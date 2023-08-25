@@ -9,9 +9,16 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
+        'ritual': "url('/images/werewolfs.png')",
+        'matilha': "url('/images/31.jpg')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      spacing: {
+        '30vh': '30vh',
+        '60vh': '60vh',
+        '70vh': '70vh',
       },
     },
   },
