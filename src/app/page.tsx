@@ -1,4 +1,4 @@
-'use Client'
+'use client'
 import Footer from '@/components/footer';
 import Nav from '@/components/nav'
 import Image from 'next/image'
@@ -31,7 +31,7 @@ export default function Home() {
             src="/images/logos/arrow-down.png"
             alt=""
             onClick={ scrollToComponent }
-            className="sm:mt-20 w-14 sm:w-20 z-10 animate-pulse"
+            className="sm:mt-20 w-14 sm:w-20 z-10 animate-pulse cursor-pointer"
             width={2000}
             height={800}
             priority

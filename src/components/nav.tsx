@@ -24,32 +24,11 @@ export default function Nav() {
     } return 'opacity-0 transition duration-500 z-40';
   }
 
-  // const returnItemMenu = () => {
-  //   const { showMenu } = state;
-  //   if(showMenu) {
-  //     return 'fixed top-0 left-0 opacity-1 z-30 w-screen h-screen items-end pt-12 pr-4 transition duration-500 flex flex-col text-white bg-t-transp justify-center'
-  //   } else return 'opacity-0 hidden items-end p-3 transition duration-500 text-white';
-  // }
-
-  // const returnLiMenu = () => {
-  //   const { showMenu } = state;
-  // if(showMenu) {
-  //   return 'px-3 my-4 font-bold opacity-1 z-30 w-full text-center'
-  // } else return 'opacity-0 z-1 transition duration-500' 
-  // }
-
-  // const returnItemsMenu = () => {
-  //   const { showMenu } = state;
-  //   if(showMenu) {
-  //     return 'items-center justify-center';
-  //   } return 'items-end';
-  // }
-
   return (
     <nav className="w-full text-base relative 2xl:text-xl leading-6 z-50">
       <div
         onClick={ () => setShowMenu(!showMenu) }
-        className="fixed right-0 top-0 mr-4 mt-4 flex flex-col z-50"
+        className="cursor-pointer fixed right-0 top-0 mr-4 mt-4 flex flex-col z-50"
       >
         <div className={`h-1 w-9 bg-white mb-1 ${barra1()}`} />
         <div className={`h-1 w-9 bg-white mb-1 ${barra2()}`} />
