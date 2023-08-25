@@ -18,6 +18,20 @@ O Segredos da Fúria foi desenvolvido usando tecnologias modernas, incluindo:
 
 Você pode acessar a aplicação online através do seguinte link: [Segredos da Fúria](https://segredosdafuria.vercel.app/). Explore as tribos, augúrios, rituais e dons do mundo de "Wherewolf: the Apocalypse 5th" diretamente no seu navegador.
 
+## Regras de Filtragem
+
+O Segredos da Fúria oferece poderosas ferramentas de filtragem para ajudar você a encontrar as informações que procura de maneira eficaz. Como rituais na quinta edição de "Wherewolf: the Apocalypse 5th" não possuem níveis ou categorias complexas que os dividem, você poderá realizar a busca d ritual cedendo um nome ou terminação (em inglês ou português). Quanto aos dons, além de ter a mesma possibilidade citada para os rituais, também poderão ser filtrados por tribo, augúrio e renome. Aqui estão as regras de filtragem para diferentes cenários de dons:
+
+### Tribos e Augúrios
+
+- Ao selecionar uma tribo e/ou um augúrio como filtro, a busca retornará dons que atendam pelo menos a um desses critérios. Isso significa que você poderá explorar dons que são relevantes para uma tribo específica ou para um augúrio em particular. Por exemplo, se você escolher uma tribo e um augúrio como filtro, a busca retornará dons que satisfazem pelo menos a um dos dois, em vez de exigir que eles satisfaçam ambos simultaneamente.
+
+### Renome e Outros Elementos (Tribo e/ou Augúrio)
+
+- Caso você escolha filtrar por renome e outro elemento como tribo e/ou augúrio, a busca retornará dons que tenham pelo menos o valor de renome igual ou abaixo do valor informado. Além disso, esses dons também devem pertencer à tribo e/ou ao augúrio escolhido. Isso permite que você refine ainda mais sua pesquisa, focando em dons que se alinhem com seu nível de renome e com as características da tribo e augúrio selecionados.
+
+Essas regras de filtragem garantem que você possa explorar as informações relevantes de acordo com suas escolhas, tornando sua jornada pelo mundo de "Wherewolf: the Apocalypse 5th" mais envolvente e personalizada.
+
 ## Como Utilizar
 
 1. **Instalação**: Se você desejar executar o projeto localmente, clone este repositório e navegue até o diretório do projeto no terminal. Execute o comando `npm install` para instalar as dependências.
