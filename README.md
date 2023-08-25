@@ -1,5 +1,11 @@
 # Segredos da Fúria: Explorando o Mundo de "Wherewolf: the Apocalypse 5th"
 
+<div align="center">
+  <img align="center" src="./public/images/presentation.gif" alt= "funcionalidade em execução" />
+</div>
+
+<h3 align="center">https://segredosdafuria.vercel.app/</h3>
+
 Bem-vindo ao **Segredos da Fúria**, uma aplicação emocionante que permite aos jogadores e fãs de "Wherewolf: the Apocalypse 5th" explorar o rico universo sobrenatural deste cenário de RPG. Com a capacidade de acessar informações detalhadas sobre tribos, augúrios, rituais e dons, esta aplicação traz à vida as nuances e mistérios deste mundo fascinante.
 
 ## Sobre "Wherewolf: the Apocalypse 5th"
