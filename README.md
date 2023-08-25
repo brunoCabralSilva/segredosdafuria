@@ -1,4 +1,4 @@
-# Segredos da Fúria: Explorando o Mundo de "Wherewolf: the Apocalypse 5th"
+<h1 align="center">Segredos da Fúria: Explorando o Mundo de "Wherewolf: the Apocalypse 5th</h1>
 
 <div align="center">
   <img align="center" src="./public/images/presentation.gif" alt= "funcionalidade em execução" />
