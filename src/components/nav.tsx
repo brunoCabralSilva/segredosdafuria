@@ -36,7 +36,7 @@ export default function Nav() {
       </div>
       { showMenu &&
         <ul
-          className="fixed top-0 right-0 opacity-1 z-30 w-full sm:w-1/2 md:w-1/4 h-screen items-center pt-12 transition duration-500 flex flex-col text-white bg-t-transp justify-center bg-gradient-to-r from-black/20 via-black to-black font-extrabold"
+          className="fixed top-0 right-0 opacity-1 z-30 w-full sm:w-1/2 md:w-1/4 h-screen items-center pt-12 transition duration-500 flex flex-col text-white justify-center bg-black/90 font-extrabold"
         >
           <li>
             <Link

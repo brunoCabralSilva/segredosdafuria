@@ -85,34 +85,6 @@ export default function Home() {
           </motion.div>
         </Link>
       </div>
-      {/* <div
-        className="bg-matilha relative flex flex-col justify-start w-full text-white"
-        ref={describe}
-      >
-        <div className="absolute w-full h-full bg-black/50" />
-        <div className="border-2 m-4 flex relative">
-          <div className="absolute w-full h-full bg-black/50" />
-          <Image
-            src="/images/art5.png"
-            alt=""
-            className="h-full w-10/12 sm:w-3/5 md:w-5/12 object-contain p-10 z-10"
-            width={2000}
-            height={800}
-            priority
-          />
-          <div className="py-10 z-10">
-            <h1 className="text-6xl">
-              Bem vindo ao Segredos da Lua
-            </h1>
-            <p className="py-10 leading-7 z-10 mx-auto text-left ">
-              Seja bem-vindo a uma jornada repleta de conhecimento ancestral, onde você poderá desvendar as características únicas das tribos de Werewolf: The Apocalypse 5th, assim como os poderosos augúrios, as diversas raças que habitam este universo e os rituais que moldam o destino dos Garou. Além disso, nossa ferramenta de busca avançada permite que você descubra os dons ocultos, desvendando segredos profundos baseados nas tribos e augúrios. Prepare-se para mergulhar na rica mitologia deste RPG épico e desvendar suas histórias através de informações detalhadas e de fácil acesso.
-            </p>
-            <button type="button" className="mx-auto relative z-10 border border-white px-4 py-3 text-white">
-              Mais
-            </button>
-          </div>
-        </div> */}
-      {/* </div> */}
       <Footer />
     </main>
   );

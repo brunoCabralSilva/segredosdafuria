@@ -1,5 +1,7 @@
 import Nav from '@/components/nav';
 import list from '../../data/gifts.json';
+import Footer from '@/components/footer';
+import Image from 'next/image';
 
 interface type {
   type: string;
@@ -43,69 +45,78 @@ export default function Gifts() {
   };
 
   return(
-    <div className="bg-white">
+    <div className="bg-ritual">
       <Nav />
-      {
-        list.map((item: gift, index) => (
-          <div key={ index } className="border m-1 py-6 px-5 border-3 bg-black/80 text-white">
-            <span className="font-bold text-lg">
-              { item.giftPtBr } ({ item.gift }) - { item.renown }
-            </span>
-            <hr className="w-10/12 my-2" />
-            <p>
-              <span className="font-bold pr-1">Pertencente a:</span>
-              { 
-                item.belonging.map((trybe: type, index) => (
-                  <span key={ index }>
-                    { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
-                    { index === item.belonging.length -1 ? '.' : ', ' }
-                  </span>
-                ))
+      {/* <Image
+        src={ "" }
+        alt=""
+        width={ 1200 }
+        height={ 800 }
+      /> */}
+      <div className="px-2 pt-2">
+        {
+          list.map((item: gift, index) => (
+            <div key={ index } className="border mb-1 py-6 px-5 border-3 bg-black/90 text-white">
+              <span className="font-bold text-lg">
+                { item.giftPtBr } ({ item.gift }) - { item.renown }
+              </span>
+              <hr className="w-10/12 my-2" />
+              <p>
+                <span className="font-bold pr-1">Pertencente a:</span>
+                { 
+                  item.belonging.map((trybe: type, index) => (
+                    <span key={ index }>
+                      { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
+                      { index === item.belonging.length -1 ? '.' : ', ' }
+                    </span>
+                  ))
+                }
+              </p>
+              <p className="pt-1">
+                <span className="font-bold pr-1">Fonte:</span>
+                { item.book }, pg. { item.page }.
+              </p>
+              <p className="pt-1">
+                <span className="font-bold pr-1">Custo:</span>
+                { item.cost }.
+              </p>
+              <p className="pt-1">
+                <span className="font-bold pr-1">Ação:</span>
+                { item.action }.
+              </p>
+              { item.pool !== "" &&
+                <p className="pt-1">
+                  <span className="font-bold pr-1">Parada de Dados:</span>
+                  { item.pool }.
+                </p>
               }
-            </p>
-            <p className="pt-1">
-              <span className="font-bold pr-1">Fonte:</span>
-              { item.book }, pg. { item.page }.
-            </p>
-            <p className="pt-1">
-              <span className="font-bold pr-1">Custo:</span>
-              { item.cost }.
-            </p>
-            <p className="pt-1">
-              <span className="font-bold pr-1">Ação:</span>
-              { item.action }.
-            </p>
-            { item.pool !== "" &&
+              { item.duration !== "" &&
+                <p className="pt-1">
+                  <span className="font-bold pr-1">Duração:</span>
+                  { item.duration }.
+                </p>
+              }
               <p className="pt-1">
-                <span className="font-bold pr-1">Parada de Dados:</span>
-                { item.pool }.
+                <span className="font-bold pr-1">Descrição:</span>
+                { item.descriptionPtBr }
               </p>
-            }
-            { item.duration !== "" &&
               <p className="pt-1">
-                <span className="font-bold pr-1">Duração:</span>
-                { item.duration }.
+                <span className="font-bold pr-1">Sistema:</span>
+                { item.systemPtBr }
               </p>
-            }
-            <p className="pt-1">
-              <span className="font-bold pr-1">Descrição:</span>
-              { item.descriptionPtBr }
-            </p>
-            <p className="pt-1">
-              <span className="font-bold pr-1">Sistema:</span>
-              { item.systemPtBr }
-            </p>
-            <p className="pt-1">
-              <span className="font-bold pr-1">Descrição:</span>
-              { item.description }
-            </p>
-            <p className="pt-1">
-              <span className="font-bold pr-1">System:</span>
-              { item.system }
-            </p>
-          </div>
-        ))
-      }
+              <p className="pt-1">
+                <span className="font-bold pr-1">Descrição:</span>
+                { item.description }
+              </p>
+              <p className="pt-1">
+                <span className="font-bold pr-1">System:</span>
+                { item.system }
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    <Footer />
     </div>
   );
 }
