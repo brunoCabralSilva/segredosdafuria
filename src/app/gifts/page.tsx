@@ -1,3 +1,4 @@
+import Nav from '@/components/nav';
 import list from '../../data/gifts.json';
 
 interface type {
@@ -43,6 +44,7 @@ export default function Gifts() {
 
   return(
     <div className="bg-white">
+      <Nav />
       {
         list.map((item: gift, index) => (
           <div key={ index } className="border m-1 py-6 px-5 border-3 bg-black/80 text-white">
