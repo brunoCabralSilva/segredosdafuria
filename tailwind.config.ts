@@ -21,6 +21,7 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       spacing: {
+        '20vh': '20vh',
         '30vh': '30vh',
         '40vh': '40vh',
         '50vh': '50vh',
