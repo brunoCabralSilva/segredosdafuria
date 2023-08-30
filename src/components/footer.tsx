@@ -25,7 +25,7 @@ export default function Footer() {
         <p className="text-center sm:text-right w-full">© Paradox Interactive. Trademarks belong to their respective owners. All rights reserved.</p>
         <p
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="text-center sm:text-right w-full cursor-pointer hover:text-orange-600"
+          className="pt-3 pb-2 sm:py-0 text-center sm:text-right w-full cursor-pointer text-orange-600 hover:text-orange-400"
         >
           Retornar ao Topo
         </p>
