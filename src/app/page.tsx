@@ -14,9 +14,10 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-black flex flex-col items-center justify-center">
-      <header className="w-full h-full flex flex-col items-center justify-center bg-ritual bg-cover relative">
-        <div className="absolute w-full h-full bg-black/60" />
+    <main className="bg-black flex flex-col items-center justify-center relative">
+      <div className="fixed top-0 left-0 h-screen w-full bg-ritual" />
+      <header className="w-full h-full flex flex-col items-center justify-center bg-cover relative">
+        <div className="absolute w-full h-full bg-black/70" />
         <Nav />
         <div className="h-screen sm:mt-20 w-full z-10 flex flex-col justify-center items-center">
           <Image
@@ -38,10 +39,10 @@ export default function Home() {
           />
         </div>
       </header>
-      <div className="sm:h-screen flex items-center justify-center bg-matilha relative" ref={describe}>
-        <div className="absolute w-full h-full bg-black/60" />
+      <div className="sm:h-screen items-center justify-center relative flex flex-col" ref={describe}>
+        <div className="absolute w-full h-full bg-black/70" />
         <p className="relative my-28 w-10/12 sm:w-3/5 md:w-6/12 leading-7 text-center text-white z-10 flex items-center justify-center">
-          Explore as profundezas místicas do mundo de Werewolf: The Apocalypse 5th Edition! Seja bem-vindo a uma jornada repleta de conhecimento ancestral, onde você poderá desvendar as características únicas das tribos, os poderosos augúrios, as diversas raças que habitam este universo e os rituais que moldam o destino dos Garou. Além disso, nossa ferramenta de busca avançada permite que você descubra os dons ocultos, desvendando segredos profundos baseados nas tribos e augúrios. Prepare-se para mergulhar na rica mitologia deste RPG épico e desvendar suas histórias através de informações detalhadas e de fácil acesso. Bem-vindo a um mundo de mistério, poder e aventura!
+          Seja bem-vindo a uma jornada repleta de conhecimento ancestral, onde você poderá desvendar as características únicas das tribos de Werewolf: The Apocalypse 5th, assim como os poderosos augúrios, as diversas raças que habitam este universo e os rituais que moldam o destino dos Garou. Além disso, nossa ferramenta de busca avançada permite que você descubra os dons ocultos, desvendando segredos profundos baseados nas tribos e augúrios. Prepare-se para mergulhar na rica mitologia deste RPG épico e desvendar suas histórias através de informações detalhadas e de fácil acesso. Bem-vindo a um mundo de mistério, poder e aventura!
         </p>
       </div>
       <Footer />
