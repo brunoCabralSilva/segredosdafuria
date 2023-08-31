@@ -358,7 +358,7 @@ export default function Gifts() {
         onClick={ search }
         className="font-bold py-4 px-5 text-lg bg-white my-2 mx-2 cursor-pointer"
       >
-        <p className="w-full text-center">Buscar</p>
+        <p className="w-full text-center text-black">Buscar</p>
       </div>
       <div className="px-2">
         { message.show &&
