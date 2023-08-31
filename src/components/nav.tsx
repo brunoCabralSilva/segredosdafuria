@@ -28,7 +28,7 @@ export default function Nav() {
     <nav className="w-full text-base relative 2xl:text-xl leading-6 z-50">
       <div
         onClick={ () => setShowMenu(!showMenu) }
-        className="cursor-pointer fixed right-0 top-0 mr-4 mt-4 flex flex-col z-50"
+        className="bg-black px-2 pt-2 pb-1 rounded cursor-pointer fixed right-0 top-0 mr-4 mt-4 flex flex-col z-50"
       >
         <div className={`h-1 w-9 bg-white mb-1 ${barra1()}`} />
         <div className={`h-1 w-9 bg-white mb-1 ${barra2()}`} />
