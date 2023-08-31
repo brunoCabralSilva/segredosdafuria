@@ -4,6 +4,10 @@ import list from '../../data/gifts.json';
 import Footer from '@/components/footer';
 import Image from 'next/image';
 import { useState } from 'react';
+import Feedback from '@/components/feedback';
+import { useAppDispatch } from '@/redux/hooks';
+import { useAppSelector } from '@/redux/hooks';
+import { actionFeedback, useSlice } from '@/redux/slice';
 
 interface type {
   type: string;
@@ -63,6 +67,8 @@ export default function Gifts() {
       page: 0,
     }
   ]);
+  const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
 
   const tribos: string[] = ['Peregrinos Silenciosos', 'Fúrias Negras', 'Presas de Prata', 'Guarda do Cervo', 'Conselho Fantasma', 'Perseguidores da Tempestade', 'Andarilhos do Asfalto', 'Roedores de Ossos', 'Senhores das Sombras', 'Filhos de Gaia','Garras Vermelhas'];
 
@@ -239,7 +245,7 @@ export default function Gifts() {
         </div>
         <div
           onClick={ () => setTrybe(!trybe) }
-          className="font-bold mt-2 mb-1 py-4 px-5 text-lg bg-black/90 cursor-pointer flex justify-between items-center"
+          className="font-bold mt-2 mb-1 py-4 px-5 text-lg bg-black/90 flex justify-between items-center cursor-pointer"
         >
           <p>Tribos</p>
           <Image
@@ -276,7 +282,7 @@ export default function Gifts() {
         }
         <div
           onClick={ () => setAuspice(!auspice) }
-          className="font-bold py-4 px-5 text-lg bg-black/90 flex justify-between items-center"
+          className="font-bold py-4 px-5 text-lg bg-black/90 flex justify-between items-center cursor-pointer"
         >
           <p>Augúrios</p>
           <Image
@@ -362,7 +368,7 @@ export default function Gifts() {
       </div>
       <div className="px-2">
         { message.show &&
-          <div className="font-bold py-4 px-5 text-lg bg-black mt-2 mb-1 text-white cursor-pointer">
+          <div className="font-bold py-4 px-5 text-lg bg-black mt-2 mb-1 text-white">
             <p className="w-full text-center">
               Total de Dons Encontrados: { listGifts.length }
             </p>
@@ -434,8 +440,17 @@ export default function Gifts() {
               <span className="font-bold pr-1">System:</span>
               { item.system }
             </p>
+            <p
+              className="text-orange-300 hover:text-orange-600 mt-3 cursor-pointer"
+              onClick={() => dispatch(actionFeedback({ show: true, message: item.gift })) }
+            >
+              Feedback
+            </p>
           </div>
         ))
+      }
+      { 
+        slice.feedback.show && <Feedback gift={ slice.feedback.gift } />
       }
     </div>
     <Footer />
