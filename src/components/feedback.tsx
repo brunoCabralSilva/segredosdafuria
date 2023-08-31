@@ -1,15 +1,15 @@
 'use client'
+import dotenv from 'dotenv';
 import { actionFeedback, useSlice } from '@/redux/slice';
 import emailjs from '@emailjs/browser';
 import { useState } from 'react';
 import { useAppDispatch } from '@/redux/hooks';
 import { useAppSelector } from '@/redux/hooks';
-import { REACT_APP_USER_ID } from '../env';
-import { REACT_APP_SERVICE_ID } from '../env.js';
-import { REACT_APP_TEMPLATE_ID } from '../env.js';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
 import { VscRepoPush } from "react-icons/vsc";
+
+dotenv.config();
 
 export default function Feedback(props: { gift: string }) {
   const [message, setMessage] = useState('');
@@ -48,9 +48,10 @@ export default function Feedback(props: { gift: string }) {
         }
       );
     } else {
-      const userID: any = REACT_APP_USER_ID;
-      const templateID: any = REACT_APP_TEMPLATE_ID;
-      const serviceID: any = REACT_APP_SERVICE_ID;
+      const userID: any = process.env.NEXT_PUBLIC_USERID;
+      const templateID: any = process.env.NEXT_PUBLIC_TEMPLATEID;
+      const serviceID: any = process.env.NEXT_PUBLIC_SERVICEID;
+      console.log(userID, templateID, serviceID);
       try {
       emailjs.sendForm(
         serviceID,
@@ -59,6 +60,9 @@ export default function Feedback(props: { gift: string }) {
         userID,
         );
         e.target.reset();
+        setMessage('');
+        setNameUser('');
+        setEmailUser('');
         setMessagePopup(
           {
             message: 'Feedback enviado com sucesso! Muito obrigado por sua colaboração!',
@@ -66,23 +70,23 @@ export default function Feedback(props: { gift: string }) {
             show: true,
           }
         );
-        // setTimeout(() => {
-        //   dispatch(actionFeedback({ show: false, message: '' }))
-        // }, 3000);
+        setTimeout(() => {
+          dispatch(actionFeedback({ show: false, message: '' }))
+        }, 3000);
       } catch (error: any) {
         global.alert(error);
       }
     }
 
-    // setTimeout(() => {
-    //   setMessagePopup(
-    //     {
-    //       message: '',
-    //       error: true,
-    //       show: false,
-    //     }
-    //   );
-    // }, 4000);
+    setTimeout(() => {
+      setMessagePopup(
+        {
+          message: '',
+          error: true,
+          show: false,
+        }
+      );
+    }, 4000);
   }
   return(
     <div className="fixed w-full h-screen top-0 left-0 bg-black/50 flex items-center justify-center flex-col text-white">
