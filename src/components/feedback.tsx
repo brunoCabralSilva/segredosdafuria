@@ -4,12 +4,12 @@ import emailjs from '@emailjs/browser';
 import { useState } from 'react';
 import { useAppDispatch } from '@/redux/hooks';
 import { useAppSelector } from '@/redux/hooks';
-import { REACT_APP_USER_ID } from '../../env';
-import { REACT_APP_SERVICE_ID } from '../../env.js';
-import { REACT_APP_TEMPLATE_ID } from '../../env.js';
+import { REACT_APP_USER_ID } from '../env';
+import { REACT_APP_SERVICE_ID } from '../env.js';
+import { REACT_APP_TEMPLATE_ID } from '../env.js';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
-import { VscError, VscRepoPush } from "react-icons/vsc";
+import { VscRepoPush } from "react-icons/vsc";
 
 export default function Feedback(props: { gift: string }) {
   const [message, setMessage] = useState('');
