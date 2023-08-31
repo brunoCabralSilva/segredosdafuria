@@ -29,7 +29,7 @@ export default function Home() {
             priority
           />
           <Image
-            src="/images/arrow-down.png"
+            src="/images/logos/arrow-down.png"
             alt=""
             className="sm:h-30vh w-20 object-contain animate-pulse cursor-pointer"
             width={2000}

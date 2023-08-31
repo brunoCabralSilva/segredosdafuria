@@ -28,6 +28,9 @@ const config: Config = {
         '60vh': '60vh',
         '70vh': '70vh',
       },
+      margin: {
+        'check': '6px',
+      }
     },
   },
   plugins: [],

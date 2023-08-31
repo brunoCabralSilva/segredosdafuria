@@ -39,6 +39,7 @@ export default function Gifts() {
   const [renown, setRenown] = useState(false);
   const [valorRenown, setValorRenown] = useState(0);
   const [selectedTrybe, setSelectTrybe] = useState(['']);
+  const [checked, setChecked] = useState(false);
   const [listGifts, setListGifts] = useState([
     {
       gift: "",
@@ -68,6 +69,10 @@ export default function Gifts() {
   const augurios: string[] = ['Ragabash', 'Theurge', 'Philodox', 'Galliard', 'Ahroun'];
 
   const renomeTotal: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  const toggleCheckbox = () => {
+    setChecked(!checked);
+  };
 
   const search = (): void => {
     setListGifts([]);
@@ -99,6 +104,10 @@ export default function Gifts() {
           return item.toLowerCase();
       }
     }).filter((element) => element !== '');
+
+    if(checked) {
+      filters.push('global');
+    };
   
     const filterItem: gift[] = [];
   
@@ -118,6 +127,7 @@ export default function Gifts() {
 
     let phrase = '';
     const data = selectedTrybe.filter((element) => element !== '');
+    if (checked) data.push('Dons Nativos');
     for (let i = 0; i < data.length; i += 1) {
       if (i !== data.length - 1) {
         phrase += (`${data[i]}, `);
@@ -131,10 +141,12 @@ export default function Gifts() {
       show: true,
       message: phrase,
     });
+
     setListGifts(filterItem);
     setTrybe(false);
     setAuspice(false);
     setRenown(false);
+    setChecked(false);
     setValorRenown(0);
     setSelectTrybe(['']);
   };
@@ -219,22 +231,32 @@ export default function Gifts() {
             Ao selecionar algum filtro, o item selecionado aparecerá em um pop-up no canto inferior direito, onde você poderá acompanhar todos os filtros escolhidos e também removê-los caso deseje;
           </p>
           <p className="py-2">
+            Marcar a opção &quot;Adicionar Dons Nativos à Busca&quot; implica dizer que todos os Dons nativos que correspondam ao filtro de busca será retornado. Caso seja o único filtro, só serão retornados Dons Nativos (mantenha a opção desmarcada para retornar todos os dons).
+          </p>
+          <p className="py-2">
             Não selecionar nenhum filtro retornará uma lista com todos os dons.
           </p>
         </div>
         <div
           onClick={ () => setTrybe(!trybe) }
-          className="font-bold mt-2 mb-1 py-4 px-5 text-lg bg-black/90 cursor-pointer"
+          className="font-bold mt-2 mb-1 py-4 px-5 text-lg bg-black/90 cursor-pointer flex justify-between items-center"
         >
           <p>Tribos</p>
+          <Image
+            src={`/images/logos/${trybe ? 'arrow-up.png' : 'arrow-down.png'}`}
+            alt=""
+            className="w-8 object-contain animate-pulse cursor-pointer"
+            width={2000}
+            height={800}
+          />
         </div>
         { trybe && 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mb-2">
             {
               tribos.map((tribo: string, index: number) => (
                 <div
                   key={ index }
-                  className={`flex flex-col items-center justify-between bg-black/80 px-2 cursor-pointer border-2 ${selectedTrybe.includes(tribo) ? 'border-white': 'border-transparent'}`}
+                  className={`flex flex-col items-center justify-between  px-2 cursor-pointer border-2 ${selectedTrybe.includes(tribo) ? 'border-white bg-black' : 'border-transparent bg-black/80'}`}
                   onClick={ () => insertSelector(tribo) }
                 >
                   <Image
@@ -254,26 +276,34 @@ export default function Gifts() {
         }
         <div
           onClick={ () => setAuspice(!auspice) }
-          className="font-bold py-4 px-5 text-lg bg-black/90"
+          className="font-bold py-4 px-5 text-lg bg-black/90 flex justify-between items-center"
         >
           <p>Augúrios</p>
+          <Image
+            src={`/images/logos/${auspice ? 'arrow-up.png' : 'arrow-down.png'}`}
+            alt=""
+            className="w-8 object-contain animate-pulse cursor-pointer"
+            width={2000}
+            height={800}
+          />
         </div>
         {
-          auspice && <div className="grid grid-cols-3 gap-2 mt-1">
+          auspice && <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mt-1">
             {
               augurios.map((augurio: string, index: number) => (
                 <div
                   key={ index }
-                  className={`flex flex-col items-center bg-black/80 border-2 ${selectedTrybe.includes(augurio) ? 'border-white' : 'border-transparent'}`}
+                  className={`flex flex-col items-center border-2 ${selectedTrybe.includes(augurio) ? 'border-white bg-black' : 'border-transparent bg-black/80'}`}
                   onClick={ () => insertSelector(augurio) }
                 >
                   <Image
                     src={ `/images/auspices/${augurio}.png` }
                     alt=""
+                    className="w-24 mt-2"
                     width={2000}
                     height={1000}
                   />
-                  <span className="text-lg py-3">{ augurio }</span>
+                  <span className="leading-2 text-sm sm:text-base py-3">{ augurio }</span>
                 </div>
                 )
               )
@@ -282,17 +312,24 @@ export default function Gifts() {
         }
         <div
           onClick={ () => setRenown(!renown) }
-          className="font-bold mt-1 py-4 px-5 text-lg bg-black/90 cursor-pointer"
+          className="font-bold mt-1 py-4 px-5 text-lg bg-black/90 cursor-pointer flex justify-between items-center"
         >
           <p>Renome Total</p>
+          <Image
+            src={`/images/logos/${renown ? 'arrow-up.png' : 'arrow-down.png'}`}
+            alt=""
+            className="w-8 object-contain animate-pulse cursor-pointer"
+            width={2000}
+            height={800}
+          />
         </div>
         {
-          renown && <div className="grid grid-cols-3 gap-2 mt-1">
+          renown && <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 mt-1">
             {
               renomeTotal.map((renome: number, index: number) => (
                 <div
                   key={ index }
-                  className={`flex flex-col items-center border-2 bg-black ${renome <= valorRenown ? 'border-white' : 'border-transparent'} cursor-pointer`}
+                  className={`flex flex-col items-center border-2 ${renome <= valorRenown ? 'border-white bg-black' : 'border-transparent bg-black/80'} cursor-pointer`}
                   onClick={ () => {
                     if (renome === valorRenown) setValorRenown(0);
                     else setValorRenown(renome);
@@ -305,6 +342,17 @@ export default function Gifts() {
             }
           </div>
         }
+      </div>
+      <div
+        className="font-bold mx-2 text-white mt-1 py-4 px-5 text-lg bg-black/90 cursor-pointer flex sm:items-center items-start"
+      >
+        <input
+          type="checkbox"
+          className="mr-2 mt-check sm:mt-0"
+          checked={checked}
+          onChange={toggleCheckbox}
+        />
+        <p onClick={toggleCheckbox}>Adicionar Dons Nativos à Busca</p>
       </div>
       <div
         onClick={ search }
