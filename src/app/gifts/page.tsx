@@ -1,25 +1,160 @@
 'use client'
 import Nav from '@/components/nav';
-import ListGifts from '@/components/listGifts';
+import list from '../../data/gifts.json';
 import Footer from '@/components/footer';
 import Image from 'next/image';
 import { useState } from 'react';
 
+interface type {
+  type: string;
+  totalRenown: number;
+}
+
+interface gift {
+  gift: string;
+  giftPtBr: string;
+  belonging: type[];
+  description: string;
+  descriptionPtBr: string;
+  renown: string;
+  cost: string;
+  action: string;
+  pool: string;
+  system: string;
+  systemPtBr: string;
+  duration: string;
+  book: string;
+  page: number;
+}
+
+interface IProps {
+  valorRenown: number;
+  selectedTrybe: string[];
+}
+
 export default function Gifts() {
+  const [message, setMessage] = useState({ show: false, message: ''});
   const [trybe, setTrybe] = useState(false);
   const [auspice, setAuspice] = useState(false);
   const [renown, setRenown] = useState(false);
   const [valorRenown, setValorRenown] = useState(0);
   const [selectedTrybe, setSelectTrybe] = useState(['']);
+  const [listGifts, setListGifts] = useState([
+    {
+      gift: "",
+      giftPtBr: "",
+      belonging: [
+        {
+          type: "",
+          totalRenown: 0
+        }
+      ],
+      description: "",
+      descriptionPtBr: "",
+      renown: "",
+      cost: "",
+      action: "",
+      pool: "",
+      system: "",
+      systemPtBr: "",
+      duration: "",
+      book: "",
+      page: 0,
+    }
+  ]);
 
   const tribos: string[] = ['Peregrinos Silenciosos', 'Fúrias Negras', 'Presas de Prata', 'Guarda do Cervo', 'Conselho Fantasma', 'Perseguidores da Tempestade', 'Andarilhos do Asfalto', 'Roedores de Ossos', 'Senhores das Sombras', 'Filhos de Gaia','Garras Vermelhas'];
 
   const augurios: string[] = ['Ragabash', 'Theurge', 'Philodox', 'Galliard', 'Ahroun'];
 
   const renomeTotal: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  
-  function search(): void {
 
+  const search = (): void => {
+    setListGifts([]);
+    const filters = selectedTrybe.map((item) => {
+      switch(item) {
+        case 'Peregrinos Silenciosos':
+          return 'silent striders';
+        case 'Fúrias Negras':
+          return 'black furies';
+        case 'Presas de Prata':
+          return 'silver fangs';
+        case 'Guarda do Cervo':
+          return 'hart wardens';
+        case 'Conselho Fantasma':
+          return 'ghost council';
+        case 'Perseguidores da Tempestade':
+          return 'galestalkers';
+        case 'Andarilhos do Asfalto':
+          return 'glass walkers';
+        case 'Roedores de Ossos':
+          return 'bone gnawers';
+        case 'Senhores das Sombras':
+          return 'shadow lords';
+        case 'Filhos de Gaia':
+          return 'children of gaia';
+        case 'Garras Vermelhas':
+          return 'red talons';
+        default:
+          return item.toLowerCase();
+      }
+    }).filter((element) => element !== '');
+  
+    const filterItem: gift[] = [];
+  
+    for (let i = 0; i < list.length; i += 1) {
+      const giftItem = list[i];
+      const belongingTypes = giftItem.belonging.map((type) => type.type);
+      const totalRenown = giftItem.belonging.map((type) => type.totalRenown).reduce((a, b) => a + b, 0);
+  
+      const matchesType = filters.length === 0 || giftItem.belonging.some((belonging) => filters.includes(belonging.type));
+  
+      const matchesRenown = valorRenown === 0 || giftItem.belonging.some((belonging) => belonging.totalRenown <= valorRenown);
+  
+      if (matchesType && matchesRenown) {
+        filterItem.push(giftItem);
+      }
+    }
+
+    let phrase = '';
+    const data = selectedTrybe.filter((element) => element !== '');
+    for (let i = 0; i < data.length; i += 1) {
+      if (i !== data.length - 1) {
+        phrase += (`${data[i]}, `);
+      } else {
+        phrase += (`${data[i]} ${valorRenown !== 0 ? `e Renome Total até ${valorRenown}` : ''}`);
+      }
+    }
+    if (data.length === 0 && valorRenown > 0) phrase = (`Renome Total até ${valorRenown}`);
+  
+    setMessage({
+      show: true,
+      message: phrase,
+    });
+    setListGifts(filterItem);
+    setTrybe(false);
+    setAuspice(false);
+    setRenown(false);
+    setValorRenown(0);
+    setSelectTrybe(['']);
+  };
+  
+  function capitalizeFirstLetter(str: string): String {
+    switch(str) {
+      case 'global': return 'Dons Nativos';
+      case 'silent striders': return 'Peregrinos Silenciosos';
+      case 'black furies': return 'Fúrias Negras';
+      case 'silver fangs': return 'Presas de Prata';
+      case 'hart wardens': return 'Guarda do Cervo';
+      case 'ghost council': return 'Conselho Fantasma';
+      case 'galestalkers': return 'Perseguidores da Tempestade';
+      case 'glass walkers': return 'Andarilhos do Asfalto';
+      case 'bone gnawers': return 'Roedores de Ossos';
+      case 'shadow lords': return 'Senhores das Sombras';
+      case 'children of gaia': return 'Filhos de Gaia';
+      case 'red talons': return 'Garras Vermelhas';
+      default: return str.charAt(0).toUpperCase() + str.slice(1);;
+    }
   };
 
   function insertSelector(newTrybe: string): void {
@@ -37,8 +172,6 @@ export default function Gifts() {
       }
     }
   };
-
-  { console.log(selectedTrybe) }
   return (
     <div className="bg-ritual pt-2">
       <Nav />
@@ -179,7 +312,84 @@ export default function Gifts() {
       >
         <p className="w-full text-center">Buscar</p>
       </div>
-      {/* <ListGifts /> */}
+      <div className="px-2">
+        { message.show &&
+          <div className="font-bold py-4 px-5 text-lg bg-black mt-2 mb-1 text-white cursor-pointer">
+            <p className="w-full text-center">
+              Total de Dons Encontrados: { listGifts.length }
+            </p>
+            {
+              message.message !== '' &&
+                <p className="w-full text-center">
+                  Filtros Selecionados: { message.message }
+                </p>
+            }
+          </div>
+        }
+      {
+        listGifts
+          .filter((item) => item.gift !== '')
+          .map((item: gift, index: number) => (
+          <div key={ index } className="border mb-1 py-6 px-5 border-3 bg-black/90 text-white">
+            <span className="font-bold text-lg">
+              { item.giftPtBr } ({ item.gift }) - { item.renown }
+            </span>
+            <hr className="w-10/12 my-2" />
+            <p>
+              <span className="font-bold pr-1">Pertencente a:</span>
+              { 
+                item.belonging.map((trybe: type, index) => (
+                  <span key={ index }>
+                    { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
+                    { index === item.belonging.length -1 ? '.' : ', ' }
+                  </span>
+                ))
+              }
+            </p>
+            <p className="pt-1">
+              <span className="font-bold pr-1">Fonte:</span>
+              { item.book }, pg. { item.page }.
+            </p>
+            <p className="pt-1">
+              <span className="font-bold pr-1">Custo:</span>
+              { item.cost }.
+            </p>
+            <p className="pt-1">
+              <span className="font-bold pr-1">Ação:</span>
+              { item.action }.
+            </p>
+            { item.pool !== "" &&
+              <p className="pt-1">
+                <span className="font-bold pr-1">Parada de Dados:</span>
+                { item.pool }.
+              </p>
+            }
+            { item.duration !== "" &&
+              <p className="pt-1">
+                <span className="font-bold pr-1">Duração:</span>
+                { item.duration }.
+              </p>
+            }
+            <p className="pt-1">
+              <span className="font-bold pr-1">Descrição:</span>
+              { item.descriptionPtBr }
+            </p>
+            <p className="pt-1">
+              <span className="font-bold pr-1">Sistema:</span>
+              { item.systemPtBr }
+            </p>
+            <p className="pt-1">
+              <span className="font-bold pr-1">Descrição:</span>
+              { item.description }
+            </p>
+            <p className="pt-1">
+              <span className="font-bold pr-1">System:</span>
+              { item.system }
+            </p>
+          </div>
+        ))
+      }
+    </div>
     <Footer />
     </div>
   );

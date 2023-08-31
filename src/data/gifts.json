@@ -35,8 +35,8 @@
     "cost": "1 ponto de Força de Vontade",
     "action": "Livre",
     "pool": "",
-    "system": "O usuário pode ver em qualquer escuridão natural sem penalidade. Se a escuridão for de origem sobrenatural, ele ganha um bônus igual a sua Sabedoria em qualquer tentativa de resistir a ela, se a resistência for possível.",
-    "systemPtBr":"",
+    "system": "",
+    "systemPtBr":"O usuário pode ver em qualquer escuridão natural sem penalidade. Se a escuridão for de origem sobrenatural, ele ganha um bônus igual a sua Sabedoria em qualquer tentativa de resistir a ela, se a resistência for possível.",
     "duration": "Uma Cena",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 146
@@ -1441,7 +1441,7 @@
     "belonging": [
       {
         "type": "ahroun",
-        "totalRenown": 1
+        "totalRenown": 2
       },
       {
         "type": "black furies",
@@ -1466,7 +1466,7 @@
     "belonging": [
       {
         "type": "ahroun",
-        "totalRenown": 1
+        "totalRenown": 2
       },
       {
         "type": "bone gnawers",
@@ -1492,7 +1492,7 @@
     "belonging": [
       {
         "type": "ahroun",
-        "totalRenown": 1
+        "totalRenown": 2
       },
       {
         "type": "red talons",
@@ -1517,7 +1517,7 @@
     "belonging": [
       {
         "type": "ahroun",
-        "totalRenown": 1
+        "totalRenown": 2
       },
       {
         "type": "ghost council",
