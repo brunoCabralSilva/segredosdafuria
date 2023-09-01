@@ -1,15 +1,13 @@
+import { IFeedback } from "@/interfaces/Gift";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
-
-interface IFeedback {
-  show: boolean;
-  message: string;
-}
 
 const INITIAL_STATE = {
   feedback: {
     show: false,
     message: '',
-  }
+  },
+  selectTA: [],
+  totalRenown: 0,
 };
 
 const slice: Slice = createSlice({
@@ -25,13 +23,47 @@ const slice: Slice = createSlice({
         }
       };
     },
+    actionFilterGift(state, { payload }: PayloadAction<string>) {
+      if (payload === 'reset') {
+        return {
+          ...state,
+          selectTA: [],
+        };
+      }
+      if (state.selectTA.length === 0) {
+        return {
+          ...state,
+          selectTA: [payload],
+        };
+      } 
+      const listContains = state.selectTA.filter((element: string) => element === payload);
+      if (listContains.length > 0) {
+        const list = state.selectTA.filter((element: string) => element !== payload);
+        return {
+          ...state,
+          selectTA: list,
+        };
+      } return {
+        ...state,
+        selectTA: [...state.selectTA, payload],
+      }
+    },
+    actionTotalRenown(state, { payload }: PayloadAction<string>) {
+        return {
+          ...state,
+          totalRenown: parseInt(payload),
+        };
+      }
+    },
   },
-});
+);
 
 export default slice.reducer;
 
 export const {
   actionFeedback,
+  actionFilterGift,
+  actionTotalRenown,
 } = slice.actions;
 
 export const useSlice = (state: any) => {
