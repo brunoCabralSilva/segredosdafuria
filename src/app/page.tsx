@@ -26,7 +26,7 @@ export default function Home() {
         <div className="h-screen w-full z-10 flex flex-col justify-center items-center">
           <Image
             src="/images/text.png"
-            alt=""
+            alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
             className="h-50vh sm:h-70vh md:h-50vh w-10/12 sm:w-3/5 md:w-1/2 xl:w-5/12 object-contain"
             width={2000}
             height={800}
@@ -34,7 +34,7 @@ export default function Home() {
           />
           <Image
             src="/images/logos/arrow-down.png"
-            alt=""
+            alt="seta para baixo"
             className="sm:h-30vh w-20 object-contain animate-pulse cursor-pointer"
             width={2000}
             height={800}

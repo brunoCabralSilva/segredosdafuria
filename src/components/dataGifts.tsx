@@ -10,7 +10,7 @@ export default function DataGifts() {
         <div className="h-40vh relative flex bg-black items-end text-black">
         <Image
           src={ "/images/32.jpg" }
-          alt=""
+          alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
           className="absolute w-full h-40vh object-cover object-top"
           width={ 1200 }
           height={ 800 }

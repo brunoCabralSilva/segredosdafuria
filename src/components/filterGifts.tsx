@@ -46,7 +46,7 @@ export default function FilterGifts(props: { type: string, title: string }) {
                 { typeof item !== 'number' && !slice.simplify &&
                   <Image
                     src={ `/images/${type}/${item}.png` }
-                    alt=""
+                    alt={`Glifo respectivo de ${item}`}
                     className={`${type === 'auspices' ? 'w-14' : 'w-10'}`}
                     width={2000}
                     height={1000}
