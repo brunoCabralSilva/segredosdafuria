@@ -4,9 +4,13 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
+import Simplify from '@/components/simplify';
+import { useSlice } from '@/redux/slice';
+import { useAppSelector } from '@/redux/hooks';
 
 export default function Home() {
   const describe = useRef<HTMLDivElement | null>(null);
+  const slice = useAppSelector(useSlice);
 
   const scrollToComponent = () => {
     if (describe.current) {
@@ -16,9 +20,9 @@ export default function Home() {
 
   return (
     <main className="bg-black flex flex-col items-center justify-center relative">
-      <div className="" />
+      <Simplify />
       <header className="h-screen w-full flex flex-col items-center justify-center bg-cover relative bg-ritual bg-top">
-        <div className="absolute w-full h-full bg-black/50" />
+        <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/50'}`} />
         <div className="h-screen w-full z-10 flex flex-col justify-center items-center">
           <Image
             src="/images/text.png"
@@ -41,46 +45,57 @@ export default function Home() {
       </header>
       <div ref={ describe } className="grid grid-cols-2 grid-row-5 sm:grid-cols-8 sm:grid-row-5 w-full h-full px-4 sm:px-8 pb-4 gap-4 sm:gap-6">
         <div
-          className="bg-06 mt-4 sm:mt-8 bg-cover col-span-2 sm:col-span-8 sm:row-span-1 text-center text-white sm:text-3xl relative"
-        >
-          <div className="absolute w-full h-full bg-black/50" />
+          className={`sm:text-3xl bg-06 mt-4 sm:mt-8 bg-cover col-span-2 sm:col-span-8 sm:row-span-1 text-center text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+          <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
           <p className="py-14 p-5 z-10 relative">
             Seja bem-vindo a uma jornada repleta de conhecimento ancestral, onde você poderá desvendar as características únicas das tribos, augúrios, raças e rituais existentes em Werewolf: The Apocalypse 5th!
           </p>
         </div>
         <Link href="/trybes" className="col-span-1 sm:col-span-2 sm:row-span-2">
-          <motion.div whileHover={{ scale: 0.98 }} className="bg-01 bg-cover h-full sm:h-40vh text-white flex items-end relative cursor-pointer">
-            <div className="absolute w-full h-full bg-black/40" />
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-01 bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2 relative">Tribos</p>
           </motion.div>
         </Link>
         <Link href="/auspices" className="col-span-1 sm:col-span-2 sm:row-span-4">
-          <motion.div whileHover={{ scale: 0.98 }} className="bg-02 bg-cover h-20vh sm:h-full text-white flex items-end relative cursor-pointer">
-            <div className="absolute w-full h-full bg-black/40" />
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-02 bg-cover h-20vh sm:h-full text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Augúrios</p>
           </motion.div>
         </Link>
         <Link href="/gifts" className="col-span-2 sm:col-span-4 sm:row-span-2">
-          <motion.div whileHover={{ scale: 0.98 }} className="bg-03 bg-cover bg-center h-20vh sm:h-40vh text-white flex items-end relative cursor-pointer">
-            <div className="absolute w-full h-full bg-black/40" />
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-03 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Dons</p>
           </motion.div>
         </Link>
         <Link href="/breeds" className="col-span-1 sm:col-span-2 sm:row-span-2">
-          <motion.div whileHover={{ scale: 0.98 }} className="bg-04 bg-cover h-20vh sm:h-40vh text-white flex items-end relative cursor-pointer">
-            <div className="absolute w-full h-full bg-black/40" />
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-04 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2 relative">Raças</p>
           </motion.div>
         </Link>
-        <Link href="/rites" className="col-span-1 row-span-2 sm:col-span-2 sm:row-span-2">
-          <motion.div whileHover={{ scale: 0.98 }} className="bg-05 bg-cover h-full sm:h-40vh text-white flex items-end relative cursor-pointer">
-            <div className="absolute w-full h-full bg-black/40" />
+        <Link href="/rituals" className="col-span-1 row-span-2 sm:col-span-2 sm:row-span-2">
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-05 bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Rituais</p>
           </motion.div>
         </Link>
         <Link href="/about" className="col-span-1 sm:row-span-2 sm:col-span-2">
-          <motion.div whileHover={{ scale: 0.98 }} className="bg-06 bg-cover h-20vh sm:h-40vh text-white flex items-end relative cursor-pointer">
-            <div className="absolute w-full h-full bg-black/40" />
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-06 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sobre</p>
           </motion.div>
         </Link>

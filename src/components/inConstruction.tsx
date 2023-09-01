@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function InConstruction() {
   return(
-    <section className="relative h-full flex flex-col items-center justify-center text-white text-2xl font-andika">
+    <section className="relative h-full flex flex-col items-center justify-center text-white text-2xl">
       <motion.h2
         initial={{opacity:0}}
         animate={{opacity:1, transition: {delay: 0.2, duration: 1 }}}

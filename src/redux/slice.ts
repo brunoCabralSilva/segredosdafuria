@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   },
   selectTA: [],
   totalRenown: 0,
+  simplify: false,
 };
 
 const slice: Slice = createSlice({
@@ -49,14 +50,19 @@ const slice: Slice = createSlice({
       }
     },
     actionTotalRenown(state, { payload }: PayloadAction<string>) {
-        return {
-          ...state,
-          totalRenown: parseInt(payload),
-        };
-      }
+      return {
+        ...state,
+        totalRenown: parseInt(payload),
+      };
+    },
+    actionSimplify(state, { payload }: PayloadAction<boolean>) {
+      return {
+        ...state,
+        simplify: payload,
+      };
     },
   },
-);
+});
 
 export default slice.reducer;
 
@@ -64,6 +70,7 @@ export const {
   actionFeedback,
   actionFilterGift,
   actionTotalRenown,
+  actionSimplify,
 } = slice.actions;
 
 export const useSlice = (state: any) => {
