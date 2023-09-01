@@ -26,7 +26,7 @@ export default function Gift(props: { item: IGift } ) {
   };
 
   return(
-    <div className="border mb-1 py-6 px-5 border-3 bg-black/70 text-white text-center sm:text-left">
+    <div className="border mb-1 py-6 px-5 border-3 bg-black/70 text-white">
       <span className="font-bold text-lg">
         { item.giftPtBr } ({ item.gift }) - { item.renown }
       </span>
@@ -66,20 +66,20 @@ export default function Gift(props: { item: IGift } ) {
           { item.duration }.
         </p>
       }
-      <p className="pt-1">
+      <p className="pt-1 text-justify">
         <span className="font-bold pr-1">Descrição:</span>
         { item.descriptionPtBr }
       </p>
-      <p className="pt-1">
+      <p className="pt-1 text-justify">
         <span className="font-bold pr-1">Sistema:</span>
         { item.systemPtBr }
       </p>
-      <p className="pt-1">
-        <span className="font-bold pr-1">Descrição:</span>
+      <p className="pt-1 text-justify">
+        <span className="font-bold pr-1">Description (original):</span>
         { item.description }
       </p>
-      <p className="pt-1">
-        <span className="font-bold pr-1">System:</span>
+      <p className="pt-1 text-justify">
+        <span className="font-bold pr-1">System (original):</span>
         { item.system }
       </p>
       <button
