@@ -92,7 +92,7 @@ export default function Feedback(props: { gift: string }) {
     <div className="fixed w-full h-screen top-0 left-0 bg-black/50 flex items-center justify-center flex-col text-white">
       <form
         onSubmit={ sendEmail }
-        className="bg-ritual w-10/12 sm:w-1/2 md:w-1/3 px-5 py-7 relative flex flex-col"
+        className="bg-black border-2 border-white w-10/12 sm:w-1/2 md:w-1/3 px-5 py-7 relative flex flex-col"
       >
         <div className="absolute top-0 right-0 p-2 text-xl">
           <AiFillCloseCircle
@@ -146,7 +146,7 @@ export default function Feedback(props: { gift: string }) {
         <button
           type="submit"
           value="Submit"
-          className="border-white w-full my-2 py-3 border-2 bg-black hover:border-black font-bold hover:bg-white hover:text-black transition-colors duration-200 "
+          className="hover:underline w-full my-2 py-3 border-2 border-black font-bold bg-white text-black transition-colors duration-200 "
         >
           Enviar
         </button>

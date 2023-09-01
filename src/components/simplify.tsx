@@ -13,13 +13,13 @@ export default function Simplify() {
   return (
     <div className="z-30 w-full relative">
       <p
-        className={`py-2 bg-black font-bold cursor-pointer hover:underline w-full text-center text-white ${slice.simplify && 'border-b-2 border-white'}`}
+        className={`px-12 py-2 bg-black font-bold cursor-pointer hover:underline w-full text-center text-white ${slice.simplify && 'border-b-2 border-white'}`}
         onClick={ () => {
           dispatch(actionSimplify(!slice.simplify));
           setMessage(true);
         }}
       >
-        <span>Clique aqui para ter acesso à versão</span>
+        <span className="text-sm">Clique aqui para ter acesso à versão</span>
         {
           slice.simplify
             ? ' completa deste site'
@@ -41,7 +41,7 @@ export default function Simplify() {
             <button
               type="submit"
               value="Submit"
-              className="border-white w-3/4 mt-4 mb-2 py-3 border-2 bg-white hover:border-white font-bold hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer relative z-10"
+              className="text-black border-white w-3/4 mt-4 mb-2 py-3 border-2 bg-white hover:border-white font-bold hover:bg-black hover:text-white transition-colors duration-200 cursor-pointer relative z-10"
               onClick={() => setMessage(false) }
             >
               Tudo certo!

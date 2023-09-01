@@ -1,9 +1,10 @@
 import { IGift, ITypeGift } from "@/interfaces/Gift";
-import { useAppDispatch } from "@/redux/hooks";
-import { actionFeedback } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionFeedback, useSlice } from "@/redux/slice";
 
 export default function Gift(props: { item: IGift } ) {
   const dispatch: any = useAppDispatch();
+  const slice = useAppSelector(useSlice);
   const { item } = props;
 
   function capitalizeFirstLetter(str: string): String {
@@ -81,12 +82,13 @@ export default function Gift(props: { item: IGift } ) {
         <span className="font-bold pr-1">System:</span>
         { item.system }
       </p>
-      <p
-        className="text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-3 cursor-pointer"
+      <button
+        type="button"
+        className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-3 cursor-pointer' : 'bg-white text-black py-3 px-2 font-bold mt-3 hover:underline'}
         onClick={() => dispatch(actionFeedback({ show: true, message: item.gift })) }
       >
         Enviar Feedback
-      </p>
+      </button>
     </div>
   );
 }

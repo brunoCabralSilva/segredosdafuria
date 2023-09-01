@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { actionFilterGift, actionTotalRenown, useSlice } from '@/redux/slice';
 import { useAppDispatch } from '@/redux/hooks';
 import { useAppSelector } from '@/redux/hooks';
+import { motion } from 'framer-motion';
 import list from '../../data/gifts.json';
 import { IGift } from '@/interfaces/Gift';
 import Nav from '@/components/nav';
@@ -11,6 +12,7 @@ import Gift from '@/components/gift';
 import Feedback from '@/components/feedback';
 import DataGifts from '@/components/dataGifts';
 import FilterGifts from '@/components/filterGifts';
+import Simplify from '@/components/simplify';
 
 export default function Gifts() {
   const [message, setMessage] = useState({ show: false, message: ''});
@@ -99,19 +101,21 @@ export default function Gifts() {
   };
 
   return (
-    <div className="bg-ritual text-white relative">
+    <div className={`${slice.simplify ? 'bg-black' : 'bg-ritual'} text-white relative`}>
       <div className="bg-black/60 absolute w-full h-full" />
       <div className="px-2 z-10 relative">
+        <Simplify />
         <Nav />
         <DataGifts />
         <FilterGifts type="trybes" title="Tribos" />
         <FilterGifts type="auspices" title="Augúrios" />
-        <div
-          className="font-bold text-white mt-1 pl-5 sm:pr-5 text-base bg-black/90 cursor-pointer flex sm:items-center justify-center sm:justify-start"
+        <motion.div
+          whileHover={{ scale: 0.98 }}
+          className={`font-bold text-white mt-1 pl-5 sm:pr-5 text-base bg-black/90 cursor-pointer flex sm:items-center justify-center sm:justify-start ${ !slice.simplify ? 'bg-black text-white' : 'bg-white text-black'}`}
         >
           <select
             id="renown"
-            className="bg-black py-2"
+            className={`${ !slice.simplify ? 'bg-black text-white' : 'bg-white text-black'} py-2`}
             onChange={(e) =>dispatch(actionTotalRenown(e.target.value))}
           >
             <option className="w-full text-center sm:text-left" value={0} selected disabled>
@@ -128,16 +132,18 @@ export default function Gifts() {
             <option className="text-center sm:text-left" value={8}>Renome Total 8</option>
             <option className="text-center sm:text-left" value={9}>Renome Total 9</option>
           </select>
-        </div>
-        <div
-          className="font-bold text-white mt-1 py-2 px-5 text-base bg-black/90 cursor-pointer flex sm:items-center items-start border-2 border-transparent hover:border-white duration-300 transition-colors"
+        </motion.div>
+        <motion.div
+          whileHover={{ scale: 0.98 }}
+          className={`font-bold mt-1 py-2 px-5 text-base cursor-pointer flex sm:items-center items-start border-2 border-transparent hover:border-white duration-300 transition-colors ${ !slice.simplify ? 'bg-black text-white' : 'bg-white text-black'}`}
           onClick={ () => setGlobal(!global) }
         >
           <p className="w-full text-center sm:text-left">
             { `Clique aqui para ${!global ? 'incluir' : 'remover'} Dons Nativos da Busca` }
           </p>
-        </div>
-        <div
+        </motion.div>
+        <motion.div
+          whileHover={{ scale: 0.98 }}
           onClick={ search }
           className="font-bold py-4 px-5 text-lg bg-white my-2 cursor-pointer"
         >
@@ -148,7 +154,7 @@ export default function Gifts() {
             returnFilterPhrase() !== '' &&
             <p className="w-full text-sm text-center text-black">({ returnFilterPhrase() })</p>
           }
-        </div>
+        </motion.div>
         <div className="">
           { message.show &&
             <div className="font-bold py-4 px-5 text-lg bg-black mt-2 mb-1 text-white">
