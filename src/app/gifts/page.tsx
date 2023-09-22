@@ -15,6 +15,7 @@ import FilterGifts from '@/components/filterGifts';
 import Simplify from '@/components/simplify';
 
 export default function Gifts() {
+  const [searchByText, setSearchByText] = useState('');
   const [message, setMessage] = useState({ show: false, message: ''});
   const [global, setGlobal] = useState(false);
   const [listGifts, setListGifts] = useState<IGift[]>([]);
@@ -25,6 +26,9 @@ export default function Gifts() {
     let phrase = '';
     const data = slice.selectTA.filter((element: string) => element !== '');
     if (global) data.push('Dons Nativos');
+    if (searchByText !== '') data.push(
+      `Dons contendo o trecho "${searchByText}"`
+    );
     for (let i = 0; i < data.length; i += 1) {
       if (i !== data.length - 1) {
         phrase += (`${data[i]}, `);
@@ -68,9 +72,7 @@ export default function Gifts() {
       }
     });
 
-    if(global) {
-      filters.push('global');
-    };
+    if(global) filters.push('global');
   
     const filterItem: IGift[] = [];
   
@@ -85,6 +87,15 @@ export default function Gifts() {
         filterItem.push(giftItem);
       }
     }
+
+    let filterByText = filterItem;
+
+    if (searchByText !== '') {
+      filterByText = filterItem.filter((item) =>
+        item.gift.toLowerCase().includes(searchByText.toLowerCase())
+        || item.giftPtBr.toLowerCase().includes(searchByText.toLowerCase())
+      );
+    }
     setMessage({
       show: true,
       message: returnFilterPhrase(),
@@ -94,10 +105,11 @@ export default function Gifts() {
     if (editionSelect) {
       editionSelect.selectedIndex = 0;
     }
-    setListGifts(filterItem);
+    setListGifts(filterByText);
     dispatch(actionTotalRenown(0));
     dispatch(actionFilterGift('reset'));
     setGlobal(false);
+    setSearchByText('');
   };
 
   return (
@@ -142,6 +154,16 @@ export default function Gifts() {
             { `Clique aqui para ${!global ? 'incluir' : 'remover'} Dons Nativos da Busca` }
           </p>
         </motion.div>
+        <div
+          className={`font-bold mt-1 py-2 px-2 text-base cursor-pointer flex sm:items-center items-start border-2 border-transparent hover:border-white duration-300 transition-colors ${ !slice.simplify ? 'bg-black text-white' : 'bg-white text-black'}`}
+        >
+          <input
+            className="w-full p-2 text-black"
+            value={ searchByText }
+            placeholder="Digite o nome ou um trecho do nome do dom"
+            onChange={ (e) => setSearchByText(e.target.value) }
+          />
+        </div>
         <motion.div
           whileHover={{ scale: 0.98 }}
           onClick={ search }
