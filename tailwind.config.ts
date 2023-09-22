@@ -24,6 +24,8 @@ const config: Config = {
         '04': "url('/images/16.jpg')",
         '05': "url('/images/128.jpg')",
         '06': "url('/images/193.jpg')",
+        'boca': "url('/images/Pedra da Boca.jpg')",
+        'boca01': "url('/images/Pedra da Boca01.png')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
