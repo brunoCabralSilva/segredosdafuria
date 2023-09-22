@@ -90,7 +90,7 @@ export default function Gift(props: { item: IGift, describe: any } ) {
       <div className="flex flex-col sm:flex-row sm:justify-between">
       <button
         type="button"
-        className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-3 cursor-pointer underline' : 'bg-white text-black py-3 px-2 font-bold mt-3 underline'}
+        className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-3 cursor-pointer underline' : 'bg-white text-black py-3 px-2 font-bold mt-3'}
         onClick={() => dispatch(actionFeedback({ show: true, message: item.gift })) }
       >
         Enviar Feedback
