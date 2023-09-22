@@ -87,7 +87,7 @@ export default function About() {
                   <a
                     target="_blank"
                     href="https://www.instagram.com/cesarbard/"
-                    className="hover:text-orange-600 text-orange-400 transition-colors duration-700">
+                    className="underline">
                       @cesarbard
                   </a>
                 </p>
@@ -104,15 +104,15 @@ export default function About() {
                   <span className="pr-1 font-bold">
                     Criador, revisor e tradutor:
                   </span>
-                  <span className={`${!slice.simplify ? 'text-orange-400' : '' }`}>Bruno Gabryell Cabral da Silva</span>
+                  <span className="">Bruno Gabryell Cabral da Silva</span>
                   </p>
                   <p className="pt-4 flex flex-col text-sm md:text-base">
                     <span className="pr-1 font-bold">Contato / Whatsapp:</span>
-                    <span className={`${!slice.simplify ? 'text-orange-400' : '' }`}>+55 83 9 9836 4408</span>
+                    <span className="">+55 83 9 9836 4408</span>
                   </p>
                   <p className="pt-4 flex flex-col text-sm md:text-base">
                     <span className="pr-1 font-bold">E-mail:</span>
-                    <span className={`${!slice.simplify ? 'text-orange-400' : '' }`}>
+                    <span className="">
                       bruno.cabral.silva2018@gmail.com
                     </span>
                   </p>
@@ -121,7 +121,7 @@ export default function About() {
                     <a
                       target="_blank"
                       href="https://github.com/brunoCabralSilva"
-                      className={`pt-3 pb-2 sm:py-0 cursor-pointer underline ${ slice.simplify ? 'font-bold' : 'hover:text-orange-600 text-orange-400 transition-colors duration-700' }`}>
+                      className="pt-3 pb-2 sm:py-0 cursor-pointer underline $font-bold">
                       github.com/brunoCabralSilva
                     </a>
                   </p>
@@ -130,7 +130,7 @@ export default function About() {
                     <a
                       target="_blank"
                       href="https://brunocabralsilva.github.io/"
-                      className={`pt-3 pb-2 sm:py-0 cursor-pointer underline ${ slice.simplify ? 'font-bold' : 'hover:text-orange-600 text-orange-400 transition-colors duration-700' }`}>
+                      className="pt-3 pb-2 sm:py-0 cursor-pointer underline $font-bold">
                       brunocabralsilva.github.io/
                     </a>
                   </p>
