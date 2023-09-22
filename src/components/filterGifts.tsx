@@ -26,33 +26,26 @@ export default function FilterGifts(props: { type: string, title: string }) {
   }, []);
 
   return (
-    <div className="">
+    <div className="bg-black mt-1 py-3 px-5">
       <div
-        className={`font-bold my-1 py-2 px-5 text-base flex justify-between items-center cursor-pointer ${slice.simplify ? 'bg-white text-black' : 'bg-black text-white'}`}
+        className="font-bold pb-2 text-base flex flex-col justify-between items-center"
       >
-        <p className="w-full text-center sm:text-left">{ `Selecione um ou mais ${title}`}</p>
+        <p className="w-full text-xl text-center sm:text-left">
+          { `Selecione um${title === 'Tribos' ? 'a' : ''} ou mais ${title}` }
+        </p>
       </div>
       { 
-      // grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6
-        <div className="grid grid-cols-1 mobile:grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-1 mb-2 w-full">
+      // grid grid-cols-1 mobile:grid-cols-2 sm:grid-cols-4 lg:grid-cols-4
+        <div className="flex flex-wrap justify-start gap-2 w-full py-1">
           {
             list.length > 0 && list.map((item: string | number, index: number) => (
               <motion.div
                 whileHover={{ scale: 0.98 }}
                 key={ index }
-                className={`w-full flex items-center justify-center ${slice.simplify ? `py-4 font-bold border-white ${selectTA.includes(item) ?'bg-white text-black'  : 'bg-black text-white' }` : `bg-black px-2 ${selectTA.includes(item) ? 'border-white' : 'border-transparent '}`} cursor-pointer border-2 `}
+                className={`shadow shadow-white rounded-full font-bold px-4 py-1 flex items-center justify-center ${selectTA.includes(item) ? 'bg-white text-black' : 'bg-black text-white'} cursor-pointer `}
                 onClick={ () => dispatch(actionFilterGift(item)) }
               >
-                { typeof item !== 'number' && !slice.simplify &&
-                  <Image
-                    src={ `/images/${type}/${item}.png` }
-                    alt={`Glifo respectivo de ${item}`}
-                    className={`${type === 'auspices' ? 'w-14' : 'w-10'}`}
-                    width={2000}
-                    height={1000}
-                  />
-                }
-                <span className="leading-2 text-sm py-1 w-full text-center">
+                <span className="leading-2 text-sm sm:text-base py-1 w-full text-center">
                   { item }
                 </span>
               </motion.div>

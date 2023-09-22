@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function DataGifts() {
   const slice = useAppSelector(useSlice);
   return (
-    <div>
+    <div className="mb-2">
       { !slice.simplify &&
         <div className="h-40vh relative flex bg-black items-end text-black">
         <Image
@@ -51,7 +51,10 @@ export default function DataGifts() {
           Ao selecionar algum filtro, o item selecionado aparecerá em um pop-up no canto inferior direito, onde você poderá acompanhar todos os filtros escolhidos e também removê-los caso deseje;
         </p>
         <p className="py-2">
-          Marcar a opção &quot;Adicionar Dons Nativos à Busca&quot; implica dizer que todos os Dons nativos que correspondam ao filtro de busca será retornado. Caso seja o único filtro, só serão retornados Dons Nativos (mantenha a opção desmarcada para retornar todos os dons).
+          Marcar a opção &quot;Clique aqui para incluir Dons Nativos na Busca&quot; implica dizer que todos os Dons nativos que correspondam ao filtro de busca serão retornados. Caso seja o único filtro, só serão retornados Dons Nativos (mantenha a opção desmarcada para retornar todos os dons). Caso não haja nenhum filtro selecionado, serão retornados todos os dons, inclusive os Nativos.
+        </p>
+        <p className="py-2">
+          Caso você digite algum trecho no campo &quot;Digite aqui&quot;, logo abaixo do título &quot;Digite o nome ou um trecho do nome do Dom&quot;, o método de busca retornará todos os dons que possuírem o trecho digitado em seu nome, seja em inglês ou português, aplicando os demais filtros antes de fazer esta filtragem. Por exemplo, se você apenas digitar o trecho &quot;beyond&quot; e não escolher nenhuma outra seleção, o método de busca retornará, dentre todos os dons existentes, os que possuem &quot;beyond&quot; no seu nome. Caso você digite o trecho &quot;beyond&quot; e também clique na seleção de Augúrio &quot;Theurge&quot;, só serão retornados os dons de Theurge que possuem o trecho digitado.
         </p>
         <p className="py-2">
           Não selecionar nenhum filtro retornará uma lista com todos os dons.
