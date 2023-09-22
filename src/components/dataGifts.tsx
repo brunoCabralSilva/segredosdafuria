@@ -28,39 +28,39 @@ export default function DataGifts() {
         </p>
         <h1 className="text-2xl pt-7 text-center sm:text-justify">Como utilizar o filtro de busca</h1>
         <hr className="w-10/12 my-4" />
-        <p className="py-2">
-          Os Filtros Tribos, Augúrios e Dons Nativos retornarão qualquer dom que inclua um dos selecionados:
-        </p>
-        <p className="py-2">
-          Exemplo - Ao selecionar A tribo dos roedores de ossos e o augúrio Ahroun, a busca retornará qualquer dom que pertença aos aos roedores de ossos ou aos Ahroun, sem necessariamente precisar pertencer aos dois filtros selecionados;
-        </p>
-        <p className="py-2">
-          Filtros de Renome Total só retornarão os dons que tiverem um valor igual ou menor que o valor cedido:
-        </p>
-        <p className="py-2">
-          Exemplo - Se selecionar o valor de Renome Total 6, só aparecerão dons que possuem Renomes Totais de 6 abaixo;
-        </p>
-        <p className="py-2">
-          Mesclando as duas categorias de filtros acima citados, você pode achar qualquer dom que desejar:
-        </p>
-        <p className="py-2">
-          Exemplo - ao selecionar os filtros de augúrio Ahroun, tribo dos Presas de Prata e Renome total 7, serão retornados todos os dons de Renome total 3 que pertençam ao augúrio Ahroun ou a tribo dos Presas de Prata;
-        </p>
-
-        <p className="py-2">
-          Ao selecionar algum filtro, o item selecionado aparecerá em um pop-up no canto inferior direito, onde você poderá acompanhar todos os filtros escolhidos e também removê-los caso deseje;
-        </p>
-        <p className="py-2">
-          Marcar a opção &quot;Clique aqui para incluir Dons Nativos na Busca&quot; implica dizer que todos os Dons nativos que correspondam ao filtro de busca serão retornados. Caso seja o único filtro, só serão retornados Dons Nativos (mantenha a opção desmarcada para retornar todos os dons).
-        </p>
-        <p className="py-2">
-          Caso você digite algum trecho no campo &quot;Digite aqui&quot;, logo abaixo do título &quot;Digite o nome ou um trecho do nome do Dom&quot;, o método de busca retornará todos os dons que possuírem o trecho digitado em seu nome, seja em inglês ou português, aplicando os demais filtros antes de fazer esta filtragem. Por exemplo, se você apenas digitar o trecho &quot;beyond&quot; e não escolher nenhuma outra seleção, o método de busca retornará, dentre todos os dons existentes, os que possuem &quot;beyond&quot; no seu nome. Caso você digite o trecho &quot;beyond&quot; e também clique na seleção de Augúrio &quot;Theurge&quot;, só serão retornados os dons de Theurge que possuem o trecho digitado.
-        </p>
-        <p className="py-2">
-          Não selecionar nenhum filtro retornará uma lista com todos os dons.
-        </p>
-
-        <p>OBS - Você notará que, ao fim de cada Dom, haverá uma opção de &quot;Enviar Feedback&quot;. Você poderá usá-lo, caso encontre algum ponto de melhoria no dom em questão (seja uma tradução que pode melhorar, ou um erro de digitação, ou ausência de informações ou informações em locais errados). Desta forma, será possível encaminhar para o administrador da página a melhoria para que ela seja avaliada e, caso acatada, seja aplicada. Desta forma, melhoramos a qualidade dos dados que estamos divulgando por meio desta aplicação! </p>
+        <ol className="list-decimal pl-4">
+          <li className="py-3">
+            Não selecionar nenhum filtro retornará uma lista com todos os dons existentes.
+          </li>
+          <li className="py-3">
+            Os Filtros Tribos, Augúrios e Dons Nativos retornarão qualquer dom que inclua uma das seleções.
+          </li>
+          <p className="py-3">
+            Exemplo - Bruno selecionou a tribo dos Roedores de ossos e o augúrio Ahroun. Desta forma, a busca retornará qualquer dom que pertença aos Roedores de ossos OU aos Ahroun, sem necessariamente precisar pertencer aos dois filtros selecionados ao mesmo tempo.
+          </p>
+          <li className="py-3">
+            Filtros de Renome Total só retornarão os dons que tiverem um valor igual ou menor que o valor cedido. Além disso, escolher um Renome Total filtra os dons de Tribos, Augúrios e Dons Nativos.
+          </li>
+          <p className="py-3">
+            Exemplo - Jocélio selecionou o valor de Renome Total 6, então só aparecerão dons que possuem Renomes Totais iguais ou abaixo de 6. Da mesma forma, Audeam selecionou os filtros de augúrio Ahroun, tribo dos Presas de Prata e Renome total 7. Sendo assim, serão retornados todos os dons de Renome total 3 que pertençam ao Augúrio dos Ahroun ou a tribo dos Presas de Prata.
+          </p>
+          <li className="py-3">
+            Marcar a opção &quot;Clique aqui para incluir Dons Nativos na Busca&quot; implica dizer que serão retornados todos os Dons nativos que correspondam ao Renome Selecionado. Caso o(s) filtro(s) selecionado(s) seja(m) de Augúrios ou Tribos ao invés de Renome, a busca retornará todos os dons que pertencam a pelo menos uma das seleções, seja Augúrio, Tribo ou Dom Nativo. Caso não haja nenhum outro filtro além do de &quot;Incluir Dons Nativos na busca&quot;, só serão retornados Dons Nativos (mantenha a opção desmarcada para retornar todos os dons).
+          </li>
+          <p>
+            Exemplo: Felipe selecionou a opção &quot;Clique aqui para incluir Dons Nativos na Busca&quot; e escolheu a seleção de Renome total 8. Serão retornados para ele todos os Dons Nativos que tenham um Renome Total igual ou abaixo de 8. Depois, Felipe selecionou a opção &quot;Clique aqui para incluir Dons Nativos na Busca&quot; e também a Tribo dos Andarilhos do Asfalto. Desta forma, serão retornados todos os dons que pertençam aos Dons Nativos ou aos Andarilhos do Asfalto. 
+          </p>
+          <li className="py-3">
+            Caso você digite algum trecho no campo &quot;Digite aqui&quot;, (localizado logo abaixo do título &quot;Digite o nome ou um trecho do nome do Dom&quot;), o método de busca retornará todos os dons que possuírem o trecho digitado em seu nome, seja em inglês ou português, aplicando os demais filtros antes de fazer esta filtragem.
+          </li>
+          <p>
+            Exemplo - Jess digitou o trecho &quot;beyond&quot; e não escolheu nenhuma outra seleção. Assim, o método de busca retornará todos os dons existentes que possuem &quot;beyond&quot; no seu nome. Depois, ela digitou novamente o trecho &quot;beyond&quot; e também clicou na seleção de Augúrio &quot;Theurge&quot;. Desta forma, só serão retornados os dons pertencentes aos Theurge que possuem o trecho digitado.
+          </p>
+          <li className="py-3">
+            Ao selecionar algum filtro, ele aparecerá dentro do botão de busca.
+          </li>
+        </ol>
+        <p className="pt-2">OBS - Você notará que, ao fim de cada Dom, haverá uma opção de &quot;Enviar Feedback&quot;. Você poderá usá-lo, caso encontre algum ponto de melhoria no dom em questão (seja uma tradução que pode melhorar, ou um erro de digitação, ou ausência de informações ou informações em locais errados). Desta forma, será possível encaminhar para o administrador da página a melhoria para que ela seja avaliada. Assim, melhoramos a qualidade dos dados que estamos cedendo por meio desta aplicação! </p>
       </div>
     </div>
   );
