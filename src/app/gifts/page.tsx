@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useState } from 'react';
+import { ChangeEvent, SetStateAction, useRef, useState } from 'react';
 import { actionFilterGift, actionTotalRenown, useSlice } from '@/redux/slice';
 import { useAppDispatch } from '@/redux/hooks';
 import { useAppSelector } from '@/redux/hooks';
@@ -23,11 +23,16 @@ export default function Gifts() {
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
 
+  const typeText = (e: ChangeEvent<HTMLInputElement>) => {
+    const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
+    setSearchByText(sanitizedValue);
+  };
+
   const returnFilterPhrase = (): string => {
     let phrase = '';
     const data = slice.selectTA.filter((element: string) => element !== '');
     if (global) data.push('Dons Nativos');
-    if (searchByText !== '') data.push(
+    if (searchByText !== '' && searchByText !== ' ') data.push(
       `Dons contendo o trecho "${searchByText}"`
     );
     for (let i = 0; i < data.length; i += 1) {
@@ -91,7 +96,7 @@ export default function Gifts() {
 
     let filterByText = filterItem;
 
-    if (searchByText !== '') {
+    if (searchByText !== '' && searchByText !== ' ') {
       filterByText = filterItem.filter((item) =>
         item.gift.toLowerCase().includes(searchByText.toLowerCase())
         || item.giftPtBr.toLowerCase().includes(searchByText.toLowerCase())
@@ -168,10 +173,11 @@ export default function Gifts() {
         >
           <p className="w-full text-xl text-center sm:text-left pb-2">Digite o nome ou um trecho do nome do Dom</p>
           <input
-            className="text-center sm:text-left w-full px-4 py-2 text-black rounded-full mb-3"
+            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${searchByText === '' || searchByText === ' '
+            ? 'bg-black text-white' : 'bg-white text-black'} rounded-full mb-3`}
             value={ searchByText }
             placeholder="Digite aqui"
-            onChange={ (e) => setSearchByText(e.target.value) }
+            onChange={ (e) => typeText(e) }
           />
         </div>
         <motion.div
