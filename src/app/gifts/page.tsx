@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { actionFilterGift, actionTotalRenown, useSlice } from '@/redux/slice';
 import { useAppDispatch } from '@/redux/hooks';
 import { useAppSelector } from '@/redux/hooks';
@@ -15,6 +15,7 @@ import FilterGifts from '@/components/filterGifts';
 import Simplify from '@/components/simplify';
 
 export default function Gifts() {
+  const describe = useRef<HTMLDivElement | null>(null);
   const [searchByText, setSearchByText] = useState('');
   const [message, setMessage] = useState({ show: false, message: ''});
   const [global, setGlobal] = useState(false);
@@ -119,7 +120,8 @@ export default function Gifts() {
         <Simplify />
         <Nav />
         <DataGifts />
-        <FilterGifts type="trybes" title="Tribos" />
+        <div ref={ describe } />
+        <FilterGifts type="trybes" title="Tribos"  />
         <FilterGifts type="auspices" title="Augúrios" />
         <div
           className="bg-black font-bold mt-1 py-2 px-5 text-base flex flex-col pt-5 pb-2 justify-between items-center"
@@ -201,7 +203,11 @@ export default function Gifts() {
           }
         {
           listGifts.map((item: IGift, index: number) => (
-              <Gift item={ item } key={ index } />
+              <Gift
+                key={ index }
+                describe={ describe }
+                item={ item }
+              />
           ))
         }
         { 

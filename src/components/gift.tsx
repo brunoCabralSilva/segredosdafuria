@@ -2,7 +2,12 @@ import { IGift, ITypeGift } from "@/interfaces/Gift";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";
 
-export default function Gift(props: { item: IGift } ) {
+export default function Gift(props: { item: IGift, describe: any } ) {
+  const scrollToComponent = () => {
+    if (props.describe.current) {
+      props.describe.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   const dispatch: any = useAppDispatch();
   const slice = useAppSelector(useSlice);
   const { item } = props;
@@ -82,6 +87,7 @@ export default function Gift(props: { item: IGift } ) {
         <span className="font-bold pr-1">System (original):</span>
         { item.system }
       </p>
+      <div className="flex flex-col sm:flex-row sm:justify-between">
       <button
         type="button"
         className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-3 cursor-pointer' : 'bg-white text-black py-3 px-2 font-bold mt-3 hover:underline'}
@@ -89,6 +95,14 @@ export default function Gift(props: { item: IGift } ) {
       >
         Enviar Feedback
       </button>
+      <button
+        type="button"
+        className="text-white transition-colors duration-300 mt-3 cursor-pointer underline"
+        onClick={scrollToComponent}
+      >
+        Retornar para a seleção de filtros
+      </button>
+      </div>
     </div>
   );
 }
