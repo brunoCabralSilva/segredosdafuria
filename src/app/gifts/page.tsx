@@ -166,7 +166,7 @@ export default function Gifts() {
         >
           <p className="w-full text-xl text-center sm:text-left pb-2">Digite o nome ou um trecho do nome do Dom</p>
           <input
-            className="w-full px-4 py-2 text-black rounded-full mb-3"
+            className="text-center sm:text-left w-full px-4 py-2 text-black rounded-full mb-3"
             value={ searchByText }
             placeholder="Digite aqui"
             onChange={ (e) => setSearchByText(e.target.value) }
