@@ -29,7 +29,7 @@ export default function DataGifts() {
         <h1 className="text-2xl pt-7 text-center sm:text-justify">Como utilizar o filtro de busca</h1>
         <hr className="w-10/12 my-4" />
         <p className="py-2">
-          Filtros Tribos, Augúrios e Dons Nativos retornarão qualquer dom que inclua um dos selecionados:
+          Os Filtros Tribos, Augúrios e Dons Nativos retornarão qualquer dom que inclua um dos selecionados:
         </p>
         <p className="py-2">
           Exemplo - Ao selecionar A tribo dos roedores de ossos e o augúrio Ahroun, a busca retornará qualquer dom que pertença aos aos roedores de ossos ou aos Ahroun, sem necessariamente precisar pertencer aos dois filtros selecionados;
@@ -51,7 +51,7 @@ export default function DataGifts() {
           Ao selecionar algum filtro, o item selecionado aparecerá em um pop-up no canto inferior direito, onde você poderá acompanhar todos os filtros escolhidos e também removê-los caso deseje;
         </p>
         <p className="py-2">
-          Marcar a opção &quot;Clique aqui para incluir Dons Nativos na Busca&quot; implica dizer que todos os Dons nativos que correspondam ao filtro de busca serão retornados. Caso seja o único filtro, só serão retornados Dons Nativos (mantenha a opção desmarcada para retornar todos os dons). Caso não haja nenhum filtro selecionado, serão retornados todos os dons, inclusive os Nativos.
+          Marcar a opção &quot;Clique aqui para incluir Dons Nativos na Busca&quot; implica dizer que todos os Dons nativos que correspondam ao filtro de busca serão retornados. Caso seja o único filtro, só serão retornados Dons Nativos (mantenha a opção desmarcada para retornar todos os dons).
         </p>
         <p className="py-2">
           Caso você digite algum trecho no campo &quot;Digite aqui&quot;, logo abaixo do título &quot;Digite o nome ou um trecho do nome do Dom&quot;, o método de busca retornará todos os dons que possuírem o trecho digitado em seu nome, seja em inglês ou português, aplicando os demais filtros antes de fazer esta filtragem. Por exemplo, se você apenas digitar o trecho &quot;beyond&quot; e não escolher nenhuma outra seleção, o método de busca retornará, dentre todos os dons existentes, os que possuem &quot;beyond&quot; no seu nome. Caso você digite o trecho &quot;beyond&quot; e também clique na seleção de Augúrio &quot;Theurge&quot;, só serão retornados os dons de Theurge que possuem o trecho digitado.
@@ -60,7 +60,7 @@ export default function DataGifts() {
           Não selecionar nenhum filtro retornará uma lista com todos os dons.
         </p>
 
-        <p>OBS - Você notará que, ao fim de cada Dom, haverá uma opção de &quot;Enviar Feedback&quot;. Você poderá usá-lo, caso encontre algum ponto de melhoria no dom em questão (seja uma tradução que pode melhorar, ou um erro de digitação, ou ausência de informações ou informações em locais errados), você possa encaminhar para o adm da página para que ele a corrija. É uma espécie de, mutuamente, melhorar a qualidade dos dados que estamos divulgando por meio desta aplicação! </p>
+        <p>OBS - Você notará que, ao fim de cada Dom, haverá uma opção de &quot;Enviar Feedback&quot;. Você poderá usá-lo, caso encontre algum ponto de melhoria no dom em questão (seja uma tradução que pode melhorar, ou um erro de digitação, ou ausência de informações ou informações em locais errados). Desta forma, será possível encaminhar para o administrador da página a melhoria para que ela seja avaliada e, caso acatada, seja aplicada. Desta forma, melhoramos a qualidade dos dados que estamos divulgando por meio desta aplicação! </p>
       </div>
     </div>
   );
