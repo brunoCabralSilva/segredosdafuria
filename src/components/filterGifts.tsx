@@ -36,7 +36,7 @@ export default function FilterGifts(props: { type: string, title: string }) {
       </div>
       { 
       // grid grid-cols-1 mobile:grid-cols-2 sm:grid-cols-4 lg:grid-cols-4
-        <div className="flex flex-wrap justify-start gap-2 w-full py-1">
+        <div className="sm:flex sm:flex-wrap grid grid-cols-1 mobile:grid-cols-2 sm:justify-start gap-2 w-full py-1">
           {
             list.length > 0 && list.map((item: string | number, index: number) => (
               <motion.div

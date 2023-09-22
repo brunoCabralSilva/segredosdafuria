@@ -26,7 +26,7 @@ export default function DataGifts() {
         <p className="pb-2">
           Quando os Dons se manifestam, cada um é diferente, e até o mesmo Dom parece diferente quando utilizado por diferentes Garou. Alguns envolvem uma prece sussurrada, outros o toque de uma marca que simboliza o pacto espiritual, e ainda outros começam com um uivo arrepiante. A menos que seja declarado o contrário, o uso de um Dom é sempre evidente, e outros Garou reconhecem que um Dom está sendo usado, mesmo que sua natureza não seja imediatamente óbvia. Os humanos têm menos probabilidade de perceber o uso dos Dons, e se o fazem, tendem a interpretar o ato como um juramento, gesto ou maldição religiosa ou cultural.
         </p>
-        <h1 className="text-2xl pt-7">Como utilizar o filtro de busca</h1>
+        <h1 className="text-2xl pt-7 text-center sm:text-justify">Como utilizar o filtro de busca</h1>
         <hr className="w-10/12 my-4" />
         <p className="py-2">
           Filtros Tribos, Augúrios e Dons Nativos retornarão qualquer dom que inclua um dos selecionados:

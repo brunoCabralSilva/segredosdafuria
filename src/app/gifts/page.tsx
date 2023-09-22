@@ -125,7 +125,7 @@ export default function Gifts() {
           className="bg-black font-bold mt-1 py-2 px-5 text-base flex flex-col pt-5 pb-2 justify-between items-center"
         >
           <p className="w-full text-xl text-center sm:text-left pb-2">Selecione um Renome e/ou Dons Nativos</p>
-          <div className="flex flex-wrap justify-start gap-2 w-full py-1">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap justify-start gap-2 w-full py-1">
             <motion.div
               whileHover={{ scale: 0.98 }}
               className={`rounded-full font-bold shadow shadow-white px-4 py-2 flex items-center justify-center ${slice.totalRenown <= 0 ? 'bg-black text-white' : 'bg-white text-black'} cursor-pointer`}
