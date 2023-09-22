@@ -18,7 +18,7 @@ export default function DataGifts() {
       </div>
       }
       <div className="py-6 px-5 bg-black/90 mt-2 flex flex-col items-center sm:items-start text-justify">
-        <h1 className="text-4xl z-10 relative">Dons</h1>
+        <h1 className="text-4xl relative">Dons</h1>
         <hr className="w-10/12 my-6" />
         <p className="pb-2">
           Um Dom e seus efeitos são a expressão de um pacto entre um lobisomem e um espírito. Os Garou ativos durante a era do Apocalipse passam grande parte do seu tempo buscando e estabelecendo relacionamentos com espíritos, além de manter aqueles que já possuem.
