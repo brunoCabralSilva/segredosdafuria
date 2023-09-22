@@ -2,16 +2,14 @@ import { IFeedback } from "@/interfaces/Gift";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
-  feedback: {
-    show: false,
-    message: '',
-  },
+  feedback: { show: false, message: '' },
+  giftMessage: { show: false, message: '' },
+  filteredList: [],
   selectTA: [],
   totalRenown: 0,
   simplify: false,
   global: false,
   searchByText: '',
-  trybes: ['Peregrinos Silenciosos', 'Fúrias Negras', 'Presas de Prata', 'Guarda do Cervo', 'Conselho Fantasma', 'Perseguidores da Tempestade', 'Andarilhos do Asfalto', 'Roedores de Ossos', 'Senhores das Sombras', 'Filhos de Gaia','Garras Vermelhas'],
   auspices: ['Ragabash', 'Theurge', 'Philodox', 'Galliard', 'Ahroun'],
 };
 
@@ -77,6 +75,18 @@ const slice: Slice = createSlice({
         searchByText: payload,
       };
     },
+    actionGiftMessage(state, { payload }: PayloadAction<boolean>) {
+      return {
+        ...state,
+        giftMessage: payload,
+      };
+    },
+    actionFilteredList(state, { payload }: PayloadAction<boolean>) {
+      return {
+        ...state,
+        filteredList: payload,
+      };
+    },
   },
 });
 
@@ -89,6 +99,8 @@ export const {
   actionSimplify,
   actionGlobal,
   actionSearchByText,
+  actionGiftMessage,
+  actionFilteredList,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFilterGift, actionGlobal, actionSearchByText, actionTotalRenown, useSlice } from "@/redux/slice";
 import { motion } from "framer-motion";
+import trybes from '../data/trybes.json';
 
 export default function FilterGifts(props: { title: string }) {
   const [list, setList] = useState<string[] | number[]>([]);
@@ -12,7 +13,8 @@ export default function FilterGifts(props: { title: string }) {
   const { selectTA } = slice;
   
   useEffect(() => {
-    if (title === 'Tribos') setList(slice.trybes);
+    const trybesList = trybes.map((element) => element.namePtBr);
+    if (title === 'Tribos') setList(trybesList);
     else if (title === 'Augúrios') setList(slice.auspices);
     else setList(slice.totalRenown);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -93,7 +95,7 @@ export default function FilterGifts(props: { title: string }) {
       </div>
     );
   } return(
-    <div
+    <section
       className="bg-black font-bold mt-1 py-2 px-5 text-base flex flex-col pt-5 pb-2 justify-between items-center"
     >
       <p className="w-full text-xl text-center sm:text-left pb-2">
@@ -106,6 +108,6 @@ export default function FilterGifts(props: { title: string }) {
         placeholder="Digite aqui"
         onChange={ (e) => typeText(e) }
       />
-    </div>
+    </section>
   );
 }

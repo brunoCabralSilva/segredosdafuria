@@ -31,7 +31,7 @@ export default function Gift(props: { item: IGift, describe: any } ) {
   };
 
   return(
-    <div className="border mb-1 py-6 px-5 border-3 bg-black/70 text-white">
+    <article className="border mb-1 py-6 px-5 border-3 bg-black/70 text-white">
       <span className="font-bold text-lg">
         { item.giftPtBr } ({ item.gift }) - { item.renown }
       </span>
@@ -103,6 +103,6 @@ export default function Gift(props: { item: IGift, describe: any } ) {
         Retornar para a seleção de filtros
       </button>
       </div>
-    </div>
+    </article>
   );
 }
