@@ -2,7 +2,7 @@
   {
     "namePtBr": "Peregrinos Silenciosos",
     "nameEn": "silent striders",
-    "phrase": "Eu estive em todos os lugares, cara, e deixe-me dizer, você vai querer ouvir isso.",
+    "phrase": "Eu estive em todos os lugares, cara. Deixe que eu te conte, você vai querer ouvir isso.",
     "description": [
       "Entre os lobos, os Garou seguem onde a presa lidera a matilha, e entre os humanos, os Garou historicamente foram encontrados em culturas que são migratórias ou diaspóricas.",
       "No fundo de sua própria história, os Peregrinos Silenciosos foram eles mesmos... amaldiçoados? por um espírito poderoso, maligno e não totalmente compreendido, e como resultado eles frequentemente encontram povos simpáticos e práticas familiares entre culturas sempre em movimento ou dispersas.",
@@ -39,7 +39,7 @@
   {
     "namePtBr": "Fúrias Negras",
     "nameEn": "black furies",
-    "phrase": "Você não precisa escolher alguém do seu próprio tamanho. Tente escolher alguém do meu tamanho.",
+    "phrase": "Você não precisa enfrentar alguém do seu próprio tamanho. Tente enfrentar alguém do meu tamanho.",
     "description": [
       "As Fúrias Negras atribuem uma importância suprema à justiça, especialmente para aqueles que se encontram em desvantagem devido às ações de outros.",
       "A tribo é renomada por contornar ou destruir obstáculos, seja uma barreira literal, na forma de uma formação inimiga, ou um 'teto de vidro' que impede resultados justos.",
@@ -78,7 +78,7 @@
   {
     "namePtBr": "Presas de Prata",
     "nameEn": "silver fangs",
-    "phrase": "O poder é um meio para um fim, um trabalho de uma vida construído em serviço a Gaia. É tão responsabilidade quanto privilégio, se não mais.",
+    "phrase": "O poder é um meio para um fim, um trabalho de uma vida construído em serviço a Gaia. É tanto responsabilidade quanto privilégio, se não mais.",
     "description": [
       "A sociedade Garou é inerentemente tribal, e onde tribos existem, líderes emergem. Para os lobisomens, o manto da liderança foi reivindicado há muito tempo pelos Presas de Prata, que estão tão próximos de uma linhagem nobre quanto a cultura Garou produz. A deles é uma herança de aristocracia, decisão e, por mais relutantes que as outras tribos sejam em admitir, unificação em circunstâncias adversas.",
       "Os Presas de Prata em jogo podem esperar motivar sua matilha, liderá-los na batalha, reunir-se com eles em derrotas desesperadoras e inspirá-los a grandes realizações."
@@ -124,8 +124,7 @@
     "whoAre": [
       "Motivar o Conselho Fantasma é um desejo, uma fome, uma necessidade de conhecimento, especialmente de natureza prática e espiritual. Essa praticidade muitas vezes se manifesta como uma habilidade de afetar o mundo ao seu redor. Os Fantasmas coletam segredos para obter melhores resultados. Seja enganando um espírito desprevenido para deixá-los passar sem problemas ou descobrindo onde o executivo escondeu documentos incriminadores no apartamento de sua amante, os lobisomens do Conselho Fantasma procuram os limites que outros estabelecem ao seu redor, as falhas que constroem em sua própria armadura.",
       "Eles querem todas as opções na mesa, até mesmo as 'proibidas', porque quando você está no meio de um maldito Apocalipse, nenhuma opção deve ser 'proibida'. Essa filosofia rendeu ao Conselho Fantasma uma reputação de subversão entre os Garou mais tradicionais — e os Fantasmas não parecem se importar. 'Os fins justificam os meios' geralmente parece ser uma doutrina política perigosa, mas para o Conselho Fantasma, encontrar uma resposta ou oportunidade desculpa como ela é alcançada.",
-      "Se algo resulta em manter um relacionamento com um confidente de uma tribo caída ou fazer pactos com espíritos proibidos, o Fantasma fica satisfeito — e validado, em suas mentes. Como era de se esperar, outros Garou frequentemente veem os lobisomens do Conselho Fantasma como tendo motivos suspeitos. Uma crítica justa é que o Conselho Fantasma se preocupa em resolver o 'como' dos mistérios pelo bem do poder, com pouca consideração pelos motivos pelos quais esse poder se manifesta em seus meios de descoberta.",
-      "O bando tem o klaive do rival — isso é o que importa. Resultados agora, custos depois.",
+      "Se algo resulta em manter um relacionamento com um confidente de uma tribo caída ou fazer pactos com espíritos proibidos, o Fantasma fica satisfeito — e validado, em suas mentes. Como era de se esperar, outros Garou frequentemente veem os lobisomens do Conselho Fantasma como tendo motivos suspeitos. Uma crítica justa é que o Conselho Fantasma se preocupa em resolver o 'como' dos mistérios pelo bem do poder, com pouca consideração pelos motivos pelos quais esse poder se manifesta em seus meios de descoberta. O bando tem o klaive do rival — isso é o que importa. Resultados agora, custos depois.",
       "De forma holística, a descoberta de verdades ocultas exige ir até elas. Toda sociedade humana tem tradições nessa linha, e o Conselho Fantasma teve membros entre muitas dessas tradições e sociedades.",
       "Os membros da tribo frequentemente estão entusiasmados com oportunidades de viajar, seja para um local estranho e remoto de mistério Umbral, uma viagem de carro pelo país em uma caravana ou uma emocionante corrida através da taiga marcada por conflitos para encontrar um rio específico e importante."
     ],
@@ -154,7 +153,7 @@
   {
     "namePtBr": "Guarda do Cervo",
     "nameEn": "hart wardens",
-    "phrase": "Seja bem-vindo ao nosso caern. Este é o nosso lar e abrigo. Aqueça-se em nossas fogueiras e alimente-se em nossa mesa. Uma palavra de cautela, amigo — abuso de nossa hospitalidade e enforcaremos suas entranhas em todas aquelas belas árvores que você viu lá fora.",
+    "phrase": "Seja bem-vindo ao nosso caern. Este é o nosso lar e abrigo. Aqueça-se em nossas fogueiras e alimente-se em nossa mesa. Mas fica aqui uma palavra de cautela, amigo: abuse de nossa hospitalidade e enforcaremos suas entranhas em todas aquelas belas árvores que você viu lá fora.",
     "description": [
       "Os Guardiões dos Cervos são os guardiões e cuidadores da natureza, seja consagrando os lugares prístinos 'inexplorados' do mundo ou cultivando algum lugar particularmente importante para eles em direção a um propósito mais estruturado, como uma fazenda ou pomar. Pode ser uma extensa propriedade rural, um vale de rio manchado que precisa ser revivido ou até mesmo um pedaço escondido de espaço verde no centro de Nova Orleans, mas os Guardiões dos Cervos estão lá, persuadindo a promessa que podem tirar do pedaço de criação de sua matilha.",
       "Se os Garou têm um pé em cada mundo da carne e espírito, os Guardiões dos Cervos têm um pé em cada mundo do mundo moderno e um mundo de sua própria criação mítica. Eles são muito apaixonados pelo que encontram e nutrem, e qualquer reunião de Guardiões dos Cervos logo se voltará para celebrações da história (e não poucas lendas altas...) em relação à sua própria tribo e aos Garou em geral.",
@@ -189,7 +188,7 @@
   {
     "namePtBr": "Perseguidores da Tempestade",
     "nameEn": "galestalkers",
-    "phrase": "Vou te dar uma vantagem. Esconda-se onde quiser. Apenas, onde você quiser. Não importa. Vejo você em breve.",
+    "phrase": "Vou te dar uma vantagem. Esconda-se em qualquer lugar que desejar. Não importa. Vejo você em breve.",
     "description": [
         "Homônimos para o vento que cruza a tundra, os Perseguidores da Tempestade são incansáveis. Esses rastreadores sem igual nunca perdem a consciência de sua presa, independentemente de a presa vir dos Espíritos Selvagens ou do mundo físico. Eles fazem grandes esforços para trazer de volta o que se comprometeram a caçar — e seus companheiros de matilha sabem que podem depender deles.",
         "Os Perseguidores da Tempestade, durante o jogo, podem esperar rastrear sua presa através de um deserto poluído, emboscar o inimigo prevendo astutamente para onde ele viajará, perseguir a presa obstinadamente se ela fugir tola e assediar a presa até que finalmente caia."
@@ -226,7 +225,7 @@
   {
     "namePtBr": "Andarilhos do Asfalto",
     "nameEn": "glass walkers",
-    "phrase": "Você quer algo despedaçado, sim, eu provavelmente consigo lidar com isso. Você quer algo construído, porém, aí é onde eu brilho. Vou fazer isso funcionar.",
+    "phrase": "Você quer despedaçar algo e eu provavelmente consigo ajudar com isso. Você quer construir algo e aí é onde eu brilho. Permita-me fazer isso funcionar.",
     "description": [
       "Os Andarilhos do Asfalto estão entre os lobisomens mais proficientes com ciência aplicada, graças à sua habilidade em resolver problemas com tecnologia, ou — mais precisamente — com os espíritos da tecnologia, muitos dos quais são frequentemente desconhecidos pelos Garou mais tradicionais. As fileiras dos Andarilhos do Asfalto incluem engenheiros, técnicos e inventores, cuja habilidade em fazer máquinas funcionarem geralmente se manifesta na forma de persuadir os espíritos que as habitam a executarem excepcionalmente.",
       "Em jogo, os Andarilhos do Asfalto podem esperar pesquisar os planos de uma sede de uma empresa de energia HQ antes de um ataque, construir um sistema de segurança para defender seu caern, hackear um drone de defesa para que ele informe o bando em vez de seu centro de comando e reutilizar uma sequência de portas de explosão para prender um grupo de fomori."
@@ -237,10 +236,10 @@
       "Mais do que qualquer outra coisa, porém, os Andarilhos do Asfalto se adaptam. Nesta era de doença espiritual, eles apropriaram-se das ferramentas do mundo moderno para usar na navegação do Apocalipse: computadores, armas de fogo, máquinas, dispositivos de comunicação de ponta, qualquer coisa que possa dar à tribo uma vantagem sobre seus inimigos e servos do Wyrm.",
       "Do ponto de vista dos Andarilhos do Asfalto, é difícil e até mesmo tolo negar a si mesmos os tipos de versatilidade e poder de fogo que as ferramentas do mundo dos humanos podem oferecer — uma perspectiva que lhes rende poucos elogios ao redor das fogueiras de caerns e moots multirraciais.",
       "Naturalmente, essa predileção por ferramentas e tecnologia mantém os Andarilhos do Asfalto em frequente contato com os humanos, e extraordinariamente poucos membros da tribo têm origens lupinas — um número que diminui diariamente.",
-      "Mesmo em particular e entre eles mesmos, muitos Andarilhos do Asfalto se preocupam que estão em perigo de 'perder o lobo', abandonar parte de sua conexão sagrada com Gaia e substituí-la por algo externo e artificial — algo mais semelhante ao propósito da Tecelã. Por enquanto, no entanto, os laços dos Andarilhos do Asfalto com sua herança Garou ainda estão de pé, e os espíritos ainda honram os pactos há muito jurados entre eles.",
+      "Mesmo em particular e entre eles mesmos, muitos Andarilhos do Asfalto se preocupam que estão em perigo de 'perder o lobo', abandonar parte de sua conexão sagrada com Gaia e substituí-la por algo externo e artificial — algo mais semelhante ao propósito da Weaver. Por enquanto, no entanto, os laços dos Andarilhos do Asfalto com sua herança Garou ainda estão de pé, e os espíritos ainda honram os pactos há muito jurados entre eles.",
       "Na verdade, os Andarilhos do Asfalto cultivam relacionamentos com espíritos que outros Garou evitam ou nem sabem que existem. Espíritos do dinheiro, espíritos do lixo, faíscas espirituais que percorrem as linhas de energia das cidades, manifestações estranhas de seu Espírito Patrono e até mesmo espíritos potentes, mas localizados, que podem fortalecer um caern urbano se forem persuadidos por um theurge competente — todas essas entidades, e outras além, chamam a cidade Umbral de seu lar."
     ],
-    "patron": "O Espírito Patrono dos Andarilhos do Asfalto é a Aranha, cujas teias cuidadosamente construídas ecoam no desejo dos Andarilhos do Asfalto de criar coisas de duração e eficácia duradouras. Esse desejo não os torna simpáticos a muitos outros Garou, que veem na patronagem da Aranha uma subserviência à Tecelã em vez de um dever para com Gaia.",
+    "patron": "O Espírito Patrono dos Andarilhos do Asfalto é a Aranha, cujas teias cuidadosamente construídas ecoam no desejo dos Andarilhos do Asfalto de criar coisas de duração e eficácia duradouras. Esse desejo não os torna simpáticos a muitos outros Garou, que veem na patronagem da Aranha uma subserviência à Weaver em vez de um dever para com Gaia.",
     "favor": "A Aranha revela a interconexão de todas as coisas como teias e fios, sugerindo uma abordagem ordenada. Os Andarilhos do Asfalto podem adicionar um dado às rolagens de Tecnologia ou Ciência relacionadas à construção ou reparo de coisas.",
     "ban": "A Aranha tem uma extensa prole de espíritos afins e proíbe os Andarilhos do Asfalto de prejudicar qualquer um deles. Se destruírem máquinas complexas, como veículos, computadores ou equipamentos de montagem, poderão recuperar apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole",
     "archetypes": [
@@ -265,7 +264,7 @@
   {
     "namePtBr": "Roedores de Ossos",
     "nameEn": "bone gnawers",
-    "phrase": "Esse cara conhecido como o Honrado Sacos Escrotais uma vez disse que por trás de toda grande fortuna alguém cometeu um grande crime, e no momento em que eu puder responsabilizar essa pessoa, acredite, eu farei isso.",
+    "phrase": "Esse cara conhecido como o 'Honrados-Testículos' uma vez disse que por trás de toda grande fortuna alguém cometeu um grande crime, e no momento em que eu puder responsabilizar essa pessoa, acredite, eu farei isso.",
     "description": [
       "Os Roedores de Ossos buscam descobrir o oculto em todas as suas formas: segredos, senhas, atalhos, qualquer coisa que possam usar a seu favor em relação ao óbvio.",
       "Eles são especialmente adeptos em se esconder à vista de todos e frequentemente existem em meio a grupos de status socioeconômico mais baixo, aqueles que passam despercebidos por pessoas que se consideram superiores e são indiferentes ao que seus 'inferiores' pensam ou veem.",
@@ -339,7 +338,7 @@
   {
     "namePtBr": "Filhos de Gaia",
     "nameEn": "children of gaia",
-    "phrase": "Que assim Gaia uive nesta era de ruína espiritual, mas como seus escolhidos, nós somos a voz do seu uivo, ou somos cúmplices daqueles que a prejudicam?",
+    "phrase": "Que Gaia possa uivar nesta era de ruína espiritual, mas como seus escolhidos, nós somos a voz do seu uivo ou somos cúmplices daqueles que a prejudicam?",
     "description": [
       "Os Filhos de Gaia se preocupam com os maiores mistérios de sua homônima e buscam compreender os enigmas que existem em sua presença. Um Filho de Gaia é desafiado por nada tanto como por um enigma para investigar ou uma ferida, literal ou figurativa, para curar, e eles são especialmente atraídos para a esotérica Umbra.",
       "Os Filhos de Gaia em jogo podem esperar descobrir um cache de artefatos deixados pelos lendários Garou, discernir a verdadeira natureza de um espírito-trapaceiro, curar a ferida de outros ou resolver o enigma de uma situação Umbral."
@@ -382,14 +381,13 @@
       "Em jogo, Os Garras Vermelhas podem esperar arruinar indivíduos e instalações que percebem como desafiadores ao seu território, proteger lugares queridos a Gaia contra intrusões, reduzir a dependência de tecnologias humanas, reduzir populações excessivas de criaturas que desequilibrariam ecologias locais e até mesmo purgar um local de ocupantes invasivos (humanos ou não) - sangrentamente, se necessário."
     ],
     "whoAre": [
-      "À medida que a humanidade continua na exploração implacável do mundo, os lugares onde os animais e suas presas podem prosperar diminuem cada vez mais. Gaia ela mesma está sendo mutilada, parcelada em uma infinidade de transações humanas míopes que ameaçam toda a vida. Com cada dia que passa, o território do lobo (e dos Garou nascidos de lobos) é ainda mais diminuído, empurrando-os para um canto metafórico e às vezes literal.",
-      "E um animal encurralado é um animal desesperado.",
+      "À medida que a humanidade continua na exploração implacável do mundo, os lugares onde os animais e suas presas podem prosperar diminuem cada vez mais. Gaia ela mesma está sendo mutilada, parcelada em uma infinidade de transações humanas míopes que ameaçam toda a vida. Com cada dia que passa, o território do lobo (e dos Garou nascidos de lobos) é ainda mais diminuído, empurrando-os para um canto metafórico e às vezes literal. E um animal encurralado é um animal desesperado.",
       "Nessas circunstâncias, Os Garras Vermelhas recorrem a uma ação veemente para lutar e recuperar territórios perdidos da invasão humana. Os Garras Vermelhas favorecem soluções decisivas, a ponto de até mesmo outros lobisomens frequentemente pensarem que a tribo é brutal. Destruir uma cidade até virar escombros interromperia a expansão desenfreada que se estende como um câncer a partir dela, por exemplo. Arrancar a garganta do operador da escavadeira é muito mais imediatamente eficaz do que desafiar leis de zoneamento ou desvalorizar planilhas corporativas de lucro e perda.",
-      "Do ponto de vista de outros lobisomens da agora fragmentada Nação Garou, a perspectiva dos Garras Vermelhas beira a heresia. Os Garras Vermelhas frequentemente pensam que não é o Wyrm que é o elemento desequilibrado do Triat, mas sim o Tecelão, com sua restrição em constante expansão e expansão maligna na forma de cidades, desenvolvimento e 'civilização'. Entre os mais extremistas dos Garras Vermelhas - mesmo expressar tal sentimento é vergonhoso - o Wyrm é uma vítima do Tecelão, e as ferramentas do Wyrm têm seu lugar.",
+      "Do ponto de vista de outros lobisomens da agora fragmentada Nação Garou, a perspectiva dos Garras Vermelhas beira a heresia. Os Garras Vermelhas frequentemente pensam que não é o Wyrm que é o elemento desequilibrado do Triat, mas sim a Weaver, com sua restrição em constante expansão e expansão maligna na forma de cidades, desenvolvimento e 'civilização'. Entre os mais extremistas dos Garras Vermelhas - mesmo expressar tal sentimento é vergonhoso - o Wyrm é uma vítima da Weaver, e as ferramentas do Wyrm têm seu lugar.",
       "Todos os Garou conhecem as histórias do Impergium, o momento em que os lobisomens travaram uma guerra aberta contra o mundo da humanidade. Detratores buscam retratar Os Garras Vermelhas como revanchistas e apologistas do Impergium com saudades dos 'bons e velhos tempos'. Essa caracterização simplifica demais a situação deles, no entanto, e atribui malícia onde o motivo é realmente sobrevivência. Para Os Garras Vermelhas, o Impergium pode ser a única opção que lhes resta.",
       "A luta dos Garou é a luta dos Garras Vermelhas. O restante dos Garou simplesmente ainda não sabe disso."
     ],
-    "patron": "O Grifo é o Espírito Patrono dos Garras Vermelhas — Grifo, que se coloca contra a invasão do Tecelão e nunca prioriza os interesses humanos sobre os dos animais. Grifo e Os Garras Vermelhas estão associados à Honra — embora seja uma honra cujo contexto frequentemente escapa aos Garou cujo contexto principal é a sociedade dos humanos.",
+    "patron": "O Grifo é o Espírito Patrono dos Garras Vermelhas — que se coloca contra a invasão da Weaver e nunca prioriza os interesses humanos sobre os dos animais. Grifo e Os Garras Vermelhas estão associados à Honra — embora seja uma honra cujo contexto frequentemente escapa aos Garou cujo contexto principal é a sociedade dos humanos.",
     "favor": "O Grifo é implacável, um lutador feroz diante de probabilidades impossíveis. Os Garras Vermelhas podem adicionar um dado em testes de Briga sempre que sua Saúde estiver abaixo da metade.",
     "ban": "O Grifo abomina a complexidade e busca simplificar os relacionamentos de seus seguidores com o mundo. Se uma sessão ocorrer na qual Os Garras Vermelhas realizarem testes que envolvam as habilidades Acadêmicos, Condução, Finanças, Armas de Fogo, Ciência ou Tecnologia para reparar ou utilizar (em vez de subverter ou destruir), eles poderão recuperar apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole.",
     "archetypes": [
