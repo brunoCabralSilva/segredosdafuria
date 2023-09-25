@@ -90,7 +90,7 @@ export default function Trybes() {
                 <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
                 <div className="w-full h-full flex flex-col items-center relative">
                   <Content object={ object } />
-                  <button className="text-4xl sm:text-5xl fixed top-4 right-8 sm:top-10 sm:right-14 color-white z-50 text-white"
+                  <button className="text-4xl sm:text-5xl fixed top-4 right-4 sm:top-10 sm:right-14 color-white z-50 text-white"
                     onClick={ () => setObject(null)}
                   >
                     <AiFillCloseCircle className="bg-black rounded-full p-2" />
