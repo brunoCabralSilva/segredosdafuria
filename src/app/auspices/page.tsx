@@ -14,7 +14,12 @@ export default function Auspices() {
       <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
       <Simplify />
       <Nav />
-      <InConstruction />
+      <div>
+        Os augúrios são categorias fundamentais que representam os papéis espirituais e as características dos lobisomens em Lobisomem: O Apocalipse. Cada augúrio é associado a uma fase específica da lua e é determinado no momento da Primeira Mudança de um lobisomem, refletindo influências cósmicas e místicas em sua personalidade e destino.
+      </div>
+      <div>
+        Esses augúrios desempenham um papel crucial na sociedade dos Garou, definindo as funções e responsabilidades de cada lobisomem em sua matilha e comunidade, enquanto também servem como requisitos para o uso de habilidades especiais chamadas Dons.
+      </div>
     </div>
       <Footer />
     </div>

@@ -1,46 +1,414 @@
 [ 
   {
     "namePtBr": "Peregrinos Silenciosos",
-    "nameEn": "silent striders"
+    "nameEn": "silent striders",
+    "phrase": "Eu estive em todos os lugares, cara, e deixe-me dizer, você vai querer ouvir isso.",
+    "description": [
+      "Entre os lobos, os Garou seguem onde a presa lidera a matilha, e entre os humanos, os Garou historicamente foram encontrados em culturas que são migratórias ou diaspóricas.",
+      "No fundo de sua própria história, os Peregrinos Silenciosos foram eles mesmos... amaldiçoados? por um espírito poderoso, maligno e não totalmente compreendido, e como resultado eles frequentemente encontram povos simpáticos e práticas familiares entre culturas sempre em movimento ou dispersas.",
+      "Sabiamente, os Peregrinos Silenciosos fizeram uma oportunidade dessa crise mal lembrada em seu passado e assumiram o papel de viajantes, mensageiros e portadores de notícias entre os Garou. Isso faz uma vida difícil, com certeza, especialmente no rastro de uma Nação Garou despedaçada e das tribulações do Apocalipse, mas é absolutamente um destino melhor do que um colapso no esquecimento... ou os caminhos trágicos que as tribos perdidas tomaram.",
+      "No jogo, os Peregrinos Silenciosos podem esperar viajar grandes distâncias por território difícil, verificar se podem estar enfrentando Garou hostis ou espíritos antagonistas, entregar uma mensagem sensível ou talismã crítico e até sabotar aqueles que tentariam detê-los antes de terem a chance."
+    ],
+    "whoAre": [
+      "A presença de um Peregrino Silencioso é algo que muitos Garou consideram portentoso, para dizer o mínimo. Muitos são itinerantes, e quando um chega ao território, eles inevitavelmente possuem algo que todo Garou quer saber ou possuir. Pode ser notícias de um Caern que caiu, uma mensagem de um ancião lendário ou a prova da corrupção de um espírito poderoso.",
+      "Seja qual for o caso, a missão de um Peregrino Silencioso é algo que requer que um indivíduo entregue e confirme.",
+      "Viajantes mestres, os Peregrinos Silenciosos se encontram únicos para encontrar o caminho para lugares onde outros"
+    ],
+    "patron": "A Coruja é o Espírito Patrono dos Peregrinos Silenciosos, que encoraja seus seguidores a abordar os assuntos em seus próprios termos. Do alto de sua vantagem, a Coruja observa cuidadosamente e não age até que tenha visto tudo o que há para ver. Somente então ela dá o mergulho - rapidamente e decisivamente. Coruja e os Peregrinos Silenciosos estão associados à Sabedoria.",
+    "favor": "A sabedoria da Coruja exalta a virtude do voo quando necessário. Os Peregrinos Silenciosos podem adicionar um dado a conjuntos de dados de Atletismo ou Furtividade relacionados a travessia, fuga ou infiltração.",
+    "ban": "A Coruja permanece eternamente alerta quanto ao retorno do espírito-rival que atormentou sua tribo no passado e ela garante fazendo isso ao honrar a presença desse 'outro' tipo de espírito. Se um Peregrino Silencioso sofre derrota em um conflito para qualquer Garou de Renome Total inferior, ele pode recuperar apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Kinseeker",
+        "description": "Os Garou estão morrendo - é assim que o o Kinseeker vê. Com essa perspectiva desesperada, o Kinseeker viaja incessantemente, procurando sempre por lobisomens que ainda não sabem que são lobisomens. Geralmente é um caminho solitário, mas que coloca o Kinseeker em contato com qualquer número de outros Garou, idealmente lutando contra a boa luta."
+      },
+      {
+        "title": "Embaixador",
+        "description": "A sabedoria convencional diz para transformar limões em limonada, então, quando o Embaixador percebeu que o Espírito Patrono que o chamava o manteria sempre em movimento, eles precisariam adaptar seus talentos para atender a esse chamado. Com 'casa' efetivamente um apartamento negligenciado na capital, o Embaixador viaja muito, colocando sua personalidade extrovertida para usar na negociação de parcerias e resolução de antigas disputas."
+      },
+      {
+        "title": "Revivalista",
+        "description": "Montando uma tenda grande nos arredores da cidade e pregando um evangelho de amor e perdão, o Revivalista dirige um show de salvação itinerante que fornece uma desculpa ampla para se mover entre os caerns por todo o território."
+      },
+      {
+        "title": "Caminhoneiro de Longa Distância",
+        "description": "Logística faz o mundo funcionar, e mover coisas do Ponto A para o Ponto B é uma boa maneira de cobrir terreno quando o Caminhoneiro de Longa Distância está rastreando sua verdadeira presa, sejam fugitivos ou simplesmente movendo um carregamento de suprimentos médicos muito necessários durante uma época de doença global."
+      }
+    ]
   },
   {
     "namePtBr": "Fúrias Negras",
-    "nameEn": "black furies"
+    "nameEn": "black furies",
+    "phrase": "Você não precisa escolher alguém do seu próprio tamanho. Tente escolher alguém do meu tamanho.",
+    "description": [
+      "As Fúrias Negras atribuem uma importância suprema à justiça, especialmente para aqueles que se encontram em desvantagem devido às ações de outros.",
+      "A tribo é renomada por contornar ou destruir obstáculos, seja uma barreira literal, na forma de uma formação inimiga, ou um 'teto de vidro' que impede resultados justos.",
+      "Dito isso, seu epíteto as identifica como fúrias com uma boa causa. Mesmo entre os Garou, as Fúrias Negras têm uma reputação de escalonamento em situações em que o compromisso, em sua opinião, resultaria apenas em soluções parciais.",
+      "Em seu melhor, as Fúrias Negras desejam restabelecer o equilíbrio. No entanto, provocá-los muito profundamente faz com que busquem justiça a qualquer custo. Afinal, não há valor em convencer a usina química a despejar um pouco menos de poluentes tóxicos no rio. Apenas queime aquele maldito lugar até o chão.",
+      "As Fúrias Negras em ação podem esperar libertar uma vítima de um opressor, superar o consentimento fabricado da mídia local para uma usina de energia perigosa, desmontar aquela usina química recalcitrante e demolir um caern muito contaminado por seus ocupantes anteriores para ser recuperado."
+    ],
+    "whoAre": [
+      "As Fúrias Negras atribuem uma importância suprema à justiça, especialmente para aqueles que se encontram em desvantagem devido às ações de outros. A tribo é renomada por contornar ou destruir obstáculos, seja uma barreira literal, na forma de uma formação inimiga, ou um 'teto de vidro' que impede resultados justos.",
+      "Dito isso, seu epíteto as identifica como fúrias com uma boa causa. Mesmo entre os Garou, as Fúrias Negras têm uma reputação de escalonamento em situações em que o compromisso, em sua opinião, resultaria apenas em soluções parciais.",
+      "Em seu melhor, as Fúrias Negras desejam restabelecer o equilíbrio. No entanto, provocá-los muito profundamente faz com que busquem justiça a qualquer custo. Afinal, não há valor em convencer a usina química a despejar um pouco menos de poluentes tóxicos no rio. Apenas queime aquele maldito lugar até o chão.",
+      "As Fúrias Negras em ação podem esperar libertar uma vítima de um opressor, superar o consentimento fabricado da mídia local para uma usina de energia perigosa, desmontar aquela usina química recalcitrante e demolir um caern muito contaminado por seus ocupantes anteriores para ser recuperado."
+    ],
+    "patron": "O espírito patrono das Fúrias Negras é a Górgona, que foi tratada injustamente por um espírito ainda mais poderoso. A Górgona e as Fúrias Negras estão associadas à Glória, especialmente a glória conquistada ao derrubar qualquer pessoa ou qualquer coisa em uma posição de poder sistêmico — um ato justificado por si só para o espírito de vingança da Górgona. De fato, não agir contra um abuso percebido de poder é considerado um ato de negligência por muitos membros desta tribo, e aqueles que buscam o favor de seu patrono podem ser vigilantes até o ponto de beligerância.",
+    "favor": "A Górgona chama seus seguidores para eliminar barreiras e punir aqueles que as criam ou mantêm. Jogadores das Fúrias Negras podem adicionar um dado a um conjunto usado para se opor a alguém ou algo em uma posição de poder (em relação a si mesmos ou alguém sob sua proteção) ou para contorná-los.",
+    "ban": "A Górgona exige que seus seguidores sempre tentem corrigir uma injustiça. Se eles permitirem a persistência de uma injustiça que poderiam ter evitado ou abordado, eles podem recuperar apenas um único Ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Mais Procurado",
+        "description": "Os Mais Procurados conquistaram sua fama antes da Primeira Mudança ao comparecerem a todas as reuniões do conselho da cidade voltadas para o público, onde rapidamente ganharam a reputação de serem um incômodo. Logo após sua Primeira Mudança, no entanto, eles perceberam que existem maneiras mais rápidas de fazer uma mudança do que pleitear a um funcionário eleito que tem um interesse pessoal em que as coisas não mudem. Juntando-se a um grupo de indivíduos com mentalidades semelhantes — sua matilha e alguns aliados de confiança, naturalmente — os Mais Procurados agora fazem o que precisa ser feito sem serem impedidos por leis injustas e agora têm seus nomes em várias listas como pessoas perigosas."
+      },
+      {
+        "title": "EMT",
+        "description": "Primeiro da família a ir para a faculdade. Primeiros socorros. Primeiro a responder. Primeira Mudança. Tem sido uma vida de primeiras vezes para o EMT, e isso provavelmente não vai mudar tão cedo. Tanto seu trabalho quanto sua matilha parecem envolver muitas oportunidades para ajudar pessoas em perigo, o que dá ao EMT um senso de propósito, mas também um orgulho pessoal de que pode estar lá para alguém que precisa. A vida é uma luta, e do jeito que o EMT vê as coisas, eles fazem as pessoas voltarem à luta. Está ficando cada vez mais difícil fazer isso, com os cortes no orçamento significando menos turnos e suprimentos mais baratos. Essa é uma luta que, eventualmente, precisará ser travada também."
+      },
+      {
+        "title": "Músico",
+        "description": "O Músico sabe como lidar com a multidão. Sua lista de músicas é arrebatadora, sua persona no palco que não aceita prisioneiros incendeia a multidão e seus coros rebeldes fazem com que o público cante slogans enquanto cantam junto. Aquela sensação de adrenalina que o Músico constrói no palco é a segunda apenas para a Fúria que o Músico expressa quando assume a forma Crinos e se rasga pelo tipo de babacas sobre os quais suas músicas tratam. No palco ou fora dele, é tudo sobre derrubá-los. Às vezes, literalmente."
+      },
+      {
+        "title": "Patrulheiro",
+        "description": "Apesar de ser um termo humano, o Patrulheiro prefere a forma lupina ao patrulhar as fronteiras do território que sente como um dever proteger. E há muito disso — o perímetro do caern, o parque de casas móveis na periferia da cidade e o cano de vazamento perto do rio, onde a vida selvagem está sempre anormalmente agressiva. É o trabalho do Patrulheiro percorrer as margens do território e, em seguida, manter o restante da matilha informada sobre o que eles viram. Às vezes, eles são excessivamente zelosos nessa tarefa, o que seus companheiros de matilha zombam como 'chorar lobo', mas a vigília deve ser mantida. Às vezes significa problemas depois. Pensando bem, geralmente significa problemas depois."
+      }
+    ]
   },
   {
     "namePtBr": "Presas de Prata",
-    "nameEn": "silver fangs"
+    "nameEn": "silver fangs",
+    "phrase": "O poder é um meio para um fim, um trabalho de uma vida construído em serviço a Gaia. É tão responsabilidade quanto privilégio, se não mais.",
+    "description": [
+      "A sociedade Garou é inerentemente tribal, e onde tribos existem, líderes emergem. Para os lobisomens, o manto da liderança foi reivindicado há muito tempo pelos Presas de Prata, que estão tão próximos de uma linhagem nobre quanto a cultura Garou produz. A deles é uma herança de aristocracia, decisão e, por mais relutantes que as outras tribos sejam em admitir, unificação em circunstâncias adversas.",
+      "Os Presas de Prata em jogo podem esperar motivar sua matilha, liderá-los na batalha, reunir-se com eles em derrotas desesperadoras e inspirá-los a grandes realizações."
+    ],
+    "whoAre": [
+      "Pesado é o fardo de quem usa a coroa, e este ditado é verdadeiro para nenhum outro tanto quanto para os Presas de Prata, pois eles reivindicam o peso da liderança entre as tribos, o que também os eleva entre os outros Garou. Claro, poucos outros lobisomens são tão serenos sobre essa herança de nobreza - mas poucos podem argumentar que os Presas de Prata realmente fazem bons líderes.",
+      "Por outro lado, porque os Presas de Prata tradicionalmente ocuparam o papel de líderes entre os Garou, eles não são um tanto culpados pelo colapso da Nação Garou e seu fracasso em evitar esta era do Apocalipse?",
+      "A cultura Garou, por sua natureza, busca líderes fortes, e historicamente tem cabido aos Presas de Prata assumir esse papel. Para seu crédito, a tribo está sempre ciente dos riscos de tais funções e, desde tempos imemoriais, tem relacionamentos complicados com harano e hauglosk. Em uma ponta do espectro, brama o tirano Presa de Prata, enlouquecido por hauglosk, rasgando aqueles que questionariam seu poder ou sabedoria; na outra ponta do espectro está o Presa de Prata atormentado por harano, sentindo que não importa quantos jovens Garou eles atirem na boca do Wyrm, a batalha já está perdida. Assim, acompanhando o prestígio da tribo Presas de Prata está uma nota de tragédia.",
+      "A relação da tribo com o mundo espiritual é igualmente complexa. Muitos espíritos — provavelmente até mais do que os próprios Garou — ainda honram os antigos pactos forjados pelos lendários Presas de Prata. Hierárquicos como são, o respeito dos espíritos pelos Presas de Prata é profundo, embora possa se provar uma espada de dois gumes. Espíritos simples e inabaláveis falham em ver a nuance nas escolhas éticas de um Presa de Prata.",
+      "Os lobisomens de outras tribos, especialmente os membros jovens dessas tribos, renunciam à 'aristocracia hereditária', na qual os Presas de Prata se lançam. Entre os anciãos tribais, práticas anacrônicas ainda prevalecem, desde noções alinhadas a Gaia de direito divino até a manutenção de concubinas, até afetações simples para modos ultrapassados de vestir. Certamente, os participantes do moot suportam recitações de inúmeras ações pelas quais os Presas de Prata são louvados, mas como isso se traduz em nobreza herdada na época do Apocalipse tem sido muito questionado - talvez mais surpreendentemente entre os jovens Garou da própria tribo."
+    ],
+    "patron": "O Falcão é o Espírito Patrono dos Presas de Prata, e sua visão aguçada e postura nobre inspiram os Presas de Prata a buscar seus objetivos e inspirar outros a segui-los nessa empreitada. O Falcão e os Presas de Prata estão associados à Honra.",
+    "favor": "O Falcão convoca os Presas de Prata a liderar, tanto por exemplo quanto em comportamento. Os Presas de Prata podem adicionar um dado a conjuntos de dados de Persuasão ou Liderança relacionados a fazer com que os outros sigam seus conselhos, sugestões ou ordens diretas.",
+    "ban": "Falcão é um espírito orgulhoso, e a desonra o envergonha profundamente. Se um Presa de Prata tomar uma ação que os coloque em risco de constrangimento ou perda de Renome, eles só podem recuperar um único Ponto de Força de Vontade no início da próxima sessão, em vez de sua Avaliação de Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Celebridade Local",
+        "description": "A Celebridade Local praticamente transformou sua vida em parecer ótima e conhecer as pessoas certas. Pessoas que querem fazer favores a eles parecem estar por toda parte, o que contrasta muito com sua classificação de crédito completamente prejudicada e sua disposição de procurar um 'espaço para relaxar' quando surge a necessidade de se esconder. Todas aquelas roupas chiques vêm de cartões de crédito no limite ou truques de lojas de segunda mão; todas as abas das bebidas são pagas por bartenders amigáveis; até mesmo aquele carro chamativo é emprestado. E por que não? A Celebridade Local sabe que você não pode levar isso com você e que é provável que eles encontrem um fim trágico como parte do segredo cabeludo que estão escondendo. Viva o agora!"
+      },
+      {
+        "title": "Hetman",
+        "description": "Nem toda guerra faz manchetes e nem toda guerra termina quando a mídia diz que terminou. O Hetman está travando uma dessas guerras, sem glamour e fora dos registros, em um país que ninguém ouviu falar, mas isso não significa que a luta não esteja acontecendo contra os idiotas de sempre que acham que o país é deles para tomar e vender pedaço por pedaço. Dinheiro não é um problema (sempre há dinheiro, geralmente de alguns outros idiotas, mas o Hetman vai atravessar essa ponte mais tarde), e não há falta de voluntários violentos dispostos a sangrar por dinheiro. O trabalho do Hetman é transformar esses voluntários violentos em lutadores organizados e não apenas uma multidão sedenta por sangue. Esse é o tipo de liderança que inspira lealdade - lealdade inquestionável."
+      },
+      {
+        "title": "QB dos Dias de Glória",
+        "description": "Você deveria ter visto - quarta descida e nove jardas, cinco pontos atrás, mas o QB dos Dias de Glória cavou fundo, inspirou os Trojans e lançou uma espiral perfeita sobre as cabeças dos Lions e na end zone, onde o WR a pegou para a vitória. Um vencedor nunca desiste e um desistente nunca vence, e se o QB dos Dias de Glória se machuca, eles apenas esfregam um pouco de sujeira nele e voltam para o jogo. Agora que descobriram que a vida deles é mais do que luzes de sexta à noite, no entanto, esse mesmo espírito de nunca desistir os mantém indo, dando cem por cento."
+      },
+      {
+        "title": "Nobre no Exílio",
+        "description": "Postura e nobreza marcam os Presas de Prata, mas para alguns, esse legado é uma pedra no sapato. Inseguro sobre o que o Falcão vê neles, o Nobre no Exílio não consegue evitar manchar sua autoimagem, indulgindo em qualquer número de vícios, indiscrições e hábitos inapropriados, porque é tudo o que eles já conheceram, e eles podem pagar por isso, porque o dinheiro da família é antigo e profundo. Quando se trata do que é importante - lutar por Gaia e se opor ao Wyrm - o Nobre no Exílio é tão entusiasta e apaixonado quanto qualquer outro Garou, e talvez até mais. Quando não é hora de liderar o ataque, no entanto, o Nobre no Exílio pode ser encontrado no fundo de uma garrafa, desmaiado em uma cama de bordel, esquecendo de comer nos últimos três dias."
+      }
+    ]
   },
   {
     "namePtBr": "Conselho Fantasma",
-    "nameEn": "ghost council"
+    "nameEn": "ghost council",
+    "phrase": "A maior vantagem está em determinar quais armas os inimigos negam a si mesmos.",
+    "description": [
+      "Os lobisomens do Conselho Fantasma são grandes buscadores de mistério, mas são considerados um tanto sigilosos por Garou mais diretos, que às vezes não compreendem o respeito da tribo por questões de propósito superior. Entre os membros do Conselho Fantasma podem ser encontrados guias, acadêmicos e até uma variedade de pessoas religiosas. Para o Conselho Fantasma — ou 'Fantasmas', individualmente — o destino ou o caminho podem ser o objetivo; o que mais importa é que o buscador entenda por que eles empreenderam uma jornada específica e, portanto, possam aprender sobre o mundo dos Garou. A própria jornada é de grande importância para os lobisomens do Conselho Fantasma, pois representa uma oportunidade de descoberta ao longo do caminho… bem como uma chance de revelar os segredos do ambiente da jornada.",
+      "Ao mesmo tempo, é uma chance de descobrir quais caminhos as outras tribos evitam deliberadamente e aprender por quê. Pois o que é um tabu se não uma ferramenta que um competidor aceita abandonar?",
+      "Lobisomens do Conselho Fantasma em ação podem esperar viajar para um canto ignorado da Umbra, resolver um enigma pernicioso proposto por um espírito arrogante, subverter as ferramentas de um inimigo para usá-las contra ele e desenterrar um segredo perigoso."
+    ],
+    "whoAre": [
+      "Motivar o Conselho Fantasma é um desejo, uma fome, uma necessidade de conhecimento, especialmente de natureza prática e espiritual. Essa praticidade muitas vezes se manifesta como uma habilidade de afetar o mundo ao seu redor. Os Fantasmas coletam segredos para obter melhores resultados. Seja enganando um espírito desprevenido para deixá-los passar sem problemas ou descobrindo onde o executivo escondeu documentos incriminadores no apartamento de sua amante, os lobisomens do Conselho Fantasma procuram os limites que outros estabelecem ao seu redor, as falhas que constroem em sua própria armadura.",
+      "Eles querem todas as opções na mesa, até mesmo as 'proibidas', porque quando você está no meio de um maldito Apocalipse, nenhuma opção deve ser 'proibida'. Essa filosofia rendeu ao Conselho Fantasma uma reputação de subversão entre os Garou mais tradicionais — e os Fantasmas não parecem se importar. 'Os fins justificam os meios' geralmente parece ser uma doutrina política perigosa, mas para o Conselho Fantasma, encontrar uma resposta ou oportunidade desculpa como ela é alcançada.",
+      "Se algo resulta em manter um relacionamento com um confidente de uma tribo caída ou fazer pactos com espíritos proibidos, o Fantasma fica satisfeito — e validado, em suas mentes. Como era de se esperar, outros Garou frequentemente veem os lobisomens do Conselho Fantasma como tendo motivos suspeitos. Uma crítica justa é que o Conselho Fantasma se preocupa em resolver o 'como' dos mistérios pelo bem do poder, com pouca consideração pelos motivos pelos quais esse poder se manifesta em seus meios de descoberta.",
+      "O bando tem o klaive do rival — isso é o que importa. Resultados agora, custos depois.",
+      "De forma holística, a descoberta de verdades ocultas exige ir até elas. Toda sociedade humana tem tradições nessa linha, e o Conselho Fantasma teve membros entre muitas dessas tradições e sociedades.",
+      "Os membros da tribo frequentemente estão entusiasmados com oportunidades de viajar, seja para um local estranho e remoto de mistério Umbral, uma viagem de carro pelo país em uma caravana ou uma emocionante corrida através da taiga marcada por conflitos para encontrar um rio específico e importante."
+    ],
+    "patron": "O Espírito Patrono do Conselho Fantasma é A Serpente de Chifres, não é estranho a lugares escuros e verdades ocultas. A Serpente de Chifres e o Conselho Fantasma estão associados à Sabedoria. De todas as tribos, o Conselho Fantasma tem o que provavelmente é o relacionamento mais transacional com seu patrono, um reconhecimento formal de dar e receber de quase qualidade de conto de fadas… um que às vezes assume um aspecto sinistro para alguns de fora da tribo.",
+    "favor": "A Serpente de Chifres encoraja a olhar as coisas de todos os ângulos e escolher o mais vantajoso. Um Garou do Conselho Fantasma pode adicionar um dado aos testes de Investigação, Ocultismo ou Lábia relacionados à revelação de um segredo guardado.",
+    "ban": "A Serpente de Chifres é conhecida por sua Sabedoria, mas espíritos e Garou olham com desconfiança para as maneiras como ela obtém conhecimento. Por uma cena em que o lobisomem do Conselho Fantasma tem a oportunidade de satisfazer sua curiosidade, mas não o faz, eles recuperam apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua classificação de Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Contemplativo",
+        "description": "Longe das preocupações mundanas da sociedade humana, o Contemplativo está entre os muitos residentes de mosteiros que se mantêm afastados por razões tanto espirituais quanto pessoais. A Primeira Mudança foi um ponto de virada horrível na vida do Contemplativo, um ponto para o qual eles sentem que estarão fazendo amends para sempre. E para fazer isso, eles adotaram as formas ascéticas, esperando impor esse senso de equilíbrio em sua própria Raiva dualística e espiritualidade. Funciona… na maioria das vezes… até que não funcione… e mais amends precisem ser feitos."
+      },
+      {
+        "title": "Sabotador",
+        "description": "Uma carreira passada com empresas militares privadas, lutando em conflitos não registrados e demolindo locais negros, deu ao Sabotador know-how que eles podem usar nos interesses de Gaia. Esse know-how nem sempre é legal, mas é eficaz. A terminologia militar moderna valoriza o papel do Sabotador como 'engenheiro', mas eles não têm ilusões — eles destroem coisas e matam pessoas. Usando ferramentas ou persuadindo espíritos, é tudo a mesma coisa para o sabotador: encontrar o ponto fraco e fazer o que precisa ser feito para derrubá-lo. Figurativamente, é claro; o Sabotador não deseja estar no epicentro quando seu trabalho culmina."
+      },
+      {
+        "title": "Bruxa",
+        "description": "Gaia é uma metáfora, e também são os espíritos. Tudo depende da maneira como o indivíduo vê o mundo, quais olhos eles escolhem. A palavra certa ou o pacto ou a oferta certa permitem que a Bruxa queira essas forças, essas forças completamente naturais, em manifestar o resultado que desejam. Não são truques de salão — a maneira como muitos charlatães tentam passar o Dom — é um relacionamento genuíno com o mundo além dos limites daquele que a maioria dos humanos pode perceber. Eles são cegos, enquanto a Bruxa pode ver, e os companheiros de bando da Bruxa fariam bem em lembrar a ignorância eletiva na qual a sociedade humana escolhe se envolver."
+      },
+      {
+        "title": "Pastor",
+        "description": "Nascido em uma cultura de pastores de renas semi-nômades, o Pastor observou como, pouco a pouco, suas terras ancestrais foram anexadas por governos humanos e seus costumes foram forçados ao esquecimento. Os mesmos poderes humanos limitaram os territórios de lobos e Garou, e o Pastor teve o bastante. Com uma declaração rebelde de soberania, o Pastor, seu bando e um punhado de companheiros humanos estabeleceram um 'protetorado', declarado uma facção rebelde por entidades governamentais regionais e nacionais. Agora, o Pastor defende esse território e rebanho de renas com a ajuda de guardiões espirituais, aparentemente eternamente em desacordo com entidades legais humanas com a intenção de subsumir a província renegada."
+      }
+    ]
   },
   {
     "namePtBr": "Guarda do Cervo",
-    "nameEn": "hart wardens"
+    "nameEn": "hart wardens",
+    "phrase": "Seja bem-vindo ao nosso caern. Este é o nosso lar e abrigo. Aqueça-se em nossas fogueiras e alimente-se em nossa mesa. Uma palavra de cautela, amigo — abuso de nossa hospitalidade e enforcaremos suas entranhas em todas aquelas belas árvores que você viu lá fora.",
+    "description": [
+      "Os Guardiões dos Cervos são os guardiões e cuidadores da natureza, seja consagrando os lugares prístinos 'inexplorados' do mundo ou cultivando algum lugar particularmente importante para eles em direção a um propósito mais estruturado, como uma fazenda ou pomar. Pode ser uma extensa propriedade rural, um vale de rio manchado que precisa ser revivido ou até mesmo um pedaço escondido de espaço verde no centro de Nova Orleans, mas os Guardiões dos Cervos estão lá, persuadindo a promessa que podem tirar do pedaço de criação de sua matilha.",
+      "Se os Garou têm um pé em cada mundo da carne e espírito, os Guardiões dos Cervos têm um pé em cada mundo do mundo moderno e um mundo de sua própria criação mítica. Eles são muito apaixonados pelo que encontram e nutrem, e qualquer reunião de Guardiões dos Cervos logo se voltará para celebrações da história (e não poucas lendas altas...) em relação à sua própria tribo e aos Garou em geral.",
+      "Em jogo, os Guardiões dos Cervos podem esperar recuperar uma região de um local de exploração, cultivar um caern lá para aplacar os espíritos perturbados pela exploração, nutrir o caern recém-estabelecido e protegê-lo dos agentes ávidos da empresa da frente que deseja continuar extraindo seus recursos."
+    ],
+    "whoAre": [
+      "Nos tempos da lenda, os Garou não tinham lar e vagavam pelo mundo e Umbra a serviço de Gaia. O mais famoso, em uma caçada por uma floresta primeval com suas vastas e sempre crescentes matilhas, viu um cervo magnífico e assumiu a forma de lobo para persegui-lo. Através da floresta sem caminho, os Garou perseguiram, sobre colinas ondulantes, promontórios rochosos, e através de montanhas, prados e terras baldias, nunca ganhando um único passo no cervo. Finalmente, depois de uma época de perseguição através do mundo inteiro, os Garou encurralaram o cervo à sombra de um vale inescapável.",
+      "\"Sua fé e determinação são admiráveis\", disse o cervo, multiplicando-se em tamanho para se revelar como o Cervo. \"Olhe atrás de você. Olhe por onde viajamos, juntos. Comprometam-se comigo e eu lhes concederei isto, o lar de vocês, e a agricultura de tudo o que cruzamos para chegar aqui.\" E aqueles que se chamariam de Guardiões dos Cervos assim se comprometeram com o pacto do Cervo."
+    ],
+    "patron": "O Espírito Patrono dos Guardiões dos Cervos é o Cervo, que apresentou todos os Garou às formas da natureza e favoreceu especialmente os Guardiões dos Cervos. O Cervo e os Guardiões dos Cervos estão associados à Glória, e eles reverenciam especialmente seus bardos, que podem acender essas chamas de Glória ao cantar sua lenda ou recitar suas façanhas.",
+    "favor": "O Cervo é considerado por muitos como o pai da floresta, com grande influência sobre as feras e até mesmo a flora. Os Guardiões dos Cervos podem adicionar um dado a qualquer grupo de dados relacionados à Sobrevivência, Empatia Animal ou ofícios relacionados à natureza.",
+    "ban": "O Cervo observa tradições de hospitalidade de longa data. Se algum dano ocorrer a alguém sob a hospitalidade de um Guardião dos Cervos, os Guardiões dos Cervos só podem recuperar um único Ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Caçador",
+        "description": "O resto do mundo vê um papel antiquado ligado a um estilo de vida senhorial privilegiado, e até o senhor e a senhora acham o trabalho um tanto antiquado. Ninguém além do Caçador conhece a verdadeira necessidade de diminuir as populações de vida selvagem, para que todos, homens e feras, não sofram. Com o papel vem um intenso estudo do conhecimento regional: o Caçador conhece intimamente todos os detalhes das terras que mantêm e tem experiência em caçar ao longo de duas vidas — como hominídeo e como lupino."
+      },
+      {
+        "title": "Estrategista Digital de Caern",
+        "description": "Pense nisso como um jogo. Você precisa colocar as coisas nos lugares certos, prestar atenção à economia de recursos. Armadilhas ao redor das fronteiras mantêm os monstros afastados. Mantenha boas relações com os espíritos, dê a eles um lugar agradável para ir; eles movem o nevoeiro de guerra para trás. A matilha, agora, são seus heróis. São eles que você quer lá fora quando a pressão chegar — porque ela vai chegar, e não pelo canal que você pensa. Fique alerta, mantenha-se saudável. Você não quer que ninguém esteja inativo quando você precisar deles para destruir tolos na linha de frente."
+      },
+      {
+        "title": "Mestre de Cerimônias",
+        "description": "Nem todo mundo entende quando ouve falar das tradições orais e das práticas de mudança de código de Queensbridge, em Nova York. Quando o ritmo abala os alicerces e o Mestre de Cerimônias cospe fogo, no entanto, não há ninguém na casa ainda sentado. Contos cheios de bravatas das travessuras rebeldes da equipe e insultos épicos dos rivais da matilha mantêm a festa na quadra indo até tarde da noite, e os sucessos no SoundCloud continuam chegando, iluminando os fãs do Mestre de Cerimônias tão longe quanto o sudoeste da Ásia e os países bálticos."
+      },
+      {
+        "title": "Lenda Local",
+        "description": "Nas noites em que as brumas se elevam pesadamente acima dos pântanos e uma lua com chifres paira baixa e pesada no céu, alguém pode ouvir o grito aterrorizado de um humano que perdeu o caminho e não viverá para encontrá-lo novamente. Tais são as noites em que a Lenda Local assombra os ermos, rondando em busca da carne dos gananciosos, dos descuidados ou daqueles que simplesmente viram mais da Lenda Local do que teriam preferido. Alguns fazem da besta um perseguidor vingativo, mas a Lenda Local conhece sua própria verdade e mantém o conhecimento da clareira secreta de sua matilha bem oculto."
+      }
+    ]
   },
   {
     "namePtBr": "Perseguidores da Tempestade",
-    "nameEn": "galestalkers"
+    "nameEn": "galestalkers",
+    "phrase": "Vou te dar uma vantagem. Esconda-se onde quiser. Apenas, onde você quiser. Não importa. Vejo você em breve.",
+    "description": [
+        "Homônimos para o vento que cruza a tundra, os Perseguidores da Tempestade são incansáveis. Esses rastreadores sem igual nunca perdem a consciência de sua presa, independentemente de a presa vir dos Espíritos Selvagens ou do mundo físico. Eles fazem grandes esforços para trazer de volta o que se comprometeram a caçar — e seus companheiros de matilha sabem que podem depender deles.",
+        "Os Perseguidores da Tempestade, durante o jogo, podem esperar rastrear sua presa através de um deserto poluído, emboscar o inimigo prevendo astutamente para onde ele viajará, perseguir a presa obstinadamente se ela fugir tola e assediar a presa até que finalmente caia."
+    ],
+    "whoAre": [
+        "Seja perseguindo sua presa na selva brasileira sem trilhas, através de um caminho espiritual deteriorado na Umbra ou pelos becos de São Francisco, a tribo dos Perseguidores da Tempestade se destaca na caçada. Certamente, todos os Garou são predadores, capazes de derrubar presas, mas a raison d'être dos Perseguidores da Tempestade é a perseguição e o abate — às vezes a captura — na caçada. Sua palavra é sua garantia e, quando prometem perseguir, apenas os resultados mais terríveis podem atraí-los para longe. E um membro da matilha dos Perseguidores da Tempestade se exalta em nada mais do que compartilhar uma matança com seus camaradas.",
+        "Os Perseguidores da Tempestade são amplamente respeitados por outros Garou, mas as outras tribos muitas vezes os veem como sombrios e taciturnos, até distantes. Em muitos casos, porém, esse temperamento decorre da atenção íntima dos Perseguidores da Tempestade aos seus sentidos de caça. Esses lobisomens constantemente leem o ambiente em busca de pistas que podem passar despercebidas no meio do cheiro de uma cidade, do esplendor de um moot ou do horror de um local de atrocidade na Umbra.",
+        "Alguns desses caçadores versáteis absorvem todas as evidências da caçada. Outros podem se concentrar estreitamente em um único elemento de si mesmos como caçadores Garou, talvez confiando em armas que concedem vantagens ou artefatos potentes que os tornam inescapáveis além do Película.",
+        "Para os Perseguidores da Tempestade, existem tantas maneiras de caçar quantos seres valem a pena ser caçados.",
+        "Na era do Apocalipse, no entanto, os Perseguidores da Tempestade muitas vezes acham difícil decidir o que, exatamente, merece sua atenção e a de sua matilha. Com tantas ameaças e crises que precisam ser enfrentadas, eles não são muito diferentes do lobo solto na toca do coelho: onde morder primeiro? Eles são provedores mais do que líderes, exceto no caso de lendas dos Perseguidores da Tempestade em crescimento. Nesse sentido, eles dependem muito de outros Garou e de relacionamentos sólidos com suas matilhas, para que não se encontrem tão sem direção quanto o vento."
+    ],
+    "patron": "O próprio Vento do Norte é o Espírito Patrono dos Perseguidores da Tempestade, com seu poder ilimitado, grande resistência, paciência e capacidade de despertar os elementos. O Vento do Norte e a tribo dos Perseguidores da Tempestade estão associados à Honra — quando eles se comprometem com um curso de ação, outros Garou podem contar com isso.",
+    "favor": "O Vento do Norte é incansável, até imparável. Tendo feito um pacto com os Perseguidores da Tempestade como seus caçadores, o Vento do Norte concede algum grau desse compromisso intransigente aos Garou da tribo. Um Perseguidor da Tempestade pode adicionar um dado a testes diretamente relacionados à perseguição de sua presa.",
+    "ban": "O Vento do Norte tem uma fome insaciável, e aqueles que se comprometem com ele também a têm. Para qualquer dia em que um Galestalkers não participe de uma presa recém-abatida (independentemente de serem eles que a caçaram), eles recuperam apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua pontuação de Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "título": "Errante",
+        "description": "Costa Oeste, depois subindo até Nova York, talvez um pouco pelo Canadá, depois descendo pelo México e chegando a Belize. A pedra que rola não cria musgo, e o Errante não chama nenhum lugar de lar, verdadeiramente. Eles tiveram uma vida difícil após sua Primeira Mudança, e a verdade sobre o que o Errante é sempre parece virar as circunstâncias contra eles e empurrá-los para o que vier a seguir, geralmente enquanto deixam um rastro de sangue. Como apenas o Errante e seus companheiros de matilha sabem, eles não são um errante de verdade. Eles estão caçando algo — alguém — muito específico, e se o Errante perder muito tempo, o rastro ficará frio."
+      },
+      {
+        "título": "Andarilho Espiritual",
+        "description": "Especializado em incursões na Umbra e na perseguição de presas espirituais inscrutáveis, o Andarilho Espiritual frequentemente enfrenta o estranho das Terras Espirituais. Eles podem parecer distraídos ou distantes no mundo físico, mas isso geralmente acontece porque o Andarilho Espiritual está espiando além da Película, procurando pistas e rastros espirituais que simplesmente não existem no mundo das caçadas carnais — cinco sentidos já são difíceis de processar, mas dez fazem exigências sem igual. Uma vez que o Andarilho Espiritual tenha descoberto sua presa, no entanto, a matilha faria bem em prestar atenção às suas preparações, pois o Andarilho Espiritual raramente se incomoda com presas inofensivas."
+      },
+      {
+        "título": "Gaucho",
+        "description": "Em muitos casos, os Garou deixam os animais nervosos, quase certamente porque estes percebem o predador comum a todas as formas de lobisomem. Mas de vez em quando, um vínculo se forma, como aconteceu entre o Gaucho e o cavalo em que passaram a confiar em suas jornadas pelos Pampas. O estilo de vida deles está desaparecendo, mas os gauchos carregam uma lenda quase tão extensa (e certamente mais amplamente conhecida) do que os Garou. O Gaucho gosta cada vez mais do sul, onde as noites são longas, o vento é frio e tudo o que a matilha pode ver até o horizonte existe sob sua responsabilidade."
+      },
+      {
+        "título": "Caçador de Sanguessugas",
+        "description": "As cidades estão cheias de mortos inquietos, bebedores de sangue que jogam o mundo dos vivos contra si mesmos em seu próprio benefício. Não é surpresa, então, que essas Sanguessugas estejam tão frequentemente ligadas à mesma agenda de avareza que os humanos mais míopes. O Caçador de Sanguessugas conhece seus padrões e seu fedor, e pode arrancá-los de seus ninhos, desde que tenha tempo e paciência suficientes. Mas nem sempre é tão simples; essas coisas imortais não parecem ter espíritos, e as Sanguessugas conhecem muito bem as cidades onde residem. Às vezes, um acordo pode ser feito."
+      }
+    ]
   },
   {
     "namePtBr": "Andarilhos do Asfalto",
-    "nameEn": "glass walkers"
+    "nameEn": "glass walkers",
+    "phrase": "Você quer algo despedaçado, sim, eu provavelmente consigo lidar com isso. Você quer algo construído, porém, aí é onde eu brilho. Vou fazer isso funcionar.",
+    "description": [
+      "Os Andarilhos do Asfalto estão entre os lobisomens mais proficientes com ciência aplicada, graças à sua habilidade em resolver problemas com tecnologia, ou — mais precisamente — com os espíritos da tecnologia, muitos dos quais são frequentemente desconhecidos pelos Garou mais tradicionais. As fileiras dos Andarilhos do Asfalto incluem engenheiros, técnicos e inventores, cuja habilidade em fazer máquinas funcionarem geralmente se manifesta na forma de persuadir os espíritos que as habitam a executarem excepcionalmente.",
+      "Em jogo, os Andarilhos do Asfalto podem esperar pesquisar os planos de uma sede de uma empresa de energia HQ antes de um ataque, construir um sistema de segurança para defender seu caern, hackear um drone de defesa para que ele informe o bando em vez de seu centro de comando e reutilizar uma sequência de portas de explosão para prender um grupo de fomori."
+    ],
+    "whoAre": [
+      "Desde tempos imemoriais, enquanto outros lobisomens confiavam em presas e garras, os Andarilhos do Asfalto favoreciam a astúcia e as ferramentas. De todas as tribos, desde que a história foi registrada, os Andarilhos do Asfalto observaram uma notável simpatia com os humanos, em oposição a se isolarem.",
+      "E, em um ato pelo qual muitos outros Garou ainda não os perdoaram, diz-se que ajudaram os humanos a construir cercas, armadilhas e alarmes para ajudar as pessoas a resistirem ao Impergium. Vergonhoso como muitos lobisomens acham o próprio Impergium, ainda incomoda outros Garou saber que os Andarilhos do Asfalto estavam do lado errado daquela guerra.",
+      "Mais do que qualquer outra coisa, porém, os Andarilhos do Asfalto se adaptam. Nesta era de doença espiritual, eles apropriaram-se das ferramentas do mundo moderno para usar na navegação do Apocalipse: computadores, armas de fogo, máquinas, dispositivos de comunicação de ponta, qualquer coisa que possa dar à tribo uma vantagem sobre seus inimigos e servos do Wyrm.",
+      "Do ponto de vista dos Andarilhos do Asfalto, é difícil e até mesmo tolo negar a si mesmos os tipos de versatilidade e poder de fogo que as ferramentas do mundo dos humanos podem oferecer — uma perspectiva que lhes rende poucos elogios ao redor das fogueiras de caerns e moots multirraciais.",
+      "Naturalmente, essa predileção por ferramentas e tecnologia mantém os Andarilhos do Asfalto em frequente contato com os humanos, e extraordinariamente poucos membros da tribo têm origens lupinas — um número que diminui diariamente.",
+      "Mesmo em particular e entre eles mesmos, muitos Andarilhos do Asfalto se preocupam que estão em perigo de 'perder o lobo', abandonar parte de sua conexão sagrada com Gaia e substituí-la por algo externo e artificial — algo mais semelhante ao propósito da Tecelã. Por enquanto, no entanto, os laços dos Andarilhos do Asfalto com sua herança Garou ainda estão de pé, e os espíritos ainda honram os pactos há muito jurados entre eles.",
+      "Na verdade, os Andarilhos do Asfalto cultivam relacionamentos com espíritos que outros Garou evitam ou nem sabem que existem. Espíritos do dinheiro, espíritos do lixo, faíscas espirituais que percorrem as linhas de energia das cidades, manifestações estranhas de seu Espírito Patrono e até mesmo espíritos potentes, mas localizados, que podem fortalecer um caern urbano se forem persuadidos por um theurge competente — todas essas entidades, e outras além, chamam a cidade Umbral de seu lar."
+    ],
+    "patron": "O Espírito Patrono dos Andarilhos do Asfalto é a Aranha, cujas teias cuidadosamente construídas ecoam no desejo dos Andarilhos do Asfalto de criar coisas de duração e eficácia duradouras. Esse desejo não os torna simpáticos a muitos outros Garou, que veem na patronagem da Aranha uma subserviência à Tecelã em vez de um dever para com Gaia.",
+    "favor": "A Aranha revela a interconexão de todas as coisas como teias e fios, sugerindo uma abordagem ordenada. Os Andarilhos do Asfalto podem adicionar um dado às rolagens de Tecnologia ou Ciência relacionadas à construção ou reparo de coisas.",
+    "ban": "A Aranha tem uma extensa prole de espíritos afins e proíbe os Andarilhos do Asfalto de prejudicar qualquer um deles. Se destruírem máquinas complexas, como veículos, computadores ou equipamentos de montagem, poderão recuperar apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole",
+    "archetypes": [
+      {
+        "title": "Planejador Urbano",
+        "description": "Muitas pessoas não irão para onde você mandar que vão, mas quase todas irão para onde você as guiar, especialmente quando você as guia deixando-as pensar que estão tomando a decisão por conta própria. O Planejador Urbano coloca essa ética em prática todos os dias, construindo fluxos de tráfego que reduzem a poluição, projetando espaços verdes que prosperam no ambiente da cidade e imunizando pessoas próximas contra fúrias assassinas no trânsito. Também é uma ótima maneira de ficar de olho em 'projetos de desenvolvimento' e nos compadres exploradores que procuram despojar espaços públicos em busca de lucro privado."
+      },
+      {
+        "title": "Liberador de Carros",
+        "description": "\"Sem carros velhos. Apenas as coisas de alta qualidade.\" Parece uma operação de alto brilho, mas na verdade é para libertar máquinas maltratadas e seus espíritos de pessoas que podem pagar para ter seus carros roubados. Talvez haja um pouco de ginástica ética lá para justificar toda a operação, claro, mas é apenas crime de propriedade, então quem se importa? E se o Libertador de Carros acabar obtendo"
+      },
+      {
+        "title": "Detetive",
+        "description": "As ruas contam mil histórias, a maioria delas tragédias, pelo menos do ponto de vista do Detetive. Os Garou podem ser violentos, mas raramente exaltam a crueldade astuta que os humanos podem reunir, e, na experiência do Detetive, cada uma dessas crueldades tem uma razão. Pode ser pessoal, pode ser premeditado, pode ser apaixonado, mas às vezes a razão abre algo grande, algo que precisa de algumas horas extras para desvendar, às vezes de quatro."
+      },
+      {
+        "title": "Artista de Tatuagem",
+        "description": "Isso exige uma combinação de talento bruto e habilidade cultivada, além de muita calma. Mas vale a pena, não apenas pela credibilidade de rua que mantém o Artista de Tatuagem em demanda (e privado de todas as coisas ruins que acontecem no bairro), mas também pelo prestígio que vem de marcar os Garou mais talentosos do território. Cada lobisomem constrói sua própria lenda, e muitos lobisomens querem contar essa lenda não apenas ao redor das fogueiras, mas na tela de seus corpos. O Artista de Tatuagem pode fazer isso acontecer e conversar com os melhores enquanto o faz."
+      }
+    ]
   },
   {
     "namePtBr": "Roedores de Ossos",
-    "nameEn": "bone gnawers"
+    "nameEn": "bone gnawers",
+    "phrase": "Esse cara conhecido como o Honrado Sacos Escrotais uma vez disse que por trás de toda grande fortuna alguém cometeu um grande crime, e no momento em que eu puder responsabilizar essa pessoa, acredite, eu farei isso.",
+    "description": [
+      "Os Roedores de Ossos buscam descobrir o oculto em todas as suas formas: segredos, senhas, atalhos, qualquer coisa que possam usar a seu favor em relação ao óbvio.",
+      "Eles são especialmente adeptos em se esconder à vista de todos e frequentemente existem em meio a grupos de status socioeconômico mais baixo, aqueles que passam despercebidos por pessoas que se consideram superiores e são indiferentes ao que seus 'inferiores' pensam ou veem.",
+      "Roedores de Ossos em jogo podem esperar se infiltrar em uma área restrita, roubar o laptop de um jornalista comprometido, escutar policiais corruptos, testemunhar uma transação ilícita acontecendo e deduzir como todos eles estão relacionados."
+    ],
+    "whoAre": [
+      "Movendo-se despercebidos entre as massas, os Roedores de Ossos sempre encontraram-se perenemente na companhia dos rejeitados da sociedade, até mesmo dentro da cultura Garou — e isso diz algo para uma cultura que inclui pessoas que dormem em valas e participam de moots com focinhos ensanguentados ainda escorrendo de resíduos petroquímicos.",
+      "Não é surpresa, então, que os Roedores de Ossos frequentemente se encontrem entre as subculturas e os segmentos desfavorecidos da sociedade.",
+      "Seja parte da população transitória da cidade, misturando-se com os punks da crosta no bairro boêmio, bêbados com a banda de outlaw-country itinerante ou revirando o lixo literal com os cães ferais no aterro, os Roedores de Ossos frequentemente estão entre aqueles dos quais o resto do mundo desvia desconfortavelmente o olhar."
+    ],
+    "patron": "O espírito patrono dos Roedores de Ossos é o Rato, que muitas vezes está presente, mas invisível, e às vezes indesejável quando sua presença é conhecida. O Rato e os Roedores de Ossos estão associados à Honra, o que alguns Garou orgulhosos consideram incongruente… até que um Roedor de Ossos aparece com prova decisiva de que um rival planejou traí-los. Na verdade, parte do disfarce do Rato parece ser buscar e cultivar aqueles que, de outra forma, evitariam a atenção. Esperto, Rato. Muito esperto.",
+    "favor": "O Rato pede que seus seguidores descubram aquilo que outros deixam passar despercebido e, uma vez descoberto, usar o que aprendem de maneira criativa. Não há valor no conhecimento por si só - cada descoberta tem um propósito. Um Roedor de Ossos pode adicionar um dado a um conjunto de dados usado para encontrar algo perdido ou negligenciado.",
+    "ban": "O Rato parece ser uma figura ignóbil, mas, na verdade, trabalha pelo bem-estar de seu ninho e ninhada. Se um Roedor de Ossos deixa passar uma oportunidade significativa de ajudar os desfavorecidos, eles recuperam apenas um único ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Narrador de Zine",
+        "description": "O Narrador de Zine tem um faro para notícias e possui um incrível histórico de seguir as dicas mais valiosas até suas verdades sujas. Eles fazem de tudo, desde investigação até fotografia, cópia e layout."
+      },
+      {
+        "title": "Técnico de Som",
+        "description": "Não é um trabalho glorioso, mas a banda favorita de todos soa melhor nas noites em que o Técnico de Som está no comando. Para ser honesto, o Técnico de Som pegou o emprego para ficar perto de onde a ação está."
+      },
+      {
+        "title": "Amigo Nosso",
+        "description": "Todo mundo deve favores ao Amigo Nosso, e isso porque o Amigo Nosso está sempre ansioso para fazer favores a um amigo."
+      },
+      {
+        "title": "Motorista de Trabalhos",
+        "description": "Todo mundo precisa ir a algum lugar, e o Motorista de Trabalhos está lá para eles."
+      }
+    ]
   },
   {
     "namePtBr": "Senhores das Sombras",
-    "nameEn": "shadow lords"
+    "nameEn": "shadow lords",
+    "phrase": "Todo mundo tem um plano até olhar para baixo e ver seu próprio sangue molhando o chão. Descobrir o que vem a seguir é o verdadeiro teste do valor de um Garou.",
+    "description": [
+      "Dominância e submissão constituem o credo dos Senhores das Sombras. Aqueles que demonstram força merecem dominar justamente; o papel dos fracos é se submeter, se render e mostrar sua garganta.",
+      "As maiores lendas dos Senhores das Sombras são poderosas, mas a verdadeira força está em descobrir como explorar as fraquezas de seus inimigos.",
+      "Os Senhores das Sombras contam entre seus membros alguns dos grandes estrategistas e senhores da guerra da lenda dos Garou, e, portanto, é razoável dizer que o domínio dos Senhores das Sombras é uma habilidade pragmática - alguns diriam impiedosa - para o planejamento. Os Senhores das Sombras valorizam a intuição astuta e mentes calculadoras, melhor para colocar em movimento seus planos para minar o Wyrm, seja através de um ataque frontal ou por meio de posicionamento inteligente. Claro, essa visão de mundo às vezes deixa outros Garou nervosos: Quando um Senhor das Sombras olha para você, eles estão pensando em como melhor usar suas habilidades? Eles estão te examinando em busca de fraquezas? Eles estão pensando em como seu sacrifício pode ser usado da maneira mais eficaz?",
+      "No jogo, um Senhor das Sombras pode esperar visualizar a verdadeira extensão de uma preocupação exploratória de minerais raros em seu território, planejar a queda final desses inimigos de Gaia, talvez até conspirar com o inimigo para descobrir suas fraquezas por dentro, e, finalmente, intimidar qualquer um que fique entre eles e o que desejam."
+    ],
+    "whoAre": [
+      "A tribo dos Senhores das Sombras é mais conhecida por dois traços distintos: poder e astúcia. O poder assume todas as formas, desde poder político em suas comunidades até o poder físico bruto ao enfrentar um servo do Wyrm ou um lobisomem rival. A astúcia pode parecer em desacordo com a natureza feroz de Raiva dos Garou, mas, como os Senhores das Sombras veem, enganar um oponente e convencê-lo de sua superioridade é uma prova por si só. De fato, dessa forma, a astúcia leva ao poder, e os Senhores das Sombras frequentemente preferem ser a força por trás de líderes mais imediatamente reconhecíveis.",
+      "Uma das habilidades mais importantes que um Senhor das Sombras aprende é escolher apenas as lutas que eles sabem que vão vencer.",
+      "Embora tenham uma reputação bem merecida como conspiradores, os Senhores das Sombras também devem ser reconhecidos por sua capacidade de prestar atenção aos detalhes de um plano. Um Caern não vai funcionar sozinho - seu espírito guardião eventualmente voltaria para a Umbra nesta era do Apocalipse. E atacar o acampamento de mercenários parece louvável até que a matilha perceba que o plano é enlouquecer e rasgar o caminho pela barricada da frente, momento em que o Senhor das Sombras aponta que esse 'plano' infantil simplesmente faria com que todos fossem mortos.",
+      "Assim como são conhecidos por poder e astúcia, um contraste semelhante incorpora a identidade dos Senhores das Sombras. Em um sentido, os Senhores das Sombras são opressores, até dominadores. Em outro sentido, eles são inspiradores, e talvez os mais meritocráticos das tribos, baseados apenas em realizações. Ser um dos Senhores das Sombras 'menos realizados' não pode levar a uma existência feliz, mas esses Garou encontram seu lugar em suas matilhas, apoiando os lobisomens ao seu redor... e talvez esperando o momento que possa elevá-los ao verdadeiro status que merecem."
+    ],
+    "patron": "O Trovão, o Espírito Patrono dos Senhores das Sombras, conduz os mansos para suas tocas e anuncia a chegada de tempestades vingativas. Trovão é frequentemente distante, mas sempre temível. Em outros momentos, Trovão é o feroz arauto da ação e da mudança. Assim, os Senhores das Sombras mantêm que um desvio calculado prepara um golpe poderoso. Trovão e os Senhores das Sombras estão associados com (em grande parte) sua própria Glória.",
+    "favor": "O Trovão pode provocar grande medo naqueles a quem ele anuncia sua presença, e os Senhores das Sombras aparentemente podem convocar sua aparência para agir da mesma forma. Um Senhor das Sombras pode adicionar um dado às jogadas de Empatia Animal, Intimidação ou Lábia relacionadas a ameaças ou à exploração de fraquezas.",
+    "ban": "O Trovão não mostra mais deferência ou respeito do que foi conquistado, e os Senhores das Sombras fazem o mesmo. Se um Senhor das Sombras sofrer derrota em um conflito para qualquer Garou de Renome Total inferior, eles podem recuperar apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Boyar",
+        "description": "Eles vêm de um país pequeno uma vez reconhecido pelo Pacto de Varsóvia, mas o Boyar - que vem de uma longa linhagem de nobres hereditários que podem traçar sua história de volta pelos séculos - conta, até onde a nobreza moderna vai. O domínio do Boyar não é mais tão rico quanto costumava ser, e se vê cercado por estados vizinhos gananciosos e interesses multinacionais que pensam que podem simplesmente aplicar pressão suficiente e tomar os recursos naturais do território. O Boyar teria dificuldade em encontrar alguém na história que tenha estado tão, tão errado quanto esses exploradores em potencial, e não hesitará em convocar antigas promessas de fidelidade entre os orgulhosos cidadãos do país para repelir esses saqueadores."
+      },
+      {
+        "title": "Hacktivista",
+        "description": "Todo mundo no mundo é corrupto, e o Hacktivista se especializa em desenterrar essa corrupção. O Hacktivista usa todas as ferramentas disponíveis - seja métodos tecnológicos, como saquear bancos de dados online criptografados; empreendimentos de engenharia social de carne e espírito; ou assumindo o manto do lobo e se infiltrando em locais restritos. Fingir ter estabelecido a 'HardTarget SoftDev' no retiro dos empreiteiros de defesa em conjunto com a conferência Bilderberg? Sem problemas. O objetivo do Hacktivista é encontrar informações que possam ser usadas como arma contra seus inimigos. Er, inimigos de sua matilha."
+      },
+      {
+        "title": "Terror da Meia-Noite",
+        "description": "Nas longas noites em que o clima fica frio e os ventos uivam, alguém pode olhar para a meseta e ver o Terror da Meia-Noite em silhueta contra a lua. A população local quer apaziguar o Terror da Meia-Noite como puder, mas na verdade não sabe nada sobre o que o Terror da Meia-Noite realmente quer. Eles deixaram para trás apenas manchas de sangue quando os irmãos desapareceram da instalação farmacêutica, e ainda é possível ver o vídeo na Internet da noite em que o médico foi despedaçado na clínica estranha que abriu na borda da cidade. Está calmo desde então, mas apenas o Terror da Meia-Noite e sua matilha sabem quem eles vão pegar a seguir."
+      },
+      {
+        "title": "Assassino",
+        "description": "A história tem sua parcela de grandes líderes e sábios conselheiros, muitos dos quais compartilham uma característica comum: eles dão ordens, eles não empunham a lâmina mortal eles mesmos. O Assassino suja as mãos a pedido de um líder de matilha que não pode se permitir ser visto removendo vozes contrárias - então o Assassino faz isso por eles. E vamos ser honestos: Todos conhecem o Assassino por quem eles são. É assim que eles preferem, ostentando uma reputação que os envolve com glória temível."
+      }
+    ]
   },
   {
     "namePtBr": "Filhos de Gaia",
-    "nameEn": "children of gaia"
+    "nameEn": "children of gaia",
+    "phrase": "Que assim Gaia uive nesta era de ruína espiritual, mas como seus escolhidos, nós somos a voz do seu uivo, ou somos cúmplices daqueles que a prejudicam?",
+    "description": [
+      "Os Filhos de Gaia se preocupam com os maiores mistérios de sua homônima e buscam compreender os enigmas que existem em sua presença. Um Filho de Gaia é desafiado por nada tanto como por um enigma para investigar ou uma ferida, literal ou figurativa, para curar, e eles são especialmente atraídos para a esotérica Umbra.",
+      "Os Filhos de Gaia em jogo podem esperar descobrir um cache de artefatos deixados pelos lendários Garou, discernir a verdadeira natureza de um espírito-trapaceiro, curar a ferida de outros ou resolver o enigma de uma situação Umbral."
+    ],
+    "whoAre": [
+      "Se os Garou são criaturas da Raiva, os Filhos de Gaia incorporam essa Raiva de forma paradoxal, em muitos casos, vendo a si mesmos como a consciência que deve acompanhar a fúria incoerente dos Garou. Qualquer outra coisa os faria os verdadeiros monstros que o resto do mundo vê quando o Delírio falha.",
+      "O que não é dizer que eles são pacifistas. Muito pelo contrário: A perspectiva da tribo é que a Raiva é uma força da natureza, como um tsunami implacável ou uma chama negligenciada. Qualquer força natural pode destruir, mas também podem ser turnadas para fins positivos.",
+      "Essas questões existenciais definem os Filhos de Gaia, que buscam, antes de tudo, entender a natureza do serviço do lobisomem à mãe que os gerou. Eles são os Garou que perguntam 'por quê?' e 'para quê?' quando outros lobisomens invocam o espírito-mãe para justificar algum ataque impulsivo na garganta do Wyrm ou insistem que uma atrocidade sangrenta de alguma forma serve seu propósito. Assim como a pedra fica firme e redireciona o fluxo ao seu redor, assim também faz o Filho de Gaia perspicaz guiar o poder de sua alcateia.",
+      "Mais do que qualquer outra coisa, os Filhos de Gaia buscam compreender. Eles olham os detalhes por trás de um candidato político impopular que de repente ganhou momentum com a mesma mente aberta que negociam um sacrifício justo para navegar pelo território de um espírito ao aprender o que o espírito quer e por quê. Nem o mundo físico nem o mundo espiritual são uma lista de fatos para um Filho de Gaia. Cada um é uma miríade de perguntas a serem respondidas. Lobisomens superficiais desprezam os Filhos de Gaia como inofensivos ou até mesmo não-lobisomens. Para o Filho de Gaia, no entanto, o propósito por trás de sua busca interminável por respostas é resolver problemas imediatos. Uma abelha pode picar e uma bala pode perfurar, e saber o que causou a ferida ajuda a determinar a melhor maneira de curá-la."
+    ],
+    "patron": "O espírito patrono dos Filhos de Gaia é Unicórnio, ele mesmo um mistério e uma maravilha para o mundo moderno. Os humanos pensam em Unicórnio como um espírito das florestas, e isso pode ser verdade, mas tanto quanto, Unicórnio é um espírito de lugares misteriosos, locais que são eles mesmos tão elusivos quanto ela. Unicórnio e os Filhos de Gaia estão associados à Sabedoria.",
+    "favor": "Unicórnio encoraja seus seguidores a aprender como as pessoas e os espíritos se interrelacionam, entender o que faz a Umbra e o mundo físico funcionar como funcionam e restaurar as coisas para sua função. Um Filho de Gaia pode adicionar um dado a um teste de Percepção ou Intuição relacionado à aprendizagem de algo sobre uma pessoa, animal ou espírito.",
+    "ban": "Unicórnio é direto e detesta a desonestidade. Se um Filho de Gaia deve mentir ou desviar, ou esconder verdades especificamente para ganho pessoal, eles podem recuperar apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua pontuação de Determinação ou Autocontrole. (Se você tiver que argumentar se é 'para ganho pessoal', isso pode ser um indicador da intenção...)",
+    "archetypes": [
+      {
+        "title": "Cirurgião",
+        "description": "Especializando-se em remendar pessoas na hora, o Cirurgião não tem um consultório limpo ou uma recepcionista amigável. Se você precisa do Cirurgião, você precisa saber onde o Cirurgião está, e esse segredo os mantém ocupados com os tipos de pacientes que não estão exatamente procurando salas de espera bem equipadas. O Cirurgião sabe como manter a boca fechada, e, vamos ser honestos, tem muitos... peccadilloes próprios que não exatamente emocionariam um conselho de certificação, especialmente dado o quanto a habilidade do Cirurgião se baseia na intuição e na negociação espiritual, em vez da ciência médica tradicional."
+      },
+      {
+        "title": "Negociador",
+        "description": "Muitas pessoas procuram expandir seus horizontes, e o Negociador está disposto a ajudá-las nisso. Pague adiante, você sabe? Às vezes, você pode ser o barqueiro de alguém na jornada de autodescoberta. Nada muito severo, nada que vá dar uma má viagem a alguém ou fazê-los acenar com uma faca de cozinha para os vizinhos. O pensamento é que, se o Negociador pode permitir que alguém entre em seu próprio mundo misterioso, eles formarão o tipo de relacionamento vitalício que manterá qualquer segredo seguro, incluindo o segredo do que encontraram no Outro Lado."
+      },
+      {
+        "title": "Caminhante",
+        "description": "O Caminhante fez muitas jornadas e fará muitas mais antes de buscar o horizonte Umbral. Onde a luz não vai, sob as copas pesadas na floresta; onde o mundo cheira a roxo e medo, nas colinas; onde a chuva soa como um milhão de espíritos lunares em coro. Todas essas e mais: O Caminhante sempre descobre algo para encontrar e seguir através da fronteira entre os mundos, e inevitavelmente algo está lá para cumprimentá-los do outro lado."
+      },
+      {
+        "title": "Miner",
+        "description": "Pode parecer um trabalho extenuante, e é. O Miner se considera um pouco médico, praticando medicina ao mergulhar nas feridas de Gaia e extirpar a impureza do Wyrm. Profundamente dentro de corredores de pedra, além dos limites de rocha antiga e calcificação espiritual, espreitam verdades e problemas, alguns dos quais até caíram da memória das tribos. Para isso, o Miner traz mistérios de volta para sua matilha e de volta para a consciência dos Garou."
+      }
+    ]
   },
   {
-  "namePtBr": "Garras Vermelhas",
-  "nameEn": "red talons"
+    "namePtBr": "Garras Vermelhas",
+    "nameEn": "red talons",
+    "phrase": "Ponha isso no chão. Vá embora. Ou morra.",
+    "description": [
+      "Os Garras Vermelhas são a única tribo moderna com um número substancial de Garou cuja Primeira Mudança acontece entre os lobos. Como todos os Garou, Os Garras Vermelhas sentem raiva com o Apocalipse em curso, ao verem Gaia sendo assassinada pelo bem da ganância insaciável. Da mesma forma, Os Garras Vermelhas veem populações de animais (especialmente lobos) em todo o mundo destruídas pela invasão humana e pelo sentimento de entitlement, uma subversão ruinosa da ordem natural para promover a mesma ganância.",
+      "Mas a raiva é uma energia, e Os Garras Vermelhas direcionam essa energia para dar voz àqueles que não têm palavras, para agirem como defensores daqueles que não podem usar as ferramentas da humanidade e para derrubar as construções humanas que profanam Gaia. Dessa forma, eles também são uma das tribos mais radicais, e eles buscam ativamente reduzir a influência da humankind sobre Gaia, às vezes chegando ao ponto de reduzir populações de humans onde tal coisa pode ser razoavelmente (em suas perspectivas) efetuada.",
+      "Em jogo, Os Garras Vermelhas podem esperar arruinar indivíduos e instalações que percebem como desafiadores ao seu território, proteger lugares queridos a Gaia contra intrusões, reduzir a dependência de tecnologias humanas, reduzir populações excessivas de criaturas que desequilibrariam ecologias locais e até mesmo purgar um local de ocupantes invasivos (humanos ou não) - sangrentamente, se necessário."
+    ],
+    "whoAre": [
+      "À medida que a humanidade continua na exploração implacável do mundo, os lugares onde os animais e suas presas podem prosperar diminuem cada vez mais. Gaia ela mesma está sendo mutilada, parcelada em uma infinidade de transações humanas míopes que ameaçam toda a vida. Com cada dia que passa, o território do lobo (e dos Garou nascidos de lobos) é ainda mais diminuído, empurrando-os para um canto metafórico e às vezes literal.",
+      "E um animal encurralado é um animal desesperado.",
+      "Nessas circunstâncias, Os Garras Vermelhas recorrem a uma ação veemente para lutar e recuperar territórios perdidos da invasão humana. Os Garras Vermelhas favorecem soluções decisivas, a ponto de até mesmo outros lobisomens frequentemente pensarem que a tribo é brutal. Destruir uma cidade até virar escombros interromperia a expansão desenfreada que se estende como um câncer a partir dela, por exemplo. Arrancar a garganta do operador da escavadeira é muito mais imediatamente eficaz do que desafiar leis de zoneamento ou desvalorizar planilhas corporativas de lucro e perda.",
+      "Do ponto de vista de outros lobisomens da agora fragmentada Nação Garou, a perspectiva dos Garras Vermelhas beira a heresia. Os Garras Vermelhas frequentemente pensam que não é o Wyrm que é o elemento desequilibrado do Triat, mas sim o Tecelão, com sua restrição em constante expansão e expansão maligna na forma de cidades, desenvolvimento e 'civilização'. Entre os mais extremistas dos Garras Vermelhas - mesmo expressar tal sentimento é vergonhoso - o Wyrm é uma vítima do Tecelão, e as ferramentas do Wyrm têm seu lugar.",
+      "Todos os Garou conhecem as histórias do Impergium, o momento em que os lobisomens travaram uma guerra aberta contra o mundo da humanidade. Detratores buscam retratar Os Garras Vermelhas como revanchistas e apologistas do Impergium com saudades dos 'bons e velhos tempos'. Essa caracterização simplifica demais a situação deles, no entanto, e atribui malícia onde o motivo é realmente sobrevivência. Para Os Garras Vermelhas, o Impergium pode ser a única opção que lhes resta.",
+      "A luta dos Garou é a luta dos Garras Vermelhas. O restante dos Garou simplesmente ainda não sabe disso."
+    ],
+    "patron": "O Grifo é o Espírito Patrono dos Garras Vermelhas — Grifo, que se coloca contra a invasão do Tecelão e nunca prioriza os interesses humanos sobre os dos animais. Grifo e Os Garras Vermelhas estão associados à Honra — embora seja uma honra cujo contexto frequentemente escapa aos Garou cujo contexto principal é a sociedade dos humanos.",
+    "favor": "O Grifo é implacável, um lutador feroz diante de probabilidades impossíveis. Os Garras Vermelhas podem adicionar um dado em testes de Briga sempre que sua Saúde estiver abaixo da metade.",
+    "ban": "O Grifo abomina a complexidade e busca simplificar os relacionamentos de seus seguidores com o mundo. Se uma sessão ocorrer na qual Os Garras Vermelhas realizarem testes que envolvam as habilidades Acadêmicos, Condução, Finanças, Armas de Fogo, Ciência ou Tecnologia para reparar ou utilizar (em vez de subverter ou destruir), eles poderão recuperar apenas um ponto de Força de Vontade no início da próxima sessão, em vez de sua Determinação ou Autocontrole.",
+    "archetypes": [
+      {
+        "title": "Caçador de Recompensas",
+        "description": "É difícil imaginar que, mesmo entre humanos depravados, algumas pessoas sejam mais depravadas do que o resto delas. Na sociedade dos lobos, os párias são expulsos. Entre os humanos, eles ficam presos em jaulas que ninguém visita. Às vezes eles saem de suas jaulas. Às vezes eles fogem antes de serem capturados e trazidos para a jaula. O Caçador de Recompensas faz disso seu trabalho recuperar aqueles que fogem. Desprovido de compaixão humana, o Caçador de Recompensas não pensa se seus alvos pertencem às jaulas ou na justiça de colocar pessoas em jaulas. Se o Caçador de Recompensas tivesse seu caminho, todos os humanos estariam em uma jaula."
+      },
+      {
+        "title": "Devorador de Homens",
+        "description": "Assim que o Devorador de Homens sente o cheiro de sangue humano, não há como voltar atrás. Viajando com sua alcateia pelas vastidões de Kamchatka, o Devorador de Homens cresceu gordo e confortável com renas enquanto ainda era jovem e experimentou sua Primeira Mudança em resposta ao helicóptero de uma expedição de caça passando por cima. Esses mesmos caçadores pegaram a alcateia, mas pagaram com suas vidas - e desde então, o Devorador de Homens viajou de ferida aberta a ferida aberta, pelo rosto de Gaia, tentando encontrar o equilíbrio certo e encontrando outros como eles pelo caminho."
+      },
+      {
+        "title": "Preparador",
+        "description": "O Preparador tem um bunker, 18 metros abaixo da superfície, abastecido com carne. Não aquela coisa química e desidratada que as pessoas tentam vender na internet. Carne real. Mataram. Defumaram. Secaram. Dura para sempre. Isso é tudo que você precisa. O Preparador tem uma mentalidade estranha. Eles não estão apenas reservando suprimentos para quando os supermercados e sistemas humanos falharem. Eles estão ansiosos por isso, de uma maneira bem raivosa. Isso deixa o resto da alcateia não totalmente confortável. Mas o Preparador sempre cuidou deles. Até agora."
+      },
+      {
+        "title": "Cão da Peste",
+        "description": "O Cão da Peste se infiltra em território ocupado, espalhando terror e doença. Enfrentar um inimigo de frente e lutar não é o estilo deles; o Cão da Peste prefere reduzir o risco para si mesmos e reduzir sua presa ao medo trêmulo com alguns rosnados da escuridão e - com a ajuda de alguns pactos escolhidos com espíritos de doença - uma mordida virulenta que deixa as vítimas infectadas e contagiosas. Eles não buscam a pomposa Honra das tribos arrogantes ao redor de suas fogueiras vãs. Em vez disso, o Cão da Peste busca a Honra silenciosa de retomar o território que esses auto-engrandecedores têm cedido repetidamente."
+      }
+    ]
   }
 ]

@@ -1,15 +1,21 @@
 'use client'
-import Nav from '@/components/nav';
-import Footer from '@/components/footer';
+import { useState } from 'react';
 import { useSlice } from '@/redux/slice';
 import { useAppSelector } from '@/redux/hooks';
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import Nav from '@/components/nav';
+import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listTrybes from '../../data/trybes.json';
-import Image from 'next/image';
-import ItemTrybe from '@/components/ItemTrybe';
+import { AiFillCloseCircle } from "react-icons/ai";
+import Content from '@/components/Content';
 
 export default function Trybes() {
+  const [isToggled, setToggle] = useState(false);
+  const [object, setObject] = useState<any>(null);
   const slice = useAppSelector(useSlice);
+  
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
       <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
@@ -45,10 +51,55 @@ export default function Trybes() {
               const nomeB = b.namePtBr.toLowerCase();
               return nomeA.localeCompare(nomeB);
             }).map((trybe, index) => (
-              <ItemTrybe key={ index } trybe={ trybe } />
+              <motion.div
+                key={ index }
+                whileHover={{ scale: 0.98 }}
+                onClick={() => {
+                  setToggle(prevValue => !prevValue );
+                  setObject(trybe);
+                }}
+                className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer"
+              >
+                <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
+                <Image
+                  src={`/images/trybes/${trybe.namePtBr}.png`}
+                  alt={`Glifo dos ${trybe.namePtBr}`}
+                  className="w-20 relative"
+                  width={800}
+                  height={400}
+                />
+                <p className="relative font-bold text-center">
+                  { trybe.namePtBr }
+                </p>
+              </motion.div>
             ))
           }
         </div>
+        <AnimatePresence>
+          {
+            object &&
+            <motion.div
+              initial={{opacity:0}}
+              animate={{opacity:1}}
+              exit={{opacity:0}}
+              className="p-3 sm:p-8 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/80 z-50 snap-y"
+            >
+              <div
+                className="relative bg-ritual bg-top bg-cover w-full h-full border-2 border-white"
+              >
+                <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
+                <div className="w-full h-full flex flex-col items-center relative">
+                  <Content object={ object } />
+                  <button className="text-3xl sm:text-4xl fixed top-4 right-8 sm:top-12 sm:right-16 color-white z-50 text-white"
+                    onClick={ () => setObject(null)}
+                  >
+                    <AiFillCloseCircle />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          }
+        </AnimatePresence>
       </section>
       <Footer />
     </div>
