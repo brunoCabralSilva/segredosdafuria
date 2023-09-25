@@ -61,7 +61,7 @@ export default function Content(props: { object: IContent }) {
       ))
     }
     <h2 className="text-center sm:text-left w-full pt-8 text-xl">
-      {`Quem são os ${object.namePtBr}`}
+      Quem são
     </h2>
     <hr className="w-10/12 my-2" />
     {
