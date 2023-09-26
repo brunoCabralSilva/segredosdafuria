@@ -88,7 +88,7 @@ export default function Trybes() {
                 className="relative bg-ritual bg-top bg-cover w-full h-full border-2 border-white"
               >
                 <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-                <div className="w-full h-full flex flex-col items-center relative">
+                <div className="w-full h-full flex flex-col items-center">
                   <Content object={ object } />
                   <button className="text-4xl sm:text-5xl fixed top-4 right-5 sm:top-10 sm:right-14 color-white z-50 text-white"
                     onClick={ () => setObject(null)}

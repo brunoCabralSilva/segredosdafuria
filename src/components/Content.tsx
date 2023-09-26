@@ -37,14 +37,11 @@ export default function Content(props: { object: IContent }) {
   };
 
   return(
-    <div className="py-10 flex flex-col items-center sm:items-start w-full relative z-20 text-white overflow-y-auto px-8 text-justify">
-      <div className="flex items-center justify-center w-full relative">
-        {
-          isLoading &&
-          <div className="absolute w-full sm:w-5/12 h-50vh flex items-center justify-center">
-            <span className="loader"></span>
-          </div>
-        }
+    <div className="py-10 flex flex-col items-center sm:items-start w-full z-20 text-white px-8 text-justify">
+      <div className="flex items-center justify-center w-full relative h-50vh">
+        <div className="absolute h-full w-full sm:w-5/12 flex items-center justify-center">
+          { isLoading && <span className="loader z-50" /> }
+        </div>
         <Image
           src={`/images/trybes/${object.namePtBr} - representation.png`}
           alt={`Representação dos ${object.namePtBr}`}
