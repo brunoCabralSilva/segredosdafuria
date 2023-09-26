@@ -24,11 +24,11 @@ export default function Forms() {
       <section className="mb-2 relative px-2">
         {
           !slice.simplify &&
-          <div className="h-40vh relative flex bg-black items-end text-black">
+          <div className="h-40vh relative flex bg-white items-end text-black">
           <Image
-            src={ "/images/32.jpg" }
+            src={ "/images/25.jpg" }
             alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-            className="absolute w-full h-40vh object-cover object-top"
+            className="absolute w-full h-40vh object-cover object-center"
             width={ 1200 }
             height={ 800 }
           />
@@ -67,16 +67,9 @@ export default function Forms() {
                   setToggle(prevValue => !prevValue );
                   setObject(forms);
                 }}
-                className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer"
+                className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer h-15vh"
               >
                 <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-                {/* <Image
-                  src={`/images/forms/${forms.name}.png`}
-                  alt={`Glifo do Augúrio ${forms.name}`}
-                  className="w-20 relative"
-                  width={800}
-                  height={400}
-                /> */}
                 <p className="relative font-bold text-center">
                   { forms.name }
                 </p>

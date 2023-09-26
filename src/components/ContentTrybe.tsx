@@ -43,7 +43,7 @@ export default function ContentTrybe(props: { object: ITrybe }) {
           { isLoading && <span className="loader z-50" /> }
         </div>
         <Image
-          src={`/images/trybes/${object.namePtBr}  - representation.png`}
+          src={`/images/trybes/${object.namePtBr} - representation.png`}
           alt={`Representação dos ${object.namePtBr}`}
           className="w-full mobile:w-8/12 sm:w-5/12 relative px-6"
           width={800}

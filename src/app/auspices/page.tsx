@@ -26,9 +26,9 @@ export default function Auspices() {
           !slice.simplify &&
           <div className="h-40vh relative flex bg-black items-end text-black">
           <Image
-            src={ "/images/32.jpg" }
+            src={ "/images/49.png" }
             alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-            className="absolute w-full h-40vh object-cover object-top"
+            className="absolute w-full h-40vh object-cover"
             width={ 1200 }
             height={ 800 }
           />

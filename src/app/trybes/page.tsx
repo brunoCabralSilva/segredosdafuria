@@ -24,11 +24,11 @@ export default function Trybes() {
       <section className="mb-2 relative px-2">
         {
           !slice.simplify &&
-          <div className="h-40vh relative flex bg-black items-end text-black">
+          <div className="h-40vh relative flex bg-white items-end text-black">
           <Image
-            src={ "/images/32.jpg" }
+            src={ "/images/84.png" }
             alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-            className="absolute w-full h-40vh object-cover object-top"
+            className="absolute w-full h-40vh object-contain object-top"
             width={ 1200 }
             height={ 800 }
           />
