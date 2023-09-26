@@ -75,12 +75,12 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Dons</p>
           </motion.div>
         </Link>
-        <Link href="/breeds" className="col-span-1 sm:col-span-2 sm:row-span-2">
+        <Link href="/forms" className="col-span-1 sm:col-span-2 sm:row-span-2">
           <motion.div
             whileHover={{ scale: 0.98 }}
             className={`bg-04 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
             <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2 relative">Raças</p>
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2 relative">Formas</p>
           </motion.div>
         </Link>
         <Link href="/rituals" className="col-span-1 row-span-2 sm:col-span-2 sm:row-span-2">
