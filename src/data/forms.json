@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Hominídeo",
+    "subtitle": "O Humano",
+    "description": "A forma hominídea é semelhante à de um humano comum, e é a forma natural da maioria dos Garou. Para a maioria dos métodos não sobrenaturais de detecção, a forma hominídea é indistinguível de não-Garou. Ser hominídeo é ótimo para usar ferramentas, se comunicar e lidar com a maioria das interações do mundo moderno.",
+    "cost": "Nenhum.",
+    "skills": "Na forma hominídea, os Garou são incapazes de se regenerar, mas podem tocar prata sem sofrer danos.",
+    "list": []
+  },
+  {
+    "name": "Glabro",
+    "subtitle": "O Quase-Humano",
+    "description": "A forma glabro é a de um humano grande, curvado e peludo. Não é explicitamente sobrenatural e é mais sinuosa do que hiper-musculosa, mas o lobo está logo abaixo da superfície. Uma inspeção mais próxima revela uma quantidade surpreendente de pelos no corpo, bem como uma caminhada oscilante. Assumir a forma glabro ainda é bom para usar ferramentas, mas também é um pouco mais resistente do que a forma hominídea - é bom para empunhar armas e para não fazer as pessoas ficarem espantadas pensando 'Meu Deus, um monstro lobo gigante acabou de despedaçar essas pessoas enquanto você está fazendo isso'.",
+    "cost": "Um Teste de Fúria.",
+    "skills": "Embora a forma não seja obviamente sobrenatural, os Garou nessa forma deixam os humanos comuns desconfortáveis, e testes Sociais de não-Intimidação com eles sofrem uma penalidade de dois dados. O seguinte também se aplica:",
+    "list": [
+      "Um bônus de dois dados para todos os testes Físicos, exceto Furtividade.",
+      "O Garou pode regenerar um nível de Vitalidade com um Teste de Fúria."
+    ]
+  },
+  {
+    "name": "Crinos",
+    "subtitle": "A Forma de Guerra, o Monstro",
+    "description": "A forma crinos é uma figura noturna de garras, presas e músculos flexíveis, combinando os traços mais temíveis de lobo e homem. Caminhar com essa forma sempre significa morte para algo. A simples visão dela aterroriza a maioria das pessoas comuns, sejam humanas, lobos ou qualquer outra coisa em seu caminho. É a forma que imediatamente grita 'lobisomem!' para qualquer pessoa que a observe. Depois de ficarem tão horrorizadas, no entanto, elas podem não se lembrar da experiência depois.",
+    "cost": "Dois Testes de Fúria.",
+    "skills": "A comunicação comum é quase impossível, e um Garou nessa forma tem dificuldade em formar expressões além de palavras únicas - 'matar', 'inimigo', 'Wyrm' - geralmente com uma entrega gutural e rosnante. Essa condição faz com que testes de Furtividade e Sociais que não envolvam Intimidação falhem automaticamente. O seguinte também se aplica:",
+    "list": [
+      "Um bônus de quatro dados para todos os testes Físicos.",
+      "Quatro níveis de Saúde adicionais (aplique qualquer dano a eles à trilha regular se não for regenerado antes de voltar).",
+      "Garras naturais com +3 de dano (Superficial vs. lobisomens, vampiros e outras criaturas sobrenaturais com resistência semelhante).",
+      "Mordida com +1 de dano Agravado.",
+      "O Garou pode regenerar dois níveis de Vitalidade com um Teste de Fúria.",
+      "Humanos comuns que testemunham isso quase certamente experimentam o Delírio (consulte p. 142).",
+      "No início de um turno, se não matou algo no turno anterior, um lobisomem na forma crinos deve gastar um ponto de Força de Vontade para não entrar em frenesi. Ao sair da forma crinos, sua Fúria é reduzida para 1."
+    ]
+  },
+  {
+    "name": "Hispo",
+    "subtitle": "O Lobo Primordial",
+    "description": "A forma Hispo se assemelha à de um lobo primordial enorme, mas não necessariamente sobrenatural. A forma Hispo é ótima para viagens de longa distância, tanto em termos de velocidade com quatro patas quanto de resistência notável. Não é ideal para falar ou usar ferramentas, mas tem uma mordida temível, além de sentidos superiores.",
+    "cost": "Um Teste de Fúria.",
+    "skills": "Nessa forma, um Garou não pode falar como um humano, mas o lobisomem pode se comunicar bem o suficiente com lobos e outros Garou que entendem nuances baseadas na forma. Devido ao tamanho e presença temível da forma, os testes para evitar a detecção são realizados com uma penalidade de dois dados. O seguinte também se aplica:",
+    "list": [
+      "Um bônus de dois dados para todos os testes Físicos não relacionados a  Furtividade.",
+      "Mordida com +1 de dano Agravado.",
+      "O Garou pode regenerar um nível de Vitalidade com uma verificação de Fúria."
+    ]
+  },
+  {
+    "name": "Lupino",
+    "subtitle": "O Lobo",
+    "description": "A forma Lupina é a de um lobo de tamanho normal. Na verdade, poderia facilmente ser confundida com um cachorro grande em certas áreas (particularmente onde os lobos são visitantes pouco frequentes...). A forma Lupina se destaca em viagens de longa distância em alta velocidade e na navegação de áreas onde seu tamanho comparativamente pequeno ajuda na furtividade ou no acesso a áreas de difícil alcance, como cavar sob uma cerca ou se esgueirar em um cano de drenagem.",
+    "cost": "Nenhum.",
+    "skills": "Nessa forma, um Garou não pode se regenerar, mas não é afetado pela prata. Ele não pode falar como um humano, mas pode se comunicar bem o suficiente com lobos e outros Garou por meio de linguagem corporal primitiva e vocalização. Dependendo do ambiente, ele também pode obter vários bônus de dois dados, como Sobrevivência ou Furtividade, dependendo se ser um lobo seria benéfico na situação específica.",
+    "list": []
+  }
+]
