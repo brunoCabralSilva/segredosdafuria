@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Ragabash",
+    "phrase": "Quem é o maior tolo? O teimoso imbecil, ou os cabeças-ocas que o seguem voluntariamente rumo à tolice?",
+    "description": [
+      "Sob o signo da lua nova, os Ragabash são os trapaceiros da sociedade Garou, o augúrio que possui a maior liberdade para desafiar tradições e questionar 'a maneira como as coisas sempre foram feitas'. Isso ocorre não apenas porque 'a maneira como as coisas sempre foram feitas' resultou no Apocalipse.",
+      "Os Ragabash podem ser caprichosos ou joviais, apontando defeitos com jovialidade, ou podem ser astutos e cínicos, com uma atitude de 'eu avisei' em relação aos tipos de tradições que trouxeram os Garou até onde estão hoje. Eles podem pregar uma peça prática ou desrespeitar um oponente vaidoso com algum jogo de palavras inteligente - desde que alguém pareça tolo ou a sabedoria convencional seja questionada, o Ragabash está cumprindo seu papel.",
+      "Em jogo, os Ragabash podem esperar enganar um oponente teimoso, despistar um conspirador humano desprevenido, zombar de um lobisomem mais renomado e passar sorrateiramente por um sentinela excessivamente confiante."
+    ]
+  },
+  {
+    "name": "Theurge",
+    "phrase": "Os espíritos têm uma linguagem elaborada, e seus movimentos são sutis e significativos - continuar a tratá-los como ferramentas descartáveis fará com que o abandonem no momento de sua maior necessidade.",
+    "description": [
+      "Transformados sob o signo da lua crescente, os Theurges são os místicos da sociedade Garou e o augúrio com a maior aptidão para interagir com os espíritos.",
+      "Os Theurges podem ser estranhos, sábios ou ambos. Seu domínio do mundo dos espíritos pode ser testado pelo tempo e tradicional, ou pode ser experimental, até controverso. Eles podem usar acessórios estranhos ou cativar espíritos com movimentos sutis e esotéricos do corpo. Alguns são sonhadores diurnos ou visionários, enquanto outros são ritualistas propositados.",
+      "No jogo, os Theurges podem esperar convocar um jaggling relutante, invocar pactos antigos de camaradagem, aplacar anciões reverenciados com seu serviço e até mesmo vincular gafflings rebeldes."
+    ]
+  },
+  {
+    "name": "Philodox",
+    "phrase": "Nossos caminhos exaltam a tradição ou promovem a justiça? Podem eles fazer ambas as coisas?",
+    "description": [
+      "Transformados sob o signo da meia-lua, os Philodoxes são os juízes e árbitros da sociedade Garou - o augúrio com a responsabilidade de mediar conflitos ao interpretar sabiamente os caminhos dos lobisomens e conhecer o texto da Litania.",
+      "Os Philodoxes podem ser gentis ou enérgicos, buscando todos os fatos ou aderindo austeramente às regras e costumes sobre as circunstâncias. Alguns sugerem cursos de ação perspicazes inspirados por séculos de lendas e tradições; outros coletam informações e formulam planos que alteram à medida que novas informações se tornam conhecidas. Um Philodox pode ser julgador ou compassivo.",
+      "Em jogo, os Philodoxes podem esperar avaliar segredos que um aliado astuto 'descobriu', interpretar o comportamento estranho de um membro da matilha errante, punir um transgressor impenitente em uma reunião, e julgar as virtudes de um ataque audacioso, especialmente depois de considerar todos os aspectos de um assunto."
+    ]
+  },
+  {
+    "name": "Galliard",
+    "phrase": "Ouçam-me enquanto canto a canção dos lobos que somos, o povo que podemos ser e as lendas que nos tornaremos! É uma canção tanto de tragédia quanto de majestade, de horror e heroísmo.",
+    "description": [
+      "Transformados sob o signo da lua gibosa, os Galliards são os contadores de histórias e guardiões do conhecimento dos Garou, e o augúrio que mantém o registro oral dos lobisomens e preserva o espírito da Litania.",
+      "Os Galliards podem ser arrojados protagonistas em busca de holofotes ou crônicos contidos. Eles podem exagerar as façanhas absolutamente incríveis de sua matilha, ou podem recitar cada detalhe honesto, até o mais ínfimo. Alguns se regozijam na performance da própria lenda, desde poemas até canções até obscenidades gestuais selvagens; outros tecem histórias envolventes de contexto e compreensão sociológica. Alguns podem lidar com a bebida, e outros, bem...",
+      "Em jogo, os Galliards podem esperar entreter outros lobisomens com uma fábula ou lenda, promover um companheiro de matilha cuja estrela está em ascensão, unir os Garou com uma lamentação por um dos seus mortos, ou desafiar com destemor um sentinela intransigente."
+    ]
+  },
+  {
+    "name": "Ahroun",
+    "phrase": "Garras entram, sangue jorra para fora.",
+    "description": [
+      "Mudados sob o signo da lua cheia, os Ahrouns são os guerreiros da sociedade Garou, os lutadores de um povo totalmente inclinado para a violência feroz. Muitas vezes, são vistos como líderes em tempos de guerra, e dada a beligerância de muitos septs, isso frequentemente significa 'até novo aviso'.",
+      "Ahrouns destroem tudo e arrancam gargantas. Eles podem ser redemoinhos frenéticos de presas e garras, ou predadores cautelosos e metódicos, causando terror por meio de precisão tática rigorosa. Outros membros da matilha podem achá-los inspiradores com sua destemida coragem ou ressentir-se deles como caçadores imprudentes.",
+      "Em jogo, os Ahrouns podem esperar lutar, atacar, destruir e lançar-se em uma briga. Foda-se, Wyrm."
+    ]
+  }
+]

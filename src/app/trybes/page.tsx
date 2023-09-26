@@ -9,7 +9,7 @@ import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listTrybes from '../../data/trybes.json';
 import { AiFillCloseCircle } from "react-icons/ai";
-import Content from '@/components/Content';
+import Content from '@/components/ContentTrybe';
 
 export default function Trybes() {
   const [isToggled, setToggle] = useState(false);

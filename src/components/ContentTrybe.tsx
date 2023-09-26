@@ -6,7 +6,7 @@ interface IArchetypes {
   description: String;
 }
 
-interface IContent {
+interface ITrybe {
   namePtBr: String;
   nameEn: String;
   phrase: String;
@@ -18,7 +18,7 @@ interface IContent {
   archetypes: IArchetypes[];
 };
 
-export default function Content(props: { object: IContent }) {
+export default function ContentTrybe(props: { object: ITrybe }) {
   const [isLoading, setIsLoading] = useState(true);
   const { object } = props;
 
@@ -43,9 +43,9 @@ export default function Content(props: { object: IContent }) {
           { isLoading && <span className="loader z-50" /> }
         </div>
         <Image
-          src={`/images/trybes/${object.namePtBr} - representation.png`}
+          src={`/images/trybes/${object.namePtBr}  - representation.png`}
           alt={`Representação dos ${object.namePtBr}`}
-          className="w-full mobile:w-8/12 sm:w-5/12 relative px-4"
+          className="w-full mobile:w-8/12 sm:w-5/12 relative px-6"
           width={800}
           height={400}
           onLoad={() => setIsLoading(false)}
