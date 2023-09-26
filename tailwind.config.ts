@@ -34,6 +34,7 @@ const config: Config = {
       spacing: {
         '20vh': '20vh',
         '30vh': '30vh',
+        '35vh': '35vh',
         '40vh': '40vh',
         '50vh': '50vh',
         '60vh': '60vh',
