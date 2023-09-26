@@ -48,7 +48,7 @@ export default function Content(props: { object: IContent }) {
           className="w-full mobile:w-8/12 sm:w-5/12 relative px-4"
           width={800}
           height={400}
-          onLoad={() => setIsLoading(false)} // Define isLoading como falso quando a imagem é carregada
+          onLoad={() => setIsLoading(false)}
         />
       </div>
       <div className="mt-5 mobile:mt-10 px-6 text-sm sm:text-base">
@@ -71,7 +71,7 @@ export default function Content(props: { object: IContent }) {
           <Image
             src={`/images/trybes/${object.namePtBr}.png`}
             alt={`Glifo dos ${object.namePtBr}`}
-            className="w-20 sm:w-38"
+            className="w-20 sm:w-38 my-2"
             width={800}
             height={400}
           />
