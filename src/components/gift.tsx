@@ -1,13 +1,9 @@
 import { IGift, ITypeGift } from "@/interfaces/Gift";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";
+import Feedback from "./feedback";
 
 export default function Gift(props: { item: IGift, describe: any } ) {
-  const scrollToComponent = () => {
-    if (props.describe.current) {
-      props.describe.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
   const dispatch: any = useAppDispatch();
   const slice = useAppSelector(useSlice);
   const { item } = props;
@@ -31,7 +27,7 @@ export default function Gift(props: { item: IGift, describe: any } ) {
   };
 
   return(
-    <article className="border mb-1 py-6 px-5 border-3 bg-black/70 text-white">
+    <article className="border w-full h-full p-4 mobile:p-6 sm:p-10 border-3 bg-black/70 text-white overflow-y-auto">
       <span className="font-bold text-lg">
         { item.giftPtBr } ({ item.gift }) - { item.renown }
       </span>
@@ -88,21 +84,17 @@ export default function Gift(props: { item: IGift, describe: any } ) {
         { item.system }
       </p>
       <div className="flex flex-col sm:flex-row sm:justify-between">
+      </div>
+      <div className="flex flex-col sm:flex-row sm:justify-between">
       <button
         type="button"
-        className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-3 cursor-pointer underline' : 'bg-white text-black py-3 px-2 font-bold mt-3'}
+        className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}
         onClick={() => dispatch(actionFeedback({ show: true, message: item.gift })) }
       >
         Enviar Feedback
       </button>
-      <button
-        type="button"
-        className="text-white transition-colors duration-300 mt-3 cursor-pointer underline"
-        onClick={scrollToComponent}
-      >
-        Retornar para a seleção de filtros
-      </button>
       </div>
+      { slice.feedback.show && <Feedback gift={ slice.feedback.gift } /> }
     </article>
   );
 }

@@ -7,7 +7,7 @@ import React from 'react';
 export default function Footer() {
   const slice = useAppSelector(useSlice);
   return (
-    <footer className={`${ slice.simplify && 'border-t-2 border-white' } relative text-white px-8 flex flex-col sm:flex-row justify-between items-center w-full py-2 z-20 bg-black`}>
+    <footer className={`${ slice.simplify && 'border-t-2 border-white' } relative text-white px-8 flex flex-col sm:flex-row justify-between items-center w-full py-2 z-5 bg-black`}>
       <div className="pl-0 sm:w-1/4 flex flex-row justify-center sm:justify-start p-2 my-4 sm:my-0">
         <Image
           src="/images/logos/Garou Nordeste.png"

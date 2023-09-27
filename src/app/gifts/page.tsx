@@ -29,7 +29,6 @@ export default function Gifts() {
         <FilterGifts title="text" />
         <SearchButton />
         <ListGifts describe={ describe } />
-        { slice.feedback.show && <Feedback gift={ slice.feedback.gift } /> }
       </div>
       <Footer />
     </div>
