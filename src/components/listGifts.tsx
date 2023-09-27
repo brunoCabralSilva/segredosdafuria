@@ -53,7 +53,7 @@ export default function ListGifts(props : { describe: any }) {
           slice.filteredList.map((item: IGift, index: number) => (
             <motion.div
               whileHover={{ scale: 0.98 }}
-              className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer"
+              className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
               onClick={() => {
                 setToggle(prevValue => !prevValue );
@@ -105,10 +105,7 @@ export default function ListGifts(props : { describe: any }) {
             >
               <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
               <div className="w-full h-full flex flex-col items-center relative">
-                <Gift
-                  describe={ props.describe }
-                  item={ object }
-                />
+                <Gift item={ object } />
                 <button className="text-4xl sm:text-5xl fixed top-4 right-5 sm:top-10 sm:right-14 color-white z-50 text-white"
                   onClick={ () => setObject(null)}
                 >

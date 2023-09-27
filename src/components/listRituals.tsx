@@ -42,14 +42,14 @@ export default function ListRituals() {
           slice.ritualList.map((item: IRitual, index: number) => (
             <motion.div
               whileHover={{ scale: 0.98 }}
-              className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer"
+              className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
               onClick={() => {
                 setToggle(prevValue => !prevValue );
                 setObject(item);
               }}
             >
-              <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
+              <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
               <div className="relative text-white flex w-full justify-center items-center">
               </div>
               <p className="text-center w-full p-2 relative font-bold">

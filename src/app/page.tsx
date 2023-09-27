@@ -25,7 +25,7 @@ export default function Home() {
         <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/50'}`} />
         <div className="h-screen w-full z-10 flex flex-col justify-center items-center">
           <Image
-            src="/images/text.png"
+            src="/images/logos/text.png"
             alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
             className="h-50vh sm:h-70vh md:h-50vh w-10/12 sm:w-3/5 md:w-1/2 xl:w-5/12 object-contain"
             width={2000}
