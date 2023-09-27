@@ -2,6 +2,7 @@ import { IGift, ITypeGift } from "@/interfaces/Gift";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";
 import Feedback from "./feedback";
+import Image from "next/image";
 
 export default function Gift(props: { item: IGift, describe: any } ) {
   const dispatch: any = useAppDispatch();
@@ -27,11 +28,27 @@ export default function Gift(props: { item: IGift, describe: any } ) {
   };
 
   return(
-    <article className="border w-full h-full p-4 mobile:p-6 sm:p-10 border-3 bg-black/70 text-white overflow-y-auto">
-      <span className="font-bold text-lg">
-        { item.giftPtBr } ({ item.gift }) - { item.renown }
-      </span>
-      <hr className="w-10/12 my-2" />
+    <article className="border w-full h-full px-4 pb-4 pt-10 sm:p-10 border-3 bg-black/70 text-white overflow-y-auto">
+      <div className="flex flex-col justify-center items-center sm:items-start">
+        <div className="relative text-white flex sm:hidden w-full justify-center pb-5">
+          { 
+            item.belonging.map((trybe: ITypeGift, index) => (
+              <Image
+                key={ index }
+                src={ `/images/glifs/${capitalizeFirstLetter(trybe.type)}.png` }
+                alt={`Glifo ${capitalizeFirstLetter(trybe.type)}`}
+                className={`${trybe.type !== 'global' ? 'h-8' : ''} w-10 object-cover object-center`}
+                width={ 1200 }
+                height={ 800 }
+              />
+            ))
+          }
+        </div>
+        <h1 className="font-bold text-lg text-center sm:text-left w-full">
+          {`${ item.giftPtBr } (${ item.gift }) - ${ item.renown }`}
+        </h1>
+        <hr className="w-10/12 my-4 sm:my-2" />
+      </div>
       <p>
         <span className="font-bold pr-1">Pertencente a:</span>
         { 
