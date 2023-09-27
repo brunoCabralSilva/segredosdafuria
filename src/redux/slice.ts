@@ -4,6 +4,7 @@ import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 const INITIAL_STATE = {
   feedback: { show: false, message: '' },
   giftMessage: { show: false, message: '' },
+  ritualMessage: false,
   filteredList: [],
   ritualList: [],
   selectTA: [],
@@ -95,6 +96,12 @@ const slice: Slice = createSlice({
         giftMessage: payload,
       };
     },
+    actionRitualMessage(state, { payload }: PayloadAction<boolean>) {
+      return {
+        ...state,
+        ritualMessage: payload,
+      };
+    },
     actionFilteredList(state, { payload }: PayloadAction<boolean>) {
       return {
         ...state,
@@ -117,6 +124,7 @@ export const {
   actionFilteredList,
   actionRitual,
   actionRitualList,
+  actionRitualMessage,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

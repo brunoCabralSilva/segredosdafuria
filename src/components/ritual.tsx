@@ -26,7 +26,7 @@ export default function Gift(props: { item: IRitual } ) {
     <article className="border w-full h-full px-4 pb-4 pt-10 sm:p-10 border-3 bg-black/70 text-white overflow-y-auto">
       <div className="flex flex-col justify-center items-center sm:items-start">
         <h1 className="font-bold text-lg text-center sm:text-left w-full">
-          {`${ item.titlePtBr } (${ item.title }) - ${ item.type }`}
+          {`${ item.titlePtBr } (${ item.title }) - ${ item.type === 'social' ? "Social" : 'Comum' }`}
         </h1>
         <hr className="w-10/12 my-4 sm:my-2" />
       </div>
@@ -62,7 +62,7 @@ export default function Gift(props: { item: IRitual } ) {
       <button
         type="button"
         className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}
-        // onClick={() => dispatch(actionFeedback({ show: true, message: item.gift })) }
+        onClick={() => dispatch(actionFeedback({ show: true, message: item.title })) }
       >
         Enviar Feedback
       </button>

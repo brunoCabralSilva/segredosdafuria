@@ -30,17 +30,11 @@ export default function ListRituals() {
   return (
     <section className="mb-2 text-white">
       { 
-        slice.giftMessage.show &&
+        slice.ritualMessage &&
         <div className="font-bold py-4 px-5 text-lg bg-black mt-2 mb-1 text-white">
           <p className="w-full text-center">
-            Total de Rituais Encontrados: { slice.filteredList.length }
+            Total de Rituais Encontrados: { slice.ritualList.length }
           </p>
-          {
-            slice.giftMessage.message !== '' &&
-            <p className="w-full text-center">
-              Filtros Selecionados: { slice.giftMessage.message }
-            </p>
-          }
         </div>
       }
       <div className={`grid grid-cols-1 ${slice.ritualList.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>

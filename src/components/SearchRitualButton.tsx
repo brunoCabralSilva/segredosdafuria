@@ -3,7 +3,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   actionRitualList,
   actionRitual,
-  useSlice
+  useSlice,
+  actionRitualMessage
 } from "@/redux/slice";
 import listRitual from '../data/rituals.json';
 
@@ -30,6 +31,7 @@ export default function SearchRitualButton() {
         || item.titlePtBr.toLowerCase().includes(slice.searchRitual.toLowerCase())
       );
     }
+    dispatch(actionRitualMessage(true))
     dispatch(actionRitualList(filterByText));
     dispatch(actionRitual(''));
   };
@@ -46,8 +48,8 @@ export default function SearchRitualButton() {
       { 
         <p className="w-full text-sm text-center text-black">
         {
-          slice.actionRitual !== '' &&
-          `Rituais contendo o trecho ${slice.actionRitual}`
+          slice.searchRitual !== '' &&
+          `Rituais contendo o trecho ${slice.searchRitual}`
         }
         </p>
       }
