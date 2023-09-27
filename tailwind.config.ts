@@ -24,6 +24,8 @@ const config: Config = {
         '04': "url('/images/16.jpg')",
         '05': "url('/images/128.jpg')",
         '06': "url('/images/193.jpg')",
+        '07': "url('/images/175.jpg')",
+        '08': "url('/images/122.jpg')",
         'boca': "url('/images/Pedra da Boca.jpg')",
         'boca01': "url('/images/Pedra da Boca01.png')",
         "trybes-background": "url('/images/trybes-background.png')",

@@ -99,6 +99,22 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sobre</p>
           </motion.div>
         </Link>
+        <Link href="/loresheets" className="col-span-1 sm:row-span-2 sm:col-span-4">
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-07 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Loresheets</p>
+          </motion.div>
+        </Link>
+        <Link href="/talismans" className="col-span-1 sm:row-span-2 sm:col-span-4">
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-08 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Talismãs</p>
+          </motion.div>
+        </Link>
       </div>
       <Footer />
     </main>

@@ -91,6 +91,22 @@ export default function Nav() {
             </Link>
           </li>
           <li className="pt-6">
+            <Link href="/talismans"
+              onClick={ () => setShowMenu(!showMenu) }
+              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
+            >
+              Talismãs
+            </Link>
+          </li>
+          <li className="pt-6">
+            <Link href="/loresheets"
+              onClick={ () => setShowMenu(!showMenu) }
+              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
+            >
+              Loresheets
+            </Link>
+          </li>
+          <li className="pt-6">
             <Link href="/about"
               onClick={ () => setShowMenu(!showMenu) }
               className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
