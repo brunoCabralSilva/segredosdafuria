@@ -4,7 +4,7 @@ import { actionFeedback, useSlice } from "@/redux/slice";
 import Feedback from "./feedback";
 import Image from "next/image";
 
-export default function Gift(props: { item: IGift, describe: any } ) {
+export default function Gift(props: { item: IGift } ) {
   const dispatch: any = useAppDispatch();
   const slice = useAppSelector(useSlice);
   const { item } = props;

@@ -1,13 +1,23 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { useSlice } from '@/redux/slice';
-import { useAppSelector } from '@/redux/hooks';
+import { useSlice, actionRitual } from '@/redux/slice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
+import { ChangeEvent } from 'react';
+import SearchRitualButton from '@/components/SearchRitualButton';
+import ListRituals from '@/components/listRituals';
 
 export default function Rituals() {
   const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
+
+  const typeText = (e: ChangeEvent<HTMLInputElement>) => {
+    const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
+    dispatch(actionRitual(sanitizedValue));
+  };
+
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
       <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
@@ -48,7 +58,7 @@ export default function Rituals() {
             Resumo dos Ritos
           </h2>
           <hr className="w-10/12 my-4" />
-          <ul>
+          <ul className="pl-5 list-disc">
             <li>
               Um Rito deve ser liderado por um mestre do Rito, que deve conhecer o Rito.
             </li>
@@ -66,6 +76,22 @@ export default function Rituals() {
             </li>
           </ul>
         </div>
+        <section
+          className="bg-black font-bold mt-1 py-2 px-5 text-base flex flex-col pt-5 pb-2 justify-between items-center"
+        >
+          <p className="w-full text-xl text-center sm:text-left pb-2 text-white mb-4">
+            Digite o nome ou um trecho do nome do Ritual, ou mantenha o campo vazio e todos os rituais serão retornados
+          </p>
+          <input
+            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.searchRitual === '' || slice.searchRitual === ' '
+            ? 'bg-black text-white' : 'bg-white text-black'} rounded-full mb-3`}
+            value={ slice.searchRitual }
+            placeholder="Digite aqui"
+            onChange={ (e) => typeText(e) }
+          />
+        </section>
+        <SearchRitualButton />
+        <ListRituals />
       </section>
       <Footer />
     </div>
