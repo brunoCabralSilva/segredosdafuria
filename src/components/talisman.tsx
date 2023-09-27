@@ -1,23 +1,21 @@
-import { IGift, ITypeGift } from "@/interfaces/Gift";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";
 import Feedback from "./feedback";
-import Image from "next/image";
 
-interface IRitual {
-  titlePtBr: String;
-  title:String;
-  type: String;
-  descriptionPtBr: String;
-  description: String;
-  pool: String;
-  systemPtBr: String;
-  system: String;
+interface ITalisman {
+  title :String;
+  titlePtBr :String;
+  description :String;
+  descriptionPtBr :String;
+  system :String;
+  systemPtBr :String;
+  backgroundCost :String;
+  backgroundCostPtBr :String;
   book: String;
   page: number;
 }
 
-export default function Ritual(props: { item: IRitual } ) {
+export default function Talisman(props: { item: ITalisman } ) {
   const dispatch: any = useAppDispatch();
   const slice = useAppSelector(useSlice);
   const { item } = props;
@@ -26,7 +24,7 @@ export default function Ritual(props: { item: IRitual } ) {
     <article className="border w-full h-full px-4 pb-4 pt-10 sm:p-10 border-3 bg-black/70 text-white overflow-y-auto">
       <div className="flex flex-col justify-center items-center sm:items-start">
         <h1 className="font-bold text-lg text-center sm:text-left w-full">
-          {`${ item.titlePtBr } (${ item.title }) - ${ item.type === 'social' ? "Social" : 'Comum' }`}
+          {`${ item.titlePtBr } (${ item.title })`}
         </h1>
         <hr className="w-10/12 my-4 sm:my-2" />
       </div>
@@ -34,10 +32,16 @@ export default function Ritual(props: { item: IRitual } ) {
         <span className="font-bold pr-1">Fonte:</span>
         { item.book }, pg. { item.page }.
       </p>
-      { item.pool !== "" &&
+      {
         <p className="pt-1">
-          <span className="font-bold pr-1">Parada de Dados:</span>
-          { item.pool }.
+          <span className="font-bold pr-1">Custo:</span>
+          { item.backgroundCostPtBr }.
+        </p>
+      }
+      {
+        <p className="pt-1">
+          <span className="font-bold pr-1">Cost:</span>
+          { item.backgroundCost }.
         </p>
       }
       <p className="pt-3 text-justify">

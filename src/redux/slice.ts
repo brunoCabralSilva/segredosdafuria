@@ -5,14 +5,17 @@ const INITIAL_STATE = {
   feedback: { show: false, message: '' },
   giftMessage: { show: false, message: '' },
   ritualMessage: false,
+  talismanMessage: false,
   filteredList: [],
   ritualList: [],
+  talismanList: [],
   selectTA: [],
   totalRenown: 0,
   simplify: false,
   global: false,
   searchByText: '',
   searchRitual: '',
+  searchTalisman: '',
   auspices: ['Ragabash', 'Theurge', 'Philodox', 'Galliard', 'Ahroun'],
 };
 
@@ -84,10 +87,22 @@ const slice: Slice = createSlice({
         searchRitual: payload,
       };
     },
+    actionTalisman(state, { payload }: PayloadAction<boolean>) {
+      return {
+        ...state,
+        searchTalisman: payload,
+      };
+    },
     actionRitualList(state, { payload }: PayloadAction<boolean>) {
       return {
         ...state,
         ritualList: payload,
+      };
+    },
+    actionTalismanList(state, { payload }: PayloadAction<boolean>) {
+      return {
+        ...state,
+        talismanList: payload,
       };
     },
     actionGiftMessage(state, { payload }: PayloadAction<boolean>) {
@@ -100,6 +115,12 @@ const slice: Slice = createSlice({
       return {
         ...state,
         ritualMessage: payload,
+      };
+    },
+    actionTalismanMessage(state, { payload }: PayloadAction<boolean>) {
+      return {
+        ...state,
+        talismanMessage: payload,
       };
     },
     actionFilteredList(state, { payload }: PayloadAction<boolean>) {
@@ -125,6 +146,9 @@ export const {
   actionRitual,
   actionRitualList,
   actionRitualMessage,
+  actionTalisman,
+  actionTalismanList,
+  actionTalismanMessage,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

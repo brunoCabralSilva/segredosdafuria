@@ -31,7 +31,7 @@ export default function SearchRitualButton() {
         || item.titlePtBr.toLowerCase().includes(slice.searchRitual.toLowerCase())
       );
     }
-    dispatch(actionRitualMessage(true))
+    dispatch(actionRitualMessage({ show: true }))
     dispatch(actionRitualList(filterByText));
     dispatch(actionRitual(''));
   };
@@ -49,7 +49,7 @@ export default function SearchRitualButton() {
         <p className="w-full text-sm text-center text-black">
         {
           slice.searchRitual !== '' &&
-          `Rituais contendo o trecho ${slice.searchRitual}`
+          `Rituais contendo o trecho "${slice.searchRitual}"`
         }
         </p>
       }
