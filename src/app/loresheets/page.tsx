@@ -161,10 +161,10 @@ export default function Loresheets() {
                   </div>
                   { slice.feedback.show && <Feedback title={ slice.feedback.gift } /> }
                 </article>
-                <button className="text-4xl sm:text-5xl fixed top-4 sm:top-10 sm:right-14 color-white z-50 text-white"
+                <button className="text-4xl sm:text-5xl fixed top-4 right-16 sm:top-10 sm:right-28 color-white z-50 text-white"
                   onClick={ () => setObject(null)}
                 >
-                  <AiFillCloseCircle className="bg-black rounded-full p-2" />
+                  <AiFillCloseCircle className="bg-black rounded-full p-2 fixed" />
                 </button>
               </div>
             </div>
