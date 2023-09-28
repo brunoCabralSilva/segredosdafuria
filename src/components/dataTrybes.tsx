@@ -18,7 +18,7 @@ interface ITrybe {
   archetypes: IArchetypes[];
 };
 
-export default function ContentTrybe(props: { object: ITrybe }) {
+export default function DataTrybes(props: { object: ITrybe }) {
   const [isLoading, setIsLoading] = useState(true);
   const { object } = props;
 

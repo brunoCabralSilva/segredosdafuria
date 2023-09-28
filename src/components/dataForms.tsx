@@ -10,7 +10,7 @@ interface IForm {
   list: String[];
 }
 
-export default function ContentForms(props: { object: IForm }) {
+export default function DataForms(props: { object: IForm }) {
   const [isLoading, setIsLoading] = useState(true);
   const { object } = props;
 

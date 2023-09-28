@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react';
-import { useSlice } from '@/redux/slice';
-import { useAppSelector } from '@/redux/hooks';
+import { useEffect, useState } from 'react';
+import { actionType, useSlice } from '@/redux/slice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Nav from '@/components/nav';
@@ -9,12 +9,18 @@ import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listForms from '../../data/forms.json';
 import { AiFillCloseCircle } from "react-icons/ai";
-import ContentForms from '@/components/ContentForms';
+import DataForms from '@/components/dataForms';
 
 export default function Forms() {
   const [isToggled, setToggle] = useState(false);
   const [object, setObject] = useState<any>(null);
   const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(actionType({ show: false, talisman: '', gift: '', ritual: '' }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
@@ -91,7 +97,7 @@ export default function Forms() {
               >
                 <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
                 <div className="w-full h-full flex flex-col items-center">
-                  <ContentForms object={ object } />
+                  <DataForms object={ object } />
                   <button className="text-4xl sm:text-5xl fixed top-4 right-5 sm:top-10 sm:right-14 color-white z-50 text-white"
                     onClick={ () => setObject(null)}
                   >

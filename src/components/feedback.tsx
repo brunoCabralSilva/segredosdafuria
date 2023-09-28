@@ -11,7 +11,7 @@ import { VscRepoPush } from "react-icons/vsc";
 
 dotenv.config();
 
-export default function Feedback(props: { gift: string }) {
+export default function Feedback(props: { title: string }) {
   const [message, setMessage] = useState('');
   const [nameUser, setNameUser] = useState('');
   const [emailUser, setEmailUser] = useState('');
@@ -51,13 +51,12 @@ export default function Feedback(props: { gift: string }) {
       const userID: any = process.env.NEXT_PUBLIC_USERID;
       const templateID: any = process.env.NEXT_PUBLIC_TEMPLATEID;
       const serviceID: any = process.env.NEXT_PUBLIC_SERVICEID;
-      console.log(userID, templateID, serviceID);
       try {
-      emailjs.sendForm(
-        serviceID,
-        templateID,
-        e.target,
-        userID,
+        emailjs.sendForm(
+          serviceID,
+          templateID,
+          e.target,
+          userID,
         );
         e.target.reset();
         setMessage('');
@@ -106,7 +105,7 @@ export default function Feedback(props: { gift: string }) {
         <input type="text"
           id="gift"
           name="gift"
-          value={ slice.feedback.message }
+          value={ slice.feedback.title }
           className="py-3 px-2 mt-2 text-center bg-transparent font-bold border-transparent"
         />
         <input

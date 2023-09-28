@@ -1,21 +1,9 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";
-import Feedback from "./feedback";
+import Feedback from "../../components/feedback";
+import { IRitual } from "../../../interface";
 
-interface ITalisman {
-  title :String;
-  titlePtBr :String;
-  description :String;
-  descriptionPtBr :String;
-  system :String;
-  systemPtBr :String;
-  backgroundCost :String;
-  backgroundCostPtBr :String;
-  book: String;
-  page: number;
-}
-
-export default function Talisman(props: { item: ITalisman } ) {
+export default function Ritual(props: { item: IRitual } ) {
   const dispatch: any = useAppDispatch();
   const slice = useAppSelector(useSlice);
   const { item } = props;
@@ -24,7 +12,7 @@ export default function Talisman(props: { item: ITalisman } ) {
     <article className="border w-full h-full px-4 pb-4 pt-10 sm:p-10 border-3 bg-black/70 text-white overflow-y-auto">
       <div className="flex flex-col justify-center items-center sm:items-start">
         <h1 className="font-bold text-lg text-center sm:text-left w-full">
-          {`${ item.titlePtBr } (${ item.title })`}
+          {`${ item.titlePtBr } (${ item.title }) - ${ item.type === 'social' ? "Social" : 'Comum' }`}
         </h1>
         <hr className="w-10/12 my-4 sm:my-2" />
       </div>
@@ -32,16 +20,10 @@ export default function Talisman(props: { item: ITalisman } ) {
         <span className="font-bold pr-1">Fonte:</span>
         { item.book }, pg. { item.page }.
       </p>
-      {
+      { item.pool !== "" &&
         <p className="pt-1">
-          <span className="font-bold pr-1">Custo:</span>
-          { item.backgroundCostPtBr }.
-        </p>
-      }
-      {
-        <p className="pt-1">
-          <span className="font-bold pr-1">Cost:</span>
-          { item.backgroundCost }.
+          <span className="font-bold pr-1">Parada de Dados:</span>
+          { item.pool }.
         </p>
       }
       <p className="pt-3 text-justify">
@@ -71,7 +53,7 @@ export default function Talisman(props: { item: ITalisman } ) {
         Enviar Feedback
       </button>
       </div>
-      { slice.feedback.show && <Feedback gift={ slice.feedback.gift } /> }
+      { slice.feedback.show && <Feedback title={ slice.feedback.title } /> }
     </article>
   );
 }

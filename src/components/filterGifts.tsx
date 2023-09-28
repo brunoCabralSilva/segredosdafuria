@@ -1,9 +1,16 @@
 'use client'
 import { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionFilterGift, actionGlobal, actionSearchByText, actionTotalRenown, useSlice } from "@/redux/slice";
+import {
+  actionFilterGift,
+  actionGlobal,
+  actionType,
+  actionTotalRenown,
+  useSlice
+} from "@/redux/slice";
 import { motion } from "framer-motion";
-import trybes from '../data/trybes.json';
+import jsonTrybes from '../data/trybes.json';
+import jsonAuspices from '../data/auspices.json';
 
 export default function FilterGifts(props: { title: string }) {
   const [list, setList] = useState<string[] | number[]>([]);
@@ -13,16 +20,18 @@ export default function FilterGifts(props: { title: string }) {
   const { selectTA } = slice;
   
   useEffect(() => {
-    const trybesList = trybes.map((element) => element.namePtBr);
+    const trybesList = jsonTrybes.map((element) => element.namePtBr);
     if (title === 'Tribos') setList(trybesList);
-    else if (title === 'Augúrios') setList(slice.auspices);
+    else if (title === 'Augúrios') {
+      setList(jsonAuspices.map(auspice => auspice.name));
+    }
     else setList(slice.totalRenown);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const typeText = (e: ChangeEvent<HTMLInputElement>) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-    dispatch(actionSearchByText(sanitizedValue));
+    dispatch(actionType({ show: true, talisman: '', gift: sanitizedValue, ritual: '' }));
   };
 
   if (title === 'Tribos' || title === 'Augúrios') {
@@ -102,9 +111,9 @@ export default function FilterGifts(props: { title: string }) {
         Digite o nome ou um trecho do nome do Dom
       </p>
       <input
-        className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.searchByText === '' || slice.searchByText === ' '
+        className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.type.gift === '' || slice.type.gift === ' '
         ? 'bg-black text-white' : 'bg-white text-black'} rounded-full mb-3`}
-        value={ slice.searchByText }
+        value={ slice.type.gift }
         placeholder="Digite aqui"
         onChange={ (e) => typeText(e) }
       />

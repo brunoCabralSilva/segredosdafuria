@@ -1,22 +1,15 @@
-import { IFeedback } from "@/interfaces/Gift";
+import { IFeedback, IList, IMessage, IType } from "../../interface";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
-  feedback: { show: false, message: '' },
-  giftMessage: { show: false, message: '' },
-  ritualMessage: false,
-  talismanMessage: false,
-  filteredList: [],
-  ritualList: [],
-  talismanList: [],
   selectTA: [],
+  global: false,
   totalRenown: 0,
   simplify: false,
-  global: false,
-  searchByText: '',
-  searchRitual: '',
-  searchTalisman: '',
-  auspices: ['Ragabash', 'Theurge', 'Philodox', 'Galliard', 'Ahroun'],
+  type: { show: false, talisman: '', gift: '', ritual: '' },
+  list: { talisman: [], gift: [], ritual: [] },
+  feedback: { show: false, title: '' },
+  message: { type: '', show: false, text: '' },
 };
 
 const slice: Slice = createSlice({
@@ -28,7 +21,7 @@ const slice: Slice = createSlice({
         ...state,
         feedback: {
           show: payload.show,
-          message: payload.message,
+          title: payload.title,
         }
       };
     },
@@ -75,59 +68,21 @@ const slice: Slice = createSlice({
         global: payload,
       };
     },
-    actionSearchByText(state, { payload }: PayloadAction<boolean>) {
+    actionType(state, { payload }: PayloadAction<IType>) {
+      return { ...state, type: payload };
+    },
+    actionMessage(state, { payload }: PayloadAction<IMessage>) {
       return {
         ...state,
-        searchByText: payload,
+        message: {
+          type: payload.type,
+          show: payload.show,
+          text: payload.text
+        },
       };
     },
-    actionRitual(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        searchRitual: payload,
-      };
-    },
-    actionTalisman(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        searchTalisman: payload,
-      };
-    },
-    actionRitualList(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        ritualList: payload,
-      };
-    },
-    actionTalismanList(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        talismanList: payload,
-      };
-    },
-    actionGiftMessage(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        giftMessage: payload,
-      };
-    },
-    actionRitualMessage(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        ritualMessage: payload,
-      };
-    },
-    actionTalismanMessage(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        talismanMessage: payload,
-      };
-    },
-    actionFilteredList(state, { payload }: PayloadAction<boolean>) {
-      return {
-        ...state,
-        filteredList: payload,
-      };
+    actionList(state, { payload }: PayloadAction<IList>) {
+      return { ...state, list: payload };
     },
   },
 });
@@ -140,15 +95,10 @@ export const {
   actionTotalRenown,
   actionSimplify,
   actionGlobal,
-  actionSearchByText,
-  actionGiftMessage,
-  actionFilteredList,
-  actionRitual,
-  actionRitualList,
-  actionRitualMessage,
-  actionTalisman,
-  actionTalismanList,
-  actionTalismanMessage,
+  actionType,
+  actionClnSearchs,
+  actionMessage,
+  actionList,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

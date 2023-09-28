@@ -2,25 +2,11 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import Gift from "./gift";
-import { IGift, ITypeGift } from "@/interfaces/Gift";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import Ritual from "./ritual";
-
-interface IRitual {
-  titlePtBr: String;
-  title:String;
-  type: String;
-  descriptionPtBr: String;
-  description: String;
-  pool: String;
-  systemPtBr: String;
-  system: String;
-  book: String;
-  page: number;
-}
+import Ritual from "../app/rituals/ritual";
+import { IRitual } from "../../interface";
 
 export default function ListRituals() {
   const slice = useAppSelector(useSlice);
@@ -30,16 +16,16 @@ export default function ListRituals() {
   return (
     <section className="mb-2 text-white">
       { 
-        slice.ritualMessage &&
+        slice.message.type === 'ritual' && slice.message.show &&
         <div className="font-bold py-4 px-5 text-lg bg-black mt-2 mb-1 text-white">
           <p className="w-full text-center">
-            Total de Rituais Encontrados: { slice.ritualList.length }
+            Total de Rituais Encontrados: { slice.list.ritual.length }
           </p>
         </div>
       }
-      <div className={`grid grid-cols-1 ${slice.ritualList.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>
+      <div className={`grid grid-cols-1 ${slice.list.ritual.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>
         {
-          slice.ritualList.map((item: IRitual, index: number) => (
+          slice.message.type === 'ritual' && slice.list.ritual.map((item: IRitual, index: number) => (
             <motion.div
               whileHover={{ scale: 0.98 }}
               className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"

@@ -2,14 +2,14 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import Gift from "./gift";
-import { IGift, ITypeGift } from "@/interfaces/Gift";
+import Gift from "../app/gifts/gift";
+import { IGift, ITypeGift } from "../../interface";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
 
-export default function ListGifts(props : { describe: any }) {
+export default function ListGifts() {
   const slice = useAppSelector(useSlice);
   const [isToggled, setToggle] = useState(false);
   const [object, setObject] = useState<any>(null);
@@ -35,22 +35,22 @@ export default function ListGifts(props : { describe: any }) {
   return (
     <section className="mb-2">
       { 
-        slice.giftMessage.show &&
+        slice.message.type === 'gift' && slice.message.show &&
         <div className="font-bold py-4 px-5 text-lg bg-black mt-2 mb-1 text-white">
           <p className="w-full text-center">
-            Total de Dons Encontrados: { slice.filteredList.length }
+            Total de Dons Encontrados: { slice.list.gift.length }
           </p>
           {
-            slice.giftMessage.message !== '' &&
+            slice.message.text !== '' &&
             <p className="w-full text-center">
-              Filtros Selecionados: { slice.giftMessage.message }
+              Filtros Selecionados: { slice.message.text }
             </p>
           }
         </div>
       }
-      <div className={`grid grid-cols-1 ${slice.filteredList.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>
+      <div className={`grid grid-cols-1 ${slice.list.gift.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>
         {
-          slice.filteredList.map((item: IGift, index: number) => (
+          slice.list.gift.map((item: IGift, index: number) => (
             <motion.div
               whileHover={{ scale: 0.98 }}
               className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
@@ -63,7 +63,7 @@ export default function ListGifts(props : { describe: any }) {
               <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
               <div className="relative text-white flex w-full justify-center items-center">
                 { 
-                  item.belonging.map((trybe: ITypeGift, index) => (
+                  item.belonging.map((trybe: ITypeGift, index: number) => (
                     <Image
                       key={ index }
                       src={ `/images/glifs/${capitalizeFirstLetter(trybe.type)}.png` }
@@ -79,7 +79,7 @@ export default function ListGifts(props : { describe: any }) {
                 { `${item.giftPtBr} (${item.gift})` }
                 { ` - ` }
                 { 
-                  item.belonging.map((trybe: ITypeGift, index) => (
+                  item.belonging.map((trybe: ITypeGift, index: number) => (
                     <span key={ index }>
                       { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
                       { index === item.belonging.length -1 ? '' : ', ' }

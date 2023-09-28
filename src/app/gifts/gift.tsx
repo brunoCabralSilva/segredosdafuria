@@ -1,7 +1,7 @@
-import { IGift, ITypeGift } from "@/interfaces/Gift";
+import { IGift, ITypeGift } from "../../../interface";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";
-import Feedback from "./feedback";
+import Feedback from "../../components/feedback";
 import Image from "next/image";
 
 export default function Gift(props: { item: IGift } ) {
@@ -32,7 +32,7 @@ export default function Gift(props: { item: IGift } ) {
       <div className="flex flex-col justify-center items-center sm:items-start">
         <div className="relative text-white flex sm:hidden w-full justify-center pb-5">
           { 
-            item.belonging.map((trybe: ITypeGift, index) => (
+            item.belonging.map((trybe: ITypeGift, index: number) => (
               <Image
                 key={ index }
                 src={ `/images/glifs/${capitalizeFirstLetter(trybe.type)}.png` }
@@ -52,7 +52,7 @@ export default function Gift(props: { item: IGift } ) {
       <p>
         <span className="font-bold pr-1">Pertencente a:</span>
         { 
-          item.belonging.map((trybe: ITypeGift, index) => (
+          item.belonging.map((trybe: ITypeGift, index: number) => (
             <span key={ index }>
               { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
               { index === item.belonging.length -1 ? '.' : ', ' }
@@ -111,7 +111,7 @@ export default function Gift(props: { item: IGift } ) {
         Enviar Feedback
       </button>
       </div>
-      { slice.feedback.show && <Feedback gift={ slice.feedback.gift } /> }
+      { slice.feedback.show && <Feedback title={ slice.feedback.title } /> }
     </article>
   );
 }

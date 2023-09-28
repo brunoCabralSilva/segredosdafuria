@@ -1,14 +1,14 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { useSlice, actionRitual, actionTalisman, actionTalismanList } from '@/redux/slice';
+import { actionList, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
 import { ChangeEvent, useEffect } from 'react';
-import SearchTalismanButton from '@/components/SearchTalismanButton';
 import ListTalismans from '@/components/listTalismans';
-import talismans from '../../data/talismans.json';
+import jsonTalismans from '../../data/talismans.json';
+import SearchButton from '@/components/SearchButton';
 
 export default function Talismans() {
   const slice = useAppSelector(useSlice);
@@ -16,11 +16,12 @@ export default function Talismans() {
 
   const typeText = (e: ChangeEvent<HTMLInputElement>) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-    dispatch(actionTalisman(sanitizedValue));
+    dispatch(actionType({ show: true, talisman: sanitizedValue, gift: '', ritual: '' }));
   };
 
   useEffect(() => {
-    dispatch(actionTalismanList(talismans));
+    dispatch(actionList({ ritual:[], gift: [], talisman: jsonTalismans}));
+    dispatch(actionType({ talisman: '', gift: '', ritual: '' }));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -59,14 +60,14 @@ export default function Talismans() {
             Digite o nome ou um trecho do nome do Talismã, ou mantenha o campo vazio e todos os Talismãs serão retornados
           </p>
           <input
-            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.searchTalismans === '' || slice.searchTalismans === ' '
+            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.type.talisman === '' || slice.type.talisman === ' ' && slice.type.type === 'talismans'
             ? 'bg-black text-white' : 'bg-white text-black'} rounded-full mb-3`}
-            value={ slice.searchTalisman }
+            value={ slice.type.text }
             placeholder="Digite aqui"
             onChange={ (e) => typeText(e) }
           />
         </section>
-        <SearchTalismanButton />
+        <SearchButton type="talismans" />
         <ListTalismans />
       </section>
       <Footer />

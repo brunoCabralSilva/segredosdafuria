@@ -7,13 +7,21 @@ import {
   BsYoutube,
   BsFacebook
 } from "react-icons/bs";
-import { useSlice } from '@/redux/slice';
-import { useAppSelector } from '@/redux/hooks';
+import { actionType, useSlice } from '@/redux/slice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
+import { useEffect } from 'react';
 
 export default function About() {
   const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(actionType({ show: false, talisman: '', gift: '', ritual: '' }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={`${slice.simplify ? 'bg-black' : 'bg-ritual'} text-white relative`}>
       <div className="bg-black/60 absolute w-full h-full" />

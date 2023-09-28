@@ -1,13 +1,13 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { actionFeedback, useSlice } from '@/redux/slice';
+import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import listLoresheets from '../../data/loresheets.json';
 import { AnimatePresence, motion } from 'framer-motion';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Feedback from '@/components/feedback';
 import { RxDotFilled } from 'react-icons/rx';
@@ -30,6 +30,11 @@ export default function Loresheets() {
   const dispatch: any = useAppDispatch();
   const [isToggled, setToggle] = useState(false);
   const [object, setObject] = useState<any>(null);
+
+  useEffect(() => {
+    dispatch(actionType({ show: false, talisman: '', gift: '', ritual: '' }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const returnDot = (index: number) => {
     const dots = ['● ', '●● ', '●●● ', '●●●● ', '●●●●● '];
@@ -154,7 +159,7 @@ export default function Loresheets() {
                     Enviar Feedback
                   </button>
                   </div>
-                  { slice.feedback.show && <Feedback gift={ slice.feedback.gift } /> }
+                  { slice.feedback.show && <Feedback title={ slice.feedback.gift } /> }
                 </article>
                 <button className="text-4xl sm:text-5xl fixed top-4 sm:top-10 sm:right-14 color-white z-50 text-white"
                   onClick={ () => setObject(null)}

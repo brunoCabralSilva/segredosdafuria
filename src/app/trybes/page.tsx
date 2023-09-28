@@ -9,7 +9,7 @@ import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listTrybes from '../../data/trybes.json';
 import { AiFillCloseCircle } from "react-icons/ai";
-import Content from '@/components/ContentTrybe';
+import DataTrybes from '@/components/dataTrybes';
 
 export default function Trybes() {
   const [isToggled, setToggle] = useState(false);
@@ -89,7 +89,7 @@ export default function Trybes() {
               >
                 <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
                 <div className="w-full h-full flex flex-col items-center">
-                  <Content object={ object } />
+                  <DataTrybes object={ object } />
                   <button className="text-4xl sm:text-5xl fixed top-4 right-5 sm:top-10 sm:right-14 color-white z-50 text-white"
                     onClick={ () => setObject(null)}
                   >

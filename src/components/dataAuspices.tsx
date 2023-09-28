@@ -7,7 +7,7 @@ interface IAuspice {
   description: String[];
 }
 
-export default function ContentAuspice(props: { object: IAuspice }) {
+export default function DataAuspices(props: { object: IAuspice }) {
   const [isLoading, setIsLoading] = useState(true);
   const { object } = props;
 

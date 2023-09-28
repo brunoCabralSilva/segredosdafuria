@@ -1,21 +1,26 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { useSlice, actionRitual } from '@/redux/slice';
+import { useSlice, actionType } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
-import SearchRitualButton from '@/components/SearchRitualButton';
+import { ChangeEvent, useEffect } from 'react';
 import ListRituals from '@/components/listRituals';
+import SearchButton from '@/components/SearchButton';
 
 export default function Rituals() {
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(actionType({ show: true, talisman: '', gift: '', ritual: '' }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const typeText = (e: ChangeEvent<HTMLInputElement>) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-    dispatch(actionRitual(sanitizedValue));
+    dispatch(actionType({ show: true, talisman: '', gift: '', ritual: sanitizedValue }));
   };
 
   return (
@@ -83,14 +88,14 @@ export default function Rituals() {
             Digite o nome ou um trecho do nome do Ritual, ou mantenha o campo vazio e todos os rituais serão retornados
           </p>
           <input
-            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.searchRitual === '' || slice.searchRitual === ' '
+            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.type.ritual === '' || slice.type.ritual === ' '
             ? 'bg-black text-white' : 'bg-white text-black'} rounded-full mb-3`}
-            value={ slice.searchRitual }
+            value={ slice.type.ritual }
             placeholder="Digite aqui"
             onChange={ (e) => typeText(e) }
           />
         </section>
-        <SearchRitualButton />
+        <SearchButton type="rituals" />
         <ListRituals />
       </section>
       <Footer />
