@@ -114,6 +114,7 @@ export default function SearchButton(props: { type: String }) {
       dispatch(actionTotalRenown(0));
       dispatch(actionFilterGift('reset'));
       dispatch(actionGlobal(false));
+      dispatch(actionMessage({ type: 'gift', text: returnFilterPhrase(), show: true  }))
     }
     dispatch(actionType({ show: false, ritual: '', talisman: '', gift: '' }));
   };
