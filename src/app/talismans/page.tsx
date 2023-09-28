@@ -1,13 +1,14 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { useSlice, actionRitual, actionTalisman } from '@/redux/slice';
+import { useSlice, actionRitual, actionTalisman, actionTalismanList } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import SearchTalismanButton from '@/components/SearchTalismanButton';
 import ListTalismans from '@/components/listTalismans';
+import talismans from '../../data/talismans.json';
 
 export default function Talismans() {
   const slice = useAppSelector(useSlice);
@@ -17,6 +18,11 @@ export default function Talismans() {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
     dispatch(actionTalisman(sanitizedValue));
   };
+
+  useEffect(() => {
+    dispatch(actionTalismanList(talismans));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
