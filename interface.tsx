@@ -46,6 +46,21 @@ export interface ITalisman {
   page: number;
 }
 
+export interface IAuspice {
+  name: String;
+  phrase: String;
+  description: String[];
+}
+
+export interface IForm {
+  name: String;
+  subtitle: String;
+  description: String;
+  cost: String;
+  skills: String;
+  list: String[];
+}
+
 export interface IProps {
   valorRenown: number;
   selectedTrybe: string[];
@@ -71,3 +86,20 @@ export interface IList {
   type: String;
   items: IGift[] | ITalisman[] | IRitual[];
 }
+
+export interface IArchetypes {
+  title: String;
+  description: String;
+}
+
+export interface ITrybe {
+  namePtBr: String;
+  nameEn: String;
+  phrase: String;
+  description: String[];
+  whoAre: String[];
+  patron: String;
+  favor: String;
+  ban: String;
+  archetypes: IArchetypes[];
+};

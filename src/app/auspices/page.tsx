@@ -1,19 +1,15 @@
 'use client'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { AnimatePresence, motion } from 'framer-motion';
+import Link from 'next/link';
 import Image from 'next/image';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listAuspices from '../../data/auspices.json';
-import { AiFillCloseCircle } from "react-icons/ai";
-import DataAuspices from '@/components/dataAuspices';
 
 export default function Auspices() {
-  const [isToggled, setToggle] = useState(false);
-  const [object, setObject] = useState<any>(null);
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
 
@@ -60,13 +56,9 @@ export default function Auspices() {
               const nomeB = b.name.toLowerCase();
               return nomeA.localeCompare(nomeB);
             }).map((auspice, index) => (
-              <motion.div
+              <Link
                 key={ index }
-                whileHover={{ scale: 0.98 }}
-                onClick={() => {
-                  setToggle(prevValue => !prevValue );
-                  setObject(auspice);
-                }}
+                href={`/auspices/${auspice.name.toLowerCase()}`}
                 className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer"
               >
                 <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
@@ -80,35 +72,10 @@ export default function Auspices() {
                 <p className="relative font-bold text-center">
                   { auspice.name }
                 </p>
-              </motion.div>
+              </Link>
             ))
           }
         </div>
-        <AnimatePresence>
-          {
-            object &&
-            <motion.div
-              initial={{opacity:0}}
-              animate={{opacity:1}}
-              exit={{opacity:0}}
-              className="p-3 sm:p-8 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/80 z-50 snap-y"
-            >
-              <div
-                className="relative bg-ritual bg-top bg-cover w-full h-full border-2 border-white"
-              >
-                <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-                <div className="w-full h-full flex flex-col items-center">
-                  <DataAuspices object={ object } />
-                  <button className="text-4xl sm:text-5xl fixed top-4 right-5 sm:top-10 sm:right-14 color-white z-50 text-white"
-                    onClick={ () => setObject(null)}
-                  >
-                    <AiFillCloseCircle className="bg-black rounded-full p-2" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          }
-        </AnimatePresence>
       </section>
       <Footer />
     </div>

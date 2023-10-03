@@ -2,17 +2,12 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import Gift from "../app/gifts/gift";
 import { IGift, ITypeGift } from "../../interface";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ListGifts() {
   const slice = useAppSelector(useSlice);
-  const [isToggled, setToggle] = useState(false);
-  const [object, setObject] = useState<any>(null);
 
   function capitalizeFirstLetter(str: string): String {
     switch(str) {
@@ -51,14 +46,10 @@ export default function ListGifts() {
       <div className={`grid grid-cols-1 ${slice.list.gift.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>
         {
           slice.list.gift.map((item: IGift, index: number) => (
-            <motion.div
-              whileHover={{ scale: 0.98 }}
+            <Link
+              href={`/gifts/${item.gift.toLowerCase().replace(/ /g, '-')}`}
               className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
-              onClick={() => {
-                setToggle(prevValue => !prevValue );
-                setObject(item);
-              }}
             >
               <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
               <div className="relative text-white flex w-full justify-center items-center">
@@ -87,35 +78,10 @@ export default function ListGifts() {
                   ))
                 }
               </p>
-            </motion.div>
+            </Link>
           ))
         }
       </div>
-      <AnimatePresence>
-        {
-          object &&
-          <motion.div
-            initial={{opacity:0}}
-            animate={{opacity:1}}
-            exit={{opacity:0}}
-            className="p-3 sm:p-8 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/80 z-50"
-          >
-            <div
-              className="relative bg-ritual bg-top bg-cover w-full h-full"
-            >
-              <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-              <div className="w-full h-full flex flex-col items-center relative">
-                <Gift item={ object } />
-                <button className="text-4xl sm:text-5xl fixed top-4 right-5 sm:top-10 sm:right-14 color-white z-50 text-white"
-                  onClick={ () => setObject(null)}
-                >
-                  <AiFillCloseCircle className="bg-black rounded-full p-2" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        }
-      </AnimatePresence>
     </section>
   )
 }

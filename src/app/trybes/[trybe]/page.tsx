@@ -1,31 +1,13 @@
 'use client';
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import listTrybes from '../../../data/trybes.json';
-import { GrFormPrevious } from 'react-icons/gr';
-import Simplify from "@/components/simplify";
-import Nav from "@/components/nav";
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
+import Simplify from "@/components/simplify";
+import Nav from "@/components/nav";
 import Footer from "@/components/footer";
-import Link from "next/link";
-
-interface IArchetypes {
-  title: String;
-  description: String;
-}
-
-interface ITrybe {
-  namePtBr: String;
-  nameEn: String;
-  phrase: String;
-  description: String[];
-  whoAre: String[];
-  patron: String;
-  favor: String;
-  ban: String;
-  archetypes: IArchetypes[];
-};
+import listTrybes from '../../../data/trybes.json';
+import { IArchetypes, ITrybe } from "../../../../interface";
 
 export default function Trybe({ params } : { params: { trybe: String } }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +17,7 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
   useEffect(() => {
     const findTrybe: ITrybe | undefined = listTrybes
       .find((trb: ITrybe) => params.trybe
-      .replace(/%20/g, ' ') === trb.nameEn
+      .replace(/-/g, ' ') === trb.nameEn
     );
     setDataTrybe(findTrybe);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,13 +47,13 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
           <div className="py-10 flex flex-col items-center sm:items-start w-full z-20 text-white text-justify overflow-y-auto">
             <div className="flex items-center justify-center w-full relative h-full">
               <div className="absolute h-full w-full sm:w-5/12 flex items-center justify-center">
-                { isLoading && <span className="loader h-96 z-50" /> }
+                { isLoading && <span className="loader z-50" /> }
               </div>
               { 
                 !slice.simplify &&
                 <Image
-                  src={`/images/trybes/${dataTrybe && dataTrybe.namePtBr} - representation.png`}
-                  alt={`Representação dos ${dataTrybe && dataTrybe.namePtBr}`}
+                  src={`/images/trybes/${dataTrybe.namePtBr} - representation.png`}
+                  alt={`Representação dos ${dataTrybe.namePtBr}`}
                   className="w-full mobile:w-8/12 sm:w-5/12 relative px-6"
                   width={800}
                   height={400}
@@ -81,20 +63,17 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
             </div>
             <div className="mt-5 mobile:mt-10 px-6 text-sm sm:text-base">
               <h2 className=" font-bold text-xl sm:text-2xl w-full text-center">
-                {
-                  dataTrybe && 
-                  <span>
-                    {`${dataTrybe.namePtBr} (${firstLetter(dataTrybe.nameEn)})`}
-                  </span>
-                }
+                <span>
+                  {`${dataTrybe.namePtBr} (${firstLetter(dataTrybe.nameEn)})`}
+                </span>
               </h2>
               <div className="flex items-center justify-center w-full text-sm">
                 <p className="mt-1 sm:mt-3 mb-10 text-center sm:w-1/2">
-                  &quot;{ dataTrybe && dataTrybe.phrase }&quot;
+                  &quot;{ dataTrybe.phrase }&quot;
                 </p>
               </div>
               {
-                dataTrybe && dataTrybe.description.map((paragraph: String, index: number) => (
+                dataTrybe.description.map((paragraph: String, index: number) => (
                   <p key={ index }>
                     { paragraph }
                   </p>
@@ -102,8 +81,8 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
               }
               <div className="flex items-center justify-center w-full">
                 <Image
-                  src={`/images/trybes/${dataTrybe && dataTrybe.namePtBr}.png`}
-                  alt={`Glifo dos ${dataTrybe && dataTrybe.namePtBr}`}
+                  src={`/images/trybes/${dataTrybe.namePtBr}.png`}
+                  alt={`Glifo dos ${dataTrybe.namePtBr}`}
                   className="w-20 sm:w-38 my-2"
                   width={800}
                   height={400}
@@ -114,7 +93,7 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
               </h2>
               <hr className="w-10/12 my-2" />
               {
-                dataTrybe && dataTrybe.whoAre.map((paragraph: String, index: number) => (
+                dataTrybe.whoAre.map((paragraph: String, index: number) => (
                   <p key={ index }>
                     { paragraph }
                   </p>
@@ -125,17 +104,17 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
                 Patrono Espiritual
               </h2>
               <hr className="w-10/12 my-2" />
-              <p>{dataTrybe && dataTrybe.patron}</p>
+              <p>{dataTrybe.patron}</p>
               
               <div>
                 <span className="underline">Favor</span>
                 <span className="px-1">-</span>
-                <span>{dataTrybe && dataTrybe.favor}</span>
+                <span>{dataTrybe.favor}</span>
               </div>
               <div>
                 <span className="underline">Proibição</span>
                 <span className="px-1">-</span>
-                <span>{dataTrybe && dataTrybe.ban}</span>
+                <span>{dataTrybe.ban}</span>
               </div>
               
               <h2 className="text-center sm:text-left w-full pt-8 text-xl">
@@ -144,7 +123,7 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
               <hr className="w-10/12 mt-2 mb-5" />
               <div>
                 {
-                  dataTrybe && dataTrybe.archetypes.map((archetype: IArchetypes, index: number) => (
+                  dataTrybe.archetypes.map((archetype: IArchetypes, index: number) => (
                     <div key={ index }>
                       <h2 className="underline">{ archetype.title } </h2>
                       <p className="pb-5">{ archetype.description }</p>

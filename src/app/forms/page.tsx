@@ -10,6 +10,7 @@ import Simplify from '@/components/simplify';
 import listForms from '../../data/forms.json';
 import { AiFillCloseCircle } from "react-icons/ai";
 import DataForms from '@/components/dataForms';
+import Link from 'next/link';
 
 export default function Forms() {
   const [isToggled, setToggle] = useState(false);
@@ -66,9 +67,9 @@ export default function Forms() {
               const nomeB = b.name.toLowerCase();
               return nomeA.localeCompare(nomeB);
             }).map((forms, index) => (
-              <motion.div
+              <Link
                 key={ index }
-                whileHover={{ scale: 0.98 }}
+                href={`/forms/${forms.name.replace('í', 'i').toLowerCase()}`}
                 onClick={() => {
                   setToggle(prevValue => !prevValue );
                   setObject(forms);
@@ -79,35 +80,10 @@ export default function Forms() {
                 <p className="relative font-bold text-center">
                   { forms.name }
                 </p>
-              </motion.div>
+              </Link>
             ))
           }
         </div>
-        <AnimatePresence>
-          {
-            object &&
-            <motion.div
-              initial={{opacity:0}}
-              animate={{opacity:1}}
-              exit={{opacity:0}}
-              className="p-3 sm:p-8 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black/80 z-50 snap-y"
-            >
-              <div
-                className="relative bg-ritual bg-top bg-cover w-full h-full border-2 border-white"
-              >
-                <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-                <div className="w-full h-full flex flex-col items-center">
-                  <DataForms object={ object } />
-                  <button className="text-4xl sm:text-5xl fixed top-4 right-5 sm:top-10 sm:right-14 color-white z-50 text-white"
-                    onClick={ () => setObject(null)}
-                  >
-                    <AiFillCloseCircle className="bg-black rounded-full p-2" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          }
-        </AnimatePresence>
       </section>
       <Footer />
     </div>

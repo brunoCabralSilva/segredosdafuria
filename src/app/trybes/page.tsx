@@ -48,7 +48,7 @@ export default function Trybes() {
               return nomeA.localeCompare(nomeB);
             }).map((trybe, index) => (
               <Link
-                href={`/trybes/${trybe.nameEn.toLowerCase()}`}
+                href={`/trybes/${trybe.nameEn.toLowerCase().replace(/ /g, '-')}`}
                 key={ index }
                 className="border-white border-2 p-3 flex items-center justify-center flex-col bg-filters bg-center bg-opacity-10 relative cursor-pointer"
               >
