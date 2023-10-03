@@ -10,7 +10,6 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Feedback from '@/components/feedback';
-import { RxDotFilled } from 'react-icons/rx';
 
 interface IHabilities {
   skill: String;
