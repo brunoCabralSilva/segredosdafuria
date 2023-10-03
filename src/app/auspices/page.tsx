@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react';
-import { actionType, useSlice } from '@/redux/slice';
+import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listAuspices from '../../data/auspices.json';
+import Feedback from '@/components/feedback';
 
 export default function Auspices() {
   const slice = useAppSelector(useSlice);
@@ -76,6 +77,16 @@ export default function Auspices() {
             ))
           }
         </div>
+        <button
+          type="button"
+          className={`px-6 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+        >
+          Enviar Feedback
+        </button>
+        {
+          slice.feedback.show && <Feedback title={ 'Página Augúrios' } /> 
+        }
       </section>
       <Footer />
     </div>

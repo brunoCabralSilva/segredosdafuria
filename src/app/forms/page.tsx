@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react';
-import { actionType, useSlice } from '@/redux/slice';
+import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Image from 'next/image';
 import Nav from '@/components/nav';
@@ -8,6 +8,7 @@ import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listForms from '../../data/forms.json';
 import Link from 'next/link';
+import Feedback from '@/components/feedback';
 
 export default function Forms() {
   const slice = useAppSelector(useSlice);
@@ -23,7 +24,7 @@ export default function Forms() {
       <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
       <Simplify />
       <Nav />
-      <section className="mb-2 relative px-2">
+      <section className="mb-2 relative px-2 pb-5">
         {
           !slice.simplify &&
           <div className="h-40vh relative flex bg-white items-end text-black">
@@ -75,6 +76,16 @@ export default function Forms() {
             ))
           }
         </div>
+        <button
+          type="button"
+          className={`pb-3 px-6 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+        >
+          Enviar Feedback
+        </button>
+        {
+          slice.feedback.show && <Feedback title={ 'Página "Formas"'} /> 
+        }
       </section>
       <Footer />
     </div>

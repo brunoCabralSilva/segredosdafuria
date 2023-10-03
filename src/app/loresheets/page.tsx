@@ -1,7 +1,7 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { actionType, useSlice } from '@/redux/slice';
+import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import listLoresheets from '../../data/loresheets.json';
@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ILoresheet } from '../../../interface';
+import Feedback from '@/components/feedback';
 
 export default function Loresheets() {
   const slice = useAppSelector(useSlice);
@@ -71,6 +72,16 @@ export default function Loresheets() {
             ))
           }
         </div>
+        <button
+          type="button"
+          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+        >
+          Enviar Feedback
+        </button>
+        {
+          slice.feedback.show && <Feedback title={ 'Página "Loresheets"' } /> 
+        }
       </section>
       <Footer />
     </div>

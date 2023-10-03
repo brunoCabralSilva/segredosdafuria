@@ -1,18 +1,20 @@
 'use client';
 import { useEffect, useState } from "react";
-import { useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionFeedback, useSlice } from "@/redux/slice";
 import Image from "next/image";
 import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listForms from '../../../data/forms.json';
 import { IForm } from "../../../../interface";
+import Feedback from "@/components/feedback";
 
 export default function Form({ params } : { params: { form: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataForm, setDataForm] = useState<IForm>();
   const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
 
   useEffect(() => {
     const findForm: IForm | undefined = listForms
@@ -68,6 +70,16 @@ export default function Form({ params } : { params: { form: String } }) {
               ))
             }
           </div>
+          <button
+            type="button"
+            className={`px-6 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+            onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+          >
+            Enviar Feedback
+          </button>
+          {
+            slice.feedback.show && <Feedback title={ dataForm.name } /> 
+          }
         </div>
       </section>
       <Footer />

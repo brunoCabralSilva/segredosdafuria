@@ -1,13 +1,14 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { useSlice, actionType } from '@/redux/slice';
+import { useSlice, actionType, actionFeedback } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
 import { ChangeEvent, useEffect } from 'react';
 import ListRituals from './listRituals';
 import SearchButton from '@/components/SearchButton';
+import Feedback from '@/components/feedback';
 
 export default function Rituals() {
   const slice = useAppSelector(useSlice);
@@ -97,6 +98,16 @@ export default function Rituals() {
         </section>
         <SearchButton type="rituals" />
         <ListRituals />
+        <button
+          type="button"
+          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+        >
+          Enviar Feedback
+        </button>
+        {
+          slice.feedback.show && <Feedback title={ 'Página "Rituais"' } /> 
+        }
       </section>
       <Footer />
     </div>

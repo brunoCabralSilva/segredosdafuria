@@ -1,18 +1,20 @@
 'use client';
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionFeedback, useSlice } from "@/redux/slice";
 import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listTrybes from '../../../data/trybes.json';
 import { IArchetypes, ITrybe } from "../../../../interface";
+import Feedback from "@/components/feedback";
 
 export default function Trybe({ params } : { params: { trybe: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataTrybe, setDataTrybe] = useState<ITrybe>();
   const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
 
   useEffect(() => {
     const findTrybe: ITrybe | undefined = listTrybes
@@ -26,15 +28,15 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
   function firstLetter(frase: String) {
     const palavras = frase.split(' ');
   
-    const palavrasComPrimeiraMaiuscula = palavras.map((palavra) => {
+    const FirstUperCase = palavras.map((palavra) => {
       if (palavra.length > 0) {
         return palavra.charAt(0).toUpperCase() + palavra.slice(1);
       } else {
         return palavra;
       }
     });
-    const fraseComPrimeiraMaiuscula = palavrasComPrimeiraMaiuscula.join(' ');
-    return fraseComPrimeiraMaiuscula;
+    const phrase = FirstUperCase.join(' ');
+    return phrase;
   };
 
   if (dataTrybe) {
@@ -133,6 +135,16 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
               </div>
           </div>
         </div>
+        <button
+          type="button"
+          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+        >
+          Enviar Feedback
+        </button>
+        {
+          slice.feedback.show && <Feedback title={ dataTrybe.nameEn } /> 
+        }
         </section>
         <Footer />
       </div>

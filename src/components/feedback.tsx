@@ -88,7 +88,7 @@ export default function Feedback(props: { title: string }) {
     }, 4000);
   }
   return(
-    <div className="fixed w-full h-screen top-0 left-0 bg-black/50 flex items-center justify-center flex-col text-white">
+    <div className="fixed w-full h-screen top-0 left-0 bg-black/50 flex items-center justify-center flex-col text-white z-50">
       <form
         onSubmit={ sendEmail }
         className="bg-black border-2 border-white w-10/12 sm:w-1/2 md:w-1/3 px-5 py-7 relative flex flex-col"
@@ -105,8 +105,8 @@ export default function Feedback(props: { title: string }) {
         <input type="text"
           id="gift"
           name="gift"
-          value={ slice.feedback.title }
-          className="py-3 px-2 mt-2 text-center bg-transparent font-bold border-transparent"
+          value={ props.title }
+          className="py-3 px-2 mt-2 text-white text-center bg-transparent font-bold border-transparent"
         />
         <input
           type="text"

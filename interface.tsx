@@ -22,7 +22,7 @@ export interface IGift {
 
 export interface IRitual {
   titlePtBr: String;
-  title:String;
+  title: string;
   type: String;
   descriptionPtBr: String;
   description: String;
@@ -34,7 +34,7 @@ export interface IRitual {
 }
 
 export interface ITalisman {
-  title :String;
+  title :string;
   titlePtBr :String;
   description :String;
   descriptionPtBr :String;
@@ -47,13 +47,13 @@ export interface ITalisman {
 }
 
 export interface IAuspice {
-  name: String;
-  phrase: String;
+  name: string;
+  phrase: string;
   description: String[];
 }
 
 export interface IForm {
-  name: String;
+  name: string;
   subtitle: String;
   description: String;
   cost: String;
@@ -63,7 +63,7 @@ export interface IForm {
 
 export interface ILoresheet {
   titlePtBr: String,
-  title: String,
+  title: string,
   descriptionPtBr: String,
   description: String,
   habilities: IHabilities[];
@@ -109,7 +109,7 @@ export interface IArchetypes {
 
 export interface ITrybe {
   namePtBr: String;
-  nameEn: String;
+  nameEn: string;
   phrase: String;
   description: String[];
   whoAre: String[];

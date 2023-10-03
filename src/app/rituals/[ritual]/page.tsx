@@ -74,7 +74,7 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
                 Enviar Feedback
               </button>
               </div>
-              { slice.feedback.show && <Feedback title={ slice.feedback.title } /> }
+              { slice.feedback.show && <Feedback title={ dataRitual.title } /> }
             </article>
           </div>
         </section>

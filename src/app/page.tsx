@@ -5,12 +5,14 @@ import Link from 'next/link';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Simplify from '@/components/simplify';
-import { useSlice } from '@/redux/slice';
-import { useAppSelector } from '@/redux/hooks';
+import { actionFeedback, useSlice } from '@/redux/slice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import Feedback from '@/components/feedback';
 
 export default function Home() {
   const describe = useRef<HTMLDivElement | null>(null);
   const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
 
   const scrollToComponent = () => {
     if (describe.current) {
@@ -116,6 +118,16 @@ export default function Home() {
           </motion.div>
         </Link>
       </div>
+      <button
+        type="button"
+        className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+        onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+      >
+        Enviar Feedback
+      </button>
+      {
+        slice.feedback.show && <Feedback title={ 'Página "Home"' } /> 
+      }
       <Footer />
     </main>
   );

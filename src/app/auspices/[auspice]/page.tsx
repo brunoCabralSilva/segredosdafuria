@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 import listAuspices from '../../../data/auspices.json';
 import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
-import { useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionFeedback, useSlice } from "@/redux/slice";
 import Footer from "@/components/footer";
 import { IAuspice } from "../../../../interface";
+import Feedback from "@/components/feedback";
 
 export default function Auspice({ params } : { params: { auspice: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataAuspice, setDataAuspice] = useState<IAuspice>();
   const slice = useAppSelector(useSlice);
+  const dispatch: any = useAppDispatch();
 
   useEffect(() => {
     const findAuspice: IAuspice | undefined = listAuspices
@@ -69,6 +71,16 @@ export default function Auspice({ params } : { params: { auspice: String } }) {
               ))
             }
           </div>
+          <button
+            type="button"
+            className={`px-6 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+            onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+          >
+            Enviar Feedback
+          </button>
+          {
+            slice.feedback.show && <Feedback title={ dataAuspice.name } /> 
+          }
         </div>
       </section>
       <Footer />

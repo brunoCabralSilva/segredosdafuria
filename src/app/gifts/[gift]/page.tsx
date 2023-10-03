@@ -125,13 +125,15 @@ export default function Gift({ params } : { params: { gift: String } }) {
               <div className="flex flex-col sm:flex-row sm:justify-between">
               <button
                 type="button"
-                className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}
-                onClick={() => dispatch(actionFeedback({ show: true, message: dataGift.gift })) }
+                className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+                onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
               >
                 Enviar Feedback
               </button>
+              {
+                slice.feedback.show && <Feedback title={ dataGift.gift } /> 
+              }
               </div>
-              { slice.feedback.show && <Feedback title={ slice.feedback.title } /> }
             </article>
           </div>
         </section>

@@ -7,11 +7,12 @@ import {
   BsYoutube,
   BsFacebook
 } from "react-icons/bs";
-import { actionType, useSlice } from '@/redux/slice';
+import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
 import { useEffect } from 'react';
+import Feedback from '@/components/feedback';
 
 export default function About() {
   const slice = useAppSelector(useSlice);
@@ -153,6 +154,14 @@ export default function About() {
                   />
                 </div>
               </div>
+              <button
+                type="button"
+                className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}
+                onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+              >
+                Enviar Feedback
+              </button>
+              { slice.feedback.show && <Feedback title={ 'Página "Quem Somos"' } /> }
             </div>
           </div>
         </section>

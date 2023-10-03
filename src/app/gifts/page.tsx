@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react';
-import { actionType, useSlice } from '@/redux/slice';
+import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
 import Nav from '@/components/nav';
@@ -10,6 +10,7 @@ import FilterGifts from './filterGifts';
 import Simplify from '@/components/simplify';
 import ListGifts from './listGifts';
 import SearchButton from '@/components/SearchButton';
+import Feedback from '@/components/feedback';
 
 export default function Gifts() {
   const describe = useRef<HTMLDivElement | null>(null);
@@ -35,6 +36,16 @@ export default function Gifts() {
         <FilterGifts title="text" />
         <SearchButton type="gifts" />
         <ListGifts />
+        <button
+          type="button"
+          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+        >
+          Enviar Feedback
+        </button>
+        {
+          slice.feedback.show && <Feedback title={ 'Página "Dons"' } /> 
+        }
       </div>
       <Footer />
     </div>
