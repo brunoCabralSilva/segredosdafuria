@@ -1,5 +1,4 @@
 'use client'
-
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
 import { IRitual } from "../../../interface";

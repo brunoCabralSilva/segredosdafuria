@@ -1,15 +1,11 @@
 'use client'
-
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import { useState } from "react";
 import { ITalisman } from "../../../interface";
 import Link from "next/link";
 
 export default function ListTalismans() {
   const slice = useAppSelector(useSlice);
-  const [isToggled, setToggle] = useState(false);
-  const [object, setObject] = useState<any>(null);
 
   return (
     <section className="mb-2 text-white">
@@ -28,10 +24,6 @@ export default function ListTalismans() {
               href={`/talismans/${item.title.toLowerCase().replace(/ /g, '-')}`}
               className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
-              onClick={() => {
-                setToggle(prevValue => !prevValue );
-                setObject(item);
-              }}
             >
               <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
               <div className="relative text-white flex w-full justify-center items-center">

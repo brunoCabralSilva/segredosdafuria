@@ -9,7 +9,6 @@ import { useSlice } from "@/redux/slice";
 import Footer from "@/components/footer";
 import { IAuspice } from "../../../../interface";
 
-
 export default function Auspice({ params } : { params: { auspice: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataAuspice, setDataAuspice] = useState<IAuspice>();

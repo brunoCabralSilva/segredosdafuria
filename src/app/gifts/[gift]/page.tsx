@@ -10,7 +10,6 @@ import listGifts from '../../../data/gifts.json';
 import { IGift, ITypeGift } from "../../../../interface";
 import Feedback from "@/components/feedback";
 
-
 export default function Gift({ params } : { params: { gift: String } }) {
   const [dataGift, setDataGift] = useState<IGift>();
   const slice = useAppSelector(useSlice);

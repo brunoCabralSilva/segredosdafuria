@@ -1,7 +1,6 @@
 'use client'
 import { useSlice } from '@/redux/slice';
 import { useAppSelector } from '@/redux/hooks';
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';

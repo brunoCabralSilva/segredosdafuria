@@ -1,20 +1,15 @@
 'use client'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listForms from '../../data/forms.json';
-import { AiFillCloseCircle } from "react-icons/ai";
-import DataForms from '@/components/dataForms';
 import Link from 'next/link';
 
 export default function Forms() {
-  const [isToggled, setToggle] = useState(false);
-  const [object, setObject] = useState<any>(null);
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
 
@@ -70,10 +65,6 @@ export default function Forms() {
               <Link
                 key={ index }
                 href={`/forms/${forms.name.replace('í', 'i').toLowerCase()}`}
-                onClick={() => {
-                  setToggle(prevValue => !prevValue );
-                  setObject(forms);
-                }}
                 className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer h-15vh"
               >
                 <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />

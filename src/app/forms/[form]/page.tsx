@@ -9,7 +9,6 @@ import Footer from "@/components/footer";
 import listForms from '../../../data/forms.json';
 import { IForm } from "../../../../interface";
 
-
 export default function Form({ params } : { params: { form: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataForm, setDataForm] = useState<IForm>();
