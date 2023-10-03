@@ -5,24 +5,24 @@ import { actionFeedback, useSlice } from "@/redux/slice";
 import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
-import listRituals from '../../../data/rituals.json';
-import { IRitual } from "../../../../interface";
+import listTalismans from '../../../data/talismans.json';
+import { ITalisman } from "../../../../interface";
 import Feedback from "@/components/feedback";
 
 
-export default function Ritual({ params } : { params: { ritual: String } }) {
-  const [dataRitual, setDataRitual] = useState<IRitual>();
+export default function Talisman({ params } : { params: { talisman: String } }) {
+  const [dataTalisman, setDataTalisman] = useState<ITalisman>();
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
 
   useEffect(() => {
-    const findRitual: IRitual | undefined = listRituals
-      .find((rtl: IRitual) => params.ritual.replace(/-/g, ' ') === rtl.title.toLowerCase());
-    setDataRitual(findRitual);
+    const findTalisman: ITalisman | undefined = listTalismans
+      .find((tlsmn: ITalisman) => params.talisman.replace(/-/g, ' ') === tlsmn.title.toLowerCase());
+    setDataTalisman(findTalisman);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (dataRitual) {
+  if (dataTalisman) {
     return(
       <div className="w-full bg-ritual bg-cover bg-top relative">
         <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
@@ -33,35 +33,41 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
             <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 bg-black/70 text-white overflow-y-auto">
               <div className="flex flex-col justify-center items-center sm:items-start">
                 <h1 className="font-bold text-lg text-center sm:text-left w-full">
-                  {`${ dataRitual.titlePtBr } (${ dataRitual.title }) - ${ dataRitual.type === 'social' ? "Social" : 'Comum' }`}
+                  {`${ dataTalisman.titlePtBr } (${ dataTalisman.title })`}
                 </h1>
                 <hr className="w-10/12 my-4 sm:my-2" />
               </div>
               <p className="pt-1">
                 <span className="font-bold pr-1">Fonte:</span>
-                { dataRitual.book }, pg. { dataRitual.page }.
+                { dataTalisman.book }, pg. { dataTalisman.page }.
               </p>
-              { dataRitual.pool !== "" &&
+              {
                 <p className="pt-1">
-                  <span className="font-bold pr-1">Parada de Dados:</span>
-                  { dataRitual.pool }.
+                  <span className="font-bold pr-1">Custo:</span>
+                  { dataTalisman.backgroundCostPtBr }.
+                </p>
+              }
+              {
+                <p className="pt-1">
+                  <span className="font-bold pr-1">Cost:</span>
+                  { dataTalisman.backgroundCost }.
                 </p>
               }
               <p className="pt-3 text-justify">
                 <span className="font-bold pr-1">Descrição:</span>
-                { dataRitual.descriptionPtBr }
+                { dataTalisman.descriptionPtBr }
               </p>
               <p className="pt-1 text-justify">
                 <span className="font-bold pr-1">Sistema:</span>
-                { dataRitual.systemPtBr }
+                { dataTalisman.systemPtBr }
               </p>
               <p className="pt-3 text-justify">
                 <span className="font-bold pr-1">Description (original):</span>
-                { dataRitual.description }
+                { dataTalisman.description }
               </p>
               <p className="pt-1 text-justify">
                 <span className="font-bold pr-1">System (original):</span>
-                { dataRitual.system }
+                { dataTalisman.system }
               </p>
               <div className="flex flex-col sm:flex-row sm:justify-between">
               </div>
@@ -69,7 +75,7 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
               <button
                 type="button"
                 className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}
-                onClick={() => dispatch(actionFeedback({ show: true, message: dataRitual.title })) }
+                onClick={() => dispatch(actionFeedback({ show: true, message: dataTalisman.title })) }
               >
                 Enviar Feedback
               </button>

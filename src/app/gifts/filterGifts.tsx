@@ -9,8 +9,8 @@ import {
   useSlice
 } from "@/redux/slice";
 import { motion } from "framer-motion";
-import jsonTrybes from '../data/trybes.json';
-import jsonAuspices from '../data/auspices.json';
+import jsonTrybes from '../../data/trybes.json';
+import jsonAuspices from '../../data/auspices.json';
 
 export default function FilterGifts(props: { title: string }) {
   const [list, setList] = useState<string[] | number[]>([]);

@@ -5,11 +5,10 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import Feedback from '@/components/feedback';
-import DataGifts from '@/components/dataGifts';
-import FilterGifts from '@/components/filterGifts';
+import DataGifts from './dataGifts';
+import FilterGifts from './filterGifts';
 import Simplify from '@/components/simplify';
-import ListGifts from '@/components/listGifts';
+import ListGifts from './listGifts';
 import SearchButton from '@/components/SearchButton';
 
 export default function Gifts() {

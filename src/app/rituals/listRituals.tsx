@@ -2,7 +2,7 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import { IRitual } from "../../interface";
+import { IRitual } from "../../../interface";
 import Link from "next/link";
 
 export default function ListRituals() {
@@ -23,7 +23,7 @@ export default function ListRituals() {
           slice.message.type === 'ritual' && slice.list.ritual.map((item: IRitual, index: number) => (
             <Link
               href={`/rituals/${item.title.toLowerCase().replace(/ /g, '-')}`}
-              className="p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
+              className="p-3 border-white border-2 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
             >
               <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />

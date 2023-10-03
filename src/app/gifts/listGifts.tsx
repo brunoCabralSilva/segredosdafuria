@@ -2,7 +2,7 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import { IGift, ITypeGift } from "../../interface";
+import { IGift, ITypeGift } from "../../../interface";
 import Image from "next/image";
 import Link from "next/link";
 

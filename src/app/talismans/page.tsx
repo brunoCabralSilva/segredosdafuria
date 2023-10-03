@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
 import { ChangeEvent, useEffect } from 'react';
-import ListTalismans from '@/components/listTalismans';
+import ListTalismans from './listTalismans';
 import jsonTalismans from '../../data/talismans.json';
 import SearchButton from '@/components/SearchButton';
 

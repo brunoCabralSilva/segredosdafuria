@@ -61,6 +61,21 @@ export interface IForm {
   list: String[];
 }
 
+export interface ILoresheet {
+  titlePtBr: String,
+  title: String,
+  descriptionPtBr: String,
+  description: String,
+  habilities: IHabilities[];
+  book: String,
+  page: number
+}
+
+export interface IHabilities {
+  skill: String;
+  skillPtBr: String;
+}
+
 export interface IProps {
   valorRenown: number;
   selectedTrybe: string[];

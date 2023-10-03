@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
 import Image from 'next/image';
 import { ChangeEvent, useEffect } from 'react';
-import ListRituals from '@/components/listRituals';
+import ListRituals from './listRituals';
 import SearchButton from '@/components/SearchButton';
 
 export default function Rituals() {
