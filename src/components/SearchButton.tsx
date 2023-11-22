@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   useSlice,
-  actionClnSearchs,
   actionFilterGift,
   actionTotalRenown,
   actionGlobal,

@@ -42,6 +42,9 @@ const config: Config = {
         '50vh': '50vh',
         '60vh': '60vh',
         '70vh': '70vh',
+        '80vh': '80vh',
+        '85vh': '85vh',
+        '90vh': '90vh',
       },
       margin: {
         'check': '6px',
