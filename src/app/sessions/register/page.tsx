@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { login, registerUser, verifyEmail } from "../../../firebase/user";
 import { actionLogin } from "@/redux/slice";
 import { jwtDecode } from "jwt-decode";
+import Simplify from "@/components/simplify";
+import Image from "next/image";
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -72,7 +74,7 @@ export default function Register() {
       await registerUser(email, firstName, secName, password);
       const logs = await login(email, password);
       dispatch(actionLogin(logs));
-      router.push('/');
+      router.push('/session');
       } catch(error: any) {
         window.alert(error.message);
       }
@@ -87,14 +89,20 @@ export default function Register() {
 
   return(
     <section>
+      <Simplify />
       <div className="principal-div">
-        <section className="section-login-register">
-          <h1 className="title-page-login">
-            Guia das Matilhas
-          </h1>
-          <div className="div-login">
+        <section className="min-h-screen flex flex-col items-center justify-center bg-ritual bg-cover">
+          <div className="flex flex-col items-center justify-center bg-black/80 h-full w-full p-10 text-white">
+            <Image
+              src="/images/logos/text.png"
+              alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+              className="h-50vh sm:h-70vh md:h-20vh w-10/12 sm:w-3/5 md:w-1/2 xl:w-5/12 object-contain"
+              width={2000}
+              height={800}
+              priority
+            />
             <input
-              className={`admin-input-register ${erFirstName && 'admin-input-error'}`}
+              className="p-2 text-center mt-10 w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
               value={firstName}
               placeholder="Primeiro nome"
               onChange={ (e) => setFirstName(e.target.value) }
@@ -102,7 +110,7 @@ export default function Register() {
             />
             { errorMessage(erFirstName) }
             <input
-              className={`admin-input-register ${erSecName && 'admin-input-error'}`}
+              className="p-2 text-center mt-10 w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
               value={secName}
               placeholder="Último nome"
               onChange={ (e) => setSecName(e.target.value) }
@@ -110,7 +118,7 @@ export default function Register() {
             />
             { errorMessage(erSecName) }
             <input
-              className={`admin-input-register ${erEmail && 'admin-input-error'}`}
+              className="p-2 text-center mt-10 w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
               value={email}
               placeholder="E-mail"
               onChange={ (e) => setEmail(e.target.value) }
@@ -118,7 +126,7 @@ export default function Register() {
             />
             { errorMessage(erEmail) }
             <input
-              className={`admin-input-register ${erPassword && 'admin-input-error'}`}
+              className="p-2 text-center mt-10 w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
               placeholder="Senha"
               value={password}
               onChange={ (e) => setPassword(e.target.value) }
@@ -126,7 +134,7 @@ export default function Register() {
             />
             { errorMessage(erPassword) }
             <input
-              className={`admin-input-register ${erRPassword && 'admin-input-error'}`}
+              className="p-2 text-center mt-10 w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
               placeholder="Repita a Senha"
               value={repeatPassword}
               onChange={ (e) => setRepeatPassword(e.target.value) }
@@ -134,7 +142,7 @@ export default function Register() {
             />
             { errorMessage(erRPassword) }
             <button
-              className="admin-button-enable admin-button"
+              className="bg-black border-2 border-white hover:border-red-800 transition-colors text-white cursor-pointer w-1/2 p-2 mt-6 font-bold"
               id="btn-login-register"
               onClick={ register }
               >
