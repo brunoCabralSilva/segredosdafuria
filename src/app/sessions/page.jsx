@@ -134,10 +134,14 @@ export default function Chat() {
     }
     return(
       <div>
-        <p>{msn.rollOfRage}</p>
-        <p>{msn.rollOfMargin}</p>
-        <p>{msn.dificulty}</p>
-        <p>{msn.penaltyOrBonus}</p> 
+        <div className="flex gap-1 mb-3">
+          { msn.rollOfRage.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
+        </div>
+        <div className="flex gap-1">
+        { msn.rollOfMargin.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
+        </div>
+        <div>{msn.dificulty}</div>
+        <div>{msn.penaltyOrBonus}</div> 
       </div>
     )
   }
