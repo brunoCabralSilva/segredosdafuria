@@ -146,8 +146,8 @@ export default function Chat() {
             { msn.rollOfMargin.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
           </div>
         </div>
-        <div>{msn.dificulty}</div>
-        <div>{msn.penaltyOrBonus}</div> 
+        <div>Dificuldade: {msn.dificulty}</div>
+        <div>Penalidade: {msn.penaltyOrBonus}</div> 
       </div>
     )
   }
