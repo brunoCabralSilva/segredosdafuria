@@ -74,7 +74,7 @@ export default function Register() {
       await registerUser(email, firstName, secName, password);
       const logs = await login(email, password);
       dispatch(actionLogin(logs));
-      router.push('/session');
+      router.push('/sessions');
       } catch(error: any) {
         window.alert(error.message);
       }
