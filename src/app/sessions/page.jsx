@@ -146,21 +146,11 @@ export default function Chat() {
                           msg.message && !msg.message.dificulty
                           ? msg.message
                           : <div>
-                              <div>
-                                <span>Fúria:</span>
-                                <div className="flex gap-2">
-                                  {msg.message && returnRollOfRage(msg.message)}
-                                </div>
-                              </div>
-                              <div>
-                                <span>Parada Restante:</span>
-                                <div className="flex gap-2">
-                                  {msg.message && returnRollOfMargin(msg.message)}
-                                </div>
-                              </div>
-                              <p>Dificuldade: {msg.message && msg.message.dificulty}</p>
-                              <p>Penalidade / Bônus: {msg.message && msg.message.penaltyOrBonus}</p>
-                            </div>
+                          <p>{msg.message.rollOfRage}</p>
+                          <p>{msg.message.rollOfMargin}</p>
+                          <p>{msg.message.dificulty}</p>
+                          <p>{msg.message.penaltyOrBonus}</p>
+                        </div>
                         }
                         </div>
                         <div className="flex justify-end pt-2">
