@@ -8,6 +8,7 @@ import { actionLogin, useSlice } from '@/redux/slice';
 import { useRouter } from 'next/navigation';
 import { verify } from '../../firebase/user';
 import { jwtDecode } from 'jwt-decode';
+import Simplify from '@/components/simplify';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -64,6 +65,7 @@ export default function Chat() {
         {
           message: text,
           user: user.firstName + ' ' + user.lastName,
+          email: user.email,
           date: serverTimestamp(),
         }
       );
@@ -81,16 +83,41 @@ export default function Chat() {
 
   return (
     showData && (
-      <div className="h-screen overflow-y-auto">
+      <div className="h-screen overflow-y-auto bg-ritual">
         <div id="messages-container" className="h-90vh overflow-y-auto p-2">
-          {messages && messages.map((msg, index) => (
-            <div key={index} className="p-2 bg-gray-500 my-2">
-              <div>
-                {msg.user} {msg.date && msg.date.toDate().toLocaleString()}{' '}
-              </div>
-              <div>{msg.message}</div>
-            </div>
-          ))}
+          {
+            messages && messages.map((msg, index) => {
+              const token = localStorage.getItem('Segredos Da Fúria');
+              const decode = jwtDecode(token);
+              if (token && decode.email === msg.email) {
+                return(
+                  <div key={index} className="w-full flex justify-end">
+                  <div  className="rounded-xl w-1/2 p-2 bg-green-500 my-2">
+                    <div>{msg.message}</div>
+                    <div className="flex justify-end pt-2">
+                      <span>
+                        {msg.date && msg.date.toDate().toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                  </div>
+                ) 
+              }
+              return (
+                <div key={index} className="rounded-xl w-1/2 p-2 bg-gray-500 my-2">
+                  <div className="font-bold mb-2">
+                    {msg.user}
+                  </div>
+                  <div>{msg.message}</div>
+                  <div className="flex justify-end pt-2">
+                    <span>
+                      {msg.date && msg.date.toDate().toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+              )
+            })
+          }
         </div>
         <div className="fixed bottom-0 w-full bg-black p-2 flex gap-3">
           <input
