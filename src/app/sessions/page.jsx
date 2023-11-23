@@ -15,6 +15,7 @@ import { FaArrowDown } from "react-icons/fa";
 import { FaEraser } from "react-icons/fa";
 import firebaseConfig from '../../firebase/connection';
 import Nav from '@/components/nav';
+import PopUpDices from '@/components/popUpDices';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -26,9 +27,11 @@ export default function Chat() {
   const queryMessages = query(messageRef, orderBy("date"), limit(25));
   const [messages] = useCollectionData(queryMessages, { idField: "id" });
   const [showData, setShowData] = useState(true);
+  const [showDices, setShowDices] = useState(false);
 
   useEffect(() => {
     setShowData(false);
+    setShowDices(false);
     window.scrollTo(0, 0);
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
@@ -86,12 +89,37 @@ export default function Chat() {
           user: user.firstName + ' ' + user.lastName,
           email: user.email,
           date: serverTimestamp(),
+          roll: '',
         }
       );
       setText('');
       scrollToBottom();
     }
   };
+
+  const returnRollOfRage = (roll) => {
+      const list = roll.rollOfRage.map((dice, index) => (
+        <div
+          key={index}
+          className="rounded-full border border-black w-10 h-10 p-2 flex items-center justify-center"
+        >
+            {dice}
+        </div>
+      ))
+      return list;
+  };
+
+  const returnRollOfMargin = (roll) => {
+    const list = roll.rollOfMargin.map((dice, index) => (
+      <div
+        key={index}
+        className="rounded-full border border-black w-10 h-10 p-2 flex items-center justify-center"
+      >
+          {dice}
+      </div>
+    ))
+    return list;
+};
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -104,6 +132,7 @@ export default function Chat() {
     showData && (
       <div className="h-screen overflow-y-auto bg-ritual">
         <Nav />
+        { showDices && <PopUpDices /> }
         <div id="messages-container" className="h-90vh overflow-y-auto p-2">
           {
             messages && messages.map((msg, index) => {
@@ -113,12 +142,33 @@ export default function Chat() {
                 return(
                   <div key={index} className="w-full flex justify-end  text-black">
                     <div  className="rounded-xl w-1/2 p-2 bg-green-400 my-2">
-                      <div>{msg.message}</div>
-                      <div className="flex justify-end pt-2">
-                        <span>
-                          {msg.date && msg.date.toDate().toLocaleString()}
-                        </span>
-                      </div>
+                      <div>
+                        {
+                          msg.roll === ''
+                          ? msg.message
+                          : <div>
+                              <div>
+                                <span>Fúria:</span>
+                                <div className="flex gap-2">
+                                  {msg.roll && returnRollOfRage(msg.roll)}
+                                </div>
+                              </div>
+                              <div>
+                                <span>Parada Restante:</span>
+                                <div className="flex gap-2">
+                                  {msg.roll && returnRollOfMargin(returnRollOfMargin(msg.roll))}
+                                </div>
+                              </div>
+                              <p>Dificuldade: {msg.roll && msg.roll.dificulty}</p>
+                              <p>Penalidade / Bônus: {msg.roll && msg.roll.penaltyOrBonus}</p>
+                            </div>
+                        }
+                        </div>
+                        <div className="flex justify-end pt-2">
+                          <span>
+                            {msg.date && msg.date.toDate().toLocaleString()}
+                          </span>
+                        </div>
                     </div>
                   </div>
                 ) 
@@ -128,7 +178,18 @@ export default function Chat() {
                   <div className="font-bold mb-2">
                     {msg.user}
                   </div>
-                  <div>{msg.message}</div>
+                  <div>
+                    {
+                      msg.message
+                      ? msg.message
+                      : <div>
+                          <p>{msg.roll.rollOfRage}</p>
+                          <p>{msg.roll.rollOfMargin}</p>
+                          <p>{msg.roll.dificulty}</p>
+                          <p>{msg.roll.penaltyOrBonus}</p>
+                        </div>
+                    }
+                  </div>
                   <div className="flex justify-end pt-2">
                     <span>
                       {msg.date && msg.date.toDate().toLocaleString()}
@@ -160,6 +221,7 @@ export default function Chat() {
               <button
                 className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
                 title="Realizar um teste com dados"
+                onClick={() => setShowDices(true) }
               >
                 <FaDiceD20 />
               </button>
