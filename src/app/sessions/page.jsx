@@ -154,7 +154,7 @@ export default function Chat() {
                       src={`/images/dices/${imgItem}`}
                       width={500}
                       height={500}
-                      className="w-20"
+                      className="w-10 sm:w-20"
                     />
                     <span className="text-2xl font-bold mt-2">{dice}</span>
                   </div>
@@ -184,7 +184,7 @@ export default function Chat() {
                         src={`/images/dices/${imgItem}`}
                         width={500}
                         height={500}
-                        className="w-20"
+                        className="w-10 sm:w-20"
                       />
                       <span className="text-2xl font-bold mt-2">{dice}</span>
                     </div>
