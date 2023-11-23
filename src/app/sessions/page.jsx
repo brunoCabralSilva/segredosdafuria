@@ -134,8 +134,8 @@ export default function Chat() {
     }
     return(
       <div>
-        {/* <p>{msn.rollOfRage}</p>
-        <p>{msn.rollOfMargin}</p> */}
+        <p>{msn.rollOfRage}</p>
+        <p>{msn.rollOfMargin}</p>
         <p>{msn.dificulty}</p>
         <p>{msn.penaltyOrBonus}</p> 
       </div>
