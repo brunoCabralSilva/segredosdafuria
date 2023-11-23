@@ -127,6 +127,18 @@ export default function Chat() {
     }
   };
 
+  const messageSet = (msn) => {
+    console.log(msn);
+    return(
+      <div>
+        {/* <p>{msn.rollOfRage}</p>
+        <p>{msn.rollOfMargin}</p> */}
+        <p>{msn.dificulty}</p>
+        <p>{msn.penaltyOrBonus}</p> 
+      </div>
+    )
+  }
+
   return (
     showData && (
       <div className="h-screen overflow-y-auto bg-ritual">
@@ -142,16 +154,7 @@ export default function Chat() {
                   <div key={index} className="w-full flex justify-end  text-black">
                     <div  className="rounded-xl w-1/2 p-2 bg-green-400 my-2">
                       <div>
-                        {
-                          msg.message && !msg.message.dificulty
-                          ? msg.message
-                          : <div>
-                          <p>{msg.message.rollOfRage}</p>
-                          <p>{msg.message.rollOfMargin}</p>
-                          <p>{msg.message.dificulty}</p>
-                          <p>{msg.message.penaltyOrBonus}</p>
-                        </div>
-                        }
+                        { messageSet(msg.message) }
                         </div>
                         <div className="flex justify-end pt-2">
                           <span>
@@ -162,30 +165,30 @@ export default function Chat() {
                   </div>
                 ) 
               }
-              return (
-                <div key={index} className="rounded-xl w-1/2 p-2 bg-blue-400 my-2 text-black">
-                  <div className="font-bold mb-2">
-                    {msg.user}
-                  </div>
-                  <div>
-                    {
-                      msg.message
-                      ? msg.message
-                      : <div>
-                          <p>{msg.message.rollOfRage}</p>
-                          <p>{msg.message.rollOfMargin}</p>
-                          <p>{msg.message.dificulty}</p>
-                          <p>{msg.message.penaltyOrBonus}</p>
-                        </div>
-                    }
-                  </div>
-                  <div className="flex justify-end pt-2">
-                    <span>
-                      {msg.date && msg.date.toDate().toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-              )
+              // return (
+              //   <div key={index} className="rounded-xl w-1/2 p-2 bg-blue-400 my-2 text-black">
+              //     <div className="font-bold mb-2">
+              //       {msg.user}
+              //     </div>
+              //     <div>
+              //       {
+              //         msg.message
+              //         ? msg.message
+              //         : <div>
+              //             <p>{msg.message.rollOfRage}</p>
+              //             <p>{msg.message.rollOfMargin}</p>
+              //             <p>{msg.message.dificulty}</p>
+              //             <p>{msg.message.penaltyOrBonus}</p>
+              //           </div>
+              //       }
+              //     </div>
+              //     <div className="flex justify-end pt-2">
+              //       <span>
+              //         {msg.date && msg.date.toDate().toLocaleString()}
+              //       </span>
+              //     </div>
+              //   </div>
+              // )
             })
           }
         </div>
