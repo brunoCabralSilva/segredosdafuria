@@ -104,9 +104,64 @@ export default function Chat() {
   };
 
   const messageSet = (msn) => {
-    if (typeof msn === 'string') {
-      return <div>{ msn }</div>
+    if (typeof msn === 'string') return (<div>{ msn }</div>);
+
+    let success = 0;
+    let fail = 0;
+    let brutal = 0;
+    let critical = 0;
+
+    for (let i = 0; i < msn.rollOfRage.length; i += 1) {
+      if (Number(Number(msn.rollOfRage[i])) === 10) {
+        critical += 1;
+      } else if (Number(msn.rollOfRage[i]) > 2 && Number(msn.rollOfRage[i]) < 6) {
+        fail += 1;
+      } else if (Number(msn.rollOfRage[i]) > 5 && Number(msn.rollOfRage[i]) < 10) {
+        success += 1;
+      } else {
+        brutal += 1;
+      }
     }
+
+    for (let i = 0; i < msn.rollOfMargin.length; i += 1) {
+      if (Number(msn.rollOfMargin[i]) === 10) {
+        critical += 1;
+      } else if (Number(msn.rollOfMargin[i]) > 2 && Number(msn.rollOfMargin[i]) < 6) {
+        fail += 1;
+      } else if (Number(msn.rollOfMargin[i]) > 5 && Number(msn.rollOfMargin[i]) < 10) {
+        success += 1;
+      } else {
+        fail += 1;
+      }
+    }
+
+    console.log('falhas ', fail, ', sucessos ', success, ' brutais ', brutal, ' critical ', critical);
+
+    let quantParesBrutais = 0;
+    let quantParesCriticals = 0;
+    if (brutal % 2 !== 0) {
+      brutal -= 1;
+    }
+    quantParesBrutais = brutal * 2;
+
+    console.log('falhas brutais ', quantParesBrutais);
+
+    if (critical % 2 !== 0 && critical !== 1) {
+      critical -= 1;
+    }
+
+    if (critical > 1) {
+      quantParesCriticals = critical * 2
+    } else {
+      quantParesCriticals = critical;
+    }
+
+    console.log('criticos ', quantParesCriticals);
+
+    let totalDeSucessosParaDano = quantParesBrutais + quantParesCriticals + success - Number(msn.dificulty);
+    const falhaBrutal = brutal > 1;
+    if (totalDeSucessosParaDano === 0) totalDeSucessosParaDano += 1;
+
     return(
       <div className="p-2">
         <div className="flex gap-1 flex-wrap">
@@ -147,10 +202,10 @@ export default function Chat() {
                     imgItem = 'critical.png';
                   } else if (Number(dice) > 2 && Number(dice) < 6) {
                     imgItem = 'falha.png';
-                  } else if (Number(dice) > 6 && Number(dice) < 10) {
+                  } else if (Number(dice) > 5 && Number(dice) < 10) {
                     imgItem = 'success.png';
                   } else {
-                    imgItem = 'brutal.png';
+                    imgItem = 'falha.png';
                   }
                   return (
                     <div key={index} className="flex flex-col items-center justify-center">
@@ -169,7 +224,41 @@ export default function Chat() {
             }
           </div>
         </div>
-        <div className="mb-3">Dificuldade: {msn.dificulty}</div>
+        <div>
+          {
+            falhaBrutal
+            ? <div>
+              {
+                totalDeSucessosParaDano >= 0
+                ? <div>
+                    <div>
+                      O jogador obteve sucesso se sua ação foi causar dano (Caso sua ação não tenha sido causar dano, ocorreu uma falha brutal)
+                    </div>
+                    <div>
+                      {` Número de Sucessos: ${quantParesBrutais + quantParesCriticals + success}`}
+                    </div>
+                    <div>{`Dificuldade: ${Number(msn.dificulty)}`}</div>
+                    <div>
+                      {`Excedente: ${totalDeSucessosParaDano}`}
+                    </div>
+                  </div>
+                : <div>{`O jogador falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e ele obteve ${Number(totalDeSucessosParaDano)} sucessos. `} </div>
+              }
+              </div>
+            : <div>
+                <div>
+                  O jogador obteve sucesso no seu teste
+                </div>
+                <div>
+                    {` Número de Sucessos: ${quantParesBrutais + quantParesCriticals + success}`}
+                  </div>
+                  <div>{`Dificuldade: ${Number(msn.dificulty)}`}</div>
+                  <div>
+                    {`Excedente: ${totalDeSucessosParaDano}`}
+                  </div>
+                </div>
+          }
+        </div>
       </div>
     )
   }
