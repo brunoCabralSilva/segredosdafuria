@@ -9,6 +9,10 @@ import { useRouter } from 'next/navigation';
 import { verify } from '../../firebase/user';
 import { jwtDecode } from 'jwt-decode';
 import Simplify from '@/components/simplify';
+import { FaDiceD20 } from "react-icons/fa";
+import { IoIosSend } from "react-icons/io";
+import { FaFile } from "react-icons/fa";
+import { FaArrowDown } from "react-icons/fa";
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -119,32 +123,48 @@ export default function Chat() {
             })
           }
         </div>
-        <div className="fixed bottom-0 w-full bg-black p-2 flex gap-3">
+        <div className="fixed bottom-0 w-full bg-black p-2 flex gap-3 items-center">
           <input
             type="text"
-            className="w-9/12 p-2 text-black"
+            className="w-full p-2 text-black"
             value={text}
             onChange={(e) => typeText(e)}
           />
-          <div className="grid grid-cols-4 w-3/12 gap-3">
-            <button
-              className="border border-white text-white h-full p-2"
-              onClick={sendMessage}
-            >
-              Enviar
-            </button>
-            <button className="border border-white text-white h-full p-2">
-              Dice
-            </button>
-            <button className="border border-white text-white h-full p-2">
-              Ficha
-            </button>
-            <button
-              className="border border-white text-white h-full p-2"
-              onClick={ scrollToBottom }
-            >
-              Fim
-            </button>
+          <div className="w-3/12 gap-3 grid grid-cols-5">
+            <div className="flex justify-center">
+              <button
+                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
+                title="Enviar uma mensagem"
+                onClick={sendMessage}
+              >
+                <IoIosSend />
+              </button>
+            </div>
+            <div className="flex justify-center">
+              <button
+                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
+                title="Realizar um teste com dados"
+              >
+                <FaDiceD20 />
+              </button>
+            </div>
+            <div className="flex justify-center">
+              <button
+                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
+                title="Acessar a sua ficha"
+              >
+                <FaFile />
+              </button>
+            </div>
+            <div className="flex justify-center">
+              <button
+                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
+                onClick={ scrollToBottom }
+                title="Ir para a mensagem mais recente"
+              >
+                <FaArrowDown />
+              </button>
+            </div>
           </div>
         </div>
       </div>
