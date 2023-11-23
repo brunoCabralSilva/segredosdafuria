@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   global: false,
   totalRenown: 0,
   simplify: false,
+  user: { firstName: '', lastName: '', email: ''  },
   type: { show: false, talisman: '', gift: '', ritual: '' },
   list: { talisman: [], gift: [], ritual: [] },
   feedback: { show: false, title: '' },
@@ -56,6 +57,12 @@ const slice: Slice = createSlice({
         totalRenown: parseInt(payload),
       };
     },
+    actionLogin(state, { payload }: PayloadAction<string>) {
+      return {
+        ...state,
+        user: payload,
+      };
+    },
     actionSimplify(state, { payload }: PayloadAction<boolean>) {
       return {
         ...state,
@@ -99,6 +106,7 @@ export const {
   actionClnSearchs,
   actionMessage,
   actionList,
+  actionLogin,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

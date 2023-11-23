@@ -3,9 +3,17 @@ import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDo
 import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { actionLogin, useSlice } from '@/redux/slice';
+import { useRouter } from 'next/navigation';
+import { verify } from '../../firebase/user';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Chat() {
+  const slice = useAppSelector(useSlice);
+  const dispatch = useAppDispatch();
   const [text, setText] = useState('');
+  const router = useRouter();
   const db = getFirestore(firestoreConfig);
   const messageRef = collection(db, "chatbot");
   const queryMessages = query(messageRef, orderBy("date"), limit(25));
@@ -13,8 +21,35 @@ export default function Chat() {
   const [showData, setShowData] = useState(true);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [])
+    setShowData(false);
+    window.scrollTo(0, 0);
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) {
+      try {
+        const decodedToken = verify(JSON.parse(token));
+        if (decodedToken) {
+          setShowData(true);
+          const { firstName, lastName, email } = jwtDecode(token);
+          dispatch(actionLogin({ firstName, lastName, email }));
+        }
+        else {
+          setShowData(false);
+          dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+          router.push('/sessions/login');
+        }
+      } catch(error) {
+        console.log(error);
+        dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+        // router.push('/sessions/login');
+        setShowData(true);
+      }
+    } else {
+        setShowData(false);
+        dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+        router.push('/sessions/login');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const typeText = (e) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -22,13 +57,14 @@ export default function Chat() {
   };
 
   const sendMessage = async () => {
-    if (text.trim() !== '') {
+    const { user } = slice;
+    if (text !== '' && text !== ' ') {
       await addDoc(
         messageRef,
         {
           message: text,
-          user: "bruno",
-          date: serverTimestamp()
+          user: user.firstName + ' ' + user.lastName,
+          date: serverTimestamp(),
         }
       );
       setText('');

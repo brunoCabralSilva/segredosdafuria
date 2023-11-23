@@ -5,6 +5,9 @@ import Footer from "@/components/footer";
 import Image from "next/image";
 import { login, verify } from "../../../firebase/user";
 import Simplify from "@/components/simplify";
+import { useAppDispatch } from "@/redux/hooks";
+import { actionLogin } from "@/redux/slice";
+import { jwtDecode } from "jwt-decode";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -12,17 +15,28 @@ export default function Login() {
   const [errorAuth, setErrorAuth] = useState(false);
   const [showData, setShowData] = useState(false);
   const router = useRouter();
-
+  const dispatch: any = useAppDispatch();
+  
   useEffect(() => {
     setShowData(false);
     window.scrollTo(0, 0);
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
-      const decodedToken = verify(JSON.parse(token));
-      if (decodedToken) router.push('/sessions');
-      else setShowData(true);
-    } else {
-      setShowData(true);
+      try {
+        const decodedToken = verify(JSON.parse(token));
+        if (decodedToken) {
+          const { firstName, lastName, email }: { firstName: string, lastName: string, email: string } = jwtDecode(token);
+          dispatch(actionLogin({ firstName, lastName, email }));
+          router.push('/sessions');
+        }
+        else setShowData(true);
+      } catch(error) {
+        setShowData(true);
+        dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+        router.push('/sessions/login');
+      }
+      } else {
+        setShowData(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -38,6 +52,7 @@ export default function Login() {
   const loginUser = async () => {
     const logs = await login(email, password);
     if (logs) {
+      dispatch(actionLogin(logs));
       router.push('/sessions');
     } else {
       setErrorAuth(true);
@@ -81,7 +96,6 @@ export default function Login() {
             <button
               className={`${enableButton() ? 'bg-gray-400 hover:bg-gray-600 hover:text-white transition-colors' : 'bg-black border-2 border-white hover:border-red-800 transition-colors text-white cursor-pointer'} w-1/2 p-2 mt-6 text-black font-bold` }
               id="btn-login"
-              onKeyPress={loginUser}
               disabled={ enableButton() }
               onClick={ loginUser }
             >
