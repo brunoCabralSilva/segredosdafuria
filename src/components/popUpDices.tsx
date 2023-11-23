@@ -1,5 +1,7 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
+import { useAppDispatch } from "@/redux/hooks";
+import { actionRollDice } from "@/redux/slice";
 import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
@@ -10,6 +12,7 @@ export default function PopUpDices() {
   const [valueOf, setValueOf] = useState<number>(0);
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
+  const dispatch = useAppDispatch();
 
   interface IUser {
     firstName: string;
@@ -58,12 +61,20 @@ export default function PopUpDices() {
         }
       );
     }
+    dispatch(actionRollDice(false));
   };
+
+  const disabledButton = () => {
+    return (valueOfRage == 0 && valueOf == 0) || dificulty <= 0;
+  }
 
   return(
     <div className="fixed w-full h-screen bg-black/80 z-50 flex items-center justify-center">
       <div className="relative p-10 bg-black flex flex-col items-center justify-center">
-          <IoIosCloseCircleOutline className="absolute top-0 right-0 text-4xl text-white mr-2 mt-2 cursor-pointer" />
+          <IoIosCloseCircleOutline
+            className="absolute top-0 right-0 text-4xl text-white mr-2 mt-2 cursor-pointer"
+            onClick={() => dispatch(actionRollDice(false))}
+          />
         <label htmlFor="valueofRage" className="mb-4 flex flex-col items-center">
           <p className="text-white">Dados de Fúria</p>
           <input
@@ -114,7 +125,8 @@ export default function PopUpDices() {
           />
         </label>
         <button
-          className="text-white bg-black border-2 border-white hover:border-red-800 transition-colorscursor-pointer w-full p-2 mt-6 font-bold"
+          className={`${disabledButton() ? 'text-black bg-gray-400 hover:bg-gray-600 hover:text-white transition-colors': 'text-white bg-black hover:border-red-800 transition-colors cursor-pointer' } border-2 border-white w-full p-2 mt-6 font-bold`}
+          disabled={disabledButton()}
           onClick={registerRoll}
         >
             Rolar dados

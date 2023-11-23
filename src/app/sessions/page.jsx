@@ -4,7 +4,7 @@ import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionLogin, useSlice } from '@/redux/slice';
+import { actionLogin, actionRollDice, useSlice } from '@/redux/slice';
 import { useRouter } from 'next/navigation';
 import { verify } from '../../firebase/user';
 import { jwtDecode } from 'jwt-decode';
@@ -28,11 +28,10 @@ export default function Chat() {
   const queryMessages = query(messageRef, orderBy("date"), limit(25));
   const [messages] = useCollectionData(queryMessages, { idField: "id" });
   const [showData, setShowData] = useState(true);
-  const [showDices, setShowDices] = useState(false);
 
   useEffect(() => {
     setShowData(false);
-    setShowDices(false);
+    dispatch(actionRollDice(false));
     window.scrollTo(0, 0);
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
@@ -96,30 +95,6 @@ export default function Chat() {
       scrollToBottom();
     }
   };
-
-  const returnRollOfRage = (roll) => {
-      const list = roll.rollOfRage.map((dice, index) => (
-        <div
-          key={index}
-          className="rounded-full border border-black w-10 h-10 p-2 flex items-center justify-center"
-        >
-            {dice}
-        </div>
-      ))
-      return list;
-  };
-
-  const returnRollOfMargin = (roll) => {
-    const list = roll.rollOfMargin.map((dice, index) => (
-      <div
-        key={index}
-        className="rounded-full border border-black w-10 h-10 p-2 flex items-center justify-center"
-      >
-          {dice}
-      </div>
-    ))
-    return list;
-};
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -203,7 +178,7 @@ export default function Chat() {
     showData && (
       <div className="h-screen overflow-y-auto bg-ritual">
         <Nav />
-        { showDices && <PopUpDices /> }
+        { slice.showRollDice && <PopUpDices /> }
         <div id="messages-container" className="h-90vh overflow-y-auto p-2">
           {
             messages && messages.map((msg, index) => {
@@ -262,7 +237,7 @@ export default function Chat() {
               <button
                 className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
                 title="Realizar um teste com dados"
-                onClick={() => setShowDices(true) }
+                onClick={() => dispatch(actionRollDice(true)) }
               >
                 <FaDiceD20 />
               </button>

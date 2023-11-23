@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   list: { talisman: [], gift: [], ritual: [] },
   feedback: { show: false, title: '' },
   message: { type: '', show: false, text: '' },
+  showRollDice: false,
 };
 
 const slice: Slice = createSlice({
@@ -91,6 +92,9 @@ const slice: Slice = createSlice({
     actionList(state, { payload }: PayloadAction<IList>) {
       return { ...state, list: payload };
     },
+    actionRollDice(state, { payload }: PayloadAction<IList>) {
+      return { ...state, showRollDice: payload };
+    },
   },
 });
 
@@ -107,6 +111,7 @@ export const {
   actionMessage,
   actionList,
   actionLogin,
+  actionRollDice,
 } = slice.actions;
 
 export const useSlice = (state: any) => {
