@@ -16,6 +16,7 @@ import { FaEraser } from "react-icons/fa";
 import firebaseConfig from '../../firebase/connection';
 import Nav from '@/components/nav';
 import PopUpDices from '@/components/popUpDices';
+import Image from 'next/image';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -128,22 +129,69 @@ export default function Chat() {
   };
 
   const messageSet = (msn) => {
-    console.log(msn);
     if (typeof msn === 'string') {
       return <div>{ msn }</div>
     }
     return(
-      <div>
-        <div className="mb-3">
-          Fúria: 
-          <div className="flex gap-1 flex-wrap">
-            { msn.rollOfRage.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
-          </div>
+      <div className="p-2">
+        <div className="flex gap-1 flex-wrap">
+          {
+            msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => {
+                let imgItem = '';
+                if (Number(dice) === 10) {
+                  imgItem = 'critical(rage).png';
+                } else if (Number(dice) > 2 && Number(dice) < 6) {
+                  imgItem = 'falha(rage).png';
+                } else if (Number(dice) > 5 && Number(dice) < 10) {
+                  imgItem = 'success(rage).png';
+                } else {
+                  imgItem = 'brutal(rage).png';
+                }
+                return (
+                  <div key={index} className="flex flex-col items-center justify-center">
+                    <Image
+                      alt={`Dado representando o valor ${dice}`}
+                      src={`/images/dices/${imgItem}`}
+                      width={500}
+                      height={500}
+                      className="w-20"
+                    />
+                    <span className="text-2xl font-bold mt-2">{dice}</span>
+                  </div>
+                )
+              }
+            )
+          }
         </div>
-        <div className="">
-          Parada Restante:
-          <div className="flex gap-1 flex-wrap mb-3">
-            { msn.rollOfMargin.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
+        <div className="p-2">
+          <div className="flex gap-1 flex-wrap">
+            {
+              msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => {
+                  let imgItem = '';
+                  if (Number(dice) === 10) {
+                    imgItem = 'critical.png';
+                  } else if (Number(dice) > 2 && Number(dice) < 6) {
+                    imgItem = 'falha.png';
+                  } else if (Number(dice) > 6 && Number(dice) < 10) {
+                    imgItem = 'success.png';
+                  } else {
+                    imgItem = 'brutal.png';
+                  }
+                  return (
+                    <div key={index} className="flex flex-col items-center justify-center">
+                      <Image
+                        alt={`Dado representando o valor ${dice}`}
+                        src={`/images/dices/${imgItem}`}
+                        width={500}
+                        height={500}
+                        className="w-20"
+                      />
+                      <span className="text-2xl font-bold mt-2">{dice}</span>
+                    </div>
+                  )
+                }
+              )
+            }
           </div>
         </div>
         <div className="mb-3">Dificuldade: {msn.dificulty}</div>
