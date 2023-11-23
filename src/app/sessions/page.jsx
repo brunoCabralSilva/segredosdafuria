@@ -184,7 +184,7 @@ export default function Chat() {
                       src={`/images/dices/${imgItem}`}
                       width={500}
                       height={500}
-                      className="w-10 sm:w-20"
+                      className="w-10 sm:w-14"
                     />
                     <span className="text-2xl font-bold mt-2">{dice}</span>
                   </div>
@@ -192,37 +192,33 @@ export default function Chat() {
               }
             )
           }
-        </div>
-        <div className="p-2">
-          <div className="flex gap-1 flex-wrap">
-            {
-              msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => {
-                  let imgItem = '';
-                  if (Number(dice) === 10) {
-                    imgItem = 'critical.png';
-                  } else if (Number(dice) > 2 && Number(dice) < 6) {
-                    imgItem = 'falha.png';
-                  } else if (Number(dice) > 5 && Number(dice) < 10) {
-                    imgItem = 'success.png';
-                  } else {
-                    imgItem = 'falha.png';
-                  }
-                  return (
-                    <div key={index} className="flex flex-col items-center justify-center">
-                      <Image
-                        alt={`Dado representando o valor ${dice}`}
-                        src={`/images/dices/${imgItem}`}
-                        width={500}
-                        height={500}
-                        className="w-10 sm:w-20"
-                      />
-                      <span className="text-2xl font-bold mt-2">{dice}</span>
-                    </div>
-                  )
+          {
+            msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => {
+                let imgItem = '';
+                if (Number(dice) === 10) {
+                  imgItem = 'critical.png';
+                } else if (Number(dice) > 2 && Number(dice) < 6) {
+                  imgItem = 'falha.png';
+                } else if (Number(dice) > 5 && Number(dice) < 10) {
+                  imgItem = 'success.png';
+                } else {
+                  imgItem = 'falha.png';
                 }
-              )
-            }
-          </div>
+                return (
+                  <div key={index} className="flex flex-col items-center justify-center">
+                    <Image
+                      alt={`Dado representando o valor ${dice}`}
+                      src={`/images/dices/${imgItem}`}
+                      width={500}
+                      height={500}
+                      className="w-10 sm:w-14"
+                    />
+                    <span className="text-2xl font-bold mt-2">{dice}</span>
+                  </div>
+                )
+              }
+            )
+          }
         </div>
         <div>
           {
