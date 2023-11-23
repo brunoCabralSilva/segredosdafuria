@@ -134,11 +134,17 @@ export default function Chat() {
     }
     return(
       <div>
-        <div className="flex gap-1 mb-3">
-          { msn.rollOfRage.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
+        <div className="mb-3">
+          Fúria: 
+          <div className="flex gap-1 flex-wrap">
+            { msn.rollOfRage.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
+          </div>
         </div>
-        <div className="flex gap-1">
-        { msn.rollOfMargin.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
+        <div className="">
+          Parada Restante:
+          <div className="flex gap-1 flex-wrap">
+            { msn.rollOfMargin.map((dice, index) => <div key={index} className="flex items-center justify-center rounded-full h-9 w-9 border border-black">{dice}</div>) }
+          </div>
         </div>
         <div>{msn.dificulty}</div>
         <div>{msn.penaltyOrBonus}</div> 
