@@ -89,7 +89,6 @@ export default function Chat() {
           user: user.firstName + ' ' + user.lastName,
           email: user.email,
           date: serverTimestamp(),
-          roll: '',
         }
       );
       setText('');
@@ -144,23 +143,23 @@ export default function Chat() {
                     <div  className="rounded-xl w-1/2 p-2 bg-green-400 my-2">
                       <div>
                         {
-                          msg.roll === ''
+                          msg.message && !msg.message.dificulty
                           ? msg.message
                           : <div>
                               <div>
                                 <span>Fúria:</span>
                                 <div className="flex gap-2">
-                                  {msg.roll && returnRollOfRage(msg.roll)}
+                                  {msg.message && returnRollOfRage(msg.message)}
                                 </div>
                               </div>
                               <div>
                                 <span>Parada Restante:</span>
                                 <div className="flex gap-2">
-                                  {msg.roll && returnRollOfMargin(returnRollOfMargin(msg.roll))}
+                                  {msg.message && returnRollOfMargin(msg.message)}
                                 </div>
                               </div>
-                              <p>Dificuldade: {msg.roll && msg.roll.dificulty}</p>
-                              <p>Penalidade / Bônus: {msg.roll && msg.roll.penaltyOrBonus}</p>
+                              <p>Dificuldade: {msg.message && msg.message.dificulty}</p>
+                              <p>Penalidade / Bônus: {msg.message && msg.message.penaltyOrBonus}</p>
                             </div>
                         }
                         </div>
@@ -183,10 +182,10 @@ export default function Chat() {
                       msg.message
                       ? msg.message
                       : <div>
-                          <p>{msg.roll.rollOfRage}</p>
-                          <p>{msg.roll.rollOfMargin}</p>
-                          <p>{msg.roll.dificulty}</p>
-                          <p>{msg.roll.penaltyOrBonus}</p>
+                          <p>{msg.message.rollOfRage}</p>
+                          <p>{msg.message.rollOfMargin}</p>
+                          <p>{msg.message.dificulty}</p>
+                          <p>{msg.message.penaltyOrBonus}</p>
                         </div>
                     }
                   </div>
