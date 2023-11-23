@@ -69,7 +69,7 @@ export default function PopUpDices() {
           <input
             type="number"
             id="valueOfRage"
-            className="p-2 text-center"
+            className="p-2 text-center text-black"
             value={valueOfRage}
             onChange={ (e: any) => {
               if (e.target.value >= 0) setValueOfRage(e.target.value);
@@ -82,7 +82,7 @@ export default function PopUpDices() {
           <input
             type="number"
             id="valueOf"
-            className="p-2 text-center"
+            className="p-2 text-center text-black"
             value={valueOf}
             onChange={ (e: any) => {
               if (e.target.value >= 0) setValueOf(e.target.value);
@@ -95,7 +95,7 @@ export default function PopUpDices() {
           <input
             type="number"
             id="penaltyOrBonus"
-            className="p-2 text-center"
+            className="p-2 text-center text-black"
             value={penaltyOrBonus}
             onChange={ (e: any) => setPenaltyOrBonus(e.target.value) }
           />
@@ -105,7 +105,7 @@ export default function PopUpDices() {
           <input
             type="number"
             id="dificulty"
-            className="p-2 text-center"
+            className="p-2 text-center text-black"
             value={dificulty}
             onChange={ (e: any) => {
               if (e.target.value >= 0) setDificulty(e.target.value);
