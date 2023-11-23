@@ -195,7 +195,6 @@ export default function Chat() {
           </div>
         </div>
         <div className="mb-3">Dificuldade: {msn.dificulty}</div>
-        <div>Penalidade: {msn.penaltyOrBonus}</div> 
       </div>
     )
   }
@@ -213,7 +212,7 @@ export default function Chat() {
               if (token && decode.email === msg.email) {
                 return(
                   <div key={index} className="w-full flex justify-end  text-black">
-                    <div  className="rounded-xl w-1/2 p-2 bg-green-400 my-2">
+                    <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-1/2 p-2 bg-green-400 my-2">
                       <div>
                         { messageSet(msg.message) }
                         </div>
@@ -227,7 +226,7 @@ export default function Chat() {
                 ) 
               }
               return (
-                <div key={index} className="rounded-xl w-1/2 p-2 bg-blue-400 my-2 text-black">
+                <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-1/2 p-2 bg-blue-400 my-2 text-black">
                   <div className="font-bold mb-2">
                     {msg.user}
                   </div>
