@@ -130,7 +130,7 @@ export default function Chat() {
   const messageSet = (msn) => {
     console.log(msn);
     if (typeof msn === 'string') {
-      return <div>msn</div>
+      return <div>{ msn }</div>
     }
     return(
       <div>
