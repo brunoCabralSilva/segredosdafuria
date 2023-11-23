@@ -168,30 +168,19 @@ export default function Chat() {
                   </div>
                 ) 
               }
-              // return (
-              //   <div key={index} className="rounded-xl w-1/2 p-2 bg-blue-400 my-2 text-black">
-              //     <div className="font-bold mb-2">
-              //       {msg.user}
-              //     </div>
-              //     <div>
-              //       {
-              //         msg.message
-              //         ? msg.message
-              //         : <div>
-              //             <p>{msg.message.rollOfRage}</p>
-              //             <p>{msg.message.rollOfMargin}</p>
-              //             <p>{msg.message.dificulty}</p>
-              //             <p>{msg.message.penaltyOrBonus}</p>
-              //           </div>
-              //       }
-              //     </div>
-              //     <div className="flex justify-end pt-2">
-              //       <span>
-              //         {msg.date && msg.date.toDate().toLocaleString()}
-              //       </span>
-              //     </div>
-              //   </div>
-              // )
+              return (
+                <div key={index} className="rounded-xl w-1/2 p-2 bg-blue-400 my-2 text-black">
+                  <div className="font-bold mb-2">
+                    {msg.user}
+                  </div>
+                  { messageSet(msg.message) }
+                  <div className="flex justify-end pt-2">
+                    <span>
+                      {msg.date && msg.date.toDate().toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+              )
             })
           }
         </div>
