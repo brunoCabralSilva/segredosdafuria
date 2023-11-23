@@ -70,17 +70,17 @@ export default function PopUpDices() {
 
   return(
     <div className="fixed w-full h-screen bg-black/80 z-50 flex items-center justify-center">
-      <div className="relative p-10 bg-black flex flex-col items-center justify-center">
+      <div className="w-8/10 relative p-10 bg-black flex flex-col items-center justify-center">
           <IoIosCloseCircleOutline
             className="absolute top-0 right-0 text-4xl text-white mr-2 mt-2 cursor-pointer"
             onClick={() => dispatch(actionRollDice(false))}
           />
         <label htmlFor="valueofRage" className="mb-4 flex flex-col items-center">
-          <p className="text-white">Dados de Fúria</p>
+          <p className="text-white w-full text-center">Dados de Fúria</p>
           <input
             type="number"
             id="valueOfRage"
-            className="p-2 text-center text-black"
+            className="p-2 text-center text-black w-full"
             value={valueOfRage}
             onChange={ (e: any) => {
               if (e.target.value >= 0) setValueOfRage(e.target.value);
@@ -89,11 +89,11 @@ export default function PopUpDices() {
           />
         </label>
         <label htmlFor="valueof" className="mb-4 flex flex-col items-center">
-          <p className="text-white">Parada de Dados Restante</p>
+          <p className="text-white w-full text-center">Parada de Dados Restante</p>
           <input
             type="number"
             id="valueOf"
-            className="p-2 text-center text-black"
+            className="p-2 text-center text-black w-full"
             value={valueOf}
             onChange={ (e: any) => {
               if (e.target.value >= 0) setValueOf(e.target.value);
@@ -102,21 +102,21 @@ export default function PopUpDices() {
           />
         </label>
         <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center">
-          <p className="text-white">Penalidade ou bônus caso possua</p>
+          <p className="text-white w-full text-center">Penalidade ou bônus caso possua</p>
           <input
             type="number"
             id="penaltyOrBonus"
-            className="p-2 text-center text-black"
+            className="p-2 text-center text-black w-full"
             value={penaltyOrBonus}
             onChange={ (e: any) => setPenaltyOrBonus(e.target.value) }
           />
         </label>
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center">
-          <p className="text-white">Qual a dificuldade?</p>
+          <p className="text-white w-full text-center">Qual a dificuldade?</p>
           <input
             type="number"
             id="dificulty"
-            className="p-2 text-center text-black"
+            className="p-2 text-center text-black w-full"
             value={dificulty}
             onChange={ (e: any) => {
               if (e.target.value >= 0) setDificulty(e.target.value);

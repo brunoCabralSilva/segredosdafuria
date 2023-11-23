@@ -11,8 +11,10 @@ import { jwtDecode } from 'jwt-decode';
 import { FaDiceD20 } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import { FaFile } from "react-icons/fa";
-import { FaArrowDown } from "react-icons/fa";
 import { FaEraser } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+import { RxUpdate } from "react-icons/rx";
+import { FaAngleDown } from "react-icons/fa6";
 import firebaseConfig from '../../firebase/connection';
 import Nav from '@/components/nav';
 import PopUpDices from '@/components/popUpDices';
@@ -28,6 +30,7 @@ export default function Chat() {
   const queryMessages = query(messageRef, orderBy("date"), limit(25));
   const [messages] = useCollectionData(queryMessages, { idField: "id" });
   const [showData, setShowData] = useState(true);
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     setShowData(false);
@@ -272,7 +275,7 @@ export default function Chat() {
               if (token && decode.email === msg.email) {
                 return(
                   <div key={index} className="w-full flex justify-end  text-black">
-                    <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-1/2 p-2 bg-green-400 my-2">
+                    <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-400 my-2">
                       <div>
                         { messageSet(msg.message) }
                         </div>
@@ -286,7 +289,7 @@ export default function Chat() {
                 ) 
               }
               return (
-                <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-1/2 p-2 bg-blue-400 my-2 text-black">
+                <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-blue-400 my-2 text-black">
                   <div className="font-bold mb-2">
                     {msg.user}
                   </div>
@@ -301,61 +304,88 @@ export default function Chat() {
             })
           }
         </div>
-        <div className="fixed bottom-0 w-full bg-black p-2 flex gap-3 items-center">
-          <input
-            type="text"
-            className="w-full p-2 text-black"
-            value={text}
-            onChange={(e) => typeText(e)}
-          />
-          <div className={`w-3/12 gap-3 grid ${slice.user.role === 'admin' ? 'grid-cols-5': 'grid-cols-4'}`}>
-            <div className="flex justify-center">
-              <button
-                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
-                title="Enviar uma mensagem"
-                onClick={sendMessage}
-              >
-                <IoIosSend />
-              </button>
+        <div className="fixed bottom-0 w-full bg-black p-2 flex flex-col gap-2 items-center">
+          { showOptions &&
+            <div className="flex items-center justify-end w-full gap-2">
+              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                <button
+                  className="p-2"
+                  title="Realizar um teste com dados"
+                  onClick={() => {
+                    dispatch(actionRollDice(true));
+                    setShowOptions(false);
+                  }}
+                >
+                  <FaDiceD20 />
+                </button>
+              </div>
+              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                <button
+                  className="p-2"
+                  title="Acessar a sua ficha"
+                  onClick={() => {
+                    setShowOptions(false);
+                  }}
+                >
+                  <FaFile />
+                </button>
+              </div>
+              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                <button
+                  className="p-2"
+                  onClick={() => {
+                    scrollToBottom();
+                    setShowOptions(false);
+                  }}
+                  title="Ir para a mensagem mais recente"
+                >
+                  <RxUpdate />
+                </button>
+              </div>
+              { 
+                slice.user.role === 'admin'&&
+                  <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                    <button
+                      className="p-2"
+                      title="Apagar o histórico de conversas"
+                      onClick={() => {
+                        clearMessages();
+                        setShowOptions(false);
+                      }}
+                    >
+                      <FaEraser />
+                    </button>
+                  </div>
+              }
             </div>
-            <div className="flex justify-center">
-              <button
-                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
-                title="Realizar um teste com dados"
-                onClick={() => dispatch(actionRollDice(true)) }
-              >
-                <FaDiceD20 />
-              </button>
+          }
+          <div className="flex w-full items-end">
+            <textarea
+              rows={Math.max(1, Math.ceil(text.length / 40))}
+              className="w-full p-2 text-black"
+              value={text}
+              onChange={(e) => typeText(e)}
+            />
+            <div className="pl-2 gap-2 flex">
+              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                <button
+                  className="p-2"
+                  title="Enviar uma mensagem"
+                  onClick={sendMessage}
+                >
+                  <IoIosSend />
+                </button>
+              </div>
+              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                <button
+                  className="p-2"
+                  title="Enviar uma mensagem"
+                  onClick={() => setShowOptions(!showOptions)}
+                >
+                  {showOptions? <FaAngleDown /> : <FaPlus /> }
+                </button>
+              </div>
             </div>
-            <div className="flex justify-center">
-              <button
-                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
-                title="Acessar a sua ficha"
-              >
-                <FaFile />
-              </button>
-            </div>
-            <div className="flex justify-center">
-              <button
-                className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
-                onClick={ scrollToBottom }
-                title="Ir para a mensagem mais recente"
-              >
-                <FaArrowDown />
-              </button>
-            </div>
-            { 
-              slice.user.role === 'admin'&&
-                <div className="flex justify-center">
-                  <button
-                    className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
-                    title="Apagar o histórico de conversas"
-                    onClick={clearMessages}
-                  >
-                    <FaEraser />
-                  </button>
-                </div>
-            }
           </div>
         </div>
       </div>
