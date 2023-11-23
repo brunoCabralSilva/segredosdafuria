@@ -107,7 +107,7 @@ export default function Chat() {
   };
 
   const messageSet = (msn) => {
-    if (typeof msn === 'string') return (<div>{ msn }</div>);
+    if (typeof msn === 'string') return (<div className="break-all">{ msn }</div>);
 
     let success = 0;
     let fail = 0;
@@ -137,8 +137,6 @@ export default function Chat() {
         fail += 1;
       }
     }
-
-    console.log('falhas ', fail, ', sucessos ', success, ' brutais ', brutal, ' critical ', critical);
 
     let quantParesBrutais = 0;
     let quantParesCriticals = 0;
@@ -189,7 +187,6 @@ export default function Chat() {
                       height={500}
                       className="w-10 sm:w-14"
                     />
-                    <span className="text-2xl font-bold mt-2">{dice}</span>
                   </div>
                 )
               }
@@ -216,12 +213,33 @@ export default function Chat() {
                       height={500}
                       className="w-10 sm:w-14"
                     />
-                    <span className="text-2xl font-bold mt-2">{dice}</span>
                   </div>
                 )
               }
             )
           }
+        </div>
+        <div className="py-2 pl-1 font-bold">
+          <span>{'( '}</span>
+          {
+            msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => {
+              if(index === msn.rollOfRage.length -1 && msn.rollOfMargin.length === 0) {
+                return <span className="md:pl-2" key={index}>{ dice } </span>
+              } 
+              if(index === msn.rollOfRage.length -1) {
+                return <span className="md:pl-2" key={index}>{ dice } <span className="md:pl-2">/</span> </span>
+              }
+                return <span className="md:pl-2" key={index}>{ dice }, </span>;
+            })
+          }
+          {
+            msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => {
+              if(index === msn.rollOfMargin.length -1) {
+                return <span className="md:pl-2" key={index}>{ dice } </span>
+              } return <span className="md:pl-2" key={index}>{ dice }, </span>;
+            })
+          }
+          <span>{' )'}</span>
         </div>
         <div>
           {
@@ -229,31 +247,53 @@ export default function Chat() {
             ? <div>
               {
                 totalDeSucessosParaDano >= 0
-                ? <div>
-                    <div>
-                      O jogador obteve sucesso se sua ação foi causar dano (Caso sua ação não tenha sido causar dano, ocorreu uma falha brutal)
-                    </div>
-                    <div>
-                      {` Número de Sucessos: ${quantParesBrutais + quantParesCriticals + success}`}
-                    </div>
-                    <div>{`Dificuldade: ${Number(msn.dificulty)}`}</div>
-                    <div>
-                      {`Excedente: ${totalDeSucessosParaDano}`}
-                    </div>
+                ? <div className="w-full">
+                <div className="font-bold py-2 text-center md:text-left">
+                  { 'O jogador obteve sucesso se sua ação foi CAUSAR DANO (Caso sua ação não tenha sido CAUSAR DANO, ocorreu uma falha brutal)' }
+                </div>
+                <div className="flex md:justify-start justify-center items-center">
+                    <span className="">{`Sucessos: `}</span>
+                    <span className="font-bold w-10 px-3">
+                      {quantParesBrutais + quantParesCriticals + success}
+                    </span>
+                </div>
+                <div className="flex md:justify-start justify-center items-center">
+                    <span className="">{`Dificuldade: `}</span>
+                    <span className="font-bold w-10 px-3">
+                      {Number(msn.dificulty)}
+                    </span>
                   </div>
+                  <div className="flex md:justify-start justify-center items-center w-full flex-wrap">
+                    <span className="">{`Excedente: `}</span>
+                    <span className="font-bold px-3">
+                      {Number(totalDeSucessosParaDano) <= 0 ? 'Nenhum' : totalDeSucessosParaDano}
+                    </span>
+                  </div>
+                </div>
                 : <div>{`O jogador falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e ele obteve ${Number(totalDeSucessosParaDano)} sucessos. `} </div>
               }
               </div>
-            : <div>
-                <div>
-                  O jogador obteve sucesso no seu teste
-                </div>
-                <div>
-                    {` Número de Sucessos: ${quantParesBrutais + quantParesCriticals + success}`}
+            : <div className="w-full">
+                  <div className="font-bold py-2">
+                    O jogador obteve sucesso no seu teste!
                   </div>
-                  <div>{`Dificuldade: ${Number(msn.dificulty)}`}</div>
-                  <div>
-                    {`Excedente: ${totalDeSucessosParaDano}`}
+                  <div className="flex md:justify-start justify-center items-center">
+                    <span className="">{`Sucessos: `}</span>
+                    <span className="font-bold w-10 px-3">
+                      {quantParesBrutais + quantParesCriticals + success}
+                    </span>
+                  </div>
+                  <div className="flex md:justify-start justify-center items-center">
+                    <span className="">{`Dificuldade: `}</span>
+                    <span className="font-bold w-10 px-3">
+                      {Number(msn.dificulty)}
+                    </span>
+                  </div>
+                  <div className="flex md:justify-start justify-center items-center w-full flex-wrap">
+                    <span className="">{`Excedente: `}</span>
+                    <span className="font-bold px-3">
+                      {Number(totalDeSucessosParaDano) <= 0 ? 'Nenhum' : totalDeSucessosParaDano}
+                    </span>
                   </div>
                 </div>
           }
