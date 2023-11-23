@@ -8,6 +8,7 @@ import { actionLogin } from "@/redux/slice";
 import { jwtDecode } from "jwt-decode";
 import Simplify from "@/components/simplify";
 import Image from "next/image";
+import Nav from "@/components/nav";
 
 export default function Register() {
   const [firstName, setFirstName] = useState('');
@@ -24,7 +25,7 @@ export default function Register() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+    dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
     localStorage.removeItem('Segredos Da Fúria');
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,6 +91,7 @@ export default function Register() {
   return(
     <section>
       <Simplify />
+      <Nav />
       <div className="principal-div">
         <section className="min-h-screen flex flex-col items-center justify-center bg-ritual bg-cover">
           <div className="flex flex-col items-center justify-center bg-black/80 h-full w-full p-10 text-white">

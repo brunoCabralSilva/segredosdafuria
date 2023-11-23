@@ -8,6 +8,7 @@ import Simplify from "@/components/simplify";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionLogin } from "@/redux/slice";
 import { jwtDecode } from "jwt-decode";
+import Nav from "@/components/nav";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -25,14 +26,14 @@ export default function Login() {
       try {
         const decodedToken = verify(JSON.parse(token));
         if (decodedToken) {
-          const { firstName, lastName, email }: { firstName: string, lastName: string, email: string } = jwtDecode(token);
-          dispatch(actionLogin({ firstName, lastName, email }));
+          const { firstName, lastName, email, role }: { firstName: string, lastName: string, email: string, role: string } = jwtDecode(token);
+          dispatch(actionLogin({ firstName, lastName, email, role }));
           router.push('/sessions');
         }
         else setShowData(true);
       } catch(error) {
         setShowData(true);
-        dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+        dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
         router.push('/sessions/login');
       }
       } else {
@@ -66,35 +67,36 @@ export default function Login() {
     showData &&
     <section>
       <Simplify />
+      <Nav />
       <div className="h-screen flex flex-col items-center justify-center bg-ritual bg-cover">
-        <section className="flex flex-col items-center justify-center bg-black/80 h-full w-full p-10 text-white">
+        <section className="flex flex-col items-center sm:justify-center bg-black/80 h-full w-full py-10 px-2 sm:p-10 text-white">
           <Image
             src="/images/logos/text.png"
             alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
-            className="h-50vh sm:h-70vh md:h-20vh w-10/12 sm:w-3/5 md:w-1/2 xl:w-5/12 object-contain"
+            className="h-20vh sm:h-70vh md:h-20vh w-10/12 sm:w-3/5 md:w-1/2 xl:w-5/12 object-contain"
             width={2000}
             height={800}
             priority
           />
           <div className="flex flex-col items-center justify-center w-full">
             <input
-              className="p-2 text-center mt-10 w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
+              className="p-2 text-center mt-10 w-11/12 sm:w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
               id="email"
               autoComplete="off"
               value={email}
-              placeholder="Digite seu E-mail aqui"
+              placeholder="E-mail"
               onChange={ (e) => setEmail(e.target.value) }
               type="email"
             />
             <input
-              className="p-2 text-center mt-5 w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
-              placeholder="Digite sua senha aqui"
+              className="p-2 text-center mt-5 w-11/12 sm:w-1/2 bg-transparent border border-transparent focus:outline-none border-b-white"
+              placeholder="Senha"
               value={password}
               onChange={ (e) => setPassword(e.target.value) }
               type="password"
             />
             <button
-              className={`${enableButton() ? 'bg-gray-400 hover:bg-gray-600 hover:text-white transition-colors' : 'bg-black border-2 border-white hover:border-red-800 transition-colors text-white cursor-pointer'} w-1/2 p-2 mt-6 text-black font-bold` }
+              className={`${enableButton() ? 'bg-gray-400 hover:bg-gray-600 hover:text-white transition-colors' : 'bg-black border-2 border-white hover:border-red-800 transition-colors text-white cursor-pointer'} w-11/12 sm:w-1/2 p-2 mt-6 text-black font-bold` }
               id="btn-login"
               disabled={ enableButton() }
               onClick={ loginUser }

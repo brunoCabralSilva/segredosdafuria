@@ -23,7 +23,7 @@ export const getUser = async (email: string, password: string) => {
     }
     return null;
   } catch (error) {
-    console.error('Error getting user:', error);
+    window.alert('Error getting user: ' + error);
     return error;
   }
 };
@@ -35,14 +35,12 @@ export const login = async (email: string, password: string) => {
 
     if (!response) return null;
 
-    console.log(response);
-    console.log(secretKey);
     const token = jwt.sign(response, secretKey, { expiresIn: '4h' });
     localStorage.setItem('Segredos Da Fúria', JSON.stringify(token));
 
     return response;
-  } catch (error) {
-    console.error('Error signing token:', error);
+  } catch (error: any) {
+    window.alert('Error signing token: ' + error);
     return null;
   }
 };
@@ -67,7 +65,7 @@ export const verifyEmail = async (email: string) => {
     const querySnapshot = await getDocs(getData);
     return !querySnapshot.empty;
   } catch (error) {
-    console.error('Error verifying email:', error);
+    window.alert('Error verifying email: ' + error);
     return false;
   }
 };

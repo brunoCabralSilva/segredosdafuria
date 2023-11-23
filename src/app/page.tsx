@@ -9,6 +9,7 @@ import Simplify from '@/components/simplify';
 import { actionFeedback, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Feedback from '@/components/feedback';
+import Nav from '@/components/nav';
 
 export default function Home() {
   const describe = useRef<HTMLDivElement | null>(null);
@@ -116,6 +117,14 @@ export default function Home() {
             className={`bg-08 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
             <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Talismãs</p>
+          </motion.div>
+        </Link>
+        <Link href="/sessions/login" className="col-span-2 sm:row-span-2 sm:col-span-8">
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-boca01 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sessões</p>
           </motion.div>
         </Link>
       </div>

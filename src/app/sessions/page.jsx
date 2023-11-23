@@ -1,5 +1,5 @@
 'use client'
-import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDoc } from 'firebase/firestore';
+import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDoc, getDocs, deleteDoc } from 'firebase/firestore';
 import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useState } from 'react';
@@ -8,11 +8,13 @@ import { actionLogin, useSlice } from '@/redux/slice';
 import { useRouter } from 'next/navigation';
 import { verify } from '../../firebase/user';
 import { jwtDecode } from 'jwt-decode';
-import Simplify from '@/components/simplify';
 import { FaDiceD20 } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 import { FaFile } from "react-icons/fa";
 import { FaArrowDown } from "react-icons/fa";
+import { FaEraser } from "react-icons/fa";
+import firebaseConfig from '../../firebase/connection';
+import Nav from '@/components/nav';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -34,23 +36,23 @@ export default function Chat() {
         const decodedToken = verify(JSON.parse(token));
         if (decodedToken) {
           setShowData(true);
-          const { firstName, lastName, email } = jwtDecode(token);
-          dispatch(actionLogin({ firstName, lastName, email }));
+          const { firstName, lastName, email, role } = jwtDecode(token);
+          dispatch(actionLogin({ firstName, lastName, email, role }));
         }
         else {
           setShowData(false);
-          dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+          dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
           router.push('/sessions/login');
         }
       } catch(error) {
         console.log(error);
-        dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+        dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
         // router.push('/sessions/login');
         setShowData(true);
       }
     } else {
         setShowData(false);
-        dispatch(actionLogin({ firstName: '', lastName: '', email: '' }));
+        dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
         router.push('/sessions/login');
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,6 +61,19 @@ export default function Chat() {
   const typeText = (e) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
     setText(sanitizedValue);
+  };
+
+  const clearMessages = async () => {
+    const db = getFirestore(firebaseConfig);
+    const messagesRef = collection(db, 'chatbot');
+    try {
+      const querySnapshot = await getDocs(messagesRef);
+      querySnapshot.forEach(async (doc) => {
+        await deleteDoc(doc.ref);
+      });
+    } catch (error) {
+      window.alert('Erro ao remover dados da coleção:', error);
+    }
   };
 
   const sendMessage = async () => {
@@ -88,6 +103,7 @@ export default function Chat() {
   return (
     showData && (
       <div className="h-screen overflow-y-auto bg-ritual">
+        <Nav />
         <div id="messages-container" className="h-90vh overflow-y-auto p-2">
           {
             messages && messages.map((msg, index) => {
@@ -96,7 +112,7 @@ export default function Chat() {
               if (token && decode.email === msg.email) {
                 return(
                   <div key={index} className="w-full flex justify-end">
-                  <div  className="rounded-xl w-1/2 p-2 bg-green-500 my-2">
+                  <div  className="rounded-xl w-1/2 p-2 bg-green-400 my-2">
                     <div>{msg.message}</div>
                     <div className="flex justify-end pt-2">
                       <span>
@@ -108,7 +124,7 @@ export default function Chat() {
                 ) 
               }
               return (
-                <div key={index} className="rounded-xl w-1/2 p-2 bg-gray-500 my-2">
+                <div key={index} className="rounded-xl w-1/2 p-2 bg-blue-400 my-2">
                   <div className="font-bold mb-2">
                     {msg.user}
                   </div>
@@ -130,7 +146,7 @@ export default function Chat() {
             value={text}
             onChange={(e) => typeText(e)}
           />
-          <div className="w-3/12 gap-3 grid grid-cols-5">
+          <div className={`w-3/12 gap-3 grid ${slice.user.role === 'admin' ? 'grid-cols-5': 'grid-cols-4'}`}>
             <div className="flex justify-center">
               <button
                 className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
@@ -165,6 +181,18 @@ export default function Chat() {
                 <FaArrowDown />
               </button>
             </div>
+            { 
+              slice.user.role === 'admin'&&
+                <div className="flex justify-center">
+                  <button
+                    className="border border-white text-white rounded-full p-2 hover:text-black hover:bg-white transition-colors"
+                    title="Apagar o histórico de conversas"
+                    onClick={clearMessages}
+                  >
+                    <FaEraser />
+                  </button>
+                </div>
+            }
           </div>
         </div>
       </div>
