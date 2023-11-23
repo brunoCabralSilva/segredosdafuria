@@ -2,7 +2,7 @@
 import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDoc } from 'firebase/firestore';
 import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Chat() {
   const [text, setText] = useState('');
@@ -11,6 +11,10 @@ export default function Chat() {
   const queryMessages = query(messageRef, orderBy("date"), limit(25));
   const [messages] = useCollectionData(queryMessages, { idField: "id" });
   const [showData, setShowData] = useState(true);
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [])
 
   const typeText = (e) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -55,7 +59,7 @@ export default function Chat() {
         <div className="fixed bottom-0 w-full bg-black p-2 flex gap-3">
           <input
             type="text"
-            className="w-9/12 p-2"
+            className="w-9/12 p-2 text-black"
             value={text}
             onChange={(e) => typeText(e)}
           />
