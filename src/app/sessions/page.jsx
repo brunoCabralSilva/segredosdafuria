@@ -217,7 +217,7 @@ export default function Chat() {
                         { messageSet(msg.message) }
                         </div>
                         <div className="flex justify-end pt-2">
-                          <span>
+                          <span className="w-full text-right">
                             {msg.date && msg.date.toDate().toLocaleString()}
                           </span>
                         </div>
@@ -232,9 +232,9 @@ export default function Chat() {
                   </div>
                   { messageSet(msg.message) }
                   <div className="flex justify-end pt-2">
-                    <span>
-                      {msg.date && msg.date.toDate().toLocaleString()}
-                    </span>
+                      <span className="w-full text-right">
+                        {msg.date && msg.date.toDate().toLocaleString()}
+                      </span>
                   </div>
                 </div>
               )
