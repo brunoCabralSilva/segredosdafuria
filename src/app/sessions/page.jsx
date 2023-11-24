@@ -315,39 +315,43 @@ export default function Chat() {
           <div className="flex flex-col w-full relative">
             <div id="messages-container" className={`relative h-screen overflow-y-auto pt-2 px-2 pb-14`}>
               {
-                messages && messages.map((msg, index) => {
-                  const token = localStorage.getItem('Segredos Da Fúria');
-                  const decode = jwtDecode(token);
-                  if (token && decode.email === msg.email) {
-                    return(
-                      <div key={index} className="w-full flex justify-end  text-white">
-                        <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-whats mb-2">
-                          <div>
-                            { messageSet(msg.message) }
+                messages && messages.length > 0
+                ? messages && messages.map((msg, index) => {
+                      const token = localStorage.getItem('Segredos Da Fúria');
+                      const decode = jwtDecode(token);
+                      if (token && decode.email === msg.email) {
+                        return(
+                          <div key={index} className="w-full flex justify-end  text-white">
+                            <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-whats mb-2">
+                              <div>
+                                { messageSet(msg.message) }
+                                </div>
+                                <div className="flex justify-end pt-2">
+                                  <span className="w-full text-right">
+                                    {msg.date && msg.date.toDate().toLocaleString()}
+                                  </span>
+                                </div>
                             </div>
-                            <div className="flex justify-end pt-2">
+                          </div>
+                        ) 
+                      }
+                      return (
+                        <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-gray-whats my-2 text-white">
+                          <div className="font-bold mb-2 ml-2 capitalize">
+                            {msg.user}
+                          </div>
+                          { messageSet(msg.message) }
+                          <div className="flex justify-end pt-2">
                               <span className="w-full text-right">
                                 {msg.date && msg.date.toDate().toLocaleString()}
                               </span>
-                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ) 
-                  }
-                  return (
-                    <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-gray-whats my-2 text-white">
-                      <div className="font-bold mb-2 ml-2 capitalize">
-                        {msg.user}
-                      </div>
-                      { messageSet(msg.message) }
-                      <div className="flex justify-end pt-2">
-                          <span className="w-full text-right">
-                            {msg.date && msg.date.toDate().toLocaleString()}
-                          </span>
-                      </div>
-                    </div>
-                  )
-                })
+                      )
+                  })
+                : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
+                  <span className="loader z-50" />
+                  </div>
               }
             </div>
             <div className="absolute bottom-0 w-full bg-black p-2 flex flex-col gap-2 items-center">

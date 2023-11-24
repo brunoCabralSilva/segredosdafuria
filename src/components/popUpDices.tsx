@@ -7,7 +7,6 @@ import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import { useState } from "react";
 import { FaChevronLeft, FaMinus, FaPlus } from "react-icons/fa";
-import { IoIosCloseCircleOutline, IoIosReturnLeft } from "react-icons/io";
 
 export default function PopUpDices() {
   const [valueOfRage, setValueOfRage] = useState<number>(0);
@@ -47,7 +46,7 @@ export default function PopUpDices() {
     const messagesRef = collection(db, 'chatbot');
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
-      const { firstName, lastName, email, role }: IUser = jwtDecode(token);
+      const { firstName, lastName, email }: IUser = jwtDecode(token);
       await addDoc(
         messagesRef,
         {
@@ -77,8 +76,8 @@ export default function PopUpDices() {
             onClick={() => dispatch(actionRollDice(false))}
           />
         <label htmlFor="valueofRage" className="mb-4 flex flex-col items-center">
-          <p className="text-white w-full pb-3">Dados de Fúria</p>
-          <div className="grid grid-cols-5 gap-2 w-full">
+          <p className="text-white w-full pb-3">Dados de Fúria ( { valueOfRage } )</p>
+          <div className="grid grid-cols-5 gap-2 w-full p-2 bg-gray-400">
             <Image
               alt="Dado de 10 faces"
               src={`/images/dices/${valueOfRage >= 1 ? 'falha(rage).png' : 'falha.png'}`}
