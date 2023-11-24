@@ -15,6 +15,9 @@ const config: Config = {
       'xl':	'1280px',
       '2xl': '1536px',
     },
+    minHeight: {
+      '10vh': '10vh',
+    },
     extend: {
       backgroundImage: {
         'ritual': "url('/images/26.jpg')",
