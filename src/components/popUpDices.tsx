@@ -6,8 +6,8 @@ import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/fire
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import { useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { FaChevronLeft, FaMinus, FaPlus } from "react-icons/fa";
+import { IoIosCloseCircleOutline, IoIosReturnLeft } from "react-icons/io";
 
 export default function PopUpDices() {
   const [valueOfRage, setValueOfRage] = useState<number>(0);
@@ -72,8 +72,8 @@ export default function PopUpDices() {
 
   return(
       <div className="w-8/10 p-10 bg-black flex flex-col items-center justify-center h-screen z-50 top-0 right-0">
-          <IoIosCloseCircleOutline
-            className="absolute top-0 right-0 text-4xl text-white mr-2 mt-2 cursor-pointer"
+          <FaChevronLeft
+            className="absolute top-0 left-0 text-3xl text-white ml-2 mt-2 cursor-pointer"
             onClick={() => dispatch(actionRollDice(false))}
           />
         <label htmlFor="valueofRage" className="mb-4 flex flex-col items-center">

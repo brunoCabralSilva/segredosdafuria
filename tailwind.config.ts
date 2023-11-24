@@ -33,6 +33,10 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'gray-whats': '#202C33',
+        'green-whats': '#005C4B',
+      },
       spacing: {
         '15vh': '15vh',
         '20vh': '20vh',

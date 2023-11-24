@@ -113,7 +113,7 @@ export default function Chat() {
   };
 
   const messageSet = (msn) => {
-    if (typeof msn === 'string') return (<div className="p-2 break-all">{ msn }</div>);
+    if (typeof msn === 'string') return (<div className="pt-2 px-2 break-all">{ msn }</div>);
 
     let success = 0;
     let fail = 0;
@@ -311,7 +311,7 @@ export default function Chat() {
       <div className="h-screen overflow-y-auto bg-ritual">
         <Nav />
         {/* <Simplify /> */}
-        <div className="flex">
+        <div className="flex bg-black/80">
           <div className="flex flex-col w-full relative">
             <div id="messages-container" className={`relative h-screen overflow-y-auto pt-2 px-2 pb-14`}>
               {
@@ -320,8 +320,8 @@ export default function Chat() {
                   const decode = jwtDecode(token);
                   if (token && decode.email === msg.email) {
                     return(
-                      <div key={index} className="w-full flex justify-end  text-black">
-                        <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-400 my-2">
+                      <div key={index} className="w-full flex justify-end  text-white">
+                        <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-whats mb-2">
                           <div>
                             { messageSet(msg.message) }
                             </div>
@@ -335,7 +335,7 @@ export default function Chat() {
                     ) 
                   }
                   return (
-                    <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-blue-400 my-2 text-black">
+                    <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-gray-whats my-2 text-white">
                       <div className="font-bold mb-2 ml-2 capitalize">
                         {msg.user}
                       </div>
