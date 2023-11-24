@@ -19,6 +19,7 @@ import firebaseConfig from '../../firebase/connection';
 import Nav from '@/components/nav';
 import PopUpDices from '@/components/popUpDices';
 import Image from 'next/image';
+import Simplify from '@/components/simplify';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -157,8 +158,6 @@ export default function Chat() {
       quantParesCriticals = critical;
     }
 
-    console.log('criticos ', quantParesCriticals);
-
     let totalDeSucessosParaDano = quantParesBrutais + quantParesCriticals + success - Number(msn.dificulty);
     const falhaBrutal = brutal > 1;
     if (totalDeSucessosParaDano === 0) totalDeSucessosParaDano += 1;
@@ -219,7 +218,7 @@ export default function Chat() {
             )
           }
         </div>
-        <div className="py-2 pl-1 font-bold">
+        {/* <div className="py-2 pl-1 font-bold">
           <span>{'( '}</span>
           {
             msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => {
@@ -240,7 +239,7 @@ export default function Chat() {
             })
           }
           <span>{' )'}</span>
-        </div>
+        </div> */}
         <div>
           {
             falhaBrutal
@@ -251,51 +250,53 @@ export default function Chat() {
                 <div className="font-bold py-2 text-center md:text-left">
                   { 'O jogador obteve sucesso se sua ação foi CAUSAR DANO (Caso sua ação não tenha sido CAUSAR DANO, ocorreu uma falha brutal)' }
                 </div>
-                <div className="flex md:justify-start justify-center items-center">
+                <div className="flex justify-start items-center">
                     <span className="">{`Sucessos: `}</span>
-                    <span className="font-bold w-10 px-3">
+                    <span className="font-bold px-3">
                       {quantParesBrutais + quantParesCriticals + success}
                     </span>
                 </div>
-                <div className="flex md:justify-start justify-center items-center">
+                <div className="flex jufy-start items-center">
                     <span className="">{`Dificuldade: `}</span>
-                    <span className="font-bold w-10 px-3">
+                    <span className="font-bold px-3">
                       {Number(msn.dificulty)}
                     </span>
                   </div>
-                  <div className="flex md:justify-start justify-center items-center w-full flex-wrap">
+                  <div className="flex tify-start items-center w-full flex-wrap">
                     <span className="">{`Excedente: `}</span>
                     <span className="font-bold px-3">
                       {Number(totalDeSucessosParaDano) <= 0 ? 'Nenhum' : totalDeSucessosParaDano}
                     </span>
                   </div>
                 </div>
-                : <div>{`O jogador falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e ele obteve ${Number(totalDeSucessosParaDano)} sucessos. `} </div>
+                : <div>{`O jogador falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e ele obteve ${Number(quantParesBrutais + quantParesCriticals + success)} sucessos. `} </div>
               }
               </div>
-            : <div className="w-full">
+            : totalDeSucessosParaDano >= 0
+                ? <div className="w-full">
                   <div className="font-bold py-2">
                     O jogador obteve sucesso no seu teste!
                   </div>
-                  <div className="flex md:justify-start justify-center items-center">
+                  <div className="flex justify-start items-center">
                     <span className="">{`Sucessos: `}</span>
-                    <span className="font-bold w-10 px-3">
+                    <span className="font-bold px-3">
                       {quantParesBrutais + quantParesCriticals + success}
                     </span>
                   </div>
-                  <div className="flex md:justify-start justify-center items-center">
+                  <div className="flex justify-start items-center">
                     <span className="">{`Dificuldade: `}</span>
                     <span className="font-bold w-10 px-3">
                       {Number(msn.dificulty)}
                     </span>
                   </div>
-                  <div className="flex md:justify-start justify-center items-center w-full flex-wrap">
+                  <div className="flex justify-start items-center w-full flex-wrap">
                     <span className="">{`Excedente: `}</span>
                     <span className="font-bold px-3">
                       {Number(totalDeSucessosParaDano) <= 0 ? 'Nenhum' : totalDeSucessosParaDano}
                     </span>
                   </div>
                 </div>
+              : <div className="font-bold py-2">{`O jogador falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e ele obteve ${Number(quantParesBrutais + quantParesCriticals + success)} sucessos. `} </div>
           }
         </div>
       </div>
@@ -306,6 +307,7 @@ export default function Chat() {
     showData && (
       <div className="h-screen overflow-y-auto bg-ritual">
         <Nav />
+        {/* <Simplify /> */}
         { slice.showRollDice && <PopUpDices /> }
         <div id="messages-container" className="h-90vh overflow-y-auto p-2">
           {
