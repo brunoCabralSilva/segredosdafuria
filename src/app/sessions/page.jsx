@@ -2,7 +2,7 @@
 import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDoc, getDocs, deleteDoc } from 'firebase/firestore';
 import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionLogin, actionRollDice, useSlice } from '@/redux/slice';
 import { useRouter } from 'next/navigation';
@@ -64,6 +64,11 @@ export default function Chat() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useLayoutEffect(() => {
+    const messagesContainer = document.getElementById('messages-container');
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+  });
 
   const typeText = (e) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -245,7 +250,7 @@ export default function Chat() {
               {
                 totalDeSucessosParaDano >= 0
                 ? <div className="w-full">
-                <div className="font-bold py-2 text-center md:text-left">
+                <div className="font-bold py-2 text-left">
                   { 'O jogador obteve sucesso se sua ação foi CAUSAR DANO (Caso sua ação não tenha sido CAUSAR DANO, ocorreu uma falha brutal)' }
                 </div>
                 <div className="flex justify-start items-center">
