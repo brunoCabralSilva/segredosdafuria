@@ -108,7 +108,7 @@ export default function Chat() {
   };
 
   const messageSet = (msn) => {
-    if (typeof msn === 'string') return (<div className="break-all">{ msn }</div>);
+    if (typeof msn === 'string') return (<div className="p-2 break-all">{ msn }</div>);
 
     let success = 0;
     let fail = 0;
@@ -145,8 +145,6 @@ export default function Chat() {
       brutal -= 1;
     }
     quantParesBrutais = brutal * 2;
-
-    console.log('falhas brutais ', quantParesBrutais);
 
     if (critical % 2 !== 0 && critical !== 1) {
       critical -= 1;
@@ -332,7 +330,7 @@ export default function Chat() {
               }
               return (
                 <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-blue-400 my-2 text-black">
-                  <div className="font-bold mb-2">
+                  <div className="font-bold mb-2 ml-2 capitalize">
                     {msg.user}
                   </div>
                   { messageSet(msg.message) }
