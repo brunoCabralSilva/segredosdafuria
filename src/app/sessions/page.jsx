@@ -313,7 +313,7 @@ export default function Chat() {
         {/* <Simplify /> */}
         <div className="flex bg-black/80">
           <div className="flex flex-col w-full relative">
-            <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2 pb-10`}>
+            <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
               {
                 messages && messages.length > 0
                 ? messages && messages.map((msg, index) => {
