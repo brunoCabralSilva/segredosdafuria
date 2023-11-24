@@ -113,7 +113,7 @@ export default function Chat() {
   };
 
   const messageSet = (msn) => {
-    if (typeof msn === 'string') return (<div className="pt-2 px-2 break-all">{ msn }</div>);
+    if (typeof msn === 'string') return (<div className="px-2 break-all">{ msn }</div>);
 
     let success = 0;
     let fail = 0;
@@ -327,7 +327,7 @@ export default function Chat() {
                                 { messageSet(msg.message) }
                                 </div>
                                 <div className="flex justify-end pt-2">
-                                  <span className="w-full text-right">
+                                  <span className="w-full text-right text-sm">
                                     {msg.date && msg.date.toDate().toLocaleString()}
                                   </span>
                                 </div>
@@ -337,12 +337,12 @@ export default function Chat() {
                       }
                       return (
                         <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-gray-whats my-2 text-white">
-                          <div className="font-bold mb-2 ml-2 capitalize">
+                          <div className="font-bold mb-2 ml-2 capitalize flex items-center gap-2">
                             {msg.user}
                           </div>
                           { messageSet(msg.message) }
                           <div className="flex justify-end pt-2">
-                              <span className="w-full text-right">
+                              <span className="w-full text-right text-sm">
                                 {msg.date && msg.date.toDate().toLocaleString()}
                               </span>
                           </div>
