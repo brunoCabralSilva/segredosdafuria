@@ -306,127 +306,135 @@ export default function Chat() {
       <div className="h-screen overflow-y-auto bg-ritual">
         <Nav />
         {/* <Simplify /> */}
-        { slice.showRollDice && <PopUpDices /> }
-        <div id="messages-container" className="h-90vh overflow-y-auto p-2">
-          {
-            messages && messages.map((msg, index) => {
-              const token = localStorage.getItem('Segredos Da Fúria');
-              const decode = jwtDecode(token);
-              if (token && decode.email === msg.email) {
-                return(
-                  <div key={index} className="w-full flex justify-end  text-black">
-                    <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-400 my-2">
-                      <div>
-                        { messageSet(msg.message) }
+        <div className="flex">
+          <div className="flex flex-col w-full relative">
+            <div id="messages-container" className={`relative h-screen overflow-y-auto pt-2 px-2 pb-14`}>
+              {
+                messages && messages.map((msg, index) => {
+                  const token = localStorage.getItem('Segredos Da Fúria');
+                  const decode = jwtDecode(token);
+                  if (token && decode.email === msg.email) {
+                    return(
+                      <div key={index} className="w-full flex justify-end  text-black">
+                        <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-400 my-2">
+                          <div>
+                            { messageSet(msg.message) }
+                            </div>
+                            <div className="flex justify-end pt-2">
+                              <span className="w-full text-right">
+                                {msg.date && msg.date.toDate().toLocaleString()}
+                              </span>
+                            </div>
                         </div>
-                        <div className="flex justify-end pt-2">
+                      </div>
+                    ) 
+                  }
+                  return (
+                    <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-blue-400 my-2 text-black">
+                      <div className="font-bold mb-2 ml-2 capitalize">
+                        {msg.user}
+                      </div>
+                      { messageSet(msg.message) }
+                      <div className="flex justify-end pt-2">
                           <span className="w-full text-right">
                             {msg.date && msg.date.toDate().toLocaleString()}
                           </span>
-                        </div>
+                      </div>
                     </div>
-                  </div>
-                ) 
+                  )
+                })
               }
-              return (
-                <div key={index} className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-blue-400 my-2 text-black">
-                  <div className="font-bold mb-2 ml-2 capitalize">
-                    {msg.user}
+            </div>
+            <div className="absolute bottom-0 w-full bg-black p-2 flex flex-col gap-2 items-center">
+                { showOptions &&
+                  <div className="flex items-center justify-end w-full gap-2">
+                    <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                      <button
+                        className="p-2"
+                        title="Realizar um teste com dados"
+                        onClick={() => {
+                          dispatch(actionRollDice(true));
+                          setShowOptions(false);
+                        }}
+                      >
+                        <FaDiceD20 />
+                      </button>
+                    </div>
+                    <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                      <button
+                        className="p-2"
+                        title="Acessar a sua ficha"
+                        onClick={() => {
+                          setShowOptions(false);
+                        }}
+                      >
+                        <FaFile />
+                      </button>
+                    </div>
+                    <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                      <button
+                        className="p-2"
+                        onClick={() => {
+                          scrollToBottom();
+                          setShowOptions(false);
+                        }}
+                        title="Ir para a mensagem mais recente"
+                      >
+                        <RxUpdate />
+                      </button>
+                    </div>
+                    { 
+                      slice.user.role === 'admin'&&
+                        <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                          <button
+                            className="p-2"
+                            title="Apagar o histórico de conversas"
+                            onClick={() => {
+                              clearMessages();
+                              setShowOptions(false);
+                            }}
+                          >
+                            <FaEraser />
+                          </button>
+                        </div>
+                    }
                   </div>
-                  { messageSet(msg.message) }
-                  <div className="flex justify-end pt-2">
-                      <span className="w-full text-right">
-                        {msg.date && msg.date.toDate().toLocaleString()}
-                      </span>
-                  </div>
-                </div>
-              )
-            })
-          }
-        </div>
-        <div className="fixed bottom-0 w-full bg-black p-2 flex flex-col gap-2 items-center">
-          { showOptions &&
-            <div className="flex items-center justify-end w-full gap-2">
-              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
-                <button
-                  className="p-2"
-                  title="Realizar um teste com dados"
-                  onClick={() => {
-                    dispatch(actionRollDice(true));
-                    setShowOptions(false);
-                  }}
-                >
-                  <FaDiceD20 />
-                </button>
-              </div>
-              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
-                <button
-                  className="p-2"
-                  title="Acessar a sua ficha"
-                  onClick={() => {
-                    setShowOptions(false);
-                  }}
-                >
-                  <FaFile />
-                </button>
-              </div>
-              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
-                <button
-                  className="p-2"
-                  onClick={() => {
-                    scrollToBottom();
-                    setShowOptions(false);
-                  }}
-                  title="Ir para a mensagem mais recente"
-                >
-                  <RxUpdate />
-                </button>
-              </div>
-              { 
-                slice.user.role === 'admin'&&
+                }
+              <div className="flex w-full items-end relative">
+                <textarea
+                  rows={Math.max(1, Math.ceil(text.length / 40))}
+                  className="w-full p-2 text-black"
+                  value={text}
+                  onChange={(e) => typeText(e)}
+                />
+                <div className="pl-2 gap-2 flex">
                   <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
                     <button
                       className="p-2"
-                      title="Apagar o histórico de conversas"
-                      onClick={() => {
-                        clearMessages();
-                        setShowOptions(false);
-                      }}
+                      title="Enviar uma mensagem"
+                      onClick={sendMessage}
                     >
-                      <FaEraser />
+                      <IoIosSend />
                     </button>
                   </div>
-              }
-            </div>
-          }
-          <div className="flex w-full items-end">
-            <textarea
-              rows={Math.max(1, Math.ceil(text.length / 40))}
-              className="w-full p-2 text-black"
-              value={text}
-              onChange={(e) => typeText(e)}
-            />
-            <div className="pl-2 gap-2 flex">
-              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
-                <button
-                  className="p-2"
-                  title="Enviar uma mensagem"
-                  onClick={sendMessage}
-                >
-                  <IoIosSend />
-                </button>
-              </div>
-              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
-                <button
-                  className="p-2"
-                  title="Enviar uma mensagem"
-                  onClick={() => setShowOptions(!showOptions)}
-                >
-                  {showOptions? <FaAngleDown /> : <FaPlus /> }
-                </button>
+                  <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                    <button
+                      className="p-2"
+                      title="Enviar uma mensagem"
+                      onClick={() => setShowOptions(!showOptions)}
+                    >
+                      {showOptions? <FaAngleDown /> : <FaPlus /> }
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          { slice.showRollDice && 
+            <div className="absolute sm:relative">
+              <PopUpDices />
+            </div>
+          }
         </div>
       </div>
     )

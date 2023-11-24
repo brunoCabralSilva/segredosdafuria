@@ -71,8 +71,7 @@ export default function PopUpDices() {
   }
 
   return(
-    <div className="fixed w-full h-screen bg-black/80 z-50 flex items-center justify-center">
-      <div className="w-8/10 relative p-10 bg-black flex flex-col items-center justify-center">
+      <div className="w-8/10 p-10 bg-black flex flex-col items-center justify-center h-screen z-50 top-0 right-0">
           <IoIosCloseCircleOutline
             className="absolute top-0 right-0 text-4xl text-white mr-2 mt-2 cursor-pointer"
             onClick={() => dispatch(actionRollDice(false))}
@@ -139,97 +138,86 @@ export default function PopUpDices() {
         </label>
         <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Dados Restantes</p>
-          <div className="flex">
-            <div
+          <div className="flex w-full">
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ valueOf === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (valueOf > 0) setValueOf(valueOf - 1);
               }}
             >
               <FaMinus />
-            </div>
-            <input
-              type="number"
-              id="valueOf"
-              className="p-2 text-center text-black w-full appearance-none"
-              value={valueOf}
-              onChange={ (e: any) => {
-                if (Number(e.target.value > 0 && Number(e.target.value) > 50)) setValueOf(50);
-                else if (e.target.value >= 0) setValueOf(Number(e.target.value));
-                else setValueOf(0);
-              }}
-            />
+            </button>
             <div
+              className="p-2 text-center text-black w-full bg-white"
+            >
+              <span className="w-full">{ valueOf }</span>
+            </div>
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ valueOf === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (valueOf < 50) setValueOf(valueOf + 1)
               }}
             >
               <FaPlus />
-            </div>
+            </button>
           </div>
         </label>
         <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Penalidade (+) ou Bônus (-)</p>
-          <div className="flex">
-            <div
+          <div className="flex w-full">
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
               }}
             >
               <FaMinus />
-            </div>
-            <input
-              type="number"
-              id="penaltyOrBonus"
-              className="p-2 text-center text-black w-full appearance-none"
-              value={penaltyOrBonus}
-              onChange={(e: any) => {
-                if (Number(e.target.value) < 0 && Number(e.target.value) < -50) setPenaltyOrBonus(-50);
-                else setPenaltyOrBonus(Number(e.target.value))
-              }}
-            />
+            </button>
             <div
+              className="p-2 text-center text-black w-full bg-white"
+            >
+              <span className="w-full">{ penaltyOrBonus }</span>
+            </div>
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
               }}
             >
               <FaPlus />
-            </div>
+            </button>
           </div>
         </label>
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Dificuldade</p>
-          <div className="flex">
-            <div
+          <div className="flex w-full">
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (dificulty > 0) setDificulty(dificulty - 1);
               }}
             >
               <FaMinus />
-            </div>
-            <input
-              type="number"
-              id="dificulty"
-              className="p-2 text-center text-black w-full"
-              value={dificulty}
-              onChange={ (e: any) => {
-                if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setDificulty(15);
-                else if (e.target.value >= 0) setDificulty(Number(e.target.value));
-                else setValueOf(0);
-              }}
-            />
+            </button>
             <div
+              className="p-2 text-center text-black w-full bg-white"
+            >
+              <span className="w-full">{ dificulty }</span>
+            </div>
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (dificulty < 15) setDificulty(dificulty + 1)
               }}
             >
               <FaPlus />
-            </div>
+            </button>
           </div>
         </label>
         <button
@@ -237,9 +225,8 @@ export default function PopUpDices() {
           disabled={disabledButton()}
           onClick={registerRoll}
         >
-            Rolar dados
-          </button>
+          Rolar dados
+        </button>
       </div>
-    </div>
   )
 }
