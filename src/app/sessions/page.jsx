@@ -354,7 +354,7 @@ export default function Chat() {
                   </div>
               }
             </div>
-            <div className="absolute bottom-0 w-full bg-black p-2 flex flex-col gap-2 items-center">
+            <div className={`${slice.showRollDice ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 items-center`}>
                 { showOptions &&
                   <div className="flex items-center justify-end w-full gap-2">
                     <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
@@ -440,7 +440,7 @@ export default function Chat() {
             </div>
           </div>
           { slice.showRollDice && 
-            <div className="absolute sm:relative">
+            <div className="absolute sm:relative z-50">
               <PopUpDices />
             </div>
           }
