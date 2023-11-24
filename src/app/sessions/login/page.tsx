@@ -22,9 +22,11 @@ export default function Login() {
     setShowData(false);
     window.scrollTo(0, 0);
     const token = localStorage.getItem('Segredos Da Fúria');
+    console.log('Token ', token);
     if (token) {
       try {
         const decodedToken = verify(JSON.parse(token));
+        console.log('decoded ', decodedToken);
         if (decodedToken) {
           const { firstName, lastName, email, role }: { firstName: string, lastName: string, email: string, role: string } = jwtDecode(token);
           dispatch(actionLogin({ firstName, lastName, email, role }));
@@ -32,6 +34,7 @@ export default function Login() {
         }
         else setShowData(true);
       } catch(error) {
+        console.log('Erro', error);
         setShowData(true);
         dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
         router.push('/sessions/login');

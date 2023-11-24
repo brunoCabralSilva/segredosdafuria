@@ -41,20 +41,21 @@ export default function Chat() {
     if (token) {
       try {
         const decodedToken = verify(JSON.parse(token));
+        console.log('verify ', decodedToken);
         if (decodedToken) {
           setShowData(true);
           const { firstName, lastName, email, role } = jwtDecode(token);
           dispatch(actionLogin({ firstName, lastName, email, role }));
-        }
-        else {
+        } else {
           setShowData(false);
+          localStorage.removeItem('Segredos Da Fúria');
           dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
           router.push('/sessions/login');
         }
       } catch(error) {
-        console.log(error);
+        localStorage.removeItem('Segredos Da Fúria');
         dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
-        // router.push('/sessions/login');
+        router.push('/sessions/login');
         setShowData(true);
       }
     } else {
@@ -66,8 +67,11 @@ export default function Chat() {
   }, []);
 
   useLayoutEffect(() => {
-    const messagesContainer = document.getElementById('messages-container');
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) {
+      const messagesContainer = document.getElementById('messages-container');
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
   });
 
   const typeText = (e) => {
@@ -318,8 +322,10 @@ export default function Chat() {
                 messages && messages.length >= 0
                 ? messages && messages.map((msg, index) => {
                       const token = localStorage.getItem('Segredos Da Fúria');
-                      const decode = jwtDecode(token);
-                      if (token && decode.email === msg.email) {
+                      const decodedToken = verify(JSON.parse(token));
+                      let decode = '';
+                      if (decodedToken) decode = jwtDecode(token);
+                      if (token && decode !== '' && decode.email === msg.email) {
                         return(
                           <div key={index} className="w-full flex justify-end  text-white">
                             <div  className="rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 bg-green-whats mb-2">

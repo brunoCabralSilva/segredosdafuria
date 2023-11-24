@@ -46,7 +46,12 @@ export const login = async (email: string, password: string) => {
 };
 
 export const verify = (token: string) => {
-  return jwt.verify(token, secretKey);
+  try {
+    console.log(jwt.verify(token, secretKey));
+    return jwt.verify(token, secretKey);
+  } catch(error) {
+    return false;
+  }
 };
 
 export const registerUser = async (email: string, firstName: string, lastName: string, password: string) => {
