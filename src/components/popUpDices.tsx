@@ -165,7 +165,7 @@ export default function PopUpDices() {
           </div>
         </label>
         <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Penalidade (+) ou Bônus (-)</p>
+          <p className="text-white w-full pb-3">Bônus (+) ou Penalidade (-)</p>
           <div className="flex w-full">
             <button
               type="button"
