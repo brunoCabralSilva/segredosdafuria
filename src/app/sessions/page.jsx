@@ -251,7 +251,7 @@ export default function Chat() {
                 totalDeSucessosParaDano >= 0
                 ? <div className="w-full">
                 <div className="font-bold py-2 text-left">
-                  { 'O jogador obteve sucesso se sua ação foi CAUSAR DANO (Caso sua ação não tenha sido CAUSAR DANO, ocorreu uma falha brutal)' }
+                  { 'Obteve sucesso se a ação foi CAUSAR DANO (Caso contrário, ocorreu uma falha brutal)' }
                 </div>
                 <div className="flex justify-start items-center">
                     <span className="">{`Sucessos: `}</span>
@@ -272,13 +272,13 @@ export default function Chat() {
                     </span>
                   </div>
                 </div>
-                : <div>{`O jogador falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e ele obteve ${Number(quantParesBrutais + quantParesCriticals + success)} sucessos. `} </div>
+                : <div>{`Falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e número de sucessos foi ${Number(quantParesBrutais + quantParesCriticals + success)}. `} </div>
               }
               </div>
             : totalDeSucessosParaDano >= 0
                 ? <div className="w-full">
                   <div className="font-bold py-2">
-                    O jogador obteve sucesso no seu teste!
+                    Obteve sucesso no teste!
                   </div>
                   <div className="flex justify-start items-center">
                     <span className="">{`Sucessos: `}</span>
@@ -299,7 +299,7 @@ export default function Chat() {
                     </span>
                   </div>
                 </div>
-              : <div className="font-bold py-2">{`O jogador falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e ele obteve ${Number(quantParesBrutais + quantParesCriticals + success)} sucessos. `} </div>
+              : <div className="font-bold py-2">{`Falhou no teste, pois a dificuldade era ${Number(msn.dificulty)} e número de sucessos foi ${Number(quantParesBrutais + quantParesCriticals + success)}. `} </div>
           }
         </div>
       </div>
