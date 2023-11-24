@@ -38,6 +38,7 @@ const config: Config = {
         'green-whats': '#005C4B',
       },
       spacing: {
+        '10vh': '10vh',
         '15vh': '15vh',
         '20vh': '20vh',
         '30vh': '30vh',

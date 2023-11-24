@@ -313,7 +313,7 @@ export default function Chat() {
         {/* <Simplify /> */}
         <div className="flex bg-black/80">
           <div className="flex flex-col w-full relative">
-            <div id="messages-container" className={`relative h-screen overflow-y-auto pt-2 px-2 pb-14`}>
+            <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
               {
                 messages && messages.length > 0
                 ? messages && messages.map((msg, index) => {
@@ -354,7 +354,7 @@ export default function Chat() {
                   </div>
               }
             </div>
-            <div className={`${slice.showRollDice ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 items-center`}>
+            <div className={`${slice.showRollDice ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center ${showOptions ? 'h-15vh': 'h-10vh'}`}>
                 { showOptions &&
                   <div className="flex items-center justify-end w-full gap-2">
                     <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
