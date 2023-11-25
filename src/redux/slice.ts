@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   feedback: { show: false, title: '' },
   message: { type: '', show: false, text: '' },
   showRollDice: false,
+  showSheet: false,
 };
 
 const slice: Slice = createSlice({
@@ -95,6 +96,9 @@ const slice: Slice = createSlice({
     actionRollDice(state, { payload }: PayloadAction<IList>) {
       return { ...state, showRollDice: payload };
     },
+    actionShowSheet(state, { payload }: PayloadAction<IList>) {
+      return { ...state, showSheet: payload };
+    },
   },
 });
 
@@ -112,6 +116,7 @@ export const {
   actionList,
   actionLogin,
   actionRollDice,
+  actionShowSheet,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

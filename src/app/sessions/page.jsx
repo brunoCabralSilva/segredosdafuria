@@ -4,7 +4,7 @@ import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionLogin, actionRollDice, useSlice } from '@/redux/slice';
+import { actionLogin, actionRollDice, actionShowSheet, useSlice } from '@/redux/slice';
 import { useRouter } from 'next/navigation';
 import { verify } from '../../firebase/user';
 import { jwtDecode } from 'jwt-decode';
@@ -20,6 +20,7 @@ import Nav from '@/components/nav';
 import PopUpDices from '@/components/popUpDices';
 import Image from 'next/image';
 import Simplify from '@/components/simplify';
+import PopUpSheet from '@/components/popUpSheet';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -381,6 +382,7 @@ export default function Chat() {
                         title="Acessar a sua ficha"
                         onClick={() => {
                           setShowOptions(false);
+                          dispatch(actionShowSheet(true))
                         }}
                       >
                         <FaFile />
@@ -445,10 +447,17 @@ export default function Chat() {
               </div>
             </div>
           </div>
-          { slice.showRollDice && 
-            <div className="absolute sm:relative z-50">
-              <PopUpDices />
-            </div>
+          {
+            slice.showSheet && 
+              <div className="w-full md:w-3/5 absolute sm:relative z-50">
+                <PopUpSheet />
+              </div>
+          }
+          { 
+            slice.showRollDice && 
+              <div className="absolute sm:relative z-50">
+                <PopUpDices />
+              </div>
           }
         </div>
       </div>
