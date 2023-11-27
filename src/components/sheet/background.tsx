@@ -105,13 +105,13 @@ export default function Background() {
         { 
           textArea ?
           <textarea
-            className="bg-white font-normal p-2 border-2 border-black w-full mr-1 mt-1 h-full"
+            className="text-black bg-white font-normal p-2 border-2 border-black w-full mr-1 mt-1 h-full"
             placeholder="Digite aqui suas anotações"
             value={ text }
             onChange={(e) => typeText(e)}
           />
           : <div
-              className="bg-white font-normal p-2 border-2 border-black w-full mr-1 mt-1 h-full"
+              className="text-black bg-white font-normal p-2 border-2 border-black w-full mr-1 mt-1 h-full"
               onClick={() => setTextArea(true)} 
             >
             { text }
