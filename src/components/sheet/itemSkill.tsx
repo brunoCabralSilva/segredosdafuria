@@ -74,7 +74,8 @@ export default function ItemSkill(props: ISkl) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.skills[name] = { value, specialty: skill[0].specialty };
+            if (userData.characterSheet[0].data.skills[name].value === 1 && value === 1) userData.characterSheet[0].data.skills[name] = { value: 0, specialty: skill[0].specialty };
+            else userData.characterSheet[0].data.skills[name] = { value, specialty: skill[0].specialty };
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
         } else {

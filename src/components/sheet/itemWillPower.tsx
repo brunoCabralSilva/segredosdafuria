@@ -66,7 +66,8 @@ export default function ItemWillpower(props: IWillpower) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.willpower = value;
+            if (userData.characterSheet[0].data.willpower === 1 && value === 1) userData.characterSheet[0].data.willpower = 0;
+            else userData.characterSheet[0].data.willpower = value;
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
         } else {

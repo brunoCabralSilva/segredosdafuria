@@ -64,7 +64,10 @@ export default function ItemRenown(props: IRenown) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.renown[name] = value;
+            if (userData.characterSheet[0].data.renown[name] === 1 && value === 1) {
+              console.log('entrou')
+              userData.characterSheet[0].data.renown[name] = 0;
+            } else userData.characterSheet[0].data.renown[name] = value;
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
         } else {

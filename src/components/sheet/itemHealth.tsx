@@ -66,7 +66,8 @@ export default function ItemHealth(props: IHealth) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.health = value;
+            if (userData.characterSheet[0].data.health === 1 && value === 1) userData.characterSheet[0].data.health = 0;
+            else userData.characterSheet[0].data.health = value;
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
         } else {
