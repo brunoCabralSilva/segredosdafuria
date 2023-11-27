@@ -110,7 +110,7 @@ export default function ItemWillpower(props: IWillpower) {
 
   return(
     <div className="w-full mt-2 pr-5">
-      <span className="capitalize">{ namePtBr }: {totalWillpower}</span>
+      <span className="capitalize">{ namePtBr } total: {totalWillpower}</span>
       <div className="w-full">
         { returnPoints(name) }
       </div>

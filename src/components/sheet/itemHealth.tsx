@@ -110,7 +110,7 @@ export default function ItemHealth(props: IHealth) {
 
   return(
     <div className="w-full mt-2 pr-5">
-      <span className="capitalize">{ namePtBr }: {totalHealth}</span>
+      <span className="capitalize">{ namePtBr } total: {totalHealth}</span>
       <div className="w-full">
         { returnPoints(name) }
       </div>
