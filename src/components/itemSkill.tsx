@@ -14,7 +14,7 @@ interface ISkl {
 }
 
 export default function ItemSkill(props: ISkl) {
-  const [ skill, setSkill ] = useState<{ value: number, specialty: string }[]>([]);
+  const [ skill, setSkill ] = useState<{ value: number, specialty: string }[]>([{ value: 0, specialty: '' }]);
   const [input, setInput ] = useState(false);
   const { name, namePtBr, quant } = props;
 
