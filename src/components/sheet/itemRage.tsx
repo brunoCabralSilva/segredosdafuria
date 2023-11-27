@@ -109,7 +109,7 @@ export default function ItemRage(props: IRage) {
 
   return(
     <div className="w-full mt-2 pr-5">
-      <span className="capitalize">{ namePtBr } ({ name })</span>
+      <span className="capitalize">{ namePtBr }</span>
       <div className="w-full">
         { returnPoints(name) }
       </div>

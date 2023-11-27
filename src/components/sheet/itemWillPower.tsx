@@ -13,7 +13,7 @@ interface IWillpower {
 }
 
 export default function ItemWillpower(props: IWillpower) {
-  const [ willpower, setWillPower ] = useState<any>([]);
+  const [ willpower, setWillpower ] = useState<any>([]);
   const [totalWillpower, setTotalWillpower] = useState(0);
   const { name, namePtBr, quant } = props;
 
@@ -33,7 +33,7 @@ export default function ItemWillpower(props: IWillpower) {
         const userQuerySnapshot = await getDocs(userQuery);
         if (!isEmpty(userQuerySnapshot.docs)) {
           const userData = userQuerySnapshot.docs[0].data();
-          setWillPower([userData.characterSheet[0].data.willpower]);
+          setWillpower(userData.characterSheet[0].data.willpower);
           setTotalWillpower(Number(userData.characterSheet[0].data.attributes.composure) + Number(userData.characterSheet[0].data.attributes.resolve));
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
@@ -66,8 +66,21 @@ export default function ItemWillpower(props: IWillpower) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            if (userData.characterSheet[0].data.willpower === 1 && value === 1) userData.characterSheet[0].data.willpower = 0;
-            else userData.characterSheet[0].data.willpower = value;
+            if (userData.characterSheet[0].data.willpower.length === 0) {
+              userData.characterSheet[0].data.willpower = [ { value, agravated: false }];
+            }
+            else {
+              const itemAgravated = userData.characterSheet[0].data.willpower.filter((item: any) => item.value === value && item.agravated === true);
+              const restOfList = userData.characterSheet[0].data.willpower.filter((item: any) => item.value !== value);
+              if (itemAgravated.length > 0) {
+                userData.characterSheet[0].data.willpower = restOfList;
+              } else {
+                const itemLetal = userData.characterSheet[0].data.willpower.filter((item: any) => item.value === value);
+                if (itemLetal.length === 0) {
+                  userData.characterSheet[0].data.willpower = [ ...restOfList, { value, agravated: false }];
+                } else userData.characterSheet[0].data.willpower = [ ...restOfList, { value, agravated: true }];
+              }
+            }
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
         } else {
@@ -85,24 +98,35 @@ export default function ItemWillpower(props: IWillpower) {
     return ( 
       <div className="grid grid-cols-5 gap-1 pt-1">
         {
-          willpower.length > 0 && pointsRest.map((item, index) => {
-            if (willpower >= index + 1) {
-              return (
+          pointsRest.map((item, index) => {
+            const willpowerMap: number[] = willpower.map((element: any) => element.value);
+            if (willpowerMap.includes(index + 1)) {
+              const filterPoint = willpower.find((ht: any) => ht.value === index + 1 && ht.agravated === true);
+              if (filterPoint) {
+                return (
+                  <button
+                    type="button"
+                    onClick={ () => updateValue(name, index + 1) }
+                    key={index}
+                    className="h-5 w-full bg-black border-black border-2 cursor-pointer"
+                  />
+                );
+              } return (
                 <button
                   type="button"
                   onClick={ () => updateValue(name, index + 1) }
                   key={index}
-                  className="h-5 w-full bg-black border-black border-2 cursor-pointer"
+                  className="h-5 w-full bg-gray-500 border-black border-2 cursor-pointer"
                 />
               );
             } return (
-              <button
-                type="button"
-                onClick={ () => updateValue(name, index + 1) }
-                key={index}
-                className="h-5 w-full bg-white border-black border-2 cursor-pointer"
-              />
-            );
+                <button
+                  type="button"
+                  onClick={ () => updateValue(name, index + 1) }
+                  key={index}
+                  className="h-5 w-full bg-white border-black border-2 cursor-pointer"
+                />
+              );
           })
         }
       </div>

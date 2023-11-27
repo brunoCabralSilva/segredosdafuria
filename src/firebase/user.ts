@@ -68,9 +68,9 @@ export const registerUser = async (email: string, firstName: string, lastName: s
           auspice: '',
           name: '',
           renown: { glory: 0, honor: 0, wisdom: 0 },
-          health: 0,
+          health: [],
           rage: 0,
-          willpower: 0,
+          willpower: [],
           attributes: {
             strength: 1,
             dexterity: 1,

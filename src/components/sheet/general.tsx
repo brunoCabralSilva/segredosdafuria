@@ -167,12 +167,12 @@ export default function General() {
             }
           </select>
         </div>
+        <ItemRage name="rage" namePtBr="Fúria" quant={5} />
+        <ItemWillpower name="willpower" namePtBr="Força de Vontade" quant={10} />
+        <ItemHealth name="health" namePtBr="Vitalidade" quant={10} />
         <ItemRenown name="honor" namePtBr="Honra" quant={5} />
         <ItemRenown name="glory" namePtBr="Glória" quant={5} />
         <ItemRenown name="wisdom" namePtBr="Sabedoria" quant={5} />
-        <ItemHealth name="health" namePtBr="Vitalidade" quant={10} />
-        <ItemRage name="rage" namePtBr="Fúria" quant={5} />
-        <ItemWillpower name="willpower" namePtBr="Força de Vontade" quant={10} />
       </div>
     </div>
   );
