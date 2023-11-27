@@ -1,20 +1,16 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
-import { useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionForm, useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
+import dataForms from '../../data/forms.json';
+import Image from "next/image";
 
-interface IAtr {
-  name: string;
-  namePtBr: string;
-  quant: number;
-}
-
-export default function ItemAtr(props: IAtr) {
-  const [ attributes, setAttributes ] = useState<any>([]);
-  const { name, namePtBr, quant } = props;
+export default function ItemForm() {
+  const [ formSelected, setFormSelected ] = useState<any>('');
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     returnValueAttribute();
@@ -32,7 +28,7 @@ export default function ItemAtr(props: IAtr) {
         const userQuerySnapshot = await getDocs(userQuery);
         if (!isEmpty(userQuerySnapshot.docs)) {
           const userData = userQuerySnapshot.docs[0].data();
-          setAttributes([userData.characterSheet[0].data.attributes[name]]);
+          setFormSelected(userData.characterSheet[0].data.form);
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
         }
@@ -51,7 +47,7 @@ export default function ItemAtr(props: IAtr) {
     return true;
   };
   
-  const updateValue = async (name: string, value: number) => {
+  const updateValue = async (name: string) => {
     const db = getFirestore(firebaseConfig);
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
@@ -64,53 +60,62 @@ export default function ItemAtr(props: IAtr) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.attributes[name] = value;
+            userData.characterSheet[0].data.form = name;
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
         }
       } catch (error) {
-        window.alert('Erro ao atualizar valor: (' + error + ')');
+        window.alert('Erro ao atualizar Forma (' + error + ')');
       }
     }
     returnValueAttribute();
   };
 
-  const returnPoints = (name: string) => {
-    const points = Array(quant).fill('');
-    return (
-      <div className="grid grid-cols-6 gap-1 pt-1">
-        {
-          attributes.length > 0 && points.map((item, index) => {
-            if (attributes[0] >= index + 1) {
-              return (
-                <button
-                  type="button"
-                  onClick={ () => updateValue(name, index + 1) }
-                  key={index}
-                  className="h-5 w-full bg-black border-black border-2 cursor-pointer"
-                />
-              );
-            } return (
-              <button
-                type="button"
-                onClick={ () => updateValue(name, index + 1) }
-                key={index}
-                className="h-5 w-full bg-white border-black border-2 cursor-pointer"
-              />
-            );
-          })
-        }
-      </div>
-    );
-  };
-
   return(
-    <div className="w-full mt-2">
-      <span className="capitalize">{ namePtBr } ({ name })</span>
-      <div className="w-full">
-        { returnPoints(name) }
+    <div className="w-full mt-2 text-black">
+      <div className="w-full"> 
+        {
+          dataForms.map((form: any, index) => (
+            <div
+              key={index}
+              className="mt-2 p-3 w-full bg-white border-black border-2 cursor-pointer flex-col items-center justify-center"
+              onClick={
+                () => {
+                  dispatch(actionForm(form.name));
+                  updateValue(form.name);
+                }
+              }
+            >
+              <div className="w-full flex items-center justify-center">
+              <Image
+                src={`/images/forms/sheet/${form.name}.png`}
+                alt={`Glifo dos ${form.name}`}
+                className={`object-cover object-top w-full my-2 ${formSelected === form.name && 'border-2 border-black'}`}
+                width={800}
+                height={400}
+              />
+              </div>
+              <p className="w-full text-center py-2">{ form.name } - { form.subtitle }</p>
+              <p className="w-full pb-1">
+                <span className="pr-1">Custo:</span>
+                <span className="font-normal">{ form.cost }</span>
+              </p>
+              <p className="w-full pb-1">Habilidades</p>
+              <ul className="pl-5 text-sm font-normal">
+                {
+                  form.resume.map((item: string, index: number) => (
+                    <li className="list-disc" key={index}>
+                      { item }
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+          ))
+        }
       </div>
     </div>
   );

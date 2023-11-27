@@ -83,7 +83,7 @@ export default function ItemRenown(props: IRenown) {
   const returnPoints = (name: string) => {
     const points = Array(quant).fill('');
     return (
-      <div className="grid grid-cols-6 gap-1 pt-1">
+      <div className={`grid grid-cols-5 gap-1 pt-1 ${namePtBr === 'Sabedoria' && 'pb-4'}`}>
         {
           renown.length > 0 && points.map((item, index) => {
             if (renown[0] >= index + 1) {
@@ -110,7 +110,7 @@ export default function ItemRenown(props: IRenown) {
   };
 
   return(
-    <div className="w-full mt-2 pr-5">
+    <div className="w-full mt-2">
       <span className="capitalize">{ namePtBr }</span>
       <div className="w-full">
         { returnPoints(name) }

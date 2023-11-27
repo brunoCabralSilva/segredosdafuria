@@ -81,7 +81,7 @@ export default function ItemRage(props: IRage) {
   const returnPoints = (name: string) => {
     const points = Array(quant).fill('');
     return (
-      <div className="grid grid-cols-6 gap-1 pt-1">
+      <div className="grid grid-cols-5 gap-1 pt-1">
         {
           rage.length > 0 && points.map((item, index) => {
             if (rage[0] >= index + 1) {
@@ -108,7 +108,7 @@ export default function ItemRage(props: IRage) {
   };
 
   return(
-    <div className="w-full mt-2 pr-5">
+    <div className="w-full mt-2">
       <span className="capitalize">{ namePtBr }</span>
       <div className="w-full">
         { returnPoints(name) }

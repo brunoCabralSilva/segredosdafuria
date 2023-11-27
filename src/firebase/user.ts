@@ -114,7 +114,7 @@ export const registerUser = async (email: string, firstName: string, lastName: s
           gifts: [],
           rituals: [],
           advantagesAndFlaws: [],
-          form: '',
+          form: 'Hominídeo',
           background: '',
           notes: '',
         },

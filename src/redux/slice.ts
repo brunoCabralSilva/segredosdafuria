@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   message: { type: '', show: false, text: '' },
   showRollDice: false,
   showSheet: false,
+  form: '',
   attributes: {
     strength: 1,
     dexterity: 1,
@@ -139,14 +140,8 @@ const slice: Slice = createSlice({
     actionShowSheet(state, { payload }: PayloadAction<IList>) {
       return { ...state, showSheet: payload };
     },
-    actionAttribute(state, { payload }: PayloadAction<IAtribute>) {
-      return {
-        ...state,
-        attributes: {
-          ...state.attributes,
-          [payload.name]: payload.quant,
-        },
-      };
+    actionForm(state, { payload }: PayloadAction<IList>) {
+      return { ...state, form: payload };
     },
   },
 });
@@ -166,7 +161,7 @@ export const {
   actionLogin,
   actionRollDice,
   actionShowSheet,
-  actionAttribute,
+  actionForm,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

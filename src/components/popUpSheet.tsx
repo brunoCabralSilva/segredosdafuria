@@ -1,15 +1,60 @@
 'use client'
-import { useAppDispatch } from "@/redux/hooks";
-import { actionShowSheet } from "@/redux/slice";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionForm, actionShowSheet, useSlice } from "@/redux/slice";
+import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import General from "./sheet/general";
 import Attributes from "./sheet/attributes";
 import Skills from "./sheet/skills";
+import Forms from "./sheet/forms";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import firebaseConfig from "@/firebase/connection";
+import { jwtDecode } from "jwt-decode";
+import Background from "./sheet/background";
+import Anotations from "./sheet/anotations";
+import GiftsSheet from "./sheet/gifts";
+import RitualsSheet from "./rituals";
+import AdvantagesAnsFlaws from "./sheet/advantagesAndFlaws";
 
 export default function PopUpSheet() {
   const [optionSelect, setOptionSelect] = useState('');
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
+
+  const isEmpty = (obj: any) => {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const getForm = async() => {
+    const db = getFirestore(firebaseConfig);
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) {
+      try {
+        const decodedToken: { email: string } = jwtDecode(token);
+        const { email } = decodedToken;
+        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuerySnapshot = await getDocs(userQuery);
+        if (!isEmpty(userQuerySnapshot.docs)) {
+          const userData = userQuerySnapshot.docs[0].data();
+          dispatch(actionForm(userData.characterSheet[0].data.form));
+        } else {
+          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
+        }
+      } catch (error) {
+        window.alert('Erro ao obter valor do atributo: ' + error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getForm();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const returnDataSheet = () => {
     switch(optionSelect) {
@@ -20,17 +65,17 @@ export default function PopUpSheet() {
       case ('skills'):
         return <Skills />;
       case ('gifts'):
-        return '';
+        return <GiftsSheet />;
       case ('rituals'):
-        return '';
+        return <RitualsSheet />;
       case ('advantages-flaws'):
-        return '';
+        return <AdvantagesAnsFlaws />;
       case ('forms'):
-        return '';
+        return <Forms />;
       case ('background'):
-        return '';
+        return <Background />;
       case ('anotations'):
-        return '';
+        return <Anotations />;
       default:
         return <General />
     }
@@ -43,7 +88,10 @@ export default function PopUpSheet() {
           onClick={() => dispatch(actionShowSheet(false))}
         />
         <select
-          onChange={ (e) => setOptionSelect(e.target.value) }
+          onChange={ (e) => {
+            setOptionSelect(e.target.value);
+            getForm();
+          }}
           className="w-full mb-2 border border-white p-3 cursor-pointer text-black bg-white flex items-center justify-center font-bold"
         >
           <option value={'general'}>Geral</option>
@@ -52,7 +100,7 @@ export default function PopUpSheet() {
           <option value={'gifts'}>Dons</option>
           <option value={'rituals'}>Rituais</option>
           <option value={'advantages-flaws'}>Vantagens e Defeitos</option>
-          <option value={'forms'}>Formas</option>
+          <option value={'forms'}>Formas ( Atual: { slice.form } )</option>
           <option value={'background'}>Background</option>
           <option value={'anotations'}>Anotações</option>
         </select>

@@ -118,7 +118,7 @@ export default function ItemSkill(props: ISkl) {
   };
 
   return(
-    <div className="w-full mt-2 pr-5">
+    <div className="w-full mt-2">
       <div className={ `capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center` }>
         <span>{ namePtBr } ({ name })</span>
         <div className="flex">

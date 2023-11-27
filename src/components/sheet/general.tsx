@@ -88,7 +88,7 @@ export default function General() {
   };
 
   return(
-    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-1">
+    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3 bg-white">
       <div className="w-full h-full mb-2 p-1 cursor-pointer text-black bg-white flex-col items-start justify-center font-bold px-4">
         <div className={ `mt-5 capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center` }>
           { 
@@ -97,7 +97,7 @@ export default function General() {
               ? <span onClick={() => setInput('nameCharacter')}>
                   Insira um nome
                 </span>
-              : <span>{ nameCharacter }</span>
+              : <span onClick={() => setInput('nameCharacter')}>{ nameCharacter }</span>
             }</span>
           }
           <div className="flex">

@@ -15,6 +15,7 @@ interface IHealth {
 export default function ItemHealth(props: IHealth) {
   const [ health, setHealth ] = useState<any>([]);
   const [totalHealth, setTotalHealth] = useState(0);
+  const [form, setForm] = useState('');
   const { name, namePtBr, quant } = props;
 
   useEffect(() => {
@@ -34,7 +35,12 @@ export default function ItemHealth(props: IHealth) {
         if (!isEmpty(userQuerySnapshot.docs)) {
           const userData = userQuerySnapshot.docs[0].data();
           setHealth(userData.characterSheet[0].data.health);
-          setTotalHealth(Number(userData.characterSheet[0].data.attributes.stamina) + 3);
+          if (userData.characterSheet[0].data.form === 'Crinos') {
+            setTotalHealth(Number(userData.characterSheet[0].data.attributes.stamina) + 7);
+          } else {
+            setTotalHealth(Number(userData.characterSheet[0].data.attributes.stamina) + 3);
+          }
+          setForm(userData.characterSheet[0].data.form);
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
         }
@@ -83,6 +89,7 @@ export default function ItemHealth(props: IHealth) {
             }
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
+          setForm(userData.characterSheet[0].data.form);
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
         }
@@ -133,11 +140,52 @@ export default function ItemHealth(props: IHealth) {
     );
   };
 
+  const returnHpCrinos = (name: string) => {
+    const pointsRest = Array(4).fill('');
+    return ( 
+      <div className="grid grid-cols-5 gap-1 pt-1">
+        {
+          pointsRest.map((item, index) => {
+            const healthMap: number[] = health.map((element: any) => element.value);
+            if (healthMap.includes(index + 11)) {
+              const filterPoint = health.find((ht: any) => ht.value === index + 11 && ht.agravated === true);
+              if (filterPoint) {
+                return (
+                  <button
+                    type="button"
+                    onClick={ () => updateValue(name, index + 11) }
+                    key={index}
+                    className="h-5 w-full bg-black border-black border-2 cursor-pointer"
+                  />
+                );
+              } return (
+                <button
+                  type="button"
+                  onClick={ () => updateValue(name, index + 11) }
+                  key={index}
+                  className="h-5 w-full bg-gray-500 border-black border-2 cursor-pointer"
+                />
+              );
+            } return (
+                <button
+                  type="button"
+                  onClick={ () => updateValue(name, index + 11) }
+                  key={index}
+                  className="h-5 w-full bg-white border-black border-2 cursor-pointer"
+                />
+              );
+          })
+        }
+      </div>
+    );
+  };
+
   return(
-    <div className="w-full mt-2 pr-5">
+    <div className="w-full mt-2">
       <span className="capitalize">{ namePtBr } total: {totalHealth}</span>
       <div className="w-full">
         { returnPoints(name) }
+        { form === 'Crinos' && returnHpCrinos(name) }
       </div>
     </div>
   );
