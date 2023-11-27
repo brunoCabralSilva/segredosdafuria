@@ -1,4 +1,4 @@
-import { IFeedback, IList, IMessage, IType } from "../../interface";
+import { IAtribute, IFeedback, IList, IMessage, IType } from "../../interface";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
@@ -13,6 +13,46 @@ const INITIAL_STATE = {
   message: { type: '', show: false, text: '' },
   showRollDice: false,
   showSheet: false,
+  attributes: {
+    strength: 1,
+    dexterity: 1,
+    stamina: 1,
+    charisma: 1,
+    manipulation: 1,
+    composure: 1,
+    intelligence: 1,
+    wits: 1,
+    resolve: 1,
+  },
+  skills: {
+    athletics: 0,
+    animalKen: 0,
+    academics: 0,
+    brawl: 0,
+    etiquette: 0,
+    awareness: 0,
+    craft: 0,
+    insight: 0,
+    finance: 0,
+    driving: 0,
+    intimidation: 0,
+    investigation: 0,
+    firearms: 0,
+    leadership: 0,
+    medicine: 0,
+    larceny: 0,
+    performance: 0,
+    occult: 0,
+    melee: 0,
+    persuasion: 0,
+    politics: 0,
+    stealth: 0,
+    streetwise: 0,
+    science: 0,
+    survival: 0,
+    subterfuge: 0,
+    technology: 0,
+  },
 };
 
 const slice: Slice = createSlice({
@@ -99,6 +139,15 @@ const slice: Slice = createSlice({
     actionShowSheet(state, { payload }: PayloadAction<IList>) {
       return { ...state, showSheet: payload };
     },
+    actionAttribute(state, { payload }: PayloadAction<IAtribute>) {
+      return {
+        ...state,
+        attributes: {
+          ...state.attributes,
+          [payload.name]: payload.quant,
+        },
+      };
+    },
   },
 });
 
@@ -117,6 +166,7 @@ export const {
   actionLogin,
   actionRollDice,
   actionShowSheet,
+  actionAttribute,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

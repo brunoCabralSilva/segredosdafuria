@@ -4,7 +4,8 @@ import { actionShowSheet } from "@/redux/slice";
 import { useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import General from "./sheet/general";
-import Attributes from "./sheet/Attributes";
+import Attributes from "./sheet/attributes";
+import Skills from "./sheet/skills";
 
 export default function PopUpSheet() {
   const [optionSelect, setOptionSelect] = useState('');
@@ -17,7 +18,7 @@ export default function PopUpSheet() {
       case ('attributes'):
         return <Attributes />;
       case ('skills'):
-        return '';
+        return <Skills />;
       case ('gifts'):
         return '';
       case ('rituals'):

@@ -118,3 +118,9 @@ export interface ITrybe {
   ban: String;
   archetypes: IArchetypes[];
 };
+
+export interface IAtribute {
+  name: string,
+  namePtBr: string,
+  quant: number,
+};
