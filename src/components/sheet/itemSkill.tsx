@@ -148,7 +148,7 @@ export default function ItemSkill(props: ISkl) {
         !input
         && skill[0].specialty !== ''
         && skill[0].specialty !== ' '
-        && <span>{ skill[0].specialty } (Especialização)</span>
+        && <span className="text-sm capitalize">Especialização: { skill[0].specialty }</span>
       }
       <div className="w-full">
         { returnPoints(name) }

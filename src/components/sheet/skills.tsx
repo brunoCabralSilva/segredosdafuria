@@ -1,4 +1,4 @@
-import ItemSkill from "../itemSkill";
+import ItemSkill from "./itemSkill";
 
 export default function Skills() {
   return(
