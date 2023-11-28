@@ -167,7 +167,7 @@ export default function ItemRituals(props: any) {
       type="button"
       onClick={() => setShowRitual(true)}
     >
-      <h1 className="font-bold text-lg text-center w-full">
+      <h1 className="font-bold text-lg text-center w-full text-black">
         {`${ ritual.titlePtBr } (${ ritual.title })`}
       </h1>
     </button>

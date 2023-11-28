@@ -188,7 +188,7 @@ export default function ItemGiftAdded(props: any) {
       type="button"
       onClick={() => setShowGift(true)}
     >
-      <div className=" relative text-white flex w-full justify-center pb-2">
+      <div className=" relative text-black flex w-full justify-center pb-2">
         { 
           dataGift.belonging.map((trybe: ITypeGift, index: number) => (
             <Image
@@ -202,7 +202,7 @@ export default function ItemGiftAdded(props: any) {
           ))
         }
       </div>
-      <h1 className="font-bold text-lg text-center w-full">
+      <h1 className="font-bold text-black text-lg text-center w-full">
         {dataGift.giftPtBr}
       </h1>
     </button>
