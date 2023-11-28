@@ -103,7 +103,7 @@ export default function ItemHealth(props: IHealth) {
   const returnPoints = (name: string) => {
     const pointsRest = Array(quant).fill('');
     return ( 
-      <div className="grid grid-cols-5 gap-1 pt-1">
+      <div className="flex flex-wrap gap-2 pt-1">
         {
           pointsRest.map((item, index) => {
             const healthMap: number[] = health.map((element: any) => element.value);
@@ -115,7 +115,7 @@ export default function ItemHealth(props: IHealth) {
                     type="button"
                     onClick={ () => updateValue(name, index + 1) }
                     key={index}
-                    className="h-5 w-full bg-black border-black border-2 cursor-pointer"
+                    className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
                   />
                 );
               } return (
@@ -123,7 +123,7 @@ export default function ItemHealth(props: IHealth) {
                   type="button"
                   onClick={ () => updateValue(name, index + 1) }
                   key={index}
-                  className="h-5 w-full bg-gray-500 border-black border-2 cursor-pointer"
+                  className="h-6 w-6 rounded-full bg-gray-500 border-white border-2 cursor-pointer"
                 />
               );
             } return (
@@ -131,7 +131,7 @@ export default function ItemHealth(props: IHealth) {
                   type="button"
                   onClick={ () => updateValue(name, index + 1) }
                   key={index}
-                  className="h-5 w-full bg-white border-black border-2 cursor-pointer"
+                  className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
                 />
               );
           })
@@ -143,7 +143,7 @@ export default function ItemHealth(props: IHealth) {
   const returnHpCrinos = (name: string) => {
     const pointsRest = Array(4).fill('');
     return ( 
-      <div className="grid grid-cols-5 gap-1 pt-1">
+      <div className="flex flex-wrap gap-2 pt-2">
         {
           pointsRest.map((item, index) => {
             const healthMap: number[] = health.map((element: any) => element.value);
@@ -155,7 +155,7 @@ export default function ItemHealth(props: IHealth) {
                     type="button"
                     onClick={ () => updateValue(name, index + 11) }
                     key={index}
-                    className="h-5 w-full bg-black border-black border-2 cursor-pointer"
+                    className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
                   />
                 );
               } return (
@@ -163,7 +163,7 @@ export default function ItemHealth(props: IHealth) {
                   type="button"
                   onClick={ () => updateValue(name, index + 11) }
                   key={index}
-                  className="h-5 w-full bg-gray-500 border-black border-2 cursor-pointer"
+                  className="h-6 w-6 rounded-full bg-gray-500 border-white border-2 cursor-pointer"
                 />
               );
             } return (
@@ -171,7 +171,7 @@ export default function ItemHealth(props: IHealth) {
                   type="button"
                   onClick={ () => updateValue(name, index + 11) }
                   key={index}
-                  className="h-5 w-full bg-white border-black border-2 cursor-pointer"
+                  className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
                 />
               );
           })
@@ -181,9 +181,9 @@ export default function ItemHealth(props: IHealth) {
   };
 
   return(
-    <div className="w-full mt-2">
+    <div className="w-full mt-4">
       <span className="capitalize">{ namePtBr } total: {totalHealth}</span>
-      <div className="w-full">
+      <div className="w-full mt-1">
         { returnPoints(name) }
         { form === 'Crinos' && returnHpCrinos(name) }
       </div>

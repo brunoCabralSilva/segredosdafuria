@@ -447,16 +447,16 @@ export default function Chat() {
               </div>
             </div>
           </div>
+          { 
+            slice.showRollDice && 
+            <div className="absolute sm:relative z-50">
+                <PopUpDices />
+              </div>
+          }
           {
             slice.showSheet && 
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
                 <PopUpSheet />
-              </div>
-          }
-          { 
-            slice.showRollDice && 
-              <div className="absolute sm:relative z-50">
-                <PopUpDices />
               </div>
           }
         </div>

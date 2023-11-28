@@ -88,8 +88,8 @@ export default function General() {
   };
 
   return(
-    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3 bg-white">
-      <div className="w-full h-full mb-2 p-1 cursor-pointer text-black bg-white flex-col items-start justify-center font-bold px-4">
+    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
+      <div className="w-full h-full mb-2 p-1 cursor-pointer text-white flex-col items-start justify-center font-bold px-4">
         <div className={ `mt-5 capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center` }>
           { 
             input !== 'nameCharacter' && <span className="capitalize break-words text-xl">{
@@ -105,7 +105,7 @@ export default function General() {
             input === 'nameCharacter' &&
             <input
               type="text"
-              className="border-2 border-black text-center w-full mr-1"
+              className="border-2 border-white text-white text-center w-full mr-1 bg-black"
               placeholder="Nome"
               value={ nameCharacter[0] }
               onChange={(e) => typeName(e)}
@@ -127,7 +127,7 @@ export default function General() {
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Augúrio</span>
           <select
-            className="w-full text-center"
+            className="w-full text-center py-1 bg-gray-whats border-2 border-white mt-2"
             value={auspice}
             onChange={ (e) => {
               updateValue('auspice', e.target.value);
@@ -145,7 +145,7 @@ export default function General() {
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Tribo</span>
           <select
-            className="w-full text-center"
+            className="w-full text-center py-1 bg-gray-whats border-2 border-white mt-2"
             value={ trybeI }
             onChange={ (e) => {
               updateValue('trybe', e.target.value);

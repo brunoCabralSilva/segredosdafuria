@@ -82,7 +82,7 @@ export default function PopUpSheet() {
   };
 
   return(
-      <div className="w-full pl-3 pr-2 pt-12 bg-black flex flex-col items-center justify-center h-screen z-50 top-0 right-0">
+      <div className="w-full pl-3 pr-2 pt-12 bg-gray-whats flex flex-col items-center justify-center h-screen z-50 top-0 right-0">
         <IoIosCloseCircleOutline
           className="fixed top-0 right-1 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
           onClick={() => dispatch(actionShowSheet(false))}
@@ -92,7 +92,7 @@ export default function PopUpSheet() {
             setOptionSelect(e.target.value);
             getForm();
           }}
-          className="w-full mb-2 border border-white p-3 cursor-pointer text-black bg-white flex items-center justify-center font-bold"
+          className="w-full mb-2 border border-white p-3 cursor-pointer bg-black text-white flex items-center justify-center font-bold text-center"
         >
           <option value={'general'}>Geral</option>
           <option value={'attributes'}>Atributos</option>

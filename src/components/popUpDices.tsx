@@ -6,7 +6,7 @@ import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/fire
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import { useState } from "react";
-import { FaChevronLeft, FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function PopUpDices() {

@@ -83,7 +83,7 @@ export default function ItemRenown(props: IRenown) {
   const returnPoints = (name: string) => {
     const points = Array(quant).fill('');
     return (
-      <div className={`grid grid-cols-5 gap-1 pt-1 ${namePtBr === 'Sabedoria' && 'pb-4'}`}>
+      <div className={`flex flex-wrap gap-2 pt-1 ${namePtBr === 'Sabedoria' && 'pb-4'}`}>
         {
           renown.length > 0 && points.map((item, index) => {
             if (renown[0] >= index + 1) {
@@ -92,7 +92,7 @@ export default function ItemRenown(props: IRenown) {
                   type="button"
                   onClick={ () => updateValue(name, index + 1) }
                   key={index}
-                  className="h-5 w-full bg-black border-black border-2 cursor-pointer"
+                  className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
                 />
               );
             } return (
@@ -100,7 +100,7 @@ export default function ItemRenown(props: IRenown) {
                 type="button"
                 onClick={ () => updateValue(name, index + 1) }
                 key={index}
-                className="h-5 w-full bg-white border-black border-2 cursor-pointer"
+                className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
               />
             );
           })
@@ -110,9 +110,9 @@ export default function ItemRenown(props: IRenown) {
   };
 
   return(
-    <div className="w-full mt-2">
+    <div className={`w-full ${name === 'honor' ? 'mt-8' : 'mt-4'}`}>
       <span className="capitalize">{ namePtBr }</span>
-      <div className="w-full">
+      <div className="w-full mt-1">
         { returnPoints(name) }
       </div>
     </div>

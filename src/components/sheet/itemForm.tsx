@@ -80,7 +80,7 @@ export default function ItemForm() {
           dataForms.map((form: any, index) => (
             <div
               key={index}
-              className="mt-2 p-3 w-full bg-white border-black border-2 cursor-pointer flex-col items-center justify-center"
+              className="mt-2 p-5 w-ful border-white border-2 cursor-pointer flex-col items-center justify-center"
               onClick={
                 () => {
                   dispatch(actionForm(form.name));
@@ -97,13 +97,9 @@ export default function ItemForm() {
                 height={400}
               />
               </div>
-              <p className="w-full text-center py-2">{ form.name } - { form.subtitle }</p>
-              <p className="w-full pb-1">
-                <span className="pr-1">Custo:</span>
-                <span className="font-normal">{ form.cost }</span>
-              </p>
-              <p className="w-full pb-1">Habilidades</p>
-              <ul className="pl-5 text-sm font-normal">
+              <p className="w-full text-center py-2 text-white">{ form.name } - { form.subtitle }</p>
+              <ul className="pl-5 text-sm font-normal  text-white">
+                  <li className="list-disc">{ form.cost }</li>
                 {
                   form.resume.map((item: string, index: number) => (
                     <li className="list-disc" key={index}>

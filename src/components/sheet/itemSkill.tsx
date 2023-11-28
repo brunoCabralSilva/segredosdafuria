@@ -91,7 +91,7 @@ export default function ItemSkill(props: ISkl) {
   const returnPoints = (name: string) => {
     const points = Array(quant).fill('');
     return (
-      <div className="grid grid-cols-5 gap-1 pt-1">
+      <div className="flex gap-2 pt-1">
         {
           skill.length > 0 && points.map((item, index) => {
             if (skill[0].value >= index + 1) {
@@ -100,7 +100,7 @@ export default function ItemSkill(props: ISkl) {
                   type="button"
                   onClick={ () => updateValue(name, index + 1) }
                   key={index}
-                  className="h-5 w-full bg-black border-black border-2 cursor-pointer"
+                  className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
                 />
               );
             } return (
@@ -108,7 +108,7 @@ export default function ItemSkill(props: ISkl) {
                 type="button"
                 onClick={ () => updateValue(name, index + 1) }
                 key={index}
-                className="h-5 w-full bg-white border-black border-2 cursor-pointer"
+                className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
               />
             );
           })
@@ -118,7 +118,7 @@ export default function ItemSkill(props: ISkl) {
   };
 
   return(
-    <div className="w-full mt-2">
+    <div className="w-full mt-4">
       <div className={ `capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center` }>
         <span>{ namePtBr } ({ name })</span>
         <div className="flex">
@@ -126,7 +126,7 @@ export default function ItemSkill(props: ISkl) {
           input &&
           <input
             type="text"
-            className="border-2 border-black text-center w-full mr-1"
+            className="my-1 border-2 border-white bg-black text-center w-full mr-1"
             placeholder="Especialização"
             value={ skill[0].specialty }
             onChange={(e) => typeText(e)}
@@ -139,7 +139,7 @@ export default function ItemSkill(props: ISkl) {
                   updateValue(name, skill[0].value);
                   setInput(false);
                 }}
-                className="text-3xl"
+                className="text-3xl my-1"
               />
             : <FaRegEdit onClick={() => setInput(true)} className="text-xl" />
         }
@@ -149,7 +149,7 @@ export default function ItemSkill(props: ISkl) {
         !input
         && skill[0].specialty !== ''
         && skill[0].specialty !== ' '
-        && <span className="text-sm capitalize">Especialização: { skill[0].specialty }</span>
+        && <span className="text-sm capitalize">{ skill[0].specialty }</span>
       }
       <div className="w-full">
         { returnPoints(name) }
