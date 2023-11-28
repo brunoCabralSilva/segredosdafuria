@@ -199,17 +199,17 @@ export default function ItemGift(props: any) {
           ))
         }
       </div>
-      <h1 className="font-bold text-lg text-center w-full">
+      <h1 className="text-black font-bold text-lg text-center w-full">
         {`${ dataGift.giftPtBr } (${ dataGift.gift }) - ${ dataGift.renown }`}
       </h1>
       <div className="flex items-center justify-center">
         <hr className="w-10/12 my-1 " />
       </div>
       <p className="w-full text-center">
-        <span className="w-full font-bold pr-1 text-center">Pertencente a:</span>
+        <span className="text-black  w-full font-bold pr-1 text-center">Pertencente a:</span>
         { 
           dataGift.belonging.map((trybe: ITypeGift, index: number) => (
-            <span key={ index }>
+            <span className="text-black " key={ index }>
               { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
               { index === dataGift.belonging.length -1 ? '' : ', ' }
             </span>
