@@ -13,8 +13,8 @@ import { jwtDecode } from "jwt-decode";
 import Background from "./sheet/background";
 import Anotations from "./sheet/anotations";
 import GiftsSheet from "./sheet/gifts";
-import RitualsSheet from "./rituals";
 import AdvantagesAnsFlaws from "./sheet/advantagesAndFlaws";
+import RitualSheet from "./sheet/rituals";
 
 export default function PopUpSheet() {
   const [optionSelect, setOptionSelect] = useState('');
@@ -67,7 +67,7 @@ export default function PopUpSheet() {
       case ('gifts'):
         return <GiftsSheet />;
       case ('rituals'):
-        return <RitualsSheet />;
+        return <RitualSheet />;
       case ('advantages-flaws'):
         return <AdvantagesAnsFlaws />;
       case ('forms'):

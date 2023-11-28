@@ -1,7 +1,5 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
-import { useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
