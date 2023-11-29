@@ -70,7 +70,7 @@ export default function GiftsSheet() {
   };
 
   return(
-    <div className="flex flex-col w-full pr-2">
+    <div className="flex flex-col w-full sm:pr-2">
       <div className="w-full mb-2 flex-col items-start justify-center font-bold relative">
         <div className="mt-1 p-2 flex justify-between items-center mb-2 border-white border-2">
           <div

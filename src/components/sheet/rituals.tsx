@@ -48,7 +48,7 @@ export default function RitualSheet() {
   return(
     <div className="flex flex-col w-full">
       <div className="w-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
-        <div className="flex flex-col w-full pr-2">
+        <div className="flex flex-col w-full sm:pr-2">
           <div className="w-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
             <div className="relative border-2 border-white mt-1 p-2 flex justify-between items-center mb-2">
               <div
