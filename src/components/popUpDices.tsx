@@ -1,7 +1,7 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch } from "@/redux/hooks";
-import { actionRollDice } from "@/redux/slice";
+import { actionShowMenuSession } from "@/redux/slice";
 import { addDoc, collection, getFirestore, serverTimestamp } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
@@ -63,7 +63,7 @@ export default function PopUpDices() {
         }
       );
     }
-    dispatch(actionRollDice(false));
+    dispatch(actionShowMenuSession(''));
   };
 
   const disabledButton = () => {
@@ -74,7 +74,7 @@ export default function PopUpDices() {
       <div className="w-8/10 p-10 bg-black flex flex-col items-center justify-center h-screen z-50 top-0 right-0">
           <IoIosCloseCircleOutline
             className="fixed top-0 right-3 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
-            onClick={() => dispatch(actionRollDice(false))}
+            onClick={() => dispatch(actionShowMenuSession(''))}
           />
         <label htmlFor="valueofRage" className="mb-4 flex flex-col items-center">
           <p className="text-white w-full pb-3">Dados de Fúria ( { valueOfRage } )</p>

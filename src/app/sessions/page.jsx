@@ -4,7 +4,7 @@ import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionLogin, actionRollDice, actionShowSheet, useSlice } from '@/redux/slice';
+import { actionLogin, actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useRouter } from 'next/navigation';
 import { verify } from '../../firebase/user';
 import { jwtDecode } from 'jwt-decode';
@@ -36,7 +36,7 @@ export default function Chat() {
 
   useEffect(() => {
     setShowData(false);
-    dispatch(actionRollDice(false));
+    dispatch(actionShowMenuSession(''));
     window.scrollTo(0, 0);
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
@@ -361,7 +361,7 @@ export default function Chat() {
                   </div>
               }
             </div>
-            <div className={`${slice.showRollDice ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center min-h-10vh`}>
+            <div className={`${slice.showMenuSession !== '' ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center min-h-10vh`}>
                 { showOptions &&
                   <div className="flex items-center justify-end w-full gap-2">
                     <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
@@ -369,7 +369,7 @@ export default function Chat() {
                         className="p-2"
                         title="Realizar um teste com dados"
                         onClick={() => {
-                          dispatch(actionRollDice(true));
+                          dispatch(actionShowMenuSession('dices'));
                           setShowOptions(false);
                         }}
                       >
@@ -382,7 +382,7 @@ export default function Chat() {
                         title="Acessar a sua ficha"
                         onClick={() => {
                           setShowOptions(false);
-                          dispatch(actionShowSheet(true))
+                          dispatch(actionShowMenuSession('sheet'))
                         }}
                       >
                         <FaFile />
@@ -448,13 +448,13 @@ export default function Chat() {
             </div>
           </div>
           { 
-            slice.showRollDice && 
-            <div className="absolute sm:relative z-50">
-                <PopUpDices />
-              </div>
+            slice.showMenuSession === 'dices' &&
+            <div className="w-full md:w-3/5 absolute sm:relative z-50">
+              <PopUpDices />
+            </div>
           }
           {
-            slice.showSheet && 
+            slice.showMenuSession === 'sheet' && 
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
                 <PopUpSheet />
               </div>

@@ -89,18 +89,22 @@ export default function General() {
 
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-      <div className="w-full h-full mb-2 p-1 cursor-pointer text-white flex-col items-start justify-center font-bold px-4">
-        <div className={ `mt-5 capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center` }>
+      <div className="w-full h-full mb-2 p-1 text-white flex-col items-start justify-center font-bold px-4">
+        <div
+          className="w-full mt-5 capitalize flex justify-between items-center cursor-pointer"
+          onClick={() => setInput('nameCharacter')}
+        >
           { 
-            input !== 'nameCharacter' && <span className="capitalize break-words text-xl">{
+            input !== 'nameCharacter' && <span className="capitalize break-words text-xl w-full">{
               nameCharacter.length === 0 || nameCharacter[0] === '' || nameCharacter[0] === ' '
-              ? <span onClick={() => setInput('nameCharacter')}>
+              ? <span className=" w-full">
                   Insira um nome
                 </span>
-              : <span onClick={() => setInput('nameCharacter')}>{ nameCharacter }</span>
+              : <span className="w-full">
+                  { nameCharacter }
+                </span>
             }</span>
           }
-          <div className="flex">
           { 
             input === 'nameCharacter' &&
             <input
@@ -114,20 +118,27 @@ export default function General() {
           { 
             input
               ? <BsCheckSquare
-                  onClick={() => {
+                  onClick={(e:any) => {
                     updateValue('name', nameCharacter[0]);
                     setInput('');
+                    e.stopPropagation();
                   }}
                   className="text-3xl"
                 />
-              : <FaRegEdit onClick={() => setInput('nameCharacter')} className="text-xl" />
+              : <FaRegEdit
+                  onClick={
+                    (e:any) => {
+                      setInput('nameCharacter');
+                      e.stopPropagation();
+                    }}
+                  className="text-3xl"
+                />
           }
-          </div>
         </div>
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Augúrio</span>
           <select
-            className="w-full text-center py-1 bg-gray-whats border-2 border-white mt-2"
+            className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={auspice}
             onChange={ (e) => {
               updateValue('auspice', e.target.value);
@@ -145,7 +156,7 @@ export default function General() {
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Tribo</span>
           <select
-            className="w-full text-center py-1 bg-gray-whats border-2 border-white mt-2"
+            className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={ trybeI }
             onChange={ (e) => {
               updateValue('trybe', e.target.value);

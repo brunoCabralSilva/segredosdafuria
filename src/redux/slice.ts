@@ -11,8 +11,7 @@ const INITIAL_STATE = {
   list: { talisman: [], gift: [], ritual: [] },
   feedback: { show: false, title: '' },
   message: { type: '', show: false, text: '' },
-  showRollDice: false,
-  showSheet: false,
+  showMenuSession: '',
   form: '',
   attributes: {
     strength: 1,
@@ -134,11 +133,8 @@ const slice: Slice = createSlice({
     actionList(state, { payload }: PayloadAction<IList>) {
       return { ...state, list: payload };
     },
-    actionRollDice(state, { payload }: PayloadAction<IList>) {
-      return { ...state, showRollDice: payload };
-    },
-    actionShowSheet(state, { payload }: PayloadAction<IList>) {
-      return { ...state, showSheet: payload };
+    actionShowMenuSession(state, { payload }: PayloadAction<IList>) {
+      return { ...state, showMenuSession: payload };
     },
     actionForm(state, { payload }: PayloadAction<IList>) {
       return { ...state, form: payload };
@@ -159,8 +155,7 @@ export const {
   actionMessage,
   actionList,
   actionLogin,
-  actionRollDice,
-  actionShowSheet,
+  actionShowMenuSession,
   actionForm,
 } = slice.actions;
 

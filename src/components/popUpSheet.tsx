@@ -1,6 +1,6 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionForm, actionShowSheet, useSlice } from "@/redux/slice";
+import { actionForm, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import General from "./sheet/general";
@@ -82,10 +82,10 @@ export default function PopUpSheet() {
   };
 
   return(
-      <div className="w-full pl-3 pr-2 pt-12 bg-gray-whats flex flex-col items-center justify-center h-screen z-50 top-0 right-0">
+      <div className="flex flex-col items-center justify-center h-screen z-50 top-0 right-0 pl-3 pr-2 pt-12 bg-gray-whats-dark">
         <IoIosCloseCircleOutline
           className="fixed top-0 right-1 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
-          onClick={() => dispatch(actionShowSheet(false))}
+          onClick={() => dispatch(actionShowMenuSession(''))}
         />
         <select
           onChange={ (e) => {
