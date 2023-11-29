@@ -66,9 +66,9 @@ export default function PopUpSheet() {
         return <Skills />;
       case ('gifts-rituals'):
         return (
-          <div className="overflow-y-auto flex flex-col items-center">
+          <div className="w-full overflow-y-auto flex flex-col items-center ">
             <GiftsSheet />
-            <hr className="mt-5 mb-8 w-11/12 mr-3" />
+            <hr className="mt-5 mb-8 w-11/12" />
             <RitualSheet />
           </div>
         );
