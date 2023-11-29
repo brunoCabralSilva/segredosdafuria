@@ -64,8 +64,13 @@ export default function PopUpSheet() {
         return <Attributes />;
       case ('skills'):
         return <Skills />;
-      case ('gifts'):
-        return <GiftsSheet />;
+      case ('gifts-rituals'):
+        return (
+          <div className="overflow-y-auto ">
+            <GiftsSheet />;
+            <RitualSheet />
+          </div>
+        );
       case ('rituals'):
         return <RitualSheet />;
       case ('advantages-flaws'):
@@ -97,8 +102,7 @@ export default function PopUpSheet() {
           <option value={'general'}>Geral</option>
           <option value={'attributes'}>Atributos</option>
           <option value={'skills'}>Habilidades</option>
-          <option value={'gifts'}>Dons</option>
-          <option value={'rituals'}>Rituais</option>
+          <option value={'gifts-rituals'}>Dons e Rituais</option>
           <option value={'advantages-flaws'}>Vantagens e Defeitos</option>
           <option value={'forms'}>Formas ( Atual: { slice.form } )</option>
           <option value={'background'}>Background</option>

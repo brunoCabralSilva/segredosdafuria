@@ -85,41 +85,53 @@ export default function ItemRituals(props: any) {
   };
 
   if(showRitual) return (
-    <section key={index} className="bg-white mb-2 relative min-h-screen">
+    <section key={index} className="border-2 border-white mb-2 relative min-h-screen">
       <div className="py-4 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-justify overflow-y-auto relative">
-        <article className=" relative w-full h-full px-4 pb-4 pt-10 sm:p-10 text-black">
+        <article className=" relative w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white">
           <div className="flex flex-col justify-center items-center sm:items-start">
-            <h1 className="font-bold text-lg text-center w-full">
+            <p className="font-bold text-center w-full text-sm">
               {`${ ritual.titlePtBr } (${ ritual.title }) - ${ ritual.type === 'social' ? "Social" : 'Comum' }`}
-            </h1>
+            </p>
             <hr className="w-10/12 my-4 sm:my-2" />
           </div>
           <p className="pt-1">
-            <span className="font-bold pr-1">Fonte:</span>
-            { ritual.book }, pg. { ritual.page }.
+            <span className="text-sm font-bold pr-1">Fonte:</span>
+            <span className="text-sm font-normal pr-1">
+              { ritual.book }, pg. { ritual.page }.
+            </span>
           </p>
           { ritual.pool !== "" &&
             <p className="pt-1">
-              <span className="font-bold pr-1">Parada de Dados:</span>
-              { ritual.pool }.
+              <span className="text-sm font-bold pr-1">Parada de Dados:</span>
+              <span className="text-sm font-normal pr-1">
+                { ritual.pool }.
+              </span>
             </p>
           }
           <p className="pt-3 text-justify">
-            <span className="font-bold pr-1">Descrição:</span>
-            { ritual.descriptionPtBr }
+            <span className="text-sm font-bold pr-1">Descrição:</span>
+            <span className="text-sm font-normal pr-1">
+              { ritual.descriptionPtBr }
+            </span>
           </p>
           <p className="pt-1 text-justify">
-            <span className="font-bold pr-1">Sistema:</span>
-            { ritual.systemPtBr }
+            <span className="text-sm font-bold pr-1">Sistema:</span>
+            <span className="text-sm font-normal pr-1">
+              { ritual.systemPtBr }
+            </span>
           </p>
-          <p className="pt-3 text-justify">
-            <span className="font-bold pr-1">Description (original):</span>
-            { ritual.description }
+          {/* <p className="pt-3 text-justify">
+            <span className="text-sm font-bold pr-1">Description (original):</span>
+            <span className="text-sm font-normal pr-1">
+              { ritual.description }
+            </span>
           </p>
           <p className="pt-1 text-justify">
-            <span className="font-bold pr-1">System (original):</span>
-            { ritual.system }
-          </p>
+            <span className="text-sm font-bold pr-1">System (original):</span>
+            <span className="text-sm font-normal pr-1">
+              { ritual.system }
+            </span>
+          </p> */}
           <div className="flex flex-col sm:flex-row sm:justify-between">
           </div>
           <div className="flex flex-col sm:flex-row sm:justify-between">
@@ -140,7 +152,7 @@ export default function ItemRituals(props: any) {
             type="button"
             onClick={ () => addRitual() }
           >
-            <IoAddCircle className="text-3xl" />
+            <IoAddCircle className="text-3xl text-white" />
           </button>
         }
         {
@@ -148,14 +160,14 @@ export default function ItemRituals(props: any) {
           type="button"
           onClick={ removeRitual }
         >
-          <MdDelete className="text-3xl" />
+          <MdDelete className="text-3xl text-white" />
         </button>
         }
         <button
           type="button"
           onClick={ () => setShowRitual(false) }
         >
-          <IoArrowUpCircleSharp className="text-3xl" />
+          <IoArrowUpCircleSharp className="text-3xl text-white" />
         </button>
       </div>
       </div>
@@ -163,11 +175,11 @@ export default function ItemRituals(props: any) {
   );
   return (
     <button
-      className="bg-white mb-2 p-2 py-3 w-full"
+      className="border-2 border-white mb-2 p-2 py-3 w-full hover:bg-black transition-colors"
       type="button"
       onClick={() => setShowRitual(true)}
     >
-      <h1 className="font-bold text-lg text-center w-full text-black">
+      <h1 className="font-bold text-white text-normal text-center text-sm w-full">
         {`${ ritual.titlePtBr } (${ ritual.title })`}
       </h1>
     </button>

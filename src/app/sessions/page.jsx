@@ -226,28 +226,6 @@ export default function Chat() {
             )
           }
         </div>
-        {/* <div className="py-2 pl-1 font-bold">
-          <span>{'( '}</span>
-          {
-            msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => {
-              if(index === msn.rollOfRage.length -1 && msn.rollOfMargin.length === 0) {
-                return <span className="md:pl-2" key={index}>{ dice } </span>
-              } 
-              if(index === msn.rollOfRage.length -1) {
-                return <span className="md:pl-2" key={index}>{ dice } <span className="md:pl-2">/</span> </span>
-              }
-                return <span className="md:pl-2" key={index}>{ dice }, </span>;
-            })
-          }
-          {
-            msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => {
-              if(index === msn.rollOfMargin.length -1) {
-                return <span className="md:pl-2" key={index}>{ dice } </span>
-              } return <span className="md:pl-2" key={index}>{ dice }, </span>;
-            })
-          }
-          <span>{' )'}</span>
-        </div> */}
         <div>
           {
             falhaBrutal

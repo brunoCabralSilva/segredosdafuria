@@ -46,23 +46,23 @@ export default function RitualSheet() {
   };
 
   return(
-    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-      <div className="w-full h-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
-        <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-          <div className="w-full h-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
-            <div className="mt-1 p-2 bg-white flex justify-between items-center mb-2">
+    <div className="flex flex-col w-full">
+      <div className="w-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
+        <div className="flex flex-col w-full pr-2">
+          <div className="w-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
+            <div className="relative border-2 border-white mt-1 p-2 flex justify-between items-center mb-2">
               <div
-                className="text-black mt-2 pb-2 w-full cursor-pointer flex-col items-center justify-center"
+                className="mt-2 pb-2 text-white w-full cursor-pointer flex items-center justify-center"
               >
                 {
                 !showAllRituals
-                ? <span>Rituais adicionados</span>
-                : <span>Escolha um ou mais Rituais para serem adicionados</span>
+                ? <span className="text-center w-full text-sm">Meus Rituais</span>
+                : <span className="text-center w-full text-sm">Adicionar Novos Rituais</span>
                 }
               </div>
               <button
                 type="button"
-                className="p-1 border-2 border-black"
+                className="sm:absolute right-3 p-1 border-2 border-white bg-white text-black"
                 onClick={ () => {
                   setShowAllRituals(!showAllRituals);
                   generateDataForRituals();
@@ -77,7 +77,7 @@ export default function RitualSheet() {
                 }
               </button>
             </div>
-            <div className="h-full">
+            <div className="">
               {
                 !showAllRituals 
                 ? <div className="">

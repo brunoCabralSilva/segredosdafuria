@@ -75,9 +75,11 @@ export default function ItemGift(props: any) {
   };
 
   if(showGift) return (
-    <section key={index} className="bg-white mb-2 relative min-h-screen">
-      <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 bg-white text-black relative">
-        <div className="flex flex-col justify-center dataGifts-center sm:dataGifts-start">
+    <section
+      key={index} className="mb-2 relative min-h-screen"
+    >
+      <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
+        <div className="flex flex-col justify-center">
           <div className="relative text-white flex w-full justify-center pb-5">
             { 
               dataGift.belonging.map((trybe: ITypeGift, index: number) => (
@@ -92,16 +94,16 @@ export default function ItemGift(props: any) {
               ))
             }
           </div>
-          <h1 className="font-bold text-lg text-center sm:text-left w-full">
+          <h1 className="text-center font-bold w-full">
             {`${ dataGift.giftPtBr } (${ dataGift.gift }) - ${ dataGift.renown }`}
           </h1>
-          <hr className="w-10/12 my-4 sm:my-2" />
+          <hr className="w-full my-4" />
         </div>
         <p>
-          <span className="font-bold pr-1">Pertencente a:</span>
+          <span className="text-sm pr-1">Pertencente a:</span>
           { 
             dataGift.belonging.map((trybe: ITypeGift, index: number) => (
-              <span key={ index }>
+              <span className="text-sm font-normal" key={ index }>
                 { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
                 { index === dataGift.belonging.length -1 ? '.' : ', ' }
               </span>
@@ -109,51 +111,40 @@ export default function ItemGift(props: any) {
           }
         </p>
         <p className="pt-1">
-          <span className="font-bold pr-1">Fonte:</span>
-          { dataGift.book }, pg. { dataGift.page }.
+          <span className="text-sm font-bold pr-1">Fonte:</span>
+          <span className="text-sm font-normal">{ dataGift.book }, pg. { dataGift.page }.</span>
         </p>
         <p className="pt-1">
-          <span className="font-bold pr-1">Custo:</span>
-          { dataGift.cost }.
+          <span className="text-sm font-bold pr-1">Custo:</span>
+          <span className="text-sm font-normal">{ dataGift.cost }.</span>
         </p>
         <p className="pt-1">
-          <span className="font-bold pr-1">Ação:</span>
-          { dataGift.action }.
+          <span className="text-sm font-bold pr-1">Ação:</span>
+          <span className="text-sm font-normal">{ dataGift.action }.</span>
         </p>
         { dataGift.pool !== "" &&
           <p className="pt-1">
-            <span className="font-bold pr-1">Parada de Dados:</span>
-            { dataGift.pool }.
-          </p>
+            <span className="text-sm font-bold pr-1">Parada de Dados:</span>
+            <span className="text-sm font-normal">{ dataGift.pool }.</span></p>
         }
         { dataGift.duration !== "" &&
           <p className="pt-1">
-            <span className="font-bold pr-1">Duração:</span>
-            { dataGift.duration }.
+            <span className="text-sm font-bold pr-1">Duração:</span>
+            <span className="text-sm font-normal">{ dataGift.duration }.</span>
           </p>
         }
         <p className="pt-1 text-justify">
-          <span className="font-bold pr-1">Descrição:</span>
-          { dataGift.descriptionPtBr }
+          <span className="text-sm font-bold pr-1">Descrição:</span>
+          <span className="text-sm font-normal">{ dataGift.descriptionPtBr }</span>
         </p>
-        <p className="pt-1 text-justify">
-          <span className="font-bold pr-1">Sistema:</span>
-          { dataGift.systemPtBr }
+        <p className="pt-1 text-justify mt-2">
+          <span className="text-sm font-bold pr-1">Sistema:</span>
+          <span className="text-sm font-normal">{ dataGift.systemPtBr }</span>
         </p>
-        <p className="pt-1 text-justify">
-          <span className="font-bold pr-1">Description (original):</span>
-          { dataGift.description }
-        </p>
-        <p className="pt-1 text-justify">
-          <span className="font-bold pr-1">System (original):</span>
-          { dataGift.system }
-        </p>
-        <div className="flex flex-col sm:flex-row sm:justify-between">
-        </div>
         <div className="flex flex-col sm:flex-row sm:justify-between">
         <button
           type="button"
-          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
+          className={`text-sm pb-3 ${!slice.simplify ? 'w-full text-center text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
           onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
         >
           Enviar Feedback
@@ -168,24 +159,24 @@ export default function ItemGift(props: any) {
           type="button"
           onClick={ () => addGift() }
         >
-          <IoAddCircle className="text-3xl" />
+          <IoAddCircle className="text-3xl text-white" />
         </button>
         <button
           type="button"
           onClick={ () => setShowGift(false) }
         >
-          <IoArrowUpCircleSharp className="text-3xl" />
+          <IoArrowUpCircleSharp className="text-3xl text-white" />
         </button>
       </div>
     </section>
   );
   return (
     <button
-      className="bg-white mb-2 p-2 py-3 w-full"
+    className="border-2 border-white mb-2 p-2 py-3 w-full hover:bg-black transition-colors"
       type="button"
       onClick={() => setShowGift(true)}
     >
-      <div className=" relative text-white flex w-full justify-center pb-2">
+      <div className="relative flex w-full justify-center pb-2">
         { 
           dataGift.belonging.map((trybe: ITypeGift, index: number) => (
             <Image
@@ -199,17 +190,15 @@ export default function ItemGift(props: any) {
           ))
         }
       </div>
-      <h1 className="text-black font-bold text-lg text-center w-full">
+      <h1 className="font-bold text-white text-normal text-center w-full">
         {`${ dataGift.giftPtBr } (${ dataGift.gift }) - ${ dataGift.renown }`}
       </h1>
       <div className="flex items-center justify-center">
-        <hr className="w-10/12 my-1 " />
       </div>
       <p className="w-full text-center">
-        <span className="text-black  w-full font-bold pr-1 text-center">Pertencente a:</span>
         { 
           dataGift.belonging.map((trybe: ITypeGift, index: number) => (
-            <span className="text-black " key={ index }>
+            <span className="text-white text-sm" key={ index }>
               { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
               { index === dataGift.belonging.length -1 ? '' : ', ' }
             </span>

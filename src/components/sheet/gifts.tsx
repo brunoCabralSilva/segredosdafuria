@@ -70,21 +70,21 @@ export default function GiftsSheet() {
   };
 
   return(
-    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-      <div className="w-full h-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
-        <div className="mt-1 p-2 bg-white flex justify-between items-center mb-2">
+    <div className="flex flex-col w-full pr-2">
+      <div className="w-full mb-2 flex-col items-start justify-center font-bold relative">
+        <div className="mt-1 p-2 flex justify-between items-center mb-2 border-white border-2">
           <div
-            className="text-black mt-2 pb-2 w-full cursor-pointer flex-col items-center justify-center"
+            className="text-white mt-2 pb-2 w-full flex-col items-center justify-center text-center"
           >
             {
             !showAllGifts
-            ? <span>Dons adicionados</span>
-            : <span>Escolha um ou mais dons para serem adicionados</span>
+            ? <span className="text-sm">Meus Dons</span>
+            : <span className="text-sm">Adicionar Novos Dons</span>
             }
           </div>
           <button
             type="button"
-            className="p-1 border-2 border-black"
+            className="p-1 border-2 border-white bg-white sm:absolute right-3"
             onClick={ () => {
               setShowAllGifts(!showAllGifts);
               generateDataForGifts();
@@ -99,7 +99,7 @@ export default function GiftsSheet() {
             }
           </button>
         </div>
-        <div className="h-full">
+        <div className="">
           {
             !showAllGifts 
             ? <div className="">
