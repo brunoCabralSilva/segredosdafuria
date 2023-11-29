@@ -175,11 +175,11 @@ export default function ItemRituals(props: any) {
   );
   return (
     <button
-      className="border-2 border-white mb-2 p-2 py-3 w-full hover:bg-black transition-colors"
+      className="border-2 border-white mb-2 p-2 py-6 w-full hover:bg-black transition-colors"
       type="button"
       onClick={() => setShowRitual(true)}
     >
-      <h1 className="font-bold text-white text-normal text-center text-sm w-full">
+      <h1 className="font-bold text-white text-normal text-center text-sm w-full px-2">
         {`${ ritual.titlePtBr } (${ ritual.title })`}
       </h1>
     </button>
