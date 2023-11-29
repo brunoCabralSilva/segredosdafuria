@@ -62,7 +62,7 @@ export default function RitualSheet() {
               </div>
               <button
                 type="button"
-                className="sm:absolute right-3 p-1 border-2 border-white bg-white text-black"
+                className="absolute right-3 p-1 border-2 border-white bg-white text-black"
                 onClick={ () => {
                   setShowAllRituals(!showAllRituals);
                   generateDataForRituals();

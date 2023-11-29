@@ -84,7 +84,7 @@ export default function GiftsSheet() {
           </div>
           <button
             type="button"
-            className="p-1 border-2 border-white bg-white sm:absolute right-3"
+            className="p-1 border-2 border-white bg-white absolute right-3"
             onClick={ () => {
               setShowAllGifts(!showAllGifts);
               generateDataForGifts();
