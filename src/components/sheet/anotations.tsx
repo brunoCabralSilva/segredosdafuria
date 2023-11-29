@@ -77,7 +77,7 @@ export default function Anotations() {
 
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-      <div className="w-full h-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
+      <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         <div className="mt-1 p-2 flex justify-between items-center">
           <div
             className="text-white mt-2 pb-2 w-full cursor-pointer flex-col items-center justify-center"
@@ -92,25 +92,31 @@ export default function Anotations() {
             { 
               textArea
                 ? <BsCheckSquare
-                    onClick={() => {
+                    onClick={(e: any) => {
                       updateValue();
                       setTextArea(false);
+                      e.stopPropagation();
                     }}
-                    className="text-3xl text-white"
+                    className="text-3xl text-white cursor-pointer"
                   />
-                : <FaRegEdit onClick={() => setTextArea(true)} className="text-3xl text-white" />
+                : <FaRegEdit
+                    onClick={(e: any) => {
+                      setTextArea(true);
+                      e.stopPropagation();
+                    }}
+                    className="text-3xl text-white cursor-pointer" />
             }
         </div>
         { 
           textArea ?
           <textarea
-            className="text-black bg-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full"
+            className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full"
             placeholder="Digite aqui suas anotações"
             value={ text }
             onChange={(e) => typeText(e)}
           />
           : <div
-              className="text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full"
+              className="text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full cursor-pointer"
               onClick={() => setTextArea(true)} 
             >
             { text }

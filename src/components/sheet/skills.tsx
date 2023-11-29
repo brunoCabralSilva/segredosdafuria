@@ -3,7 +3,7 @@ import ItemSkill from "./itemSkill";
 export default function Skills() {
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-      <div className="w-full h-full mb-2 p-1 cursor-pointer text-white flex-col items-start justify-center font-bold">
+      <div className="w-full h-full mb-2 p-1 text-white flex-col items-start justify-center font-bold">
         <div className="w-full px-4 pt-4">
           <ItemSkill name="athletics" namePtBr="Atletismo" quant={5} />
           <ItemSkill name="brawl" namePtBr="Briga" quant={5} />

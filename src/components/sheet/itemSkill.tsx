@@ -119,9 +119,11 @@ export default function ItemSkill(props: ISkl) {
 
   return(
     <div className="w-full mt-4">
-      <div className={ `capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center` }>
+      <div className={ `capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center cursor-pointer` } onClick={() => setInput(true)}>
         <span>{ namePtBr } ({ name })</span>
-        <div className="flex">
+        <div
+          className="flex cursor-pointer"
+        >
         { 
           input &&
           <input
@@ -135,13 +137,20 @@ export default function ItemSkill(props: ISkl) {
         { 
           input
             ? <BsCheckSquare
-                onClick={() => {
+                onClick={(e: any) => {
                   updateValue(name, skill[0].value);
                   setInput(false);
+                  e.stopPropagation();
                 }}
-                className="text-3xl my-1"
+                className="text-3xl my-1 cursor-pointer"
               />
-            : <FaRegEdit onClick={() => setInput(true)} className="text-xl" />
+            : <FaRegEdit
+                onClick={(e: any) => {
+                  setInput(true);
+                  e.stopPropagation();
+                }}
+                className="text-xl cursor-pointer"
+              />
         }
         </div>
       </div>

@@ -80,7 +80,7 @@ export default function ItemForm() {
           dataForms.map((form: any, index) => (
             <div
               key={index}
-              className="mt-2 p-5 w-ful border-white border-2 cursor-pointer flex-col items-center justify-center"
+              className={`mt-2 p-5 w-ful border-white border-2 cursor-pointer flex-col items-center justify-center ${formSelected === form.name && 'bg-black'}`}
               onClick={
                 () => {
                   dispatch(actionForm(form.name));
@@ -90,16 +90,22 @@ export default function ItemForm() {
             >
               <div className="w-full flex items-center justify-center">
               <Image
-                src={`/images/forms/sheet/${form.name}.png`}
+                src={`/images/forms/${form.name}-white.png`}
                 alt={`Glifo dos ${form.name}`}
-                className={`object-cover object-top w-full my-2 ${formSelected === form.name && 'border-2 border-black'}`}
+                className="object-cover object-top w-32 my-2"
                 width={800}
                 height={400}
               />
               </div>
               <p className="w-full text-center py-2 text-white">{ form.name } - { form.subtitle }</p>
-              <ul className="pl-5 text-sm font-normal  text-white">
-                  <li className="list-disc">{ form.cost }</li>
+              <ul className="pl-5 text-sm font-normal text-white">
+                  <li className="list-disc">
+                    {
+                      form.cost === 'Nenhum.'
+                        ? 'Nenhum Teste de Fúria'
+                        : form.cost
+                    }
+                  </li>
                 {
                   form.resume.map((item: string, index: number) => (
                     <li className="list-disc" key={index}>

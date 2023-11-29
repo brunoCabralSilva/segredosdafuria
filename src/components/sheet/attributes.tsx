@@ -3,7 +3,7 @@ import ItemAtr from "./itemAtr"
 export default function Attributes() {
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-      <div className="w-full h-full mb-2 p-1 cursor-pointer flex-col text-white items-start justify-center font-bold">
+      <div className="w-full h-full mb-2 p-1 flex-col text-white items-start justify-center font-bold">
         <div className="w-full p-4">
           <span className="w-full text-center">Físicos</span>
           <hr className="h-1 w-full" />
