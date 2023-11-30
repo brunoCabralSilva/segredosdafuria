@@ -1,23 +1,21 @@
 'use client'
-import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDoc, getDocs, deleteDoc, where } from 'firebase/firestore';
-import firestoreConfig from '../../firebase/connection';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionLogin, actionShowMenuSession, useSlice } from '@/redux/slice';
-import { useRouter } from 'next/navigation';
-import { verify } from '../../firebase/user';
+import { actionShowMenuSession, useSlice } from '@/redux/slice';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { collection, orderBy, limit, getFirestore, query } from 'firebase/firestore';
+import firestoreConfig from '../../firebase/connection';
 import { jwtDecode } from 'jwt-decode';
+import { IGenerateDataRolls, IMsn } from '@/interface';
 import Nav from '@/components/nav';
 import PopUpDices from '@/components/popUpDices';
-import Message from './message';
 import PopUpSheet from '@/components/popUpSheet';
+import { verify } from '../../firebase/user';
 import { testToken } from '@/firebase/token';
-import { IGenerateDataRolls, IMsn } from '@/interface';
-import Dice from './dice';
+import Message from './message';
 import { generateDataRoll } from './functions';
+import Dice from './dice';
 import SessionBar from './sessionBar';
-import Simplify from '@/components/simplify';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -89,12 +87,13 @@ export default function Chat() {
     return <Message rollDices={ rollDices } msn={ msn } type="rage-check" />
   };
 
-  const messageForm = (index: number, msg: IMsn, color: string, justify: string) => {
+  const messageForm = (index: number, msg: any, color: string, justify: string) => {
+    console.log('atualizou');
     return(
       <div key={index} className={`w-full flex ${justify === 'end' ? 'justify-end' : 'justify-start' } text-white`}>
         <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2`}>
           <div>
-            { messageData(msg) }
+            { messageData(msg.message) }
             </div>
             <div className="flex justify-end pt-2">
               <span className="w-full text-right text-sm">
@@ -122,9 +121,9 @@ export default function Chat() {
                       let decode = { email: '' };
                       if (decodedToken) decode = jwtDecode(token);
                       if (token && decode.email !== '' && decode.email === msg.email) {
-                        return messageForm(index, msg.message, 'green', 'end');
+                        return messageForm(index, msg, 'green', 'end');
                       }
-                      return messageForm(index, msg.message, 'gray', 'start');
+                      return messageForm(index, msg, 'gray', 'start');
                     } return null;
                   })
                 : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">

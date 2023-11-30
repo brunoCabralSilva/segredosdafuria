@@ -8,13 +8,21 @@ import { RxUpdate } from "react-icons/rx";
 import { FaAngleDown } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionShowMenuSession, useSlice } from '@/redux/slice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 export default function SessionBar(props: any) {
   const { showOptions, setShowOptions, scrollToBottom } = props;
   const [text, setText] = useState('');
+  const [token, setToken] = useState({ role: '' });
   const slice = useAppSelector(useSlice);
-  const dispatch = useAppDispatch();
+  const dispatch: any = useAppDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) setToken(jwtDecode(token));
+  }, []);
+
   return(
     <div className={`${slice.showMenuSession !== '' ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center min-h-10vh`}>
       { showOptions &&
@@ -56,7 +64,7 @@ export default function SessionBar(props: any) {
             </button>
           </div>
           { 
-            slice.user.role === 'admin'&&
+            token.role === 'admin' &&
               <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
                 <button
                   className="p-2"

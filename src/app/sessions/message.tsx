@@ -21,18 +21,19 @@ export default function Message(props: IMessage) {
         </div>
         <div className="w-full">
           <div className="font-bold pt-4 pb-2 text-left">
-            { `${ msn.rollOfRage.length === 2 ? 'Foram realizados 2 Testes de Fúria': 'Foi realizado um Teste de Fúria'} ${ msn.cause != 'manual' && ` por mudar para a forma`} ${msn.cause}.`}
+            { `${ msn.rollOfRage.length === 2 ? 'Foram realizados 2 Testes de Fúria': 'Foi realizado um Teste de Fúria'} ${ msn.cause !== 'manual' ? ` por mudar para a forma ${msn.cause}` : '!' }`}
           </div>
           <div className="pb-2 text-left">
             { msn.success === 1 && <span>
               {
                 msn.rollOfRage.length == 2
-                  ? `Você teve 1 sucesso no seu Teste de Fúria. A sua Fúria foi reduzida em 1.`
-                  : `Você teve 1 sucesso no seu Teste de Fúria. Não houve nenhuma redução na sua Fúria.`
+                  ? `Obteve 1 sucesso no Teste. A Fúria foi reduzida em 1.`
+                  : `Obteve 1 sucesso no Teste. Não houve redução na Fúria.`
               }
               </span>}
-            { msn.success === 2 && <span>Você teve 2 sucessos no seu Teste. Não houve nenhuma redução na sua Fúria.</span>}
-            { msn.success === 0 && <span>Você não teve nenhum sucessos no seu Teste de Fúria. A sua fúria foi reduzida em {msn.rollOfRage.length}.</span>}
+            { msn.success === 2 && <span>Obteve 2 sucessos no Teste. Não houve redução na Fúria.</span> }
+            { msn.success === 0 && <span>Não obteve sucesso no Teste. A fúria foi reduzida em {msn.rollOfRage.length}.</span> }
+            { msn.rage && <span>Fúria Atual: {msn.rage}.</span> }
           </div>
         </div>
     </div>

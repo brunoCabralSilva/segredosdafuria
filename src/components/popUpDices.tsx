@@ -84,31 +84,48 @@ export default function PopUpDices() {
     const db = getFirestore(firebaseConfig);
     const messagesRef = collection(db, 'chatbot');
     const token = localStorage.getItem('Segredos Da Fúria');
+    console.log(token)
     if (token) {
       const { firstName, lastName, email }: IUser = jwtDecode(token);
+      const decodedToken: { email: string } = jwtDecode(token);
+      const { email: emailUser } = decodedToken;
       await addDoc(
         messagesRef,
         {
-          message: {
-            rollOfRage: resultOfRage,
-            success,
-            cause: 'manual'
-          },
+          message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode utilizar dons, mudar de forma e afins.',
           user: firstName + ' ' + lastName,
           email: email,
           date: serverTimestamp(),
-      });
-      const decodedToken: { email: string } = jwtDecode(token);
-      const { email: emailUser } = decodedToken;
+        }
+      );
       const userQuery = query(collection(db, 'users'), where('email', '==', emailUser));
       const userQuerySnapshot = await getDocs(userQuery);
       if (!isEmpty(userQuerySnapshot.docs)) {
         const userDocRef = userQuerySnapshot.docs[0].ref;
         const userData = userQuerySnapshot.docs[0].data();
         if (userData.characterSheet && userData.characterSheet.length > 0) {
-          if (userData.characterSheet[0].data.rage - success < 0) {
+          if (userData.characterSheet[0].data.rage <= 0) {
             userData.characterSheet[0].data.rage = 0;
-          } else userData.characterSheet[0].data.rage = userData.characterSheet[0].data.rage - (resultOfRage.length - success);
+          } else {
+            if (userData.characterSheet[0].data.rage - success < 0) {
+              userData.characterSheet[0].data.rage = 0;
+            } else {
+              userData.characterSheet[0].data.rage = userData.characterSheet[0].data.rage - (resultOfRage.length - success);
+            }
+            await addDoc(
+              messagesRef,
+              {
+                message: {
+                  rollOfRage: resultOfRage,
+                  success,
+                  cause: 'manual',
+                  rage: userData.characterSheet[0].data.rage,
+                },
+                user: firstName + ' ' + lastName,
+                email: email,
+                date: serverTimestamp(),
+            });
+          }
           await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
         }
       } else {
@@ -189,29 +206,12 @@ export default function PopUpDices() {
           onClick={() => dispatch(actionShowMenuSession(''))}
         />
         <label htmlFor="valueOf" className="mb-4 flex items-center w-full gap-2">
-            <select
-              onClick={(e: any) => setRageCheck(e.target.value)}
-              className="w-full py-3 capitalize cursor-pointer"
-            >
-              <option
-                className="capitalize text-center text-black"
-                value={1}
-              >
-                1 Teste de Fúria
-              </option>
-              <option
-                value={2}
-                className="capitalize text-center text-black"
-              >
-                2 Testes de Fúria
-              </option>
-            </select>
-            <button
-              className="bg-white p-3"
-              onClick={ returnRageCheck }
-            >
-              Ok
-            </button>
+          <button
+            className="bg-white p-3 w-full py-3 cursor-pointer capitalize text-center text-black hover:font-bold"
+            onClick={ returnRageCheck }
+          >
+            Realizar 1 Teste de Fúria
+          </button>
         </label>
         <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Atributo</p>

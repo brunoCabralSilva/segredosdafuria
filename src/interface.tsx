@@ -134,6 +134,7 @@ export interface IMsn {
   cause?: String;
   success?: number;
   date: any;
+  rage?: number; 
 }
 
 export interface IGenerateDataRolls {
