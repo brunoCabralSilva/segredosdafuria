@@ -3,7 +3,6 @@ import { useAppDispatch } from "@/redux/hooks";
 import { useAppSelector } from "@/redux/hooks";
 import { actionSimplify, useSlice } from "@/redux/slice";
 import { useState } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
 
 export default function Simplify() {
   const [message, setMessage] = useState<boolean>(false);

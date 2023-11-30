@@ -42,7 +42,6 @@ export default function Chat() {
     if (token) {
       try {
         const decodedToken = verify(JSON.parse(token));
-        console.log('verify ', decodedToken);
         if (decodedToken) {
           setShowData(true);
           const { firstName, lastName, email, role } = jwtDecode(token);
@@ -118,7 +117,7 @@ export default function Chat() {
   };
 
   const messageSet = (msn) => {
-    if (typeof msn === 'string') return (<div className="px-2 break-all">{ msn }</div>);
+    if (typeof msn === 'string') return (<div className="px-2 break-words">{ msn }</div>);
 
     let success = 0;
     let fail = 0;

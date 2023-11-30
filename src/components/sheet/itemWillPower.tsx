@@ -9,13 +9,12 @@ import { useEffect, useState } from "react";
 interface IWillpower {
   name: string;
   namePtBr: string;
-  quant: number;
 }
 
 export default function ItemWillpower(props: IWillpower) {
   const [ willpower, setWillpower ] = useState<any>([]);
   const [totalWillpower, setTotalWillpower] = useState(0);
-  const { name, namePtBr, quant } = props;
+  const { name, namePtBr } = props;
 
   useEffect(() => {
     returnValueWillpower();
@@ -94,7 +93,7 @@ export default function ItemWillpower(props: IWillpower) {
   };
 
   const returnPoints = (name: string) => {
-    const pointsRest = Array(quant).fill('');
+    const pointsRest = Array(totalWillpower).fill('');
     return ( 
       <div className="flex flex-wrap gap-2 pt-1">
         {

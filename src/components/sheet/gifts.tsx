@@ -40,7 +40,7 @@ export default function GiftsSheet() {
         if (!isEmpty(userQuerySnapshot.docs)) {
           const userData = userQuerySnapshot.docs[0].data();
             const wayElement = userData.characterSheet[0].data;
-            setTotalRenown(Number(wayElement.renown.honor) + Number(wayElement.renown.glory + Number(wayElement.renown.wisdom)));
+            setTotalRenown(Number(wayElement.honor) + Number(wayElement.glory + Number(wayElement.wisdom)));
             setTrybe(userData.characterSheet[0].data.trybe);
             setAuspice(userData.characterSheet[0].data.auspice);
             setGiftsAdded((userData.characterSheet[0].data.gifts))

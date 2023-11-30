@@ -10,16 +10,16 @@ interface IRage {
   quant: number;
 }
 
-export default function ItemRage(props: IRage) {
-  const [ rage, setAttributes ] = useState<any>([]);
+export default function Item(props: IRage) {
+  const [ valueItem, setValueItem ] = useState<any>([]);
   const { name, namePtBr, quant } = props;
 
   useEffect(() => {
-    returnValueRage();
+    returnValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const returnValueRage = async (): Promise<void> => {
+  const returnValue = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
@@ -30,12 +30,12 @@ export default function ItemRage(props: IRage) {
         const userQuerySnapshot = await getDocs(userQuery);
         if (!isEmpty(userQuerySnapshot.docs)) {
           const userData = userQuerySnapshot.docs[0].data();
-          setAttributes([userData.characterSheet[0].data.rage]);
+          setValueItem([userData.characterSheet[0].data[name]]);
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
         }
       } catch (error) {
-        window.alert('Erro ao obter valor da Fúria: ' + error);
+        window.alert(`Erro ao obter valor da ${namePtBr}: ` + error);
       }
     }
   };
@@ -62,8 +62,8 @@ export default function ItemRage(props: IRage) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            if (userData.characterSheet[0].data.rage === 1 && value === 1) userData.characterSheet[0].data.rage = 0;
-            else userData.characterSheet[0].data.rage = value;
+            if (userData.characterSheet[0].data[name] === 1 && value === 1) userData.characterSheet[0].data[name] = 0;
+            else userData.characterSheet[0].data[name] = value;
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
           }
         } else {
@@ -73,7 +73,7 @@ export default function ItemRage(props: IRage) {
         window.alert('Erro ao atualizar valor: (' + error + ')');
       }
     }
-    returnValueRage();
+    returnValue();
   };
 
   const returnPoints = (name: string) => {
@@ -81,8 +81,8 @@ export default function ItemRage(props: IRage) {
     return (
       <div className="flex flex-wrap gap-2 pt-1">
         {
-          rage.length > 0 && points.map((item, index) => {
-            if (rage[0] >= index + 1) {
+          valueItem.length > 0 && points.map((item, index) => {
+            if (valueItem[0] >= index + 1) {
               return (
                 <button
                   type="button"

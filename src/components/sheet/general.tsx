@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import ItemHealth from "./itemHealth";
-import ItemRage from "./itemRage";
-import ItemRenown from "./itemRenown"
+import Item from "./item";
 import ItemWillpower from "./itemWillPower";
 import firebaseConfig from "@/firebase/connection";
 import { jwtDecode } from "jwt-decode";
@@ -178,12 +177,12 @@ export default function General() {
             }
           </select>
         </div>
-        <ItemRage name="rage" namePtBr="Fúria" quant={5} />
-        <ItemWillpower name="willpower" namePtBr="Força de Vontade" quant={10} />
-        <ItemHealth name="health" namePtBr="Vitalidade" quant={10} />
-        <ItemRenown name="honor" namePtBr="Honra" quant={5} />
-        <ItemRenown name="glory" namePtBr="Glória" quant={5} />
-        <ItemRenown name="wisdom" namePtBr="Sabedoria" quant={5} />
+        <Item name="rage" namePtBr="Fúria" quant={5} />
+        <ItemWillpower name="willpower" namePtBr="Força de Vontade" />
+        <ItemHealth name="health" namePtBr="Vitalidade" />
+        <Item name="honor" namePtBr="Honra" quant={5} />
+        <Item name="glory" namePtBr="Glória" quant={5} />
+        <Item name="wisdom" namePtBr="Sabedoria" quant={5} />
       </div>
     </div>
   );

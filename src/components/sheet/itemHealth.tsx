@@ -1,7 +1,5 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
-import { useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
@@ -9,14 +7,13 @@ import { useEffect, useState } from "react";
 interface IHealth {
   name: string;
   namePtBr: string;
-  quant: number;
 }
 
 export default function ItemHealth(props: IHealth) {
   const [ health, setHealth ] = useState<any>([]);
   const [totalHealth, setTotalHealth] = useState(0);
   const [form, setForm] = useState('');
-  const { name, namePtBr, quant } = props;
+  const { name, namePtBr } = props;
 
   useEffect(() => {
     returnValueHealth();
@@ -101,7 +98,7 @@ export default function ItemHealth(props: IHealth) {
   };
 
   const returnPoints = (name: string) => {
-    const pointsRest = Array(quant).fill('');
+    const pointsRest = Array(totalHealth).fill('');
     return ( 
       <div className="flex flex-wrap gap-2 pt-1">
         {
@@ -140,52 +137,11 @@ export default function ItemHealth(props: IHealth) {
     );
   };
 
-  const returnHpCrinos = (name: string) => {
-    const pointsRest = Array(4).fill('');
-    return ( 
-      <div className="flex flex-wrap gap-2 pt-2">
-        {
-          pointsRest.map((item, index) => {
-            const healthMap: number[] = health.map((element: any) => element.value);
-            if (healthMap.includes(index + 11)) {
-              const filterPoint = health.find((ht: any) => ht.value === index + 11 && ht.agravated === true);
-              if (filterPoint) {
-                return (
-                  <button
-                    type="button"
-                    onClick={ () => updateValue(name, index + 11) }
-                    key={index}
-                    className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
-                  />
-                );
-              } return (
-                <button
-                  type="button"
-                  onClick={ () => updateValue(name, index + 11) }
-                  key={index}
-                  className="h-6 w-6 rounded-full bg-gray-500 border-white border-2 cursor-pointer"
-                />
-              );
-            } return (
-                <button
-                  type="button"
-                  onClick={ () => updateValue(name, index + 11) }
-                  key={index}
-                  className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
-                />
-              );
-          })
-        }
-      </div>
-    );
-  };
-
   return(
     <div className="w-full mt-4">
       <span className="capitalize">{ namePtBr } total: {totalHealth}</span>
       <div className="w-full mt-1">
         { returnPoints(name) }
-        { form === 'Crinos' && returnHpCrinos(name) }
       </div>
     </div>
   );

@@ -1,0 +1,47 @@
+{
+  "attributes": [
+    { "value": "strength", "namePtBr": "força" },
+    { "value": "dexterity", "namePtBr": "destreza" },
+    { "value": "stamina", "namePtBr": "vigor" },
+    { "value": "charisma", "namePtBr": "carisma" },
+    { "value": "manipulation", "namePtBr": "manipulação" },
+    { "value": "composure", "namePtBr": "perseverança" },
+    { "value": "intelligence", "namePtBr": "inteligência" },
+    { "value": "wits", "namePtBr": "raciocínio" },
+    { "value": "resolve", "namePtBr": "autocontrole" }
+  ],
+  "skills": [
+    { "value": "athletics", "namePtBr": "atletismo" },
+    { "value": "animalKen", "namePtBr": "magnetismo Animal" },
+    { "value": "academics", "namePtBr": "acadêmicos" },
+    { "value": "brawl", "namePtBr": "briga" },
+    { "value": "etiquette", "namePtBr": "etiqueta" },
+    { "value": "awareness", "namePtBr": "percepção" },
+    { "value": "craft", "namePtBr": "ofícios" },
+    { "value": "insight", "namePtBr": "intuição" },
+    { "value": "finance", "namePtBr": "finanças" },
+    { "value": "driving", "namePtBr": "condução" },
+    { "value": "intimidation", "namePtBr": "intimidação" },
+    { "value": "investigation", "namePtBr": "investigação" },
+    { "value": "firearms", "namePtBr": "armas de fogo" },
+    { "value": "leadership", "namePtBr": "liderança" },
+    { "value": "medicine", "namePtBr": "medicina" },
+    { "value": "larceny", "namePtBr": "furto" },
+    { "value": "performance", "namePtBr": "performance" },
+    { "value": "occult", "namePtBr": "ocultismo" },
+    { "value": "melee", "namePtBr": "armas brancas" },
+    { "value": "persuasion", "namePtBr": "persuasão" },
+    { "value": "politics", "namePtBr": "política" },
+    { "value": "stealth", "namePtBr": "sobrevivência" },
+    { "value": "streetwise", "namePtBr": "manha" },
+    { "value": "science", "namePtBr": "ciência" },
+    { "value": "survival", "namePtBr": "sobrevivência" },
+    { "value": "subterfuge", "namePtBr": "lábia" },
+    { "value": "technology", "namePtBr": "tecnologia" }
+  ],
+  "renown": [
+    { "value": "honor", "namePtBr": "honra" },
+    { "value": "glory", "namePtBr": "glória" },
+    { "value": "wisdom", "namePtBr": "sabedoria" }
+  ]
+}
