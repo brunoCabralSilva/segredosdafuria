@@ -7,7 +7,7 @@ import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listForms from '../../../data/forms.json';
-import { IForm } from "../../../../interface";
+import { IForm } from "../../../interface";
 import Feedback from "@/components/feedback";
 
 export default function Form({ params } : { params: { form: String } }) {

@@ -7,7 +7,7 @@ import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listTrybes from '../../../data/trybes.json';
-import { IArchetypes, ITrybe } from "../../../../interface";
+import { IArchetypes, ITrybe } from "../../../interface";
 import Feedback from "@/components/feedback";
 
 export default function Trybe({ params } : { params: { trybe: String } }) {

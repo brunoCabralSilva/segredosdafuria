@@ -6,7 +6,7 @@ import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listRituals from '../../../data/rituals.json';
-import { IRitual } from "../../../../interface";
+import { IRitual } from "../../../interface";
 import Feedback from "@/components/feedback";
 
 

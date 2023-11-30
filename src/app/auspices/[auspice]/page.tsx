@@ -7,7 +7,7 @@ import Nav from "@/components/nav";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";
 import Footer from "@/components/footer";
-import { IAuspice } from "../../../../interface";
+import { IAuspice } from "../../../interface";
 import Feedback from "@/components/feedback";
 
 export default function Auspice({ params } : { params: { auspice: String } }) {

@@ -88,8 +88,10 @@ export interface IFeedback {
 
 export interface IMessage {
   type: String;
-  show: boolean;
-  text: String;
+  show?: boolean;
+  text?: String;
+  rollDices: IGenerateDataRolls;
+  msn: IMsn;
 }
 
 export interface IType {
@@ -124,3 +126,23 @@ export interface IAtribute {
   namePtBr: string,
   quant: number,
 };
+
+export interface IMsn {
+  rollOfRage: number[],
+  rollOfMargin: number[],
+  dificulty: number[],
+  cause?: String;
+  success?: number;
+  date: any;
+}
+
+export interface IGenerateDataRolls {
+  falhaBrutal: boolean,
+  success: number,
+  fail: number,
+  brutal: number,
+  critical: number,
+  sucessosParaDano: number,
+  paresBrutais: number,
+  paresCriticals: number,
+}

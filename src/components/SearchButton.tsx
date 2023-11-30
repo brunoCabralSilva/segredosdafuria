@@ -13,7 +13,7 @@ import jsonTalismans from '../data/talismans.json';
 import jsonRituals from '../data/rituals.json';
 import jsonGifts from '../data/gifts.json';
 import jsonTrybes from '../data/trybes.json';
-import { IGift, IRitual, ITalisman } from "../../interface";
+import { IGift, IRitual, ITalisman } from "../interface";
 
 export default function SearchButton(props: { type: String }) {
   const { type } = props;

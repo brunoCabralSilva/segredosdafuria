@@ -1,7 +1,7 @@
 'use client'
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import { ITalisman } from "../../../interface";
+import { ITalisman } from "../../interface";
 import Link from "next/link";
 
 export default function ListTalismans() {

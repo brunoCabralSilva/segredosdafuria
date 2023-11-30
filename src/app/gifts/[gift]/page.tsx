@@ -7,7 +7,7 @@ import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listGifts from '../../../data/gifts.json';
-import { IGift, ITypeGift } from "../../../../interface";
+import { IGift, ITypeGift } from "../../../interface";
 import Feedback from "@/components/feedback";
 
 export default function Gift({ params } : { params: { gift: String } }) {

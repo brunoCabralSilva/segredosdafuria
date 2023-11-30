@@ -8,7 +8,7 @@ import listLoresheets from '../../data/loresheets.json';
 import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ILoresheet } from '../../../interface';
+import { ILoresheet } from '../../interface';
 import Feedback from '@/components/feedback';
 
 export default function Loresheets() {

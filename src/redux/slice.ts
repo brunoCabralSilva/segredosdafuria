@@ -1,4 +1,4 @@
-import { IAtribute, IFeedback, IList, IMessage, IType } from "../../interface";
+import { IAtribute, IFeedback, IList, IMessage, IType } from "../interface";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {

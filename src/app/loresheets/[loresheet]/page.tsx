@@ -6,7 +6,7 @@ import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listLoresheets from '../../../data/loresheets.json';
-import { IHabilities, ILoresheet } from "../../../../interface";
+import { IHabilities, ILoresheet } from "../../../interface";
 import Feedback from "@/components/feedback";
 
 export default function Loresheet({ params } : { params: { loresheet: String } }) {

@@ -6,7 +6,7 @@ import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listTalismans from '../../../data/talismans.json';
-import { ITalisman } from "../../../../interface";
+import { ITalisman } from "../../../interface";
 import Feedback from "@/components/feedback";
 
 

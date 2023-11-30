@@ -48,68 +48,6 @@ export default function ItemForm() {
   };
   
 
-  const rollRageCheck = async (numberOfChecks: number, name: string) => {
-    let resultOfRage = [];
-    let success = 0;
-    for (let i = 0; i < numberOfChecks; i += 1) {
-      const value = Math.floor(Math.random() * 10) + 1;
-      if (value >= 6) success += 1;
-      resultOfRage.push(value);
-    }
-    const db = getFirestore(firebaseConfig);
-    const messagesRef = collection(db, 'chatbot');
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const { firstName, lastName, email }: any = jwtDecode(token);
-      await addDoc(
-        messagesRef,
-        {
-          message: {
-            rollOfRage: resultOfRage,
-            success,
-            cause: name,
-          },
-          user: firstName + ' ' + lastName,
-          email: email,
-          date: serverTimestamp(),
-      });
-      const decodedToken: { email: string } = jwtDecode(token);
-      const { email: emailUser } = decodedToken;
-      const userQuery = query(collection(db, 'users'), where('email', '==', emailUser));
-      const userQuerySnapshot = await getDocs(userQuery);
-      if (!isEmpty(userQuerySnapshot.docs)) {
-        const userDocRef = userQuerySnapshot.docs[0].ref;
-        const userData = userQuerySnapshot.docs[0].data();
-        if (userData.characterSheet && userData.characterSheet.length > 0) {
-          if (userData.characterSheet[0].data.rage - (resultOfRage.length - success) < 0) {
-            userData.characterSheet[0].data.rage = 0;
-          } else userData.characterSheet[0].data.rage = userData.characterSheet[0].data.rage - (resultOfRage.length - success);
-          userData.characterSheet[0].data.form = name;
-          await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-        }
-      } else {
-        window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-      }
-    }
-  };
-
-  const sendMessage = async (text: string) => {
-    const db = getFirestore(firebaseConfig);
-    const messagesRef = collection(db, 'chatbot');
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const decodedToken: any = jwtDecode(token);
-      await addDoc(
-        messagesRef,
-        {
-          message: text,
-          user: decodedToken.firstName + ' ' + decodedToken.lastName,
-          email: decodedToken.email,
-          date: serverTimestamp(),
-        }
-      );
-    }
-  };
   
   const updateValue = async (name: string) => {
     const db = getFirestore(firebaseConfig);
@@ -124,19 +62,10 @@ export default function ItemForm() {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            if ((name === 'Crinos' || name === 'Hispo' || name === 'Glabro') && userData.characterSheet[0].data.rage === 0) {
-              sendMessage('Sua Fúria está em zero, portanto perdeu o lobo e não pode realizar Transformações para Glabro, Crinos e Hispo.');
-            } else {
-              if (name === 'Crinos') rollRageCheck(2, name);
-              if (name === 'Hispo' || name === 'Glabro') rollRageCheck(1, name);
-              if (userData.characterSheet[0].data.form === "Crinos") {
-                userData.characterSheet[0].data.rage = 1;
-                sendMessage('Você saiu da forma Crinos. Sua Fúria foi reduzida para 1.');
-              }
-              userData.characterSheet[0].data.form = name;
-              await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-              dispatch(actionForm(name));
-            }
+            if (userData.characterSheet[0].data.form === "Crinos") userData.characterSheet[0].data.rage = 1;
+            userData.characterSheet[0].data.form = name;
+            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
+            dispatch(actionForm(name));
           }
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
