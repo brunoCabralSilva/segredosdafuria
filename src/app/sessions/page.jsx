@@ -1,5 +1,5 @@
 'use client'
-import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDoc, getDocs, deleteDoc } from 'firebase/firestore';
+import { collection, orderBy, limit, getFirestore, query, serverTimestamp, addDoc, getDocs, deleteDoc, where } from 'firebase/firestore';
 import firestoreConfig from '../../firebase/connection';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useEffect, useLayoutEffect, useState } from 'react';
@@ -8,7 +8,7 @@ import { actionLogin, actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useRouter } from 'next/navigation';
 import { verify } from '../../firebase/user';
 import { jwtDecode } from 'jwt-decode';
-import { FaDiceD20 } from "react-icons/fa";
+import { GiD10 } from "react-icons/gi";
 import { IoIosSend } from "react-icons/io";
 import { FaFile } from "react-icons/fa";
 import { FaEraser } from "react-icons/fa";
@@ -119,61 +119,62 @@ export default function Chat() {
   const messageSet = (msn) => {
     if (typeof msn === 'string') return (<div className="px-2 break-words">{ msn }</div>);
 
-    let success = 0;
-    let fail = 0;
-    let brutal = 0;
-    let critical = 0;
+    if (msn.rollOfMargin) {
+      let success = 0;
+      let fail = 0;
+      let brutal = 0;
+      let critical = 0;
 
-    for (let i = 0; i < msn.rollOfRage.length; i += 1) {
-      if (Number(Number(msn.rollOfRage[i])) === 10) {
-        critical += 1;
-      } else if (Number(msn.rollOfRage[i]) > 2 && Number(msn.rollOfRage[i]) < 6) {
-        fail += 1;
-      } else if (Number(msn.rollOfRage[i]) > 5 && Number(msn.rollOfRage[i]) < 10) {
-        success += 1;
-      } else {
-        brutal += 1;
+      for (let i = 0; i < msn.rollOfRage.length; i += 1) {
+        if (Number(Number(msn.rollOfRage[i])) === 10) {
+          critical += 1;
+        } else if (Number(msn.rollOfRage[i]) > 2 && Number(msn.rollOfRage[i]) < 6) {
+          fail += 1;
+        } else if (Number(msn.rollOfRage[i]) > 5 && Number(msn.rollOfRage[i]) < 10) {
+          success += 1;
+        } else {
+          brutal += 1;
+        }
       }
-    }
 
-    for (let i = 0; i < msn.rollOfMargin.length; i += 1) {
-      if (Number(msn.rollOfMargin[i]) === 10) {
-        critical += 1;
-      } else if (Number(msn.rollOfMargin[i]) > 2 && Number(msn.rollOfMargin[i]) < 6) {
-        fail += 1;
-      } else if (Number(msn.rollOfMargin[i]) > 5 && Number(msn.rollOfMargin[i]) < 10) {
-        success += 1;
-      } else {
-        fail += 1;
+      for (let i = 0; i < msn.rollOfMargin.length; i += 1) {
+        if (Number(msn.rollOfMargin[i]) === 10) {
+          critical += 1;
+        } else if (Number(msn.rollOfMargin[i]) > 2 && Number(msn.rollOfMargin[i]) < 6) {
+          fail += 1;
+        } else if (Number(msn.rollOfMargin[i]) > 5 && Number(msn.rollOfMargin[i]) < 10) {
+          success += 1;
+        } else {
+          fail += 1;
+        }
       }
-    }
 
-    let quantParesBrutais = 0;
-    let quantParesCriticals = 0;
-    if (brutal % 2 !== 0) {
-      brutal -= 1;
-    }
-    quantParesBrutais = brutal * 2;
+      let quantParesBrutais = 0;
+      let quantParesCriticals = 0;
+      if (brutal % 2 !== 0) {
+        brutal -= 1;
+      }
+      quantParesBrutais = brutal * 2;
 
-    if (critical % 2 !== 0 && critical !== 1) {
-      critical -= 1;
-    }
+      if (critical % 2 !== 0 && critical !== 1) {
+        critical -= 1;
+      }
 
-    if (critical > 1) {
-      quantParesCriticals = critical * 2
-    } else {
-      quantParesCriticals = critical;
-    }
+      if (critical > 1) {
+        quantParesCriticals = critical * 2
+      } else {
+        quantParesCriticals = critical;
+      }
 
-    let totalDeSucessosParaDano = quantParesBrutais + quantParesCriticals + success - Number(msn.dificulty);
-    const falhaBrutal = brutal > 1;
-    if (totalDeSucessosParaDano === 0) totalDeSucessosParaDano += 1;
+      let totalDeSucessosParaDano = quantParesBrutais + quantParesCriticals + success - Number(msn.dificulty);
+      const falhaBrutal = brutal > 1;
+      if (totalDeSucessosParaDano === 0) totalDeSucessosParaDano += 1;
 
-    return(
-      <div className="p-2">
-        <div className="flex gap-1 flex-wrap">
-          {
-            msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => {
+      return(
+        <div className="p-2">
+          <div className="flex gap-1 flex-wrap">
+            {
+              msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => {
                 let imgItem = '';
                 if (Number(dice) === 10) {
                   imgItem = 'critical(rage).png';
@@ -200,27 +201,27 @@ export default function Chat() {
           }
           {
             msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => {
-                let imgItem = '';
-                if (Number(dice) === 10) {
-                  imgItem = 'critical.png';
-                } else if (Number(dice) > 2 && Number(dice) < 6) {
-                  imgItem = 'falha.png';
-                } else if (Number(dice) > 5 && Number(dice) < 10) {
-                  imgItem = 'success.png';
-                } else {
-                  imgItem = 'falha.png';
-                }
-                return (
-                  <div key={index} className="flex flex-col items-center justify-center">
-                    <Image
-                      alt={`Dado representando o valor ${dice}`}
-                      src={`/images/dices/${imgItem}`}
-                      width={500}
-                      height={500}
-                      className="w-10 sm:w-14"
-                    />
-                  </div>
-                )
+              let imgItem = '';
+              if (Number(dice) === 10) {
+                imgItem = 'critical.png';
+              } else if (Number(dice) > 2 && Number(dice) < 6) {
+                imgItem = 'falha.png';
+              } else if (Number(dice) > 5 && Number(dice) < 10) {
+                imgItem = 'success.png';
+              } else {
+                imgItem = 'falha.png';
+              }
+              return (
+                <div key={index} className="flex flex-col items-center justify-center">
+                  <Image
+                    alt={`Dado representando o valor ${dice}`}
+                    src={`/images/dices/${imgItem}`}
+                    width={500}
+                    height={500}
+                    className="w-10 sm:w-14"
+                  />
+                </div>
+              )
               }
             )
           }
@@ -285,7 +286,57 @@ export default function Chat() {
           }
         </div>
       </div>
-    )
+      )
+    } else {
+      
+      return (
+        <div className="p-2">
+          <div className="flex gap-1 flex-wrap">
+            {
+              msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => {
+                let imgItem = '';
+                if (Number(dice) === 10) {
+                  imgItem = 'critical(rage).png';
+                } else if (Number(dice) > 2 && Number(dice) < 6) {
+                  imgItem = 'falha(rage).png';
+                } else if (Number(dice) > 5 && Number(dice) < 10) {
+                  imgItem = 'success(rage).png';
+                } else {
+                  imgItem = 'brutal(rage).png';
+                }
+                return (
+                  <div key={index} className="flex flex-col items-center justify-center">
+                    <Image
+                      alt={`Dado representando o valor ${dice}`}
+                      src={`/images/dices/${imgItem}`}
+                      width={500}
+                      height={500}
+                      className="w-10 sm:w-14"
+                    />
+                  </div>
+                )
+              })
+            }
+          </div>
+          <div className="w-full">
+            <div className="font-bold pt-4 pb-2 text-left">
+              { `${ msn.rollOfRage.length === 2 ? 'Foram realizados 2 Testes de Fúria': 'Foi realizado um Teste de Fúria'} ${ msn.cause != 'manual' && ` por mudar para a forma`} ${msn.cause}.`}
+            </div>
+            <div className="pb-2 text-left">
+              { msn.success === 1 && <span>
+                {
+                  msn.rollOfRage.length == 2
+                    ? `Você teve 1 sucesso no seu Teste de Fúria. A sua Fúria foi reduzida em 1.`
+                    : `Você teve 1 sucesso no seu Teste de Fúria. Não houve nenhuma redução na sua Fúria.`
+                }
+                </span>}
+              { msn.success === 2 && <span>Você teve 2 sucessos no seu Teste. Não houve nenhuma redução na sua Fúria.</span>}
+              { msn.success === 0 && <span>Você não teve nenhum sucessos no seu Teste de Fúria. A sua fúria foi reduzida em {msn.rollOfRage.length}.</span>}
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 
   return (
@@ -350,7 +401,7 @@ export default function Chat() {
                           setShowOptions(false);
                         }}
                       >
-                        <FaDiceD20 />
+                        <GiD10 />
                       </button>
                     </div>
                     <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">

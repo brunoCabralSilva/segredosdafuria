@@ -2,7 +2,7 @@
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionShowMenuSession } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, addDoc, serverTimestamp, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, addDoc, serverTimestamp, where, updateDoc } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
@@ -15,6 +15,7 @@ export default function PopUpDices() {
   const [renSelected, setRenSelected] = useState<string>('');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
+  const [rageCheck, setRageCheck] = useState<number>(1);
   const dispatch = useAppDispatch();
   interface IUser {
     firstName: string;
@@ -70,6 +71,50 @@ export default function PopUpDices() {
         window.alert('Erro ao obter valor do atributo: ' + error);
       }
     } return null;
+  };
+
+  const returnRageCheck = async () => {
+    let resultOfRage = [];
+    let success = 0;
+    for (let i = 0; i < rageCheck; i += 1) {
+      const value = Math.floor(Math.random() * 10) + 1;
+      if (value >= 6) success += 1;
+      resultOfRage.push(value);
+    }
+    const db = getFirestore(firebaseConfig);
+    const messagesRef = collection(db, 'chatbot');
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) {
+      const { firstName, lastName, email }: IUser = jwtDecode(token);
+      await addDoc(
+        messagesRef,
+        {
+          message: {
+            rollOfRage: resultOfRage,
+            success,
+            cause: 'manual'
+          },
+          user: firstName + ' ' + lastName,
+          email: email,
+          date: serverTimestamp(),
+      });
+      const decodedToken: { email: string } = jwtDecode(token);
+      const { email: emailUser } = decodedToken;
+      const userQuery = query(collection(db, 'users'), where('email', '==', emailUser));
+      const userQuerySnapshot = await getDocs(userQuery);
+      if (!isEmpty(userQuerySnapshot.docs)) {
+        const userDocRef = userQuerySnapshot.docs[0].ref;
+        const userData = userQuerySnapshot.docs[0].data();
+        if (userData.characterSheet && userData.characterSheet.length > 0) {
+          if (userData.characterSheet[0].data.rage - success < 0) {
+            userData.characterSheet[0].data.rage = 0;
+          } else userData.characterSheet[0].data.rage = userData.characterSheet[0].data.rage - (resultOfRage.length - success);
+          await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
+        }
+      } else {
+        window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
+      }
+    }
   };
 
   const registerRoll = async () => {
@@ -134,23 +179,48 @@ export default function PopUpDices() {
   };
 
   const disabledButton = () => {
-    return (atrSelected === '' && renSelected === '' && atrSelected === '') || dificulty <= 0;
+    return (atrSelected === '' && renSelected === '' && sklSelected === '') || dificulty <= 0;
   }
 
   return(
-      <div className="w-8/10 p-10 bg-black flex flex-col items-center justify-center h-screen z-50 top-0 right-0">
-          <IoIosCloseCircleOutline
-            className="fixed top-0 right-3 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
-            onClick={() => dispatch(actionShowMenuSession(''))}
-          />
+      <div className="w-8/10 p-8 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+        <IoIosCloseCircleOutline
+          className="fixed top-0 right-1 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
+          onClick={() => dispatch(actionShowMenuSession(''))}
+        />
+        <label htmlFor="valueOf" className="mb-4 flex items-center w-full gap-2">
+            <select
+              onClick={(e: any) => setRageCheck(e.target.value)}
+              className="w-full py-3 capitalize cursor-pointer"
+            >
+              <option
+                className="capitalize text-center text-black"
+                value={1}
+              >
+                1 Teste de Fúria
+              </option>
+              <option
+                value={2}
+                className="capitalize text-center text-black"
+              >
+                2 Testes de Fúria
+              </option>
+            </select>
+            <button
+              className="bg-white p-3"
+              onClick={ returnRageCheck }
+            >
+              Ok
+            </button>
+        </label>
         <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Atributo</p>
             <select
               onClick={(e: any) => setAtrSelected(e.target.value)}
-              className="w-full py-3 capitalize"
+              className="w-full py-3 capitalize cursor-pointer"
             >
               <option
-                className="capitalize text-center"
+                className="capitalize text-center text-black"
                 disabled selected
               >
                 Escolha um atributo
@@ -159,7 +229,7 @@ export default function PopUpDices() {
                 dataSheet.attributes
                   .map((item, index) => (
                   <option
-                    className="capitalize text-center"
+                    className="capitalize text-center text-black"
                     key={index}
                     value={item.value}
                   >
@@ -173,16 +243,16 @@ export default function PopUpDices() {
           <p className="text-white w-full pb-3">Habilidade</p>
             <select
               onClick={(e: any) => setSklSelected(e.target.value)}
-              className="w-full py-3 capitalize"
+              className="w-full py-3 capitalize cursor-pointer"
             > 
               <option
-                className="capitalize text-center"
+                className="capitalize text-center text-black"
                 disabled selected
               >
                 Escolha uma Habilidade
               </option>
               <option
-                className="capitalize text-center"
+                className="text-black capitalize text-center"
                 value=""
               >
                 Nenhuma
@@ -192,7 +262,7 @@ export default function PopUpDices() {
                   .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr))
                   .map((item, index) => (
                     <option
-                      className="capitalize text-center"
+                      className="text-black capitalize text-center"
                       key={index}
                       value={item.value}
                     >
@@ -206,16 +276,16 @@ export default function PopUpDices() {
           <p className="text-white w-full pb-3">Renome</p>
             <select
               onClick={(e: any) => setRenSelected(e.target.value)}
-              className="w-full py-3 capitalize"
+              className="w-full py-3 capitalize cursor-pointer"
             >
               <option
-                className="capitalize text-center"
+                className="capitalize text-center text-black"
                 disabled selected
               >
                 Escolha um Renome
               </option>
               <option
-                className="capitalize text-center"
+                className="capitalize text-center text-black"
                 value=""
               >
                 Nenhum
@@ -224,7 +294,7 @@ export default function PopUpDices() {
                 dataSheet.renown
                   .map((item, index) => (
                   <option
-                    className="capitalize text-center"
+                    className="capitalize text-center text-black"
                     key={index}
                     value={item.value}
                   >

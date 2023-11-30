@@ -2,7 +2,7 @@
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionForm, useSlice } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
@@ -16,6 +16,15 @@ export default function ItemForm() {
     returnValueAttribute();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const isEmpty = (obj: any) => {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   const returnValueAttribute = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
@@ -38,13 +47,68 @@ export default function ItemForm() {
     }
   };
   
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
+
+  const rollRageCheck = async (numberOfChecks: number, name: string) => {
+    let resultOfRage = [];
+    let success = 0;
+    for (let i = 0; i < numberOfChecks; i += 1) {
+      const value = Math.floor(Math.random() * 10) + 1;
+      if (value >= 6) success += 1;
+      resultOfRage.push(value);
+    }
+    const db = getFirestore(firebaseConfig);
+    const messagesRef = collection(db, 'chatbot');
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) {
+      const { firstName, lastName, email }: any = jwtDecode(token);
+      await addDoc(
+        messagesRef,
+        {
+          message: {
+            rollOfRage: resultOfRage,
+            success,
+            cause: name,
+          },
+          user: firstName + ' ' + lastName,
+          email: email,
+          date: serverTimestamp(),
+      });
+      const decodedToken: { email: string } = jwtDecode(token);
+      const { email: emailUser } = decodedToken;
+      const userQuery = query(collection(db, 'users'), where('email', '==', emailUser));
+      const userQuerySnapshot = await getDocs(userQuery);
+      if (!isEmpty(userQuerySnapshot.docs)) {
+        const userDocRef = userQuerySnapshot.docs[0].ref;
+        const userData = userQuerySnapshot.docs[0].data();
+        if (userData.characterSheet && userData.characterSheet.length > 0) {
+          if (userData.characterSheet[0].data.rage - (resultOfRage.length - success) < 0) {
+            userData.characterSheet[0].data.rage = 0;
+          } else userData.characterSheet[0].data.rage = userData.characterSheet[0].data.rage - (resultOfRage.length - success);
+          userData.characterSheet[0].data.form = name;
+          await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
+        }
+      } else {
+        window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
       }
     }
-    return true;
+  };
+
+  const sendMessage = async (text: string) => {
+    const db = getFirestore(firebaseConfig);
+    const messagesRef = collection(db, 'chatbot');
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+      await addDoc(
+        messagesRef,
+        {
+          message: text,
+          user: decodedToken.firstName + ' ' + decodedToken.lastName,
+          email: decodedToken.email,
+          date: serverTimestamp(),
+        }
+      );
+    }
   };
   
   const updateValue = async (name: string) => {
@@ -60,8 +124,19 @@ export default function ItemForm() {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.form = name;
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
+            if ((name === 'Crinos' || name === 'Hispo' || name === 'Glabro') && userData.characterSheet[0].data.rage === 0) {
+              sendMessage('Sua Fúria está em zero, portanto perdeu o lobo e não pode realizar Transformações para Glabro, Crinos e Hispo.');
+            } else {
+              if (name === 'Crinos') rollRageCheck(2, name);
+              if (name === 'Hispo' || name === 'Glabro') rollRageCheck(1, name);
+              if (userData.characterSheet[0].data.form === "Crinos") {
+                userData.characterSheet[0].data.rage = 1;
+                sendMessage('Você saiu da forma Crinos. Sua Fúria foi reduzida para 1.');
+              }
+              userData.characterSheet[0].data.form = name;
+              await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
+              dispatch(actionForm(name));
+            }
           }
         } else {
           window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
@@ -81,12 +156,7 @@ export default function ItemForm() {
             <div
               key={index}
               className={`mt-2 p-5 w-ful border-white border-2 cursor-pointer flex-col items-center justify-center ${formSelected === form.name && 'bg-black'}`}
-              onClick={
-                () => {
-                  dispatch(actionForm(form.name));
-                  updateValue(form.name);
-                }
-              }
+              onClick={ () => updateValue(form.name) }
             >
               <div className="w-full flex items-center justify-center">
               <Image
