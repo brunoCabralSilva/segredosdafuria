@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import Footer from "@/components/footer";
 import Image from "next/image";
-import { login, verify } from "../../../firebase/user";
+import { login } from "../../../firebase/user";
 import Simplify from "@/components/simplify";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionLogin } from "@/redux/slice";
-import { jwtDecode } from "jwt-decode";
 import Nav from "@/components/nav";
+import { testToken } from "@/firebase/token";
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -21,24 +21,9 @@ export default function Login() {
   useEffect(() => {
     setShowData(false);
     window.scrollTo(0, 0);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken = verify(JSON.parse(token));
-        if (decodedToken) {
-          const { firstName, lastName, email, role }: { firstName: string, lastName: string, email: string, role: string } = jwtDecode(token);
-          dispatch(actionLogin({ firstName, lastName, email, role }));
-          router.push('/sessions');
-        }
-        else setShowData(true);
-      } catch(error) {
-        setShowData(true);
-        dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
-        router.push('/sessions/login');
-      }
-      } else {
-        setShowData(true);
-    }
+    const verification = testToken();
+    setShowData(!verification);
+    if (verification) router.push('/session')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -16,6 +16,7 @@ import Message from './message';
 import { generateDataRoll } from './functions';
 import Dice from './dice';
 import SessionBar from './sessionBar';
+import { useRouter } from 'next/navigation';
 
 export default function Chat() {
   const slice = useAppSelector(useSlice);
@@ -26,12 +27,15 @@ export default function Chat() {
   const [messages] = useCollectionData(queryMessages, { idField: "id" } as any);
   const [showData, setShowData] = useState(true);
   const [showOptions, setShowOptions] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setShowData(false);
     dispatch(actionShowMenuSession(''));
     window.scrollTo(0, 0);
-    setShowData(testToken());
+    const verification = testToken();
+    setShowData(verification);
+    if (!verification) router.push('/session/login')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -88,7 +92,6 @@ export default function Chat() {
   };
 
   const messageForm = (index: number, msg: any, color: string, justify: string) => {
-    console.log('atualizou');
     return(
       <div key={index} className={`w-full flex ${justify === 'end' ? 'justify-end' : 'justify-start' } text-white`}>
         <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2`}>
@@ -107,7 +110,7 @@ export default function Chat() {
 
   return (
     showData && (
-      <div className="h-screen overflow-y-auto bg-ritual">
+      <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
         <Nav />
         <div className="flex bg-black/80">
           <div className="flex flex-col w-full relative">
@@ -130,6 +133,7 @@ export default function Chat() {
                     <span className="loader z-50" />
                   </div>
               }
+              NumberMessages
             </div>
             <SessionBar
               showOptions={showOptions}

@@ -33,7 +33,7 @@ export default function Message(props: IMessage) {
               </span>}
             { msn.success === 2 && <span>Obteve 2 sucessos no Teste. Não houve redução na Fúria.</span> }
             { msn.success === 0 && <span>Não obteve sucesso no Teste. A fúria foi reduzida em {msn.rollOfRage.length}.</span> }
-            { msn.rage && <span>Fúria Atual: {msn.rage}.</span> }
+            <div className="font-bold py-3">Fúria Atual: {msn.rage}</div>
           </div>
         </div>
     </div>

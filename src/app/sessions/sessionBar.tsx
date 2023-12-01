@@ -4,7 +4,6 @@ import { IoIosSend } from "react-icons/io";
 import { FaFile } from "react-icons/fa";
 import { FaEraser } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { RxUpdate } from "react-icons/rx";
 import { FaAngleDown } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionShowMenuSession, useSlice } from '@/redux/slice';
@@ -49,18 +48,6 @@ export default function SessionBar(props: any) {
               }}
             >
               <FaFile />
-            </button>
-          </div>
-          <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
-            <button
-              className="p-2"
-              onClick={() => {
-                scrollToBottom();
-                setShowOptions(false);
-              }}
-              title="Ir para a mensagem mais recente"
-            >
-              <RxUpdate />
             </button>
           </div>
           { 

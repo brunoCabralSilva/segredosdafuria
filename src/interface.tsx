@@ -147,3 +147,17 @@ export interface IGenerateDataRolls {
   paresBrutais: number,
   paresCriticals: number,
 }
+
+export interface IUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+};
+
+export interface IDataValues {
+  renown: number,
+  rage: number,
+  skill: number,
+  attribute: number,
+};

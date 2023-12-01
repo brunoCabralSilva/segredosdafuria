@@ -1,12 +1,14 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionForm, useSlice } from "@/redux/slice";
-import { addDoc, collection, getDocs, getFirestore, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
+import { useAppDispatch } from "@/redux/hooks";
+import { actionForm } from "@/redux/slice";
+import { collection, getDocs, getFirestore, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
 import Image from "next/image";
+import { returnRageCheck } from "@/firebase/checks";
+import { registerMessage } from "@/firebase/chatbot";
 
 export default function Forms() {
   const [ formSelected, setFormSelected ] = useState<any>('');
@@ -54,15 +56,27 @@ export default function Forms() {
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
       try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+        const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
+        const { email, firstName, lastName } = decodedToken;
         const userQuery = query(collection(db, 'users'), where('email', '==', email));
         const userQuerySnapshot = await getDocs(userQuery);
         if (!isEmpty(userQuerySnapshot.docs)) {
           const userDocRef = userQuerySnapshot.docs[0].ref;
           const userData = userQuerySnapshot.docs[0].data();
           if (userData.characterSheet && userData.characterSheet.length > 0) {
-            if (userData.characterSheet[0].data.form === "Crinos") userData.characterSheet[0].data.rage = 1;
+            if (name === 'Crinos') await returnRageCheck(2, name);
+            if (name === 'Glabro' || name === 'Hispo') await returnRageCheck(1, name);
+            if (userData.characterSheet[0].data.form === "Crinos") {
+              if (userData.characterSheet[0].data.rage > 0) {
+                userData.characterSheet[0].data.rage = 1;
+                await registerMessage({
+                  message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
+                  user: firstName + ' ' + lastName,
+                  email: email,
+                  date: serverTimestamp(),
+                });
+              }
+            }
             userData.characterSheet[0].data.form = name;
             await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
             dispatch(actionForm(name));
@@ -116,7 +130,6 @@ export default function Forms() {
                     }
                   </ul>
                 </div>
-
               ))
             }
           </div>

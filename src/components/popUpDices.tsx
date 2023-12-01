@@ -1,13 +1,11 @@
 'use client'
-import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionShowMenuSession } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, addDoc, serverTimestamp, where, updateDoc } from "firebase/firestore";
-import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import dataSheet from '../data/sheet.json';
+import { registerRoll, returnRageCheck } from "@/firebase/checks";
 
 export default function PopUpDices() {
   const [atrSelected, setAtrSelected] = useState<string>('');
@@ -15,185 +13,7 @@ export default function PopUpDices() {
   const [renSelected, setRenSelected] = useState<string>('');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
-  const [rageCheck, setRageCheck] = useState<number>(1);
   const dispatch = useAppDispatch();
-  interface IUser {
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: string;
-  };
-
-  interface IDataValues {
-    renown: number,
-    rage: number,
-    skill: number,
-    attribute: number,
-  };
-
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const returnValue = async (): Promise<IDataValues | null> => {
-    const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
-        const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          let renown = 0;
-          let skill = 0;
-          let atr = 0;
-          if (atrSelected !== '') renown = userData.characterSheet[0].data.attributes[atrSelected];
-          if (renSelected !== '') renown = userData.characterSheet[0].data[renSelected];
-          if (sklSelected !== '') skill = userData.characterSheet[0].data.skills[sklSelected].value;
-          return {
-            renown: renown,
-            rage: userData.characterSheet[0].data.rage,
-            skill: skill,
-            attribute: atr,
-          }
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-          return null;
-        }
-      } catch (error) {
-        window.alert('Erro ao obter valor do atributo: ' + error);
-      }
-    } return null;
-  };
-
-  const returnRageCheck = async () => {
-    let resultOfRage = [];
-    let success = 0;
-    for (let i = 0; i < rageCheck; i += 1) {
-      const value = Math.floor(Math.random() * 10) + 1;
-      if (value >= 6) success += 1;
-      resultOfRage.push(value);
-    }
-    const db = getFirestore(firebaseConfig);
-    const messagesRef = collection(db, 'chatbot');
-    const token = localStorage.getItem('Segredos Da Fúria');
-    console.log(token)
-    if (token) {
-      const { firstName, lastName, email }: IUser = jwtDecode(token);
-      const decodedToken: { email: string } = jwtDecode(token);
-      const { email: emailUser } = decodedToken;
-      await addDoc(
-        messagesRef,
-        {
-          message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode utilizar dons, mudar de forma e afins.',
-          user: firstName + ' ' + lastName,
-          email: email,
-          date: serverTimestamp(),
-        }
-      );
-      const userQuery = query(collection(db, 'users'), where('email', '==', emailUser));
-      const userQuerySnapshot = await getDocs(userQuery);
-      if (!isEmpty(userQuerySnapshot.docs)) {
-        const userDocRef = userQuerySnapshot.docs[0].ref;
-        const userData = userQuerySnapshot.docs[0].data();
-        if (userData.characterSheet && userData.characterSheet.length > 0) {
-          if (userData.characterSheet[0].data.rage <= 0) {
-            userData.characterSheet[0].data.rage = 0;
-          } else {
-            if (userData.characterSheet[0].data.rage - success < 0) {
-              userData.characterSheet[0].data.rage = 0;
-            } else {
-              userData.characterSheet[0].data.rage = userData.characterSheet[0].data.rage - (resultOfRage.length - success);
-            }
-            await addDoc(
-              messagesRef,
-              {
-                message: {
-                  rollOfRage: resultOfRage,
-                  success,
-                  cause: 'manual',
-                  rage: userData.characterSheet[0].data.rage,
-                },
-                user: firstName + ' ' + lastName,
-                email: email,
-                date: serverTimestamp(),
-            });
-          }
-          await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-        }
-      } else {
-        window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-      }
-    }
-  };
-
-  const registerRoll = async () => {
-    const dtSheet: IDataValues | null = await returnValue();
-    if (dtSheet) {
-      let rage = dtSheet.rage;
-      let resultOfRage = [];
-      let resultOf = [];
-      let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
-      if (dices > 0) {
-        if (dices - dtSheet.rage === 0) dices = 0;
-        else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
-        else {
-          rage = dices;
-          dices = 0;
-        };
-
-        for (let i = 0; i < rage; i += 1) {
-          const value = Math.floor(Math.random() * 10) + 1;
-          resultOfRage.push(value);
-        }
-    
-        for (let i = 0; i < dices; i += 1) {
-          const value = Math.floor(Math.random() * 10) + 1;
-          resultOf.push(value);
-        }
-      }
-
-      const db = getFirestore(firebaseConfig);
-      const messagesRef = collection(db, 'chatbot');
-      const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
-        const { firstName, lastName, email }: IUser = jwtDecode(token);
-        if (dices + rage >= dificulty) {
-          await addDoc(
-            messagesRef,
-            {
-              message: {
-                rollOfMargin: resultOf,
-                rollOfRage: resultOfRage,
-                dificulty,
-                penaltyOrBonus,
-              },
-              user: firstName + ' ' + lastName,
-              email: email,
-              date: serverTimestamp(),
-          }) 
-        } else {
-          await addDoc(
-            messagesRef,
-            {
-              message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática.`,
-              user: firstName + ' ' + lastName,
-              email: email,
-              date: serverTimestamp(),
-            }
-          );
-        }
-      }
-      dispatch(actionShowMenuSession(''));
-    }
-  };
 
   const disabledButton = () => {
     return (atrSelected === '' && renSelected === '' && sklSelected === '') || dificulty <= 0;
@@ -208,7 +28,10 @@ export default function PopUpDices() {
         <label htmlFor="valueOf" className="mb-4 flex items-center w-full gap-2">
           <button
             className="bg-white p-3 w-full py-3 cursor-pointer capitalize text-center text-black hover:font-bold"
-            onClick={ returnRageCheck }
+            onClick={ () => {
+              returnRageCheck(1, 'manual');
+              dispatch(actionShowMenuSession(''))
+            }}
           >
             Realizar 1 Teste de Fúria
           </button>
@@ -363,7 +186,17 @@ export default function PopUpDices() {
         <button
           className={`${disabledButton() ? 'text-black bg-gray-400 hover:bg-gray-600 hover:text-white transition-colors': 'text-white bg-black hover:border-red-800 transition-colors cursor-pointer' } border-2 border-white w-full p-2 mt-6 font-bold`}
           disabled={disabledButton()}
-          onClick={registerRoll}
+          onClick={() => {
+            registerRoll(
+              dificulty,
+              penaltyOrBonus,
+              atrSelected,
+              sklSelected,
+              renSelected
+            );
+            dispatch(actionShowMenuSession(''));
+          }
+          }
         >
           Rolar dados
         </button>
