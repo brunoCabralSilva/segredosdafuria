@@ -35,7 +35,7 @@ export default function Chat() {
     window.scrollTo(0, 0);
     const verification = testToken();
     setShowData(verification);
-    if (!verification) router.push('/session/login')
+    if (!verification) router.push('/sessions/login')
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

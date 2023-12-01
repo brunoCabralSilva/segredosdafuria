@@ -23,7 +23,7 @@ export default function Login() {
     window.scrollTo(0, 0);
     const verification = testToken();
     setShowData(!verification);
-    if (verification) router.push('/session')
+    if (verification) router.push('/sessions')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

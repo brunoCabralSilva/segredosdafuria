@@ -21,10 +21,6 @@ export default function PopUpDices() {
 
   return(
       <div className="w-8/10 px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-        {/* <IoIosCloseCircleOutline
-          className="fixed top-0 right-1 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
-          onClick={() => dispatch(actionShowMenuSession(''))}
-        /> */}
         <div className="w-full h-20 mb-3 flex justify-end">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer"
