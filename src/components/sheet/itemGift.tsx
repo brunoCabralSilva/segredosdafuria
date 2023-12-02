@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { ITypeGift } from "../../interface";

@@ -1,17 +1,8 @@
 import { IDataValues, IUser } from "@/interface";
-import { collection, getDocs, getFirestore, query, serverTimestamp, updateDoc, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { jwtDecode } from "jwt-decode";
 import { registerMessage } from "./chatbot";
-
-const isEmpty = (obj: any) => {
-  for (const key in obj) {
-    if (obj.hasOwnProperty(key)) {
-      return false;
-    }
-  }
-  return true;
-};
 
 export const returnValue = async (
   atrSelected: string,

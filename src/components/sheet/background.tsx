@@ -1,3 +1,4 @@
+'use client'
 import { BsCheckSquare } from "react-icons/bs";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { FaRegEdit } from "react-icons/fa";

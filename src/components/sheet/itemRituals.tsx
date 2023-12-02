@@ -1,4 +1,4 @@
-import Image from "next/image";
+'use client'
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useState } from "react";
 import { actionFeedback, useSlice } from "@/redux/slice";

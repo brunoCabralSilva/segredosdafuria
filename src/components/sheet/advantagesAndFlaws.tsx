@@ -1,3 +1,4 @@
+'use client'
 export default function AdvantagesAnsFlaws() {
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">

@@ -1,5 +1,5 @@
-import ItemAtr from "./itemAtr"
-
+'use client'
+import ItemAtr from "./itemAtr";
 export default function Attributes(props: { session: string }) {
   const { session } = props;
   return(

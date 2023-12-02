@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from "react";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { IoAdd, IoClose } from "react-icons/io5";
