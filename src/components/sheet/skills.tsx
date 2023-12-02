@@ -1,5 +1,5 @@
+'use client'
 import ItemSkill from "./itemSkill";
-
 export default function Skills(props: { session: string }) {
   const { session } = props;
   return(

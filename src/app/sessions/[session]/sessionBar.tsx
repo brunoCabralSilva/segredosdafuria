@@ -1,5 +1,6 @@
 'use client'
 import { clearMessages, sendMessage } from '@/firebase/chatbot';
+import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { GiD10 } from "react-icons/gi";
 import { IoIosSend } from "react-icons/io";
 import { FaFile } from "react-icons/fa";
@@ -10,18 +11,39 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import firestoreConfig from '../../../firebase/connection';
 
 export default function SessionBar(props: any) {
   const { showOptions, setShowOptions, scrollToBottom, sessionName } = props;
   const [text, setText] = useState('');
-  const [token, setToken] = useState({ role: '' });
+  const [dm, setDm] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) setToken(jwtDecode(token));
-  }, []);
+    setDm(false);
+    const analyzeDm = async () => {
+      try {
+        const token = localStorage.getItem('Segredos Da Fúria');
+        if (token) {
+          const decodification: { email: string } = jwtDecode(token);
+          const db = getFirestore(firestoreConfig);
+          const sessionRef = collection(db, "sessions");
+          const querySession = query(sessionRef, where("name", "==", sessionName));
+          const { email } = decodification;
+          const resultado: any = await getDocs(querySession);
+          const players: any = [];
+          resultado.forEach((doc: any) => players.push(...doc.data().players));
+          let dmEmail: string = '';
+          resultado.forEach((doc: any) => dmEmail = doc.data().dm);
+          if (dmEmail === email) setDm(true);
+        }
+      } catch(error) {
+        setDm(false);
+      }
+    };
+    analyzeDm();
+  }, [sessionName]);
 
   return(
     <div className={`${slice.showMenuSession !== '' ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center min-h-10vh`}>
@@ -52,7 +74,7 @@ export default function SessionBar(props: any) {
             </button>
           </div>
           { 
-            token.role === 'admin' &&
+            dm &&
               <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
                 <button
                   className="p-2"

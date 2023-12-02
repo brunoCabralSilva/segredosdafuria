@@ -16,9 +16,11 @@ import { generateDataRoll } from './functions';
 import Dice from './dice';
 import SessionBar from './sessionBar';
 import { useRouter } from 'next/navigation';
+import POpUpDicesDm from '@/components/PopUpDicesDm';
+import MenuDm from '@/components/MenuDm';
 
 export default function Chat({ params } : { params: { session: String } }) {
-  const [sesssionName, setSessionName] = useState('');
+  const [sessionName, setSessionName] = useState('');
   const nameSession = decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-'));
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
@@ -28,9 +30,11 @@ export default function Chat({ params } : { params: { session: String } }) {
   const [session] = useCollectionData(querySession, { idField: "id" } as any);
   const [showData, setShowData] = useState(true);
   const [showOptions, setShowOptions] = useState(false);
+  const [dm, setDm] = useState(false);
   const router = useRouter();
   
   useEffect(() => {
+    setDm(false);
     setSessionName(decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-')));
     setShowData(false);
     dispatch(actionShowMenuSession(''));
@@ -46,13 +50,12 @@ export default function Chat({ params } : { params: { session: String } }) {
         resultado.forEach((doc: any) => players.push(...doc.data().players));
         let dmEmail: string = '';
         resultado.forEach((doc: any) => dmEmail = doc.data().dm);
-        if (dmEmail === email) {
-          window.alert("Bem vindo, Narrador!");
-        } else {
+        if (dmEmail === email) setDm(true);
+        else {
           const findByEmail = players.find((user: any) => user.email === email);
           if(!findByEmail) {
             const sheet = {
-              session: sesssionName,
+              session: sessionName,
               email: email,
               user: `${firstName} ${lastName}`,
               creationData: Date.now(),
@@ -241,19 +244,19 @@ export default function Chat({ params } : { params: { session: String } }) {
               showOptions={showOptions}
               setShowOptions={setShowOptions}
               scrollToBottom={scrollToBottom}
-              sessionName={sesssionName}
+              sessionName={sessionName}
             />
           </div>
           { 
             slice.showMenuSession === 'dices' &&
             <div className="w-full md:w-3/5 absolute sm:relative z-50">
-              <PopUpDices session={ sesssionName } />
+              { dm ? <POpUpDicesDm session={ sessionName } /> : <PopUpDices session={ sessionName } /> }
             </div>
           }
           {
             slice.showMenuSession === 'sheet' && 
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
-                <PopUpSheet session={ sesssionName }  />
+              { dm ? <MenuDm session={ sessionName } /> : <PopUpSheet session={ sessionName }  /> }
               </div>
           }
         </div>

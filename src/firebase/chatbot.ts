@@ -10,7 +10,7 @@ export const clearMessages = async (sessionName: string) => {
       query(sessionsRef, where('name', '==', sessionName))
     )
     querySnapshot.forEach(async (doc) => {
-      await updateDoc(doc.ref, { chat: '' });
+      await updateDoc(doc.ref, { chat: [] });
     });
   } catch (error) {
     window.alert('Erro ao limpar o campo chat: ' + error);
@@ -39,12 +39,17 @@ export const registerMessage = async (message: any, sessionName: string) => {
     const collectionRef = collection(db, 'sessions');
     const q: any = query(collectionRef, where('name', '==', sessionName));
     const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      const docRef = querySnapshot.docs[0].ref;
-      await updateDoc(docRef, {
-        chat: arrayUnion({ ...message, date: Date.now() })
-      });
+    const querySnap: any = querySnapshot.docs[0].data();
+    const docRef = querySnapshot.docs[0].ref;
+    const chatArray = querySnap.chat;
+    const updatedChatArray = [...chatArray, { ...message, date: Date.now() }];
+    updatedChatArray.sort((a, b) => a.date - b.date);
+    if (updatedChatArray.length > 15) {
+      updatedChatArray.shift();
     }
+    await updateDoc(docRef, {
+      chat: updatedChatArray
+    });
   } catch (error) {
     window.alert('Ocorreu um erro: ' + error);
   }
