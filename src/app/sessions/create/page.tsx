@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import { FaArrowLeft } from "react-icons/fa6";
 
-export default function RegisterSession() {
+export default function Create() {
   const router = useRouter();
   const [nameSession, setNameSession] = useState<string>('');
   const [errNameSession, setErrNameSession] = useState<string>('');
