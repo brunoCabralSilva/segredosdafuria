@@ -43,7 +43,7 @@ export default function PopUpDices(props: { session: string }) {
           <p className="text-white w-full pb-3">Atributo</p>
             <select
               onClick={(e: any) => setAtrSelected(e.target.value)}
-              className="w-full py-3 capitalize cursor-pointer"
+              className="w-full py-3 text-black capitalize cursor-pointer"
             >
               <option
                 className="capitalize text-center text-black"
