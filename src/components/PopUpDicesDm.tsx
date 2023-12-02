@@ -63,6 +63,7 @@ export default function POpUpDicesDm(props: { session: string }) {
     setValueOf(0);
     setPenaltyOrBonus(0);
     setDificulty(0);
+    dispatch(actionShowMenuSession(''))
   };
 
   return(

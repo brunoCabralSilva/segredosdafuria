@@ -45,7 +45,7 @@ export default function Chat({ params } : { params: { session: String } }) {
         setShowData(true);
         const decodification: { email: string, firstName: string, lastName: string } = jwtDecode(token);
         const { email, firstName, lastName } = decodification;
-        if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo');
+        if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
         const resultado: any = await getDocs(querySession);
         const players: any = [];
         resultado.forEach((doc: any) => players.push(...doc.data().players));

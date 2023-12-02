@@ -41,60 +41,72 @@ export default function MenuDm(props: { session: string }) {
   }
 
   return(
-		<div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 px-3 pt-12 bg-gray-whats-dark">
-			<IoIosCloseCircleOutline
-				className="fixed top-0 right-1 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
-				onClick={() => dispatch(actionShowMenuSession(''))}
-			/>
+		<div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 px-3 pt-5 bg-gray-whats-dark overflow-y-auto">
+			<div className="w-full flex justify-end">
+				<IoIosCloseCircleOutline
+					className="text-4xl text-white cursor-pointer"
+					onClick={() => dispatch(actionShowMenuSession(''))}
+				/>
+			</div>
 			<div className="text-white font-bold text-2xl mb-5">{session}</div>
 			{
 				players.length > 0 && players.map((player: any, index) => (
-					<div className="text-white w-full border-2 border-white flex flex-col items-center justify-center p-3" key={index}>
-						<h1 className="capitalize">{`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}</h1>
+					<div className="text-white w-full border-2 border-white flex flex-col items-center justify-center p-3 mb-4" key={index}>
+						<h1 className="capitalize text-xl pt-5">{`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}</h1>
+						<hr className="w-full my-3" />
 						<div>
-							Tribo: { player.data.trybe === '' ? 'Indefinida' : player.data.trybe }
-						</div>
-						<div>
-							Augúrio: { player.data.auspice === '' ? 'Indefinido' : player.data.auspice }
-						</div>
-						<div>
-							Fúria: { player.data.rage }
+							<span className="font-bold pr-1">Tribo:</span>
+							<span className="capitalize">{ player.data.trybe === '' ? 'Indefinida' : player.data.trybe }</span>
 						</div>
 						<div>
-							Força de Vontade total: { player.data.attributes.composure + player.data.attributes.resolve }
+						<span className="font-bold pr-1">Augúrio:</span>
+						<span className="capitalize">{ player.data.auspice === '' ? 'Indefinido' : player.data.auspice }</span>
+						</div>
+						<div className="mt-3">
+							<span className="font-bold pr-1">Fúria:</span>
+							<span>{ player.data.rage }</span>
 						</div>
 						<div>
-							Vitalidade: { player.data.form === 'Crinos' ? player.data.attributes.stamina + 7 : player.data.attributes.stamina + 3}
+							<span className="font-bold pr-1">Força de Vontade Total:</span>
+							<span className="capitalize">{ player.data.attributes.composure + player.data.attributes.resolve }</span>
 						</div>
-						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-						<div>
-							Forma Atual: { player.data.form }
+						<div className="">
+							<span className="font-bold pr-1">Vitalidade:</span>
+							<span className="capitalize">{ player.data.form === 'Crinos' ? player.data.attributes.stamina + 7 : player.data.attributes.stamina + 3}</span>
 						</div>
-						<div>
-							Honra: { player.data.honor }
+						<div className="mt-3">
+							<span className="font-bold pr-1">Forma Atual:</span>
+							<span className="capitalize">{ player.data.form }</span>
 						</div>
-						<div>
-							Glória: { player.data.glory }
+						<p className="font-bold pr-1 mt-3">Renome</p>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
+							<p className="text-center">
+								Honra: { player.data.honor }
+							</p>
+							<p className="text-center">
+								Glória: { player.data.glory }
+							</p>
+							<p className="text-center">
+								Sabedoria: { player.data.wisdom }
+							</p>
 						</div>
-						<div>
-							Sabedoria: { player.data.wisdom }
-						</div>
-						</div>
-						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+						<p className="font-bold pr-1 mt-3">Atributos</p>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
 							{
 								Object.entries(player.data.attributes).map(([chave, valor]: any, index) => (
-									<div className="capitalize" key={index}>
+									<div className="capitalize text-center" key={index}>
 										{chave}: {valor}
 									</div>
 								))
 							}
 						</div>
-						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+						<p className="font-bold pr-1 mt-3">Habilidades</p>
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
 							{
 								Object.entries(player.data.skills).map(([chave, valor]: any, index) => {
 									if (valor.value !== 0)
 									return (
-										<div className="capitalize" key={index}>
+										<div className="capitalize text-center w-full" key={index}>
 											{chave}: { valor.value }
 											{valor.specialty === '' ? '' : (valor.specialty)}
 										</div>
@@ -102,20 +114,33 @@ export default function MenuDm(props: { session: string }) {
 								})
 							}
 						</div>
-						<div>
-							Dons: { player.data.gifts.length === 0 ? 'Nenhum' : player.data.gifts.map((gift: any) => gift.giftPtBr) }
+						<p className="font-bold pr-1 w-full text-center mt-3">Dons</p>
+						<div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+						{ 
+							player.data.gifts.length === 0
+								? 'Nenhum'
+								: player.data.gifts.map((gift: any, index: number) => (
+										<p className="text-center" key={index}>{ gift.giftPtBr }</p>
+									))
+						}
 						</div>
-						<div>
-							Rituais: { player.data.rituals.length  === 0 ? 'Nenhum' : player.data.rituals.map((ritual: any) => ritual.titlePtBr) }
+						<p className="font-bold pr-1 w-full text-center mt-3">Rituais</p>
+						<div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+						{ 
+							player.data.rituals.length === 0
+								? 'Nenhum'
+								: player.data.rituals.map((ritual: any, index: number) => (
+										<p className="text-center" key={index}>{ ritual.titlePtBr }</p>
+									))
+						}
 						</div>
-						<div>
-							Background: { player.data.background }
-						</div>
-						<p>Criado em: { returnDate(player) }</p>
+						<p className="font-bold pr-1 w-full text-center mt-3">Background</p>
+						<p className="w-full text-center">{ player.data.background }</p>
+						<p>Ficha criada em: { returnDate(player) }</p>
 					</div>
 				))
 			}
-			<button onClick={returnValue}>Atualizar</button>
+			<button className="p-4 bg-black border-2 border-white w-full text-white font-bold" onClick={returnValue}>Atualizar</button>
 		</div>
   )
 }
