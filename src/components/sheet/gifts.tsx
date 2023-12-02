@@ -50,6 +50,8 @@ export default function GiftsSheet(props: { session: string }) {
       return null;
     });
 
+    if (listGifts.length === 0) window.alert('É necessário investir pelo menos um ponto em algum Renome para que sejam sugeridos dons.')
+
     return (listGifts.map((dataGift, index) => (
       <ItemGift
         session={ session }
