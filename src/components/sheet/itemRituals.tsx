@@ -12,17 +12,8 @@ import { MdDelete } from "react-icons/md";
 export default function ItemRituals(props: any) {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const { index, ritual, remove } = props;
+  const { index, ritual, remove, session } = props;
   const [showRitual, setShowRitual] = useState<boolean>(false);
-
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
 
   const addRitual = async () => {
     const db = getFirestore(firebaseConfig);
@@ -31,25 +22,23 @@ export default function ItemRituals(props: any) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            const filterRitual = userData.characterSheet[0].data.rituals.find((item: any) => item.title === ritual.title);
-            if (filterRitual) {
-              window.alert("Este Ritual já está cadastrado na sua Ficha.")
-            } else {
-              userData.characterSheet[0].data.rituals = [...userData.characterSheet[0].data.rituals, ritual];
-              await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-              setShowRitual(false);
-              window.alert(`Dom '${ritual.titlePtBr}' adicionado com sucesso!`)
-            }
-          }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        const filterRitual = player.data.rituals.find((item: any) => item.title === ritual.title);
+        if (filterRitual) {
+          window.alert("Este Ritual já está cadastrado na sua Ficha.")
         } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+          player.data.rituals = [...player.data.rituals, ritual];
+          const docRef = userQuerySnapshot.docs[0].ref;
+          const playersFiltered = players.filter((gp: any) => gp.email !== email);
+          await updateDoc(docRef, { players: [...playersFiltered, player] });
+          setShowRitual(false);
+          window.alert(`Ritual '${ritual.titlePtBr}' adicionado com sucesso!`)
+          }
+
       } catch (error) {
         window.alert('Erro ao atualizar Ritual: (' + error + ')');
       }
@@ -63,20 +52,18 @@ export default function ItemRituals(props: any) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.rituals = userData.characterSheet[0].data.rituals.filter((item: any) => item.title !== ritual.title );
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-          }
-          setShowRitual(false);
-          window.alert(`Ritual '${ritual.titlePtBr}' removido com sucesso!`)
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        const filterRitual = player.data.rituals.filter((item: any) => item.title !== ritual.title);
+        player.data.rituals = filterRitual;
+        const playersFiltered = players.filter((gp: any) => gp.email !== email);
+        const docRef = userQuerySnapshot.docs[0].ref;
+        await updateDoc(docRef, { players: [...playersFiltered, player] });
+        setShowRitual(false);
+        window.alert(`Ritual '${ritual.titlePtBr}' removido com sucesso!`)
       } catch (error) {
         window.alert('Erro ao atualizar Ritual: (' + error + ')');
       }
@@ -120,18 +107,6 @@ export default function ItemRituals(props: any) {
               { ritual.systemPtBr }
             </span>
           </p>
-          {/* <p className="pt-3 text-justify">
-            <span className="text-sm font-bold pr-1">Description (original):</span>
-            <span className="text-sm font-normal pr-1">
-              { ritual.description }
-            </span>
-          </p>
-          <p className="pt-1 text-justify">
-            <span className="text-sm font-bold pr-1">System (original):</span>
-            <span className="text-sm font-normal pr-1">
-              { ritual.system }
-            </span>
-          </p> */}
           <div className="flex flex-col sm:flex-row sm:justify-between">
           </div>
           <div className="flex flex-col sm:flex-row sm:justify-between">

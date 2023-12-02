@@ -91,7 +91,7 @@ export default function Nav() {
             </Link>
           </li>
           <li className="pt-6">
-            <Link href="/sessions/login"
+            <Link href="/sessions"
               className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
             >
               Sessões

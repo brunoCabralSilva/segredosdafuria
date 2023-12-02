@@ -16,7 +16,8 @@ const isEmpty = (obj: any) => {
 export const returnValue = async (
   atrSelected: string,
   sklSelected: string,
-  renSelected: string
+  renSelected: string,
+  session: string,
 ): Promise<IDataValues | null> => {
   const db = getFirestore(firebaseConfig);
   const token = localStorage.getItem('Segredos Da Fúria');
@@ -24,33 +25,33 @@ export const returnValue = async (
     try {
       const decodedToken: { email: string } = jwtDecode(token);
       const { email } = decodedToken;
-      const userQuery = query(collection(db, 'users'), where('email', '==', email));
+      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
       const userQuerySnapshot = await getDocs(userQuery);
-      if (!isEmpty(userQuerySnapshot.docs)) {
-        const userData = userQuerySnapshot.docs[0].data();
-        let renown = 0;
-        let skill = 0;
-        let atr = 0;
-        if (atrSelected !== '') renown = userData.characterSheet[0].data.attributes[atrSelected];
-        if (renSelected !== '') renown = userData.characterSheet[0].data[renSelected];
-        if (sklSelected !== '') skill = userData.characterSheet[0].data.skills[sklSelected].value;
-        return {
-          renown: renown,
-          rage: userData.characterSheet[0].data.rage,
-          skill: skill,
-          attribute: atr,
-        }
-      } else {
-        window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        return null;
-      }
+      const players: any = [];
+      userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+      const player: any = players.find((gp: any) => gp.email === email);
+      let renown = 0;
+      let skill = 0;
+      let atr = 0;
+      if (atrSelected !== '') renown = player.data.attributes[atrSelected];
+      if (renSelected !== '') renown = player.data[renSelected];
+      if (sklSelected !== '') skill = player.data.skills[sklSelected].value;
+      return {
+        renown: renown,
+        rage: player.data.rage,
+        skill: skill,
+        attribute: atr,
+      } 
     } catch (error) {
       window.alert('Erro ao obter valor do atributo: ' + error);
     }
+  } else {
+    window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
+    return null;
   } return null;
 };
 
-export const returnRageCheck = async (rageCheck: number, type="manual") => {
+export const returnRageCheck = async (rageCheck: number, type: string, session: string ) => {
   let resultOfRage = [];
   let success = 0;
   for (let i = 0; i < rageCheck; i += 1) {
@@ -61,45 +62,43 @@ export const returnRageCheck = async (rageCheck: number, type="manual") => {
   const db = getFirestore(firebaseConfig);
   const token = localStorage.getItem('Segredos Da Fúria');
   if (token) {
-    const { firstName, lastName, email }: IUser = jwtDecode(token);
-    const decodedToken: { email: string } = jwtDecode(token);
-    const { email: emailUser } = decodedToken;
-    const userQuery = query(collection(db, 'users'), where('email', '==', emailUser));
-    const userQuerySnapshot = await getDocs(userQuery);
-    if (!isEmpty(userQuerySnapshot.docs)) {
-      const userDocRef = userQuerySnapshot.docs[0].ref;
-      const userData = userQuerySnapshot.docs[0].data();
-      if (userData.characterSheet && userData.characterSheet.length > 0) {
-        if (userData.characterSheet[0].data.rage <= 0) {
-          userData.characterSheet[0].data.rage = 0;
-          await registerMessage({
-            message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, dentre outros.',
-            user: firstName + ' ' + lastName,
-            email: email,
-            date: serverTimestamp(),
-          });
+    try {
+      const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
+      const { email, firstName, lastName } = decodedToken;
+      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+      const userQuerySnapshot = await getDocs(userQuery);
+      const players: any = [];
+      userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+      const player: any = players.find((gp: any) => gp.email === email);
+      if (player.data.rage <= 0) {
+        player.data.rage = 0;
+        await registerMessage({
+          message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, dentre outros.',
+          user: firstName + ' ' + lastName,
+          email: email
+        }, session);
+      } else {
+        if (player.data.rage - success < 0) {
+          player.data.rage = 0;
         } else {
-          if (userData.characterSheet[0].data.rage - success < 0) {
-            userData.characterSheet[0].data.rage = 0;
-          } else {
-            userData.characterSheet[0].data.rage = userData.characterSheet[0].data.rage - (resultOfRage.length - success);
-          }
-          await registerMessage({
-            message: {
-              rollOfRage: resultOfRage,
-              success,
-              cause: type,
-              rage: userData.characterSheet[0].data.rage,
-            },
-            user: firstName + ' ' + lastName,
-            email: email,
-            date: serverTimestamp(),
-          });
+          player.data.rage = player.data.rage - (resultOfRage.length - success);
         }
-        await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
+        await registerMessage({
+          message: {
+            rollOfRage: resultOfRage,
+            success,
+            cause: type,
+            rage: player.data.rage,
+          },
+          user: firstName + ' ' + lastName,
+          email: email,
+        }, session);
       }
-    } else {
-      window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
+      const docRef = userQuerySnapshot.docs[0].ref;
+      const playersFiltered = players.filter((gp: any) => gp.email !== email);
+      await updateDoc(docRef, { players: [...playersFiltered, player] });
+    } catch(error) {
+      window.alert('Ocorreu um erro: ' + error);
     }
   }
 };
@@ -110,8 +109,9 @@ export const registerRoll = async (
   atrSelected: string,
   sklSelected: string,
   renSelected: string,
+  session: string,
 ) => {
-  const dtSheet: IDataValues | null = await returnValue(atrSelected, sklSelected, renSelected);
+  const dtSheet: IDataValues | null = await returnValue(atrSelected, sklSelected, renSelected, session);
   if (dtSheet) {
     let rage = dtSheet.rage;
     let resultOfRage = [];
@@ -148,15 +148,13 @@ export const registerRoll = async (
           },
           user: firstName + ' ' + lastName,
           email: email,
-          date: serverTimestamp(),
-        }) 
+        }, session) 
       } else {
         await registerMessage({
           message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${resultOf.length + resultOfRage.length + penaltyOrBonus } dados para um Teste de Dificuldade ${dificulty}).`,
           user: firstName + ' ' + lastName,
           email: email,
-          date: serverTimestamp(),
-        });
+        }, session);
       }
     }
   }

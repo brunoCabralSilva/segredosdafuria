@@ -1,20 +1,19 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
-import { useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 
-interface IWillpower {
+interface IItem {
   name: string;
   namePtBr: string;
+  session: string;
 }
 
-export default function ItemWillpower(props: IWillpower) {
-  const [ willpower, setWillpower ] = useState<any>([]);
-  const [totalWillpower, setTotalWillpower] = useState(0);
-  const { name, namePtBr } = props;
+export default function ItemAgravated(props: IItem) {
+  const [ dataItem, setDataItem ] = useState<any>([]);
+  const [totalItem, setTotalItem] = useState(0);
+  const { name, namePtBr, session } = props;
 
   useEffect(() => {
     returnValueWillpower();
@@ -28,14 +27,19 @@ export default function ItemWillpower(props: IWillpower) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          setWillpower(userData.characterSheet[0].data.willpower);
-          setTotalWillpower(Number(userData.characterSheet[0].data.attributes.composure) + Number(userData.characterSheet[0].data.attributes.resolve));
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        setDataItem(player.data[name]);
+        if (name === 'willpower') setTotalItem(Number(player.data.attributes.composure) + Number(player.data.attributes.resolve));
+        if (name === 'health') {
+          if (player.data.form === 'Crinos') {
+            setTotalItem(Number(player.data.attributes.stamina) + 7);
+          } else {
+            setTotalItem(Number(player.data.attributes.stamina) + 3);
+          }
         }
       } catch (error) {
         window.alert('Erro ao obter valor da Força de Vontade: ' + error);
@@ -59,32 +63,28 @@ export default function ItemWillpower(props: IWillpower) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            if (userData.characterSheet[0].data.willpower.length === 0) {
-              userData.characterSheet[0].data.willpower = [ { value, agravated: false }];
-            }
-            else {
-              const itemAgravated = userData.characterSheet[0].data.willpower.filter((item: any) => item.value === value && item.agravated === true);
-              const restOfList = userData.characterSheet[0].data.willpower.filter((item: any) => item.value !== value);
-              if (itemAgravated.length > 0) {
-                userData.characterSheet[0].data.willpower = restOfList;
-              } else {
-                const itemLetal = userData.characterSheet[0].data.willpower.filter((item: any) => item.value === value);
-                if (itemLetal.length === 0) {
-                  userData.characterSheet[0].data.willpower = [ ...restOfList, { value, agravated: false }];
-                } else userData.characterSheet[0].data.willpower = [ ...restOfList, { value, agravated: true }];
-              }
-            }
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-          }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        if (player.data[name].length === 0) {
+          player.data[name] = [ { value, agravated: false }];
         } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
+          const itemAgravated = player.data[name].filter((item: any) => item.value === value && item.agravated === true);
+          const restOfList = player.data[name].filter((item: any) => item.value !== value);
+          if (itemAgravated.length > 0) {
+            player.data[name] = restOfList;
+          } else {
+            const itemLetal = player.data[name].filter((item: any) => item.value === value);
+            if (itemLetal.length === 0) {
+              player.data[name] = [ ...restOfList, { value, agravated: false }];
+            } else player.data[name] = [ ...restOfList, { value, agravated: true }];
+          }
         }
+        const docRef = userQuerySnapshot.docs[0].ref;
+        const playersFiltered = players.filter((gp: any) => gp.email !== email);
+        await updateDoc(docRef, { players: [...playersFiltered, player] });
       } catch (error) {
         window.alert('Erro ao atualizar valor: (' + error + ')');
       }
@@ -93,14 +93,14 @@ export default function ItemWillpower(props: IWillpower) {
   };
 
   const returnPoints = (name: string) => {
-    const pointsRest = Array(totalWillpower).fill('');
+    const pointsRest = Array(totalItem).fill('');
     return ( 
       <div className="flex flex-wrap gap-2 pt-1">
         {
           pointsRest.map((item, index) => {
-            const willpowerMap: number[] = willpower.map((element: any) => element.value);
+            const willpowerMap: number[] = dataItem.map((element: any) => element.value);
             if (willpowerMap.includes(index + 1)) {
-              const filterPoint = willpower.find((ht: any) => ht.value === index + 1 && ht.agravated === true);
+              const filterPoint = dataItem.find((ht: any) => ht.value === index + 1 && ht.agravated === true);
               if (filterPoint) {
                 return (
                   <button
@@ -134,7 +134,7 @@ export default function ItemWillpower(props: IWillpower) {
 
   return(
     <div className="w-full mt-4">
-      <span className="capitalize">{ namePtBr } total: {totalWillpower}</span>
+      <span className="capitalize">{ namePtBr } total: {totalItem}</span>
       <div className="w-full mt-1">
         { returnPoints(name) }
       </div>

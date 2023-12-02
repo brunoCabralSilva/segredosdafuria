@@ -5,22 +5,14 @@ import { useEffect, useState } from "react";
 import firebaseConfig from "@/firebase/connection";
 import { jwtDecode } from "jwt-decode";
 
-export default function Anotations() {
+export default function Notes(props: { session: string, type: string }) {
+  const { session, type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
     setText(sanitizedValue);
-  };
-
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
   };
 
   useEffect(() => {
@@ -35,14 +27,13 @@ export default function Anotations() {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          setText(userData.characterSheet[0].data.notes);
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        console.log(type);
+        setText(player.data[type]);
       } catch (error) {
         window.alert('Erro ao obter valor da Anotação: ' + error);
       }
@@ -56,18 +47,15 @@ export default function Anotations() {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.notes = text;
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-          }
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        player.data[type] = text;
+        const docRef = userQuerySnapshot.docs[0].ref;
+        const playersFiltered = players.filter((gp: any) => gp.email !== email);
+        await updateDoc(docRef, { players: [...playersFiltered, player] });
       } catch (error) {
         window.alert('Erro ao atualizar Anotação: (' + error + ')');
       }
@@ -87,7 +75,7 @@ export default function Anotations() {
               }
             }
           >
-            Anotações do Personagem
+            { type === 'background' ? 'História do Personagem' : 'Anotações do Personagem' }
           </div>
             { 
               textArea
@@ -111,7 +99,6 @@ export default function Anotations() {
           textArea ?
           <textarea
             className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full"
-            placeholder="Digite aqui suas anotações"
             value={ text }
             onChange={(e) => typeText(e)}
           />

@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   feedback: { show: false, title: '' },
   message: { type: '', show: false, text: '' },
   showMenuSession: '',
+  sessionAuth: { show: false, name: '' },
   form: '',
 };
 
@@ -99,6 +100,9 @@ const slice: Slice = createSlice({
     actionForm(state, { payload }: PayloadAction<IList>) {
       return { ...state, form: payload };
     },
+    actionSessionAuth(state, { payload }: PayloadAction<IList>) {
+      return { ...state, sessionAuth: payload };
+    },
   },
 });
 
@@ -118,6 +122,7 @@ export const {
   actionShowMenuSession,
   actionForm,
   actionRegisterSession,
+  actionSessionAuth,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

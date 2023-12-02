@@ -6,7 +6,8 @@ import { jwtDecode } from "jwt-decode";
 import dataRituals from '../../data/rituals.json';
 import ItemRituals from "./itemRituals";
 
-export default function RitualSheet() {
+export default function RitualSheet(props: { session: string }) {
+  const { session } = props;
   const [showAllRituals, setShowAllRituals] = useState<boolean>(false);
   const [ritualsAdded, setRitualsAdded] = useState<any[]>([]);
 
@@ -15,15 +16,6 @@ export default function RitualSheet() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
   const generateDataForRituals = async () => {
     const db = getFirestore(firebaseConfig);
     const token = localStorage.getItem('Segredos Da Fúria');
@@ -31,14 +23,12 @@ export default function RitualSheet() {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          setRitualsAdded((userData.characterSheet[0].data.rituals))
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        setRitualsAdded(player.data.rituals);
       } catch (error) {
         window.alert('Erro ao obter valor do Ritual: ' + error);
       }
@@ -84,6 +74,7 @@ export default function RitualSheet() {
                     { 
                       ritualsAdded.length > 0 && ritualsAdded.map((item, index) => (
                         <ItemRituals
+                          session={session}
                           key={ index }
                           index={ index }
                           ritual={ item }
@@ -97,6 +88,7 @@ export default function RitualSheet() {
                     {
                       dataRituals.map((ritual, index) => (
                         <ItemRituals
+                          session={session}
                           key={ index }
                           index={ index }
                           ritual={ ritual }

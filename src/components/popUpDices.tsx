@@ -7,7 +7,8 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import dataSheet from '../data/sheet.json';
 import { registerRoll, returnRageCheck } from "@/firebase/checks";
 
-export default function PopUpDices() {
+export default function PopUpDices(props: { session: string }) {
+  const { session } = props;
   const [atrSelected, setAtrSelected] = useState<string>('');
   const [sklSelected, setSklSelected] = useState<string>('');
   const [renSelected, setRenSelected] = useState<string>('');
@@ -31,7 +32,7 @@ export default function PopUpDices() {
           <button
             className="bg-white p-3 w-full py-3 cursor-pointer capitalize text-center text-black hover:font-bold"
             onClick={ () => {
-              returnRageCheck(1, 'manual');
+              returnRageCheck(1, 'manual', session);
               dispatch(actionShowMenuSession(''))
             }}
           >
@@ -194,7 +195,8 @@ export default function PopUpDices() {
               penaltyOrBonus,
               atrSelected,
               sklSelected,
-              renSelected
+              renSelected,
+              session
             );
             dispatch(actionShowMenuSession(''));
           }

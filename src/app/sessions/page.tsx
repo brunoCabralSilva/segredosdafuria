@@ -1,160 +1,97 @@
 'use client'
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionShowMenuSession, useSlice } from '@/redux/slice';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { collection, orderBy, limit, getFirestore, query } from 'firebase/firestore';
+import Footer from "@/components/footer";
+import Nav from "@/components/nav";
+import Simplify from "@/components/simplify";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionSessionAuth, useSlice } from "@/redux/slice";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import firestoreConfig from '../../firebase/connection';
-import { jwtDecode } from 'jwt-decode';
-import { IGenerateDataRolls, IMsn } from '@/interface';
-import Nav from '@/components/nav';
-import PopUpDices from '@/components/popUpDices';
-import PopUpSheet from '@/components/popUpSheet';
-import { verify } from '../../firebase/user';
-import { testToken } from '@/firebase/token';
-import Message from './message';
-import { generateDataRoll } from './functions';
-import Dice from './dice';
-import SessionBar from './sessionBar';
-import { useRouter } from 'next/navigation';
+import { IoMdAdd } from "react-icons/io";
+import { useRouter } from "next/navigation";
+import SessionAuth from "./sessionAuth";
 
-export default function Chat() {
+interface ISessions {
+  name: string;
+  description: string;
+  dm: string;
+  creationDate: Date;
+  anotations: string;
+  chat: any[],
+  image: string;
+};
+
+export default function Session() {
+  const [sessions, setSessions] = useState<any[]>([]);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const db = getFirestore(firestoreConfig);
-  const messageRef = collection(db, "chatbot");
-  const queryMessages = query(messageRef, orderBy("date"), limit(25));
-  const [messages] = useCollectionData(queryMessages, { idField: "id" } as any);
-  const [showData, setShowData] = useState(true);
-  const [showOptions, setShowOptions] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    setShowData(false);
-    dispatch(actionShowMenuSession(''));
-    window.scrollTo(0, 0);
-    const verification = testToken();
-    setShowData(verification);
-    if (!verification) router.push('/sessions/login')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    const getAllSessions = async () => {
+      try {
+        const db = getFirestore(firestoreConfig);
+        const collectionRef = collection(db, 'sessions');
+        const querySnapshot = await getDocs(collectionRef);
+        const sessionsList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setSessions(sessionsList);
+      } catch (error) {
+        window.alert('Erro ao obter sessões: ' + error);
+      }
+    };
+    getAllSessions();
   }, []);
 
-  useLayoutEffect(() => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const messagesContainer: HTMLElement | null = document.getElementById('messages-container');
-      if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-  });
-
-  const scrollToBottom = () => {
-    const messagesContainer = document.getElementById('messages-container');
-    if (messagesContainer) {
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-  };
-
-  const messageData = (msn: IMsn) => {
-    if (typeof msn === 'string') {
-      return ( <div className="px-2 break-words">{ msn }</div> );
-    }
-    const rollDices: IGenerateDataRolls = generateDataRoll(msn);
-    if (msn.rollOfMargin) {
-      return(
-        <div className="p-2">
-          <div className="p-2 flex gap-1 flex-wrap">
-            {
-              msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => (
-                <Dice key={ index } dice={ dice } type="(rage)" />
-              ))
-            }
-            {
-              msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => (
-                <Dice key={ index } dice={ dice } type="" />
-              ))
-            }
-          </div>
-          <div>
-            {
-              rollDices.falhaBrutal
-              ? rollDices.sucessosParaDano >= 0
-                ? <Message rollDices={ rollDices } msn={ msn } type="success-rage" />
-                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
-              : rollDices.sucessosParaDano >= 0
-                ? <Message rollDices={ rollDices } msn={ msn } type="success" />
-                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
-            }
-          </div>
-        </div>
-      );
-    }
-    return <Message rollDices={ rollDices } msn={ msn } type="rage-check" />
-  };
-
-  const messageForm = (index: number, msg: any, color: string, justify: string) => {
-    return(
-      <div key={index} className={`w-full flex ${justify === 'end' ? 'justify-end' : 'justify-start' } text-white`}>
-        <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2`}>
-          <div>
-            { messageData(msg.message) }
-            </div>
-            <div className="flex justify-end pt-2">
-              <span className="w-full text-right text-sm">
-                { msg.date && msg.date.toDate().toLocaleString() }
-              </span>
-            </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    showData && (
-      <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
+  return(
+    <div className="bg-ritual bg-top bg-cover w-full">
+      <div className="bg-black/80 h-full">
+        <Simplify />
         <Nav />
-        <div className="flex bg-black/80">
-          <div className="flex flex-col w-full relative">
-            <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
-              {
-                messages && messages.length >= 0
-                ? messages && messages.map((msg, index) => {
-                    const token = localStorage.getItem('Segredos Da Fúria');
-                    if (token) {
-                      const decodedToken = verify(JSON.parse(token));
-                      let decode = { email: '' };
-                      if (decodedToken) decode = jwtDecode(token);
-                      if (token && decode.email !== '' && decode.email === msg.email) {
-                        return messageForm(index, msg, 'green', 'end');
-                      }
-                      return messageForm(index, msg, 'gray', 'start');
-                    } return null;
-                  })
-                : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
-                    <span className="loader z-50" />
-                  </div>
-              }
-              NumberMessages
-            </div>
-            <SessionBar
-              showOptions={showOptions}
-              setShowOptions={setShowOptions}
-              scrollToBottom={scrollToBottom}
+        <section className="relative px-2">
+          <div className="h-40vh relative flex bg-white items-end text-black">
+            <Image
+              src={ "/images/84.png" }
+              alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
+              className="absolute w-full h-40vh object-contain object-top"
+              width={ 1200 }
+              height={ 800 }
             />
           </div>
-          { 
-            slice.showMenuSession === 'dices' &&
-            <div className="w-full md:w-3/5 absolute sm:relative z-50">
-              <PopUpDices />
-            </div>
-          }
-          {
-            slice.showMenuSession === 'sheet' && 
-              <div className="w-full md:w-3/5 absolute sm:relative z-50">
-                <PopUpSheet />
-              </div>
-          }
-        </div>
+          <div className="py-6 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
+            <h1 className="text-4xl relative">Sessões</h1>
+            <hr className="w-10/12 mt-6" />
+          </div>
+          <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3 pb-4">
+            <button
+              type="button"
+              onClick={ () => router.push('/sessions/create') }
+              className="p-2 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
+            >
+              <IoMdAdd className="text-4xl" />
+            </button>
+            {
+              sessions.map((session: ISessions, index: number) =>
+                <button
+                  type="button"
+                  onClick={
+                    () => dispatch(actionSessionAuth({ show: true, name: session.name }))
+                  }
+                  key={ index }
+                  className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
+                >
+                  { session.name }
+                </button>
+              )
+            }
+          </div>
+        </section>
+        { slice.sessionAuth.show ? <SessionAuth /> : '' }
       </div>
-    )
+      <Footer />
+    </div>
   );
 }

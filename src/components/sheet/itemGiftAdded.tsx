@@ -14,7 +14,7 @@ import { jwtDecode } from "jwt-decode";
 export default function ItemGiftAdded(props: any) {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const { index, dataGift } = props;
+  const { index, dataGift, session } = props;
   const [showGift, setShowGift] = useState<boolean>(false);
 
   function capitalizeFirstLetter(str: string): String {
@@ -35,15 +35,6 @@ export default function ItemGiftAdded(props: any) {
     }
   };
 
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
   const removeGift = async () => {
     const db = getFirestore(firebaseConfig);
     const token = localStorage.getItem('Segredos Da Fúria');
@@ -51,20 +42,18 @@ export default function ItemGiftAdded(props: any) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.gifts = userData.characterSheet[0].data.gifts.filter((item: any) => item.gift !== dataGift.gift );
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-          }
-          setShowGift(false);
-          window.alert(`Dom '${dataGift.giftPtBr}' removido com sucesso!`)
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        const filterGift = player.data.gifts.filter((item: any) => item.gift !== dataGift.gift);
+        player.data.gifts = filterGift;
+        const playersFiltered = players.filter((gp: any) => gp.email !== email);
+        const docRef = userQuerySnapshot.docs[0].ref;
+        await updateDoc(docRef, { players: [...playersFiltered, player] });
+        setShowGift(false);
+        window.alert(`Dom '${dataGift.giftPtBr}' removido com sucesso!`)
       } catch (error) {
         window.alert('Erro ao atualizar valor: (' + error + ')');
       }

@@ -12,7 +12,7 @@ import { jwtDecode } from "jwt-decode";
 export default function ItemGift(props: any) {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const { index, dataGift } = props;
+  const { index, dataGift, session } = props;
   const [showGift, setShowGift] = useState<boolean>(false);
 
   function capitalizeFirstLetter(str: string): String {
@@ -33,15 +33,6 @@ export default function ItemGift(props: any) {
     }
   };
 
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
   const addGift = async () => {
     const db = getFirestore(firebaseConfig);
     const token = localStorage.getItem('Segredos Da Fúria');
@@ -49,24 +40,21 @@ export default function ItemGift(props: any) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            const filterGift = userData.characterSheet[0].data.gifts.find((item: any) => item.gift === dataGift.gift);
-            if (filterGift) {
-              window.alert("Este dom já está cadastrado na sua Ficha.")
-            } else {
-              userData.characterSheet[0].data.gifts = [...userData.characterSheet[0].data.gifts, dataGift];
-              await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-              setShowGift(false);
-              window.alert(`Dom '${dataGift.giftPtBr}' adicionado com sucesso!`)
-            }
-          }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        const filterGift = player.data.gifts.find((item: any) => item.gift === dataGift.gift);
+        if (filterGift) {
+          window.alert("Este dom já está cadastrado na sua Ficha.")
         } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
+          player.data.gifts = [...player.data.gifts, dataGift];
+          const docRef = userQuerySnapshot.docs[0].ref;
+          const playersFiltered = players.filter((gp: any) => gp.email !== email);
+          await updateDoc(docRef, { players: [...playersFiltered, player] });
+          setShowGift(false);
+          window.alert(`Dom '${dataGift.giftPtBr}' adicionado com sucesso!`)
         }
       } catch (error) {
         window.alert('Erro ao atualizar Dom: (' + error + ')');

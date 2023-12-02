@@ -8,11 +8,12 @@ interface IAtr {
   name: string;
   namePtBr: string;
   quant: number;
+  session: string;
 }
 
 export default function ItemAtr(props: IAtr) {
-  const [ attributes, setAttributes ] = useState<any>([]);
-  const { name, namePtBr, quant } = props;
+  const [ attributes, setAttributes ] = useState<any>(0);
+  const { name, namePtBr, quant, session } = props;
 
   useEffect(() => {
     returnValueAttribute();
@@ -26,27 +27,16 @@ export default function ItemAtr(props: IAtr) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          setAttributes([userData.characterSheet[0].data.attributes[name]]);
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        setAttributes(player.data.attributes[name]);
       } catch (error) {
         window.alert('Erro ao obter valor do atributo: ' + error);
       }
     }
-  };
-  
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
   };
   
   const updateValue = async (name: string, value: number) => {
@@ -56,18 +46,15 @@ export default function ItemAtr(props: IAtr) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            userData.characterSheet[0].data.attributes[name] = value;
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-          }
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        player.data.attributes[name] = value;
+        const docRef = userQuerySnapshot.docs[0].ref;
+        const playersFiltered = players.filter((gp: any) => gp.email !== email);
+        await updateDoc(docRef, { players: [...playersFiltered, player] });
       } catch (error) {
         window.alert('Erro ao atualizar valor: (' + error + ')');
       }
@@ -80,8 +67,8 @@ export default function ItemAtr(props: IAtr) {
     return (
       <div className="flex flex-wrap gap-2 pt-1">
         {
-          attributes.length > 0 && points.map((item, index) => {
-            if (attributes[0] >= index + 1) {
+          points.map((item, index) => {
+            if (attributes >= index + 1) {
               return (
                 <button
                   type="button"

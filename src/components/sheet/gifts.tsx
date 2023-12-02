@@ -7,7 +7,8 @@ import dataGifts from '../../data/gifts.json';
 import ItemGift from "./itemGift";
 import ItemGiftAdded from "./itemGiftAdded";
 
-export default function GiftsSheet() {
+export default function GiftsSheet(props: { session: string }) {
+  const { session } = props;
   const [showAllGifts, setShowAllGifts] = useState<boolean>(false);
   const [totalRenown, setTotalRenown] = useState<number>(0);
   const [trybe, setTrybe] = useState<string>('');
@@ -19,15 +20,6 @@ export default function GiftsSheet() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
   const generateDataForGifts = async () => {
     const db = getFirestore(firebaseConfig);
     const token = localStorage.getItem('Segredos Da Fúria');
@@ -35,18 +27,15 @@ export default function GiftsSheet() {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-            const wayElement = userData.characterSheet[0].data;
-            setTotalRenown(Number(wayElement.honor) + Number(wayElement.glory + Number(wayElement.wisdom)));
-            setTrybe(userData.characterSheet[0].data.trybe);
-            setAuspice(userData.characterSheet[0].data.auspice);
-            setGiftsAdded((userData.characterSheet[0].data.gifts))
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        setTotalRenown(Number(player.data.honor) + Number(player.data.glory + Number(player.data.wisdom)));
+        setTrybe(player.data.trybe);
+        setAuspice(player.data.auspice);
+        setGiftsAdded((player.data.gifts))
       } catch (error) {
         window.alert('Erro ao obter valor do atributo: ' + error);
       }
@@ -62,6 +51,7 @@ export default function GiftsSheet() {
 
     return (listGifts.map((dataGift, index) => (
       <ItemGift
+        session={ session }
         key={ index }
         index={ index }
         dataGift={ dataGift }
@@ -109,6 +99,7 @@ export default function GiftsSheet() {
                       key={ index }
                       index={ index }
                       dataGift={ item }
+                      session={ session }
                       generateDataForGifts={ generateDataForGifts }
                     />
                   ))

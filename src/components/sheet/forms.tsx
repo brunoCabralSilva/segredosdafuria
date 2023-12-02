@@ -10,12 +10,13 @@ import Image from "next/image";
 import { returnRageCheck } from "@/firebase/checks";
 import { registerMessage } from "@/firebase/chatbot";
 
-export default function Forms() {
+export default function Forms(props: { session: string }) {
+  const { session } = props;
   const [ formSelected, setFormSelected ] = useState<any>('');
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    returnValueAttribute();
+    returnValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -28,28 +29,24 @@ export default function Forms() {
     return true;
   };
 
-  const returnValueAttribute = async (): Promise<void> => {
+  const returnValue = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          setFormSelected(userData.characterSheet[0].data.form);
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        setFormSelected(player.data.form);
       } catch (error) {
         window.alert('Erro ao obter valor do atributo: ' + error);
       }
     }
   };
-  
-
   
   const updateValue = async (name: string) => {
     const db = getFirestore(firebaseConfig);
@@ -58,37 +55,33 @@ export default function Forms() {
       try {
         const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
         const { email, firstName, lastName } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            if (name === 'Crinos') await returnRageCheck(2, name);
-            if (name === 'Glabro' || name === 'Hispo') await returnRageCheck(1, name);
-            if (userData.characterSheet[0].data.form === "Crinos") {
-              if (userData.characterSheet[0].data.rage > 0) {
-                userData.characterSheet[0].data.rage = 1;
-                await registerMessage({
-                  message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
-                  user: firstName + ' ' + lastName,
-                  email: email,
-                  date: serverTimestamp(),
-                });
-              }
-            }
-            userData.characterSheet[0].data.form = name;
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-            dispatch(actionForm(name));
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        if (name === 'Crinos') await returnRageCheck(2, name, session);
+        if (name === 'Glabro' || name === 'Hispo') await returnRageCheck(1, name, session);
+        if (player.data.form === "Crinos") {
+          if (player.data.rage > 0) {
+            player.data.rage = 1;
+            await registerMessage({
+              message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
+              user: firstName + ' ' + lastName,
+              email: email,
+            }, session);
           }
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
         }
+        player.data.form = name;
+        const docRef = userQuerySnapshot.docs[0].ref;
+        const playersFiltered = players.filter((gp: any) => gp.email !== email);
+        await updateDoc(docRef, { players: [...playersFiltered, player] });
+        dispatch(actionForm(name));
       } catch (error) {
         window.alert('Erro ao atualizar Forma (' + error + ')');
       }
     }
-    returnValueAttribute();
+    returnValue();
   };
 
   return(

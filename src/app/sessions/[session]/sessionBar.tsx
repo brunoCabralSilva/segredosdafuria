@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
 export default function SessionBar(props: any) {
-  const { showOptions, setShowOptions, scrollToBottom } = props;
+  const { showOptions, setShowOptions, scrollToBottom, sessionName } = props;
   const [text, setText] = useState('');
   const [token, setToken] = useState({ role: '' });
   const slice = useAppSelector(useSlice);
@@ -57,7 +57,7 @@ export default function SessionBar(props: any) {
                   className="p-2"
                   title="Apagar o histórico de conversas"
                   onClick={() => {
-                    clearMessages();
+                    clearMessages(sessionName);
                     setShowOptions(false);
                   }}
                 >
@@ -83,7 +83,7 @@ export default function SessionBar(props: any) {
               className="p-2"
               title="Enviar uma mensagem"
               onClick={() => {
-                sendMessage(text);
+                sendMessage(text, sessionName);
                 setText('');
                 scrollToBottom();
               }}

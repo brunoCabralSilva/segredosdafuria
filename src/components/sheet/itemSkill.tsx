@@ -5,25 +5,25 @@ import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
-import { TiInputChecked } from "react-icons/ti";
 
 interface ISkl {
   name: string;
   namePtBr: string;
   quant: number;
+  session: string;
 }
 
 export default function ItemSkill(props: ISkl) {
-  const [ skill, setSkill ] = useState<{ value: number, specialty: string }[]>([{ value: 0, specialty: '' }]);
+  const [ skill, setSkill ] = useState<{ value: number, specialty: string }>({ value: 0, specialty: '' });
   const [input, setInput ] = useState(false);
-  const { name, namePtBr, quant } = props;
+  const { name, namePtBr, quant, session } = props;
 
   const typeText = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-    setSkill([{
-      value: skill[0].value,
+    setSkill({
+      value: skill.value,
       specialty: sanitizedValue,
-    }]);
+    });
   };
 
   useEffect(() => {
@@ -38,27 +38,16 @@ export default function ItemSkill(props: ISkl) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          setSkill([userData.characterSheet[0].data.skills[name]]);
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        setSkill(player.data.skills[name]);
       } catch (error) {
         window.alert('Erro ao obter valor do atributo: ' + error);
       }
     }
-  };
-  
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
   };
   
   const updateValue = async (name: string, value: number) => {
@@ -68,19 +57,17 @@ export default function ItemSkill(props: ISkl) {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userDocRef = userQuerySnapshot.docs[0].ref;
-          const userData = userQuerySnapshot.docs[0].data();
-          if (userData.characterSheet && userData.characterSheet.length > 0) {
-            if (userData.characterSheet[0].data.skills[name].value === 1 && value === 1) userData.characterSheet[0].data.skills[name] = { value: 0, specialty: skill[0].specialty };
-            else userData.characterSheet[0].data.skills[name] = { value, specialty: skill[0].specialty };
-            await updateDoc(userDocRef, { characterSheet: userData.characterSheet });
-          }
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        player.data.skills[name] = value;
+        if (player.data.skills[name].value === 1 && value === 1) player.data.skills[name] = { value: 0, specialty: skill.specialty };
+        else player.data.skills[name] = { value, specialty: skill.specialty };
+        const docRef = userQuerySnapshot.docs[0].ref;
+        const playersFiltered = players.filter((gp: any) => gp.email !== email);
+        await updateDoc(docRef, { players: [...playersFiltered, player] });
       } catch (error) {
         window.alert('Erro ao atualizar valor: (' + error + ')');
       }
@@ -93,8 +80,8 @@ export default function ItemSkill(props: ISkl) {
     return (
       <div className="flex gap-2 pt-1">
         {
-          skill.length > 0 && points.map((item, index) => {
-            if (skill[0].value >= index + 1) {
+          skill && points.map((item, index) => {
+            if (skill.value >= index + 1) {
               return (
                 <button
                   type="button"
@@ -130,7 +117,7 @@ export default function ItemSkill(props: ISkl) {
             type="text"
             className="my-1 border-2 border-white bg-black text-center w-full mr-1"
             placeholder="Especialização"
-            value={ skill[0].specialty }
+            value={ skill.specialty }
             onChange={(e) => typeText(e)}
           />
         }
@@ -138,7 +125,7 @@ export default function ItemSkill(props: ISkl) {
           input
             ? <BsCheckSquare
                 onClick={(e: any) => {
-                  updateValue(name, skill[0].value);
+                  updateValue(name, skill.value);
                   setInput(false);
                   e.stopPropagation();
                 }}
@@ -156,9 +143,9 @@ export default function ItemSkill(props: ISkl) {
       </div>
       { 
         !input
-        && skill[0].specialty !== ''
-        && skill[0].specialty !== ' '
-        && <span className="text-sm capitalize">{ skill[0].specialty }</span>
+        && skill.specialty !== ''
+        && skill.specialty !== ' '
+        && <span className="text-sm capitalize">{ skill.specialty }</span>
       }
       <div className="w-full">
         { returnPoints(name) }

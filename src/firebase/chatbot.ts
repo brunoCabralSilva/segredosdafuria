@@ -1,21 +1,23 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { arrayUnion, collection, deleteDoc, getDocs, getFirestore, orderBy, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { jwtDecode } from "jwt-decode";
 
-export const clearMessages = async () => {
+export const clearMessages = async (sessionName: string) => {
   const db = getFirestore(firebaseConfig);
-  const messagesRef = collection(db, 'chatbot');
+  const sessionsRef = collection(db, 'sessions');
   try {
-    const querySnapshot = await getDocs(messagesRef);
+    const querySnapshot = await getDocs(
+      query(sessionsRef, where('name', '==', sessionName))
+    )
     querySnapshot.forEach(async (doc) => {
-      await deleteDoc(doc.ref);
+      await updateDoc(doc.ref, { chat: '' });
     });
   } catch (error) {
-    window.alert('Erro ao remover dados do chat: ' + error);
+    window.alert('Erro ao limpar o campo chat: ' + error);
   }
 };
 
-export const sendMessage = async (text: string) => {
+export const sendMessage = async (text: string, sessionName: string) => {
   const token = localStorage.getItem('Segredos Da Fúria');
   if (token) {
     const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
@@ -25,25 +27,24 @@ export const sendMessage = async (text: string) => {
         message: text,
         user: firstName + ' ' + lastName,
         email,
-        date: serverTimestamp(),
-      });
+      },
+      sessionName);
     }
   }
 };
 
-export const registerMessage = async (message: any) => {
+export const registerMessage = async (message: any, sessionName: string) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'chatbot');
-    const q = query(collectionRef, orderBy('date'));
+    const collectionRef = collection(db, 'sessions');
+    const q: any = query(collectionRef, where('name', '==', sessionName));
     const querySnapshot = await getDocs(q);
-    const numDocuments = querySnapshot.size;
-    const maxDocuments = 19;
-    if (numDocuments >= maxDocuments) {
-      const oldestDocument = querySnapshot.docs[0];
-      await deleteDoc(doc(db, 'chatbot', oldestDocument.id));
-    } 
-    await addDoc(collectionRef, message);
+    if (!querySnapshot.empty) {
+      const docRef = querySnapshot.docs[0].ref;
+      await updateDoc(docRef, {
+        chat: arrayUnion({ ...message, date: Date.now() })
+      });
+    }
   } catch (error) {
     window.alert('Ocorreu um erro: ' + error);
   }

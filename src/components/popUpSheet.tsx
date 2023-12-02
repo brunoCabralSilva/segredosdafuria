@@ -10,25 +10,17 @@ import Forms from "./sheet/forms";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
 import { jwtDecode } from "jwt-decode";
-import Background from "./sheet/background";
-import Anotations from "./sheet/anotations";
+import Notes from './sheet/notes';
 import GiftsSheet from "./sheet/gifts";
 import AdvantagesAnsFlaws from "./sheet/advantagesAndFlaws";
 import RitualSheet from "./sheet/rituals";
+import Background from "./sheet/background";
 
-export default function PopUpSheet() {
+export default function PopUpSheet(props: { session: string }) {
+  const { session } = props;
   const [optionSelect, setOptionSelect] = useState('');
   const dispatch = useAppDispatch();
   const slice = useAppSelector(useSlice);
-
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
 
   const getForm = async() => {
     const db = getFirestore(firebaseConfig);
@@ -37,14 +29,12 @@ export default function PopUpSheet() {
       try {
         const decodedToken: { email: string } = jwtDecode(token);
         const { email } = decodedToken;
-        const userQuery = query(collection(db, 'users'), where('email', '==', email));
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
-        if (!isEmpty(userQuerySnapshot.docs)) {
-          const userData = userQuerySnapshot.docs[0].data();
-          dispatch(actionForm(userData.characterSheet[0].data.form));
-        } else {
-          window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-        }
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        dispatch(actionForm(player.data.form));
       } catch (error) {
         window.alert('Erro ao obter valor do atributo: ' + error);
       }
@@ -59,31 +49,29 @@ export default function PopUpSheet() {
   const returnDataSheet = () => {
     switch(optionSelect) {
       case ('general'):
-        return <General />
+        return <General session={session} />
       case ('attributes'):
-        return <Attributes />;
+        return <Attributes session={session} />;
       case ('skills'):
-        return <Skills />;
+        return <Skills session={session} />;
       case ('gifts-rituals'):
         return (
           <div className="w-full overflow-y-auto flex flex-col items-center">
-            <GiftsSheet />
+            <GiftsSheet session={session} />
             <hr className="mt-5 mb-8 w-11/12" />
-            <RitualSheet />
+            <RitualSheet session={session} />
           </div>
         );
-      case ('rituals'):
-        return <RitualSheet />;
       case ('advantages-flaws'):
         return <AdvantagesAnsFlaws />;
       case ('forms'):
-        return <Forms />;
+        return <Forms session={session} />;
       case ('background'):
-        return <Background />;
+        return <Background type="background" session={session} /> ;
       case ('anotations'):
-        return <Anotations />;
+        return <Notes type="notes" session={session} />;
       default:
-        return <General />
+        return <General session={session} />
     }
   };
 
