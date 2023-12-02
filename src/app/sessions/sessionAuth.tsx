@@ -1,3 +1,4 @@
+'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionSessionAuth, useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
