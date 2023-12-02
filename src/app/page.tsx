@@ -4,12 +4,10 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet';
 import Simplify from '@/components/simplify';
 import { actionFeedback, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Feedback from '@/components/feedback';
-import Nav from '@/components/nav';
 
 export default function Home() {
   const describe = useRef<HTMLDivElement | null>(null);

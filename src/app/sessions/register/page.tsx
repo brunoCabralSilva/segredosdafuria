@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { login, registerUser, verifyEmail } from "../../../firebase/user";
 import { actionLogin } from "@/redux/slice";
-import { jwtDecode } from "jwt-decode";
 import Simplify from "@/components/simplify";
 import Image from "next/image";
 import Nav from "@/components/nav";

@@ -1,3 +1,4 @@
+'use client'
 import { clearMessages, sendMessage } from '@/firebase/chatbot';
 import { GiD10 } from "react-icons/gi";
 import { IoIosSend } from "react-icons/io";

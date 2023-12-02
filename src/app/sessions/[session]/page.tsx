@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionSessionAuth, actionShowMenuSession, useSlice } from '@/redux/slice';
+import { actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { arrayUnion, collection, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import firestoreConfig from '../../../firebase/connection';
