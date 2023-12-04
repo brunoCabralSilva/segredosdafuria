@@ -38,12 +38,6 @@ export default function AutomatedRoll(props: { session: string }) {
           onClick={(e: any) => setAtrSelected(e.target.value)}
           className="w-full py-3 text-black capitalize cursor-pointer"
         >
-          <option
-            className="capitalize text-center text-black"
-            disabled selected
-          >
-            Escolha um atributo
-          </option>
           {
             dataSheet.attributes
               .map((item, index) => (
@@ -64,12 +58,6 @@ export default function AutomatedRoll(props: { session: string }) {
             onClick={(e: any) => setSklSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           > 
-            <option
-              className="capitalize text-center text-black"
-              disabled selected
-            >
-              Escolha uma Habilidade
-            </option>
             <option
               className="text-black capitalize text-center"
               value=""
@@ -97,12 +85,6 @@ export default function AutomatedRoll(props: { session: string }) {
             onClick={(e: any) => setRenSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           >
-            <option
-              className="capitalize text-center text-black"
-              disabled selected
-            >
-              Escolha um Renome
-            </option>
             <option
               className="capitalize text-center text-black"
               value=""
