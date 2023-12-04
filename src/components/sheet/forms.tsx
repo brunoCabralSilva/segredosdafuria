@@ -54,6 +54,8 @@ export default function Forms(props: { session: string }) {
         if (name === 'Hominídeo' || name === 'Lupino') {
           await registerMessage({
             message: `Mudou para a forma ${name}.`,
+            user: firstName + ' ' + lastName,
+            email: email,
           }, session);
         }
         if (name === 'Crinos') await returnRageCheck(2, name, session);
