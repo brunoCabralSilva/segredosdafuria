@@ -16,7 +16,7 @@ import { generateDataRoll } from './functions';
 import Dice from './dice';
 import SessionBar from './sessionBar';
 import { useRouter } from 'next/navigation';
-import POpUpDicesDm from '@/components/PopUpDicesDm';
+import POpUpDicesDm from '@/components/manualRoll';
 import MenuDm from '@/components/MenuDm';
 
 export default function Chat({ params } : { params: { session: String } }) {

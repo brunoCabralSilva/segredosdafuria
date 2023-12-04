@@ -64,7 +64,7 @@ export const returnRageCheck = async (rageCheck: number, type: string, session: 
       if (player.data.rage <= 0) {
         player.data.rage = 0;
         await registerMessage({
-          message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, dentre outros.',
+          message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
           user: firstName + ' ' + lastName,
           email: email
         }, session);
