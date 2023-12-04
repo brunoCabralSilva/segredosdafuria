@@ -45,7 +45,7 @@ export default function Home() {
           />
         </div>
       </header>
-      <div ref={ describe } className="grid grid-cols-2 grid-row-5 sm:grid-cols-8 sm:grid-row-5 w-full h-full px-4 sm:px-8 pb-4 gap-4 sm:gap-6">
+      <div ref={ describe } className="grid grid-cols-2 sm:grid-cols-8 w-full h-full px-4 sm:px-8 pb-4 gap-4 sm:gap-6">
         <div
           className={`sm:text-3xl bg-06 mt-4 sm:mt-8 bg-cover col-span-2 sm:col-span-8 sm:row-span-1 text-center text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
           <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
@@ -88,7 +88,7 @@ export default function Home() {
         <Link href="/rituals" className="col-span-1 row-span-2 sm:col-span-2 sm:row-span-2">
           <motion.div
             whileHover={{ scale: 0.98 }}
-            className={`bg-05 bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            className={`bg-06 bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
             <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Rituais</p>
           </motion.div>
@@ -96,20 +96,20 @@ export default function Home() {
         <Link href="/about" className="col-span-1 sm:row-span-2 sm:col-span-2">
           <motion.div
             whileHover={{ scale: 0.98 }}
-            className={`bg-06 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            className={`bg-05 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
             <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sobre</p>
           </motion.div>
         </Link>
-        <Link href="/loresheets" className="col-span-1 sm:row-span-2 sm:col-span-4">
+        <Link href="/sessions" className="col-span-1 row-span-3 sm:row-span-4 sm:col-span-3">
           <motion.div
             whileHover={{ scale: 0.98 }}
-            className={`bg-07 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            className={`bg-boca01 bg-cover bg-center h-full text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
             <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Loresheets</p>
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sessões</p>
           </motion.div>
         </Link>
-        <Link href="/talismans" className="col-span-1 sm:row-span-2 sm:col-span-4">
+        <Link href="/talismans" className="col-span-1 sm:row-span-2 sm:col-span-3">
           <motion.div
             whileHover={{ scale: 0.98 }}
             className={`bg-08 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
@@ -117,12 +117,20 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Talismãs</p>
           </motion.div>
         </Link>
-        <Link href="/sessions/login" className="col-span-2 sm:row-span-2 sm:col-span-8">
+        <Link href="/loresheets" className="col-span-1 row-span-2 sm:row-span-2 sm:col-span-2">
           <motion.div
             whileHover={{ scale: 0.98 }}
-            className={`bg-boca01 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            className={`bg-07 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
             <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sessões</p>
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Loresheets</p>
+          </motion.div>
+        </Link>
+        <Link href="/sessions/login" className="col-span-2 sm:col-span-5 sm:row-span-2">
+          <motion.div
+            whileHover={{ scale: 0.98 }}
+            className={`bg-09 bg-bottom bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>
+            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/40'}`} />
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Perfil</p>
           </motion.div>
         </Link>
       </div>
