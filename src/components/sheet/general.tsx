@@ -122,7 +122,6 @@ export default function General(props: { session: string }) {
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Augúrio</span>
           <select
-            defaultValue=""
             className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={auspice}
             onChange={ (e) => {
@@ -141,7 +140,6 @@ export default function General(props: { session: string }) {
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Tribo</span>
           <select
-            defaultValue=""
             className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={ trybeI }
             onChange={ (e) => {
