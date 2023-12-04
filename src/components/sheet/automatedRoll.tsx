@@ -34,30 +34,29 @@ export default function AutomatedRoll(props: { session: string }) {
       </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
-          <select
-            onClick={(e: any) => setAtrSelected(e.target.value)}
-            className="w-full py-3 text-black capitalize cursor-pointer"
+        <select
+          onClick={(e: any) => setAtrSelected(e.target.value)}
+          className="w-full py-3 text-black capitalize cursor-pointer"
+        >
+          <option
+            className="capitalize text-center text-black"
+            disabled selected
           >
-            <option
-              className="capitalize text-center text-black"
-              disabled selected
-              value=""
-            >
-              Escolha um atributo
-            </option>
-            {
-              dataSheet.attributes
-                .map((item, index) => (
-                <option
-                  className="capitalize text-center text-black"
-                  key={index}
-                  value={item.value}
-                >
-                  { item.namePtBr }
-                </option>
-              ))
-            }
-          </select>
+            Escolha um atributo
+          </option>
+          {
+            dataSheet.attributes
+              .map((item, index) => (
+              <option
+                className="capitalize text-center text-black"
+                key={index}
+                value={item.value}
+              >
+                { item.namePtBr }
+              </option>
+            ))
+          }
+        </select>
       </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Habilidade</p>
@@ -68,7 +67,6 @@ export default function AutomatedRoll(props: { session: string }) {
             <option
               className="capitalize text-center text-black"
               disabled selected
-              value=""
             >
               Escolha uma Habilidade
             </option>
@@ -102,7 +100,6 @@ export default function AutomatedRoll(props: { session: string }) {
             <option
               className="capitalize text-center text-black"
               disabled selected
-              value=""
             >
               Escolha um Renome
             </option>
