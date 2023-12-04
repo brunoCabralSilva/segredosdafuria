@@ -56,7 +56,7 @@ export default function ItemGiftAdded(props: any) {
         setShowGift(false);
         window.alert(`Dom '${dataGift.giftPtBr}' removido com sucesso!`)
       } catch (error) {
-        window.alert('Erro ao atualizar valor: (' + error + ')');
+        window.alert('Erro ao atualizar valor do Dom: (' + error + ')');
       }
     }
     props.generateDataForGifts();

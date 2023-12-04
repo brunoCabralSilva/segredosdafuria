@@ -35,12 +35,14 @@ export default function AutomatedRoll(props: { session: string }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
           <select
+            defaultValue=""
             onClick={(e: any) => setAtrSelected(e.target.value)}
             className="w-full py-3 text-black capitalize cursor-pointer"
           >
             <option
               className="capitalize text-center text-black"
               disabled selected
+              value=""
             >
               Escolha um atributo
             </option>
@@ -61,12 +63,14 @@ export default function AutomatedRoll(props: { session: string }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Habilidade</p>
           <select
+            defaultValue=""
             onClick={(e: any) => setSklSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           > 
             <option
               className="capitalize text-center text-black"
               disabled selected
+              value=""
             >
               Escolha uma Habilidade
             </option>
@@ -94,12 +98,14 @@ export default function AutomatedRoll(props: { session: string }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Renome</p>
           <select
+            defaultValue=""
             onClick={(e: any) => setRenSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           >
             <option
               className="capitalize text-center text-black"
               disabled selected
+              value=""
             >
               Escolha um Renome
             </option>

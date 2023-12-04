@@ -42,7 +42,7 @@ export default function General(props: { session: string }) {
         setTrybe(player.data.trybe);
         setNameCharacter(player.data.name);
       } catch (error) {
-        window.alert('Erro ao obter valor do atributo: ' + error);
+        window.alert(`Erro ao obter valores de augúrio, tribo e/ou nome: (' + error + ')`);
       }
     }
   };
@@ -65,7 +65,7 @@ export default function General(props: { session: string }) {
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
       } catch (error) {
-        window.alert('Erro ao atualizar valor: (' + error + ')');
+        window.alert(`Erro ao atualizar valor de ${key}: (' + error + ')`);
       }
     }
     returnValueSkill();
@@ -122,6 +122,7 @@ export default function General(props: { session: string }) {
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Augúrio</span>
           <select
+            defaultValue=""
             className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={auspice}
             onChange={ (e) => {
@@ -140,6 +141,7 @@ export default function General(props: { session: string }) {
         <div className={ `mt-5 capitalize flex-col justify-between items-center` }>
           <span className="pr-3">Tribo</span>
           <select
+            defaultValue=""
             className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={ trybeI }
             onChange={ (e) => {

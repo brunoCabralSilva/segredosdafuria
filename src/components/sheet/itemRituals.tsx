@@ -40,7 +40,7 @@ export default function ItemRituals(props: any) {
           }
 
       } catch (error) {
-        window.alert('Erro ao atualizar Ritual: (' + error + ')');
+        window.alert('Erro ao adicionar Ritual: (' + error + ')');
       }
     }
   };
@@ -65,7 +65,7 @@ export default function ItemRituals(props: any) {
         setShowRitual(false);
         window.alert(`Ritual '${ritual.titlePtBr}' removido com sucesso!`)
       } catch (error) {
-        window.alert('Erro ao atualizar Ritual: (' + error + ')');
+        window.alert('Erro ao remover Ritual: (' + error + ')');
       }
     }
     props.generateDataForRituals();

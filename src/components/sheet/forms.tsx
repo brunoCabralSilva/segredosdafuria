@@ -34,7 +34,7 @@ export default function Forms(props: { session: string }) {
         const player: any = players.find((gp: any) => gp.email === email);
         setFormSelected(player.data.form);
       } catch (error) {
-        window.alert('Erro ao obter valor do atributo: ' + error);
+        window.alert('Erro ao obter valor da Forma: ' + error);
       }
     }
   };

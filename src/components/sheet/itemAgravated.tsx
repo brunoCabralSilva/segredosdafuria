@@ -42,7 +42,7 @@ export default function ItemAgravated(props: IItem) {
           }
         }
       } catch (error) {
-        window.alert('Erro ao obter valor da Força de Vontade: ' + error);
+        window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`);
       }
     }
   };
@@ -86,7 +86,7 @@ export default function ItemAgravated(props: IItem) {
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
       } catch (error) {
-        window.alert('Erro ao atualizar valor: (' + error + ')');
+        window.alert(`Erro ao atualizar valor de ${name}: (' + error + ')`);
       }
     }
     returnValueWillpower();

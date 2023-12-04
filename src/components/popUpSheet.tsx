@@ -82,6 +82,7 @@ export default function PopUpSheet(props: { session: string }) {
           onClick={() => dispatch(actionShowMenuSession(''))}
         />
         <select
+          defaultValue='general'
           onChange={ (e) => {
             setOptionSelect(e.target.value);
             getForm();

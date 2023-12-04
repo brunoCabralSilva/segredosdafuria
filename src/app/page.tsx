@@ -125,7 +125,7 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Loresheets</p>
           </motion.div>
         </Link>
-        <Link href="/sessions/login" className="col-span-2 sm:col-span-5 sm:row-span-2">
+        <Link href="/profile" className="col-span-2 sm:col-span-5 sm:row-span-2">
           <motion.div
             whileHover={{ scale: 0.98 }}
             className={`bg-09 bg-bottom bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer ${slice.simplify ? 'border-2 border-white items-center justify-center' : 'border-transparent items-end'}`}>

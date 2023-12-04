@@ -39,7 +39,7 @@ export default function GiftsSheet(props: { session: string }) {
         setGiftsAdded((player.data.gifts))
         console.log(player.data.gifts);
       } catch (error) {
-        window.alert('Erro ao obter valor do atributo: ' + error);
+        window.alert('Erro ao obter valores do dom: ' + error);
       }
     }
   };

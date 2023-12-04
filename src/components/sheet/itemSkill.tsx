@@ -45,7 +45,7 @@ export default function ItemSkill(props: ISkl) {
         const player: any = players.find((gp: any) => gp.email === email);
         setSkill(player.data.skills[name]);
       } catch (error) {
-        window.alert('Erro ao obter valor do atributo: ' + error);
+        window.alert('Erro ao obter valor da habilidade: ' + error);
       }
     }
   };
@@ -69,7 +69,7 @@ export default function ItemSkill(props: ISkl) {
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
       } catch (error) {
-        window.alert('Erro ao atualizar valor: (' + error + ')');
+        window.alert('Erro ao atualizar valor da Habilidade: (' + error + ')');
       }
     }
     returnValueSkill();
