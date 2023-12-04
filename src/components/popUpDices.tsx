@@ -69,7 +69,7 @@ export default function PopUpDices(props: { session: string }) {
           <p className="text-white w-full pb-3">Habilidade</p>
             <select
               onClick={(e: any) => setSklSelected(e.target.value)}
-              className="w-full py-3 capitalize cursor-pointer"
+              className="w-full py-3 capitalize cursor-pointer text-black"
             > 
               <option
                 className="capitalize text-center text-black"
@@ -102,7 +102,7 @@ export default function PopUpDices(props: { session: string }) {
           <p className="text-white w-full pb-3">Renome</p>
             <select
               onClick={(e: any) => setRenSelected(e.target.value)}
-              className="w-full py-3 capitalize cursor-pointer"
+              className="w-full py-3 capitalize cursor-pointer text-black"
             >
               <option
                 className="capitalize text-center text-black"

@@ -1,7 +1,7 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch } from "@/redux/hooks";
-import { actionForm } from "@/redux/slice";
+import { actionForm, actionShowMenuSession } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
@@ -18,16 +18,7 @@ export default function Forms(props: { session: string }) {
   useEffect(() => {
     returnValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
-  };
+  }, []);
 
   const returnValue = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
@@ -60,6 +51,11 @@ export default function Forms(props: { session: string }) {
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
+        if (name === 'Hominídeo' || name === 'Lupino') {
+          await registerMessage({
+            message: `Mudou para a forma ${name}.`,
+          }, session);
+        }
         if (name === 'Crinos') await returnRageCheck(2, name, session);
         if (name === 'Glabro' || name === 'Hispo') await returnRageCheck(1, name, session);
         if (player.data.form === "Crinos") {
@@ -77,6 +73,7 @@ export default function Forms(props: { session: string }) {
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
         dispatch(actionForm(name));
+        dispatch(actionShowMenuSession(''))
       } catch (error) {
         window.alert('Erro ao atualizar Forma (' + error + ')');
       }
