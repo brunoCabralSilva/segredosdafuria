@@ -20,7 +20,7 @@ export default function AutomatedRoll(props: { session: string }) {
   }
 
   return(
-    <div className="w-8/10 px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+    <div className="bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueOf" className="mb-4 flex items-center w-full gap-2">
         <button
           className="bg-white p-3 w-full py-3 cursor-pointer capitalize text-center text-black hover:font-bold"
@@ -35,7 +35,7 @@ export default function AutomatedRoll(props: { session: string }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
           <select
-            onClick={(e: any) => setAtrSelected(e.target.value)}
+            onChange={(e: any) => setAtrSelected(e.target.value)}
             className="w-full py-3 text-black capitalize cursor-pointer"
           >
             <option
@@ -61,7 +61,7 @@ export default function AutomatedRoll(props: { session: string }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Habilidade</p>
           <select
-            onClick={(e: any) => setSklSelected(e.target.value)}
+            onChange={(e: any) => setSklSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           > 
             <option
@@ -94,7 +94,7 @@ export default function AutomatedRoll(props: { session: string }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Renome</p>
           <select
-            onClick={(e: any) => setRenSelected(e.target.value)}
+            onChange={(e: any) => setRenSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           >
             <option
