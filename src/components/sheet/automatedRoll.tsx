@@ -20,7 +20,7 @@ export default function AutomatedRoll(props: { session: string }) {
   }
 
   return(
-    <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+    <div className="w-8/10 px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueOf" className="mb-4 flex items-center w-full gap-2">
         <button
           className="bg-white p-3 w-full py-3 cursor-pointer capitalize text-center text-black hover:font-bold"
@@ -34,31 +34,42 @@ export default function AutomatedRoll(props: { session: string }) {
       </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
-        <select className="w-full py-3 text-black capitalize cursor-pointer">
-          <option
-              className="text-black capitalize text-center"
-              value=""
+          <select
+            onClick={(e: any) => setAtrSelected(e.target.value)}
+            className="w-full py-3 text-black capitalize cursor-pointer"
+          >
+            <option
+              className="capitalize text-center text-black"
+              disabled selected
             >
-            Nenhum
-          </option>
-          {
-            dataSheet.attributes
-              .map((item, index) => (
-              <option
-                className="capitalize text-center text-black"
-                key={index}
-                value={item.value}
-                onClick={() => setAtrSelected(item.value)}
-              >
-                { item.namePtBr }
-              </option>
-            ))
-          }
-        </select>
+              Escolha um atributo
+            </option>
+            {
+              dataSheet.attributes
+                .map((item, index) => (
+                <option
+                  className="capitalize text-center text-black"
+                  key={index}
+                  value={item.value}
+                >
+                  { item.namePtBr }
+                </option>
+              ))
+            }
+          </select>
       </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Habilidade</p>
-          <select className="w-full py-3 capitalize cursor-pointer text-black"> 
+          <select
+            onClick={(e: any) => setSklSelected(e.target.value)}
+            className="w-full py-3 capitalize cursor-pointer text-black"
+          > 
+            <option
+              className="capitalize text-center text-black"
+              disabled selected
+            >
+              Escolha uma Habilidade
+            </option>
             <option
               className="text-black capitalize text-center"
               value=""
@@ -73,7 +84,6 @@ export default function AutomatedRoll(props: { session: string }) {
                     className="text-black capitalize text-center"
                     key={index}
                     value={item.value}
-                    onClick={() => setSklSelected(item.value)}
                   >
                     { item.namePtBr }
                   </option>
@@ -83,7 +93,16 @@ export default function AutomatedRoll(props: { session: string }) {
       </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Renome</p>
-          <select className="w-full py-3 capitalize cursor-pointer text-black">
+          <select
+            onClick={(e: any) => setRenSelected(e.target.value)}
+            className="w-full py-3 capitalize cursor-pointer text-black"
+          >
+            <option
+              className="capitalize text-center text-black"
+              disabled selected
+            >
+              Escolha um Renome
+            </option>
             <option
               className="capitalize text-center text-black"
               value=""
@@ -97,7 +116,6 @@ export default function AutomatedRoll(props: { session: string }) {
                   className="capitalize text-center text-black"
                   key={index}
                   value={item.value}
-                  onClick={() => setRenSelected(item.value)}
                 >
                   { item.namePtBr }
                 </option>
