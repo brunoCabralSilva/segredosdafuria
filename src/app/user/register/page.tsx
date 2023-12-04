@@ -24,7 +24,6 @@ export default function Register() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(actionLogin({ firstName: '', lastName: '', email: '', role: '' }));
     localStorage.removeItem('Segredos Da Fúria');
     window.scrollTo(0, 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -13,7 +13,8 @@ export const testToken = () => {
   const token = localStorage.getItem('Segredos Da Fúria');
   if (token) {
     try {
-      const decodedToken = verify(JSON.parse(token));
+      const tokenV = JSON.parse(token);
+      const decodedToken = verify(JSON.parse(tokenV));
       if (decodedToken) return true;
       else {
         localStorage.removeItem('Segredos Da Fúria');

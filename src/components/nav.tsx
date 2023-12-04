@@ -113,7 +113,7 @@ export default function Nav() {
             </Link>
           </li>
           <li className="pt-4">
-            <Link href="/profile"
+            <Link href="/user/profile"
               onClick={ () => setShowMenu(!showMenu) }
               className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
             >

@@ -2,11 +2,12 @@
 import { addDoc, collection, getDocs, getFirestore, serverTimestamp } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import firestoreConfig from '../../../firebase/connection';
 import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import { FaArrowLeft } from "react-icons/fa6";
+import { testToken } from "@/firebase/token";
 
 export default function Create() {
   const router = useRouter();
@@ -17,6 +18,16 @@ export default function Create() {
   const [errExists, setErrExists] = useState<string>('');
   const [errPalavraPasse, setErrPalavraPasse] = useState<string>('');
   const [palavraPasse, setPalavraPasse] = useState<string>('');
+  const [showData, setShowData] = useState(false);
+
+  useEffect(() => {
+    setShowData(false);
+    window.scrollTo(0, 0);
+    const verification = testToken();
+    if (!verification) router.push('/user/login');
+    setShowData(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const registerSession = async () => {
     if (nameSession.length < 3) {
@@ -62,7 +73,7 @@ export default function Create() {
           });
           router.push(`/sessions/${nameSession}`);
         } else {
-          router.push('/sessions/login');
+          router.push('/user/login');
           window.alert('Não foi possível validar seu Token. Por favor, faça login novamente');
         }
       }
@@ -71,8 +82,9 @@ export default function Create() {
     }
   };
   
-  return(
-    <div className="bg-ritual bg-cover bg-top min-h-screen">
+  {
+    showData
+    ? <div className="bg-ritual bg-cover bg-top min-h-screen">
       <div className="flex flex-col w-full overflow-y-auto justify-center items-center bg-black/90">
         <Nav />
         <div
@@ -149,5 +161,6 @@ export default function Create() {
       </div>
       <Footer />
     </div>
-  );
+    : <div className="bg-ritual bg-cover bg-top h-screen w-full" />
+  }
 }

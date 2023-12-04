@@ -42,7 +42,7 @@ export default function Message(props: IMessage) {
     <div className="w-full">
       <div className="font-bold py-2 text-left">
         { type === 'success-rage'
-          ? 'Obteve sucesso se a ação foi CAUSAR DANO (Caso contrário, ocorreu uma falha brutal'
+          ? 'Obteve sucesso se a ação foi CAUSAR DANO (Caso contrário, ocorreu uma falha brutal)'
           : 'Obteve sucesso no teste!'
         }
       </div>
