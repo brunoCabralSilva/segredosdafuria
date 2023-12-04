@@ -38,6 +38,12 @@ export default function AutomatedRoll(props: { session: string }) {
           onClick={(e: any) => setAtrSelected(e.target.value)}
           className="w-full py-3 text-black capitalize cursor-pointer"
         >
+          <option
+              className="text-black capitalize text-center"
+              value=""
+            >
+            Nenhum
+          </option>
           {
             dataSheet.attributes
               .map((item, index) => (
