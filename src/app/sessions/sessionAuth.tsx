@@ -87,6 +87,8 @@ export default function SessionAuth(props: { session : string }) {
               message: `O usuário ${capitalize(firstName)} ${capitalize(lastName)} de Email ${email}, solicitou acesso à sua Sessão`,
               email: email,
               type: 'approval',
+              firstName,
+              lastName,
             }
           ];
           await updateDoc(sessionDoc.ref, { notifications: updatedNotifications });
