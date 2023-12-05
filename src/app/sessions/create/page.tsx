@@ -60,7 +60,7 @@ export default function Create() {
             name: nameSession.replace(/_/g, '-').toLowerCase(),
             description,
             dm: data.email,
-            creationDate: serverTimestamp(),
+            creationDate: Date.now(),
             anotations: '',
             chat: [],
             players: [],

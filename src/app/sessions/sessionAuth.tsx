@@ -84,7 +84,7 @@ export default function SessionAuth(props: { session : string }) {
           const updatedNotifications = [
             ...sessionData.notifications,
             {
-              message: `O usuário ${capitalize(firstName)} ${capitalize(lastName)} de Email ${email}, solicitou acesso à sua Sessão`,
+              message: `O Usuário ${capitalize(firstName)} ${capitalize(lastName)} de email "${email}" solicitou acesso à sua Sessão.`,
               email: email,
               type: 'approval',
               firstName,
@@ -113,7 +113,7 @@ export default function SessionAuth(props: { session : string }) {
               Notamos que você é novo nesta Sessão.
             </p>
             <p className="text-white w-full text-center pb-3">
-              Como é a sua primeira vez por aqui, podemos encaminhar uma notificação para que o Narrador da {session} possa autorizar seu acesso, que tal?
+              Como é a sua primeira vez por aqui, podemos encaminhar uma notificação para que o Narrador de {session} possa autorizar seu acesso, que tal?
             </p>
           </label>
           <div className="flex w-full gap-2">
