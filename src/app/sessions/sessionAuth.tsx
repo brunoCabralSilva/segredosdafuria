@@ -1,14 +1,14 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionSessionAuth, useSlice } from "@/redux/slice";
+import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaArrowLeft } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../firebase/connection';
 
-export default function SessionAuth() {
+export default function SessionAuth(props: { session: string }) {
+  const { session } = props;
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -47,6 +47,7 @@ export default function SessionAuth() {
         .replace(/\s+/g, '-')
         .toLowerCase();
       dispatch(actionSessionAuth({ show: false, name: slice.sessionAuth.name }))
+      dispatch(actionLoginInTheSession({ name: session, logged: true }))
       router.push(`/sessions/${endpoint}`);
     }
   };

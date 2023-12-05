@@ -36,106 +36,110 @@ export default function Chat({ params } : { params: { session: String } }) {
   
   useEffect(() => {
     setShowData(false);
-    window.scrollTo(0, 0);
-    const verification = testToken();
-    if (!verification) router.push('/user/login');
-    else {
-      setDm(false);
-      setSessionName(decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-')));
-      dispatch(actionShowMenuSession(''));
-      window.scrollTo(0, 0);
-      const registerUserInTheSession = async () => {
-        const token = localStorage.getItem('Segredos Da Fúria');
-        if (token) {
-          setShowData(true);
-          const decodification: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-          const { email, firstName, lastName } = decodification;
-          if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
-          const resultado: any = await getDocs(querySession);
-          const players: any = [];
-          resultado.forEach((doc: any) => players.push(...doc.data().players));
-          let dmEmail: string = '';
-          resultado.forEach((doc: any) => dmEmail = doc.data().dm);
-          if (dmEmail === email) setDm(true);
-          else {
-            const findByEmail = players.find((user: any) => user.email === email);
-            if(!findByEmail) {
-              const sheet = {
-                session: sessionName,
-                email: email,
-                user: `${firstName} ${lastName}`,
-                creationData: Date.now(),
-                data: {
-                  trybe: '',
-                  auspice: '',
-                  name: '',
-                  glory: 0,
-                  honor: 0,
-                  wisdom: 0,
-                  health: [],
-                  rage: 0,
-                  willpower: [],
-                  attributes: {
-                    strength: 1,
-                    dexterity: 1,
-                    stamina: 1,
-                    charisma: 1,
-                    manipulation: 1,
-                    composure: 1,
-                    intelligence: 1,
-                    wits: 1,
-                    resolve: 1,
-                  },
-                  skills: {
-                    athletics: { value: 0, specialty: '' },
-                    animalKen: { value: 0, specialty: '' },
-                    academics: { value: 0, specialty: '' },
-                    brawl: { value: 0, specialty: '' },
-                    etiquette: { value: 0, specialty: '' },
-                    awareness: { value: 0, specialty: '' },
-                    craft: { value: 0, specialty: '' },
-                    insight: { value: 0, specialty: '' },
-                    finance: { value: 0, specialty: '' },
-                    driving: { value: 0, specialty: '' },
-                    intimidation: { value: 0, specialty: '' },
-                    investigation: { value: 0, specialty: '' },
-                    firearms: { value: 0, specialty: '' },
-                    leadership: { value: 0, specialty: '' },
-                    medicine: { value: 0, specialty: '' },
-                    larceny: { value: 0, specialty: '' },
-                    performance: { value: 0, specialty: '' },
-                    occult: { value: 0, specialty: '' },
-                    melee: { value: 0, specialty: '' },
-                    persuasion: { value: 0, specialty: '' },
-                    politics: { value: 0, specialty: '' },
-                    stealth: { value: 0, specialty: '' },
-                    streetwise: { value: 0, specialty: '' },
-                    science: { value: 0, specialty: '' },
-                    survival: { value: 0, specialty: '' },
-                    subterfuge: { value: 0, specialty: '' },
-                    technology: { value: 0, specialty: '' },
-                  },
-                  gifts: [],
-                  rituals: [],
-                  advantagesAndFlaws: [],
-                  form: 'Hominídeo',
-                  background: '',
-                  notes: '',
-                },
-              };
-              const docRef = resultado.docs[0].ref;
-              await updateDoc(docRef, {
-                players: arrayUnion({ ...sheet, date: Date.now() })
-              });
-            }
-          }
-        }
-        else {
-          router.push('/user/login');
-        }
-      }
-      registerUserInTheSession();
+    if (slice.loginInTheSession.name !== decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-'))) {
+      router.push('/sessions');
     }
+    const registerUserInTheSession = async () => {
+      window.scrollTo(0, 0);
+      const verification = testToken();
+      if (!verification) router.push('/user/login');
+      else {
+        setDm(false);
+        setSessionName(decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-')));
+        dispatch(actionShowMenuSession(''));
+          const token = localStorage.getItem('Segredos Da Fúria');
+          if (token) {
+            try {
+              setShowData(true);
+              const decodification: { email: string, firstName: string, lastName: string } = jwtDecode(token);
+              const { email, firstName, lastName } = decodification;
+              if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
+              const resultado: any = await getDocs(querySession);
+              const players: any = [];
+              resultado.forEach((doc: any) => players.push(...doc.data().players));
+              let dmEmail: string = '';
+              resultado.forEach((doc: any) => dmEmail = doc.data().dm);
+              if (dmEmail === email) setDm(true);
+              else {
+                const findByEmail = players.find((user: any) => user.email === email);
+                if(!findByEmail) {
+                  const sheet = {
+                    session: sessionName,
+                    email: email,
+                    user: `${firstName} ${lastName}`,
+                    creationData: Date.now(),
+                    data: {
+                      trybe: '',
+                      auspice: '',
+                      name: '',
+                      glory: 0,
+                      honor: 0,
+                      wisdom: 0,
+                      health: [],
+                      rage: 0,
+                      willpower: [],
+                      attributes: {
+                        strength: 1,
+                        dexterity: 1,
+                        stamina: 1,
+                        charisma: 1,
+                        manipulation: 1,
+                        composure: 1,
+                        intelligence: 1,
+                        wits: 1,
+                        resolve: 1,
+                      },
+                      skills: {
+                        athletics: { value: 0, specialty: '' },
+                        animalKen: { value: 0, specialty: '' },
+                        academics: { value: 0, specialty: '' },
+                        brawl: { value: 0, specialty: '' },
+                        etiquette: { value: 0, specialty: '' },
+                        awareness: { value: 0, specialty: '' },
+                        craft: { value: 0, specialty: '' },
+                        insight: { value: 0, specialty: '' },
+                        finance: { value: 0, specialty: '' },
+                        driving: { value: 0, specialty: '' },
+                        intimidation: { value: 0, specialty: '' },
+                        investigation: { value: 0, specialty: '' },
+                        firearms: { value: 0, specialty: '' },
+                        leadership: { value: 0, specialty: '' },
+                        medicine: { value: 0, specialty: '' },
+                        larceny: { value: 0, specialty: '' },
+                        performance: { value: 0, specialty: '' },
+                        occult: { value: 0, specialty: '' },
+                        melee: { value: 0, specialty: '' },
+                        persuasion: { value: 0, specialty: '' },
+                        politics: { value: 0, specialty: '' },
+                        stealth: { value: 0, specialty: '' },
+                        streetwise: { value: 0, specialty: '' },
+                        science: { value: 0, specialty: '' },
+                        survival: { value: 0, specialty: '' },
+                        subterfuge: { value: 0, specialty: '' },
+                        technology: { value: 0, specialty: '' },
+                      },
+                      gifts: [],
+                      rituals: [],
+                      advantagesAndFlaws: [],
+                      form: 'Hominídeo',
+                      background: '',
+                      notes: '',
+                    },
+                  };
+                  const docRef = resultado.docs[0].ref;
+                  await updateDoc(docRef, {
+                    players: arrayUnion({ ...sheet, date: Date.now() })
+                  });
+                }
+              } 
+            } catch(error) {
+              window.alert("Não foi possível acessar a Sessão " + sessionName);
+              router.push('/sessions');
+            }
+          } else router.push('/user/login');
+        }
+    }
+    registerUserInTheSession();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -272,6 +276,6 @@ export default function Chat({ params } : { params: { session: String } }) {
             <span className="loader z-50" />
           </div>
       }
-      </div>
+    </div>
   );
 }

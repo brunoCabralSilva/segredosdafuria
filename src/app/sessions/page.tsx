@@ -29,6 +29,7 @@ export default function Session() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [showData, setShowData] = useState(true);
+  const [sessionSelected, setSessionSelected] = useState('');
 
   useEffect(() => {
     setShowData(false);
@@ -89,7 +90,10 @@ export default function Session() {
                   <button
                     type="button"
                     onClick={
-                      () => dispatch(actionSessionAuth({ show: true, name: session.name }))
+                      () => {
+                        dispatch(actionSessionAuth({ show: true, name: session.name }))
+                        setSessionSelected(session.name);
+                      }
                     }
                     key={ index }
                     className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
@@ -100,7 +104,7 @@ export default function Session() {
               }
             </div>
           </section>
-          { slice.sessionAuth.show ? <SessionAuth /> : '' }
+          { slice.sessionAuth.show ? <SessionAuth session={ sessionSelected } /> : '' }
           </div>
         : <div className="bg-black/80 text-white h-screen flex items-center justify-center flex-col">
             <span className="loader z-50" />

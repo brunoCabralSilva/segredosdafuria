@@ -140,7 +140,10 @@ export default function MenuDm(props: { session: string }) {
 					</div>
 				))
 			}
-			<button className="p-4 bg-black border-2 border-white w-full text-white font-bold" onClick={returnValue}>Atualizar</button>
+			<button className="text-white bg-black border-2 border-white hover:border-red-800 transition-colorscursor-pointer w-full p-2 my-3 font-bold" onClick={returnValue}>Atualizar</button>
 		</div>
   )
 }
+
+"titularidade da Sala"
+"Criar Ficha por e-mail de usuário"
