@@ -63,16 +63,7 @@ export default function Session() {
         ? <div className="bg-black/80 h-full">
           <Simplify />
           <Nav />
-          <section className="relative px-2">
-            <div className="h-40vh relative flex bg-white items-end text-black">
-              <Image
-                src={ "/images/84.png" }
-                alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-                className="absolute w-full h-40vh object-contain object-top"
-                width={ 1200 }
-                height={ 800 }
-              />
-            </div>
+          <section className="relative px-2 h-screen overflow-y-auto">
             <div className="py-6 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
               <h1 className="text-4xl relative">Sessões</h1>
               <hr className="w-10/12 mt-6" />

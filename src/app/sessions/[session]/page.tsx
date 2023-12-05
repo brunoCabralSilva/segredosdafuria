@@ -16,7 +16,6 @@ import { generateDataRoll } from './functions';
 import Dice from './dice';
 import SessionBar from './sessionBar';
 import { useRouter } from 'next/navigation';
-import POpUpDicesDm from '@/components/manualRoll';
 import MenuDm from '@/components/MenuDm';
 import { testToken } from '@/firebase/token';
 
@@ -262,7 +261,7 @@ export default function Chat({ params } : { params: { session: String } }) {
             { 
               slice.showMenuSession === 'dices' &&
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
-                { dm ? <POpUpDicesDm session={ sessionName } /> : <PopUpDices session={ sessionName } /> }
+                <PopUpDices session={ sessionName } />
               </div>
             }
             {

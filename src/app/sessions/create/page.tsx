@@ -16,7 +16,6 @@ export default function Create() {
   const [description, setDescription] = useState<string>('');
   const [errDescription, setErrDescription] = useState<string>('');
   const [errExists, setErrExists] = useState<string>('');
-  const [errPalavraPasse, setErrPalavraPasse] = useState<string>('');
   const [palavraPasse, setPalavraPasse] = useState<string>('');
   const [showData, setShowData] = useState(false);
 
@@ -25,7 +24,7 @@ export default function Create() {
     window.scrollTo(0, 0);
     const verification = testToken();
     if (!verification) router.push('/user/login');
-    setShowData(true);
+    else setShowData(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -42,10 +41,6 @@ export default function Create() {
       setErrDescription('Necessário preencher uma descrição com pelo menos 10 caracteres');
     } else setErrDescription('');
 
-    if (palavraPasse.length < 8) {
-      setErrPalavraPasse('Necessário preencher uma Palavra-passe com pelo menos 8 caracteres (Sugestão: Insira Números e caracteres especiais');
-    } else setErrPalavraPasse('');
-
     try {
       const db = getFirestore(firestoreConfig);
       const sessionsCollection = collection(db, 'sessions');
@@ -57,7 +52,7 @@ export default function Create() {
         setErrExists('Já existe uma Sala criada com esse nome');
       } else setErrExists('');
     
-      if (nameSession.length > 3 && nameSession.length < 20 && description.length > 10 && palavraPasse.length >= 8 && !sessionList) {
+      if (nameSession.length > 3 && nameSession.length < 20 && description.length > 10 && !sessionList) {
         const token = localStorage.getItem('Segredos Da Fúria');
         if (token) {
           const data: { email: string } = jwtDecode(JSON.parse(token));
@@ -69,7 +64,7 @@ export default function Create() {
             anotations: '',
             chat: [],
             players: [],
-            palavraPasse,
+            notifications: [],
           });
           router.push(`/sessions/${nameSession}`);
         } else {
@@ -82,10 +77,9 @@ export default function Create() {
     }
   };
   
-  {
-    showData
-    ? <div className="bg-ritual bg-cover bg-top min-h-screen">
-      <div className="flex flex-col w-full overflow-y-auto justify-center items-center bg-black/90">
+  return (
+    <div className="bg-ritual bg-cover bg-top min-h-screen">
+      <div className="flex flex-col w-full overflow-y-auto justify-center items-center bg-black/90 h-screen">
         <Nav />
         <div
           className="px-2 py-2 mb-1 cursor-pointer flex z-30 justify-start items-center w-full bg-black"
@@ -132,25 +126,6 @@ export default function Create() {
           {
             errDescription !== '' && <div className="text-white pb-3 text-center">{ errDescription }</div>
           }
-          <label htmlFor="nameSession" className={`${errPalavraPasse !== '' ? 'mb-2' : 'mb-4'} flex flex-col items-center w-full`}>
-            <p className="text-white w-full pb-3">Palavra-passe</p>
-            <input
-              type="text"
-              id="nameSession"
-              value={ palavraPasse }
-              className="bg-white w-full p-3 cursor-pointer text-black text-center"
-              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-                const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-                setPalavraPasse(sanitizedValue);
-              }}
-            />
-          {
-            errPalavraPasse !== '' && <div className="text-white pb-3 text-center">{ errPalavraPasse }</div>
-          }
-          </label>
-          {
-            errExists !== '' && <div className="text-white pb-3 text-center">{ errExists }</div>
-          }
           <button
             className={`text-white bg-black hover:border-red-800 transition-colors cursor-pointer' } border-2 border-white w-full p-2 mt-6 font-bold`}
             onClick={ registerSession }
@@ -161,6 +136,5 @@ export default function Create() {
       </div>
       <Footer />
     </div>
-    : <div className="bg-ritual bg-cover bg-top h-screen w-full" />
-  }
+  );
 }
