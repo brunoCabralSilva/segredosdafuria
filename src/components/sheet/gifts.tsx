@@ -37,7 +37,6 @@ export default function GiftsSheet(props: { session: string }) {
         setTrybe(player.data.trybe);
         setAuspice(player.data.auspice);
         setGiftsAdded((player.data.gifts))
-        console.log(player.data.gifts);
       } catch (error) {
         window.alert('Erro ao obter valores do dom: ' + error);
       }

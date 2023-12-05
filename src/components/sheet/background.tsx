@@ -33,7 +33,6 @@ export default function Background(props: { session: string, type: string }) {
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
-        console.log(type);
         setText(player.data[type]);
       } catch (error) {
         window.alert('Erro ao obter valor da Anotação: ' + error);
