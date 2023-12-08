@@ -1,26 +1,22 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../firebase/connection';
 import { jwtDecode } from "jwt-decode";
 
-export default function SessionAuth(props: { session : string }) {
-  const { session } = props;
+export default function SessionAuth(props: { sessionId : string }) {
+  const { sessionId } = props;
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [popup, setPopup] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(() => {
-    const endpointSpace = slice.sessionAuth.name.trim();
-    const endpoint = endpointSpace
-      .replace(/-/g, '_')
-      .replace(/\s+/g, '-')
-      .toLowerCase();
     const requestSession = async () => {
       try {
         const token = localStorage.getItem('Segredos Da Fúria');
@@ -29,36 +25,39 @@ export default function SessionAuth(props: { session : string }) {
           const decode: { email: string } = jwtDecode(token);
           const { email } = decode;
           const sessionsCollectionRef = collection(db, 'sessions');
-          const sessionsQuerySnapshot = await getDocs(query(sessionsCollectionRef, where('name', '==', session)));
-          const dm = sessionsQuerySnapshot.docs[0].data().dm;
-          if (email === dm) {
-            router.push(`/sessions/${endpoint}`);
-            dispatch(actionSessionAuth({ show: false, name: slice.sessionAuth.name }))
-            dispatch(actionLoginInTheSession({ name: session, logged: true }));
-          } else {
-            const notifications = sessionsQuerySnapshot.docs[0].data().notifications;
-            let authNotification = false;
-            notifications.forEach((notification: { email: string, type: string }) => {
-              if (notification.email === email && notification.type === 'approval') authNotification = true;
-            });
-            if (authNotification) {
-              setPopup('waiting');
+          const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+          const sessionDocSnapshot = await getDoc(sessionDocRef);
+          if (sessionDocSnapshot.exists()) {
+            const dm = sessionDocSnapshot.data().dm;
+            setName(sessionDocSnapshot.data().name);
+            if (email === dm) {
+              router.push(`/sessions/${sessionId}`);
+              dispatch(actionLoginInTheSession({ id: sessionId, logged: true }));
             } else {
-              const sessionNew = sessionsQuerySnapshot.docs[0].data();
-              let auth = false;
-              sessionNew.players.forEach((player: { email: string }) => {
-                if (player.email === email) auth = true;
+              const notifications = sessionDocSnapshot.data().notifications;
+              let authNotification = false;
+              notifications.forEach((notification: { email: string, type: string }) => {
+                if (notification.email === email && notification.type === 'approval') authNotification = true;
               });
-              if (auth) {
-                router.push(`/sessions/${endpoint}`);
-                dispatch(actionSessionAuth({ show: false, name: slice.sessionAuth.name }))
-                dispatch(actionLoginInTheSession({ name: session, logged: true }));
-              } else setPopup('authorization');
+              if (authNotification) {
+                setPopup('waiting');
+              } else {
+                const sessionNew = sessionDocSnapshot.data();
+                let auth = false;
+                sessionNew.players.forEach((player: { email: string }) => {
+                  if (player.email === email) auth = true;
+                });
+                if (auth) {
+                  router.push(`/sessions/${sessionId}`);
+                  dispatch(actionSessionAuth({ show: false, id: sessionId }))
+                  dispatch(actionLoginInTheSession({ id: sessionId, logged: true }));
+                } else setPopup('authorization');
+              }
             }
           }
         } else router.push('/login');
       } catch(error) {
-        window.alert("Ocorreu um erro: " + error);
+        window.alert("Ocorreu um erro ao Inicializar a: " + error);
       }
     }
     requestSession();
@@ -77,12 +76,12 @@ export default function SessionAuth(props: { session : string }) {
         const decode: { email: string, firstName: string, lastName: string } = jwtDecode(token);
         const { email, firstName, lastName } = decode;
         const sessionsCollectionRef = collection(db, 'sessions');
-        const sessionsQuerySnapshot = await getDocs(query(sessionsCollectionRef, where('name', '==', session)));
-        if (!sessionsQuerySnapshot.empty) {
-          const sessionDoc = sessionsQuerySnapshot.docs[0];
-          const sessionData = sessionDoc.data();
+        const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+        const sessionDocSnapshot = await getDoc(sessionDocRef);
+        if (sessionDocSnapshot.exists()) {
+          const sessionDoc = sessionDocSnapshot.data();
           const updatedNotifications = [
-            ...sessionData.notifications,
+            ...sessionDoc.notifications,
             {
               message: `O Usuário ${capitalize(firstName)} ${capitalize(lastName)} de email "${email}" solicitou acesso à sua Sessão.`,
               email: email,
@@ -91,7 +90,7 @@ export default function SessionAuth(props: { session : string }) {
               lastName,
             }
           ];
-          await updateDoc(sessionDoc.ref, { notifications: updatedNotifications });
+          await updateDoc(sessionDocSnapshot.ref, { notifications: updatedNotifications });
         } else {
           window.alert("Ocorreu um erro. Por favor, tente novamente solicitar o acesso.");
         }
@@ -113,13 +112,13 @@ export default function SessionAuth(props: { session : string }) {
               Notamos que você é novo nesta Sessão.
             </p>
             <p className="text-white w-full text-center pb-3">
-              Como é a sua primeira vez por aqui, podemos encaminhar uma notificação para que o Narrador de {session} possa autorizar seu acesso, que tal?
+              Como é a sua primeira vez por aqui, podemos encaminhar uma notificação para que o Narrador da Sessão possa autorizar seu acesso, que tal?
             </p>
           </label>
           <div className="flex w-full gap-2">
             <button
               type="button"
-              onClick={ () => dispatch(actionSessionAuth({ show: false, name: '' })) }
+              onClick={ () => dispatch(actionSessionAuth({ show: false, id: '' })) }
               className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
 
             >
@@ -142,8 +141,9 @@ export default function SessionAuth(props: { session : string }) {
       case 'send':
         return (<div className="text-white text-center">Tudo pronto! Enviamos uma solicitação ao Narrador e logo mais ele responderá! Por favor, aguarde até a resposta dele.</div>);
       default:
-        return null;
-
+        return (<div className="bg-black/80 text-white flex items-center justify-center flex-col">
+          <span className="loader z-50" />
+        </div>);
     }
   };
 
@@ -153,11 +153,11 @@ export default function SessionAuth(props: { session : string }) {
         <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer"
-            onClick={() => dispatch(actionSessionAuth({ show: false, name: '' }))}
+            onClick={() => dispatch(actionSessionAuth({ show: false, id: '' }))}
           />
         </div>
         <div className="pb-5 px-5 w-full">
-          <h1 className="text-white text-2xl w-full text-center pb-10">{ slice.sessionAuth.name }</h1>
+          <h1 className="text-white text-2xl w-full text-center pb-10">{ name }</h1>
           { returnNotification() }
         </div>
       </div>

@@ -56,7 +56,7 @@ export default function PopUpSheet(props: { session: string }) {
         return <Skills session={session} />;
       case ('gifts-rituals'):
         return (
-          <div className="w-full overflow-y-auto flex flex-col items-center">
+          <div className="w-full overflow-y-auto flex flex-col items-center justify-start">
             <GiftsSheet session={session} />
             <hr className="mt-5 mb-8 w-11/12" />
             <RitualSheet session={session} />
@@ -76,7 +76,7 @@ export default function PopUpSheet(props: { session: string }) {
   };
 
   return(
-      <div className="flex flex-col items-center justify-center h-screen z-50 top-0 right-0 pl-3 pr-2 pt-12 bg-gray-whats-dark">
+      <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 pl-3 pr-2 pt-12 bg-gray-whats-dark">
         <IoIosCloseCircleOutline
           className="fixed top-0 right-1 text-4xl text-white ml-2 mt-2 cursor-pointer z-50"
           onClick={() => dispatch(actionShowMenuSession(''))}

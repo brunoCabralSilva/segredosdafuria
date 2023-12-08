@@ -1,5 +1,5 @@
 'use client'
-import { addDoc, collection, getDocs, getFirestore, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, getDocs, getFirestore, query, serverTimestamp, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,8 +16,8 @@ export default function Create() {
   const [description, setDescription] = useState<string>('');
   const [errDescription, setErrDescription] = useState<string>('');
   const [errExists, setErrExists] = useState<string>('');
-  const [palavraPasse, setPalavraPasse] = useState<string>('');
   const [showData, setShowData] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setShowData(false);
@@ -29,35 +29,36 @@ export default function Create() {
   }, []);
 
   const registerSession = async () => {
+    setLoading(true);
+    setErrExists('');
     if (nameSession.length < 3) {
       setErrNameSession('Necessário preencher um nome com pelo menos 3 caracteres');
-    } else setErrNameSession('');
-
-    if (nameSession.length > 40) {
+      setLoading(false);
+    } else if (nameSession.length > 40) {
       setErrNameSession('Necessário preencher um nome com menos  de 40 caracteres');
+      setLoading(false);
     } else setErrNameSession('');
   
     if (description.length < 10) {
       setErrDescription('Necessário preencher uma descrição com pelo menos 10 caracteres');
+      setLoading(false);
     } else setErrDescription('');
 
     try {
       const db = getFirestore(firestoreConfig);
       const sessionsCollection = collection(db, 'sessions');
       const querySnapshot = await getDocs(sessionsCollection);
-      const sessionList = querySnapshot.docs.find((doc) => doc.data().name === nameSession
-      );
-
+      const sessionList = querySnapshot.docs.find((doc) => doc.data().name === nameSession);
       if (sessionList) {
         setErrExists('Já existe uma Sala criada com esse nome');
+        setLoading(false);
       } else setErrExists('');
-    
-      if (nameSession.length > 3 && nameSession.length < 20 && description.length > 10 && !sessionList) {
+      if (nameSession.length > 3 && nameSession.length < 40 && description.length > 10 && !sessionList) {
         const token = localStorage.getItem('Segredos Da Fúria');
         if (token) {
           const data: { email: string } = jwtDecode(JSON.parse(token));
-          await addDoc(sessionsCollection, {
-            name: nameSession.replace(/_/g, '-').toLowerCase(),
+          const docRef: any = await addDoc(sessionsCollection, {
+            name: nameSession.toLowerCase(),
             description,
             dm: data.email,
             creationDate: Date.now(),
@@ -66,7 +67,11 @@ export default function Create() {
             players: [],
             notifications: [],
           });
-          router.push(`/sessions/${nameSession}`);
+          if (docRef.id) {
+            router.push(`/sessions/${docRef.id}`);
+          } else {
+            window.alert('Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.');
+          }
         } else {
           router.push('/user/login');
           window.alert('Não foi possível validar seu Token. Por favor, faça login novamente');
@@ -130,9 +135,17 @@ export default function Create() {
             className={`text-white bg-black hover:border-red-800 transition-colors cursor-pointer' } border-2 border-white w-full p-2 mt-6 font-bold`}
             onClick={ registerSession }
           >
-            Criar
+            { loading ? 'Criando...' : 'Criar'}
           </button>
+          {
+            errExists !== '' && <div className="text-white pt-4 pb-3 text-center">{ errExists }</div>
+          }
         </div>
+        {
+          loading && <div className="bg-black/80 text-white flex items-center justify-center flex-col">
+            <span className="loader z-50" />
+          </div>
+        }
       </div>
       <Footer />
     </div>

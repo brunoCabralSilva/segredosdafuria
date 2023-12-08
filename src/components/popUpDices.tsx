@@ -11,7 +11,7 @@ import { jwtDecode } from "jwt-decode";
 
 export default function PopUpDices(props: { session: string }) {
   const { session } = props;
-  const [optionRadio, setOptionRadio] = useState<string>('automated');
+  const [optionRadio, setOptionRadio] = useState<string>('manual');
   const [dm, setDm] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -29,7 +29,7 @@ export default function PopUpDices(props: { session: string }) {
           setOptionRadio('manual');
           setDm(decode.email === sessionData.dm);
         } else {
-
+          setOptionRadio('automated');
         }
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
@@ -45,15 +45,14 @@ export default function PopUpDices(props: { session: string }) {
   }, []);
 
   return(
-      <div className="w-8/10 px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-        <div className="w-full h-20 mb-3 flex justify-end">
+      <div className="w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+        <div className="w-full mb-3 flex justify-end">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer"
             onClick={() => dispatch(actionShowMenuSession(''))}
           />
         </div>
-        {
-          !dm && <div className="pb-8 grid grid-cols-2 w-full">
+        <div className="pb-8 grid grid-cols-2 w-full">
           <button
               type="button"
               onClick={() => setOptionRadio('automated')}
@@ -67,7 +66,6 @@ export default function PopUpDices(props: { session: string }) {
               Teste Manual
             </button>
           </div>
-        }
         {
           optionRadio === 'automated'
           ? <AutomatedRoll session={ session } />

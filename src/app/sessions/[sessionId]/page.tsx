@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionShowMenuSession, useSlice } from '@/redux/slice';
+import { actionSessionAuth, actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { arrayUnion, collection, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
+import { collection, documentId, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import firestoreConfig from '../../../firebase/connection';
 import { jwtDecode } from 'jwt-decode';
 import { IGenerateDataRolls, IMsn } from '@/interface';
@@ -17,128 +17,62 @@ import Dice from './dice';
 import SessionBar from './sessionBar';
 import { useRouter } from 'next/navigation';
 import MenuDm from '@/components/MenuDm';
-import { testToken } from '@/firebase/token';
+import firebaseConfig from '../../../firebase/connection';
+import AutomatedRoll from '@/components/sheet/automatedRoll';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
+import ManualRoll from '@/components/manualRoll';
 
-export default function Chat({ params } : { params: { session: String } }) {
-  const [sessionName, setSessionName] = useState('');
-  const nameSession = decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-'));
+export default function Chat({ params } : { params: { sessionId: string } }) {
+  const [dataSession, setDataSession] = useState<any>({ name: '' });
   const slice = useAppSelector(useSlice);
-  const dispatch = useAppDispatch();
   const db = getFirestore(firestoreConfig);
   const sessionRef = collection(db, "sessions");
-  const querySession = query(sessionRef, where("name", "==", nameSession));
+  const querySession = query(sessionRef, where(documentId(), "==", params.sessionId));
   const [session] = useCollectionData(querySession, { idField: "id" } as any);
   const [showData, setShowData] = useState(true);
   const [showOptions, setShowOptions] = useState(false);
-  const [dm, setDm] = useState(false);
+  const [dm, setDm] = useState('');
   const router = useRouter();
+  const dispatch = useAppDispatch();
   
   useEffect(() => {
+    dispatch(actionSessionAuth({ show: false, id: ''}));
     setShowData(false);
-    if (slice.loginInTheSession.name !== decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-'))) {
-      router.push('/sessions');
-    }
-    const registerUserInTheSession = async () => {
-      window.scrollTo(0, 0);
-      const verification = testToken();
-      if (!verification) router.push('/user/login');
+    const db = getFirestore(firebaseConfig);
+    const verifyUser = async () => {
+      const sessionDocSnapshot = await getDocs(querySession);
+      if (sessionDocSnapshot.empty) {
+        router.push('/sessions');
+        window.alert('A Sessão não foi encontrada');
+      }
       else {
-        setDm(false);
-        setSessionName(decodeURIComponent(params.session.replace(/-/g, ' ').replace(/_/g, '-')));
-        dispatch(actionShowMenuSession(''));
-          const token = localStorage.getItem('Segredos Da Fúria');
-          if (token) {
-            try {
-              setShowData(true);
-              const decodification: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-              const { email, firstName, lastName } = decodification;
-              if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
-              const resultado: any = await getDocs(querySession);
-              const players: any = [];
-              resultado.forEach((doc: any) => players.push(...doc.data().players));
-              let dmEmail: string = '';
-              resultado.forEach((doc: any) => dmEmail = doc.data().dm);
-              if (dmEmail === email) setDm(true);
-              else {
-                const findByEmail = players.find((user: any) => user.email === email);
-                if(!findByEmail) {
-                  const sheet = {
-                    session: sessionName,
-                    email: email,
-                    user: `${firstName} ${lastName}`,
-                    creationData: Date.now(),
-                    data: {
-                      trybe: '',
-                      auspice: '',
-                      name: '',
-                      glory: 0,
-                      honor: 0,
-                      wisdom: 0,
-                      health: [],
-                      rage: 0,
-                      willpower: [],
-                      attributes: {
-                        strength: 1,
-                        dexterity: 1,
-                        stamina: 1,
-                        charisma: 1,
-                        manipulation: 1,
-                        composure: 1,
-                        intelligence: 1,
-                        wits: 1,
-                        resolve: 1,
-                      },
-                      skills: {
-                        athletics: { value: 0, specialty: '' },
-                        animalKen: { value: 0, specialty: '' },
-                        academics: { value: 0, specialty: '' },
-                        brawl: { value: 0, specialty: '' },
-                        etiquette: { value: 0, specialty: '' },
-                        awareness: { value: 0, specialty: '' },
-                        craft: { value: 0, specialty: '' },
-                        insight: { value: 0, specialty: '' },
-                        finance: { value: 0, specialty: '' },
-                        driving: { value: 0, specialty: '' },
-                        intimidation: { value: 0, specialty: '' },
-                        investigation: { value: 0, specialty: '' },
-                        firearms: { value: 0, specialty: '' },
-                        leadership: { value: 0, specialty: '' },
-                        medicine: { value: 0, specialty: '' },
-                        larceny: { value: 0, specialty: '' },
-                        performance: { value: 0, specialty: '' },
-                        occult: { value: 0, specialty: '' },
-                        melee: { value: 0, specialty: '' },
-                        persuasion: { value: 0, specialty: '' },
-                        politics: { value: 0, specialty: '' },
-                        stealth: { value: 0, specialty: '' },
-                        streetwise: { value: 0, specialty: '' },
-                        science: { value: 0, specialty: '' },
-                        survival: { value: 0, specialty: '' },
-                        subterfuge: { value: 0, specialty: '' },
-                        technology: { value: 0, specialty: '' },
-                      },
-                      gifts: [],
-                      rituals: [],
-                      advantagesAndFlaws: [],
-                      form: 'Hominídeo',
-                      background: '',
-                      notes: '',
-                    },
-                  };
-                  const docRef = resultado.docs[0].ref;
-                  await updateDoc(docRef, {
-                    players: arrayUnion({ ...sheet, date: Date.now() })
-                  });
-                }
-              } 
-            } catch(error) {
-              window.alert("Não foi possível acessar a Sessão " + sessionName);
+        const token = localStorage.getItem('Segredos Da Fúria');
+        const sessionData = sessionDocSnapshot.docs[0].data();
+        if (token) {
+          const decode: { email: string } = jwtDecode(token);
+          const { email } = decode;
+          if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
+          if (sessionData.name) {
+            setShowData(true);
+            setDataSession(sessionData);
+            if(sessionData.dm === email || sessionData.players.find((player: any) => player.email === email)) {
+              if(sessionData.dm === email) setDm('master');
+              else setDm('player');
+            } else {
+              window.alert('você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.');
               router.push('/sessions');
             }
-          } else router.push('/user/login');
+          } else {
+            window.alert('Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente');
+            router.push('/sessions');
+          }
+        } else {
+          window.alert('É necessário efetuar o Login novamente');
+          router.push('/user/login');
         }
+      }
     }
-    registerUserInTheSession();
+    verifyUser();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -196,10 +130,11 @@ export default function Chat({ params } : { params: { session: String } }) {
 
   const returnDate = (msg: any) => {
     const data = new Date(msg.date);
-    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${data.getMonth() + 1}/${data.getFullYear()}`;
-    const formatoHora = `${data.getHours()}:${data.getMinutes()}:${data.getSeconds()}`;
+    console.log(data.getDate() < 10);
+    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getDate() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
+    const formatoHora = `${data.getHours() === 0 ? 0 : ''}${data.getHours()}:${data.getMinutes() < 10 ? 0: ''}${data.getMinutes()}:${data.getSeconds() < 10 ? 0 : ''}${data.getSeconds()}`;
     return `${formatoHora}, ${formatoData}`;
-  }
+  };
 
   const messageForm = (index: number, msg: any, color: string, justify: string) => {
     return(
@@ -255,19 +190,34 @@ export default function Chat({ params } : { params: { session: String } }) {
                 showOptions={showOptions}
                 setShowOptions={setShowOptions}
                 scrollToBottom={scrollToBottom}
-                sessionName={sessionName}
+                sessionName={dataSession.name}
               />
             </div>
             { 
               slice.showMenuSession === 'dices' &&
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
-                <PopUpDices session={ sessionName } />
+                {
+                  dm === 'master' &&
+                    <div className="w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+                    <div className="w-full mb-3 flex justify-end">
+                      <IoIosCloseCircleOutline
+                        className="text-4xl text-white cursor-pointer"
+                        onClick={() => dispatch(actionShowMenuSession(''))}
+                      />
+                    </div>
+                    <ManualRoll session={ dataSession.name } />
+                  </div>
+                }
+                {
+                  dm === 'player' && <PopUpDices session={ dataSession.name } />
+                }
               </div>
             }
             {
               slice.showMenuSession === 'sheet' && 
                 <div className="w-full md:w-3/5 absolute sm:relative z-50">
-                { dm ? <MenuDm session={ sessionName } /> : <PopUpSheet session={ sessionName }  /> }
+                { dm === 'master' && <MenuDm sessionId={ params.sessionId } /> }
+                { dm === 'player' && <PopUpSheet session={ dataSession.name }  /> }
                 </div>
             }
           </div>

@@ -12,9 +12,10 @@ const INITIAL_STATE = {
   feedback: { show: false, title: '' },
   message: { type: '', show: false, text: '' },
   showMenuSession: '',
-  sessionAuth: { show: false, name: '' },
+  sessionAuth: { show: false, id: '' },
   loginInTheSession: { name: '', logged: false },
   form: '',
+  popupDeleteSession: false,
 };
 
 const slice: Slice = createSlice({
@@ -107,12 +108,16 @@ const slice: Slice = createSlice({
     actionLoginInTheSession(state, { payload }: PayloadAction<IList>) {
       return { ...state, loginInTheSession: payload };
     },
+    actionDeleteSession(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupDeleteSession: payload };
+    },
   },
 });
 
 export default slice.reducer;
 
 export const {
+  actionDeleteSession,
   actionFeedback,
   actionFilterGift,
   actionTotalRenown,

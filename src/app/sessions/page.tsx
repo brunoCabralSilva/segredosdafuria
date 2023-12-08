@@ -5,15 +5,16 @@ import Simplify from "@/components/simplify";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionSessionAuth, useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import firestoreConfig from '../../firebase/connection';
 import { IoMdAdd } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import SessionAuth from "./sessionAuth";
 import { testToken } from "@/firebase/token";
+import { jwtDecode } from "jwt-decode";
 
 interface ISessions {
+  id: string;
   name: string;
   description: string;
   dm: string;
@@ -32,6 +33,12 @@ export default function Session() {
   const [sessionSelected, setSessionSelected] = useState('');
 
   useEffect(() => {
+    const token = localStorage.getItem('Segredos Da Fúria');
+      if (token) {
+        const decode: { email: string, firstName: string, lastName: string } = jwtDecode(token);
+        const { email, firstName, lastName } = decode;
+        console.log(decode);
+      }
     setShowData(false);
     const verification = testToken();
     if (!verification) router.push('/user/login');
@@ -78,14 +85,13 @@ export default function Session() {
               </button>
               {
                 sessions.map((session: ISessions, index: number) =>
-                  <button
-                    type="button"
-                    onClick={
-                      () => {
-                        dispatch(actionSessionAuth({ show: true, name: session.name }))
-                        setSessionSelected(session.name);
-                      }
-                    }
+                <button
+                  type="button"
+                  onClick={
+                    () => {
+                      dispatch(actionSessionAuth({ show: true, id: session.id }))
+                      setSessionSelected(session.id);
+                    }}
                     key={ index }
                     className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
                   >
@@ -95,7 +101,7 @@ export default function Session() {
               }
             </div>
           </section>
-          { slice.sessionAuth.show ? <SessionAuth session={ sessionSelected } /> : '' }
+          { slice.sessionAuth.show ? <SessionAuth sessionId={ sessionSelected } /> : '' }
           </div>
         : <div className="bg-black/80 text-white h-screen flex items-center justify-center flex-col">
             <span className="loader z-50" />

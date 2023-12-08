@@ -50,16 +50,20 @@ export default function GiftsSheet(props: { session: string }) {
       return null;
     });
 
-    if (listGifts.length === 0) window.alert('É necessário investir pelo menos um ponto em algum Renome para que sejam sugeridos dons.')
-
-    return (listGifts.map((dataGift, index) => (
-      <ItemGift
-        session={ session }
-        key={ index }
-        index={ index }
-        dataGift={ dataGift }
-      />
-    )));
+    if (listGifts.length === 0) {
+      window.alert('É necessário investir pelo menos um ponto em algum Renome para que sejam sugeridos dons.')
+      setShowAllGifts(false);
+    }
+    else {
+      return (listGifts.map((dataGift, index) => (
+        <ItemGift
+          session={ session }
+          key={ index }
+          index={ index }
+          dataGift={ dataGift }
+        />
+      )));
+    }
   };
 
   return(
