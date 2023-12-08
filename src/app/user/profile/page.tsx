@@ -182,10 +182,10 @@ export default function Profile() {
                         ? <input
                             type="text"
                             value={ newFirstName }
-                            className="text-black p-3 h-full bg-white w-full"
+                            className="text-sm sm:text-base break-all text-black p-3 h-full bg-white w-full"
                             onChange={ (e: any) => setNewFirstName(e.target.value) }
                           />
-                        : <span className="capitalize">{ newFirstName }</span>
+                        : <span className="capitalize text-sm sm:text-base break-all">{ newFirstName }</span>
                     }
                     { 
                       editFirstName
@@ -216,10 +216,10 @@ export default function Profile() {
                         ? <input
                             type="text"
                             value={ newLastName }
-                            className="text-black p-3 h-full bg-white w-full"
+                            className="text-black p-3 h-full bg-white w-full text-sm sm:text-base break-all"
                             onChange={ (e: any) => setNewLastName(e.target.value) }
                           />
-                        : <span className="capitalize">{ newLastName }</span>
+                        : <span className="capitalize text-sm sm:text-base break-all">{ newLastName }</span>
                     }
                     { 
                       editLastName
@@ -250,10 +250,10 @@ export default function Profile() {
                       ? <input
                           type="email"
                           value={ newEmail }
-                          className="text-black p-3 h-full bg-white w-full"
+                          className="text-sm sm:text-base break-all text-black p-3 h-full bg-white w-full"
                           onChange={ (e: any) => setNewEmail(e.target.value) }
                         />
-                      : <span>{ newEmail }</span>
+                      : <span className="text-sm sm:text-base break-all">{ newEmail }</span>
                     }
                     { 
                       editEmail

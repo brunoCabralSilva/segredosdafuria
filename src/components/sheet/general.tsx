@@ -8,9 +8,12 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import dataTrybes from '../../data/trybes.json';
 import ItemAgravated from "./itemAgravated";
+import { actionResetSheet } from "@/redux/slice";
+import { useAppDispatch } from "@/redux/hooks";
 
 export default function General(props: { session: string }) {
   const { session } = props;
+  const dispatch = useAppDispatch();
   const [input, setInput ] = useState('');
   const [nameCharacter, setNameCharacter] = useState<string>('');
   const [auspice, setAuspice] = useState<string>('');
@@ -168,6 +171,13 @@ export default function General(props: { session: string }) {
         <Item name="honor" namePtBr="Honra" quant={5} session={session} />
         <Item name="glory" namePtBr="Glória" quant={5} session={session} />
         <Item name="wisdom" namePtBr="Sabedoria" quant={5} session={session} />
+        <button
+            type="button"
+            className="mt-8 mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+            onClick={() => dispatch(actionResetSheet(true))}
+          >
+            Resetar Ficha
+          </button>
       </div>
     </div>
   );

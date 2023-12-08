@@ -1,7 +1,7 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDeleteSession, actionLoginInTheSession, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { actionDeletePlayer, actionDeleteSession, actionLoginInTheSession, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { arrayUnion, collection, doc, documentId, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import firestoreConfig from '../firebase/connection';
@@ -11,6 +11,8 @@ import { jwtDecode } from "jwt-decode";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import PopupDeleteSession from "./popupDeleteSession";
+import { MdDelete } from "react-icons/md";
+import PopupDeletePlayer from "./popupDeletePlayer";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -22,8 +24,10 @@ export default function MenuDm(props: { sessionId: string }) {
   const [nameSession, setNameSession] = useState('');
   const [creationDate, setCreationDate] = useState('');
   const [description, setDescription] = useState('');
+  const [anotation, setAnotation] = useState('');
   const [textArea, setTextArea] = useState(false);
   const [dm, setDm] = useState('');
+  const [textAnotation, setTextAnotation] = useState(false);
   const [input, setInput] = useState('');
   const router = useRouter();
   
@@ -35,6 +39,23 @@ export default function MenuDm(props: { sessionId: string }) {
   const typeName = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
     setNameSession(sanitizedValue);
+  };
+
+  const updateAnotations = async () => {
+    try {
+      const db = getFirestore(firestoreConfig);
+      const sessionsCollectionRef = collection(db, 'sessions');
+      const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+      const sessionDocSnapshot = await getDoc(sessionDocRef);
+      if (sessionDocSnapshot.exists()) {
+        await updateDoc(sessionDocRef, { anotations: anotation });
+        window.alert('Anotação da sessão feita com sucesso!');
+      } else {
+        window.alert('Não foi possível encontrar a sessão especificada.');
+      }
+    } catch (error) {
+      window.alert('Ocorreu um erro ao atualizar a Anotação da sessão: ' + error);
+    }
   };
 
   const updateNameSession = async () => {
@@ -205,6 +226,7 @@ export default function MenuDm(props: { sessionId: string }) {
             setDescription(sessionData.description);
             setDm(sessionData.dm);
             setPlayers(sessionData.players);
+            setAnotation(sessionData.anotations);
             dispatch(actionLoginInTheSession({ id: sessionId, logged: true }))
           } else router.push('/sessions');
         } else router.push('/sessions');
@@ -241,7 +263,7 @@ export default function MenuDm(props: { sessionId: string }) {
 
 	const returnDate = (msg: any) => {
     const data = new Date(msg.date);
-    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getDate() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
+    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getMonth() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
     const formatoHora = `${data.getHours() === 0 ? 0 : ''}${data.getHours()}:${data.getMinutes() < 10 ? 0: ''}${data.getMinutes()}:${data.getSeconds() < 10 ? 0 : ''}${data.getSeconds()}`;
     return `${formatoHora}, ${formatoData}`;
   }
@@ -352,6 +374,57 @@ export default function MenuDm(props: { sessionId: string }) {
 			}
 	};
 
+  const returnHealth = (player: any, index: number) => {
+    let hp = 0;
+    if (player.data.form === 'Crinos') {
+      hp = player.data.attributes.stamina + 7
+    } else hp = player.data.attributes.stamina + 3;
+    const rest = Array(hp - player.data.health.length).fill('');
+
+    return (
+      <div className="mt-3">
+        <div className="w-full flex justify-center">
+          <span className="font-bold pr-1 text-center w-full pb-2 pt-2">Vitalidade Total: { player.data.form === 'Crinos' ? player.data.attributes.stamina + 7 : player.data.attributes.stamina + 3}</span>
+        </div>
+        <div className="flex w-full flex-wrap gap-1 justify-center" key={index}>
+          { 
+            player.data.health.map((heal: any, index: number) => (
+              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 cursor-pointer ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
+            ))
+          }
+          { 
+            rest.map((heal: any, index: number) => (
+              <span key={index} className="h-6 w-6 rounded-full border-white border-2 cursor-pointer bg-white" />
+            ))
+          }
+        </div>
+      </div>
+    );
+  };
+
+  const returnWillpower = (player: any, index: number) => {
+    const hp = player.data.attributes.composure + player.data.attributes.resolve;
+    const rest = Array(hp - player.data.willpower.length).fill('');
+    return (
+      <div className="mt-3">
+        <div className="w-full flex justify-center">
+          <span className="font-bold pr-1 text-center w-full pb-2 pt-2">Força de Vontade Total: { player.data.attributes.composure + player.data.attributes.resolve }</span>
+        </div>
+        <div className="flex flex-wrap w-full gap-1 justify-center" key={index}>
+          { 
+            player.data.willpower.map((heal: any, index: number) => (
+              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 cursor-pointer ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
+            ))
+          }
+          { 
+            rest.map((heal: any, index: number) => (
+              <span key={index} className="h-6 w-6 rounded-full border-white border-2 cursor-pointer bg-white" />
+            ))
+          }
+        </div>
+      </div>
+    );
+  };
   return(
 		<div className="bg-gray-whats-dark overflow-y-auto flex flex-col items-center justify-start h-screen px-4">
       <div className="w-full flex justify-end my-3">
@@ -368,18 +441,19 @@ export default function MenuDm(props: { sessionId: string }) {
       >
         <option value={'general'}>Geral</option>
         <option value={'notifications'}>Notificações</option>
-        <option value={'personagens'}>Personagens</option>
+        <option value={'players'}>Personagens</option>
+        <option value={'anotations'}>Anotações</option>
       </select>
       { optionSelect === 'general' &&
       <div className="h-full w-full">
         <div className="flex flex-col items-center justify-start w-full">
           <div
-            className="w-full mt-2 capitalize flex justify-between items-center cursor-pointer pr-2"
+            className="w-full mt-2 capitalize flex justify-between items-center cursor-pointer pr-2 border-2 border-white mb-2"
             onClick={() => setInput('nameSession')}
           >
             { 
               input !== 'nameSession' &&
-              <span className="text-white font-bold text-2xl my-5 capitalize break-words w-full p-2">
+              <span className="text-white font-bold text-2xl my-3 capitalize break-words w-full px-4">
                 { nameSession }
               </span>
             }
@@ -387,7 +461,7 @@ export default function MenuDm(props: { sessionId: string }) {
               input === 'nameSession' &&
               <input
                 type="text"
-                className="border-2 border-white text-white text-left w-full mr-1 bg-black p-2 text-2xl my-5 break-words"
+                className="border-2 border-white text-white text-left w-full mr-1 bg-black p-2 text-2xl break-words"
                 placeholder="Nome"
                 value={ nameSession }
                 onChange={(e) => typeName(e)}
@@ -413,8 +487,8 @@ export default function MenuDm(props: { sessionId: string }) {
                   />
             }
           </div>
-          <div className="w-full mb-2 flex-col font-bold">
-            <div className="p-2 flex justify-between items-center w-full">
+          <div className="w-full mb-2 flex-col font-bold border-2 border-white">
+            <div className="px-4 pt-2 flex justify-between items-center w-full">
               <div
                 className="text-white w-full cursor-pointer flex-col items-center justify-center"
                 onClick={
@@ -434,7 +508,7 @@ export default function MenuDm(props: { sessionId: string }) {
                         setTextArea(false);
                         e.stopPropagation();
                       }}
-                      className="text-3xl text-white cursor-pointer"
+                      className="text-3xl text-white cursor-pointer mb-1"
                     />
                   : <FaRegEdit
                       onClick={(e: any) => {
@@ -444,23 +518,23 @@ export default function MenuDm(props: { sessionId: string }) {
                       className="text-3xl text-white cursor-pointer" />
               }
               </div>
-              </div>
-              <div className="w-full h-full">
-                { 
-                  textArea ?
-                  <textarea
-                    className="text-white bg-black font-normal p-5 border-2 border-white w-full mr-1 h-72 cursor-pointer break-words text-justify"
-                    value={ description }
-                    onChange={(e) => typeText(e)}
-                  />
-                  : <div
-                      className="text-white font-normal p-5 text-justify border-2 border-white w-full mr-1 h-full cursor-pointer break-words"
-                      onClick={() => setTextArea(true)} 
-                    >
-                    { description }
-                  </div>
-                }
-              </div>
+            </div>
+            <div className="w-full h-full">
+              { 
+                textArea ?
+                <textarea
+                  className="text-white bg-black font-normal p-4 w-full h-72 cursor-pointer break-words text-justify border-t-white border"
+                  value={ description }
+                  onChange={(e) => typeText(e)}
+                />
+                : <div
+                    className="text-white font-normal p-4 text-justify w-full h-full cursor-pointer break-words"
+                    onClick={() => setTextArea(true)} 
+                  >
+                  { description }
+                </div>
+              }
+            </div>
           </div>
           <div
             className={`w-full mb-2 mt-1 flex flex-col justify-between items-center cursor-pointer p-2 border-2 border-white`}
@@ -586,12 +660,18 @@ export default function MenuDm(props: { sessionId: string }) {
         </div>
       }
       {
-        optionSelect === 'personagens' && <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
+        optionSelect === 'players' && <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
           <button className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold" onClick={returnValue}>Atualizar</button>
           {
             players.length > 0 && players.filter((player: any) => player.email !== dm).map((player: any, index) => (
               <div className="text-white w-full border-2 border-white flex flex-col items-center justify-center p-3 mb-4" key={index}>
-                <h1 className="capitalize text-xl pt-5 text-center">{`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}</h1>
+                <div className="w-full flex justify-end pb-3">
+                  <MdDelete
+                    className="text-3xl text-white cursor-pointer"
+                    onClick={() => dispatch(actionDeletePlayer({show: true, player: player}))}
+                  />
+                </div>
+                <h1 className="capitalize text-xl text-center">{`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}</h1>
                 <hr className="w-full my-3" />
                 <div>
                   <span className="font-bold pr-1">Tribo:</span>
@@ -605,14 +685,8 @@ export default function MenuDm(props: { sessionId: string }) {
                   <span className="font-bold pr-1">Fúria:</span>
                   <span>{ player.data.rage }</span>
                 </div>
-                <div>
-                  <span className="font-bold pr-1">Força de Vontade Total:</span>
-                  <span className="capitalize">{ player.data.attributes.composure + player.data.attributes.resolve }</span>
-                </div>
-                <div className="">
-                  <span className="font-bold pr-1">Vitalidade:</span>
-                  <span className="capitalize">{ player.data.form === 'Crinos' ? player.data.attributes.stamina + 7 : player.data.attributes.stamina + 3}</span>
-                </div>
+                { returnWillpower(player, index) }
+                { returnHealth(player, index) }
                 <div className="mt-3">
                   <span className="font-bold pr-1">Forma Atual:</span>
                   <span className="capitalize">{ player.data.form }</span>
@@ -659,7 +733,13 @@ export default function MenuDm(props: { sessionId: string }) {
                     player.data.gifts.length === 0
                       ? <p className="text-center">Nenhum</p>
                       : player.data.gifts.map((gift: any, index: number) => (
-                          <p className="text-center" key={index}>{ gift.giftPtBr }</p>
+                          <button
+                            type="button"
+                            className="text-center"
+                            key={index}
+                          >
+                            { gift.giftPtBr }
+                          </button>
                         ))
                   }
                 </div>
@@ -676,11 +756,61 @@ export default function MenuDm(props: { sessionId: string }) {
                 <p className="font-bold pr-1 w-full text-center mt-3">Background</p>
                 <p className="w-full text-center">{ player.data.background }</p>
                 <p className="font-bold pr-1 w-full text-center mt-3">Ficha criada em:</p>
-                <p>{ returnDate(player) }</p>
+                <p>{ returnDate({ date: player.creationDate } ) }</p>
               </div>
             ))
           }
+          { slice.popupDeletePlayer.show && <PopupDeletePlayer sessionId={ sessionId } /> }
         </div>
+      }
+      {
+        optionSelect === 'anotations' && <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
+        <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
+          <div className="mt-1 p-2 flex justify-between items-center">
+            <div
+              className="text-white mt-2 pb-2 w-full cursor-pointer flex-col items-center justify-center"
+              onClick={
+                () => {
+                  setTextArea(true);
+                }
+              }
+            >
+              Anotações do Narrador
+            </div>
+              { 
+                textArea
+                  ? <BsCheckSquare
+                      onClick={(e: any) => {
+                        updateAnotations();
+                        setTextArea(false);
+                        e.stopPropagation();
+                      }}
+                      className="text-3xl text-white cursor-pointer"
+                    />
+                  : <FaRegEdit
+                      onClick={(e: any) => {
+                        setTextArea(true);
+                        e.stopPropagation();
+                      }}
+                      className="text-3xl text-white cursor-pointer" />
+              }
+          </div>
+          { 
+            textArea ?
+            <textarea
+              className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full"
+              value={ anotation }
+              onChange={(e) => setAnotation(e.target.value)}
+            />
+            : <div
+                className="text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full cursor-pointer"
+                onClick={() => setTextAnotation(true)} 
+              >
+              { anotation }
+            </div>
+          }
+        </div>
+      </div>
       }
 
 		</div>

@@ -21,6 +21,7 @@ import firebaseConfig from '../../../firebase/connection';
 import AutomatedRoll from '@/components/sheet/automatedRoll';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import ManualRoll from '@/components/manualRoll';
+import PopupResetSheet from '@/components/popupResetSheet';
 
 export default function Chat({ params } : { params: { sessionId: string } }) {
   const [dataSession, setDataSession] = useState<any>({ name: '' });
@@ -130,11 +131,10 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
 
   const returnDate = (msg: any) => {
     const data = new Date(msg.date);
-    console.log(data.getDate() < 10);
-    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getDate() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
+    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getMonth() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
     const formatoHora = `${data.getHours() === 0 ? 0 : ''}${data.getHours()}:${data.getMinutes() < 10 ? 0: ''}${data.getMinutes()}:${data.getSeconds() < 10 ? 0 : ''}${data.getSeconds()}`;
     return `${formatoHora}, ${formatoData}`;
-  };
+  }
 
   const messageForm = (index: number, msg: any, color: string, justify: string) => {
     return(
@@ -217,7 +217,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
               slice.showMenuSession === 'sheet' && 
                 <div className="w-full md:w-3/5 absolute sm:relative z-50">
                 { dm === 'master' && <MenuDm sessionId={ params.sessionId } /> }
-                { dm === 'player' && <PopUpSheet session={ dataSession.name }  /> }
+                { dm === 'player' && <PopUpSheet session={ dataSession.name } /> }
                 </div>
             }
           </div>
@@ -225,6 +225,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
             <span className="loader z-50" />
           </div>
       }
+    { slice.popupResetSheet && <PopupResetSheet sessionId={ params.sessionId } /> }
     </div>
   );
 }

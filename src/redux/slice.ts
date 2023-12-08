@@ -16,6 +16,8 @@ const INITIAL_STATE = {
   loginInTheSession: { name: '', logged: false },
   form: '',
   popupDeleteSession: false,
+  popupDeletePlayer: { show: false, player: {} },
+  popupResetSheet: false,
 };
 
 const slice: Slice = createSlice({
@@ -111,6 +113,12 @@ const slice: Slice = createSlice({
     actionDeleteSession(state, { payload }: PayloadAction<IList>) {
       return { ...state, popupDeleteSession: payload };
     },
+    actionDeletePlayer(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupDeletePlayer: payload };
+    },
+    actionResetSheet(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupResetSheet: payload };
+    },
   },
 });
 
@@ -118,6 +126,8 @@ export default slice.reducer;
 
 export const {
   actionDeleteSession,
+  actionDeletePlayer,
+  actionResetSheet,
   actionFeedback,
   actionFilterGift,
   actionTotalRenown,

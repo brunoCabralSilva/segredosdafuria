@@ -1,6 +1,6 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionForm, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { actionForm, actionResetSheet, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import General from "./sheet/general";
@@ -15,6 +15,7 @@ import GiftsSheet from "./sheet/gifts";
 import AdvantagesAnsFlaws from "./sheet/advantagesAndFlaws";
 import RitualSheet from "./sheet/rituals";
 import Background from "./sheet/background";
+import PopupResetSheet from "./popupResetSheet";
 
 export default function PopUpSheet(props: { session: string }) {
   const { session } = props;
