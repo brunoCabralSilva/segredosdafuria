@@ -21,6 +21,21 @@ const INITIAL_STATE = {
   popupGift: { show: false, gift: {} },
   popupRitual: { show: false, ritual: {} },
   deleteHistoric: false,
+  advantagesAndFlaws: [
+    { name: "Caern", advantages: [], flaws: [] },
+    { name: "Trabalho Diário", advantages: [], flaws: [] },
+    { name: "Linguística", advantages: [], flaws: [] },
+    { name: "Aparência", advantages: [], flaws: [] },
+    { name: "Refúgio Seguro", advantages: [], flaws: [] },
+    { name: "Situações Sobrenaturais", advantages: [], flaws: [] },
+    { name: "Aliado", advantages: [], flaws: [] },
+    { name: "Contatos", advantages: [], flaws: [] },
+    { name: "Fama", advantages: [], flaws: [] },
+    { name: "Máscara", advantages: [], flaws: [] },
+    { name: "Mentor", advantages: [], flaws: [] },
+    { name: "Recursos", advantages: [], flaws: [] },
+    { name: "Pacto Espiritual", advantages: [], flaws: [] },
+  ],
 };
 
 const slice: Slice = createSlice({
@@ -131,12 +146,16 @@ const slice: Slice = createSlice({
     actionDelHistoric(state, { payload }: PayloadAction<IList>) {
       return { ...state, deleteHistoric: payload };
     },
+    actionUpdateAdvantage(state, { payload }: PayloadAction<IList>) {
+      return { ...state, advantagesAndFlaws: payload };
+    },
   },
 });
 
 export default slice.reducer;
 
 export const {
+  actionUpdateAdvantage,
   actionDeleteSession,
   actionDelHistoric,
   actionPopupGift,
