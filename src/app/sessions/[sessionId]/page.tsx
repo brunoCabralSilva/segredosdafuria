@@ -22,6 +22,7 @@ import AutomatedRoll from '@/components/sheet/automatedRoll';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import ManualRoll from '@/components/manualRoll';
 import PopupResetSheet from '@/components/popupResetSheet';
+import PopupDelHistoric from '@/components/popupDelHistoric';
 
 export default function Chat({ params } : { params: { sessionId: string } }) {
   const [dataSession, setDataSession] = useState<any>({ name: '' });
@@ -226,6 +227,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
           </div>
       }
     { slice.popupResetSheet && <PopupResetSheet sessionId={ params.sessionId } /> }
+    { slice.deleteHistoric && <PopupDelHistoric sessionId={ params.sessionId } /> }
     </div>
   );
 }

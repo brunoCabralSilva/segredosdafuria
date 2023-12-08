@@ -2,21 +2,6 @@ import { arrayUnion, collection, getDocs, getFirestore, query, updateDoc, where 
 import firebaseConfig from "./connection";
 import { jwtDecode } from "jwt-decode";
 
-export const clearMessages = async (sessionName: string) => {
-  const db = getFirestore(firebaseConfig);
-  const sessionsRef = collection(db, 'sessions');
-  try {
-    const querySnapshot = await getDocs(
-      query(sessionsRef, where('name', '==', sessionName))
-    )
-    querySnapshot.forEach(async (doc) => {
-      await updateDoc(doc.ref, { chat: [] });
-    });
-  } catch (error) {
-    window.alert('Erro ao limpar o campo chat: ' + error);
-  }
-};
-
 export const sendMessage = async (text: string, sessionName: string) => {
   const token = localStorage.getItem('Segredos Da Fúria');
   if (token) {

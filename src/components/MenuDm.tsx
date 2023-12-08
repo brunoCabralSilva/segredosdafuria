@@ -1,7 +1,7 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDeletePlayer, actionDeleteSession, actionLoginInTheSession, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { actionDeletePlayer, actionDeleteSession, actionLoginInTheSession, actionPopupGift, actionPopupRitual, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { arrayUnion, collection, doc, documentId, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import firestoreConfig from '../firebase/connection';
@@ -13,6 +13,8 @@ import { FaRegEdit } from "react-icons/fa";
 import PopupDeleteSession from "./popupDeleteSession";
 import { MdDelete } from "react-icons/md";
 import PopupDeletePlayer from "./popupDeletePlayer";
+import PopupGift from "./popupGift";
+import PopupRitual from "./popupRitual";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -389,12 +391,12 @@ export default function MenuDm(props: { sessionId: string }) {
         <div className="flex w-full flex-wrap gap-1 justify-center" key={index}>
           { 
             player.data.health.map((heal: any, index: number) => (
-              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 cursor-pointer ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
+              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
             ))
           }
           { 
             rest.map((heal: any, index: number) => (
-              <span key={index} className="h-6 w-6 rounded-full border-white border-2 cursor-pointer bg-white" />
+              <span key={index} className="h-6 w-6 rounded-full border-white border-2 bg-white" />
             ))
           }
         </div>
@@ -413,12 +415,12 @@ export default function MenuDm(props: { sessionId: string }) {
         <div className="flex flex-wrap w-full gap-1 justify-center" key={index}>
           { 
             player.data.willpower.map((heal: any, index: number) => (
-              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 cursor-pointer ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
+              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
             ))
           }
           { 
             rest.map((heal: any, index: number) => (
-              <span key={index} className="h-6 w-6 rounded-full border-white border-2 cursor-pointer bg-white" />
+              <span key={index} className="h-6 w-6 rounded-full border-white border-2 bg-white" />
             ))
           }
         </div>
@@ -728,15 +730,16 @@ export default function MenuDm(props: { sessionId: string }) {
                   }
                 </div>
                 <p className="font-bold pr-1 w-full text-center mt-3">Dons</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
+                <div className="flex items-center justify-center flex-wrap w-full gap-1">
                   { 
                     player.data.gifts.length === 0
                       ? <p className="text-center">Nenhum</p>
                       : player.data.gifts.map((gift: any, index: number) => (
                           <button
                             type="button"
-                            className="text-center"
+                            className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
                             key={index}
+                            onClick={ () => dispatch(actionPopupGift({ show: true, gift: gift })) }
                           >
                             { gift.giftPtBr }
                           </button>
@@ -744,12 +747,18 @@ export default function MenuDm(props: { sessionId: string }) {
                   }
                 </div>
                 <p className="font-bold pr-1 w-full text-center mt-3">Rituais</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
+                <div className="flex items-center justify-center flex-wrap w-full gap-1">
                   { 
                     player.data.rituals.length === 0
                       ? <p className="text-center">Nenhum</p>
                       : player.data.rituals.map((ritual: any, index: number) => (
-                          <p className="text-center" key={index}>{ ritual.titlePtBr }</p>
+                          <button
+                            className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
+                            key={index}
+                            onClick={ () => dispatch(actionPopupRitual({ show: true, ritual: ritual })) }
+                          >
+                            { ritual.titlePtBr }
+                          </button>
                         ))
                   }
                 </div>
@@ -812,7 +821,8 @@ export default function MenuDm(props: { sessionId: string }) {
         </div>
       </div>
       }
-
+      { slice.popupGift.show && <PopupGift item={ slice.popupGift.gift } /> }
+      { slice.popupRitual.show && <PopupRitual item={ slice.popupRitual.ritual } /> }
 		</div>
   )
 }

@@ -18,6 +18,9 @@ const INITIAL_STATE = {
   popupDeleteSession: false,
   popupDeletePlayer: { show: false, player: {} },
   popupResetSheet: false,
+  popupGift: { show: false, gift: {} },
+  popupRitual: { show: false, ritual: {} },
+  deleteHistoric: false,
 };
 
 const slice: Slice = createSlice({
@@ -119,6 +122,15 @@ const slice: Slice = createSlice({
     actionResetSheet(state, { payload }: PayloadAction<IList>) {
       return { ...state, popupResetSheet: payload };
     },
+    actionPopupGift(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupGift: payload };
+    },
+    actionPopupRitual(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupRitual: payload };
+    },
+    actionDelHistoric(state, { payload }: PayloadAction<IList>) {
+      return { ...state, deleteHistoric: payload };
+    },
   },
 });
 
@@ -126,6 +138,9 @@ export default slice.reducer;
 
 export const {
   actionDeleteSession,
+  actionDelHistoric,
+  actionPopupGift,
+  actionPopupRitual,
   actionDeletePlayer,
   actionResetSheet,
   actionFeedback,

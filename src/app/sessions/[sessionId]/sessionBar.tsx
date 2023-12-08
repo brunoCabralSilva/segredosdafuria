@@ -1,5 +1,5 @@
 'use client'
-import { clearMessages, sendMessage } from '@/firebase/chatbot';
+import { sendMessage } from '@/firebase/chatbot';
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { GiD10 } from "react-icons/gi";
 import { IoIosSend } from "react-icons/io";
@@ -8,7 +8,7 @@ import { FaEraser } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { FaAngleDown } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionShowMenuSession, useSlice } from '@/redux/slice';
+import { actionDelHistoric, actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import firestoreConfig from '../../../firebase/connection';
@@ -80,7 +80,7 @@ export default function SessionBar(props: any) {
                   className="p-2"
                   title="Apagar o histórico de conversas"
                   onClick={() => {
-                    clearMessages(sessionName);
+                    dispatch(actionDelHistoric(true))
                     setShowOptions(false);
                   }}
                 >
