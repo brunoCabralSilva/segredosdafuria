@@ -1,4 +1,6 @@
 'use client'
+import data from '../../data/advantagesAndFlaws.json';
+import Advantage from './itemAdvangate';
 export default function AdvantagesAnsFlaws() {
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
@@ -10,8 +12,12 @@ export default function AdvantagesAnsFlaws() {
             Vantagens e Defeitos
           </div>
         </div>
-        <div className="h-full">
-
+        <div className="h-full text-white ">
+          {
+            data.map((item: any, index: number) => (
+              <Advantage key={index} item={item} />
+            ))
+          }
         </div>
       </div>
     </div>

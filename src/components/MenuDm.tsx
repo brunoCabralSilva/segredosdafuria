@@ -31,6 +31,7 @@ export default function MenuDm(props: { sessionId: string }) {
   const [dm, setDm] = useState('');
   const [textAnotation, setTextAnotation] = useState(false);
   const [input, setInput] = useState('');
+  const [optionPlayer, setOptionPlayer] = useState<any>({});
   const router = useRouter();
   
   const typeText = (e: any) => {
@@ -42,6 +43,11 @@ export default function MenuDm(props: { sessionId: string }) {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
     setNameSession(sanitizedValue);
   };
+
+  const choosePlayer = (email: string) => {
+    const findPLayer = players.find((player: any) => player.email === email);
+    setOptionPlayer(findPLayer);
+  }
 
   const updateAnotations = async () => {
     try {
@@ -376,7 +382,7 @@ export default function MenuDm(props: { sessionId: string }) {
 			}
 	};
 
-  const returnHealth = (player: any, index: number) => {
+  const returnHealth = (player: any) => {
     let hp = 0;
     if (player.data.form === 'Crinos') {
       hp = player.data.attributes.stamina + 7
@@ -388,7 +394,7 @@ export default function MenuDm(props: { sessionId: string }) {
         <div className="w-full flex justify-center">
           <span className="font-bold pr-1 text-center w-full pb-2 pt-2">Vitalidade Total: { player.data.form === 'Crinos' ? player.data.attributes.stamina + 7 : player.data.attributes.stamina + 3}</span>
         </div>
-        <div className="flex w-full flex-wrap gap-1 justify-center" key={index}>
+        <div className="flex w-full flex-wrap gap-1 justify-center">
           { 
             player.data.health.map((heal: any, index: number) => (
               <span key={index} className={`h-6 w-6 rounded-full border-white border-2 ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
@@ -404,7 +410,7 @@ export default function MenuDm(props: { sessionId: string }) {
     );
   };
 
-  const returnWillpower = (player: any, index: number) => {
+  const returnWillpower = (player: any) => {
     const hp = player.data.attributes.composure + player.data.attributes.resolve;
     const rest = Array(hp - player.data.willpower.length).fill('');
     return (
@@ -412,7 +418,7 @@ export default function MenuDm(props: { sessionId: string }) {
         <div className="w-full flex justify-center">
           <span className="font-bold pr-1 text-center w-full pb-2 pt-2">Força de Vontade Total: { player.data.attributes.composure + player.data.attributes.resolve }</span>
         </div>
-        <div className="flex flex-wrap w-full gap-1 justify-center" key={index}>
+        <div className="flex flex-wrap w-full gap-1 justify-center">
           { 
             player.data.willpower.map((heal: any, index: number) => (
               <span key={index} className={`h-6 w-6 rounded-full border-white border-2 ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
@@ -657,6 +663,12 @@ export default function MenuDm(props: { sessionId: string }) {
                     </div>
                 ))
               }
+              {
+                listNotifications.length === 0 &&
+                <div className="w-full text-white text-lg text-center mt-4">
+                  Você não possui notificações.
+                </div>
+              }
             </div>
           }
         </div>
@@ -664,110 +676,131 @@ export default function MenuDm(props: { sessionId: string }) {
       {
         optionSelect === 'players' && <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
           <button className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold" onClick={returnValue}>Atualizar</button>
+          <select
+            className="w-full mb-3 border border-white p-3 cursor-pointer bg-black capitalize text-white flex items-center justify-center font-bold text-center"
+            onChange={ (e) => choosePlayer(e.target.value) }
+          >
+            <option
+              disabled selected
+              value={''}
+              >
+                Selecione um Jogador
+            </option>
           {
             players.length > 0 && players.filter((player: any) => player.email !== dm).map((player: any, index) => (
-              <div className="text-white w-full border-2 border-white flex flex-col items-center justify-center p-3 mb-4" key={index}>
-                <div className="w-full flex justify-end pb-3">
-                  <MdDelete
-                    className="text-3xl text-white cursor-pointer"
-                    onClick={() => dispatch(actionDeletePlayer({show: true, player: player}))}
-                  />
-                </div>
-                <h1 className="capitalize text-xl text-center">{`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}</h1>
-                <hr className="w-full my-3" />
-                <div>
-                  <span className="font-bold pr-1">Tribo:</span>
-                  <span className="capitalize">{ player.data.trybe === '' ? 'Indefinida' : player.data.trybe }</span>
-                </div>
-                <div>
-                <span className="font-bold pr-1">Augúrio:</span>
-                <span className="capitalize">{ player.data.auspice === '' ? 'Indefinido' : player.data.auspice }</span>
-                </div>
-                <div className="mt-3">
-                  <span className="font-bold pr-1">Fúria:</span>
-                  <span>{ player.data.rage }</span>
-                </div>
-                { returnWillpower(player, index) }
-                { returnHealth(player, index) }
-                <div className="mt-3">
-                  <span className="font-bold pr-1">Forma Atual:</span>
-                  <span className="capitalize">{ player.data.form }</span>
-                </div>
-                <p className="font-bold pr-1 mt-3">Renome</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
-                  <p className="text-center">
-                    Honra: { player.data.honor }
-                  </p>
-                  <p className="text-center">
-                    Glória: { player.data.glory }
-                  </p>
-                  <p className="text-center">
-                    Sabedoria: { player.data.wisdom }
-                  </p>
-                </div>
-                <p className="font-bold pr-1 mt-3">Atributos</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
-                  {
-                    Object.entries(player.data.attributes).map(([chave, valor]: any, index) => (
-                      <div className="capitalize text-center" key={index}>
-                        {chave}: {valor}
-                      </div>
-                    ))
-                  }
-                </div>
-                <p className="font-bold pr-1 mt-3">Habilidades</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
-                  {
-                    Object.entries(player.data.skills).map(([chave, valor]: any, index) => {
-                      if (valor.value !== 0)
-                      return (
-                        <div className="capitalize text-center w-full flex justify-center" key={index}>
-                            {chave}: { valor.value }
-                           {valor.specialty === '' ? '' : ` (${valor.specialty} ${valor.value + 1})`}
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-                <p className="font-bold pr-1 w-full text-center mt-3">Dons</p>
-                <div className="flex items-center justify-center flex-wrap w-full gap-1">
-                  { 
-                    player.data.gifts.length === 0
-                      ? <p className="text-center">Nenhum</p>
-                      : player.data.gifts.map((gift: any, index: number) => (
-                          <button
-                            type="button"
-                            className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
-                            key={index}
-                            onClick={ () => dispatch(actionPopupGift({ show: true, gift: gift })) }
-                          >
-                            { gift.giftPtBr }
-                          </button>
-                        ))
-                  }
-                </div>
-                <p className="font-bold pr-1 w-full text-center mt-3">Rituais</p>
-                <div className="flex items-center justify-center flex-wrap w-full gap-1">
-                  { 
-                    player.data.rituals.length === 0
-                      ? <p className="text-center">Nenhum</p>
-                      : player.data.rituals.map((ritual: any, index: number) => (
-                          <button
-                            className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
-                            key={index}
-                            onClick={ () => dispatch(actionPopupRitual({ show: true, ritual: ritual })) }
-                          >
-                            { ritual.titlePtBr }
-                          </button>
-                        ))
-                  }
-                </div>
-                <p className="font-bold pr-1 w-full text-center mt-3">Background</p>
-                <p className="w-full text-center">{ player.data.background }</p>
-                <p className="font-bold pr-1 w-full text-center mt-3">Ficha criada em:</p>
-                <p>{ returnDate({ date: player.creationDate } ) }</p>
-              </div>
+              <option
+                className="capitalize"
+                key={index}
+                value={player.email}
+              >
+                {`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}
+              </option>
             ))
+          }
+          </select>
+          { console.log(optionPlayer) }
+          {
+            Object.keys(optionPlayer).length > 0 && <div className="text-white w-full border-2 border-white flex flex-col items-center justify-center p-3 mb-4">
+            <div className="w-full flex justify-end pb-3">
+              <MdDelete
+                className="text-3xl text-white cursor-pointer"
+                onClick={() => dispatch(actionDeletePlayer({show: true, player: optionPlayer}))}
+              />
+            </div>
+            <h1 className="capitalize text-xl text-center">{`${optionPlayer.user} (${optionPlayer.data.name === '' ? 'Sem nome': optionPlayer.data.name})`}</h1>
+            <hr className="w-full my-3" />
+            <div>
+              <span className="font-bold pr-1">Tribo:</span>
+              <span className="capitalize">{ optionPlayer.data.trybe === '' ? 'Indefinida' : optionPlayer.data.trybe }</span>
+            </div>
+            <div>
+            <span className="font-bold pr-1">Augúrio:</span>
+            <span className="capitalize">{ optionPlayer.data.auspice === '' ? 'Indefinido' : optionPlayer.data.auspice }</span>
+            </div>
+            <div className="mt-3">
+              <span className="font-bold pr-1">Fúria:</span>
+              <span>{ optionPlayer.data.rage }</span>
+            </div>
+            { returnWillpower(optionPlayer) }
+            { returnHealth(optionPlayer) }
+            <div className="mt-3">
+              <span className="font-bold pr-1">Forma Atual:</span>
+              <span className="capitalize">{ optionPlayer.data.form }</span>
+            </div>
+            <p className="font-bold pr-1 mt-3">Renome</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
+              <p className="text-center">
+                Honra: { optionPlayer.data.honor }
+              </p>
+              <p className="text-center">
+                Glória: { optionPlayer.data.glory }
+              </p>
+              <p className="text-center">
+                Sabedoria: { optionPlayer.data.wisdom }
+              </p>
+            </div>
+            <p className="font-bold pr-1 mt-3">Atributos</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
+              {
+                Object.entries(optionPlayer.data.attributes).map(([chave, valor]: any, index) => (
+                  <div className="capitalize text-center" key={index}>
+                    {chave}: {valor}
+                  </div>
+                ))
+              }
+            </div>
+            <p className="font-bold pr-1 mt-3">Habilidades</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
+              {
+                Object.entries(optionPlayer.data.skills).map(([chave, valor]: any, index) => {
+                  if (valor.value !== 0)
+                  return (
+                    <div className="capitalize text-center w-full flex justify-center" key={index}>
+                        {chave}: { valor.value }
+                       {valor.specialty === '' ? '' : ` (${valor.specialty} ${valor.value + 1})`}
+                    </div>
+                  )
+                })
+              }
+            </div>
+            <p className="font-bold pr-1 w-full text-center mt-3">Dons</p>
+            <div className="flex items-center justify-center flex-wrap w-full gap-1">
+              { 
+                optionPlayer.data.gifts.length === 0
+                  ? <p className="text-center">Nenhum</p>
+                  : optionPlayer.data.gifts.map((gift: any, index: number) => (
+                      <button
+                        type="button"
+                        className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
+                        key={index}
+                        onClick={ () => dispatch(actionPopupGift({ show: true, gift: gift })) }
+                      >
+                        { gift.giftPtBr }
+                      </button>
+                    ))
+              }
+            </div>
+            <p className="font-bold pr-1 w-full text-center mt-3">Rituais</p>
+            <div className="flex items-center justify-center flex-wrap w-full gap-1">
+              { 
+                optionPlayer.data.rituals.length === 0
+                  ? <p className="text-center">Nenhum</p>
+                  : optionPlayer.data.rituals.map((ritual: any, index: number) => (
+                      <button
+                        className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
+                        key={index}
+                        onClick={ () => dispatch(actionPopupRitual({ show: true, ritual: ritual })) }
+                      >
+                        { ritual.titlePtBr }
+                      </button>
+                    ))
+              }
+            </div>
+            <p className="font-bold pr-1 w-full text-center mt-3">Background</p>
+            <p className="w-full text-center">{ optionPlayer.data.background }</p>
+            <p className="font-bold pr-1 w-full text-center mt-3">Ficha criada em:</p>
+            <p>{ returnDate({ date: optionPlayer.creationDate } ) }</p>
+          </div>
           }
           { slice.popupDeletePlayer.show && <PopupDeletePlayer sessionId={ sessionId } /> }
         </div>

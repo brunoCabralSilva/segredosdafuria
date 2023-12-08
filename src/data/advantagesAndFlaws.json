@@ -1,0 +1,590 @@
+[
+  {
+    "name": "caern",
+    "type": "méritos",
+    "description": "Central para a sociedade e práticas dos Garou, os Caerns são pontos de energia espiritual, e muito esforço é dedicado a encontrar, manter e defender esses lugares. As matilhas frequentemente fazem parte de um septo de um caern ou são dedicadas a encontrar um novo para chamar de seu. Enquanto o despertar e nutrir um caern geralmente estão no domínio da história, esta Vantagem permite que um personagem tenha uma vantagem inicial (ou desvantagem) nessas buscas. Veja Acessos a Caerns na página 190–195 para mais informações.",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "Acesso a Caern",
+        "type": "radio",
+        "description": "Você tem permissão para fazer uso de um Caern específico pertencente a outro septo, contanto que suas ações não interfiram em suas atividades ou coloquem em risco a segurança do caern. Você deve concordar com a natureza do caern e o septo de proteção com o Narrador."
+      },
+      {
+        "cost": 5,
+        "title": "Caern Desperto",
+        "type": "radio",
+        "description": "Você faz parte de um septo que guarda um caern que já foi despertado em algum grau, ou está prestes a descobrir um caern de significância, já parcialmente despertado. Adicione um ao valor do caern do primeiro caern que você se juntar ou descobrir. Essa Vantagem não acumula, mas vários membros podem 'contribuir' para acumular os cinco pontos, a critério do Narrador."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Pária do Caern",
+        "description": "Você se tornou indesejado em todos os caerns em seu território (cidade natal ou outra área central à crônica). Você precisa pagar caro pelo privilégio de acesso, geralmente realizando serviços perigosos, ou recorrer à furtividade. Se pego, as coisas provavelmente escalarão para a violência. Isso não se aplica a um caern cujo septo você pertence, embora possa fornecer uma desculpa caso alguém em seu septo queira que você vá embora."
+      }
+    ]
+  },
+  {
+    "name": "Trabalho Diário",
+    "type": "méritos",
+    "description": "Apesar de ser um maldito lobisomem, você de alguma forma consegue manter um emprego estável, ou pelo menos a aparência disso. Esse emprego pode fornecer desde um álibi para sua localização até a proteção do seu segredo peludo. Não necessariamente proporciona uma renda notável — para isso, existe Recursos, embora uma combinação de um Emprego Diurno e Recursos significativos possa resultar em um lobisomem curioso, de fato.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Emprego Diurno",
+        "description": "Esforços para obscurecer sua natureza de Garou ao usar o emprego ganham um bônus de um dado para piscinas relevantes, como Subterfúgio ('Não fui eu; eu estava no trabalho naquele dia') ou Persuasão ('Quantos lobisomens você acha que a empresa de TV a cabo emprega para fazer instalações?')."
+      },
+      {
+        "cost": 2,
+        "title": "Emprego Diurno Corroborado",
+        "type": "radio",
+        "description": "Assim como o Emprego Diurno, acima, mas pessoas com quem você trabalha (ou finge trabalhar) corroboram suas alegações de trabalho, fornecendo uma substanciação além dos documentos básicos de emprego. Adicione dois dados às piscinas semelhantes às acima."
+      }
+    ],
+    "flaws": []
+  },
+  {
+    "name": "Linguística",
+    "type": "méritos",
+    "description": "Todo personagem tem fluência em seu idioma de nascimento e (a menos que o jogador e o Narrador tenham uma razão para declarar o contrário) no idioma dominante do cenário da crônica. Por exemplo, um lobisomem mexicano em uma crônica ambientada nos Utah Badlands pode falar e ler espanhol e inglês. Narradores podem optar por permitir que Garou cuja língua nativa coincide com a do cenário escolham uma segunda língua de qualquer maneira. Cada ponto em Linguística permite que o personagem fale, escreva e leia fluentemente uma língua adicional, além dessas duas línguas padrão. Observe que a leitura de certos documentos antigos ou recitar em um dialeto estranho pode impor uma Dificuldade adicional aos testes de Acadêmicos ou Ocultismo.",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "1 Idioma adicional",
+        "type": "radio",
+        "description": "Permite que o personagem fale, escreva e leia fluentemente uma língua adicional, além de sua língua de nascimento e do idioma dominante do cenário."
+      },
+      {
+        "cost": 2,
+        "title": "2 Idiomas adicionais",
+        "type": "radio",
+        "description": "Permite que o personagem fale, escreva e leia fluentemente duas línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+      },
+      {
+        "cost": 3,
+        "title": "3 Idiomas adicionais",
+        "type": "radio",
+        "description": "Permite que o personagem fale, escreva e leia fluentemente três línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+      },
+      {
+        "cost":4,
+        "title": "4 Idiomas adicionais",
+        "type": "radio",
+        "description": "Permite que o personagem fale, escreva e leia fluentemente quatro línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+      },
+      {
+        "cost": 5,
+        "title": "5 Idiomas adicionais",
+        "type": "radio",
+        "description": "Permite que o personagem fale, escreva e leia fluentemente cinco línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+      },
+      {
+        "cost": 6,
+        "title": "6 Idiomas adicionais",
+        "type": "radio",
+        "description": "Permite que o personagem fale, escreva e leia fluentemente seis línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+      },
+      {
+        "cost": 7,
+        "title": "7 Idiomas adicionais",
+        "type": "radio",
+        "description": "Permite que o personagem fale, escreva e leia fluentemente sete línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Analfabetismo",
+        "description": "Você não pode ler nem escrever. Suas habilidades de Acadêmicos e Ciências são limitadas a 1, e você não pode ter uma Especialidade nelas que incorpore conhecimento moderno."
+      }
+    ]
+  },
+  {
+    "name": "Aparência",
+    "type": "méritos",
+    "description": "Não todos os lobisomens têm o glamour de um modelo de capa ou um ator icônico. Alguns deles parecem ainda melhores. E alguns, é claro, parecem muito piores. Modificadores de Aparência se aplicam apenas quando você pode ser visto. O Narrador decide se esses modificadores se aplicam durante conflitos Sociais caso a caso (ou até mesmo em cada pool).",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "Clement Lupus",
+        "type": "radio",
+        "description": "Sua forma lupina parece mais com um cachorro do que com um lobo, e a menos que tenham motivo para acreditar, nenhum observador humano que te veja na forma lupina pensa que você é um lobo."
+      },
+      {
+        "cost": 2,
+        "title": "Bonito(a)",
+        "type": "radio",
+        "description": "Você adiciona um dado extra a todos os pools de dados Sociais apropriados."
+      },
+      {
+        "cost": 4,
+        "title": "Deslumbrante",
+        "type": "radio",
+        "description": "Você adiciona dois dados extras a todos os pools de dados Sociais apropriados, como mencionado acima."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 2,
+        "title": "Repulsivo(a)",
+        "type": "radio",
+        "description": "Você perde dois dados de todos os pools de dados Sociais relevantes."
+      },
+      {
+        "cost": 1,
+        "title": "Feio(a)",
+        "type": "radio",
+        "description": "Você perde um dado de todos os pools de dados Sociais relevantes."
+      }
+    ]
+  },
+  {
+    "name": "Refúgio Seguro",
+    "type": "méritos",
+    "description": "Refúgio Seguro representa um grau de segurança ou distinção para o domicílio acima e além de um lugar para dormir e preparar refeições. Pode ser um apartamento, uma casa, um loft, cabana de madeira, caverna ou toca - seja o que for, desde que o Garou o considere seguro. Um personagem pode adquirir ambos os Méritos Refúgio Seguro, se desejar.",
+    "advantages": [
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Refúgio Seguro e Oculto",
+        "description": "Os esforços para encontrar o Garou e qualquer pessoa com eles enquanto estão na safe house sofrem uma penalidade de 2 dados."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Refúgio Seguro e Protegido",
+        "description": "Adicione 2 dados aos pools relevantes para descobrir ou resistir à entrada não autorizada em seu Refúgio Seguro."
+      }
+    ],
+    "flaws": []
+  },
+  {
+    "name": "Situações Sobrenaturais",
+    "type": "méritos",
+    "description": "Embora os Garou sejam eles mesmos sobrenaturais, às vezes mistérios maiores se abatem sobre os lobisomens para marcá-los de maneiras desconhecidas. Esses Méritos e Falhas não alteram a natureza de lobisomem do Garou, mas indicam circunstâncias em que as linhas de distinção entre lobisomens e outros elementos do mundo secreto não são tão absolutas.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Acelerado pela Lua",
+        "description": "A lua o inspira mais do que outros lobisomens. A primeira vez que você uiva para a lua em uma determinada noite, você pode restaurar um ponto de dano Superficial de Força de Vontade."
+      },
+      {
+        "cost": 3,
+        "type": "checkbox",
+        "title": "Afligido pela Lua",
+        "description": "A lua inflama sua Fúria em um grau ainda maior do que a maioria dos outros lobisomens. Você ganha um ponto adicional de Fúria quando uiva para a lua pela primeira vez a cada noite."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Maldição Folclórica",
+        "description": "Você sofre dano Agravado de uma proibição folclórica. Proibições folclóricas incluem: água benta (dano como fogo), uma arma empunhada por um crente devoto em sua própria fé, uma arma adornada com pedra-da lua (hecatolite), ou a própria pedra-da-lua (dano como dano de arma; simplesmente tocar uma pedra-da-lua ou uma joia de pedra-da-lua causa um ponto de dano Agravado), ou outra proibição acordada entre você e o Narrador.",
+        "sugestions": [
+          "Água benta (dano como fogo)",
+          "Uma arma empunhada por um crente devoto em sua própria fé",
+          "Uma arma adornada com pedra-da lua (hecatolita), ou a pedra-da lua em si (dano como dano de arma; simplesmente tocar em uma pedra-da lua ou em uma joia de pedra-da lua causa um ponto de dano Agravado)"
+        ]
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Bloqueio Folclórico",
+        "description": "Ao enfrentar um bloqueio folclórico, você deve se afastar ou gastar um ponto de Força de Vontade para ultrapassá-lo. Cada bloqueio folclórico que você aceita conta como uma Falha separada de um ponto. Blocos folclóricos incluem: aconitina ou outras ervas consideradas ter propriedades místicas, símbolos sagrados apresentados por qualquer crente, a presença de uma virgem maior de idade, símbolos religiosos, prata mostrada (além da aversão normal dos Garou à prata), ser abordado três vezes consecutivas pelo nome que você tinha antes de sua Primeira Mudança (mesmo que seja o mesmo que seu nome agora), ou outro bloqueio acordado entre você e o Narrador.",
+        "sugestions": [
+          "Aconitina ou outras ervas consideradas ter propriedades místicas",
+          "Símbolos sagrados apresentados por qualquer crente",
+          "A presença de uma virgem na maioridade ou mais velha",
+          "Ver prata empunhada (além da aversão normal dos Garou à prata - ver p. 134)",
+          "Ser chamado três vezes consecutivas pelo nome que você tinha antes da sua Primeira Mudança (mesmo que seja o mesmo que seu nome atual)",
+          "Algum outro obstáculo com o qual você e o Narrador concordem"
+        ]
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Conto Folclórico",
+        "description": "Você tem algum indicador que faz as pessoas pensarem que há algo perturbador sobre você, independentemente de associarem o indicador especificamente aos lobisomens. Aqueles que discernem seu indicador folclórico desconfiam de você, dando a você uma penalidade de -1 dado aos testes sociais, exceto aqueles baseados em Intimidação. Cada indicador folclórico que você aceita conta como uma Falha separada de um ponto. Indicadores folclóricos incluem: pessoas ouvem uivos em sua presença (mesmo que nada esteja uivando de fato), sua sombra é a de um lobo quando você está na forma humana e humana quando está na forma de lobo, leite estraga e plantas murcham em sua chegada, ou outro indicador acordado entre você e o Narrador.",
+        "sugestions:": [
+          "As pessoas ouvem uivos em sua presença (seja ou não algo realmente uivando)",
+          "Sua sombra é a de um lobo quando você está em forma humana e humana quando está em forma de lobo",
+          "O leite estraga e as plantas murcham com a sua chegada",
+          "Algo mais que você e o Narrador concordem"
+        ]
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Maldição da Anciã",
+        "description": "Alguma maldição espiritual o afetou e o envelheceu rapidamente, como o desfavor de um Bane ou alguma circunstância profética, ou você simplesmente experimentou a Primeira Mudança bem depois do seu auge. Sua saúde sofreu, e você tem uma caixa a menos em sua trilha de saúde do que teria."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Submisso à Lua",
+        "description": "A lua tem uma influência indevida sobre você. Sempre que você vê a lua pela primeira vez em uma determinada noite, você deve mudar para a forma glabro ou hispo (e fazer quaisquer verificações de Fúria concomitantes)."
+      }
+    ]
+  },
+  {
+    "name": "Aliados - Efetividade",
+    "type": "background",
+    "description": "Pessoas que oferecem apoio e ajuda, como família, amigos ou até mesmo uma organização que lhe é leal. Embora normalmente ajudem de bom grado, eles nem sempre estão disponíveis. Têm suas próprias preocupações e fazem apenas o suficiente pelo relacionamento. Geralmente, aparecem cerca de uma vez por história. Não fazem parte da matilha, não são Garou nem espíritos. Podem ser quase qualquer pessoa com alguma conexão razoável, dependendo do que o Narrador permitir. Use as regras do Modelo de Personagem de Apoio para criá-los. Eles são geralmente confiáveis, embora provavelmente não saibam sobre sua natureza de lobisomem ou mesmo sobre o sobrenatural. Nada é de graça, e se pedir favores, eles provavelmente pedirão um favor em troca no futuro. Inimigos são o oposto de Aliados e são considerados Defeitos. Eles podem ser criados usando as regras do Modelo de Personagem de Apoio, anotados no Mapa de Relacionamentos ou deixados a cargo do Narrador. Construa Aliados ou Inimigos com base em um orçamento de pontos, levando em consideração a Eficácia e a Confiabilidade. O máximo de pontos para um Aliado é seis. Grupos de Aliados ou Inimigos aparecem em número igual ao número de personagens dos jogadores. Todos os Inimigos têm dois pontos a menos do que sua Eficácia. Por exemplo, um indivíduo Talentoso custa três pontos como Aliado, mas fornece apenas um ponto como Defeito. Todos os Inimigos têm a mesma Confiabilidade: sempre que o Narrador achar que eles deveriam aparecer, mas provavelmente pelo menos uma vez por história (mesmo que indiretamente).",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "",
+        "type": "radio",
+        "description": "Indivíduo fraco, provavelmente inútil em uma situação violenta ou potencialmente violenta."
+      },
+      {
+        "cost": 2,
+        "title": "",
+        "type": "radio",
+        "description": "Indivíduo médio ou um grupo coeso de indivíduos fracos (trabalhadores portuários imprevisíveis, um sindicato mal organizado, capítulo de uma ONG)."
+      },
+      {
+        "cost": 3,
+        "title": "",
+        "type": "radio",
+        "description": "Indivíduo talentoso ou um grupo perigoso de indivíduos médios (gangue de rua, acompanhantes de celebridades, sindicato operário bem organizado)."
+      },
+      {
+        "cost": 4,
+        "title": "",
+        "type": "radio",
+        "description": "Indivíduo superlativo, um indivíduo talentoso potencialmente com poderes sobrenaturais, ou um grupo bem armado de indivíduos talentosos (equipe de segurança privada, grupo de advogados, equipe de atletas treinados)"
+      }
+    ],
+    "flaws": []
+  },
+  {
+    "name": "Aliados - Confiabilidade",
+    "type": "background",
+    "description": "Caso não invista nenhum ponto neste item, o aliado pode ser chamado à vontade, mas ajudará apenas quando estiver nas proximidades.",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "",
+        "type": "radio",
+        "description": "Quando você os chama, eles aparecem metade do tempo."
+      },
+      {
+        "cost": 2,
+        "title": "",
+        "type": "radio",
+        "description": "Quando você os chama, eles aparecem dentro de 1 a 10 horas (role um dado)."
+      },
+      {
+        "cost": 3,
+        "title": "",
+        "type": "radio",
+        "description": "Quando você os chama, eles aparecem o mais rápido possível."
+      }
+    ],
+    "flaws": [
+      {
+        "title": "Stalker",
+        "cost": 1,
+        "type": "radio",
+        "description": "Você tem uma tendência a atrair pessoas que ficam um pouco obcecadas por você para o seu próprio bem. Um Perseguidor abriga sentimentos não saudáveis por você e deseja um relacionamento mais substancial, quer você concorde ou não. Eles podem estar com ciúmes, enlouquecidos pelo amor, desesperados, oportunistas, ou qualquer combinação ou variação disso. Se você se livrar deles, outro logo aparece."
+      }
+    ]
+  },
+  {
+    "name": "Contatos",
+    "type": "background",
+    "description": "Você conhece pessoas - pessoas úteis - de muitas áreas diferentes da vida. Contatos fornecem principalmente informações em suas áreas de especialização e podem querer trocar favores de vários tipos. Para diferentes tipos de ajuda, conte com seus Aliados (p. 101) ou Mentor (p. 104). Um Contato é alguém em excelente posição para obter informações. Eles podem ser um despachante da polícia, em vez de um tenente de homicídios, ou um funcionário do Congresso, em vez de um senador. Corretores de informações, repórteres, solucionadores do submundo e motoristas de transporte são excelentes Contatos. Você pode definir seus Contatos ao comprar este Antecedente ou conforme precisar apresentá-los durante o jogo. Sempre que criá-los, certifique-se de adicioná-los ao Mapa de Relacionamentos (veja p. 111).",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "",
+        "type": "radio",
+        "description": "Um Contato que pode fornecer informações comuns, mas especializadas, como um traficante de drogas ou um vendedor de carros."
+      },
+      {
+        "cost": 2,
+        "title": "",
+        "type": "radio",
+        "description": "Um Contato que pode fornecer informações incomuns e privilegiadas, como um pequeno traficante de armas ou um psiquiatra."
+      },
+      {
+        "cost": 3,
+        "title": "",
+        "type": "radio",
+        "description": "Um Contato que pode fornecer informações críticas e até mesmo classificadas como do governo, como um especialista em sistemas de segurança, agente de narcóticos ou lobista de elite."
+      }
+    ],
+    "flaws": []
+  },
+  {
+    "name": "Fama",
+    "type": "background",
+    "description": "As pessoas conhecem seu nome e procuram avidamente notícias sobre suas atividades. Você pode ser uma estrela de cinema, estrela do rock ou outra celebridade. A Fama concede influência na mídia em massa e social; você tem mais maneiras do que a maioria das pessoas para influenciar o que grupos específicos (geralmente) de seres humanos pensam. Você provavelmente tem maneiras, como um sósia, de esconder o fato de que está envolvido em coisas que prefere manter em segredo. Em algumas circunstâncias, o Narrador pode permitir que você use a Fama em um grupo de dados de teste Social, em vez de algum outro Atributo, especialmente para entrar em um local ou evento exclusivo. 'Você sabe quem eu sou?' não funciona em todos os lugares, mas funciona. Cada nível de Fama subtrai um do Dificuldade de testes Sociais envolvendo seu público ou apoiadores, desde que o teste não envolva nada muito extravagante. (Se envolver, consequências certamente seguirão.) A Fama tem seus contras, é claro - é mais difícil para você seguir alguém discretamente, por exemplo, e se fãs começarem a rondar o caern, esse caern provavelmente está comprometido por algo lamentavelmente mundano, como o Instagram. Você deve considerar a possibilidade de adquirir Disfarce como uma Especialização de Habilidade. Por padrão, a Fama se aplica entre os humanos, mas você pode argumentar a favor de uma espécie de Fama específica dos lobos. Algumas criaturas sobrenaturais estão especialmente cientes de notícias e tendências e podem estar cientes de você, Garou incluído, então o Narrador determina se os benefícios da Fama se aplicam a qualquer indivíduo sobrenatural específico.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title":"",
+        "description": "Uma subcultura selecione sabe quem você é e o admira."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title":"",
+        "description": "Você é uma celebridade local, reconhecida pela maioria da cidade."
+      },
+      {
+        "cost": 3,
+        "type": "radio",
+        "title":"",
+        "description": "A maioria das pessoas no país conhece pelo menos o seu nome."
+      },
+      {
+        "cost": 4,
+        "type": "radio",
+        "title":"",
+        "description": "Todo mundo que se importa vagamente com as tendências sociais ou seu campo sabe algo sobre você."
+      },
+      {
+        "cost": 5,
+        "type": "radio",
+        "title":"",
+        "description": "Sua Fama atinge audiências nacionais ou até mesmo globais em massa. Você é uma grande estrela de cinema, uma banda de rock que lota estádios ou uma personalidade da Internet."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Segredo Sombrio",
+        "description": "O Defeito do Segredo Sombrio é semelhante à Infâmia, mas suas ações obscuras permanecem desconhecidas para todos, exceto você e talvez um ou dois inimigos muito motivados. Também é mais fácil de descobrir do que um segredo verdadeiramente ameaçador. Exemplos incluem uma dívida significativa com um criminoso ou ter um arquivo em uma agência governamental de caça a lobisomens."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Parceiro Infame",
+        "description": "Seu cônjuge, amante ou alguma outra pessoa significativa para você tem Infâmia (como acima) que ocasionalmente mancha sua reputação por associação."
+      },
+      {
+        "cost": 2,
+        "title": "Infâmia",
+        "type": "checkbox",
+        "description": "Você é famoso por algo horrível. Pelo menos, a Dificuldade da maioria dos testes de reação aumenta pela quantidade do Defeito; na pior das hipóteses, as autoridades tentam matar ou capturar você à vista. Você pode estar na lista dos mais procurados de um governo, ou o Grupo Pentex pode circular sua descrição como um indivíduo perigoso entre suas várias frentes."
+      }
+    ]
+  },
+  {
+    "name": "Máscara",
+    "type": "background",
+    "description": "Como indivíduos que às vezes precisam trabalhar em segredo ou com um grau de negação plausível, os Garou encontram grande valor em poder se proteger com identidades falsas, ou até mesmo em ficar completamente 'invisíveis'. Por padrão (sem pontos), um lobisomem ou não precisa de uma Máscara, como aqueles que ainda não entraram em conflito com a lei ou outras agências governamentais para gerar tais registros, ou possui uma identidade falsa viável que pode resistir a uma parada de trânsito ou escrutínio superficial semelhante. Uma Máscara de zero pontos não pode passar em uma verificação de antecedentes, muito menos em uma investigação adequada pelas autoridades.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Identidade Falsa de Qualidade",
+        "description": "Inclui cartão de crédito, conta bancária, histórico de crédito, certidão de nascimento, etc., todos no nome da sua Máscara. Você pode passar em uma verificação de antecedentes estadual ou provincial."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Verificação de Antecedentes",
+        "description": "Sua Máscara pode passar em uma verificação de antecedentes com a polícia nacional: FBI, Scotland Yard ou equivalente. Se você tiver um registro militar ou de inteligência, ele foi classificado."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Pessoa de Interesse",
+        "description": "Suas biometrias, nome, histórico, associados conhecidos e pseudônimos aparecem em vários bancos de dados de agências de inteligência, provavelmente identificando você como um potencial terrorista. Qualquer operador de agência governamental (ou analista comparável) provavelmente conseguirá juntar as peças para perceber o que você anda fazendo."
+      },
+      {
+        "cost": 1,
+        "title": "Erro de Série",
+        "type": "checkbox",
+        "description": "Em algum lugar, alguém cometeu um erro em detrimento ao seu. Como resultado, qualquer pessoa que faça uma verificação de antecedentes em você descobrirá que você morreu recentemente, está em uma lista de observação como perigoso ou, de alguma forma, merece detenção ou uma chamada para a polícia. Este defeito também se aplica a qualquer pesquisa de banco de dados em sua identidade."
+      }
+    ],
+    "aditional": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Apagado",
+        "description": "Alguém em posições elevadas eliminou seus registros reais. Oficialmente, você não existe."
+      },
+      {
+        "cost": 1,
+        "title": "Mestre das Máscaras",
+        "type": "checkbox",
+        "description": "Você pode criar ou obter Máscaras. Criar uma Máscara leva três dias por ponto e possivelmente expõe você online; obter Máscaras leva um dia por ponto, mas custa algo em troca. O quanto depende da sua alavancagem, margem no teste social ou qualquer outra coisa que o Narrador decida"
+      }
+    ]
+  },
+  {
+    "name": "Mentor",
+    "type": "background",
+    "description": "Este Traço representa um Garou solitário, ou até mesmo uma matilha, que cuida de você oferecendo orientação, informações ou ajuda de vez em quando. Essa função pode ser desempenhada por um indivíduo que o ajudou a iniciar nas tradições de sua tribo ou auspício, ou pode ser alguém que o ajudou a evitar um fim desastroso após sua Primeira Mudança. Ou podem ter uma perspectiva totalmente diferente; você pode nem mesmo saber que tem um Mentor, se eles forem do tipo que intervém em seu nome de algum nível de distância e obscuridade.",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "",
+        "type": "radio",
+        "description": "Garou de Renome 1 / Gaffling respeitado."
+      },
+      {
+        "cost": 2,
+        "title": "",
+        "type": "radio",
+        "description": "Garou de Renome 2 / Jaggling estabelecido."
+      },
+      {
+        "cost": 3,
+        "title": "",
+        "type": "radio",
+        "description": "Garou de Renome 3 / Jaggling respeitado."
+      },
+      {
+        "cost": 4,
+        "title": "",
+        "type": "radio",
+        "description": "Garou de Renome 4 / Jaggling honrado."
+      },
+      {
+        "cost": 5,
+        "title": "",
+        "type": "radio",
+        "description": "Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmática, agindo em seu nome de maneiras que precisam ser interpretadas."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "title": "Novato",
+        "type": "radio",
+        "description": "Garou de Renome 3 / Jaggling respeitado."
+      },
+      {
+        "cost": 3,
+        "title": "Veterano",
+        "type": "radio",
+        "description": "Garou de Renome 4 / Jaggling honrado."
+      },
+      {
+        "cost": 5,
+        "title": "Ancião",
+        "type": "radio",
+        "description": "Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmático, agindo contra seu nome de maneiras que precisam ser interpretadas."
+      }
+    ]
+  },
+  {
+    "name": "Recursos",
+    "type": "background",
+    "description": "Este Antecedente descreve uma forma abstrata de riqueza ou outros ativos que você pode aproveitar em muitas situações. Esses benefícios não são necessariamente de natureza financeira e raramente são completamente líquidos. Especialmente à medida que o estado da banca moderna se torna quase inteiramente digital, rivais bem conectados e nêmesis sobrenaturais podem congelar ou esgotar contas bancárias, então Garou podem acumular seus Recursos como dinheiro, ouro, arte, material ou até mesmo contrabando.",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "",
+        "type": "radio",
+        "description": "Estilo de vida de salário mínimo."
+      },
+      {
+        "cost": 2,
+        "title": "",
+        "type": "radio",
+        "description": "Estilo de vida de classe média."
+      },
+      {
+        "cost": 3,
+        "title": "",
+        "type": "radio",
+        "description": "Estilo de vida de classe alta."
+      },
+      {
+        "cost": 4,
+        "title": "",
+        "type": "radio",
+        "description": "Estilo de vida rico."
+      },
+      {
+        "cost": 5,
+        "title": "",
+        "type": "radio",
+        "description": "Estilo de vida ultra-rico."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Destituído",
+        "description": "Você não tem dinheiro e nem casa."
+      }
+    ]
+  },
+  {
+    "name": "Pacto Espiritual",
+    "type": "background",
+    "description": "Você fez um pacto mútuo com um espírito menor e ganhou sua lealdade. O espírito age como um aliado e fornecerá ajuda da melhor maneira possível quando convocado, geralmente com o Ritual de Invocação de Espíritos.",
+    "advantages": [
+      {
+        "cost": 1,
+        "title": "",
+        "type": "radio",
+        "description": "Espírito / Gaffling menor."
+      },
+      {
+        "cost": 2,
+        "title": "",
+        "type": "radio",
+        "description": "Espírito / Gaffling moderado."
+      },
+      {
+        "cost": 3,
+        "title": "",
+        "type": "radio",
+        "description": "Espírito / Gaffling maior ou Jagling menor."
+      },
+      {
+        "cost": 4,
+        "title": "",
+        "type": "radio",
+        "description": "Espírito / Jagling menor."
+      },
+      {
+        "cost": 5,
+        "title": "",
+        "type": "radio",
+        "description": "Espírito / Jagling moderado."
+      },
+      {
+        "cost": 1,
+        "title": "Companheiro",
+        "type": "radio",
+        "description": "O espírito pode acompanhá-lo onde quer que você vá, desde que não encontre barreiras espirituais ou outras contramedidas aplicáveis. A comunicação com ele é restrita à Umbra ou ao acessar os Espíritos Selvagens através do uso dos Sentidos Penumbrais."
+      },
+      {
+        "cost": 1,
+        "title": "Hospedeiro",
+        "type": "radio",
+        "description": "O espírito possui um corpo hospedeiro persistente, como um animal, ou a capacidade de possuir outro tipo de característica recorrente, como árvores ou monitores. Isso permite que ele interaja com você e qualquer outra pessoa no mundo físico."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "title": "Condição de Pacto",
+        "type": "radio",
+        "description": "Seu pacto depende de você realizar ou evitar certos atos em troca do serviço, como um espírito do fogo exigindo que você acenda uma vela em cada edifício que você entrar. Não cumprir essa condição irrita o espírito, e ele não será considerado um aliado até que uma penitência adequada seja feita, conforme decidido pelo Narrador."
+      }
+    ]
+  }
+  
+]
