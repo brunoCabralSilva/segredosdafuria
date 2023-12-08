@@ -8,7 +8,7 @@ export default function Advantage(props: any) {
     <div>
     {
       !showAd
-        ? <div className="border-2 border-white my-3 text-base font-normal flex justify-between items-center w-full">
+        ? <div className="border-2 border-white mb-3 text-base font-normal flex justify-between items-center w-full">
             <button
               type="button"
               className="flex justify-between items-center w-full p-4"
@@ -32,11 +32,11 @@ export default function Advantage(props: any) {
               <p className="text-justify">{item.description}</p>
               <div>
                 <p className="my-3 font-bold">Vantagens</p>
-                <label htmlFor="none" className="flex gap-3 cursor-pointer border border-white p-4 mb-2 items-center">
+                <label htmlFor={`advantages-${item.name}`} className="flex gap-3 cursor-pointer border border-white p-4 mb-2 items-center">
                   <input
-                    id="none"
+                    id={`advantages-${item.name}`}
                     type="radio"
-                    name="advantageOption"
+                    name={`advantageOption-${item.name}`}
                   />
                   <span className="font-bold">Nenhum (0)</span>
                 </label>
@@ -48,7 +48,7 @@ export default function Advantage(props: any) {
                         ? <label htmlFor={advantage.description} className="mb-4 cursor-pointer">
                           <div className="flex gap-3 pt-4 px-4">
                             <input
-                              name="advantageOption"
+                              name={`advantageOption-${item.name}`}
                               id={advantage.description}
                               type={advantage.type}
                             />
@@ -62,7 +62,7 @@ export default function Advantage(props: any) {
                             className="mb-4 cursor-pointer">
                             <div className="gap-3 p-4">
                               <input
-                                name="advantageOption"
+                                name={`advantageOption-${item.name}`}
                                 id={advantage.description}
                                 type={advantage.type}
                               />
@@ -90,11 +90,11 @@ export default function Advantage(props: any) {
                   item.flaws.length > 0 &&
                   <div>
                     <p className="my-3 font-bold">Desvantagens</p>
-                    <label htmlFor="none-flaw" className="flex gap-3 cursor-pointer border border-white p-4 mb-2">
+                    <label htmlFor={`flaw${item.name}`} className="flex gap-3 cursor-pointer border border-white p-4 mb-2">
                       <input
-                        id="none-flaw"
+                        id={`flaw${item.name}`}
                         type="radio"
-                        name="flawOption"
+                        name={`flawOption-${item.name}`}
                       />
                       <span className="font-bold">Nenhum (0)</span>
                     </label>
@@ -106,7 +106,7 @@ export default function Advantage(props: any) {
                       <label htmlFor={flaw.description} className="mb-4 cursor-pointer">
                         <div className="flex gap-3 pt-4 px-4">
                           <input
-                            name="flawOption"
+                            name={`advantageOption-${item.name}`}
                             id={flaw.description}
                             type={flaw.type}
                           />
