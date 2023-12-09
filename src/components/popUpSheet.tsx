@@ -64,7 +64,7 @@ export default function PopUpSheet(props: { session: string }) {
           </div>
         );
       case ('advantages-flaws'):
-        return <AdvantagesAnsFlaws />;
+        return <AdvantagesAnsFlaws session={session} />;
       case ('forms'):
         return <Forms session={session} />;
       case ('background'):

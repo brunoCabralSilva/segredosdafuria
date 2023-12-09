@@ -26,7 +26,6 @@ export default function PopupDeletePlayer(props: { sessionId : string }) {
         if (sessionDocSnapshot.exists()) {
           const sessionDoc = sessionDocSnapshot.data();
           const filterListPlayer = sessionDoc.players.filter((player: any) => player.email !== slice.popupDeletePlayer.player.email);
-          console.log(filterListPlayer);
           await updateDoc(sessionDocSnapshot.ref, {
             players: filterListPlayer,
           });

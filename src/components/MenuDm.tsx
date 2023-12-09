@@ -140,6 +140,22 @@ export default function MenuDm(props: { sessionId: string }) {
                     user: `${firstName} ${lastName}`,
                     creationDate: Date.now(),
                     data: {
+                      advantagesAndFlaws: [
+                        { name: "Caern", advantages: [], flaws: [] },
+                        { name: "Trabalho Diário", advantages: [], flaws: [] },
+                        { name: "Linguística", advantages: [], flaws: [] },
+                        { name: "Aparência", advantages: [], flaws: [] },
+                        { name: "Refúgio Seguro", advantages: [], flaws: [] },
+                        { name: "Situações Sobrenaturais", advantages: [], flaws: [] },
+                        { name: "Aliados - Efetividade", advantages: [], flaws: [] },
+                        { name: "Aliados - Confiabilidade", advantages: [], flaws: [] },
+                        { name: "Contatos", advantages: [], flaws: [] },
+                        { name: "Fama", advantages: [], flaws: [] },
+                        { name: "Máscara", advantages: [], flaws: [] },
+                        { name: "Mentor", advantages: [], flaws: [] },
+                        { name: "Recursos", advantages: [], flaws: [] },
+                        { name: "Pacto Espiritual", advantages: [], flaws: [] },
+                      ],
                       trybe: '',
                       auspice: '',
                       name: '',
@@ -191,7 +207,6 @@ export default function MenuDm(props: { sessionId: string }) {
                       },
                       gifts: [],
                       rituals: [],
-                      advantagesAndFlaws: [],
                       form: 'Hominídeo',
                       background: '',
                       notes: '',
@@ -294,7 +309,7 @@ export default function MenuDm(props: { sessionId: string }) {
 			}
 			getNotifications();
 		} catch (error) {
-			console.error("Ocorreu um erro:", error);
+			window.alert("Ocorreu um erro: " + error);
 		}
 	};
 	
@@ -312,6 +327,22 @@ export default function MenuDm(props: { sessionId: string }) {
             user: `${list.firstName} ${list.lastName}`,
             creationDate: Date.now(),
             data: {
+              advantagesAndFlaws: [
+                { name: "Caern", advantages: [], flaws: [] },
+                { name: "Trabalho Diário", advantages: [], flaws: [] },
+                { name: "Linguística", advantages: [], flaws: [] },
+                { name: "Aparência", advantages: [], flaws: [] },
+                { name: "Refúgio Seguro", advantages: [], flaws: [] },
+                { name: "Situações Sobrenaturais", advantages: [], flaws: [] },
+                { name: "Aliados - Efetividade", advantages: [], flaws: [] },
+                { name: "Aliados - Confiabilidade", advantages: [], flaws: [] },
+                { name: "Contatos", advantages: [], flaws: [] },
+                { name: "Fama", advantages: [], flaws: [] },
+                { name: "Máscara", advantages: [], flaws: [] },
+                { name: "Mentor", advantages: [], flaws: [] },
+                { name: "Recursos", advantages: [], flaws: [] },
+                { name: "Pacto Espiritual", advantages: [], flaws: [] },
+              ],
               trybe: '',
               auspice: '',
               name: '',
@@ -363,7 +394,6 @@ export default function MenuDm(props: { sessionId: string }) {
               },
               gifts: [],
               rituals: [],
-              advantagesAndFlaws: [],
               form: 'Hominídeo',
               background: '',
               notes: '',
@@ -698,7 +728,6 @@ export default function MenuDm(props: { sessionId: string }) {
             ))
           }
           </select>
-          { console.log(optionPlayer) }
           {
             Object.keys(optionPlayer).length > 0 && <div className="text-white w-full border-2 border-white flex flex-col items-center justify-center p-3 mb-4">
             <div className="w-full flex justify-end pb-3">

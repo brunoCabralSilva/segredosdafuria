@@ -26,19 +26,15 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
         if (sessionDocSnapshot.exists()) {
           const sessionDoc = sessionDocSnapshot.data();
           const filterListPlayer = sessionDoc.players.filter((player: any) => player.email !== email);
-          console.log('email no token ', email, ', quem sobrou: ', filterListPlayer);
           if (filterListPlayer.length === 0) {
             await deleteDoc(sessionDocSnapshot.ref);
           } else {
             let oldestPlayer = filterListPlayer[0];
-            console.log('primeiro elemento', oldestPlayer);
             for(let i = 0; i <= filterListPlayer.length - 1; i += 1) {
-              console.log('candidato: ', filterListPlayer[i].creationDate);
               if (filterListPlayer[i].creationDate < oldestPlayer.creationDate) {
                 oldestPlayer = filterListPlayer[i];
               }
             }
-            console.log('Jogador mais antigo ', oldestPlayer);
             const updatedNotifications = [
               {
                 message: `Olá, tudo bem? O antigo narrador desta sessão saiu desta sala e agora você é o novo narrador, por ser o jogador mais antigo da Sala. Você pode transferir o cargo de narrador para outro jogador ou, caso não exista mais nenhum, também sair da sala e mesma será excluida. `,
