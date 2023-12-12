@@ -7,8 +7,8 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../firebase/connection';
 import { jwtDecode } from "jwt-decode";
 
-export default function PopupDeletePlayer(props: { sessionId : string }) {
-  const { sessionId } = props;
+export default function PopupDeletePlayer(props: { returnValue: any, sessionId : string }) {
+  const { sessionId, returnValue } = props;
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -29,6 +29,7 @@ export default function PopupDeletePlayer(props: { sessionId : string }) {
           await updateDoc(sessionDocSnapshot.ref, {
             players: filterListPlayer,
           });
+          returnValue();
           dispatch(actionDeletePlayer({ show: false, player: {}}));
           window.alert("O jogador foi removido com sucesso!");
         }
