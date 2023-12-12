@@ -17,7 +17,6 @@ export default function PopupLogout(props: any) {
     dispatch(actionLogoutUser(false))
     setShowMenu(false);
     router.push('/');
-    window.alert('Histórico apagado com Sucesso!');
   };
 
   return(
