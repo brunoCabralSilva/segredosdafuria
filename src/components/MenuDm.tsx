@@ -33,6 +33,13 @@ export default function MenuDm(props: { sessionId: string }) {
   const [input, setInput] = useState('');
   const [optionPlayer, setOptionPlayer] = useState<any>({});
   const router = useRouter();
+
+  useEffect(() => {
+    setListNotifications([]);
+		returnValue();
+		getNotifications();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   const typeText = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -288,13 +295,6 @@ export default function MenuDm(props: { sessionId: string }) {
     }
 	};
 
-  useEffect(() => {
-    setListNotifications([]);
-		returnValue();
-		getNotifications();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
 	const returnDate = (msg: any) => {
     const data = new Date(msg.date);
     const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getMonth() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
@@ -496,161 +496,167 @@ export default function MenuDm(props: { sessionId: string }) {
       </select>
       { 
         optionSelect === 'general' &&
-        <div className="h-full w-full">
-          <div className="flex flex-col items-center justify-start w-full">
-            <div
-              className="w-full mt-2 capitalize flex justify-between items-center cursor-pointer pr-2 border-2 border-white mb-2"
-              onClick={() => setInput('nameSession')}
-            >
-              { 
-                input !== 'nameSession' &&
-                <span className="text-white font-bold text-2xl my-3 capitalize break-words w-full px-4">
-                  { nameSession }
-                </span>
-              }
-              { 
-                input === 'nameSession' &&
-                <input
-                  type="text"
-                  className="border-2 border-white text-white text-left w-full mr-1 bg-black p-2 text-2xl break-words"
-                  placeholder="Nome"
-                  value={ nameSession }
-                  onChange={(e) => typeName(e)}
-                />
-              }
-              { 
-                input
-                  ? <BsCheckSquare
-                      onClick={(e:any) => {
-                        updateNameSession();
-                        setInput('');
-                        e.stopPropagation();
-                      }}
-                      className="text-3xl text-white"
-                    />
-                  : <FaRegEdit
-                      onClick={
-                        (e:any) => {
-                          setInput('nameSession');
-                          e.stopPropagation();
-                        }}
-                      className="text-3xl text-white"
-                    />
-              }
-            </div>
-            <div className="w-full mb-2 flex-col font-bold border-2 border-white">
-              <div className="px-4 pt-2 flex justify-between items-center w-full">
+        <div className="h-full w-full">{
+          creationDate !== ''
+          ? <div className="h-full w-full">
+              <div className="flex flex-col items-center justify-start w-full">
                 <div
-                  className="text-white w-full cursor-pointer flex-col items-center justify-center"
-                  onClick={
-                    () => {
-                      setTextArea(true);
-                    }
-                  }
+                  className="w-full mt-2 capitalize flex justify-between items-center cursor-pointer pr-2 border-2 border-white mb-2"
+                  onClick={() => setInput('nameSession')}
                 >
-                  Descrição:
-                </div>
-                <div>
-                { 
-                  textArea
-                    ? <BsCheckSquare
-                        onClick={(e: any) => {
-                          updateDescription();
-                          setTextArea(false);
-                          e.stopPropagation();
-                        }}
-                        className="text-3xl text-white cursor-pointer mb-1"
-                      />
-                    : <FaRegEdit
-                        onClick={(e: any) => {
-                          setTextArea(true);
-                          e.stopPropagation();
-                        }}
-                        className="text-3xl text-white cursor-pointer" />
-                }
-                </div>
-              </div>
-              <div className="w-full h-full">
-                { 
-                  textArea ?
-                  <textarea
-                    className="text-white bg-black font-normal p-4 w-full h-72 cursor-pointer break-words text-justify border-t-white border"
-                    value={ description }
-                    onChange={(e) => typeText(e)}
-                  />
-                  : <div
-                      className="text-white font-normal p-4 text-justify w-full h-full cursor-pointer break-words"
-                      onClick={() => setTextArea(true)} 
-                    >
-                    { description }
-                  </div>
-                }
-              </div>
-            </div>
-            <div
-              className={`w-full mb-2 mt-1 flex flex-col justify-between items-center cursor-pointer p-2 border-2 border-white`}
-              onClick={() => setInput('dm')}
-            >
-              <div className="flex w-full">
-                <span className="text-white break-words w-full p-2">
-                  <span className="font-bold pr-1">Narrador:</span>
-                </span>
-              { 
-                input
-                  ? <BsCheckSquare
-                      onClick={(e:any) => {
-                        updateDm();
-                        setInput('');
-                        e.stopPropagation();
-                      }}
-                      className="text-3xl text-white mr-1"
+                  { 
+                    input !== 'nameSession' &&
+                    <span className="text-white font-bold text-2xl my-3 capitalize break-words w-full px-4">
+                      { nameSession }
+                    </span>
+                  }
+                  { 
+                    input === 'nameSession' &&
+                    <input
+                      type="text"
+                      className="border-2 border-white text-white text-left w-full mr-1 bg-black p-2 text-2xl break-words"
+                      placeholder="Nome"
+                      value={ nameSession }
+                      onChange={(e) => typeName(e)}
                     />
-                  : <FaRegEdit
+                  }
+                  { 
+                    input
+                      ? <BsCheckSquare
+                          onClick={(e:any) => {
+                            updateNameSession();
+                            setInput('');
+                            e.stopPropagation();
+                          }}
+                          className="text-3xl text-white"
+                        />
+                      : <FaRegEdit
+                          onClick={
+                            (e:any) => {
+                              setInput('nameSession');
+                              e.stopPropagation();
+                            }}
+                          className="text-3xl text-white"
+                        />
+                  }
+                </div>
+                <div className="w-full mb-2 flex-col font-bold border-2 border-white">
+                  <div className="px-4 pt-2 flex justify-between items-center w-full">
+                    <div
+                      className="text-white w-full cursor-pointer flex-col items-center justify-center"
                       onClick={
-                        (e:any) => {
-                          setInput('dm');
-                          e.stopPropagation();
-                        }}
-                      className="text-3xl text-white"
+                        () => {
+                          setTextArea(true);
+                        }
+                      }
+                    >
+                      Descrição:
+                    </div>
+                    <div>
+                    { 
+                      textArea
+                        ? <BsCheckSquare
+                            onClick={(e: any) => {
+                              updateDescription();
+                              setTextArea(false);
+                              e.stopPropagation();
+                            }}
+                            className="text-3xl text-white cursor-pointer mb-1"
+                          />
+                        : <FaRegEdit
+                            onClick={(e: any) => {
+                              setTextArea(true);
+                              e.stopPropagation();
+                            }}
+                            className="text-3xl text-white cursor-pointer" />
+                    }
+                    </div>
+                  </div>
+                  <div className="w-full h-full">
+                    { 
+                      textArea ?
+                      <textarea
+                        className="text-white bg-black font-normal p-4 w-full h-72 cursor-pointer break-words text-justify border-t-white border"
+                        value={ description }
+                        onChange={(e) => typeText(e)}
+                      />
+                      : <div
+                          className="text-white font-normal p-4 text-justify w-full h-full cursor-pointer break-words"
+                          onClick={() => setTextArea(true)} 
+                        >
+                        { description }
+                      </div>
+                    }
+                  </div>
+                </div>
+                <div
+                  className={`w-full mb-2 mt-1 flex flex-col justify-between items-center cursor-pointer p-2 border-2 border-white`}
+                  onClick={() => setInput('dm')}
+                >
+                  <div className="flex w-full">
+                    <span className="text-white break-words w-full p-2">
+                      <span className="font-bold pr-1">Narrador:</span>
+                    </span>
+                  { 
+                    input
+                      ? <BsCheckSquare
+                          onClick={(e:any) => {
+                            updateDm();
+                            setInput('');
+                            e.stopPropagation();
+                          }}
+                          className="text-3xl text-white mr-1"
+                        />
+                      : <FaRegEdit
+                          onClick={
+                            (e:any) => {
+                              setInput('dm');
+                              e.stopPropagation();
+                            }}
+                          className="text-3xl text-white"
+                        />
+                  }
+                  </div>
+                  { 
+                    input === 'dm' ?
+                    <input
+                      type="text"
+                      className="text-sm border border-white text-white text-left w-full bg-black p-2"
+                      placeholder="Nome"
+                      value={ dm }
+                      onChange={(e) => setDm(e.target.value)}
                     />
-              }
+                    : <span className="border border-transparent text-sm text-white w-full p-2 break-words">{ dm }</span>
+                  }
+                </div>
+                <p className="mt-1 text-white sm:text-left w-full text-center border-2 border-white p-4">
+                  <span className="font-bold pr-1">Data de Criação:</span>
+                  <span>{ returnDate({ date: creationDate }) }</span>
+                </p>
+                <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3">
+                  <span className="pr-1 font-bold">Jogadores:</span>
+                  {
+                    players.filter((player:any) => player.email !== dm ).map((item: any, index: number) => (
+                      <span className="capitalize" key={index}>
+                        { index === players.length -1 ? item.user + '.' : item.user + ', ' }
+                      </span>
+                    ))
+                  }
+                </div>
+                <button
+                  type="button"
+                  className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+                  onClick={() => dispatch(actionDeleteSession(true))}
+                >
+                  Sair da Sessão
+                </button>
+                { slice.popupDeleteSession && <PopupDeleteSession sessionId={ sessionId } /> }
               </div>
-              { 
-                input === 'dm' ?
-                <input
-                  type="text"
-                  className="text-sm border border-white text-white text-left w-full bg-black p-2"
-                  placeholder="Nome"
-                  value={ dm }
-                  onChange={(e) => setDm(e.target.value)}
-                />
-                : <span className="border border-transparent text-sm text-white w-full p-2 break-words">{ dm }</span>
-              }
             </div>
-            <p className="mt-1 text-white sm:text-left w-full text-center border-2 border-white p-4">
-              <span className="font-bold pr-1">Data de Criação:</span>
-              <span>{ returnDate({ date: creationDate }) }</span>
-            </p>
-            <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3">
-              <span className="pr-1 font-bold">Jogadores:</span>
-              {
-                players.filter((player:any) => player.email !== dm ).map((item: any, index: number) => (
-                  <span className="capitalize" key={index}>
-                    { index === players.length -1 ? item.user + '.' : item.user + ', ' }
-                  </span>
-                ))
-              }
+          : <div className="h-full flex items-center justify-center">
+              <span className="loader z-50" />
             </div>
-            <button
-              type="button"
-              className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
-              onClick={() => dispatch(actionDeleteSession(true))}
-            >
-              Sair da Sessão
-            </button>
-            { slice.popupDeleteSession && <PopupDeleteSession sessionId={ sessionId } /> }
-          </div>
-        </div>
+        }</div>
       }
       {
         optionSelect === 'notifications' &&

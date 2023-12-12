@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 
 export const verify = (token: string) => {
-  const secretKey = 'SegredosDaFúria2023';
+  const secretKey: any = process.env.NEXT_PUBLIC_SECRET_KEY;
   try {
     return jwt.verify(token, secretKey);
   } catch(error) {

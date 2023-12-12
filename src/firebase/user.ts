@@ -4,7 +4,7 @@ import { getFirestore, collection, query, where, getDocs, addDoc } from 'firebas
 import firebaseConfig from './connection';
 
 const db = getFirestore(firebaseConfig);
-const secretKey = 'SegredosDaFúria2023';
+const secretKey: any = process.env.NEXT_PUBLIC_SECRET_KEY;
 
 export const getUser = async (email: string, password: string) => {
   try {
