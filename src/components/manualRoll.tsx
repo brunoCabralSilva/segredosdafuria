@@ -7,7 +7,6 @@ import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function ManualRoll(props: { session: string }) {
   const { session } = props;
@@ -46,7 +45,8 @@ export default function ManualRoll(props: { session: string }) {
 
     const token = localStorage.getItem('Segredos Da Fúria');
     if (token) {
-      const { firstName, lastName, email, role }: IUser = jwtDecode(token);
+      const { firstName, lastName, email }: IUser = jwtDecode(token);
+      if (valueWithPenaltyOfBonus >= dificulty) {
         await registerMessage({
           message: {
             rollOfMargin: resultOf,
@@ -58,6 +58,13 @@ export default function ManualRoll(props: { session: string }) {
           email: email,
           date: serverTimestamp(),
         }, session);
+      } else {
+        await registerMessage({
+          message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${valueWithPenaltyOfBonus } dados para um Teste de Dificuldade ${dificulty}).`,
+          user: firstName + ' ' + lastName,
+          email: email,
+        }, session);
+      }
     }
     setValueOfRage(0);
     setValueOf(0);
@@ -65,6 +72,10 @@ export default function ManualRoll(props: { session: string }) {
     setDificulty(0);
     dispatch(actionShowMenuSession(''))
   };
+
+  const disableRoll = () => {
+    return (dificulty <= 0) || (valueOfRage <= 0 &&  valueOf <= 0 && penaltyOrBonus === 0)
+  }
 
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
@@ -224,8 +235,9 @@ export default function ManualRoll(props: { session: string }) {
         </div>
       </label>
       <button
-        className="text-white bg-black border-2 border-white hover:border-red-800 transition-colorscursor-pointer w-full p-2 mt-6 font-bold"
+        className={`${disableRoll() ? 'text-black bg-gray-400' : 'text-white bg-black hover:border-red-800' } border-2 border-white  transition-colors cursor-pointer w-full p-2 mt-6 font-bold`}
         onClick={registerRoll}
+        disabled={ disableRoll() }
       >
         Rolar dados
       </button>
