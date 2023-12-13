@@ -9,8 +9,7 @@ import { MdDelete } from "react-icons/md";
 import PopupDelAdv from "../popupDelAdv";
 
 export default function ItensAdvantagesAdded(props: any) {
-  const { session } = props;
-  const [adv, setAdv] = useState([]);
+  const { session, adv, setAdv } = props;
   const router = useRouter();
   const dispatch = useAppDispatch();
   const slice = useAppSelector(useSlice);
@@ -36,37 +35,8 @@ export default function ItensAdvantagesAdded(props: any) {
     } else router.push('/user/login');
   }
 
-  const sumAllAdvantagesAndFlaws = () => {
-    let advantageSum = 0;
-    let flawSum = 0;
-    adv.forEach((item: any) => {
-      console.log(item);
-      if (item.flaws.length > 0) {
-        item.flaws.forEach((it: any) => flawSum += it.value)
-      }
-      if (item.advantages.length > 0) {
-        item.advantages.forEach((it: any) => advantageSum += it.value)
-      }
-    });
-    return (
-    <div className="flex flex-col border-2 border-white p-4 text-white justify-center items-center">
-      <div className={
-        `${advantageSum > 7 && 'text-red-800'}
-         ${advantageSum === 7 && 'text-green-500'}
-      `}>
-        Total em Vantagens: {advantageSum} {advantageSum !== 7 && <span>/ 7</span>}</div>
-      <div className={`
-        ${flawSum > 2 && 'text-red-800'}
-        ${flawSum === 2 && 'text-green-500'}
-      `}>
-        Total em Defeitos: {flawSum} {flawSum !== 2 && <span>/ 2</span>}</div>
-    </div>
-    );
-  }
-
   return(
     <div>
-      <div>{sumAllAdvantagesAndFlaws()}</div>
       {
         adv.length > 0 && adv.map((ad: any, index: number) => (
           <div key={index} className="text-white border-2 border-white my-1 p-4">

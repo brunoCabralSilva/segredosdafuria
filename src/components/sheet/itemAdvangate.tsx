@@ -1,4 +1,6 @@
 import firebaseConfig from "@/firebase/connection";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionSumOfAdv, useSlice } from "@/redux/slice";
 import { collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
@@ -20,31 +22,11 @@ interface IFlaw {
 }
 
 export default function Advantage(props: any) {
-  const { item, session } = props;
+  const { item, session, index, adv } = props;
   const [ showAd, setShowAd ] = useState(false);
-  const [adv, setAdv] = useState<any>([]);
   const router = useRouter();
-
-  useEffect(() => {
-    getAllAdvantages();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getAllAdvantages = async () => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const decode: { email: string } = jwtDecode(token);
-      const { email } = decode;
-      const db = getFirestore(firebaseConfig);
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const userDocument = userQuerySnapshot.docs[0];
-      const advAndflw = userDocument.data();
-      const playerFound = advAndflw.players.find((player: any) => player.email === email);
-      const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
-      setAdv(listOfAdvantages);
-    } else router.push('/user/login');
-  }
+  const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
 
   const setAdvantageValueItem = async (obj: IAdvantage) => {
     const token = localStorage.getItem('Segredos Da Fúria');
@@ -71,7 +53,7 @@ export default function Advantage(props: any) {
             advantages: [],
             flaws: foundAdvantage.flaws,
           }
-          setAdv([...restOfAdvantage, updatedAdvantage]);
+          props.setAdv([...restOfAdvantage, updatedAdvantage]);
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
@@ -84,7 +66,7 @@ export default function Advantage(props: any) {
             flaws: foundAdvantage.flaws,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          setAdv([...restOfAdvantage, updatedAdvantage]);
+          props.setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -96,7 +78,7 @@ export default function Advantage(props: any) {
           flaws: foundAdvantage.flaws,
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
-        setAdv([...restOfAdvantage, updated]);
+        props.setAdv([...restOfAdvantage, updated]);
         await updateDoc(userDocRef, {
           players: [searchPlayer, ...otherPlayers],
         });
@@ -109,7 +91,7 @@ export default function Advantage(props: any) {
             flaws: foundAdvantage.flaws,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          setAdv([...restOfAdvantage, updatedAdvantage]);
+          props.setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -124,7 +106,7 @@ export default function Advantage(props: any) {
               flaws: foundAdvantage.flaws,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-            setAdv([...restOfAdvantage, updatedAdvantage]);
+            props.setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -135,7 +117,7 @@ export default function Advantage(props: any) {
               flaws: foundAdvantage.flaws,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-            setAdv([...restOfAdvantage, updatedAdvantage]);
+            props.setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -171,7 +153,7 @@ export default function Advantage(props: any) {
             flaws: [],
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          setAdv([...restOfAdvantage, updatedAdvantage]);
+          props.setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -183,7 +165,7 @@ export default function Advantage(props: any) {
             flaws: updateAdvantage,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          setAdv([...restOfAdvantage, updatedAdvantage]);
+          props.setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -195,7 +177,7 @@ export default function Advantage(props: any) {
           flaws: [obj],
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
-        setAdv([...restOfAdvantage, updated]);
+        props.setAdv([...restOfAdvantage, updated]);
         await updateDoc(userDocRef, {
           players: [searchPlayer, ...otherPlayers],
         });
@@ -210,7 +192,7 @@ export default function Advantage(props: any) {
             flaws: [...updateAdvantage, obj],
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          setAdv([...restOfAdvantage, updatedAdvantage]);
+          props.setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -225,7 +207,7 @@ export default function Advantage(props: any) {
               flaws: newObject,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-            setAdv([...restOfAdvantage, updatedAdvantage]);
+            props.setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -236,7 +218,7 @@ export default function Advantage(props: any) {
               flaws: [...foundAdvantage.flaws, obj],
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-            setAdv([...restOfAdvantage, updatedAdvantage]);
+            props.setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -274,6 +256,34 @@ export default function Advantage(props: any) {
     const find: any = adv.find((ad: any) => ad.name === item.name);
     if (find) return find.flaws.find((ad: any) => ad.flaw === element);
     return false;
+  }
+
+  const sumAllAdvantagesAndFlaws = () => {
+    let advantageSum = 0;
+    let flawSum = 0;
+    adv.forEach((item: any) => {
+      if (item.flaws.length > 0) {
+        item.flaws.forEach((it: any) => flawSum += it.value)
+      }
+      if (item.advantages.length > 0) {
+        item.advantages.forEach((it: any) => advantageSum += it.value)
+      }
+    });
+    dispatch(actionSumOfAdv({ advantageSum, flawSum }));
+    return (
+    <div className="flex flex-col border-2 border-white p-4 text-white justify-center items-center">
+      <div className={
+        `${slice.sumOfAdv.advantageSum > 7 && 'text-red-800'}
+         ${slice.sumOfAdv.advantageSum === 7 && 'text-green-500'}
+      `}>
+        Total em Vantagens: {slice.sumOfAdv.advantageSum} {slice.sumOfAdv.advantageSum !== 7 && <span>/ 7</span>}</div>
+      <div className={`
+        ${slice.sumOfAdv.flawSum > 2 && 'text-red-800'}
+        ${slice.sumOfAdv.flawSum === 2 && 'text-green-500'}
+      `}>
+        Total em Defeitos: {slice.sumOfAdv.flawSum} {slice.sumOfAdv.flawSum !== 2 && <span>/ 2</span>}</div>
+    </div>
+    );
   }
 
   return(
@@ -358,7 +368,6 @@ export default function Advantage(props: any) {
                       htmlFor={`flaw-${item.name}`}
                       className={`${returnFlawNull() ? 'bg-black' : ''} flex gap-3 cursor-pointer border border-white pl-2 py-4 pr-4 mb-2`}
                       onClick={async () => {
-                        await getAllAdvantages();
                         setFlawValueItem({
                           flaw: '',
                           value: 0,
