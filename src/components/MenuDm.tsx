@@ -146,92 +146,97 @@ export default function MenuDm(props: { sessionId: string }) {
             if (dm === sessionDocSnapshot.data().dm) {
               window.alert('Este já é o Narrador da sessão.');
             } else if (findPlayer) {
-              await updateDoc(sessionDocRef, { dm: dm.toLowerCase() });
-              window.alert('Narrador da sessão atualizado com sucesso! Ao atualizar a página, você terá se tornado um jogador ao invés de um Narrador. O novo narrador também precisa atualizar a página para que seus antigos privilégios sejam aplicados a ele.');
-                const findDmInPlayers = sessionDocSnapshot.data().players.find((player: any) => player.email === dm);
-                if(!findDmInPlayers) {
-                  const sheet = {
-                    email: emailUser,
-                    user: `${firstName} ${lastName}`,
-                    creationDate: Date.now(),
-                    data: {
-                      advantagesAndFlaws: [
-                        { name: "Caern", advantages: [], flaws: [] },
-                        { name: "Trabalho Diário", advantages: [], flaws: [] },
-                        { name: "Linguística", advantages: [], flaws: [] },
-                        { name: "Aparência", advantages: [], flaws: [] },
-                        { name: "Refúgio Seguro", advantages: [], flaws: [] },
-                        { name: "Situações Sobrenaturais", advantages: [], flaws: [] },
-                        { name: "Aliados - Efetividade", advantages: [], flaws: [] },
-                        { name: "Aliados - Confiabilidade", advantages: [], flaws: [] },
-                        { name: "Contatos", advantages: [], flaws: [] },
-                        { name: "Fama", advantages: [], flaws: [] },
-                        { name: "Máscara", advantages: [], flaws: [] },
-                        { name: "Mentor", advantages: [], flaws: [] },
-                        { name: "Recursos", advantages: [], flaws: [] },
-                        { name: "Pacto Espiritual", advantages: [], flaws: [] },
-                      ],
-                      trybe: '',
-                      auspice: '',
-                      name: '',
-                      glory: 0,
-                      honor: 0,
-                      wisdom: 0,
-                      health: [],
-                      rage: 0,
-                      willpower: [],
-                      attributes: {
-                        strength: 1,
-                        dexterity: 1,
-                        stamina: 1,
-                        charisma: 1,
-                        manipulation: 1,
-                        composure: 1,
-                        intelligence: 1,
-                        wits: 1,
-                        resolve: 1,
-                      },
-                      skills: {
-                        athletics: { value: 0, specialty: '' },
-                        animalKen: { value: 0, specialty: '' },
-                        academics: { value: 0, specialty: '' },
-                        brawl: { value: 0, specialty: '' },
-                        etiquette: { value: 0, specialty: '' },
-                        awareness: { value: 0, specialty: '' },
-                        craft: { value: 0, specialty: '' },
-                        insight: { value: 0, specialty: '' },
-                        finance: { value: 0, specialty: '' },
-                        driving: { value: 0, specialty: '' },
-                        intimidation: { value: 0, specialty: '' },
-                        investigation: { value: 0, specialty: '' },
-                        firearms: { value: 0, specialty: '' },
-                        leadership: { value: 0, specialty: '' },
-                        medicine: { value: 0, specialty: '' },
-                        larceny: { value: 0, specialty: '' },
-                        performance: { value: 0, specialty: '' },
-                        occult: { value: 0, specialty: '' },
-                        melee: { value: 0, specialty: '' },
-                        persuasion: { value: 0, specialty: '' },
-                        politics: { value: 0, specialty: '' },
-                        stealth: { value: 0, specialty: '' },
-                        streetwise: { value: 0, specialty: '' },
-                        science: { value: 0, specialty: '' },
-                        survival: { value: 0, specialty: '' },
-                        subterfuge: { value: 0, specialty: '' },
-                        technology: { value: 0, specialty: '' },
-                      },
-                      gifts: [],
-                      rituals: [],
-                      form: 'Hominídeo',
-                      background: '',
-                      notes: '',
+              const findDmInPlayers = sessionDocSnapshot.data().players.find((player: any) => player.email === sessionDocSnapshot.data().dm);
+              if(!findDmInPlayers) {
+                const sheet = {
+                  email: emailUser,
+                  user: `${firstName} ${lastName}`,
+                  creationDate: Date.now(),
+                  data: {
+                    advantagesAndFlaws: [
+                      { name: "Caern", advantages: [], flaws: [] },
+                      { name: "Trabalho Diário", advantages: [], flaws: [] },
+                      { name: "Linguística", advantages: [], flaws: [] },
+                      { name: "Aparência", advantages: [], flaws: [] },
+                      { name: "Refúgio Seguro", advantages: [], flaws: [] },
+                      { name: "Situações Sobrenaturais", advantages: [], flaws: [] },
+                      { name: "Aliados - Efetividade", advantages: [], flaws: [] },
+                      { name: "Aliados - Confiabilidade", advantages: [], flaws: [] },
+                      { name: "Contatos", advantages: [], flaws: [] },
+                      { name: "Fama", advantages: [], flaws: [] },
+                      { name: "Máscara", advantages: [], flaws: [] },
+                      { name: "Mentor", advantages: [], flaws: [] },
+                      { name: "Recursos", advantages: [], flaws: [] },
+                      { name: "Pacto Espiritual", advantages: [], flaws: [] },
+                    ],
+                    trybe: '',
+                    auspice: '',
+                    name: '',
+                    glory: 0,
+                    honor: 0,
+                    wisdom: 0,
+                    health: [],
+                    rage: 0,
+                    willpower: [],
+                    attributes: {
+                      strength: 1,
+                      dexterity: 1,
+                      stamina: 1,
+                      charisma: 1,
+                      manipulation: 1,
+                      composure: 1,
+                      intelligence: 1,
+                      wits: 1,
+                      resolve: 1,
                     },
-                  };
-                  await updateDoc(sessionDocSnapshot.ref, {
-                    players: arrayUnion(sheet)
-                  });
-                }
-                window.location.reload();
+                    skills: {
+                      athletics: { value: 0, specialty: '' },
+                      animalKen: { value: 0, specialty: '' },
+                      academics: { value: 0, specialty: '' },
+                      brawl: { value: 0, specialty: '' },
+                      etiquette: { value: 0, specialty: '' },
+                      awareness: { value: 0, specialty: '' },
+                      craft: { value: 0, specialty: '' },
+                      insight: { value: 0, specialty: '' },
+                      finance: { value: 0, specialty: '' },
+                      driving: { value: 0, specialty: '' },
+                      intimidation: { value: 0, specialty: '' },
+                      investigation: { value: 0, specialty: '' },
+                      firearms: { value: 0, specialty: '' },
+                      leadership: { value: 0, specialty: '' },
+                      medicine: { value: 0, specialty: '' },
+                      larceny: { value: 0, specialty: '' },
+                      performance: { value: 0, specialty: '' },
+                      occult: { value: 0, specialty: '' },
+                      melee: { value: 0, specialty: '' },
+                      persuasion: { value: 0, specialty: '' },
+                      politics: { value: 0, specialty: '' },
+                      stealth: { value: 0, specialty: '' },
+                      streetwise: { value: 0, specialty: '' },
+                      science: { value: 0, specialty: '' },
+                      survival: { value: 0, specialty: '' },
+                      subterfuge: { value: 0, specialty: '' },
+                      technology: { value: 0, specialty: '' },
+                    },
+                    gifts: [],
+                    rituals: [],
+                    form: 'Hominídeo',
+                    background: '',
+                    notes: '',
+                  },
+                };
+                await updateDoc(sessionDocRef, {
+                  dm: dm.toLowerCase(),
+                  players: arrayUnion(sheet),
+                });
+              } else {
+                await updateDoc(sessionDocRef, {
+                  dm: dm.toLowerCase(),
+                });
+              }
+              dispatch(actionShowMenuSession(''))
+              window.location.reload();
+              window.alert('Narrador da sessão atualizado com sucesso! Ao atualizar a página, você terá se tornado um jogador ao invés de um Narrador. O novo narrador também precisa atualizar a página para que seus antigos privilégios sejam aplicados a ele.');
             } else {
               window.alert('O email do usuário informado não foi encontrado na sua lista de jogadores desta sessão.');
               setDm(sessionDocSnapshot.data().dm);
@@ -862,6 +867,7 @@ export default function MenuDm(props: { sessionId: string }) {
             </div>
             <div>
               <p className="font-bold pr-1 w-full text-center mt-3">Vantagens e Defeitos</p>
+              <div className="flex items-center justify-center flex-wrap w-full gap-1">
               {
                 optionPlayer.data.advantagesAndFlaws.map((adv: any, index: number) => {
                   if (adv.advantages.length > 0 || adv.flaws.length > 0) {
@@ -872,7 +878,7 @@ export default function MenuDm(props: { sessionId: string }) {
                           className="w-full"
                           onClick={ () => dispatch(actionShowAdvantage({ show: true, item: adv })) }
                         >
-                          <p className="text-center w-full pt-2 pb-1 hover:underline cursor-pointer">{ adv.name }</p>
+                          <p className="text-center border border-transparent hover:border-white rounded-full px-2 py-1">{ adv.name }</p>
                         </button>
                       }
                   </div>
@@ -880,6 +886,7 @@ export default function MenuDm(props: { sessionId: string }) {
                   }
                 )
               }
+              </div>
             </div>
             <p className="font-bold pr-1 w-full text-center mt-3">Background</p>
             <p className="w-full text-center">{ optionPlayer.data.background }</p>
