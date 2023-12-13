@@ -22,6 +22,7 @@ const INITIAL_STATE = {
   popupRitual: { show: false, ritual: {} },
   deleteHistoric: false,
   logoutUser: false,
+  popupDelAdv: {show: false, name: '', desc: '', type: ''},
   advantagesAndFlaws: [
     { name: "Caern", advantages: [], flaws: [] },
     { name: "Trabalho Diário", advantages: [], flaws: [] },
@@ -154,12 +155,16 @@ const slice: Slice = createSlice({
     actionLogoutUser(state, { payload }: PayloadAction<IList>) {
       return { ...state, logoutUser: payload };
     },
+    actionPopupDelAdv(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupDelAdv: payload };
+    },
   },
 });
 
 export default slice.reducer;
 
 export const {
+  actionPopupDelAdv,
   actionLogoutUser,
   actionUpdateAdvantage,
   actionDeleteSession,

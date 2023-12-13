@@ -1,11 +1,9 @@
 import firebaseConfig from "@/firebase/connection";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useSlice } from "@/redux/slice";
 import { collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { IoArrowDownCircleSharp, IoArrowUpCircleSharp } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { IoArrowDownCircleSharp, IoArrowUpCircleSharp, IoCheckmarkDone } from "react-icons/io5";
 
 interface IAdvantage {
   advantage: string;
@@ -24,8 +22,29 @@ interface IFlaw {
 export default function Advantage(props: any) {
   const { item, session } = props;
   const [ showAd, setShowAd ] = useState(false);
-  const slice = useAppSelector(useSlice);
+  const [adv, setAdv] = useState<any>([]);
   const router = useRouter();
+
+  useEffect(() => {
+    getAllAdvantages();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getAllAdvantages = async () => {
+    const token = localStorage.getItem('Segredos Da Fúria');
+    if (token) {
+      const decode: { email: string } = jwtDecode(token);
+      const { email } = decode;
+      const db = getFirestore(firebaseConfig);
+      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+      const userQuerySnapshot = await getDocs(userQuery);
+      const userDocument = userQuerySnapshot.docs[0];
+      const advAndflw = userDocument.data();
+      const playerFound = advAndflw.players.find((player: any) => player.email === email);
+      const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
+      setAdv(listOfAdvantages);
+    } else router.push('/user/login');
+  }
 
   const setAdvantageValueItem = async (obj: IAdvantage) => {
     const token = localStorage.getItem('Segredos Da Fúria');
@@ -43,6 +62,7 @@ export default function Advantage(props: any) {
 
       const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === obj.name);
       const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== obj.name);
+      const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
 
       if (obj.type === '') {
         if (foundAdvantage.advantages) {
@@ -51,6 +71,7 @@ export default function Advantage(props: any) {
             advantages: [],
             flaws: foundAdvantage.flaws,
           }
+          setAdv([...restOfAdvantage, updatedAdvantage]);
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
@@ -63,6 +84,7 @@ export default function Advantage(props: any) {
             flaws: foundAdvantage.flaws,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -74,6 +96,7 @@ export default function Advantage(props: any) {
           flaws: foundAdvantage.flaws,
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
+        setAdv([...restOfAdvantage, updated]);
         await updateDoc(userDocRef, {
           players: [searchPlayer, ...otherPlayers],
         });
@@ -86,6 +109,7 @@ export default function Advantage(props: any) {
             flaws: foundAdvantage.flaws,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -100,6 +124,7 @@ export default function Advantage(props: any) {
               flaws: foundAdvantage.flaws,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+            setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -110,6 +135,7 @@ export default function Advantage(props: any) {
               flaws: foundAdvantage.flaws,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+            setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -135,6 +161,7 @@ export default function Advantage(props: any) {
 
       const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === obj.name);
       const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== obj.name);
+      const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
 
       if (obj.type === '') {
         if (foundAdvantage.flaws) {
@@ -144,6 +171,7 @@ export default function Advantage(props: any) {
             flaws: [],
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -155,6 +183,7 @@ export default function Advantage(props: any) {
             flaws: updateAdvantage,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -166,6 +195,7 @@ export default function Advantage(props: any) {
           flaws: [obj],
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
+        setAdv([...restOfAdvantage, updated]);
         await updateDoc(userDocRef, {
           players: [searchPlayer, ...otherPlayers],
         });
@@ -180,6 +210,7 @@ export default function Advantage(props: any) {
             flaws: [...updateAdvantage, obj],
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          setAdv([...restOfAdvantage, updatedAdvantage]);
           await updateDoc(userDocRef, {
             players: [searchPlayer, ...otherPlayers],
           });
@@ -194,6 +225,7 @@ export default function Advantage(props: any) {
               flaws: newObject,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+            setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -204,6 +236,7 @@ export default function Advantage(props: any) {
               flaws: [...foundAdvantage.flaws, obj],
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+            setAdv([...restOfAdvantage, updatedAdvantage]);
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
@@ -213,12 +246,41 @@ export default function Advantage(props: any) {
     }
   }
 
+  const returnIfHavePoint = () => {
+    const find: any = adv.find((ad: any) => ad.name === item.name);
+    if (find) return find.advantages.length > 0 || find.flaws.length > 0;
+    return false;
+  };
+
+  const returnAdvantageNull = () => {
+    const find: any = adv.find((ad: any) => ad.name === item.name);
+    if (find) return find.advantages.length === 0;
+    return true;
+  };
+
+  const returnFlawNull = () => {
+    const find: any = adv.find((ad: any) => ad.name === item.name);
+    if (find) return find.flaws.length === 0;
+    return true;
+  };
+
+  const returnIfHaveAdvantage = (element: string) => {
+    const find: any = adv.find((ad: any) => ad.name === item.name);
+    if (find) return find.advantages.find((ad: any) => ad.advantage === element);
+    return false;
+  }
+
+  const returnIfHaveFlaw = (element: string) => {
+    const find: any = adv.find((ad: any) => ad.name === item.name);
+    if (find) return find.flaws.find((ad: any) => ad.flaw === element);
+    return false;
+  }
 
   return(
     <div>
     {
       !showAd
-        ? <div className="border-2 border-white mb-3 text-base font-normal flex justify-between items-center w-full">
+        ? <div className={`${returnIfHavePoint() ? 'bg-black' : ''} border-2 border-white mb-3 text-base font-normal flex justify-between items-center w-full`}>
             <button
               type="button"
               className="flex justify-between items-center w-full p-4"
@@ -244,126 +306,97 @@ export default function Advantage(props: any) {
                 <p className="my-3 font-bold">Vantagens</p>
                 <label
                   htmlFor={`advantages-${item.name}`}
-                  className="flex gap-3 cursor-pointer border border-white p-4 mb-2 items-center"
-                  onClick={() => setAdvantageValueItem({
-                    advantage: '',
-                    value: 0,
-                    name: item.name,
-                    type: "",
-                  })
-                  }
+                  className={`${returnAdvantageNull() ? 'bg-black' : ''} flex gap-3 cursor-pointer border border-white pl-2 py-4 pr-4 mb-2 items-center`}
+                  onClick={() => {
+                      setAdvantageValueItem({
+                        advantage: '',
+                        value: 0,
+                        name: item.name,
+                        type: "",
+                      });
+                    }}
                 >
-                  <div id={`advantages-${item.name}`} />
-                  <span className="font-bold">Nenhum (0)</span>
+                  { returnAdvantageNull() && <IoCheckmarkDone className="text-2xl" /> }
+                  <span className="font-bold" id={`advantages-${item.name}`}>
+                    Nenhum (0)
+                  </span>
                 </label>
                 { 
                   item.advantages.map((advantage: any, index2: number) => (
-                    <div key={index2} className={`border-2 border-white mb-2 ${advantage.type === "checkbox" ? 'bg-black' : 'bg-gray-whats'}`}>
-                      {
-                        advantage.title !== ''
-                        ? <label
-                            htmlFor={advantage.description}
-                            className={`mb-4 cursor-pointer ${advantage.type === "checkbox" ? 'bg-black' : 'bg-gray-whats'}`}
-                            onClick={() => setAdvantageValueItem({
-                              advantage: advantage.title,
-                              value: advantage.cost,
-                              name: item.name,
-                              type: advantage.type,
-                             })
-                            }
-                          >
-                          <div className="flex gap-3 pt-4 px-4">
-                            <div
-                              id={advantage.description}
-                            />
-                            <p className="font-bold">{ advantage.title } ( {advantage.cost} )</p>
-                          </div>
-                          <p className="p-4">{ advantage.description }</p>
-                        </label>
-                        : <label
-                            className={`mb-4 cursor-pointer ${advantage.type === "checkbox" ? 'bg-black' : 'bg-gray-whats'}`}   
-                            htmlFor={advantage.description}
-                            onClick={() => setAdvantageValueItem({
-                              advantage: advantage.description,
-                              value: advantage.cost,
-                              name: item.name,
-                              type: advantage.type,
-                             })
-                            }
-                          >
-                            <div className="gap-3 p-4">
-                              <div id={advantage.description} />
-                              <span className="p-4">{ advantage.description }</span>
-                            </div>
-                          </label>
-                      }
+                    <div
+                      key={index2}
+                      className={`border-2 border-white mb-2 ${ returnIfHaveAdvantage(advantage.description) ? 'bg-black': ''}`}>
+                      <label
+                        className={`mb-4 cursor-pointer`}   
+                        htmlFor={advantage.description}
+                        onClick={() => {
+                          setAdvantageValueItem({
+                            advantage: advantage.description,
+                            value: advantage.cost,
+                            name: item.name,
+                            type: advantage.type,
+                          });
+                        }}
+                        >
+                          <p className="list-none pl-2 py-4 pr-4 text-justify flex">
+                            <span className="list-disc text-2xl pr-2">
+                              {returnIfHaveAdvantage(advantage.description) && <IoCheckmarkDone />}
+                            </span>
+                            <span id={advantage.description} className="flex">
+                              Custo {advantage.cost} - {advantage.description}
+                            </span>
+                          </p>
+                      </label>
                     </div>
                   ))
                 }
-                {
-                  item.name === 'Máscara' &&
-                  item.aditional.map((ad: any, index2: number) => (
-                  <div key={index2} className="border-2 border-white mb-2">
-                    <label
-                      htmlFor={ad.description}
-                      className="mb-4 cursor-pointer"
-                      onClick={() => setAdvantageValueItem({
-                        advantage: ad.title,
-                        value: ad.cost,
-                        name: item.name,
-                        type: ad.type,
-                      })}
-                    >
-                      <div className="flex gap-3 pt-4 px-4">
-                        <div id={ad.description} />
-                        <p className="font-bold">{ ad.title } ( {ad.cost} )</p>
-                      </div>
-                      <p className="p-4">{ ad.description }</p>
-                    </label>
-                    </div>
-                    ))
-                  }
-                </div>
-              <div>
                 { 
                   item.flaws.length > 0 &&
                   <div>
                     <p className="my-3 font-bold">Desvantagens</p>
                     <label
                       htmlFor={`flaw-${item.name}`}
-                      className="flex gap-3 cursor-pointer border border-white p-4 mb-2"
-                      onClick={() => setFlawValueItem({
-                        flaw: '',
-                        value: 0,
-                        type: "",
-                        name: item.name
-                      })}
+                      className={`${returnFlawNull() ? 'bg-black' : ''} flex gap-3 cursor-pointer border border-white pl-2 py-4 pr-4 mb-2`}
+                      onClick={async () => {
+                        await getAllAdvantages();
+                        setFlawValueItem({
+                          flaw: '',
+                          value: 0,
+                          type: "",
+                          name: item.name
+                        });
+                      }}
                     >
-                      <div id={`flaw-${item.name}`} />
-                      <span className="font-bold">Nenhum (0)</span>
+                      { returnFlawNull() && <IoCheckmarkDone className="text-2xl" /> }
+                      <span id={`flaw-${item.name}`} className="font-bold">
+                        Nenhum (0)
+                      </span>
                     </label>
                   </div>
                 }
                 { 
                   item.flaws.map((flaw: any, index2: number) => (
-                    <div key={index2} className="border-2 border-white mb-3">
+                    <div key={index2} className={`border-2 border-white mb-3 ${ returnIfHaveFlaw(flaw.description) ? 'bg-black': ''}`}>
                       <label
                         htmlFor={flaw.description}
                         className="mb-4 cursor-pointer"
-                        onClick={() => setFlawValueItem({
-                          flaw: flaw.title,
-                          value: flaw.cost,
-                          name: item.name,
-                          type: flaw.type,
-                        })}
+                        onClick={() => {
+                          setFlawValueItem({
+                            flaw: flaw.description,
+                            value: flaw.cost,
+                            name: item.name,
+                            type: flaw.type,
+                          });
+                      }}
                       >
-                        <div className="flex gap-3 pt-4 px-4">
-                          <div id={flaw.description} />
-                          {
-                            item.type !== "background" && <p className="font-bold">{ flaw.title } ( {flaw.cost} )</p>
-                          }
-                        </div>
-                        <p className="p-4">{ flaw.description }</p>
+                        <p className="list-none pl-2 py-4 pr-4 text-justify flex">
+                            <span className="list-disc text-2xl pr-2">
+                              {returnIfHaveFlaw(flaw.description) && <IoCheckmarkDone />}
+                            </span>
+                            <span id={flaw.description} className="flex">
+                            Custo {flaw.cost} - {flaw.description}
+                            </span>
+                          </p>
                       </label>
                     </div>
                   ))

@@ -1,4 +1,4 @@
-import { arrayUnion, collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { jwtDecode } from "jwt-decode";
 

@@ -72,7 +72,9 @@ export const returnRageCheck = async (rageCheck: number, type: string, session: 
         if (player.data.rage - success < 0) {
           player.data.rage = 0;
         } else {
+          console.log(player.data.rage, resultOfRage.length, success)
           player.data.rage = player.data.rage - (resultOfRage.length - success);
+          console.log(player.data.rage);
         }
         await registerMessage({
           message: {

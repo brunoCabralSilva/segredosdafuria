@@ -1,14 +1,11 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionLogoutUser, useSlice } from "@/redux/slice";
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
+import { useAppDispatch } from "@/redux/hooks";
+import { actionLogoutUser } from "@/redux/slice";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firebaseConfig from "../firebase/connection";
 
 export default function PopupLogout(props: any) {
   const { setShowMenu } = props;
-  const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
 

@@ -46,12 +46,7 @@ export default function Forms(props: { session: string }) {
       try {
         const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
         const { email, firstName, lastName } = decodedToken;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        if (name !== player.data.form) {
+        if (name !== formSelected) {
           if (name === 'Hominídeo' || name === 'Lupino') {
             await registerMessage({
               message: `Mudou para a forma ${name}.`,
@@ -61,18 +56,23 @@ export default function Forms(props: { session: string }) {
           }
           if (name === 'Crinos') await returnRageCheck(2, name, session);
           if (name === 'Glabro' || name === 'Hispo') await returnRageCheck(1, name, session);
-          if (player.data.form === "Crinos") {
-            if (player.data.rage > 0) {
-              player.data.rage = 1;
-              await registerMessage({
-                message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
-                user: firstName + ' ' + lastName,
-                email: email,
-              }, session);
-            }
-          }
-          dispatch(actionShowMenuSession(''))
         }
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+        const userQuerySnapshot = await getDocs(userQuery);
+        const players: any = [];
+        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+        const player: any = players.find((gp: any) => gp.email === email);
+        if (player.data.form === "Crinos") {
+          if (player.data.rage > 0) {
+            player.data.rage = 1;
+            await registerMessage({
+              message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
+              user: firstName + ' ' + lastName,
+              email: email,
+            }, session);
+          }
+        }
+        dispatch(actionShowMenuSession(''))
         player.data.form = name;
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);

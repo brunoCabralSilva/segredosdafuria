@@ -6,23 +6,20 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "Acesso a Caern",
         "type": "radio",
-        "description": "Você tem permissão para fazer uso de um Caern específico pertencente a outro septo, contanto que suas ações não interfiram em suas atividades ou coloquem em risco a segurança do caern. Você deve concordar com a natureza do caern e o septo de proteção com o Narrador."
+        "description": "Acesso a Caern - Você tem permissão para fazer uso de um Caern específico pertencente a outro septo, contanto que suas ações não interfiram em suas atividades ou coloquem em risco a segurança do caern. Você deve concordar com a natureza do caern e o septo de proteção com o Narrador."
       },
       {
         "cost": 5,
-        "title": "Caern Desperto",
         "type": "radio",
-        "description": "Você faz parte de um septo que guarda um caern que já foi despertado em algum grau, ou está prestes a descobrir um caern de significância, já parcialmente despertado. Adicione um ao valor do caern do primeiro caern que você se juntar ou descobrir. Essa Vantagem não acumula, mas vários membros podem 'contribuir' para acumular os cinco pontos, a critério do Narrador."
+        "description": "Caern Desperto - Você faz parte de um septo que guarda um caern que já foi despertado em algum grau, ou está prestes a descobrir um caern de significância, já parcialmente despertado. Adicione um ao valor do caern do primeiro caern que você se juntar ou descobrir. Essa Vantagem não acumula, mas vários membros podem 'contribuir' para acumular os cinco pontos, a critério do Narrador."
       }
     ],
     "flaws": [
       {
         "cost": 1,
         "type": "radio",
-        "title": "Pária do Caern",
-        "description": "Você se tornou indesejado em todos os caerns em seu território (cidade natal ou outra área central à crônica). Você precisa pagar caro pelo privilégio de acesso, geralmente realizando serviços perigosos, ou recorrer à furtividade. Se pego, as coisas provavelmente escalarão para a violência. Isso não se aplica a um caern cujo septo você pertence, embora possa fornecer uma desculpa caso alguém em seu septo queira que você vá embora."
+        "description": "Pária do Caern - Você se tornou indesejado em todos os caerns em seu território (cidade natal ou outra área central à crônica). Você precisa pagar caro pelo privilégio de acesso, geralmente realizando serviços perigosos, ou recorrer à furtividade. Se pego, as coisas provavelmente escalarão para a violência. Isso não se aplica a um caern cujo septo você pertence, embora possa fornecer uma desculpa caso alguém em seu septo queira que você vá embora."
       }
     ]
   },
@@ -34,14 +31,12 @@
       {
         "cost": 1,
         "type": "radio",
-        "title": "Emprego Diurno",
-        "description": "Esforços para obscurecer sua natureza de Garou ao usar o emprego ganham um bônus de um dado para piscinas relevantes, como Subterfúgio ('Não fui eu; eu estava no trabalho naquele dia') ou Persuasão ('Quantos lobisomens você acha que a empresa de TV a cabo emprega para fazer instalações?')."
+        "description": "Emprego Diurno - Esforços para obscurecer sua natureza de Garou ao usar o emprego ganham um bônus de um dado para piscinas relevantes, como Subterfúgio ('Não fui eu; eu estava no trabalho naquele dia') ou Persuasão ('Quantos lobisomens você acha que a empresa de TV a cabo emprega para fazer instalações?')."
       },
       {
         "cost": 2,
-        "title": "Emprego Diurno Corroborado",
         "type": "radio",
-        "description": "Assim como o Emprego Diurno, acima, mas pessoas com quem você trabalha (ou finge trabalhar) corroboram suas alegações de trabalho, fornecendo uma substanciação além dos documentos básicos de emprego. Adicione dois dados às piscinas semelhantes às acima."
+        "description": "Emprego Diurno Corroborado - Assim como o Emprego Diurno, acima, mas pessoas com quem você trabalha (ou finge trabalhar) corroboram suas alegações de trabalho, fornecendo uma substanciação além dos documentos básicos de emprego. Adicione dois dados às piscinas semelhantes às acima."
       }
     ],
     "flaws": []
@@ -53,53 +48,45 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "1 Idioma adicional",
         "type": "radio",
-        "description": "Permite que o personagem fale, escreva e leia fluentemente uma língua adicional, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "1 Idioma adicional - Permite que o personagem fale, escreva e leia fluentemente uma língua adicional, além de sua língua de nascimento e do idioma dominante do cenário."
       },
       {
         "cost": 2,
-        "title": "2 Idiomas adicionais",
         "type": "radio",
-        "description": "Permite que o personagem fale, escreva e leia fluentemente duas línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "2 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente duas línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
       },
       {
         "cost": 3,
-        "title": "3 Idiomas adicionais",
         "type": "radio",
-        "description": "Permite que o personagem fale, escreva e leia fluentemente três línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "3 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente três línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
       },
       {
         "cost":4,
-        "title": "4 Idiomas adicionais",
         "type": "radio",
-        "description": "Permite que o personagem fale, escreva e leia fluentemente quatro línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "4 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente quatro línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
       },
       {
         "cost": 5,
-        "title": "5 Idiomas adicionais",
         "type": "radio",
-        "description": "Permite que o personagem fale, escreva e leia fluentemente cinco línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "5 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente cinco línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
       },
       {
         "cost": 6,
-        "title": "6 Idiomas adicionais",
         "type": "radio",
-        "description": "Permite que o personagem fale, escreva e leia fluentemente seis línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "6 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente seis línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
       },
       {
         "cost": 7,
-        "title": "7 Idiomas adicionais",
         "type": "radio",
-        "description": "Permite que o personagem fale, escreva e leia fluentemente sete línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "7 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente sete línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
       }
     ],
     "flaws": [
       {
         "cost": 2,
         "type": "radio",
-        "title": "Analfabetismo",
-        "description": "Você não pode ler nem escrever. Suas habilidades de Acadêmicos e Ciências são limitadas a 1, e você não pode ter uma Especialidade nelas que incorpore conhecimento moderno."
+        "description": "Analfabetismo - Você não pode ler nem escrever. Suas habilidades de Acadêmicos e Ciências são limitadas a 1, e você não pode ter uma Especialidade nelas que incorpore conhecimento moderno."
       }
     ]
   },
@@ -110,21 +97,18 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "Clement Lupus",
         "type": "radio",
-        "description": "Sua forma lupina parece mais com um cachorro do que com um lobo, e a menos que tenham motivo para acreditar, nenhum observador humano que te veja na forma lupina pensa que você é um lobo."
+        "description": "Clement Lupus - Sua forma lupina parece mais com um cachorro do que com um lobo, e a menos que tenham motivo para acreditar, nenhum observador humano que te veja na forma lupina pensa que você é um lobo."
       },
       {
         "cost": 2,
-        "title": "Bonito(a)",
         "type": "radio",
-        "description": "Você adiciona um dado extra a todos os pools de dados Sociais apropriados."
+        "description": "Bonito(a) - Você adiciona um dado extra a todos os pools de dados Sociais apropriados."
       },
       {
         "cost": 4,
-        "title": "Deslumbrante",
         "type": "radio",
-        "description": "Você adiciona dois dados extras a todos os pools de dados Sociais apropriados, como mencionado acima."
+        "description": "Deslumbrante - Você adiciona dois dados extras a todos os pools de dados Sociais apropriados, como mencionado acima."
       }
     ],
     "flaws": [
@@ -150,14 +134,12 @@
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Refúgio Seguro e Oculto",
-        "description": "Os esforços para encontrar o Garou e qualquer pessoa com eles enquanto estão na safe house sofrem uma penalidade de 2 dados."
+        "description": "Refúgio Seguro e Oculto - Os esforços para encontrar o Garou e qualquer pessoa com eles enquanto estão na safe house sofrem uma penalidade de 2 dados."
       },
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Refúgio Seguro e Protegido",
-        "description": "Adicione 2 dados aos pools relevantes para descobrir ou resistir à entrada não autorizada em seu Refúgio Seguro."
+        "description": "Refúgio Seguro e Protegido - Adicione 2 dados aos pools relevantes para descobrir ou resistir à entrada não autorizada em seu Refúgio Seguro."
       }
     ],
     "flaws": []
@@ -170,22 +152,19 @@
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Acelerado pela Lua",
-        "description": "A lua o inspira mais do que outros lobisomens. A primeira vez que você uiva para a lua em uma determinada noite, você pode restaurar um ponto de dano Superficial de Força de Vontade."
+        "description": "Acelerado pela Lua - A lua o inspira mais do que outros lobisomens. A primeira vez que você uiva para a lua em uma determinada noite, você pode restaurar um ponto de dano Superficial de Força de Vontade."
       },
       {
         "cost": 3,
         "type": "checkbox",
-        "title": "Afligido pela Lua",
-        "description": "A lua inflama sua Fúria em um grau ainda maior do que a maioria dos outros lobisomens. Você ganha um ponto adicional de Fúria quando uiva para a lua pela primeira vez a cada noite."
+        "description": "Afligido pela Lua - A lua inflama sua Fúria em um grau ainda maior do que a maioria dos outros lobisomens. Você ganha um ponto adicional de Fúria quando uiva para a lua pela primeira vez a cada noite."
       }
     ],
     "flaws": [
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Maldição Folclórica",
-        "description": "Você sofre dano Agravado de uma proibição folclórica. Proibições folclóricas incluem: água benta (dano como fogo), uma arma empunhada por um crente devoto em sua própria fé, uma arma adornada com pedra-da lua (hecatolite), ou a própria pedra-da-lua (dano como dano de arma; simplesmente tocar uma pedra-da-lua ou uma joia de pedra-da-lua causa um ponto de dano Agravado), ou outra proibição acordada entre você e o Narrador.",
+        "description": "Maldição Folclórica - Você sofre dano Agravado de uma proibição folclórica. Proibições folclóricas incluem: água benta (dano como fogo), uma arma empunhada por um crente devoto em sua própria fé, uma arma adornada com pedra-da lua (hecatolite), ou a própria pedra-da-lua (dano como dano de arma; simplesmente tocar uma pedra-da-lua ou uma joia de pedra-da-lua causa um ponto de dano Agravado), ou outra proibição acordada entre você e o Narrador.",
         "sugestions": [
           "Água benta (dano como fogo)",
           "Uma arma empunhada por um crente devoto em sua própria fé",
@@ -195,8 +174,7 @@
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Bloqueio Folclórico",
-        "description": "Ao enfrentar um bloqueio folclórico, você deve se afastar ou gastar um ponto de Força de Vontade para ultrapassá-lo. Cada bloqueio folclórico que você aceita conta como uma Falha separada de um ponto. Blocos folclóricos incluem: aconitina ou outras ervas consideradas ter propriedades místicas, símbolos sagrados apresentados por qualquer crente, a presença de uma virgem maior de idade, símbolos religiosos, prata mostrada (além da aversão normal dos Garou à prata), ser abordado três vezes consecutivas pelo nome que você tinha antes de sua Primeira Mudança (mesmo que seja o mesmo que seu nome agora), ou outro bloqueio acordado entre você e o Narrador.",
+        "description": "Bloqueio Folclórico - Ao enfrentar um bloqueio folclórico, você deve se afastar ou gastar um ponto de Força de Vontade para ultrapassá-lo. Cada bloqueio folclórico que você aceita conta como uma Falha separada de um ponto. Blocos folclóricos incluem: aconitina ou outras ervas consideradas ter propriedades místicas, símbolos sagrados apresentados por qualquer crente, a presença de uma virgem maior de idade, símbolos religiosos, prata mostrada (além da aversão normal dos Garou à prata), ser abordado três vezes consecutivas pelo nome que você tinha antes de sua Primeira Mudança (mesmo que seja o mesmo que seu nome agora), ou outro bloqueio acordado entre você e o Narrador.",
         "sugestions": [
           "Aconitina ou outras ervas consideradas ter propriedades místicas",
           "Símbolos sagrados apresentados por qualquer crente",
@@ -209,8 +187,7 @@
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Conto Folclórico",
-        "description": "Você tem algum indicador que faz as pessoas pensarem que há algo perturbador sobre você, independentemente de associarem o indicador especificamente aos lobisomens. Aqueles que discernem seu indicador folclórico desconfiam de você, dando a você uma penalidade de -1 dado aos testes sociais, exceto aqueles baseados em Intimidação. Cada indicador folclórico que você aceita conta como uma Falha separada de um ponto. Indicadores folclóricos incluem: pessoas ouvem uivos em sua presença (mesmo que nada esteja uivando de fato), sua sombra é a de um lobo quando você está na forma humana e humana quando está na forma de lobo, leite estraga e plantas murcham em sua chegada, ou outro indicador acordado entre você e o Narrador.",
+        "description": "Conto Folclórico - Você tem algum indicador que faz as pessoas pensarem que há algo perturbador sobre você, independentemente de associarem o indicador especificamente aos lobisomens. Aqueles que discernem seu indicador folclórico desconfiam de você, dando a você uma penalidade de -1 dado aos testes sociais, exceto aqueles baseados em Intimidação. Cada indicador folclórico que você aceita conta como uma Falha separada de um ponto. Indicadores folclóricos incluem: pessoas ouvem uivos em sua presença (mesmo que nada esteja uivando de fato), sua sombra é a de um lobo quando você está na forma humana e humana quando está na forma de lobo, leite estraga e plantas murcham em sua chegada, ou outro indicador acordado entre você e o Narrador.",
         "sugestions:": [
           "As pessoas ouvem uivos em sua presença (seja ou não algo realmente uivando)",
           "Sua sombra é a de um lobo quando você está em forma humana e humana quando está em forma de lobo",
@@ -221,14 +198,12 @@
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Maldição da Anciã",
-        "description": "Alguma maldição espiritual o afetou e o envelheceu rapidamente, como o desfavor de um Bane ou alguma circunstância profética, ou você simplesmente experimentou a Primeira Mudança bem depois do seu auge. Sua saúde sofreu, e você tem uma caixa a menos em sua trilha de saúde do que teria."
+        "description": "Maldição da Anciã - Alguma maldição espiritual o afetou e o envelheceu rapidamente, como o desfavor de um Bane ou alguma circunstância profética, ou você simplesmente experimentou a Primeira Mudança bem depois do seu auge. Sua saúde sofreu, e você tem uma caixa a menos em sua trilha de saúde do que teria."
       },
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Submisso à Lua",
-        "description": "A lua tem uma influência indevida sobre você. Sempre que você vê a lua pela primeira vez em uma determinada noite, você deve mudar para a forma glabro ou hispo (e fazer quaisquer verificações de Fúria concomitantes)."
+        "description": "Submisso à Lua - A lua tem uma influência indevida sobre você. Sempre que você vê a lua pela primeira vez em uma determinada noite, você deve mudar para a forma glabro ou hispo (e fazer quaisquer verificações de Fúria concomitantes)."
       }
     ]
   },
@@ -239,25 +214,21 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "",
         "type": "radio",
         "description": "Indivíduo fraco, provavelmente inútil em uma situação violenta ou potencialmente violenta."
       },
       {
         "cost": 2,
-        "title": "",
         "type": "radio",
         "description": "Indivíduo médio ou um grupo coeso de indivíduos fracos (trabalhadores portuários imprevisíveis, um sindicato mal organizado, capítulo de uma ONG)."
       },
       {
         "cost": 3,
-        "title": "",
         "type": "radio",
         "description": "Indivíduo talentoso ou um grupo perigoso de indivíduos médios (gangue de rua, acompanhantes de celebridades, sindicato operário bem organizado)."
       },
       {
         "cost": 4,
-        "title": "",
         "type": "radio",
         "description": "Indivíduo superlativo, um indivíduo talentoso potencialmente com poderes sobrenaturais, ou um grupo bem armado de indivíduos talentosos (equipe de segurança privada, grupo de advogados, equipe de atletas treinados)"
       }
@@ -271,19 +242,16 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "",
         "type": "radio",
         "description": "Quando você os chama, eles aparecem metade do tempo."
       },
       {
         "cost": 2,
-        "title": "",
         "type": "radio",
         "description": "Quando você os chama, eles aparecem dentro de 1 a 10 horas (role um dado)."
       },
       {
         "cost": 3,
-        "title": "",
         "type": "radio",
         "description": "Quando você os chama, eles aparecem o mais rápido possível."
       }
@@ -304,19 +272,16 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "",
         "type": "radio",
         "description": "Um Contato que pode fornecer informações comuns, mas especializadas, como um traficante de drogas ou um vendedor de carros."
       },
       {
         "cost": 2,
-        "title": "",
         "type": "radio",
         "description": "Um Contato que pode fornecer informações incomuns e privilegiadas, como um pequeno traficante de armas ou um psiquiatra."
       },
       {
         "cost": 3,
-        "title": "",
         "type": "radio",
         "description": "Um Contato que pode fornecer informações críticas e até mesmo classificadas como do governo, como um especialista em sistemas de segurança, agente de narcóticos ou lobista de elite."
       }
@@ -331,31 +296,26 @@
       {
         "cost": 1,
         "type": "radio",
-        "title":"",
-        "description": "Uma subcultura selecione sabe quem você é e o admira."
+        "description": "Uma subcultura sabe quem você é e o admira."
       },
       {
         "cost": 2,
         "type": "radio",
-        "title":"",
         "description": "Você é uma celebridade local, reconhecida pela maioria da cidade."
       },
       {
         "cost": 3,
         "type": "radio",
-        "title":"",
         "description": "A maioria das pessoas no país conhece pelo menos o seu nome."
       },
       {
         "cost": 4,
         "type": "radio",
-        "title":"",
         "description": "Todo mundo que se importa vagamente com as tendências sociais ou seu campo sabe algo sobre você."
       },
       {
         "cost": 5,
         "type": "radio",
-        "title":"",
         "description": "Sua Fama atinge audiências nacionais ou até mesmo globais em massa. Você é uma grande estrela de cinema, uma banda de rock que lota estádios ou uma personalidade da Internet."
       }
     ],
@@ -363,20 +323,17 @@
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Segredo Sombrio",
-        "description": "O Defeito do Segredo Sombrio é semelhante à Infâmia, mas suas ações obscuras permanecem desconhecidas para todos, exceto você e talvez um ou dois inimigos muito motivados. Também é mais fácil de descobrir do que um segredo verdadeiramente ameaçador. Exemplos incluem uma dívida significativa com um criminoso ou ter um arquivo em uma agência governamental de caça a lobisomens."
+        "description": "Segredo Sombrio - O Defeito do Segredo Sombrio é semelhante à Infâmia, mas suas ações obscuras permanecem desconhecidas para todos, exceto você e talvez um ou dois inimigos muito motivados. Também é mais fácil de descobrir do que um segredo verdadeiramente ameaçador. Exemplos incluem uma dívida significativa com um criminoso ou ter um arquivo em uma agência governamental de caça a lobisomens."
       },
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Parceiro Infame",
-        "description": "Seu cônjuge, amante ou alguma outra pessoa significativa para você tem Infâmia (como acima) que ocasionalmente mancha sua reputação por associação."
+        "description": "Parceiro Infame - Seu cônjuge, amante ou alguma outra pessoa significativa para você tem Infâmia (como acima) que ocasionalmente mancha sua reputação por associação."
       },
       {
         "cost": 2,
-        "title": "Infâmia",
         "type": "checkbox",
-        "description": "Você é famoso por algo horrível. Pelo menos, a Dificuldade da maioria dos testes de reação aumenta pela quantidade do Defeito; na pior das hipóteses, as autoridades tentam matar ou capturar você à vista. Você pode estar na lista dos mais procurados de um governo, ou o Grupo Pentex pode circular sua descrição como um indivíduo perigoso entre suas várias frentes."
+        "description": "Infâmia - Você é famoso por algo horrível. Pelo menos, a Dificuldade da maioria dos testes de reação aumenta pela quantidade do Defeito; na pior das hipóteses, as autoridades tentam matar ou capturar você à vista. Você pode estar na lista dos mais procurados de um governo, ou o Grupo Pentex pode circular sua descrição como um indivíduo perigoso entre suas várias frentes."
       }
     ]
   },
@@ -388,42 +345,34 @@
       {
         "cost": 1,
         "type": "radio",
-        "title": "Identidade Falsa de Qualidade",
-        "description": "Inclui cartão de crédito, conta bancária, histórico de crédito, certidão de nascimento, etc., todos no nome da sua Máscara. Você pode passar em uma verificação de antecedentes estadual ou provincial."
+        "description": "Identidade Falsa de Qualidade - Inclui cartão de crédito, conta bancária, histórico de crédito, certidão de nascimento, etc., todos no nome da sua Máscara. Você pode passar em uma verificação de antecedentes estadual ou provincial."
       },
       {
         "cost": 2,
         "type": "radio",
-        "title": "Verificação de Antecedentes",
-        "description": "Sua Máscara pode passar em uma verificação de antecedentes com a polícia nacional: FBI, Scotland Yard ou equivalente. Se você tiver um registro militar ou de inteligência, ele foi classificado."
+        "description": "Verificação de Antecedentes - Sua Máscara pode passar em uma verificação de antecedentes com a polícia nacional: FBI, Scotland Yard ou equivalente. Se você tiver um registro militar ou de inteligência, ele foi classificado."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "description": "Apagado - Alguém em posições elevadas eliminou seus registros reais. Oficialmente, você não existe."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "description": "Mestre das Máscaras - Você pode criar ou obter Máscaras. Criar uma Máscara leva três dias por ponto e possivelmente expõe você online; obter Máscaras leva um dia por ponto, mas custa algo em troca. O quanto depende da sua alavancagem, margem no teste social ou qualquer outra coisa que o Narrador decida"
       }
     ],
     "flaws": [
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Pessoa de Interesse",
-        "description": "Suas biometrias, nome, histórico, associados conhecidos e pseudônimos aparecem em vários bancos de dados de agências de inteligência, provavelmente identificando você como um potencial terrorista. Qualquer operador de agência governamental (ou analista comparável) provavelmente conseguirá juntar as peças para perceber o que você anda fazendo."
+        "description": "Pessoa de Interesse - Suas biometrias, nome, histórico, associados conhecidos e pseudônimos aparecem em vários bancos de dados de agências de inteligência, provavelmente identificando você como um potencial terrorista. Qualquer operador de agência governamental (ou analista comparável) provavelmente conseguirá juntar as peças para perceber o que você anda fazendo."
       },
       {
         "cost": 1,
-        "title": "Erro de Série",
         "type": "checkbox",
-        "description": "Em algum lugar, alguém cometeu um erro em detrimento ao seu. Como resultado, qualquer pessoa que faça uma verificação de antecedentes em você descobrirá que você morreu recentemente, está em uma lista de observação como perigoso ou, de alguma forma, merece detenção ou uma chamada para a polícia. Este defeito também se aplica a qualquer pesquisa de banco de dados em sua identidade."
-      }
-    ],
-    "aditional": [
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Apagado",
-        "description": "Alguém em posições elevadas eliminou seus registros reais. Oficialmente, você não existe."
-      },
-      {
-        "cost": 1,
-        "title": "Mestre das Máscaras",
-        "type": "checkbox",
-        "description": "Você pode criar ou obter Máscaras. Criar uma Máscara leva três dias por ponto e possivelmente expõe você online; obter Máscaras leva um dia por ponto, mas custa algo em troca. O quanto depende da sua alavancagem, margem no teste social ou qualquer outra coisa que o Narrador decida"
+        "description": "Erro de Série - Em algum lugar, alguém cometeu um erro em detrimento ao seu. Como resultado, qualquer pessoa que faça uma verificação de antecedentes em você descobrirá que você morreu recentemente, está em uma lista de observação como perigoso ou, de alguma forma, merece detenção ou uma chamada para a polícia. Este defeito também se aplica a qualquer pesquisa de banco de dados em sua identidade."
       }
     ]
   },
@@ -434,31 +383,26 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "",
         "type": "radio",
         "description": "Garou de Renome 1 / Gaffling respeitado."
       },
       {
         "cost": 2,
-        "title": "",
         "type": "radio",
         "description": "Garou de Renome 2 / Jaggling estabelecido."
       },
       {
         "cost": 3,
-        "title": "",
         "type": "radio",
         "description": "Garou de Renome 3 / Jaggling respeitado."
       },
       {
         "cost": 4,
-        "title": "",
         "type": "radio",
         "description": "Garou de Renome 4 / Jaggling honrado."
       },
       {
         "cost": 5,
-        "title": "",
         "type": "radio",
         "description": "Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmática, agindo em seu nome de maneiras que precisam ser interpretadas."
       }
@@ -466,21 +410,18 @@
     "flaws": [
       {
         "cost": 1,
-        "title": "Novato",
         "type": "radio",
-        "description": "Garou de Renome 3 / Jaggling respeitado."
+        "description": "Novato - Garou de Renome 3 / Jaggling respeitado."
       },
       {
         "cost": 3,
-        "title": "Veterano",
         "type": "radio",
-        "description": "Garou de Renome 4 / Jaggling honrado."
+        "description": "Veterano - Garou de Renome 4 / Jaggling honrado."
       },
       {
         "cost": 5,
-        "title": "Ancião",
         "type": "radio",
-        "description": "Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmático, agindo contra seu nome de maneiras que precisam ser interpretadas."
+        "description": "Ancião - Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmático, agindo contra seu nome de maneiras que precisam ser interpretadas."
       }
     ]
   },
@@ -491,31 +432,26 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "",
         "type": "radio",
         "description": "Estilo de vida de salário mínimo."
       },
       {
         "cost": 2,
-        "title": "",
         "type": "radio",
         "description": "Estilo de vida de classe média."
       },
       {
         "cost": 3,
-        "title": "",
         "type": "radio",
         "description": "Estilo de vida de classe alta."
       },
       {
         "cost": 4,
-        "title": "",
         "type": "radio",
         "description": "Estilo de vida rico."
       },
       {
         "cost": 5,
-        "title": "",
         "type": "radio",
         "description": "Estilo de vida ultra-rico."
       }
@@ -524,8 +460,7 @@
       {
         "cost": 1,
         "type": "radio",
-        "title": "Destituído",
-        "description": "Você não tem dinheiro e nem casa."
+        "description": "Destituído - Você não tem dinheiro e nem casa."
       }
     ]
   },
@@ -536,53 +471,45 @@
     "advantages": [
       {
         "cost": 1,
-        "title": "",
         "type": "radio",
         "description": "Espírito / Gaffling menor."
       },
       {
         "cost": 2,
-        "title": "",
         "type": "radio",
         "description": "Espírito / Gaffling moderado."
       },
       {
         "cost": 3,
-        "title": "",
         "type": "radio",
         "description": "Espírito / Gaffling maior ou Jagling menor."
       },
       {
         "cost": 4,
-        "title": "",
         "type": "radio",
         "description": "Espírito / Jagling menor."
       },
       {
         "cost": 5,
-        "title": "",
         "type": "radio",
         "description": "Espírito / Jagling moderado."
       },
       {
         "cost": 1,
-        "title": "Companheiro",
         "type": "radio",
-        "description": "O espírito pode acompanhá-lo onde quer que você vá, desde que não encontre barreiras espirituais ou outras contramedidas aplicáveis. A comunicação com ele é restrita à Umbra ou ao acessar os Espíritos Selvagens através do uso dos Sentidos Penumbrais."
+        "description": "Companheiro - O espírito pode acompanhá-lo onde quer que você vá, desde que não encontre barreiras espirituais ou outras contramedidas aplicáveis. A comunicação com ele é restrita à Umbra ou ao acessar os Espíritos Selvagens através do uso dos Sentidos Penumbrais."
       },
       {
         "cost": 1,
-        "title": "Hospedeiro",
         "type": "radio",
-        "description": "O espírito possui um corpo hospedeiro persistente, como um animal, ou a capacidade de possuir outro tipo de característica recorrente, como árvores ou monitores. Isso permite que ele interaja com você e qualquer outra pessoa no mundo físico."
+        "description": "Hospedeiro - O espírito possui um corpo hospedeiro persistente, como um animal, ou a capacidade de possuir outro tipo de característica recorrente, como árvores ou monitores. Isso permite que ele interaja com você e qualquer outra pessoa no mundo físico."
       }
     ],
     "flaws": [
       {
         "cost": 1,
-        "title": "Condição de Pacto",
         "type": "radio",
-        "description": "Seu pacto depende de você realizar ou evitar certos atos em troca do serviço, como um espírito do fogo exigindo que você acenda uma vela em cada edifício que você entrar. Não cumprir essa condição irrita o espírito, e ele não será considerado um aliado até que uma penitência adequada seja feita, conforme decidido pelo Narrador."
+        "description": "Condição de Pacto - Seu pacto depende de você realizar ou evitar certos atos em troca do serviço, como um espírito do fogo exigindo que você acenda uma vela em cada edifício que você entrar. Não cumprir essa condição irrita o espírito, e ele não será considerado um aliado até que uma penitência adequada seja feita, conforme decidido pelo Narrador."
       }
     ]
   }

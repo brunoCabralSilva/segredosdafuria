@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import data from '../../data/advantagesAndFlaws.json';
 import Advantage from './itemAdvangate';
 import { IoAdd, IoClose } from 'react-icons/io5';
@@ -8,6 +8,7 @@ import ItensAdvantagesAdded from './itemAdvantagedAdded';
 export default function AdvantagesAndFlaws(props: any) {
   const { session } = props;
   const [allAdvantages, showAllAdvantages] = useState(false);
+
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
       <div className="w-full h-full mb-2 cursor-pointer flex-col items-start justify-center font-bold">
@@ -26,7 +27,6 @@ export default function AdvantagesAndFlaws(props: any) {
           className="p-1 border-2 border-white bg-white sm:absolute right-3"
           onClick={ () => {
             showAllAdvantages(!allAdvantages);
-            // generateDataForGifts();
           }}
         >
           { 
