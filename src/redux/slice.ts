@@ -24,6 +24,7 @@ const INITIAL_STATE = {
   logoutUser: false,
   popupDelAdv: {show: false, name: '', desc: '', type: ''},
   sumOfAdv: { advantageSum: 0, flawSum: 0 },
+  showAdvantage: { show: false, item: {} },
   advantagesAndFlaws: [
     { name: "Caern", advantages: [], flaws: [] },
     { name: "Trabalho Diário", advantages: [], flaws: [] },
@@ -162,12 +163,16 @@ const slice: Slice = createSlice({
     actionSumOfAdv(state, { payload }: PayloadAction<IList>) {
       return { ...state, sumOfAdv: payload };
     },
+    actionShowAdvantage(state, { payload }: PayloadAction<IList>) {
+      return { ...state, showAdvantage: payload };
+    },
   },
 });
 
 export default slice.reducer;
 
 export const {
+  actionShowAdvantage,
   actionSumOfAdv,
   actionPopupDelAdv,
   actionLogoutUser,

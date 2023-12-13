@@ -1,7 +1,7 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDeletePlayer, actionDeleteSession, actionLoginInTheSession, actionPopupGift, actionPopupRitual, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { actionDeletePlayer, actionDeleteSession, actionLoginInTheSession, actionPopupGift, actionPopupRitual, actionShowAdvantage, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { arrayUnion, collection, doc, documentId, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import firestoreConfig from '../firebase/connection';
@@ -15,6 +15,8 @@ import { MdDelete } from "react-icons/md";
 import PopupDeletePlayer from "./popupDeletePlayer";
 import PopupGift from "./popupGift";
 import PopupRitual from "./popupRitual";
+import AdvantagesAndFlaws from "./sheet/advantagesAndFlaws";
+import PopupAdvantage from "./popupAdvantage";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -858,6 +860,27 @@ export default function MenuDm(props: { sessionId: string }) {
                     ))
               }
             </div>
+            <div>
+              <p className="font-bold pr-1 w-full text-center mt-3">Vantagens e Defeitos</p>
+              {
+                optionPlayer.data.advantagesAndFlaws.map((adv: any, index: number) => {
+                  if (adv.advantages.length > 0 || adv.flaws.length > 0) {
+                    return <div key={index}>
+                      {
+                        <button
+                          type="button"
+                          className="w-full"
+                          onClick={ () => dispatch(actionShowAdvantage({ show: true, item: adv })) }
+                        >
+                          <p className="text-center w-full pt-2 pb-1 hover:underline cursor-pointer">{ adv.name }</p>
+                        </button>
+                      }
+                  </div>
+                  } return null;
+                  }
+                )
+              }
+            </div>
             <p className="font-bold pr-1 w-full text-center mt-3">Background</p>
             <p className="w-full text-center">{ optionPlayer.data.background }</p>
             <p className="font-bold pr-1 w-full text-center mt-3">Ficha criada em:</p>
@@ -918,6 +941,7 @@ export default function MenuDm(props: { sessionId: string }) {
       }
       { slice.popupGift.show && <PopupGift item={ slice.popupGift.gift } /> }
       { slice.popupRitual.show && <PopupRitual item={ slice.popupRitual.ritual } /> }
+      { slice.showAdvantage.show && <PopupAdvantage /> }
 		</div>
-  )
+  ) 
 }
