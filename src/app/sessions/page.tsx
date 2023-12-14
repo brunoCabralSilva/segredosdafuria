@@ -75,6 +75,7 @@ export default function Session() {
               <h1 className="text-4xl relative">Sessões</h1>
               <hr className="w-10/12 mt-6" />
             </div>
+            
             <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3 pb-4">
               <button
                 type="button"

@@ -15,8 +15,8 @@ import { MdDelete } from "react-icons/md";
 import PopupDeletePlayer from "./popupDeletePlayer";
 import PopupGift from "./popupGift";
 import PopupRitual from "./popupRitual";
-import AdvantagesAndFlaws from "./sheet/advantagesAndFlaws";
 import PopupAdvantage from "./popupAdvantage";
+import PlayersDm from "./playerDM";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -33,7 +33,6 @@ export default function MenuDm(props: { sessionId: string }) {
   const [dm, setDm] = useState('');
   const [textAnotation, setTextAnotation] = useState(false);
   const [input, setInput] = useState('');
-  const [optionPlayer, setOptionPlayer] = useState<any>({});
   const router = useRouter();
 
   useEffect(() => {
@@ -52,11 +51,6 @@ export default function MenuDm(props: { sessionId: string }) {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
     setNameSession(sanitizedValue);
   };
-
-  const choosePlayer = (email: string) => {
-    const findPLayer = players.find((player: any) => player.email === email);
-    setOptionPlayer(findPLayer);
-  }
 
   const updateAnotations = async () => {
     try {
@@ -120,12 +114,6 @@ export default function MenuDm(props: { sessionId: string }) {
       }
     }
   };
-
-  const updateOption = () => {
-    dispatch(actionDeletePlayer({show: true, player: optionPlayer}));
-    setOptionPlayer({});
-    returnValue();
-  }
 
   const updateDm = async () => {
     const validateEmail = /\S+@\S+\.\S+/;
@@ -269,11 +257,6 @@ export default function MenuDm(props: { sessionId: string }) {
             setDescription(sessionData.description);
             setDm(sessionData.dm);
             setPlayers(sessionData.players);
-            setOptionPlayer(sessionData.players[0]);
-            const selectPlayer: any = document.getElementById("selectPlayers");
-            if (selectPlayer && players.length > 0 && players[0]) {
-              selectPlayer.value = players[0].email;
-            }
             setAnotation(sessionData.anotations);
             dispatch(actionLoginInTheSession({ id: sessionId, logged: true }))
           } else router.push('/sessions');
@@ -431,57 +414,6 @@ export default function MenuDm(props: { sessionId: string }) {
 			}
 	};
 
-  const returnHealth = (player: any) => {
-    let hp = 0;
-    if (player.data.form === 'Crinos') {
-      hp = player.data.attributes.stamina + 7
-    } else hp = player.data.attributes.stamina + 3;
-    const rest = Array(hp - player.data.health.length).fill('');
-
-    return (
-      <div className="mt-3">
-        <div className="w-full flex justify-center">
-          <span className="font-bold pr-1 text-center w-full pb-2 pt-2">Vitalidade Total: { player.data.form === 'Crinos' ? player.data.attributes.stamina + 7 : player.data.attributes.stamina + 3}</span>
-        </div>
-        <div className="flex w-full flex-wrap gap-1 justify-center">
-          { 
-            player.data.health.map((heal: any, index: number) => (
-              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
-            ))
-          }
-          { 
-            rest.map((heal: any, index: number) => (
-              <span key={index} className="h-6 w-6 rounded-full border-white border-2 bg-white" />
-            ))
-          }
-        </div>
-      </div>
-    );
-  };
-
-  const returnWillpower = (player: any) => {
-    const hp = player.data.attributes.composure + player.data.attributes.resolve;
-    const rest = Array(hp - player.data.willpower.length).fill('');
-    return (
-      <div className="mt-3">
-        <div className="w-full flex justify-center">
-          <span className="font-bold pr-1 text-center w-full pb-2 pt-2">Força de Vontade Total: { player.data.attributes.composure + player.data.attributes.resolve }</span>
-        </div>
-        <div className="flex flex-wrap w-full gap-1 justify-center">
-          { 
-            player.data.willpower.map((heal: any, index: number) => (
-              <span key={index} className={`h-6 w-6 rounded-full border-white border-2 ${heal.agravated ? 'bg-black': 'bg-gray-400'}`} />
-            ))
-          }
-          { 
-            rest.map((heal: any, index: number) => (
-              <span key={index} className="h-6 w-6 rounded-full border-white border-2 bg-white" />
-            ))
-          }
-        </div>
-      </div>
-    );
-  };
   return(
 		<div className="bg-gray-whats-dark overflow-y-auto flex flex-col items-center justify-start h-screen px-4">
       <div className="w-full flex justify-end my-3">
@@ -548,7 +480,7 @@ export default function MenuDm(props: { sessionId: string }) {
                   }
                 </div>
                 <div className="w-full mb-2 flex-col font-bold border-2 border-white">
-                  <div className="px-4 pt-2 flex justify-between items-center w-full">
+                  <div className="pl-4 pr-2 pt-2 flex justify-between items-center w-full">
                     <div
                       className="text-white w-full cursor-pointer flex-col items-center justify-center"
                       onClick={
@@ -733,166 +665,15 @@ export default function MenuDm(props: { sessionId: string }) {
       {
         optionSelect === 'players' && <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
           <button className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold" onClick={returnValue}>Atualizar</button>
-          { players.length > 0
-          ? <select
-            className="w-full mb-3 border border-white p-3 cursor-pointer bg-black capitalize text-white flex items-center justify-center font-bold text-center"
-            id="selectPlayers"
-            onChange={ (e) => choosePlayer(e.target.value) }
-          >
-            {
-              players.length > 0 && players.filter((player: any) => player.email !== dm).map((player: any, index) => {
-                if(index === 0) {
-                  return (
-                    <option
-                      className="capitalize"
-                      selected
-                      key={index}
-                      value={player.email}
-                    >
-                      {`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}
-                    </option>
-                  )
-                } return (
-                  <option
-                    className="capitalize"
-                    key={index}
-                    value={player.email}
-                  >
-                    {`${player.user} (${player.data.name === '' ? 'Sem nome': player.data.name})`}
-                  </option>
-                )})
-            }
-            </select>
-          : <div className="w-full text-white text-lg text-center mt-4">
+          { 
+            players.length === 0 && <div className="w-full text-white text-lg text-center mt-4">
               Você não possui Jogadores.
             </div>
           }
           {
-            players.length > 0 && Object.keys(optionPlayer).length > 0
-            && <div className="text-white w-full border-2 border-white flex flex-col items-center justify-center p-3 mb-4">
-            <div className="w-full flex justify-end pb-3">
-              <MdDelete
-                className="text-3xl text-white cursor-pointer"
-                onClick={ updateOption }
-              />
-            </div>  
-            <h1 className="capitalize text-xl text-center">{`${optionPlayer.user} (${optionPlayer.data.name === '' ? 'Sem nome': optionPlayer.data.name})`}</h1>
-            <hr className="w-full my-3" />
-            <div>
-              <span className="font-bold pr-1">Tribo:</span>
-              <span className="capitalize">{ optionPlayer.data.trybe === '' ? 'Indefinida' : optionPlayer.data.trybe }</span>
-            </div>
-            <div>
-            <span className="font-bold pr-1">Augúrio:</span>
-            <span className="capitalize">{ optionPlayer.data.auspice === '' ? 'Indefinido' : optionPlayer.data.auspice }</span>
-            </div>
-            <div className="mt-3">
-              <span className="font-bold pr-1">Fúria:</span>
-              <span>{ optionPlayer.data.rage }</span>
-            </div>
-            { returnWillpower(optionPlayer) }
-            { returnHealth(optionPlayer) }
-            <div className="mt-3">
-              <span className="font-bold pr-1">Forma Atual:</span>
-              <span className="capitalize">{ optionPlayer.data.form }</span>
-            </div>
-            <p className="font-bold pr-1 mt-3">Renome</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
-              <p className="text-center">
-                Honra: { optionPlayer.data.honor }
-              </p>
-              <p className="text-center">
-                Glória: { optionPlayer.data.glory }
-              </p>
-              <p className="text-center">
-                Sabedoria: { optionPlayer.data.wisdom }
-              </p>
-            </div>
-            <p className="font-bold pr-1 mt-3">Atributos</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
-              {
-                Object.entries(optionPlayer.data.attributes).map(([chave, valor]: any, index) => (
-                  <div className="capitalize text-center" key={index}>
-                    {chave}: {valor}
-                  </div>
-                ))
-              }
-            </div>
-            <p className="font-bold pr-1 mt-3">Habilidades</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full">
-              {
-                Object.entries(optionPlayer.data.skills).map(([chave, valor]: any, index) => {
-                  if (valor.value !== 0)
-                  return (
-                    <div className="capitalize text-center w-full flex justify-center" key={index}>
-                        {chave}: { valor.value }
-                       {valor.specialty === '' ? '' : ` (${valor.specialty} ${valor.value + 1})`}
-                    </div>
-                  )
-                })
-              }
-            </div>
-            <p className="font-bold pr-1 w-full text-center mt-3">Dons</p>
-            <div className="flex items-center justify-center flex-wrap w-full gap-1">
-              { 
-                optionPlayer.data.gifts.length === 0
-                  ? <p className="text-center">Nenhum</p>
-                  : optionPlayer.data.gifts.map((gift: any, index: number) => (
-                      <button
-                        type="button"
-                        className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
-                        key={index}
-                        onClick={ () => dispatch(actionPopupGift({ show: true, gift: gift })) }
-                      >
-                        { gift.giftPtBr }
-                      </button>
-                    ))
-              }
-            </div>
-            <p className="font-bold pr-1 w-full text-center mt-3">Rituais</p>
-            <div className="flex items-center justify-center flex-wrap w-full gap-1">
-              { 
-                optionPlayer.data.rituals.length === 0
-                  ? <p className="text-center">Nenhum</p>
-                  : optionPlayer.data.rituals.map((ritual: any, index: number) => (
-                      <button
-                        className="text-center border border-transparent hover:border-white rounded-full px-2 py-1"
-                        key={index}
-                        onClick={ () => dispatch(actionPopupRitual({ show: true, ritual: ritual })) }
-                      >
-                        { ritual.titlePtBr }
-                      </button>
-                    ))
-              }
-            </div>
-            <div>
-              <p className="font-bold pr-1 w-full text-center mt-3">Vantagens e Defeitos</p>
-              <div className="flex items-center justify-center flex-wrap w-full gap-1">
-              {
-                optionPlayer.data.advantagesAndFlaws.map((adv: any, index: number) => {
-                  if (adv.advantages.length > 0 || adv.flaws.length > 0) {
-                    return <div key={index}>
-                      {
-                        <button
-                          type="button"
-                          className="w-full"
-                          onClick={ () => dispatch(actionShowAdvantage({ show: true, item: adv })) }
-                        >
-                          <p className="text-center border border-transparent hover:border-white rounded-full px-2 py-1">{ adv.name }</p>
-                        </button>
-                      }
-                  </div>
-                  } return null;
-                  }
-                )
-              }
-              </div>
-            </div>
-            <p className="font-bold pr-1 w-full text-center mt-3">Background</p>
-            <p className="w-full text-center">{ optionPlayer.data.background }</p>
-            <p className="font-bold pr-1 w-full text-center mt-3">Ficha criada em:</p>
-            <p>{ returnDate({ date: optionPlayer.creationDate } ) }</p>
-            </div>
+            players.length > 0 && players.filter((pl) => pl.email !== dm).map((player: any, index: number) => (
+              <PlayersDm key={index} player={player} returnValue={returnValue} />
+            ))
           }
           { slice.popupDeletePlayer.show && <PopupDeletePlayer returnValue={returnValue} sessionId={ sessionId } /> }
         </div>

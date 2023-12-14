@@ -106,7 +106,6 @@ export default function AdvantagesAndFlaws(props: any) {
                 session={session}
                 adv={adv}
                 setAdv={setAdv}
-
               />
             ))
           }
