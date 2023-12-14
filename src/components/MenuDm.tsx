@@ -1,22 +1,21 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDeletePlayer, actionDeleteSession, actionLoginInTheSession, actionPopupGift, actionPopupRitual, actionShowAdvantage, actionShowMenuSession, useSlice } from "@/redux/slice";
-import { arrayUnion, collection, doc, documentId, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { actionDeleteSession, actionLoginInTheSession, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { arrayUnion, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import firestoreConfig from '../firebase/connection';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useRouter } from "next/navigation";
-import { jwtDecode } from "jwt-decode";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import PopupDeleteSession from "./popupDeleteSession";
-import { MdDelete } from "react-icons/md";
 import PopupDeletePlayer from "./popupDeletePlayer";
 import PopupGift from "./popupGift";
 import PopupRitual from "./popupRitual";
 import PopupAdvantage from "./popupAdvantage";
 import PlayersDm from "./playerDM";
+import { authenticate, signIn } from "@/firebase/login";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -121,10 +120,9 @@ export default function MenuDm(props: { sessionId: string }) {
       window.alert('Necessário preencher um e-mail válido.');
     } else {
       try {
-        const token = localStorage.getItem('Segredos Da Fúria');
-        if (token) {
-          const decode : { email: string, firstName: string, lastName: string } = jwtDecode(token);
-          const { email: emailUser, firstName, lastName } = decode;
+        const authData: { email: string, name: string } | null = await authenticate();
+        if (authData && authData.email && authData.name) {
+          const { email, name } = authData;
           const db = getFirestore(firestoreConfig);
           const sessionsCollectionRef = collection(db, 'sessions');
           const sessionDocRef = doc(sessionsCollectionRef, sessionId);
@@ -137,8 +135,8 @@ export default function MenuDm(props: { sessionId: string }) {
               const findDmInPlayers = sessionDocSnapshot.data().players.find((player: any) => player.email === sessionDocSnapshot.data().dm);
               if(!findDmInPlayers) {
                 const sheet = {
-                  email: emailUser,
-                  user: `${firstName} ${lastName}`,
+                  email: email,
+                  user: name,
                   creationDate: Date.now(),
                   data: {
                     advantagesAndFlaws: [
@@ -232,7 +230,10 @@ export default function MenuDm(props: { sessionId: string }) {
           } else {
             window.alert('Não foi possível encontrar a sessão especificada.');
           }
-        } else router.push('/user/login');
+        } else {
+          const sign = await signIn();
+          if (!sign) router.push('/');
+        }
       } catch (error) {
         window.alert('Ocorreu um erro ao atualizar o Narrador da sessão: ' + error);
       }
@@ -245,23 +246,25 @@ export default function MenuDm(props: { sessionId: string }) {
 			const sessionsCollectionRef = collection(db, 'sessions');
       const sessionDocRef = doc(sessionsCollectionRef, sessionId);
       const sessionDocSnapshot = await getDoc(sessionDocRef);
-      const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
-        const decode: { email: string } = jwtDecode(token);
-        const { email } = decode;
-        if (sessionDocSnapshot.exists()) {
-          const sessionData = sessionDocSnapshot.data();
-          if (sessionData.dm === email) {
-            setNameSession(sessionData.name);
-            setCreationDate(sessionData.creationDate);
-            setDescription(sessionData.description);
-            setDm(sessionData.dm);
-            setPlayers(sessionData.players);
-            setAnotation(sessionData.anotations);
-            dispatch(actionLoginInTheSession({ id: sessionId, logged: true }))
+      const authData: { email: string, name: string } | null = await authenticate();
+        if (authData && authData.email && authData.name) {
+          const { email } = authData;
+          if (sessionDocSnapshot.exists()) {
+            const sessionData = sessionDocSnapshot.data();
+            if (sessionData.dm === email) {
+              setNameSession(sessionData.name);
+              setCreationDate(sessionData.creationDate);
+              setDescription(sessionData.description);
+              setDm(sessionData.dm);
+              setPlayers(sessionData.players);
+              setAnotation(sessionData.anotations);
+              dispatch(actionLoginInTheSession({ id: sessionId, logged: true }))
+            } else router.push('/sessions');
           } else router.push('/sessions');
-        } else router.push('/sessions');
-      } else router.push('/login');
+        } else {
+          const sign = await signIn();
+          if (!sign) router.push('/');
+        }
 		} catch (error) {
 			window.alert(`Erro ao obter a lista de jogadores: ` + error);
     }
@@ -273,13 +276,16 @@ export default function MenuDm(props: { sessionId: string }) {
 			const sessionsCollectionRef = collection(db, 'sessions');
       const sessionDocRef = doc(sessionsCollectionRef, sessionId);
       const sessionDocSnapshot = await getDoc(sessionDocRef);
-      const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
+      const authData: { email: string, name: string } | null = await authenticate();
+      if (authData && authData.email && authData.name) {
         if (sessionDocSnapshot.exists()) {
           const notifications = sessionDocSnapshot.data().notifications;
           setListNotifications([...notifications]);
         }
-      } else router.push('/user/login');
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
+      }
     } catch(error) {
       window.alert(`Erro ao obter Notificações de jogadores: ` + error);
     }

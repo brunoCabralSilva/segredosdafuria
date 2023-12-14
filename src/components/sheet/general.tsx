@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import Item from "./item";
 import firebaseConfig from "@/firebase/connection";
-import { jwtDecode } from "jwt-decode";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import dataTrybes from '../../data/trybes.json';
 import ItemAgravated from "./itemAgravated";
 import { actionResetSheet } from "@/redux/slice";
 import { useAppDispatch } from "@/redux/hooks";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function General(props: { session: string }) {
   const { session } = props;
@@ -18,6 +19,7 @@ export default function General(props: { session: string }) {
   const [nameCharacter, setNameCharacter] = useState<string>('');
   const [auspice, setAuspice] = useState<string>('');
   const [trybeI, setTrybe] = useState<string>('');
+  const router = useRouter();
 
   const typeName = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -31,11 +33,10 @@ export default function General(props: { session: string }) {
 
   const returnValueSkill = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -44,18 +45,21 @@ export default function General(props: { session: string }) {
         setAuspice(player.data.auspice);
         setTrybe(player.data.trybe);
         setNameCharacter(player.data.name);
-      } catch (error) {
-        window.alert(`Erro ao obter valores de augúrio, tribo e/ou nome: (' + error + ')`);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert(`Erro ao obter valores de augúrio, tribo e/ou nome: (' + error + ')`);
     }
   };
+
   const updateValue = async (key: string, value: string) => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -67,9 +71,12 @@ export default function General(props: { session: string }) {
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
-      } catch (error) {
-        window.alert(`Erro ao atualizar valor de ${key}: (' + error + ')`);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert(`Erro ao atualizar valor de ${key}: (' + error + ')`);
     }
     returnValueSkill();
   };

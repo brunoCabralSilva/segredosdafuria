@@ -1,10 +1,8 @@
 import firebaseConfig from "@/firebase/connection";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionSumOfAdv, useSlice } from "@/redux/slice";
+import { authenticate, signIn } from "@/firebase/login";
 import { collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoArrowDownCircleSharp, IoArrowUpCircleSharp, IoCheckmarkDone } from "react-icons/io5";
 
 interface IAdvantage {
@@ -22,98 +20,45 @@ interface IFlaw {
 }
 
 export default function Advantage(props: any) {
-  const { item, session, index, adv } = props;
+  const { item, session, adv } = props;
   const [ showAd, setShowAd ] = useState(false);
   const router = useRouter();
-  const dispatch = useAppDispatch();
-  const slice = useAppSelector(useSlice);
 
   const setAdvantageValueItem = async (obj: IAdvantage) => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const decode: { email: string } = jwtDecode(token);
-      const { email } = decode;
-      const db = getFirestore(firebaseConfig);
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const userDocument = userQuerySnapshot.docs[0];
-      const userDocRef = doc(db, 'sessions', userDocument.id);
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
+        const db = getFirestore(firebaseConfig);
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+        const userQuerySnapshot = await getDocs(userQuery);
+        const userDocument = userQuerySnapshot.docs[0];
+        const userDocRef = doc(db, 'sessions', userDocument.id);
 
-      const searchPlayer = userDocument.data().players.find((player: any) => player.email === email);
-      const otherPlayers = userDocument.data().players.filter((player: any) => player.email !== email);
+        const searchPlayer = userDocument.data().players.find((player: any) => player.email === email);
+        const otherPlayers = userDocument.data().players.filter((player: any) => player.email !== email);
 
-      const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === obj.name);
-      const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== obj.name);
-      const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
+        const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === obj.name);
+        const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== obj.name);
+        const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
 
-      if (obj.type === '') {
-        if (foundAdvantage.advantages) {
-          const updatedAdvantage = {
-            name: obj.name, 
-            advantages: [],
-            flaws: foundAdvantage.flaws,
-          }
-          props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          await updateDoc(userDocRef, {
-            players: [searchPlayer, ...otherPlayers],
-          });
-        } else {
-          const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantage) => item.type !== 'radio');
-          const updatedAdvantage = {
-            name: obj.name, 
-            advantages: updateAdvantage,
-            flaws: foundAdvantage.flaws,
-          }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDoc(userDocRef, {
-            players: [searchPlayer, ...otherPlayers],
-          });
-        }
-      } else if (foundAdvantage.advantages.length === 0) {
-        const updated = {
-          name: obj.name, 
-          advantages: [obj],
-          flaws: foundAdvantage.flaws,
-        }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
-        props.setAdv([...restOfAdvantage, updated]);
-        await updateDoc(userDocRef, {
-          players: [searchPlayer, ...otherPlayers],
-        });
-      } else {
-        if (obj.type === 'radio') {
-          const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantage) => item.type !== 'radio' && item.advantage !== obj.advantage);
-          const updatedAdvantage = {
-            name: obj.name, 
-            advantages: [...updateAdvantage, obj],
-            flaws: foundAdvantage.flaws,
-          }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDoc(userDocRef, {
-            players: [searchPlayer, ...otherPlayers],
-          });
-        }
-        if (obj.type === 'checkbox') {
-          const updateAdvantage = foundAdvantage.advantages.find((item: IAdvantage) => item.advantage === obj.advantage);
-          if (updateAdvantage) {
-            const newObject = foundAdvantage.advantages.filter((item: IAdvantage) => item.advantage !== obj.advantage);
+        if (obj.type === '') {
+          if (foundAdvantage.advantages) {
             const updatedAdvantage = {
               name: obj.name, 
-              advantages: newObject,
+              advantages: [],
               flaws: foundAdvantage.flaws,
             }
-            searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
             props.setAdv([...restOfAdvantage, updatedAdvantage]);
+            searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
             await updateDoc(userDocRef, {
               players: [searchPlayer, ...otherPlayers],
             });
           } else {
+            const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantage) => item.type !== 'radio');
             const updatedAdvantage = {
               name: obj.name, 
-              advantages: [...foundAdvantage.advantages, obj],
+              advantages: updateAdvantage,
               flaws: foundAdvantage.flaws,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
@@ -122,89 +67,92 @@ export default function Advantage(props: any) {
               players: [searchPlayer, ...otherPlayers],
             });
           }
+        } else if (foundAdvantage.advantages.length === 0) {
+          const updated = {
+            name: obj.name, 
+            advantages: [obj],
+            flaws: foundAdvantage.flaws,
+          }
+          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
+          props.setAdv([...restOfAdvantage, updated]);
+          await updateDoc(userDocRef, {
+            players: [searchPlayer, ...otherPlayers],
+          });
+        } else {
+          if (obj.type === 'radio') {
+            const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantage) => item.type !== 'radio' && item.advantage !== obj.advantage);
+            const updatedAdvantage = {
+              name: obj.name, 
+              advantages: [...updateAdvantage, obj],
+              flaws: foundAdvantage.flaws,
+            }
+            searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+            props.setAdv([...restOfAdvantage, updatedAdvantage]);
+            await updateDoc(userDocRef, {
+              players: [searchPlayer, ...otherPlayers],
+            });
+          }
+          if (obj.type === 'checkbox') {
+            const updateAdvantage = foundAdvantage.advantages.find((item: IAdvantage) => item.advantage === obj.advantage);
+            if (updateAdvantage) {
+              const newObject = foundAdvantage.advantages.filter((item: IAdvantage) => item.advantage !== obj.advantage);
+              const updatedAdvantage = {
+                name: obj.name, 
+                advantages: newObject,
+                flaws: foundAdvantage.flaws,
+              }
+              searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+              props.setAdv([...restOfAdvantage, updatedAdvantage]);
+              await updateDoc(userDocRef, {
+                players: [searchPlayer, ...otherPlayers],
+              });
+            } else {
+              const updatedAdvantage = {
+                name: obj.name, 
+                advantages: [...foundAdvantage.advantages, obj],
+                flaws: foundAdvantage.flaws,
+              }
+              searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+              props.setAdv([...restOfAdvantage, updatedAdvantage]);
+              await updateDoc(userDocRef, {
+                players: [searchPlayer, ...otherPlayers],
+              });
+            }
+          }
         }
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
-    } else router.push('/user/login');
-  }
+    } catch (error) {
+      window.alert('Erro ao obter valores do dom: ' + error);
+    }
+  };
 
   const setFlawValueItem = async(obj: IFlaw) => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const decode: { email: string } = jwtDecode(token);
-      const { email } = decode;
-      const db = getFirestore(firebaseConfig);
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const userDocument = userQuerySnapshot.docs[0];
-      const userDocRef = doc(db, 'sessions', userDocument.id);
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
+        const db = getFirestore(firebaseConfig);
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+        const userQuerySnapshot = await getDocs(userQuery);
+        const userDocument = userQuerySnapshot.docs[0];
+        const userDocRef = doc(db, 'sessions', userDocument.id);
 
-      const searchPlayer = userDocument.data().players.find((player: any) => player.email === email);
-      const otherPlayers = userDocument.data().players.filter((player: any) => player.email !== email);
+        const searchPlayer = userDocument.data().players.find((player: any) => player.email === email);
+        const otherPlayers = userDocument.data().players.filter((player: any) => player.email !== email);
 
-      const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === obj.name);
-      const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== obj.name);
-      const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
+        const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === obj.name);
+        const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== obj.name);
+        const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
 
-      if (obj.type === '') {
-        if (foundAdvantage.flaws) {
-          const updatedAdvantage = {
-            name: obj.name, 
-            advantages: foundAdvantage.advantages,
-            flaws: [],
-          }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDoc(userDocRef, {
-            players: [searchPlayer, ...otherPlayers],
-          });
-        } else {
-          const updateAdvantage = foundAdvantage.flaws.filter((item: IAdvantage) => item.type !== 'radio');
-          const updatedAdvantage = {
-            name: obj.name, 
-            advantages: foundAdvantage.advantages,
-            flaws: updateAdvantage,
-          }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDoc(userDocRef, {
-            players: [searchPlayer, ...otherPlayers],
-          });
-        }
-      } else if (foundAdvantage.flaws.length === 0) {
-        const updated = {
-          name: obj.name, 
-          advantages: foundAdvantage.advantages,
-          flaws: [obj],
-        }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
-        props.setAdv([...restOfAdvantage, updated]);
-        await updateDoc(userDocRef, {
-          players: [searchPlayer, ...otherPlayers],
-        });
-      } else {
-        if (obj.type === 'radio') {
-          const updateAdvantage = foundAdvantage.flaws.filter((item: IFlaw) => {
-            return item.type !== 'radio' && item.flaw !== obj.flaw
-          });
-          const updatedAdvantage = {
-            name: obj.name, 
-            advantages: foundAdvantage.advantages,
-            flaws: [...updateAdvantage, obj],
-          }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-          props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDoc(userDocRef, {
-            players: [searchPlayer, ...otherPlayers],
-          });
-        }
-        if (obj.type === 'checkbox') {
-          const updateAdvantage = foundAdvantage.flaws.find((item: IFlaw) => item.flaw === obj.flaw);
-          if (updateAdvantage) {
-            const newObject = foundAdvantage.flaws.filter((item: IFlaw) => item.flaw !== obj.flaw);
+        if (obj.type === '') {
+          if (foundAdvantage.flaws) {
             const updatedAdvantage = {
               name: obj.name, 
               advantages: foundAdvantage.advantages,
-              flaws: newObject,
+              flaws: [],
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
             props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -212,10 +160,11 @@ export default function Advantage(props: any) {
               players: [searchPlayer, ...otherPlayers],
             });
           } else {
+            const updateAdvantage = foundAdvantage.flaws.filter((item: IAdvantage) => item.type !== 'radio');
             const updatedAdvantage = {
               name: obj.name, 
               advantages: foundAdvantage.advantages,
-              flaws: [...foundAdvantage.flaws, obj],
+              flaws: updateAdvantage,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
             props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -223,10 +172,69 @@ export default function Advantage(props: any) {
               players: [searchPlayer, ...otherPlayers],
             });
           }
+        } else if (foundAdvantage.flaws.length === 0) {
+          const updated = {
+            name: obj.name, 
+            advantages: foundAdvantage.advantages,
+            flaws: [obj],
+          }
+          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
+          props.setAdv([...restOfAdvantage, updated]);
+          await updateDoc(userDocRef, {
+            players: [searchPlayer, ...otherPlayers],
+          });
+        } else {
+          if (obj.type === 'radio') {
+            const updateAdvantage = foundAdvantage.flaws.filter((item: IFlaw) => {
+              return item.type !== 'radio' && item.flaw !== obj.flaw
+            });
+            const updatedAdvantage = {
+              name: obj.name, 
+              advantages: foundAdvantage.advantages,
+              flaws: [...updateAdvantage, obj],
+            }
+            searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+            props.setAdv([...restOfAdvantage, updatedAdvantage]);
+            await updateDoc(userDocRef, {
+              players: [searchPlayer, ...otherPlayers],
+            });
+          }
+          if (obj.type === 'checkbox') {
+            const updateAdvantage = foundAdvantage.flaws.find((item: IFlaw) => item.flaw === obj.flaw);
+            if (updateAdvantage) {
+              const newObject = foundAdvantage.flaws.filter((item: IFlaw) => item.flaw !== obj.flaw);
+              const updatedAdvantage = {
+                name: obj.name, 
+                advantages: foundAdvantage.advantages,
+                flaws: newObject,
+              }
+              searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+              props.setAdv([...restOfAdvantage, updatedAdvantage]);
+              await updateDoc(userDocRef, {
+                players: [searchPlayer, ...otherPlayers],
+              });
+            } else {
+              const updatedAdvantage = {
+                name: obj.name, 
+                advantages: foundAdvantage.advantages,
+                flaws: [...foundAdvantage.flaws, obj],
+              }
+              searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+              props.setAdv([...restOfAdvantage, updatedAdvantage]);
+              await updateDoc(userDocRef, {
+                players: [searchPlayer, ...otherPlayers],
+              });
+            }
+          }
         }
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valores do dom: ' + error);
     }
-  }
+  };
 
   const returnIfHavePoint = () => {
     const find: any = adv.find((ad: any) => ad.name === item.name);
@@ -256,34 +264,6 @@ export default function Advantage(props: any) {
     const find: any = adv.find((ad: any) => ad.name === item.name);
     if (find) return find.flaws.find((ad: any) => ad.flaw === element);
     return false;
-  }
-
-  const sumAllAdvantagesAndFlaws = () => {
-    let advantageSum = 0;
-    let flawSum = 0;
-    adv.forEach((item: any) => {
-      if (item.flaws.length > 0) {
-        item.flaws.forEach((it: any) => flawSum += it.value)
-      }
-      if (item.advantages.length > 0) {
-        item.advantages.forEach((it: any) => advantageSum += it.value)
-      }
-    });
-    dispatch(actionSumOfAdv({ advantageSum, flawSum }));
-    return (
-    <div className="flex flex-col border-2 border-white p-4 text-white justify-center items-center">
-      <div className={
-        `${slice.sumOfAdv.advantageSum > 7 && 'text-red-800'}
-         ${slice.sumOfAdv.advantageSum === 7 && 'text-green-500'}
-      `}>
-        Total em Vantagens: {slice.sumOfAdv.advantageSum} {slice.sumOfAdv.advantageSum !== 7 && <span>/ 7</span>}</div>
-      <div className={`
-        ${slice.sumOfAdv.flawSum > 2 && 'text-red-800'}
-        ${slice.sumOfAdv.flawSum === 2 && 'text-green-500'}
-      `}>
-        Total em Defeitos: {slice.sumOfAdv.flawSum} {slice.sumOfAdv.flawSum !== 2 && <span>/ 2</span>}</div>
-    </div>
-    );
   }
 
   return(

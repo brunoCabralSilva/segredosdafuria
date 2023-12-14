@@ -1,13 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = initializeApp({
-  apiKey: "AIzaSyBrsLX1mm8gqfWByxgfpF728pA5qY__Gh4",
-  authDomain: "guia-das-matilhas.firebaseapp.com",
-  projectId: "guia-das-matilhas",
-  storageBucket: "guia-das-matilhas.appspot.com",
-  messagingSenderId: "940920362320",
-  appId: "1:940920362320:web:492a98a6abeb827c168855",
-  measurementId: "G-N5KZB6EQLB"
+  apiKey: "AIzaSyD6c5jqiOrV8calseJ_dNPfKY29_py18Uo",
+  authDomain: "segredos-da-furia.firebaseapp.com",
+  projectId: "segredos-da-furia",
+  storageBucket: "segredos-da-furia.appspot.com",
+  messagingSenderId: "147800519056",
+  appId: "1:147800519056:web:a81dd7f056d683f199c315",
+  measurementId: "G-QCQHM1ZNTF"
 });
 
 export default firebaseConfig;

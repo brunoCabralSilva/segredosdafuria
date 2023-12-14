@@ -1,16 +1,13 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDelHistoric, useSlice } from "@/redux/slice";
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { actionDelHistoric } from "@/redux/slice";
+import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firebaseConfig from "../firebase/connection";
 
 export default function PopupDelHistoric(props: { sessionId : string }) {
   const { sessionId } = props;
-  const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const router = useRouter();
 
   const clearMessages = async () => {
     try {
@@ -50,7 +47,6 @@ export default function PopupDelHistoric(props: { sessionId : string }) {
               type="button"
               onClick={() => dispatch(actionDelHistoric(false))}
               className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-
             >
               Não
             </button>

@@ -8,34 +8,40 @@ import ManualRoll from "./manualRoll";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
 import { jwtDecode } from "jwt-decode";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function PopUpDices(props: { session: string }) {
   const { session } = props;
   const [optionRadio, setOptionRadio] = useState<string>('manual');
   const [dm, setDm] = useState(false);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const verifyIfUserIsDm = async () => {
+    const authData: { email: string, name: string } | null = await authenticate();
     try {
-      const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
-        const decode: { email: string } = jwtDecode(token);
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const db = getFirestore(firebaseConfig);
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const sessionDoc = userQuerySnapshot.docs[0];
         const sessionData = sessionDoc.data();
-        if (decode.email === sessionData.dm) {
+        if (email === sessionData.dm) {
           setOptionRadio('manual');
-          setDm(decode.email === sessionData.dm);
+          setDm(email === sessionData.dm);
         } else {
           setOptionRadio('automated');
         }
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
-		} catch (error) {
-			window.alert(`Erro ao obter a lista de jogadores: ` + error);
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
   };
 

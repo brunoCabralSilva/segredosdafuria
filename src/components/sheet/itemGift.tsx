@@ -8,13 +8,15 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Feedback from "../feedback";
 import { IoAddCircle, IoArrowUpCircleSharp } from "react-icons/io5";
 import firebaseConfig from "@/firebase/connection";
-import { jwtDecode } from "jwt-decode";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function ItemGift(props: any) {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const { index, dataGift, session } = props;
   const [showGift, setShowGift] = useState<boolean>(false);
+  const router = useRouter();
 
   function capitalizeFirstLetter(str: string): String {
     switch(str) {
@@ -36,11 +38,10 @@ export default function ItemGift(props: any) {
 
   const addGift = async () => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -57,9 +58,12 @@ export default function ItemGift(props: any) {
           setShowGift(false);
           window.alert(`Dom '${dataGift.giftPtBr}' adicionado com sucesso!`)
         }
-      } catch (error) {
-        window.alert('Erro ao atualizar Dom: (' + error + ')');
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor: ' + error);
     }
   };
 

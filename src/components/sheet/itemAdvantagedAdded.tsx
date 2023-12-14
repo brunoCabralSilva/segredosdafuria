@@ -1,12 +1,12 @@
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupDelAdv, useSlice } from "@/redux/slice";
-import { collection, doc, getDocs, getFirestore, query, where } from "firebase/firestore";
-import { jwtDecode } from "jwt-decode";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
 import PopupDelAdv from "../popupDelAdv";
+import { authenticate, signIn } from "@/firebase/login";
 
 export default function ItensAdvantagesAdded(props: any) {
   const { session, adv, setAdv } = props;
@@ -20,19 +20,25 @@ export default function ItensAdvantagesAdded(props: any) {
   }, []);
 
   const getAllAdvantages = async () => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const decode: { email: string } = jwtDecode(token);
-      const { email } = decode;
-      const db = getFirestore(firebaseConfig);
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const userDocument = userQuerySnapshot.docs[0];
-      const advAndflw = userDocument.data();
-      const playerFound = advAndflw.players.find((player: any) => player.email === email);
-      const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
-      setAdv(listOfAdvantages);
-    } else router.push('/user/login');
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
+        const db = getFirestore(firebaseConfig);
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+        const userQuerySnapshot = await getDocs(userQuery);
+        const userDocument = userQuerySnapshot.docs[0];
+        const advAndflw = userDocument.data();
+        const playerFound = advAndflw.players.find((player: any) => player.email === email);
+        const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
+        setAdv(listOfAdvantages);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
+      }
+    } catch (error) {
+      window.alert('Erro ao obter valores do dom: ' + error);
+    }
   }
 
   return(

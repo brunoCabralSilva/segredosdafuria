@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../firebase/connection';
 import { jwtDecode } from "jwt-decode";
+import { authenticate, signIn } from "@/firebase/login";
 
 export default function PopupDeleteSession(props: { sessionId : string }) {
   const { sessionId } = props;
@@ -14,12 +15,11 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
   const router = useRouter();
 
   const removeSession = async () => {
+    const db = getFirestore(firestoreConfig);
+    const authData: { email: string, name: string } | null = await authenticate();
     try {
-      const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
-        const db = getFirestore(firestoreConfig);
-        const decode: { email: string } = jwtDecode(token);
-        const { email } = decode;
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const sessionsCollectionRef = collection(db, 'sessions');
         const sessionDocRef = doc(sessionsCollectionRef, sessionId);
         const sessionDocSnapshot = await getDoc(sessionDocRef);
@@ -51,7 +51,8 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
           window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
           router.push('/sessions');
         } else {
-          window.alert("Ocorreu um erro. Por favor, atualize a página tente novamente sair da sessão.");
+          const sign = await signIn();
+          if (!sign) router.push('/');
         }
       }
     } catch(error) {

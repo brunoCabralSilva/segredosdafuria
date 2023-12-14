@@ -8,20 +8,22 @@ import { IoAddCircle, IoArrowUpCircleSharp } from "react-icons/io5";
 import firebaseConfig from "@/firebase/connection";
 import { jwtDecode } from "jwt-decode";
 import { MdDelete } from "react-icons/md";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function ItemRituals(props: any) {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const { index, ritual, remove, session } = props;
   const [showRitual, setShowRitual] = useState<boolean>(false);
+  const router = useRouter();
 
   const addRitual = async () => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -38,20 +40,21 @@ export default function ItemRituals(props: any) {
           setShowRitual(false);
           window.alert(`Ritual '${ritual.titlePtBr}' adicionado com sucesso!`)
           }
-
-      } catch (error) {
-        window.alert('Erro ao adicionar Ritual: (' + error + ')');
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
   };
 
   const removeRitual = async () => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -64,9 +67,12 @@ export default function ItemRituals(props: any) {
         await updateDoc(docRef, { players: [...playersFiltered, player] });
         setShowRitual(false);
         window.alert(`Ritual '${ritual.titlePtBr}' removido com sucesso!`)
-      } catch (error) {
-        window.alert('Erro ao remover Ritual: (' + error + ')');
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
     props.generateDataForRituals();
   };

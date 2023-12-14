@@ -3,6 +3,7 @@ import { collection, getDocs, getFirestore, query, updateDoc, where } from "fire
 import firebaseConfig from "./connection";
 import { jwtDecode } from "jwt-decode";
 import { registerMessage } from "./chatbot";
+import { authenticate } from "./login";
 
 export const returnValue = async (
   atrSelected: string,
@@ -11,11 +12,10 @@ export const returnValue = async (
   session: string,
 ): Promise<IDataValues | null> => {
   const db = getFirestore(firebaseConfig);
-  const token = localStorage.getItem('Segredos Da Fúria');
-  if (token) {
+  const authData: { email: string, name: string } | null = await authenticate();
+  if (authData && authData.email && authData.name) {
     try {
-      const decodedToken: { email: string } = jwtDecode(token);
-      const { email } = decodedToken;
+      const { email } = authData;
       const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
       const userQuerySnapshot = await getDocs(userQuery);
       const players: any = [];
@@ -51,11 +51,10 @@ export const returnRageCheck = async (rageCheck: number, type: string, session: 
     resultOfRage.push(value);
   }
   const db = getFirestore(firebaseConfig);
-  const token = localStorage.getItem('Segredos Da Fúria');
-  if (token) {
+  const authData: { email: string, name: string } | null = await authenticate();
+  if (authData && authData.email && authData.name) {
     try {
-      const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-      const { email, firstName, lastName } = decodedToken;
+      const { email, name } = authData;
       const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
       const userQuerySnapshot = await getDocs(userQuery);
       const players: any = [];
@@ -65,7 +64,7 @@ export const returnRageCheck = async (rageCheck: number, type: string, session: 
         player.data.rage = 0;
         await registerMessage({
           message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
-          user: firstName + ' ' + lastName,
+          user: name,
           email: email
         }, session);
       } else {
@@ -83,7 +82,7 @@ export const returnRageCheck = async (rageCheck: number, type: string, session: 
             cause: type,
             rage: player.data.rage,
           },
-          user: firstName + ' ' + lastName,
+          user: name,
           email: email,
         }, session);
       }
@@ -128,27 +127,31 @@ export const registerRoll = async (
         resultOf.push(value);
       }
     }
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const { firstName, lastName, email }: IUser = jwtDecode(token);
-      if (dices + rage >= dificulty) {
-        await registerMessage({
-          message: {
-            rollOfMargin: resultOf,
-            rollOfRage: resultOfRage,
-            dificulty,
-            penaltyOrBonus,
-          },
-          user: firstName + ' ' + lastName,
-          email: email,
-        }, session) 
-      } else {
-        await registerMessage({
-          message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${resultOf.length + resultOfRage.length + penaltyOrBonus } dados para um Teste de Dificuldade ${dificulty}).`,
-          user: firstName + ' ' + lastName,
-          email: email,
-        }, session);
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email, name } = authData;
+        if (dices + rage >= dificulty) {
+          await registerMessage({
+            message: {
+              rollOfMargin: resultOf,
+              rollOfRage: resultOfRage,
+              dificulty,
+              penaltyOrBonus,
+            },
+            user: name,
+            email: email,
+          }, session) 
+        } else {
+          await registerMessage({
+            message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${resultOf.length + resultOfRage.length + penaltyOrBonus } dados para um Teste de Dificuldade ${dificulty}).`,
+            user: name,
+            email: email,
+          }, session);
+        }
       }
+    } catch (error) {
+    window.alert('Erro ao obter valor da Forma: ' + error);
     }
   }
 };

@@ -1,16 +1,16 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/slice";
-import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../firebase/connection';
-import { jwtDecode } from "jwt-decode";
+import firebaseConfig from "../../firebase/connection";
+import { authenticate, signIn } from "@/firebase/login";
 
 export default function SessionAuth(props: { sessionId : string }) {
   const { sessionId } = props;
-  const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [popup, setPopup] = useState('');
@@ -19,11 +19,10 @@ export default function SessionAuth(props: { sessionId : string }) {
   useEffect(() => {
     const requestSession = async () => {
       try {
-        const token = localStorage.getItem('Segredos Da Fúria');
-        if (token) {
-          const db = getFirestore(firestoreConfig);
-          const decode: { email: string } = jwtDecode(token);
-          const { email } = decode;
+        const db = getFirestore(firebaseConfig);
+        const authData: { email: string, name: string } | null = await authenticate();
+        if (authData && authData.email && authData.name) {
+          const { email } = authData;
           const sessionsCollectionRef = collection(db, 'sessions');
           const sessionDocRef = doc(sessionsCollectionRef, sessionId);
           const sessionDocSnapshot = await getDoc(sessionDocRef);
@@ -55,9 +54,12 @@ export default function SessionAuth(props: { sessionId : string }) {
               }
             }
           }
-        } else router.push('/login');
+        } else {
+          const sign = await signIn();
+          if (!sign) router.push('/');
+        }
       } catch(error) {
-        window.alert("Ocorreu um erro ao Inicializar a: " + error);
+        window.alert("Ocorreu um erro: " + error);
       }
     }
     requestSession();
@@ -70,11 +72,10 @@ export default function SessionAuth(props: { sessionId : string }) {
 
   const sendNotification = async () => {
     try {
-      const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
-        const db = getFirestore(firestoreConfig);
-        const decode: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-        const { email, firstName, lastName } = decode;
+      const db = getFirestore(firestoreConfig);
+      const authData: { email: string, name: string } | null = await authenticate();
+      if (authData && authData.email && authData.name) {
+        const { email, name } = authData;
         const sessionsCollectionRef = collection(db, 'sessions');
         const sessionDocRef = doc(sessionsCollectionRef, sessionId);
         const sessionDocSnapshot = await getDoc(sessionDocRef);
@@ -83,17 +84,19 @@ export default function SessionAuth(props: { sessionId : string }) {
           const updatedNotifications = [
             ...sessionDoc.notifications,
             {
-              message: `O Usuário ${capitalize(firstName)} ${capitalize(lastName)} de email "${email}" solicitou acesso à sua Sessão.`,
+              message: `O Usuário ${capitalize(name)} de email "${email}" solicitou acesso à sua Sessão.`,
               email: email,
               type: 'approval',
-              firstName,
-              lastName,
+              user: name.toLowerCase(),
             }
           ];
           await updateDoc(sessionDocSnapshot.ref, { notifications: updatedNotifications });
         } else {
           window.alert("Ocorreu um erro. Por favor, tente novamente solicitar o acesso.");
         }
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);
@@ -120,7 +123,6 @@ export default function SessionAuth(props: { sessionId : string }) {
               type="button"
               onClick={ () => dispatch(actionSessionAuth({ show: false, id: '' })) }
               className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-
             >
               Cancelar
             </button>

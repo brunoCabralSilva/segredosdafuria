@@ -1,16 +1,18 @@
 'use client'
+import { signOutFirebase } from "@/firebase/login";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionLogoutUser } from "@/redux/slice";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function PopupLogout(props: any) {
-  const { setShowMenu } = props;
+  const { setShowMenu, setLoginLogout } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const logout = async () => {
-    localStorage.removeItem('Segredos Da Fúria');
+    signOutFirebase();
+    setLoginLogout('login')
     dispatch(actionLogoutUser(false))
     setShowMenu(false);
     router.push('/');

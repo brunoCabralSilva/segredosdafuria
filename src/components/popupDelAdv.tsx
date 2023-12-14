@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firebaseConfig from "../firebase/connection";
 import { jwtDecode } from "jwt-decode";
+import { authenticate, signIn } from "@/firebase/login";
 
 interface IAdvantage {
   advantage: string;
@@ -27,65 +28,71 @@ export default function PopupDelAdv(props: any) {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const clearMessages = async () => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const decode: { email: string } = jwtDecode(token);
-      const { email } = decode;
-      const db = getFirestore(firebaseConfig);
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const userDocument = userQuerySnapshot.docs[0];
-      const userDocRef = doc(db, 'sessions', userDocument.id);
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
+        const db = getFirestore(firebaseConfig);
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+        const userQuerySnapshot = await getDocs(userQuery);
+        const userDocument = userQuerySnapshot.docs[0];
+        const userDocRef = doc(db, 'sessions', userDocument.id);
 
-      const searchPlayer = userDocument.data().players.find((player: any) => player.email === email);
-      const otherPlayers = userDocument.data().players.filter((player: any) => player.email !== email);
+        const searchPlayer = userDocument.data().players.find((player: any) => player.email === email);
+        const otherPlayers = userDocument.data().players.filter((player: any) => player.email !== email);
 
-      const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === slice.popupDelAdv.name);
-      const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== slice.popupDelAdv.name);
+        const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === slice.popupDelAdv.name);
+        const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== slice.popupDelAdv.name);
 
-      if (slice.popupDelAdv.type === 'advantage') {
-        const remoteItemAdv = foundAdvantage.advantages.filter((ad: any) => ad.advantage !== slice.popupDelAdv.desc);
+        if (slice.popupDelAdv.type === 'advantage') {
+          const remoteItemAdv = foundAdvantage.advantages.filter((ad: any) => ad.advantage !== slice.popupDelAdv.desc);
 
-        const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
+          const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
 
-        const updatedAdvantage = {
-          name: slice.popupDelAdv.name, 
-          advantages: remoteItemAdv,
-          flaws: foundAdvantage.flaws,
+          const updatedAdvantage = {
+            name: slice.popupDelAdv.name, 
+            advantages: remoteItemAdv,
+            flaws: foundAdvantage.flaws,
+          }
+
+          if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
+            setAdv(restOfAdvantage);
+          } else {
+            setAdv([...restOfAdvantage, updatedAdvantage]);
+          }
+          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        }
+        
+        if (slice.popupDelAdv.type === 'flaw') {
+          const remoteItemflw = foundAdvantage.flaws.filter((ad: any) => ad.flaw !== slice.popupDelAdv.desc);
+
+          const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
+
+          const updatedAdvantage = {
+            name: slice.popupDelAdv.name, 
+            advantages: foundAdvantage.advantages,
+            flaws: remoteItemflw,
+          }
+
+          if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
+            setAdv(restOfAdvantage);
+          } else {
+            setAdv([...restOfAdvantage, updatedAdvantage]);
+          }
+          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         }
 
-        if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
-          setAdv(restOfAdvantage);
-        } else {
-          setAdv([...restOfAdvantage, updatedAdvantage]);
-        }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        await updateDoc(userDocRef, {
+          players: [searchPlayer, ...otherPlayers],
+        });
+        dispatch(actionPopupDelAdv({show: false, adv: {}, type:'' }));
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
-      
-      if (slice.popupDelAdv.type === 'flaw') {
-        const remoteItemflw = foundAdvantage.flaws.filter((ad: any) => ad.flaw !== slice.popupDelAdv.desc);
-
-        const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
-
-        const updatedAdvantage = {
-          name: slice.popupDelAdv.name, 
-          advantages: foundAdvantage.advantages,
-          flaws: remoteItemflw,
-        }
-
-        if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
-          setAdv(restOfAdvantage);
-        } else {
-          setAdv([...restOfAdvantage, updatedAdvantage]);
-        }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-      }
-
-      await updateDoc(userDocRef, {
-        players: [searchPlayer, ...otherPlayers],
-      });
-      dispatch(actionPopupDelAdv({show: false, adv: {}, type:'' }));
-    } else router.push('/user/login');
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
+    }
   };
 
   return(

@@ -1,7 +1,8 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
+import { authenticate, signIn } from "@/firebase/login";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { jwtDecode } from "jwt-decode";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IItem {
@@ -14,6 +15,7 @@ export default function ItemAgravated(props: IItem) {
   const [ dataItem, setDataItem ] = useState<any>([]);
   const [totalItem, setTotalItem] = useState(0);
   const { name, namePtBr, session } = props;
+  const router = useRouter();
 
   useEffect(() => {
     returnValueWillpower();
@@ -22,11 +24,10 @@ export default function ItemAgravated(props: IItem) {
 
   const returnValueWillpower = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -41,28 +42,21 @@ export default function ItemAgravated(props: IItem) {
             setTotalItem(Number(player.data.attributes.stamina) + 3);
           }
         }
-      } catch (error) {
-        window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`)
     }
-  };
-  
-  const isEmpty = (obj: any) => {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
-    return true;
   };
   
   const updateValue = async (name: string, value: number) => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -85,9 +79,12 @@ export default function ItemAgravated(props: IItem) {
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
-      } catch (error) {
-        window.alert(`Erro ao atualizar valor de ${name}: (' + error + ')`);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`)
     }
     returnValueWillpower();
   };

@@ -1,7 +1,8 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
+import { authenticate, signIn } from "@/firebase/login";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { jwtDecode } from "jwt-decode";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface IAtr {
@@ -14,6 +15,7 @@ interface IAtr {
 export default function ItemAtr(props: IAtr) {
   const [ attributes, setAttributes ] = useState<any>(0);
   const { name, namePtBr, quant, session } = props;
+  const router = useRouter();
 
   useEffect(() => {
     returnValueAttribute();
@@ -22,30 +24,31 @@ export default function ItemAtr(props: IAtr) {
 
   const returnValueAttribute = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
         setAttributes(player.data.attributes[name]);
-      } catch (error) {
-        window.alert('Erro ao obter valor do atributo: ' + error);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
   };
   
   const updateValue = async (name: string, value: number) => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -55,10 +58,13 @@ export default function ItemAtr(props: IAtr) {
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
-      } catch (error) {
-        window.alert('Erro ao atualizar valor: (' + error + ')');
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
-    }
+    } catch (error) {
+      window.alert('Erro ao obter valor: ' + error);
+    }    
     returnValueAttribute();
   };
 

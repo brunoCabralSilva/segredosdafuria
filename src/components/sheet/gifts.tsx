@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { IoAdd, IoClose } from "react-icons/io5";
 import firebaseConfig from "@/firebase/connection";
-import { jwtDecode } from "jwt-decode";
 import dataGifts from '../../data/gifts.json';
 import ItemGift from "./itemGift";
 import ItemGiftAdded from "./itemGiftAdded";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function GiftsSheet(props: { session: string }) {
   const { session } = props;
@@ -15,6 +16,7 @@ export default function GiftsSheet(props: { session: string }) {
   const [trybe, setTrybe] = useState<string>('');
   const [auspice, setAuspice] = useState<string>('');
   const [giftsAdded, setGiftsAdded] = useState<any[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     generateDataForGifts();
@@ -23,11 +25,10 @@ export default function GiftsSheet(props: { session: string }) {
 
   const generateDataForGifts = async () => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -37,9 +38,12 @@ export default function GiftsSheet(props: { session: string }) {
         setTrybe(player.data.trybe);
         setAuspice(player.data.auspice);
         setGiftsAdded((player.data.gifts))
-      } catch (error) {
-        window.alert('Erro ao obter valores do dom: ' + error);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+     } catch (error) {
+      window.alert('Erro ao obter valores do dom: ' + error);
     }
   };
 

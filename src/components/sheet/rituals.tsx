@@ -3,14 +3,16 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { IoAdd, IoClose } from "react-icons/io5";
 import firebaseConfig from "@/firebase/connection";
-import { jwtDecode } from "jwt-decode";
 import dataRituals from '../../data/rituals.json';
 import ItemRituals from "./itemRituals";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function RitualSheet(props: { session: string }) {
   const { session } = props;
   const [showAllRituals, setShowAllRituals] = useState<boolean>(false);
   const [ritualsAdded, setRitualsAdded] = useState<any[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     generateDataForRituals();
@@ -19,20 +21,22 @@ export default function RitualSheet(props: { session: string }) {
 
   const generateDataForRituals = async () => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
         setRitualsAdded(player.data.rituals);
-      } catch (error) {
-        window.alert('Erro ao obter valor do Ritual: ' + error);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
   };
 

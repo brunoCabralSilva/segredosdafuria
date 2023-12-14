@@ -6,12 +6,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionSessionAuth, useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import firestoreConfig from '../../firebase/connection';
 import { IoMdAdd } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import SessionAuth from "./sessionAuth";
-import { testToken } from "@/firebase/token";
-import { jwtDecode } from "jwt-decode";
+import { authenticate, signIn } from "@/firebase/login";
+import firebaseConfig from "@/firebase/connection";
 
 interface ISessions {
   id: string;
@@ -29,23 +28,16 @@ export default function Session() {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [showData, setShowData] = useState(true);
+  const [showData, setShowData] = useState(false);
   const [sessionSelected, setSessionSelected] = useState('');
 
   useEffect(() => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
-        const decode: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-        const { email, firstName, lastName } = decode;
-        console.log(decode);
-      }
-    setShowData(false);
-    const verification = testToken();
-    if (!verification) router.push('/user/login');
-    else {
-      const getAllSessions = async () => {
-        try {
-          const db = getFirestore(firestoreConfig);
+    const fetchData = async () => {
+      const authData = await authenticate();
+      try {
+        if (authData && authData.email && authData.name) {
+          setShowData(true);
+          const db = getFirestore(firebaseConfig);
           const collectionRef = collection(db, 'sessions');
           const querySnapshot = await getDocs(collectionRef);
           const sessionsList = querySnapshot.docs.map((doc) => ({
@@ -54,12 +46,15 @@ export default function Session() {
           }));
           setSessions(sessionsList);
           setShowData(true);
-        } catch (error) {
-          window.alert('Erro ao obter sessões: ' + error);
-        }
+        } else {
+          const sign = await signIn();
+          if (!sign) router.push('/');
+        } 
+      } catch (error) {
+        window.alert('Ocorreu um erro ao obter Sessões: ' + error);
       }
-      getAllSessions();
     };
+    fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

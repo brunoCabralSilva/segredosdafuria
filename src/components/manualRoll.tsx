@@ -1,10 +1,11 @@
 'use client'
 import { registerMessage } from "@/firebase/chatbot";
+import { authenticate, signIn } from "@/firebase/login";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionShowMenuSession } from "@/redux/slice";
 import { serverTimestamp } from "firebase/firestore";
-import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
@@ -15,13 +16,7 @@ export default function ManualRoll(props: { session: string }) {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
   const dispatch = useAppDispatch();
-
-  interface IUser {
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: string;
-  }
+  const router = useRouter();
 
   const registerRoll = async () => {
     let resultOfRage = [];
@@ -43,9 +38,10 @@ export default function ManualRoll(props: { session: string }) {
       resultOf.push(value);
     }
 
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const { firstName, lastName, email }: IUser = jwtDecode(token);
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email, name } = authData;
       if (valueWithPenaltyOfBonus >= dificulty) {
         await registerMessage({
           message: {
@@ -54,23 +50,29 @@ export default function ManualRoll(props: { session: string }) {
             dificulty,
             penaltyOrBonus,
             },
-          user: firstName + ' ' + lastName,
+          user: name,
           email: email,
           date: serverTimestamp(),
         }, session);
       } else {
         await registerMessage({
           message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${valueWithPenaltyOfBonus } dados para um Teste de Dificuldade ${dificulty}).`,
-          user: firstName + ' ' + lastName,
+          user: name,
           email: email,
         }, session);
       }
+      setValueOfRage(0);
+      setValueOf(0);
+      setPenaltyOrBonus(0);
+      setDificulty(0);
+      dispatch(actionShowMenuSession(''))
+    } else {
+      const sign = await signIn();
+      if (!sign) router.push('/');
     }
-    setValueOfRage(0);
-    setValueOf(0);
-    setPenaltyOrBonus(0);
-    setDificulty(0);
-    dispatch(actionShowMenuSession(''))
+  } catch (error) {
+    window.alert('Erro ao obter valor da Forma: ' + error);
+  }
   };
 
   const disableRoll = () => {

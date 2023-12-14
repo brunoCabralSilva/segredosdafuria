@@ -4,12 +4,14 @@ import { collection, getDocs, getFirestore, query, updateDoc, where } from "fire
 import { FaRegEdit } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import firebaseConfig from "@/firebase/connection";
-import { jwtDecode } from "jwt-decode";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function Notes(props: { session: string, type: string }) {
   const { session, type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
   const [text, setText] = useState<string>('');
+  const router = useRouter();
 
   const typeText = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -23,30 +25,31 @@ export default function Notes(props: { session: string, type: string }) {
 
   const returnValue = async () => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
         setText(player.data[type]);
-      } catch (error) {
-        window.alert('Erro ao obter valor da Anotação: ' + error);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
   };
 
   const updateValue = async () => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -56,9 +59,12 @@ export default function Notes(props: { session: string, type: string }) {
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
-      } catch (error) {
-        window.alert('Erro ao atualizar Anotação: (' + error + ')');
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
     returnValue();
   };

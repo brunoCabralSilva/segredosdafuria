@@ -3,17 +3,19 @@ import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionForm, actionShowMenuSession } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
 import Image from "next/image";
 import { returnRageCheck } from "@/firebase/checks";
 import { registerMessage } from "@/firebase/chatbot";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function Forms(props: { session: string }) {
   const { session } = props;
   const [ formSelected, setFormSelected ] = useState<any>('');
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     returnValue();
@@ -22,35 +24,36 @@ export default function Forms(props: { session: string }) {
 
   const returnValue = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
         setFormSelected(player.data.form);
-      } catch (error) {
-        window.alert('Erro ao obter valor da Forma: ' + error);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
   };
   
   const updateValue = async (name: string) => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-        const { email, firstName, lastName } = decodedToken;
+    const authData: { email: string, name: string } | null = await authenticate();
+    try {
+      if (authData && authData.email && authData.name) {
+        const { email, name } = authData;
         if (name !== formSelected) {
           if (name === 'Hominídeo' || name === 'Lupino') {
             await registerMessage({
               message: `Mudou para a forma ${name}.`,
-              user: firstName + ' ' + lastName,
+              user: name,
               email: email,
             }, session);
           }
@@ -67,7 +70,7 @@ export default function Forms(props: { session: string }) {
             player.data.rage = 1;
             await registerMessage({
               message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
-              user: firstName + ' ' + lastName,
+              user: name,
               email: email,
             }, session);
           }
@@ -78,9 +81,12 @@ export default function Forms(props: { session: string }) {
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
         dispatch(actionForm(name));
-      } catch (error) {
-        window.alert('Erro ao atualizar Forma (' + error + ')');
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao atualizar Forma (' + error + ')');
     }
     returnValue();
   };

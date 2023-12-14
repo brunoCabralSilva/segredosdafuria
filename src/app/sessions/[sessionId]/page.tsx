@@ -5,12 +5,10 @@ import { actionSessionAuth, actionShowMenuSession, useSlice } from '@/redux/slic
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { collection, documentId, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import firestoreConfig from '../../../firebase/connection';
-import { jwtDecode } from 'jwt-decode';
 import { IGenerateDataRolls, IMsn } from '@/interface';
 import Nav from '@/components/nav';
 import PopUpDices from '@/components/popUpDices';
 import PopUpSheet from '@/components/popUpSheet';
-import { verify } from '../../../firebase/user';
 import Message from './message';
 import { generateDataRoll } from './functions';
 import Dice from './dice';
@@ -18,16 +16,17 @@ import SessionBar from './sessionBar';
 import { useRouter } from 'next/navigation';
 import MenuDm from '@/components/MenuDm';
 import firebaseConfig from '../../../firebase/connection';
-import AutomatedRoll from '@/components/sheet/automatedRoll';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import ManualRoll from '@/components/manualRoll';
 import PopupResetSheet from '@/components/popupResetSheet';
 import PopupDelHistoric from '@/components/popupDelHistoric';
+import { authenticate, signIn } from '@/firebase/login';
 
 export default function Chat({ params } : { params: { sessionId: string } }) {
   const [dataSession, setDataSession] = useState<any>({ name: '' });
   const slice = useAppSelector(useSlice);
   const db = getFirestore(firestoreConfig);
+  const [email, setEmail] = useState('');
   const sessionRef = collection(db, "sessions");
   const querySession = query(sessionRef, where(documentId(), "==", params.sessionId));
   const [session] = useCollectionData(querySession, { idField: "id" } as any);
@@ -40,7 +39,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
   useEffect(() => {
     dispatch(actionSessionAuth({ show: false, id: ''}));
     setShowData(false);
-    const db = getFirestore(firebaseConfig);
+        
     const verifyUser = async () => {
       const sessionDocSnapshot = await getDocs(querySession);
       if (sessionDocSnapshot.empty) {
@@ -48,11 +47,12 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
         window.alert('A Sessão não foi encontrada');
       }
       else {
-        const token = localStorage.getItem('Segredos Da Fúria');
         const sessionData = sessionDocSnapshot.docs[0].data();
-        if (token) {
-          const decode: { email: string } = jwtDecode(token);
-          const { email } = decode;
+        const authData: { email: string, name: string } | null = await authenticate();
+        if (authData && authData.email && authData.name) {
+          setShowData(true);
+          const { email } = authData;
+          setEmail(email);
           if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
           if (sessionData.name) {
             setShowData(true);
@@ -69,8 +69,9 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
             router.push('/sessions');
           }
         } else {
-          window.alert('É necessário efetuar o Login novamente');
-          router.push('/user/login');
+          const sign = await signIn();
+          if (sign) setShowData(true);
+          else router.push('/');
         }
       }
     }
@@ -171,17 +172,10 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
                 {
                   session && session.length > 0 && session[0].chat && session[0].chat.length >= 0
                   ? session[0] && session[0].chat.map((msg: any, index: number) => {
-                      const token = localStorage.getItem('Segredos Da Fúria');
-                      if (token) {
-                        const decodedToken = verify(JSON.parse(token));
-                        let decode = { email: '' };
-                        if (decodedToken) decode = jwtDecode(token);
-                        if (token && decode.email !== '' && decode.email === msg.email) {
-                          return messageForm(index, msg, 'green', 'end');
-                        }
-                        return messageForm(index, msg, 'gray', 'start');
-                      } return null;
-                    })
+                    if (email !== '' && email === msg.email) {
+                      return messageForm(index, msg, 'green', 'end');
+                    } return messageForm(index, msg, 'gray', 'start');
+                  })
                   : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
                       <span className="loader z-50" />
                     </div>

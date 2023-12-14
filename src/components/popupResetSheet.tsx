@@ -1,28 +1,26 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDeletePlayer, actionResetSheet, useSlice } from "@/redux/slice";
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useAppDispatch} from "@/redux/hooks";
+import { actionResetSheet } from "@/redux/slice";
+import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../firebase/connection';
-import { jwtDecode } from "jwt-decode";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
 
 export default function PopupResetSheet(props: { sessionId : string }) {
   const { sessionId } = props;
-  const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
   const resetSheet = async () => {
     try {
-      const token = localStorage.getItem('Segredos Da Fúria');
-      if (token) {
-        const db = getFirestore(firestoreConfig);
-        const decode: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-        const { email, firstName, lastName } = decode;
+      const authData: { email: string, name: string } | null = await authenticate();
+      const db = getFirestore(firestoreConfig);
+      if (authData && authData.email && authData.name) {
+        const { email, name } = authData;
         const sheet = {
           email: email,
-          user: `${firstName} ${lastName}`,
+          user: name,
           creationDate: Date.now(),
           data: {
             trybe: '',
@@ -117,7 +115,9 @@ export default function PopupResetSheet(props: { sessionId : string }) {
         window.location.reload();
         }
       } else {
+        const sign = await signIn();
         window.alert("Ocorreu um erro. Por favor, atualize a página tente novamente remover o jogador.");
+        if (!sign) router.push('/');
         dispatch(actionResetSheet(false));
       }
     } catch(error) {

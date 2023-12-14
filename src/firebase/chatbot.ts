@@ -1,20 +1,23 @@
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
-import { jwtDecode } from "jwt-decode";
+import { authenticate } from "./login";
 
 export const sendMessage = async (text: string, sessionName: string) => {
-  const token = localStorage.getItem('Segredos Da Fúria');
-  if (token) {
-    const decodedToken: { email: string, firstName: string, lastName: string } = jwtDecode(token);
-    const { email, firstName, lastName } = decodedToken;
-    if (text !== '' && text !== ' ') {
-      await registerMessage({
-        message: text,
-        user: firstName + ' ' + lastName,
-        email,
-      },
-      sessionName);
+  const authData: { email: string, name: string } | null = await authenticate();
+  try {
+    if (authData && authData.email && authData.name) {
+      const { email, name } = authData;
+      if (text !== '' && text !== ' ') {
+        await registerMessage({
+          message: text,
+          user: name,
+          email,
+        },
+        sessionName);
+      }
     }
+  } catch (error) {
+    window.alert('Erro ao obter valor da Forma: ' + error);
   }
 };
 

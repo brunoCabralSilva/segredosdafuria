@@ -10,8 +10,9 @@ import { FaAngleDown } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionDelHistoric, actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
 import firestoreConfig from '../../../firebase/connection';
+import { authenticate, signIn } from '@/firebase/login';
+import { useRouter } from 'next/navigation';
 
 export default function SessionBar(props: any) {
   const { showOptions, setShowOptions, scrollToBottom, sessionName } = props;
@@ -19,31 +20,35 @@ export default function SessionBar(props: any) {
   const [dm, setDm] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     setDm(false);
     const analyzeDm = async () => {
       try {
-        const token = localStorage.getItem('Segredos Da Fúria');
-        if (token) {
-          const decodification: { email: string } = jwtDecode(token);
+        const authData: { email: string, name: string } | null = await authenticate();
+        if (authData && authData.email && authData.name) {
+          const { email } = authData;
           const db = getFirestore(firestoreConfig);
           const sessionRef = collection(db, "sessions");
           const querySession = query(sessionRef, where("name", "==", sessionName));
-          const { email } = decodification;
           const resultado: any = await getDocs(querySession);
           const players: any = [];
           resultado.forEach((doc: any) => players.push(...doc.data().players));
           let dmEmail: string = '';
           resultado.forEach((doc: any) => dmEmail = doc.data().dm);
           if (dmEmail === email) setDm(true);
+        } else {
+          const sign = await signIn();
+          if (!sign) router.push('/');
         }
       } catch(error) {
         setDm(false);
       }
     };
     analyzeDm();
-  }, [sessionName]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return(
     <div className={`${slice.showMenuSession !== '' ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center min-h-10vh`}>

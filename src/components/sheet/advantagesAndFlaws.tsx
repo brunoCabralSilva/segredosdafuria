@@ -6,8 +6,8 @@ import { IoAdd, IoClose } from 'react-icons/io5';
 import ItensAdvantagesAdded from './itemAdvantagedAdded';
 import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import firebaseConfig from '@/firebase/connection';
-import { jwtDecode } from 'jwt-decode';
 import { useRouter } from 'next/navigation';
+import { authenticate, signIn } from '@/firebase/login';
 
 export default function AdvantagesAndFlaws(props: any) {
   const { session } = props;
@@ -21,10 +21,9 @@ export default function AdvantagesAndFlaws(props: any) {
   }, []);
 
   const getAllAdvantages = async () => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const decode: { email: string } = jwtDecode(token);
-      const { email } = decode;
+    const authData: { email: string, name: string } | null = await authenticate();
+    if (authData && authData.email && authData.name) {
+      const { email } = authData;
       const db = getFirestore(firebaseConfig);
       const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
       const userQuerySnapshot = await getDocs(userQuery);
@@ -33,7 +32,10 @@ export default function AdvantagesAndFlaws(props: any) {
       const playerFound = advAndflw.players.find((player: any) => player.email === email);
       const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
       setAdv(listOfAdvantages);
-    } else router.push('/user/login');
+    } else {
+      const sign = await signIn();
+      if (!sign) router.push('/');
+    }
   }
 
   const sumAllAdvantagesAndFlaws = () => {

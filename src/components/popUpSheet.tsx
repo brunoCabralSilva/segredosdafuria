@@ -1,44 +1,47 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionForm, actionResetSheet, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { actionForm, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 import General from "./sheet/general";
 import Attributes from "./sheet/attributes";
 import Skills from "./sheet/skills";
 import Forms from "./sheet/forms";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
-import { jwtDecode } from "jwt-decode";
 import Notes from './sheet/notes';
 import GiftsSheet from "./sheet/gifts";
 import AdvantagesAnsFlaws from "./sheet/advantagesAndFlaws";
 import RitualSheet from "./sheet/rituals";
 import Background from "./sheet/background";
-import PopupResetSheet from "./popupResetSheet";
+import { authenticate, signIn } from "@/firebase/login";
+import { useRouter } from "next/navigation";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function PopUpSheet(props: { session: string }) {
   const { session } = props;
-  const [optionSelect, setOptionSelect] = useState('');
-  const dispatch = useAppDispatch();
   const slice = useAppSelector(useSlice);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const [optionSelect, setOptionSelect] = useState('general');
 
   const getForm = async() => {
     const db = getFirestore(firebaseConfig);
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      try {
-        const decodedToken: { email: string } = jwtDecode(token);
-        const { email } = decodedToken;
+    try {
+      const authData: { email: string, name: string } | null = await authenticate();
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
         dispatch(actionForm(player.data.form));
-      } catch (error) {
-        window.alert('Erro ao obter valor do atributo: ' + error);
+      } else {
+        const sign = await signIn();
+        if (!sign) router.push('/');
       }
+    } catch (error) {
+      window.alert('Erro ao obter valor do atributo: ' + error);
     }
   };
 
