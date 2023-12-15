@@ -232,7 +232,10 @@ export default function MenuDm(props: { sessionId: string }) {
           }
         } else {
           const sign = await signIn();
-          if (!sign) router.push('/');
+          if (!sign) {
+            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+            router.push('/');
+          }
         }
       } catch (error) {
         window.alert('Ocorreu um erro ao atualizar o Narrador da sessão: ' + error);
@@ -263,7 +266,10 @@ export default function MenuDm(props: { sessionId: string }) {
           } else router.push('/sessions');
         } else {
           const sign = await signIn();
-          if (!sign) router.push('/');
+          if (!sign) {
+            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+            router.push('/');
+          }
         }
 		} catch (error) {
 			window.alert(`Erro ao obter a lista de jogadores: ` + error);
@@ -284,7 +290,10 @@ export default function MenuDm(props: { sessionId: string }) {
         }
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch(error) {
       window.alert(`Erro ao obter Notificações de jogadores: ` + error);
@@ -320,7 +329,7 @@ export default function MenuDm(props: { sessionId: string }) {
 		}
 	};
 	
-	const approveUser = async (list: {email: string, firstName: string, lastName: string, message: string }) => {
+	const approveUser = async (list: {email: string, user: string, message: string }) => {
 		try {
 			const db = getFirestore(firebaseConfig);
 			const sessionsCollectionRef = collection(db, 'sessions');
@@ -331,7 +340,7 @@ export default function MenuDm(props: { sessionId: string }) {
         if(!findByEmail) {
           const sheet = {
             email: list.email,
-            user: `${list.firstName} ${list.lastName}`,
+            user: list.user,
             creationDate: Date.now(),
             data: {
               advantagesAndFlaws: [
@@ -406,6 +415,7 @@ export default function MenuDm(props: { sessionId: string }) {
               notes: '',
             },
           };
+          console.log(sheet);
           await updateDoc(sessionDocSnapshot.ref, {
             players: arrayUnion(sheet)
           });

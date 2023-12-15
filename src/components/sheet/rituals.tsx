@@ -33,7 +33,10 @@ export default function RitualSheet(props: { session: string }) {
         setRitualsAdded(player.data.rituals);
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert('Erro ao obter valor da Forma: ' + error);

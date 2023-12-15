@@ -47,7 +47,10 @@ export default function General(props: { session: string }) {
         setNameCharacter(player.data.name);
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert(`Erro ao obter valores de augúrio, tribo e/ou nome: (' + error + ')`);
@@ -73,7 +76,10 @@ export default function General(props: { session: string }) {
         await updateDoc(docRef, { players: [...playersFiltered, player] });
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert(`Erro ao atualizar valor de ${key}: (' + error + ')`);

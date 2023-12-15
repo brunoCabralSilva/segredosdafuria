@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Feedback from "../feedback";
 import { IoAddCircle, IoArrowUpCircleSharp } from "react-icons/io5";
 import firebaseConfig from "@/firebase/connection";
-import { jwtDecode } from "jwt-decode";
 import { MdDelete } from "react-icons/md";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
@@ -42,7 +41,10 @@ export default function ItemRituals(props: any) {
           }
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert('Erro ao obter valor da Forma: ' + error);
@@ -69,7 +71,10 @@ export default function ItemRituals(props: any) {
         window.alert(`Ritual '${ritual.titlePtBr}' removido com sucesso!`)
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert('Erro ao obter valor da Forma: ' + error);

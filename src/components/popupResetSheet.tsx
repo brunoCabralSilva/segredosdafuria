@@ -117,7 +117,10 @@ export default function PopupResetSheet(props: { sessionId : string }) {
       } else {
         const sign = await signIn();
         window.alert("Ocorreu um erro. Por favor, atualize a página tente novamente remover o jogador.");
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
         dispatch(actionResetSheet(false));
       }
     } catch(error) {

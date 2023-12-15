@@ -1,11 +1,10 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionDeletePlayer, useSlice } from "@/redux/slice";
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../firebase/connection';
-import { jwtDecode } from "jwt-decode";
 import { authenticate, signIn } from "@/firebase/login";
 
 export default function PopupDeletePlayer(props: { returnValue: any, sessionId : string }) {
@@ -34,7 +33,10 @@ export default function PopupDeletePlayer(props: { returnValue: any, sessionId :
         }
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);

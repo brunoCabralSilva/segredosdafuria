@@ -1,22 +1,14 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupDelAdv, useSlice } from "@/redux/slice";
-import { collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firebaseConfig from "../firebase/connection";
-import { jwtDecode } from "jwt-decode";
 import { authenticate, signIn } from "@/firebase/login";
 
 interface IAdvantage {
   advantage: string;
-  value: number;
-  name: string;
-  type: string;
-}
-
-interface IFlaw {
-  flaw: string;
   value: number;
   name: string;
   type: string;
@@ -88,7 +80,10 @@ export default function PopupDelAdv(props: any) {
         dispatch(actionPopupDelAdv({show: false, adv: {}, type:'' }));
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert('Erro ao obter valor da Forma: ' + error);

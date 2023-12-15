@@ -43,6 +43,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
     const verifyUser = async () => {
       const sessionDocSnapshot = await getDocs(querySession);
       if (sessionDocSnapshot.empty) {
+        console.log('aqui');
         router.push('/sessions');
         window.alert('A Sessão não foi encontrada');
       }
@@ -71,7 +72,10 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
         } else {
           const sign = await signIn();
           if (sign) setShowData(true);
-          else router.push('/');
+          else {
+            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+            router.push('/');
+          }
         }
       }
     }

@@ -48,7 +48,11 @@ export default function Session() {
           setShowData(true);
         } else {
           const sign = await signIn();
-          if (!sign) router.push('/');
+          setShowData(true);
+          if (!sign) {
+            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+            router.push('/');
+          }
         } 
       } catch (error) {
         window.alert('Ocorreu um erro ao obter Sessões: ' + error);

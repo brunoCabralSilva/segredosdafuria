@@ -29,7 +29,10 @@ export default function Create() {
         } else {
           const sign = await signIn();
           if (sign) setShowData(true);
-          else router.push('/');
+          else {
+            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+            router.push('/');
+          }
         }
       } catch (error) {
         window.alert('Ocorreu um erro com a validação de dados: ' + error);

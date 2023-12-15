@@ -37,7 +37,10 @@ export default function Background(props: { session: string, type: string }) {
         setText(player.data[type]);
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert('Erro ao obter valor da Anotação: ' + error);
@@ -61,7 +64,10 @@ export default function Background(props: { session: string, type: string }) {
         await updateDoc(docRef, { players: [...playersFiltered, player] });
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert('Erro ao obter valor da Anotação: ' + error);

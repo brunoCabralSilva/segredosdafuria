@@ -44,7 +44,10 @@ export default function ItemAgravated(props: IItem) {
         }
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`)
@@ -81,7 +84,10 @@ export default function ItemAgravated(props: IItem) {
         await updateDoc(docRef, { players: [...playersFiltered, player] });
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch (error) {
       window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`)

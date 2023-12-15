@@ -1,6 +1,6 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/slice";
+import { useAppDispatch } from "@/redux/hooks";
+import { actionLoginInTheSession, actionSessionAuth } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -56,7 +56,10 @@ export default function SessionAuth(props: { sessionId : string }) {
           }
         } else {
           const sign = await signIn();
-          if (!sign) router.push('/');
+          if (!sign) {
+            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+            router.push('/');
+          }
         }
       } catch(error) {
         window.alert("Ocorreu um erro: " + error);
@@ -87,7 +90,7 @@ export default function SessionAuth(props: { sessionId : string }) {
               message: `O Usuário ${capitalize(name)} de email "${email}" solicitou acesso à sua Sessão.`,
               email: email,
               type: 'approval',
-              user: name.toLowerCase(),
+              user: name,
             }
           ];
           await updateDoc(sessionDocSnapshot.ref, { notifications: updatedNotifications });
@@ -96,7 +99,10 @@ export default function SessionAuth(props: { sessionId : string }) {
         }
       } else {
         const sign = await signIn();
-        if (!sign) router.push('/');
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
       }
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);
