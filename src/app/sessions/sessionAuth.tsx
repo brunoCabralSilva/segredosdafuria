@@ -48,7 +48,6 @@ export default function SessionAuth(props: { sessionId : string }) {
                 });
                 if (auth) {
                   router.push(`/sessions/${sessionId}`);
-                  dispatch(actionSessionAuth({ show: false, id: sessionId }))
                   dispatch(actionLoginInTheSession({ id: sessionId, logged: true }));
                 } else setPopup('authorization');
               }
@@ -149,9 +148,11 @@ export default function SessionAuth(props: { sessionId : string }) {
       case 'send':
         return (<div className="text-white text-center">Tudo pronto! Enviamos uma solicitação ao Narrador e logo mais ele responderá! Por favor, aguarde até a resposta dele.</div>);
       default:
-        return (<div className="bg-black/80 text-white flex items-center justify-center flex-col">
-          <span className="loader z-50" />
-        </div>);
+        return (
+          <div className="bg-black/80 text-white flex items-center justify-center flex-col">
+            <span className="loader z-50" />
+          </div>
+        );
     }
   };
 
