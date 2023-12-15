@@ -14,6 +14,10 @@ interface IAdvantage {
   type: string;
 }
 
+function limitCaracteres(texto: string) {
+  return texto.slice(0, 300);
+}
+
 export default function PopupDelAdv(props: any) {
   const { session, adv, setAdv } = props;
   const slice = useAppSelector(useSlice);
@@ -105,7 +109,8 @@ export default function PopupDelAdv(props: any) {
               Tem certeza de que quer Remover este item da sua ficha?
             </p>
             <p className="text-white w-full text-center pb-3">
-              { slice.popupDelAdv.desc }
+              { limitCaracteres(slice.popupDelAdv.desc) }
+              { slice.popupDelAdv.desc.length > 498 ? <span className="text-white">...</span> : ''}
             </p>
           </label>
           <div className="flex w-full gap-2">

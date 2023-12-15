@@ -599,7 +599,7 @@ export default function MenuDm(props: { sessionId: string }) {
                   {
                     players.filter((player:any) => player.email !== dm ).map((item: any, index: number) => (
                       <span className="capitalize" key={index}>
-                        { index === players.length -1 ? item.user + '.' : item.user + ', ' }
+                        { index === players.length -2 ? item.user + '.' : item.user + ', ' }
                       </span>
                     ))
                   }

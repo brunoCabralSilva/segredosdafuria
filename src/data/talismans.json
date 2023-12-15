@@ -8,6 +8,16 @@
     "systemPtBr": "Enquanto este talismã estiver sendo usado e o usuário estiver na forma glabro ou hispo, eles tratam a prata como se estivessem na forma homid ou lupus. Eles também perdem a capacidade de regenerar danos em qualquer forma durante esse período e por um dia e uma noite completos após a remoção do talismã.",
     "backgroundCost": "An apeskin talisman is a four-dot background, while a talen apeskin is worth two.",
     "backgroundCostPtBr": "Um talismã de pele de macaco é um background de quatro pontos, enquanto um talen de pele de macaco vale dois.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 1
+      }, 
+      {
+        "type": "Talismã",
+        "value": 4
+      }
+    ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 188
   },
@@ -20,6 +30,12 @@
     "systemPtBr": "Passar uma cena (ou um período de tempo livre) contemplando uma das Lágrimas de Gaia permite ao jogador diminuir um nível de hauglosk ou harano, momento em que a Lágrima perde seu brilho e volta a ser uma composição mineral comum.",
     "backgroundCost": "Gaia's Tears are by their nature considered talens, but cannot be taken as a Background as there is no reliable way to find them.",
     "backgroundCostPtBr": "As Lágrimas de Gaia são, por natureza, consideradas talens, mas não podem ser adquiridas como um Background, pois não há uma maneira confiável de encontrá-las.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 0
+      }
+    ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 188
   },
@@ -32,6 +48,12 @@
     "systemPtBr": "O usuário da flauta deve gastar dois turnos e um Ponto de Força de Vontade e, em seguida, fazer um teste de Compostura + Performance contra a Fúria atual de um alvo em frenesi, ou uma Dificuldade de 3 no caso de outras criaturas. Se o usuário for bem-sucedido, o alvo é retirado do frenesi, revertendo para sua forma natural (se for um Garou), conforme as regras normais para sair da forma Crinos.",
     "backgroundCost": "A harmony flute is a three-dot background.",
     "backgroundCostPtBr": "Uma flauta da harmonia é um background de três pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 188
   },
@@ -44,6 +66,16 @@
     "systemPtBr": "Uma klaive causa +2 de dano à Vitalidade baseado em prata agravada e pode ser empunhado nas formas homid ou glabro.",
     "backgroundCost": "The klaive is a three-dot Talisman, while a talen klaive is worth a single dot.",
     "backgroundCostPtBr": "A klaive é um Talismã de três pontos, enquanto um klaive como talen vale um único ponto.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 1
+      }, 
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 188
   },
@@ -57,6 +89,12 @@
     "backgroundCost": "The partridge wing is a two-dot Talisman.",
     "backgroundCostPtBr": "A asa de perdiz é um Talismã de dois pontos.",
     "book": "Werewolf: The Apocalypse 5th",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 2
+      }
+    ],
     "page": 189
   },
   {
@@ -68,6 +106,16 @@
     "systemPtBr": "Fragmentos das sombras existem apenas como talens. Eles permitem que um único usuário entre no Umbra, desde que a classificação do Véu seja 3 ou inferior. Essa travessia consome o talismã quando ele é quebrado e conta como uma ação completa. Fragmentos maiores das sombras também existem, permitindo que o usuário leve toda a matilha através do Véu. Fragmentos das sombras funcionam apenas para os Garou; eles não podem puxar humanos ou outras pessoas para o Umbra, presumivelmente porque eles não possuem a mesma composição parcialmente espiritual dos lobisomens.",
     "backgroundCost": "Single-Garou shadowshards are worth one dot while pack-sized shards are worth three dots.",
     "backgroundCostPtBr": "Fragmentos das sombras para um único Garou valem um ponto, enquanto fragmentos de tamanho de matilha valem três pontos.",
+    "cost": [
+      {
+        "type": "Um Único Garou",
+        "value": 2
+      },
+      {
+        "type": "Toda a Matilha",
+        "value": 3
+      } 
+    ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 189
   },
@@ -80,6 +128,12 @@
     "systemPtBr": "Um atrair-espírito impede que um espírito por cena deixe a presença do Garou que o empunha, desde que ambos estejam no mesmo plano (Umbra ou físico). O Garou normalmente pode escolher o espírito, mas se houver muitos espíritos presentes, exatamente qual será cativado fica a critério do Narrador - não é tão preciso a ponto de ser \"mirado\". Se o espírito desejar sair, ele deve ter sucesso em um teste de seu Poder versus a classificação do atrair-espírito. Se o espírito falhar no teste, ele deve permanecer nas proximidades do atrair-espírito, mas pode se esconder, evadir, etc., e se for ferido, está livre para fugir. Se usado em conjunto com Dons ou Ritos que prendem ou restringem espíritos, o atrair-espírito pode fornecer metade de sua classificação como dados de bônus, a critério do Narrador.",
     "backgroundCost": "A general spirit-catcher able to attract all kinds of spirits is worth its full rating in Background dots. It is considered to be worth one dot less than its rating if it attracts one particular spirit type (such as Weaver or Gaian spirits) and is further reduced in cost by one if taken as a talen, to a minimum of one.",
     "backgroundCostPtBr": "Um atrair-espírito geral capaz de atrair todos os tipos de espíritos vale a quantidade completa de pontos de Antecedente em Background. É considerado valer um ponto a menos do que sua classificação se atrair um tipo específico de espírito (como espíritos Tecelões ou Gaianos) e seu custo é reduzido em mais um ponto se for usado como um talen, até um mínimo de um.",
+    "cost": [
+      {
+        "type": "Capaz de atrair qualquer Espírito",
+        "value": 7
+      }
+    ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 189
   },
@@ -92,6 +146,16 @@
     "systemPtBr": "O usuário faz um teste de Astúcia + Ocultismo, aumentando a Dificuldade para rastreá-los e ao seu grupo pela metade do número de sucessos rolados, arredondado para cima. O apito do vento só pode ser usado ao ar livre e apenas uma vez por sessão. O efeito se aplica apenas a perseguições que envolvem o local onde o talismã foi usado.",
     "backgroundCost": "The wind whistle is a three-dot Talisman, while a talen whistle is worth a single dot.",
     "backgroundCostPtBr": "O apito do vento é um Talismã de três pontos, enquanto um apito talen vale um único ponto.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 1
+      }, 
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 190
   }

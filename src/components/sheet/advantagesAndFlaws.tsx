@@ -127,6 +127,7 @@ export default function AdvantagesAndFlaws(props: any) {
                 item={item}
                 index={index}
                 session={session}
+                adv={adv}
                 setAdv={setAdv}
               />
             ))
@@ -139,6 +140,7 @@ export default function AdvantagesAndFlaws(props: any) {
                 item={item}
                 index={index}
                 session={session}
+                adv={adv}
                 setAdv={setAdv}
               />
             ))
