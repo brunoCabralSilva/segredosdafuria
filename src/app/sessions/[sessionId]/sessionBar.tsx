@@ -15,12 +15,19 @@ import { authenticate, signIn } from '@/firebase/login';
 import { useRouter } from 'next/navigation';
 
 export default function SessionBar(props: any) {
-  const { showOptions, setShowOptions, scrollToBottom, sessionName } = props;
+  const { showOptions, setShowOptions, sessionName } = props;
   const [text, setText] = useState('');
   const [dm, setDm] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
   const router = useRouter();
+
+  const scrollToBottom = () => {
+    const messagesContainer = document.getElementById('messages-container');
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+  };
 
   useEffect(() => {
     setDm(false);

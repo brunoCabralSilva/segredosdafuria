@@ -15,7 +15,6 @@ import Dice from './dice';
 import SessionBar from './sessionBar';
 import { useRouter } from 'next/navigation';
 import MenuDm from '@/components/MenuDm';
-import firebaseConfig from '../../../firebase/connection';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import ManualRoll from '@/components/manualRoll';
 import PopupResetSheet from '@/components/popupResetSheet';
