@@ -36,6 +36,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
   const dispatch = useAppDispatch();
   
   useEffect(() => {
+    scrollToBottom();
     dispatch(actionSessionAuth({ show: false, id: ''}));
     setShowData(false);
         
