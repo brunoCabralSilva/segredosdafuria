@@ -71,6 +71,7 @@ export default function SessionBar(props: any) {
               onClick={() => {
                 dispatch(actionShowMenuSession('dices'));
                 setShowOptions(false);
+                scrollToBottom();
               }}
             >
               <GiD10 />
@@ -83,6 +84,7 @@ export default function SessionBar(props: any) {
               onClick={() => {
                 setShowOptions(false);
                 dispatch(actionShowMenuSession('sheet'))
+                scrollToBottom();
               }}
             >
               <FaFile />
@@ -97,6 +99,7 @@ export default function SessionBar(props: any) {
                   onClick={() => {
                     dispatch(actionDelHistoric(true))
                     setShowOptions(false);
+                    scrollToBottom();
                   }}
                 >
                   <FaEraser />
@@ -133,7 +136,10 @@ export default function SessionBar(props: any) {
             <button
               className="p-2"
               title="Enviar uma mensagem"
-              onClick={() => setShowOptions(!showOptions)}
+              onClick={() => {
+                setShowOptions(!showOptions);
+                scrollToBottom();
+              }}
             >
               {showOptions? <FaAngleDown /> : <FaPlus /> }
             </button>
