@@ -46,22 +46,22 @@ export default function Forms(props: { session: string }) {
     }
   };
   
-  const updateValue = async (name: string) => {
+  const updateValue = async (nameForm: string) => {
     const db = getFirestore(firebaseConfig);
     const authData: { email: string, name: string } | null = await authenticate();
     try {
       if (authData && authData.email && authData.name) {
         const { email, name } = authData;
-        if (name !== formSelected) {
-          if (name === 'Hominídeo' || name === 'Lupino') {
+        if (nameForm !== formSelected) {
+          if (nameForm === 'Hominídeo' || nameForm === 'Lupino') {
             await registerMessage({
-              message: `Mudou para a forma ${name}.`,
+              message: `Mudou para a forma ${nameForm}.`,
               user: name,
               email: email,
             }, session);
           }
-          if (name === 'Crinos') await returnRageCheck(2, name, session);
-          if (name === 'Glabro' || name === 'Hispo') await returnRageCheck(1, name, session);
+          if (nameForm === 'Crinos') await returnRageCheck(2, nameForm, session);
+          if (nameForm === 'Glabro' || nameForm === 'Hispo') await returnRageCheck(1, nameForm, session);
         }
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
@@ -79,11 +79,12 @@ export default function Forms(props: { session: string }) {
           }
         }
         dispatch(actionShowMenuSession(''))
-        player.data.form = name;
+        player.data.form = nameForm;
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
-        dispatch(actionForm(name));
+        console.log('Name', nameForm)
+        dispatch(actionForm(nameForm));
       } else {
         const sign = await signIn();
         if (!sign) {

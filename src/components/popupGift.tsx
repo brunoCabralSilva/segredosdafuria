@@ -81,7 +81,9 @@ export default function PopupGift(props: { item: IGift } ) {
               <h1 className="font-bold text-lg text-center sm:text-left w-full">
                 {`${ item.giftPtBr } (${ item.gift }) - ${ item.renown }`}
               </h1>
-              <hr className="w-10/12 my-4 sm:my-2" />
+              <div className="w-full flex items-center sm:justify-start justify-center">
+                <hr className="w-10/12 my-4 sm:my-2" />
+              </div>
             </div>
             <p>
               <span className="font-bold pr-1">Pertencente a:</span>

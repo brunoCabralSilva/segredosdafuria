@@ -78,8 +78,8 @@ export default function AdvantagesAndFlaws(props: any) {
         >
           {
           !allAdvantages
-          ? <span className="text-sm">Minhas Vantagens e Defeitos</span>
-          : <span className="text-sm">Adicionar Vantagens e Defeitos</span>
+          ? <p className="text-sm w-full text-center">Minhas Vantagens e Defeitos</p>
+          : <p className="text-sm w-full text-center">Adicionar Vantagens e Defeitos</p>
           }
         </div>
         <button

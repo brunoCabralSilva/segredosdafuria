@@ -35,6 +35,7 @@ export default function PopUpSheet(props: { session: string }) {
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
+        console.log(player.data.form);
         dispatch(actionForm(player.data.form));
       } else {
         const sign = await signIn();

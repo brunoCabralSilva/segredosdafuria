@@ -18,14 +18,14 @@ export default function PopupAdvantage() {
 
   return(
     <div className="w-full h-screen fixed top-0 left-0 bg-black z-50">
-      <section className="mb-2 relative px-2 h-full overflow-y-auto flex flex-col items-center justify-center">
+      <section className="mb-2 relative px-2 h-full flex flex-col items-center justify-center">
         <div className="w-full flex justify-end mt-5 mb-3 px-2 sm:px-10">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer mb-2"
             onClick={() => dispatch(actionShowAdvantage({ show: false, item: {} }))}
           />
         </div>
-        <div className="px-2 sm:px-10 flex flex-col w-full z-20 text-white text-justify">
+        <div className="overflow-y-auto px-2 sm:px-10 flex flex-col w-full z-20 text-white text-justify">
           <article className="w-full h-full px-4 pb-4 text-white">
             <div className="flex flex-col justify-center dataGifts-center sm:dataGifts-start">
               <h1 className="font-bold text-lg text-center w-full">
