@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react';
 import data from '../../data/advantagesAndFlaws.json';
+import dataLoresheets from '../../data/loresheets.json';
+import dataTalismans from '../../data/talismans.json';
 import Advantage from './itemAdvangate';
 import { IoAdd, IoClose } from 'react-icons/io5';
 import ItensAdvantagesAdded from './itemAdvantagedAdded';
@@ -8,6 +10,8 @@ import { collection, getDocs, getFirestore, query, where } from 'firebase/firest
 import firebaseConfig from '@/firebase/connection';
 import { useRouter } from 'next/navigation';
 import { authenticate, signIn } from '@/firebase/login';
+import AdvantageLoresheets from './itemAdvangateLoresheet';
+import AdvantageTalismans from './itemAdvangateTalismans';
 
 export default function AdvantagesAndFlaws(props: any) {
   const { session } = props;
@@ -110,6 +114,30 @@ export default function AdvantagesAndFlaws(props: any) {
                 index={index}
                 session={session}
                 adv={adv}
+                setAdv={setAdv}
+              />
+            ))
+          }
+          <div className="w-full text-center my-6">Loresheets</div>
+          {
+            dataLoresheets.map((item: any, index: number) => (
+              <AdvantageLoresheets
+                key={index}
+                item={item}
+                index={index}
+                session={session}
+                setAdv={setAdv}
+              />
+            ))
+          }
+          <div className="w-full text-center my-6">Talismãs</div>
+          {
+            dataTalismans.map((item: any, index: number) => (
+              <AdvantageTalismans
+                key={index}
+                item={item}
+                index={index}
+                session={session}
                 setAdv={setAdv}
               />
             ))
