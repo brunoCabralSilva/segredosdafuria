@@ -106,6 +106,7 @@ export default function AdvantagesAndFlaws(props: any) {
       {
         allAdvantages ?
         <div className="h-full text-white ">
+          <div className="w-full text-center my-6">Vantagens e Defeitos</div>
           {
             data.map((item: any, index: number) => (
               <Advantage
