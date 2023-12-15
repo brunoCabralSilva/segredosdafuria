@@ -36,7 +36,6 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
   const dispatch = useAppDispatch();
   
   useEffect(() => {
-    scrollToBottom();
     dispatch(actionSessionAuth({ show: false, id: ''}));
     setShowData(false);
         
@@ -84,11 +83,8 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
   }, []);
 
   useLayoutEffect(() => {
-    const token = localStorage.getItem('Segredos Da Fúria');
-    if (token) {
-      const messagesContainer: HTMLElement | null = document.getElementById('messages-container');
-      if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
+    const messagesContainer: HTMLElement | null = document.getElementById('messages-container');
+    if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
   });
 
   const scrollToBottom = () => {
