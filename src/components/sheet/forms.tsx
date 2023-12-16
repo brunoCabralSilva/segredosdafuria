@@ -83,7 +83,6 @@ export default function Forms(props: { session: string }) {
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
-        console.log('Name', nameForm)
         dispatch(actionForm(nameForm));
       } else {
         const sign = await signIn();

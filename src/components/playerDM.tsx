@@ -70,7 +70,6 @@ export default function PlayersDm(props: any) {
     let flw = 0;
     let type = "";
     list.forEach((item: any) => {
-      console.log(item);
       if (item.flaw) {
         flw += item.value;
         type = 'flaw';

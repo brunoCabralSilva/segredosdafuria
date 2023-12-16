@@ -49,7 +49,6 @@ export default function AdvantagesAndFlaws(props: any) {
     let advantageSum = 0;
     let flawSum = 0;
     adv.forEach((item: any) => {
-      console.log(item);
       if (item.flaws.length > 0) {
         item.flaws.forEach((it: any) => flawSum += it.value)
       }

@@ -10,6 +10,7 @@ interface IAdvantage {
   value: number;
   name: string;
   type: string;
+  item: string;
 }
 
 export default function AdvantageLoresheets(props: any) {
@@ -22,7 +23,6 @@ export default function AdvantageLoresheets(props: any) {
   }, []);
 
   const setAdvantageValueItem = async (obj: IAdvantage) => {
-    console.log(obj);
     const authData: { email: string, name: string } | null = await authenticate();
     try {
       if (authData && authData.email && authData.name) {
@@ -43,6 +43,7 @@ export default function AdvantageLoresheets(props: any) {
             advantages: [],
             flaws: [],
             name: obj.name,
+            item: '',
           };
         }
 
@@ -54,6 +55,7 @@ export default function AdvantageLoresheets(props: any) {
             name: obj.name, 
             advantages: [],
             flaws: [],
+            item: obj.item,
           }
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
@@ -65,6 +67,7 @@ export default function AdvantageLoresheets(props: any) {
             name: obj.name, 
             advantages: [obj],
             flaws: [],
+            item: obj.item,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
           props.setAdv([...restOfAdvantage, updated]);
@@ -85,23 +88,18 @@ export default function AdvantageLoresheets(props: any) {
   };
 
   const returnIfHavePoint = () => {
-    console.log('item', item);
-    console.log('adv: ', adv);
     const find: any = adv.find((ad: any) => ad.name === item.titlePtBr);
-    console.log('returnIfHavePoint ', find);
     if (find) return find.advantages.length > 0;
   };
 
   const returnAdvantageNull = () => {
     const find: any = adv.find((ad: any) => ad.name === item.titlePtBr);
-    console.log('returnAdvantageNull ', find);
     if (find) return find.advantages.length === 0;
     return true;
   };
 
   const returnIfHaveAdvantage = (element: string) => {
     const find: any = adv.find((ad: any) => ad.name === item.titlePtBr);
-    console.log('returnIfHaveAdvantage ', find);
     if (find) return find.advantages.find((ad: any) => ad.advantage === element);
     return false;
   }
@@ -143,6 +141,7 @@ export default function AdvantageLoresheets(props: any) {
                         value: 0,
                         name: item.titlePtBr,
                         type: "",
+                        item: '',
                       });
                     }}
                 >
@@ -165,6 +164,7 @@ export default function AdvantageLoresheets(props: any) {
                             value: advantage.value,
                             name: item.titlePtBr,
                             type: 'radio',
+                            item: 'talisman',
                           });
                         }}
                       >

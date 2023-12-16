@@ -432,7 +432,6 @@ export default function MenuDm(props: { sessionId: string }) {
             players: arrayUnion(sheet)
           });
           if (authData) {
-          console.log(list.user, authData?.name, authData.email);
           await registerMessage({
             message: `${list.user} iniciou sua jornada nesta Sessão! seja bem vinde!`,
             user: authData.name,

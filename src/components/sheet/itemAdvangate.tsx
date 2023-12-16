@@ -10,6 +10,7 @@ interface IAdvantage {
   value: number;
   name: string;
   type: string;
+  item: string;
 }
 
 interface IFlaw {
@@ -17,6 +18,7 @@ interface IFlaw {
   value: number;
   name: string;
   type: string;
+  item: string;
 }
 
 export default function Advantage(props: any) {
@@ -48,6 +50,7 @@ export default function Advantage(props: any) {
               name: obj.name, 
               advantages: [],
               flaws: foundAdvantage.flaws,
+              item: obj.item,
             }
             props.setAdv([...restOfAdvantage, updatedAdvantage]);
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
@@ -60,6 +63,7 @@ export default function Advantage(props: any) {
               name: obj.name, 
               advantages: updateAdvantage,
               flaws: foundAdvantage.flaws,
+              item: obj.item,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
             props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -72,6 +76,7 @@ export default function Advantage(props: any) {
             name: obj.name, 
             advantages: [obj],
             flaws: foundAdvantage.flaws,
+            item: obj.item,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
           props.setAdv([...restOfAdvantage, updated]);
@@ -85,6 +90,7 @@ export default function Advantage(props: any) {
               name: obj.name, 
               advantages: [...updateAdvantage, obj],
               flaws: foundAdvantage.flaws,
+              item: obj.item,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
             props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -100,6 +106,7 @@ export default function Advantage(props: any) {
                 name: obj.name, 
                 advantages: newObject,
                 flaws: foundAdvantage.flaws,
+                item: obj.item,
               }
               searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
               props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -111,6 +118,7 @@ export default function Advantage(props: any) {
                 name: obj.name, 
                 advantages: [...foundAdvantage.advantages, obj],
                 flaws: foundAdvantage.flaws,
+                item: obj.item,
               }
               searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
               props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -180,6 +188,7 @@ export default function Advantage(props: any) {
             name: obj.name, 
             advantages: foundAdvantage.advantages,
             flaws: [obj],
+            item: obj.item,
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
           props.setAdv([...restOfAdvantage, updated]);
@@ -195,6 +204,7 @@ export default function Advantage(props: any) {
               name: obj.name, 
               advantages: foundAdvantage.advantages,
               flaws: [...updateAdvantage, obj],
+              item: obj.item,
             }
             searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
             props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -210,6 +220,7 @@ export default function Advantage(props: any) {
                 name: obj.name, 
                 advantages: foundAdvantage.advantages,
                 flaws: newObject,
+                item: obj.item,
               }
               searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
               props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -221,6 +232,7 @@ export default function Advantage(props: any) {
                 name: obj.name, 
                 advantages: foundAdvantage.advantages,
                 flaws: [...foundAdvantage.flaws, obj],
+                item: obj.item,
               }
               searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
               props.setAdv([...restOfAdvantage, updatedAdvantage]);
@@ -309,6 +321,7 @@ export default function Advantage(props: any) {
                         value: 0,
                         name: item.name,
                         type: "",
+                        item: '',
                       });
                     }}
                 >
@@ -331,6 +344,7 @@ export default function Advantage(props: any) {
                             value: advantage.cost,
                             name: item.name,
                             type: advantage.type,
+                            item: item.type,
                           });
                         }}
                         >
@@ -358,7 +372,8 @@ export default function Advantage(props: any) {
                           flaw: '',
                           value: 0,
                           type: "",
-                          name: item.name
+                          name: item.name,
+                          item: '',
                         });
                       }}
                     >
@@ -381,6 +396,7 @@ export default function Advantage(props: any) {
                             value: flaw.cost,
                             name: item.name,
                             type: flaw.type,
+                            item: item.type,
                           });
                       }}
                       >
