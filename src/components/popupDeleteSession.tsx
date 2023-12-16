@@ -1,15 +1,15 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDeleteSession, useSlice } from "@/redux/slice";
+import { useAppDispatch } from "@/redux/hooks";
+import { actionDeleteSession } from "@/redux/slice";
 import { collection, deleteDoc, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../firebase/connection';
 import { authenticate, signIn } from "@/firebase/login";
+import { registerMessage } from "@/firebase/chatbot";
 
 export default function PopupDeleteSession(props: { sessionId : string }) {
   const { sessionId } = props;
-  const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -45,6 +45,11 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
               dm: oldestPlayer.email,
               notifications: updatedNotifications,
             });
+            await registerMessage({
+              message: `O antigo narrador desta sessão saiu definitivamente desta sala e agora ${oldestPlayer.user} é o novo narrador, por ser o jogador mais antigo..`,
+              user: authData.name,
+              email: email,
+            }, sessionDocSnapshot.data().name);
           }
           dispatch(actionDeleteSession(false));
           window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");

@@ -16,6 +16,7 @@ import PopupRitual from "./popupRitual";
 import PopupAdvantage from "./popupAdvantage";
 import PlayersDm from "./playerDM";
 import { authenticate, signIn } from "@/firebase/login";
+import { registerMessage } from "@/firebase/chatbot";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -225,6 +226,11 @@ export default function MenuDm(props: { sessionId: string }) {
                     }
                   ],
                 });
+                await registerMessage({
+                  message: `${name} acaba de transferir o cargo de Narrador para ${findPlayer.user}! Atualize a página para que seus antigos privilégios de Narrador sejam aplicados.`,
+                  user: name,
+                  email: email,
+                }, sessionDocSnapshot.data().name);
               }
               dispatch(actionShowMenuSession(''))
               window.location.reload();
@@ -421,10 +427,18 @@ export default function MenuDm(props: { sessionId: string }) {
               notes: '',
             },
           };
-          console.log(sheet);
+          const authData: { email: string, name: string } | null = await authenticate();
           await updateDoc(sessionDocSnapshot.ref, {
             players: arrayUnion(sheet)
           });
+          if (authData) {
+          console.log(list.user, authData?.name, authData.email);
+          await registerMessage({
+            message: `${list.user} iniciou sua jornada nesta Sessão! seja bem vinde!`,
+            user: authData.name,
+            email: authData.email,
+          }, sessionDocSnapshot.data().name);
+        }
         }
         await removeNotification(list.message);
         returnValue();
