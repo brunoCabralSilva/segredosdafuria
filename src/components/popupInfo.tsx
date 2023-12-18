@@ -19,7 +19,7 @@ export default function PopupInfo() {
         <div className="overflow-y-auto px-2 sm:px-10 flex flex-col w-full z-20 text-white text-center sm:text-justify">
           <article className="w-full h-full px-4 pb-4 text-white">
             <div className="flex flex-col justify-center dataGifts-center sm:dataGifts-start">
-              <h1 className="font-bold text-lg text-center w-full">
+              <h1 className="font-bold text-center w-full text-2xl">
                 Bem vindo ao ambiente de Sessões do Segredos da Fúria!
               </h1>
               <p className="pt-5">

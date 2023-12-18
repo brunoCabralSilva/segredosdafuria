@@ -16,6 +16,7 @@ import Background from "./sheet/background";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import SessionDetails from "./sheet/sessionDetalis";
 
 export default function PopUpSheet(props: { session: string }) {
   const { session } = props;
@@ -73,6 +74,8 @@ export default function PopUpSheet(props: { session: string }) {
         return <AdvantagesAnsFlaws session={session} />;
       case ('forms'):
         return <Forms session={session} />;
+      case ('session'):
+        return <SessionDetails session={session} />;
       case ('background'):
         return <Background type="background" session={session} /> ;
       case ('anotations'):
@@ -102,6 +105,7 @@ export default function PopUpSheet(props: { session: string }) {
           <option value={'gifts-rituals'}>Dons e Rituais</option>
           <option value={'advantages-flaws'}>Vantagens e Defeitos</option>
           <option value={'forms'}>Formas ( Atual: { slice.form } )</option>
+          <option value={'session'}>Sessão</option>
           <option value={'background'}>Background</option>
           <option value={'anotations'}>Anotações</option>
         </select>
