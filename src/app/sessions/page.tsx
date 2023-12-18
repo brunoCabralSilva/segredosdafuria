@@ -3,14 +3,15 @@ import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import Simplify from "@/components/simplify";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionSessionAuth, useSlice } from "@/redux/slice";
+import { actionInfoSessions, actionSessionAuth, useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { IoMdAdd } from "react-icons/io";
+import { IoIosInformationCircle, IoMdAdd } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import SessionAuth from "./sessionAuth";
 import { authenticate, signIn } from "@/firebase/login";
 import firebaseConfig from "@/firebase/connection";
+import PopupInfo from "@/components/popupInfo";
 
 interface ISessions {
   id: string;
@@ -71,7 +72,13 @@ export default function Session() {
           <Nav />
           <section className="relative px-2 h-screen overflow-y-auto">
             <div className="py-6 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
-              <h1 className="text-4xl relative">Sessões</h1>
+              <h1 className="text-4xl relative flex items-center">
+                <span className="pr-2">Sessões</span>
+                <IoIosInformationCircle
+                  className="cursor-pointer"
+                  onClick={ () => dispatch(actionInfoSessions(true)) }
+                />
+              </h1>
               <hr className="w-10/12 mt-6" />
             </div>
             
@@ -107,6 +114,7 @@ export default function Session() {
             <span className="loader z-50" />
           </div>
       }
+      { slice.popupInfo && <PopupInfo /> }
       <Footer />
     </div>
   );

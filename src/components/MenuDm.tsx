@@ -228,7 +228,7 @@ export default function MenuDm(props: { sessionId: string }) {
                 });
                 await registerMessage({
                   message: `${name} acaba de transferir o cargo de Narrador para ${findPlayer.user}! Atualize a página para que seus antigos privilégios de Narrador sejam aplicados.`,
-                  user: name,
+                  user: 'notification',
                   email: email,
                 }, sessionDocSnapshot.data().name);
               }
@@ -434,7 +434,7 @@ export default function MenuDm(props: { sessionId: string }) {
           if (authData) {
           await registerMessage({
             message: `${list.user} iniciou sua jornada nesta Sessão! seja bem vinde!`,
-            user: authData.name,
+            user: 'notification',
             email: authData.email,
           }, sessionDocSnapshot.data().name);
         }
@@ -464,7 +464,7 @@ export default function MenuDm(props: { sessionId: string }) {
         className="w-full mb-2 border border-white p-3 cursor-pointer bg-black text-white flex items-center justify-center font-bold text-center"
       >
         <option value={'general'}>Geral</option>
-        <option value={'notifications'}>Notificações</option>
+        <option value={'notifications'}>Notificações { listNotifications.length > 0 && `(${listNotifications.length})` }</option>
         <option value={'players'}>Personagens</option>
         <option value={'anotations'}>Anotações</option>
       </select>
@@ -698,7 +698,8 @@ export default function MenuDm(props: { sessionId: string }) {
         </div>
       }
       {
-        optionSelect === 'players' && <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
+        optionSelect === 'players' && 
+        <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
           <button className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold" onClick={returnValue}>Atualizar</button>
           { 
             players.length === 0 && <div className="w-full text-white text-lg text-center mt-4">
@@ -714,7 +715,8 @@ export default function MenuDm(props: { sessionId: string }) {
         </div>
       }
       {
-        optionSelect === 'anotations' && <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
+        optionSelect === 'anotations' &&
+        <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
         <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
           <div className="mt-1 p-2 flex justify-between items-center">
             <div

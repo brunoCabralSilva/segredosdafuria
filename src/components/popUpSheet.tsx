@@ -76,7 +76,7 @@ export default function PopUpSheet(props: { session: string }) {
       case ('background'):
         return <Background type="background" session={session} /> ;
       case ('anotations'):
-        return <Notes type="notes" session={session} />;
+        return <Notes type="notes" session={session}  />;
       default:
         return <General session={session} />
     }

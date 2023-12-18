@@ -16,10 +16,12 @@ const INITIAL_STATE = {
   loginInTheSession: { name: '', logged: false },
   form: '',
   popupDeleteSession: false,
+  popupDeleteUserFromSession: false,
   popupDeletePlayer: { show: false, player: {} },
   popupResetSheet: false,
   popupGift: { show: false, gift: {} },
   popupRitual: { show: false, ritual: {} },
+  popupInfo: false,
   deleteHistoric: false,
   logoutUser: false,
   popupDelAdv: {show: false, name: '', desc: '', type: ''},
@@ -166,12 +168,20 @@ const slice: Slice = createSlice({
     actionShowAdvantage(state, { payload }: PayloadAction<IList>) {
       return { ...state, showAdvantage: payload };
     },
+    actionDeleteUserFromSession(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupDeleteUserFromSession: payload };
+    },
+    actionInfoSessions(state, { payload }: PayloadAction<IList>) {
+      return { ...state, popupInfo: payload };
+    },
   },
 });
 
 export default slice.reducer;
 
 export const {
+  actionInfoSessions,
+  actionDeleteUserFromSession,
   actionShowAdvantage,
   actionSumOfAdv,
   actionPopupDelAdv,

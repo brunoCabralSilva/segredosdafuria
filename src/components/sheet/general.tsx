@@ -7,10 +7,11 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import dataTrybes from '../../data/trybes.json';
 import ItemAgravated from "./itemAgravated";
-import { actionResetSheet } from "@/redux/slice";
-import { useAppDispatch } from "@/redux/hooks";
+import { actionDeleteUserFromSession, actionResetSheet, useSlice } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
+import PopupDelUserFromSession from "../popupDelUserFromSession";
 
 export default function General(props: { session: string }) {
   const { session } = props;
@@ -20,6 +21,7 @@ export default function General(props: { session: string }) {
   const [auspice, setAuspice] = useState<string>('');
   const [trybeI, setTrybe] = useState<string>('');
   const router = useRouter();
+  const slice = useAppSelector(useSlice);
 
   const typeName = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -186,11 +188,19 @@ export default function General(props: { session: string }) {
         <Item name="wisdom" namePtBr="Sabedoria" quant={5} session={session} />
         <button
             type="button"
-            className="mt-8 mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+            className="mt-8 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
             onClick={() => dispatch(actionResetSheet(true))}
           >
             Resetar Ficha
-          </button>
+        </button>
+        <button
+            type="button"
+            className="mt-3 mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+            onClick={() => dispatch(actionDeleteUserFromSession(true))}
+          >
+            Sair da Sessão
+        </button>
+        { slice.popupDeleteUserFromSession && <PopupDelUserFromSession session={session} /> }
       </div>
     </div>
   );

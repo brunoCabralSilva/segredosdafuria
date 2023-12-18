@@ -138,6 +138,18 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
   }
 
   const messageForm = (index: number, msg: any, color: string, justify: string) => {
+    if (msg.user === 'notification') {
+      return(
+        <div key={index} className="my-3 w-full flex justify-center text-gray-400">
+          <div className="bg-gray-whats text-sm text-center rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2">
+            <div>
+              { messageData(msg.message) }
+              { msg.date && returnDate(msg) }
+            </div>
+          </div>
+        </div>
+      )
+    }
     return(
       <div key={index} className={`w-full flex ${justify === 'end' ? 'justify-end' : 'justify-start' } text-white`}>
         <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2`}>
@@ -149,12 +161,12 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
           }
           <div>
             { messageData(msg.message) }
-            </div>
-            <div className="flex justify-end pt-2">
-              <span className="w-full text-right text-sm flex justify-end">
-                { msg.date && returnDate(msg) }
-              </span>
-            </div>
+          </div>
+          <div className="flex justify-end pt-2">
+            <span className="w-full text-right text-sm flex justify-end">
+              { msg.date && returnDate(msg) }
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -219,8 +231,8 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
             <span className="loader z-50" />
           </div>
       }
-    { slice.popupResetSheet && <PopupResetSheet sessionId={ params.sessionId } /> }
-    { slice.deleteHistoric && <PopupDelHistoric sessionId={ params.sessionId } /> }
+      { slice.popupResetSheet && <PopupResetSheet sessionId={ params.sessionId } /> }
+      { slice.deleteHistoric && <PopupDelHistoric sessionId={ params.sessionId } /> }
     </div>
   );
 }
