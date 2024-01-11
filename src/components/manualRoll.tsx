@@ -22,13 +22,12 @@ export default function ManualRoll(props: { session: string }) {
     let resultOfRage = [];
     let resultOf = [];
     let valueWithPenaltyOfBonus = Number(penaltyOrBonus) + Number(valueOf);
-    let totalOfRage = valueOfRage;
-    if (valueWithPenaltyOfBonus < 0) {
-      totalOfRage = Number(valueOfRage) + valueWithPenaltyOfBonus;
-      valueWithPenaltyOfBonus = 0;
+    let totalDices = valueOfRage + valueWithPenaltyOfBonus;
+    if (valueOfRage + valueWithPenaltyOfBonus < 0) {
+      totalDices = 0;
     }
 
-    for (let i = 0; i < Number(totalOfRage); i += 1) {
+    for (let i = 0; i < Number(valueOfRage); i += 1) {
       const value = Math.floor(Math.random() * 10) + 1;
       resultOfRage.push(value);
     }
@@ -42,7 +41,7 @@ export default function ManualRoll(props: { session: string }) {
     try {
       if (authData && authData.email && authData.name) {
         const { email, name } = authData;
-      if (valueWithPenaltyOfBonus >= dificulty) {
+      if (totalDices >= dificulty) {
         await registerMessage({
           message: {
             rollOfMargin: resultOf,
