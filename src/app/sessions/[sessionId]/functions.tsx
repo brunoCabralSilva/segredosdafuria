@@ -43,6 +43,7 @@ export const generateDataRoll = (msn: IMsn): IGenerateDataRolls => {
 
   if (critical % 2 !== 0 && critical !== 1) {
     critical -= 1;
+    success += 1;
   }
 
   if (critical > 1) {

@@ -61,7 +61,7 @@ export default function Message(props: IMessage) {
       <div className="flex tify-start items-center w-full flex-wrap">
         <span className="">{`Excedente: `}</span>
         <span className="font-bold px-3">
-          {Number(rollDices.sucessosParaDano) <= 0 ? 'Nenhum' : rollDices.sucessosParaDano}
+          {Number(rollDices.sucessosParaDano) <= 0 ? 'Nenhum' : rollDices.sucessosParaDano + 1}
         </span>
       </div>
     </div>

@@ -126,6 +126,7 @@ export const registerRoll = async (
       }
     }
     const authData: { email: string, name: string } | null = await authenticate();
+    
     try {
       if (authData && authData.email && authData.name) {
         const { email, name } = authData;
