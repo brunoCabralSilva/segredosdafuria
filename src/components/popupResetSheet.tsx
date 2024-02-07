@@ -6,6 +6,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../firebase/connection';
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
+import { getHoraOficialBrasil } from "@/firebase/chatbot";
 
 export default function PopupResetSheet(props: { sessionId : string }) {
   const { sessionId } = props;
@@ -13,6 +14,7 @@ export default function PopupResetSheet(props: { sessionId : string }) {
   const router = useRouter();
 
   const resetSheet = async () => {
+    const dateMessage = getHoraOficialBrasil();
     try {
       const authData: { email: string, name: string } | null = await authenticate();
       const db = getFirestore(firestoreConfig);
@@ -21,7 +23,7 @@ export default function PopupResetSheet(props: { sessionId : string }) {
         const sheet = {
           email: email,
           user: name,
-          creationDate: Date.now(),
+          creationDate: dateMessage,
           data: {
             trybe: '',
             auspice: '',

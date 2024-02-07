@@ -16,7 +16,7 @@ import PopupRitual from "./popupRitual";
 import PopupAdvantage from "./popupAdvantage";
 import PlayersDm from "./playerDM";
 import { authenticate, signIn } from "@/firebase/login";
-import { registerMessage } from "@/firebase/chatbot";
+import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -135,10 +135,11 @@ export default function MenuDm(props: { sessionId: string }) {
             } else if (findPlayer) {
               const findDmInPlayers = sessionDocSnapshot.data().players.find((player: any) => player.email === sessionDocSnapshot.data().dm);
               if(!findDmInPlayers) {
+                const dateMessage = getHoraOficialBrasil();
                 const sheet = {
                   email: email,
                   user: name,
-                  creationDate: Date.now(),
+                  creationDate: dateMessage,
                   data: {
                     advantagesAndFlaws: [
                       { name: "Caern", advantages: [], flaws: [] },
@@ -352,10 +353,11 @@ export default function MenuDm(props: { sessionId: string }) {
       if (sessionDocSnapshot.exists()) {
         const findByEmail = sessionDocSnapshot.data().players.find((user: any) => user.email === list.email);
         if(!findByEmail) {
+          const dateMessage = getHoraOficialBrasil();
           const sheet = {
             email: list.email,
             user: list.user,
-            creationDate: Date.now(),
+            creationDate: dateMessage,
             data: {
               advantagesAndFlaws: [
                 { name: "Caern", advantages: [], flaws: [] },

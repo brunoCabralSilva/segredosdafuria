@@ -1,5 +1,5 @@
 'use client'
-import { registerMessage } from "@/firebase/chatbot";
+import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 import { authenticate, signIn } from "@/firebase/login";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionShowMenuSession } from "@/redux/slice";
@@ -39,6 +39,7 @@ export default function ManualRoll(props: { session: string }) {
 
     const authData: { email: string, name: string } | null = await authenticate();
     try {
+      const dateMessage = getHoraOficialBrasil();
       if (authData && authData.email && authData.name) {
         const { email, name } = authData;
       if (totalDices >= dificulty) {
@@ -51,7 +52,7 @@ export default function ManualRoll(props: { session: string }) {
             },
           user: name,
           email: email,
-          date: serverTimestamp(),
+          date: dateMessage,
         }, session);
       } else {
         await registerMessage({

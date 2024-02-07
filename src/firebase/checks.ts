@@ -1,7 +1,6 @@
 import { IDataValues, IUser } from "@/interface";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
-import { jwtDecode } from "jwt-decode";
 import { registerMessage } from "./chatbot";
 import { authenticate } from "./login";
 

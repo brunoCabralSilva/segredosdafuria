@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import { FaArrowLeft } from "react-icons/fa6";
 import { authenticate, signIn, signOutFirebase } from "@/firebase/login";
+import { getHoraOficialBrasil } from "@/firebase/chatbot";
 
 export default function Create() {
   const router = useRouter();
@@ -61,6 +62,7 @@ export default function Create() {
     } else setErrDescription('');
 
     try {
+      const dateMessage = getHoraOficialBrasil();
       const db = getFirestore(firestoreConfig);
       const sessionsCollection = collection(db, 'sessions');
       const querySnapshot = await getDocs(sessionsCollection);
@@ -74,7 +76,7 @@ export default function Create() {
           name: nameSession.toLowerCase(),
           description,
           dm: email,
-          creationDate: Date.now(),
+          creationDate: dateMessage,
           anotations: '',
           chat: [],
           players: [],
