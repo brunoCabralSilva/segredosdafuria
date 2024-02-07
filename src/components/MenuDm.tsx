@@ -164,6 +164,8 @@ export default function MenuDm(props: { sessionId: string }) {
                     wisdom: 0,
                     health: [],
                     rage: 0,
+                    harano: 0,
+                    hauglosk: 0, 
                     willpower: [],
                     attributes: {
                       strength: 1,

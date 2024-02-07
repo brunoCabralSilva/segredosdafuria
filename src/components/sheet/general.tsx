@@ -183,6 +183,10 @@ export default function General(props: { session: string }) {
         <Item name="rage" namePtBr="Fúria" quant={5} session={session} />
         <ItemAgravated name="willpower" namePtBr="Força de Vontade" session={session} />
         <ItemAgravated name="health" namePtBr="Vitalidade" session={session} />
+        <div className="flex flex-col lg:flex-row">
+          <Item name="harano" namePtBr="Harano" quant={5} session={session} />
+          <Item name="hauglosk" namePtBr="Hauglosk" quant={5} session={session} />
+        </div>
         <Item name="honor" namePtBr="Honra" quant={5} session={session} />
         <Item name="glory" namePtBr="Glória" quant={5} session={session} />
         <Item name="wisdom" namePtBr="Sabedoria" quant={5} session={session} />

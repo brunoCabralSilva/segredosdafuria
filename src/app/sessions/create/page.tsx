@@ -70,26 +70,20 @@ export default function Create() {
         setLoading(false);
       } else setErrExists('');
       if (nameSession.length > 3 && nameSession.length < 40 && description.length > 10 && !sessionList) {
-        const token = localStorage.getItem('Segredos Da Fúria');
-        if (token) {
-          const docRef: any = await addDoc(sessionsCollection, {
-            name: nameSession.toLowerCase(),
-            description,
-            dm: email,
-            creationDate: Date.now(),
-            anotations: '',
-            chat: [],
-            players: [],
-            notifications: [],
-          });
-          if (docRef.id) {
-            router.push(`/sessions/${docRef.id}`);
-          } else {
-            window.alert('Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.');
-          }
+        const docRef: any = await addDoc(sessionsCollection, {
+          name: nameSession.toLowerCase(),
+          description,
+          dm: email,
+          creationDate: Date.now(),
+          anotations: '',
+          chat: [],
+          players: [],
+          notifications: [],
+        });
+        if (docRef.id) {
+          router.push(`/sessions/${docRef.id}`);
         } else {
-          router.push('/user/login');
-          window.alert('Não foi possível validar seu Token. Por favor, faça login novamente');
+          window.alert('Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.');
         }
       }
     } catch (error) {
