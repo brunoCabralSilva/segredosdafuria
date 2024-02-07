@@ -1,13 +1,24 @@
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { authenticate } from "./login";
-import moment from 'moment';
-import 'moment-timezone';
 
-export const getHoraOficialBrasil = () => {
-  const horaSaoPaulo = moment().tz('America/Sao_Paulo').format();
-  return horaSaoPaulo;
-}
+export const getHoraOficialBrasil = async () => {
+  try {
+    const response = await fetch('https://worldtimeapi.org/api/timezone/America/Sao_Paulo');
+    const data = await response.json();
+    const date = new Date(data.utc_datetime);
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const seconds = date.getSeconds().toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const formattedDate = `${hours}:${minutes}:${seconds}, ${day}/${month}/${year}`;
+    return formattedDate;
+  } catch (error) {
+    return null;
+  }
+};
 
 export const sendMessage = async (text: string, sessionName: string) => {
   const authData: { email: string, name: string } | null = await authenticate();
@@ -29,7 +40,7 @@ export const sendMessage = async (text: string, sessionName: string) => {
 };
 
 export const registerMessage = async (message: any, sessionName: string) => {
-  const dateMessage = getHoraOficialBrasil();
+  const dateMessage = await getHoraOficialBrasil();
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'sessions');

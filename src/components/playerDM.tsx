@@ -82,13 +82,6 @@ export default function PlayersDm(props: any) {
     if (type === 'flaw') return flw;
   }
 
-  const returnDate = (msg: any) => {
-    const data = new Date(msg.date);
-    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getMonth() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
-    const formatoHora = `${data.getHours() < 10 ? 0 : ''}${data.getHours()}:${data.getMinutes() < 10 ? 0: ''}${data.getMinutes()}:${data.getSeconds() < 10 ? 0 : ''}${data.getSeconds()}`;
-    return `${formatoHora}, ${formatoData}`;
-  }
-
   return(
     <div className="w-full">
       { !show
@@ -259,7 +252,7 @@ export default function PlayersDm(props: any) {
         <p className="font-bold pr-1 w-full text-center mt-3">Background</p>
         <p className="w-full text-center">{ player.data.background }</p>
         <p className="font-bold pr-1 w-full text-center mt-3">Ficha criada em:</p>
-        <p>{ returnDate({ date: player.creationDate } ) }</p>
+        <p>{ player.creationDate }</p>
       </div>
       }
     </div>

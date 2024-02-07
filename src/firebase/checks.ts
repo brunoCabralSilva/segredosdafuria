@@ -1,4 +1,4 @@
-import { IDataValues, IUser } from "@/interface";
+import { IDataValues } from "@/interface";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./chatbot";

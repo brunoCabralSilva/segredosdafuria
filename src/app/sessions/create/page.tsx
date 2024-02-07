@@ -62,7 +62,7 @@ export default function Create() {
     } else setErrDescription('');
 
     try {
-      const dateMessage = getHoraOficialBrasil();
+      const dateMessage = await getHoraOficialBrasil();
       const db = getFirestore(firestoreConfig);
       const sessionsCollection = collection(db, 'sessions');
       const querySnapshot = await getDocs(sessionsCollection);

@@ -130,13 +130,6 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
     return <Message rollDices={ rollDices } msn={ msn } type="rage-check" />
   };
 
-  const returnDate = (msg: any) => {
-    const data = new Date(msg.date);
-    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getMonth() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
-    const formatoHora = `${data.getHours() < 10 ? 0 : ''}${data.getHours()}:${data.getMinutes() < 10 ? 0: ''}${data.getMinutes()}:${data.getSeconds() < 10 ? 0 : ''}${data.getSeconds()}`;
-    return `${formatoHora}, ${formatoData}`;
-  }
-
   const messageForm = (index: number, msg: any, color: string, justify: string) => {
     if (msg.user === 'notification') {
       return(
@@ -144,7 +137,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
           <div className="bg-gray-whats text-sm text-center rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2">
             <div>
               { messageData(msg.message) }
-              { msg.date && returnDate(msg) }
+              { msg.date && msg.date }
             </div>
           </div>
         </div>
@@ -164,7 +157,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
           </div>
           <div className="flex justify-end pt-2">
             <span className="w-full text-right text-sm flex justify-end">
-              { msg.date && returnDate(msg) }
+              { msg.date && msg.date }
             </span>
           </div>
         </div>

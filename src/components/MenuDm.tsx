@@ -135,7 +135,7 @@ export default function MenuDm(props: { sessionId: string }) {
             } else if (findPlayer) {
               const findDmInPlayers = sessionDocSnapshot.data().players.find((player: any) => player.email === sessionDocSnapshot.data().dm);
               if(!findDmInPlayers) {
-                const dateMessage = getHoraOficialBrasil();
+                const dateMessage = await getHoraOficialBrasil();
                 const sheet = {
                   email: email,
                   user: name,
@@ -315,13 +315,6 @@ export default function MenuDm(props: { sessionId: string }) {
     }
 	};
 
-	const returnDate = (msg: any) => {
-    const data = new Date(msg.date);
-    const formatoData = `${`${data.getDate() < 10 ? 0 : ''}${data.getDate()}`}/${`${data.getMonth() < 10 ? 0 : ''}${data.getMonth() + 1}`}/${data.getFullYear()}`;
-    const formatoHora = `${data.getHours() < 10 ? 0 : ''}${data.getHours()}:${data.getMinutes() < 10 ? 0: ''}${data.getMinutes()}:${data.getSeconds() < 10 ? 0 : ''}${data.getSeconds()}`;
-    return `${formatoHora}, ${formatoData}`;
-  }
-
   const remNotFromCache = async(list: any[]) => {
     const listNotif = listNotifications.filter(listNot => JSON.stringify(listNot) !== JSON.stringify(list));
     setListNotifications(listNotif);
@@ -353,7 +346,7 @@ export default function MenuDm(props: { sessionId: string }) {
       if (sessionDocSnapshot.exists()) {
         const findByEmail = sessionDocSnapshot.data().players.find((user: any) => user.email === list.email);
         if(!findByEmail) {
-          const dateMessage = getHoraOficialBrasil();
+          const dateMessage = await getHoraOficialBrasil();
           const sheet = {
             email: list.email,
             user: list.user,
@@ -609,7 +602,7 @@ export default function MenuDm(props: { sessionId: string }) {
                 </div>
                 <p className="mt-1 text-white sm:text-left w-full text-center border-2 border-white p-4">
                   <span className="font-bold pr-1">Data de Criação:</span>
-                  <span>{ returnDate({ date: creationDate }) }</span>
+                  <span>{ creationDate }</span>
                 </p>
                 <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3">
                   <span className="pr-1 font-bold">Jogadores:</span>

@@ -14,7 +14,7 @@ export default function PopupResetSheet(props: { sessionId : string }) {
   const router = useRouter();
 
   const resetSheet = async () => {
-    const dateMessage = getHoraOficialBrasil();
+    const dateMessage = await getHoraOficialBrasil();
     try {
       const authData: { email: string, name: string } | null = await authenticate();
       const db = getFirestore(firestoreConfig);

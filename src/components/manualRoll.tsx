@@ -3,7 +3,6 @@ import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 import { authenticate, signIn } from "@/firebase/login";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionShowMenuSession } from "@/redux/slice";
-import { serverTimestamp } from "firebase/firestore";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -39,7 +38,7 @@ export default function ManualRoll(props: { session: string }) {
 
     const authData: { email: string, name: string } | null = await authenticate();
     try {
-      const dateMessage = getHoraOficialBrasil();
+      const dateMessage = await getHoraOficialBrasil();
       if (authData && authData.email && authData.name) {
         const { email, name } = authData;
       if (totalDices >= dificulty) {
