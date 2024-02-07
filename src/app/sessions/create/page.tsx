@@ -99,10 +99,11 @@ export default function Create() {
           <div className="flex flex-col w-full overflow-y-auto justify-center items-center bg-black/90 h-screen">
             <Nav />
             <div
-              className="px-2 py-2 mb-1 cursor-pointer flex z-30 justify-start items-center w-full bg-black"
+              className="px-2 py-2 mb-1 flex z-30 justify-start items-center w-full fixed top-0 ml-2 mt-1"
             >
               <button
                 type="button"
+                className=""
                 onClick={ () => router.push('/sessions') }
               >
                 <FaArrowLeft className="text-3xl text-white" />
