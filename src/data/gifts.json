@@ -100,7 +100,7 @@
     "action": "Livre",
     "pool": "",
     "system": "The player makes a Rage Check to gain bonus dice equal to their Glory on a single Brawl attack.",
-    "systemPtBr":"O jogador faz um Teste de Fúria para ganhar dados de bônus igual à sua Glória em um único ataque de  Briga.",
+    "systemPtBr":"O jogador faz um Teste de Fúria para ganhar dados de bônus igual à sua Glória em um único ataque de Briga.",
     "duration": "Um Ataque",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 147
@@ -119,7 +119,7 @@
     "renown": "Honra",
     "cost": "1 Teste de Fúria",
     "action": "Total",
-    "pool": "Carisma + Honra vs. Compostura + Determinação",
+    "pool": "Carisma + Honra vs. Autocontrole + Determinação",
     "system": "This Gift can be used on any single human or animal, within two meters, with whom the Garou can establish eye contact. The Gift succeeds automatically on mundane humans and animals and causes the target to get out of the werewolf's way while averting their eyes, if not outright groveling. Supernatural creatures and humans aware of the Garou and their powers are unaffected unless the player wins a Charisma + Honor vs Composure + Resolve test. A subject can be targeted by this Gift only once per scene, and the Gift cannot be used during a physical conflict. This Gift can be used in any form.",
     "systemPtBr":"Este Dom pode ser usado em qualquer humano ou animal, dentro de dois metros, com quem o Garou possa estabelecer contato visual. O Dom funciona automaticamente em humanos e animais mundanos e faz com que o alvo saia do caminho do lobisomem enquanto desvia seus olhos, se não rastejando completamente. Criaturas sobrenaturais e humanos cientes dos Garou e seus poderes não são afetados a menos que o jogador obtenha sucesso em um teste de Carisma + Honra vs. Compostura + Determinação. Uma criatura pode ser alvo deste Dom apenas uma vez por cena, e o Dom não pode ser usado durante um conflito físico. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",

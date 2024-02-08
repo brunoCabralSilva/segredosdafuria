@@ -68,9 +68,11 @@ export default function PopupRollGift() {
           <p className="font-normal text-white w-full pb-3">
             Ação: { slice.showPopupGiftRoll.gift.data.action }
           </p>
-          <p className="font-normal text-white w-full pb-3">
-            Parada de Dados: { slice.showPopupGiftRoll.gift.data.pool }
-          </p>
+          { slice.showPopupGiftRoll.gift.data.pool !== '' &&
+            <p className="font-normal text-white w-full pb-3">
+              Parada de Dados: { slice.showPopupGiftRoll.gift.data.pool }
+            </p>
+          }
           <p className="font-normal text-white w-full pb-3">
             Duração: { slice.showPopupGiftRoll.gift.data.duration }
           </p>

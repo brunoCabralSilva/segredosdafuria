@@ -23,7 +23,7 @@ export const returnValue = async (
       let renown = 0;
       let skill = 0;
       let atr = 0;
-      if (atrSelected !== '') renown = player.data.attributes[atrSelected];
+      if (atrSelected !== '') atr = player.data.attributes[atrSelected];
       if (renSelected !== '') renown = player.data[renSelected];
       if (sklSelected !== '') skill = player.data.skills[sklSelected].value;
       return {
