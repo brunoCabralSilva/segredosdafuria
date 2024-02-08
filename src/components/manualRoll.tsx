@@ -84,7 +84,8 @@ export default function ManualRoll(props: { session: string }) {
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-3">Dados de Fúria</p>
+        <p className="text-white w-full pb-1">Dados de Fúria</p>
+        <p className="text-white w-full pb-3">(Dados pretos definem o total de dados de Fúria)</p>
         <div className="grid grid-cols-5 gap-2 w-full bg-gray-400 p-1">
           <Image
             alt="Dado de 10 faces"

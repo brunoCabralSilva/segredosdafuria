@@ -21,17 +21,6 @@ export default function AutomatedRoll(props: { session: string }) {
 
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueOf" className="mb-4 flex items-center w-full gap-2">
-        <button
-          className="bg-white p-3 w-full py-3 cursor-pointer capitalize text-center text-black hover:font-bold"
-          onClick={ () => {
-            returnRageCheck(1, 'manual', session);
-            dispatch(actionShowMenuSession(''))
-          }}
-        >
-          Realizar 1 Teste de Fúria
-        </button>
-      </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
           <select

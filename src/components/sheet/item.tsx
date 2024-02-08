@@ -1,6 +1,9 @@
 'use client'
+import { returnRageCheck } from "@/firebase/checks";
 import firebaseConfig from "@/firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
+import { useAppDispatch } from "@/redux/hooks";
+import { actionShowMenuSession } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,6 +19,7 @@ export default function Item(props: IRage) {
   const [ valueItem, setValueItem ] = useState<any>([]);
   const { name, namePtBr, quant, session } = props;
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     returnValue();
@@ -107,8 +111,22 @@ export default function Item(props: IRage) {
   return(
     <div className="w-full mt-8">
       <span className="capitalize">{ namePtBr }</span>
-      <div className="w-full mt-1">
-        { returnPoints(name) }
+      <div className="flex flex-col items-center lg:flex-row">
+        <div className="w-full">
+          { returnPoints(name) }
+        </div>
+        {
+          namePtBr === 'Fúria' &&
+          <button
+              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition transition-colors duration-600"
+              onClick={ () => {
+                returnRageCheck(1, 'manual', session);
+                dispatch(actionShowMenuSession(''))
+              }}
+            >
+              Teste de Fúria
+            </button>
+        }
       </div>
     </div>
   );
