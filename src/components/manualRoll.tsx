@@ -177,7 +177,7 @@ export default function ManualRoll(props: { session: string }) {
         </div>
       </label>
       <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Penalidade (+) ou Bônus (-)</p>
+        <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+)</p>
         <div className="flex w-full">
           <div
             className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}

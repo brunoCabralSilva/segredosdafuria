@@ -27,6 +27,7 @@ const INITIAL_STATE = {
   popupDelAdv: {show: false, name: '', desc: '', type: ''},
   sumOfAdv: { advantageSum: 0, flawSum: 0 },
   showAdvantage: { show: false, item: {} },
+  showPopupGiftRoll: { show: false, gift: { session: '', data: '' } },
   advantagesAndFlaws: [
     { name: "Caern", advantages: [], flaws: [] },
     { name: "Trabalho Diário", advantages: [], flaws: [] },
@@ -174,6 +175,9 @@ const slice: Slice = createSlice({
     actionInfoSessions(state, { payload }: PayloadAction<IList>) {
       return { ...state, popupInfo: payload };
     },
+    actionPopupGiftRoll(state, { payload }: PayloadAction<IList>) {
+      return { ...state, showPopupGiftRoll: payload };
+    },
   },
 });
 
@@ -208,6 +212,7 @@ export const {
   actionRegisterSession,
   actionSessionAuth,
   actionLoginInTheSession,
+  actionPopupGiftRoll,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

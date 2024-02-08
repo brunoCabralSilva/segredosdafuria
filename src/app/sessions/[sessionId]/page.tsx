@@ -5,7 +5,7 @@ import { actionSessionAuth, actionShowMenuSession, useSlice } from '@/redux/slic
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { collection, documentId, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import firestoreConfig from '../../../firebase/connection';
-import { IGenerateDataRolls, IMsn } from '@/interface';
+import { IGenerateDataRolls } from '@/interface';
 import Nav from '@/components/nav';
 import PopUpDices from '@/components/popUpDices';
 import PopUpSheet from '@/components/popUpSheet';
@@ -38,6 +38,24 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
   useEffect(() => {
     dispatch(actionSessionAuth({ show: false, id: ''}));
     setShowData(false);
+
+    function capitalizeFirstLetter(str: string): String {
+      switch(str) {
+        case 'global': return 'Dons Nativos';
+        case 'silent striders': return 'Peregrinos Silenciosos';
+        case 'black furies': return 'Fúrias Negras';
+        case 'silver fangs': return 'Presas de Prata';
+        case 'hart wardens': return 'Guarda do Cervo';
+        case 'ghost council': return 'Conselho Fantasma';
+        case 'galestalkers': return 'Perseguidores da Tempestade';
+        case 'glass walkers': return 'Andarilhos do Asfalto';
+        case 'bone gnawers': return 'Roedores de Ossos';
+        case 'shadow lords': return 'Senhores das Sombras';
+        case 'children of gaia': return 'Filhos de Gaia';
+        case 'red talons': return 'Garras Vermelhas';
+        default: return str.charAt(0).toUpperCase() + str.slice(1);;
+      }
+    };
         
     const verifyUser = async () => {
       const sessionDocSnapshot = await getDocs(querySession);
@@ -93,22 +111,121 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
     }
   };
 
-  const messageData = (msn: IMsn) => {
+  const messageData = (msn: any) => {
     if (typeof msn === 'string') {
       return ( <div className="px-2 break-words">{ msn }</div> );
     }
+    if (msn.action && msn.roll === 'false') {
+      return <section
+        className="mb-2 relative min-h-screen"
+      >
+        <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
+          <div className="flex flex-col justify-center">
+            <h1 className="text-center text-sm font-bold w-full">
+              {`${ msn.giftPtBr } (${ msn.gift })`}
+            </h1>
+            <hr className="w-full my-4" />
+          </div>
+          <p className="pt-1">
+            <span className="text-sm font-bold pr-1">Custo:</span>
+            <span className="text-sm font-normal">{ msn.cost } (Já deduzido).</span>
+          </p>
+          <p className="pt-1">
+            <span className="text-sm font-bold pr-1">Ação:</span>
+            <span className="text-sm font-normal">{ msn.action }.</span>
+          </p>
+          { msn.pool !== "" &&
+            <p className="pt-1">
+              <span className="text-sm font-bold pr-1">Parada de Dados:</span>
+              <span className="text-sm font-normal">{ msn.pool }.</span></p>
+          }
+          { msn.duration !== "" &&
+            <p className="pt-1">
+              <span className="text-sm font-bold pr-1">Duração:</span>
+              <span className="text-sm font-normal">{ msn.duration }.</span>
+            </p>
+          }
+          <p className="pt-1 text-justify mt-2">
+            <span className="text-sm font-bold pr-1">Sistema:</span>
+            <span className="text-sm font-normal">{ msn.system }</span>
+          </p>
+        </article>
+      </section>
+    }
     const rollDices: IGenerateDataRolls = generateDataRoll(msn);
+    if (msn.action && msn.roll === 'true') {
+      return <section
+        className="mb-2 relative min-h-screen"
+      >
+        <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
+          <div className="flex flex-col justify-center">
+            <h1 className="text-center text-sm font-bold w-full">
+              {`${ msn.giftPtBr } (${ msn.gift })`}
+            </h1>
+            <hr className="w-full my-4" />
+          </div>
+          <p className="pt-1">
+            <span className="text-sm font-bold pr-1">Custo:</span>
+            <span className="text-sm font-normal">{ msn.cost } (Já deduzido).</span>
+          </p>
+          <p className="pt-1">
+            <span className="text-sm font-bold pr-1">Ação:</span>
+            <span className="text-sm font-normal">{ msn.action }.</span>
+          </p>
+          { msn.pool !== "" &&
+            <p className="pt-1">
+              <span className="text-sm font-bold pr-1">Parada de Dados:</span>
+              <span className="text-sm font-normal">{ msn.pool }.</span></p>
+          }
+          { msn.duration !== "" &&
+            <p className="pt-1">
+              <span className="text-sm font-bold pr-1">Duração:</span>
+              <span className="text-sm font-normal">{ msn.duration }.</span>
+            </p>
+          }
+          <p className="pt-1 text-justify mt-2">
+            <span className="text-sm font-bold pr-1">Sistema:</span>
+            <span className="text-sm font-normal">{ msn.system }</span>
+          </p>
+          <div className="p-2">
+          <div className="p-2 flex gap-1 flex-wrap">
+            {
+              msn.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
+                <Dice key={ index } dice={ dice } type="(rage)" />
+              ))
+            }
+            {
+              msn.rollOfMargin.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
+                <Dice key={ index } dice={ dice } type="" />
+              ))
+            }
+          </div>
+          <div>
+            {
+              rollDices.falhaBrutal
+              ? rollDices.sucessosParaDano >= 0
+                ? <Message rollDices={ rollDices } msn={ msn } type="success-rage" />
+                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
+              : rollDices.sucessosParaDano >= 0
+                ? <Message rollDices={ rollDices } msn={ msn } type="success" />
+                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
+            }
+          </div>
+        </div>
+        </article>
+        </section>
+    }
     if (msn.rollOfMargin) {
       return(
         <div className="p-2">
           <div className="p-2 flex gap-1 flex-wrap">
             {
-              msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => (
+              msn.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
                 <Dice key={ index } dice={ dice } type="(rage)" />
               ))
             }
             {
-              msn.rollOfMargin.sort((a, b) => a - b).map((dice, index) => (
+              msn.rollOfMargin.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
                 <Dice key={ index } dice={ dice } type="" />
               ))
             }

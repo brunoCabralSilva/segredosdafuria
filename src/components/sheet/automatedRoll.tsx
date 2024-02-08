@@ -4,7 +4,7 @@ import { actionShowMenuSession } from "@/redux/slice";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import dataSheet from '../../data/sheet.json';
-import { registerRoll, returnRageCheck } from "@/firebase/checks";
+import { registerRoll } from "@/firebase/checks";
 
 export default function AutomatedRoll(props: { session: string }) {
   const { session } = props;

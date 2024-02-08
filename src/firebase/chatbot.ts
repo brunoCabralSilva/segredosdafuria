@@ -20,7 +20,7 @@ export const getHoraOficialBrasil = async () => {
   }
 };
 
-export const sendMessage = async (text: string, sessionName: string) => {
+export const sendMessage = async (text: any, sessionName: string) => {
   const authData: { email: string, name: string } | null = await authenticate();
   try {
     if (authData && authData.email && authData.name) {

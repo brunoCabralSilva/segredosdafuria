@@ -1,8 +1,11 @@
 import { IMessage } from "@/interface";
 import Dice from "./dice";
 
-export default function Message(props: IMessage) {
+export default function Message(props: any) {
   const { rollDices, msn, type } = props;
+  if (msn.roll === 'false') {
+
+  }
   if (type === 'fail') {
     return(
       <div>
@@ -14,7 +17,7 @@ export default function Message(props: IMessage) {
       <div className="p-2">
         <div className="flex gap-1 flex-wrap">
           {
-            msn.rollOfRage.sort((a, b) => a - b).map((dice, index) => (
+            msn.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: any) => (
               <Dice key={ index } dice={ dice } type="(rage)" />
             ))
           }
