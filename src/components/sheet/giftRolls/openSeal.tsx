@@ -2,23 +2,24 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { reduceFdv } from "../functionGifts";
+import { reduceFdv, verifyRage } from "../functionGifts";
 import { registerMessage, sendMessage } from "@/firebase/chatbot";
 import { authenticate } from "@/firebase/login";
-import { returnValue } from "@/firebase/checks";
+import { returnRageCheck, returnValue } from "@/firebase/checks";
 
-export default function CatFeet() {
+export default function OpenSeal() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
-  const [dificulty, setDificulty] = useState<number>(3);
+  const [dificulty, setDificulty] = useState<number>(2);
   const [reflex, setReflexa] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
   const rollDice = async () => {
-    if (reflex) {
-      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
-      if (willpower) {
-          const dtSheet: any | null = await returnValue('wits', 'survival', '', slice.showPopupGiftRoll.gift.session);
+    if (!reflex) {
+      const rage = await verifyRage(slice.showPopupGiftRoll.gift.session);
+      if (rage) {
+        await returnRageCheck(1, 'manual', slice.showPopupGiftRoll.gift.session);
+          const dtSheet: any | null = await returnValue('manipulation', '', 'honor', slice.showPopupGiftRoll.gift.session);
           if (dtSheet) {
             let rage = dtSheet.rage;
             let resultOfRage = [];
@@ -91,10 +92,13 @@ export default function CatFeet() {
             window.alert('Erro ao obter valor da Forma: ' + error);
             }
           }
-        }
+      } else {
+        await sendMessage('Não foi possível conjurar o dom (Não possui Fúria suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
+      }
     } else {
-      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
-      if (willpower) {
+      const rage = await verifyRage(slice.showPopupGiftRoll.gift.session);
+      if (rage) {
+        await returnRageCheck(1, 'manual', slice.showPopupGiftRoll.gift.session);
         await sendMessage({
           roll: 'false',
           gift: slice.showPopupGiftRoll.gift.data.gift,
@@ -106,7 +110,7 @@ export default function CatFeet() {
           system: slice.showPopupGiftRoll.gift.data.systemPtBr,
         }, slice.showPopupGiftRoll.gift.session);
       } else {
-        await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
+        await sendMessage('Não foi possível conjurar o dom (Não possui Fúria suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
       }
     }
     dispatch(actionShowMenuSession(''));
@@ -116,16 +120,17 @@ export default function CatFeet() {
     <div className="w-full">
       <label
         htmlFor="checkboxReflexive"
-        className="pb-5 px-5 w-full text-white">
+        className="pb-5 px-5 w-full text-white flex items-start">
         <input
           type="checkbox"
           id="checkboxReflexive"
-          className="mr-2"
+          className="mr-2 mt-1"
           checked={reflex}
           onChange={ (e: any) => setReflexa(e.target.checked) }
-        />Marque se a ação for reflexa
+        />
+        <span>Marque se este Dom está sendo empregado em Fechaduras ou barras puramente mecânicas</span>
       </label>
-      { reflex &&
+      { !reflex &&
         <div className="w-full">
           <label htmlFor="penaltyOrBonus" className="pt-4 px-4 mb-4 flex flex-col items-center w-full">
             <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+)</p>
@@ -159,7 +164,7 @@ export default function CatFeet() {
             </div>
           </label>
           <label htmlFor="dificulty" className="px-4 mb-4 flex flex-col items-center w-full">
-            <p className="text-white w-full pb-3">Dificuldade</p>
+            <p className="text-white w-full pb-3 text-justify">Dificuldade - Dispositivos eletrônicos ou sobrenaturais requerem um teste de Manipulação + Honra vs. uma Dificuldade definida pelo Narrador (2 para um cadeado regular eletrônico, 5 para um scanner de impressão digital aprimorado).</p>
             <div className="flex w-full">
               <div
                 className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
@@ -191,7 +196,7 @@ export default function CatFeet() {
         <button
           type="button"
           onClick={ rollDice }
-          disabled={reflex && dificulty === 0}
+          disabled={!reflex && dificulty === 0}
           className={`text-white ${dificulty === 0 ? 'bg-gray-600' : 'bg-green-whats'} hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >
           Utilizar Dom

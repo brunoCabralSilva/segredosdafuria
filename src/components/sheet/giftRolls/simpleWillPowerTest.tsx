@@ -8,7 +8,7 @@ export default function SimpleWillPowerTest() {
   const dispatch = useAppDispatch();
   
   const rollDiceEyesOfTheOwl = async () => {
-    const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session);
+    const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
     if (willpower) {
       await sendMessage({
         roll: 'false',
@@ -20,6 +20,8 @@ export default function SimpleWillPowerTest() {
         pool: 'Nenhuma',
         system: slice.showPopupGiftRoll.gift.data.systemPtBr,
       }, slice.showPopupGiftRoll.gift.session);
+    } else {
+      await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
     }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));

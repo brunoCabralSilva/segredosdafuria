@@ -2,23 +2,23 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { reduceFdv } from "../functionGifts";
+import { reduceFdv, verifyRage } from "../functionGifts";
 import { registerMessage, sendMessage } from "@/firebase/chatbot";
 import { authenticate } from "@/firebase/login";
-import { returnValue } from "@/firebase/checks";
+import { returnRageCheck, returnValue } from "@/firebase/checks";
 
-export default function CatFeet() {
+export default function PulseOfThePrey() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
-  const [dificulty, setDificulty] = useState<number>(3);
+  const [dificulty, setDificulty] = useState<number>(1);
   const [reflex, setReflexa] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
   const rollDice = async () => {
-    if (reflex) {
+    if (!reflex) {
       const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
       if (willpower) {
-          const dtSheet: any | null = await returnValue('wits', 'survival', '', slice.showPopupGiftRoll.gift.session);
+          const dtSheet: any | null = await returnValue('intelligence', '', 'wisdom', slice.showPopupGiftRoll.gift.session);
           if (dtSheet) {
             let rage = dtSheet.rage;
             let resultOfRage = [];
@@ -116,16 +116,17 @@ export default function CatFeet() {
     <div className="w-full">
       <label
         htmlFor="checkboxReflexive"
-        className="pb-5 px-5 w-full text-white">
+        className="pb-5 px-5 w-full text-white flex items-start">
         <input
           type="checkbox"
           id="checkboxReflexive"
-          className="mr-2"
+          className="mr-2 mt-1"
           checked={reflex}
           onChange={ (e: any) => setReflexa(e.target.checked) }
-        />Marque se a ação for reflexa
+        />
+        <span>Marque se está tentando rastrear um humano que não esteja escondido</span>
       </label>
-      { reflex &&
+      { !reflex &&
         <div className="w-full">
           <label htmlFor="penaltyOrBonus" className="pt-4 px-4 mb-4 flex flex-col items-center w-full">
             <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+)</p>
@@ -159,7 +160,7 @@ export default function CatFeet() {
             </div>
           </label>
           <label htmlFor="dificulty" className="px-4 mb-4 flex flex-col items-center w-full">
-            <p className="text-white w-full pb-3">Dificuldade</p>
+            <p className="text-white w-full pb-3 text-justify">Dificuldade - Rastrear uma criatura sobrenatural ou um humano que está se escondendo ativamente requer um teste de Inteligência + Sabedoria contra Inteligência + Manha (para esconderijos urbanos) ou Inteligência + Sobrevivência (em áreas rurais). A Dificuldade aumenta se um alvo tiver maneiras sobrenaturais de esconder-se. O tempo necessário depende tanto da distância até o alvo quanto do resultado da rolagem.</p>
             <div className="flex w-full">
               <div
                 className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
@@ -191,7 +192,7 @@ export default function CatFeet() {
         <button
           type="button"
           onClick={ rollDice }
-          disabled={reflex && dificulty === 0}
+          disabled={!reflex && dificulty === 0}
           className={`text-white ${dificulty === 0 ? 'bg-gray-600' : 'bg-green-whats'} hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >
           Utilizar Dom

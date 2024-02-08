@@ -7,16 +7,17 @@ import { registerMessage, sendMessage } from "@/firebase/chatbot";
 import { authenticate } from "@/firebase/login";
 import { returnValue } from "@/firebase/checks";
 
-export default function PenumbralSenses() {
+export default function TongueOfBeasts() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
-  const [dificulty, setDificulty] = useState<number>(1);
+  const [dificulty, setDificulty] = useState<number>(2);
+  const [reflex, setReflexa] = useState('');
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
   const rollDiceCatFeet = async () => {
-    const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session);
+    const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
     if (willpower) {
-        const dtSheet: any | null = await returnValue('intelligence', '', 'wisdom', slice.showPopupGiftRoll.gift.session);
+        const dtSheet: any | null = await returnValue(reflex, '', 'wisdom', slice.showPopupGiftRoll.gift.session);
         if (dtSheet) {
           let rage = dtSheet.rage;
           let resultOfRage = [];
@@ -89,12 +90,36 @@ export default function PenumbralSenses() {
           window.alert('Erro ao obter valor da Forma: ' + error);
           }
         }
-      }
+    } else {
+      await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
+    }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
   }
   return(
     <div className="w-full">
+      <div className="px-6 flex flex-col text-white">
+        <label htmlFor="charisma" className="cursor-pointer mb-2">
+          <input
+            type="radio"
+            id="charisma"
+            value="charisma"
+            checked={reflex === 'charisma'}
+            onChange={(event: any) => setReflexa(event.target.value)}
+          />
+          <span className="text-white pl-2">Irei realizar o teste usando Carisma</span>
+        </label>
+        <label htmlFor="manipulation" className="cursor-pointer">
+          <input
+            type="radio"
+            value="manipulation"
+            id="manipulation"
+            checked={reflex === 'manipulation'}
+            onChange={(event: any) => setReflexa(event.target.value)}
+          />
+          <span className="text-white pl-2">Irei realizar o teste usando Manipulação</span>
+        </label>
+      </div>
       <div className="w-full">
         <label htmlFor="penaltyOrBonus" className="pt-4 px-4 mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+)</p>
@@ -128,7 +153,7 @@ export default function PenumbralSenses() {
           </div>
         </label>
         <label htmlFor="dificulty" className="px-4 mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Dificuldade da Película Local</p>
+          <p className="text-white w-full pb-3">Dificuldade</p>
           <div className="flex w-full">
             <div
               className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
@@ -159,7 +184,8 @@ export default function PenumbralSenses() {
         <button
           type="button"
           onClick={ rollDiceCatFeet }
-          className="text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4"
+          disabled={reflex === '' || dificulty === 0}
+          className={`text-white ${reflex === '' || dificulty === 0 ? 'bg-gray-600' : 'bg-green-whats'} hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >
           Utilizar Dom
         </button>

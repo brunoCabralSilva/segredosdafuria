@@ -24,16 +24,19 @@ export default function Message(props: any) {
         </div>
         <div className="w-full">
           <div className="font-bold pt-4 pb-2 text-left">
-            { `${ msn.rollOfRage.length === 2 ? 'Foram realizados 2 Testes de Fúria': 'Foi realizado um Teste de Fúria'} ${ msn.cause !== 'manual' ? ` por mudar para a forma ${msn.cause}` : '!' }`}
+            { `${ msn.rollOfRage.length === 2 ? 'Foram realizados 2 Testes de Fúria': msn.rollOfRage.length === 1 ? 'Foi realizado um Teste de Fúria' : `Foram realizados ${msn.rollOfRage.length} Testes de Fúria`} ${ msn.cause !== 'manual' ? ` por mudar para a forma ${msn.cause}` : '!' }`}
           </div>
           <div className="pb-2 text-left">
             { msn.success === 1 && <span>
               {
                 msn.rollOfRage.length == 2
                   ? `Obteve 1 sucesso no Teste. A Fúria foi reduzida em 1.`
-                  : `Obteve 1 sucesso no Teste. Não houve redução na Fúria.`
+                  : msn.rollOfRage.length === 1 
+                    ? `Obteve ${msn.success} sucesso no Teste. Não houve redução na Fúria.`
+                    : `Obteve sucesso no Teste.`
               }
               </span>}
+            { msn.success > 2 && <span>{`Obteve ${msn.success} sucessos no Teste.`}</span> }
             { msn.success === 2 && <span>Obteve 2 sucessos no Teste. Não houve redução na Fúria.</span> }
             { msn.success === 0 && <span>Não obteve sucesso no Teste. A fúria foi reduzida em {msn.rollOfRage.length}.</span> }
             <div className="font-bold py-3">Fúria Atual: {msn.rage}</div>

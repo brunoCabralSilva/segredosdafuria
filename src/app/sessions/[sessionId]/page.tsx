@@ -38,24 +38,6 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
   useEffect(() => {
     dispatch(actionSessionAuth({ show: false, id: ''}));
     setShowData(false);
-
-    function capitalizeFirstLetter(str: string): String {
-      switch(str) {
-        case 'global': return 'Dons Nativos';
-        case 'silent striders': return 'Peregrinos Silenciosos';
-        case 'black furies': return 'Fúrias Negras';
-        case 'silver fangs': return 'Presas de Prata';
-        case 'hart wardens': return 'Guarda do Cervo';
-        case 'ghost council': return 'Conselho Fantasma';
-        case 'galestalkers': return 'Perseguidores da Tempestade';
-        case 'glass walkers': return 'Andarilhos do Asfalto';
-        case 'bone gnawers': return 'Roedores de Ossos';
-        case 'shadow lords': return 'Senhores das Sombras';
-        case 'children of gaia': return 'Filhos de Gaia';
-        case 'red talons': return 'Garras Vermelhas';
-        default: return str.charAt(0).toUpperCase() + str.slice(1);;
-      }
-    };
         
     const verifyUser = async () => {
       const sessionDocSnapshot = await getDocs(querySession);
@@ -128,7 +110,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
           </div>
           <p className="pt-1">
             <span className="text-sm font-bold pr-1">Custo:</span>
-            <span className="text-sm font-normal">{ msn.cost } (Já deduzido).</span>
+            <span className="text-sm font-normal">{ msn.cost } (Possíveis Testes de Fúria e gastos de Força de Vontade são feitos automaticamente).</span>
           </p>
           <p className="pt-1">
             <span className="text-sm font-bold pr-1">Ação:</span>
@@ -166,7 +148,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
           </div>
           <p className="pt-1">
             <span className="text-sm font-bold pr-1">Custo:</span>
-            <span className="text-sm font-normal">{ msn.cost } (Já deduzido).</span>
+            <span className="text-sm font-normal">{ msn.cost } (Possíveis Testes de Fúria e gastos de Força de Vontade são feitos automaticamente).</span>
           </p>
           <p className="pt-1">
             <span className="text-sm font-bold pr-1">Ação:</span>

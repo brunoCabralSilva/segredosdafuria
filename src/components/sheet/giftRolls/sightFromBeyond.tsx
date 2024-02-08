@@ -7,14 +7,14 @@ import { registerMessage, sendMessage } from "@/firebase/chatbot";
 import { authenticate } from "@/firebase/login";
 import { returnValue } from "@/firebase/checks";
 
-export default function CatFeet() {
+export default function SightFromBeyond() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
-  const [dificulty, setDificulty] = useState<number>(3);
+  const [dificulty, setDificulty] = useState<number>(1);
   const [reflex, setReflexa] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
-  const rollDice = async () => {
+  const rollDiceCatFeet = async () => {
     if (reflex) {
       const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
       if (willpower) {
@@ -91,23 +91,83 @@ export default function CatFeet() {
             window.alert('Erro ao obter valor da Forma: ' + error);
             }
           }
-        }
-    } else {
-      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
-      if (willpower) {
-        await sendMessage({
-          roll: 'false',
-          gift: slice.showPopupGiftRoll.gift.data.gift,
-          giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-          cost: slice.showPopupGiftRoll.gift.data.cost,
-          action: slice.showPopupGiftRoll.gift.data.action,
-          duration: slice.showPopupGiftRoll.gift.data.duration,
-          pool: 'Nenhuma',
-          system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-        }, slice.showPopupGiftRoll.gift.session);
       } else {
         await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
       }
+      } else {
+        const dtSheet: any | null = await returnValue('intelligence', '', 'wisdom', slice.showPopupGiftRoll.gift.session);
+        if (dtSheet) {
+          let rage = dtSheet.rage;
+          let resultOfRage = [];
+          let resultOf = [];
+          let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
+          if (dices > 0) {
+            if (dices - dtSheet.rage === 0) dices = 0;
+            else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
+            else {
+              rage = dices;
+              dices = 0;
+            };
+      
+            for (let i = 0; i < rage; i += 1) {
+              const value = Math.floor(Math.random() * 10) + 1;
+              resultOfRage.push(value);
+            }
+        
+            for (let i = 0; i < dices; i += 1) {
+              const value = Math.floor(Math.random() * 10) + 1;
+              resultOf.push(value);
+            }
+          }
+          const authData: { email: string, name: string } | null = await authenticate();
+
+          try {
+            if (authData && authData.email && authData.name) {
+              const { email, name } = authData;
+              if (dices + rage >= dificulty) {
+                await registerMessage({
+                  message: {
+                    rollOfMargin: resultOf,
+                    rollOfRage: resultOfRage,
+                    dificulty,
+                    penaltyOrBonus,
+                    roll: 'true',
+                    gift: slice.showPopupGiftRoll.gift.data.gift,
+                    giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+                    cost: slice.showPopupGiftRoll.gift.data.cost,
+                    action: slice.showPopupGiftRoll.gift.data.action,
+                    duration: slice.showPopupGiftRoll.gift.data.duration,
+                    pool: slice.showPopupGiftRoll.gift.data.pool,
+                    system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+                },
+                  user: name,
+                  email: email,
+                }, slice.showPopupGiftRoll.gift.session);
+              } else {
+                await registerMessage({
+                  message: {
+                    rollOfMargin: resultOf,
+                    rollOfRage: resultOfRage,
+                    dificulty,
+                    roll: 'true',
+                    penaltyOrBonus,
+                    gift: slice.showPopupGiftRoll.gift.data.gift,
+                    giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+                    cost: slice.showPopupGiftRoll.gift.data.cost,
+                    action: slice.showPopupGiftRoll.gift.data.action,
+                    duration: slice.showPopupGiftRoll.gift.data.duration,
+                    pool: slice.showPopupGiftRoll.gift.data.pool,
+                    system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+                  },
+                  user: name,
+                  email: email,
+                }, slice.showPopupGiftRoll.gift.session);
+              }
+            }
+          } catch (error) {
+          window.alert('Erro ao obter valor da Forma: ' + error);
+          }
+        }
     }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
@@ -116,18 +176,17 @@ export default function CatFeet() {
     <div className="w-full">
       <label
         htmlFor="checkboxReflexive"
-        className="pb-5 px-5 w-full text-white">
+        className="pb-5 px-5 w-full text-white flex items-start">
         <input
           type="checkbox"
           id="checkboxReflexive"
-          className="mr-2"
+          className="mr-2 mt-1"
           checked={reflex}
           onChange={ (e: any) => setReflexa(e.target.checked) }
-        />Marque se a ação for reflexa
+        />Marque se foi você que intencionalmente está ativando este dom. Se foi o narrador quem solicitou, mantenha esta opção desmarcada.
       </label>
-      { reflex &&
         <div className="w-full">
-          <label htmlFor="penaltyOrBonus" className="pt-4 px-4 mb-4 flex flex-col items-center w-full">
+          <label htmlFor="penaltyOrBonus" className="px-4 mb-4 flex flex-col items-center w-full">
             <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+)</p>
             <div className="flex w-full">
               <div
@@ -186,11 +245,10 @@ export default function CatFeet() {
             </div>
           </label>
         </div>
-      }
       <div className="flex w-full gap-2"> 
         <button
           type="button"
-          onClick={ rollDice }
+          onClick={ rollDiceCatFeet }
           disabled={reflex && dificulty === 0}
           className={`text-white ${dificulty === 0 ? 'bg-gray-600' : 'bg-green-whats'} hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >
