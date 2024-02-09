@@ -7,19 +7,18 @@ import { registerMessage, sendMessage } from "@/firebase/chatbot";
 import { authenticate } from "@/firebase/login";
 import { returnRageCheck, returnValue } from "@/firebase/checks";
 
-export default function GaiasCandor() {
+export default function PackInstinct() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
-  const [dificulty, setDificulty] = useState<number>(1);
+  const [dificulty, setDificulty] = useState<number>(2);
   const [reflex, setReflexa] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
   const rollDiceCatFeet = async () => {
-    if (!reflex) {
-      const rage = await verifyRage(slice.showPopupGiftRoll.gift.session);
-      if (rage) {
-          await returnRageCheck(1, 'manual', slice.showPopupGiftRoll.gift.session);
-          const dtSheet: any | null = await returnValue('charisma', '', 'glory', slice.showPopupGiftRoll.gift.session);
+    if (reflex) {
+      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
+      if (willpower) {
+          const dtSheet: any | null = await returnValue('composure', '', 'honor', slice.showPopupGiftRoll.gift.session);
           if (dtSheet) {
             let rage = dtSheet.rage;
             let resultOfRage = [];
@@ -48,24 +47,45 @@ export default function GaiasCandor() {
             try {
               if (authData && authData.email && authData.name) {
                 const { email, name } = authData;
-                await registerMessage({
-                  message: {
-                    rollOfMargin: resultOf,
-                    rollOfRage: resultOfRage,
-                    dificulty,
-                    penaltyOrBonus,
-                    roll: 'true',
-                    gift: slice.showPopupGiftRoll.gift.data.gift,
-                    giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                    cost: slice.showPopupGiftRoll.gift.data.cost,
-                    action: slice.showPopupGiftRoll.gift.data.action,
-                    duration: slice.showPopupGiftRoll.gift.data.duration,
-                    pool: slice.showPopupGiftRoll.gift.data.pool,
-                    system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                },
-                  user: name,
-                  email: email,
-                }, slice.showPopupGiftRoll.gift.session);
+                if (dices + rage >= dificulty) {
+                  await registerMessage({
+                    message: {
+                      rollOfMargin: resultOf,
+                      rollOfRage: resultOfRage,
+                      dificulty,
+                      penaltyOrBonus,
+                      roll: 'true',
+                      gift: slice.showPopupGiftRoll.gift.data.gift,
+                      giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+                      cost: slice.showPopupGiftRoll.gift.data.cost,
+                      action: slice.showPopupGiftRoll.gift.data.action,
+                      duration: slice.showPopupGiftRoll.gift.data.duration,
+                      pool: slice.showPopupGiftRoll.gift.data.pool,
+                      system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+                  },
+                    user: name,
+                    email: email,
+                  }, slice.showPopupGiftRoll.gift.session);
+                } else {
+                  await registerMessage({
+                    message: {
+                      rollOfMargin: resultOf,
+                      rollOfRage: resultOfRage,
+                      dificulty,
+                      roll: 'true',
+                      penaltyOrBonus,
+                      gift: slice.showPopupGiftRoll.gift.data.gift,
+                      giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+                      cost: slice.showPopupGiftRoll.gift.data.cost,
+                      action: slice.showPopupGiftRoll.gift.data.action,
+                      duration: slice.showPopupGiftRoll.gift.data.duration,
+                      pool: slice.showPopupGiftRoll.gift.data.pool,
+                      system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+                    },
+                    user: name,
+                    email: email,
+                  }, slice.showPopupGiftRoll.gift.session);
+                }
               }
             } catch (error) {
             window.alert('Erro ao obter valor da Forma: ' + error);
@@ -75,9 +95,8 @@ export default function GaiasCandor() {
         await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
       }
     } else {
-      const rage = await verifyRage(slice.showPopupGiftRoll.gift.session);
-      if (rage) {
-        await returnRageCheck(1, 'manual', slice.showPopupGiftRoll.gift.session);
+      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
+      if (willpower) {
         await sendMessage({
           roll: 'false',
           gift: slice.showPopupGiftRoll.gift.data.gift,
@@ -107,9 +126,9 @@ export default function GaiasCandor() {
           checked={reflex}
           onChange={ (e: any) => setReflexa(e.target.checked) }
         />
-        <span>Marque se o alvo é um humano que não conhece os Garou ou seus poderes</span>
+        <span>Marque se busca obter informações precisas sobre um único membro, como o valor atual de Vitalidade dele e onde ele está, desde que esteja dentro de um raio de 10 quilômetros.</span>
       </label>
-      { !reflex &&
+      { reflex &&
         <div className="w-full">
           <label htmlFor="penaltyOrBonus" className="pt-4 px-4 mb-4 flex flex-col items-center w-full">
             <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+)</p>
@@ -139,7 +158,7 @@ export default function GaiasCandor() {
             </div>
           </label>
           <label htmlFor="dificulty" className="px-4 mb-4 flex flex-col items-center w-full">
-            <p className="text-white w-full pb-3 text-justify">Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Lábia, ou um valor imposto pelo Narrador).</p>
+            <p className="text-white w-full pb-3 text-justify">Dificuldade</p>
             <div className="flex w-full">
               <div
                 className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}

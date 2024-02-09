@@ -20,7 +20,11 @@ import DrainSpirit from "./giftRolls/drainSpirit";
 import GaiasCandor from "./giftRolls/gaiasCandor";
 import HaltTheCowardsFlight from "./giftRolls/haltTheCowardsFlight";
 import RazorClaws from "./giftRolls/razorClaws";
-import SenseDanger from "./giftRolls/senseDanger";
+import Camouflage from "./giftRolls/camouflage";
+import NoTestRoll from "./giftRolls/noTestRoll";
+import PackInstinct from "./giftRolls/packInstinct";
+import RapidShift from "./giftRolls/rapidShift";
+import EyesOfTheCobra from "./giftRolls/eyesOfTheCobra";
 
 export const MechanicGift = (props: { nameGift: any }) => {
   switch(props.nameGift) {
@@ -128,11 +132,57 @@ export const MechanicGift = (props: { nameGift: any }) => {
 
     case "Razor Claws": return <RazorClaws />
 
-    case 'Sense Danger': return <SenseDanger />
+    case 'Sense Danger': return <NoTestRoll />
 
     case 'Curse of Aeolus': return <AutoRollwithWill attribute="resolve" skill="" renown="glory" dificulty={2} />
 
-    case 'Odious Aroma': return <AutoRollWithRage attribute="stamina" skill="" renown="glory" dificulty={3} />
+    case 'Odious Aroma': return <AutoRollWithRage attribute="stamina" skill="" renown="honor" dificulty={3} />
+
+    case "Brother's Scent": return <SimpleWillPowerTest />
+
+    case 'Camouflage': return <Camouflage />
+
+    case 'Lacerating Wind': return <AutoRollWithRage attribute="resolve" skill="" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Vigor + Sobrevivência, ou Destreza + Atletismo, ou um valor imposto pelo Narrador)." />
+
+    case 'Augur': return <AutoRollwithWill attribute="intelligence" skill="" renown="wisdom" dificulty={1} textDificulty="Dificuldade (Um ponto de ônibus próximo abençoado com um espelho e uma poça adjacente pode ter uma Dificuldade 2, enquanto uma caverna do outro lado da Terra pode exigir uma Dificuldade 6 para encontrar a única gota de água da qual espionar)." />
+
+    case 'Blackout': return <SimplesRageTest />
+
+    case 'Skinbind': return <SimpleWillPowerTest />
+
+    case 'Sacred Boundary': return <NoTestRoll />
+
+    case 'Hidden Killer': return <SimpleWillPowerTest />
+
+    case 'Render Down': return <AutoRollWithRage attribute="resolve" skill="" renown="honor" dificulty={1} textDificulty="Dificuldade (As Dificuldades variam de 2, para algo como uma arma de fogo, até 5 para uma coluna de pedra esculpida)." />
+
+    case 'Fatal Flaw': return <AutoRollwithWill attribute="intelligence" skill="" renown="glory" dificulty={1} textDificulty={'Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Raciocínio + Lábia, ou um valor imposto pelo Narrador).'} />
+
+    case 'Icy Chill of Despair': return <SimplesRageTest />
+
+    case 'Fetch Bounty': return <AutoRollwithWill attribute="wits" skill="" renown="wisdom" dificulty={1} textDificulty={'Dificuldade (Encontrar um carro pode ter Dificuldade 2, enquanto localizar um Chevrolet Corvette 75 se aproxima de 4 ou 5 e pode exigir horas de viagem).'} />
+
+    case 'Speech of the World': return <AutoRollwithWill attribute="intelligence" skill="" renown="wisdom" dificulty={1} textDificulty={'Dificuldade (chinês ou qualquer variante de árabe, por exemplo, teriam Dificuldade 2, uma tabuleta escrita em um dialeto obscuro do sumério teria Dificuldade 4, e runas entalhadas por uma mão desconhecida antes do alvorecer da humanidade teriam Dificuldade 5 ou mais).'} /> 
+
+    case 'Whispered Passage': return <SimpleWillPowerTest />
+
+    case 'The Silver Compact': return <SimplesRageTest />
+
+    case 'Pack Instinct': return <PackInstinct />
+
+    case 'Rapid Shift': return <RapidShift />
+
+    case 'Call the Ridden': return <AutoRollwithWill attribute="charisma" skill="" renown="glory" dificulty={1} textDificulty={'Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Determinação + Intuição, ou um valor imposto pelo Narrador).'} />
+
+    case 'Eyes of the Cobra': return <EyesOfTheCobra />
+
+    case 'Song of Valor': return <AutoRollWithRage attribute="charisma" skill="" renown="honor" dificulty={3} />
+
+    case 'Song of Inspiration': return <AutoRollwithWill attribute="manipulation" skill="" renown="wisdom" dificulty={3} textDificulty={'Dificuldade (3 se tiver menos de dois pontos na Habilidade escolhida, ou 2 se o possuir 2 ou mais pontos.'} /> 
+
+    case 'Snarl of Challenge': return <AutoRollWithRage attribute="charisma" skill="" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Compostura + Intuição, ou um valor imposto pelo Narrador)." />
+
+    case 'True Fear': return <AutoRollWithRage attribute="charisma" skill="" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Intuição, ou um valor imposto pelo Narrador)." />
   }
 }
 

@@ -3,7 +3,7 @@ import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/sl
 import { useState } from "react";
 import { sendMessage } from "@/firebase/chatbot";
 
-export default function SenseDanger() {
+export default function NoTestRoll() {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
