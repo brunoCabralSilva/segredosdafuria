@@ -215,6 +215,26 @@ export const MechanicGift = (props: { nameGift: any }) => {
     case 'Doppelganger': return <AutoRollwithWill attribute="manipulation" skill="" renown="wisdom" dificulty={3} />
 
     case 'Control Machine': return <AutoRollWithRage attribute="manipulation" skill="" renown="wisdom" dificulty={3} textDificulty="Dificuldade (Depende da complexidade do comando e do tamanho do alvo, e essa Dificuldade aumenta se o dispositivo for solicitado a fazer algo contrário ao seu propósito principal, como pedir a uma fechadura (projetada para barrar a entrada) que se abra. A Dificuldade nunca é inferior a 3, em qualquer caso, já que esse Dom é notoriamente complicado e muitos Garou prefeririam simplesmente destruir o dispositivo do que conversar com ele)." />
+
+    case 'Take the True Form': return <AutoRollwithWill attribute="manipulation" skill="" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Vigor + Determinação, ou um valor imposto pelo Narrador)." />
+
+    case 'Against the Odds': return <SimplesRageTest />
+
+    case 'Closing the Gap': return <SimplesRageTest />
+
+    case 'Kiss of Helios': return <SimplesRageTest />
+
+    case "Luna's Armor": return <SimpleWillPowerTest />
+
+    case 'Coup de Grâce': return <SimpleWillPowerTest />
+
+    case "Kali's Scar": return <SimplesRageTest />
+
+    case 'Face in the Crowd': return <SimpleWillPowerTest />
+
+    case 'Between the Cracks': return <SimplesRageTest />
+
+    case 'Share the Pain': return <SimplesRageTest />
   }
 }
 

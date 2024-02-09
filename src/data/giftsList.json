@@ -26,56 +26,6 @@
     "page": 158
   },
   {
-    "gift": "Take the True Form",
-    "giftPtBr": "Adote a Forma Verdadeira",
-    "belonging": [
-      {
-        "type": "philodox",
-        "totalRenown": 8
-      },
-      {
-        "type": "ghost council",
-        "totalRenown": 9
-      }
-    ],
-    "description": "The Garou forces a shapeshifting creature to return to its “natural” form. This includes Garou, some vampires, and other, stranger creatures with the ability to change form. A river-spirit grants this Gift, washing away adornment and deception.",
-    "descriptionPtBr": "O Garou força uma criatura que muda de forma a retornar à sua forma “natural”. Isso inclui Garou, alguns vampiros e outras criaturas estranhas com a habilidade de mudar de forma. Um espírito do rio concede este Dom, lavando adornos e enganos.",
-    "renown": "Honra",
-    "cost": "1 ponto de Força de Vontade",
-    "action": "Total",
-    "pool": "Manipulação + Honra vs. Vigor + Determinação",
-    "system": "The Garou commands the subject to return to their natural form, and the player tests Manipulation + Honor against the target's Stamina + Resolve. On a win, the subject returns to their normal form, following  their usual rules, and are then unable to change shape for a number of turns equal to the margin. This Gift can be used in homid or lupus form, and the Gift ceases to be active if the user changes form during its effect.",
-    "systemPtBr": "O Garou comanda o alvo para retornar à  sua forma natural, testando Manipulação + Honra contra o Vigor + Determinação do alvo. Caso obtenha sucesso, o alvo retorna à sua forma normal, seguindo suas regras usuais e então não consegue mudar de forma por um número de turnos igual a diferença de sucesso obtida. Este Dom pode ser usado na forma hominídea ou lupina e o Dom deixa de ser ativo se o usuário mudar de forma durante seu efeito.",
-    "duration": "Até um número de turnos igual a diferença de sucessos(caso o usuário do dom tenha obtido mais sucessos que o alvo) ou quando o usuário do dom mudar de forma",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 158
-  },
-  {
-    "gift": "Against the Odds",
-    "giftPtBr": "Contra as Probabilidades",
-    "belonging": [
-      {
-        "type": "galliard",
-        "totalRenown": 8
-      },
-      {
-        "type": "silent striders",
-        "totalRenown": 9
-      }
-    ],
-    "description": "Summoning inner strength at the brink of defeat, the Garou emboldens their pack and turns the tables in the darkest of hours. A warthog- or badger-spirit grants this Gift.",
-    "descriptionPtBr": "Invocando a força interior à beira da derrota, o Garou fortalece sua matilha e reverte a situação nas horas mais sombrias. Um espírito de javali ou texugo concede este Dom.",
-    "renown": "Glória",
-    "cost": "1 Teste de Fúria",
-    "action": "Total",
-    "pool": "Glória",
-    "system": "The player rolls a pool equal to the Garou's Glory. Each success enables each member of the pack (including the Gift user) to restore one level of Superficial Willpower damage. This Gift can be used only once per story.",
-    "systemPtBr": "O jogador realiza um teste com um conjunto de dados igual à Glória do Garou. Cada sucesso permite que cada membro da matilha (incluindo o usuário do Dom) recupere um nível de dano superficial de Força de Vontade. Este Dom pode ser utilizado apenas uma vez por história.",
-    "duration": "",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 160
-  },
-  {
     "gift": "Break the Shackles",
     "giftPtBr": "Quebrar as Correntes",
     "belonging": [
@@ -197,81 +147,6 @@
     "page": 163
   },
   {
-    "gift": "Closing the Gap",
-    "giftPtBr": "Encurtar a Distância",
-    "belonging": [
-      {
-        "type": "ahroun",
-        "totalRenown": 8
-      },
-      {
-        "type": "silent striders",
-        "totalRenown": 9
-      }
-    ],
-    "description": "Either through the aid of spirits or by skillfully skirting the Umbra, the user immediately crosses a distance to bring the fight to their foes. A grasshopper- or mantis-spirit grants this Gift.",
-    "descriptionPtBr": "Seja por meio da ajuda de espíritos ou ao contornar habilmente a Umbra, o usuário atravessa imediatamente uma distância para levar a luta aos seus inimigos. Um espírito de gafanhoto ou louva-a-deus concede esse Dom.",
-    "renown": "Glória",
-    "cost": "1 Teste de Fúria",
-    "action": "Mínima",
-    "pool": "",
-    "system": "The Garou instantly moves to within melee range of an enemy within line of sight, crossing an intervening distance of up to three meters per point of Glory while being able to perform an attack during the same turn. (Note that it must still be possible for the user to physically traverse the distance — no moving through cliff faces or imprisoning bars.) The user counts as being already engaged at the beginning of the turn for the purpose of combat priority.",
-    "systemPtBr": "O Garou se move instantaneamente para a distância de combate corpo a corpo de um inimigo dentro da linha de visão, atravessando uma distância intermediária de até três metros por ponto de Glória, enquanto pode realizar um ataque durante o mesmo turno (Observe que ainda deve ser possível para o usuário atravessar fisicamente a distância - não é possível atravessar paredes de rocha ou barras que prendem). O usuário é considerado como já estando envolvido no início do turno para fins de prioridade de combate.",
-    "duration": "Um Turno",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 163
-  },
-  {
-    "gift": "Kiss of Helios",
-    "giftPtBr": "Beijo de Hélios",
-    "belonging": [
-      {
-        "type": "ahroun",
-        "totalRenown": 8
-      },
-      {
-        "type": "hart wardens",
-        "totalRenown": 9
-      }
-    ],
-    "description": "Calling upon the sun-spirit Helios,  the werewolf is infused with a supernatural heat and becomes almost immune to fire and other heat-based damage. A sun ray–spirit grants this Gift.",
-    "descriptionPtBr": "Invocando o espírito solar Hélio, o lobisomem é impregnado com um calor sobrenatural e se torna quase imune ao fogo e a outros danos baseados em calor. Um espírito em forma de raio de sol concede esse Dom.",
-    "renown": "Glória",
-    "cost": "1 Teste de Fúria",
-    "action": "Mínima",
-    "pool": "",
-    "system": "The werewolf takes no damage from fire and other similar heat sources for the duration of this Gift, and reduces damage from stronger sources by an amount of their Glory per turn. In addition, anyone striking the user with their bare flesh sustains Superficial damage equal to the user's Glory, as the attacker is seared by the smoldering skin of the werewolf.",
-    "systemPtBr": "O lobisomem não sofre dano de fogo e outras fontes de calor semelhantes durante a duração desse Dom e reduz o dano de fontes mais intensas em uma quantidade igual à sua Glória por turno. Além disso, qualquer pessoa que atingir o usuário com a pele nua sofre dano Superficial igual à Glória do usuário, já que o atacante é queimado pela pele ardente do lobisomem.",
-    "duration": "Uma Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 163
-  },
-  {
-    "gift": "Luna's Armor",
-    "giftPtBr": "Armadura de Luna",
-    "belonging": [
-      {
-        "type": "ahroun",
-        "totalRenown": 8
-      },
-      {
-        "type": "children of gaia",
-        "totalRenown": 9
-      }
-    ],
-    "description": "Clad in a silvery mist, the werewolf gains protection against harm caused by fire and silver. A Lune grants this Gift.",
-    "descriptionPtBr": "Vestido em uma bruma prateada, o lobisomem ganha proteção contra danos causados pelo fogo e pela prata. Uma Lune concede esse Dom.",
-    "renown": "Honra",
-    "cost": "1 ponto de Força de Vontade",
-    "action": "Mínima",
-    "pool": "",
-    "system": "Whenever the werewolf sustains (normally Aggravated) damage from fire or silver, an amount equal to their Honor is turned to Superficial damage instead (though it is not subsequently halved).",
-    "systemPtBr": "Sempre que o lobisomem sofre dano (normalmente Agravado) causado pelo fogo ou prata, uma quantidade igual à sua Honra é convertida em dano Superficial em vez disso (embora não seja subsequentemente reduzida pela metade).",
-    "duration": "Uma Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 163
-  },
-  {
     "gift": "Silver Claws",
     "giftPtBr": "Garras de Prata",
     "belonging": [
@@ -293,48 +168,6 @@
     "system": "This Gift is free and instantaneous while in crinos form. The Garou's claw attacks deal Aggravated damage to other Garou. If their current form doesn't have claws, it also gains a +0 damage claw attack as the fingernails elongate, harden, and  gain a silver coating. The silver claws cause a point of Aggravated damage per turn, per the normal silver  rules, and the user must make a Resolve + Honor test at Difficulty 3 each turn to maintain this Gift, as  the silver-induced agony can become unbearable.",
     "systemPtBr": "Este Dom não tem custo e é instantâneo enquanto estiver na forma de crinos. Os ataques de garra do Garou causam dano Agravado a outros Garou. Se sua forma atual não tiver garras, o usuário também ganha um ataque de garra com dano +0, à medida que as unhas alongam, endurecem e ganham um revestimento de prata. As garras de prata causam um ponto de dano Agravado por turno, de acordo com as regras normais de prata  e o usuário deve fazer um teste de Determinação + Honra com Dificuldade 3 a cada turno para manter esse Dom, já que a agonia induzida pela prata pode se tornar insuportável.",
     "duration": "Uma Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 164
-  },
-  {
-    "gift": "Coup de Grâce",
-    "giftPtBr": "Golpe de Misericórdia",
-    "belonging": [
-      {
-        "type": "black furies",
-        "totalRenown": 6
-      }
-    ],
-    "description": "The Garou summons all their strength and skill to perform a decisive blow intended to end an enemy in one strike. Any spirit associated with pride grants this Gift.",
-    "descriptionPtBr": "O Garou convoca toda sua força e habilidade para realizar um golpe decisivo destinado a acabar com um inimigo em um único golpe. Qualquer espírito associado ao orgulho concede esse Dom.",
-    "renown": "Glória",
-    "cost": "1 ponto de Força de Vontade",
-    "action": "Total",
-    "pool": "",
-    "system": "The Garou focuses their attention on an enemy, spending a full turn while summoning their strength. The user's next brawl or melee attack adds their Glory to the damage rating, but only if doing so would reduce the target's physical Health to zero. In either case, the effect lapses after the attack.",
-    "systemPtBr": "O Garou concentra sua atenção em um inimigo, gastando um turno inteiro enquanto convoca sua força. O próximo ataque com briga ou Arma Branca do usuário adiciona sua Glória ao dano, mas apenas se isso reduzir a Vitalidade física do alvo a zero. Em qualquer caso, o efeito desaparece após o ataque.",
-    "duration": "Até o próximo ataque com briga ou Arma Branca, ou até o fim da Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 164
-  },
-  {
-    "gift": "Kali's Scar",
-    "giftPtBr": "Cicatriz de Kali",
-    "belonging": [
-      {
-        "type": "black furies",
-        "totalRenown": 6
-      }
-    ],
-    "description": "The wounds inflicted by the Garou's claws and fangs become ragged and festering, and the damage cannot be healed by any means while the Gift is active. Furthermore, the smell of the diseased open wound allows the victim to be tracked by the user, should the victim escape. A rot-spirit grants this Gift.",
-    "descriptionPtBr": "As feridas infligidas pelas garras e presas do Garou se tornam irregulares e ulceradas e o dano não pode ser curado de forma alguma enquanto o Dom estiver ativo. Além disso, o cheiro da ferida aberta e infectada permite que a vítima seja rastreada pelo usuário, caso ela escape. Um espírito de podridão concede esse Dom.",
-    "renown": "Glória",
-    "cost": "1 Teste de Fúria",
-    "action": "Mínima",
-    "pool": "",
-    "system": "For the duration of the Gift, any damage inflicted by the claws or fangs of the user cannot be healed or mended by any means, including Gifts or other supernatural abilities. In addition, the user's player receives bonus dice equal to the character's Glory on any attempt to track or find the victim while the Gift is in effect. (In rare cases a Storyteller can allow extremely powerful foes to resist the user's Stamina + Glory with an appropriate pool, such as Power, and negate the effect after a turn.)",
-    "systemPtBr": "Durante a duração do Dom, qualquer dano infligido pelas garras ou presas do usuário não pode ser curado ou reparado de nenhuma forma, incluindo Dons ou outras habilidades sobrenaturais. Além disso, o Garou recebe dados bônus iguais à Glória do personagem em qualquer tentativa de rastrear ou encontrar a vítima enquanto o Dom estiver em efeito (em casos raros, o Narrador pode permitir que inimigos extremamente poderosos resistam ao teste do usuário de Vigor + Glória com um conjunto apropriado, como Poder, e neguem o efeito após um turno).",
-    "duration": "Uma noite e um dia",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 164
   },
@@ -381,27 +214,6 @@
     "page": 165
   },
   {
-    "gift": "Face in the Crowd",
-    "giftPtBr": "Rosto na Multidão",
-    "belonging": [
-      {
-        "type": "bone gnawers",
-        "totalRenown": 6
-      }
-    ],
-    "description": "Blink and they're gone. The Garou can obscure their presence in a crowd and seemingly disappear after an innocuous change in their appearance. A roach-spirit grants this Gift.",
-    "descriptionPtBr": "Pisque e eles se foram. O Garou pode obscurecer sua presença em uma multidão e aparentemente desaparecer após uma mudança inofensiva em sua aparência. Um espírito de barata concede esse Dom.",
-    "renown": "Honra",
-    "cost": "1 ponto de Força de Vontade",
-    "action": "Mínima",
-    "pool": "",
-    "system": "Once per scene, when ducking into a crowd, the Garou can activate this Gift to attempt to lose any pursuers. Doing so adds their Honor to the Difficulty of any attempt to spot them or follow them for as long as they're in the crowd. This Gift can be used only in homid form or (amid dogs or wolves) lupus form.",
-    "systemPtBr": "Uma vez por cena, ao se misturar em uma multidão, o Garou pode ativar esse Dom para tentar despistar qualquer perseguidor. Fazendo isso, adiciona sua Honra à Dificuldade de qualquer tentativa de avistá-lo ou segui-lo enquanto estiver na multidão. Esse Dom só pode ser usado na forma hominídea ou (em meio a cães ou lobos) na forma lupina.",
-    "duration": "Uma Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 166
-  },
-  {
     "gift": "Streets tell Stories",
     "giftPtBr": "Histórias das Ruas",
     "belonging": [
@@ -440,27 +252,6 @@
     "system": "The Garou closes their eyes, and the player makes a Gift test at a Difficulty set by the  Storyteller, depending on the number of animals in the vicinity and what the Gift user is searching for. (Scouting the layout of a farm would be 2, whereas finding a specific scientist in an urban medical center would approach 5.) Some supernatural creatures are able to detect the supernatural intrusion and the animal acting as eyes, and if that animal is killed while the Gift is in use (intentionally or through happenstance) the user suffers a level of Aggravated Willpower damage from the mental shock.",
     "systemPtBr": "O Garou fecha os olhos e realiza um teste de Raciocínio + Honra com uma Dificuldade estabelecida pelo Narrador, dependendo do número de animais nas proximidades e do que o usuário do Dom está procurando (investigar o layout de uma fazenda teria uma dificuldade de 2, enquanto encontrar um cientista específico em um centro médico urbano teria uma dificuldade de 5). Algumas criaturas sobrenaturais são capazes de detectar a intrusão sobrenatural e o animal agindo como os olhos e se esse animal for morto enquanto o Dom estiver em uso (intencionalmente ou por acaso), o usuário sofre um nível de dano de Força de Vontade Agravado devido ao choque mental.",
     "duration": "Uma Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 167
-  },
-  {
-    "gift": "Between the Cracks",
-    "giftPtBr": "Entre as Fendas",
-    "belonging": [
-      {
-        "type": "bone gnawers",
-        "totalRenown": 9
-      }
-    ],
-    "description": "In the blink of an eye, the Garou can disappear into any crack, so long as the crack is at least a hand's breadth long, and reappear from another crack just out of sight or distant enough to elude pursuit. A spirit of shadow, decay, or ruin grants this Gift.",
-    "descriptionPtBr": "Num piscar de olhos, o Garou pode desaparecer em qualquer fenda, desde que a fenda tenha pelo menos a largura de uma mão, e reaparecer em outra fenda logo fora da vista ou a uma distância suficiente para evitar perseguição. Um espírito de sombra, decadência ou ruína concede esse Dom.",
-    "renown": "Honra",
-    "cost": "1 Teste de Fúria",
-    "action": "Total",
-    "pool": "",
-    "system": "The Garou can escape into a crack (a fissure resulting from wear or damage, not just any gap) in the landscape or a building and reappear from another crack a turn later, as long as they can reach the crack, both cracks are at least a hand's breadth long, and the cracks are both visible to the user and within ten meters per Honor of the user. The Storyteller ultimately decides on the availability of suitable entries and exits, and the Garou is unable to use this Gift if no exit is to be found within range.",
-    "systemPtBr": "O Garou pode escapar para uma fenda (uma fissura resultante do desgaste ou dano, não apenas qualquer espaço vazio) na paisagem ou em um prédio, e reaparecer de outra fenda um turno depois, desde que possa alcançar a fenda, ambas as fendas tenham pelo menos a largura de uma mão e as fendas sejam visíveis para o usuário e estejam a uma distância de até dez metros por ponto de Honra do usuário. O Narrador decide em última instância sobre a disponibilidade de entradas e saídas adequadas e o Garou é incapaz de usar esse Dom se nenhuma saída for encontrada dentro do alcance.",
-    "duration": "Um Turno",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 167
   },
@@ -523,27 +314,6 @@
     "pool": "Autocontrole + Sabedoria",
     "system": "The user automatically becomes aware of all mundane life — plant, animal, and human — as well as any (living) supernatural entities in an area roughly equal to a two-story home. Supernatural entities that use powers to conceal themselves can be found only on a Composure + Wisdom test at a Difficulty depending on the creature and ability used, and spirits are not  sensed at all unless they are possessing a living body. Vampires and other undead are not detected unless they feign life, in which case a Gift test at Difficulty 3  can pierce the ruse.",
     "systemPtBr": "O usuário automaticamente se torna consciente de toda vida mundana — plantas, animais e humanos —, assim como de qualquer entidade sobrenatural (viva) em uma área aproximadamente igual a uma casa de dois andares. Entidades sobrenaturais que usam poderes para se ocultar podem ser encontradas somente em um teste de Autocontrole + Sabedoria com uma Dificuldade dependendo da criatura e da habilidade usada, e os espíritos não são percebidos a menos que estejam possuindo um corpo vivo. Vampiros e outros mortos-vivos não são detectados, a menos que finjam estar vivos, caso em que um teste de Dom com Dificuldade 3 pode desmascarar a artimanha.",
-    "duration": "Uma Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 168
-  },
-  {
-    "gift": "Share the Pain",
-    "giftPtBr": "Compartilhar a Dor",
-    "belonging": [
-      {
-        "type": "children of gaia",
-        "totalRenown": 9
-      }
-    ],
-    "description": "The Garou is able to shoulder part of the physical harm suffered by another member of their pack. Their body or mind takes on the burden of a  packmate. A bee-spirit grants this Gift.",
-    "descriptionPtBr": "O Garou é capaz de suportar parte do dano físico sofrido por outro membro de sua matilha. Seu corpo ou mente assume o fardo de um companheiro de matilha. Um espírito de abelha concede esse Dom.",
-    "renown": "Sabedoria",
-    "cost": "1 Teste de Fúria",
-    "action": "Livre",
-    "pool": "",
-    "system": "The Garou chooses a number of pack members equal to their Wisdom. Any time one of these members suffers physical damage of any kind, the damage is  halved and the Gift's user suffers the other half as either Health or Willpower damage. Any defensive Gifts active on the user apply as normal.",
-    "systemPtBr": "O Garou escolhe um número de membros da matilha igual à sua Sabedoria. Sempre que um desses membros sofre dano físico de qualquer tipo, o dano é reduzido à metade e o usuário do Dom sofre a outra metade como dano de Saúde ou Força de Vontade. Quaisquer Dons defensivos ativos no usuário se aplicam normalmente.",
     "duration": "Uma Cena",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 168
