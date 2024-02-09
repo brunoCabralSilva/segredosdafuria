@@ -183,6 +183,38 @@ export const MechanicGift = (props: { nameGift: any }) => {
     case 'Snarl of Challenge': return <AutoRollWithRage attribute="charisma" skill="" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Compostura + Intuição, ou um valor imposto pelo Narrador)." />
 
     case 'True Fear': return <AutoRollWithRage attribute="charisma" skill="" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Intuição, ou um valor imposto pelo Narrador)." />
+
+    case "Luna's Avenger": return <SimplesRageTest />
+
+    case 'Unity of the Pack': return <SimpleWillPowerTest />
+
+    case 'Blood of the Pack': return <SimplesRageTest />
+
+    case 'The Golden Path': return <SimpleWillPowerTest />
+
+    case 'Burrow': return <AutoRollWithRage attribute="strength" skill="" renown="wisdom" dificulty={2} textDificulty="Dificuldade (Solo macio é Dificuldade 2, enquanto solo rochoso compacto é Dificuldade 4)." />
+
+    case 'Under the Gun': return <SimpleWillPowerTest />
+
+    case 'Thunderclap': return <AutoRollWithRage attribute="strength" skill="" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Vigor + Raciocínio de todos dentro de 20 metros, ou um valor imposto pelo Narrador)." />
+
+    case 'Dire Distraction': return <AutoRollWithRage attribute="composure" skill="" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Raciocínio + Ocultismo (ou Sabedoria), ou um valor imposto pelo Narrador)." /> 
+
+    case 'Shield of the Wyld': return <SimpleWillPowerTest />
+
+    case 'Quicksand': return <AutoRollWithRage attribute="intelligence" skill="" renown="honor" dificulty={2} textDificulty="Dificuldade (A dificuldade inicial é 2, mas deve ser aumentada em 1 para cada dez metros adicionais de distância)." />
+
+    case "Gaia's Embrace": return <SimplesRageTest />
+
+    case "Balor's Gaze": return <AutoRollwithWill attribute="charisma" skill="" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Ocultismo, ou um valor imposto pelo Narrador)." />
+
+    case 'Territorial Dominance': return <SimplesRageTest />
+
+    case 'Recovery Memory': return <AutoRollwithWill attribute="intelligence" skill="" renown="wisdom" dificulty={1} textDificulty="Dificuldade (Quanto pior o estado do objeto e quanto mais tempo ele passou nesse estado, maior será a Dificuldade." />
+
+    case 'Doppelganger': return <AutoRollwithWill attribute="manipulation" skill="" renown="wisdom" dificulty={3} />
+
+    case 'Control Machine': return <AutoRollWithRage attribute="manipulation" skill="" renown="wisdom" dificulty={3} textDificulty="Dificuldade (Depende da complexidade do comando e do tamanho do alvo, e essa Dificuldade aumenta se o dispositivo for solicitado a fazer algo contrário ao seu propósito principal, como pedir a uma fechadura (projetada para barrar a entrada) que se abra. A Dificuldade nunca é inferior a 3, em qualquer caso, já que esse Dom é notoriamente complicado e muitos Garou prefeririam simplesmente destruir o dispositivo do que conversar com ele)." />
   }
 }
 
