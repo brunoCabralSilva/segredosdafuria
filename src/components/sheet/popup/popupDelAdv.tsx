@@ -4,7 +4,7 @@ import { actionPopupDelAdv, useSlice } from "@/redux/slice";
 import { collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firebaseConfig from "../firebase/connection";
+import firebaseConfig from "../../../firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
 
 interface IAdvantage {

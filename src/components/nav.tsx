@@ -3,15 +3,13 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionLogoutUser, useSlice } from '@/redux/slice';
-import PopupLogout from './popupLogout';
+import PopupLogout from './sheet/popup/popupLogout';
 import { authenticate, signIn } from '@/firebase/login';
-import { useRouter } from 'next/navigation';
 
 export default function Nav() {
   const [showMenu, setShowMenu] = useState(false);
   const [loginLogout, setLoginLogout] = useState('');
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const slice = useAppSelector(useSlice);
 
   useEffect(() => {

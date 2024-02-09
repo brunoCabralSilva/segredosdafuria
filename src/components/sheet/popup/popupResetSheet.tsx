@@ -3,7 +3,7 @@ import { useAppDispatch} from "@/redux/hooks";
 import { actionResetSheet } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firestoreConfig from '../firebase/connection';
+import firestoreConfig from '../../../firebase/connection';
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";

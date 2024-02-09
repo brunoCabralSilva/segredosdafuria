@@ -1,15 +1,16 @@
 'use client'
 import { useAppDispatch } from "@/redux/hooks";
-import { actionDeleteSession } from "@/redux/slice";
-import { collection, deleteDoc, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
+import { actionDeleteUserFromSession } from "@/redux/slice";
+import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firestoreConfig from '../firebase/connection';
+import firestoreConfig from '../../../firebase/connection';
 import { authenticate, signIn } from "@/firebase/login";
 import { registerMessage } from "@/firebase/chatbot";
+import firebaseConfig from "../../../firebase/connection";
 
-export default function PopupDeleteSession(props: { sessionId : string }) {
-  const { sessionId } = props;
+export default function PopupDelUserFromSession(props: { session : string }) {
+  const { session } = props;
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -18,9 +19,12 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
     const authData: { email: string, name: string } | null = await authenticate();
     try {
       if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const sessionsCollectionRef = collection(db, 'sessions');
-        const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+        const { email, name } = authData;
+        const db = getFirestore(firebaseConfig);
+        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+        const userQuerySnapshot = await getDocs(userQuery);
+        const userDocument = userQuerySnapshot.docs[0];
+        const sessionDocRef = doc(db, 'sessions', userDocument.id);
         const sessionDocSnapshot = await getDoc(sessionDocRef);
         if (sessionDocSnapshot.exists()) {
           const sessionDoc = sessionDocSnapshot.data();
@@ -36,7 +40,7 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
             }
             const updatedNotifications = [
               {
-                message: `Olá, tudo bem? O antigo narrador desta sessão saiu desta sala e agora você é o novo narrador, por ser o jogador mais antigo da Sala. Você pode transferir o cargo de narrador para outro jogador ou, caso não exista mais nenhum, também sair da sala e mesma será excluida. `,
+                message: `Olá, tudo bem? O jogador ${name} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
                 type: 'transfer',
               }
             ];
@@ -46,12 +50,12 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
               notifications: updatedNotifications,
             });
             await registerMessage({
-              message: `O antigo narrador desta sessão saiu definitivamente desta sala e agora ${oldestPlayer.user} é o novo narrador, por ser o jogador mais antigo..`,
+              message: `O jogador ${name} saiu definitivamente desta sala.`,
               user: 'notification',
               email: email,
             }, sessionDocSnapshot.data().name);
           }
-          dispatch(actionDeleteSession(false));
+          dispatch(actionDeleteUserFromSession(false));
           window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
           router.push('/sessions');
         } else {
@@ -73,21 +77,20 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
         <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer"
-            onClick={() => dispatch(actionDeleteSession(false))}
+            onClick={() => dispatch(actionDeleteUserFromSession(false))}
           />
         </div>
         <div className="pb-5 px-5 w-full">
           <label htmlFor="palavra-passe" className="flex flex-col items-center w-full">
             <p className="text-white w-full text-center pb-3">
-              Ao escolher sair de uma Sessão, o cargo de narrador da sala que você criou passa para o seu jogador mais antigo e todos os dados que você tem aqui, como fichas e anotações é removido permanentemente. A Sessão só é de fato excluída caso não hajam mais jogadores restantes. Você tem certeza que de fato quer fazer isto?
+              Ao escolher sair de uma Sessão, todos os dados que você tem registrados aqui, como fichas e anotações, serão removidos permanentemente. Você tem certeza que de fato quer fazer isto?
             </p>
           </label>
           <div className="flex w-full gap-2">
             <button
               type="button"
-              onClick={() => dispatch(actionDeleteSession(false))}
+              onClick={() => dispatch(actionDeleteUserFromSession(false))}
               className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-
             >
               Não
             </button>

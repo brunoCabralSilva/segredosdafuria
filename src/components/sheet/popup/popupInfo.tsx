@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, actionInfoSessions, useSlice } from "@/redux/slice";
-import Feedback from "./feedback";
+import Feedback from "../../feedback";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function PopupInfo() {

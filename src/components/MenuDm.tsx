@@ -1,7 +1,7 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionDeleteSession, actionLoginInTheSession, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { actionDeleteSession, actionLoginInTheSession, actionPopupCreateSheet, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { arrayUnion, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import firestoreConfig from '../firebase/connection';
@@ -9,14 +9,15 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
-import PopupDeleteSession from "./popupDeleteSession";
-import PopupDeletePlayer from "./popupDeletePlayer";
-import PopupGift from "./popupGift";
-import PopupRitual from "./popupRitual";
-import PopupAdvantage from "./popupAdvantage";
+import PopupDeleteSession from "./sheet/popup/popupDeleteSession";
+import PopupDeletePlayer from "./sheet/popup/popupDeletePlayer";
+import PopupGift from "./sheet/popup/popupGift";
+import PopupRitual from "./sheet/popup/popupRitual";
+import PopupAdvantage from "./sheet/popup/popupAdvantage";
 import PlayersDm from "./playerDM";
 import { authenticate, signIn } from "@/firebase/login";
 import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
+import PopupCreateSheet from "./sheet/popup/popupCreateSheet";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -441,9 +442,9 @@ export default function MenuDm(props: { sessionId: string }) {
       } else {
         window.alert('Não foi possível realizar a aprovação do usuário. Atualize a página e tente novamente.');
       }
-  } catch (error) {
-				window.alert("Ocorreu um erro ao tentar aprovar usuário: " + error);
-			}
+    } catch (error) {
+      window.alert("Ocorreu um erro ao tentar aprovar usuário: " + error);
+		}
 	};
 
   return(
@@ -697,6 +698,11 @@ export default function MenuDm(props: { sessionId: string }) {
       {
         optionSelect === 'players' && 
         <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
+          <button
+            className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold"
+            onClick={ () => dispatch(actionPopupCreateSheet(true)) }>
+            Criar Ficha
+          </button>
           <button className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold" onClick={returnValue}>Atualizar</button>
           { 
             players.length === 0 && <div className="w-full text-white text-lg text-center mt-4">
@@ -762,6 +768,7 @@ export default function MenuDm(props: { sessionId: string }) {
       </div>
       }
       { slice.popupGift.show && <PopupGift item={ slice.popupGift.gift } /> }
+      { slice.popupCreateSheet && <PopupCreateSheet sessionId={ sessionId } returnValue={ returnValue } /> }
       { slice.popupRitual.show && <PopupRitual item={ slice.popupRitual.ritual } /> }
       { slice.showAdvantage.show && <PopupAdvantage /> }
 		</div>

@@ -12,7 +12,7 @@ import { FaDiceD20 } from "react-icons/fa";
 import firebaseConfig from "@/firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
-import PopupRollGift from "../popupRollGift";
+import PopupRollGift from "./popup/popupRollGift";
 
 export default function ItemGiftAdded(props: any) {
   const slice = useAppSelector(useSlice);

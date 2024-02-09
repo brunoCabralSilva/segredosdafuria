@@ -11,7 +11,7 @@ import { actionDeleteUserFromSession, actionResetSheet, useSlice } from "@/redux
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
-import PopupDelUserFromSession from "../popupDelUserFromSession";
+import PopupDelUserFromSession from "./popup/popupDelUserFromSession";
 
 export default function General(props: { session: string }) {
   const { session } = props;

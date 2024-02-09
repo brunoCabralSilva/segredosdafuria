@@ -5,7 +5,7 @@ import { collection, getDocs, getFirestore, query, where } from "firebase/firest
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
-import PopupDelAdv from "../popupDelAdv";
+import PopupDelAdv from "./popup/popupDelAdv";
 import { authenticate, signIn } from "@/firebase/login";
 
 export default function ItensAdvantagesAdded(props: any) {

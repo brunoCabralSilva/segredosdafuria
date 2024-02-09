@@ -7,8 +7,8 @@ import { collection, documentId, getDocs, getFirestore, query, where } from 'fir
 import firestoreConfig from '../../../firebase/connection';
 import { IGenerateDataRolls } from '@/interface';
 import Nav from '@/components/nav';
-import PopUpDices from '@/components/popUpDices';
-import PopUpSheet from '@/components/popUpSheet';
+import PopUpDices from '@/components/sheet/popup/popUpDices';
+import PopUpSheet from '@/components/sheet/popup/popUpSheet';
 import Message from './message';
 import { generateDataRoll } from './functions';
 import Dice from './dice';
@@ -17,8 +17,8 @@ import { useRouter } from 'next/navigation';
 import MenuDm from '@/components/MenuDm';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import ManualRoll from '@/components/manualRoll';
-import PopupResetSheet from '@/components/popupResetSheet';
-import PopupDelHistoric from '@/components/popupDelHistoric';
+import PopupResetSheet from '@/components/sheet/popup/popupResetSheet';
+import PopupDelHistoric from '@/components/sheet/popup/popupDelHistoric';
 import { authenticate, signIn } from '@/firebase/login';
 
 export default function Chat({ params } : { params: { sessionId: string } }) {

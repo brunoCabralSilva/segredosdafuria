@@ -1,7 +1,7 @@
-import dataAdvantages from '../data/advantagesAndFlaws.json';
+import dataAdvantages from '../../../data/advantagesAndFlaws.json';
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, actionShowAdvantage, useSlice } from "@/redux/slice";
-import Feedback from "./feedback";
+import Feedback from "../../feedback";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useEffect, useState } from 'react';
 

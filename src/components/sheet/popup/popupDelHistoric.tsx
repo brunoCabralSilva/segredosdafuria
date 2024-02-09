@@ -1,9 +1,9 @@
 'use client'
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { actionDelHistoric } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firebaseConfig from "../firebase/connection";
+import firebaseConfig from "../../../firebase/connection";
 
 export default function PopupDelHistoric(props: { sessionId : string }) {
   const { sessionId } = props;

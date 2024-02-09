@@ -4,7 +4,7 @@ import { actionDeletePlayer, useSlice } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firestoreConfig from '../firebase/connection';
+import firestoreConfig from '../../../firebase/connection';
 import { authenticate, signIn } from "@/firebase/login";
 
 export default function PopupDeletePlayer(props: { returnValue: any, sessionId : string }) {

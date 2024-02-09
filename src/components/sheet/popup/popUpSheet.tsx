@@ -2,21 +2,21 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionForm, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
-import General from "./sheet/general";
-import Attributes from "./sheet/attributes";
-import Skills from "./sheet/skills";
-import Forms from "./sheet/forms";
+import General from "../general";
+import Attributes from "../attributes";
+import Skills from "../skills";
+import Forms from "../forms";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
-import Notes from './sheet/notes';
-import GiftsSheet from "./sheet/gifts";
-import AdvantagesAnsFlaws from "./sheet/advantagesAndFlaws";
-import RitualSheet from "./sheet/rituals";
-import Background from "./sheet/background";
+import Notes from '../notes';
+import GiftsSheet from "../gifts";
+import AdvantagesAnsFlaws from "../advantagesAndFlaws";
+import RitualSheet from "../rituals";
+import Background from "../background";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import SessionDetails from "./sheet/sessionDetalis";
+import SessionDetails from "../sessionDetalis";
 
 export default function PopUpSheet(props: { session: string }) {
   const { session } = props;

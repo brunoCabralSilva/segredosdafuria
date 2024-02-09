@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, useSlice } from "@/redux/slice";
 import Image from "next/image";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { MechanicGift } from "./sheet/functionGifts";
+import { MechanicGift } from "../functionGifts";
 
 export default function PopupRollGift() {
   const slice = useAppSelector(useSlice);

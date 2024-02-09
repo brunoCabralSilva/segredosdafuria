@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import SessionAuth from "./sessionAuth";
 import { authenticate, signIn } from "@/firebase/login";
 import firebaseConfig from "@/firebase/connection";
-import PopupInfo from "@/components/popupInfo";
+import PopupInfo from "@/components/sheet/popup/popupInfo";
 
 interface ISessions {
   id: string;
