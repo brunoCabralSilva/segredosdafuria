@@ -41,6 +41,44 @@ export const returnValue = async (
   } return null;
 };
 
+export const returnRageCheckForOthers = async (rageCheck: number, type: string, session: string, dataUser: any, setDataUser: any ) => {
+  let resultOfRage = [];
+  let success = 0;
+  for (let i = 0; i < rageCheck; i += 1) {
+    const value = Math.floor(Math.random() * 10) + 1;
+    if (value >= 6) success += 1;
+    resultOfRage.push(value);
+  }
+  if (dataUser.data.rage <= 0) {
+    setDataUser({ ...dataUser, data: { ...dataUser.data, rage: 0 }});
+    await registerMessage({
+      message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
+      user: dataUser.email,
+      email: dataUser.user,
+    }, session);
+  } else {
+    if (dataUser.data.rage - success < 0) {
+      dataUser.data.rage = 0;
+    } else {
+      dataUser.data.rage = dataUser.data.rage - (resultOfRage.length - success);
+      setDataUser({
+        ...dataUser,
+        data: { ...dataUser.data, rage: dataUser.data.rage - (resultOfRage.length - success) },
+      });
+    }
+    await registerMessage({
+      message: {
+        rollOfRage: resultOfRage,
+        success,
+        cause: type,
+        rage: dataUser.data.rage,
+      },
+      user: dataUser.user,
+      email: dataUser.email,
+    }, session);
+  }
+};
+
 export const returnRageCheck = async (rageCheck: number, type: string, session: string ) => {
   let resultOfRage = [];
   let success = 0;

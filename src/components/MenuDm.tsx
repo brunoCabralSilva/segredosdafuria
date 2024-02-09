@@ -711,7 +711,7 @@ export default function MenuDm(props: { sessionId: string }) {
           }
           {
             players.length > 0 && players.filter((pl) => pl.email !== dm).map((player: any, index: number) => (
-              <PlayersDm key={index} player={player} returnValue={returnValue} />
+              <PlayersDm key={index} player={player} returnValue={returnValue} sessionId={ sessionId } />
             ))
           }
           { slice.popupDeletePlayer.show && <PopupDeletePlayer returnValue={returnValue} sessionId={ sessionId } /> }
