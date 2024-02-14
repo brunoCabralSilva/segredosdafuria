@@ -26,6 +26,8 @@ export default function PlayersDm(props: any) {
   const [editRenown, setEditRenown] = useState(false);
   const [editAttributes, setEditAttributes] = useState(false);
   const [editSkills, setEditSkills] = useState(false);
+  const [editHarano, setEditHarano] = useState(false);
+  const [editHauglosk, setEditHauglosk] = useState(false);
   const [editGifts, setEditGifts] = useState(false);
   const [editRituals, setEditRituals] = useState(false);
   const [editbackground, setEditBackground] = useState(false);
@@ -519,6 +521,92 @@ export default function PlayersDm(props: any) {
         </div>
         { returnWillpower(dataUser) }
         { returnHealth(dataUser) }
+        <div className="mt-2 flex items-center w-full justify-between pl-5 mb-2 gap-2">
+          <div className="flex items-center">
+            <span className="font-bold pr-1">Harano:</span>
+            {
+              !editHarano
+              ? <span className="capitalize my-1">{ dataUser.data.harano }</span>
+              : <div className="capitalize flex-col justify-between items-center">
+                <select
+                  className="text-left py-1 bg-gray-whats-dark border-2 border-white cursor-pointer"
+                  value={ dataUser.data.harano }
+                  onChange={ (e) => {
+                    setDataUser({
+                      ...dataUser,
+                      data: {
+                        ...dataUser.data,
+                        harano: e.target.value,
+                      }
+                    });
+                  }}
+                >
+                  <option disabled value="">Escolha um valor de Harano</option>
+                  <option value={0}>0</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                </select>
+              </div>
+            }
+          </div>
+          {
+            !editHarano
+            ? <FaEdit onClick={ () => setEditHarano(true) } className="text-2xl cursor-pointer" />
+            : <BsCheckSquare
+              onClick={() => {
+                updateDataValue('harano');
+                setEditHarano(false);
+              }}
+              className="text-2xl cursor-pointer"
+            />
+          }
+        </div>
+        <div className="mt-2 flex items-center w-full justify-between pl-5 mb-2 gap-2">
+          <div className="flex items-center">
+            <span className="font-bold pr-1">Hauglosk:</span>
+            {
+              !editHauglosk
+              ? <span className="capitalize my-1">{ dataUser.data.hauglosk }</span>
+              : <div className="capitalize flex-col justify-between items-center">
+                <select
+                  className="text-left py-1 bg-gray-whats-dark border-2 border-white cursor-pointer"
+                  value={ dataUser.data.hauglosk }
+                  onChange={ (e) => {
+                    setDataUser({
+                      ...dataUser,
+                      data: {
+                        ...dataUser.data,
+                        hauglosk: e.target.value,
+                      }
+                    });
+                  }}
+                >
+                  <option disabled value="">Escolha um valor de Hauglosk</option>
+                  <option value={1}>0</option>
+                  <option value={1}>1</option>
+                  <option value={2}>2</option>
+                  <option value={3}>3</option>
+                  <option value={4}>4</option>
+                  <option value={5}>5</option>
+                </select>
+              </div>
+            }
+          </div>
+          {
+            !editHauglosk
+            ? <FaEdit onClick={ () => setEditHauglosk(true) } className="text-2xl cursor-pointer" />
+            : <BsCheckSquare
+              onClick={() => {
+                updateDataValue('hauglosk');
+                setEditHauglosk(false);
+              }}
+              className="text-2xl cursor-pointer"
+            />
+          }
+        </div>
         <div className="mt-2 flex items-center w-full justify-between pl-5 mb-2 gap-2">
           <div className="flex items-center">
             <span className="font-bold pr-1">Forma:</span>

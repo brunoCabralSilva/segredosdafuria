@@ -369,6 +369,8 @@ export default function MenuDm(props: { sessionId: string }) {
                 { name: "Recursos", advantages: [], flaws: [] },
                 { name: "Pacto Espiritual", advantages: [], flaws: [] },
               ],
+              harano: 0,
+              hauglosk: 0,
               trybe: '',
               auspice: '',
               name: '',
