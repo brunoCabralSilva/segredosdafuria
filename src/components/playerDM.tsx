@@ -794,7 +794,7 @@ export default function PlayersDm(props: any) {
                 ))
           }
         </div>
-        <div>
+        <div className="w-full">
           <div className="mt-3 flex items-center w-full justify-between pl-5">
             <p className="font-bold pr-1 w-full text-left mt-3">Vantagens</p>
             <FaEdit className="text-2xl cursor-pointer" />
