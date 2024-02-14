@@ -111,7 +111,7 @@ export default function Create() {
                 <FaArrowLeft className="text-3xl text-white" />
               </button>
             </div>
-            <div className="w-full sm:w-2/3 md:w-7/12 overflow-y-auto flex flex-col justify-center items-center mt-2 mb-10">
+            <div className="w-full sm:w-2/3 md:w-7/12 overflow-y-auto flex flex-col justify-center items-center mt-2 mb-10 px-5">
               <div className="w-full text-white text-2xl pb-3 font-bold text-center mt-2">
                 Crie sua Sessão
               </div>
