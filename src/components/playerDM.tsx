@@ -42,6 +42,11 @@ export default function PlayersDm(props: any) {
     props.returnValue();
   };
 
+  const truncateString = (str: string) =>  {
+    if (str.length <= 20) return str;
+    else return str.substring(0, 20) + '...';
+  }
+
   const returnHealth = (player: any) => {
     let hp = 0;
     if (player.data.form === 'Crinos') {
@@ -126,49 +131,53 @@ export default function PlayersDm(props: any) {
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const docRef = userQuerySnapshot.docs[0].ref;
-        if (valueform !== dataUser.data.form) {
-          if (dataUser.data.form === 'Crinos' && dataUser.data.rage 
-          > 0 ) {
-            dataUser.data.rage = 1;
-              await registerMessage({
-                message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
-                user: dataUser.user,
-                email: dataUser.email,
-              }, session);
-              setDataUser({
-                ...dataUser,
-                data: { ...dataUser.data, form: valueform, rage: 1 },
-              });
-          } else {
-            if (valueform === 'Hominídeo' || valueform === 'Lupino') {
-              await registerMessage({
-                message: `Mudou para a forma ${valueform}.`,
-                user: dataUser.user,
-                email: dataUser.email,
-              }, session);
-              setDataUser({ ...dataUser, data: { ...dataUser.data, form: valueform }});
-            } else {
-              if ( dataUser.data.rage <= 0) {
+        const docSnapshot = await getDoc(docRef);
+        if (docSnapshot.exists()) {
+          const players = docSnapshot.data().players;
+          console.log(players);
+          if (valueform !== dataUser.data.form) {
+            if (dataUser.data.form === 'Crinos' && dataUser.data.rage 
+            > 0 ) {
+              dataUser.data.rage = 1;
                 await registerMessage({
-                  message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
+                  message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
                   user: dataUser.user,
                   email: dataUser.email,
                 }, session);
-                setValueForm(dataUser.data.form);
-              } else if (valueform === 'Glabro' || valueform === 'Hispo') {
-                await returnRageCheckForOthers(1, valueform, session, dataUser, setDataUser);
+                setDataUser({
+                  ...dataUser,
+                  data: { ...dataUser.data, form: valueform, rage: 1 },
+                });
+            } else {
+              if (valueform === 'Hominídeo' || valueform === 'Lupino') {
+                await registerMessage({
+                  message: `Mudou para a forma ${valueform}.`,
+                  user: dataUser.user,
+                  email: dataUser.email,
+                }, session);
                 setDataUser({ ...dataUser, data: { ...dataUser.data, form: valueform }});
               } else {
-                await returnRageCheckForOthers(2, valueform, session, dataUser, setDataUser);
-                setDataUser({ ...dataUser, data: { ...dataUser.data, form: valueform }});
+                if ( dataUser.data.rage <= 0) {
+                  await registerMessage({
+                    message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
+                    user: dataUser.user,
+                    email: dataUser.email,
+                  }, session);
+                  setValueForm(dataUser.data.form);
+                } else if (valueform === 'Glabro' || valueform === 'Hispo') {
+                  await returnRageCheckForOthers(1, valueform, session, dataUser, setDataUser);
+                  setDataUser({ ...dataUser, data: { ...dataUser.data, form: valueform }});
+                } else {
+                  await returnRageCheckForOthers(2, valueform, session, dataUser, setDataUser);
+                  setDataUser({ ...dataUser, data: { ...dataUser.data, form: valueform }});
+                }
               }
             }
+            const playersFiltered = players.filter((gp: any) => gp.email !== dataUser.email);
+            await updateDoc(docRef, { players: [...playersFiltered, { ...dataUser, data: { ...dataUser.data, form: valueform }}] });
+            dispatch(actionForm(valueform));
+            returnValue();
           }
-          const players: any = [];
-          const playersFiltered = players.filter((gp: any) => gp.email !== dataUser.email);
-          await updateDoc(docRef, { players: [...playersFiltered, { ...dataUser, data: { ...dataUser.data, form: valueform }}] });
-          dispatch(actionForm(valueform));
-          returnValue();
         }
       }
     } catch (error) {
@@ -263,7 +272,7 @@ export default function PlayersDm(props: any) {
         >
           <span className="w-full">
             { 
-              dataUser.user && `${dataUser.user} (${dataUser.data.name === '' ? 'Sem nome': dataUser.data.name})`
+              dataUser.user && `${truncateString(dataUser .user)} (${dataUser.data.name === '' ? 'Sem nome': truncateString(dataUser.data.name)})`
             }
           </span>
           <button
@@ -730,7 +739,7 @@ export default function PlayersDm(props: any) {
                     />
                     <input
                       type="text"
-                      placeholder="Especialidade"
+                      placeholder="Especialização"
                       onChange={ (e: any) => {
                         let valueSkill = e.target.value;
                         setDataUser({
