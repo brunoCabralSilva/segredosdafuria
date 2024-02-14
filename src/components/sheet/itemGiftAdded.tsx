@@ -13,6 +13,7 @@ import firebaseConfig from "@/firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
 import PopupRollGift from "./popup/popupRollGift";
+import { GiD10 } from "react-icons/gi";
 
 export default function ItemGiftAdded(props: any) {
   const slice = useAppSelector(useSlice);
@@ -160,7 +161,7 @@ export default function ItemGiftAdded(props: any) {
               gift: { session: props.session, data: dataGift },
             }))}
           >
-            <FaDiceD20 className="text-2xl text-white" />
+            <GiD10 className="text-2xl text-white" />
           </button>
           <button
             type="button"

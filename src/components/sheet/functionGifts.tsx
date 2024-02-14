@@ -255,6 +255,7 @@ export const reduceFdv = async (session: string, agravatedValue: boolean): Promi
         const docRef = userQuerySnapshot.docs[0].ref;
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
+        return true;
       } else {
         const resolveComposure = player.data.attributes.resolve + player.data.attributes.composure;
         const agravated = player.data.willpower.filter((fdv: any) => fdv.agravated === true).map((fd: any) => fd.value);
