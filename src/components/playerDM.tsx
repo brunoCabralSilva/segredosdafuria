@@ -747,7 +747,7 @@ export default function PlayersDm(props: any) {
                 );
               } else {
                 return(
-                  <h1 className="capitalize text-center">
+                  <h1 className="capitalize text-center" key={index}>
                     <p className="text-left">{chave}</p>
                     <input
                       type="text"
