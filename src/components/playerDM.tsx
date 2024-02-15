@@ -738,7 +738,7 @@ export default function PlayersDm(props: any) {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full pl-5 pt-2 gap-2">
           {
-            Object.entries(dataUser.data.attributes).map(([chave, valor]: any, index) => {
+            Object.entries(dataUser.data.attributes).map(([chave, valor]: any, index: number) => {
               if(!editAttributes) {
                 return (
                   <div className="capitalize text-left" key={index}>
@@ -802,7 +802,7 @@ export default function PlayersDm(props: any) {
                 }
               } else {
                 return(
-                  <h1 className="capitalize text-center">
+                  <h1 className="capitalize text-center" key={index}>
                     <p className="text-left">{chave}</p>
                     <input
                       type="text"
