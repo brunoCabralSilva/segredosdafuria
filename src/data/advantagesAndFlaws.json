@@ -134,15 +134,15 @@
     "flaws": [
       {
         "cost": 1,
-        "title": "Dependência Desesperada",
-        "type": "checkbox",
-        "description": "Dependência Desesperada - Perde dois dados de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto paradas para ações que obtenham sua droga imediatamente."
+        "title": "Vício",
+        "type": "radio",
+        "description": "Vício - Perde um dado de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto as paradas de ações que obtenham sua droga imediatamente."
       },
       {
         "cost": 2,
-        "title": "Vício",
-        "type": "checkbox",
-        "description": "Vício - Perde um dado de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto as paradas de ações que obtenham sua droga imediatamente."
+        "title": "Vício Desesperado",
+        "type": "radio",
+        "description": "Vício Desesperado - Perde dois dados de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto paradas para ações que obtenham sua droga imediatamente."
       }
     ]
   },
