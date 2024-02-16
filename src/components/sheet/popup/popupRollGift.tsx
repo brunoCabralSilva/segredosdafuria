@@ -73,9 +73,12 @@ export default function PopupRollGift() {
               Parada de Dados: { slice.showPopupGiftRoll.gift.data.pool }
             </p>
           }
-          <p className="font-normal text-white w-full pb-3">
-            Duração: { slice.showPopupGiftRoll.gift.data.duration }
-          </p>
+          {
+            slice.showPopupGiftRoll.gift.data.duration !== '' &&
+            <p className="font-normal text-white w-full pb-3">
+              Duração: { slice.showPopupGiftRoll.gift.data.duration }
+            </p>
+          }
         </label>
       </div>
       <MechanicGift

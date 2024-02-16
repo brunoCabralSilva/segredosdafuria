@@ -9,36 +9,30 @@ export const returnValue = async (
   sklSelected: string,
   renSelected: string,
   session: string,
-): Promise<IDataValues | null> => {
+  email: string,
+): Promise<any> => {
   const db = getFirestore(firebaseConfig);
-  const authData: { email: string, name: string } | null = await authenticate();
-  if (authData && authData.email && authData.name) {
-    try {
-      const { email } = authData;
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const players: any = [];
-      userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-      const player: any = players.find((gp: any) => gp.email === email);
-      let renown = 0;
-      let skill = 0;
-      let atr = 0;
-      if (atrSelected !== '') atr = player.data.attributes[atrSelected];
-      if (renSelected !== '') renown = player.data[renSelected];
-      if (sklSelected !== '') skill = player.data.skills[sklSelected].value;
-      return {
-        renown: renown,
-        rage: player.data.rage,
-        skill: skill,
-        attribute: atr,
-      } 
-    } catch (error) {
-      window.alert('Erro ao obter valor do atributo: ' + error);
-    }
-  } else {
-    window.alert('Nenhum documento de usuário encontrado com o email fornecido.');
-    return null;
-  } return null;
+  try {
+    const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
+    const userQuerySnapshot = await getDocs(userQuery);
+    const players: any = [];
+    userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+    const player: any = players.find((gp: any) => gp.email === email);
+    let renown = 0;
+    let skill = 0;
+    let atr = 0;
+    if (atrSelected !== '') atr = player.data.attributes[atrSelected];
+    if (renSelected !== '') renown = player.data[renSelected];
+    if (sklSelected !== '') skill = player.data.skills[sklSelected].value;
+    return {
+      renown: renown,
+      rage: player.data.rage,
+      skill: skill,
+      attribute: atr,
+    } 
+  } catch (error) {
+    window.alert('Erro ao obter valor do atributo: ' + error);
+  }
 };
 
 export const returnRageCheckForOthers = async (rageCheck: number, type: string, session: string, dataUser: any, setDataUser: any ) => {
@@ -138,35 +132,35 @@ export const registerRoll = async (
   renSelected: string,
   session: string,
 ) => {
-  const dtSheet: IDataValues | null = await returnValue(atrSelected, sklSelected, renSelected, session);
-  if (dtSheet) {
-    let rage = dtSheet.rage;
-    let resultOfRage = [];
-    let resultOf = [];
-    let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
-    if (dices > 0) {
-      if (dices - dtSheet.rage === 0) dices = 0;
-      else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
-      else {
-        rage = dices;
-        dices = 0;
-      };
+  const authData: { email: string, name: string } | null = await authenticate();
+  if (authData && authData.email && authData.name) {
+    const { email, name } = authData;
+    const dtSheet: IDataValues | null = await returnValue(atrSelected, sklSelected, renSelected, session, email);
+    if (dtSheet) {
+      let rage = dtSheet.rage;
+      let resultOfRage = [];
+      let resultOf = [];
+      let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
+      if (dices > 0) {
+        if (dices - dtSheet.rage === 0) dices = 0;
+        else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
+        else {
+          rage = dices;
+          dices = 0;
+        };
 
-      for (let i = 0; i < rage; i += 1) {
-        const value = Math.floor(Math.random() * 10) + 1;
-        resultOfRage.push(value);
-      }
-  
-      for (let i = 0; i < dices; i += 1) {
-        const value = Math.floor(Math.random() * 10) + 1;
-        resultOf.push(value);
-      }
-    }
-    const authData: { email: string, name: string } | null = await authenticate();
+        for (let i = 0; i < rage; i += 1) {
+          const value = Math.floor(Math.random() * 10) + 1;
+          resultOfRage.push(value);
+        }
     
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
+        for (let i = 0; i < dices; i += 1) {
+          const value = Math.floor(Math.random() * 10) + 1;
+          resultOf.push(value);
+        }
+      }
+      
+      try {
         if (dices + rage >= dificulty) {
           await registerMessage({
             message: {
@@ -185,6 +179,66 @@ export const registerRoll = async (
             email: email,
           }, session);
         }
+      } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
+      }
+    }
+  }
+};
+
+export const registerRollForOthers = async (
+  dificulty: number,
+  penaltyOrBonus: number,
+  atrSelected: string,
+  sklSelected: string,
+  renSelected: string,
+  session: string,
+  name: string,
+  email: string,
+) => {
+  const dtSheet: IDataValues | null = await returnValue(atrSelected, sklSelected, renSelected, session, email);
+  if (dtSheet) {
+    let rage = Number(dtSheet.rage);
+    let resultOfRage = [];
+    let resultOf = [];
+    let dices = dtSheet.attribute + Number(dtSheet.renown) + dtSheet.skill + Number(penaltyOrBonus);
+    if (dices > 0) {
+      if (dices - Number(dtSheet.rage) === 0) dices = 0;
+      else if (dices - Number(dtSheet.rage) > 0) dices = dices - Number(dtSheet.rage);
+      else {
+        rage = dices;
+        dices = 0;
+      };
+
+      for (let i = 0; i < rage; i += 1) {
+        const value = Math.floor(Math.random() * 10) + 1;
+        resultOfRage.push(value);
+      }
+  
+      for (let i = 0; i < dices; i += 1) {
+        const value = Math.floor(Math.random() * 10) + 1;
+        resultOf.push(value);
+      }
+    }
+    
+    try {
+      if (dices + rage >= dificulty) {
+        await registerMessage({
+          message: {
+            rollOfMargin: resultOf,
+            rollOfRage: resultOfRage,
+            dificulty,
+            penaltyOrBonus,
+          },
+          user: name,
+          email: email,
+        }, session) 
+      } else {
+        await registerMessage({
+          message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${resultOf.length + resultOfRage.length + penaltyOrBonus } dados para um Teste de Dificuldade ${dificulty}).`,
+          user: name,
+          email: email,
+        }, session);
       }
     } catch (error) {
     window.alert('Erro ao obter valor da Forma: ' + error);
