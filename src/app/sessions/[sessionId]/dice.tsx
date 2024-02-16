@@ -22,5 +22,5 @@ export default function Dice(props: { dice: number, type: string }) {
         className="w-10 sm:w-14"
       />
     </div>
-    );
+  );
 }

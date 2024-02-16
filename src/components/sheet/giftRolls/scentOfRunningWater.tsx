@@ -5,8 +5,6 @@ import { reduceFdv } from "../functionGifts";
 import { sendMessage } from "@/firebase/chatbot";
 
 export default function ScentOfRunningWater() {
-  const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
-  const [dificulty, setDificulty] = useState<number>(3);
   const [reflex, setReflexa] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
@@ -60,8 +58,8 @@ export default function ScentOfRunningWater() {
         <button
           type="button"
           onClick={ rollDiceCatFeet }
-          disabled={reflex && dificulty === 0}
-          className={`text-white ${dificulty === 0 ? 'bg-gray-600' : 'bg-green-whats'} hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
+          disabled={reflex}
+          className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >
           Utilizar Dom
         </button>

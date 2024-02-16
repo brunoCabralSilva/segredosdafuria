@@ -93,7 +93,7 @@
   {
     "name": "Aparência",
     "type": "méritos",
-    "description": "Não todos os lobisomens têm o glamour de um modelo de capa ou um ator icônico. Alguns deles parecem ainda melhores. E alguns, é claro, parecem muito piores. Modificadores de Aparência se aplicam apenas quando você pode ser visto. O Narrador decide se esses modificadores se aplicam durante conflitos Sociais caso a caso (ou até mesmo em cada pool).",
+    "description": "Nem todos os lobisomens têm o glamour de um modelo de capa ou um ator icônico. Alguns deles parecem ainda melhores. E alguns, é claro, parecem muito piores. Modificadores de Aparência se aplicam apenas quando você pode ser visto. O Narrador decide se esses modificadores se aplicam durante conflitos Sociais caso a caso (ou até mesmo em cada teste).",
     "advantages": [
       {
         "cost": 1,
@@ -103,26 +103,46 @@
       {
         "cost": 2,
         "type": "radio",
-        "description": "Bonito(a) - Você adiciona um dado extra a todos os pools de dados Sociais apropriados."
+        "description": "Bonito(a) - Você adiciona um dado extra a todos os testes Sociais apropriados."
       },
       {
         "cost": 4,
         "type": "radio",
-        "description": "Deslumbrante - Você adiciona dois dados extras a todos os pools de dados Sociais apropriados, como mencionado acima."
+        "description": "Deslumbrante - Você adiciona dois dados extras a todos os testes Sociais apropriados, como mencionado acima."
       }
     ],
     "flaws": [
       {
-        "cost": 2,
-        "title": "Repulsivo(a)",
-        "type": "radio",
-        "description": "Você perde dois dados de todos os pools de dados Sociais relevantes."
-      },
-      {
         "cost": 1,
         "title": "Feio(a)",
         "type": "radio",
-        "description": "Você perde um dado de todos os pools de dados Sociais relevantes."
+        "description": "Feio(a) - Você perde um dado de todos os testes Sociais relevantes."
+      },
+      {
+        "cost": 2,
+        "title": "Repulsivo(a)",
+        "type": "radio",
+        "description": "Repulsivo(a) - Você perde dois dados de todos os testes Sociais relevantes."
+      }
+    ]
+  },
+  {
+    "name": "Abuso de Substâncias",
+    "type": "méritos",
+    "description": "Não todos os lobisomens têm o glamour de um modelo de capa ou um ator icônico. Alguns deles parecem ainda melhores. E alguns, é claro, parecem muito piores. Modificadores de Aparência se aplicam apenas quando você pode ser visto. O Narrador decide se esses modificadores se aplicam durante conflitos Sociais caso a caso (ou até mesmo em cada rolagem).",
+    "advantages": [],
+    "flaws": [
+      {
+        "cost": 1,
+        "title": "Dependência Desesperada",
+        "type": "checkbox",
+        "description": "Dependência Desesperada - Perde dois dados de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto paradas para ações que obtenham sua droga imediatamente."
+      },
+      {
+        "cost": 2,
+        "title": "Vício",
+        "type": "checkbox",
+        "description": "Vício - Perde um dado de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto as paradas de ações que obtenham sua droga imediatamente."
       }
     ]
   },
@@ -139,7 +159,7 @@
       {
         "cost": 2,
         "type": "checkbox",
-        "description": "Refúgio Seguro e Protegido - Adicione 2 dados aos pools relevantes para descobrir ou resistir à entrada não autorizada em seu Refúgio Seguro."
+        "description": "Refúgio Seguro e Protegido - Adicione 2 dados aos testes relevantes para descobrir ou resistir à entrada não autorizada em seu Refúgio Seguro."
       }
     ],
     "flaws": []
@@ -233,12 +253,25 @@
         "description": "Indivíduo superlativo, um indivíduo talentoso potencialmente com poderes sobrenaturais, ou um grupo bem armado de indivíduos talentosos (equipe de segurança privada, grupo de advogados, equipe de atletas treinados)"
       }
     ],
-    "flaws": []
+    "flaws": [
+      {
+        "title": "Inimigo",
+        "cost": 1,
+        "type": "radio",
+        "description": "Inimigo (1) - Todos os inimigos são classificados com dois pontos a menos que sua Eficácia. Por exemplo, um indivíduo dotado com três pontos como aliado fornece apenas um ponto como defeito."
+      },
+      {
+        "title": "Inimigo",
+        "cost": 2,
+        "type": "radio",
+        "description": "Inimigo (2) - Todos os inimigos são classificados com dois pontos a menos que sua Eficácia. Por exemplo, um indivíduo dotado com três pontos como aliado mas fornece apenas um ponto como defeito."
+      }
+    ]
   },
   {
     "name": "Aliados - Confiabilidade",
     "type": "background",
-    "description": "Caso não invista nenhum ponto neste item, o aliado pode ser chamado à vontade, mas ajudará apenas quando estiver nas proximidades.",
+    "description": "(Requer Aliados Efetividade em pelo menos 1) - Caso não invista nenhum ponto neste item, o aliado pode ser chamado à vontade, mas ajudará apenas quando estiver nas proximidades.",
     "advantages": [
       {
         "cost": 1,
@@ -261,7 +294,7 @@
         "title": "Stalker",
         "cost": 1,
         "type": "radio",
-        "description": "Você tem uma tendência a atrair pessoas que ficam um pouco obcecadas por você para o seu próprio bem. Um Perseguidor abriga sentimentos não saudáveis por você e deseja um relacionamento mais substancial, quer você concorde ou não. Eles podem estar com ciúmes, enlouquecidos pelo amor, desesperados, oportunistas, ou qualquer combinação ou variação disso. Se você se livrar deles, outro logo aparece."
+        "description": "Perseguidor - Você tem uma tendência a atrair pessoas que ficam um pouco obcecadas por você para o seu próprio bem. Um Perseguidor abriga sentimentos não saudáveis por você e deseja um relacionamento mais substancial, quer você concorde ou não. Eles podem estar com ciúmes, enlouquecidos pelo amor, desesperados, oportunistas, ou qualquer combinação ou variação disso. Se você se livrar deles, outro logo aparece."
       }
     ]
   },
@@ -411,17 +444,17 @@
       {
         "cost": 1,
         "type": "radio",
-        "description": "Novato - Garou de Renome 3 / Jaggling respeitado."
+        "description": "Adversário Novato - Garou de Renome 3 / Jaggling respeitado."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "description": "Adversário Veterano - Garou de Renome 4 / Jaggling honrado."
       },
       {
         "cost": 3,
         "type": "radio",
-        "description": "Veterano - Garou de Renome 4 / Jaggling honrado."
-      },
-      {
-        "cost": 5,
-        "type": "radio",
-        "description": "Ancião - Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmático, agindo contra seu nome de maneiras que precisam ser interpretadas."
+        "description": "Adversário Ancião - Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmático, agindo contra seu nome de maneiras que precisam ser interpretadas."
       }
     ]
   },
@@ -495,21 +528,21 @@
         "description": "Espírito / Jagling moderado."
       },
       {
-        "cost": 1,
-        "type": "radio",
+        "cost": 2,
+        "type": "checkbox",
         "description": "Companheiro - O espírito pode acompanhá-lo onde quer que você vá, desde que não encontre barreiras espirituais ou outras contramedidas aplicáveis. A comunicação com ele é restrita à Umbra ou ao acessar os Espíritos Selvagens através do uso dos Sentidos Penumbrais."
       },
       {
         "cost": 1,
-        "type": "radio",
-        "description": "Hospedeiro - O espírito possui um corpo hospedeiro persistente, como um animal, ou a capacidade de possuir outro tipo de característica recorrente, como árvores ou monitores. Isso permite que ele interaja com você e qualquer outra pessoa no mundo físico."
+        "type": "checkbox",
+        "description": "Hospedeiro(Requer Pacto Espiritual pelo menos em 1) - O espírito possui um corpo hospedeiro persistente, como um animal, ou a capacidade de possuir outro tipo de característica recorrente, como árvores ou monitores. Isso permite que ele interaja com você e qualquer outra pessoa no mundo físico."
       }
     ],
     "flaws": [
       {
         "cost": 1,
         "type": "radio",
-        "description": "Condição de Pacto - Seu pacto depende de você realizar ou evitar certos atos em troca do serviço, como um espírito do fogo exigindo que você acenda uma vela em cada edifício que você entrar. Não cumprir essa condição irrita o espírito, e ele não será considerado um aliado até que uma penitência adequada seja feita, conforme decidido pelo Narrador."
+        "description": "Condição de Pacto(Requer Pacto Espiritual pelo menos em 1) - Seu pacto depende de você realizar ou evitar certos atos em troca do serviço, como um espírito do fogo exigindo que você acenda uma vela em cada edifício que você entrar. Não cumprir essa condição irrita o espírito, e ele não será considerado um aliado até que uma penitência adequada seja feita, conforme decidido pelo Narrador."
       }
     ]
   }

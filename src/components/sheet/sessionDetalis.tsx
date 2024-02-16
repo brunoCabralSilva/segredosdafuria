@@ -4,8 +4,7 @@ import { collection, doc, getDoc, getDocs, getFirestore } from "firebase/firesto
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function SessionDetails(props: { session: string }) {
-  const { session } = props;
+export default function SessionDetails() {
   const [players, setPlayers] = useState<any[]>([]);
   const [nameSession, setNameSession] = useState('');
   const [creationDate, setCreationDate] = useState('');

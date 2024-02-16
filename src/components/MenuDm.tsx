@@ -18,6 +18,7 @@ import PlayersDm from "./playerDM";
 import { authenticate, signIn } from "@/firebase/login";
 import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 import PopupCreateSheet from "./sheet/popup/popupCreateSheet";
+import { sheetStructure } from "./sheet/sheet";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;
@@ -137,85 +138,7 @@ export default function MenuDm(props: { sessionId: string }) {
               const findDmInPlayers = sessionDocSnapshot.data().players.find((player: any) => player.email === sessionDocSnapshot.data().dm);
               if(!findDmInPlayers) {
                 const dateMessage = await getHoraOficialBrasil();
-                const sheet = {
-                  email: email,
-                  user: name,
-                  creationDate: dateMessage,
-                  data: {
-                    advantagesAndFlaws: [
-                      { name: "Caern", advantages: [], flaws: [] },
-                      { name: "Trabalho Diário", advantages: [], flaws: [] },
-                      { name: "Linguística", advantages: [], flaws: [] },
-                      { name: "Aparência", advantages: [], flaws: [] },
-                      { name: "Refúgio Seguro", advantages: [], flaws: [] },
-                      { name: "Situações Sobrenaturais", advantages: [], flaws: [] },
-                      { name: "Aliados - Efetividade", advantages: [], flaws: [] },
-                      { name: "Aliados - Confiabilidade", advantages: [], flaws: [] },
-                      { name: "Contatos", advantages: [], flaws: [] },
-                      { name: "Fama", advantages: [], flaws: [] },
-                      { name: "Máscara", advantages: [], flaws: [] },
-                      { name: "Mentor", advantages: [], flaws: [] },
-                      { name: "Recursos", advantages: [], flaws: [] },
-                      { name: "Pacto Espiritual", advantages: [], flaws: [] },
-                    ],
-                    trybe: '',
-                    auspice: '',
-                    name: '',
-                    glory: 0,
-                    honor: 0,
-                    wisdom: 0,
-                    health: [],
-                    rage: 0,
-                    harano: 0,
-                    hauglosk: 0, 
-                    willpower: [],
-                    attributes: {
-                      strength: 1,
-                      dexterity: 1,
-                      stamina: 1,
-                      charisma: 1,
-                      manipulation: 1,
-                      composure: 1,
-                      intelligence: 1,
-                      wits: 1,
-                      resolve: 1,
-                    },
-                    skills: {
-                      athletics: { value: 0, specialty: '' },
-                      animalKen: { value: 0, specialty: '' },
-                      academics: { value: 0, specialty: '' },
-                      brawl: { value: 0, specialty: '' },
-                      etiquette: { value: 0, specialty: '' },
-                      awareness: { value: 0, specialty: '' },
-                      craft: { value: 0, specialty: '' },
-                      insight: { value: 0, specialty: '' },
-                      finance: { value: 0, specialty: '' },
-                      driving: { value: 0, specialty: '' },
-                      intimidation: { value: 0, specialty: '' },
-                      investigation: { value: 0, specialty: '' },
-                      firearms: { value: 0, specialty: '' },
-                      leadership: { value: 0, specialty: '' },
-                      medicine: { value: 0, specialty: '' },
-                      larceny: { value: 0, specialty: '' },
-                      performance: { value: 0, specialty: '' },
-                      occult: { value: 0, specialty: '' },
-                      melee: { value: 0, specialty: '' },
-                      persuasion: { value: 0, specialty: '' },
-                      politics: { value: 0, specialty: '' },
-                      stealth: { value: 0, specialty: '' },
-                      streetwise: { value: 0, specialty: '' },
-                      science: { value: 0, specialty: '' },
-                      survival: { value: 0, specialty: '' },
-                      subterfuge: { value: 0, specialty: '' },
-                      technology: { value: 0, specialty: '' },
-                    },
-                    gifts: [],
-                    rituals: [],
-                    form: 'Hominídeo',
-                    background: '',
-                    notes: '',
-                  },
-                };
+                const sheet = sheetStructure(email, name, dateMessage);
                 await updateDoc(sessionDocRef, {
                   dm: dm.toLowerCase(),
                   players: arrayUnion(sheet),
@@ -348,85 +271,7 @@ export default function MenuDm(props: { sessionId: string }) {
         const findByEmail = sessionDocSnapshot.data().players.find((user: any) => user.email === list.email);
         if(!findByEmail) {
           const dateMessage = await getHoraOficialBrasil();
-          const sheet = {
-            email: list.email,
-            user: list.user,
-            creationDate: dateMessage,
-            data: {
-              advantagesAndFlaws: [
-                { name: "Caern", advantages: [], flaws: [] },
-                { name: "Trabalho Diário", advantages: [], flaws: [] },
-                { name: "Linguística", advantages: [], flaws: [] },
-                { name: "Aparência", advantages: [], flaws: [] },
-                { name: "Refúgio Seguro", advantages: [], flaws: [] },
-                { name: "Situações Sobrenaturais", advantages: [], flaws: [] },
-                { name: "Aliados - Efetividade", advantages: [], flaws: [] },
-                { name: "Aliados - Confiabilidade", advantages: [], flaws: [] },
-                { name: "Contatos", advantages: [], flaws: [] },
-                { name: "Fama", advantages: [], flaws: [] },
-                { name: "Máscara", advantages: [], flaws: [] },
-                { name: "Mentor", advantages: [], flaws: [] },
-                { name: "Recursos", advantages: [], flaws: [] },
-                { name: "Pacto Espiritual", advantages: [], flaws: [] },
-              ],
-              harano: 0,
-              hauglosk: 0,
-              trybe: '',
-              auspice: '',
-              name: '',
-              glory: 0,
-              honor: 0,
-              wisdom: 0,
-              health: [],
-              rage: 0,
-              willpower: [],
-              attributes: {
-                strength: 1,
-                dexterity: 1,
-                stamina: 1,
-                charisma: 1,
-                manipulation: 1,
-                composure: 1,
-                intelligence: 1,
-                wits: 1,
-                resolve: 1,
-              },
-              skills: {
-                athletics: { value: 0, specialty: '' },
-                animalKen: { value: 0, specialty: '' },
-                academics: { value: 0, specialty: '' },
-                brawl: { value: 0, specialty: '' },
-                etiquette: { value: 0, specialty: '' },
-                awareness: { value: 0, specialty: '' },
-                craft: { value: 0, specialty: '' },
-                insight: { value: 0, specialty: '' },
-                finance: { value: 0, specialty: '' },
-                driving: { value: 0, specialty: '' },
-                intimidation: { value: 0, specialty: '' },
-                investigation: { value: 0, specialty: '' },
-                firearms: { value: 0, specialty: '' },
-                leadership: { value: 0, specialty: '' },
-                medicine: { value: 0, specialty: '' },
-                larceny: { value: 0, specialty: '' },
-                performance: { value: 0, specialty: '' },
-                occult: { value: 0, specialty: '' },
-                melee: { value: 0, specialty: '' },
-                persuasion: { value: 0, specialty: '' },
-                politics: { value: 0, specialty: '' },
-                stealth: { value: 0, specialty: '' },
-                streetwise: { value: 0, specialty: '' },
-                science: { value: 0, specialty: '' },
-                survival: { value: 0, specialty: '' },
-                subterfuge: { value: 0, specialty: '' },
-                technology: { value: 0, specialty: '' },
-              },
-              gifts: [],
-              rituals: [],
-              form: 'Hominídeo',
-              background: '',
-              notes: '',
-            },
-          };
+          const sheet = sheetStructure(list.email, list.user, dateMessage);
           const authData: { email: string, name: string } | null = await authenticate();
           await updateDoc(sessionDocSnapshot.ref, {
             players: arrayUnion(sheet)
@@ -612,7 +457,7 @@ export default function MenuDm(props: { sessionId: string }) {
                   {
                     players.filter((player:any) => player.email !== dm ).map((item: any, index: number) => (
                       <span className="capitalize" key={index}>
-                        { index === players.length -2 ? item.user + '.' : item.user + ', ' }
+                        { index === players.length -1 ? item.user + '.' : item.user + ', ' }
                       </span>
                     ))
                   }

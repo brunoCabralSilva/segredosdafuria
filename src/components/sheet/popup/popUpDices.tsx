@@ -10,8 +10,8 @@ import firebaseConfig from "@/firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
 
-export default function PopUpDices(props: { session: string }) {
-  const { session } = props;
+export default function PopUpDices(props: { session: string, type: string }) {
+  const { session, type } = props;
   const [optionRadio, setOptionRadio] = useState<string>('automated');
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -52,21 +52,21 @@ export default function PopUpDices(props: { session: string }) {
       </div>
       <div className="pb-8 grid grid-cols-2 w-full">
         <button
-            type="button"
-            onClick={() => setOptionRadio('automated')}
-            className={`text-sm sm:text-base w-full ${ optionRadio === 'automated' ? 'text-white bg-black border-2 border-white' : 'text-black bg-gray-400 border-2 border-black'} p-2 text-center`}>
-            Teste Automatizado
-          </button>
-          <button
-            type="button"
-            onClick={() => setOptionRadio('manual')}
-            className={`text-sm sm:text-base w-full ${ optionRadio === 'manual' ? 'text-white bg-black border-2 border-white' : 'text-black bg-gray-400 border-2 border-black'} p-2 text-center`}>
-            Teste Manual
-          </button>
-        </div>
+          type="button"
+          onClick={() => setOptionRadio('automated')}
+          className={`text-sm sm:text-base w-full ${ optionRadio === 'automated' ? 'text-white bg-black border-2 border-white' : 'text-black bg-gray-400 border-2 border-black'} p-2 text-center`}>
+          Teste Automatizado
+        </button>
+        <button
+          type="button"
+          onClick={() => setOptionRadio('manual')}
+          className={`text-sm sm:text-base w-full ${ optionRadio === 'manual' ? 'text-white bg-black border-2 border-white' : 'text-black bg-gray-400 border-2 border-black'} p-2 text-center`}>
+          Teste Manual
+        </button>
+      </div>
       {
         optionRadio === 'automated'
-        ? <AutomatedRoll session={ session } />
+        ? <AutomatedRoll session={ session } type={type} />
         : <ManualRoll session={ session } />
       }
     </div>

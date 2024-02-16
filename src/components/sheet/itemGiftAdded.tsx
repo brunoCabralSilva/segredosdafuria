@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Feedback from "../feedback";
 import { MdDelete } from "react-icons/md";
 import { IoArrowUpCircleSharp } from "react-icons/io5";
-import { FaDiceD20 } from "react-icons/fa";
 import firebaseConfig from "@/firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";

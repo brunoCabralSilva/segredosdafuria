@@ -310,6 +310,8 @@ export default function PlayersDm(props: any) {
                 setEditSkills(false);
                 setEditGifts(false);
                 setEditRituals(false);
+                setEditHarano(false);
+                setEditHauglosk(false);
               }}
             >
               <IoArrowUpCircleSharp className="text-3xl text-white" />
@@ -585,7 +587,7 @@ export default function PlayersDm(props: any) {
                   }}
                 >
                   <option disabled value="">Escolha um valor de Hauglosk</option>
-                  <option value={1}>0</option>
+                  <option value={0}>0</option>
                   <option value={1}>1</option>
                   <option value={2}>2</option>
                   <option value={3}>3</option>

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
-import { reduceFdv, verifyRage } from "../functionGifts";
+import { verifyRage } from "../functionGifts";
 import { sendMessage } from "@/firebase/chatbot";
 import { returnRageCheck } from "@/firebase/checks";
 

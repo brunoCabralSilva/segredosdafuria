@@ -1,26 +1,60 @@
 'use client'
 import { useAppDispatch } from "@/redux/hooks";
 import { actionShowMenuSession } from "@/redux/slice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import dataSheet from '../../data/sheet.json';
 import { registerRoll } from "@/firebase/checks";
 
-export default function AutomatedRoll(props: { session: string }) {
-  const { session } = props;
+export default function AutomatedRoll(props: { session: string, type: string }) {
+  const { session, type } = props;
   const [atrSelected, setAtrSelected] = useState<string>('');
   const [sklSelected, setSklSelected] = useState<string>('');
   const [renSelected, setRenSelected] = useState<string>('');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
+  const [players, setPlayers] = useState([]);
   const dispatch = useAppDispatch();
 
   const disabledButton = () => {
     return (atrSelected === '' && renSelected === '' && sklSelected === '') || dificulty <= 0;
   }
 
+  useEffect(() => {
+    //escrever aqui o preenchimento dos dados dos jogadores
+  }, []);
+
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+      {
+        type === 'master' && 
+        <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
+        <p className="text-white w-full pb-3">Atributo</p>
+          <select
+            onChange={(e: any) => setAtrSelected(e.target.value)}
+            className="w-full py-3 text-black capitalize cursor-pointer"
+          >
+            <option
+              className="capitalize text-center text-black"
+              disabled selected
+            >
+              Escolha um Jogador
+            </option>
+            {
+              dataSheet.attributes
+                .map((item, index) => (
+                <option
+                  className="capitalize text-center text-black"
+                  key={index}
+                  value={item.value}
+                >
+                  { item.namePtBr }
+                </option>
+              ))
+            }
+          </select>
+      </label>
+      }
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
           <select

@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { reduceFdv, verifyRage } from "../functionGifts";
+import { verifyRage } from "../functionGifts";
 import { registerMessage, sendMessage } from "@/firebase/chatbot";
 import { authenticate } from "@/firebase/login";
 import { returnRageCheck, returnValue } from "@/firebase/checks";

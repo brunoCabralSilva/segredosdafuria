@@ -295,19 +295,10 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
               slice.showMenuSession === 'dices' &&
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
                 {
-                  dm === 'master' &&
-                    <div className="w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-                    <div className="w-full mb-3 flex justify-end">
-                      <IoIosCloseCircleOutline
-                        className="text-4xl text-white cursor-pointer"
-                        onClick={() => dispatch(actionShowMenuSession(''))}
-                      />
-                    </div>
-                    <ManualRoll session={ dataSession.name } />
-                  </div>
+                  dm === 'master' && <PopUpDices session={ dataSession.name } type={dm} />
                 }
                 {
-                  dm === 'player' && <PopUpDices session={ dataSession.name } />
+                  dm === 'player' && <PopUpDices session={ dataSession.name } type={dm} />
                 }
               </div>
             }

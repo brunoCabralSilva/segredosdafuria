@@ -2,10 +2,10 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { reduceFdv, verifyRage } from "../functionGifts";
+import { reduceFdv } from "../functionGifts";
 import { registerMessage, sendMessage } from "@/firebase/chatbot";
 import { authenticate } from "@/firebase/login";
-import { returnRageCheck, returnValue } from "@/firebase/checks";
+import { returnValue } from "@/firebase/checks";
 
 export default function PulseOfThePrey() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
