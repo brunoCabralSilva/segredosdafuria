@@ -1,10 +1,11 @@
 import firebaseConfig from "@/firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
-import { collection, doc, getDoc, getDocs, getFirestore } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function SessionDetails() {
+export default function SessionDetails( props: { session: string }) {
+  const { session } = props;
   const [players, setPlayers] = useState<any[]>([]);
   const [nameSession, setNameSession] = useState('');
   const [creationDate, setCreationDate] = useState('');
@@ -17,23 +18,19 @@ export default function SessionDetails() {
       try {
         const db = getFirestore(firebaseConfig);
         const collectionRef = collection(db, 'sessions');
-          const querySnapshot = await getDocs(collectionRef);
-          const sessionsList = querySnapshot.docs.map((doc: any) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-        const sessionDocRef = doc(collectionRef, sessionsList[0].id);
-        const sessionDocSnapshot = await getDoc(sessionDocRef);
-        const authData: { email: string, name: string } | null = await authenticate();
+        const querySnapshot = await getDocs(query(collectionRef, where('name', '==', session)));
+        
+        if (!querySnapshot.empty) {
+          const sessionDocSnapshot = querySnapshot.docs[0];
+          const authData: { email: string, name: string } | null = await authenticate();
+          
           if (authData && authData.email && authData.name) {
-            if (sessionDocSnapshot.exists()) {
-              const sessionData = sessionDocSnapshot.data();
-              setNameSession(sessionData.name);
-              setCreationDate(sessionData.creationDate);
-              setDescription(sessionData.description);
-              setDm(sessionData.dm);
-              setPlayers(sessionData.players);
-            } else router.push('/sessions');
+            const sessionData = sessionDocSnapshot.data();
+            setNameSession(sessionData.name);
+            setCreationDate(sessionData.creationDate);
+            setDescription(sessionData.description);
+            setDm(sessionData.dm);
+            setPlayers(sessionData.players);
           } else {
             const sign = await signIn();
             if (!sign) {
@@ -41,10 +38,14 @@ export default function SessionDetails() {
               router.push('/');
             }
           }
+        } else {
+          router.push('/sessions');
+        }
       } catch (error) {
         window.alert(`Erro ao obter a lista de jogadores: ` + error);
       }
     };
+    
     returnValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -103,7 +104,7 @@ export default function SessionDetails() {
                     {
                       players.filter((player:any) => player.email !== dm ).map((item: any, index: number) => (
                         <span className="capitalize" key={index}>
-                          { index === players.length -2 ? item.user + '.' : item.user + ', ' }
+                          { index === players.length -1 ? item.user + '.' : item.user + ', ' }
                         </span>
                       ))
                     }
