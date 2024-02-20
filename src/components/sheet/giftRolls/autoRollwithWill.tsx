@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { rollDiceWithRage, rollDiceWithWillpower } from "../functionGifts";
 
@@ -10,6 +10,10 @@ export default function AutoRollwithWill(props: any) {
   const [dificulty, setDificulty] = useState<number>(1);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (props.dificulty) setDificulty(props.dificulty);
+  }, []);
   
   return(
     <div className="w-full">
