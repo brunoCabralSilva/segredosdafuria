@@ -1,25 +1,17 @@
 'use client'
 import { returnRageCheck } from "@/firebase/checks";
-import firebaseConfig from "@/firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
-import { useAppDispatch } from "@/redux/hooks";
-import { actionShowMenuSession } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
+import { IItem } from "@/interface";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionShowMenuSession, useSlice } from "@/redux/slice";
+import { updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
-interface IRage {
-  name: string;
-  namePtBr: string;
-  quant: number;
-  session: string;
-}
-
-export default function Item(props: IRage) {
+export default function Item(props: IItem) {
   const [ valueItem, setValueItem ] = useState<any>([]);
-  const { name, namePtBr, quant, session } = props;
-  const router = useRouter();
+  const { name, namePtBr, quant } = props;
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
 
   useEffect(() => {
     returnValue();
@@ -27,56 +19,25 @@ export default function Item(props: IRage) {
   }, [])
 
   const returnValue = async (): Promise<void> => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setValueItem(player.data[name]);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`)
-    }
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setValueItem(player.data[name]);
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
   
   const updateValue = async (name: string, value: number) => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        if (player.data[name] === 1 && value === 1) player.data[name] = 0;
-        else player.data[name] = value;
-        const docRef = userQuerySnapshot.docs[0].ref;
-        const playersFiltered = players.filter((gp: any) => gp.email !== email);
-        await updateDoc(docRef, { players: [...playersFiltered, player] });
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert(`Erro ao atualizar valor de ${name}: (' + error + ')`);
-    }
-    returnValue();
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      if (player.data[name] === 1 && value === 1) player.data[name] = 0;
+      else player.data[name] = value;
+      const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+      await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+      returnValue();
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   const returnPoints = (name: string) => {
@@ -120,7 +81,7 @@ export default function Item(props: IRage) {
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition transition-colors duration-600"
               onClick={ () => {
-                returnRageCheck(1, 'manual', session);
+                returnRageCheck(1, 'manual', slice.sessionId, slice.userData);
                 dispatch(actionShowMenuSession(''))
               }}
             >

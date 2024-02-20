@@ -1,75 +1,14 @@
 'use client'
-import { useAppDispatch } from "@/redux/hooks";
-import { actionDeleteUserFromSession } from "@/redux/slice";
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionDeleteUserFromSession, useSlice } from "@/redux/slice";
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firestoreConfig from '../../../firebase/connection';
-import { authenticate, signIn } from "@/firebase/login";
-import { registerMessage } from "@/firebase/chatbot";
-import firebaseConfig from "../../../firebase/connection";
+import { leaveFromSession } from "@/firebase/sessions";
 
-export default function PopupDelUserFromSession(props: { session : string }) {
-  const { session } = props;
+export default function PopupDelUserFromSession() {
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
   const router = useRouter();
-
-  const removeSession = async () => {
-    const db = getFirestore(firestoreConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
-        const db = getFirestore(firebaseConfig);
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const userDocument = userQuerySnapshot.docs[0];
-        const sessionDocRef = doc(db, 'sessions', userDocument.id);
-        const sessionDocSnapshot = await getDoc(sessionDocRef);
-        if (sessionDocSnapshot.exists()) {
-          const sessionDoc = sessionDocSnapshot.data();
-          const filterListPlayer = sessionDoc.players.filter((player: any) => player.email !== email);
-          if (filterListPlayer.length === 0) {
-            await deleteDoc(sessionDocSnapshot.ref);
-          } else {
-            let oldestPlayer = filterListPlayer[0];
-            for(let i = 0; i <= filterListPlayer.length - 1; i += 1) {
-              if (filterListPlayer[i].creationDate < oldestPlayer.creationDate) {
-                oldestPlayer = filterListPlayer[i];
-              }
-            }
-            const updatedNotifications = [
-              {
-                message: `Olá, tudo bem? O jogador ${name} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
-                type: 'transfer',
-              }
-            ];
-            await updateDoc(sessionDocSnapshot.ref, {
-              players: filterListPlayer,
-              dm: oldestPlayer.email,
-              notifications: updatedNotifications,
-            });
-            await registerMessage({
-              message: `O jogador ${name} saiu definitivamente desta sala.`,
-              user: 'notification',
-              email: email,
-            }, sessionDocSnapshot.data().name);
-          }
-          dispatch(actionDeleteUserFromSession(false));
-          window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
-          router.push('/sessions');
-        } else {
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
-      }
-    } catch(error) {
-      window.alert("Ocorreu um erro: " + error);
-    }
-  };
 
   return(
     <div className="z-50 fixed top-0 left-0 w-full h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0">
@@ -96,7 +35,7 @@ export default function PopupDelUserFromSession(props: { session : string }) {
             </button>
             <button
               type="button"
-              onClick={ removeSession }
+              onClick={ async () => await leaveFromSession(slice, dispatch, router) }
               className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
               Sim

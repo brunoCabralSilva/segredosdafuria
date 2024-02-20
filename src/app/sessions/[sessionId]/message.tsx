@@ -3,9 +3,6 @@ import Dice from "./dice";
 
 export default function Message(props: any) {
   const { rollDices, msn, type } = props;
-  if (msn.roll === 'false') {
-
-  }
   if (type === 'fail') {
     return(
       <div>

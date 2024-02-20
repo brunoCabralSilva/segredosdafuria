@@ -2,9 +2,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { reduceFdv } from "../functionGifts";
-import { registerMessage, sendMessage } from "@/firebase/chatbot";
-import { authenticate } from "@/firebase/login";
+import { rollDiceWithWillpower } from "../functionGifts";
+import { registerMessage } from "@/firebase/chatbot";
 import { returnValue } from "@/firebase/checks";
 
 export default function SightFromBeyond() {
@@ -14,160 +13,63 @@ export default function SightFromBeyond() {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
-  const rollDiceCatFeet = async () => {
+  const rollDice = async () => {
     if (reflex) {
-      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
-      if (willpower) {
-          const dtSheet: any | null = await returnValue('wits', 'survival', '', slice.showPopupGiftRoll.gift.session);
-          if (dtSheet) {
-            let rage = dtSheet.rage;
-            let resultOfRage = [];
-            let resultOf = [];
-            let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
-            if (dices > 0) {
-              if (dices - dtSheet.rage === 0) dices = 0;
-              else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
-              else {
-                rage = dices;
-                dices = 0;
-              };
-        
-              for (let i = 0; i < rage; i += 1) {
-                const value = Math.floor(Math.random() * 10) + 1;
-                resultOfRage.push(value);
-              }
-          
-              for (let i = 0; i < dices; i += 1) {
-                const value = Math.floor(Math.random() * 10) + 1;
-                resultOf.push(value);
-              }
-            }
-            const authData: { email: string, name: string } | null = await authenticate();
-
-            try {
-              if (authData && authData.email && authData.name) {
-                const { email, name } = authData;
-                if (dices + rage >= dificulty) {
-                  await registerMessage({
-                    message: {
-                      rollOfMargin: resultOf,
-                      rollOfRage: resultOfRage,
-                      dificulty,
-                      penaltyOrBonus,
-                      roll: 'true',
-                      gift: slice.showPopupGiftRoll.gift.data.gift,
-                      giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                      cost: slice.showPopupGiftRoll.gift.data.cost,
-                      action: slice.showPopupGiftRoll.gift.data.action,
-                      duration: slice.showPopupGiftRoll.gift.data.duration,
-                      pool: slice.showPopupGiftRoll.gift.data.pool,
-                      system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                  },
-                    user: name,
-                    email: email,
-                  }, slice.showPopupGiftRoll.gift.session);
-                } else {
-                  await registerMessage({
-                    message: {
-                      rollOfMargin: resultOf,
-                      rollOfRage: resultOfRage,
-                      dificulty,
-                      roll: 'true',
-                      penaltyOrBonus,
-                      gift: slice.showPopupGiftRoll.gift.data.gift,
-                      giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                      cost: slice.showPopupGiftRoll.gift.data.cost,
-                      action: slice.showPopupGiftRoll.gift.data.action,
-                      duration: slice.showPopupGiftRoll.gift.data.duration,
-                      pool: slice.showPopupGiftRoll.gift.data.pool,
-                      system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                    },
-                    user: name,
-                    email: email,
-                  }, slice.showPopupGiftRoll.gift.session);
-                }
-              }
-            } catch (error) {
-            window.alert('Erro ao obter valor da Forma: ' + error);
-            }
+      await rollDiceWithWillpower(
+        slice,
+        dispatch,
+        dificulty,
+        'intelligence',
+        '',
+        'wisdom',
+        slice.userData,
+        penaltyOrBonus,
+      );
+    } else {
+      const dtSheet: any | null = await returnValue('intelligence', '', 'wisdom', slice.sessionId, slice.userData.email);
+      if (dtSheet) {
+        let rage = dtSheet.rage;
+        let resultOfRage = [];
+        let resultOf = [];
+        let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
+        if (dices > 0) {
+          if (dices - dtSheet.rage === 0) dices = 0;
+          else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
+          else {
+            rage = dices;
+            dices = 0;
+          };
+    
+          for (let i = 0; i < rage; i += 1) {
+            const value = Math.floor(Math.random() * 10) + 1;
+            resultOfRage.push(value);
           }
-      } else {
-        await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
-      }
-      } else {
-        const dtSheet: any | null = await returnValue('intelligence', '', 'wisdom', slice.showPopupGiftRoll.gift.session);
-        if (dtSheet) {
-          let rage = dtSheet.rage;
-          let resultOfRage = [];
-          let resultOf = [];
-          let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
-          if (dices > 0) {
-            if (dices - dtSheet.rage === 0) dices = 0;
-            else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
-            else {
-              rage = dices;
-              dices = 0;
-            };
       
-            for (let i = 0; i < rage; i += 1) {
-              const value = Math.floor(Math.random() * 10) + 1;
-              resultOfRage.push(value);
-            }
-        
-            for (let i = 0; i < dices; i += 1) {
-              const value = Math.floor(Math.random() * 10) + 1;
-              resultOf.push(value);
-            }
-          }
-          const authData: { email: string, name: string } | null = await authenticate();
-
-          try {
-            if (authData && authData.email && authData.name) {
-              const { email, name } = authData;
-              if (dices + rage >= dificulty) {
-                await registerMessage({
-                  message: {
-                    rollOfMargin: resultOf,
-                    rollOfRage: resultOfRage,
-                    dificulty,
-                    penaltyOrBonus,
-                    roll: 'true',
-                    gift: slice.showPopupGiftRoll.gift.data.gift,
-                    giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                    cost: slice.showPopupGiftRoll.gift.data.cost,
-                    action: slice.showPopupGiftRoll.gift.data.action,
-                    duration: slice.showPopupGiftRoll.gift.data.duration,
-                    pool: slice.showPopupGiftRoll.gift.data.pool,
-                    system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                },
-                  user: name,
-                  email: email,
-                }, slice.showPopupGiftRoll.gift.session);
-              } else {
-                await registerMessage({
-                  message: {
-                    rollOfMargin: resultOf,
-                    rollOfRage: resultOfRage,
-                    dificulty,
-                    roll: 'true',
-                    penaltyOrBonus,
-                    gift: slice.showPopupGiftRoll.gift.data.gift,
-                    giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                    cost: slice.showPopupGiftRoll.gift.data.cost,
-                    action: slice.showPopupGiftRoll.gift.data.action,
-                    duration: slice.showPopupGiftRoll.gift.data.duration,
-                    pool: slice.showPopupGiftRoll.gift.data.pool,
-                    system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                  },
-                  user: name,
-                  email: email,
-                }, slice.showPopupGiftRoll.gift.session);
-              }
-            }
-          } catch (error) {
-          window.alert('Erro ao obter valor da Forma: ' + error);
+          for (let i = 0; i < dices; i += 1) {
+            const value = Math.floor(Math.random() * 10) + 1;
+            resultOf.push(value);
           }
         }
+
+        await registerMessage({
+          message: {
+            rollOfMargin: resultOf,
+            rollOfRage: resultOfRage,
+            dificulty,
+            penaltyOrBonus,
+            roll: 'true',
+            gift: slice.showPopupGiftRoll.gift.data.gift,
+            giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+            cost: slice.showPopupGiftRoll.gift.data.cost,
+            action: slice.showPopupGiftRoll.gift.data.action,
+            duration: slice.showPopupGiftRoll.gift.data.duration,
+            pool: slice.showPopupGiftRoll.gift.data.pool,
+            system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+        },
+          user: slice.userData.name,
+          email: slice.userData.email,
+        }, slice.showPopupGiftRoll.gift.session);
+      }
     }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
@@ -248,7 +150,7 @@ export default function SightFromBeyond() {
       <div className="flex w-full gap-2"> 
         <button
           type="button"
-          onClick={ rollDiceCatFeet }
+          onClick={ rollDice }
           disabled={reflex && dificulty === 0}
           className={`text-white ${dificulty === 0 ? 'bg-gray-600' : 'bg-green-whats'} hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >

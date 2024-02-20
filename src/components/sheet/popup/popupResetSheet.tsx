@@ -1,6 +1,6 @@
 'use client'
-import { useAppDispatch} from "@/redux/hooks";
-import { actionResetSheet } from "@/redux/slice";
+import { useAppDispatch, useAppSelector} from "@/redux/hooks";
+import { actionResetSheet, useSlice } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
@@ -9,9 +9,9 @@ import { useRouter } from "next/navigation";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";
 import { sheetStructure } from "../sheet";
 
-export default function PopupResetSheet(props: { sessionId : string }) {
-  const { sessionId } = props;
+export default function PopupResetSheet() {
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
   const router = useRouter();
 
   const resetSheet = async () => {
@@ -23,7 +23,7 @@ export default function PopupResetSheet(props: { sessionId : string }) {
         const { email, name } = authData;
         const sheet = sheetStructure(email, name, dateMessage);
         const sessionsCollectionRef = collection(db, 'sessions');
-        const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+        const sessionDocRef = doc(sessionsCollectionRef, slice.sessionId);
         const sessionDocSnapshot = await getDoc(sessionDocRef);
         if (sessionDocSnapshot.exists()) {
           const sessionDoc = sessionDocSnapshot.data();

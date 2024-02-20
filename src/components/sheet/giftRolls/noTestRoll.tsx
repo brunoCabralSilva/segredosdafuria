@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
-import { useState } from "react";
 import { sendMessage } from "@/firebase/chatbot";
 
 export default function NoTestRoll() {
@@ -17,7 +16,7 @@ export default function NoTestRoll() {
       duration: slice.showPopupGiftRoll.gift.data.duration,
       pool: 'Nenhuma',
       system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-    }, slice.showPopupGiftRoll.gift.session);
+    }, slice.sessionId, slice.userData);
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
   }

@@ -1,90 +1,85 @@
 'use client'
-import { useAppDispatch } from "@/redux/hooks";
-import { actionLoginInTheSession, actionSessionAuth } from "@/redux/slice";
-import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/slice";
+import { updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import firestoreConfig from '../../firebase/connection';
-import firebaseConfig from "../../firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
+import { getNameAndDmFromSessions } from "@/firebase/sessions";
+import { getNotificationById } from "@/firebase/notifications";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
-export default function SessionAuth(props: { sessionId : string }) {
-  const { sessionId } = props;
+export default function SessionAuth() {
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
   const router = useRouter();
   const [popup, setPopup] = useState('');
   const [name, setName] = useState('');
 
   useEffect(() => {
-    const requestSession = async () => {
-      try {
-        const db = getFirestore(firebaseConfig);
-        const authData: { email: string, name: string } | null = await authenticate();
-        if (authData && authData.email && authData.name) {
-          const { email } = authData;
-          const sessionsCollectionRef = collection(db, 'sessions');
-          const sessionDocRef = doc(sessionsCollectionRef, sessionId);
-          const sessionDocSnapshot = await getDoc(sessionDocRef);
-          if (sessionDocSnapshot.exists()) {
-            const dm = sessionDocSnapshot.data().dm;
-            setName(sessionDocSnapshot.data().name);
-            if (email === dm) {
-              router.push(`/sessions/${sessionId}`);
-              dispatch(actionLoginInTheSession({ id: sessionId, logged: true }));
-            } else {
-              const notifications = sessionDocSnapshot.data().notifications;
-              let authNotification = false;
-              notifications.forEach((notification: { email: string, type: string }) => {
-                if (notification.email === email && notification.type === 'approval') authNotification = true;
-              });
-              if (authNotification) {
-                setPopup('waiting');
-              } else {
-                const sessionNew = sessionDocSnapshot.data();
-                let auth = false;
-                sessionNew.players.forEach((player: { email: string }) => {
-                  if (player.email === email) auth = true;
-                });
-                if (auth) {
-                  router.push(`/sessions/${sessionId}`);
-                  dispatch(actionLoginInTheSession({ id: sessionId, logged: true }));
-                } else setPopup('authorization');
-              }
-            }
-          }
-        } else {
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
-      } catch(error) {
-        window.alert("Ocorreu um erro: " + error);
-      }
-    }
     requestSession();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  
+  const requestSession = async () => {
+    try {
+      const sessionId = slice.sessionAuth.id;
+      const authData: { email: string, name: string } | null = await authenticate();
+      if (authData && authData.email && authData.name) {
+        const { email } = authData;
+        const getData = await getNameAndDmFromSessions(sessionId);
+        if (getData) {
+          setName(getData.name);
+          if (email === getData.dm) {
+            router.push(`/sessions/${sessionId}`);
+            dispatch(actionLoginInTheSession({ id: sessionId, logged: true }));
+          } else {
+            const notifications = getData.notifications;
+            let authNotification = false;
+            notifications.forEach((notification: { email: string, type: string }) => {
+              if (notification.email === email && notification.type === 'approval') authNotification = true;
+            });
+            if (authNotification) {
+              setPopup('waiting');
+            } else {
+              const sessionNew = getData;
+              let auth = false;
+              sessionNew.players.forEach((player: { email: string }) => {
+                if (player.email === email) auth = true;
+              });
+              if (auth) {
+                router.push(`/sessions/${sessionId}`);
+                dispatch(actionLoginInTheSession({ id: sessionId, logged: true }));
+              } else setPopup('authorization');
+            }
+          }
+        }
+      } else {
+        const sign = await signIn();
+        if (!sign) {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
+        }
+      }
+    } catch(error) {
+      window.alert("Ocorreu um erro: " + error);
+    }
+  }
+  
   const capitalize = (string: string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
   const sendNotification = async () => {
     try {
-      const db = getFirestore(firestoreConfig);
       const authData: { email: string, name: string } | null = await authenticate();
       if (authData && authData.email && authData.name) {
         const { email, name } = authData;
-        const sessionsCollectionRef = collection(db, 'sessions');
-        const sessionDocRef = doc(sessionsCollectionRef, sessionId);
-        const sessionDocSnapshot = await getDoc(sessionDocRef);
-        if (sessionDocSnapshot.exists()) {
-          const sessionDoc = sessionDocSnapshot.data();
+        const sessionDocSnapshot = await getNotificationById(slice.sessionAuth.id);
+        if (sessionDocSnapshot) {
+          const sendNot = sessionDocSnapshot.data();
           const updatedNotifications = [
-            ...sessionDoc.notifications,
+            ...sendNot.notifications,
             {
               message: `O Usuário ${capitalize(name)} de email "${email}" solicitou acesso à sua Sessão.`,
               email: email,
@@ -166,7 +161,7 @@ export default function SessionAuth(props: { sessionId : string }) {
           />
         </div>
         <div className="pb-5 px-5 w-full">
-          <h1 className="text-white text-2xl w-full text-center pb-10">{ name }</h1>
+          <h1 className="text-white text-2xl w-full text-center pb-10 capitalize">{ name }</h1>
           { returnNotification() }
         </div>
       </div>

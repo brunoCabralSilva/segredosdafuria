@@ -1,20 +1,20 @@
 'use client'
 import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 import { authenticate, signIn } from "@/firebase/login";
-import { useAppDispatch } from "@/redux/hooks";
-import { actionShowMenuSession } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionShowMenuSession, useSlice } from "@/redux/slice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-export default function ManualRoll(props: { session: string }) {
-  const { session } = props;
+export default function ManualRoll() {
   const [valueOfRage, setValueOfRage] = useState<number>(0);
   const [valueOf, setValueOf] = useState<number>(0);
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
   const router = useRouter();
 
   const registerRoll = async () => {
@@ -52,13 +52,13 @@ export default function ManualRoll(props: { session: string }) {
           user: name,
           email: email,
           date: dateMessage,
-        }, session);
+        }, slice.sessionId);
       } else {
         await registerMessage({
           message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${valueWithPenaltyOfBonus } dados para um Teste de Dificuldade ${dificulty}).`,
           user: name,
           email: email,
-        }, session);
+        }, slice.sessionId);
       }
       setValueOfRage(0);
       setValueOf(0);

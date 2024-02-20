@@ -1,9 +1,8 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
-import { reduceFdv } from "../functionGifts";
+import { rollWillPower } from "../functionGifts";
 import { sendMessage } from "@/firebase/chatbot";
-import { returnRageCheck } from "@/firebase/checks";
 
 export default function Camouflage() {
   const [reflex, setReflexa] = useState(false);
@@ -12,23 +11,8 @@ export default function Camouflage() {
   
   const rollDice = async () => {
     if (reflex) {
-      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
-        if (willpower) {
-          await returnRageCheck(1, 'manual', slice.showPopupGiftRoll.gift.session);
-          await sendMessage({
-            roll: 'false',
-            gift: slice.showPopupGiftRoll.gift.data.gift,
-            giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-            cost: slice.showPopupGiftRoll.gift.data.cost,
-            action: slice.showPopupGiftRoll.gift.data.action,
-            duration: slice.showPopupGiftRoll.gift.data.duration,
-            pool: 'Nenhuma',
-            system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-          }, slice.showPopupGiftRoll.gift.session);
-        } else {
-          await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
-        }
-    } else { 
+      await rollWillPower(slice);
+    } else {
       await sendMessage({
         roll: 'false',
         gift: slice.showPopupGiftRoll.gift.data.gift,
@@ -38,7 +22,9 @@ export default function Camouflage() {
         duration: slice.showPopupGiftRoll.gift.data.duration,
         pool: 'Nenhuma',
         system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-      }, slice.showPopupGiftRoll.gift.session);
+      }, slice.sessionId, slice.userData);
+      dispatch(actionShowMenuSession(''));
+      dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
     }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));

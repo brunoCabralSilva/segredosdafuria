@@ -3,26 +3,15 @@ import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import Simplify from "@/components/simplify";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionInfoSessions, actionSessionAuth, useSlice } from "@/redux/slice";
-import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { actionInfoSessions, actionSaveUserData, actionSessionAuth, useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
 import { IoIosInformationCircle, IoMdAdd } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import SessionAuth from "./sessionAuth";
-import { authenticate, signIn } from "@/firebase/login";
-import firebaseConfig from "@/firebase/connection";
+import { authenticate, signIn, signOutFirebase } from "@/firebase/login";
 import PopupInfo from "@/components/sheet/popup/popupInfo";
-
-interface ISessions {
-  id: string;
-  name: string;
-  description: string;
-  dm: string;
-  creationDate: Date;
-  anotations: string;
-  chat: any[],
-  image: string;
-};
+import { getAllSessions } from "@/firebase/sessions";
+import { ISessions } from "@/interface";
 
 export default function Session() {
   const [sessions, setSessions] = useState<any[]>([]);
@@ -30,29 +19,33 @@ export default function Session() {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [showData, setShowData] = useState(false);
-  const [sessionSelected, setSessionSelected] = useState('');
 
   useEffect(() => {
-    const fetchData = async () => {
+    setShowData(false);
+    const fetchData = async (): Promise<void> => {
       const authData = await authenticate();
       try {
         if (authData && authData.email && authData.name) {
+          dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: false }));
           setShowData(true);
-          const db = getFirestore(firebaseConfig);
-          const collectionRef = collection(db, 'sessions');
-          const querySnapshot = await getDocs(collectionRef);
-          const sessionsList = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
+          const sessionsList = await getAllSessions();
           setSessions(sessionsList);
           setShowData(true);
         } else {
+          await signOutFirebase();
           const sign = await signIn();
-          setShowData(true);
           if (!sign) {
             window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
             router.push('/');
+          } else {
+            const authData = await authenticate();
+            if (authData && authData.email && authData.name) {
+              dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: false }));
+              setShowData(true);
+            } else {
+              window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+              router.push('/');
+            }
           }
         } 
       } catch (error) {
@@ -97,10 +90,9 @@ export default function Session() {
                   onClick={
                     () => {
                       dispatch(actionSessionAuth({ show: true, id: session.id }))
-                      setSessionSelected(session.id);
                     }}
                     key={ index }
-                    className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
+                    className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80 capitalize"
                   >
                     { session.name }
                   </button>
@@ -108,12 +100,12 @@ export default function Session() {
               }
             </div>
           </section>
-          { slice.sessionAuth.show ? <SessionAuth sessionId={ sessionSelected } /> : '' }
           </div>
         : <div className="bg-black/80 text-white h-screen flex items-center justify-center flex-col">
             <span className="loader z-50" />
           </div>
       }
+      { slice.sessionAuth.show ? <SessionAuth /> : '' }
       { slice.popupInfo && <PopupInfo /> }
       <Footer />
     </div>

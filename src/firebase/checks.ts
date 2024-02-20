@@ -1,41 +1,39 @@
 import { IDataValues } from "@/interface";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import firebaseConfig from "./connection";
+import { updateDoc } from "firebase/firestore";
 import { registerMessage } from "./chatbot";
-import { authenticate } from "./login";
+import { getUserAndDataByIdSession, getUserByIdSession } from "./sessions";
 
 export const returnValue = async (
   atrSelected: string,
   sklSelected: string,
   renSelected: string,
-  session: string,
+  sessionId: string,
   email: string,
 ): Promise<any> => {
-  const db = getFirestore(firebaseConfig);
-  try {
-    const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-    const userQuerySnapshot = await getDocs(userQuery);
-    const players: any = [];
-    userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-    const player: any = players.find((gp: any) => gp.email === email);
-    let renown = 0;
-    let skill = 0;
-    let atr = 0;
-    if (atrSelected !== '') atr = player.data.attributes[atrSelected];
-    if (renSelected !== '') renown = player.data[renSelected];
-    if (sklSelected !== '') skill = player.data.skills[sklSelected].value;
-    return {
-      renown: renown,
-      rage: player.data.rage,
-      skill: skill,
-      attribute: atr,
-    } 
-  } catch (error) {
-    window.alert('Erro ao obter valor do atributo: ' + error);
-  }
+    const player = await getUserByIdSession(sessionId, email);
+    if (player) {
+      let renown = 0;
+      let skill = 0;
+      let atr = 0;
+      if (atrSelected !== '') atr = player.data.attributes[atrSelected];
+      if (renSelected !== '') renown = player.data[renSelected];
+      if (sklSelected !== '') skill = player.data.skills[sklSelected].value;
+      return {
+        renown: renown,
+        rage: player.data.rage,
+        skill: skill,
+        attribute: atr,
+      }
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente (Return Value)');
 };
 
-export const returnRageCheckForOthers = async (rageCheck: number, type: string, session: string, dataUser: any, setDataUser: any ) => {
+export const returnRageCheckForOthers = async (
+  rageCheck: number,
+  type: string,
+  sessionId: string,
+  dataUser: any,
+  setDataUser: any,
+) => {
   let resultOfRage = [];
   let success = 0;
   for (let i = 0; i < rageCheck; i += 1) {
@@ -49,7 +47,7 @@ export const returnRageCheckForOthers = async (rageCheck: number, type: string, 
       message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
       user: dataUser.email,
       email: dataUser.user,
-    }, session);
+    }, sessionId);
   } else {
     if (dataUser.data.rage - success < 0) {
       dataUser.data.rage = 0;
@@ -69,11 +67,16 @@ export const returnRageCheckForOthers = async (rageCheck: number, type: string, 
       },
       user: dataUser.user,
       email: dataUser.email,
-    }, session);
+    }, sessionId);
   }
 };
 
-export const returnRageCheck = async (rageCheck: number, type: string, session: string ) => {
+export const returnRageCheck = async (
+  rageCheck: number,
+  type: string,
+  sessionId: string,
+  userData: { email: string, name: string },
+) => {
   let resultOfRage = [];
   let success = 0;
   for (let i = 0; i < rageCheck; i += 1) {
@@ -81,47 +84,37 @@ export const returnRageCheck = async (rageCheck: number, type: string, session: 
     if (value >= 6) success += 1;
     resultOfRage.push(value);
   }
-  const db = getFirestore(firebaseConfig);
-  const authData: { email: string, name: string } | null = await authenticate();
-  if (authData && authData.email && authData.name) {
-    try {
-      const { email, name } = authData;
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const players: any = [];
-      userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-      const player: any = players.find((gp: any) => gp.email === email);
-      if (player.data.rage <= 0) {
+  const getUser: any = await getUserAndDataByIdSession(sessionId);
+  const player = getUser.players.find((gp: any) => gp.email === userData.email);
+
+  if (player) {
+    if (player.data.rage <= 0) {
+      player.data.rage = 0;
+      await registerMessage({
+        message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
+        user: userData.name,
+        email: userData.email
+      }, sessionId);
+    } else {
+      if (player.data.rage - success < 0) {
         player.data.rage = 0;
-        await registerMessage({
-          message: 'Você não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.',
-          user: name,
-          email: email
-        }, session);
       } else {
-        if (player.data.rage - success < 0) {
-          player.data.rage = 0;
-        } else {
-          player.data.rage = player.data.rage - (resultOfRage.length - success);
-        }
-        await registerMessage({
-          message: {
-            rollOfRage: resultOfRage,
-            success,
-            cause: type,
-            rage: player.data.rage,
-          },
-          user: name,
-          email: email,
-        }, session);
+        player.data.rage = player.data.rage - (resultOfRage.length - success);
       }
-      const docRef = userQuerySnapshot.docs[0].ref;
-      const playersFiltered = players.filter((gp: any) => gp.email !== email);
-      await updateDoc(docRef, { players: [...playersFiltered, player] });
-    } catch(error) {
-      window.alert('Ocorreu um erro: ' + error);
+      await registerMessage({
+        message: {
+          rollOfRage: resultOfRage,
+          success,
+          cause: type,
+          rage: player.data.rage,
+        },
+        user: userData.name,
+        email: userData.email,
+      }, sessionId);
     }
-  }
+    const playersFiltered = getUser.players.filter((gp: any) => gp.email !== userData.email);
+    await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+  } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente (Rage Check)');
 };
 
 export const registerRoll = async (
@@ -130,81 +123,20 @@ export const registerRoll = async (
   atrSelected: string,
   sklSelected: string,
   renSelected: string,
-  session: string,
+  sessionId: string,
+  userData: { email: string, name: string },
 ) => {
-  const authData: { email: string, name: string } | null = await authenticate();
-  if (authData && authData.email && authData.name) {
-    const { email, name } = authData;
-    const dtSheet: IDataValues | null = await returnValue(atrSelected, sklSelected, renSelected, session, email);
-    if (dtSheet) {
-      let rage = dtSheet.rage;
-      let resultOfRage = [];
-      let resultOf = [];
-      let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
-      if (dices > 0) {
-        if (dices - dtSheet.rage === 0) dices = 0;
-        else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
-        else {
-          rage = dices;
-          dices = 0;
-        };
-
-        for (let i = 0; i < rage; i += 1) {
-          const value = Math.floor(Math.random() * 10) + 1;
-          resultOfRage.push(value);
-        }
-    
-        for (let i = 0; i < dices; i += 1) {
-          const value = Math.floor(Math.random() * 10) + 1;
-          resultOf.push(value);
-        }
-      }
-      
-      try {
-        if (dices + rage >= dificulty) {
-          await registerMessage({
-            message: {
-              rollOfMargin: resultOf,
-              rollOfRage: resultOfRage,
-              dificulty,
-              penaltyOrBonus,
-            },
-            user: name,
-            email: email,
-          }, session) 
-        } else {
-          await registerMessage({
-            message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${resultOf.length + resultOfRage.length + penaltyOrBonus } dados para um Teste de Dificuldade ${dificulty}).`,
-            user: name,
-            email: email,
-          }, session);
-        }
-      } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-      }
-    }
-  }
-};
-
-export const registerRollForOthers = async (
-  dificulty: number,
-  penaltyOrBonus: number,
-  atrSelected: string,
-  sklSelected: string,
-  renSelected: string,
-  session: string,
-  name: string,
-  email: string,
-) => {
-  const dtSheet: IDataValues | null = await returnValue(atrSelected, sklSelected, renSelected, session, email);
+  const dtSheet: IDataValues | null = await returnValue(
+    atrSelected, sklSelected, renSelected, sessionId, userData.email,
+  );
   if (dtSheet) {
-    let rage = Number(dtSheet.rage);
+    let rage = dtSheet.rage;
     let resultOfRage = [];
     let resultOf = [];
-    let dices = dtSheet.attribute + Number(dtSheet.renown) + dtSheet.skill + Number(penaltyOrBonus);
+    let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
     if (dices > 0) {
-      if (dices - Number(dtSheet.rage) === 0) dices = 0;
-      else if (dices - Number(dtSheet.rage) > 0) dices = dices - Number(dtSheet.rage);
+      if (dices - dtSheet.rage === 0) dices = 0;
+      else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
       else {
         rage = dices;
         dices = 0;
@@ -230,18 +162,18 @@ export const registerRollForOthers = async (
             dificulty,
             penaltyOrBonus,
           },
-          user: name,
-          email: email,
-        }, session) 
+          user: userData.name,
+          email: userData.email,
+        }, sessionId) 
       } else {
         await registerMessage({
           message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${resultOf.length + resultOfRage.length + penaltyOrBonus } dados para um Teste de Dificuldade ${dificulty}).`,
-          user: name,
-          email: email,
-        }, session);
+          user: userData.name,
+          email: userData.email,
+        }, sessionId);
       }
     } catch (error) {
-    window.alert('Erro ao obter valor da Forma: ' + error);
+      window.alert('Erro ao obter valor da Forma: ' + error);
     }
   }
 };

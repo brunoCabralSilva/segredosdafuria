@@ -1,46 +1,30 @@
 'use client'
 import { useEffect, useState } from "react";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { IoAdd, IoClose } from "react-icons/io5";
-import firebaseConfig from "@/firebase/connection";
+import { getUserByIdSession } from "@/firebase/sessions";
+import { useAppSelector } from "@/redux/hooks";
+import { useSlice } from "@/redux/slice";
 import dataRituals from '../../data/rituals.json';
 import ItemRituals from "./itemRituals";
-import { authenticate, signIn } from "@/firebase/login";
-import { useRouter } from "next/navigation";
 
-export default function RitualSheet(props: { session: string }) {
-  const { session } = props;
+export default function RitualSheet() {
   const [showAllRituals, setShowAllRituals] = useState<boolean>(false);
   const [ritualsAdded, setRitualsAdded] = useState<any[]>([]);
-  const router = useRouter();
+  const slice = useAppSelector(useSlice);
 
   useEffect(() => {
     generateDataForRituals();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const generateDataForRituals = async () => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setRitualsAdded(player.data.rituals);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-    }
+  const generateDataForRituals = async (): Promise<void> => {
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setRitualsAdded(player.data.rituals);
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   return(
@@ -82,12 +66,11 @@ export default function RitualSheet(props: { session: string }) {
                     { 
                       ritualsAdded.length > 0 && ritualsAdded.map((item, index) => (
                         <ItemRituals
-                          session={session}
                           key={ index }
                           index={ index }
                           ritual={ item }
                           remove={true}
-                          generateDataForRituals={ () => generateDataForRituals() }
+                          generateDataForRituals={generateDataForRituals}
                         />
                       ))
                     }
@@ -96,7 +79,6 @@ export default function RitualSheet(props: { session: string }) {
                     {
                       dataRituals.map((ritual, index) => (
                         <ItemRituals
-                          session={session}
                           key={ index }
                           index={ index }
                           ritual={ ritual }

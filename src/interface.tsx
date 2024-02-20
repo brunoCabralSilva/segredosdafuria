@@ -3,6 +3,32 @@ export interface ITypeGift {
   totalRenown: number;
 }
 
+export interface ISessions {
+  id: string;
+  name: string;
+  description: string;
+  dm: string;
+  creationDate: Date;
+  anotations: string;
+  chat: any[],
+  image: string;
+};
+
+export interface IItem {
+  name: string;
+  namePtBr: string;
+  quant?: number;
+}
+
+export interface IAdvantageAndFlaw {
+  advantage?: string;
+  flaw?: string;
+  value: number;
+  name: string;
+  type: string;
+  item: string;
+}
+
 export interface IGift {
   gift: string;
   giftPtBr: string;
@@ -18,6 +44,11 @@ export interface IGift {
   duration: string;
   book: string;
   page: number;
+}
+
+interface IBelonging {
+  type: string;
+  totalRenown: number;
 }
 
 export interface IRitual {

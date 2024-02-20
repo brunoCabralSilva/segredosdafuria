@@ -1,21 +1,16 @@
 'use client'
-import firebaseConfig from "@/firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
+import { IItem } from "@/interface";
+import { useAppSelector } from "@/redux/hooks";
+import { useSlice } from "@/redux/slice";
+import { updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-
-interface IItem {
-  name: string;
-  namePtBr: string;
-  session: string;
-}
 
 export default function ItemAgravated(props: IItem) {
   const [ dataItem, setDataItem ] = useState<any>([]);
   const [totalItem, setTotalItem] = useState(0);
-  const { name, namePtBr, session } = props;
-  const router = useRouter();
+  const { name, namePtBr } = props;
+  const slice = useAppSelector(useSlice);
 
   useEffect(() => {
     returnValueWillpower();
@@ -23,75 +18,44 @@ export default function ItemAgravated(props: IItem) {
   }, [])
 
   const returnValueWillpower = async (): Promise<void> => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setDataItem(player.data[name]);
-        if (name === 'willpower') setTotalItem(Number(player.data.attributes.composure) + Number(player.data.attributes.resolve));
-        if (name === 'health') {
-          if (player.data.form === 'Crinos') {
-            setTotalItem(Number(player.data.attributes.stamina) + 7);
-          } else {
-            setTotalItem(Number(player.data.attributes.stamina) + 3);
-          }
-        }
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setDataItem(player.data[name]);
+      if (name === 'willpower') setTotalItem(Number(player.data.attributes.composure) + Number(player.data.attributes.resolve));
+      if (name === 'health') {
+        if (player.data.form === 'Crinos') {
+          setTotalItem(Number(player.data.attributes.stamina) + 7);
+        } else {
+          setTotalItem(Number(player.data.attributes.stamina) + 3);
         }
       }
-    } catch (error) {
-      window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`)
-    }
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');    
   };
   
   const updateValue = async (name: string, value: number) => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        if (player.data[name].length === 0) {
-          player.data[name] = [ { value, agravated: false }];
-        } else {
-          const itemAgravated = player.data[name].filter((item: any) => item.value === value && item.agravated === true);
-          const restOfList = player.data[name].filter((item: any) => item.value !== value);
-          if (itemAgravated.length > 0) {
-            player.data[name] = restOfList;
-          } else {
-            const itemLetal = player.data[name].filter((item: any) => item.value === value);
-            if (itemLetal.length === 0) {
-              player.data[name] = [ ...restOfList, { value, agravated: false }];
-            } else player.data[name] = [ ...restOfList, { value, agravated: true }];
-          }
-        }
-        const docRef = userQuerySnapshot.docs[0].ref;
-        const playersFiltered = players.filter((gp: any) => gp.email !== email);
-        await updateDoc(docRef, { players: [...playersFiltered, player] });
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      if (player.data[name].length === 0) {
+        player.data[name] = [ { value, agravated: false }];
       } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
+        const itemAgravated = player.data[name].filter((item: any) => item.value === value && item.agravated === true);
+        const restOfList = player.data[name].filter((item: any) => item.value !== value);
+        if (itemAgravated.length > 0) {
+          player.data[name] = restOfList;
+        } else {
+          const itemLetal = player.data[name].filter((item: any) => item.value === value);
+          if (itemLetal.length === 0) {
+            player.data[name] = [ ...restOfList, { value, agravated: false }];
+          } else player.data[name] = [ ...restOfList, { value, agravated: true }];
         }
       }
-    } catch (error) {
-      window.alert(`Erro ao atualizar valor de ${namePtBr}: (' + error + ')`)
-    }
+      const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+      await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
     returnValueWillpower();
   };
 

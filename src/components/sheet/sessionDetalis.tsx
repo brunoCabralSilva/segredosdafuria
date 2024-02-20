@@ -1,51 +1,30 @@
-import firebaseConfig from "@/firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { getSessionById } from "@/firebase/sessions";
+import { useAppSelector } from "@/redux/hooks";
+import { useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
 
-export default function SessionDetails( props: { session: string }) {
-  const { session } = props;
+export default function SessionDetails() {
   const [players, setPlayers] = useState<any[]>([]);
   const [nameSession, setNameSession] = useState('');
   const [creationDate, setCreationDate] = useState('');
   const [description, setDescription] = useState('');
   const [dm, setDm] = useState('');
-  const router = useRouter();
+  const slice = useAppSelector(useSlice);
+
+  const returnValue = async () => {
+    const sessionData = await getSessionById(slice.sessionId);
+    if (sessionData) {
+      setNameSession(sessionData.name);
+      setCreationDate(sessionData.creationDate);
+      setDescription(sessionData.description);
+      setDm(sessionData.dm);
+      setPlayers(sessionData.players);
+    } else {
+      window.alert('Não foi encontrada um Sessão com as referências mencionadas. Por favor, atualize a página e tente novamente.')
+    }
+  };
 
   useEffect(() => {
-    const returnValue = async () => {
-      try {
-        const db = getFirestore(firebaseConfig);
-        const collectionRef = collection(db, 'sessions');
-        const querySnapshot = await getDocs(query(collectionRef, where('name', '==', session)));
-        
-        if (!querySnapshot.empty) {
-          const sessionDocSnapshot = querySnapshot.docs[0];
-          const authData: { email: string, name: string } | null = await authenticate();
-          
-          if (authData && authData.email && authData.name) {
-            const sessionData = sessionDocSnapshot.data();
-            setNameSession(sessionData.name);
-            setCreationDate(sessionData.creationDate);
-            setDescription(sessionData.description);
-            setDm(sessionData.dm);
-            setPlayers(sessionData.players);
-          } else {
-            const sign = await signIn();
-            if (!sign) {
-              window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-              router.push('/');
-            }
-          }
-        } else {
-          router.push('/sessions');
-        }
-      } catch (error) {
-        window.alert(`Erro ao obter a lista de jogadores: ` + error);
-      }
-    };
-    
     returnValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

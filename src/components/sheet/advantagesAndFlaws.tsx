@@ -3,21 +3,20 @@ import { useEffect, useState } from 'react';
 import data from '../../data/advantagesAndFlaws.json';
 import dataLoresheets from '../../data/loresheets.json';
 import dataTalismans from '../../data/talismans.json';
-import Advantage from './itemAdvangate';
 import { IoAdd, IoClose } from 'react-icons/io5';
 import ItensAdvantagesAdded from './itemAdvantagedAdded';
-import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
-import firebaseConfig from '@/firebase/connection';
-import { useRouter } from 'next/navigation';
-import { authenticate, signIn } from '@/firebase/login';
+import { getUserByIdSession } from '@/firebase/sessions';
+import { useAppSelector } from '@/redux/hooks';
+import { useSlice } from '@/redux/slice';
+import Advantage from './itemAdvangate';
 import AdvantageLoresheets from './itemAdvangateLoresheet';
 import AdvantageTalismans from './itemAdvangateTalismans';
 
-export default function AdvantagesAndFlaws(props: any) {
-  const { session } = props;
+export default function AdvantagesAndFlaws() {
   const [allAdvantages, showAllAdvantages] = useState(false);
-  const router = useRouter();
   const [adv, setAdv] = useState<any>([]);
+
+  const slice = useAppSelector(useSlice);
 
   useEffect(() => {
     getAllAdvantages();
@@ -25,24 +24,14 @@ export default function AdvantagesAndFlaws(props: any) {
   }, []);
 
   const getAllAdvantages = async () => {
-    const authData: { email: string, name: string } | null = await authenticate();
-    if (authData && authData.email && authData.name) {
-      const { email } = authData;
-      const db = getFirestore(firebaseConfig);
-      const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-      const userQuerySnapshot = await getDocs(userQuery);
-      const userDocument = userQuerySnapshot.docs[0];
-      const advAndflw = userDocument.data();
-      const playerFound = advAndflw.players.find((player: any) => player.email === email);
-      const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      const listOfAdvantages = player.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
       setAdv(listOfAdvantages);
-    } else {
-      const sign = await signIn();
-      if (!sign) {
-        window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-        router.push('/');
-      }
-    }
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   }
 
   const sumAllAdvantagesAndFlaws = () => {
@@ -112,7 +101,6 @@ export default function AdvantagesAndFlaws(props: any) {
                 key={index}
                 item={item}
                 index={index}
-                session={session}
                 adv={adv}
                 setAdv={setAdv}
               />
@@ -125,7 +113,6 @@ export default function AdvantagesAndFlaws(props: any) {
                 key={index}
                 item={item}
                 index={index}
-                session={session}
                 adv={adv}
                 setAdv={setAdv}
               />
@@ -138,7 +125,6 @@ export default function AdvantagesAndFlaws(props: any) {
                 key={index}
                 item={item}
                 index={index}
-                session={session}
                 adv={adv}
                 setAdv={setAdv}
               />
@@ -146,7 +132,6 @@ export default function AdvantagesAndFlaws(props: any) {
           }
         </div>
         : <ItensAdvantagesAdded
-            session={session}
             adv={adv}
             setAdv={setAdv}
           />

@@ -1,97 +1,69 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupDelAdv, useSlice } from "@/redux/slice";
-import { collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import firebaseConfig from "../../../firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
-
-interface IAdvantage {
-  advantage: string;
-  value: number;
-  name: string;
-  type: string;
-}
+import { IAdvantageAndFlaw } from "@/interface";
+import { getUserAndDataByIdSession } from "@/firebase/sessions";
 
 function limitCaracteres(texto: string) {
   return texto.slice(0, 300);
 }
 
 export default function PopupDelAdv(props: any) {
-  const { session, adv, setAdv } = props;
+  const { adv, setAdv } = props;
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  const clearMessages = async () => {
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const db = getFirestore(firebaseConfig);
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const userDocument = userQuerySnapshot.docs[0];
-        const userDocRef = doc(db, 'sessions', userDocument.id);
 
-        const searchPlayer = userDocument.data().players.find((player: any) => player.email === email);
-        const otherPlayers = userDocument.data().players.filter((player: any) => player.email !== email);
+  const removeAdv = async () => {
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const searchPlayer = getUser.players.find((player: any) => player.email === slice.userData.email);
+    const otherPlayers = getUser.players.filter((player: any) => player.email !== slice.userData.email);
+    const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === slice.popupDelAdv.name);
+    const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== slice.popupDelAdv.name);
 
-        const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantage) => item.name === slice.popupDelAdv.name);
-        const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantage) => item.name !== slice.popupDelAdv.name);
+    if (slice.popupDelAdv.type === 'advantage') {
+      const remoteItemAdv = foundAdvantage.advantages.filter((ad: any) => ad.advantage !== slice.popupDelAdv.desc);
 
-        if (slice.popupDelAdv.type === 'advantage') {
-          const remoteItemAdv = foundAdvantage.advantages.filter((ad: any) => ad.advantage !== slice.popupDelAdv.desc);
+      const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
 
-          const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
-
-          const updatedAdvantage = {
-            name: slice.popupDelAdv.name, 
-            advantages: remoteItemAdv,
-            flaws: foundAdvantage.flaws,
-          }
-
-          if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
-            setAdv(restOfAdvantage);
-          } else {
-            setAdv([...restOfAdvantage, updatedAdvantage]);
-          }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-        }
-        
-        if (slice.popupDelAdv.type === 'flaw') {
-          const remoteItemflw = foundAdvantage.flaws.filter((ad: any) => ad.flaw !== slice.popupDelAdv.desc);
-
-          const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
-
-          const updatedAdvantage = {
-            name: slice.popupDelAdv.name, 
-            advantages: foundAdvantage.advantages,
-            flaws: remoteItemflw,
-          }
-
-          if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
-            setAdv(restOfAdvantage);
-          } else {
-            setAdv([...restOfAdvantage, updatedAdvantage]);
-          }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-        }
-
-        await updateDoc(userDocRef, {
-          players: [searchPlayer, ...otherPlayers],
-        });
-        dispatch(actionPopupDelAdv({show: false, adv: {}, type:'' }));
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
+      const updatedAdvantage = {
+        name: slice.popupDelAdv.name, 
+        advantages: remoteItemAdv,
+        flaws: foundAdvantage.flaws,
       }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
+
+      if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
+        setAdv(restOfAdvantage);
+      } else {
+        setAdv([...restOfAdvantage, updatedAdvantage]);
+      }
+      searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
     }
+    
+    if (slice.popupDelAdv.type === 'flaw') {
+      const remoteItemflw = foundAdvantage.flaws.filter((ad: any) => ad.flaw !== slice.popupDelAdv.desc);
+
+      const restOfAdvantage = adv.filter((ad: any) => ad.name !== slice.popupDelAdv.name);
+
+      const updatedAdvantage = {
+        name: slice.popupDelAdv.name, 
+        advantages: foundAdvantage.advantages,
+        flaws: remoteItemflw,
+      }
+
+      if (updatedAdvantage.advantages.length === 0 && updatedAdvantage.flaws.length === 0) {
+        setAdv(restOfAdvantage);
+      } else {
+        setAdv([...restOfAdvantage, updatedAdvantage]);
+      }
+      searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+    }
+
+    await updateDoc(getUser.sessionRef, {
+      players: [searchPlayer, ...otherPlayers],
+    });
+    dispatch(actionPopupDelAdv({show: false, adv: {}, type:'' }));
   };
 
   return(
@@ -123,7 +95,7 @@ export default function PopupDelAdv(props: any) {
             </button>
             <button
               type="button"
-              onClick={ clearMessages }
+              onClick={ removeAdv }
               className={`text-white bg-red-800 hover:border-red-900  transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
               Sim

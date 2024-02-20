@@ -1,86 +1,94 @@
 'use client'
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionSessionAuth, actionShowMenuSession, useSlice } from '@/redux/slice';
+import { IGenerateDataRolls } from '@/interface';
+import { generateDataRoll } from './functions';
+import { useRouter } from 'next/navigation';
+import { authenticate, signIn } from '@/firebase/login';
+import { actionSaveUserData, actionSessionAuth, actionSessionId, useSlice } from '@/redux/slice';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { collection, documentId, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import firestoreConfig from '../../../firebase/connection';
-import { IGenerateDataRolls } from '@/interface';
 import Nav from '@/components/nav';
 import PopUpDices from '@/components/sheet/popup/popUpDices';
 import PopUpSheet from '@/components/sheet/popup/popUpSheet';
 import Message from './message';
-import { generateDataRoll } from './functions';
-import Dice from './dice';
 import SessionBar from './sessionBar';
-import { useRouter } from 'next/navigation';
 import MenuDm from '@/components/MenuDm';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
-import ManualRoll from '@/components/manualRoll';
 import PopupResetSheet from '@/components/sheet/popup/popupResetSheet';
 import PopupDelHistoric from '@/components/sheet/popup/popupDelHistoric';
-import { authenticate, signIn } from '@/firebase/login';
+import BasicMessage from './basicMessage';
+import MessageWithRoll from './messageWithRoll';
 
-export default function Chat({ params } : { params: { sessionId: string } }) {
+export default function SessionId({ params } : { params: { sessionId: string } }) {
   const [dataSession, setDataSession] = useState<any>({ name: '' });
-  const slice = useAppSelector(useSlice);
   const db = getFirestore(firestoreConfig);
-  const [email, setEmail] = useState('');
   const sessionRef = collection(db, "sessions");
   const querySession = query(sessionRef, where(documentId(), "==", params.sessionId));
   const [session] = useCollectionData(querySession, { idField: "id" } as any);
+
+  const [email, setEmail] = useState('');
   const [showData, setShowData] = useState(true);
   const [showOptions, setShowOptions] = useState(false);
   const [dm, setDm] = useState('');
-  const router = useRouter();
+
+  const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
+  const router = useRouter();
   
   useEffect(() => {
     dispatch(actionSessionAuth({ show: false, id: ''}));
     setShowData(false);
-        
-    const verifyUser = async () => {
-      const sessionDocSnapshot = await getDocs(querySession);
-      if (sessionDocSnapshot.empty) {
-        router.push('/sessions');
-        window.alert('A Sessão não foi encontrada');
-      }
-      else {
-        const sessionData = sessionDocSnapshot.docs[0].data();
-        const authData: { email: string, name: string } | null = await authenticate();
-        if (authData && authData.email && authData.name) {
+    verifyUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const verifyUser = async () => {
+    const sessionDocSnapshot = await getDocs(querySession);
+    if (sessionDocSnapshot.empty) {
+      router.push('/sessions');
+      window.alert('A Sessão não foi encontrada');
+    }
+    else {
+      const sessionData = sessionDocSnapshot.docs[0].data();
+      const authData: { email: string, name: string } | null = await authenticate();
+      if (authData && authData.email && authData.name) {
+        setShowData(true);
+        setEmail(authData.email);
+        if (authData.email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
+        if (sessionData.name) {
           setShowData(true);
-          const { email } = authData;
-          setEmail(email);
-          if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
-          if (sessionData.name) {
-            setShowData(true);
-            setDataSession(sessionData);
-            if(sessionData.dm === email || sessionData.players.find((player: any) => player.email === email)) {
-              if(sessionData.dm === email) setDm('master');
-              else setDm('player');
-            } else {
-              window.alert('você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.');
-              router.push('/sessions');
+          setDataSession(sessionData);
+          if(sessionData.dm === authData.email || sessionData.players.find((player: any) => player.email === authData.email)) {
+            if(sessionData.dm === authData.email) {
+              setDm('master');
+              dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: true }));
+              dispatch(actionSessionId(params.sessionId));
+            }
+            else {
+              setDm('player');
+              dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: false }));
+              dispatch(actionSessionId(params.sessionId));
             }
           } else {
-            window.alert('Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente');
+            window.alert('você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.');
             router.push('/sessions');
           }
         } else {
-          const sign = await signIn();
-          if (sign) setShowData(true);
-          else {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
+          window.alert('Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente');
+          router.push('/sessions');
+        }
+      } else {
+        const sign = await signIn();
+        if (sign) setShowData(true);
+        else {
+          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
+          router.push('/');
         }
       }
     }
-    verifyUser();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  }
+  
   useLayoutEffect(() => {
     const messagesContainer: HTMLElement | null = document.getElementById('messages-container');
     if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -98,133 +106,28 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
       return ( <div className="px-2 break-words">{ msn }</div> );
     }
     if (msn.action && msn.roll === 'false') {
-      return <section
-        className="mb-2 relative min-h-screen"
-      >
-        <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
-          <div className="flex flex-col justify-center">
-            <h1 className="text-center text-sm font-bold w-full">
-              {`${ msn.giftPtBr } (${ msn.gift })`}
-            </h1>
-            <hr className="w-full my-4" />
-          </div>
-          <p className="pt-1">
-            <span className="text-sm font-bold pr-1">Custo:</span>
-            <span className="text-sm font-normal">{ msn.cost } (Possíveis Testes de Fúria e gastos de Força de Vontade são feitos automaticamente).</span>
-          </p>
-          <p className="pt-1">
-            <span className="text-sm font-bold pr-1">Ação:</span>
-            <span className="text-sm font-normal">{ msn.action }.</span>
-          </p>
-          { msn.pool !== "" &&
-            <p className="pt-1">
-              <span className="text-sm font-bold pr-1">Parada de Dados:</span>
-              <span className="text-sm font-normal">{ msn.pool }.</span></p>
-          }
-          { msn.duration !== "" &&
-            <p className="pt-1">
-              <span className="text-sm font-bold pr-1">Duração:</span>
-              <span className="text-sm font-normal">{ msn.duration }.</span>
-            </p>
-          }
-          <p className="pt-1 text-justify mt-2">
-            <span className="text-sm font-bold pr-1">Sistema:</span>
-            <span className="text-sm font-normal">{ msn.system }</span>
-          </p>
-        </article>
-      </section>
+      return (
+        <section className="mb-2 relative min-h-screen">
+          <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
+            <BasicMessage msn={msn} />
+          </article>
+        </section>
+      );
     }
+    
     const rollDices: IGenerateDataRolls = generateDataRoll(msn);
     if (msn.action && msn.roll === 'true') {
-      return <section
-        className="mb-2 relative min-h-screen"
-      >
-        <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
-          <div className="flex flex-col justify-center">
-            <h1 className="text-center text-sm font-bold w-full">
-              {`${ msn.giftPtBr } (${ msn.gift })`}
-            </h1>
-            <hr className="w-full my-4" />
-          </div>
-          <p className="pt-1">
-            <span className="text-sm font-bold pr-1">Custo:</span>
-            <span className="text-sm font-normal">{ msn.cost } (Possíveis Testes de Fúria e gastos de Força de Vontade são feitos automaticamente).</span>
-          </p>
-          <p className="pt-1">
-            <span className="text-sm font-bold pr-1">Ação:</span>
-            <span className="text-sm font-normal">{ msn.action }.</span>
-          </p>
-          { msn.pool !== "" &&
-            <p className="pt-1">
-              <span className="text-sm font-bold pr-1">Parada de Dados:</span>
-              <span className="text-sm font-normal">{ msn.pool }.</span></p>
-          }
-          { msn.duration !== "" &&
-            <p className="pt-1">
-              <span className="text-sm font-bold pr-1">Duração:</span>
-              <span className="text-sm font-normal">{ msn.duration }.</span>
-            </p>
-          }
-          <p className="pt-1 text-justify mt-2">
-            <span className="text-sm font-bold pr-1">Sistema:</span>
-            <span className="text-sm font-normal">{ msn.system }</span>
-          </p>
-          <div className="p-2">
-          <div className="p-2 flex gap-1 flex-wrap">
-            {
-              msn.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
-                <Dice key={ index } dice={ dice } type="(rage)" />
-              ))
-            }
-            {
-              msn.rollOfMargin.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
-                <Dice key={ index } dice={ dice } type="" />
-              ))
-            }
-          </div>
-          <div>
-            {
-              rollDices.falhaBrutal
-              ? rollDices.sucessosParaDano >= 0
-                ? <Message rollDices={ rollDices } msn={ msn } type="success-rage" />
-                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
-              : rollDices.sucessosParaDano >= 0
-                ? <Message rollDices={ rollDices } msn={ msn } type="success" />
-                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
-            }
-          </div>
-        </div>
-        </article>
+      return (
+        <section className="mb-2 relative min-h-screen">
+          <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
+            <BasicMessage msn={msn} />
+            <MessageWithRoll msn={msn} rollDices={rollDices} />
+          </article>
         </section>
+      );
     }
     if (msn.rollOfMargin) {
-      return(
-        <div className="p-2">
-          <div className="p-2 flex gap-1 flex-wrap">
-            {
-              msn.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
-                <Dice key={ index } dice={ dice } type="(rage)" />
-              ))
-            }
-            {
-              msn.rollOfMargin.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
-                <Dice key={ index } dice={ dice } type="" />
-              ))
-            }
-          </div>
-          <div>
-            {
-              rollDices.falhaBrutal
-              ? rollDices.sucessosParaDano >= 0
-                ? <Message rollDices={ rollDices } msn={ msn } type="success-rage" />
-                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
-              : rollDices.sucessosParaDano >= 0
-                ? <Message rollDices={ rollDices } msn={ msn } type="success" />
-                : <Message rollDices={ rollDices } msn={ msn } type="fail" />
-            }
-          </div>
-        </div>
-      );
+      return(<MessageWithRoll msn={msn} rollDices={rollDices} />);
     }
     return <Message rollDices={ rollDices } msn={ msn } type="rage-check" />
   };
@@ -234,10 +137,8 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
       return(
         <div key={index} className="my-3 w-full flex justify-center text-gray-400">
           <div className="bg-gray-whats text-sm text-center rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2">
-            <div>
-              { messageData(msg.message) }
-              { msg.date && msg.date }
-            </div>
+            { messageData(msg.message) }
+            { msg.date && msg.date }
           </div>
         </div>
       )
@@ -285,6 +186,7 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
                 }
               </div>
               <SessionBar
+                sessionId={params.sessionId}
                 showOptions={showOptions}
                 setShowOptions={setShowOptions}
                 scrollToBottom={scrollToBottom}
@@ -294,19 +196,14 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
             { 
               slice.showMenuSession === 'dices' &&
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
-                {
-                  dm === 'master' && <PopUpDices session={ dataSession.name } type={dm} />
-                }
-                {
-                  dm === 'player' && <PopUpDices session={ dataSession.name } type={dm} />
-                }
+                <PopUpDices session={ dataSession.name } type={dm} />
               </div>
             }
             {
               slice.showMenuSession === 'sheet' && 
                 <div className="w-full md:w-3/5 absolute sm:relative z-50">
                 { dm === 'master' && <MenuDm sessionId={ params.sessionId } /> }
-                { dm === 'player' && <PopUpSheet session={ dataSession.name } /> }
+                { dm === 'player' && <PopUpSheet /> }
                 </div>
             }
           </div>
@@ -314,8 +211,8 @@ export default function Chat({ params } : { params: { sessionId: string } }) {
             <span className="loader z-50" />
           </div>
       }
-      { slice.popupResetSheet && <PopupResetSheet sessionId={ params.sessionId } /> }
-      { slice.deleteHistoric && <PopupDelHistoric sessionId={ params.sessionId } /> }
+      { slice.popupResetSheet && <PopupResetSheet /> }
+      { slice.deleteHistoric && <PopupDelHistoric /> }
     </div>
   );
 }

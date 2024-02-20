@@ -1,16 +1,12 @@
-import firebaseConfig from "@/firebase/connection";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupDelAdv, useSlice } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { MdDelete } from "react-icons/md";
+import { getUserAndDataByIdSession } from "@/firebase/sessions";
 import PopupDelAdv from "./popup/popupDelAdv";
-import { authenticate, signIn } from "@/firebase/login";
 
 export default function ItensAdvantagesAdded(props: any) {
-  const { session, adv, setAdv } = props;
-  const router = useRouter();
+  const { adv, setAdv } = props;
   const dispatch = useAppDispatch();
   const slice = useAppSelector(useSlice);
 
@@ -20,29 +16,11 @@ export default function ItensAdvantagesAdded(props: any) {
   }, []);
 
   const getAllAdvantages = async () => {
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const db = getFirestore(firebaseConfig);
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const userDocument = userQuerySnapshot.docs[0];
-        const advAndflw = userDocument.data();
-        const playerFound = advAndflw.players.find((player: any) => player.email === email);
-        const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
-        setAdv(listOfAdvantages);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valores do dom: ' + error);
-    }
-  }
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const playerFound = getUser.players.find((player: any) => player.email === slice.userData.email);
+    const listOfAdvantages = playerFound.data.advantagesAndFlaws.filter((item: any) => item.flaws.length > 0 || item.advantages.length > 0);
+    setAdv(listOfAdvantages);
+  };
 
   const returnAdvantage = (ad: any) => {
     return(
@@ -169,7 +147,7 @@ export default function ItensAdvantagesAdded(props: any) {
           </div>
         ))
       }
-      { slice.popupDelAdv.show && <PopupDelAdv session={session} adv={adv} setAdv={setAdv} /> }
+      { slice.popupDelAdv.show && <PopupDelAdv adv={adv} setAdv={setAdv} /> }
     </div>
   );
 }

@@ -9,10 +9,10 @@ export default function LunasBlessing() {
   const dispatch = useAppDispatch();
   
   const rollDice = async () => {
-    const rage = await verifyRage(slice.showPopupGiftRoll.gift.session);
+    const rage = await verifyRage(slice.sessionId, slice.userData);
     if (rage) {
-      await returnRageCheck(1, 'manual', slice.showPopupGiftRoll.gift.session);
-      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
+      await returnRageCheck(1, 'manual', slice.sessionId, slice.userData);
+      const willpower = await reduceFdv(slice.sessionId, false, slice.userData);
       if (willpower) {
         await sendMessage({
           roll: 'false',
@@ -23,14 +23,14 @@ export default function LunasBlessing() {
           duration: slice.showPopupGiftRoll.gift.data.duration,
           pool: 'Nenhuma',
           system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-        }, slice.showPopupGiftRoll.gift.session);
+        }, slice.sessionId, slice.userData);
       } else {
-        await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
+        await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.sessionId, slice.userData);
       }
       dispatch(actionShowMenuSession(''));
       dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
     } else {
-      await sendMessage('Não foi possível conjurar o dom (Não possui Fúria suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
+      await sendMessage('Não foi possível conjurar o dom (Não possui Fúria suficiente para a ação requisitada).', slice.sessionId, slice.userData);
     }
   }
 

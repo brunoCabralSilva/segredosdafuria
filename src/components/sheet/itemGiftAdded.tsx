@@ -1,74 +1,38 @@
 'use client'
-import Image from "next/image";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 import { ITypeGift } from "../../interface";
 import { useState } from "react";
+import { GiD10 } from "react-icons/gi";
+import { getUserAndDataByIdSession } from "@/firebase/sessions";
 import { actionFeedback, actionPopupGiftRoll, useSlice } from "@/redux/slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import Feedback from "../feedback";
 import { MdDelete } from "react-icons/md";
 import { IoArrowUpCircleSharp } from "react-icons/io5";
-import firebaseConfig from "@/firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Feedback from "../feedback";
 import PopupRollGift from "./popup/popupRollGift";
-import { GiD10 } from "react-icons/gi";
+import { capitalizeFirstLetter } from "@/functions/utilities";
 
 export default function ItemGiftAdded(props: any) {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const { index, dataGift, session } = props;
+  const { index, dataGift } = props;
   const [showGift, setShowGift] = useState<boolean>(false);
-  const router = useRouter();
-
-  function capitalizeFirstLetter(str: string): String {
-    switch(str) {
-      case 'global': return 'Dons Nativos';
-      case 'silent striders': return 'Peregrinos Silenciosos';
-      case 'black furies': return 'Fúrias Negras';
-      case 'silver fangs': return 'Presas de Prata';
-      case 'hart wardens': return 'Guarda do Cervo';
-      case 'ghost council': return 'Conselho Fantasma';
-      case 'galestalkers': return 'Perseguidores da Tempestade';
-      case 'glass walkers': return 'Andarilhos do Asfalto';
-      case 'bone gnawers': return 'Roedores de Ossos';
-      case 'shadow lords': return 'Senhores das Sombras';
-      case 'children of gaia': return 'Filhos de Gaia';
-      case 'red talons': return 'Garras Vermelhas';
-      default: return str.charAt(0).toUpperCase() + str.slice(1);;
-    }
-  };
 
   const removeGift = async () => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        const filterGift = player.data.gifts.filter((item: any) => item.gift !== dataGift.gift);
-        player.data.gifts = filterGift;
-        const playersFiltered = players.filter((gp: any) => gp.email !== email);
-        const docRef = userQuerySnapshot.docs[0].ref;
-        await updateDoc(docRef, { players: [...playersFiltered, player] });
-        setShowGift(false);
-        window.alert(`Dom '${dataGift.giftPtBr}' removido com sucesso!`)
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor: ' + error);
-    }
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      const filterGift = player.data.gifts.filter((item: any) => item.gift !== dataGift.gift);
+      player.data.gifts = filterGift;
+      const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+      await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+      setShowGift(false);
+      window.alert(`Dom '${dataGift.giftPtBr}' removido com sucesso!`)
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
     props.generateDataForGifts();
   };
+  
   if(showGift) {
     if (slice.showPopupGiftRoll.show) {
       return <PopupRollGift />;

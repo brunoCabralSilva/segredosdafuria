@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
-import { reduceFdv } from "../functionGifts";
+import { reduceFdv, rollWillPower } from "../functionGifts";
 import { sendMessage } from "@/firebase/chatbot";
 
 export default function ScentOfRunningWater() {
@@ -9,24 +9,9 @@ export default function ScentOfRunningWater() {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
   
-  const rollDiceCatFeet = async () => {
-    if (reflex) {
-      const willpower = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
-      if (willpower) {
-        await sendMessage({
-          roll: 'false',
-          gift: slice.showPopupGiftRoll.gift.data.gift,
-          giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-          cost: slice.showPopupGiftRoll.gift.data.cost,
-          action: slice.showPopupGiftRoll.gift.data.action,
-          duration: slice.showPopupGiftRoll.gift.data.duration,
-          pool: 'Nenhuma',
-          system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-        }, slice.showPopupGiftRoll.gift.session);
-      } else {
-        await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
-      }
-    } else {
+  const rollDice = async () => {
+    if (reflex) await rollWillPower(slice);
+    else {
       await sendMessage({
         roll: 'false',
         gift: slice.showPopupGiftRoll.gift.data.gift,
@@ -36,7 +21,7 @@ export default function ScentOfRunningWater() {
         duration: slice.showPopupGiftRoll.gift.data.duration,
         pool: 'Nenhuma',
         system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-      }, slice.showPopupGiftRoll.gift.session);
+      }, slice.sessionId, slice.userData);
     }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
@@ -57,7 +42,7 @@ export default function ScentOfRunningWater() {
       <div className="flex w-full gap-2"> 
         <button
           type="button"
-          onClick={ rollDiceCatFeet }
+          onClick={ rollDice }
           disabled={reflex}
           className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >

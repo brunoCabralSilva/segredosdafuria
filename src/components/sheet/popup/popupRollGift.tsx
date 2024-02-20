@@ -4,28 +4,11 @@ import { actionPopupGiftRoll, useSlice } from "@/redux/slice";
 import Image from "next/image";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { MechanicGift } from "../functionGifts";
+import { capitalizeFirstLetter } from "@/functions/utilities";
 
 export default function PopupRollGift() {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-
-  function capitalizeFirstLetter(str: string): String {
-    switch(str) {
-      case 'global': return 'Dons Nativos';
-      case 'silent striders': return 'Peregrinos Silenciosos';
-      case 'black furies': return 'Fúrias Negras';
-      case 'silver fangs': return 'Presas de Prata';
-      case 'hart wardens': return 'Guarda do Cervo';
-      case 'ghost council': return 'Conselho Fantasma';
-      case 'galestalkers': return 'Perseguidores da Tempestade';
-      case 'glass walkers': return 'Andarilhos do Asfalto';
-      case 'bone gnawers': return 'Roedores de Ossos';
-      case 'shadow lords': return 'Senhores das Sombras';
-      case 'children of gaia': return 'Filhos de Gaia';
-      case 'red talons': return 'Garras Vermelhas';
-      default: return str.charAt(0).toUpperCase() + str.slice(1);;
-    }
-  };
 
   return(
     <div className="w-full overflow-y-auto flex flex-col justify-center items-center bg-black relative border-white border-2 pb-5">
@@ -81,9 +64,7 @@ export default function PopupRollGift() {
           }
         </label>
       </div>
-      <MechanicGift
-        nameGift={slice.showPopupGiftRoll.gift.data.gift}
-      />
+      <MechanicGift nameGift={slice.showPopupGiftRoll.gift.data.gift} />
     </div>
   );
 }

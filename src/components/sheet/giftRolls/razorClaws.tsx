@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
-import { verifyRage } from "../functionGifts";
+import { rollRage, verifyRage } from "../functionGifts";
 import { sendMessage } from "@/firebase/chatbot";
 import { returnRageCheck } from "@/firebase/checks";
 
@@ -21,25 +21,8 @@ export default function RazorClaws() {
         duration: slice.showPopupGiftRoll.gift.data.duration,
         pool: 'Nenhuma',
         system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-      }, slice.showPopupGiftRoll.gift.session);
-    } else {
-        const rage = await verifyRage(slice.showPopupGiftRoll.gift.session);
-        if (rage) {
-          await returnRageCheck(1, 'manual', slice.showPopupGiftRoll.gift.session);
-          await sendMessage({
-            roll: 'false',
-            gift: slice.showPopupGiftRoll.gift.data.gift,
-            giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-            cost: slice.showPopupGiftRoll.gift.data.cost,
-            action: slice.showPopupGiftRoll.gift.data.action,
-            duration: slice.showPopupGiftRoll.gift.data.duration,
-            pool: 'Nenhuma',
-            system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-          }, slice.showPopupGiftRoll.gift.session);
-        } else {
-          await sendMessage('Não foi possível conjurar o dom (Não possui Fúria suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
-        }
-      }
+      }, slice.sessionId, slice.userData);
+    } else await rollRage(slice);
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
   }

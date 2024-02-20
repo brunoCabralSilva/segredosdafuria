@@ -1,79 +1,41 @@
 'use client'
-import Image from "next/image";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 import { ITypeGift } from "../../interface";
 import { useState } from "react";
 import { actionFeedback, useSlice } from "@/redux/slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import Feedback from "../feedback";
 import { IoAddCircle, IoArrowUpCircleSharp } from "react-icons/io5";
-import firebaseConfig from "@/firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
-import { useRouter } from "next/navigation";
+import { capitalizeFirstLetter } from "@/functions/utilities";
+import { getUserAndDataByIdSession } from "@/firebase/sessions";
+import Image from "next/image";
+import Feedback from "../feedback";
 
 export default function ItemGift(props: any) {
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const { index, dataGift, session } = props;
+  const { index, dataGift } = props;
   const [showGift, setShowGift] = useState<boolean>(false);
-  const router = useRouter();
-
-  function capitalizeFirstLetter(str: string): String {
-    switch(str) {
-      case 'global': return 'Dons Nativos';
-      case 'silent striders': return 'Peregrinos Silenciosos';
-      case 'black furies': return 'Fúrias Negras';
-      case 'silver fangs': return 'Presas de Prata';
-      case 'hart wardens': return 'Guarda do Cervo';
-      case 'ghost council': return 'Conselho Fantasma';
-      case 'galestalkers': return 'Perseguidores da Tempestade';
-      case 'glass walkers': return 'Andarilhos do Asfalto';
-      case 'bone gnawers': return 'Roedores de Ossos';
-      case 'shadow lords': return 'Senhores das Sombras';
-      case 'children of gaia': return 'Filhos de Gaia';
-      case 'red talons': return 'Garras Vermelhas';
-      default: return str.charAt(0).toUpperCase() + str.slice(1);;
-    }
-  };
 
   const addGift = async () => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        const filterGift = player.data.gifts.find((item: any) => item.gift === dataGift.gift);
-        if (filterGift) {
-          window.alert("Este dom já está cadastrado na sua Ficha.")
-        } else {
-          player.data.gifts = [...player.data.gifts, dataGift];
-          const docRef = userQuerySnapshot.docs[0].ref;
-          const playersFiltered = players.filter((gp: any) => gp.email !== email);
-          await updateDoc(docRef, { players: [...playersFiltered, player] });
-          setShowGift(false);
-          window.alert(`Dom '${dataGift.giftPtBr}' adicionado com sucesso!`)
-        }
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      const filterGift = player.data.gifts.find((item: any) => item.gift === dataGift.gift);
+      if (filterGift) {
+        window.alert("Este dom já está cadastrado na sua Ficha.")
       } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
+        player.data.gifts = [...player.data.gifts, dataGift];
+        const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+        await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+        setShowGift(false);
+        window.alert(`Dom '${dataGift.giftPtBr}' adicionado com sucesso!`)
       }
-    } catch (error) {
-      window.alert('Erro ao obter valor: ' + error);
-    }
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+    props.generateDataForGifts();
   };
 
   if(showGift) return (
-    <section
-      key={index} className="mb-2 relative min-h-screen"
-    >
+    <section key={index} className="mb-2 relative min-h-screen">
       <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 text-white border-2 border-white relative">
         <div className="flex flex-col justify-center">
           <div className="relative text-white flex w-full justify-center pb-5">

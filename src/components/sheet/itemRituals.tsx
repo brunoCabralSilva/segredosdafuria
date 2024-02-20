@@ -1,84 +1,47 @@
 'use client'
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { updateDoc } from "firebase/firestore";
 import { useState } from "react";
 import { actionFeedback, useSlice } from "@/redux/slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import Feedback from "../feedback";
 import { IoAddCircle, IoArrowUpCircleSharp } from "react-icons/io5";
-import firebaseConfig from "@/firebase/connection";
 import { MdDelete } from "react-icons/md";
-import { authenticate, signIn } from "@/firebase/login";
-import { useRouter } from "next/navigation";
+import { getUserAndDataByIdSession } from "@/firebase/sessions";
+import Feedback from "../feedback";
 
 export default function ItemRituals(props: any) {
+  const { index, ritual, remove } = props;
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
-  const { index, ritual, remove, session } = props;
   const [showRitual, setShowRitual] = useState<boolean>(false);
-  const router = useRouter();
 
   const addRitual = async () => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        const filterRitual = player.data.rituals.find((item: any) => item.title === ritual.title);
-        if (filterRitual) {
-          window.alert("Este Ritual já está cadastrado na sua Ficha.")
-        } else {
-          player.data.rituals = [...player.data.rituals, ritual];
-          const docRef = userQuerySnapshot.docs[0].ref;
-          const playersFiltered = players.filter((gp: any) => gp.email !== email);
-          await updateDoc(docRef, { players: [...playersFiltered, player] });
-          setShowRitual(false);
-          window.alert(`Ritual '${ritual.titlePtBr}' adicionado com sucesso!`)
-          }
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      const filterRitual = player.data.rituals.find((item: any) => item.title === ritual.title);
+      if (filterRitual) {
+        window.alert("Este Ritual já está cadastrado na sua Ficha.")
       } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
+        player.data.rituals = [...player.data.rituals, ritual];
+        const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+        await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+        setShowRitual(false);
+        window.alert(`Ritual '${ritual.titlePtBr}' adicionado com sucesso!`)
         }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-    }
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   const removeRitual = async () => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        const filterRitual = player.data.rituals.filter((item: any) => item.title !== ritual.title);
-        player.data.rituals = filterRitual;
-        const playersFiltered = players.filter((gp: any) => gp.email !== email);
-        const docRef = userQuerySnapshot.docs[0].ref;
-        await updateDoc(docRef, { players: [...playersFiltered, player] });
-        setShowRitual(false);
-        window.alert(`Ritual '${ritual.titlePtBr}' removido com sucesso!`)
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-    }
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      const filterRitual = player.data.rituals.filter((item: any) => item.title !== ritual.title);
+      player.data.rituals = filterRitual;
+      const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+      await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+      setShowRitual(false);
+      window.alert(`Ritual '${ritual.titlePtBr}' removido com sucesso!`)
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
     props.generateDataForRituals();
   };
 

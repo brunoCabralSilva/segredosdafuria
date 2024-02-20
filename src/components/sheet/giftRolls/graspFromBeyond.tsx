@@ -4,13 +4,12 @@ import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { reduceFdv } from "../functionGifts";
 import { registerMessage, sendMessage } from "@/firebase/chatbot";
-import { authenticate, signIn } from "@/firebase/login";
 import { returnValue } from "@/firebase/checks";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
 
 export default function GraspfromBeyond(props: any) {
-  const { attribute, renown, skill, textDificulty } = props;
+  const { textDificulty } = props;
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [fdv, setFdv] = useState(1);
@@ -24,116 +23,73 @@ export default function GraspfromBeyond(props: any) {
 
   const getWillPower = async () => {
     const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', slice.showPopupGiftRoll.gift.session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        const valueWill = player.data.willpower.filter((will: any) => will.agravated === false);
-        const valueWillAgravated = player.data.willpower.filter((will: any) => will.agravated === true);
-        const totalDamageSuperficial = valueWill.length;
-        const totalDamageAgravated = valueWillAgravated.length;
-        const totalWillpower = player.data.attributes.resolve + player.data.attributes.composure;
-        const restWillpower = totalWillpower - totalDamageSuperficial - totalDamageAgravated;
-        setWillpower(restWillpower*2 + totalDamageSuperficial);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-        }
-      }
-    } catch (error) {
-      window.alert(`Erro ao atualizar valor de Glória` + (error));
-    }
+    const userQuery = query(collection(db, 'sessions'), where('name', '==', slice.showPopupGiftRoll.gift.session));
+    const userQuerySnapshot = await getDocs(userQuery);
+    const players: any = [];
+    userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
+    const player: any = players.find((gp: any) => gp.email === slice.userData.email);
+    const valueWill = player.data.willpower.filter((will: any) => will.agravated === false);
+    const valueWillAgravated = player.data.willpower.filter((will: any) => will.agravated === true);
+    const totalDamageSuperficial = valueWill.length;
+    const totalDamageAgravated = valueWillAgravated.length;
+    const totalWillpower = player.data.attributes.resolve + player.data.attributes.composure;
+    const restWillpower = totalWillpower - totalDamageSuperficial - totalDamageAgravated;
+    setWillpower(restWillpower*2 + totalDamageSuperficial);
   };
-  
-  let allPointsUsed = true;
-  const rollDiceCatFeet = async () => {
+
+  const rollDice = async () => {
+    let allPointsUsed = true;
     for (let i = 1; i <= 3; i += 1) {
-      const will = await reduceFdv(slice.showPopupGiftRoll.gift.session, false);
+      const will = await reduceFdv(slice.sessionId, false, slice.userData);
       if (will) allPointsUsed = true;
       else (allPointsUsed = false);
     }
     if (allPointsUsed) {
-        const dtSheet: any | null = await returnValue('resolve', '', 'wisdom', slice.showPopupGiftRoll.gift.session);
-        if (dtSheet) {
-          let rage = dtSheet.rage;
-          let resultOfRage = [];
-          let resultOf = [];
-          let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
-          if (dices > 0) {
-            if (dices - dtSheet.rage === 0) dices = 0;
-            else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
-            else {
-              rage = dices;
-              dices = 0;
-            };
-      
-            for (let i = 0; i < rage; i += 1) {
-              const value = Math.floor(Math.random() * 10) + 1;
-              resultOfRage.push(value);
-            }
-        
-            for (let i = 0; i < dices; i += 1) {
-              const value = Math.floor(Math.random() * 10) + 1;
-              resultOf.push(value);
-            }
+      const dtSheet: any | null = await returnValue('resolve', '', 'wisdom', slice.sessionId, slice.userData.email);
+      if (dtSheet) {
+        let rage = dtSheet.rage;
+        let resultOfRage = [];
+        let resultOf = [];
+        let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
+        if (dices > 0) {
+          if (dices - dtSheet.rage === 0) dices = 0;
+          else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
+          else {
+            rage = dices;
+            dices = 0;
+          };
+    
+          for (let i = 0; i < rage; i += 1) {
+            const value = Math.floor(Math.random() * 10) + 1;
+            resultOfRage.push(value);
           }
-          const authData: { email: string, name: string } | null = await authenticate();
-
-          try {
-            if (authData && authData.email && authData.name) {
-              const { email, name } = authData;
-              if (dices + rage >= dificulty) {
-                await registerMessage({
-                  message: {
-                    rollOfMargin: resultOf,
-                    rollOfRage: resultOfRage,
-                    dificulty,
-                    penaltyOrBonus,
-                    roll: 'true',
-                    gift: slice.showPopupGiftRoll.gift.data.gift,
-                    giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                    cost: slice.showPopupGiftRoll.gift.data.cost,
-                    action: slice.showPopupGiftRoll.gift.data.action,
-                    duration: slice.showPopupGiftRoll.gift.data.duration,
-                    pool: slice.showPopupGiftRoll.gift.data.pool,
-                    system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                },
-                  user: name,
-                  email: email,
-                }, slice.showPopupGiftRoll.gift.session);
-              } else {
-                await registerMessage({
-                  message: {
-                    rollOfMargin: resultOf,
-                    rollOfRage: resultOfRage,
-                    dificulty,
-                    roll: 'true',
-                    penaltyOrBonus,
-                    gift: slice.showPopupGiftRoll.gift.data.gift,
-                    giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                    cost: slice.showPopupGiftRoll.gift.data.cost,
-                    action: slice.showPopupGiftRoll.gift.data.action,
-                    duration: slice.showPopupGiftRoll.gift.data.duration,
-                    pool: slice.showPopupGiftRoll.gift.data.pool,
-                    system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                  },
-                  user: name,
-                  email: email,
-                }, slice.showPopupGiftRoll.gift.session);
-              }
-            }
-          } catch (error) {
-          window.alert('Erro ao obter valor da Forma: ' + error);
+      
+          for (let i = 0; i < dices; i += 1) {
+            const value = Math.floor(Math.random() * 10) + 1;
+            resultOf.push(value);
           }
         }
+        await registerMessage({
+          message: {
+            rollOfMargin: resultOf,
+            rollOfRage: resultOfRage,
+            dificulty,
+            penaltyOrBonus,
+            roll: 'true',
+            gift: slice.showPopupGiftRoll.gift.data.gift,
+            giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+            cost: slice.showPopupGiftRoll.gift.data.cost,
+            action: slice.showPopupGiftRoll.gift.data.action,
+            duration: slice.showPopupGiftRoll.gift.data.duration,
+            pool: slice.showPopupGiftRoll.gift.data.pool,
+            system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+        },
+          user: slice.userData.name,
+          email: slice.userData.email,
+        }, slice.sessionId);
+      }
     } else {
-      await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
+      await sendMessage('Não foi possível conjurar o dom (Não possui Força de Vontade suficiente para a ação requisitada).', slice.sessionId, slice.userData);
     }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
@@ -142,7 +98,7 @@ export default function GraspfromBeyond(props: any) {
     <div className="w-full">
       <div className="w-full">
         <label htmlFor="fdv" className="px-4 mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Pontos de Força de Vontade que serão gastos (O custo de Força de Vontade depende do tamanho do objeto, com um item pequeno , como um livro ou laptop, requerendo um único ponto, e um grande , como um carro ou tenda, requerendo três.)</p>
+          <p className="text-white w-full pb-3">Pontos de Força de Vontade que serão gastos (O custo de Força de Vontade depende do tamanho do objeto, com um item pequeno - como um livro ou laptop - requerendo um único ponto e um grande - como um carro ou tenda - requerendo três.)</p>
           <div className="flex w-full">
             <div
               className={`border border-white p-3 cursor-pointer ${ fdv === 1 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
@@ -230,7 +186,7 @@ export default function GraspfromBeyond(props: any) {
       <div className="flex w-full gap-2"> 
         <button
           type="button"
-          onClick={ rollDiceCatFeet }
+          onClick={ rollDice }
           disabled={dificulty === 0}
           className={`text-white ${dificulty === 0 ? 'bg-gray-600' : 'bg-green-whats'} hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold mx-4`}
         >

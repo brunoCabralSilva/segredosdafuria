@@ -66,8 +66,8 @@ export default function PopUpDices(props: { session: string, type: string }) {
       </div>
       {
         optionRadio === 'automated'
-        ? <AutomatedRoll session={ session } type={type} />
-        : <ManualRoll session={ session } />
+        ? <AutomatedRoll type={type} />
+        : <ManualRoll />
       }
     </div>
   )

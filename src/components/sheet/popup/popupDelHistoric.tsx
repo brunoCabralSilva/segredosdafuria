@@ -1,19 +1,19 @@
 'use client'
-import { useAppDispatch } from "@/redux/hooks";
-import { actionDelHistoric } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionDelHistoric, useSlice } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firebaseConfig from "../../../firebase/connection";
 
-export default function PopupDelHistoric(props: { sessionId : string }) {
-  const { sessionId } = props;
+export default function PopupDelHistoric() {
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
 
   const clearMessages = async () => {
     try {
       const db = getFirestore(firebaseConfig);
       const sessionsCollectionRef = collection(db, 'sessions');
-      const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+      const sessionDocRef = doc(sessionsCollectionRef, slice.sessionId);
       const sessionDocSnapshot = await getDoc(sessionDocRef);
       if (sessionDocSnapshot.exists()) {
         await updateDoc(sessionDocSnapshot.ref, { chat: [] });

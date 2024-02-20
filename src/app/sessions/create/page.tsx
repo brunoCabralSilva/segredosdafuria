@@ -1,13 +1,13 @@
 'use client'
-import { addDoc, collection, getDocs, getFirestore } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import firestoreConfig from '../../../firebase/connection';
 import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import { FaArrowLeft } from "react-icons/fa6";
 import { authenticate, signIn, signOutFirebase } from "@/firebase/login";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";
+import { getSessionByName } from "@/firebase/sessions";
 
 export default function Create() {
   const router = useRouter();
@@ -63,29 +63,28 @@ export default function Create() {
 
     try {
       const dateMessage = await getHoraOficialBrasil();
-      const db = getFirestore(firestoreConfig);
-      const sessionsCollection = collection(db, 'sessions');
-      const querySnapshot = await getDocs(sessionsCollection);
-      const sessionList = querySnapshot.docs.find((doc) => doc.data().name === nameSession);
-      if (sessionList) {
+      const sessionList: any = await getSessionByName(nameSession);
+      if (sessionList.list) {
         setErrExists('Já existe uma Sala criada com esse nome');
         setLoading(false);
-      } else setErrExists('');
-      if (nameSession.length > 3 && nameSession.length < 40 && description.length > 10 && !sessionList) {
-        const docRef: any = await addDoc(sessionsCollection, {
-          name: nameSession.toLowerCase(),
-          description,
-          dm: email,
-          creationDate: dateMessage,
-          anotations: '',
-          chat: [],
-          players: [],
-          notifications: [],
-        });
-        if (docRef.id) {
-          router.push(`/sessions/${docRef.id}`);
-        } else {
-          window.alert('Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.');
+      } else {
+        setErrExists('');
+        if (nameSession.length > 3 && nameSession.length < 40 && description.length > 10 && !sessionList.list) {
+          const docRef: any = await addDoc(sessionList.collection, {
+            name: nameSession.toLowerCase(),
+            description,
+            dm: email,
+            creationDate: dateMessage,
+            anotations: '',
+            chat: [],
+            players: [],
+            notifications: [],
+          });
+          if (docRef.id) {
+            router.push(`/sessions/${docRef.id}`);
+          } else {
+            window.alert('Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.');
+          }
         }
       }
     } catch (error) {

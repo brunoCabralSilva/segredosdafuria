@@ -303,6 +303,27 @@
     "page": 149
   },
   {
+    "gift": "Blessed Brew",
+    "giftPtBr": "Bebida Abençoada",
+    "belonging": [
+      {
+        "type": "hart wardens",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The Garou can infuse a beverage with spiritual power, enabling it to embolden and strengthen the mental fortitude of those who drink it. A hearth- or herb-spirit grants this Gift.",
+    "descriptionPtBr": "O Garou pode infundir uma bebida com poder espiritual, permitindo que ela fortaleça e aumente a fortaleza mental daqueles que a bebem. Um espírito de lareira ou de erva concede esse Dom.",
+    "renown": "Glória",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "",
+    "system": "Anyone who drinks the equivalent of a glass of a liquid affected by this Gift receives the following benefit: For the next test to resist any kind fear or hostile supernatural mental ability, add a number of dice equal to the Glory of the Gift user. The Gift user can infuse the equivalent of a single bottle of liquid, enough for an entire pack, and the brew and its effect remain active until used or the session ends. This Gift can be used only once per session and can be used in any form.",
+    "systemPtBr": "Qualquer um que beba o equivalente a um copo de líquido afetado por este Dom recebe o seguinte benefício: Para o próximo teste de resistência a qualquer tipo de medo ou habilidade mental sobrenatural hostil, adicione um número de dados igual à Glória do usuário do Dom. O usuário do Dom pode infundir o equivalente a uma única garrafa de líquido, suficiente para toda uma matilha, e a infusão e seu efeito permanecem ativos até serem usados ou até o final da sessão. Este Dom só pode ser usado uma vez por sessão e pode ser usado em qualquer forma.",
+    "duration": "Por até uma sessão",
+    "book": "Werewolf: The Apocalypse 5th",
+    "page": 149
+  },
+  {
     "gift":"Gremlins",
     "giftPtBr":"Gremlins",
     "belonging": [
@@ -430,10 +451,6 @@
       {
         "type": "ragabash",
         "totalRenown": 5
-      },
-      {
-        "type": "bone gnawers",
-        "totalRenown": 6
       },
       {
         "type": "silent striders",
@@ -1026,6 +1043,10 @@
       {
         "type": "philodox",
         "totalRenown": 5
+      },
+      {
+        "type": "bone gnawers",
+        "totalRenown": 6
       }
     ],
     "description": "By inhaling the scent of an object or place, the Garou can catch glimpses of events that occurred in the target's vicinity. More dramatic events leave stronger scents, and picking out details and minor occurrences calls for great skill. A crow-spirit or another animal-spirit that thrives in multiple environments, witnessing many events, can grant this Gift.",

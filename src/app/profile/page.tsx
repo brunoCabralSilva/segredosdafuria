@@ -152,7 +152,7 @@ export default function Profile() {
           </div>
       }
       <Footer />
-      { slice.sessionAuth.show ? <SessionAuth sessionId={ sessionSelected } /> : '' }
+      { slice.sessionAuth.show ? <SessionAuth /> : '' }
     </div>
   );
 }

@@ -28,8 +28,8 @@ export default function RapidShift() {
             email: email,
           }, slice.showPopupGiftRoll.gift.session);
         }
-        if (slice.form === 'Crinos') await returnRageCheck(2, slice.form, slice.showPopupGiftRoll.gift.session);
-        if (slice.form === 'Glabro' || slice.form === 'Hispo') await returnRageCheck(1, slice.form, slice.showPopupGiftRoll.gift.session);
+        if (slice.form === 'Crinos') await returnRageCheck(2, slice.form, slice.sessionId, slice.userData);
+        if (slice.form === 'Glabro' || slice.form === 'Hispo') await returnRageCheck(1, slice.form, slice.sessionId, slice.userData);
         const userQuery = query(collection(db, 'sessions'), where('name', '==', slice.showPopupGiftRoll.gift.session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
@@ -63,61 +63,52 @@ export default function RapidShift() {
   };
   
   const rollDice = async () => {
-  updateValue();
-  const dtSheet: any | null = await returnValue('dexterity', '', 'glory', slice.showPopupGiftRoll.gift.session);
-  if (dtSheet) {
-    let rage = dtSheet.rage;
-    let resultOfRage = [];
-    let resultOf = [];
-    let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
-    if (dices > 0) {
-      if (dices - dtSheet.rage === 0) dices = 0;
-      else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
-      else {
-        rage = dices;
-        dices = 0;
-      };
+    updateValue();
+    const dtSheet: any | null = await returnValue('dexterity', '', 'glory', slice.sessionId, slice.userData.email);
+    if (dtSheet) {
+      let rage = dtSheet.rage;
+      let resultOfRage = [];
+      let resultOf = [];
+      let dices = dtSheet.attribute + dtSheet.renown + dtSheet.skill + Number(penaltyOrBonus);
+      if (dices > 0) {
+        if (dices - dtSheet.rage === 0) dices = 0;
+        else if (dices - dtSheet.rage > 0) dices = dices - dtSheet.rage;
+        else {
+          rage = dices;
+          dices = 0;
+        };
 
-      for (let i = 0; i < rage; i += 1) {
-        const value = Math.floor(Math.random() * 10) + 1;
-        resultOfRage.push(value);
-      }
+        for (let i = 0; i < rage; i += 1) {
+          const value = Math.floor(Math.random() * 10) + 1;
+          resultOfRage.push(value);
+        }
 
-      for (let i = 0; i < dices; i += 1) {
-        const value = Math.floor(Math.random() * 10) + 1;
-        resultOf.push(value);
+        for (let i = 0; i < dices; i += 1) {
+          const value = Math.floor(Math.random() * 10) + 1;
+          resultOf.push(value);
+        }
       }
+      await registerMessage({
+        message: {
+          rollOfMargin: resultOf,
+          rollOfRage: resultOfRage,
+          dificulty,
+          penaltyOrBonus,
+          roll: 'true',
+          gift: slice.showPopupGiftRoll.gift.data.gift,
+          giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+          cost: slice.showPopupGiftRoll.gift.data.cost,
+          action: slice.showPopupGiftRoll.gift.data.action,
+          duration: slice.showPopupGiftRoll.gift.data.duration,
+          pool: slice.showPopupGiftRoll.gift.data.pool,
+          system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+      },
+        user: slice.userData.name,
+        email: slice.userData.email,
+      }, slice.sessionId);
+      dispatch(actionShowMenuSession(''));
+      dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
     }
-    const authData: { email: string, name: string } | null = await authenticate();
-
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
-        await registerMessage({
-          message: {
-            rollOfMargin: resultOf,
-            rollOfRage: resultOfRage,
-            dificulty,
-            penaltyOrBonus,
-            roll: 'true',
-            gift: slice.showPopupGiftRoll.gift.data.gift,
-            giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-            cost: slice.showPopupGiftRoll.gift.data.cost,
-            action: slice.showPopupGiftRoll.gift.data.action,
-            duration: slice.showPopupGiftRoll.gift.data.duration,
-            pool: slice.showPopupGiftRoll.gift.data.pool,
-            system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-        },
-          user: name,
-          email: email,
-        }, slice.showPopupGiftRoll.gift.session);
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-      }
-    }
-    dispatch(actionShowMenuSession(''));
-    dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));
   }
   return(
     <div className="w-full">

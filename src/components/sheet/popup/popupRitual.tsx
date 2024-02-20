@@ -2,19 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, actionPopupRitual, useSlice } from "@/redux/slice";
 import Feedback from "../../feedback";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-
-interface IRitual {
-  titlePtBr: string;
-  title:string;
-  type: string;
-  descriptionPtBr: string;
-  description: string;
-  pool: string;
-  systemPtBr: string;
-  system: string;
-  book: string;
-  page: number;
-}
+import { IRitual } from "@/interface";
 
 export default function PopupRitual(props: { item: IRitual } ) {
   const dispatch: any = useAppDispatch();

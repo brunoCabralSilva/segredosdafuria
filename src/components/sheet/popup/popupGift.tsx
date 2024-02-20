@@ -1,50 +1,11 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionFeedback, actionPopupGift, useSlice } from "@/redux/slice";
+import { actionFeedback, actionPopupGift, actionPopupGiftRoll, useSlice } from "@/redux/slice";
 import Feedback from "../../feedback";
 import Image from "next/image";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { ITypeGift } from "@/interface";
-
-interface IBelonging {
-  type: string;
-  totalRenown: number;
-}
-
-interface IGift {
-  giftPtBr: string;
-  gift: string;
-  title: string;
-  belonging: IBelonging[];
-  descriptionPtBr: string;
-  description: string;
-  pool: string;
-  renown: string;
-  systemPtBr: string;
-  system: string;
-  book: string;
-  page: number;
-  cost: string;
-  action: string;
-  duration: string;
-}
-
-function capitalizeFirstLetter(str: string): String {
-  switch(str) {
-    case 'global': return 'Dons Nativos';
-    case 'silent striders': return 'Peregrinos Silenciosos';
-    case 'black furies': return 'Fúrias Negras';
-    case 'silver fangs': return 'Presas de Prata';
-    case 'hart wardens': return 'Guarda do Cervo';
-    case 'ghost council': return 'Conselho Fantasma';
-    case 'galestalkers': return 'Perseguidores da Tempestade';
-    case 'glass walkers': return 'Andarilhos do Asfalto';
-    case 'bone gnawers': return 'Roedores de Ossos';
-    case 'shadow lords': return 'Senhores das Sombras';
-    case 'children of gaia': return 'Filhos de Gaia';
-    case 'red talons': return 'Garras Vermelhas';
-    default: return str.charAt(0).toUpperCase() + str.slice(1);;
-  }
-};
+import { IGift, ITypeGift } from "@/interface";
+import { capitalizeFirstLetter } from "@/functions/utilities";
+import { GiD10 } from "react-icons/gi";
 
 export default function PopupGift(props: { item: IGift } ) {
   const dispatch: any = useAppDispatch();
@@ -60,6 +21,15 @@ export default function PopupGift(props: { item: IGift } ) {
             onClick={() => dispatch(actionPopupGift({ show: false, gift: {} }))}
           />
         </div>
+        {/* <button
+          type="button"
+          onClick={() => dispatch(actionPopupGiftRoll({
+            show: true,
+            gift: { session: slice.sessionId, data: item },
+          }))}
+        >
+          <GiD10 className="text-2xl text-white" />
+        </button> */}
         <div className="px-2 sm:px-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify">
           <article className="w-full h-full px-4 pb-4 text-white">
             <div className="flex flex-col justify-center dataGifts-center sm:dataGifts-start">

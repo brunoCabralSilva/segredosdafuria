@@ -2,6 +2,8 @@ import { IAtribute, IFeedback, IList, IMessage, IType } from "../interface";
 import { PayloadAction, Slice, createSlice } from "@reduxjs/toolkit";
 
 const INITIAL_STATE = {
+  userData: { email: '', name: '', dm: false },
+  sessionId: '',
   selectTA: [],
   global: false,
   totalRenown: 0,
@@ -43,6 +45,7 @@ const INITIAL_STATE = {
     { name: "Máscara", advantages: [], flaws: [] },
     { name: "Mentor", advantages: [], flaws: [] },
     { name: "Recursos", advantages: [], flaws: [] },
+    { name: "Abuso Substancial", advantages: [], flaws: [] },
     { name: "Pacto Espiritual", advantages: [], flaws: [] },
   ],
 };
@@ -182,12 +185,25 @@ const slice: Slice = createSlice({
     actionPopupCreateSheet(state, { payload }: PayloadAction<IList>) {
       return { ...state, popupCreateSheet: payload };
     },
+    actionSessionId(state, { payload }: PayloadAction<IList>) {
+      return { ...state, sessionId: payload };
+    },
+    actionSaveUserData(state, { payload }: PayloadAction<{ email: string, name: string, dm: boolean }>) {
+      return {
+        ...state,
+        userData: {
+          email: payload.email,
+          name: payload.name,
+          dm: payload.dm },
+      };
+    },
   },
 });
 
 export default slice.reducer;
 
 export const {
+  actionSaveUserData,
   actionInfoSessions,
   actionDeleteUserFromSession,
   actionShowAdvantage,
@@ -218,6 +234,7 @@ export const {
   actionLoginInTheSession,
   actionPopupGiftRoll,
   actionPopupCreateSheet,
+  actionSessionId,
 } = slice.actions;
 
 export const useSlice = (state: any) => {

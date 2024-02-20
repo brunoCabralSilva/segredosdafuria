@@ -3,10 +3,8 @@ import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/sl
 import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { registerMessage, sendMessage } from "@/firebase/chatbot";
-import { authenticate, signIn } from "@/firebase/login";
 import { returnRageCheck, returnValue } from "@/firebase/checks";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import firebaseConfig from "@/firebase/connection";
+import { getUserByIdSession } from "@/firebase/sessions";
 
 export default function SpiritOfTheFray(props: any) {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
@@ -22,33 +20,20 @@ export default function SpiritOfTheFray(props: any) {
   }, []);
   
   const getGlory = async () => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', slice.showPopupGiftRoll.gift.session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setGlory(player.data.glory);
-        setRage(player.data.rage);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-        }
-      }
-    } catch (error) {
-      window.alert(`Erro ao atualizar valor de Glória` + (error));
-    }
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setGlory(player.data.glory);
+      setRage(player.data.rage);
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   const rollDice = async () => {
     if (rage) {
-      await returnRageCheck(rageTests + 1, 'manual', slice.showPopupGiftRoll.gift.session);
-      const dtSheet: any | null = await returnValue('strength', 'brawl', '', slice.showPopupGiftRoll.gift.session);
+      await returnRageCheck(rageTests + 1, 'manual', slice.sessionId, slice.userData);
+      const dtSheet: any | null = await returnValue('strength', 'brawl', '', slice.sessionId, slice.userData.email);
       if (dtSheet) {
         let rage = dtSheet.rage;
         let resultOfRage = [];
@@ -72,57 +57,27 @@ export default function SpiritOfTheFray(props: any) {
             resultOf.push(value);
           }
         }
-        const authData: { email: string, name: string } | null = await authenticate();
-
-        try {
-          if (authData && authData.email && authData.name) {
-            const { email, name } = authData;
-            if (dices + rage >= dificulty) {
-              await registerMessage({
-                message: {
-                  rollOfMargin: resultOf,
-                  rollOfRage: resultOfRage,
-                  dificulty,
-                  penaltyOrBonus,
-                  roll: 'true',
-                  gift: slice.showPopupGiftRoll.gift.data.gift,
-                  giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                  cost: slice.showPopupGiftRoll.gift.data.cost,
-                  action: slice.showPopupGiftRoll.gift.data.action,
-                  duration: slice.showPopupGiftRoll.gift.data.duration,
-                  pool: slice.showPopupGiftRoll.gift.data.pool,
-                  system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-              },
-                user: name,
-                email: email,
-              }, slice.showPopupGiftRoll.gift.session);
-            } else {
-              await registerMessage({
-                message: {
-                  rollOfMargin: resultOf,
-                  rollOfRage: resultOfRage,
-                  dificulty,
-                  roll: 'true',
-                  penaltyOrBonus,
-                  gift: slice.showPopupGiftRoll.gift.data.gift,
-                  giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
-                  cost: slice.showPopupGiftRoll.gift.data.cost,
-                  action: slice.showPopupGiftRoll.gift.data.action,
-                  duration: slice.showPopupGiftRoll.gift.data.duration,
-                  pool: slice.showPopupGiftRoll.gift.data.pool,
-                  system: slice.showPopupGiftRoll.gift.data.systemPtBr,
-                },
-                user: name,
-                email: email,
-              }, slice.showPopupGiftRoll.gift.session);
-            }
-          }
-        } catch (error) {
-        window.alert('Erro ao obter valor da Forma: ' + error);
-        }
+        await registerMessage({
+          message: {
+            rollOfMargin: resultOf,
+            rollOfRage: resultOfRage,
+            dificulty,
+            penaltyOrBonus,
+            roll: 'true',
+            gift: slice.showPopupGiftRoll.gift.data.gift,
+            giftPtBr: slice.showPopupGiftRoll.gift.data.giftPtBr,
+            cost: slice.showPopupGiftRoll.gift.data.cost,
+            action: slice.showPopupGiftRoll.gift.data.action,
+            duration: slice.showPopupGiftRoll.gift.data.duration,
+            pool: slice.showPopupGiftRoll.gift.data.pool,
+            system: slice.showPopupGiftRoll.gift.data.systemPtBr,
+        },
+          user: slice.userData.name,
+          email: slice.userData.email,
+        }, slice.sessionId);
       }
     } else {
-      await sendMessage('Não foi possível conjurar o dom (Não possui Fúria suficiente para a ação requisitada).', slice.showPopupGiftRoll.gift.session);
+      await sendMessage('Não foi possível conjurar o dom (Não possui Fúria suficiente para a ação requisitada).', slice.sessionId, slice.userData);
     }
     dispatch(actionShowMenuSession(''));
     dispatch(actionPopupGiftRoll({ show: false, gift: { session: '', data: '' }}));

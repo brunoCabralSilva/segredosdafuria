@@ -1,20 +1,18 @@
 'use client'
 import { useEffect, useState } from "react";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import Item from "./item";
-import firebaseConfig from "@/firebase/connection";
+import { updateDoc } from "firebase/firestore";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
-import dataTrybes from '../../data/trybes.json';
-import ItemAgravated from "./itemAgravated";
 import { actionDeleteUserFromSession, actionResetSheet, useSlice } from "@/redux/slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { authenticate, signIn } from "@/firebase/login";
 import { useRouter } from "next/navigation";
+import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
+import Item from "./item";
+import dataTrybes from '../../data/trybes.json';
+import ItemAgravated from "./itemAgravated";
 import PopupDelUserFromSession from "./popup/popupDelUserFromSession";
 
-export default function General(props: { session: string }) {
-  const { session } = props;
+export default function General() {
   const dispatch = useAppDispatch();
   const [input, setInput ] = useState('');
   const [nameCharacter, setNameCharacter] = useState<string>('');
@@ -34,58 +32,27 @@ export default function General(props: { session: string }) {
   }, [])
 
   const returnValueSkill = async (): Promise<void> => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setAuspice(player.data.auspice);
-        setTrybe(player.data.trybe);
-        setNameCharacter(player.data.name);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert(`Erro ao obter valores de augúrio, tribo e/ou nome: (' + error + ')`);
-    }
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setAuspice(player.data.auspice);
+      setTrybe(player.data.trybe);
+      setNameCharacter(player.data.name);
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   const updateValue = async (key: string, value: string) => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        if (key === 'name') player.data.name = nameCharacter;
-        if (key === 'auspice') player.data.auspice = value;
-        if (key === 'trybe') player.data.trybe = value;
-        const docRef = userQuerySnapshot.docs[0].ref;
-        const playersFiltered = players.filter((gp: any) => gp.email !== email);
-        await updateDoc(docRef, { players: [...playersFiltered, player] });
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert(`Erro ao atualizar valor de ${key}: (' + error + ')`);
-    }
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      if (key === 'name') player.data.name = nameCharacter;
+      if (key === 'auspice') player.data.auspice = value;
+      if (key === 'trybe') player.data.trybe = value;
+      const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+      await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
     returnValueSkill();
   };
 
@@ -180,16 +147,16 @@ export default function General(props: { session: string }) {
             }
           </select>
         </div>
-        <Item name="rage" namePtBr="Fúria" quant={5} session={session} />
-        <ItemAgravated name="willpower" namePtBr="Força de Vontade" session={session} />
-        <ItemAgravated name="health" namePtBr="Vitalidade" session={session} />
+        <Item name="rage" namePtBr="Fúria" quant={5} />
+        <ItemAgravated name="willpower" namePtBr="Força de Vontade" />
+        <ItemAgravated name="health" namePtBr="Vitalidade" />
         <div className="flex flex-col lg:flex-row">
-          <Item name="harano" namePtBr="Harano" quant={5} session={session} />
-          <Item name="hauglosk" namePtBr="Hauglosk" quant={5} session={session} />
+          <Item name="harano" namePtBr="Harano" quant={5} />
+          <Item name="hauglosk" namePtBr="Hauglosk" quant={5} />
         </div>
-        <Item name="honor" namePtBr="Honra" quant={5} session={session} />
-        <Item name="glory" namePtBr="Glória" quant={5} session={session} />
-        <Item name="wisdom" namePtBr="Sabedoria" quant={5} session={session} />
+        <Item name="honor" namePtBr="Honra" quant={5} />
+        <Item name="glory" namePtBr="Glória" quant={5} />
+        <Item name="wisdom" namePtBr="Sabedoria" quant={5} />
         <button
             type="button"
             className="mt-8 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
@@ -204,7 +171,7 @@ export default function General(props: { session: string }) {
           >
             Sair da Sessão
         </button>
-        { slice.popupDeleteUserFromSession && <PopupDelUserFromSession session={session} /> }
+        { slice.popupDeleteUserFromSession && <PopupDelUserFromSession /> }
       </div>
     </div>
   );

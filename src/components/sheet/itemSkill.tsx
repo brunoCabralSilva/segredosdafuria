@@ -1,24 +1,21 @@
 'use client'
 import firebaseConfig from "@/firebase/connection";
 import { authenticate, signIn } from "@/firebase/login";
+import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
+import { IItem } from "@/interface";
+import { useAppSelector } from "@/redux/hooks";
+import { useSlice } from "@/redux/slice";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 
-interface ISkl {
-  name: string;
-  namePtBr: string;
-  quant: number;
-  session: string;
-}
-
-export default function ItemSkill(props: ISkl) {
+export default function ItemSkill(props: IItem) {
   const [ skill, setSkill ] = useState<{ value: number, specialty: string }>({ value: 0, specialty: '' });
   const [input, setInput ] = useState(false);
-  const { name, namePtBr, quant, session } = props;
-  const router = useRouter();
+  const { name, namePtBr, quant } = props;
+  const slice = useAppSelector(useSlice);
 
   const typeText = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -29,62 +26,32 @@ export default function ItemSkill(props: ISkl) {
   };
 
   useEffect(() => {
-    returnValueSkill();
+    returnValue();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  const returnValueSkill = async (): Promise<void> => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setSkill(player.data.skills[name]);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-    }
-  };
+  }, []);
   
+  const returnValue = async (): Promise<void> => {
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setSkill(player.data.skills[name]);
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+  };
+
   const updateValue = async (name: string, value: number) => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        player.data.skills[name] = value;
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      player.data.skills[name] = value;
         if (player.data.skills[name].value === 1 && value === 1) player.data.skills[name] = { value: 0, specialty: skill.specialty };
         else player.data.skills[name] = { value, specialty: skill.specialty };
-        const docRef = userQuerySnapshot.docs[0].ref;
-        const playersFiltered = players.filter((gp: any) => gp.email !== email);
-        await updateDoc(docRef, { players: [...playersFiltered, player] });
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-    }
-    returnValueSkill();
+        const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+        await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+      await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+      returnValue();
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   const returnPoints = (name: string) => {

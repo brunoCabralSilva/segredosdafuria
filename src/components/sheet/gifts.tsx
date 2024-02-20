@@ -1,22 +1,21 @@
 'use client'
 import { useEffect, useState } from "react";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { IoAdd, IoClose } from "react-icons/io5";
-import firebaseConfig from "@/firebase/connection";
+import { getUserByIdSession } from "@/firebase/sessions";
+import { useAppSelector } from "@/redux/hooks";
+import { useSlice } from "@/redux/slice";
 import dataGifts from '../../data/gifts.json';
 import ItemGift from "./itemGift";
 import ItemGiftAdded from "./itemGiftAdded";
-import { authenticate, signIn } from "@/firebase/login";
-import { useRouter } from "next/navigation";
 
-export default function GiftsSheet(props: { session: string }) {
-  const { session } = props;
+export default function GiftsSheet() {
   const [showAllGifts, setShowAllGifts] = useState<boolean>(false);
   const [totalRenown, setTotalRenown] = useState<number>(0);
   const [trybe, setTrybe] = useState<string>('');
   const [auspice, setAuspice] = useState<string>('');
   const [giftsAdded, setGiftsAdded] = useState<any[]>([]);
-  const router = useRouter();
+
+  const slice = useAppSelector(useSlice);
 
   useEffect(() => {
     generateDataForGifts();
@@ -24,30 +23,16 @@ export default function GiftsSheet(props: { session: string }) {
   }, []);
 
   const generateDataForGifts = async () => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setTotalRenown(Number(player.data.honor) + Number(player.data.glory + Number(player.data.wisdom)));
-        setTrybe(player.data.trybe);
-        setAuspice(player.data.auspice);
-        setGiftsAdded((player.data.gifts))
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-     } catch (error) {
-      window.alert('Erro ao obter valores do dom: ' + error);
-    }
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setTotalRenown(Number(player.data.honor) + Number(player.data.glory + Number(player.data.wisdom)));
+      setTrybe(player.data.trybe);
+      setAuspice(player.data.auspice);
+      setGiftsAdded((player.data.gifts));
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   const returnListOfGifts = () => {
@@ -64,10 +49,10 @@ export default function GiftsSheet(props: { session: string }) {
     else {
       return (listGifts.map((dataGift, index) => (
         <ItemGift
-          session={ session }
           key={ index }
           index={ index }
           dataGift={ dataGift }
+          generateDataForGifts={generateDataForGifts}
         />
       )));
     }
@@ -113,7 +98,6 @@ export default function GiftsSheet(props: { session: string }) {
                       key={ index }
                       index={ index }
                       dataGift={ item }
-                      session={ session }
                       generateDataForGifts={ generateDataForGifts }
                     />
                   ))

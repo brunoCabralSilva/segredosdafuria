@@ -1,4 +1,4 @@
-import { IGenerateDataRolls, IMsn } from "@/interface";
+import { IGenerateDataRolls } from "@/interface";
 
 export const generateDataRoll = (msn: any): IGenerateDataRolls => {
   let success = 0;

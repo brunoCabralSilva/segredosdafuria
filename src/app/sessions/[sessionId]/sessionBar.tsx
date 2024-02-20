@@ -1,6 +1,6 @@
 'use client'
 import { sendMessage } from '@/firebase/chatbot';
-import { collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { GiD10 } from "react-icons/gi";
 import { IoIosSend } from "react-icons/io";
 import { FaFile } from "react-icons/fa";
@@ -10,48 +10,30 @@ import { FaAngleDown } from "react-icons/fa6";
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionDelHistoric, actionShowMenuSession, useSlice } from '@/redux/slice';
 import { useEffect, useState } from 'react';
-import firestoreConfig from '../../../firebase/connection';
-import { authenticate, signIn } from '@/firebase/login';
-import { useRouter } from 'next/navigation';
+import firebaseConfig from '../../../firebase/connection';
 
 export default function SessionBar(props: any) {
-  const { showOptions, setShowOptions, scrollToBottom, sessionName } = props;
+  const { showOptions, setShowOptions, scrollToBottom, sessionId } = props;
   const [text, setText] = useState('');
   const [dm, setDm] = useState(false);
   const slice = useAppSelector(useSlice);
   const dispatch: any = useAppDispatch();
-  const router = useRouter();
 
   useEffect(() => {
     setDm(false);
-    const analyzeDm = async () => {
-      try {
-        const authData: { email: string, name: string } | null = await authenticate();
-        if (authData && authData.email && authData.name) {
-          const { email } = authData;
-          const db = getFirestore(firestoreConfig);
-          const sessionRef = collection(db, "sessions");
-          const querySession = query(sessionRef, where("name", "==", sessionName));
-          const resultado: any = await getDocs(querySession);
-          const players: any = [];
-          resultado.forEach((doc: any) => players.push(...doc.data().players));
-          let dmEmail: string = '';
-          resultado.forEach((doc: any) => dmEmail = doc.data().dm);
-          if (dmEmail === email) setDm(true);
-        } else {
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
-      } catch(error) {
-        setDm(false);
-      }
-    };
     analyzeDm();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const analyzeDm = async () => {
+    const db = getFirestore(firebaseConfig);
+    const sessionRef = doc(db, "sessions", sessionId);
+    const result: any = await getDoc(sessionRef);
+    if (result.exists()) {
+      const dmEmail: string = result.data().dm;
+      if (dmEmail === slice.userData.email) setDm(true);
+    }
+  };
 
   return(
     <div className={`${slice.showMenuSession !== '' ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center min-h-10vh`}>
@@ -117,7 +99,7 @@ export default function SessionBar(props: any) {
               className="p-2"
               title="Enviar uma mensagem"
               onClick={() => {
-                sendMessage(text, sessionName);
+                sendMessage(text, slice.sessionId, slice.userData);
                 setText('');
                 scrollToBottom();
               }}

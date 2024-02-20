@@ -1,21 +1,18 @@
 'use client'
-import firebaseConfig from "@/firebase/connection";
-import { useAppDispatch } from "@/redux/hooks";
-import { actionForm, actionShowMenuSession } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionForm, actionShowMenuSession, useSlice } from "@/redux/slice";
+import { updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
 import Image from "next/image";
 import { returnRageCheck } from "@/firebase/checks";
 import { registerMessage } from "@/firebase/chatbot";
-import { authenticate, signIn } from "@/firebase/login";
-import { useRouter } from "next/navigation";
+import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
 
-export default function Forms(props: { session: string }) {
-  const { session } = props;
+export default function Forms() {
   const [ formSelected, setFormSelected ] = useState<any>('');
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const slice = useAppSelector(useSlice);
 
   useEffect(() => {
     returnValue();
@@ -23,78 +20,47 @@ export default function Forms(props: { session: string }) {
   }, []);
 
   const returnValue = async (): Promise<void> => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email } = authData;
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        setFormSelected(player.data.form);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
-    } catch (error) {
-      window.alert('Erro ao obter valor da Forma: ' + error);
-    }
+    const player = await getUserByIdSession(
+      slice.sessionId,
+      slice.userData.email,
+    );
+    if (player) {
+      setFormSelected(player.data.form);
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
-  
+
   const updateValue = async (nameForm: string) => {
-    const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
-    try {
-      if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
-        if (nameForm !== formSelected) {
-          if (nameForm === 'Hominídeo' || nameForm === 'Lupino') {
-            await registerMessage({
-              message: `Mudou para a forma ${nameForm}.`,
-              user: name,
-              email: email,
-            }, session);
-          }
-          if (nameForm === 'Crinos') await returnRageCheck(2, nameForm, session);
-          if (nameForm === 'Glabro' || nameForm === 'Hispo') await returnRageCheck(1, nameForm, session);
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
+    if (player) {
+      if (nameForm !== formSelected) {
+        if (nameForm === 'Hominídeo' || nameForm === 'Lupino') {
+          await registerMessage({
+            message: `Mudou para a forma ${nameForm}.`,
+            user: slice.userData.name,
+            email: slice.userData.email,
+          }, slice.sessionId);
         }
-        const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
-        const userQuerySnapshot = await getDocs(userQuery);
-        const players: any = [];
-        userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-        const player: any = players.find((gp: any) => gp.email === email);
-        if (player.data.form === "Crinos") {
-          if (player.data.rage > 0) {
-            player.data.rage = 1;
-            await registerMessage({
-              message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
-              user: name,
-              email: email,
-            }, session);
-          }
-        }
-        dispatch(actionShowMenuSession(''))
-        player.data.form = nameForm;
-        const docRef = userQuerySnapshot.docs[0].ref;
-        const playersFiltered = players.filter((gp: any) => gp.email !== email);
-        await updateDoc(docRef, { players: [...playersFiltered, player] });
-        dispatch(actionForm(nameForm));
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
+        if (nameForm === 'Crinos') await returnRageCheck(2, nameForm, slice.sessionId, slice.userData);
+        if (nameForm === 'Glabro' || nameForm === 'Hispo') await returnRageCheck(1, nameForm, slice.sessionId, slice.userData);
+      }
+      if (player.data.form === "Crinos") {
+        if (player.data.rage > 0) {
+          player.data.rage = 1;
+          await registerMessage({
+            message: 'Fúria reduzida para 1 por ter saído da forma Crinos.',
+            user: slice.userData.name,
+            email: slice.userData.email,
+          }, slice.sessionId);
         }
       }
-    } catch (error) {
-      window.alert('Erro ao atualizar Forma (' + error + ')');
-    }
-    returnValue();
+      dispatch(actionShowMenuSession(''))
+      player.data.form = nameForm;
+      const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
+      await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+      dispatch(actionForm(nameForm));
+      returnValue();
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
   };
 
   return(

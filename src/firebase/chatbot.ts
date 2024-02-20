@@ -1,6 +1,5 @@
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import firebaseConfig from "./connection";
-import { authenticate } from "./login";
+import { updateDoc } from "firebase/firestore";
+import { getChatAndDataByIdSession } from "./sessions";
 
 export const getHoraOficialBrasil = async () => {
   try {
@@ -20,44 +19,28 @@ export const getHoraOficialBrasil = async () => {
   }
 };
 
-export const sendMessage = async (text: any, sessionName: string) => {
-  const authData: { email: string, name: string } | null = await authenticate();
-  try {
-    if (authData && authData.email && authData.name) {
-      const { email, name } = authData;
-      if (text !== '' && text !== ' ') {
-        await registerMessage({
-          message: text,
-          user: name,
-          email,
-        },
-        sessionName);
-      }
-    }
-  } catch (error) {
-    window.alert('Erro ao obter valor da Forma: ' + error);
+export const sendMessage = async (text: any, sessionId: string, userData: any) => {
+  if (text !== '' && text !== ' ') {
+    await registerMessage({
+      message: text,
+      user: userData.name,
+      email: userData.email,
+    },
+    sessionId);
   }
 };
 
-export const registerMessage = async (message: any, sessionName: string) => {
+export const registerMessage = async (message: any, sessionId: string) => {
   const dateMessage = await getHoraOficialBrasil();
-  try {
-    const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'sessions');
-    const q: any = query(collectionRef, where('name', '==', sessionName));
-    const querySnapshot = await getDocs(q);
-    const querySnap: any = querySnapshot.docs[0].data();
-    const docRef = querySnapshot.docs[0].ref;
-    const chatArray = querySnap.chat;
-    const updatedChatArray = [...chatArray, { ...message, date: dateMessage }];
+  const getUser: any = await getChatAndDataByIdSession(sessionId);
+  if (getUser.chat) {
+    const updatedChatArray = [...getUser.chat, { ...message, date: dateMessage }];
     updatedChatArray.sort((a, b) => a.date - b.date);
     if (updatedChatArray.length > 15) {
       updatedChatArray.shift();
     }
-    await updateDoc(docRef, {
+    await updateDoc(getUser.sessionRef, {
       chat: updatedChatArray
     });
-  } catch (error) {
-    window.alert('Ocorreu um erro: ' + error);
-  }
+  } else window.alert('Não foi possível encontrar informações sobre o chat. Por favor, atualize a página e tente novamente.');
 };

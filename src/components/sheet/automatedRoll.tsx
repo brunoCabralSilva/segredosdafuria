@@ -1,15 +1,14 @@
 'use client'
-import { useAppDispatch } from "@/redux/hooks";
-import { actionShowMenuSession } from "@/redux/slice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import dataSheet from '../../data/sheet.json';
-import { registerRoll, registerRollForOthers } from "@/firebase/checks";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import firebaseConfig from "@/firebase/connection";
+import { registerRoll } from "@/firebase/checks";
+import { getUserAndDataByIdSession } from "@/firebase/sessions";
 
-export default function AutomatedRoll(props: { session: string, type: string }) {
-  const { session, type } = props;
+export default function AutomatedRoll(props: { type: string }) {
+  const { type } = props;
   const [atrSelected, setAtrSelected] = useState<string>('');
   const [sklSelected, setSklSelected] = useState<string>('');
   const [renSelected, setRenSelected] = useState<string>('');
@@ -18,6 +17,7 @@ export default function AutomatedRoll(props: { session: string, type: string }) 
   const [players, setPlayers] = useState([]);
   const [playerSelect, setPlayerSelect] = useState<any>('');
   const dispatch = useAppDispatch();
+  const slice = useAppSelector(useSlice);
   const disabledButton = () => {
     return (atrSelected === '' && renSelected === '' && sklSelected === '') || dificulty <= 0;
   }
@@ -27,19 +27,8 @@ export default function AutomatedRoll(props: { session: string, type: string }) 
   }, []);
 
   const getPlayersFromSession = async () => {
-    try {
-      const db = getFirestore(firebaseConfig);
-      const sessionsCollectionRef = collection(db, 'sessions');
-      const querySnapshot = await getDocs(query(sessionsCollectionRef, where('name', '==', session)));
-      if (!querySnapshot.empty) {
-        const sessionDoc = querySnapshot.docs[0];
-        const sessionData = sessionDoc.data();
-        const players = sessionData.players;
-        setPlayers(players);
-      }
-    } catch (error) {
-      window.alert("Erro ao obter os jogadores da sessão: " + error);
-    }
+    const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
+    setPlayers(getUser.players);
   };
   
   const rollDices = async () => {
@@ -47,15 +36,14 @@ export default function AutomatedRoll(props: { session: string, type: string }) 
       if (playerSelect !== '') {
         const selected: any = players.find((player: any) => player.email === playerSelect);
         if (selected) {
-          await registerRollForOthers(
+          await registerRoll(
             dificulty,
             penaltyOrBonus,
             atrSelected,
             sklSelected,
             renSelected,
-            session,
-            selected.user,
-            selected.email,
+            slice.sessionId,
+            { name: selected.user, email: selected.email },
           );
         } else window.alert('Necessário Selecionar um jogador para realizar o Teste.');
       } else window.alert('Necessário Selecionar um jogador para realizar o Teste.');
@@ -66,7 +54,8 @@ export default function AutomatedRoll(props: { session: string, type: string }) 
         atrSelected,
         sklSelected,
         renSelected,
-        session
+        slice.sessionId,
+        slice.userData,
       );
     }
     dispatch(actionShowMenuSession(''));
