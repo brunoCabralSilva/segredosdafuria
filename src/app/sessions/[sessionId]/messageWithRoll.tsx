@@ -9,7 +9,7 @@ export default function MessageWithRoll(
     <div className="p-2">
       <div className="p-2 flex gap-1 flex-wrap">
         {
-          msn.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
+          msn.rollOfRage.length > 0 && msn.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
             <Dice key={ index } dice={ dice } type="(rage)" />
           ))
         }

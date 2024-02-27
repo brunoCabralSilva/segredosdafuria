@@ -15,7 +15,16 @@ export const returnValue = async (
       let renown = 0;
       let skill = 0;
       let atr = 0;
-      if (atrSelected !== '') atr = Number(player.data.attributes[atrSelected]);
+      const fisics = ['strength', 'dexterity', 'stamina'];
+      if (fisics.includes(atrSelected)) {
+        if (player.data.form === 'Glabro' || player.data.form === 'Hispo') {
+          atr += 2;
+        } else if (player.data.form === 'Crinos') {
+
+          atr += 4;
+        } else atr += 0;
+      }
+      if (atrSelected !== '') atr += Number(player.data.attributes[atrSelected]);
       if (renSelected !== '') renown = Number(player.data[renSelected]);
       if (sklSelected !== '') skill = Number(player.data.skills[sklSelected].value);
       return {
@@ -114,6 +123,43 @@ export const returnRageCheck = async (
     }
     const playersFiltered = getUser.players.filter((gp: any) => gp.email !== userData.email);
     await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
+  } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente (Rage Check)');
+};
+
+export const returnHaranoHaugloskCheck = async (
+  sessionId: string,
+  userData: { email: string, name: string },
+) => {
+  const getUser: any = await getUserAndDataByIdSession(sessionId);
+  const player = getUser.players.find((gp: any) => gp.email === userData.email);
+  let resultOf = [];
+  if (player) {
+    let haranoHauglosk = Number(player.data.harano) + Number(player.data.hauglosk);
+    if (haranoHauglosk === 0) haranoHauglosk = 1;
+    
+    let success = 0;
+    
+    for (let i = 0; i < haranoHauglosk; i += 1) {
+      const value = Math.floor(Math.random() * 10) + 1;
+      if (value >= 6) success += 1;
+      resultOf.push(value);
+    }
+
+    try {
+      await registerMessage({
+        message: {
+          rollOfMargin: resultOf,
+          rollOfRage: [],
+          dificulty: 1,
+          penaltyOrBonus: 0,
+          type: 'hauglosk/harano',
+        },
+        user: userData.name,
+        email: userData.email,
+      }, sessionId);
+    } catch (error) {
+      window.alert('Erro ao obter valor da Forma: ' + error);
+    }  
   } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente (Rage Check)');
 };
 

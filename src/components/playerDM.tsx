@@ -54,7 +54,8 @@ export default function PlayersDm(props: any) {
     if (player.data.form === 'Crinos') {
       hp = player.data.attributes.stamina + 7
     } else hp = player.data.attributes.stamina + 3;
-    const rest = Array(hp - player.data.health.length).fill('');
+    let rest = [];
+    if (hp - player.data.health.length > 0) rest = Array(hp - player.data.health.length).fill('');
     return (
       <div className="pl-5 w-full">
         <div className="w-full flex justify-start">

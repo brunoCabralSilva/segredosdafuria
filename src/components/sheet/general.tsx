@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { updateDoc } from "firebase/firestore";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
-import { actionDeleteUserFromSession, actionResetSheet, useSlice } from "@/redux/slice";
+import { actionDeleteUserFromSession, actionResetSheet, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
 import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
@@ -11,6 +11,7 @@ import Item from "./item";
 import dataTrybes from '../../data/trybes.json';
 import ItemAgravated from "./itemAgravated";
 import PopupDelUserFromSession from "./popup/popupDelUserFromSession";
+import { returnHaranoHaugloskCheck } from "@/firebase/checks";
 
 export default function General() {
   const dispatch = useAppDispatch();
@@ -154,6 +155,15 @@ export default function General() {
           <Item name="harano" namePtBr="Harano" quant={5} />
           <Item name="hauglosk" namePtBr="Hauglosk" quant={5} />
         </div>
+        {/* <button
+          className="mt-3 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition transition-colors duration-600"
+          onClick={ async () => {
+            await returnHaranoHaugloskCheck(slice.sessionId, slice.userData);
+            dispatch(actionShowMenuSession(''))
+          }}
+        >
+          Teste de Harano / Hauglosk
+        </button> */}
         <Item name="honor" namePtBr="Honra" quant={5} />
         <Item name="glory" namePtBr="Glória" quant={5} />
         <Item name="wisdom" namePtBr="Sabedoria" quant={5} />

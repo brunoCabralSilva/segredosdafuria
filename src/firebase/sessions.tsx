@@ -56,7 +56,7 @@ export const getUserByIdSession = async(sessionId: string, email: string) => {
       return player;
     } return null;
   } catch (error) {
-    window.alert('Erro ao obter valor da Forma: ' + error);
+    window.alert('Erro ao obter dados do Jogador: ' + error);
   }
 };
 
