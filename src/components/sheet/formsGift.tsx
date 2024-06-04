@@ -5,7 +5,7 @@ import { collection, getDocs, getFirestore, query, where } from "firebase/firest
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
 import Image from "next/image";
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { useRouter } from "next/navigation";
 import { actionForm, useSlice } from "@/redux/slice";
 
@@ -23,9 +23,9 @@ export default function FormsGift(props: { session: string }) {
 
   const returnValue = async (): Promise<void> => {
     const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
+    const authData: any = await authenticate();
     try {
-      if (authData && authData.email && authData.name) {
+      if (authData && authData.email && authData.displayName) {
         const { email } = authData;
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
@@ -33,13 +33,7 @@ export default function FormsGift(props: { session: string }) {
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
         const player: any = players.find((gp: any) => gp.email === email);
         setFormSelected(player.data.form);
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
+      } else router.push('/login');
     } catch (error) {
       window.alert('Erro ao obter valor da Forma: ' + error);
     }

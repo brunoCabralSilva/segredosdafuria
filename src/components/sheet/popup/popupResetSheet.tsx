@@ -4,7 +4,7 @@ import { actionResetSheet, useSlice } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { useRouter } from "next/navigation";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";
 import { sheetStructure } from "../sheet";
@@ -17,10 +17,10 @@ export default function PopupResetSheet() {
   const resetSheet = async () => {
     const dateMessage = await getHoraOficialBrasil();
     try {
-      const authData: { email: string, name: string } | null = await authenticate();
+      const authData: any = await authenticate();
       const db = getFirestore(firestoreConfig);
-      if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
+      if (authData && authData.email && authData.displayName) {
+        const { email, displayName: name } = authData;
         const sheet = sheetStructure(email, name, dateMessage);
         const sessionsCollectionRef = collection(db, 'sessions');
         const sessionDocRef = doc(sessionsCollectionRef, slice.sessionId);
@@ -40,15 +40,7 @@ export default function PopupResetSheet() {
         }
         window.location.reload();
         }
-      } else {
-        const sign = await signIn();
-        window.alert("Ocorreu um erro. Por favor, atualize a página tente novamente remover o jogador.");
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-        dispatch(actionResetSheet(false));
-      }
+      } else router.push('/login');
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);
       dispatch(actionResetSheet(false));

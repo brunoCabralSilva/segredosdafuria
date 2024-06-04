@@ -3,24 +3,26 @@ import { actionForm, actionPopupGiftRoll, actionShowMenuSession, useSlice } from
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { registerMessage } from "@/firebase/chatbot";
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { returnRageCheck, returnValue } from "@/firebase/checks";
 import FormsGift from "../formsGift";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
+import { useRouter } from "next/navigation";
 
 export default function RapidShift() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const slice = useAppSelector(useSlice);
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const updateValue = async () => {
     const db = getFirestore(firebaseConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
+    const authData: any = await authenticate();
     try {
-      if (authData && authData.email && authData.name) {
-      const { email, name } = authData;
+      if (authData && authData.email && authData.displayName) {
+      const { email, displayName: name } = authData;
         if (slice.form === 'Hominídeo' || slice.form === 'Lupino') {
           await registerMessage({
             message: `Mudou para a forma ${slice.form}.`,
@@ -51,12 +53,7 @@ export default function RapidShift() {
         const playersFiltered = players.filter((gp: any) => gp.email !== email);
         await updateDoc(docRef, { players: [...playersFiltered, player] });
         dispatch(actionForm(slice.form));
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-        }
-      }
+      } else router.push('/login');
     } catch (error) {
       window.alert('Erro ao atualizar Forma (' + error + ')');
     }

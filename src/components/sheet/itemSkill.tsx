@@ -1,12 +1,9 @@
 'use client'
-import firebaseConfig from "@/firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
 import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
 import { IItem } from "@/interface";
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";

@@ -7,7 +7,7 @@ import AutomatedRoll from "../automatedRoll";
 import ManualRoll from "../../manualRoll";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { useRouter } from "next/navigation";
 
 export default function PopUpDices(props: { session: string, type: string }) {
@@ -17,21 +17,15 @@ export default function PopUpDices(props: { session: string, type: string }) {
   const router = useRouter();
 
   const verifyIfUserIsDm = async () => {
-    const authData: { email: string, name: string } | null = await authenticate();
+    const authData: any = await authenticate();
     try {
-      if (authData && authData.email && authData.name) {
+      if (authData && authData.email && authData.displayName) {
         const db = getFirestore(firebaseConfig);
         const userQuery = query(collection(db, 'sessions'), where('name', '==', session));
         const userQuerySnapshot = await getDocs(userQuery);
         const players: any = [];
         userQuerySnapshot.forEach((doc: any) => players.push(...doc.data().players));
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
+      } else router.push('/login');
     } catch (error) {
       window.alert('Erro ao obter valor da Forma: ' + error);
     }

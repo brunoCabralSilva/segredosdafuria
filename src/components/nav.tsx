@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionLogoutUser, useSlice } from '@/redux/slice';
 import PopupLogout from './sheet/popup/popupLogout';
-import { authenticate } from '@/firebase/login';
+import { authenticate } from '@/firebase/new/authenticate';
 import { useRouter } from 'next/navigation';
 
 export default function Nav() {
@@ -17,7 +17,7 @@ export default function Nav() {
   useEffect(() => {
     const fetchData = async () => {
       const authData = await authenticate();
-      if (authData && authData.email && authData.name) {
+      if (authData && authData.email && authData.displayName) {
         setLoginLogout('logout');
       } else {
         setLoginLogout('login');
@@ -152,12 +152,7 @@ export default function Nav() {
           <button
               type="button"
               onClick={ async () => {
-                if (loginLogout === 'login') {
-                  setShowMenu(!showMenu)
-                  const auth: any = await authenticate();
-                  if (auth) setLoginLogout('logout');
-                  else router.push('/login');
-                }
+                if (loginLogout === 'login') router.push('/login');
                 else dispatch(actionLogoutUser(true))
               }}
               className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"

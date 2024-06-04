@@ -15,7 +15,7 @@ import PopupGift from "./sheet/popup/popupGift";
 import PopupRitual from "./sheet/popup/popupRitual";
 import PopupAdvantage from "./sheet/popup/popupAdvantage";
 import PlayersDm from "./playerDM";
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 import PopupCreateSheet from "./sheet/popup/popupCreateSheet";
 import { sheetStructure } from "./sheet/sheet";
@@ -123,9 +123,9 @@ export default function MenuDm(props: { sessionId: string }) {
       window.alert('Necessário preencher um e-mail válido.');
     } else {
       try {
-        const authData: { email: string, name: string } | null = await authenticate();
-        if (authData && authData.email && authData.name) {
-          const { email, name } = authData;
+        const authData: any = await authenticate();
+        if (authData && authData.email && authData.displayName) {
+          const { email, displayName: name } = authData;
           const db = getFirestore(firestoreConfig);
           const sessionsCollectionRef = collection(db, 'sessions');
           const sessionDocRef = doc(sessionsCollectionRef, sessionId);
@@ -169,13 +169,7 @@ export default function MenuDm(props: { sessionId: string }) {
           } else {
             window.alert('Não foi possível encontrar a sessão especificada.');
           }
-        } else {
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
+        } else router.push('/login');
       } catch (error) {
         window.alert('Ocorreu um erro ao atualizar o Narrador da sessão: ' + error);
       }
@@ -188,8 +182,8 @@ export default function MenuDm(props: { sessionId: string }) {
 			const sessionsCollectionRef = collection(db, 'sessions');
       const sessionDocRef = doc(sessionsCollectionRef, sessionId);
       const sessionDocSnapshot = await getDoc(sessionDocRef);
-      const authData: { email: string, name: string } | null = await authenticate();
-        if (authData && authData.email && authData.name) {
+      const authData: any = await authenticate();
+        if (authData && authData.email && authData.displayName) {
           const { email } = authData;
           if (sessionDocSnapshot.exists()) {
             const sessionData = sessionDocSnapshot.data();
@@ -203,13 +197,7 @@ export default function MenuDm(props: { sessionId: string }) {
               dispatch(actionLoginInTheSession({ id: sessionId, logged: true }))
             } else router.push('/sessions');
           } else router.push('/sessions');
-        } else {
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
+        } else router.push('/login');
 		} catch (error) {
 			window.alert(`Erro ao obter a lista de jogadores: ` + error);
     }
@@ -221,19 +209,13 @@ export default function MenuDm(props: { sessionId: string }) {
 			const sessionsCollectionRef = collection(db, 'sessions');
       const sessionDocRef = doc(sessionsCollectionRef, sessionId);
       const sessionDocSnapshot = await getDoc(sessionDocRef);
-      const authData: { email: string, name: string } | null = await authenticate();
-      if (authData && authData.email && authData.name) {
+      const authData: any = await authenticate();
+      if (authData && authData.email && authData.displayName) {
         if (sessionDocSnapshot.exists()) {
           const notifications = sessionDocSnapshot.data().notifications;
           setListNotifications([...notifications]);
         }
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
+      } else router.push('/login');
     } catch(error) {
       window.alert(`Erro ao obter Notificações de jogadores: ` + error);
     }
@@ -272,7 +254,7 @@ export default function MenuDm(props: { sessionId: string }) {
         if(!findByEmail) {
           const dateMessage = await getHoraOficialBrasil();
           const sheet = sheetStructure(list.email, list.user, dateMessage);
-          const authData: { email: string, name: string } | null = await authenticate();
+          const authData: any | null = await authenticate();
           await updateDoc(sessionDocSnapshot.ref, {
             players: arrayUnion(sheet)
           });

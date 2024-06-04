@@ -1,6 +1,6 @@
 'use client'
 import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionShowMenuSession, useSlice } from "@/redux/slice";
 import Image from "next/image";
@@ -36,11 +36,11 @@ export default function ManualRoll() {
       resultOf.push(value);
     }
 
-    const authData: { email: string, name: string } | null = await authenticate();
+    const authData: any = await authenticate();
     try {
       const dateMessage = await getHoraOficialBrasil();
-      if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
+      if (authData && authData.email && authData.displayName) {
+        const { email, displayName: name } = authData;
       if (totalDices >= dificulty) {
         await registerMessage({
           message: {
@@ -65,13 +65,7 @@ export default function ManualRoll() {
       setPenaltyOrBonus(0);
       setDificulty(0);
       dispatch(actionShowMenuSession(''))
-    } else {
-      const sign = await signIn();
-      if (!sign) {
-        window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-        router.push('/');
-      }
-    }
+    } else router.push('/login');
   } catch (error) {
     window.alert('Erro ao obter valor da Forma: ' + error);
   }

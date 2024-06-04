@@ -5,7 +5,7 @@ import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/fires
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 
 export default function PopupDeletePlayer(props: { returnValue: any, sessionId : string }) {
   const { sessionId, returnValue } = props;
@@ -15,9 +15,9 @@ export default function PopupDeletePlayer(props: { returnValue: any, sessionId :
 
   const removePlayer = async () => {
     const db = getFirestore(firestoreConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
+    const authData: any = await authenticate();
     try {
-      if (authData && authData.email && authData.name) {
+      if (authData && authData.email && authData.displayName) {
         const sessionsCollectionRef = collection(db, 'sessions');
         const sessionDocRef = doc(sessionsCollectionRef, sessionId);
         const sessionDocSnapshot = await getDoc(sessionDocRef);
@@ -31,13 +31,7 @@ export default function PopupDeletePlayer(props: { returnValue: any, sessionId :
           dispatch(actionDeletePlayer({ show: false, player: {}}));
           window.alert("O jogador foi removido com sucesso!");
         }
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
+      } else router.push('/login');
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);
     }

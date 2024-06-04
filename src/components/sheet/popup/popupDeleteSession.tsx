@@ -5,7 +5,7 @@ import { collection, deleteDoc, doc, getDoc, getFirestore, updateDoc } from "fir
 import { useRouter } from "next/navigation";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { registerMessage } from "@/firebase/chatbot";
 
 export default function PopupDeleteSession(props: { sessionId : string }) {
@@ -15,9 +15,9 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
 
   const removeSession = async () => {
     const db = getFirestore(firestoreConfig);
-    const authData: { email: string, name: string } | null = await authenticate();
+    const authData: any = await authenticate();
     try {
-      if (authData && authData.email && authData.name) {
+      if (authData && authData.email && authData.displayName) {
         const { email } = authData;
         const sessionsCollectionRef = collection(db, 'sessions');
         const sessionDocRef = doc(sessionsCollectionRef, sessionId);
@@ -54,13 +54,7 @@ export default function PopupDeleteSession(props: { sessionId : string }) {
           dispatch(actionDeleteSession(false));
           window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
           router.push('/sessions');
-        } else {
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
+        } else router.push('/login');
       }
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);

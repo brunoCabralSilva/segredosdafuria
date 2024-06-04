@@ -22,8 +22,7 @@ function App() {
   useEffect(() => {
     const authUser = async () => {
       const auth = await authenticate();
-      console.log(auth);
-      if(auth) router.push("/sessions");
+      if(auth && auth.email && auth.displayName) router.push("/sessions");
       else setShowData(true);
       // const path = router.pathname;
       // console.log(`Salvando o endpoint: ${path}`);
