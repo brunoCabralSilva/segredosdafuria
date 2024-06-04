@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IGenerateDataRolls } from '@/interface';
 import { generateDataRoll } from './functions';
 import { useRouter } from 'next/navigation';
-import { authenticate, signIn } from '@/firebase/login';
+import { authenticate } from "@/firebase/new/authenticate";
 import { actionSaveUserData, actionSessionAuth, actionSessionId, useSlice } from '@/redux/slice';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { collection, documentId, getDocs, getFirestore, query, where } from 'firebase/firestore';
@@ -51,8 +51,8 @@ export default function SessionId({ params } : { params: { sessionId: string } }
     }
     else {
       const sessionData = sessionDocSnapshot.docs[0].data();
-      const authData: { email: string, name: string } | null = await authenticate();
-      if (authData && authData.email && authData.name) {
+      const authData: any = await authenticate();
+      if (authData && authData.email && authData.displayName) {
         setShowData(true);
         setEmail(authData.email);
         if (authData.email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
@@ -62,12 +62,12 @@ export default function SessionId({ params } : { params: { sessionId: string } }
           if(sessionData.dm === authData.email || sessionData.players.find((player: any) => player.email === authData.email)) {
             if(sessionData.dm === authData.email) {
               setDm('master');
-              dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: true }));
+              dispatch(actionSaveUserData({ email: authData.email, name: authData.displayName, dm: true }));
               dispatch(actionSessionId(params.sessionId));
             }
             else {
               setDm('player');
-              dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: false }));
+              dispatch(actionSaveUserData({ email: authData.email, name: authData.displayName, dm: false }));
               dispatch(actionSessionId(params.sessionId));
             }
           } else {
@@ -78,14 +78,7 @@ export default function SessionId({ params } : { params: { sessionId: string } }
           window.alert('Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente');
           router.push('/sessions');
         }
-      } else {
-        const sign = await signIn();
-        if (sign) setShowData(true);
-        else {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
+      } else router.push('/login');
     }
   }
   

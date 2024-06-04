@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { IoIosInformationCircle, IoMdAdd } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import SessionAuth from "./sessionAuth";
-import { authenticate, signIn, signOutFirebase } from "@/firebase/login";
+import { authenticate, signIn } from "@/firebase/new/authenticate";
 import PopupInfo from "@/components/sheet/popup/popupInfo";
 import { getAllSessions } from "@/firebase/sessions";
 import { ISessions } from "@/interface";
@@ -23,31 +23,15 @@ export default function Session() {
   useEffect(() => {
     setShowData(false);
     const fetchData = async (): Promise<void> => {
-      const authData = await authenticate();
+      const authData: any = await authenticate();
       try {
-        if (authData && authData.email && authData.name) {
-          dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: false }));
+        if (authData && authData.email && authData.displayName) {
+          dispatch(actionSaveUserData({ email: authData.email, name: authData.displayName, dm: false }));
           setShowData(true);
           const sessionsList = await getAllSessions();
           setSessions(sessionsList);
           setShowData(true);
-        } else {
-          await signOutFirebase();
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          } else {
-            const authData = await authenticate();
-            if (authData && authData.email && authData.name) {
-              dispatch(actionSaveUserData({ email: authData.email, name: authData.name, dm: false }));
-              setShowData(true);
-            } else {
-              window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-              router.push('/');
-            }
-          }
-        } 
+        } else router.push('/login');
       } catch (error) {
         window.alert('Ocorreu um erro ao obter Sessões: ' + error);
       }

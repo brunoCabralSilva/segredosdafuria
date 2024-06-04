@@ -4,7 +4,7 @@ import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/sl
 import { updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { authenticate, signIn } from "@/firebase/login";
+import { authenticate, signIn } from "@/firebase/new/authenticate";
 import { getNameAndDmFromSessions } from "@/firebase/sessions";
 import { getNotificationById } from "@/firebase/notifications";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -24,8 +24,8 @@ export default function SessionAuth() {
   const requestSession = async () => {
     try {
       const sessionId = slice.sessionAuth.id;
-      const authData: { email: string, name: string } | null = await authenticate();
-      if (authData && authData.email && authData.name) {
+      const authData: any = await authenticate();
+      if (authData && authData.email && authData.displayName) {
         const { email } = authData;
         const getData = await getNameAndDmFromSessions(sessionId);
         if (getData) {
@@ -54,13 +54,7 @@ export default function SessionAuth() {
             }
           }
         }
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
+      } else router.push('/login');
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);
     }
@@ -72,9 +66,9 @@ export default function SessionAuth() {
 
   const sendNotification = async () => {
     try {
-      const authData: { email: string, name: string } | null = await authenticate();
-      if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
+      const authData: any = await authenticate();
+      if (authData && authData.email && authData.displayName) {
+        const { email, displayName: name } = authData;
         const sessionDocSnapshot = await getNotificationById(slice.sessionAuth.id);
         if (sessionDocSnapshot) {
           const sendNot = sessionDocSnapshot.data();
@@ -91,13 +85,7 @@ export default function SessionAuth() {
         } else {
           window.alert("Ocorreu um erro. Por favor, tente novamente solicitar o acesso.");
         }
-      } else {
-        const sign = await signIn();
-        if (!sign) {
-          window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-          router.push('/');
-        }
-      }
+      } else router.push('/login');
     } catch(error) {
       window.alert("Ocorreu um erro: " + error);
     }

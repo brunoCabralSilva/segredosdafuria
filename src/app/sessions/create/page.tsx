@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import { FaArrowLeft } from "react-icons/fa6";
-import { authenticate, signIn, signOutFirebase } from "@/firebase/login";
+import { authenticate } from "@/firebase/new/authenticate";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";
 import { getSessionByName } from "@/firebase/sessions";
 
@@ -23,22 +23,14 @@ export default function Create() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const authData = await authenticate();
-        if (authData && authData.email && authData.name) {
+        const authData: any = await authenticate();
+        if (authData && authData.email && authData.displayName) {
           setShowData(true);
           setEmail(authData.email);
-        } else {
-          const sign = await signIn();
-          if (sign) setShowData(true);
-          else {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
+        } else router.push('/login');
       } catch (error) {
         window.alert('Ocorreu um erro com a validação de dados: ' + error);
-        signOutFirebase();
-        router.push('/');
+        router.push('/login');
       }
     };
     fetchData();

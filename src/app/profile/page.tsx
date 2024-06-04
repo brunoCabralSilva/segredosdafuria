@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Nav from '@/components/nav';
 import { useRouter } from 'next/navigation';
-import { authenticate, signIn } from '@/firebase/login';
+import { authenticate } from "@/firebase/new/authenticate";
 import Footer from '@/components/footer';
 import Image from 'next/image';
 import Simplify from '@/components/simplify';
@@ -27,8 +27,8 @@ export default function Profile() {
     setListDmSessions([]);
     setListSessions([]);
     const profile = async () => {
-    const authData: { email: string, name: string } | null = await authenticate();
-    if (authData && authData.email && authData.name) {
+    const authData: any = await authenticate();
+    if (authData && authData.email && authData.displayName) {
       const { email, name } = authData;
       setNameUser(name);
       setEmail(email);
@@ -52,14 +52,7 @@ export default function Profile() {
       });
       setListSessions(list2);
       setListDmSessions(list1);
-    } else {
-      const sign = await signIn();
-      if (sign) setShowData(true);
-      else {
-        window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-        router.push('/');
-      }
-    }
+    } else router.push('/login');
   }
   profile();
   // eslint-disable-next-line react-hooks/exhaustive-deps
