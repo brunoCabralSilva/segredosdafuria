@@ -1,6 +1,6 @@
 'use client'
 import { addDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import Footer from "@/components/footer";
 import Nav from "@/components/nav";

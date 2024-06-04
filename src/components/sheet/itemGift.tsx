@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { IoAddCircle, IoArrowUpCircleSharp } from "react-icons/io5";
 import { capitalizeFirstLetter } from "@/functions/utilities";
 import { getUserAndDataByIdSession } from "@/firebase/sessions";
-import Image from "next/image";
+import Image from 'next/image';
 import Feedback from "../feedback";
 
 export default function ItemGift(props: any) {

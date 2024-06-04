@@ -1,7 +1,7 @@
 'use client'
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionDeleteUserFromSession, useSlice } from "@/redux/slice";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { leaveFromSession } from "@/firebase/sessions";
 

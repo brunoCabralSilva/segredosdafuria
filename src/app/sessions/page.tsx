@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionInfoSessions, actionSaveUserData, actionSessionAuth, useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
 import { IoIosInformationCircle, IoMdAdd } from "react-icons/io";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import SessionAuth from "./sessionAuth";
 import { authenticate, signIn } from "@/firebase/new/authenticate";
 import PopupInfo from "@/components/sheet/popup/popupInfo";

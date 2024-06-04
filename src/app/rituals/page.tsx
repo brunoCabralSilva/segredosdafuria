@@ -4,7 +4,7 @@ import Footer from '@/components/footer';
 import { useSlice, actionType, actionFeedback } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
-import Image from 'next/image';
+import Image from "next/image";
 import { ChangeEvent, useEffect } from 'react';
 import ListRituals from './listRituals';
 import SearchButton from '@/components/SearchButton';

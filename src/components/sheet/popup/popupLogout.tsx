@@ -2,7 +2,7 @@
 import { signOutFirebase } from "@/firebase/login";
 import { useAppDispatch } from "@/redux/hooks";
 import { actionLogoutUser } from "@/redux/slice";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function PopupLogout(props: any) {

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, actionPopupGift, actionPopupGiftRoll, useSlice } from "@/redux/slice";
 import Feedback from "../../feedback";
-import Image from "next/image";
+import Image from 'next/image';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IGift, ITypeGift } from "@/interface";
 import { capitalizeFirstLetter } from "@/functions/utilities";

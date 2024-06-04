@@ -1,7 +1,7 @@
 'use client'
 import Footer from '@/components/footer';
-import Image from 'next/image'
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import Simplify from '@/components/simplify';

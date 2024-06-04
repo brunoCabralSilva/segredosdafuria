@@ -8,7 +8,7 @@ import { actionFeedback, actionPopupGiftRoll, useSlice } from "@/redux/slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { MdDelete } from "react-icons/md";
 import { IoArrowUpCircleSharp } from "react-icons/io5";
-import Image from "next/image";
+import Image from 'next/image';
 import Feedback from "../feedback";
 import PopupRollGift from "./popup/popupRollGift";
 import { capitalizeFirstLetter } from "@/functions/utilities";

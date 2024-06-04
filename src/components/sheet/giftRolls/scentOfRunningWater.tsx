@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionPopupGiftRoll, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useState } from "react";
-import { reduceFdv, rollWillPower } from "../functionGifts";
+import { rollWillPower } from "../functionGifts";
 import { sendMessage } from "@/firebase/chatbot";
 
 export default function ScentOfRunningWater() {

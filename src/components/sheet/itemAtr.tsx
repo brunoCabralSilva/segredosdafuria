@@ -4,7 +4,7 @@ import { IItem } from "@/interface";
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
 import { updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 
 export default function ItemAtr(props: IItem) {

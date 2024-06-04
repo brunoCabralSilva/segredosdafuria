@@ -2,7 +2,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
 import { IRitual } from "../../interface";
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function ListRituals() {
   const slice = useAppSelector(useSlice);

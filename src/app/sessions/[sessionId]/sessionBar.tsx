@@ -88,6 +88,13 @@ export default function SessionBar(props: any) {
           rows={Math.max(1, Math.ceil(text.length / 40))}
           className="w-full p-2 text-black"
           value={text}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter') {
+              sendMessage(text, slice.sessionId, slice.userData);
+              setText('');
+              scrollToBottom();
+            }
+          }}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
             setText(sanitizedValue);

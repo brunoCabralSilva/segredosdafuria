@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useState } from 'react';
 import Nav from '@/components/nav';
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { authenticate } from "@/firebase/new/authenticate";
 import Footer from '@/components/footer';
-import Image from 'next/image';
+import Image from "next/image";
 import Simplify from '@/components/simplify';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionSessionAuth, useSlice } from '@/redux/slice';

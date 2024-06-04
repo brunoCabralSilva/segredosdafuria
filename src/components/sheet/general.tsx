@@ -5,13 +5,12 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { actionDeleteUserFromSession, actionResetSheet, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";
 import Item from "./item";
 import dataTrybes from '../../data/trybes.json';
 import ItemAgravated from "./itemAgravated";
 import PopupDelUserFromSession from "./popup/popupDelUserFromSession";
-import { returnHaranoHaugloskCheck } from "@/firebase/checks";
 
 export default function General() {
   const dispatch = useAppDispatch();

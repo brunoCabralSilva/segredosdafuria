@@ -1,5 +1,5 @@
 'use client';
-import Image from "next/image";
+import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionFeedback, useSlice } from "@/redux/slice";

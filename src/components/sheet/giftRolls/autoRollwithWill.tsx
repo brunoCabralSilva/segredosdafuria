@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
 import { useEffect, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { rollDiceWithRage, rollDiceWithWillpower } from "../functionGifts";
+import { rollDiceWithWillpower } from "../functionGifts";
 
 export default function AutoRollwithWill(props: any) {
   const { attribute, renown, skill, textDificulty } = props;

@@ -4,7 +4,7 @@ import Footer from '@/components/footer';
 import { actionFeedback, actionList, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Simplify from '@/components/simplify';
-import Image from 'next/image';
+import Image from "next/image";
 import { ChangeEvent, useEffect } from 'react';
 import ListTalismans from './listTalismans';
 import jsonTalismans from '../../data/talismans.json';

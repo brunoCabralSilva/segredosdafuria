@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/slice";
 import { updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
 import { authenticate } from "@/firebase/new/authenticate";
 import { getNameAndDmFromSessions } from "@/firebase/sessions";

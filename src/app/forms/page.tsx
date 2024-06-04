@@ -2,12 +2,12 @@
 import { useEffect } from 'react';
 import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Image from 'next/image';
+import Image from "next/image";
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listForms from '../../data/forms.json';
-import Link from 'next/link';
+import Link from "next/link";
 import Feedback from '@/components/feedback';
 
 export default function Forms() {

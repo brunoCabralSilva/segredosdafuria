@@ -6,7 +6,7 @@ import { arrayUnion, collection, doc, getDoc, getFirestore, updateDoc } from "fi
 import { useEffect, useState } from "react";
 import firestoreConfig from '../firebase/connection';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import PopupDeleteSession from "./sheet/popup/popupDeleteSession";

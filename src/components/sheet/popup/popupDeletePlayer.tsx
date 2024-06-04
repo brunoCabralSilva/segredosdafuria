@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { actionDeletePlayer, useSlice } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
 import { authenticate } from "@/firebase/new/authenticate";

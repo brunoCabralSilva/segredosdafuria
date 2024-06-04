@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from "next/link";
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionLogoutUser, useSlice } from '@/redux/slice';
 import PopupLogout from './sheet/popup/popupLogout';

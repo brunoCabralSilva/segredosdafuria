@@ -1,6 +1,6 @@
 import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import Provider from "@/context/provider";
 import { Providers } from '@/redux/provider';
 

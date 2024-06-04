@@ -3,7 +3,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IGenerateDataRolls } from '@/interface';
 import { generateDataRoll } from './functions';
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { authenticate } from "@/firebase/new/authenticate";
 import { actionSaveUserData, actionSessionAuth, actionSessionId, useSlice } from '@/redux/slice';
 import { useCollectionData } from 'react-firebase-hooks/firestore';

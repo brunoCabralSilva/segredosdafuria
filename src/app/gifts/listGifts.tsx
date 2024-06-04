@@ -3,8 +3,8 @@
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
 import { IGift, ITypeGift } from "../../interface";
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ListGifts() {
   const slice = useAppSelector(useSlice);

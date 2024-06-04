@@ -1,12 +1,12 @@
 'use client'
 import { actionFeedback, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Image from 'next/image';
+import Image from "next/image";
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';
 import listTrybes from '../../data/trybes.json';
-import Link from 'next/link';
+import Link from "next/link";
 import Feedback from '@/components/feedback';
 
 export default function Trybes() {

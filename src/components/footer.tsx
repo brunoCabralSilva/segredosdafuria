@@ -1,7 +1,7 @@
 'use client'
 import { useAppSelector } from '@/redux/hooks';
 import { useSlice } from '@/redux/slice';
-import Image from 'next/image';
+import Image from "next/image";
 import React from 'react';
 
 export default function Footer() {

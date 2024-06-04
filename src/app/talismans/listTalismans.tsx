@@ -2,7 +2,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
 import { ITalisman } from "../../interface";
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function ListTalismans() {
   const slice = useAppSelector(useSlice);

@@ -1,6 +1,6 @@
 import { useAppSelector } from "@/redux/hooks";
 import { useSlice } from "@/redux/slice";
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function DataGifts() {
   const slice = useAppSelector(useSlice);

@@ -4,9 +4,9 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
-import Image from "next/image";
+import Image from 'next/image';
 import { authenticate } from "@/firebase/new/authenticate";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { actionForm, useSlice } from "@/redux/slice";
 
 export default function FormsGift(props: { session: string }) {

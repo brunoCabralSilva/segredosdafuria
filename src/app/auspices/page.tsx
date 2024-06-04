@@ -2,8 +2,8 @@
 import { useEffect } from 'react';
 import { actionFeedback, actionType, useSlice } from '@/redux/slice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import Simplify from '@/components/simplify';

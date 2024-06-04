@@ -4,7 +4,7 @@ import { actionForm, actionShowMenuSession, useSlice } from "@/redux/slice";
 import { updateDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
-import Image from "next/image";
+import Image from 'next/image';
 import { returnRageCheck } from "@/firebase/checks";
 import { registerMessage } from "@/firebase/chatbot";
 import { getUserAndDataByIdSession, getUserByIdSession } from "@/firebase/sessions";

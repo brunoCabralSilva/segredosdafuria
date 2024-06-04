@@ -1,4 +1,3 @@
-import { IMessage } from "@/interface";
 import Dice from "./dice";
 
 export default function Message(props: any) {

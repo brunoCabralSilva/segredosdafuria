@@ -1,6 +1,6 @@
 'use client'
 import { arrayUnion, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 import { useState } from "react";
 import firestoreConfig from '../../../firebase/connection';
 import { FaArrowLeft } from "react-icons/fa6";
