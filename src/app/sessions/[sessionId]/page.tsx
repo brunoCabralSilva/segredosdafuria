@@ -19,6 +19,7 @@ import PopupResetSheet from '@/components/sheet/popup/popupResetSheet';
 import PopupDelHistoric from '@/components/sheet/popup/popupDelHistoric';
 import BasicMessage from './basicMessage';
 import MessageWithRoll from './messageWithRoll';
+import Image from 'next/image';
 
 export default function SessionId({ params } : { params: { sessionId: string } }) {
   const [dataSession, setDataSession] = useState<any>({ name: '' });
@@ -126,6 +127,7 @@ export default function SessionId({ params } : { params: { sessionId: string } }
   };
 
   const messageForm = (index: number, msg: any, color: string, justify: string) => {
+    console.log(msg);
     if (msg.user === 'notification') {
       return(
         <div key={index} className="my-3 w-full flex justify-center text-gray-400">
@@ -141,7 +143,7 @@ export default function SessionId({ params } : { params: { sessionId: string } }
         <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2`}>
           {
             color === 'gray' &&
-            <div className="pl-2 pb-2 capitalize font-bold">
+            <div className="pl-2 pb-2 capitalize font-bold flex items-center gap-2">
               { msg.user }
             </div>
           }

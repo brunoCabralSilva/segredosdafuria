@@ -41,9 +41,9 @@ export default function ItemSkill(props: IItem) {
     const getUser: any = await getUserAndDataByIdSession(slice.sessionId);
     const player = getUser.players.find((gp: any) => gp.email === slice.userData.email);
     if (player) {
-      player.data.skills[name] = value;
-        if (player.data.skills[name].value === 1 && value === 1) player.data.skills[name] = { value: 0, specialty: skill.specialty };
-        else player.data.skills[name] = { value, specialty: skill.specialty };
+        if (player.data.skills[name].value === 1 && value === 1) {
+          player.data.skills[name] = { value: 0, specialty: skill.specialty };
+        } else player.data.skills[name] = { value, specialty: skill.specialty };
         const playersFiltered = getUser.players.filter((gp: any) => gp.email !== slice.userData.email);
         await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
       await updateDoc(getUser.sessionRef, { players: [...playersFiltered, player] });
