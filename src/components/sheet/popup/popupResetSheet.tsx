@@ -4,7 +4,7 @@ import { actionResetSheet, useSlice } from "@/redux/slice";
 import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { useRouter } from "next/navigation";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";
 import { sheetStructure } from "../sheet";

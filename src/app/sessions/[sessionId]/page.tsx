@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { IGenerateDataRolls } from '@/interface';
 import { generateDataRoll } from './functions';
 import { useRouter } from "next/navigation";
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { actionSaveUserData, actionSessionAuth, actionSessionId, useSlice } from '@/redux/slice';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { collection, documentId, getDocs, getFirestore, query, where } from 'firebase/firestore';
@@ -19,7 +19,6 @@ import PopupResetSheet from '@/components/sheet/popup/popupResetSheet';
 import PopupDelHistoric from '@/components/sheet/popup/popupDelHistoric';
 import BasicMessage from './basicMessage';
 import MessageWithRoll from './messageWithRoll';
-import Image from 'next/image';
 
 export default function SessionId({ params } : { params: { sessionId: string } }) {
   const [dataSession, setDataSession] = useState<any>({ name: '' });

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { actionLogoutUser, useSlice } from '@/redux/slice';
 import PopupLogout from './sheet/popup/popupLogout';
-import { authenticate } from '@/firebase/new/authenticate';
+import { authenticate } from '@/new/firebase/authenticate';
 import { useRouter } from 'next/navigation';
 
 export default function Nav() {

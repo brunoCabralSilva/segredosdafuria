@@ -1,10 +1,10 @@
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import firebaseConfig from "../connection";
+import firebaseConfig from "./connection";
 
-export async function createSessionImage(title: string, data: any){
+export async function createSessionImage(id: string, data: any){
   try {
     const storage = getStorage(firebaseConfig);
-    const storageRef = ref(storage, `images/${title}/${data.name}`);
+    const storageRef = ref(storage, `images/sessions/${id}/${data.name}`);
     await uploadBytes(storageRef, data);
     const downloadUrl = await getDownloadURL(storageRef);
     return downloadUrl;

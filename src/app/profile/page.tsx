@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import Nav from '@/components/nav';
 import { useRouter } from "next/navigation";
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import Footer from '@/components/footer';
 import Image from "next/image";
 import Simplify from '@/components/simplify';

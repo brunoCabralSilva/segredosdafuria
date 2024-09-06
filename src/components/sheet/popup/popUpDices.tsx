@@ -7,7 +7,7 @@ import AutomatedRoll from "../automatedRoll";
 import ManualRoll from "../../manualRoll";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import firebaseConfig from "@/firebase/connection";
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { useRouter } from "next/navigation";
 
 export default function PopUpDices(props: { session: string, type: string }) {

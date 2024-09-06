@@ -5,7 +5,7 @@ import { collection, doc, getDoc, getFirestore, updateDoc } from "firebase/fires
 import { useRouter } from 'next/navigation';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 
 export default function PopupDeletePlayer(props: { returnValue: any, sessionId : string }) {
   const { sessionId, returnValue } = props;

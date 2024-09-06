@@ -3,7 +3,7 @@ import { actionForm, actionPopupGiftRoll, actionShowMenuSession, useSlice } from
 import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { registerMessage } from "@/firebase/chatbot";
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { returnRageCheck, returnValue } from "@/firebase/checks";
 import FormsGift from "../formsGift";
 import { collection, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";

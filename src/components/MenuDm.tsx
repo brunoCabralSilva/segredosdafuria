@@ -15,7 +15,7 @@ import PopupGift from "./sheet/popup/popupGift";
 import PopupRitual from "./sheet/popup/popupRitual";
 import PopupAdvantage from "./sheet/popup/popupAdvantage";
 import PlayersDm from "./playerDM";
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 import PopupCreateSheet from "./sheet/popup/popupCreateSheet";
 import { sheetStructure } from "./sheet/sheet";

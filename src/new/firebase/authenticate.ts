@@ -6,8 +6,8 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import firebaseConfig from "../connection";
 import { getUserByEmail } from "./user";
+import firebaseConfig from "./connection";
 
 export const signIn = async (email: string, password: string) => {
   const auth = getAuth(firebaseConfig);

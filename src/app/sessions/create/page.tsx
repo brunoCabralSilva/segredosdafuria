@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Footer from "@/components/footer";
 import Nav from "@/components/nav";
 import { FaArrowLeft } from "react-icons/fa6";
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";
 import { getSessionByName } from "@/firebase/sessions";
 

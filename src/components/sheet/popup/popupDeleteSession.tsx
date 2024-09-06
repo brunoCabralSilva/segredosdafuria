@@ -5,7 +5,7 @@ import { collection, deleteDoc, doc, getDoc, getFirestore, updateDoc } from "fir
 import { useRouter } from 'next/navigation';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import firestoreConfig from '../../../firebase/connection';
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { registerMessage } from "@/firebase/chatbot";
 
 export default function PopupDeleteSession(props: { sessionId : string }) {

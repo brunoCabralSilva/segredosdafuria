@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* * {
+  background-color: black;
+} */
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -75,6 +79,7 @@ body {
   position: relative;
   width: 100px;
   height: 100px;
+  background-color: transparent;
 }
 
 .loader:before , .loader:after{

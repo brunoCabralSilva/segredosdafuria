@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { IoIosInformationCircle, IoMdAdd } from "react-icons/io";
 import { useRouter } from 'next/navigation';
 import SessionAuth from "./sessionAuth";
-import { authenticate, signIn } from "@/firebase/new/authenticate";
+import { authenticate, signIn } from "@/new/firebase/authenticate";
 import PopupInfo from "@/components/sheet/popup/popupInfo";
 import { getAllSessions } from "@/firebase/sessions";
 import { ISessions } from "@/interface";

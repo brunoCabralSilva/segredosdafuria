@@ -1,84 +1,36 @@
-'use client'
-import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
-import { authenticate } from "@/new/firebase/authenticate";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionShowMenuSession, useSlice } from "@/redux/slice";
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useState } from "react";
+import contexto from "@/context/context";
+import Image from "next/image";
+import { useContext, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { registerManualRoll } from "@/new/firebase/messagesAndRolls";
 
 export default function ManualRoll() {
-  const [valueOfRage, setValueOfRage] = useState<number>(0);
+	const [valueOfRage, setValueOfRage] = useState<number>(0);
   const [valueOf, setValueOf] = useState<number>(0);
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
-  const dispatch = useAppDispatch();
-  const slice = useAppSelector(useSlice);
-  const router = useRouter();
+	const { setShowMenuSession, sessionId } = useContext(contexto);
 
-  const registerRoll = async () => {
-    let resultOfRage = [];
-    let resultOf = [];
-    let valueWithPenaltyOfBonus = Number(penaltyOrBonus) + Number(valueOf);
-    let totalDices = valueOfRage + valueWithPenaltyOfBonus;
-    if (valueOfRage + valueWithPenaltyOfBonus < 0) {
-      totalDices = 0;
-    }
-
-    for (let i = 0; i < Number(valueOfRage); i += 1) {
-      const value = Math.floor(Math.random() * 10) + 1;
-      resultOfRage.push(value);
-    }
-
-    for (let i = 0; i < Number(valueWithPenaltyOfBonus); i += 1) {
-      const value = Math.floor(Math.random() * 10) + 1;
-      resultOf.push(value);
-    }
-
-    const authData: any = await authenticate();
-    try {
-      const dateMessage = await getHoraOficialBrasil();
-      if (authData && authData.email && authData.displayName) {
-        const { email, displayName: name } = authData;
-      if (totalDices >= dificulty) {
-        await registerMessage({
-          message: {
-            rollOfMargin: resultOf,
-            rollOfRage: resultOfRage,
-            dificulty,
-            penaltyOrBonus,
-            },
-          user: name,
-          email: email,
-          date: dateMessage,
-        }, slice.sessionId);
-      } else {
-        await registerMessage({
-          message: `A soma dos dados é menor que a dificuldade imposta. Sendo assim, a falha no teste foi automática (São ${valueWithPenaltyOfBonus } dados para um Teste de Dificuldade ${dificulty}).`,
-          user: name,
-          email: email,
-        }, slice.sessionId);
-      }
-      setValueOfRage(0);
-      setValueOf(0);
-      setPenaltyOrBonus(0);
-      setDificulty(0);
-      dispatch(actionShowMenuSession(''))
-    } else router.push('/login');
-  } catch (error) {
-    window.alert('Erro ao obter valor da Forma: ' + error);
-  }
-  };
-
-  const disableRoll = () => {
+	const disableRoll = () => {
     return (dificulty <= 0) || (valueOfRage <= 0 &&  valueOf <= 0 && penaltyOrBonus === 0)
   }
+
+	const rollDices = async () => {
+      await registerManualRoll(
+        sessionId,
+        valueOfRage,
+        valueOf,
+        penaltyOrBonus,
+        dificulty
+      );
+    setShowMenuSession('');
+  };
 
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1">Dados de Fúria (Dados pretos definem o total de dados de Fúria)</p>
+        <p className="text-white w-full pb-1">Dados de Fúria</p>
+        <p className="text-white w-full pb-3">(Dados pretos definem o total de dados de Fúria)</p>
         <div className="grid grid-cols-5 gap-2 w-full bg-gray-400 p-1">
           <Image
             alt="Dado de 10 faces"
@@ -138,7 +90,7 @@ export default function ManualRoll() {
         </div>
       </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Dados Restantes</p>
+        <p className="text-white w-full pb-3">Dados Restantes (Parada de dados - Fúria)</p>
         <div className="flex w-full">
           <div
             className={`w-10 border border-white p-3 cursor-pointer ${ valueOf === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
@@ -170,7 +122,7 @@ export default function ManualRoll() {
         </div>
       </label>
       <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+)</p>
+        <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
         <div className="flex w-full">
           <div
             className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
@@ -234,11 +186,11 @@ export default function ManualRoll() {
       </label>
       <button
         className={`${disableRoll() ? 'text-black bg-gray-400' : 'text-white bg-black hover:border-red-800' } border-2 border-white  transition-colors cursor-pointer w-full p-2 mt-6 font-bold`}
-        onClick={registerRoll}
+        onClick={ rollDices }
         disabled={ disableRoll() }
       >
         Rolar dados
       </button>
     </div>
-  )
+  );
 }

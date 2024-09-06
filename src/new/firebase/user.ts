@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getAuth } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
 import { createProfileImage } from './storage';
-import firebaseConfig from "../connection";
+import firebaseConfig from "../../firebase/connection";
 
 export async function registerUser(
   email: string,

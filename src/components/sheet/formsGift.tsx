@@ -5,7 +5,7 @@ import { collection, getDocs, getFirestore, query, where } from "firebase/firest
 import { useEffect, useState } from "react";
 import dataForms from '../../data/forms.json';
 import Image from 'next/image';
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { useRouter } from 'next/navigation';
 import { actionForm, useSlice } from "@/redux/slice";
 

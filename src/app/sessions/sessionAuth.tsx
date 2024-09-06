@@ -4,7 +4,7 @@ import { actionLoginInTheSession, actionSessionAuth, useSlice } from "@/redux/sl
 import { updateDoc } from "firebase/firestore";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
-import { authenticate } from "@/firebase/new/authenticate";
+import { authenticate } from "@/new/firebase/authenticate";
 import { getNameAndDmFromSessions } from "@/firebase/sessions";
 import { getNotificationById } from "@/firebase/notifications";
 import { IoIosCloseCircleOutline } from "react-icons/io";
