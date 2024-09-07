@@ -22,6 +22,9 @@ interface RecipesContext {
   showMenuSession: string,
   setShowMenuSession: (state: string) => void,
   scrollToBottom: () => void,
+  //notifications
+  listNotification: any[];
+  setListNotification: (state: any[]) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -45,6 +48,9 @@ const initialValue: RecipesContext = {
   showMenuSession: '',
   setShowMenuSession: () => {},
   scrollToBottom: () => {},
+  //notifications
+  listNotification: [],
+  setListNotification: () => {},
 }
 
 const contexto = createContext(initialValue);

@@ -111,14 +111,14 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
         const sessionDocRef = doc(db, 'sessions2', sessionId);
         const sessionDocSnapshot = await transaction.get(sessionDocRef);
         if (sessionDocSnapshot.exists()) {
-					let emailToRecord = email;
-					if (!emailToRecord) emailToRecord = authData.email;
-          const sessionData = sessionDocSnapshot.data();
-          const updatedChat = [
-            ...sessionData.chat,
-            { date, email: emailToRecord, user: authData.displayName, ...data },
-          ];
-          transaction.update(sessionDocRef, { chat: updatedChat });
+			let emailToRecord = email;
+			if (!emailToRecord) emailToRecord = authData.email;
+			const sessionData = sessionDocSnapshot.data();
+			const updatedChat = [
+            	...sessionData.chat,
+            	{ date, email: emailToRecord, user: authData.displayName, ...data },
+          	];
+         	transaction.update(sessionDocRef, { chat: updatedChat });
         } else {
           throw new Error("Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.");
         }

@@ -1,11 +1,6 @@
 'use client'
 import { ReactNode, useState } from 'react';
 import contexto from './context';
-// import { getAllVideos } from '@/firebase/video';
-// import { categories } from '@/categories';
-// import { getChatsByEmail } from '@/firebase/chat';
-// import { getNotificationsByEmail } from '@/firebase/notifications';
-// import { getUserByEmail } from '@/firebase/user';
 
 interface IProvider { children: ReactNode }
 
@@ -21,6 +16,8 @@ export default function Provider({children }: IProvider) {
   //session bar
   const [showOptions, setShowOptions] = useState(false);
   const [showMenuSession, setShowMenuSession] = useState('');
+  //notification
+  const [ listNotification, setListNotification ] = useState([0]);
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -44,6 +41,9 @@ export default function Provider({children }: IProvider) {
         showOptions, setShowOptions,
         showMenuSession, setShowMenuSession,
         scrollToBottom,
+        //notification
+        listNotification,
+        setListNotification,
       }}
     >
       {children}

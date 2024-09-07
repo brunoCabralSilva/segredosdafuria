@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from "react";
 import contexto from '@/context/context';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import { requestApproval } from '@/new/firebase/notifications';
+import { getNotificationBySession, requestApproval } from '@/new/firebase/notifications';
 import Loading from '../loading';
 import { getNameAndDmFromSessions } from '@/new/firebase/sessions';
 import { authenticate } from '@/new/firebase/authenticate';
@@ -23,18 +23,12 @@ export default function VerifySession() {
   const requestSession = async () => {
     try {
       let email = '';
-      let displayName = '';
-      if (dataUser.email !== '', dataUser.displayName !== '') {
-        email = dataUser.email;
-        displayName = dataUser.displayName;
-      } else {
+      if (dataUser.email !== '', dataUser.displayName !== '')  email = dataUser.email;
+      else {
         const authData: any = await authenticate();
         if (!authData || !authData.email || !authData.displayName) {
           router.push('/new/login');
-        } else {
-          email = authData.email;
-          displayName = authData.displayName;
-        }
+        } else email = authData.email;
       }
       const getData = await getNameAndDmFromSessions(dataSession.id);
       if (getData) {
@@ -42,7 +36,7 @@ export default function VerifySession() {
         if (email === getData.gameMaster) {
           router.push(`/new/sessions/${dataSession.id}`);
         } else {
-          const notifications = getData.notifications;
+          const notifications = await getNotificationBySession(dataSession.id);
           let authNotification = false;
           notifications.forEach((notification: { email: string, type: string }) => {
             if (notification.email === email && notification.type === 'approval') authNotification = true;

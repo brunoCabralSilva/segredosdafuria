@@ -1,6 +1,7 @@
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
+import { createNotificationData } from "./notifications";
 
 export const getSessions = async () => {
   const db = getFirestore(firebaseConfig);
@@ -33,22 +34,6 @@ export const getNameAndDmFromSessions = async (sessionId: string) => {
   } return null;
 };
 
-
-// export const provisory = async (sessionId: string) => {
-//   const db = getFirestore(firebaseConfig);
-//   const sessionsCollectionRef = collection(db, 'sessions2');
-//   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
-//   const sessionDocSnapshot = await getDoc(sessionDocRef);
-//   if (sessionDocSnapshot.exists()) {
-//     const sessionData = sessionDocSnapshot.data();
-//     const updatedPlayers = [...sessionData.players, { email: "lycan.byell@gmail.com" }];
-//     await updateDoc(sessionDocRef, { players: updatedPlayers });
-//     return sessionDocSnapshot.data();
-//   }
-//   return null;
-// };
-
-
 export const createSession = async (
   nameSession: string,
   description: string,
@@ -61,13 +46,13 @@ export const createSession = async (
     const docRef = await addDoc(collectionRef, {
       name: nameSession.toLowerCase(),
       creationDate: dateMessage,
-      notifications: [],
       gameMaster: email,
       anotations: '',
       description,
       players: [],
       chat: [],
     });
+    await createNotificationData(docRef.id);
     return docRef.id;
   } catch(err)  {
     throw new Error ('Ocorreu um erro ao criar uma sessão: ' + err);

@@ -1,19 +1,23 @@
 import contexto from "@/context/context";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import Skills from "../sheet/skills";
-import AdvantagesAndFlaws from "../sheet/advantagesAndFlaws";
-import General from "../sheet/general";
-import Rituals from "../sheet/rituals";
-import Anotations from "../sheet/notes";
-import Gifts from "../sheet/gifts";
-import Details from "../sheet/details";
-import Attributes from "../sheet/attributes";
-import Forms from "../sheet/forms";
+import Skills from "../player/skills";
+import AdvantagesAndFlaws from "../player/advantagesAndFlaws";
+import General from "../player/general";
+import Rituals from "../player/rituals";
+import Anotations from "../player/notes";
+import Gifts from "../player/gifts";
+import Details from "../player/details";
+import Attributes from "../player/attributes";
+import Forms from "../player/forms";
 
 export default function MenuPlayer() {
-  const { setShowMenuSession } = useContext(contexto);
-	const [optionSelect, setOptionSelect] = useState('general');
+  const [optionSelect, setOptionSelect] = useState('general');
+  const {
+    sessionId,
+    setShowMenuSession,
+  } = useContext(contexto);
+
 
 	const returnDataSheet = () => {
     switch(optionSelect) {
