@@ -39,7 +39,7 @@ export default function Notifications() {
                 </button>
                 <button
                   type="button"
-                  onClick={ () => approveUser(listNot) }
+                  onClick={ () => approveUser(listNot, sessionId) }
                   className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
                 >
                   Aceitar

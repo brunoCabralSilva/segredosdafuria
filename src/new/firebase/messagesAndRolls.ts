@@ -1,6 +1,6 @@
 import { getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
-import { doc, getFirestore, runTransaction } from "firebase/firestore";
+import { collection, doc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
 import { getSessionById } from "@/firebase/sessions";
 
@@ -102,32 +102,39 @@ const rollTest = (
 }
 
 export const registerMessage = async (sessionId: string, data: any, email: string | null) => {
-  try {
-    const authData: any = await authenticate();
-    if (authData && authData.email && authData.displayName) {
-      const date = await getOfficialTimeBrazil();
-      const db = getFirestore(firebaseConfig);
-      await runTransaction(db, async (transaction: any) => {
-        const sessionDocRef = doc(db, 'sessions2', sessionId);
-        const sessionDocSnapshot = await transaction.get(sessionDocRef);
-        if (sessionDocSnapshot.exists()) {
+	try {
+	  const authData: any = await authenticate();
+	  if (authData && authData.email && authData.displayName) {
+		const date = await getOfficialTimeBrazil();
+		const db = getFirestore(firebaseConfig);
+		const chatsCollectionRef = collection(db, 'chats');
+		const querySession = query(chatsCollectionRef, where("sessionId", "==", sessionId));
+		const querySnapshot = await getDocs(querySession);
+		if (querySnapshot.empty) {
+		  throw new Error('Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.');
+		}
+		const sessionDocRef = querySnapshot.docs[0].ref;
+		await runTransaction(db, async (transaction: any) => {
+		  const sessionDocSnapshot = await transaction.get(sessionDocRef);
+		  if (sessionDocSnapshot.exists()) {
 			let emailToRecord = email;
 			if (!emailToRecord) emailToRecord = authData.email;
 			const sessionData = sessionDocSnapshot.data();
 			const updatedChat = [
-            	...sessionData.chat,
-            	{ date, email: emailToRecord, user: authData.displayName, ...data },
-          	];
-         	transaction.update(sessionDocRef, { chat: updatedChat });
-        } else {
-          throw new Error("Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.");
-        }
-      });
-    }
-  } catch (error) {
-    throw new Error('Ocorreu um erro ao enviar a mensagem: ' + error);
-  }
-};
+			  ...sessionData.list,
+			  { date, email: emailToRecord, user: authData.displayName, ...data },
+			];
+			transaction.update(sessionDocRef, { list: updatedChat });
+		  } else {
+			throw new Error("Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.");
+		  }
+		});
+	  }
+	} catch (error) {
+	  throw new Error('Ocorreu um erro ao enviar a mensagem: ' + error);
+	}
+  };
+  
 
 export const registerManualRoll = async(
 	sessionId: string,

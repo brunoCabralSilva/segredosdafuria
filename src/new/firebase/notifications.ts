@@ -88,37 +88,39 @@ export const removeNotification = async (sessionId: string, message: string) => 
   }
 };
 
-export const approveUser = async (notification: any) => {
+export const approveUser = async (notification: any, sessionId: string) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const sessionsCollectionRef = collection(db, 'sessions');
-    const sessionDocRef = doc(sessionsCollectionRef, notification.sessionId);
-
+    const playersCollectionRef = collection(db, 'players');
+    const querySession = query(playersCollectionRef, where("sessionId", "==", sessionId));
+    const querySnapshot = await getDocs(querySession);
+    if (querySnapshot.empty) {
+      throw new Error('Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.');
+    }
+    const playerDocRef = querySnapshot.docs[0].ref;
     await runTransaction(db, async (transaction: any) => {
-      const sessionDocSnapshot = await transaction.get(sessionDocRef);
-      if (!sessionDocSnapshot.exists()) {
-        throw new Error('Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.');
-      }
-      const sessionData = sessionDocSnapshot.data();
-      const findByEmail = sessionData.players.find((user: any) => user.email === notification.email);
+      const playerDocSnapshot = await transaction.get(playerDocRef);
+      const playerData = playerDocSnapshot.data();
+      const findByEmail = playerData.list.find((user: any) => user.email === notification.email);
       if (!findByEmail) {
         const dateMessage = await getOfficialTimeBrazil();
         const sheet = sheetStructure(notification.email, notification.user, dateMessage);
-        transaction.update(sessionDocRef, { players: arrayUnion(sheet) });
+        transaction.update(playerDocRef, { list: arrayUnion(sheet) });
         await registerMessage(
-          notification.sessionId,
+          sessionId,
           {
-            message: `${notification.user} iniciou sua jornada nesta Sessão! Seja bem-vindo!`,
+            message: `${capitalize(notification.user)} iniciou sua jornada nesta Sessão! Seja bem-vindo!`,
             type: 'notification',
           },
           null,
         );
-        await removeNotification(notification.sessionId, notification.message);
+        await removeNotification(sessionId, notification.message);
       } else {
-        window.alert('O usuário já está na sessão.');
+        throw new Error('O usuário já está na sessão.');
       }
     });
   } catch (error) {
     window.alert("Ocorreu um erro ao tentar aprovar usuário: " + error);
   }
 };
+

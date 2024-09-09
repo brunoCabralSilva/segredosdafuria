@@ -8,6 +8,7 @@ import { getNotificationBySession, requestApproval } from '@/new/firebase/notifi
 import Loading from '../loading';
 import { getNameAndDmFromSessions } from '@/new/firebase/sessions';
 import { authenticate } from '@/new/firebase/authenticate';
+import { getPlayersBySession } from '@/new/firebase/players';
 
 export default function VerifySession() {
   const router = useRouter();
@@ -45,7 +46,8 @@ export default function VerifySession() {
             setPopup('waiting');
           } else {
             let auth = false;
-            getData.players.forEach((player: { email: string }) => {
+            const getPlayers = await getPlayersBySession(dataSession.id);
+            getPlayers.forEach((player: { email: string }) => {
               if (player.email === email) auth = true;
             });
             if (auth) {
