@@ -34,14 +34,14 @@ export default function SessionId({ params } : { params: { id: string } }) {
     setEmail,
     email,
     showMenuSession,
-    dataUser, setSessionId,
+    setSessionId,
   } = useContext(contexto);
 	
   const returnValues = async () => {
     const auth = await authenticate();
     if (auth) {
       const player: any = await getPlayerByEmail(id, auth.email);
-      setDataSheet(player.data);
+      if (player) setDataSheet(player.data);
     }
   };
 

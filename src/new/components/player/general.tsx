@@ -37,7 +37,7 @@ export default function General() {
         >
           { 
             input !== 'nameCharacter' && <span className="capitalize break-words text-xl w-full">{
-              dataSheet.name.length === 0 || dataSheet.name[0] === '' || dataSheet.name[0] === ' '
+              dataSheet && dataSheet.name.length === 0 || dataSheet.name[0] === '' || dataSheet.name[0] === ' '
               ? <span className=" w-full">
                   Insira um nome
                 </span>
@@ -60,7 +60,7 @@ export default function General() {
             input
               ? <BsCheckSquare
                   onClick={(e:any) => {
-                    updateValue('name', dataSheet.name[0]);
+                    updateValue('name', dataSheet.name);
                     setInput('');
                     e.stopPropagation();
                   }}

@@ -38,6 +38,8 @@ interface RecipesContext {
   dataSheet: any,
   setDataSheet: (state: any) => void,
   returnSheetValues: () => void,
+  deleteAdvOrFlaw: any,
+  setDeleteAdvOrFlaw: (state: any) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -76,6 +78,8 @@ const initialValue: RecipesContext = {
   dataSheet: playerSheet,
   setDataSheet: () => {},
   returnSheetValues: () => {},
+  deleteAdvOrFlaw: { show: false},
+  setDeleteAdvOrFlaw: () => {},
 }
 
 const contexto = createContext(initialValue);

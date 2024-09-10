@@ -27,6 +27,7 @@ export default function Provider({children }: IProvider) {
   const [dataSheet, setDataSheet] = useState(playerSheet);
   const [showDelFromSession, setShowDelFromSession] = useState(false);
   const [showResetSheet, setShowResetSheet] = useState(false);
+  const [deleteAdvOrFlaw, setDeleteAdvOrFlaw] = useState({ show: false });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -73,6 +74,8 @@ export default function Provider({children }: IProvider) {
         setShowDelFromSession,
         showResetSheet,
         setShowResetSheet,
+        deleteAdvOrFlaw,
+        setDeleteAdvOrFlaw,
       }}
     >
       {children}
