@@ -67,15 +67,32 @@ export default function Message(props: { dataMessage: any, color: string }) {
 								))
 							}
 						</div>
-						<div className="font-bold py-2 text-left">
-							{ dataMessage.message }
-						</div>
-            <div>
-              { dataMessage.result }
-            </div>
+						<div className="font-bold py-2 text-left">{ dataMessage.message }</div>
+            <div>{ dataMessage.result }</div>
             <div className="font-bold py-3">
               Fúria Atual: {dataMessage.rage}
             </div>
+						<div className="flex justify-end pt-2">
+							<span className="w-full text-right text-sm flex justify-end">
+								{ dataMessage.date && dataMessage.date }
+							</span>
+						</div>
+					</div>
+				</div>
+			);
+    case 'harano-hauglosk':
+      return(
+				<div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
+					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2 pl-3`}>
+						<div className="p-2 flex gap-1 flex-wrap">
+							{
+								dataMessage.rollOf.length > 0 && dataMessage.rollOf.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
+									<Dice key={index} dice={ dice } type="" />
+								))
+							}
+						</div>
+						<div className="font-bold py-2 text-left">{ dataMessage.message }</div>
+            <div>{ dataMessage.result } </div>
 						<div className="flex justify-end pt-2">
 							<span className="w-full text-right text-sm flex justify-end">
 								{ dataMessage.date && dataMessage.date }
@@ -106,9 +123,4 @@ export default function Message(props: { dataMessage: any, color: string }) {
 				</div>		
 			);
 	}
-  return(
-    <div className="text-white h-full flex items-center justify-center flex-col">
-      <span className="loader z-50" />
-    </div>
-  );
 }

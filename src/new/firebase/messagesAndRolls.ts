@@ -1,4 +1,4 @@
-import { getOfficialTimeBrazil } from "./utilities";
+import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
@@ -181,59 +181,62 @@ export const registerAutomatedRoll = async(
 	}
 }
 
-export const rageCheck = async(nameForm: string | null, sessionId: string, email: string) => {
-  let numberOfChecks = 0;
-  if (nameForm === 'Crinos') numberOfChecks = 2;
-  else numberOfChecks = 1;
-
+export const rageCheck = async(sessionId: string, email: string) => {
   let resultOfRage = [];
-    let success = 0;
-    for (let i = 0; i < numberOfChecks; i += 1) {
-      const value = Math.floor(Math.random() * 10) + 1;
-      if (value >= 6) success += 1;
-      resultOfRage.push(value);
-    }
-    
-    const player = await getPlayerByEmail(sessionId, email);
-    if (player) {
-      console.log('Onde está: ' + player.data.form);
-      console.log('Para onde vai: ' + nameForm);
-      if (nameForm === 'Crinos' && player.data.rage < 2) {
-        await registerMessage(sessionId, { message: 'Você não possui Fúria para realizar esta ação (Mudar para a forma Crinos).', type: 'rage-check' }, email);
-      } else if (player.data.rage <= 0) {
-        player.data.rage = 0;
-        await registerMessage(sessionId, { message: 'Não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.', type: 'rage check' }, email);
-      } else {
-        let textForm = '.';
-        if (player.data.rage - success < 0) player.data.rage = 0;
-        else player.data.rage = player.data.rage - (resultOfRage.length - success);
-        let textActualRage = '';
-        let textNumberofChecks = 'Foi realizado um Teste de Fúria';
-        if (numberOfChecks === 2) {
-          textNumberofChecks = 'Foram realizados dois Testes de Fúria';
-          if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a fúria foi mantida.';
-          else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + player.data.rage + '.'
-          else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + player.data.rage + '.';
-        } else {
-          if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + player.data.rage + '.';
-          else textActualRage = 'Obteve sucesso no Teste. A fúria foi mantida.';
-        }
-		    if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
-        
-        if (player.data.rage > success) textActualRage = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + player.data.rage + '.';
-        await registerMessage(
-          sessionId,
-          {
-            message: textNumberofChecks + textForm,
-            rollOfRage: resultOfRage,
-            result: textActualRage,
-            rage: player.data.rage,
-            success,
-            type: 'rage-check',
-          },
-          email,
-        );
-      }
-      await updateDataPlayer(sessionId, email, player.data);
-    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente (Rage Check)');
+  let success = 0;
+  const value = Math.floor(Math.random() * 10) + 1;
+  if (value >= 6) success += 1;
+  resultOfRage.push(value);
+  const player = await getPlayerByEmail(sessionId, email);
+  if (player) {
+    let text = '';
+    if (success === 0) {
+      player.data.rage -= 1;
+      text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + player.data.rage + '.';
+    } else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
+    await registerMessage(
+      sessionId,
+      {
+        message: 'Foi realizado um Teste de Fúria.',
+        rollOfRage: resultOfRage,
+        result: text,
+        rage: player.data.rage,
+        success,
+        type: 'rage-check',
+      },
+      email,
+    );
   }
+  return player.data.rage;
+}
+
+export const haranoHaugloskCheck = async(sessionId: string, type: string, dataSheet: any) => {
+  let rollTest = [];
+  let success = 0;
+  let sumData = 0;
+  sumData += Number(dataSheet.harano);
+  sumData += Number(dataSheet.hauglosk);
+  if (sumData === 0) sumData = 1;
+  for (let i = 0; i < sumData; i += 1) {
+    const value = Math.floor(Math.random() * 10) + 1;
+    if (value >= 6) success += 1;
+    rollTest.push(value);
+  }
+  let text = '';
+  if (success === 0) {
+    dataSheet[type] += 1;
+    text = `Não obteve sucesso no Teste. O ${type} foi aumentado para ` + dataSheet[type] + '.';
+  } else text = 'Obteve sucesso no Teste. Não houve aumento em ' + type + '.';
+  await registerMessage(
+    sessionId,
+    {
+      message: `Foi realizado um Teste de ${capitalize(type)}.`,
+      rollOf: rollTest,
+      result: text,
+      value: dataSheet[type],
+      type: 'harano-hauglosk',
+    },
+    null
+  );
+  return dataSheet[type];
+}

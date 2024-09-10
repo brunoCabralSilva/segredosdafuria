@@ -1,6 +1,6 @@
 'use client'
 import contexto from "@/context/context";
-import { rageCheck } from "@/new/firebase/messagesAndRolls";
+import { haranoHaugloskCheck, rageCheck } from "@/new/firebase/messagesAndRolls";
 import { getPlayerByEmail, updateDataPlayer } from "@/new/firebase/players";
 import { useContext } from "react";
 
@@ -62,8 +62,9 @@ export default function Item(props: any) {
           namePtBr === 'Fúria' &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ () => {
-                rageCheck(null, sessionId, email);
+              onClick={ async () => {
+                const rage = await rageCheck(sessionId, email);
+                updateValue('rage', rage);
                 setShowMenuSession('');
               }}
 					>
@@ -74,9 +75,10 @@ export default function Item(props: any) {
           namePtBr === 'Harano' &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ () => {
-                // returnRageCheck(1, 'manual', slice.sessionId, slice.userData);
-                // dispatch(actionShowMenuSession(''))
+              onClick={ async () => {
+                const harano = await haranoHaugloskCheck(sessionId, 'harano', dataSheet);
+                updateValue('harano', harano);
+                setShowMenuSession('');
               }}
 					>
 						Teste de Harano
@@ -86,9 +88,10 @@ export default function Item(props: any) {
           namePtBr === 'Hauglosk' &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ () => {
-                // returnRageCheck(1, 'manual', slice.sessionId, slice.userData);
-                // dispatch(actionShowMenuSession(''))
+              onClick={ async () => {
+                const hauglosk = await haranoHaugloskCheck(sessionId, 'hauglosk',dataSheet);
+                updateValue('hauglosk', hauglosk);
+                setShowMenuSession('');
               }}
 					>
 						Teste de Hauglosk
