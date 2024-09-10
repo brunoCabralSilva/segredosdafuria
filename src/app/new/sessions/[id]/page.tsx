@@ -1,5 +1,5 @@
 'use client'
-import { collection, documentId, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import firestoreConfig from '../../../../firebase/connection';
 import { useRouter } from "next/navigation";
@@ -14,6 +14,7 @@ import MenuPlayer from "@/new/components/popup/menuPlayer";
 import MenuGameMaster from "@/new/components/popup/menuGameMaster";
 import MenuRoll from "@/new/components/popup/menuRoll";
 import { getSessionById } from "@/new/firebase/sessions";
+import { getPlayerByEmail, getPlayersBySession } from "@/new/firebase/players";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -25,51 +26,52 @@ export default function SessionId({ params } : { params: { id: string } }) {
 
   const router = useRouter();
 	const [showData, setShowData] = useState(false);
-  const [email, setEmail] = useState('');
 	const [gameMaster, setGameMaster] = useState(false);
   const [dataSession, setDataSession] = useState({});
   const {
+    setDataSheet,
+    setName,
+    setEmail,
+    email,
     showMenuSession,
     dataUser, setSessionId,
   } = useContext(contexto);
 	
+  const returnValues = async () => {
+    const auth = await authenticate();
+    if (auth) {
+      const player: any = await getPlayerByEmail(id, auth.email);
+      setDataSheet(player.data);
+    }
+  };
+
   useEffect(() => {
     setSessionId(id);
     setDataSession({ show: false, id: '' });
     setShowData(false);
     verifyUser();
+    returnValues();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const verifyUser = async () => {
-    let email = '';
-    let displayName = '';
-
-    if (dataUser.email && dataUser.displayName) {
-      email = dataUser.email;
-      displayName = dataUser.displayName;
-    } else {
-      const authData: any = await authenticate();
-      if (authData && authData.email && authData.displayName) {
-        email = authData.email;
-        displayName = authData.displayName;
-      } else router.push('/new/login');
-    }
-
-    if (email !== '' && displayName !== '') {
+    const authData: any = await authenticate();
+    if (authData && authData.email && authData.displayName) {
+      setEmail(authData.email);
+      setName(authData.displayName);
       const dataDocSnapshot = await getDocs(queryData);
       if (dataDocSnapshot.empty) {
         window.alert('A Sessão não foi encontrada');
         router.push('/new/sessions');
       } else {
         setShowData(true);
-        setEmail(email);
-        if (email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
+        if (authData.email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
         const sessionData: any = await getSessionById(id);
-        if (sessionData.name) {
+        if (sessionData) {
           setDataSession(sessionData);
-          if (sessionData.gameMaster === email) setGameMaster(true);
-          else if (sessionData.players.find((player: any) => player.email === email)) {
+          const players = await getPlayersBySession(id);
+          if (sessionData.gameMaster === authData.email) setGameMaster(true);
+          else if (players.find((player: any) => player.email === authData.email)) {
             setGameMaster(false);
           } else {
             window.alert('você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.');
@@ -81,7 +83,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
           router.push('/new/sessions');
         }
       }
-    }
+    } else router.push('/new/login');
   };
   
   useLayoutEffect(() => {
@@ -104,11 +106,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
                   && chat[0].list.length >= 0
                   ? chat[0]
                     && chat[0].list
-                      .sort((a: any, b: any) => {
-                        const dateA = new Date(a.date.split(', ')[0].split('/').reverse().join('-') + 'T' + a.date.split(', ')[1]).getTime();
-                        const dateB = new Date(b.date.split(', ')[0].split('/').reverse().join('-') + 'T' + b.date.split(', ')[1]).getTime();
-                        return dateA - dateB;
-                      })
+                      .sort((a: any, b: any) => a.order - b.order)
                       .map((msg: any, index: number) => {
                         if (email !== '' && email === msg.email) {
                           return (<Message key={index} dataMessage={msg} color="green" />);

@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import contexto from "@/context/context";
 import { getPlayerByEmail, updateDataPlayer } from "@/new/firebase/players";
 
-export default function Notes(props: { type: string }) {
+export default function Background(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
   const { sessionId, email, returnSheetValues, dataSheet } =  useContext(contexto);

@@ -31,10 +31,11 @@ export const getNotificationBySession = async (sessionId: string) => {
     const collectionRef = collection(db, 'notifications'); 
     const q = query(collectionRef, where('sessionId', '==', sessionId));
     const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) throw new Error("Nenhuma notificação encontrada para a sessão fornecida.");
-    const notificationDoc = querySnapshot.docs[0];
-    const notificationData = notificationDoc.data();
-    return notificationData.list || [];
+    if (!querySnapshot.empty) {
+      const notificationDoc = querySnapshot.docs[0];
+      const notificationData = notificationDoc.data();
+      return notificationData.list;
+    } return [];
   } catch (err) {
     throw new Error('Ocorreu um erro ao buscar as notificações da Sessão: ' + err);
   }
@@ -69,6 +70,21 @@ export const requestApproval = async (sessionId: string) => {
   } catch (error) {
     throw new Error('Ocorreu um erro ao enviar Solicitação: ' + error);
   }
+};
+
+export const registerNotification = async (sessionId: string, notification: any) => {
+  const db = getFirestore(firebaseConfig);
+  const notificationRef = collection(db, 'notifications');
+  const q = query(notificationRef, where('sessionId', '==', sessionId));
+  const querySnapshot = await getDocs(q);
+  if (querySnapshot.empty) throw new Error("Não foi possível localizar a notificação da Sessão fornecida.");
+  const notificationDoc = querySnapshot.docs[0];
+  const notificationData = notificationDoc.data();
+  const notificationDocRef = notificationDoc.ref;
+  await runTransaction(db, async (transaction: any) => {
+    const updatedList = [...notificationData.list, notification];
+    transaction.update(notificationDocRef, { list: updatedList });
+  });
 };
 
 export const removeNotification = async (sessionId: string, message: string) => {

@@ -79,7 +79,7 @@ export default function Item(props: IItem) {
         {
           namePtBr === 'Fúria' &&
           <button
-              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition transition-colors duration-600"
+              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
               onClick={ () => {
                 returnRageCheck(1, 'manual', slice.sessionId, slice.userData);
                 dispatch(actionShowMenuSession(''))

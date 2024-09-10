@@ -1,7 +1,7 @@
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
-import { getOfficialTimeBrazil } from "./utilities";
+import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
-import { createNotificationData } from "./notifications";
+import { createNotificationData, registerNotification } from "./notifications";
 import { createChatData } from "./chats";
 import { createPlayersData } from "./players";
 
@@ -73,5 +73,29 @@ export const clearHistory = async (id: string) => {
     await updateDoc(docRef, { chat: [] });
   } catch (err) {
     throw new Error('Ocorreu um erro ao limpar o histórico de chat: ' + err);
+  }
+};
+
+export const leaveFromSession = async (sessionId: string, email: string, name: string) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const collectionRef = collection(db, 'players');
+    const q = query(collectionRef, where('sessionId', '==', sessionId));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const dataDoc = querySnapshot.docs[0];
+      const data = dataDoc.data();
+      data.list = data.list.filter((player: any) => player.email !== email);
+      const docRef = doc(db, 'players', dataDoc.id);
+      const dataNotification = {
+        message: `Olá, tudo bem? O jogador ${capitalize(name)} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
+        type: 'transfer',
+      };
+      await updateDoc(docRef, { list: data.list });
+      await registerNotification(sessionId, dataNotification);
+      window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
+    } else throw new Error('Sessão não encontrada.');
+  } catch (err) {
+    throw new Error('Ocorreu um erro ao atualizar os dados do Jogador: ' + err);
   }
 };

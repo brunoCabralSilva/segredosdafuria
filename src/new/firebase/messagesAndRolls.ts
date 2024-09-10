@@ -1,8 +1,8 @@
 import { getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
-import { collection, doc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
-import { getSessionById } from "@/firebase/sessions";
+import { getPlayerByEmail, updateDataPlayer } from "./players";
 
 const verifyResult = (
 	rollOfRage: number[],
@@ -122,8 +122,10 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
 			const sessionData = sessionDocSnapshot.data();
 			const updatedChat = [
 			  ...sessionData.list,
-			  { date, email: emailToRecord, user: authData.displayName, ...data },
+			  { date, email: emailToRecord, user: authData.displayName, ...data, order: sessionData.list.length + 1 },
 			];
+			updatedChat.sort((a: any, b: any) => a.order - b.order)
+			if (updatedChat.length > 15) updatedChat.shift();
 			transaction.update(sessionDocRef, { list: updatedChat });
 		  } else {
 			throw new Error("Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.");
@@ -133,9 +135,8 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
 	} catch (error) {
 	  throw new Error('Ocorreu um erro ao enviar a mensagem: ' + error);
 	}
-  };
+};
   
-
 export const registerManualRoll = async(
 	sessionId: string,
 	rage: number,
@@ -159,15 +160,19 @@ export const registerAutomatedRoll = async(
 	let valueOf = 0;
 	let rage = 0;
 	try {
-		const session = await getSessionById(sessionId);
-		if (session) {
-			const playing = session.players.find((player: any) => player.email === emailUser);
-			rage = Number(playing.data.rage);
-			valueOf = Number(playing.data.attributes[atrSelected])
-			+ Number(playing.data.skills[sklSelected])
-			+ Number(playing.data.renown[renSelected])
-			- rage;
-			if (valueOf < 0) valueOf = 0;
+		const player = await getPlayerByEmail(sessionId, emailUser);
+		if (player) {
+			rage = Number(player.data.rage);
+			if (atrSelected !== '0' && atrSelected !== '1')
+				valueOf += Number(player.data.attributes[atrSelected]);
+			if (sklSelected !== '0' && sklSelected !== '1')
+				valueOf += Number(player.data.skills[sklSelected].value);
+			if (renSelected !== '0' && renSelected !== '1')
+				valueOf += Number(player.data[renSelected]);
+			if (rage > valueOf) {
+				rage = valueOf;
+				valueOf = 0;
+			} else valueOf -= rage;
 			const roll = rollTest(rage, valueOf, penaltyOrBonus, dificulty);
 			await registerMessage(sessionId, roll, emailUser);
 		} else throw new Error ('Sessão não encontrada.');
@@ -175,3 +180,60 @@ export const registerAutomatedRoll = async(
 		window.alert('Ocorreu um erro ao buscar os dados do Jogador. Por favor, atualize a página e tente novamente' + '('+ error +').');
 	}
 }
+
+export const rageCheck = async(nameForm: string | null, sessionId: string, email: string) => {
+  let numberOfChecks = 0;
+  if (nameForm === 'Crinos') numberOfChecks = 2;
+  else numberOfChecks = 1;
+
+  let resultOfRage = [];
+    let success = 0;
+    for (let i = 0; i < numberOfChecks; i += 1) {
+      const value = Math.floor(Math.random() * 10) + 1;
+      if (value >= 6) success += 1;
+      resultOfRage.push(value);
+    }
+    
+    const player = await getPlayerByEmail(sessionId, email);
+    if (player) {
+      console.log('Onde está: ' + player.data.form);
+      console.log('Para onde vai: ' + nameForm);
+      if (nameForm === 'Crinos' && player.data.rage < 2) {
+        await registerMessage(sessionId, { message: 'Você não possui Fúria para realizar esta ação (Mudar para a forma Crinos).', type: 'rage-check' }, email);
+      } else if (player.data.rage <= 0) {
+        player.data.rage = 0;
+        await registerMessage(sessionId, { message: 'Não possui Fúria para realizar esta ação. Após chegar a zero pontos de Fúria, o Garou perde o Lobo e não pode realizar ações como usar dons, mudar de forma, realizar testes de Fúria, dentre outros.', type: 'rage check' }, email);
+      } else {
+        let textForm = '.';
+        if (player.data.rage - success < 0) player.data.rage = 0;
+        else player.data.rage = player.data.rage - (resultOfRage.length - success);
+        let textActualRage = '';
+        let textNumberofChecks = 'Foi realizado um Teste de Fúria';
+        if (numberOfChecks === 2) {
+          textNumberofChecks = 'Foram realizados dois Testes de Fúria';
+          if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a fúria foi mantida.';
+          else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + player.data.rage + '.'
+          else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + player.data.rage + '.';
+        } else {
+          if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + player.data.rage + '.';
+          else textActualRage = 'Obteve sucesso no Teste. A fúria foi mantida.';
+        }
+		    if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
+        
+        if (player.data.rage > success) textActualRage = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + player.data.rage + '.';
+        await registerMessage(
+          sessionId,
+          {
+            message: textNumberofChecks + textForm,
+            rollOfRage: resultOfRage,
+            result: textActualRage,
+            rage: player.data.rage,
+            success,
+            type: 'rage-check',
+          },
+          email,
+        );
+      }
+      await updateDataPlayer(sessionId, email, player.data);
+    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente (Rage Check)');
+  }

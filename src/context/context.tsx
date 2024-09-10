@@ -1,4 +1,5 @@
 'use client'
+import { playerSheet } from '@/new/firebase/utilities';
 import { createContext } from 'react';
 
 interface RecipesContext {
@@ -25,6 +26,18 @@ interface RecipesContext {
   //notifications
   listNotification: any[];
   setListNotification: (state: any[]) => void,
+  //sheet
+  showResetSheet: boolean,
+  setShowResetSheet: (state: boolean) => void,
+  showDelFromSession: boolean,
+  setShowDelFromSession: (state: boolean) => void,
+  email: string,
+  setEmail: (state: string) => void,
+  name: string,
+  setName: (state: string) => void,
+  dataSheet: any,
+  setDataSheet: (state: any) => void,
+  returnSheetValues: () => void,
 }
 
 const initialValue: RecipesContext = {
@@ -51,6 +64,18 @@ const initialValue: RecipesContext = {
   //notifications
   listNotification: [],
   setListNotification: () => {},
+  //sheet
+  showResetSheet: false,
+  setShowResetSheet: () => {},
+  showDelFromSession: false,
+  setShowDelFromSession: () => {},
+  email: '',
+  setEmail: () => {},
+  name: '',
+  setName: () => {},
+  dataSheet: playerSheet,
+  setDataSheet: () => {},
+  returnSheetValues: () => {},
 }
 
 const contexto = createContext(initialValue);

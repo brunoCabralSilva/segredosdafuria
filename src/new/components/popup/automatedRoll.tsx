@@ -5,16 +5,19 @@ import contexto from "@/context/context";
 import { authenticate } from "@/new/firebase/authenticate";
 import { useRouter } from "next/navigation";
 import { registerAutomatedRoll } from "@/new/firebase/messagesAndRolls";
+import { getPlayerByEmail } from "@/new/firebase/players";
+import { playerSheet } from "@/new/firebase/utilities";
 
 export default function AutomatedRoll(props: { gameMaster: boolean }) {
   const { gameMaster } = props;
-  const [atrSelected, setAtrSelected] = useState<string>('');
-  const [sklSelected, setSklSelected] = useState<string>('');
-  const [renSelected, setRenSelected] = useState<string>('');
+  const [atrSelected, setAtrSelected] = useState<string>('0');
+  const [sklSelected, setSklSelected] = useState<string>('0');
+  const [renSelected, setRenSelected] = useState<string>('0');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
   const [players, setPlayers] = useState([]);
-  const [playerSelected, setPlayerSelected] = useState<any>('');
+  const [dataUser, setDataUser] = useState<any>(playerSheet);
+  const [playerSelected, setPlayerSelected] = useState<any>('0');
   const { setShowMenuSession, sessionId } = useContext(contexto);
   const router = useRouter();
 
@@ -25,12 +28,16 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
   
   const verifyUser = async() => {
     const auth: any = await authenticate();
-    if (auth && auth.email) setPlayerSelected(auth.email);
+    if (auth && auth.email) {
+      setPlayerSelected(auth.email);
+      const data = await getPlayerByEmail(sessionId, auth.email);
+      setDataUser(data.data);
+    }
     else router.push('/new/login');
   }
 
   const disabledButton = () => {
-    return (atrSelected === '' && renSelected === '' && sklSelected === '') || dificulty <= 0;
+    return ((atrSelected === '0' || atrSelected === '1') && (sklSelected === '0' || sklSelected === '1') && (renSelected === '0' || renSelected === '1')) || dificulty <= 0;
   }
 
   const rollDices = async () => {
@@ -53,14 +60,15 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
         <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
           <select
             onChange={(e: any) => {
-              console.log(e.target.value);
               setPlayerSelected(e.target.value);
             }}
+            value={playerSelected}
             className="w-full py-3 text-black capitalize cursor-pointer"
           >
             <option
               className="capitalize text-center text-black"
-              disabled selected
+              value="0"
+              disabled
             >
               Escolha um Jogador
             </option>
@@ -81,14 +89,22 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
           <select
+            value={atrSelected}
             onChange={(e: any) => setAtrSelected(e.target.value)}
             className="w-full py-3 text-black capitalize cursor-pointer"
           >
             <option
               className="capitalize text-center text-black"
-              disabled selected
+              value="0"
+              disabled
             >
               Escolha um atributo
+            </option>
+            <option
+              className="text-black capitalize text-center"
+              value="1"
+            >
+              Nenhum
             </option>
             {
               dataSheet.attributes
@@ -98,7 +114,7 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
                   key={index}
                   value={item.value}
                 >
-                  { item.namePtBr }
+                  { item.namePtBr } ({ dataUser.attributes[item.value] })
                 </option>
               ))
             }
@@ -107,18 +123,20 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Habilidade</p>
           <select
+            value={sklSelected}
             onChange={(e: any) => setSklSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           > 
             <option
               className="capitalize text-center text-black"
-              disabled selected
+              value="0"
+              disabled
             >
               Escolha uma Habilidade
             </option>
             <option
               className="text-black capitalize text-center"
-              value=""
+              value="1"
             >
               Nenhuma
             </option>
@@ -132,6 +150,13 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
                     value={item.value}
                   >
                     { item.namePtBr }
+                    ({ dataUser.skills[item.value].value })
+                    {/* {
+                      dataUser.skills[item.value].specialty !== ''
+                      && dataUser.skills[item.value].specialty !== ' '
+                      ? <p> +1 em Especialização </p>
+                      : ''
+                    } */}
                   </option>
                 ))
             }
@@ -140,18 +165,20 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Renome</p>
           <select
+            value={renSelected}
             onChange={(e: any) => setRenSelected(e.target.value)}
             className="w-full py-3 capitalize cursor-pointer text-black"
           >
             <option
+              value="0"
               className="capitalize text-center text-black"
-              disabled selected
+              disabled
             >
               Escolha um Renome
             </option>
             <option
-              className="capitalize text-center text-black"
-              value=""
+              className="text-black capitalize text-center"
+              value="1"
             >
               Nenhum
             </option>
@@ -163,7 +190,7 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
                   key={index}
                   value={item.value}
                 >
-                  { item.namePtBr }
+                  { item.namePtBr } ({ dataUser[item.value] })
                 </option>
               ))
             }

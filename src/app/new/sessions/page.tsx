@@ -24,8 +24,9 @@ export default function Sessions() {
   } = useContext(contexto);
   const [sessions, setSessions] = useState<any[]>([]);
   const [showData, setShowData] = useState(false);
-
+  
   useEffect(() => {
+    setDataSession({ show: false, id: '' });
     setShowData(false);
     const fetchData = async (): Promise<void> => {
       if (dataUser.email !== '' && dataUser.displayName !== '') {
