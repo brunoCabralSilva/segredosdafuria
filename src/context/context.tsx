@@ -40,6 +40,10 @@ interface RecipesContext {
   returnSheetValues: () => void,
   deleteAdvOrFlaw: any,
   setDeleteAdvOrFlaw: (state: any) => void,
+  showAllFlaws: boolean,
+  setShowAllFlaws: (state: boolean) => void,
+  showAllAdvantages: boolean,
+  setShowAllAdvantages: (state: boolean) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -80,6 +84,10 @@ const initialValue: RecipesContext = {
   returnSheetValues: () => {},
   deleteAdvOrFlaw: { show: false},
   setDeleteAdvOrFlaw: () => {},
+  showAllFlaws: false,
+  setShowAllFlaws: () => {},
+  showAllAdvantages: false,
+  setShowAllAdvantages: () => {},
 }
 
 const contexto = createContext(initialValue);

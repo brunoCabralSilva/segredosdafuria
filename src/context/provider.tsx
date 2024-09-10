@@ -28,6 +28,8 @@ export default function Provider({children }: IProvider) {
   const [showDelFromSession, setShowDelFromSession] = useState(false);
   const [showResetSheet, setShowResetSheet] = useState(false);
   const [deleteAdvOrFlaw, setDeleteAdvOrFlaw] = useState({ show: false });
+  const [showAllFlaws, setShowAllFlaws] = useState(false);
+  const [showAllAdvantages, setShowAllAdvantages] = useState(false);
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -70,12 +72,11 @@ export default function Provider({children }: IProvider) {
         name, setName,
         dataSheet, setDataSheet,
         returnSheetValues,
-        showDelFromSession,
-        setShowDelFromSession,
-        showResetSheet,
-        setShowResetSheet,
-        deleteAdvOrFlaw,
-        setDeleteAdvOrFlaw,
+        showDelFromSession, setShowDelFromSession,
+        showResetSheet, setShowResetSheet,
+        deleteAdvOrFlaw, setDeleteAdvOrFlaw,
+        showAllFlaws, setShowAllFlaws,
+        showAllAdvantages, setShowAllAdvantages,
       }}
     >
       {children}

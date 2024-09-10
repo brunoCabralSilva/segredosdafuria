@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
-import { rageCheck, registerMessage } from "./messagesAndRolls";
+import { registerMessage } from "./messagesAndRolls";
 
 export const createPlayersData = async(sessionId: string) => {
   try {
