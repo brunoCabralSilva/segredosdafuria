@@ -2,7 +2,7 @@ import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
-import { getPlayerByEmail, updateDataPlayer } from "./players";
+import { getPlayerByEmail } from "./players";
 
 const verifyResult = (
 	rollOfRage: number[],
@@ -189,27 +189,27 @@ export const rageCheck = async(sessionId: string, email: string) => {
   resultOfRage.push(value);
   const player = await getPlayerByEmail(sessionId, email);
   if (player) {
-	if (player.data.rage <= 0) {
-    window.alert('Você não possui Fúria suficiente para ativar este Teste.');
-	} else {
-		let text = '';
-		if (success === 0) {
-      player.data.rage -= 1;
-      text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + (player.data.rage) + '.';
-		} else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
-		await registerMessage(
-		  sessionId,
-		  {
-			message: 'Foi realizado um Teste de Fúria.',
-			rollOfRage: resultOfRage,
-			result: text,
-			rage: player.data.rage,
-			success,
-			type: 'rage-check',
-		  },
-		  email,
-		);
-	}
+    if (player.data.rage <= 0) {
+      window.alert('Você não possui Fúria suficiente para ativar este Teste.');
+    } else {
+      let text = '';
+      if (success === 0) {
+        player.data.rage -= 1;
+        text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + (player.data.rage) + '.';
+      } else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
+      await registerMessage(
+        sessionId,
+        {
+        message: 'Foi realizado um Teste de Fúria.',
+        rollOfRage: resultOfRage,
+        result: text,
+        rage: player.data.rage,
+        success,
+        type: 'rage-check',
+        },
+        email,
+      );
+    }
   }
   return player.data.rage;
 }
