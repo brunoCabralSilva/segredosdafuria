@@ -17,13 +17,15 @@ export default function AdvLoresheets() {
     cost: number,
     skill: string,
   )  => {
+    console.log(name);
     const obj = { name, cost, description, skill };
     let newList = dataSheet.advantagesAndFlaws.loresheets;
-    const sameName = newList.filter((item: any) => item.name === name);
-    if (sameName.length > 0) {
-      const equal = newList.find((item: any) => item.skill === skill);
-      if (equal) newList = newList.filter((item: any) => item.skill !== skill);
-      else newList.push(obj);
+    const equal = newList.find((item: any) => item.skill === skill);
+    const different = newList.find((item: any) => item.name !== name);
+    if (equal) newList = newList.filter((item: any) => item.skill !== skill);
+    else if (different) {
+      newList = newList.filter((item: any) => item.name === name);
+      newList.push(obj);
     } else newList.push(obj);
     dataSheet.advantagesAndFlaws.loresheets = newList;
     await updateDataPlayer(sessionId, email, dataSheet);
