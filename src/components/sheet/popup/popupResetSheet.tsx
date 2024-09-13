@@ -7,7 +7,7 @@ import firestoreConfig from '../../../firebase/connection';
 import { authenticate } from "@/new/firebase/authenticate";
 import { useRouter } from "next/navigation";
 import { getHoraOficialBrasil } from "@/firebase/chatbot";
-import { sheetStructure } from "../sheet";
+import { sheetStructure } from "@/new/firebase/utilities";
 
 export default function PopupResetSheet() {
   const dispatch = useAppDispatch();

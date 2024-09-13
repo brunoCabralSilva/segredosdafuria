@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import dataTrybes from '../../../data/trybes.json';
-import { getPlayerByEmail, updateDataPlayer } from "@/new/firebase/players";
+import { updateDataPlayer } from "@/new/firebase/players";
 import contexto from "@/context/context";
 import Item from "./item";
 import ItemAgravated from "./itemAgravated";
@@ -16,7 +16,14 @@ export default function General() {
     dataSheet, setDataSheet,
 		showResetSheet, setShowResetSheet,
     returnSheetValues,
+    setShowGiftRoll,
+    setShowRitualRoll,
 	} = useContext(contexto);
+
+  useEffect(() => {
+    setShowGiftRoll({ show: false, gift: {}});
+    setShowRitualRoll({ show: false, ritual: {}});
+  }, [])
 
   const typeName = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');

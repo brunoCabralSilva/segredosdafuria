@@ -35,6 +35,8 @@ export default function SessionId({ params } : { params: { id: string } }) {
     email,
     showMenuSession,
     setSessionId,
+    showHarano,
+    showHauglosk,
   } = useContext(contexto);
 	
   const returnValues = async () => {
@@ -140,8 +142,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
             <Loading />
           </div>
       }
-      {/* { slice.popupResetSheet && <PopupResetSheet /> }
-      { slice.deleteHistoric && <PopupDelHistoric /> } */}
+      {/* { slice.deleteHistoric && <PopupDelHistoric /> } */}
     </div>
   );
 }

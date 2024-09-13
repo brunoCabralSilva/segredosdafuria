@@ -1,14 +1,16 @@
 'use client'
+import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/new/firebase/utilities";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import { GiD10 } from "react-icons/gi";
 
 export default function GiftsAdded(props: { gift: any }) {
   const { gift } = props;
   const [showData, setShowData] = useState(false);
+  const { setShowGiftRoll } = useContext(contexto);
   return(
-    <div className="flex flex-col gap-3 border border-white pl-2 p-2 mb-2 items-center text-justify">
+    <div className="flex flex-col gap-3 border border-white pl-2 p-2 mb-2 items-center text-justify font-normal">
       <div
         className={`w-full flex items-center justify-between ${showData && 'pl-4 transition-all'}`}
         onClick={() => {}}
@@ -22,6 +24,7 @@ export default function GiftsAdded(props: { gift: any }) {
             <button
               type="button"
               className="cursor-pointer"
+              onClick={ () => setShowGiftRoll({ show: true, gift }) }
             >
               <GiD10 className="text-3xl text-white" />
             </button>

@@ -189,28 +189,37 @@ export const rageCheck = async(sessionId: string, email: string) => {
   resultOfRage.push(value);
   const player = await getPlayerByEmail(sessionId, email);
   if (player) {
-    let text = '';
-    if (success === 0) {
+	if (player.data.rage <= 0) {
+    window.alert('Você não possui Fúria suficiente para ativar este Teste.');
+	} else {
+		let text = '';
+		if (success === 0) {
       player.data.rage -= 1;
-      text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + player.data.rage + '.';
-    } else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
-    await registerMessage(
-      sessionId,
-      {
-        message: 'Foi realizado um Teste de Fúria.',
-        rollOfRage: resultOfRage,
-        result: text,
-        rage: player.data.rage,
-        success,
-        type: 'rage-check',
-      },
-      email,
-    );
+      text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + (player.data.rage) + '.';
+		} else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
+		await registerMessage(
+		  sessionId,
+		  {
+			message: 'Foi realizado um Teste de Fúria.',
+			rollOfRage: resultOfRage,
+			result: text,
+			rage: player.data.rage,
+			success,
+			type: 'rage-check',
+		  },
+		  email,
+		);
+	}
   }
   return player.data.rage;
 }
 
-export const haranoHaugloskCheck = async(sessionId: string, type: string, dataSheet: any) => {
+export const haranoHaugloskCheck = async(
+	sessionId: string,
+	type: string,
+	dataSheet: any,
+	dificulty: number,
+) => {
   let rollTest = [];
   let success = 0;
   let sumData = 0;
@@ -223,7 +232,7 @@ export const haranoHaugloskCheck = async(sessionId: string, type: string, dataSh
     rollTest.push(value);
   }
   let text = '';
-  if (success === 0) {
+  if (success < dificulty) {
     dataSheet[type] += 1;
     text = `Não obteve sucesso no Teste. O ${type} foi aumentado para ` + dataSheet[type] + '.';
   } else text = 'Obteve sucesso no Teste. Não houve aumento em ' + type + '.';

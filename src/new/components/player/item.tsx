@@ -5,12 +5,16 @@ import { getPlayerByEmail, updateDataPlayer } from "@/new/firebase/players";
 import { useContext } from "react";
 
 export default function Item(props: any) {
+	const { name, quant, namePtBr } = props;
 	const {
-		name,
-		quant,
-		namePtBr,
-	} = props;
-	const { sessionId, email, returnSheetValues, dataSheet, setShowMenuSession } = useContext(contexto);
+    email,
+    dataSheet,
+    sessionId,
+    setShowHarano,
+    setShowHauglosk,
+    returnSheetValues,
+    setShowMenuSession,
+  } = useContext(contexto);
   
   const updateValue = async (name: string, value: number) => {
     const player: any = await getPlayerByEmail(sessionId, email);
@@ -75,11 +79,7 @@ export default function Item(props: any) {
           namePtBr === 'Harano' &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => {
-                const harano = await haranoHaugloskCheck(sessionId, 'harano', dataSheet);
-                updateValue('harano', harano);
-                setShowMenuSession('');
-              }}
+              onClick={ async () => setShowHarano(true) }
 					>
 						Teste de Harano
 					</button>
@@ -88,11 +88,7 @@ export default function Item(props: any) {
           namePtBr === 'Hauglosk' &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => {
-                const hauglosk = await haranoHaugloskCheck(sessionId, 'hauglosk',dataSheet);
-                updateValue('hauglosk', hauglosk);
-                setShowMenuSession('');
-              }}
+              onClick={ async () => setShowHauglosk(true) }
 					>
 						Teste de Hauglosk
 					</button>

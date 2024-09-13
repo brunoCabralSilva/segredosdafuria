@@ -8,7 +8,7 @@ import { getHoraOficialBrasil } from "@/firebase/chatbot";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { actionPopupCreateSheet } from "@/redux/slice";
 import { useAppDispatch } from "@/redux/hooks";
-import { sheetStructure } from "../sheet";
+import { sheetStructure } from "@/new/firebase/utilities";
 
 export default function PopupCreateSheet(props: { sessionId: string, returnValue: any }) {
   const { sessionId, returnValue } = props;

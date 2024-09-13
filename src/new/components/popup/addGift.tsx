@@ -39,7 +39,7 @@ export default function AddGift() {
   }
 
   return(
-    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70  p-5 pb-3">
+    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70 font-normal p-5 pb-3">
       <div className="bg-black border-2 border-white w-full h-full p-5">
         <div className="flex justify-between">
           <p className="text-white font-bold text-2xl py-3 pt-2">Dons</p>
@@ -56,7 +56,7 @@ export default function AddGift() {
         </div>
         <div className="custom-grid">
           <div className="flex-1 pt-3 pb-2 text-justify overflow-y-auto col1-73">
-            <div className="p-3 bg-gray-whats">
+            <div className="p-3 bg-gray-whats-dark">
               {
                 generateList().map((gift: any, index2: number) => (
                   <div key={index2} className={`${dataSheet.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr) ? 'bg-black': ''} border-2 border-white p-5 mb-3`}>
@@ -125,7 +125,7 @@ export default function AddGift() {
             </div>
           </div>
           <div className="col2-73 flex flex-col w-full pl-2 pt-3">
-            <div className="bg-gray-whats w-full h-full overflow-y-auto p-5">
+            <div className="bg-gray-whats-dark w-full h-full overflow-y-auto p-5">
               <p className="capitalize text-lg pb-3 font-bold">Dons Adicionados</p>
               {
                 dataSheet.gifts.map((item: any, index: number) => (

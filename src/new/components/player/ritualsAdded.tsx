@@ -1,12 +1,13 @@
 'use client'
-import { capitalizeFirstLetter } from "@/new/firebase/utilities";
-import { useState } from "react";
+import contexto from "@/context/context";
+import { useContext, useState } from "react";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import { GiD10 } from "react-icons/gi";
 
 export default function RitualsAdded(props: { ritual: any }) {
   const { ritual } = props;
   const [showData, setShowData] = useState(false);
+  const { setShowRitualRoll } = useContext(contexto);
   return(
     <div className="flex flex-col gap-3 border border-white pl-2 p-2 mb-2 items-center text-justify">
       <div
@@ -22,6 +23,7 @@ export default function RitualsAdded(props: { ritual: any }) {
             <button
               type="button"
               className="cursor-pointer"
+              onClick={ () => setShowRitualRoll({ show: true, ritual }) }
             >
               <GiD10 className="text-3xl text-white" />
             </button>

@@ -18,7 +18,7 @@ import PlayersDm from "./playerDM";
 import { authenticate } from "@/new/firebase/authenticate";
 import { getHoraOficialBrasil, registerMessage } from "@/firebase/chatbot";
 import PopupCreateSheet from "./sheet/popup/popupCreateSheet";
-import { sheetStructure } from "./sheet/sheet";
+import { sheetStructure } from "@/new/firebase/utilities";
 
 export default function MenuDm(props: { sessionId: string }) {
   const { sessionId } = props;

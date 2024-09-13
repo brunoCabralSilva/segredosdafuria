@@ -48,6 +48,14 @@ interface RecipesContext {
   setShowGiftsToAdd: (state: boolean) => void,
   showRitualsToAdd: boolean,
   setShowRitualsToAdd: (state: boolean) => void,
+  showHarano: boolean,
+  setShowHarano: (state: boolean) => void,
+  showHauglosk: boolean,
+  setShowHauglosk: (state: boolean) => void,
+  showGiftRoll: { show: boolean, gift: any },
+  setShowGiftRoll: (state: { show: boolean, gift: any }) => void,
+  showRitualRoll: { show: boolean, ritual: any },
+  setShowRitualRoll: (state: { show: boolean, ritual: any }) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -96,6 +104,14 @@ const initialValue: RecipesContext = {
   setShowGiftsToAdd: () => {},
   showRitualsToAdd: false,
   setShowRitualsToAdd: () => {},
+  showHarano: false,
+  setShowHarano: () => {},
+  showHauglosk: false,
+  setShowHauglosk: () => {},
+  showGiftRoll: { show: false, gift: {} },
+  setShowGiftRoll: () => {},
+  showRitualRoll: { show: false, ritual: {} },
+  setShowRitualRoll: () => {},
 }
 
 const contexto = createContext(initialValue);
