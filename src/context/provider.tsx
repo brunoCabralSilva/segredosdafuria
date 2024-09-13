@@ -31,6 +31,7 @@ export default function Provider({children }: IProvider) {
   const [showAllFlaws, setShowAllFlaws] = useState(false);
   const [showAllAdvantages, setShowAllAdvantages] = useState(false);
   const [showGiftsToAdd, setShowGiftsToAdd] = useState(false);
+  const [showRitualsToAdd, setShowRitualsToAdd] = useState(false);
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -79,6 +80,7 @@ export default function Provider({children }: IProvider) {
         showAllFlaws, setShowAllFlaws,
         showAllAdvantages, setShowAllAdvantages,
         showGiftsToAdd, setShowGiftsToAdd,
+        showRitualsToAdd, setShowRitualsToAdd,
       }}
     >
       {children}

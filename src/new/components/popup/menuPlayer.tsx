@@ -29,14 +29,8 @@ export default function MenuPlayer() {
       case ('session'): return (<Details />);
       case ('background'): return (<Background type="background" />);
       case ('anotations'): return (<Anotations type="notes" />);
-      case ('gifts-rituals'):
-        return (
-          <div className="w-full overflow-y-auto flex flex-col items-center justify-start">
-            <Gifts />
-            <hr className="mt-5 mb-8 w-11/12" />
-            <Rituals />
-          </div>
-        );
+      case ('gifts'): return (<Gifts />);
+      case ('rituals'): return (<Rituals />);
       default: return (<General />);
     }
   };
@@ -59,7 +53,8 @@ export default function MenuPlayer() {
         <option value={'general'}>Geral</option>
         <option value={'attributes'}>Atributos</option>
         <option value={'skills'}>Habilidades</option>
-        <option value={'gifts-rituals'}>Dons e Rituais</option>
+        <option value={'gifts'}>Dons</option>
+        <option value={'rituals'}>Rituais</option>
         <option value={'advantages-flaws'}>Vantagens e Defeitos</option>
         <option value={'forms'}>
           Formas ( Atual: { dataSheet.form } )

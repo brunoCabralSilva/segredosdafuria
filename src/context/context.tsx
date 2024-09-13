@@ -46,6 +46,8 @@ interface RecipesContext {
   setShowAllAdvantages: (state: boolean) => void,
   showGiftsToAdd: boolean,
   setShowGiftsToAdd: (state: boolean) => void,
+  showRitualsToAdd: boolean,
+  setShowRitualsToAdd: (state: boolean) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -92,6 +94,8 @@ const initialValue: RecipesContext = {
   setShowAllAdvantages: () => {},
   showGiftsToAdd: false,
   setShowGiftsToAdd: () => {},
+  showRitualsToAdd: false,
+  setShowRitualsToAdd: () => {},
 }
 
 const contexto = createContext(initialValue);
