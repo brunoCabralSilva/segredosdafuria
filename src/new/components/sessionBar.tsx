@@ -78,7 +78,7 @@ export default function SessionBar(props: { gameMaster: boolean}) {
           className="w-full p-2 text-black"
           value={text}
           onKeyDown={ async (event) => {
-            if (event.key === 'Enter') {
+            if (event.key === 'Enter' && text !== '' && text !== ' ') {
               await registerMessage(sessionId, { type: 'text', message: text }, null);
               setText('');
               scrollToBottom();
@@ -95,9 +95,11 @@ export default function SessionBar(props: { gameMaster: boolean}) {
               className="p-2"
               title="Enviar uma mensagem"
               onClick={ async () => {
-                await registerMessage(sessionId, { type: 'text', message: text }, null);
-                setText('');
-                scrollToBottom();
+                if (text !== '' && text !== ' ') {
+                  await registerMessage(sessionId, { type: 'text', message: text }, null);
+                  setText('');
+                  scrollToBottom();
+                }
               }}
             >
               <IoIosSend />

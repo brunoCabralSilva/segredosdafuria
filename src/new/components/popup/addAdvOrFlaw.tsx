@@ -1,21 +1,21 @@
 'use client'
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import dataAdvAndFlaws from '../../../data/advantagesAndFlaws.json';
-import dataLoresheets from '../../../data/loresheets.json';
-import dataTalens from '../../../data/talismans.json';
 import contexto from "@/context/context";
+import AdvOrFlaw from "../player/advOrFlaw";
+import AdvOrFlawAdded from "../player/advOrFlawAdded";
+import AdvTalens from "../player/advTalens";
+import AdvLoresheets from "../player/advLoresheets";
 
 export default function AddAdvOrFlaw(props: { type: string }) {
+  const [ selectOption, setSelectOption ] = useState('merits');
   const { type } = props;
-  const { sessionId, email, returnSheetValues, dataSheet, setShowAllAdvantages, showAllAdvantages, setShowAllFlaws } =  useContext(contexto);
-  // const [text, setText] = useState<string>('');
-
+  const { setShowAllAdvantages, setShowAllFlaws } =  useContext(contexto);
   return(
-    <div className="fixed top-0 left-0 w-full h-screen flex flex-col overflow-y-auto bg-black/70 p-5 pb-3">
-      <div className="bg-black w-full h-full relative">
+    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70  p-5 pb-3">
+      <div className="bg-black border-2 border-white w-full h-full p-5">
         <div className="flex justify-between">
-          <p className="text-white text-2xl">{ type === 'advantage' ? 'Vantagens' : 'Defeitos' }</p>
+          <p className="text-white font-bold text-2xl py-3 pt-2">{ type === 'advantage' ? 'Vantagens' : 'Defeitos' }</p>
           <button
             type="button"
             className="p-1 right-3 h-10"
@@ -33,83 +33,34 @@ export default function AddAdvOrFlaw(props: { type: string }) {
             />
           </button>
         </div>
-        <div className="bg-black p-3 text-justify">
-          <div>Méritos e Backgrounds</div>
+        {
+          type === 'advantage' &&
+          <select
+            value={selectOption}
+            onChange={(e) => setSelectOption(e.target.value) }
+            className="border-2 cursor-pointer border-white mx-3 p-2 mt-2 bg-black w-full text-white font-bold"
+          >
+            <option value="merits">Méritos e Backgrounds</option>
+            <option value="talens">Talismãs</option>
+            <option value="loresheets">Loresheets</option>
+          </select>
+        }
+        <div className="custom-grid">
           {
-            type === 'advantage' &&
-            dataAdvAndFlaws &&
-            dataAdvAndFlaws.map((item: any, index: number) => (
-              <div key={index} className="my-5">
-                <p className="capitalize">{ item.name }</p>
-                <p>{ item.description }</p>
-                {
-                  item.advantages.map((adv: any, index2: number) => (
-                    <div key={index2}>
-                      <p>Custo: { adv.cost } - { adv.type }</p>
-                      <p>{ adv.description }</p>
-                    </div>
-                  ))
-                }
-              </div>
-            ))
+            type === 'advantage'
+            ? <div className={`flex-1 pt-3 pb-2 text-justify overflow-y-auto ${ type === 'advantage' ? 'col1': 'col1-73' }`}>
+              { selectOption === 'merits' && <AdvOrFlaw type="advantage" /> }
+              { selectOption === 'talens' && <AdvTalens /> }
+              { selectOption === 'loresheets' && <AdvLoresheets /> }
+              
+            </div>
+            : <div className={`flex-1 pt-3 pb-2 text-justify overflow-y-auto ${ type === 'advantage' ? 'col1': 'col1-73' }`}>
+              { type === 'flaw' && <AdvOrFlaw type="flaw" /> }
+            </div>
           }
-          {
-            type === 'advantage' &&
-            dataTalens &&
-            dataTalens.map((item: any, index: number) => (
-              <div key={index} className="my-5">
-                <p className="capitalize">{ item.titlePtBr }</p>
-                <p>{ item.descriptionPtBr }</p>
-                <p>{ item.systemPtBr }</p>
-                <p>{ item.backgroundCostPtBr }</p>
-                {
-                  item.cost.map((adv: any, index2: number) => (
-                    <div key={index2}>
-                      <p>Tipo { adv.type }</p>
-                      <p>Valor: { adv.value }</p>
-                    </div>
-                  ))
-                }
-              </div>
-            ))
-          }
-          {
-            type === 'advantage' &&
-            dataLoresheets &&
-            dataLoresheets.map((item: any, index: number) => (
-              <div key={index} className="my-5">
-                <p className="capitalize">{ item.titlePtBr }</p>
-                <p>{ item.descriptionPtBr }</p>
-                {
-                  item.habilities.map((adv: any, index2: number) => (
-                    <div key={index2}>
-                      <p>{ adv.skillPtBr }</p>
-                    </div>
-                  ))
-                }
-              </div>
-            ))
-          }
-          {
-            type === 'flaw' &&
-            dataAdvAndFlaws &&
-            dataAdvAndFlaws
-              .filter((dataItem) => dataItem.flaws.length > 0)
-              .map((item: any, index: number) => (
-              <div key={index} className="my-5">
-                <p className="capitalize">{ item.name }</p>
-                <p>{ item.description }</p>
-                {
-                  item.flaws.map((adv: any, index2: number) => (
-                    <div key={index2}>
-                      <p>Custo: { adv.cost } - { adv.type }</p>
-                      <p>{ adv.description }</p>
-                    </div>
-                  ))
-                }
-              </div>
-            ))
-          }
+          <div className={`${ type === 'advantage' ? 'col2': 'col2-73'} hidden sm:flex w-full pl-2 pt-3`}>
+            <AdvOrFlawAdded type={type} />
+          </div>
         </div>
       </div>
     </div>

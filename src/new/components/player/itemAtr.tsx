@@ -38,7 +38,10 @@ export default function ItemAtr(props: any) {
             } return (
               <button
                 type="button"
-                onClick={ () => updateValue(name, index + 1) }
+                onClick={ () => {
+                  if (dataSheet.form === 'Hominídeo' || dataSheet.form === 'Lupino') updateValue(name, index + 1)
+                  else window.alert('Os Atributos só podem ser atualizados na forma Hominídea ou Lupina')
+                }}
                 key={index}
                 className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
               />

@@ -1,20 +1,20 @@
 'use client'
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
-import firestoreConfig from '../../../../firebase/connection';
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
-import Loading from "../../../../new/components/loading";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 import { authenticate } from "@/new/firebase/authenticate";
+import { getSessionById } from "@/new/firebase/sessions";
+import { getPlayerByEmail, getPlayersBySession } from "@/new/firebase/players";
+import firestoreConfig from '../../../../firebase/connection';
+import Loading from "../../../../new/components/loading";
 import Nav from "@/components/nav";
 import SessionBar from "../../../../new/components/sessionBar";
-import contexto from "@/context/context";
 import Message from "@/new/components/message";
 import MenuPlayer from "@/new/components/popup/menuPlayer";
 import MenuGameMaster from "@/new/components/popup/menuGameMaster";
 import MenuRoll from "@/new/components/popup/menuRoll";
-import { getSessionById } from "@/new/firebase/sessions";
-import { getPlayerByEmail, getPlayersBySession } from "@/new/firebase/players";
+import contexto from "@/context/context";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;

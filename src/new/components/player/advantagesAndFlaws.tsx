@@ -3,18 +3,18 @@ import { useContext, useEffect, useState } from 'react';
 import { getPlayerByEmail } from '@/new/firebase/players';
 import contexto from '@/context/context';
 import { IoAdd } from 'react-icons/io5';
-import AdvantageLoresheets from './itemAdvLst';
-import AdvantageTalismans from './itemAdvTlms';
-import ItensAdvantagesAdded from './itemAdvAdd';
-import Advantage from './itemAdv';
-import data from '../../../data/advantagesAndFlaws.json';
-import dataTalismans from '../../../data/talismans.json';
-import dataLoresheets from '../../../data/loresheets.json';
+import { CiCircleChevDown } from "react-icons/ci";
+// import dataTalismans from '../../../data/talismans.json';
+// import dataLoresheets from '../../../data/loresheets.json';
 import AddAdvOrFlaw from '../popup/addAdvOrFlaw';
+import AdvAdded from './advAdded';
+import AdvTalensAdded from './advTalensAdded';
+import AdvLoresheetsAdded from './advLoresheetsAdded';
 
 export default function AdvantagesAndFlaws() {
   const [adv, setAdv] = useState<any>([]);
   const {
+    dataSheet,
     sessionId, email,
     showAllFlaws, setShowAllFlaws,
     showAllAdvantages, setShowAllAdvantages,
@@ -33,10 +33,12 @@ export default function AdvantagesAndFlaws() {
   const sumAllAdvantagesAndFlaws = () => {
     let advantageSum = 0;
     let flawSum = 0;
-    adv.forEach((item: any) => {
-      if (item.flaws.length > 0) item.flaws.forEach((it: any) => flawSum += it.value)
-      if (item.advantages.length > 0) item.advantages.forEach((it: any) => advantageSum += it.value)
-    });
+    dataSheet.advantagesAndFlaws.advantages.forEach((item: any) => advantageSum += item.cost);
+    dataSheet.advantagesAndFlaws.talens.forEach((item: any) => advantageSum += item.value);
+    dataSheet.advantagesAndFlaws.loresheets.forEach((item: any) => advantageSum += item.cost);
+    dataSheet.advantagesAndFlaws.flaws.forEach((item: any) => flawSum += item.cost);
+    let textAdvantage = advantageSum + ' / 7 ';
+    let textFlaw = flawSum + ' / 2 ';
     return (
     <div className="flex flex-col border-2 border-white p-4 text-white justify-center bg-black items-between w-full gap-2">
       <div className={
@@ -44,10 +46,7 @@ export default function AdvantagesAndFlaws() {
          ${advantageSum === 7 && 'text-green-500'}
          flex justify-between
       `}>
-        <p>
-          <span>Total em Vantagens: {advantageSum}</span>
-          { advantageSum !== 7 && <span>/ 7</span> }
-        </p>
+        <p><span>Total em Vantagens: {textAdvantage}</span></p>
         <button
           type="button"
           className="p-1 border-2 border-white bg-white right-3"
@@ -61,10 +60,7 @@ export default function AdvantagesAndFlaws() {
          ${flawSum === 2 && 'text-green-500'}
          flex justify-between
       `}>
-        <p>
-          <span>Total em Defeitos: {flawSum}</span>
-          { flawSum !== 2 && <span>/ 7</span> }
-        </p>
+        <p><span>Total em Defeitos: {textFlaw}</span></p>
         <button
           type="button"
           className="p-1 border-2 border-white bg-white right-3"
@@ -81,51 +77,30 @@ export default function AdvantagesAndFlaws() {
     <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
       { sumAllAdvantagesAndFlaws() }
-      {/* {
-        allAdvantages ?
-        <div className="h-full text-white ">
-          <div className="w-full text-center my-6">Vantagens e Defeitos</div>
-          {
-            data.map((item: any, index: number) => (
-              <Advantage
-                key={index}
-                item={item}
-                index={index}
-                adv={adv}
-                setAdv={setAdv}
-              />
-            ))
-          }
-          <div className="w-full text-center my-6">Loresheets</div>
-          {
-            dataLoresheets.map((item: any, index: number) => (
-              <AdvantageLoresheets
-                key={index}
-                item={item}
-                index={index}
-                adv={adv}
-                setAdv={setAdv}
-              />
-            ))
-          }
-          <div className="w-full text-center my-6">Talismãs</div>
-          {
-            dataTalismans.map((item: any, index: number) => (
-              <AdvantageTalismans
-                key={index}
-                item={item}
-                index={index}
-                adv={adv}
-                setAdv={setAdv}
-              />
-            ))
-          }
-        </div>
-        : <ItensAdvantagesAdded
-            adv={adv}
-            setAdv={setAdv}
-          />
-      } */}
+      <div className="w-full mt-5 mb-3">Méritos e Backgrounds</div>
+      {
+        dataSheet.advantagesAndFlaws.advantages.map((item: any, index: number) => (
+          <AdvAdded key={index} item={item} />
+        ))
+      }
+      <div className="w-full mt-5 mb-3">Defeitos</div>
+      {
+        dataSheet.advantagesAndFlaws.flaws.map((item: any, index: number) => (
+          <AdvAdded key={index} item={item} />
+        ))
+      }
+      <div className="w-full mt-5 mb-3">Talismãs</div>
+      {
+        dataSheet.advantagesAndFlaws.talens.map((item: any, index: number) => (
+          <AdvTalensAdded key={index} item={item} />
+        ))
+      }
+      <div className="w-full mt-5 mb-3">Loresheets</div>
+      {
+        dataSheet.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
+          <AdvLoresheetsAdded key={index} item={item} />
+        ))
+      }
       </div>
       { showAllAdvantages && <AddAdvOrFlaw type="advantage" />}
       { showAllFlaws && <AddAdvOrFlaw type="flaw" />}

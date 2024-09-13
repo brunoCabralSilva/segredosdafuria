@@ -32,7 +32,7 @@ export default function LeaveFromSession(props: { email: string, name: string })
         <div className="pb-5 px-5 w-full">
           <label htmlFor="palavra-passe" className="flex flex-col items-center w-full">
             <p className="text-white w-full text-center pb-3">
-              Ao escolher sair de uma Sessão, o cargo de narrador da sala que você criou passa para o seu jogador mais antigo e todos os dados que você tem aqui, como fichas e anotações é removido permanentemente. A Sessão só é de fato excluída caso não hajam mais jogadores restantes. Você tem certeza que de fato quer fazer isto?
+              Ai confirmar sua saída desta Sessão, sua Ficha e histórico serão completamente apagados, sem chance de resgate destes dados. Você tem certeza que de fato quer fazer isto?
             </p>
           </label>
           <div className="flex w-full gap-2">

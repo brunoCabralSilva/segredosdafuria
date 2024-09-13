@@ -2,9 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-/* * {
-  background-color: black;
-} */
+.custom-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* 2 colunas, uma ocupando 2x o espaço da outra */
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .custom-grid {
+    grid-template-columns: 1fr; /* Coloca tudo em uma coluna */
+  }
+}
+
+.col1, .col2 {
+  height: 73vh;
+}
+
+.col1-73, .col2-73 {
+  height: 82vh;
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;

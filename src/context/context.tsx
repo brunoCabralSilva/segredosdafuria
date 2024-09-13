@@ -44,6 +44,8 @@ interface RecipesContext {
   setShowAllFlaws: (state: boolean) => void,
   showAllAdvantages: boolean,
   setShowAllAdvantages: (state: boolean) => void,
+  showGiftsToAdd: boolean,
+  setShowGiftsToAdd: (state: boolean) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -88,6 +90,8 @@ const initialValue: RecipesContext = {
   setShowAllFlaws: () => {},
   showAllAdvantages: false,
   setShowAllAdvantages: () => {},
+  showGiftsToAdd: false,
+  setShowGiftsToAdd: () => {},
 }
 
 const contexto = createContext(initialValue);
