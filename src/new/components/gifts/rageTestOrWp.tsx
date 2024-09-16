@@ -1,5 +1,5 @@
 import contexto from "@/context/context";
-import { rageCheck, registerMessage } from "@/new/firebase/messagesAndRolls";
+import { calculateRageCheck, registerMessage } from "@/new/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/new/firebase/players";
 import { useContext } from "react";
 
@@ -16,13 +16,20 @@ export function RageTestOrWp(props: { type: string }) {
 
   const rollRage = async () => {
     if (dataSheet.rage >= 1) {
-      dataSheet.rage = await rageCheck(sessionId, email);
+      const rageTest = await calculateRageCheck(sessionId, email);
+      dataSheet.rage = rageTest?.rage;
       await updateDataPlayer(sessionId, email, dataSheet);
-      await registerMessage(sessionId,{ type: 'gift', ...showGiftRoll.gift },email);
+      await registerMessage(
+        sessionId,
+        {
+          type: 'gift',
+          ...showGiftRoll.gift,
+          roll: 'rage',
+          rageResults: rageTest,
+        },
+        email);
       returnSheetValues();
-    } else {
-      window.alert('Você não possui Fúria suficiente para ativar este Dom.');
-    }
+    } else window.alert('Você não possui Fúria suficiente para ativar este Dom.');
   }
 
   const discountWillpower = async() => {

@@ -82,7 +82,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                   dataMessage.pool !== '' &&
                   <p className="pt-2">
                     <span className="pr-1 font-bold">Parada de Dados:</span>
-                    { dataMessage.pool === '' ? 'Nenhuma.' : dataMessage.gift.pool + '.' }
+                    { dataMessage.pool === '' ? 'Nenhuma.' : dataMessage.pool + '.' }
                   </p>
                 }
                 {
@@ -97,6 +97,66 @@ export default function Message(props: { dataMessage: any, color: string }) {
                   { dataMessage.systemPtBr}
                 </p>
               </div>
+              {
+                dataMessage && (dataMessage.roll === 'rage' || dataMessage.roll === 'rage-with-test') &&
+                <div className="px-3">
+                  <div className="border-white py-1">
+                    <div className="flex gap-1 flex-wrap">
+                      {
+                        dataMessage.rageResults.rollOfRage && dataMessage.rageResults.rollOfRage.length > 0 && dataMessage.rageResults.rollOfRage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
+                          <Dice key={index} dice={ dice } type="(rage)" />
+                        ))
+                      }
+                    </div>
+                    <div className="font-bold pt-2 text-left">Teste de Fúria necessário:</div>
+                    <div className="">{ dataMessage.rageResults.result }</div>
+                    <div className="font-bold pb-3">
+                      Fúria Atual: {dataMessage.rageResults.rage}
+                    </div>
+                  </div>
+                </div>
+              }
+              {
+                dataMessage && (dataMessage.roll === 'willpower' || dataMessage.roll === 'rage-with-test') &&
+                <div className="px-3 bg-green-whats-dark">
+                  <div className="border-white ">
+                    <div className="flex gap-1 flex-wrap">
+                      {
+                        dataMessage.results.rage.length > 0 && dataMessage.results.rage.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
+                          <Dice key={index} dice={ dice } type="(rage)" />
+                        ))
+                      }
+                      {
+                        dataMessage.results.margin.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
+                          <Dice key={index} dice={ dice } type="" />
+                        ))
+                      }
+                    </div>
+                    <div className="font-bold pt-2 text-left">Teste de ativação do Dom:</div>
+                    <div className="font-bold pt-1 text-left">
+                      { dataMessage.results.message }
+                    </div>
+                    <div className="flex justify-start items-center">
+                        <span className="">{`Sucessos: `}</span>
+                        <span className="font-bold px-3">
+                          { dataMessage.results.brutalPairs + dataMessage.results.criticalPairs + dataMessage.results.success }
+                        </span>
+                    </div>
+                    <div className="flex jufy-start items-center">
+                      <span className="">{`Dificuldade: `}</span>
+                      <span className="font-bold px-3">
+                        {Number(dataMessage.results.dificulty)}
+                      </span>
+                    </div>
+                    <div className="flex tify-start items-center w-full flex-wrap">
+                      <span className="">{`Excedente: `}</span>
+                      <span className="font-bold px-3">
+                        {Number(dataMessage.results.successesForDamage) <= 0 ? 'Nenhum' : dataMessage.results.successesForDamage + 1}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              }
             </div>
             <div className="flex justify-end pt-2">
 							<span className="w-full text-right text-sm flex justify-end">

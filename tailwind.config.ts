@@ -40,6 +40,7 @@ const config: Config = {
       colors: {
         'gray-whats': '#202C33',
         'green-whats': '#005C4B',
+        'green-whats-dark': '#013027',
         'gray-whats-dark': '#0c1114',
       },
       spacing: {

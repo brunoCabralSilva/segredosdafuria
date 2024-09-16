@@ -1820,7 +1820,7 @@
   },
   {
     "gift": "Wasp Talons",
-    "giftPtBr": "",
+    "giftPtBr": "Garras de Vespa",
     "belonging": [
       {
         "type": "black furies",
@@ -2127,8 +2127,8 @@
     "cost": "Nenhum / 1 ponto de Força de Vontade",
     "action": "Livre / Total",
     "pool": "",
-    "system": "",
-    "systemPtBr": "",
+    "system": "Add the Gift user's Honor to any Stealth, survival or Larceny attempt to avoid detection by electronic surveillance,including infrared câmeras, movement detectors and light-based sensors. Ordinary câmeras can still spot them, assuming a living person in watching the feed, and outright mechanical devices (such as tripwires) are unaffected. By spending a Willpower and a full turn, the Gift can extend its effect to members of their pach within reach.",
+    "systemPtBr": "Adicione a Honra do usuário do Dom a qualquer teste de Furtividade, Sobrevivência ou Furto para evitar a detecção por vigilância eletrônica, incluindo câmeras infravermelhas, detectores de movimento e sensores baseados em luz. Câmeras comuns ainda podem detectá-los, assumindo que uma pessoa viva esteja monitorando a transmissão, e dispositivos totalmente mecânicos (como fios de disparo) não são afetados. Ao gastar um ponto de Força de Vontade e um turno completo, o Dom pode estender seu efeito aos membros de sua matilha que estejam ao alcance.",
     "duration": "Uma Cena",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 169

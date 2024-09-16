@@ -69,7 +69,7 @@ const verifyResult = (
 	}
 }
 
-const rollTest = (
+export const rollTest = (
 	valueOfRage: number,
 	valueOf: number,
 	penaltyOrBonus: number,
@@ -212,6 +212,33 @@ export const rageCheck = async(sessionId: string, email: string) => {
     }
   }
   return player.data.rage;
+}
+
+export const calculateRageCheck = async(sessionId: string, email: string) => {
+	let resultOfRage = [];
+	let success = 0;
+	const value = Math.floor(Math.random() * 10) + 1;
+	if (value >= 6) success += 1;
+	resultOfRage.push(value);
+	const player = await getPlayerByEmail(sessionId, email);
+	if (player) {
+	  if (player.data.rage <= 0) {
+		  window.alert('Você não possui Fúria suficiente para ativar este Teste.');
+	  } else {
+      let text = '';
+      if (success === 0) {
+        player.data.rage -= 1;
+        text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + (player.data.rage) + '.';
+      } else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
+      return({
+        message: 'Foi realizado um Teste de Fúria.',
+        rollOfRage: resultOfRage,
+        result: text,
+        rage: player.data.rage,
+        success,
+      });
+	  }
+  }
 }
 
 export const haranoHaugloskCheck = async(
