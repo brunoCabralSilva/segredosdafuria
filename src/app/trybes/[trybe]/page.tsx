@@ -1,20 +1,17 @@
 'use client';
 import Image from 'next/image';
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionFeedback, useSlice } from "@/redux/slice";
-import Simplify from "@/components/simplify";
-import Nav from "@/components/nav";
+import { useContext, useEffect, useState } from "react";
+import Nav from '@/components/nav';
 import Footer from "@/components/footer";
 import listTrybes from '../../../data/trybes.json';
 import { IArchetypes, ITrybe } from "../../../interface";
 import Feedback from "@/components/feedback";
+import contexto from '@/context/context';
 
 export default function Trybe({ params } : { params: { trybe: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataTrybe, setDataTrybe] = useState<ITrybe>();
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
+  const { showFeedback, setShowFeedback } = useContext(contexto)
 
   useEffect(() => {
     const findTrybe: ITrybe | undefined = listTrybes
@@ -42,8 +39,7 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
   if (dataTrybe) {
     return(
       <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
-        <Simplify />
+        <div className="absolute w-full h-full bg-black/90" />
         <Nav />
         <section className="mb-2 relative px-2">
           <div className="py-10 flex flex-col items-center sm:items-start w-full z-20 text-white text-justify overflow-y-auto">
@@ -51,17 +47,14 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
               <div className="absolute h-full w-full sm:w-5/12 flex items-center justify-center">
                 { isLoading && <span className="loader z-50" /> }
               </div>
-              { 
-                !slice.simplify &&
-                <Image
-                  src={`/images/trybes/${dataTrybe.namePtBr} - representation.png`}
-                  alt={`Representação dos ${dataTrybe.namePtBr}`}
-                  className="w-full mobile:w-8/12 sm:w-5/12 relative px-6"
-                  width={800}
-                  height={400}
-                  onLoad={() => setIsLoading(false)}
-                />
-              }
+              <Image
+                src={`/images/trybes/${dataTrybe.namePtBr} - representation.png`}
+                alt={`Representação dos ${dataTrybe.namePtBr}`}
+                className="w-full mobile:w-8/12 sm:w-5/12 relative px-6"
+                width={800}
+                height={400}
+                onLoad={() => setIsLoading(false)}
+              />
             </div>
             <div className="mt-5 mobile:mt-10 px-6 text-sm sm:text-base">
               <h2 className=" font-bold text-xl sm:text-2xl w-full text-center">
@@ -137,13 +130,13 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
         </div>
         <button
           type="button"
-          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+          className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+          onClick={() => setShowFeedback(true) }
         >
           Enviar Feedback
         </button>
         {
-          slice.feedback.show && <Feedback title={ dataTrybe.nameEn } /> 
+          showFeedback && <Feedback title={ dataTrybe.nameEn } /> 
         }
         </section>
         <Footer />
@@ -151,8 +144,7 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
     );
   } return (
     <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <span className="loader z-50" />
     </div>

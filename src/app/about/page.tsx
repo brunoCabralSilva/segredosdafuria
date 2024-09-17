@@ -1,38 +1,21 @@
 'use client'
-import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import {
-  BsInstagram,
-  BsSpotify,
-  BsYoutube,
-  BsFacebook
-} from "react-icons/bs";
-import { actionFeedback, actionType, useSlice } from '@/redux/slice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Simplify from '@/components/simplify';
+import { BsInstagram, BsSpotify, BsYoutube, BsFacebook } from "react-icons/bs";
 import Image from 'next/image';
-import { useEffect } from 'react';
 import Feedback from '@/components/feedback';
+import { useContext } from 'react';
+import contexto from '@/context/context';
+import Nav from '@/components/nav';
 
 export default function About() {
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(actionType({ show: false, talisman: '', gift: '', ritual: '' }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  const { showFeedback, setShowFeedback  } = useContext(contexto);
   return (
-    <div className={`${slice.simplify ? 'bg-black' : 'bg-ritual'} text-white relative`}>
+    <div className="bg-ritual text-white relative">
       <div className="bg-black/60 absolute w-full h-full" />
       <div className="px-2 z-10 relative">
-        <Simplify />
         <Nav />
         <section className="mb-2">
-          { !slice.simplify &&
-            <div className="h-40vh relative flex bg-black items-end text-black bg-boca md:bg-boca01 bg-cover bg-center" />
-          }
+          <div className="h-40vh relative flex bg-black items-end text-black bg-boca md:bg-boca01 bg-cover bg-center" />
           <div className="py-6 px-5 bg-black/90 mt-2 flex flex-col items-center sm:items-start text-justify">
         <h1 className="text-4xl relative text-center">Quem Somos</h1>
             <hr className="w-10/12 my-6" />
@@ -70,37 +53,31 @@ export default function About() {
               <p className="pt-4">
                 A semente desse projeto foi plantada nas mentes de três apaixonados: Bruno Gabryell, Felipe Brito e Jocélio Procópio, que, unidos sob o estandarte da &quot;Taverna Literária&quot;, decidiram embarcar em uma jornada única. Eles almejavam criar algo que destacasse o Nordeste e a cultura dos Garou, mostrando ao Brasil inteiro que nossa região é muito mais do que os estereótipos de seca e carência.
               </p>
-              {
-                !slice.simplify &&
-                <div className="flex flex-col sm:flex-row justify-center items-center w-full pt-4 gap-2">
-                  <Image
-                    src={ "/images/modelo01.jpeg" }
-                    alt="Modelo branco da camisa do Garou Nordeste"
-                    className="w-full sm:w-1/2 object-contain cobject-center h-full"
-                    width={ 1200 }
-                    height={ 800 }
-                  />
-                  <Image
-                    src={ "/images/modelo02.jpeg" }
-                    alt="Modelo preto da camisa do Garou Nordeste"
-                    className="w-full sm:w-1/2 object-contain cobject-center h-full"
-                    width={ 1200 }
-                    height={ 800 }
-                  />
-                </div>
-              }
-              {
-                !slice.simplify &&
-                <p className="w-full text-center">
-                  <span className="pr-1">Imagens criadas por</span>
-                  <a
-                    target="_blank"
-                    href="https://www.instagram.com/cesarbard/"
-                    className="underline">
-                      @cesarbard
-                  </a>
-                </p>
-              }
+              <div className="flex flex-col sm:flex-row justify-center items-center w-full pt-4 gap-2">
+                <Image
+                  src={ "/images/modelo01.jpeg" }
+                  alt="Modelo branco da camisa do Garou Nordeste"
+                  className="w-full sm:w-1/2 object-contain cobject-center h-full"
+                  width={ 1200 }
+                  height={ 800 }
+                />
+                <Image
+                  src={ "/images/modelo02.jpeg" }
+                  alt="Modelo preto da camisa do Garou Nordeste"
+                  className="w-full sm:w-1/2 object-contain cobject-center h-full"
+                  width={ 1200 }
+                  height={ 800 }
+                />
+              </div>
+              <p className="w-full text-center">
+                <span className="pr-1">Imagens criadas por</span>
+                <a
+                  target="_blank"
+                  href="https://www.instagram.com/cesarbard/"
+                  className="underline">
+                    @cesarbard
+                </a>
+              </p>
               <p className="pt-4">
                 O Garou Nordeste é um tributo à diversidade e à espiritualidade profundamente enraizada no coração do Nordeste. É uma celebração da força da natureza, da resiliência de seu povo e da riqueza de suas tradições. Neste projeto, os jogadores de &quot;Lobisomem: O Apocalipse&quot; serão levados a uma jornada única, onde os mistérios da região se mesclam com a mitologia dos Garou de uma forma que cativa, educa e inspira.
               </p>
@@ -156,12 +133,12 @@ export default function About() {
               </div>
               <button
                 type="button"
-                className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}
-                onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+                className="text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+                onClick={() => setShowFeedback(true) }
               >
                 Enviar Feedback
               </button>
-              { slice.feedback.show && <Feedback title={ 'Página "Quem Somos"' } /> }
+              { showFeedback && <Feedback title={ 'Página "Quem Somos"' } /> }
             </div>
           </div>
         </section>

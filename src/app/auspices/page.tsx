@@ -1,33 +1,21 @@
 'use client'
-import { useEffect } from 'react';
-import { actionFeedback, actionType, useSlice } from '@/redux/slice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { useContext, useEffect } from 'react';
 import Link from "next/link";
 import Image from "next/image";
-import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import Simplify from '@/components/simplify';
 import listAuspices from '../../data/auspices.json';
 import Feedback from '@/components/feedback';
+import contexto from '@/context/context';
+import Nav from '@/components/nav';
 
 export default function Auspices() {
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(actionType({ show: false, talisman: '', gift: '', ritual: '' }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  
+  const { showFeedback, setShowFeedback } = useContext(contexto);
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <section className="mb-2 relative px-2">
-        {
-          !slice.simplify &&
-          <div className="h-40vh relative flex bg-black items-end text-black">
+        <div className="h-40vh relative flex bg-black items-end text-black">
           <Image
             src={ "/images/49.png" }
             alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
@@ -35,8 +23,7 @@ export default function Auspices() {
             width={ 1200 }
             height={ 800 }
           />
-          </div>
-        }
+        </div>
         <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
           <h1 className="text-4xl relative">Augúrios</h1>
           <hr className="w-10/12 my-6" />
@@ -62,7 +49,7 @@ export default function Auspices() {
                 href={`/auspices/${auspice.name.toLowerCase()}`}
                 className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer"
               >
-                <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
+                <div className="absolute w-full h-full bg-black/80" />
                 <Image
                   src={`/images/auspices/${auspice.name}.png`}
                   alt={`Glifo do Augúrio ${auspice.name}`}
@@ -79,13 +66,13 @@ export default function Auspices() {
         </div>
         <button
           type="button"
-          className={`px-6 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+          className="px-6 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+          onClick={() => setShowFeedback(true) }
         >
           Enviar Feedback
         </button>
         {
-          slice.feedback.show && <Feedback title={ 'Página Augúrios' } /> 
+          showFeedback && <Feedback title={ 'Página Augúrios' } /> 
         }
       </section>
       <Footer />

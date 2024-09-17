@@ -1,39 +1,49 @@
 'use client'
 import Footer from "@/components/footer";
-import Nav from "@/components/nav";
-import Simplify from "@/components/simplify";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionInfoSessions, actionSaveUserData, actionSessionAuth, useSlice } from "@/redux/slice";
-import { useEffect, useState } from "react";
+import Nav from '@/components/nav';
+import { useContext, useEffect, useState } from "react";
 import { IoIosInformationCircle, IoMdAdd } from "react-icons/io";
 import { useRouter } from 'next/navigation';
-import SessionAuth from "./sessionAuth";
-import { authenticate, signIn } from "@/new/firebase/authenticate";
-import PopupInfo from "@/components/sheet/popup/popupInfo";
-import { getAllSessions } from "@/firebase/sessions";
+import { authenticate } from "@/firebase/authenticate";
 import { ISessions } from "@/interface";
+import CreateSection from "../../components/createSection";
+import { getSessions } from "@/firebase/sessions";
+import contexto from "@/context/context";
+import Info from "../../components/info";
+import Loading from "../../components/loading";
+import VerifySession from "../../components/popup/verifySession";
 
-export default function Session() {
-  const [sessions, setSessions] = useState<any[]>([]);
-  const slice = useAppSelector(useSlice);
-  const dispatch = useAppDispatch();
+export default function Sessions() {
   const router = useRouter();
+  const {
+    showInfoSessions, setShowInfoSessions,
+    showCreateSession, setShowCreateSession,
+    dataSession, setDataSession,
+    dataUser, setDataUser,
+  } = useContext(contexto);
+  const [sessions, setSessions] = useState<any[]>([]);
   const [showData, setShowData] = useState(false);
-
+  
   useEffect(() => {
+    setDataSession({ show: false, id: '' });
     setShowData(false);
     const fetchData = async (): Promise<void> => {
-      const authData: any = await authenticate();
-      try {
-        if (authData && authData.email && authData.displayName) {
-          dispatch(actionSaveUserData({ email: authData.email, name: authData.displayName, dm: false }));
-          setShowData(true);
-          const sessionsList = await getAllSessions();
-          setSessions(sessionsList);
-          setShowData(true);
-        } else router.push('/login');
-      } catch (error) {
-        window.alert('Ocorreu um erro ao obter Sessões: ' + error);
+      if (dataUser.email !== '' && dataUser.displayName !== '') {
+        const sessionsList = await getSessions();
+        setSessions(sessionsList);
+        setShowData(true);
+      } else {
+        const authData: any = await authenticate();
+        try {
+          if (authData && authData.email && authData.displayName) {
+            setDataUser({ email: authData.email, displayName: authData.displayName });
+            const sessionsList = await getSessions();
+            setSessions(sessionsList);
+            setShowData(true);
+          } else router.push('/login');
+        } catch (error) {
+          window.alert('Ocorreu um erro ao obter Sessões: ' + error);
+        }
       }
     };
     fetchData();
@@ -41,56 +51,61 @@ export default function Session() {
   }, []);
 
   return(
-    <div className="bg-ritual bg-top bg-cover w-full">
+    <div className={`${!showInfoSessions && !showCreateSession && 'h-screen'} bg-ritual bg-top bg-cover w-full`}>
       { 
         showData
-        ? <div className="bg-black/80 h-full">
-          <Simplify />
-          <Nav />
-          <section className="relative px-2 h-screen overflow-y-auto">
-            <div className="py-6 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
-              <h1 className="text-4xl relative flex items-center">
-                <span className="pr-2">Sessões</span>
-                <IoIosInformationCircle
-                  className="cursor-pointer"
-                  onClick={ () => dispatch(actionInfoSessions(true)) }
-                />
-              </h1>
-              <hr className="w-10/12 mt-6" />
-            </div>
-            
-            <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3 pb-4">
-              <button
-                type="button"
-                onClick={ () => router.push('/sessions/create') }
-                className="p-2 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
-              >
-                <IoMdAdd className="text-4xl" />
-              </button>
-              {
-                sessions.map((session: ISessions, index: number) =>
-                <button
-                  type="button"
-                  onClick={
-                    () => {
-                      dispatch(actionSessionAuth({ show: true, id: session.id }))
+        ? <div className="h-full bg-black/80">
+            <Nav />
+            <section className="relative px-2 overflow-y-auto bg-black/10">
+              <div className="py-6 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify bg-black/10">
+                <h1 className="text-4xl relative flex items-center">
+                  <span className="pr-2">Sessões</span>
+                  <IoIosInformationCircle
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setShowInfoSessions(!showInfoSessions);
+                      setShowCreateSession(false);
                     }}
-                    key={ index }
-                    className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80 capitalize"
+                  />
+                </h1>
+                <hr className="w-10/12 mt-6" />
+              </div>
+              { 
+                !showInfoSessions
+                && !showCreateSession
+                &&
+                <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3 pb-4 bg-transparent">
+                  <button
+                    type="button"
+                    onClick={ () => {
+                      setShowCreateSession(true);
+                      setShowInfoSessions(false);
+                    }}
+                    className="p-2 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
                   >
-                    { session.name }
+                    <IoMdAdd className="text-4xl" />
                   </button>
-                )
+                  {
+                    sessions.map((session: ISessions, index: number) =>
+                    <button
+                      type="button"
+                      key={ index }
+                      onClick={ () => setDataSession({ show: true, id: session.id })}
+                      className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80 capitalize"
+                      >
+                        { session.name }
+                      </button>
+                    )
+                  }
+                </div>
               }
-            </div>
-          </section>
+              { showInfoSessions && <Info /> }
+              { showCreateSession && <CreateSection /> }
+              { dataSession.show && <VerifySession /> }
+            </section>
           </div>
-        : <div className="bg-black/80 text-white h-screen flex items-center justify-center flex-col">
-            <span className="loader z-50" />
-          </div>
+        : <div className="bg-black/80 h-screen w-full"><Loading /></div>
       }
-      { slice.sessionAuth.show ? <SessionAuth /> : '' }
-      { slice.popupInfo && <PopupInfo /> }
       <Footer />
     </div>
   );

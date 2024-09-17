@@ -1,18 +1,16 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionLogoutUser, useSlice } from '@/redux/slice';
-import PopupLogout from './sheet/popup/popupLogout';
-import { authenticate } from '@/new/firebase/authenticate';
+import { authenticate } from '@/firebase/authenticate';
 import { useRouter } from 'next/navigation';
+import contexto from '@/context/context';
+import Logout from './popup/logout';
 
 export default function Nav() {
   const [showMenu, setShowMenu] = useState(false);
   const [loginLogout, setLoginLogout] = useState('');
-  const dispatch = useAppDispatch();
-  const slice = useAppSelector(useSlice);
   const router = useRouter();
+  const { logoutUser, setLogoutUser } = useContext(contexto);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +45,7 @@ export default function Nav() {
 
   return (
     <nav className="w-full text-base relative 2xl:text-xl leading-6 z-40">
-      { slice.logoutUser && <PopupLogout setShowMenu={setShowMenu} setLoginLogout={setLoginLogout} /> }
+      { logoutUser && <Logout /> }
       <div
         onClick={ () => setShowMenu(!showMenu) }
         className="bg-black px-2 pt-2 pb-1 rounded cursor-pointer fixed right-0 top-0 sm:mt-1 sm:mr-2 flex flex-col z-40"
@@ -58,7 +56,7 @@ export default function Nav() {
       </div>
       { showMenu &&
         <ul
-          className={`overflow-y-auto fixed top-0 right-0 opacity-1 z-30 w-full sm:w-1/2 md:w-1/4 h-screen items-center pt-2 transition duration-500 flex flex-col text-white justify-center ${slice.simplify ? 'bg-black border-l-2 border-white' : 'bg-black'} font-extrabold`}
+          className={`overflow-y-auto fixed top-0 right-0 opacity-1 z-30 w-full sm:w-1/2 md:w-1/4 h-screen items-center pt-2 transition duration-500 flex flex-col text-white justify-center bg-black font-extrabold`}
         >
           <li>
             <Link
@@ -153,7 +151,7 @@ export default function Nav() {
               type="button"
               onClick={ async () => {
                 if (loginLogout === 'login') router.push('/login');
-                else dispatch(actionLogoutUser(true))
+                else setLogoutUser(true)
               }}
               className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
             >

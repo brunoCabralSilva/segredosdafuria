@@ -1,13 +1,10 @@
 'use client'
-import { useAppSelector } from '@/redux/hooks';
-import { useSlice } from '@/redux/slice';
 import Image from "next/image";
 import React from 'react';
 
 export default function Footer() {
-  const slice = useAppSelector(useSlice);
   return (
-    <footer className={`${ slice.simplify && 'border-t-2 border-white' } relative text-white px-8 flex flex-col sm:flex-row justify-between items-center w-full py-2 z-5 bg-black`}>
+    <footer className={`relative text-white px-8 flex flex-col sm:flex-row justify-between items-center w-full py-2 z-5 bg-black`}>
       <div className="pl-0 sm:w-1/4 flex flex-row justify-center sm:justify-start p-2 my-4 sm:my-0">
         <Image
           src="/images/logos/Garou Nordeste.png"
@@ -28,7 +25,7 @@ export default function Footer() {
         <p className="text-center sm:text-right w-full">© Paradox Interactive. Trademarks belong to their respective owners. All rights reserved.</p>
         <p
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className={`pt-3 pb-2 sm:py-0 text-center sm:text-right w-full cursor-pointer ${ slice.simplify ? 'underline font-bold' : 'hover:text-orange-600 text-orange-400 transition-colors duration-700' }`}
+          className={`pt-3 pb-2 sm:py-0 text-center sm:text-right w-full cursor-pointer hover:text-orange-600 text-orange-400 transition-colors duration-700`}
         >
           Retornar ao Topo
         </p>

@@ -1,9 +1,9 @@
 'use client'
 import { ReactNode, useState } from 'react';
 import contexto from './context';
-import { playerSheet } from '@/new/firebase/utilities';
-import { getPlayerByEmail } from '@/new/firebase/players';
-import { authenticate } from '@/new/firebase/authenticate';
+import { playerSheet } from '@/firebase/utilities';
+import { getPlayerByEmail } from '@/firebase/players';
+import { authenticate } from '@/firebase/authenticate';
 
 interface IProvider { children: ReactNode }
 
@@ -11,6 +11,20 @@ export default function Provider({children }: IProvider) {
   //user
   const [dataUser, setDataUser] = useState({ email: '', displayName: '' });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
+  //Gifts
+  const [globalGifts, setGlobalGifts] = useState(false);
+  const [totalRenown, setTotalRenown] = useState(0);
+  const [textGift, setTextGift] = useState('');
+  const [listOfGiftsSelected, setListOfGiftsSelected] = useState([]);
+  const [textRitual, setTextRitual] = useState('');
+  const [listOfRituals, setListOfRituais] = useState([]);
+  const [textTalisman, setTextTalisman] = useState('');
+  const [listOfTalismans, setListOfTalismans] = useState([]);
+  const [listOfGift, setListOfGift] = useState([]);
+  //pages
+  const [showFeedback, setShowFeedback] = useState(false);
+  //navigation
+  const [logoutUser, setLogoutUser] = useState(false);
   //sessions
   const [sessionId, setSessionId] = useState('');
   const [dataSession, setDataSession] = useState({ show: false, id: '' });
@@ -61,6 +75,20 @@ export default function Provider({children }: IProvider) {
         //user
         dataUser, setDataUser,
         showForgotPassword, setShowForgotPassword,
+        //pages
+        showFeedback, setShowFeedback,
+        //Gifts
+        globalGifts, setGlobalGifts,
+        totalRenown, setTotalRenown,
+        textGift, setTextGift,
+        listOfGiftsSelected, setListOfGiftsSelected,
+        textRitual, setTextRitual,
+        listOfRituals, setListOfRituais,
+        textTalisman, setTextTalisman,
+        listOfTalismans, setListOfTalismans,
+        listOfGift, setListOfGift,
+        //navigation
+        logoutUser, setLogoutUser,
         //session
         sessionId, setSessionId,
         dataSession, setDataSession,

@@ -1,9 +1,11 @@
 'use client'
-// import Loading from '@/components/loading';
-import { registerUser } from '@/new/firebase/user';
-import React, { useState } from 'react';
+import { registerUser } from '@/firebase/user';
+import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaBackward } from "react-icons/fa6";
+import Loading from '@/components/loading';
+import contexto from '@/context/context';
+import { authenticate } from '@/firebase/authenticate';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -14,6 +16,7 @@ const Register = () => {
   const [password2, setPassword2] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { setDataUser } = useContext(contexto);
 
   const handleRegisterDev = async () => {
     setLoading(true);
@@ -40,6 +43,10 @@ const Register = () => {
         image,
       );
       if (reg) {
+        const data = await authenticate();
+        if (data) {
+          setDataUser({ email: data.email, displayName: data.displayName });
+        }
         router.push('/sessions');
       }
       setFirstName('');
@@ -63,7 +70,7 @@ const Register = () => {
        <div className="break-words md:my-5 w-full rounded-lg shadow">
           <div className="break-words p-4 space-y-4 md:space-y-6 sm:p-8">
             <div className="break-words flex items-center justify-between w-full mb-6 sm:mb-0">
-              <h1 className="break-words text-xl font-bold leading-tight tracking-tight text-white md:text-2xl text-white">
+              <h1 className="break-words text-xl font-bold leading-tight tracking-tight md:text-2xl text-white">
                   Cadastro
               </h1>
               <FaBackward
@@ -80,7 +87,7 @@ const Register = () => {
                   id="firstName"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value.toLowerCase())}
-                  className="break-words shadow-sm w-full bg-black border border-white text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-400" 
+                  className="break-words shadow-sm bg-black border border-white text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-400" 
                   placeholder="Insira seu primeiro nome" 
                   required 
                 />
@@ -92,7 +99,7 @@ const Register = () => {
                   id="lastName"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value.toLowerCase())}
-                  className="break-words shadow-sm w-full bg-black border border-white text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-400" 
+                  className="break-words shadow-sm bg-black border border-white text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-400" 
                   placeholder="Insira seu último nome" 
                   required 
                 />
@@ -105,7 +112,7 @@ const Register = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value.toLowerCase())}
-                  className="break-words shadow-sm bg-black border border-white text-white text-sm rounded-lg block p-2.5 placeholder-gray-400" 
+                  className="break-words shadow-sm bg-black border border-white text-white text-sm rounded-lg block p-2.5 placeholder-gray-400 w-full" 
                   placeholder="name@flowbite.com" 
                   required 
                 />
@@ -154,7 +161,7 @@ const Register = () => {
                 </span>
               </button>
             </div>
-          {/* { loading && <Loading /> } */}
+          { loading && <Loading /> }
           </div>
         </div>
       </div> 

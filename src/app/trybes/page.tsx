@@ -1,36 +1,20 @@
 'use client'
-import { actionFeedback, useSlice } from '@/redux/slice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Image from "next/image";
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import Simplify from '@/components/simplify';
 import listTrybes from '../../data/trybes.json';
 import Link from "next/link";
 import Feedback from '@/components/feedback';
+import { useContext } from "react";
+import contexto from "@/context/context";
 
 export default function Trybes() {
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
-  
+  const { showFeedback, setShowFeedback } = useContext(contexto);
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className={`absolute w-full h-full bg-black/80`} />
       <Nav />
       <section className="mb-2 relative px-2">
-        {
-          !slice.simplify &&
-          <div className="h-40vh relative flex bg-white items-end text-black">
-          <Image
-            src={ "/images/84.png" }
-            alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-            className="absolute w-full h-40vh object-contain object-top"
-            width={ 1200 }
-            height={ 800 }
-          />
-          </div>
-        }
         <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
           <h1 className="text-4xl relative">Tribos</h1>
           <hr className="w-10/12 my-6" />
@@ -53,7 +37,7 @@ export default function Trybes() {
                 key={ index }
                 className="border-white border-2 p-3 flex items-center justify-center flex-col bg-filters bg-center bg-opacity-10 relative cursor-pointer"
               >
-                <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
+                <div className={`absolute w-full h-full bg-black/80`} />
                 <Image
                   src={`/images/trybes/${trybe.namePtBr}.png`}
                   alt={`Glifo dos ${trybe.namePtBr}`}
@@ -70,13 +54,13 @@ export default function Trybes() {
         </div>
         <button
           type="button"
-          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+          className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+          onClick={() => setShowFeedback(true) }
         >
           Enviar Feedback
         </button>
         {
-          slice.feedback.show && <Feedback title={ 'Página "Tribos"' } /> 
+          showFeedback && <Feedback title={ 'Página "Tribos"' } /> 
         }
       </section>
       <Footer />

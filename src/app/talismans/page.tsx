@@ -1,40 +1,47 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { actionFeedback, actionList, actionType, useSlice } from '@/redux/slice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Simplify from '@/components/simplify';
 import Image from "next/image";
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useContext, useEffect } from 'react';
 import ListTalismans from './listTalismans';
 import jsonTalismans from '../../data/talismans.json';
-import SearchButton from '@/components/SearchButton';
 import Feedback from '@/components/feedback';
+import contexto from '@/context/context';
 
 export default function Talismans() {
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
-
+  const {
+    textTalisman, setTextTalisman,
+    setListOfTalismans, 
+    showFeedback, setShowFeedback,
+  } = useContext(contexto);
   const typeText = (e: ChangeEvent<HTMLInputElement>) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-    dispatch(actionType({ show: true, talisman: sanitizedValue, gift: '', ritual: '' }));
+    setTextTalisman(sanitizedValue);
   };
 
   useEffect(() => {
-    dispatch(actionList({ ritual:[], gift: [], talisman: jsonTalismans}));
-    dispatch(actionType({ talisman: '', gift: '', ritual: '' }));
+    setListOfTalismans(jsonTalismans);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const search = () => {
+    let filterByText = jsonTalismans;
+    if (textTalisman !== '' && textTalisman !== ' ') {
+      filterByText = jsonTalismans.filter((item: any) => 
+        item.title.toLowerCase().includes(textTalisman.toLowerCase())
+        || item.titlePtBr.toLowerCase().includes(textTalisman.toLowerCase())
+      );
+    }
+    setListOfTalismans(filterByText);
+    setTextTalisman('');
+  }
+
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <section className="mb-2 relative px-2">
-        {
-          !slice.simplify &&
-          <div className="h-40vh relative flex bg-white items-end text-black">
+        <div className="h-40vh relative flex bg-white items-end text-black">
           <Image
             src={ "/images/25.jpg" }
             alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
@@ -42,8 +49,7 @@ export default function Talismans() {
             width={ 1200 }
             height={ 800 }
           />
-          </div>
-        }
+        </div>
         <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
           <h1 className="text-4xl relative">Talismãs</h1>
           <hr className="w-10/12 my-6" />
@@ -61,24 +67,38 @@ export default function Talismans() {
             Digite o nome ou um trecho do nome do Talismã, ou mantenha o campo vazio e todos os Talismãs serão retornados
           </p>
           <input
-            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.type.talisman === '' || slice.type.talisman === ' ' && slice.type.type === 'talismans'
+            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${textTalisman === '' || textTalisman === ' '
             ? 'bg-black text-white' : 'bg-white text-black'} rounded-full mb-3`}
-            value={ slice.type.text }
+            value={ textTalisman }
             placeholder="Digite aqui"
             onChange={ (e) => typeText(e) }
           />
         </section>
-        <SearchButton type="talismans" />
+        <div
+          onClick={ search }
+          className="font-bold py-4 px-5 text-lg bg-white my-2 cursor-pointer"
+        >
+          <p className="w-full text-center text-black">
+            Buscar
+          </p>
+          <p className="text-center w-full">
+            {
+              textTalisman !== ''
+              && textTalisman !== ' '
+              && `Talismãs contendo o trecho "${textTalisman}"`
+            }
+          </p>
+        </div>
         <ListTalismans />
         <button
           type="button"
-          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+          className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+          onClick={() => setShowFeedback(true) }
         >
           Enviar Feedback
         </button>
         {
-          slice.feedback.show && <Feedback title={ 'Página "Talismans"' } /> 
+          showFeedback && <Feedback title={ 'Página "Talismans"' } /> 
         }
       </section>
       <Footer />

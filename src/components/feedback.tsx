@@ -1,13 +1,11 @@
 'use client'
 import dotenv from 'dotenv';
-import { actionFeedback, useSlice } from '@/redux/slice';
 import emailjs from '@emailjs/browser';
-import { useState } from 'react';
-import { useAppDispatch } from '@/redux/hooks';
-import { useAppSelector } from '@/redux/hooks';
+import { useContext, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
 import { VscRepoPush } from "react-icons/vsc";
+import contexto from '@/context/context';
 
 dotenv.config();
 
@@ -18,8 +16,7 @@ export default function Feedback(props: { title: string }) {
   const [messagePopup, setMessagePopup] = useState(
     { error: true, message: '', show: false }
   );
-  const slice = useAppSelector(useSlice);
-  const dispatch = useAppDispatch();
+  const { showFeedback, setShowFeedback } = useContext(contexto);
   const sendEmail = (e: any) => {
     const regex = /\S+@\S+\.\S+/
     e.preventDefault();
@@ -69,22 +66,13 @@ export default function Feedback(props: { title: string }) {
             show: true,
           }
         );
-        setTimeout(() => {
-          dispatch(actionFeedback({ show: false, message: '' }))
-        }, 3000);
+        setTimeout(() => setShowFeedback(false), 3000);
       } catch (error: any) {
         global.alert(error);
       }
     }
-
     setTimeout(() => {
-      setMessagePopup(
-        {
-          message: '',
-          error: true,
-          show: false,
-        }
-      );
+      setMessagePopup( { message: '', error: true, show: false });
     }, 4000);
   }
   return(
@@ -96,7 +84,7 @@ export default function Feedback(props: { title: string }) {
         <div className="absolute top-0 right-0 p-2 text-xl">
           <AiFillCloseCircle
             className="cursor-pointer"
-            onClick={() => dispatch(actionFeedback({ show: false, message: '' })) }
+            onClick={() => setShowFeedback(false) }
           />
         </div>
         <p className="py-2 text-center px-4 font-bold">

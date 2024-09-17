@@ -1,19 +1,16 @@
 'use client';
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionFeedback, useSlice } from "@/redux/slice";
-import Simplify from "@/components/simplify";
-import Nav from "@/components/nav";
+import { useContext, useEffect, useState } from "react";
+import Nav from '@/components/nav';
 import Footer from "@/components/footer";
 import listTalismans from '../../../data/talismans.json';
 import { ITalisman } from "../../../interface";
 import Feedback from "@/components/feedback";
+import contexto from "@/context/context";
 
 
 export default function Talisman({ params } : { params: { talisman: String } }) {
   const [dataTalisman, setDataTalisman] = useState<ITalisman>();
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
+  const { showFeedback, setShowFeedback } = useContext(contexto);
 
   useEffect(() => {
     const findTalisman: ITalisman | undefined = listTalismans
@@ -25,8 +22,7 @@ export default function Talisman({ params } : { params: { talisman: String } }) 
   if (dataTalisman) {
     return(
       <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
-        <Simplify />
+        <div className="absolute w-full h-full bg-black/90" />
         <Nav />
         <section className="mb-2 relative px-2 min-h-screen">
           <div className="py-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
@@ -74,13 +70,13 @@ export default function Talisman({ params } : { params: { talisman: String } }) 
               <div className="flex flex-col sm:flex-row sm:justify-between">
               <button
                 type="button"
-                className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-                onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+                className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+                onClick={() => setShowFeedback(true) }
               >
                 Enviar Feedback
               </button>
               {
-                slice.feedback.show && <Feedback title={ dataTalisman.title } /> 
+                showFeedback && <Feedback title={ dataTalisman.title } /> 
               }
               </div>
             </article>
@@ -91,8 +87,7 @@ export default function Talisman({ params } : { params: { talisman: String } }) 
   );
 } return (
     <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <span className="loader z-50" />
     </div>

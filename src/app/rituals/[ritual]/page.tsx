@@ -1,32 +1,29 @@
 'use client';
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionFeedback, useSlice } from "@/redux/slice";
-import Simplify from "@/components/simplify";
-import Nav from "@/components/nav";
+import { useContext, useEffect, useState } from "react";
+import Nav from '@/components/nav';
 import Footer from "@/components/footer";
 import listRituals from '../../../data/rituals.json';
 import { IRitual } from "../../../interface";
 import Feedback from "@/components/feedback";
+import contexto from "@/context/context";
 
 
 export default function Ritual({ params } : { params: { ritual: String } }) {
   const [dataRitual, setDataRitual] = useState<IRitual>();
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
+  const { showFeedback, setShowFeedback, setListOfRituais } = useContext(contexto);
 
   useEffect(() => {
     const findRitual: IRitual | undefined = listRituals
       .find((rtl: IRitual) => params.ritual.replace(/-/g, ' ') === rtl.title.toLowerCase());
     setDataRitual(findRitual);
+    setListOfRituais(listRituals);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (dataRitual) {
     return(
       <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
-        <Simplify />
+        <div className="absolute w-full h-full bg-black/90" />
         <Nav />
         <section className="mb-2 relative px-2 min-h-screen">
           <div className="py-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
@@ -68,13 +65,13 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
               <div className="flex flex-col sm:flex-row sm:justify-between">
               <button
                 type="button"
-                className={ !slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}
-                onClick={() => dispatch(actionFeedback({ show: true, message: dataRitual.title })) }
+                className="text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+                onClick={() => setShowFeedback(true) }
               >
                 Enviar Feedback
               </button>
               </div>
-              { slice.feedback.show && <Feedback title={ dataRitual.title } /> }
+              { showFeedback && <Feedback title={ dataRitual.title } /> }
             </article>
           </div>
         </section>
@@ -83,8 +80,7 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
   );
 } return (
     <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <span className="loader z-50" />
     </div>

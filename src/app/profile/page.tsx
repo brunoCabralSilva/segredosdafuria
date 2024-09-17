@@ -1,59 +1,40 @@
 'use client'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Nav from '@/components/nav';
 import { useRouter } from "next/navigation";
-import { authenticate } from "@/new/firebase/authenticate";
+import { authenticate } from "@/firebase/authenticate";
 import Footer from '@/components/footer';
 import Image from "next/image";
-import Simplify from '@/components/simplify';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { actionSessionAuth, useSlice } from '@/redux/slice';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
-import firebaseConfig from '@/firebase/connection';
-import SessionAuth from '../sessions/sessionAuth';
+import VerifySession from '@/components/popup/verifySession';
+import contexto from '@/context/context';
+import { getAllSessionsByFunction } from '@/firebase/sessions';
 
 export default function Profile() {
-  const [sessionSelected, setSessionSelected] = useState('');
   const [showData, setShowData] = useState(false);
   const [email, setEmail] = useState('');
   const [nameUser, setNameUser] = useState('');
   const [listDmSessions, setListDmSessions] = useState<{id: string, name: string }[]>([]);
   const [listSessions, setListSessions] = useState<{id: string, name: string }[]>([]);
   const router = useRouter();
-  const slice = useAppSelector(useSlice);
-  const dispatch = useAppDispatch();
+  const { dataSession, setDataSession } = useContext(contexto);
   
   useEffect(() => {
     setListDmSessions([]);
     setListSessions([]);
+    setDataSession({ show: false, id: '' });
     const profile = async () => {
     const authData: any = await authenticate();
     if (authData && authData.email && authData.displayName) {
-      const { email, name } = authData;
-      setNameUser(name);
+      const { email, displayName } = authData;
+      setNameUser(displayName);
       setEmail(email);
       setShowData(true);
-        const db = getFirestore(firebaseConfig);
-        const sessionsCollectionRef = collection(db, 'sessions');
-        const userQuerySnapshot = await getDocs(sessionsCollectionRef);
-        let list1: {id: string, name: string }[] = [];
-        let list2: {id: string, name: string }[] = [];
-        userQuerySnapshot.forEach((doc: any) => {
-          const data = doc.data();
-          if (data.dm === email) {
-              list1.push({ id: doc.id, name: data.name });
-          } else {
-            data.players.forEach((player: any) => {
-              if (player.email === email && data.dm !== email) {
-                list2.push({ id: doc.id, name: data.name });
-              }
-            });
-          }
-      });
+      const { list1, list2 } = await getAllSessionsByFunction(email);
       setListSessions(list2);
       setListDmSessions(list1);
     } else router.push('/login');
   }
+
   profile();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -64,13 +45,10 @@ export default function Profile() {
       {
         showData
         ? <div className="w-full bg-ritual bg-cover bg-top relative">
-            <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
-            <Simplify />
+            <div className="absolute w-full h-full bg-black/90" />
             <Nav />
             <section className="relative">
-              {
-                !slice.simplify &&
-                <div className="h-40vh relative flex bg-white items-end text-black">
+              <div className="h-40vh relative flex bg-white items-end text-black">
                 <Image
                   src={ "/images/25.jpg" }
                   alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
@@ -78,17 +56,16 @@ export default function Profile() {
                   width={ 1200 }
                   height={ 800 }
                 />
-                </div>
-              }
+              </div>
               <div className="py-6 sm:px-5 text-white flex flex-col items-center sm:items-start text-justify">
                 <h1 className="text-4xl relative">Perfil</h1>
                 <hr className="w-10/12 mt-6" />
                 <div className="w-full bg-black p-4 mt-6 mb-2">
                   <p className="w-full text-center sm:text-left">Usuário registrado:</p>
-                  <p className="w-full text-center sm:text-left text-white font-bold">
+                  <p className="w-full text-center sm:text-left text-white font-bold capitalize">
                     {nameUser}
                   </p>
-                  <p className="pt-5 w-full text-center sm:text-left">Email de cadastro via Google:</p>
+                  <p className="pt-5 w-full text-center sm:text-left">Email de cadastro:</p>
                   <p className="w-full text-center sm:text-left text-white font-bold">
                   {email} 
                   </p>
@@ -101,13 +78,8 @@ export default function Profile() {
                       <button
                         type="button"
                         key={index}
-                        className="text-center border-2 border-white bg-black px-4 py-2 rounded-full text-white hover:border-red-800"
-                        onClick={
-                          () => {
-                            setSessionSelected(sessions.id);
-                            dispatch(actionSessionAuth({ show: true, id: sessions.id }))
-                          }
-                        }
+                        className="text-center border-2 border-white bg-black px-4 py-2 rounded-full capitalize text-white hover:border-red-800"
+                        onClick={ () => setDataSession({ show: true, id: sessions.id }) }
                       >
                         { sessions.name }
                       </button>
@@ -124,12 +96,7 @@ export default function Profile() {
                         type="button"
                         key={index}
                         className="text-center border-2 border-white bg-black px-4 py-2 rounded-full text-white hover:border-red-800 break-all"
-                        onClick={
-                          () => {
-                            setSessionSelected(sessions.id);
-                            dispatch(actionSessionAuth({ show: true, id: sessions.id }))
-                          }
-                        }
+                        onClick={ () => setDataSession({ show: true, id: sessions.id }) }
                       >
                         { sessions.name }
                       </button>
@@ -145,7 +112,7 @@ export default function Profile() {
           </div>
       }
       <Footer />
-      { slice.sessionAuth.show ? <SessionAuth /> : '' }
+      { dataSession.show ? <VerifySession /> : '' }
     </div>
   );
 }

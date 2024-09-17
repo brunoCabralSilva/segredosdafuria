@@ -19,7 +19,6 @@
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
     "firebase": "^10.6.0",
-    "framer-motion": "^10.16.2",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^4.0.0",
     "md5": "^2.3.0",

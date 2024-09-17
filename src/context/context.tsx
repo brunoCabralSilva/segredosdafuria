@@ -1,5 +1,5 @@
 'use client'
-import { playerSheet } from '@/new/firebase/utilities';
+import { playerSheet } from '@/firebase/utilities';
 import { createContext } from 'react';
 
 interface RecipesContext {
@@ -8,6 +8,31 @@ interface RecipesContext {
   setDataUser: (state: { email: string, displayName: string }) => void,
   showForgotPassword: boolean,
   setShowForgotPassword: (state: boolean) => void,
+  //navigation
+  logoutUser: boolean,
+  setLogoutUser: (state: boolean) => void,
+  //Gifts
+  globalGifts: boolean,
+  setGlobalGifts: (state: boolean) => void,
+  totalRenown: number,
+  setTotalRenown: (state: number) => void,
+  textGift: string,
+  setTextGift: (state: string) => void,
+  listOfGiftsSelected: any,
+  setListOfGiftsSelected: (state: any) => void,
+  textRitual: string,
+  setTextRitual: (state: string) => void,
+  listOfRituals: any,
+  setListOfRituais: (state: any) => void,
+  textTalisman: string,
+  setTextTalisman: (state: string) => void,
+  listOfTalismans: any,
+  setListOfTalismans: (state: any) => void,
+  listOfGift: any,
+  setListOfGift: (state: any) => void,
+  //pages
+  showFeedback: boolean,
+  setShowFeedback: (state: boolean) => void,
   //sessions
   sessionId: string,
   setSessionId: (state: string) => void,
@@ -64,6 +89,31 @@ const initialValue: RecipesContext = {
   setDataUser: () => {},
   showForgotPassword: false,
   setShowForgotPassword: () => {},
+  //navigation
+  logoutUser: false,
+  setLogoutUser: () => {},
+  //Gifts
+  globalGifts: false,
+  setGlobalGifts: () => {},
+  totalRenown: 1,
+  setTotalRenown: () => {},
+  textGift: '',
+  setTextGift: () => {},
+  listOfGiftsSelected: [],
+  setListOfGiftsSelected: () => {},
+  textRitual: '',
+  setTextRitual: () => {},
+  listOfRituals: [],
+  setListOfRituais: () => {},
+  textTalisman: '',
+  setTextTalisman: () => {},
+  listOfTalismans: [],
+  setListOfTalismans: () => {},
+  listOfGift: [],
+  setListOfGift: () => {},
+  //pages
+  showFeedback: false,
+  setShowFeedback: () => {},
   //sessions
   sessionId: '',
   setSessionId: () => {},

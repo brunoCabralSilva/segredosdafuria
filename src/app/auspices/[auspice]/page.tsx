@@ -1,20 +1,17 @@
 'use client';
 import Image from 'next/image';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import listAuspices from '../../../data/auspices.json';
-import Simplify from "@/components/simplify";
-import Nav from "@/components/nav";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionFeedback, useSlice } from "@/redux/slice";
 import Footer from "@/components/footer";
 import { IAuspice } from "../../../interface";
 import Feedback from "@/components/feedback";
+import contexto from '@/context/context';
+import Nav from '@/components/nav';
 
 export default function Auspice({ params } : { params: { auspice: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataAuspice, setDataAuspice] = useState<IAuspice>();
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
+  const { showFeedback, setShowFeedback } = useContext(contexto);
 
   useEffect(() => {
     const findAuspice: IAuspice | undefined = listAuspices
@@ -27,8 +24,7 @@ export default function Auspice({ params } : { params: { auspice: String } }) {
   if (dataAuspice) {
     return(
       <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
-        <Simplify />
+        <div className="absolute w-full h-full bg-black/90" />
         <Nav />
         <section className="mb-2 relative px-2">
         <div className="py-10 flex flex-col items-center sm:items-start w-full z-20 text-white text-justify overflow-y-auto">
@@ -73,13 +69,13 @@ export default function Auspice({ params } : { params: { auspice: String } }) {
           </div>
           <button
             type="button"
-            className={`px-6 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-            onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+            className="px-6 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+            onClick={() => setShowFeedback(true) }
           >
             Enviar Feedback
           </button>
           {
-            slice.feedback.show && <Feedback title={ dataAuspice.name } /> 
+            showFeedback && <Feedback title={ dataAuspice.name } /> 
           }
         </div>
       </section>
@@ -88,8 +84,7 @@ export default function Auspice({ params } : { params: { auspice: String } }) {
   );
 } return (
     <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <span className="loader z-50" />
     </div>

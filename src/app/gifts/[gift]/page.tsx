@@ -1,52 +1,29 @@
 'use client';
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { actionFeedback, useSlice } from "@/redux/slice";
+import { useContext, useEffect, useState } from "react";
 import Image from 'next/image';
-import Simplify from "@/components/simplify";
 import Nav from "@/components/nav";
 import Footer from "@/components/footer";
 import listGifts from '../../../data/gifts.json';
 import { IGift, ITypeGift } from "../../../interface";
 import Feedback from "@/components/feedback";
+import contexto from "@/context/context";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function Gift({ params } : { params: { gift: String } }) {
   const [dataGift, setDataGift] = useState<IGift>();
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
+  const { showFeedback, setShowFeedback } = useContext(contexto);
 
   useEffect(() => {
-    console.log(params.gift);
-    console.log(params.gift.replace(/-/g, ' '));
     const findGift: IGift | undefined = listGifts
       .find((gft: IGift) => params.gift.replace(/-/g, ' ').replace(/%C3%A2/g, "â") === gft.gift.toLowerCase());
     setDataGift(findGift);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function capitalizeFirstLetter(str: string): String {
-    switch(str) {
-      case 'global': return 'Dons Nativos';
-      case 'silent striders': return 'Peregrinos Silenciosos';
-      case 'black furies': return 'Fúrias Negras';
-      case 'silver fangs': return 'Presas de Prata';
-      case 'hart wardens': return 'Guarda do Cervo';
-      case 'ghost council': return 'Conselho Fantasma';
-      case 'galestalkers': return 'Perseguidores da Tempestade';
-      case 'glass walkers': return 'Andarilhos do Asfalto';
-      case 'bone gnawers': return 'Roedores de Ossos';
-      case 'shadow lords': return 'Senhores das Sombras';
-      case 'children of gaia': return 'Filhos de Gaia';
-      case 'red talons': return 'Garras Vermelhas';
-      default: return str.charAt(0).toUpperCase() + str.slice(1);;
-    }
-  };
-
   if (dataGift) {
     return(
       <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/90'}`} />
-        <Simplify />
+        <div className="absolute w-full h-full bg-black/90" />
         <Nav />
         <section className="mb-2 relative px-2 min-h-screen">
           <div className="py-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
@@ -127,13 +104,13 @@ export default function Gift({ params } : { params: { gift: String } }) {
               <div className="flex flex-col sm:flex-row sm:justify-between">
               <button
                 type="button"
-                className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-                onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+                className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+                onClick={() => setShowFeedback(true) }
               >
                 Enviar Feedback
               </button>
               {
-                slice.feedback.show && <Feedback title={ dataGift.gift } /> 
+                showFeedback && <Feedback title={ dataGift.gift } /> 
               }
               </div>
             </article>
@@ -144,8 +121,7 @@ export default function Gift({ params } : { params: { gift: String } }) {
   );
 } return (
     <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <span className="loader z-50" />
     </div>

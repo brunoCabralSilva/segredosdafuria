@@ -1,38 +1,48 @@
 'use client'
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import { useSlice, actionType, actionFeedback } from '@/redux/slice';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Simplify from '@/components/simplify';
 import Image from "next/image";
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent, useContext, useEffect } from 'react';
 import ListRituals from './listRituals';
-import SearchButton from '@/components/SearchButton';
+import jsonRituals from '../../data/rituals.json';
 import Feedback from '@/components/feedback';
+import contexto from '@/context/context';
 
 export default function Rituals() {
-  const slice = useAppSelector(useSlice);
-  const dispatch: any = useAppDispatch();
+  const {
+    showFeedback, setShowFeedback,
+    textRitual, setTextRitual,
+    setListOfRituais,
+  } = useContext(contexto);
 
   useEffect(() => {
-    dispatch(actionType({ show: true, talisman: '', gift: '', ritual: '' }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    setListOfRituais(jsonRituals);
   }, []);
-
+  
   const typeText = (e: ChangeEvent<HTMLInputElement>) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-    dispatch(actionType({ show: true, talisman: '', gift: '', ritual: sanitizedValue }));
+    setTextRitual(sanitizedValue);
   };
+
+  const search = (): void => {
+    let filterByText = [];
+    filterByText = jsonRituals;
+    if (textRitual !== '' && textRitual !== ' ') {
+      filterByText = jsonRituals.filter((item: any) => 
+        item.title.toLowerCase().includes(textRitual.toLowerCase())
+        || item.titlePtBr.toLowerCase().includes(textRitual.toLowerCase())
+      );
+      setListOfRituais(filterByText);
+    } else setListOfRituais(jsonRituals);
+    setTextRitual('');
+  }
 
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
-      <div className={`absolute w-full h-full ${slice.simplify ? 'bg-black' : 'bg-black/80'}`} />
-      <Simplify />
+      <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <section className="mb-2 relative px-2">
-        {
-          !slice.simplify &&
-          <div className="h-40vh relative flex bg-white items-end text-black">
+        <div className="h-40vh relative flex bg-white items-end text-black">
           <Image
             src={ "/images/25.jpg" }
             alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
@@ -40,8 +50,7 @@ export default function Rituals() {
             width={ 1200 }
             height={ 800 }
           />
-          </div>
-        }
+        </div>
         <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
           <h1 className="text-4xl relative">Rituais</h1>
           <hr className="w-10/12 my-6" />
@@ -89,24 +98,38 @@ export default function Rituals() {
             Digite o nome ou um trecho do nome do Ritual, ou mantenha o campo vazio e todos os rituais serão retornados
           </p>
           <input
-            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${slice.type.ritual === '' || slice.type.ritual === ' '
+            className={`shadow shadow-white text-center sm:text-left w-full px-4 py-2 ${textRitual === '' || textRitual === ' '
             ? 'bg-black text-white' : 'bg-white text-black'} rounded-full mb-3`}
-            value={ slice.type.ritual }
+            value={ textRitual }
             placeholder="Digite aqui"
             onChange={ (e) => typeText(e) }
           />
         </section>
-        <SearchButton type="rituals" />
+        <div
+          onClick={ search }
+          className="font-bold py-4 px-5 text-lg bg-white my-2 cursor-pointer"
+        >
+          <p className="w-full text-center text-black">
+            Buscar
+          </p>
+          <p className="text-center w-full">
+            {
+              textRitual !== ''
+              && textRitual !== ' '
+              && `Rituais contendo o trecho "${textRitual}"`
+            }
+          </p>
+        </div>
         <ListRituals />
         <button
           type="button"
-          className={`pb-3 ${!slice.simplify ? 'text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline' : 'bg-white text-black p-2 font-bold mt-3'}`}
-          onClick={() => dispatch(actionFeedback({ show: true, message: '' })) }
+          className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+          onClick={() => setShowFeedback(true) }
         >
           Enviar Feedback
         </button>
         {
-          slice.feedback.show && <Feedback title={ 'Página "Rituais"' } /> 
+          showFeedback && <Feedback title={ 'Página "Rituais"' } /> 
         }
       </section>
       <Footer />

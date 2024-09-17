@@ -1,12 +1,13 @@
-import { collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
-import { authenticate, signIn } from "./login";
-import { registerMessage } from "./chatbot";
-import { actionDeleteUserFromSession } from "@/redux/slice";
+import { createNotificationData, registerNotification } from "./notifications";
+import { createChatData } from "./chats";
+import { createPlayersData } from "./players";
 
-export const getAllSessions = async () => {
+export const getSessions = async () => {
   const db = getFirestore(firebaseConfig);
-  const collectionRef = collection(db, 'sessions');
+  const collectionRef = collection(db, 'sessions2');
   const querySnapshot = await getDocs(collectionRef);
   const sessionsList = querySnapshot.docs.map((doc) => ({
     id: doc.id,
@@ -17,16 +18,16 @@ export const getAllSessions = async () => {
 
 export const getSessionByName = async (nameSession: string) => {
   const db = getFirestore(firebaseConfig);
-  const sessionsCollection = collection(db, 'sessions');
+  const sessionsCollection = collection(db, 'sessions2');
   const querySnapshot = await getDocs(query(sessionsCollection, where('name', '==', nameSession)));
   let sessionList: any;
   if (!querySnapshot.empty) sessionList = querySnapshot.docs[0].data();
-  return { list: sessionList, collection: sessionsCollection};
+  return sessionList;
 };
 
 export const getSessionById = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
-  const sessionsCollectionRef = collection(db, 'sessions');
+  const sessionsCollectionRef = collection(db, 'sessions2');
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   const sessionDocSnapshot = await getDoc(sessionDocRef);
   if (sessionDocSnapshot.exists()) {
@@ -36,7 +37,7 @@ export const getSessionById = async (sessionId: string) => {
 
 export const getNameAndDmFromSessions = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
-  const sessionsCollectionRef = collection(db, 'sessions');
+  const sessionsCollectionRef = collection(db, 'sessions2');
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   const sessionDocSnapshot = await getDoc(sessionDocRef);
   if (sessionDocSnapshot.exists()) {
@@ -44,106 +45,93 @@ export const getNameAndDmFromSessions = async (sessionId: string) => {
   } return null;
 };
 
-export const getUserByIdSession = async(sessionId: string, email: string) => {
+export const createSession = async (
+  nameSession: string,
+  description: string,
+  email: string,
+) => {
   try {
+    const dateMessage = await getOfficialTimeBrazil();
     const db = getFirestore(firebaseConfig);
-    const sessionsCollectionRef = collection(db, 'sessions');
-    const sessionDocRef = doc(sessionsCollectionRef, sessionId);
-    const sessionDocSnapshot = await getDoc(sessionDocRef);
-    if (sessionDocSnapshot.exists()) {
-      const players = sessionDocSnapshot.data().players;
-      const player: any = players.find((gp: any) => gp.email === email);
-      return player;
-    } return null;
-  } catch (error) {
-    window.alert('Erro ao obter dados do Jogador: ' + error);
+    const collectionRef = collection(db, 'sessions2'); 
+    const docRef = await addDoc(collectionRef, {
+      name: nameSession.toLowerCase(), creationDate: dateMessage, gameMaster: email, anotations: '', description,
+    });
+    await createNotificationData(docRef.id);
+    await createPlayersData(docRef.id);
+    await createChatData(docRef.id);
+    return docRef.id;
+  } catch(err)  {
+    throw new Error ('Ocorreu um erro ao criar uma sessão: ' + err);
   }
 };
 
-export const getUserAndDataByIdSession = async(sessionId: string) => {
+export const clearHistory = async (id: string) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const sessionRef = doc(collection(db, 'sessions'), sessionId);
-    const sessionDocSnapshot = await getDoc(sessionRef);
-    let players = [];
-  if (sessionDocSnapshot.exists()) {
-    const sessionData = sessionDocSnapshot.data();
-    players = sessionData.players;
-  }
-  return { players, sessionRef };
-  } catch (error) {
-    window.alert('Erro ao obter valor da Forma: ' + error);
+    const docRef = doc(db, 'sessions2', id);
+    await updateDoc(docRef, { chat: [] });
+  } catch (err) {
+    throw new Error('Ocorreu um erro ao limpar o histórico de chat: ' + err);
   }
 };
 
-export const getChatAndDataByIdSession = async(sessionId: string) => {
+export const leaveFromSession = async (sessionId: string, email: string, name: string) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const sessionRef = doc(collection(db, 'sessions'), sessionId);
-    const sessionDocSnapshot = await getDoc(sessionRef);
-    let chat = [];
-  if (sessionDocSnapshot.exists()) {
-    const sessionData = sessionDocSnapshot.data();
-    chat = sessionData.chat;
-  }
-  return { chat, sessionRef };
-  } catch (error) {
-    window.alert('Erro ao obter valor da Forma: ' + error);
+    const collectionRef = collection(db, 'players');
+    const q = query(collectionRef, where('sessionId', '==', sessionId));
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const dataDoc = querySnapshot.docs[0];
+      const data = dataDoc.data();
+      data.list = data.list.filter((player: any) => player.email !== email);
+      const docRef = doc(db, 'players', dataDoc.id);
+      const dataNotification = {
+        message: `Olá, tudo bem? O jogador ${capitalize(name)} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
+        type: 'transfer',
+      };
+      await updateDoc(docRef, { list: data.list });
+      await registerNotification(sessionId, dataNotification);
+      window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
+    } else throw new Error('Sessão não encontrada.');
+  } catch (err) {
+    throw new Error('Ocorreu um erro ao atualizar os dados do Jogador: ' + err);
   }
 };
 
-export const leaveFromSession = async (slice: any, dispatch: any, router: any) => {
+export const getAllSessionsByFunction = async (email: string) => {
   const db = getFirestore(firebaseConfig);
-  const authData: { email: string, name: string } | null = await authenticate();
-  try {
-    if (authData && authData.email && authData.name) {
-        const { email, name } = authData;
-        const sessionDocRef = doc(db, 'sessions', slice.sessionId);
-        const sessionDocSnapshot = await getDoc(sessionDocRef);
+  const playersCollectionRef = collection(db, 'players');
+  const playersQuerySnapshot = await getDocs(playersCollectionRef);
+  const sessionIds: string[] = [];
 
-        if (sessionDocSnapshot.exists()) {
-        const sessionDoc = sessionDocSnapshot.data();
-        const filterListPlayer = sessionDoc.players.filter((player: any) => player.email !== email);
+  playersQuerySnapshot.forEach((doc) => {
+    const data = doc.data();
+    if (Array.isArray(data.list)) {
+      data.list.forEach((item: any) => {
+        if (item.email === email) sessionIds.push(data.sessionId);
+      });
+    }
+  });
 
-        if (filterListPlayer.length === 0) {
-          await deleteDoc(sessionDocRef);
-        } else {
-            let oldestPlayer = filterListPlayer[0];
-            for (let i = 0; i <= filterListPlayer.length - 1; i += 1) {
-                if (filterListPlayer[i].creationDate < oldestPlayer.creationDate) {
-                    oldestPlayer = filterListPlayer[i];
-                }
-            }
-            const updatedNotifications = [{
-              message: `Olá, tudo bem? O jogador ${name} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
-              type: 'transfer',
-            }];
+  if (sessionIds.length === 0) return { list1: [], list2: [] };
 
-            await updateDoc(sessionDocRef, {
-              players: filterListPlayer,
-              dm: oldestPlayer.email,
-              notifications: updatedNotifications,
-            });
+  const sessionsCollectionRef = collection(db, 'sessions2');
+  const list1: { id: string; name: string }[] = [];
+  const list2: { id: string; name: string }[] = [];
 
-            await registerMessage({
-              message: `O jogador ${name} saiu definitivamente desta sala.`,
-              user: 'notification',
-              email: email,
-            }, sessionDoc.name); // Se quiser usar o nome da sessão, você pode acessá-lo diretamente de sessionDoc
-
-            dispatch(actionDeleteUserFromSession(false));
-            window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
-            router.push('/sessions');
-          }
-        } else {
-          const sign = await signIn();
-          if (!sign) {
-            window.alert('Houve um erro ao realizar a autenticação. Por favor, faça login novamente.');
-            router.push('/');
-          }
-        }
+  for (const sessionId of sessionIds) {
+    const sessionDoc = await getDoc(doc(sessionsCollectionRef, sessionId));
+    if (sessionDoc.exists()) {
+      const data = sessionDoc.data();
+      if (data.gameMaster === email) {
+        list1.push({ id: sessionDoc.id, name: data.name });
+      } else {
+        list2.push({ id: sessionDoc.id, name: data.name });
       }
-  } catch (error) {
-    window.alert("Ocorreu um erro ao tentar remover a Sessão: " + error);
+    }
   }
+
+  return { list1, list2 };
 };
