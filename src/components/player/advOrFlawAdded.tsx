@@ -1,7 +1,7 @@
 import contexto from "@/context/context";
 import { useContext } from "react";
 
-export default function advOrFlawAdded(props: { type: string }) {
+export default function AdvOrFlawAdded(props: { type: string }) {
   const { type } = props;
   const { dataSheet } = useContext(contexto);
 
