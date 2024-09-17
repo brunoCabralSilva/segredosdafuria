@@ -80,7 +80,7 @@ export default function Forms() {
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         <div className="w-full mt-2 text-black">
-          <div className="w-full"> 
+          <div className="w-full pb-5"> 
             {
               dataForms.map((form: any, index: number) => (
                 <div
@@ -89,13 +89,13 @@ export default function Forms() {
                   onClick={ () => updateValue(form.name) }
                 >
                   <div className="w-full flex items-center justify-center">
-                  <Image
-                    src={`/images/forms/${form.name}-white.png`}
-                    alt={`Glifo dos ${form.name}`}
-                    className="object-cover object-top w-32 my-2"
-                    width={800}
-                    height={400}
-                  />
+                    <Image
+                      src={`/images/forms/${form.name}-white.png`}
+                      alt={`Glifo dos ${form.name}`}
+                      className="object-cover object-top w-32 my-2"
+                      width={800}
+                      height={400}
+                    />
                   </div>
                   <p className="w-full text-center py-2 text-white">{ form.name } - { form.subtitle }</p>
                   <ul className="pl-5 text-sm font-normal text-white">

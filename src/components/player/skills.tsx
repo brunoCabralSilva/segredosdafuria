@@ -30,7 +30,7 @@ export default function Skills() {
           <ItemSkill name="subterfuge" namePtBr="Lábia" quant={5} />
         </div>
         <hr className="mx-4 my-6" />
-        <div className="w-full px-4">
+        <div className="w-full px-4 pb-5">
           <ItemSkill name="academics" namePtBr="Acadêmicos" quant={5} />
           <ItemSkill name="awareness" namePtBr="Percepção" quant={5} />
           <ItemSkill name="finance" namePtBr="Finanças" quant={5} />

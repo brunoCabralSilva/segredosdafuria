@@ -33,8 +33,8 @@ export default function Background(props: { type: string }) {
 
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
-      <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
-        <div className="mt-1 p-2 flex justify-between items-center">
+      <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold ">
+        <div className="mt-1 p-2 flex justify-between items-center ">
           <div
             className="text-white mt-2 pb-2 w-full cursor-pointer flex-col items-center justify-center"
             onClick={
@@ -66,12 +66,12 @@ export default function Background(props: { type: string }) {
           { 
             textArea ?
             <textarea
-              className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full"
+              className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full mb-5"
               value={ text }
               onChange={(e) => typeText(e)}
             />
             : <div
-                className="text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full cursor-pointer"
+                className="text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full cursor-pointer mb-5"
                 onClick={() => setTextArea(true)} 
               >
               { text }

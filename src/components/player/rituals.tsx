@@ -20,7 +20,7 @@ export default function Rituals() {
             <IoAdd className="text-black text-xl" />
           </button>
         </div>
-        <div>
+        <div className="pb-5">
           {
             dataSheet.rituals.map((item: any, index: number) => (
               <RitualsAdded key={ index } ritual={ item } />

@@ -1,6 +1,7 @@
 'use client'
 import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
+import Image from "next/image";
 import { useContext, useState } from "react";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import { GiD10 } from "react-icons/gi";
@@ -12,34 +13,34 @@ export default function GiftsAdded(props: { gift: any }) {
   return(
     <div className="flex flex-col gap-3 border border-white pl-2 p-2 mb-2 items-center text-justify font-normal">
       <div
-        className={`w-full flex items-center justify-between ${showData && 'pl-4 transition-all'}`}
-        onClick={() => {}}
+        className={`w-full flex flex-col items-center cursor-pointer justify-between relative ${showData && 'pl-4 transition-all'}`}
+        onClick={() => setShowData(!showData)}
       >
-        <span className="font-bold">
-          { gift.giftPtBr } ({ gift.gift })
-        </span>
-        <div className="flex items-center gap-2">
+        <div className="flex justify-center items-center mb-2">
+          {
+            gift.belonging.map((belong: any) => (
+              <Image
+                src={`/images/gifts/${capitalizeFirstLetter(belong.type)}.png`}
+                alt={`Glifo dos ${capitalizeFirstLetter(belong.type)}`}
+                className="h-8 relative object-contain"
+                width={35}
+                height={400}
+              />
+            ))
+          }
+        </div>
+        <div className="font-bold">{ gift.giftPtBr }</div>
+        <div className={`flex items-center gap-2 ${showData && 'absolute top-2 right-2'}`}>
           {
             showData &&
             <button
               type="button"
-              className="cursor-pointer"
+              className={`cursor-pointer`}
               onClick={ () => setShowGiftRoll({ show: true, gift }) }
             >
               <GiD10 className="text-3xl text-white" />
             </button>
           }
-          <button
-            type="button"
-            className="cursor-pointer"
-            onClick={() => setShowData(!showData) }
-          >
-            {
-            !showData
-              ? <CiCircleChevDown className="text-4xl" />
-              : <CiCircleChevUp className="text-4xl" />
-            }
-          </button>
         </div>
       </div>
         {

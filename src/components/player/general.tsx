@@ -131,7 +131,7 @@ export default function General() {
         <button
 					type="button"
 					onClick={ () => setShowResetSheet(true) }
-					className="mt-8 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+					className="mt-8 mb-5 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
 				>
 					Resetar Ficha
         </button>

@@ -76,31 +76,31 @@ export default function AdvantagesAndFlaws() {
   return(
     <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
-      { sumAllAdvantagesAndFlaws() }
-      <div className="w-full mt-5 mb-3">Méritos e Backgrounds</div>
-      {
-        dataSheet.advantagesAndFlaws.advantages.map((item: any, index: number) => (
-          <AdvAdded key={index} item={item} />
-        ))
-      }
-      <div className="w-full mt-5 mb-3">Defeitos</div>
-      {
-        dataSheet.advantagesAndFlaws.flaws.map((item: any, index: number) => (
-          <AdvAdded key={index} item={item} />
-        ))
-      }
-      <div className="w-full mt-5 mb-3">Talismãs</div>
-      {
-        dataSheet.advantagesAndFlaws.talens.map((item: any, index: number) => (
-          <AdvTalensAdded key={index} item={item} />
-        ))
-      }
-      <div className="w-full mt-5 mb-3">Loresheets</div>
-      {
-        dataSheet.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
-          <AdvLoresheetsAdded key={index} item={item} />
-        ))
-      }
+        { sumAllAdvantagesAndFlaws() }
+        <div className="w-full mt-5 mb-3">Méritos e Backgrounds</div>
+        {
+          dataSheet.advantagesAndFlaws.advantages.map((item: any, index: number) => (
+            <AdvAdded key={index} item={item} />
+          ))
+        }
+        <div className="w-full mt-5 mb-3">Defeitos</div>
+        {
+          dataSheet.advantagesAndFlaws.flaws.map((item: any, index: number) => (
+            <AdvAdded key={index} item={item} />
+          ))
+        }
+        <div className="w-full mt-5 mb-3">Talismãs</div>
+        {
+          dataSheet.advantagesAndFlaws.talens.map((item: any, index: number) => (
+            <AdvTalensAdded key={index} item={item} />
+          ))
+        }
+        <div className="w-full mt-5 mb-3">Loresheets</div>
+        {
+          dataSheet.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
+            <AdvLoresheetsAdded key={index} item={item} />
+          ))
+        }
       </div>
       { showAllAdvantages && <AddAdvOrFlaw type="advantage" />}
       { showAllFlaws && <AddAdvOrFlaw type="flaw" />}

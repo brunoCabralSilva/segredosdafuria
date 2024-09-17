@@ -27,7 +27,7 @@ export default function Gifts() {
             <IoAdd className="text-black text-xl" />
           </button>
         </div>
-      <div>
+      <div className="pb-5">
         {
           dataSheet.gifts.map((item: any, index: number) => (
             <GiftsAdded key={ index } gift={ item } />
