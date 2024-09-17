@@ -18,8 +18,9 @@ export default function GiftsAdded(props: { gift: any }) {
       >
         <div className="flex justify-center items-center mb-2">
           {
-            gift.belonging.map((belong: any) => (
+            gift.belonging.map((belong: any, index: number) => (
               <Image
+                key={index}
                 src={`/images/gifts/${capitalizeFirstLetter(belong.type)}.png`}
                 alt={`Glifo dos ${capitalizeFirstLetter(belong.type)}`}
                 className="h-8 relative object-contain"
