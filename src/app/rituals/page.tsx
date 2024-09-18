@@ -13,9 +13,11 @@ export default function Rituals() {
     showFeedback, setShowFeedback,
     textRitual, setTextRitual,
     setListOfRituais,
+    resetPopups,
   } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     setListOfRituais(jsonRituals);
   }, []);
   

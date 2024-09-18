@@ -1,7 +1,7 @@
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import firebaseConfig from "./connection";
 
-export async function createSessionImage(id: string, data: any){
+export async function createSessionImage(id: string, data: any, setShowMessage: any){
   try {
     const storage = getStorage(firebaseConfig);
     const storageRef = ref(storage, `images/sessions/${id}/${data.name}`);
@@ -9,12 +9,12 @@ export async function createSessionImage(id: string, data: any){
     const downloadUrl = await getDownloadURL(storageRef);
     return downloadUrl;
   } catch (error: any) {
-    window.alert("Erro ao fazer upload da midia imagem: " + error.message);
+    setShowMessage({ show: true, text: "Erro ao fazer upload imagem: " + error.message });
     return false;
   }
 };
 
-export async function createProfileImage(id: string, img: any){
+export async function createProfileImage(id: string, img: any, setShowMessage: any){
   try {
     const storage = getStorage(firebaseConfig);
     const storageRef = ref(storage, `images/users/${id}/${img.name}`);
@@ -22,7 +22,7 @@ export async function createProfileImage(id: string, img: any){
     const downloadUrl = await getDownloadURL(storageRef);
     return downloadUrl;
   } catch (error: any) {
-    window.alert("Erro ao fazer upload da midia imagem: " + error.message);
+    setShowMessage({ show: true, text: "Erro ao fazer upload da midia de imagem: " + error.message });
     return false;
   }
 };

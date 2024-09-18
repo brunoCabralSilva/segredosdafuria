@@ -19,6 +19,9 @@ const config: Config = {
       '10vh': '10vh',
     },
     extend: {
+      zIndex: {
+        '80': '80',
+      },
       backgroundImage: {
         'ritual': "url('/images/26.jpg')",
         '01': "url('/images/wallpapers/95.jpg')",

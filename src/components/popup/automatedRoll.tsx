@@ -18,7 +18,7 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
   const [players, setPlayers] = useState([]);
   const [dataUser, setDataUser] = useState<any>(playerSheet);
   const [playerSelected, setPlayerSelected] = useState<any>('0');
-  const { setShowMenuSession, sessionId } = useContext(contexto);
+  const { setShowMenuSession, sessionId, setShowMessage } = useContext(contexto);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,10 +27,10 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
   }, []);
   
   const verifyUser = async() => {
-    const auth: any = await authenticate();
+    const auth: any = await authenticate(setShowMessage);
     if (auth && auth.email) {
       setPlayerSelected(auth.email);
-      const data = await getPlayerByEmail(sessionId, auth.email);
+      const data = await getPlayerByEmail(sessionId, auth.email, setShowMessage);
       setDataUser(data.data);
     }
     else router.push('/login');
@@ -49,6 +49,7 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
       renSelected,
       penaltyOrBonus,
       dificulty,
+      setShowMessage,
     );
     setShowMenuSession('');
   };

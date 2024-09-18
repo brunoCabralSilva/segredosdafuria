@@ -4,14 +4,14 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function RazorClaws() {
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
     if (dataSheet.form !== "Crinos") {
       if (dataSheet.rage >= 1) {
-        const rageTest = await calculateRageCheck(sessionId, email);
+        const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
         dataSheet.rage = rageTest?.rage;
-        await updateDataPlayer(sessionId, email, dataSheet);
+        await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
         await registerMessage(
           sessionId,
           {
@@ -20,11 +20,12 @@ export function RazorClaws() {
             roll: 'rage',
             rageResults: rageTest,
           },
-          email);
+          email,
+          setShowMessage);
         returnSheetValues();
-      } else window.alert('Você não possui Fúria suficiente para ativar este Dom.');
+      } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
     } else {
-      await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email);
+      await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
     }
   }
 

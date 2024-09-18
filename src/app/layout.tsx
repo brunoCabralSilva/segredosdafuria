@@ -2,6 +2,9 @@ import './globals.css';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Provider from "@/context/provider";
+import { useContext } from 'react';
+import contexto from '@/context/context';
+import MessageToUser from '@/components/popup/messageToUser';
 
 const inter = Inter({ subsets: ['latin'] })
 

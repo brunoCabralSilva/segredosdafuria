@@ -16,7 +16,7 @@ export default function Feedback(props: { title: string }) {
   const [messagePopup, setMessagePopup] = useState(
     { error: true, message: '', show: false }
   );
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { setShowFeedback } = useContext(contexto);
   const sendEmail = (e: any) => {
     const regex = /\S+@\S+\.\S+/
     e.preventDefault();

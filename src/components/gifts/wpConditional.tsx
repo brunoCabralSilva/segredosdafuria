@@ -1,13 +1,12 @@
 import contexto from "@/context/context";
-import { calculateRageCheck, registerMessage, rollTest } from "@/firebase/messagesAndRolls";
+import { registerMessage } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
 
 export function WpConditional(props: { type: string, condition: string }) {
   const { condition } = props;
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const discountWillpower = async() => {
     if (marked) {
@@ -33,13 +32,13 @@ export function WpConditional(props: { type: string, condition: string }) {
             const smallestNumber = Math.min(...missingInAgravated);
             dataSheet.willpower.push({ value: smallestNumber, agravated: true });
           } else {
-            window.alert(`Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).`);
+            setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
           }
         }
       }
-      updateDataPlayer(sessionId, email, dataSheet);
+      updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     }
-    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email);
+    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
     returnSheetValues();
   }
 

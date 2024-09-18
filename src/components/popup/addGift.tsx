@@ -15,6 +15,7 @@ export default function AddGift() {
     dataSheet,
     returnSheetValues,
     setShowGiftsToAdd,
+    setShowMessage
   } =  useContext(contexto);
 
   const generateList = () => {
@@ -34,7 +35,7 @@ export default function AddGift() {
     if (dataSheet.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr))
       dataSheet.gifts = dataSheet.gifts.filter((item: any) => item.giftPtBr !== gift.giftPtBr)
     else dataSheet.gifts.push(gift);
-    await updateDataPlayer(sessionId, email, dataSheet);
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     returnSheetValues();
   }
 

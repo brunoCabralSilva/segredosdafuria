@@ -101,9 +101,9 @@ export const rollTest = (
 	}
 }
 
-export const registerMessage = async (sessionId: string, data: any, email: string | null) => {
+export const registerMessage = async (sessionId: string, data: any, email: string | null, setShowMessage: any) => {
 	try {
-	  const authData: any = await authenticate();
+	  const authData: any = await authenticate(setShowMessage);
 	  if (authData && authData.email && authData.displayName) {
 		const date = await getOfficialTimeBrazil();
 		const db = getFirestore(firebaseConfig);
@@ -111,29 +111,30 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
 		const querySession = query(chatsCollectionRef, where("sessionId", "==", sessionId));
 		const querySnapshot = await getDocs(querySession);
 		if (querySnapshot.empty) {
-		  throw new Error('Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.');
+		  setShowMessage({ show: true, text: 'Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.' });
+		} else {
+			const sessionDocRef = querySnapshot.docs[0].ref;
+			await runTransaction(db, async (transaction: any) => {
+			const sessionDocSnapshot = await transaction.get(sessionDocRef);
+			if (sessionDocSnapshot.exists()) {
+				let emailToRecord = email;
+				if (!emailToRecord) emailToRecord = authData.email;
+				const sessionData = sessionDocSnapshot.data();
+				const updatedChat = [
+				...sessionData.list,
+				{ date, email: emailToRecord, user: authData.displayName, ...data, order: sessionData.list.length + 1 },
+				];
+				updatedChat.sort((a: any, b: any) => a.order - b.order)
+				if (updatedChat.length > 15) updatedChat.shift();
+				transaction.update(sessionDocRef, { list: updatedChat });
+			} else {
+				setShowMessage({ show: true, text: "Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente." });
+			}
+			});
 		}
-		const sessionDocRef = querySnapshot.docs[0].ref;
-		await runTransaction(db, async (transaction: any) => {
-		  const sessionDocSnapshot = await transaction.get(sessionDocRef);
-		  if (sessionDocSnapshot.exists()) {
-			let emailToRecord = email;
-			if (!emailToRecord) emailToRecord = authData.email;
-			const sessionData = sessionDocSnapshot.data();
-			const updatedChat = [
-			  ...sessionData.list,
-			  { date, email: emailToRecord, user: authData.displayName, ...data, order: sessionData.list.length + 1 },
-			];
-			updatedChat.sort((a: any, b: any) => a.order - b.order)
-			if (updatedChat.length > 15) updatedChat.shift();
-			transaction.update(sessionDocRef, { list: updatedChat });
-		  } else {
-			throw new Error("Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.");
-		  }
-		});
 	  }
 	} catch (error) {
-	  throw new Error('Ocorreu um erro ao enviar a mensagem: ' + error);
+	  setShowMessage({ show: true, text: 'Ocorreu um erro ao enviar a mensagem: ' + error });
 	}
 };
   
@@ -142,10 +143,11 @@ export const registerManualRoll = async(
 	rage: number,
 	valueOf: number,
 	penaltyOrBonus: number,
-	dificulty: number
+	dificulty: number,
+  setShowMessage: any,
 ) => {
 	const roll = rollTest(rage, valueOf, penaltyOrBonus, dificulty);
-	await registerMessage(sessionId, roll, null);
+	await registerMessage(sessionId, roll, null, setShowMessage);
 }
 
 export const registerAutomatedRoll = async(
@@ -156,11 +158,12 @@ export const registerAutomatedRoll = async(
 	renSelected: string,
 	penaltyOrBonus: number,
 	dificulty: number,
+  setShowMessage: any,
 ) => {
 	let valueOf = 0;
 	let rage = 0;
 	try {
-		const player = await getPlayerByEmail(sessionId, emailUser);
+		const player = await getPlayerByEmail(sessionId, emailUser, setShowMessage);
 		if (player) {
 			rage = Number(player.data.rage);
 			if (atrSelected !== '0' && atrSelected !== '1')
@@ -174,23 +177,23 @@ export const registerAutomatedRoll = async(
 				valueOf = 0;
 			} else valueOf -= rage;
 			const roll = rollTest(rage, valueOf, penaltyOrBonus, dificulty);
-			await registerMessage(sessionId, roll, emailUser);
-		} else throw new Error ('Sessão não encontrada.');
+			await registerMessage(sessionId, roll, emailUser, setShowMessage);
+		} else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
 	} catch(error) {
-		window.alert('Ocorreu um erro ao buscar os dados do Jogador. Por favor, atualize a página e tente novamente' + '('+ error +').');
+		setShowMessage({ show: true, text: `Ocorreu um erro ao buscar os dados do Jogador. Por favor, atualize a página e tente novamente (${error})` });
 	}
 }
 
-export const rageCheck = async(sessionId: string, email: string) => {
+export const rageCheck = async(sessionId: string, email: string, setShowMessage: any) => {
   let resultOfRage = [];
   let success = 0;
   const value = Math.floor(Math.random() * 10) + 1;
   if (value >= 6) success += 1;
   resultOfRage.push(value);
-  const player = await getPlayerByEmail(sessionId, email);
+  const player = await getPlayerByEmail(sessionId, email, setShowMessage);
   if (player) {
     if (player.data.rage <= 0) {
-      window.alert('Você não possui Fúria suficiente para ativar este Teste.');
+      setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
     } else {
       let text = '';
       if (success === 0) {
@@ -208,22 +211,23 @@ export const rageCheck = async(sessionId: string, email: string) => {
         type: 'rage-check',
         },
         email,
+        setShowMessage,
       );
     }
   }
   return player.data.rage;
 }
 
-export const calculateRageCheck = async(sessionId: string, email: string) => {
+export const calculateRageCheck = async(sessionId: string, email: string, setShowMessage: any) => {
 	let resultOfRage = [];
 	let success = 0;
 	const value = Math.floor(Math.random() * 10) + 1;
 	if (value >= 6) success += 1;
 	resultOfRage.push(value);
-	const player = await getPlayerByEmail(sessionId, email);
+	const player = await getPlayerByEmail(sessionId, email, setShowMessage);
 	if (player) {
 	  if (player.data.rage <= 0) {
-		  window.alert('Você não possui Fúria suficiente para ativar este Teste.');
+		  setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
 	  } else {
       let text = '';
       if (success === 0) {
@@ -241,11 +245,11 @@ export const calculateRageCheck = async(sessionId: string, email: string) => {
   }
 }
 
-export const calculateRageChecks = async(sessionId: string, email: string, number: number) => {
-	const player = await getPlayerByEmail(sessionId, email);
+export const calculateRageChecks = async(sessionId: string, email: string, number: number, setShowMessage: any) => {
+	const player = await getPlayerByEmail(sessionId, email, setShowMessage);
 	if (player) {
     if (player.data.rage < number) {
-      window.alert('Você não possui Fúria suficiente para ativar este Teste.');
+      setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
 	  } else {
       let resultOfRage = [];
       let success = 0;
@@ -278,6 +282,7 @@ export const haranoHaugloskCheck = async(
 	type: string,
 	dataSheet: any,
 	dificulty: number,
+  setShowMessage: any,
 ) => {
   let rollTest = [];
   let success = 0;
@@ -304,7 +309,8 @@ export const haranoHaugloskCheck = async(
       value: dataSheet[type],
       type: 'harano-hauglosk',
     },
-    null
+    null,
+    setShowMessage,
   );
   return dataSheet[type];
 }

@@ -23,6 +23,7 @@ export default function Provider({children }: IProvider) {
   const [listOfGift, setListOfGift] = useState([]);
   //pages
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showMessage, setShowMessage] = useState({ show: false, text: '' });
   //navigation
   const [logoutUser, setLogoutUser] = useState(false);
   //sessions
@@ -59,15 +60,37 @@ export default function Provider({children }: IProvider) {
   };
 
   const returnSheetValues = async (): Promise<void> => {
-		const auth: any = await authenticate();
+		const auth: any = await authenticate(setShowMessage);
 		if (auth && auth.email && auth.displayName) {
 			setEmail(auth.email);
       setName(auth.displayName);
-			const player = await getPlayerByEmail(sessionId, auth.email);
+			const player = await getPlayerByEmail(sessionId, auth.email, setShowMessage);
 			if (player) setDataSheet(player.data);
-			else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+			else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
 		}
   };
+
+  const resetPopups = () => {
+    setShowForgotPassword(false);
+    setShowFeedback(false);
+    setLogoutUser(false);
+    setDataSession({ show: false, id: '' });
+    setShowInfoSessions(false);
+    setShowCreateSession(false);
+    setShowOptions(false);
+    setShowMenuSession('');
+    setShowDelFromSession(false);
+    setShowResetSheet(false);
+    setDeleteAdvOrFlaw({ show: false });
+    setShowAllFlaws(false);
+    setShowAllAdvantages(false);
+    setShowGiftsToAdd(false);
+    setShowRitualsToAdd(false);
+    setShowHarano(false);
+    setShowHauglosk(false);
+    setShowGiftRoll({ show: false, gift: {} });
+    setShowRitualRoll({ show: false, ritual: {} });
+  }
 
   return (
     <contexto.Provider
@@ -77,6 +100,7 @@ export default function Provider({children }: IProvider) {
         showForgotPassword, setShowForgotPassword,
         //pages
         showFeedback, setShowFeedback,
+        showMessage, setShowMessage,
         //Gifts
         globalGifts, setGlobalGifts,
         totalRenown, setTotalRenown,
@@ -105,7 +129,7 @@ export default function Provider({children }: IProvider) {
         email, setEmail,
         name, setName,
         dataSheet, setDataSheet,
-        returnSheetValues,
+        resetPopups, returnSheetValues,
         showDelFromSession, setShowDelFromSession,
         showResetSheet, setShowResetSheet,
         deleteAdvOrFlaw, setDeleteAdvOrFlaw,
@@ -123,3 +147,4 @@ export default function Provider({children }: IProvider) {
     </contexto.Provider>
   );
 }
+

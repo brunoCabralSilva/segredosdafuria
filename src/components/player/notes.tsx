@@ -8,7 +8,7 @@ import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
 export default function Notes(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
-  const { sessionId, email, returnSheetValues, dataSheet } =  useContext(contexto);
+  const { sessionId, email, returnSheetValues, dataSheet, setShowMessage } =  useContext(contexto);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
@@ -23,12 +23,12 @@ export default function Notes(props: { type: string }) {
   }, []);
 
   const updateValue = async () => {
-    const player: any = await getPlayerByEmail(sessionId, email);
+    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
     if (player) {
       player.data[type] = text;
-			await updateDataPlayer(sessionId, email, player.data);
+			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
       returnSheetValues();
-    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+    } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 
   return(

@@ -8,7 +8,7 @@ export function SightFromBeyond() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(2);
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = Number(dataSheet.attributes.intelligence) + Number(dataSheet.wisdom);
@@ -46,14 +46,14 @@ export function SightFromBeyond() {
             const smallestNumber = Math.min(...missingInAgravated);
             dataSheet.willpower.push({ value: smallestNumber, agravated: true });
           } else {
-            window.alert(`Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).`);
+            setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
           }
         }
       }
-      updateDataPlayer(sessionId, email, dataSheet);
+      updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     }
     const roll = await rollTestOfUser();
-    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email);
+    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email, setShowMessage);
     returnSheetValues();
   }
 

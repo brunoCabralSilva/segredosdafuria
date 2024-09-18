@@ -7,10 +7,10 @@ import { IoArrowDownCircleSharp, IoArrowUpCircleSharp, IoCheckmarkDone } from "r
 export default function Advantage(props: any) {
   const { item, adv } = props;
   const [ showAd, setShowAd ] = useState(false);
-  const { sessionId, email } = useContext(contexto);
+  const { sessionId, email, setShowMessage } = useContext(contexto);
 
   const setAdvantageValueItem = async (obj: IAdvantageAndFlaw) => {
-    const searchPlayer = await getPlayerByEmail(sessionId, email);
+    const searchPlayer = await getPlayerByEmail(sessionId, email, setShowMessage);
     const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === obj.name);
     const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== obj.name);
     const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
@@ -24,7 +24,7 @@ export default function Advantage(props: any) {
         }
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-        await updateDataPlayer(sessionId, email, searchPlayer);
+        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
       } else {
         const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantageAndFlaw) => item.type !== 'radio');
         const updatedAdvantage = {
@@ -35,7 +35,7 @@ export default function Advantage(props: any) {
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer);
+        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
       }
     } else if (foundAdvantage.advantages.length === 0) {
       const updated = {
@@ -46,7 +46,7 @@ export default function Advantage(props: any) {
       }
       searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
       props.setAdv([...restOfAdvantage, updated]);
-      await updateDataPlayer(sessionId, email, searchPlayer);
+      await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
     } else {
       if (obj.type === 'radio') {
         const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantageAndFlaw) => item.type !== 'radio' && item.advantage !== obj.advantage);
@@ -58,7 +58,7 @@ export default function Advantage(props: any) {
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer);
+        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
       }
       if (obj.type === 'checkbox') {
         const updateAdvantage = foundAdvantage.advantages.find((item: IAdvantageAndFlaw) => item.advantage === obj.advantage);
@@ -72,7 +72,7 @@ export default function Advantage(props: any) {
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer);
+          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
         } else {
           const updatedAdvantage = {
             name: obj.name, 
@@ -82,14 +82,14 @@ export default function Advantage(props: any) {
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer);
+          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
         }
       }
     }
   };
 
   const setFlawValueItem = async(obj: IAdvantageAndFlaw) => {
-    const searchPlayer = await getPlayerByEmail(sessionId, email);
+    const searchPlayer = await getPlayerByEmail(sessionId, email, setShowMessage);
     const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === obj.name);
     const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== obj.name);
     const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
@@ -103,7 +103,7 @@ export default function Advantage(props: any) {
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer);
+        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
       } else {
         const updateAdvantage = foundAdvantage.flaws.filter((item: IAdvantageAndFlaw) => item.type !== 'radio');
         const updatedAdvantage = {
@@ -113,7 +113,7 @@ export default function Advantage(props: any) {
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer);
+        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
       }
     } else if (foundAdvantage.flaws.length === 0) {
       const updated = {
@@ -124,7 +124,7 @@ export default function Advantage(props: any) {
       }
       searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
       props.setAdv([...restOfAdvantage, updated]);
-      await updateDataPlayer(sessionId, email, searchPlayer);
+      await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
     } else {
       if (obj.type === 'radio') {
         const updateAdvantage = foundAdvantage.flaws.filter((item: IAdvantageAndFlaw) => {
@@ -138,7 +138,7 @@ export default function Advantage(props: any) {
         }
         searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer);
+        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
       }
       if (obj.type === 'checkbox') {
         const updateAdvantage = foundAdvantage.flaws.find((item: IAdvantageAndFlaw) => item.flaw === obj.flaw);
@@ -152,7 +152,7 @@ export default function Advantage(props: any) {
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer);
+          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
         } else {
           const updatedAdvantage = {
             name: obj.name, 
@@ -162,7 +162,7 @@ export default function Advantage(props: any) {
           }
           searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer);
+          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
         }
       }
     }

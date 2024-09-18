@@ -9,9 +9,10 @@ import contexto from "@/context/context";
 
 export default function Loresheet({ params } : { params: { loresheet: String } }) {
   const [dataLoresheet, setDataLoresheet] = useState<ILoresheet>();
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     const findLoresheet: ILoresheet | undefined = listLoresheets
       .find((lrsht: ILoresheet) => params.loresheet.replace(/-/g, ' ') === lrsht.title.toLowerCase());
     setDataLoresheet(findLoresheet);

@@ -19,23 +19,23 @@ export const signIn = async (email: string, password: string) => {
   }
 }
 
-export const signOutFirebase = async () => {
+export const signOutFirebase = async (setShowMessage: any) => {
   try {
     const auth = getAuth(firebaseConfig);
     await signOut(auth);
-    return true;
+    setShowMessage({ show: true, text: 'Você foi deslogado da plataforma! Até logo!' });
   } catch (error) {
-    window.alert('Não foi possível deslogar o usuário. Por favor, atualize a página e Tente novamente ('+ error + ').' );
+    setShowMessage({ show: true, text: `Não foi possível deslogar o usuário. Por favor, atualize a página e Tente novamente (${error}).` });
     return false;
   }
 };
 
-export const authenticate = async () => {
+export const authenticate = async (setShowMessage: any) => {
   return new Promise<{ email: string, photoURL: string, displayName: string } | null>((resolve) => {
     const auth = getAuth(firebaseConfig);
     const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
       if (user) {
-        const dataUser = await getUserByEmail(user.email);
+        const dataUser = await getUserByEmail(user.email, setShowMessage);
         const displayName = dataUser.firstName + ' ' + dataUser.lastName;
         const photoURL = dataUser.imageURL;
         const { email } = user;
@@ -54,7 +54,8 @@ export const authenticate = async () => {
 export const changeUserPassword = async (
   oldPassword: string,
   email: string,
-  newPassword: string
+  newPassword: string,
+  setShowMessage: any,
 ) => {
   const auth = getAuth(firebaseConfig);
   try {
@@ -62,21 +63,21 @@ export const changeUserPassword = async (
     await credenciais;
     const user: any = auth.currentUser;
     await updatePassword(user, newPassword);
-    window.alert('Senha alterada com sucesso!');
+    setShowMessage({ show: true, text: 'Senha alterada com sucesso!' });
     return true
   } catch (error) {
-    window.alert('Erro ao alterar a senha: (' + error + ')');
+    setShowMessage({ show: true, text: 'Erro ao alterar a senha: (' + error + ')' });
     return false;
   }
 };
 
-export const forgotPassword = async (email: string) => {
+export const forgotPassword = async (email: string, setShowMessage: any) => {
   const auth = getAuth(firebaseConfig);
   try {
     await sendPasswordResetEmail(auth, email);
-    return true;
+    setShowMessage({ show: true, text: 'Enviamos um link de confirmação para seu Email. Por meio dele, você poderá redefinir sua Senha!' });
   } catch (error) {
-    window.alert('Erro ao enviar e-mail de redefinição de senha: ' + error + ')');
+    setShowMessage({ show: true, text: 'Erro ao enviar e-mail de redefinição de senha: ' + error + ')' });
     return false;
   }
 };

@@ -11,9 +11,10 @@ import contexto from "@/context/context";
 export default function Form({ params } : { params: { form: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataForm, setDataForm] = useState<IForm>();
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     const findForm: IForm | undefined = listForms
       .find((frm: IForm) => {
         if (params.form === 'hominideo') {

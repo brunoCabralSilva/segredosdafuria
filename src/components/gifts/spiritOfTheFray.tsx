@@ -1,5 +1,5 @@
 import contexto from "@/context/context";
-import { calculateRageCheck, calculateRageChecks, registerMessage } from "@/firebase/messagesAndRolls";
+import { calculateRageChecks, registerMessage } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useState } from "react";
 import { FaMinus } from "react-icons/fa";
@@ -11,6 +11,7 @@ export function SpiritOfTheFray() {
     sessionId,
     email,
     dataSheet,
+    setShowMessage,
     showGiftRoll, setShowGiftRoll,
     returnSheetValues,
     setShowMenuSession,
@@ -18,9 +19,9 @@ export function SpiritOfTheFray() {
 
   const rollRage = async () => {
     if (dataSheet.rage >= dificulty) {
-      const rageTest = await calculateRageChecks(sessionId, email, dificulty);
+      const rageTest = await calculateRageChecks(sessionId, email, dificulty, setShowMessage);
       dataSheet.rage = rageTest?.rage;
-      await updateDataPlayer(sessionId, email, dataSheet);
+      await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
       await registerMessage(
         sessionId,
         {
@@ -29,9 +30,10 @@ export function SpiritOfTheFray() {
           roll: 'rage',
           rageResults: rageTest,
         },
-        email);
+        email,
+        setShowMessage);
       returnSheetValues();
-    } else window.alert('Você não possui Fúria suficiente para ativar este Dom.');
+    } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
 
   return(

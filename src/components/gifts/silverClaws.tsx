@@ -1,10 +1,10 @@
 import contexto from "@/context/context";
-import { calculateRageCheck, registerMessage } from "@/firebase/messagesAndRolls";
+import { registerMessage } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function SilverClaws() {
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
     if (dataSheet.form !== "Crinos") {
@@ -30,13 +30,13 @@ export function SilverClaws() {
               const smallestNumber = Math.min(...missingInAgravated);
               dataSheet.willpower.push({ value: smallestNumber, agravated: true });
             } else {
-              window.alert(`Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).`);
+              setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
             }
           }
         }
-        updateDataPlayer(sessionId, email, dataSheet);
+        updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     }
-    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email);
+    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
     returnSheetValues();
   }
 

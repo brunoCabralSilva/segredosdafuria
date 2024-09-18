@@ -9,6 +9,7 @@ export function RageTestOrWp(props: { type: string }) {
     sessionId,
     email,
     dataSheet,
+    setShowMessage,
     showGiftRoll, setShowGiftRoll,
     returnSheetValues,
     setShowMenuSession,
@@ -16,9 +17,9 @@ export function RageTestOrWp(props: { type: string }) {
 
   const rollRage = async () => {
     if (dataSheet.rage >= 1) {
-      const rageTest = await calculateRageCheck(sessionId, email);
+      const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
       dataSheet.rage = rageTest?.rage;
-      await updateDataPlayer(sessionId, email, dataSheet);
+      await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
       await registerMessage(
         sessionId,
         {
@@ -27,9 +28,10 @@ export function RageTestOrWp(props: { type: string }) {
           roll: 'rage',
           rageResults: rageTest,
         },
-        email);
+        email,
+        setShowMessage);
       returnSheetValues();
-    } else window.alert('Você não possui Fúria suficiente para ativar este Dom.');
+    } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
 
   const discountWillpower = async() => {
@@ -55,12 +57,12 @@ export function RageTestOrWp(props: { type: string }) {
           const smallestNumber = Math.min(...missingInAgravated);
           dataSheet.willpower.push({ value: smallestNumber, agravated: true });
         } else {
-          window.alert(`Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).`);
+          setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
         }
       }
     }
-    updateDataPlayer(sessionId, email, dataSheet);
-    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift },email);
+    updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift },email, setShowMessage);
     returnSheetValues();
   }
 

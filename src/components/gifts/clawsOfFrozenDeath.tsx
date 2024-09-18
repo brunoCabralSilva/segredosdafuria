@@ -7,7 +7,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 export function ClawsOfFrozenDeath() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = Number(dataSheet.attributes.wits) + Number(dataSheet.honor);
@@ -24,15 +24,15 @@ export function ClawsOfFrozenDeath() {
     if (dataSheet.rage >= 1) {
       let roll = await rollTestOfUser();
       if (dataSheet.form !== 'Crinos') {
-        const rageTest = await calculateRageCheck(sessionId, email);
+        const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
         dataSheet.rage = rageTest?.rage;
-        await updateDataPlayer(sessionId, email, dataSheet);
-        await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll:  'rage-with-test', rageResults: rageTest, results: roll }, email);
+        await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+        await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'rage-with-test', rageResults: rageTest, results: roll }, email, setShowMessage);
       } else {
-        await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email);
+        await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
       }
       returnSheetValues();
-    } else window.alert('Você não possui Fúria suficiente para ativar este Dom.');
+    } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
 
   return(

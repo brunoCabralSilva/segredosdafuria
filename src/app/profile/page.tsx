@@ -8,6 +8,7 @@ import Image from "next/image";
 import VerifySession from '@/components/popup/verifySession';
 import contexto from '@/context/context';
 import { getAllSessionsByFunction } from '@/firebase/sessions';
+import MessageToUser from '@/components/popup/messageToUser';
 
 export default function Profile() {
   const [showData, setShowData] = useState(false);
@@ -16,14 +17,15 @@ export default function Profile() {
   const [listDmSessions, setListDmSessions] = useState<{id: string, name: string }[]>([]);
   const [listSessions, setListSessions] = useState<{id: string, name: string }[]>([]);
   const router = useRouter();
-  const { dataSession, setDataSession } = useContext(contexto);
+  const { dataSession, setDataSession, resetPopups, showMessage, setShowMessage } = useContext(contexto);
   
   useEffect(() => {
+    resetPopups();
     setListDmSessions([]);
     setListSessions([]);
     setDataSession({ show: false, id: '' });
     const profile = async () => {
-    const authData: any = await authenticate();
+    const authData: any = await authenticate(setShowMessage);
     if (authData && authData.email && authData.displayName) {
       const { email, displayName } = authData;
       setNameUser(displayName);
@@ -41,6 +43,7 @@ export default function Profile() {
 
   return (
     <div className="h-full overflow-y-auto bg-ritual bg-cover bg-top">
+      { showMessage.show && <MessageToUser /> }
       <Nav />
       {
         showData

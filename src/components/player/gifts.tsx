@@ -6,7 +6,7 @@ import GiftsAdded from "./giftsAdded";
 import RitualsAdded from "./ritualsAdded";
 
 export default function Gifts() {
-  const { dataSheet, showGiftsToAdd, setShowGiftsToAdd } = useContext(contexto);
+  const { dataSheet, showGiftsToAdd, setShowGiftsToAdd, setShowMessage } = useContext(contexto);
 	return(
     <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
       <div className="w-full h-full mb-2 p-1 text-white flex-col items-start justify-center font-bold">
@@ -20,7 +20,7 @@ export default function Gifts() {
               if (dataSheet.trybe !== '' && dataSheet.auspice !== '' && totalRenown >= 3) {
                 setShowGiftsToAdd(true);
               } else {
-                window.alert('Antes de adicionar um dom, é necessário preencher uma Tribo, um Augúrio e pelo menos três pontos em Renomes')
+                setShowMessage({ show: true, text: 'Antes de adicionar um dom, é necessário preencher uma Tribo, um Augúrio e pelo menos três pontos em Renomes' });
               }
             }}
           >

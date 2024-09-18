@@ -2,7 +2,7 @@ import contexto from "@/context/context";
 import { getSessionById } from "@/firebase/sessions";
 import { useContext, useEffect, useState } from "react";
 import LeaveFromSession from "../popup/leaveFromSession";
-import { getPlayerByEmail, getPlayersBySession } from "@/firebase/players";
+import { getPlayersBySession } from "@/firebase/players";
 
 export default function Details() {
   const [players, setPlayers] = useState<any[]>([]);
@@ -12,10 +12,11 @@ export default function Details() {
   const [gameMaster, setGameMaster] = useState('');
   const {
     sessionId,
-    setShowDelFromSession,
     showDelFromSession,
     email,
-    name
+    name,
+    setShowMessage,
+    setShowDelFromSession,
   } = useContext(contexto);
 
   const returnValue = async () => {
@@ -25,9 +26,9 @@ export default function Details() {
       setCreationDate(sessionData.creationDate);
       setDescription(sessionData.description);
       setGameMaster(sessionData.gameMaster);
-      setPlayers(await getPlayersBySession(sessionId));
+      setPlayers(await getPlayersBySession(sessionId, setShowMessage));
     } else {
-      window.alert('Não foi encontrada um Sessão com as referências mencionadas. Por favor, atualize a página e tente novamente.')
+      setShowMessage({ show: true, text: 'Não foi encontrada um Sessão com as referências mencionadas. Por favor, atualize a página e tente novamente.' })
     }
   };
 

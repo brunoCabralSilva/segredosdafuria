@@ -13,10 +13,11 @@ export default function Forms() {
     sessionId,
     returnSheetValues,
     setShowMenuSession,
+    setShowMessage,
   } = useContext(contexto);
 
   const updateValue = async (newForm: string) => {
-    const player: any = await getPlayerByEmail(sessionId, email);
+    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
     const actualForm = player.data.form;
     if (newForm !== actualForm) {
       if (newForm === 'Hominídeo' || newForm === 'Lupino') {
@@ -26,21 +27,21 @@ export default function Forms() {
           player.data.attributes.dexterity -= 4;
           if (player.data.rage > 0) {
             player.data.rage = 1;
-            await registerMessage( sessionId, { message: `Mudou para a forma ${newForm}. Fúria reduzida para 1 por ter saído da forma Crinos.`, type: 'transform' }, email);
+            await registerMessage( sessionId, { message: `Mudou para a forma ${newForm}. Fúria reduzida para 1 por ter saído da forma Crinos.`, type: 'transform' }, email, setShowMessage);
           }
         } else if (actualForm === 'Hispo' || actualForm === 'Glabro') {
           player.data.attributes.strength -= 2;
           player.data.attributes.stamina -= 2;
           player.data.attributes.dexterity -= 2;
-          await registerMessage( sessionId, { message: `Mudou para a forma ${newForm}.`, type: 'transform' }, email);
+          await registerMessage( sessionId, { message: `Mudou para a forma ${newForm}.`, type: 'transform' }, email, setShowMessage);
         } else {
-          await registerMessage( sessionId, { message: `Mudou para a forma ${newForm}.`, type: 'transform' }, email);
+          await registerMessage( sessionId, { message: `Mudou para a forma ${newForm}.`, type: 'transform' }, email, setShowMessage);
         }
         player.data.form = newForm;
-        await updateDataPlayer(sessionId, email, player.data);
+        await updateDataPlayer(sessionId, email, player.data, setShowMessage);
       } else if (newForm === 'Crinos') {
         if (player.data.rage < 2) {
-          await registerMessage( sessionId, { message: 'Você não possui Fúria para realizar esta ação (Mudar para a forma Crinos).', type: 'rage check' }, email);
+          await registerMessage( sessionId, { message: 'Você não possui Fúria para realizar esta ação (Mudar para a forma Crinos).', type: 'rage check' }, email, setShowMessage);
         } else {
           if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
             player.data.attributes.strength += 4;
@@ -52,11 +53,11 @@ export default function Forms() {
             player.data.attributes.dexterity += 2;
           }
           player.data.form = newForm;
-          await updateDataWithRage(sessionId, email, player.data, newForm);
+          await updateDataWithRage(sessionId, email, player.data, newForm, setShowMessage);
         }
       } else {
         if (player.data.rage < 1) {
-          await registerMessage( sessionId, { message: `Você não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`, type: 'rage check' }, email);
+          await registerMessage( sessionId, { message: `Você não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`, type: 'rage check' }, email, setShowMessage);
         } else {
           if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
             player.data.attributes.strength += 2;
@@ -68,7 +69,7 @@ export default function Forms() {
             player.data.attributes.dexterity -= 2;
           }
           player.data.form = newForm;
-          await updateDataWithRage(sessionId, email, player.data, newForm);
+          await updateDataWithRage(sessionId, email, player.data, newForm, setShowMessage);
         }
       }
       setShowMenuSession('');

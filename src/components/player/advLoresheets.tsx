@@ -9,6 +9,7 @@ export default function AdvLoresheets() {
     dataSheet,
     sessionId,
     returnSheetValues,
+    setShowMessage
   } = useContext(contexto);
 
   const updateLoresheet = async(
@@ -17,7 +18,6 @@ export default function AdvLoresheets() {
     cost: number,
     skill: string,
   )  => {
-    console.log(name);
     const obj = { name, cost, description, skill };
     let newList = dataSheet.advantagesAndFlaws.loresheets;
     const equal = newList.find((item: any) => item.skill === skill);
@@ -28,7 +28,7 @@ export default function AdvLoresheets() {
       newList.push(obj);
     } else newList.push(obj);
     dataSheet.advantagesAndFlaws.loresheets = newList;
-    await updateDataPlayer(sessionId, email, dataSheet);
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     returnSheetValues();
   }
 

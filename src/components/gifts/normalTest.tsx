@@ -7,7 +7,7 @@ export function NormalTest(props: { attribute: string, renown: string }) {
   const { attribute, renown } = props;
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -24,7 +24,7 @@ export function NormalTest(props: { attribute: string, renown: string }) {
   
   const rollDices = async () => {
     const roll = await rollTestOfUser();
-    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift,  results: roll }, email);
+    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift,  results: roll }, email, setShowMessage);
     returnSheetValues();
   }
 

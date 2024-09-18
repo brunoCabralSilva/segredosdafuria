@@ -9,6 +9,7 @@ export default function ResetSheet() {
 	const {
     email,
     sessionId,
+    setShowMessage,
     setShowResetSheet,
     returnSheetValues,
     setShowMenuSession,
@@ -16,13 +17,13 @@ export default function ResetSheet() {
 
   const resetSheet = async () => {
     try {
-      await updateDataPlayer(sessionId, email, playerSheet);
-      window.alert("Sua ficha foi resetada!");
+      await updateDataPlayer(sessionId, email, playerSheet, setShowMessage);
+      setShowMessage({ show: true, text: "Sua ficha foi redefinida!" });
       returnSheetValues();
       setShowResetSheet(false);
       setShowMenuSession('');
     } catch(error) {
-      window.alert("Ocorreu um erro: " + error);
+      setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
       returnSheetValues();
       setShowResetSheet(false);
     }
@@ -40,7 +41,7 @@ export default function ResetSheet() {
         <div className="pb-5 px-5 w-full">
           <label htmlFor="palavra-passe" className="flex flex-col items-center w-full">
             <p className="text-white w-full text-center pb-3">
-              Tem certeza que quer resetar os dados da sua ficha? Absolutamente tudo o que você registrou nela será apagado e ela voltará ao estado inicial de quando você logou pela primeira vez nesta sessão.
+              Tem certeza que quer redefinir os dados da sua ficha? Absolutamente tudo o que você registrou nela será apagado e ela voltará ao estado inicial de quando você logou pela primeira vez nesta sessão.
             </p>
           </label>
           <div className="flex w-full gap-2">

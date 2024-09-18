@@ -11,9 +11,10 @@ import Nav from '@/components/nav';
 export default function Auspice({ params } : { params: { auspice: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataAuspice, setDataAuspice] = useState<IAuspice>();
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     const findAuspice: IAuspice | undefined = listAuspices
       .find((ausp: IAuspice) => params.auspice === ausp.name.toLowerCase()
     );

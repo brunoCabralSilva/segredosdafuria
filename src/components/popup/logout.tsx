@@ -7,13 +7,14 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function Logout() {
   const router = useRouter();
-  const { setShowMenuSession, setLogoutUser } = useContext(contexto);
+  const { setShowMenuSession, setLogoutUser, setShowMessage } = useContext(contexto);
 
   const logout = async () => {
-    signOutFirebase();
+    signOutFirebase(setShowMessage);
     setLogoutUser(false);
     setShowMenuSession('');
     router.push('/');
+    location.reload();
   };
 
   return(

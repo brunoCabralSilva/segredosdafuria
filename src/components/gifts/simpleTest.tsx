@@ -3,10 +3,10 @@ import { registerMessage } from "@/firebase/messagesAndRolls";
 import { useContext } from "react";
 
 export function SimpleTest() {
-  const { sessionId, email, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const roll = async () => {
-    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email);
+    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
     returnSheetValues();
   }
 

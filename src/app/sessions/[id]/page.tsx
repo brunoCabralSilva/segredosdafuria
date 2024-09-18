@@ -15,6 +15,7 @@ import { authenticate } from "@/firebase/authenticate";
 import { getPlayerByEmail, getPlayersBySession } from "@/firebase/players";
 import { getSessionById } from "@/firebase/sessions";
 import firestoreConfig from "@/firebase/connection";
+import MessageToUser from "@/components/popup/messageToUser";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -22,12 +23,10 @@ export default function SessionId({ params } : { params: { id: string } }) {
   const dataRef = collection(db, "chats");
   const queryData = query(dataRef, where("sessionId", "==", id));
   const [chat] = useCollectionData(queryData, { idField: "id" } as any);
-
-
+  
   const router = useRouter();
 	const [showData, setShowData] = useState(false);
 	const [gameMaster, setGameMaster] = useState(false);
-  const [dataSession, setDataSession] = useState({});
   const {
     setDataSheet,
     setName,
@@ -35,21 +34,21 @@ export default function SessionId({ params } : { params: { id: string } }) {
     email,
     showMenuSession,
     setSessionId,
-    showHarano,
-    showHauglosk,
+    resetPopups,
+    showMessage, setShowMessage,
   } = useContext(contexto);
 	
   const returnValues = async () => {
-    const auth = await authenticate();
+    const auth = await authenticate(setShowMessage);
     if (auth) {
-      const player: any = await getPlayerByEmail(id, auth.email);
+      const player: any = await getPlayerByEmail(id, auth.email, setShowMessage);
       if (player) setDataSheet(player.data);
     }
   };
 
   useEffect(() => {
+    resetPopups();
     setSessionId(id);
-    setDataSession({ show: false, id: '' });
     setShowData(false);
     verifyUser();
     returnValues();
@@ -57,31 +56,30 @@ export default function SessionId({ params } : { params: { id: string } }) {
   }, []);
 
   const verifyUser = async () => {
-    const authData: any = await authenticate();
+    const authData: any = await authenticate(setShowMessage);
     if (authData && authData.email && authData.displayName) {
       setEmail(authData.email);
       setName(authData.displayName);
       const dataDocSnapshot = await getDocs(queryData);
       if (dataDocSnapshot.empty) {
-        window.alert('A Sessão não foi encontrada');
+        setShowMessage({ show: true, text: 'A Sessão não foi encontrada' });
         router.push('/sessions');
       } else {
         setShowData(true);
-        if (authData.email === 'yslasouzagnr@gmail.com') window.alert('Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3');
+        if (authData.email === 'yslasouzagnr@gmail.com') setShowMessage({ show: true, text: 'Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3' });
         const sessionData: any = await getSessionById(id);
         if (sessionData) {
-          setDataSession(sessionData);
-          const players = await getPlayersBySession(id);
+          const players = await getPlayersBySession(id, setShowMessage);
           if (sessionData.gameMaster === authData.email) setGameMaster(true);
           else if (players.find((player: any) => player.email === authData.email)) {
             setGameMaster(false);
           } else {
-            window.alert('você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.');
+            setShowMessage({ show: true, text: 'você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.' });
             router.push('/sessions');
           }          
           setShowData(true);
         } else {
-          window.alert('Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente');
+          setShowMessage({ show: true, text: 'Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente' });
           router.push('/sessions');
         }
       }
@@ -95,6 +93,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
 
   return (
     <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
+      { showMessage.show && <MessageToUser /> }
       <Nav />
       {
         showData

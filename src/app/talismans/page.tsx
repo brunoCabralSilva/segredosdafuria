@@ -11,15 +11,17 @@ import contexto from '@/context/context';
 export default function Talismans() {
   const {
     textTalisman, setTextTalisman,
-    setListOfTalismans, 
+    resetPopups, setListOfTalismans, 
     showFeedback, setShowFeedback,
   } = useContext(contexto);
+
   const typeText = (e: ChangeEvent<HTMLInputElement>) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
     setTextTalisman(sanitizedValue);
   };
 
   useEffect(() => {
+    resetPopups();
     setListOfTalismans(jsonTalismans);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -9,6 +9,7 @@ export default function AdvTalens() {
     dataSheet,
     sessionId,
     returnSheetValues,
+    setShowMessage,
   } = useContext(contexto);
 
   const updateTalen = async (
@@ -31,7 +32,7 @@ export default function AdvTalens() {
     }
     console.log(newList);
     dataSheet.advantagesAndFlaws.talens = newList;
-    await updateDataPlayer(sessionId, email, dataSheet);
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     returnSheetValues();
   }
 

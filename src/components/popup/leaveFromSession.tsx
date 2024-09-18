@@ -8,15 +8,15 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 export default function LeaveFromSession(props: { email: string, name: string }) {
   const { email, name } = props;
   const router = useRouter();
-	const { setShowDelFromSession, sessionId } = useContext(contexto);
+	const { setShowDelFromSession, sessionId, setShowMessage } = useContext(contexto);
 
   const removeSession = async () => {
     try {
-			await leaveFromSession(sessionId, email, name);
+			await leaveFromSession(sessionId, email, name, setShowMessage);
       setShowDelFromSession(false);
       router.push('/sessions');
     } catch(error) {
-      window.alert("Ocorreu um erro: " + error);
+      setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
     }
   };
 

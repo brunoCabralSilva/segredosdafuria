@@ -1,11 +1,12 @@
 'use client'
 import { registerUser } from '@/firebase/user';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FaBackward } from "react-icons/fa6";
 import Loading from '@/components/loading';
 import contexto from '@/context/context';
 import { authenticate } from '@/firebase/authenticate';
+import MessageToUser from '@/components/popup/messageToUser';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');
@@ -16,34 +17,37 @@ const Register = () => {
   const [password2, setPassword2] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { setDataUser } = useContext(contexto);
+  const { setDataUser, resetPopups, setShowMessage, showMessage } = useContext(contexto);
+
+  useEffect(() => resetPopups(), []);
 
   const handleRegisterDev = async () => {
-    setLoading(true);
     const validate = /\S+@\S+\.\S+/;
     const vEmail = !email || !validate.test(email) || email === '';
     if (firstName.length < 2 ) {
-      window.alert('Necessário preencher um Nome com mais de 2 caracteres');
+      setShowMessage({ show: true, text: 'Necessário preencher um Nome com mais de 2 caracteres' });
     } else if (lastName.length < 2) {
-      window.alert('Necessário preencher um Sobrenome com mais de 2 caracteres');
+      setShowMessage({ show: true, text: 'Necessário preencher um Sobrenome com mais de 2 caracteres' });
     } else if(vEmail) {
-      window.alert('Necessário preencher um Email válido');
-    } else if(image.length === 0 || image === '') {
-      window.alert('Necessário escolher uma imagem de perfil');
+      setShowMessage({ show: true, text: 'Necessário preencher um Email válido' });
+    } else if(image === '' || image === null) {
+      setShowMessage({ show: true, text: 'Necessário escolher uma imagem de perfil' });
     } else if (!password || password.length < 6) {
-      window.alert('Necessário inserir uma Senha com pelo menos 6 dígitos');
+      setShowMessage({ show: true, text: 'Necessário inserir uma Senha com pelo menos 6 dígitos' });
     } else if (password !== password2) {
-      window.alert('As senhas inseridas não conferem');
+      setShowMessage({ show: true, text: 'As senhas inseridas não conferem' });
     } else {
+      setLoading(true);
       const reg = await registerUser(
         email,
         password,
         firstName,
         lastName,
         image,
+        setShowMessage,
       );
       if (reg) {
-        const data = await authenticate();
+        const data = await authenticate(setShowMessage);
         if (data) {
           setDataUser({ email: data.email, displayName: data.displayName });
         }
@@ -66,6 +70,7 @@ const Register = () => {
 
   return(
     <section className="bg-ritual break-words bg-dice bg-center bg-fixed min-h-screen w-full items-center justify-center">
+    { showMessage.show && <MessageToUser /> }
     <div className="break-words bg-black/95 flex flex-col items-center justify-center px-2 sm:px-6 py-8 mx-auto h-full lg:py-0">
        <div className="break-words md:my-5 w-full rounded-lg shadow">
           <div className="break-words p-4 space-y-4 md:space-y-6 sm:p-8">

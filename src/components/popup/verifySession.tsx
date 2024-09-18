@@ -14,7 +14,7 @@ export default function VerifySession() {
   const router = useRouter();
   const [popup, setPopup] = useState('');
   const [name, setName] = useState('');
-	const { dataUser, dataSession, setDataSession } = useContext(contexto);
+	const { dataUser, dataSession, setDataSession, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
     requestSession();
@@ -26,7 +26,7 @@ export default function VerifySession() {
       let email = '';
       if (dataUser.email !== '', dataUser.displayName !== '')  email = dataUser.email;
       else {
-        const authData: any = await authenticate();
+        const authData: any = await authenticate(setShowMessage);
         if (!authData || !authData.email || !authData.displayName) {
           router.push('/login');
         } else email = authData.email;
@@ -37,7 +37,7 @@ export default function VerifySession() {
         if (email === getData.gameMaster) {
           router.push(`/sessions/${dataSession.id}`);
         } else {
-          const notifications = await getNotificationBySession(dataSession.id);
+          const notifications = await getNotificationBySession(dataSession.id, setShowMessage);
           let authNotification = false;
           notifications.forEach((notification: { email: string, type: string }) => {
             if (notification.email === email && notification.type === 'approval') authNotification = true;
@@ -46,7 +46,7 @@ export default function VerifySession() {
             setPopup('waiting');
           } else {
             let auth = false;
-            const getPlayers = await getPlayersBySession(dataSession.id);
+            const getPlayers = await getPlayersBySession(dataSession.id, setShowMessage);
             getPlayers.forEach((player: { email: string }) => {
               if (player.email === email) auth = true;
             });
@@ -57,7 +57,7 @@ export default function VerifySession() {
         }
       }
     } catch(error) {
-      window.alert("Ocorreu um erro: " + error);
+      setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
     }
   }
 
@@ -87,7 +87,7 @@ export default function VerifySession() {
             <button
               type="button"
               onClick={ async () => {
-                await requestApproval(dataSession.id);
+                await requestApproval(dataSession.id, requestApproval);
                 setPopup('send');
               }}
               className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}

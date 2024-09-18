@@ -9,7 +9,8 @@ import contexto from '@/context/context';
 import Nav from '@/components/nav';
 
 export default function Auspices() {
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  useEffect(() => resetPopups(), []);
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
       <div className="absolute w-full h-full bg-black/80" />

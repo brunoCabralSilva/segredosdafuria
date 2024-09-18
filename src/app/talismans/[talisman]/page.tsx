@@ -7,12 +7,12 @@ import { ITalisman } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from "@/context/context";
 
-
 export default function Talisman({ params } : { params: { talisman: String } }) {
   const [dataTalisman, setDataTalisman] = useState<ITalisman>();
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     const findTalisman: ITalisman | undefined = listTalismans
       .find((tlsmn: ITalisman) => params.talisman.replace(/-/g, ' ') === tlsmn.title.toLowerCase());
     setDataTalisman(findTalisman);

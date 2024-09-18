@@ -17,6 +17,7 @@ export default function HaranoHauglosk(props: { type: string }) {
     setShowHarano,
     setShowMenuSession,
     returnSheetValues,
+    setShowMessage,
   } =  useContext(contexto);
 
   useEffect(() => {
@@ -28,8 +29,8 @@ export default function HaranoHauglosk(props: { type: string }) {
 
   const rollDices = async () => {
     const typeEdited = type.toLocaleLowerCase();
-    dataSheet[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty);
-    await updateDataPlayer(sessionId, email, dataSheet);
+    dataSheet[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty, setShowMessage);
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     returnSheetValues();
     setShowHauglosk(false);
     setShowHarano(false);

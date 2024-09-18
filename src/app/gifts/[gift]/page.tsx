@@ -11,9 +11,10 @@ import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function Gift({ params } : { params: { gift: String } }) {
   const [dataGift, setDataGift] = useState<IGift>();
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     const findGift: IGift | undefined = listGifts
       .find((gft: IGift) => params.gift.replace(/-/g, ' ').replace(/%C3%A2/g, "â") === gft.gift.toLowerCase());
     setDataGift(findGift);

@@ -13,7 +13,7 @@ export function RiteWithRoll(
   const { textDifficult, skill, renown } = props;
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
-  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -30,7 +30,7 @@ export function RiteWithRoll(
   
   const rollDices = async () => {
     const roll = await rollTestOfUser();
-    await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', results: roll }, email);
+    await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', results: roll }, email, setShowMessage);
     returnSheetValues();
   }
 

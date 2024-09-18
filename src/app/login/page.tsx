@@ -7,6 +7,7 @@ import contexto from "@/context/context";
 import ForgotPassword from "@/components/popup/forgotPassword";
 import Loading from "@/components/loading";
 import Nav from "@/components/nav";
+import MessageToUser from "@/components/popup/messageToUser";
 
 function App() {
   const [showData, setShowData] = useState(false);
@@ -17,14 +18,17 @@ function App() {
   const {
     dataUser, setDataUser,
     showForgotPassword, setShowForgotPassword,
+    resetPopups, setShowMessage,
+    showMessage,
   } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     const authUser = async () => {
       if (dataUser.email !== '' && dataUser.displayName !== '') {
         router.push("/sessions");
       } else {
-        const auth = await authenticate();
+        const auth = await authenticate(setShowMessage);
         if(auth && auth.email && auth.displayName) {
           setDataUser({ email: auth.email, displayName: auth.displayName });
           router.push("/sessions");
@@ -39,22 +43,22 @@ function App() {
     const validate = /\S+@\S+\.\S+/;
     const vEmail = !email || !validate.test(email) || email === '';
     if(vEmail) {
-      window.alert('Necessário preencher um Email válido');
+      setShowMessage({ show: true, text: 'Necessário preencher um Email válido' });
       setLoading(false);
     } else if (!password || password.length < 6) {
-      window.alert('Necessário inserir uma Senha com pelo menos 6 dígitos');
+      setShowMessage({ show: true, text: 'Necessário inserir uma Senha com pelo menos 6 dígitos' });
       setLoading(false);
     } else {
       const log = await signIn(email, password);
       if (log) {
-        const auth = await authenticate();
+        const auth = await authenticate(setShowMessage);
         if(auth && auth.email && auth.displayName) {
           setDataUser({ email: auth.email, displayName: auth.displayName });
           router.push("/sessions");
         }
       }
       else {
-        window.alert('Não foi possível realizar o login. Por favor, verifique suas credenciais e tente novamente.');
+        setShowMessage({ show: true, text: 'Não foi possível realizar o login. Por favor, verifique suas credenciais e tente novamente.' });
         setLoading(false);
       }
     }
@@ -70,6 +74,7 @@ function App() {
   
   return(
     <section className="bg-ritual bg-cover break-words bg-dice bg-center h-screen w-full items-center justify-center">
+      { showMessage.show && <MessageToUser /> }
       <Nav />
       <div className="break-words flex flex-col items-center justify-center sm:px-6 py-8 mx-auto h-full lg:py-0 bg-black/80">
         {

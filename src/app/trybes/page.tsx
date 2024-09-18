@@ -5,11 +5,14 @@ import Footer from '@/components/footer';
 import listTrybes from '../../data/trybes.json';
 import Link from "next/link";
 import Feedback from '@/components/feedback';
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import contexto from "@/context/context";
 
 export default function Trybes() {
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+
+  useEffect(() => resetPopups(), []);
+  
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative">
       <div className={`absolute w-full h-full bg-black/80`} />

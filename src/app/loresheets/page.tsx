@@ -2,7 +2,7 @@
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import listLoresheets from '../../data/loresheets.json';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { ILoresheet } from '../../interface';
@@ -10,7 +10,8 @@ import Feedback from '@/components/feedback';
 import contexto from '@/context/context';
 
 export default function Loresheets() {
-  const { showFeedback, setShowFeedback } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  useEffect(() => resetPopups(), []);
   return (
     <div className="w-full bg-ritual bg-cover bg-top relative text-white">
       <div className="absolute w-full h-fullbg-black/80" />

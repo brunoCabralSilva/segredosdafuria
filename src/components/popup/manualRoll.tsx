@@ -9,7 +9,7 @@ export default function ManualRoll() {
   const [valueOf, setValueOf] = useState<number>(0);
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
-	const { setShowMenuSession, sessionId } = useContext(contexto);
+	const { setShowMenuSession, sessionId, setShowMessage } = useContext(contexto);
 
 	const disableRoll = () => {
     return (dificulty <= 0) || (valueOfRage <= 0 &&  valueOf <= 0 && penaltyOrBonus === 0)
@@ -21,7 +21,8 @@ export default function ManualRoll() {
         valueOfRage,
         valueOf,
         penaltyOrBonus,
-        dificulty
+        dificulty,
+        setShowMessage,      
       );
     setShowMenuSession('');
   };

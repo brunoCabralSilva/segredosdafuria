@@ -11,9 +11,10 @@ import contexto from '@/context/context';
 export default function Trybe({ params } : { params: { trybe: String } }) {
   const [isLoading, setIsLoading] = useState(true);
   const [dataTrybe, setDataTrybe] = useState<ITrybe>();
-  const { showFeedback, setShowFeedback } = useContext(contexto)
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto)
 
   useEffect(() => {
+    resetPopups();
     const findTrybe: ITrybe | undefined = listTrybes
       .find((trb: ITrybe) => params.trybe
       .replace(/-/g, ' ') === trb.nameEn

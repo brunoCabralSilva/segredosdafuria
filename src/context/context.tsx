@@ -33,6 +33,8 @@ interface RecipesContext {
   //pages
   showFeedback: boolean,
   setShowFeedback: (state: boolean) => void,
+  showMessage: { show: boolean, text: string },
+  setShowMessage: (state: { show: boolean, text: string }) => void,
   //sessions
   sessionId: string,
   setSessionId: (state: string) => void,
@@ -81,6 +83,7 @@ interface RecipesContext {
   setShowGiftRoll: (state: { show: boolean, gift: any }) => void,
   showRitualRoll: { show: boolean, ritual: any },
   setShowRitualRoll: (state: { show: boolean, ritual: any }) => void,
+  resetPopups: () => void,
 }
 
 const initialValue: RecipesContext = {
@@ -114,6 +117,8 @@ const initialValue: RecipesContext = {
   //pages
   showFeedback: false,
   setShowFeedback: () => {},
+  showMessage: { show: false, text: '' },
+  setShowMessage: () => {},
   //sessions
   sessionId: '',
   setSessionId: () => {},
@@ -162,6 +167,7 @@ const initialValue: RecipesContext = {
   setShowGiftRoll: () => {},
   showRitualRoll: { show: false, ritual: {} },
   setShowRitualRoll: () => {},
+  resetPopups: () => {},
 }
 
 const contexto = createContext(initialValue);

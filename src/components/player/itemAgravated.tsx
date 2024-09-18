@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 export default function ItemAgravated(props: any) {
   const [totalItem, setTotalItem] = useState(0);
   const { name, namePtBr } = props;
-	const { sessionId, email, dataSheet, returnSheetValues } = useContext(contexto);
+	const { sessionId, email, dataSheet, returnSheetValues, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
     const returnValues = async (): Promise<void> => {
@@ -18,7 +18,7 @@ export default function ItemAgravated(props: any) {
 
   
   const updateValue = async (name: string, value: number) => {
-    const player: any = await getPlayerByEmail(sessionId, email);
+    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
     if (player) {
       if (player.data[name].length === 0) {
         player.data[name] = [ { value, agravated: false }];
@@ -34,8 +34,8 @@ export default function ItemAgravated(props: any) {
           } else player.data[name] = [ ...restOfList, { value, agravated: true }];
         }
       }
-			await updateDataPlayer(sessionId, email, player.data);
-    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
+    } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
     returnSheetValues();
   };
 

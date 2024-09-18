@@ -18,6 +18,7 @@ export default function General() {
     returnSheetValues,
     setShowGiftRoll,
     setShowRitualRoll,
+    setShowMessage,
 	} = useContext(contexto);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function General() {
   };
 
   const updateValue = async (key: string, value: string) => {
-		await updateDataPlayer(sessionId, email, { ...dataSheet, [key]: value });
+		await updateDataPlayer(sessionId, email, { ...dataSheet, [key]: value }, setShowMessage);
     returnSheetValues();
   };
 
@@ -133,7 +134,7 @@ export default function General() {
 					onClick={ () => setShowResetSheet(true) }
 					className="mt-8 mb-5 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
 				>
-					Resetar Ficha
+					Redefinir Ficha
         </button>
 				{ showResetSheet && <ResetSheet /> }
       </div>

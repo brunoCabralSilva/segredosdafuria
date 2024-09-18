@@ -6,7 +6,6 @@ import contexto from "@/context/context";
 import { IoAdd } from "react-icons/io5";
 import { updateDataPlayer } from "@/firebase/players";
 import { MdDelete } from "react-icons/md";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function AddRitual() {
   const {
@@ -15,13 +14,14 @@ export default function AddRitual() {
     dataSheet,
     returnSheetValues,
     setShowRitualsToAdd,
+    setShowMessage,
   } =  useContext(contexto);
   
   const registerRitual = async (ritual: any) => {
     if (dataSheet.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr))
       dataSheet.rituals = dataSheet.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr)
     else dataSheet.rituals.push(ritual);
-    await updateDataPlayer(sessionId, email, dataSheet);
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     returnSheetValues();
   }
 

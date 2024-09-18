@@ -7,7 +7,7 @@ export function RiteOfBinding() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = Number(dataSheet.skills.occult.value) + Number(dataSheet.glory);
@@ -22,10 +22,10 @@ export function RiteOfBinding() {
 
   const rollDice = async () => {
     if (marked) {
-      await registerMessage(sessionId, { type: 'ritual', ...showRitualRoll.ritual }, email);
+      await registerMessage(sessionId, { type: 'ritual', ...showRitualRoll.ritual }, email, setShowMessage);
     } else {
       const roll = await rollTestOfUser();
-      await registerMessage(sessionId, { type: 'ritual', ...showRitualRoll.ritual, roll: 'willpower', results: roll }, email);
+      await registerMessage(sessionId, { type: 'ritual', ...showRitualRoll.ritual, roll: 'willpower', results: roll }, email, setShowMessage);
     }
     returnSheetValues();
   }

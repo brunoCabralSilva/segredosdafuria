@@ -8,9 +8,7 @@ export default function Home() {
   const describe = useRef<HTMLDivElement | null>(null);
 
   const scrollToComponent = () => {
-    if (describe.current) {
-      describe.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (describe.current) describe.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

@@ -2,17 +2,17 @@ import { addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 
-export const createPlayersData = async(sessionId: string) => {
+export const createPlayersData = async(sessionId: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players'); 
     await addDoc(collectionRef, { sessionId, list: [] });
   } catch(err)  {
-    throw new Error ('Ocorreu um erro ao criar jogadores para a Sessão: ' + err);
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar jogadores para a Sessão: ' + err });
   }
 };
 
-export const getPlayersBySession = async (sessionId: string) => {
+export const getPlayersBySession = async (sessionId: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players'); 
@@ -24,11 +24,11 @@ export const getPlayersBySession = async (sessionId: string) => {
       return data.list;
     } return [];
   } catch (err) {
-    throw new Error('Ocorreu um erro ao buscar os usuários da Sessão: ' + err);
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar os usuários da Sessão: ' + err });
   }
 };
 
-export const getPlayerByEmail = async (sessionId: string, email: string) => {
+export const getPlayerByEmail = async (sessionId: string, email: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players'); 
@@ -40,11 +40,11 @@ export const getPlayerByEmail = async (sessionId: string, email: string) => {
       return data.list.find((item: any) => item.email === email);
     } return [];
   } catch (err) {
-    throw new Error('Ocorreu um erro ao buscar o Jogador na Sessão: ' + err);
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar o Jogador na Sessão: ' + err });
   }
 };
 
-export const updateDataPlayer = async (sessionId: string, email: string, newData: any) => {
+export const updateDataPlayer = async (sessionId: string, email: string, newData: any, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players');
@@ -58,14 +58,14 @@ export const updateDataPlayer = async (sessionId: string, email: string, newData
         data.list[playerIndex].data = newData;
         const docRef = doc(db, 'players', dataDoc.id);
         await updateDoc(docRef, { list: data.list });
-      } else throw new Error('Jogador não encontrado.');
-    } else throw new Error('Sessão não encontrada.');
+      } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
+    } else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
   } catch (err) {
-    throw new Error('Ocorreu um erro ao atualizar os dados do Jogador: ' + err);
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
   }
 };
 
-export const updateDataWithRage = async (sessionId: string, email: string, newData: any, nameForm: string) => {
+export const updateDataWithRage = async (sessionId: string, email: string, newData: any, nameForm: string, setShowMessage: any) => {
   try {
     let numberOfChecks = 1;
     if (nameForm === 'Crinos') numberOfChecks = 2;
@@ -106,6 +106,7 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
         type: 'rage-check',
       },
       email,
+      setShowMessage,
     );
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players');
@@ -119,9 +120,9 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
         data.list[playerIndex].data = newData;
         const docRef = doc(db, 'players', dataDoc.id);
         await updateDoc(docRef, { list: data.list });
-      } else throw new Error('Jogador não encontrado.');
-    } else throw new Error('Sessão não encontrada.');
+      } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
+    } else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
   } catch (err) {
-    throw new Error('Ocorreu um erro ao atualizar os dados do Jogador: ' + err);
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
   }
 };

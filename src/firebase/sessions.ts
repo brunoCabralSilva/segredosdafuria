@@ -49,6 +49,7 @@ export const createSession = async (
   nameSession: string,
   description: string,
   email: string,
+  setShowMessage: any
 ) => {
   try {
     const dateMessage = await getOfficialTimeBrazil();
@@ -57,26 +58,26 @@ export const createSession = async (
     const docRef = await addDoc(collectionRef, {
       name: nameSession.toLowerCase(), creationDate: dateMessage, gameMaster: email, anotations: '', description,
     });
-    await createNotificationData(docRef.id);
-    await createPlayersData(docRef.id);
-    await createChatData(docRef.id);
+    await createNotificationData(docRef.id, setShowMessage);
+    await createPlayersData(docRef.id, setShowMessage);
+    await createChatData(docRef.id, setShowMessage);
     return docRef.id;
   } catch(err)  {
-    throw new Error ('Ocorreu um erro ao criar uma sessão: ' + err);
+    setShowMessage({show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err });
   }
 };
 
-export const clearHistory = async (id: string) => {
+export const clearHistory = async (id: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const docRef = doc(db, 'sessions2', id);
     await updateDoc(docRef, { chat: [] });
   } catch (err) {
-    throw new Error('Ocorreu um erro ao limpar o histórico de chat: ' + err);
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao limpar o histórico de chat: ' + err });
   }
 };
 
-export const leaveFromSession = async (sessionId: string, email: string, name: string) => {
+export const leaveFromSession = async (sessionId: string, email: string, name: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players');
@@ -92,11 +93,11 @@ export const leaveFromSession = async (sessionId: string, email: string, name: s
         type: 'transfer',
       };
       await updateDoc(docRef, { list: data.list });
-      await registerNotification(sessionId, dataNotification);
-      window.alert("Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!");
-    } else throw new Error('Sessão não encontrada.');
+      await registerNotification(sessionId, dataNotification, setShowMessage);
+      setShowMessage({ show: true, text: "Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!" });
+    } else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
   } catch (err) {
-    throw new Error('Ocorreu um erro ao atualizar os dados do Jogador: ' + err);
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
   }
 };
 

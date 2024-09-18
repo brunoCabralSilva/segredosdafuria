@@ -16,6 +16,7 @@ export default function SessionBar(props: { gameMaster: boolean}) {
   const {
     sessionId,
     scrollToBottom,
+    setShowMessage,
     showOptions, setShowOptions,
     showMenuSession, setShowMenuSession,
   } = useContext(contexto);
@@ -58,9 +59,9 @@ export default function SessionBar(props: { gameMaster: boolean}) {
                   title="Apagar o histórico de conversas"
                   onClick={ async () => {
                     try {
-                      await clearHistory(sessionId);
+                      await clearHistory(sessionId, setShowMessage);
                     } catch (error) {
-                      window.alert(error)
+                      setShowMessage({ show: true, text: 'Ocorreu um erro: ' + error });
                     }
                     setShowOptions(false);
                     scrollToBottom();
@@ -79,7 +80,7 @@ export default function SessionBar(props: { gameMaster: boolean}) {
           value={text}
           onKeyDown={ async (event) => {
             if (event.key === 'Enter' && text !== '' && text !== ' ') {
-              await registerMessage(sessionId, { type: 'text', message: text }, null);
+              await registerMessage(sessionId, { type: 'text', message: text }, null, setShowMessage);
               setText('');
               scrollToBottom();
             }
@@ -96,7 +97,7 @@ export default function SessionBar(props: { gameMaster: boolean}) {
               title="Enviar uma mensagem"
               onClick={ async () => {
                 if (text !== '' && text !== ' ') {
-                  await registerMessage(sessionId, { type: 'text', message: text }, null);
+                  await registerMessage(sessionId, { type: 'text', message: text }, null, setShowMessage);
                   setText('');
                   scrollToBottom();
                 }

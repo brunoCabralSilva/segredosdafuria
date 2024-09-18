@@ -14,10 +14,10 @@ export function RageOrWpWithRoll(
     textDificulty: string,
   }
 ) {
-  const { type, attribute, skill, renown, dificulty: dif, textDificulty } = props;
+  const { type, attribute, renown, dificulty: dif, textDificulty } = props;
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(dif);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -35,9 +35,9 @@ export function RageOrWpWithRoll(
   const rollRage = async () => {
     if (dataSheet.rage >= 1) {
       const roll = await rollTestOfUser();
-      const rageTest = await calculateRageCheck(sessionId, email);
+      const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
       dataSheet.rage = rageTest?.rage;
-      await updateDataPlayer(sessionId, email, dataSheet);
+      await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
       await registerMessage(
         sessionId,
         {
@@ -47,9 +47,10 @@ export function RageOrWpWithRoll(
           rageResults: rageTest,
           results: roll,
         },
-        email);
+        email,
+        setShowMessage);
       returnSheetValues();
-    } else window.alert('Você não possui Fúria suficiente para ativar este Dom.');
+    } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
 
   const discountWillpower = async() => {
@@ -75,13 +76,13 @@ export function RageOrWpWithRoll(
           const smallestNumber = Math.min(...missingInAgravated);
           dataSheet.willpower.push({ value: smallestNumber, agravated: true });
         } else {
-          window.alert(`Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).`);
+          setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
         }
       }
     }
-    updateDataPlayer(sessionId, email, dataSheet);
+    updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     const roll = await rollTestOfUser();
-    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email);
+    await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email, setShowMessage);
     returnSheetValues();
   }
 

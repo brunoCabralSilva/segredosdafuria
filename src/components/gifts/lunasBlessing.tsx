@@ -8,15 +8,16 @@ export function LunasBlessing() {
     sessionId,
     email,
     dataSheet,
+    setShowMessage,
     showGiftRoll, setShowGiftRoll,
     returnSheetValues,
     setShowMenuSession,
   } = useContext(contexto);
 
   const rollRage = async () => {
-    const rageTest = await calculateRageCheck(sessionId, email);
+    const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
     dataSheet.rage = rageTest?.rage;
-    await updateDataPlayer(sessionId, email, dataSheet);
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     await registerMessage(
       sessionId,
       {
@@ -25,7 +26,8 @@ export function LunasBlessing() {
         roll: 'rage',
         rageResults: rageTest,
       },
-      email);
+      email,
+      setShowMessage);
     returnSheetValues();
   }
 
@@ -64,11 +66,11 @@ export function LunasBlessing() {
             dataSheet.willpower.push({ value: smallestNumber, agravated: true });
             rollRage();
           } else {
-            window.alert(`Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).`);
+            setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
           }
         }
       }
-    } else window.alert('Você não possui Fúria suficiente para ativar este Dom.');
+    } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
   
   return(

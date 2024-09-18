@@ -1,6 +1,6 @@
 'use client'
 import contexto from "@/context/context";
-import { haranoHaugloskCheck, rageCheck } from "@/firebase/messagesAndRolls";
+import { rageCheck } from "@/firebase/messagesAndRolls";
 import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
@@ -10,6 +10,7 @@ export default function Item(props: any) {
     email,
     dataSheet,
     sessionId,
+    setShowMessage,
     setShowHarano,
     setShowHauglosk,
     returnSheetValues,
@@ -17,13 +18,13 @@ export default function Item(props: any) {
   } = useContext(contexto);
   
   const updateValue = async (name: string, value: number) => {
-    const player: any = await getPlayerByEmail(sessionId, email);
+    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
     if (player) {
       if (player.data[name] === 1 && value === 1) player.data[name] = 0;
       else player.data[name] = value;
-			await updateDataPlayer(sessionId, email, player.data);
+			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
       returnSheetValues();
-    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+    } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 
   const returnPoints = (name: string) => {
@@ -67,7 +68,7 @@ export default function Item(props: any) {
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
               onClick={ async () => {
-                const rage = await rageCheck(sessionId, email);
+                const rage = await rageCheck(sessionId, email, setShowMessage);
                 updateValue('rage', rage);
                 setShowMenuSession('');
               }}

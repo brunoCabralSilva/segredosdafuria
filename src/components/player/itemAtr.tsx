@@ -1,19 +1,19 @@
 'use client'
 import contexto from '@/context/context';
 import { getPlayerByEmail, updateDataPlayer } from '@/firebase/players';
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 export default function ItemAtr(props: any) {
   const { value, name, namePtBr, quant } = props;
-	const { sessionId, email, returnSheetValues, dataSheet } = useContext(contexto);
+	const { sessionId, email, returnSheetValues, dataSheet, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
-    const player: any = await getPlayerByEmail(sessionId, email);
+    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
     if (player) {
 			player.data.attributes[name] = value;
-			await updateDataPlayer(sessionId, email, player.data);
+			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
       returnSheetValues();
-    } else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+    } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 
   const returnPoints = (name: string) => {
@@ -29,7 +29,7 @@ export default function ItemAtr(props: any) {
                   onClick={ () => {
                     if (dataSheet.form === 'Hominídeo' || dataSheet.form === 'Lupino')
                       updateValue(name, index + 1)
-                    else window.alert('Os Atributos só podem ser atualizados na forma Hominídea ou Lupina')
+                    else setShowMessage({ show: true, text: 'Os Atributos só podem ser atualizados na forma Hominídea ou Lupina' })
                   }}
                   key={index}
                   className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
@@ -40,7 +40,7 @@ export default function ItemAtr(props: any) {
                 type="button"
                 onClick={ () => {
                   if (dataSheet.form === 'Hominídeo' || dataSheet.form === 'Lupino') updateValue(name, index + 1)
-                  else window.alert('Os Atributos só podem ser atualizados na forma Hominídea ou Lupina')
+                  else setShowMessage({ show: true, text: 'Os Atributos só podem ser atualizados na forma Hominídea ou Lupina' })
                 }}
                 key={index}
                 className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"

@@ -10,6 +10,7 @@ export default function AdvOfFlaw(props: { type: string }) {
     dataSheet,
     sessionId,
     returnSheetValues,
+    setShowMessage,
   } = useContext(contexto);
 
   const updateAdvantageOrFlaw = async (
@@ -41,7 +42,7 @@ export default function AdvOfFlaw(props: { type: string }) {
     }
     if (advOfFlaw === 'flaw') dataSheet.advantagesAndFlaws.flaws = newList;
     else dataSheet.advantagesAndFlaws.advantages = newList;
-    await updateDataPlayer(sessionId, email, dataSheet);
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     returnSheetValues();
   }
 

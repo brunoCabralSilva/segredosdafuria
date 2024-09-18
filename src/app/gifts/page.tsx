@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import DataGifts from '../../components/dataGifts';
@@ -18,8 +18,10 @@ export default function Gifts() {
     globalGifts, setGlobalGifts,
     textGift, setTextGift,
     totalRenown, setTotalRenown,
-    setListOfGift,
+    setListOfGift, resetPopups
   } = useContext(contexto);
+
+  useEffect(() => resetPopups(), []);
 
   const returnFilterPhrase = (): string => {
     let phrase = '';

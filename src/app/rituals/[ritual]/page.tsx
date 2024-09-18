@@ -10,9 +10,10 @@ import contexto from "@/context/context";
 
 export default function Ritual({ params } : { params: { ritual: String } }) {
   const [dataRitual, setDataRitual] = useState<IRitual>();
-  const { showFeedback, setShowFeedback, setListOfRituais } = useContext(contexto);
+  const { showFeedback, setShowFeedback, setListOfRituais, resetPopups } = useContext(contexto);
 
   useEffect(() => {
+    resetPopups();
     const findRitual: IRitual | undefined = listRituals
       .find((rtl: IRitual) => params.ritual.replace(/-/g, ' ') === rtl.title.toLowerCase());
     setDataRitual(findRitual);

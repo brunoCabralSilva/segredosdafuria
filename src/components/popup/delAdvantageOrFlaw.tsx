@@ -11,10 +11,10 @@ function limitCaracteres(texto: string) {
 
 export default function DelAdvantageOrFlaw(props: any) {
   const { adv, setAdv } = props;
-  const { sessionId, email, deleteAdvOrFlaw, setDeleteAdvOrFlaw } = useContext(contexto);
+  const { sessionId, email, deleteAdvOrFlaw, setDeleteAdvOrFlaw, setShowMessage } = useContext(contexto);
 
   const removeAdv = async () => {
-    const searchPlayer = await getPlayerByEmail(sessionId, email);
+    const searchPlayer = await getPlayerByEmail(sessionId, email, setShowMessage);
     const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === deleteAdvOrFlaw.name);
     const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== deleteAdvOrFlaw.name);
 
@@ -56,7 +56,7 @@ export default function DelAdvantageOrFlaw(props: any) {
       searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
     }
 
-    await updateDataPlayer(sessionId, email, searchPlayer);
+    await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
     setDeleteAdvOrFlaw({show: false, adv: {}, type:'' });
   };
 

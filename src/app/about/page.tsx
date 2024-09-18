@@ -3,12 +3,13 @@ import Footer from '@/components/footer';
 import { BsInstagram, BsSpotify, BsYoutube, BsFacebook } from "react-icons/bs";
 import Image from 'next/image';
 import Feedback from '@/components/feedback';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import contexto from '@/context/context';
 import Nav from '@/components/nav';
 
 export default function About() {
-  const { showFeedback, setShowFeedback  } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  useEffect(() => resetPopups(), []);
   return (
     <div className="bg-ritual text-white relative">
       <div className="bg-black/60 absolute w-full h-full" />

@@ -12,6 +12,7 @@ import contexto from "@/context/context";
 import Info from "../../components/info";
 import Loading from "../../components/loading";
 import VerifySession from "../../components/popup/verifySession";
+import MessageToUser from "@/components/popup/messageToUser";
 
 export default function Sessions() {
   const router = useRouter();
@@ -20,12 +21,14 @@ export default function Sessions() {
     showCreateSession, setShowCreateSession,
     dataSession, setDataSession,
     dataUser, setDataUser,
+    resetPopups,
+    showMessage, setShowMessage,
   } = useContext(contexto);
   const [sessions, setSessions] = useState<any[]>([]);
   const [showData, setShowData] = useState(false);
   
   useEffect(() => {
-    setDataSession({ show: false, id: '' });
+    resetPopups();
     setShowData(false);
     const fetchData = async (): Promise<void> => {
       if (dataUser.email !== '' && dataUser.displayName !== '') {
@@ -33,7 +36,7 @@ export default function Sessions() {
         setSessions(sessionsList);
         setShowData(true);
       } else {
-        const authData: any = await authenticate();
+        const authData: any = await authenticate(setShowMessage);
         try {
           if (authData && authData.email && authData.displayName) {
             setDataUser({ email: authData.email, displayName: authData.displayName });
@@ -42,7 +45,7 @@ export default function Sessions() {
             setShowData(true);
           } else router.push('/login');
         } catch (error) {
-          window.alert('Ocorreu um erro ao obter Sessões: ' + error);
+          setShowMessage({ show: true, text: 'Ocorreu um erro ao obter Sessões: ' + error });
         }
       }
     };
@@ -55,6 +58,7 @@ export default function Sessions() {
       { 
         showData
         ? <div className="h-full bg-black/80">
+            { showMessage.show && <MessageToUser /> }
             <Nav />
             <section className="relative px-2 overflow-y-auto bg-black/10">
               <div className="py-6 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify bg-black/10">

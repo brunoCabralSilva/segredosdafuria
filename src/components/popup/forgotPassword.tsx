@@ -8,16 +8,15 @@ export default function ForgotPassword() {
 	const [email, setEmail] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
   const context = useContext(contexto);
-  const { setShowForgotPassword } = context;
+  const { setShowForgotPassword, setShowMessage } = context;
   
   const forgotUserPassword = async () => {
 		const validate = /\S+@\S+\.\S+/;
     const vEmail = !email || !validate.test(email) || email === '';
-    if (vEmail) {
-			window.alert('Por favor, forneça um e-mail válido.');
-    } else { 
+    if (vEmail) setShowMessage({ show: true, text: 'Por favor, forneça um e-mail válido.' });
+    else { 
 			setLoading(true);
-      await forgotPassword(email);
+      await forgotPassword(email, setShowMessage);
       setShowForgotPassword(false);
       setLoading(false);
     }

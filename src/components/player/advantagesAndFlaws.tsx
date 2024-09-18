@@ -3,9 +3,6 @@ import { useContext, useEffect, useState } from 'react';
 import { getPlayerByEmail } from '@/firebase/players';
 import contexto from '@/context/context';
 import { IoAdd } from 'react-icons/io5';
-import { CiCircleChevDown } from "react-icons/ci";
-// import dataTalismans from '../../../data/talismans.json';
-// import dataLoresheets from '../../../data/loresheets.json';
 import AddAdvOrFlaw from '../popup/addAdvOrFlaw';
 import AdvAdded from './advAdded';
 import AdvTalensAdded from './advTalensAdded';
@@ -16,15 +13,16 @@ export default function AdvantagesAndFlaws() {
   const {
     dataSheet,
     sessionId, email,
+    setShowMessage,
     showAllFlaws, setShowAllFlaws,
     showAllAdvantages, setShowAllAdvantages,
   } = useContext(contexto);
 
   useEffect(() => {
     const getAllAdvantages = async () => {
-      const player = await getPlayerByEmail(sessionId, email);
+      const player = await getPlayerByEmail(sessionId, email, setShowMessage);
       if (player) setAdv(player.data.advantagesAndFlaws);
-      else window.alert('Jogador não encontrado! Por favor, atualize a página e tente novamente');
+      else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
     }
     getAllAdvantages();
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -3,7 +3,6 @@ import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import Image from "next/image";
 import { useContext, useState } from "react";
-import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 import { GiD10 } from "react-icons/gi";
 
 export default function GiftsAdded(props: { gift: any }) {

@@ -10,11 +10,11 @@ export default function Nav() {
   const [showMenu, setShowMenu] = useState(false);
   const [loginLogout, setLoginLogout] = useState('');
   const router = useRouter();
-  const { logoutUser, setLogoutUser } = useContext(contexto);
+  const { logoutUser, setLogoutUser, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
     const fetchData = async () => {
-      const authData = await authenticate();
+      const authData = await authenticate(setShowMessage);
       if (authData && authData.email && authData.displayName) {
         setLoginLogout('logout');
       } else {

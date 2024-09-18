@@ -16,7 +16,7 @@ export default function CreateSection() {
   const [errExists, setErrExists] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
-  const { dataUser, setShowCreateSession } = useContext(contexto);
+  const { dataUser, setShowCreateSession, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,13 +24,13 @@ export default function CreateSection() {
         if (dataUser.email !== '' && dataUser.displayName !== '') {
           setEmail(dataUser.email);
         } else {
-          const authData: any = await authenticate();
+          const authData: any = await authenticate(setShowMessage);
           if (authData && authData.email && authData.displayName) {
             setEmail(authData.email);
           } else router.push('/login');
         }
       } catch (error) {
-        window.alert('Ocorreu um erro com a validação de dados: ' + error);
+        setShowMessage({ show: true, text: 'Ocorreu um erro com a validação de dados: ' + error });
         router.push('/login');
       }
     };
@@ -66,11 +66,12 @@ export default function CreateSection() {
           const docRef: string = await createSession(
             nameSession.toLowerCase(),
             description,
-            email
+            email,
+            setShowMessage,
           );
           if (docRef) router.push(`/sessions/${docRef}`);
           else {
-            window.alert('Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.');
+            setShowMessage({ show: true, text: 'Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.' });
           }
         }
       } catch (error: any) {
