@@ -63,7 +63,7 @@ export default function CreateSection() {
           setLoading(false);
         } else {
           setErrExists('');
-          const docRef: string = await createSession(
+          const docRef: any = await createSession(
             nameSession.toLowerCase(),
             description,
             email,
