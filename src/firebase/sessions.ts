@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
 import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
@@ -31,7 +31,7 @@ export const getSessionById = async (sessionId: string) => {
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   const sessionDocSnapshot = await getDoc(sessionDocRef);
   if (sessionDocSnapshot.exists()) {
-    return sessionDocSnapshot.data();
+    return { ...sessionDocSnapshot.data(), id: sessionDocSnapshot.id }
   } return null;
 };
 
@@ -64,6 +64,23 @@ export const createSession = async (
     return docRef.id;
   } catch(err)  {
     setShowMessage({show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err });
+  }
+};
+
+export const updateSession = async (session: any, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const sessionsCollectionRef = collection(db, 'sessions2');
+    const sessionDocRef = doc(sessionsCollectionRef, session.id);
+    const sessionDocSnapshot = await getDoc(sessionDocRef);
+    if (sessionDocSnapshot.exists()) {
+      const docRef = doc(db, 'sessions2', session.id);
+      await updateDoc(docRef, { ...session });
+    } else {
+      setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador (Sessão não encontrada)' });
+    }
+  } catch (err) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
   }
 };
 
@@ -135,4 +152,17 @@ export const getAllSessionsByFunction = async (email: string) => {
   }
 
   return { list1, list2 };
+};
+
+export const deleteSessionById = async (sessionId: string, setShowMessage: any) => {
+  const db = getFirestore(firebaseConfig);
+  const sessionsCollectionRef = collection(db, 'sessions2');
+  const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+  try {
+    await deleteDoc(sessionDocRef);
+    setShowMessage({ show: true, text: 'A Sessão foi excluída. Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!' });
+  } catch (error) {
+    setShowMessage({ show: true, text: `Erro ao deletar sessão. Atualize a página e tente novamente (${error}).` });
+    return false;
+  }
 };

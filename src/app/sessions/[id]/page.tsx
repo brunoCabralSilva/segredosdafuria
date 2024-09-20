@@ -16,6 +16,7 @@ import { getPlayerByEmail, getPlayersBySession } from "@/firebase/players";
 import { getSessionById } from "@/firebase/sessions";
 import firestoreConfig from "@/firebase/connection";
 import MessageToUser from "@/components/popup/messageToUser";
+import PlayerSheet from "@/components/popup/playerSheet";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -31,18 +32,24 @@ export default function SessionId({ params } : { params: { id: string } }) {
     setDataSheet,
     setName,
     setEmail,
-    email,
-    showMenuSession,
     setSessionId,
     resetPopups,
+    setSession,
     showMessage, setShowMessage,
+    viewPlayer,
+    email,
+    showMenuSession,
   } = useContext(contexto);
 	
   const returnValues = async () => {
     const auth = await authenticate(setShowMessage);
+    const dataSession: any = await getSessionById(id);
     if (auth) {
-      const player: any = await getPlayerByEmail(id, auth.email, setShowMessage);
-      if (player) setDataSheet(player.data);
+      if (dataSession.gameMaster === auth.email) setSession(dataSession);
+      else {
+        const player: any = await getPlayerByEmail(id, auth.email, setShowMessage);
+        if (player) setDataSheet(player.data);
+      }
     }
   };
 
@@ -94,6 +101,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
   return (
     <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
       { showMessage.show && <MessageToUser /> }
+      { viewPlayer.show && <PlayerSheet /> }
       <Nav />
       {
         showData

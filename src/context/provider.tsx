@@ -4,6 +4,7 @@ import contexto from './context';
 import { playerSheet } from '@/firebase/utilities';
 import { getPlayerByEmail } from '@/firebase/players';
 import { authenticate } from '@/firebase/authenticate';
+import { getSessionById } from '@/firebase/sessions';
 
 interface IProvider { children: ReactNode }
 
@@ -51,6 +52,12 @@ export default function Provider({children }: IProvider) {
   const [showHauglosk, setShowHauglosk] = useState(false);
   const [showGiftRoll, setShowGiftRoll] = useState({ show: false, gift: {} });
   const [showRitualRoll, setShowRitualRoll] = useState({ show: false, ritual: {} });
+  //gameMaster
+  const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
+  const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
+  const [session, setSession] = useState({});
+  const [players, setPlayers] = useState([]);
+  const [viewPlayer, setViewPlayer] = useState({ show: false, data: {} });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -70,6 +77,17 @@ export default function Provider({children }: IProvider) {
 		}
   };
 
+  const returnSessionValues = async () => {
+    const auth: any = await authenticate(setShowMessage);
+		if (auth && auth.email && auth.displayName) {
+			setEmail(auth.email);
+      setName(auth.displayName);
+			const session: any = await getSessionById(sessionId);
+      if (session.name) setSession(session);
+			else setShowMessage({ show: true, text: 'Sessão não encontrada! Por favor, atualize a página e tente novamente' });
+		}
+  }
+
   const resetPopups = () => {
     setShowForgotPassword(false);
     setShowFeedback(false);
@@ -80,6 +98,7 @@ export default function Provider({children }: IProvider) {
     setShowOptions(false);
     setShowMenuSession('');
     setShowDelFromSession(false);
+    setShowDelGMFromSession(false);
     setShowResetSheet(false);
     setDeleteAdvOrFlaw({ show: false });
     setShowAllFlaws(false);
@@ -90,6 +109,8 @@ export default function Provider({children }: IProvider) {
     setShowHauglosk(false);
     setShowGiftRoll({ show: false, gift: {} });
     setShowRitualRoll({ show: false, ritual: {} });
+    setShowChangeGameMaster({ show: false, data: {} });
+    setViewPlayer({ show: false, data: {} });
   }
 
   return (
@@ -141,6 +162,13 @@ export default function Provider({children }: IProvider) {
         showHauglosk, setShowHauglosk,
         showGiftRoll, setShowGiftRoll,
         showRitualRoll, setShowRitualRoll,
+        //gameMaster
+        showChangeGameMaster, setShowChangeGameMaster,
+        showDelGMFromSession, setShowDelGMFromSession,
+        viewPlayer, setViewPlayer,
+        session, setSession,
+        players, setPlayers,
+        returnSessionValues,
       }}
     >
       {children}

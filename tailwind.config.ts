@@ -20,6 +20,7 @@ const config: Config = {
     },
     extend: {
       zIndex: {
+        '60': '60',
         '80': '80',
       },
       backgroundImage: {

@@ -169,6 +169,7 @@ export const capitalizeFirstLetter = (str: string): String => {
     case 'shadow lords': return 'Senhores das Sombras';
     case 'children of gaia': return 'Filhos de Gaia';
     case 'red talons': return 'Garras Vermelhas';
-    default: return str.charAt(0).toUpperCase() + str.slice(1);;
+    default: return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
   }
 };

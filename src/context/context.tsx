@@ -84,6 +84,18 @@ interface RecipesContext {
   showRitualRoll: { show: boolean, ritual: any },
   setShowRitualRoll: (state: { show: boolean, ritual: any }) => void,
   resetPopups: () => void,
+  //gameMaster
+  session: any,
+  setSession: (state: any) => void,
+  showChangeGameMaster: { show: boolean, data: any },
+  setShowChangeGameMaster: (state: { show: boolean, data: any }) => void,
+  showDelGMFromSession: boolean,
+  setShowDelGMFromSession: (state: boolean) => void,
+  players: any,
+  setPlayers: (state: any) => void,
+  returnSessionValues: () => void,
+  viewPlayer: { show: boolean, data: any },
+  setViewPlayer: (state: any) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -168,6 +180,18 @@ const initialValue: RecipesContext = {
   showRitualRoll: { show: false, ritual: {} },
   setShowRitualRoll: () => {},
   resetPopups: () => {},
+  //gameMaster
+  session: {},
+  setSession: () => {},
+  showChangeGameMaster: { show: false, data: {} },
+  setShowChangeGameMaster: () => {},
+  showDelGMFromSession: false,
+  setShowDelGMFromSession: () => {},
+  players: [],
+  setPlayers: () => {},
+  returnSessionValues: () => {},
+  viewPlayer: { show: false, data: {} },
+  setViewPlayer: () => {},
 }
 
 const contexto = createContext(initialValue);

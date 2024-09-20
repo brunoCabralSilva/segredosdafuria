@@ -42,7 +42,7 @@ export async function getUserByEmail(email: string, setShowMessage: any) {
     const querySnapshot = await getDocs(q);
     
     if (querySnapshot.empty) {
-      setShowMessage({ show: true, text: 'Usuário com o email fornecido não encontrado.' });
+      throw new Error('Usuário com o email fornecido não encontrado.');
     } else {
       let user: any;
       querySnapshot.forEach((doc: any) => {
