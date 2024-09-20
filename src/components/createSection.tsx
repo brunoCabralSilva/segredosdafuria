@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from "react";
-import Nav from "@/components/nav";
 import { FaArrowLeft } from "react-icons/fa6";
 import { authenticate } from "@/firebase/authenticate";
 import { createSession, getSessionByName } from '@/firebase/sessions';
@@ -81,24 +80,19 @@ export default function CreateSection() {
   };
   
   return (
-    <div className="bg-ritual bg-cover bg-top mb-2 w-full h-full">
-      <div className="flex flex-col w-full overflow-y-auto justify-left items-center bg-black/90">
-        <Nav />
-        <div
-          className="px-2 py-2 mb-1 flex z-30 justify-start items-center w-full fixed top-0 ml-2 mt-1"
-        >
-        </div>
+    <div className="fixed top-0 left-0 h-screen bg-ritual bg-cover bg-top mb-2 w-full">
+      <div className="flex items-center justify-center flex-col w-full h-full bg-black/90">
         <div className="w-full overflow-y-auto flex flex-col justify-center items-center mt-2 px-5 pb-10">
           <div className="w-full text-white text-2xl pb-3 font-bold text-center mt-2 relative flex items-center justify-center">
             <button
               type="button"
               className="absolute left-0"
-              onClick={ () => router.push('/sessions') }
+              onClick={ () => {
+                setShowCreateSession(false);
+                router.push('/sessions');
+              }}
             >
-              <FaArrowLeft
-                onClick={ () => setShowCreateSession(false) }
-                className="text-3xl text-white"
-              />
+              <FaArrowLeft className="text-3xl text-white" />
             </button>
             Crie sua Sessão
           </div>

@@ -13,6 +13,7 @@ import Info from "../../components/info";
 import Loading from "../../components/loading";
 import VerifySession from "../../components/popup/verifySession";
 import MessageToUser from "@/components/popup/messageToUser";
+import Image from "next/image";
 
 export default function Sessions() {
   const router = useRouter();
@@ -54,13 +55,13 @@ export default function Sessions() {
   }, []);
 
   return(
-    <div className={`${!showInfoSessions && !showCreateSession && 'h-screen'} bg-ritual bg-top bg-cover w-full`}>
+    <div className="h-screen bg-ritual bg-top bg-cover w-full">
       { 
         showData
         ? <div className="h-full bg-black/80">
             { showMessage.show && <MessageToUser /> }
             <Nav />
-            <section className="relative px-2 overflow-y-auto bg-black/10">
+            <section className="h-full relative px-2 overflow-y-auto bg-black/10">
               <div className="py-6 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify bg-black/10">
                 <h1 className="text-4xl relative flex items-center">
                   <span className="pr-2">Sessões</span>
@@ -74,35 +75,39 @@ export default function Sessions() {
                 </h1>
                 <hr className="w-10/12 mt-6" />
               </div>
-              { 
-                !showInfoSessions
-                && !showCreateSession
-                &&
-                <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3 pb-4 bg-transparent">
+              <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3 pb-4 bg-transparent">
+                <button
+                  type="button"
+                  onClick={ () => {
+                    setShowCreateSession(true);
+                    setShowInfoSessions(false);
+                  }}
+                  className="p-2 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
+                >
+                  <IoMdAdd className="text-4xl" />
+                </button>
+                {
+                  sessions.map((session: ISessions, index: number) =>
                   <button
                     type="button"
-                    onClick={ () => {
-                      setShowCreateSession(true);
-                      setShowInfoSessions(false);
-                    }}
-                    className="p-2 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80"
-                  >
-                    <IoMdAdd className="text-4xl" />
-                  </button>
-                  {
-                    sessions.map((session: ISessions, index: number) =>
-                    <button
-                      type="button"
-                      key={ index }
-                      onClick={ () => setDataSession({ show: true, id: session.id })}
-                      className="p-2 px-4 border-2 border-white text-white flex items-center justify-center h-28 cursor-pointer bg-black/80 capitalize"
-                      >
+                    key={ index }
+                    onClick={ () => setDataSession({ show: true, id: session.id })}
+                    className=" border-2 border-white text-white h-28 cursor-pointer bg-ritual bg-cover capitalize"
+                    >
+                      <div className="w-full h-full bg-black/60 p-2 px-4 flex flex-col items-center justify-center font-bold">
+                        <Image
+                          src="/images/gifts/Dons Nativos.png"
+                          alt="Glifo de um lobo"
+                          className="w-12 relative object-contain mb-2"
+                          width={35}
+                          height={400}
+                        />
                         { session.name }
-                      </button>
-                    )
-                  }
-                </div>
-              }
+                      </div>
+                    </button>
+                  )
+                }
+              </div>
               { showInfoSessions && <Info /> }
               { showCreateSession && <CreateSection /> }
               { dataSession.show && <VerifySession /> }

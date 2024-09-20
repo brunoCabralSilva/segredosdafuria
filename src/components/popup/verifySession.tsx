@@ -107,16 +107,18 @@ export default function VerifySession() {
 
   return(
     <div className="z-50 fixed top-0 left-0 w-full h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0">
-      <div className="w-full sm:w-2/3 md:w-1/2 overflow-y-auto flex flex-col justify-center items-center bg-black relative border-white border-2 pb-5">
-        <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
-          <IoIosCloseCircleOutline
-            className="text-4xl text-white cursor-pointer"
-            onClick={ () => setDataSession({ show: false, id: '' }) }
-          />
-        </div>
-        <div className="pb-5 px-5 w-full">
-          <h1 className="text-white text-2xl w-full text-center pb-10 capitalize">{ name }</h1>
-          { returnNotification() }
+      <div className="w-full sm:w-2/3 md:w-1/2 bg-ritual bg-cover relative border-white border-2">
+        <div className="overflow-y-auto flex flex-col justify-center items-center bg-black/80 pb-5">
+          <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
+            <IoIosCloseCircleOutline
+              className="text-4xl text-white cursor-pointer"
+              onClick={ () => setDataSession({ show: false, id: '' }) }
+            />
+          </div>
+          <div className="pb-5 px-5 w-full">
+            <h1 className="text-white text-2xl w-full text-center pb-10 capitalize">{ name }</h1>
+            { returnNotification() }
+          </div>
         </div>
       </div>
     </div>

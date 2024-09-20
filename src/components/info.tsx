@@ -1,9 +1,27 @@
 'use client'
+
+import contexto from "@/context/context";
+import { useRouter } from "next/navigation";
+import { useContext } from "react";
+import { FaArrowLeft } from "react-icons/fa";
+
 export default function Info() {
+  const { setShowInfoSessions } = useContext(contexto);
+  const router = useRouter();
   return(
-    <div className="w-full h-full bg-black">
-      <section className="mb-2 relative px-2 h-full flex flex-col items-center justify-center">
+    <div className="fixed top-0 left-0 w-full h-screen bg-black py-10">
+      <section className="mb-2 relative px-2 h-full flex flex-col items-center justify-start overflow-y-auto">
         <div className="px-2 sm:px-10 flex flex-col w-full z-20 text-white text-center sm:text-justify">
+        <button
+          type="button"
+          className="absolute left-10 cursor-pointer "
+          onClick={ () => {
+            setShowInfoSessions(false);
+            router.push('/sessions');
+          }}
+        >
+          <FaArrowLeft className="text-3xl text-white" />
+        </button>
           <article className="w-full h-full px-4 pb-4 text-white">
             <div className="flex flex-col justify-center dataGifts-center sm:dataGifts-start">
               <h1 className="font-bold text-center w-full text-2xl mt-5">
