@@ -20,7 +20,7 @@ export default function Details() {
   } = useContext(contexto);
 
   const returnValue = async () => {
-    const sessionData = await getSessionById(sessionId);
+    const sessionData: any = await getSessionById(sessionId);
     if (sessionData) {
       setNameSession(sessionData.name);
       setCreationDate(sessionData.creationDate);
