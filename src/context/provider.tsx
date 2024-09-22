@@ -77,6 +77,12 @@ export default function Provider({children }: IProvider) {
 		}
   };
 
+  const returnDataPlayer = async (emailUser: string, id: string): Promise<void> => {
+			const player = await getPlayerByEmail(id, emailUser, setShowMessage);
+			if (player) setViewPlayer({show: true, data: player });
+			else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
+  };
+
   const returnSessionValues = async () => {
     const auth: any = await authenticate(setShowMessage);
 		if (auth && auth.email && auth.displayName) {
@@ -169,6 +175,7 @@ export default function Provider({children }: IProvider) {
         session, setSession,
         players, setPlayers,
         returnSessionValues,
+        returnDataPlayer,
       }}
     >
       {children}

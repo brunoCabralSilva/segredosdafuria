@@ -16,14 +16,7 @@ export default function ManualRoll() {
   }
 
 	const rollDices = async () => {
-      await registerManualRoll(
-        sessionId,
-        valueOfRage,
-        valueOf,
-        penaltyOrBonus,
-        dificulty,
-        setShowMessage,      
-      );
+    await registerManualRoll(sessionId, valueOfRage, valueOf, penaltyOrBonus, dificulty, setShowMessage);
     setShowMenuSession('');
   };
 

@@ -208,6 +208,7 @@ export const rageCheck = async(sessionId: string, email: string, setShowMessage:
         result: text,
         rage: player.data.rage,
         success,
+		user: player.user,
         type: 'rage-check',
         },
         email,

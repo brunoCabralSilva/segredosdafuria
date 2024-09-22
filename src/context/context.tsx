@@ -96,6 +96,7 @@ interface RecipesContext {
   returnSessionValues: () => void,
   viewPlayer: { show: boolean, data: any },
   setViewPlayer: (state: any) => void,
+  returnDataPlayer: (email: string, id: string) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -192,6 +193,7 @@ const initialValue: RecipesContext = {
   returnSessionValues: () => {},
   viewPlayer: { show: false, data: {} },
   setViewPlayer: () => {},
+  returnDataPlayer: () => {},
 }
 
 const contexto = createContext(initialValue);

@@ -21,10 +21,7 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
   const { setShowMenuSession, sessionId, setShowMessage } = useContext(contexto);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!gameMaster) verifyUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, []);
+  useEffect(() => { if (!gameMaster) verifyUser() }, []);
   
   const verifyUser = async() => {
     const auth: any = await authenticate(setShowMessage);
@@ -32,8 +29,7 @@ export default function AutomatedRoll(props: { gameMaster: boolean }) {
       setPlayerSelected(auth.email);
       const data = await getPlayerByEmail(sessionId, auth.email, setShowMessage);
       setDataUser(data.data);
-    }
-    else router.push('/login');
+    } else router.push('/login');
   }
 
   const disabledButton = () => {
