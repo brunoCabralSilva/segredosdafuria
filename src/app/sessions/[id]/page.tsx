@@ -46,21 +46,15 @@ export default function SessionId({ params } : { params: { id: string } }) {
     showMenuSession,
   } = useContext(contexto);
 
-  if (gameMaster) {
-    const db = getFirestore(firestoreConfig);
-    const dataRefPlayer = collection(db, "players");
-    const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", session.id));
-    const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
-    if (data) setPlayers(data[0].list);
-  } else {
-    const dataRefPlayer = collection(db, "players");
-    const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
-    const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
-    if (data) {
-      if (data.length > 0) {
-        const player = data[0].list.find((item: any) => item.email === email);
-        if (player) setDataSheet(player.data);
-      }
+  const dataRefPlayer = collection(db, "players");
+  const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
+  const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
+
+  if (data) {
+    if (gameMaster) setPlayers(data[0].list)
+    else if (data.length > 0) {
+      const player = data[0].list.find((item: any) => item.email === email);
+      if (player) setDataSheet(player.data);
     }
   }
 	
