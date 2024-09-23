@@ -57,7 +57,7 @@ export default function ItemMaster(props: any) {
   };
 
   return(
-    <div className={ `w-full ${ name === 'rage' || name === 'honor' ? 'mt-8' : 'mt-4' }` }>
+    <div className="w-full mt-4">
       <span className="capitalize">{ namePtBr }</span>
       <div className="flex flex-col items-center lg:flex-row">
         <div className="w-full">

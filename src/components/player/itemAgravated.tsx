@@ -81,7 +81,7 @@ export default function ItemAgravated(props: any) {
 
   return(
     <div className={ `w-full ${ name === 'willpower' ? 'mt-8' : 'mt-4' }` }>
-      <span className="capitalize">{ namePtBr } total: {totalItem}</span>
+      Dano em <span className="capitalize">{ namePtBr }:</span>
       <div className="w-full mt-1">
         { returnPoints(name) }
       </div>

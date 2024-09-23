@@ -34,8 +34,12 @@ export default function PlayerSheet() {
     <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70 font-normal p-5 sm:p-0 pb-3 z-60 text-white">
       <div className="bg-gray-whats-dark border-2 border-white w-full h-full overflow-y-auto">
         <div className="flex justify-between">
-          <p className="text-white font-bold text-2xl py-3 pl-5 pt-5">
-            { viewPlayer.data.data.name } - { capitalizeFirstLetter(viewPlayer.data.data.auspice) } dos { capitalizeFirstLetter(viewPlayer.data.data.trybe) }
+          <p className="text-white font-bold text-2xl pl-5 pt-5">
+            { 
+              viewPlayer.data.data.name !== ''
+                ? `${viewPlayer.data.data.name} - ${ capitalizeFirstLetter(viewPlayer.data.data.auspice)} ${capitalizeFirstLetter(viewPlayer.data.data.trybe)}`
+                : `${capitalizeFirstLetter(viewPlayer.data.data.auspice)} ${capitalizeFirstLetter(viewPlayer.data.data.trybe)}`
+            }
           </p>
           <button
             type="button"
@@ -47,7 +51,7 @@ export default function PlayerSheet() {
             />
           </button>
         </div>
-        <div className="pt-3 w-full h-full sm:p-5 p-3">
+        <div className="pt-3 w-full h-full sm:px-5 sm:pb-5 p-3">
           <div className="w-full">
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
               <div className="w-full">
@@ -67,12 +71,14 @@ export default function PlayerSheet() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
-            <div className="mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 w-full mt-4">
+            <ItemMaster value={viewPlayer.data.data.honor} name="honor" quant={5} namePtBr="Honra" />
+            <ItemMaster value={viewPlayer.data.data.glory} name="glory" quant={5} namePtBr="Glória" />
+            <ItemMaster value={viewPlayer.data.data.wisdom} name="wisdom" quant={5} namePtBr="Sabedoria" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 w-full mt-4">
             <ItemAgravatedMaster name="health" namePtBr="Vitalidade" />
-            </div>
             <ItemAgravatedMaster name="willpower" namePtBr="Força de Vontade" />
-            <div />
           </div>
           <div className="flex flex-col sm:flex-row w-full">
             <div className="w-full sm:w-1/2">
@@ -205,7 +211,7 @@ export default function PlayerSheet() {
                 </div>
               ))
             }
-            <div className="pt-10 pb-5 font-bold text-2xl">Defeitos</div>
+            { viewPlayer.data.data.advantagesAndFlaws.flaws.length > 0 && <div className="pt-10 pb-5 font-bold text-2xl">Defeitos</div> }
             {
               viewPlayer.data.data.advantagesAndFlaws.flaws.map((flaws: any, index: number) => (
                 <div
@@ -240,7 +246,10 @@ export default function PlayerSheet() {
               ))
             }
           </div>
-          <div className="pt-10 pb-5 font-bold text-2xl">História</div>
+          { 
+            viewPlayer.data.data.background !== '' &&
+            <div className="pt-10 pb-5 font-bold text-2xl">História</div>
+          }
           <div className="pb-10 sm:text-justify">
             { viewPlayer.data.data.background }
           </div>
