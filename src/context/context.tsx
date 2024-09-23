@@ -50,6 +50,8 @@ interface RecipesContext {
   showMenuSession: string,
   setShowMenuSession: (state: string) => void,
   scrollToBottom: () => void,
+  showDeleteHistoric: boolean,
+  setShowDeleteHistoric: (state: boolean) => void,
   //notifications
   listNotification: any[];
   setListNotification: (state: any[]) => void,
@@ -147,6 +149,8 @@ const initialValue: RecipesContext = {
   showMenuSession: '',
   setShowMenuSession: () => {},
   scrollToBottom: () => {},
+  showDeleteHistoric: false,
+  setShowDeleteHistoric: () => {},
   //notifications
   listNotification: [],
   setListNotification: () => {},

@@ -17,6 +17,7 @@ import { getSessionById } from "@/firebase/sessions";
 import firestoreConfig from "@/firebase/connection";
 import MessageToUser from "@/components/popup/messageToUser";
 import PlayerSheet from "@/components/popup/playerSheet";
+import DeleteHistoric from "@/components/popup/deleteHistoric";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -37,6 +38,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     setSession,
     showMessage, setShowMessage,
     viewPlayer,
+    showDeleteHistoric,
     email,
     showMenuSession,
   } = useContext(contexto);
@@ -45,8 +47,10 @@ export default function SessionId({ params } : { params: { id: string } }) {
   const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
   const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
   if (data) {
-    const player = data[0].list.find((item: any) => item.email === email);
-    if (player) setDataSheet(player.data);
+    if (data.length > 0) {
+      const player = data[0].list.find((item: any) => item.email === email);
+      if (player) setDataSheet(player.data);
+    }
   }
 	
   const returnValues = async () => {
@@ -110,6 +114,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
       { showMessage.show && <MessageToUser /> }
       { viewPlayer.show && <PlayerSheet /> }
+      { showDeleteHistoric && <DeleteHistoric /> }
       <Nav />
       {
         showData
@@ -157,7 +162,6 @@ export default function SessionId({ params } : { params: { id: string } }) {
             <Loading />
           </div>
       }
-      {/* { slice.deleteHistoric && <PopupDelHistoric /> } */}
     </div>
   );
 }

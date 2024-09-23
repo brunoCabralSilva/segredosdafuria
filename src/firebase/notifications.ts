@@ -1,4 +1,4 @@
-import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { capitalize, getOfficialTimeBrazil, sheetStructure } from "./utilities";
 import { authenticate } from "./authenticate";
 import firebaseConfig from "./connection";

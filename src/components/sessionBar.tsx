@@ -18,6 +18,7 @@ export default function SessionBar(props: { gameMaster: boolean}) {
     scrollToBottom,
     setShowMessage,
     showOptions, setShowOptions,
+    setShowDeleteHistoric,
     showMenuSession, setShowMenuSession,
   } = useContext(contexto);
 
@@ -58,11 +59,7 @@ export default function SessionBar(props: { gameMaster: boolean}) {
                   className="p-2"
                   title="Apagar o histórico de conversas"
                   onClick={ async () => {
-                    try {
-                      await clearHistory(sessionId, setShowMessage);
-                    } catch (error) {
-                      setShowMessage({ show: true, text: 'Ocorreu um erro: ' + error });
-                    }
+                    setShowDeleteHistoric(true);
                     setShowOptions(false);
                     scrollToBottom();
                   }}

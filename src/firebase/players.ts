@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 

@@ -35,6 +35,7 @@ export default function Provider({children }: IProvider) {
   //session bar
   const [showOptions, setShowOptions] = useState(false);
   const [showMenuSession, setShowMenuSession] = useState('');
+  const [showDeleteHistoric, setShowDeleteHistoric] = useState(false);
   //notification
   const [listNotification, setListNotification] = useState([0]);
   //sheet
@@ -151,6 +152,7 @@ export default function Provider({children }: IProvider) {
         showOptions, setShowOptions,
         showMenuSession, setShowMenuSession,
         scrollToBottom,
+        showDeleteHistoric, setShowDeleteHistoric,
         //notification
         listNotification,
         setListNotification,

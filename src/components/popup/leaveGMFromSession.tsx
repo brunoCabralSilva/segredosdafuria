@@ -45,8 +45,8 @@ export default function LeaveGMFromSession() {
         );
         await updateSession(sessionData, setShowMessage);
       }
-      setShowDelGMFromSession(false);
       router.push('/sessions'); 
+      setShowDelGMFromSession(false);
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
     }

@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
@@ -66,9 +66,9 @@ export const createSession = async (
       anotations: '',
       description,
     });
-    // await createNotificationData(newSession.id, setShowMessage);
-    // await createPlayersData(newSession.id, setShowMessage);
-    // await createChatData(newSession.id, setShowMessage);
+    await createNotificationData(newSession.id, setShowMessage);
+    await createPlayersData(newSession.id, setShowMessage);
+    await createChatData(newSession.id, setShowMessage);
     return newSession.id;
   } catch (err: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err.message });
@@ -91,16 +91,16 @@ export const updateSession = async (session: any, setShowMessage: any) => {
   }
 };
 
-
 export const clearHistory = async (id: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const docRef = doc(db, 'sessions', id);
+    const chatsCollectionRef = collection(db, 'chats');
+    const q = query(chatsCollectionRef, where('sessionId', '==', id));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) throw new Error('Sessão não encontrada');
+    const docRef = querySnapshot.docs[0].ref;
     await runTransaction(db, async (transaction) => {
-      const sessionDocSnapshot = await getDoc(docRef);
-      if (sessionDocSnapshot.exists()) {
-        transaction.update(docRef, { chat: [] });
-      } else throw new Error('Sessão não encontrada');
+      transaction.update(docRef, { list: [] });
     });
   } catch (err: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao limpar o histórico de chat: ' + err.message });
@@ -202,7 +202,7 @@ export const deleteSessionById = async (sessionId: string, setShowMessage: any) 
         transaction.delete(notificationDocRef);
       });
     });
-    setShowMessage({ show: true, text: 'A Sessão foi excluída. Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!' });
+    setShowMessage({ show: true, text: 'A Sessão foi excluída. Esperamos que sua jornada tenha sido divertida e gratificante. Até logo!' });
   } catch (error) {
     setShowMessage({ show: true, text: `Erro ao deletar sessão. Atualize a página e tente novamente (${error}).` });
     return false;
