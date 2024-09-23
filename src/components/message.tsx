@@ -69,7 +69,10 @@ export default function Message(props: { dataMessage: any, color: string }) {
       return(
         <div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
           <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 mb-2 p-2`}>
-            <div className="font-bold pl-1 pb-1">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            {
+              color === 'gray' &&
+              <div className="font-bold pl-1 pb-1">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            }
             <div className="border border-white p-5 text-sm">
               <div className="px-3 pb-3">
                 <p className="font-bold text-center w-full p-3">{ dataMessage.giftPtBr} ({ dataMessage.gift })</p>
@@ -180,7 +183,10 @@ export default function Message(props: { dataMessage: any, color: string }) {
       return(
         <div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
           <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 mb-2 p-2`}>
-          <div className="pl-1 pb-1 font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            {
+							color === 'gray' &&
+              <div className="pl-1 pb-1 font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            }
             <div className="border border-white p-5 text-sm">
               <div className="px-3 pb-3">
                 <p className="font-bold text-center w-full p-3">{ dataMessage.titlePtBr} ({ dataMessage.title })</p>
@@ -251,7 +257,10 @@ export default function Message(props: { dataMessage: any, color: string }) {
 			return(
 				<div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
 					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2 pl-3`}>
-            <div className="font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            {
+              color === 'gray' &&
+              <div className="font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            }
             <div className="pl-1">
               <div className="py-2 flex gap-1 flex-wrap">
                 {
@@ -278,7 +287,10 @@ export default function Message(props: { dataMessage: any, color: string }) {
       return(
 				<div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
 					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2 pl-3`}>
-            <div className="font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            {
+              color === 'gray' &&
+              <div className="font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
+            }
 						<div className="pl-1 py-2 flex gap-1 flex-wrap">
 							{
 								dataMessage.rollOf.length > 0 && dataMessage.rollOf.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
