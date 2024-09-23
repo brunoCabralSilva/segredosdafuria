@@ -15,7 +15,7 @@ export default function ItemAgravatedMaster(props: any) {
   } = useContext(contexto);
 
   useEffect(() => {
-    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    const playerData: any = players.find((item: any) => item.email === showPlayer.email);
     setPlayer(playerData);
     const returnValues = async (): Promise<void> => {
       if (name === 'willpower') setTotalItem(Number(playerData.data.attributes.composure) + Number(playerData.data.attributes.resolve));

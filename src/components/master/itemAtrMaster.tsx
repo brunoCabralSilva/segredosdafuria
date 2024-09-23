@@ -9,7 +9,7 @@ export default function ItemAtrMaster(props: any) {
 	const { session, showPlayer, dataSheet, players, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
-    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    const playerData: any = players.find((item: any) => item.email === showPlayer.email);
     setPlayer(playerData);
     if (player) {
 			player.data.attributes[name] = value;

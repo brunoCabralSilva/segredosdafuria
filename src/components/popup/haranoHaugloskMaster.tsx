@@ -23,7 +23,7 @@ export default function HaranoHaugloskMaster(props: { type: string }) {
   } =  useContext(contexto);
 
   useEffect(() => {
-    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    const playerData: any = players.find((item: any) => item.email === showPlayer.email);
     setPlayer(playerData);
     if (Number(playerData.data.harano) + Number(playerData.data.hauglosk) === 0) setHaranoHauglosk(1);
     else setHaranoHauglosk(Number(playerData.data.harano) + Number(playerData.data.hauglosk));

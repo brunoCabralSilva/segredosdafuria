@@ -13,7 +13,7 @@ export default function ItemSkillMaster(props: any) {
   const [input, setInput ] = useState(false);
 
   useEffect(() => {
-    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    const playerData: any = players.find((item: any) => item.email === showPlayer.email);
     setSkill({ value: playerData.data.skills[name].value, specialty: playerData.data.skills[name].specialty });
     setPlayer(playerData);
   }, []);

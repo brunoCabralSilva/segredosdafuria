@@ -26,7 +26,7 @@ export default function PlayerSheet() {
   } = useContext(contexto);
 
   useEffect(() => {
-    const playerData = players.find((item: any) => item.data.email === showPlayer.email)
+    const playerData = players.find((item: any) => item.email === showPlayer.email);
     setPlayer(playerData);
     setNewName(playerData.data.name)
   }, []);

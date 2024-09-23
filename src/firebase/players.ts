@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 
@@ -132,5 +132,21 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
     });
   } catch (err) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
+  }
+};
+
+export const addNewSheet = async (sessionId: string, sheet: any, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const sessionsCollectionRef = collection(db, 'players');
+    const q = query(sessionsCollectionRef, where('sessionId', '==', sessionId));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) throw new Error('Sessão não encontrada');
+    const docRef = querySnapshot.docs[0].ref;
+    await runTransaction(db, async (transaction) => {
+      transaction.update(docRef, { list: arrayUnion(sheet) });
+    });
+  } catch(error: any) {
+    setShowMessage('Ocorreu um erro ao criar uma nova Ficha: ' + error);
   }
 };

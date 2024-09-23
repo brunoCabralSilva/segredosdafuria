@@ -4,6 +4,7 @@ import contexto from './context';
 import { playerSheet } from '@/firebase/utilities';
 import { getPlayerByEmail } from '@/firebase/players';
 import { authenticate } from '@/firebase/authenticate';
+import { getSessionById } from '@/firebase/sessions';
 
 interface IProvider { children: ReactNode }
 
@@ -58,6 +59,7 @@ export default function Provider({children }: IProvider) {
   const [session, setSession] = useState({});
   const [players, setPlayers] = useState([]);
   const [showPlayer, setShowPlayer] = useState({ show: false, email: {} });
+  const [showCreateSheet, setShowCreateSheet] = useState(false);
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -65,6 +67,17 @@ export default function Provider({children }: IProvider) {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
   };
+
+  const returnSessionValues = async () => {
+    const auth: any = await authenticate(setShowMessage);
+		if (auth && auth.email && auth.displayName) {
+			setEmail(auth.email);
+      setName(auth.displayName);
+			const session: any = await getSessionById(sessionId);
+      if (session.name) setSession(session);
+			else setShowMessage({ show: true, text: 'Sessão não encontrada! Por favor, atualize a página e tente novamente' });
+		}
+  }
 
   const resetPopups = () => {
     setShowForgotPassword(false);
@@ -89,6 +102,7 @@ export default function Provider({children }: IProvider) {
     setShowRitualRoll({ show: false, ritual: {} });
     setShowChangeGameMaster({ show: false, data: {} });
     setShowPlayer({ show: false, email: {} });
+    setShowCreateSheet(false);
   }
 
   return (
@@ -147,6 +161,7 @@ export default function Provider({children }: IProvider) {
         showPlayer, setShowPlayer,
         session, setSession,
         players, setPlayers,
+        showCreateSheet, setShowCreateSheet,
       }}
     >
       {children}

@@ -18,6 +18,7 @@ import firestoreConfig from "@/firebase/connection";
 import MessageToUser from "@/components/popup/messageToUser";
 import PlayerSheet from "@/components/popup/playerSheet";
 import DeleteHistoric from "@/components/popup/deleteHistoric";
+import CreateSheet from "@/components/popup/createSheet";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -37,6 +38,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     resetPopups,
     setPlayers,
     showPlayer,
+    showCreateSheet,
     session, setSession,
     showMessage, setShowMessage,
     showDeleteHistoric,
@@ -124,6 +126,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showMessage.show && <MessageToUser /> }
       { showPlayer.show && <PlayerSheet /> }
       { showDeleteHistoric && <DeleteHistoric /> }
+      { showCreateSheet && <CreateSheet /> }
       <Nav />
       {
         showData

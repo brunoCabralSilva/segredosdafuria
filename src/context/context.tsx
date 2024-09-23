@@ -96,6 +96,8 @@ interface RecipesContext {
   setPlayers: (state: any) => void,
   showPlayer: { show: boolean, email: any },
   setShowPlayer: (state: any) => void,
+  showCreateSheet: boolean,
+  setShowCreateSheet: (state: boolean) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -192,6 +194,8 @@ const initialValue: RecipesContext = {
   setPlayers: () => {},
   showPlayer: { show: false, email: {} },
   setShowPlayer: () => {},
+  showCreateSheet: false,
+  setShowCreateSheet: () => {},
 }
 
 const contexto = createContext(initialValue);
