@@ -98,6 +98,10 @@ interface RecipesContext {
   setShowPlayer: (state: any) => void,
   showCreateSheet: boolean,
   setShowCreateSheet: (state: boolean) => void,
+  showResetPlayer: { show: boolean, email: string },
+  setShowResetPlayer: (state: { show: boolean, email: string }) => void,
+  showRemovePlayer: { show: boolean, email: string },
+  setShowRemovePlayer: (state: { show: boolean, email: string }) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -196,6 +200,10 @@ const initialValue: RecipesContext = {
   setShowPlayer: () => {},
   showCreateSheet: false,
   setShowCreateSheet: () => {},
+  showResetPlayer: { show: false, email: '' },
+  setShowResetPlayer: () => {},
+  showRemovePlayer: { show: false, email: '' },
+  setShowRemovePlayer: () => {},
 }
 
 const contexto = createContext(initialValue);

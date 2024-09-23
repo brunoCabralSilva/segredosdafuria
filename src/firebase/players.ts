@@ -150,3 +150,29 @@ export const addNewSheet = async (sessionId: string, sheet: any, setShowMessage:
     setShowMessage('Ocorreu um erro ao criar uma nova Ficha: ' + error);
   }
 };
+export const removePlayerFromSession = async (sessionId: string, email: string, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const sessionsCollectionRef = collection(db, 'players');
+    const q = query(sessionsCollectionRef, where('sessionId', '==', sessionId));
+    const querySnapshot = await getDocs(q);
+    const docRef = querySnapshot.docs[0].ref;
+    await runTransaction(db, async (transaction) => {
+      const docSnapshot = await transaction.get(docRef);
+      const data = docSnapshot.data();
+      if (!data?.list || data.list.length === 0) {
+        setShowMessage({ show: true, text: 'Nenhum jogador encontrado na sessão.' });
+        return;
+      }
+      const updatedList = data.list.filter((player: any) => player.email !== email);
+      if (updatedList.length !== data.list.length) {
+        transaction.update(docRef, { list: updatedList });
+        setShowMessage({ show: true, text: 'Jogador removido com sucesso.' });
+      } else {
+        setShowMessage({ show: true, text: 'Jogador não encontrado na sessão.' });
+      }
+    });
+  } catch (error: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao remover o jogador: ' + error.message });
+  }
+};

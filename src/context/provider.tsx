@@ -2,7 +2,6 @@
 import { ReactNode, useState } from 'react';
 import contexto from './context';
 import { playerSheet } from '@/firebase/utilities';
-import { getPlayerByEmail } from '@/firebase/players';
 import { authenticate } from '@/firebase/authenticate';
 import { getSessionById } from '@/firebase/sessions';
 
@@ -60,6 +59,8 @@ export default function Provider({children }: IProvider) {
   const [players, setPlayers] = useState([]);
   const [showPlayer, setShowPlayer] = useState({ show: false, email: {} });
   const [showCreateSheet, setShowCreateSheet] = useState(false);
+  const [showResetPlayer, setShowResetPlayer] = useState({ show: false, email: '' });
+  const [showRemovePlayer, setShowRemovePlayer] = useState({ show: false, email: '' });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -103,6 +104,8 @@ export default function Provider({children }: IProvider) {
     setShowChangeGameMaster({ show: false, data: {} });
     setShowPlayer({ show: false, email: {} });
     setShowCreateSheet(false);
+    setShowResetPlayer({ show: false, email: '' });
+    setShowRemovePlayer({ show: false, email: '' });
   }
 
   return (
@@ -162,6 +165,8 @@ export default function Provider({children }: IProvider) {
         session, setSession,
         players, setPlayers,
         showCreateSheet, setShowCreateSheet,
+        showResetPlayer, setShowResetPlayer,
+        showRemovePlayer, setShowRemovePlayer,
       }}
     >
       {children}

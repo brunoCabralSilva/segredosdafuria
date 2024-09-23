@@ -19,6 +19,8 @@ import MessageToUser from "@/components/popup/messageToUser";
 import PlayerSheet from "@/components/popup/playerSheet";
 import DeleteHistoric from "@/components/popup/deleteHistoric";
 import CreateSheet from "@/components/popup/createSheet";
+import RemovePlayer from "@/components/popup/removePlayer";
+import ResetPlayer from "@/components/popup/resetPlayer";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -37,10 +39,12 @@ export default function SessionId({ params } : { params: { id: string } }) {
     setSessionId,
     resetPopups,
     setPlayers,
+    setSession,
+    showMessage, setShowMessage,
+    showRemovePlayer,
     showPlayer,
     showCreateSheet,
-    session, setSession,
-    showMessage, setShowMessage,
+    showResetPlayer,
     showDeleteHistoric,
     email,
     showMenuSession,
@@ -121,6 +125,8 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showPlayer.show && <PlayerSheet /> }
       { showDeleteHistoric && <DeleteHistoric /> }
       { showCreateSheet && <CreateSheet /> }
+      { showResetPlayer.show && <ResetPlayer /> }
+      { showRemovePlayer.show && <RemovePlayer /> }
       <Nav />
       {
         showData
