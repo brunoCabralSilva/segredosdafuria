@@ -1,18 +1,19 @@
 'use client'
 import contexto from '@/context/context';
-import { getPlayerByEmail, updateDataPlayer } from '@/firebase/players';
-import { useContext } from "react";
+import { updateDataPlayer } from '@/firebase/players';
+import { useContext, useState } from "react";
 
 export default function ItemAtrMaster(props: any) {
   const { value, name, namePtBr, quant } = props;
-	const { session, viewPlayer, returnDataPlayer, dataSheet, setShowMessage } = useContext(contexto);
+  const [player, setPlayer]: any = useState({});
+	const { session, showPlayer, dataSheet, players, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
-    const player: any = await getPlayerByEmail(session.id, viewPlayer.data.email, setShowMessage);
+    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    setPlayer(playerData);
     if (player) {
 			player.data.attributes[name] = value;
-			await updateDataPlayer(session.id, viewPlayer.data.email, player.data, setShowMessage);
-      returnDataPlayer(viewPlayer.data.email, session.id, null);
+			await updateDataPlayer(session.id, player.email, player.data, setShowMessage);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

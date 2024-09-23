@@ -8,7 +8,7 @@ import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
 export default function Background(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
-  const { sessionId, email, returnSheetValues, dataSheet, setShowMessage } =  useContext(contexto);
+  const { sessionId, email, dataSheet, setShowMessage } =  useContext(contexto);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
@@ -18,7 +18,6 @@ export default function Background(props: { type: string }) {
 
   useEffect(() => {
     setText(dataSheet[type]);
-    returnSheetValues();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -27,7 +26,6 @@ export default function Background(props: { type: string }) {
     if (player) {
       player.data[type] = text;
 			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
-      returnSheetValues();
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

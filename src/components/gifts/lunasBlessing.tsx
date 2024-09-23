@@ -10,7 +10,6 @@ export function LunasBlessing() {
     dataSheet,
     setShowMessage,
     showGiftRoll, setShowGiftRoll,
-    returnSheetValues,
     setShowMenuSession,
   } = useContext(contexto);
 
@@ -28,7 +27,6 @@ export function LunasBlessing() {
       },
       email,
       setShowMessage);
-    returnSheetValues();
   }
 
   const rollDice = async () => {

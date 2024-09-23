@@ -7,7 +7,7 @@ export function RiteOfPatronage() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(3);
   const [renown, setRenown] = useState('');
-  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = dataSheet.skills.etiquette.value + dataSheet[renown];
@@ -23,7 +23,6 @@ export function RiteOfPatronage() {
   const rollDices = async () => {
     const roll = await rollTestOfUser();
     await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', results: roll }, email, setShowMessage);
-    returnSheetValues();
   }
 
   return(

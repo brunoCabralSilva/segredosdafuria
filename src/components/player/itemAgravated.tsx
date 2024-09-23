@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 export default function ItemAgravated(props: any) {
   const [totalItem, setTotalItem] = useState(0);
   const { name, namePtBr } = props;
-	const { sessionId, email, dataSheet, returnSheetValues, setShowMessage } = useContext(contexto);
+	const { sessionId, email, dataSheet, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
     const returnValues = async (): Promise<void> => {
@@ -36,7 +36,6 @@ export default function ItemAgravated(props: any) {
       }
 			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
-    returnSheetValues();
   };
 
   const returnPoints = (name: string) => {

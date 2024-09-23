@@ -11,7 +11,6 @@ export default function Forms() {
     email,
     dataSheet,
     sessionId,
-    returnSheetValues,
     setShowMenuSession,
     setShowMessage,
   } = useContext(contexto);
@@ -73,7 +72,6 @@ export default function Forms() {
         }
       }
       setShowMenuSession('');
-      returnSheetValues();
     }
   };
 

@@ -11,7 +11,6 @@ export default function ResetSheet() {
     sessionId,
     setShowMessage,
     setShowResetSheet,
-    returnSheetValues,
     setShowMenuSession,
   } = useContext(contexto);
 
@@ -19,12 +18,10 @@ export default function ResetSheet() {
     try {
       await updateDataPlayer(sessionId, email, playerSheet, setShowMessage);
       setShowMessage({ show: true, text: "Sua ficha foi redefinida!" });
-      returnSheetValues();
       setShowResetSheet(false);
       setShowMenuSession('');
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
-      returnSheetValues();
       setShowResetSheet(false);
     }
   };

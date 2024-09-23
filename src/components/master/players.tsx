@@ -3,7 +3,7 @@ import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext } from "react";
 
 export default function Players() {
-  const { players, session, setViewPlayer } = useContext(contexto);
+  const { players, session, setShowPlayer } = useContext(contexto);
   return(
     <div className="flex flex-col items-center justify-start h-screen z-50 top-0 right-0 w-full">
       <button className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold">
@@ -20,7 +20,7 @@ export default function Players() {
             <button
               type="button"
               key={index}
-              onClick={ () => setViewPlayer({ show: true, data: player }) }
+              onClick={ () => setShowPlayer({show: true, email: player.data.email }) }
               className="w-full py-4 border border-white cursor-pointer text-white text-center font-bold"
             >
               {

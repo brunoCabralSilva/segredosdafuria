@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 export function WpConditional(props: { type: string, condition: string }) {
   const { condition } = props;
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const discountWillpower = async() => {
     if (marked) {
@@ -39,7 +39,6 @@ export function WpConditional(props: { type: string, condition: string }) {
       updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     }
     await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
-    returnSheetValues();
   }
 
   return(

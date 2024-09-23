@@ -8,33 +8,35 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function HaranoHaugloskMaster(props: { type: string }) {
   const { type } = props;
+  const [player, setPlayer]: any = useState({});
   const [haranoHauglosk, setHaranoHauglosk] = useState<number>(1);
   const [dificulty, setDificulty] = useState<number>(1);
   const {
-    viewPlayer,
-    returnDataPlayer,
+    showPlayer,
+    players,
     session,
     setShowHauglosk,
     setShowHarano,
     setShowMenuSession,
     setShowMessage,
+    setShowPlayer,
   } =  useContext(contexto);
 
   useEffect(() => {
-    if (Number(viewPlayer.data.data.harano) + Number(viewPlayer.data.data.hauglosk) === 0)
-      setHaranoHauglosk(1);
-    else
-      setHaranoHauglosk(Number(viewPlayer.data.data.harano) + Number(viewPlayer.data.data.hauglosk));
+    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    setPlayer(playerData);
+    if (Number(playerData.data.harano) + Number(playerData.data.hauglosk) === 0) setHaranoHauglosk(1);
+    else setHaranoHauglosk(Number(playerData.data.harano) + Number(playerData.data.hauglosk));
   });
 
   const rollDices = async () => {
     const typeEdited = type.toLocaleLowerCase();
-    viewPlayer.data.data[typeEdited] = await haranoHaugloskCheck(session.id, typeEdited, viewPlayer.data.data, dificulty, viewPlayer.data.email, setShowMessage);
-    await updateDataPlayer(session.id, viewPlayer.data.email, viewPlayer.data.data, setShowMessage);
-    returnDataPlayer(viewPlayer.data.email, session.id, type);
+    player.data[typeEdited] = await haranoHaugloskCheck(session.id, typeEdited, player.data, dificulty, player.email, setShowMessage);
+    await updateDataPlayer(session.id, player.email, player.data, setShowMessage);
     setShowHauglosk(false);
     setShowHarano(false);
     setShowMenuSession('');
+    setShowPlayer({ show: false, email: '' })
   };
 
   return(

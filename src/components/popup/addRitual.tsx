@@ -12,7 +12,6 @@ export default function AddRitual() {
     email,
     sessionId,
     dataSheet,
-    returnSheetValues,
     setShowRitualsToAdd,
     setShowMessage,
   } =  useContext(contexto);
@@ -22,7 +21,6 @@ export default function AddRitual() {
       dataSheet.rituals = dataSheet.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr)
     else dataSheet.rituals.push(ritual);
     await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
-    returnSheetValues();
   }
 
   return(

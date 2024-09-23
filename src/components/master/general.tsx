@@ -19,8 +19,7 @@ export default function General() {
   const {
     session,
     setShowMessage,
-    players, setPlayers,
-    returnSessionValues,
+    players,
     showChangeGameMaster, setShowChangeGameMaster,
     showDelGMFromSession, setShowDelGMFromSession,
   } = useContext(contexto);
@@ -30,11 +29,6 @@ export default function General() {
     setNameSession(session.name);
     setCreationDate(session.creationDate);
     setDescription(session.description);
-    const getPlayers = async () => {
-      const allPlayers = await getPlayersBySession(session.id, setShowMessage);
-      setPlayers(allPlayers);
-    }
-    getPlayers();
   }, []);
 
   const typeText = (e: any, type: string) => {
@@ -48,7 +42,6 @@ export default function General() {
     if (nameSession !== sessionData.name) {
       session.name = nameSession;
       await updateSession(sessionData, setShowMessage);
-      returnSessionValues();
     }
   }
 
@@ -57,7 +50,6 @@ export default function General() {
     if (description !== sessionData.description) {
       session.description = description;
       await updateSession(sessionData, setShowMessage);
-      returnSessionValues();
     }
   }
 

@@ -8,7 +8,6 @@ export default function AdvTalens() {
     email,
     dataSheet,
     sessionId,
-    returnSheetValues,
     setShowMessage,
   } = useContext(contexto);
 
@@ -19,7 +18,6 @@ export default function AdvTalens() {
     type: string,
   ) => {
     const obj = { name, value, description, type };
-    console.log(obj);
     let newList = dataSheet.advantagesAndFlaws.talens;
     if (newList.length === 0) newList.push(obj);
     else {
@@ -30,10 +28,8 @@ export default function AdvTalens() {
         else newList.push(obj);
       } else newList.push(obj);
     }
-    console.log(newList);
     dataSheet.advantagesAndFlaws.talens = newList;
     await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
-    returnSheetValues();
   }
 
   return (

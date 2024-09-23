@@ -1,59 +1,33 @@
 'use client'
 import contexto from "@/context/context";
 import { rageCheck } from "@/firebase/messagesAndRolls";
-import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
-import { useContext } from "react";
+import { updateDataPlayer } from "@/firebase/players";
+import { useContext, useEffect, useState } from "react";
 
 export default function ItemMaster(props: any) {
 	const { name, quant, namePtBr } = props;
+  const [points, setPoints]: any = useState([]);
+  const [player, setPlayer]: any = useState({});
 	const {
     session,
-    viewPlayer,
-    returnDataPlayer,
+    players,
+    showPlayer,
     setShowMessage,
     setShowHarano,
     setShowHauglosk,
     setShowMenuSession,
   } = useContext(contexto);
-  
-  const updateValue = async (value: number, show: boolean) => {
-    const player: any = await getPlayerByEmail(session.id, viewPlayer.data.email, setShowMessage);
-    if (player) {
+
+  useEffect(() => {
+    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    setPlayer(playerData);
+    setPoints(Array(quant).fill(''));
+  }, []);
+
+  const updateValue = async (value: number) => {
       if (player.data[name] === 1 && value === 1) player.data[name] = 0;
       else player.data[name] = value;
-			await updateDataPlayer(session.id, viewPlayer.data.email, player.data, setShowMessage);
-      if (show) returnDataPlayer(viewPlayer.data.email, session.id, null);
-      else returnDataPlayer(viewPlayer.data.email, session.id, name);
-    } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
-  };
-
-  const returnPoints = (name: string) => {
-    const points = Array(quant).fill('');
-    return (
-      <div className="flex flex-wrap gap-2 pt-1">
-        {
-          points.map((item, index) => {
-            if (viewPlayer.data.data[name] >= index + 1) {
-              return (
-                <button
-                  type="button"
-                  onClick={ () => updateValue(index + 1, true) }
-                  key={index}
-                  className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
-                />
-              );
-            } return (
-              <button
-                type="button"
-                onClick={ () => updateValue(index + 1, true) }
-                key={index}
-                className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
-              />
-            );
-          })
-        }
-      </div>
-    );
+			await updateDataPlayer(session.id, player.email, player.data, setShowMessage);
   };
 
   return(
@@ -61,15 +35,37 @@ export default function ItemMaster(props: any) {
       <span className="capitalize">{ namePtBr }</span>
       <div className="flex flex-col items-center lg:flex-row">
         <div className="w-full">
-          { returnPoints(name) }
+        <div className="flex flex-wrap gap-2 pt-1">
+          {
+            player.data && points.map((item: any, index: number) => {
+              if (player.data[name] >= index + 1) {
+                return (
+                  <button
+                    type="button"
+                    onClick={ () => updateValue(index + 1) }
+                    key={index}
+                    className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
+                  />
+                );
+              } return (
+                <button
+                  type="button"
+                  onClick={ () => updateValue(index + 1) }
+                  key={index}
+                  className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
+                />
+              );
+            })
+          }
+        </div>
         </div>
         {
           namePtBr === 'Fúria' &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
               onClick={ async () => {
-                const rage = await rageCheck(session.id, viewPlayer.data.email, setShowMessage);
-                updateValue(rage, false);
+                const rage = await rageCheck(session.id, player.email, setShowMessage);
+                updateValue(rage);
                 setShowMenuSession('');
               }}
 					>

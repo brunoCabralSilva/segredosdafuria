@@ -4,7 +4,7 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function SilverClaws() {
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
     if (dataSheet.form !== "Crinos") {
@@ -37,7 +37,6 @@ export function SilverClaws() {
         updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     }
     await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
-    returnSheetValues();
   }
 
   return(

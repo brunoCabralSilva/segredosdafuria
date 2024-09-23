@@ -13,7 +13,6 @@ export function SpiritOfTheFray() {
     dataSheet,
     setShowMessage,
     showGiftRoll, setShowGiftRoll,
-    returnSheetValues,
     setShowMenuSession,
   } = useContext(contexto);
 
@@ -32,7 +31,6 @@ export function SpiritOfTheFray() {
         },
         email,
         setShowMessage);
-      returnSheetValues();
     } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
 

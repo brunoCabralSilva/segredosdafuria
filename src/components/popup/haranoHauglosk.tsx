@@ -16,7 +16,6 @@ export default function HaranoHauglosk(props: { type: string }) {
     setShowHauglosk,
     setShowHarano,
     setShowMenuSession,
-    returnSheetValues,
     setShowMessage,
   } =  useContext(contexto);
 
@@ -31,7 +30,6 @@ export default function HaranoHauglosk(props: { type: string }) {
     const typeEdited = type.toLocaleLowerCase();
     dataSheet[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty, '', setShowMessage);
     await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
-    returnSheetValues();
     setShowHauglosk(false);
     setShowHarano(false);
     setShowMenuSession('');

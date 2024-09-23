@@ -35,21 +35,30 @@ export default function SessionId({ params } : { params: { id: string } }) {
     setEmail,
     setSessionId,
     resetPopups,
-    setSession,
+    setPlayers,
+    showPlayer,
+    session, setSession,
     showMessage, setShowMessage,
-    viewPlayer,
     showDeleteHistoric,
     email,
     showMenuSession,
   } = useContext(contexto);
 
-  const dataRefPlayer = collection(db, "players");
-  const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
-  const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
-  if (data) {
-    if (data.length > 0) {
-      const player = data[0].list.find((item: any) => item.email === email);
-      if (player) setDataSheet(player.data);
+  if (gameMaster) {
+    const db = getFirestore(firestoreConfig);
+    const dataRefPlayer = collection(db, "players");
+    const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", session.id));
+    const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
+    if (data) setPlayers(data[0].list);
+  } else {
+    const dataRefPlayer = collection(db, "players");
+    const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
+    const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
+    if (data) {
+      if (data.length > 0) {
+        const player = data[0].list.find((item: any) => item.email === email);
+        if (player) setDataSheet(player.data);
+      }
     }
   }
 	
@@ -113,7 +122,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
   return (
     <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
       { showMessage.show && <MessageToUser /> }
-      { viewPlayer.show && <PlayerSheet /> }
+      { showPlayer.show && <PlayerSheet /> }
       { showDeleteHistoric && <DeleteHistoric /> }
       <Nav />
       {

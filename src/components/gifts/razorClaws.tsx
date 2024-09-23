@@ -4,7 +4,7 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function RazorClaws() {
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
     if (dataSheet.form !== "Crinos") {
@@ -22,7 +22,6 @@ export function RazorClaws() {
           },
           email,
           setShowMessage);
-        returnSheetValues();
       } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
     } else {
       await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);

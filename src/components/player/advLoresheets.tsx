@@ -8,7 +8,6 @@ export default function AdvLoresheets() {
     email,
     dataSheet,
     sessionId,
-    returnSheetValues,
     setShowMessage
   } = useContext(contexto);
 
@@ -29,7 +28,6 @@ export default function AdvLoresheets() {
     } else newList.push(obj);
     dataSheet.advantagesAndFlaws.loresheets = newList;
     await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
-    returnSheetValues();
   }
 
   return (

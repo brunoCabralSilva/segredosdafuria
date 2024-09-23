@@ -4,11 +4,10 @@ import { registerMessage } from "@/firebase/messagesAndRolls";
 import { useContext } from "react";
 
 export function SimpleTest() {
-  const { sessionId, email, showRitualRoll, setShowRitualRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const roll = async () => {
-    await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', }, email, setShowMessage);
-    returnSheetValues();
+    await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', }, email, setShowMessage);;
   }
 
   return(

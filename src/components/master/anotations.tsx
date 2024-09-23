@@ -7,7 +7,7 @@ import { updateSession } from "@/firebase/sessions";
 
 export default function Anotations() {
   const [textArea, setTextArea] = useState<boolean>(false);
-  const { returnSessionValues, session, setShowMessage } =  useContext(contexto);
+  const { session, setShowMessage } =  useContext(contexto);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
@@ -25,7 +25,6 @@ export default function Anotations() {
     if (sessionData.anotations !== text) {
       sessionData.anotations = text;
 			await updateSession(session, setShowMessage);
-      returnSessionValues();
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

@@ -5,14 +5,13 @@ import { useContext } from "react";
 
 export default function ItemAtr(props: any) {
   const { value, name, namePtBr, quant } = props;
-	const { sessionId, email, returnSheetValues, dataSheet, setShowMessage } = useContext(contexto);
+	const { sessionId, email, dataSheet, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
     const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
     if (player) {
 			player.data.attributes[name] = value;
 			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
-      returnSheetValues();
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

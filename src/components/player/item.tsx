@@ -13,7 +13,6 @@ export default function Item(props: any) {
     setShowMessage,
     setShowHarano,
     setShowHauglosk,
-    returnSheetValues,
     setShowMenuSession,
   } = useContext(contexto);
   
@@ -23,7 +22,6 @@ export default function Item(props: any) {
       if (player.data[name] === 1 && value === 1) player.data[name] = 0;
       else player.data[name] = value;
 			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
-      returnSheetValues();
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

@@ -1,15 +1,22 @@
 'use client'
 import contexto from "@/context/context";
-import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
-import { useContext, useState } from "react";
+import { updateDataPlayer } from "@/firebase/players";
+import { useContext, useEffect, useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 
 export default function ItemSkillMaster(props: any) {
-	const { value, name, namePtBr, quant } = props;
-	const { viewPlayer, session, returnDataPlayer, setShowMessage } = useContext(contexto);
-  const [ skill, setSkill ] = useState<{ value: number, specialty: string }>({ value: viewPlayer.data.data.skills[name].value, specialty: viewPlayer.data.data.skills[name].specialty });
+	const { name, namePtBr, quant } = props;
+	const { showPlayer, players, session, setShowMessage } = useContext(contexto);
+  const [player, setPlayer]: any = useState({});
+  const [ skill, setSkill ] = useState({ value: 0, specialty: '' });
   const [input, setInput ] = useState(false);
+
+  useEffect(() => {
+    const playerData: any = players.find((item: any) => item.data.email === showPlayer.email);
+    setSkill({ value: playerData.data.skills[name].value, specialty: playerData.data.skills[name].specialty });
+    setPlayer(playerData);
+  }, []);
 
   const typeText = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -20,13 +27,11 @@ export default function ItemSkillMaster(props: any) {
   };
 
   const updateValue = async (number: number) => {
-    const player: any = await getPlayerByEmail(session.id, viewPlayer.data.email, setShowMessage);
     if (player) {
       if (player.data.skills[name].value === 1 && number === 1) 
 				player.data.skills[name] = { value: 0, specialty: skill.specialty };
       else player.data.skills[name] = { value: number, specialty: skill.specialty };
-			await updateDataPlayer(session.id, viewPlayer.data.email, player.data, setShowMessage);
-      returnDataPlayer(viewPlayer.data.email, session.id, null);
+			await updateDataPlayer(session.id, player.email, player.data, setShowMessage);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 
@@ -35,8 +40,8 @@ export default function ItemSkillMaster(props: any) {
     return (
       <div className="flex gap-2 pt-1">
         {
-          viewPlayer.data.data && points.map((item, index) => {
-            if (viewPlayer.data.data.skills[name].value >= index + 1) {
+          player.data && points.map((item, index) => {
+            if (player.data.skills[name].value >= index + 1) {
               return (
                 <button
                   type="button"
@@ -80,7 +85,7 @@ export default function ItemSkillMaster(props: any) {
           input
             ? <BsCheckSquare
                 onClick={(e: any) => {
-                  updateValue(viewPlayer.data.data.skills[name].value);
+                  updateValue(player.data.skills[name].value);
                   setInput(false);
                   e.stopPropagation();
                 }}
@@ -98,9 +103,10 @@ export default function ItemSkillMaster(props: any) {
       </div>
       { 
         !input
-        && viewPlayer.data.data.skills[name].specialty !== ''
-        && viewPlayer.data.data.skills[name].specialty !== ' '
-        && <span className="text-sm capitalize">{ viewPlayer.data.data.skills[name].specialty }</span>
+        && player.data
+        && player.data.skills[name].specialty !== ''
+        && player.data.skills[name].specialty !== ' '
+        && <span className="text-sm capitalize">{ player.data.skills[name].specialty }</span>
       }
       <div className="w-full">
         { returnPoints() }

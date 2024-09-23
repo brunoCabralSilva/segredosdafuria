@@ -11,7 +11,6 @@ export function RageTestOrWp(props: { type: string }) {
     dataSheet,
     setShowMessage,
     showGiftRoll, setShowGiftRoll,
-    returnSheetValues,
     setShowMenuSession,
   } = useContext(contexto);
 
@@ -30,7 +29,6 @@ export function RageTestOrWp(props: { type: string }) {
         },
         email,
         setShowMessage);
-      returnSheetValues();
     } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
 
@@ -63,7 +61,6 @@ export function RageTestOrWp(props: { type: string }) {
     }
     updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift },email, setShowMessage);
-    returnSheetValues();
   }
 
   return(

@@ -19,7 +19,7 @@ export function RgOrWpWithConditionInRoll(
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(dif);
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -47,7 +47,6 @@ export function RgOrWpWithConditionInRoll(
       } else {
         await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'rage', rageResults: rageTest }, email, setShowMessage);
       }
-      returnSheetValues();
     } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
   }
 
@@ -83,7 +82,6 @@ export function RgOrWpWithConditionInRoll(
       const roll = await rollTestOfUser();
       await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email, setShowMessage);
     } else await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
-    returnSheetValues();
   }
 
   return(

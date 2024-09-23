@@ -9,7 +9,7 @@ export function TongueofBeasts() {
   const [dificulty, setDificulty] = useState<number>(2);
   const [information, setInformation] = useState(false);
   const [services, setServices] = useState(false);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -54,7 +54,6 @@ export function TongueofBeasts() {
     updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
     const roll = await rollTestOfUser();
     await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email, setShowMessage);
-    returnSheetValues();
   }
 
   return(

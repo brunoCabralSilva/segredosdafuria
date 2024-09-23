@@ -66,7 +66,6 @@ interface RecipesContext {
   setName: (state: string) => void,
   dataSheet: any,
   setDataSheet: (state: any) => void,
-  returnSheetValues: () => void,
   deleteAdvOrFlaw: any,
   setDeleteAdvOrFlaw: (state: any) => void,
   showAllFlaws: boolean,
@@ -95,10 +94,8 @@ interface RecipesContext {
   setShowDelGMFromSession: (state: boolean) => void,
   players: any,
   setPlayers: (state: any) => void,
-  returnSessionValues: () => void,
-  viewPlayer: { show: boolean, data: any },
-  setViewPlayer: (state: any) => void,
-  returnDataPlayer: (email: string, id: string, type: string | null) => void,
+  showPlayer: { show: boolean, email: any },
+  setShowPlayer: (state: any) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -165,7 +162,6 @@ const initialValue: RecipesContext = {
   setName: () => {},
   dataSheet: playerSheet,
   setDataSheet: () => {},
-  returnSheetValues: () => {},
   deleteAdvOrFlaw: { show: false},
   setDeleteAdvOrFlaw: () => {},
   showAllFlaws: false,
@@ -194,10 +190,8 @@ const initialValue: RecipesContext = {
   setShowDelGMFromSession: () => {},
   players: [],
   setPlayers: () => {},
-  returnSessionValues: () => {},
-  viewPlayer: { show: false, data: {} },
-  setViewPlayer: () => {},
-  returnDataPlayer: () => {},
+  showPlayer: { show: false, email: {} },
+  setShowPlayer: () => {},
 }
 
 const contexto = createContext(initialValue);

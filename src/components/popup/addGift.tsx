@@ -13,7 +13,6 @@ export default function AddGift() {
     email,
     sessionId,
     dataSheet,
-    returnSheetValues,
     setShowGiftsToAdd,
     setShowMessage
   } =  useContext(contexto);
@@ -36,7 +35,6 @@ export default function AddGift() {
       dataSheet.gifts = dataSheet.gifts.filter((item: any) => item.giftPtBr !== gift.giftPtBr)
     else dataSheet.gifts.push(gift);
     await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
-    returnSheetValues();
   }
 
   return(

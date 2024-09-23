@@ -15,7 +15,6 @@ export default function General() {
 		sessionId, email,
     dataSheet, setDataSheet,
 		showResetSheet, setShowResetSheet,
-    returnSheetValues,
     setShowGiftRoll,
     setShowRitualRoll,
     setShowMessage,
@@ -33,7 +32,6 @@ export default function General() {
 
   const updateValue = async (key: string, value: string) => {
 		await updateDataPlayer(sessionId, email, { ...dataSheet, [key]: value }, setShowMessage);
-    returnSheetValues();
   };
 
   return(

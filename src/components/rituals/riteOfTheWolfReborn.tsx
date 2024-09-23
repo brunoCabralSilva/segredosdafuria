@@ -6,7 +6,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 export function RiteOfTheWolfReborn() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(3);
-  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, returnSheetValues, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = dataSheet.skill.leadership.value;
@@ -28,7 +28,6 @@ export function RiteOfTheWolfReborn() {
   const rollDices = async () => {
     const roll = await rollTestOfUser();
     await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', results: roll }, email, setShowMessage);
-    returnSheetValues();
   }
 
   return(

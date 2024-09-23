@@ -7,7 +7,7 @@ import { FaRegEdit } from "react-icons/fa";
 
 export default function ItemSkill(props: any) {
 	const { name, namePtBr, quant } = props;
-	const { dataSheet, sessionId, email, returnSheetValues, setShowMessage } = useContext(contexto);
+	const { dataSheet, sessionId, email, setShowMessage } = useContext(contexto);
   const [ skill, setSkill ] = useState<{ value: number, specialty: string }>({ value: dataSheet.skills[name].value, specialty: dataSheet.skills[name].specialty });
   const [input, setInput ] = useState(false);
 
@@ -26,7 +26,6 @@ export default function ItemSkill(props: any) {
 				player.data.skills[name] = { value: 0, specialty: skill.specialty };
       else player.data.skills[name] = { value, specialty: skill.specialty };
 			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
-      returnSheetValues();
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 
