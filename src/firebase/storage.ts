@@ -9,7 +9,7 @@ export async function createSessionImage(id: string, data: any, setShowMessage: 
   try {
     await uploadBytes(storageRef, data);
     const downloadUrl = await getDownloadURL(storageRef);
-    const sessionDocRef = doc(db, 'sessions2', id);
+    const sessionDocRef = doc(db, 'sessions', id);
     await runTransaction(db, async (transaction) => {
       const sessionDocSnapshot = await transaction.get(sessionDocRef);
       if (sessionDocSnapshot.exists()) {

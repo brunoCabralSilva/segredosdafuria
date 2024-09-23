@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
 import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
@@ -7,7 +7,7 @@ import { createPlayersData } from "./players";
 
 export const getSessions = async () => {
   const db = getFirestore(firebaseConfig);
-  const collectionRef = collection(db, 'sessions2');
+  const collectionRef = collection(db, 'sessions');
   const querySnapshot = await getDocs(collectionRef);
   const sessionsList = querySnapshot.docs.map((doc) => ({
     id: doc.id,
@@ -16,18 +16,22 @@ export const getSessions = async () => {
   return sessionsList;
 };
 
-export const getSessionByName = async (nameSession: string) => {
-  const db = getFirestore(firebaseConfig);
-  const sessionsCollection = collection(db, 'sessions2');
-  const querySnapshot = await getDocs(query(sessionsCollection, where('name', '==', nameSession)));
-  let sessionList: any;
-  if (!querySnapshot.empty) sessionList = querySnapshot.docs[0].data();
-  return sessionList;
+export const getSessionByName = async (nameSession: string, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const sessionsCollection = collection(db, 'sessions');
+    const querySnapshot = await getDocs(query(sessionsCollection, where('name', '==', nameSession)));
+    let sessionList: any;
+    if (!querySnapshot.empty) sessionList = querySnapshot.docs[0].data();
+    return sessionList;
+  } catch (error) {
+    setShowMessage({show: true, text: 'Ocorreu um erro ao buscar Sessões: ' + error });
+  }
 };
 
 export const getSessionById = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
-  const sessionsCollectionRef = collection(db, 'sessions2');
+  const sessionsCollectionRef = collection(db, 'sessions');
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   const sessionDocSnapshot = await getDoc(sessionDocRef);
   if (sessionDocSnapshot.exists()) {
@@ -37,7 +41,7 @@ export const getSessionById = async (sessionId: string) => {
 
 export const getNameAndDmFromSessions = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
-  const sessionsCollectionRef = collection(db, 'sessions2');
+  const sessionsCollectionRef = collection(db, 'sessions');
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   const sessionDocSnapshot = await getDoc(sessionDocRef);
   if (sessionDocSnapshot.exists()) {
@@ -49,27 +53,23 @@ export const createSession = async (
   nameSession: string,
   description: string,
   email: string,
-  setShowMessage: any
+  setShowMessage: any,
 ) => {
   try {
     const dateMessage = await getOfficialTimeBrazil();
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'sessions2');
-    const sessionId = await runTransaction(db, async (transaction) => {
-      const docRef = doc(collectionRef, nameSession.toLowerCase());
-      transaction.set(docRef, {
-        name: nameSession.toLowerCase(),
-        creationDate: dateMessage,
-        gameMaster: email,
-        anotations: '',
-        description,
-      });
-      return docRef.id;
+    const collectionRef = collection(db, 'sessions');
+    const newSession = await addDoc(collectionRef, {
+      name: nameSession.toLowerCase(),
+      creationDate: dateMessage,
+      gameMaster: email,
+      anotations: '',
+      description,
     });
-    await createNotificationData(sessionId, setShowMessage);
-    await createPlayersData(sessionId, setShowMessage);
-    await createChatData(sessionId, setShowMessage);
-    return sessionId;
+    // await createNotificationData(newSession.id, setShowMessage);
+    // await createPlayersData(newSession.id, setShowMessage);
+    // await createChatData(newSession.id, setShowMessage);
+    return newSession.id;
   } catch (err: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err.message });
   }
@@ -78,7 +78,7 @@ export const createSession = async (
 export const updateSession = async (session: any, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const sessionsCollectionRef = collection(db, 'sessions2');
+    const sessionsCollectionRef = collection(db, 'sessions');
     const sessionDocRef = doc(sessionsCollectionRef, session.id);
     await runTransaction(db, async (transaction) => {
       const sessionDocSnapshot = await getDoc(sessionDocRef);
@@ -95,7 +95,7 @@ export const updateSession = async (session: any, setShowMessage: any) => {
 export const clearHistory = async (id: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const docRef = doc(db, 'sessions2', id);
+    const docRef = doc(db, 'sessions', id);
     await runTransaction(db, async (transaction) => {
       const sessionDocSnapshot = await getDoc(docRef);
       if (sessionDocSnapshot.exists()) {
@@ -150,7 +150,7 @@ export const getAllSessionsByFunction = async (email: string) => {
 
   if (sessionIds.length === 0) return { list1: [], list2: [] };
 
-  const sessionsCollectionRef = collection(db, 'sessions2');
+  const sessionsCollectionRef = collection(db, 'sessions');
   const list1: { id: string; name: string }[] = [];
   const list2: { id: string; name: string }[] = [];
 
@@ -171,7 +171,7 @@ export const getAllSessionsByFunction = async (email: string) => {
 
 export const deleteSessionById = async (sessionId: string, setShowMessage: any) => {
   const db = getFirestore(firebaseConfig);
-  const sessionsCollectionRef = collection(db, 'sessions2');
+  const sessionsCollectionRef = collection(db, 'sessions');
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   try {
     await runTransaction(db, async (transaction) => {

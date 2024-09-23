@@ -130,7 +130,7 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
         } else {
           setShowMessage({ show: true, text: "Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente." });
         }
-			});
+		  });
 		}
 	  }
 	} catch (error) {

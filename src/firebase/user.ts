@@ -1,7 +1,7 @@
 'use client'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getAuth } from 'firebase/auth';
-import { collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from 'firebase/firestore';
 import { createProfileImage } from './storage';
 import firebaseConfig from "./connection";
 
@@ -20,14 +20,12 @@ export async function registerUser(
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     const imageURL = await createProfileImage(user.uid, image, setShowMessage);
-    await runTransaction(db, async (transaction) => {
-      const userDocRef = doc(db, 'users', user.uid);
-      transaction.set(userDocRef, {
-        email,
-        firstName,
-        lastName,
-        imageURL,
-      });
+    const collectionRef = collection(db, 'users'); 
+    await addDoc(collectionRef, {
+      email,
+      firstName,
+      lastName,
+      imageURL,
     });
     setShowMessage({ show: true, text: 'Usuário registrado com sucesso!' });
     return true;

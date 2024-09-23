@@ -56,7 +56,7 @@ export default function CreateSection() {
 
     if (nameSession.length > 3 && nameSession.length < 40 && description.length > 10) {
       try {
-        const sessionList: any = await getSessionByName(nameSession.toLowerCase());
+        const sessionList: any = await getSessionByName(nameSession.toLowerCase(), setShowMessage);
         if (sessionList) {
           setErrExists('Já existe uma Sala criada com esse nome');
           setLoading(false);

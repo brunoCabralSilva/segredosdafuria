@@ -6,10 +6,7 @@ export const createPlayersData = async (sessionId: string, setShowMessage: any) 
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players');
-    await runTransaction(db, async (transaction) => {
-      const docRef = doc(collectionRef, sessionId);
-      transaction.set(docRef, { sessionId, list: [] });
-    });
+    await addDoc(collectionRef, { sessionId, list: [] });
   } catch (err: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao criar jogadores para a Sessão: ' + err.message });
   }

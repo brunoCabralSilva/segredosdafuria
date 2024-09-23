@@ -1,4 +1,4 @@
-import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, setDoc, updateDoc, where } from "firebase/firestore";
 import { capitalize, getOfficialTimeBrazil, sheetStructure } from "./utilities";
 import { authenticate } from "./authenticate";
 import firebaseConfig from "./connection";
@@ -6,7 +6,7 @@ import { registerMessage } from "./messagesAndRolls";
 
 export const getNotificationsById = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
-  const sessionsCollectionRef = collection(db, 'sessions2');
+  const sessionsCollectionRef = collection(db, 'sessions');
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   const sessionDocSnapshot = await getDoc(sessionDocRef);
   if (sessionDocSnapshot.exists()) {
@@ -17,11 +17,8 @@ export const getNotificationsById = async (sessionId: string) => {
 export const createNotificationData = async (sessionId: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'notifications');
-    await runTransaction(db, async (transaction) => {
-      const docRef = doc(collectionRef, sessionId);
-      transaction.set(docRef, { sessionId, list: [] });
-    });
+    const notificationsCollection = collection(db, 'notifications');
+    await addDoc(notificationsCollection, { sessionId, list: [] });
   } catch (err: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma aba de notificação na Sessão: ' + err.message });
   }
