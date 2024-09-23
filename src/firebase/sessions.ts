@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
 import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
@@ -54,16 +54,24 @@ export const createSession = async (
   try {
     const dateMessage = await getOfficialTimeBrazil();
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'sessions2'); 
-    const docRef = await addDoc(collectionRef, {
-      name: nameSession.toLowerCase(), creationDate: dateMessage, gameMaster: email, anotations: '', description,
+    const collectionRef = collection(db, 'sessions2');
+    const sessionId = await runTransaction(db, async (transaction) => {
+      const docRef = doc(collectionRef, nameSession.toLowerCase());
+      transaction.set(docRef, {
+        name: nameSession.toLowerCase(),
+        creationDate: dateMessage,
+        gameMaster: email,
+        anotations: '',
+        description,
+      });
+      return docRef.id;
     });
-    await createNotificationData(docRef.id, setShowMessage);
-    await createPlayersData(docRef.id, setShowMessage);
-    await createChatData(docRef.id, setShowMessage);
-    return docRef.id;
-  } catch(err)  {
-    setShowMessage({show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err });
+    await createNotificationData(sessionId, setShowMessage);
+    await createPlayersData(sessionId, setShowMessage);
+    await createChatData(sessionId, setShowMessage);
+    return sessionId;
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err.message });
   }
 };
 
@@ -72,25 +80,30 @@ export const updateSession = async (session: any, setShowMessage: any) => {
     const db = getFirestore(firebaseConfig);
     const sessionsCollectionRef = collection(db, 'sessions2');
     const sessionDocRef = doc(sessionsCollectionRef, session.id);
-    const sessionDocSnapshot = await getDoc(sessionDocRef);
-    if (sessionDocSnapshot.exists()) {
-      const docRef = doc(db, 'sessions2', session.id);
-      await updateDoc(docRef, { ...session });
-    } else {
-      setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador (Sessão não encontrada)' });
-    }
-  } catch (err) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
+    await runTransaction(db, async (transaction) => {
+      const sessionDocSnapshot = await getDoc(sessionDocRef);
+      if (sessionDocSnapshot.exists()) {
+        transaction.update(sessionDocRef, { ...session });
+      } else throw new Error('Sessão não encontrada');
+    });
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados da Sessão: ' + err.message });
   }
 };
+
 
 export const clearHistory = async (id: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const docRef = doc(db, 'sessions2', id);
-    await updateDoc(docRef, { chat: [] });
-  } catch (err) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao limpar o histórico de chat: ' + err });
+    await runTransaction(db, async (transaction) => {
+      const sessionDocSnapshot = await getDoc(docRef);
+      if (sessionDocSnapshot.exists()) {
+        transaction.update(docRef, { chat: [] });
+      } else throw new Error('Sessão não encontrada');
+    });
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao limpar o histórico de chat: ' + err.message });
   }
 };
 
@@ -99,22 +112,24 @@ export const leaveFromSession = async (sessionId: string, email: string, name: s
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players');
     const q = query(collectionRef, where('sessionId', '==', sessionId));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      const dataDoc = querySnapshot.docs[0];
-      const data = dataDoc.data();
-      data.list = data.list.filter((player: any) => player.email !== email);
-      const docRef = doc(db, 'players', dataDoc.id);
-      const dataNotification = {
-        message: `Olá, tudo bem? O jogador ${capitalize(name)} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
-        type: 'transfer',
-      };
-      await updateDoc(docRef, { list: data.list });
-      await registerNotification(sessionId, dataNotification, setShowMessage);
-      setShowMessage({ show: true, text: "Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!" });
-    } else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
-  } catch (err) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
+    await runTransaction(db, async (transaction) => {
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const dataDoc = querySnapshot.docs[0];
+        const docRef = doc(db, 'players', dataDoc.id);
+        const data = dataDoc.data();
+        data.list = data.list.filter((player: any) => player.email !== email);
+        transaction.update(docRef, { list: data.list });
+        const dataNotification = {
+          message: `Olá, tudo bem? O jogador ${capitalize(name)} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
+          type: 'transfer',
+        };
+        await registerNotification(sessionId, dataNotification, setShowMessage);
+        setShowMessage({ show: true, text: "Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!" });
+      } else throw new Error('Sessão não encontrada.');
+    });
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err.message });
   }
 };
 
@@ -159,7 +174,34 @@ export const deleteSessionById = async (sessionId: string, setShowMessage: any) 
   const sessionsCollectionRef = collection(db, 'sessions2');
   const sessionDocRef = doc(sessionsCollectionRef, sessionId);
   try {
-    await deleteDoc(sessionDocRef);
+    await runTransaction(db, async (transaction) => {
+      // Deletar a sessão
+      transaction.delete(sessionDocRef);
+      // Deletar chats relacionados
+      const chatsRef = collection(db, 'chats');
+      const chatsQuery = query(chatsRef, where('sessionId', '==', sessionId));
+      const chatsSnapshot = await getDocs(chatsQuery);
+      chatsSnapshot.forEach((chatDoc) => {
+        const chatDocRef = doc(chatsRef, chatDoc.id);
+        transaction.delete(chatDocRef);
+      });
+      // Deletar players relacionados
+      const playersRef = collection(db, 'players');
+      const playersQuery = query(playersRef, where('sessionId', '==', sessionId));
+      const playersSnapshot = await getDocs(playersQuery);
+      playersSnapshot.forEach((playerDoc) => {
+        const playerDocRef = doc(playersRef, playerDoc.id);
+        transaction.delete(playerDocRef);
+      });
+      // Deletar notificações relacionadas
+      const notificationsRef = collection(db, 'notifications');
+      const notificationsQuery = query(notificationsRef, where('sessionId', '==', sessionId));
+      const notificationsSnapshot = await getDocs(notificationsQuery);
+      notificationsSnapshot.forEach((notificationDoc) => {
+        const notificationDocRef = doc(notificationsRef, notificationDoc.id);
+        transaction.delete(notificationDocRef);
+      });
+    });
     setShowMessage({ show: true, text: 'A Sessão foi excluída. Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!' });
   } catch (error) {
     setShowMessage({ show: true, text: `Erro ao deletar sessão. Atualize a página e tente novamente (${error}).` });

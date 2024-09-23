@@ -1,14 +1,17 @@
-import { addDoc, collection, doc, getDocs, getFirestore, query, updateDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 
-export const createPlayersData = async(sessionId: string, setShowMessage: any) => {
+export const createPlayersData = async (sessionId: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'players'); 
-    await addDoc(collectionRef, { sessionId, list: [] });
-  } catch(err)  {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar jogadores para a Sessão: ' + err });
+    const collectionRef = collection(db, 'players');
+    await runTransaction(db, async (transaction) => {
+      const docRef = doc(collectionRef, sessionId);
+      transaction.set(docRef, { sessionId, list: [] });
+    });
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar jogadores para a Sessão: ' + err.message });
   }
 };
 
@@ -49,19 +52,23 @@ export const updateDataPlayer = async (sessionId: string, email: string, newData
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players');
     const q = query(collectionRef, where('sessionId', '==', sessionId));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
+    await runTransaction(db, async (transaction) => {
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        setShowMessage({ show: true, text: 'Sessão não encontrada.' });
+        return;
+      }
       const dataDoc = querySnapshot.docs[0];
+      const docRef = doc(db, 'players', dataDoc.id);
       const data = dataDoc.data();
-      const playerIndex = data.list.findIndex((item: any) => item.email === email);
+      const playerIndex = data.list.findIndex((item: any) => item.email === email);  
       if (playerIndex !== -1) {
         data.list[playerIndex].data = newData;
-        const docRef = doc(db, 'players', dataDoc.id);
-        await updateDoc(docRef, { list: data.list });
+        transaction.update(docRef, { list: data.list });
       } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
-    } else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
-  } catch (err) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
+    });
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err.message });
   }
 };
 
@@ -111,17 +118,21 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'players');
     const q = query(collectionRef, where('sessionId', '==', sessionId));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
+    await runTransaction(db, async (transaction) => {
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        setShowMessage({ show: true, text: 'Sessão não encontrada.' });
+        return;
+      }
       const dataDoc = querySnapshot.docs[0];
+      const docRef = doc(db, 'players', dataDoc.id);
       const data = dataDoc.data();
       const playerIndex = data.list.findIndex((item: any) => item.email === email);
       if (playerIndex !== -1) {
         data.list[playerIndex].data = newData;
-        const docRef = doc(db, 'players', dataDoc.id);
-        await updateDoc(docRef, { list: data.list });
+        transaction.update(docRef, { list: data.list });
       } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
-    } else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
+    });
   } catch (err) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
   }

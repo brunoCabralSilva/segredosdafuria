@@ -5,7 +5,7 @@ import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export default function ItemMaster(props: any) {
-	const { value, name, quant, namePtBr } = props;
+	const { name, quant, namePtBr } = props;
 	const {
     session,
     viewPlayer,
@@ -16,13 +16,14 @@ export default function ItemMaster(props: any) {
     setShowMenuSession,
   } = useContext(contexto);
   
-  const updateValue = async (name: string, value: number) => {
+  const updateValue = async (value: number, show: boolean) => {
     const player: any = await getPlayerByEmail(session.id, viewPlayer.data.email, setShowMessage);
     if (player) {
       if (player.data[name] === 1 && value === 1) player.data[name] = 0;
       else player.data[name] = value;
 			await updateDataPlayer(session.id, viewPlayer.data.email, player.data, setShowMessage);
-      returnDataPlayer(viewPlayer.data.email, session.id);
+      if (show) returnDataPlayer(viewPlayer.data.email, session.id, null);
+      else returnDataPlayer(viewPlayer.data.email, session.id, name);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 
@@ -36,7 +37,7 @@ export default function ItemMaster(props: any) {
               return (
                 <button
                   type="button"
-                  onClick={ () => updateValue(name, index + 1) }
+                  onClick={ () => updateValue(index + 1, true) }
                   key={index}
                   className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
                 />
@@ -44,7 +45,7 @@ export default function ItemMaster(props: any) {
             } return (
               <button
                 type="button"
-                onClick={ () => updateValue(name, index + 1) }
+                onClick={ () => updateValue(index + 1, true) }
                 key={index}
                 className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
               />
@@ -68,7 +69,7 @@ export default function ItemMaster(props: any) {
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
               onClick={ async () => {
                 const rage = await rageCheck(session.id, viewPlayer.data.email, setShowMessage);
-                updateValue('rage', rage);
+                updateValue(rage, false);
                 setShowMenuSession('');
               }}
 					>
@@ -78,8 +79,12 @@ export default function ItemMaster(props: any) {
 				{
           namePtBr === 'Harano' &&
           <button
-              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => setShowHarano(true) }
+            className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
+            onClick={
+              async () => {
+                setShowHarano(true);
+                setShowHauglosk(false);
+              }}
 					>
 						Teste de Harano
 					</button>
@@ -87,8 +92,11 @@ export default function ItemMaster(props: any) {
 				{
           namePtBr === 'Hauglosk' &&
           <button
-              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => setShowHauglosk(true) }
+            className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
+            onClick={ async () => {
+              setShowHarano(false);
+              setShowHauglosk(true);
+            }}
 					>
 						Teste de Hauglosk
 					</button>

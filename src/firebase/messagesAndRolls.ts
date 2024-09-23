@@ -115,21 +115,21 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
 		} else {
 			const sessionDocRef = querySnapshot.docs[0].ref;
 			await runTransaction(db, async (transaction: any) => {
-			const sessionDocSnapshot = await transaction.get(sessionDocRef);
-			if (sessionDocSnapshot.exists()) {
-				let emailToRecord = email;
-				if (!emailToRecord) emailToRecord = authData.email;
-				const sessionData = sessionDocSnapshot.data();
-				const updatedChat = [
-				...sessionData.list,
-				{ date, email: emailToRecord, user: authData.displayName, ...data, order: sessionData.list.length + 1 },
-				];
-				updatedChat.sort((a: any, b: any) => a.order - b.order)
-				if (updatedChat.length > 15) updatedChat.shift();
-				transaction.update(sessionDocRef, { list: updatedChat });
-			} else {
-				setShowMessage({ show: true, text: "Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente." });
-			}
+        const sessionDocSnapshot = await transaction.get(sessionDocRef);
+        if (sessionDocSnapshot.exists()) {
+          let emailToRecord = email;
+          if (!emailToRecord) emailToRecord = authData.email;
+          const sessionData = sessionDocSnapshot.data();
+          const updatedChat = [
+          ...sessionData.list,
+          { date, email: emailToRecord, user: authData.displayName, ...data, order: sessionData.list.length + 1 },
+          ];
+          updatedChat.sort((a: any, b: any) => a.order - b.order)
+          if (updatedChat.length > 15) updatedChat.shift();
+          transaction.update(sessionDocRef, { list: updatedChat });
+        } else {
+          setShowMessage({ show: true, text: "Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente." });
+        }
 			});
 		}
 	  }
@@ -283,6 +283,7 @@ export const haranoHaugloskCheck = async(
 	type: string,
 	dataSheet: any,
 	dificulty: number,
+  email: string,
   setShowMessage: any,
 ) => {
   let rollTest = [];
@@ -301,6 +302,8 @@ export const haranoHaugloskCheck = async(
     dataSheet[type] += 1;
     text = `Não obteve sucesso no Teste. O ${type} foi aumentado para ` + dataSheet[type] + '.';
   } else text = 'Obteve sucesso no Teste. Não houve aumento em ' + type + '.';
+  let emailRoll = null;
+  if (email !== '') emailRoll = email;
   await registerMessage(
     sessionId,
     {
@@ -310,7 +313,7 @@ export const haranoHaugloskCheck = async(
       value: dataSheet[type],
       type: 'harano-hauglosk',
     },
-    null,
+    emailRoll,
     setShowMessage,
   );
   return dataSheet[type];

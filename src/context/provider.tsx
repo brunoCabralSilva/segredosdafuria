@@ -77,11 +77,13 @@ export default function Provider({children }: IProvider) {
 		}
   };
 
-  const returnDataPlayer = async (emailUser: string, id: string): Promise<void> => {
-			const player = await getPlayerByEmail(id, emailUser, setShowMessage);
-			if (player) setViewPlayer({show: true, data: player });
-			else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
-  };
+  const returnDataPlayer = async (emailUser: string, id: string, type: string | null): Promise<void> => {
+    const player = await getPlayerByEmail(id, emailUser, setShowMessage);
+    if (type === 'rage' || type === 'harano' || type === 'hauglosk') {
+      setViewPlayer({show: false, data: {} });
+    } else if (player) setViewPlayer({show: true, data: player });
+    else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
+  }; 
 
   const returnSessionValues = async () => {
     const auth: any = await authenticate(setShowMessage);

@@ -26,7 +26,7 @@ export default function ItemSkillMaster(props: any) {
 				player.data.skills[name] = { value: 0, specialty: skill.specialty };
       else player.data.skills[name] = { value: number, specialty: skill.specialty };
 			await updateDataPlayer(session.id, viewPlayer.data.email, player.data, setShowMessage);
-      returnDataPlayer(viewPlayer.data.email, session.id);
+      returnDataPlayer(viewPlayer.data.email, session.id, null);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

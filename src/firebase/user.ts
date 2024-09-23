@@ -1,7 +1,7 @@
 'use client'
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getAuth } from 'firebase/auth';
-import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc, updateDoc, where } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from 'firebase/firestore';
 import { createProfileImage } from './storage';
 import firebaseConfig from "./connection";
 
@@ -13,23 +13,28 @@ export async function registerUser(
   image: any,
   setShowMessage: any,
 ) {
+  const auth = getAuth(firebaseConfig);
+  const db = getFirestore(firebaseConfig);
+  
   try {
-    const auth = getAuth(firebaseConfig);
-    const db = getFirestore(firebaseConfig);
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     const imageURL = await createProfileImage(user.uid, image, setShowMessage);
-
-    await setDoc(doc(db, 'users', user.uid), {
-      email, firstName, lastName, imageURL,
+    await runTransaction(db, async (transaction) => {
+      const userDocRef = doc(db, 'users', user.uid);
+      transaction.set(userDocRef, {
+        email,
+        firstName,
+        lastName,
+        imageURL,
+      });
     });
-
     setShowMessage({ show: true, text: 'Usuário registrado com sucesso!' });
     return true;
   } catch (error: any) {
     const errorCode = error.code;
     const errorMessage = error.message;
-    setShowMessage({ show: true, text: 'Erro ao registrar usuário:' + errorCode + ' - ' + errorMessage });
+    setShowMessage({ show: true, text: 'Erro ao registrar usuário: ' + errorCode + ' - ' + errorMessage });
     return false;
   }
 }
@@ -83,19 +88,18 @@ export async function getUserById(userId: string, setShowMessage: any) {
 }
 
 export async function updateUserById(userData: any, setShowMessage: any) {
+  const db = getFirestore(firebaseConfig);
   try {
-    const db = getFirestore(firebaseConfig);
     const userDocRef = doc(db, 'users', userData.id);
-    const userDocSnapshot = await getDoc(userDocRef);
-    if (!userDocSnapshot.exists()) {
-      setShowMessage({ show: true, text: 'Usuário / Empresa não encontrad(a)' });
-    } else {
-      await updateDoc(userDocRef, userData);
-      setShowMessage({ show: true, text: 'Dados atualizados com sucesso!' });
-      return true;
-    }
-  } catch (error) {
-    setShowMessage({ show: true, text: 'Erro ao atualizar dados: ' + error });
+    await runTransaction(db, async (transaction) => {
+      const userDocSnapshot = await transaction.get(userDocRef);
+      if (!userDocSnapshot.exists()) throw new Error('Usuário não encontrad(a)');
+      transaction.update(userDocRef, userData);
+    });
+    setShowMessage({ show: true, text: 'Dados atualizados com sucesso!' });
+    return true;
+  } catch (error: any) {
+    setShowMessage({ show: true, text: 'Erro ao atualizar dados: ' + error.message });
     return false;
   }
 }

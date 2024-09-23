@@ -40,6 +40,14 @@ export default function SessionId({ params } : { params: { id: string } }) {
     email,
     showMenuSession,
   } = useContext(contexto);
+
+  const dataRefPlayer = collection(db, "players");
+  const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
+  const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
+  if (data) {
+    const player = data[0].list.find((item: any) => item.email === email);
+    if (player) setDataSheet(player.data);
+  }
 	
   const returnValues = async () => {
     const auth = await authenticate(setShowMessage);

@@ -96,7 +96,7 @@ interface RecipesContext {
   returnSessionValues: () => void,
   viewPlayer: { show: boolean, data: any },
   setViewPlayer: (state: any) => void,
-  returnDataPlayer: (email: string, id: string) => void,
+  returnDataPlayer: (email: string, id: string, type: string | null) => void,
 }
 
 const initialValue: RecipesContext = {

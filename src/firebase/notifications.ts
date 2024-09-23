@@ -14,13 +14,16 @@ export const getNotificationsById = async (sessionId: string) => {
   } return false;
 };
 
-export const createNotificationData = async(sessionId: string, setShowMessage: any) => {
+export const createNotificationData = async (sessionId: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'notifications'); 
-    await addDoc(collectionRef, { sessionId, list: [] });
-  } catch(err)  {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma aba de notificação na Sessão: ' + err });
+    const collectionRef = collection(db, 'notifications');
+    await runTransaction(db, async (transaction) => {
+      const docRef = doc(collectionRef, sessionId);
+      transaction.set(docRef, { sessionId, list: [] });
+    });
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma aba de notificação na Sessão: ' + err.message });
   }
 };
 
@@ -91,15 +94,20 @@ export const removeNotification = async (sessionId: string, message: string, set
     const db = getFirestore(firebaseConfig);
     const notificationsRef = collection(db, 'notifications');
     const q = query(notificationsRef, where('sessionId', '==', sessionId));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) setShowMessage({ show: true, text: 'Não foi possível encontrar a notificação.' });
-    const notificationDoc = querySnapshot.docs[0];
-    const notificationDocRef = doc(db, 'notifications', notificationDoc.id);
-    const notificationData = notificationDoc.data();
-    const updatedList = (notificationData.list || []).filter((notification: any) => notification.message !== message);
-    await updateDoc(notificationDocRef, { list: updatedList });
-  } catch (error) {
-    setShowMessage({show: true, text: "Ocorreu um erro: " + error });
+    await runTransaction(db, async (transaction) => {
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        setShowMessage({ show: true, text: 'Não foi possível encontrar a notificação.' });
+        return;
+      }
+      const notificationDoc = querySnapshot.docs[0];
+      const notificationDocRef = doc(db, 'notifications', notificationDoc.id);
+      const notificationData = notificationDoc.data();
+      const updatedList = (notificationData.list || []).filter((notification: any) => notification.message !== message);
+      transaction.update(notificationDocRef, { list: updatedList });
+    });
+  } catch (error: any) {
+    setShowMessage({ show: true, text: "Ocorreu um erro: " + error.message });
   }
 };
 

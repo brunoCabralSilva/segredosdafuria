@@ -3,19 +3,36 @@ import { useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
-import ItemAgravated from "../player/itemAgravated";
-import Item from "../player/item";
-import ItemSkill from "../player/itemSkill";
-import ItemAtrMaster from "../player/itemAtrMaster";
-import ItemSkillMaster from "../player/itemSkillMaster";
-import ItemMaster from "../player/itemMaster";
+import ItemAgravatedMaster from "../master/itemAgravatedMaster";
+import ItemAtrMaster from "../master/itemAtrMaster";
+import ItemSkillMaster from "../master/itemSkillMaster";
+import ItemMaster from "../master/itemMaster";
+import firestoreConfig from "@/firebase/connection";
+import HaranoHaugloskMaster from "./haranoHaugloskMaster";
+import { collection, getFirestore, query, where } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function PlayerSheet() {
-  const { viewPlayer, setViewPlayer } =  useContext(contexto);
+  const {
+    viewPlayer,
+    setViewPlayer,
+    showHauglosk,
+    showHarano,
+    session,
+  } =  useContext(contexto);
+
+  const db = getFirestore(firestoreConfig);
+  const dataRefPlayer = collection(db, "players");
+  const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", session.id));
+  const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
+  if (data) {
+    const player = data[0].list.find((item: any) => item.email === viewPlayer.data.email);
+    if (player) setViewPlayer({ show: true, data: player });
+  }
 
   return(
-    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70 font-normal p-5 pb-3 z-60">
-      <div className="bg-gray-whats-dark border-2 border-white w-full h-full p-5 overflow-y-auto">
+    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70 font-normal p-5 sm:p-0 pb-3 z-60 text-white">
+      <div className="bg-gray-whats-dark border-2 border-white w-full h-full overflow-y-auto">
         <div className="flex justify-between">
           <p className="text-white font-bold text-2xl py-3 pl-5 pt-5">
             { viewPlayer.data.data.name } - { capitalizeFirstLetter(viewPlayer.data.data.auspice) } dos { capitalizeFirstLetter(viewPlayer.data.data.trybe) }
@@ -30,7 +47,7 @@ export default function PlayerSheet() {
             />
           </button>
         </div>
-        <div className="pt-3 w-full h-full p-5">
+        <div className="pt-3 w-full h-full sm:p-5 p-3">
           <div className="w-full">
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
               <div className="w-full">
@@ -52,19 +69,25 @@ export default function PlayerSheet() {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
             <div className="mt-4">
-            <ItemAgravated name="health" namePtBr="Vitalidade" />
+            <ItemAgravatedMaster name="health" namePtBr="Vitalidade" />
             </div>
-            <ItemAgravated name="willpower" namePtBr="Força de Vontade" />
+            <ItemAgravatedMaster name="willpower" namePtBr="Força de Vontade" />
             <div />
           </div>
-          <div className="w-1/2">
-            <div className="flex flex-col justify-start">
-              <ItemMaster value={viewPlayer.data.data.rage} name="rage" quant={5} namePtBr="Fúria" />
-              <ItemMaster value={viewPlayer.data.data.harano} name="harano" quant={5} namePtBr="Harano" />
-              <ItemMaster value={viewPlayer.data.data.hauglosk} quant={5} namePtBr="Hauglosk" />
+          <div className="flex flex-col sm:flex-row w-full">
+            <div className="w-full sm:w-1/2">
+              <div className="flex flex-col justify-start">
+                <ItemMaster value={viewPlayer.data.data.rage} name="rage" quant={5} namePtBr="Fúria" />
+                <ItemMaster value={viewPlayer.data.data.harano} name="harano" quant={5} namePtBr="Harano" />
+                <ItemMaster value={viewPlayer.data.data.hauglosk} name="hauglosk" quant={5} namePtBr="Hauglosk" />
+              </div>
+            </div>
+            <div className="w-full sm:w-1/2 h-full sm:px-5 md:px-10">
+              { showHauglosk && <HaranoHaugloskMaster type="hauglosk" /> }
+              { showHarano && <HaranoHaugloskMaster type="harano" /> }
             </div>
           </div>
-          <div className="pt-10 pb-5 font-bold text-2xl">Habilidades</div>
+          <div className="pt-5 sm:pt-10 pb-5 font-bold text-2xl">Habilidades</div>
           <div className="grid grid-cols-1 sm:grid-cols-3 w-full pb-10">
             <div>
               <ItemSkillMaster value={viewPlayer.data.data.skills.athletics} name="athletics" namePtBr="Atletismo" quant={5} />
@@ -104,7 +127,7 @@ export default function PlayerSheet() {
           <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {
               viewPlayer.data.data.gifts.map((gift: any, index: number) => (
-                <div key={ index } className="border border-white p-5 text-sm">
+                <div key={ index } className="border border-white p-2 sm:p-5  text-sm">
                   <div className="px-3 pb-3">
                     <p className="font-bold text-center w-full p-3">{ gift.giftPtBr} ({ gift.gift })</p>
                     <hr className="mt-1 pb-5" />
@@ -175,7 +198,7 @@ export default function PlayerSheet() {
               viewPlayer.data.data.advantagesAndFlaws.advantages.map((advantage: any, index: number) => (
                 <div
                   key={ index }
-                  className="pt-3 text-justify"
+                  className="pt-3 sm:text-justify"
                   >
                   <p>{ advantage.name } - { advantage.cost } - { advantage.title }</p>
                   <p>{ advantage.description }</p>
@@ -187,7 +210,7 @@ export default function PlayerSheet() {
               viewPlayer.data.data.advantagesAndFlaws.flaws.map((flaws: any, index: number) => (
                 <div
                   key={ index }
-                  className="pt-3 text-justify"
+                  className="pt-3 sm:text-justify"
                   >
                   <p>{ flaws.name } - { flaws.cost } - { flaws.title }</p>
                   <p>{ flaws.description }</p>
@@ -199,7 +222,7 @@ export default function PlayerSheet() {
               viewPlayer.data.data.advantagesAndFlaws.talens.map((flaws: any, index: number) => (
                 <div
                   key={ index }
-                  className="pt-3 text-justify"
+                  className="pt-3 sm:text-justify"
                   >
                   <p>{ flaws.name } - { flaws.description }</p>
                 </div>
@@ -210,7 +233,7 @@ export default function PlayerSheet() {
               viewPlayer.data.data.advantagesAndFlaws.loresheets.map((flaws: any, index: number) => (
                 <div
                   key={ index }
-                  className="pt-3 text-justify"
+                  className="pt-3 sm:text-justify"
                   >
                   <p>{ flaws.name } - { flaws.skill }</p>
                 </div>
@@ -218,7 +241,7 @@ export default function PlayerSheet() {
             }
           </div>
           <div className="pt-10 pb-5 font-bold text-2xl">História</div>
-          <div className="pb-10 text-justify">
+          <div className="pb-10 sm:text-justify">
             { viewPlayer.data.data.background }
           </div>
         </div>

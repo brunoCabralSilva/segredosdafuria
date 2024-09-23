@@ -12,7 +12,7 @@ export default function ItemAtrMaster(props: any) {
     if (player) {
 			player.data.attributes[name] = value;
 			await updateDataPlayer(session.id, viewPlayer.data.email, player.data, setShowMessage);
-      returnDataPlayer(viewPlayer.data.email, session.id);
+      returnDataPlayer(viewPlayer.data.email, session.id, null);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

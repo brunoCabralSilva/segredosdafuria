@@ -4,45 +4,57 @@ import contexto from "@/context/context";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { haranoHaugloskCheck } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
-export default function HaranoHauglosk(props: { type: string }) {
+export default function HaranoHaugloskMaster(props: { type: string }) {
   const { type } = props;
   const [haranoHauglosk, setHaranoHauglosk] = useState<number>(1);
   const [dificulty, setDificulty] = useState<number>(1);
   const {
-    email,
-    sessionId,
-    dataSheet,
+    viewPlayer,
+    returnDataPlayer,
+    session,
     setShowHauglosk,
     setShowHarano,
     setShowMenuSession,
-    returnSheetValues,
     setShowMessage,
   } =  useContext(contexto);
 
   useEffect(() => {
-    if (Number(dataSheet.harano) + Number(dataSheet.hauglosk) === 0)
+    if (Number(viewPlayer.data.data.harano) + Number(viewPlayer.data.data.hauglosk) === 0)
       setHaranoHauglosk(1);
     else
-      setHaranoHauglosk(Number(dataSheet.harano) + Number(dataSheet.hauglosk));
+      setHaranoHauglosk(Number(viewPlayer.data.data.harano) + Number(viewPlayer.data.data.hauglosk));
   });
 
   const rollDices = async () => {
     const typeEdited = type.toLocaleLowerCase();
-    dataSheet[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty, '', setShowMessage);
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
-    returnSheetValues();
+    viewPlayer.data.data[typeEdited] = await haranoHaugloskCheck(session.id, typeEdited, viewPlayer.data.data, dificulty, viewPlayer.data.email, setShowMessage);
+    await updateDataPlayer(session.id, viewPlayer.data.email, viewPlayer.data.data, setShowMessage);
+    returnDataPlayer(viewPlayer.data.email, session.id, type);
     setShowHauglosk(false);
     setShowHarano(false);
     setShowMenuSession('');
   };
 
   return(
-    <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Teste de { type }</p>
+    <div className="sm:pl-4 mt-8 w-full flex flex-col items-center z-50 top-0 right-0 overflow-y-auto">
+      <label htmlFor="valueofRage" className="w-full mb-2 flex justify-between items-center">
+        <p className="text-white w-full text-xl font-bold">Teste de { type }</p>
+        <button
+          type="button"
+          className="p-1 right-3 h-10"
+          onClick={ () => {
+            setShowHarano(false);
+            setShowHauglosk(false);
+          }}
+        >
+          <IoIosCloseCircleOutline
+            className="text-4xl text-white cursor-pointer"
+          />
+        </button>
       </label>
-      <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
+      <label htmlFor="dificulty" className="mb-2 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Parada de Dados</p>
         <div className="flex w-full">
           <div
@@ -63,7 +75,7 @@ export default function HaranoHauglosk(props: { type: string }) {
           </div>
         </div>
       </label>
-      <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
+      <label htmlFor="dificulty" className="flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Dificuldade do Teste</p>
         <div className="flex w-full">
           <div
@@ -95,7 +107,7 @@ export default function HaranoHauglosk(props: { type: string }) {
         </div>
       </label>
       <button
-        className={`${dificulty <= 0 ? 'text-black bg-gray-400' : 'text-white bg-black hover:border-red-800' } border-2 border-white  transition-colors cursor-pointer w-full p-2 mt-6 font-bold`}
+        className={`${dificulty <= 0 ? 'text-black bg-gray-400' : 'text-white bg-black hover:border-red-800' } border-2 border-white  transition-colors cursor-pointer w-full p-2 mt-4 mb-2 font-bold`}
         onClick={ rollDices }
         disabled={ dificulty <= 0 }
       >
