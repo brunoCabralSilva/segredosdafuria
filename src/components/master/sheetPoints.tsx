@@ -6,13 +6,9 @@ import ItemMaster from "./itemMaster";
 import ItemSkillMaster from "./itemSkillMaster";
 import contexto from "@/context/context";
 
-export default function SheetPoints() {
-  const [player, setPlayer]: any = useState([]);
-  const { showHauglosk, showHarano, players, showPlayer } = useContext(contexto);
-  useEffect(() => {
-    const playerData = players.find((item: any) => item.email === showPlayer.email);
-    setPlayer(playerData);
-  }, []);
+export default function SheetPoints(props: { player: any }) {
+  const { player } = props;
+  const { showHauglosk, showHarano } = useContext(contexto);
   return(
     <div>
       { 
@@ -21,19 +17,19 @@ export default function SheetPoints() {
           <div className="w-full">
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
               <div className="w-full">
-                <ItemAtrMaster value={player.data.attributes.strength} name="strength" namePtBr="Força" quant={5} />
-                <ItemAtrMaster value={player.data.attributes.dexterity} name="dexterity" namePtBr="Destreza" quant={5} />
-                <ItemAtrMaster value={player.data.attributes.stamina} name="stamina" namePtBr="Vigor" quant={5} />
+                <ItemAtrMaster value={player.data.attributes.strength} name="strength" namePtBr="Força" quant={6} />
+                <ItemAtrMaster value={player.data.attributes.dexterity} name="dexterity" namePtBr="Destreza" quant={6} />
+                <ItemAtrMaster value={player.data.attributes.stamina} name="stamina" namePtBr="Vigor" quant={6} />
               </div>
               <div className="w-full">
-                <ItemAtrMaster value={player.data.attributes.charisma} name="charisma" namePtBr="Carisma" quant={5} />
-                <ItemAtrMaster value={player.data.attributes.manipulation} name="manipulation" namePtBr="Manipulação" quant={5} />
-                <ItemAtrMaster value={player.data.attributes.composure} name="composure" namePtBr="Autocontrole" quant={5} />
+                <ItemAtrMaster value={player.data.attributes.charisma} name="charisma" namePtBr="Carisma" quant={6} />
+                <ItemAtrMaster value={player.data.attributes.manipulation} name="manipulation" namePtBr="Manipulação" quant={6} />
+                <ItemAtrMaster value={player.data.attributes.composure} name="composure" namePtBr="Autocontrole" quant={6} />
               </div>
               <div className="w-full">
-                <ItemAtrMaster value={player.data.attributes.intelligence} name="intelligence" namePtBr="Inteligência" quant={5} />
-                <ItemAtrMaster value={player.data.attributes.wits} name="wits" namePtBr="Raciocínio" quant={5} />
-                <ItemAtrMaster value={player.data.attributes.resolve} name="resolve" namePtBr="Determinação" quant={5} />
+                <ItemAtrMaster value={player.data.attributes.intelligence} name="intelligence" namePtBr="Inteligência" quant={6} />
+                <ItemAtrMaster value={player.data.attributes.wits} name="wits" namePtBr="Raciocínio" quant={6} />
+                <ItemAtrMaster value={player.data.attributes.resolve} name="resolve" namePtBr="Determinação" quant={6} />
               </div>
             </div>
           </div>

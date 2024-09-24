@@ -1,18 +1,5 @@
-import { useContext, useEffect, useState } from "react";
-import HaranoHaugloskMaster from "../popup/haranoHaugloskMaster";
-import ItemAgravatedMaster from "./itemAgravatedMaster";
-import ItemAtrMaster from "./itemAtrMaster";
-import ItemMaster from "./itemMaster";
-import ItemSkillMaster from "./itemSkillMaster";
-import contexto from "@/context/context";
-
-export default function SheetData() {
-  const [player, setPlayer]: any = useState([]);
-  const { showHauglosk, showHarano, players, showPlayer } = useContext(contexto);
-  useEffect(() => {
-    const playerData = players.find((item: any) => item.email === showPlayer.email);
-    setPlayer(playerData);
-  }, []);
+export default function SheetData(props: { player: any }) {
+  const { player } = props;
   return(
     <div>
       { 

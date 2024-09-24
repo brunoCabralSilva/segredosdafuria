@@ -52,15 +52,20 @@ export default function SessionId({ params } : { params: { id: string } }) {
 
   const dataRefPlayer = collection(db, "players");
   const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
-  const [data]: any = useCollectionData(queryDataPlayer, { idField: "id" } as any);
-
+  const [data, loading, error] = useCollectionData(queryDataPlayer, { idField: "id" } as any);
   if (data) {
-    if (gameMaster) setPlayers(data[0].list)
-    else if (data.length > 0) {
-      const player = data[0].list.find((item: any) => item.email === email);
+    setPlayers(data[0].list);
+    const player = data[0].list.find((item: any) => item.email === email);
+    if (player) setDataSheet(player.data);
+  }
+  
+  useEffect(() => {
+    if (data && !loading) {
+      setPlayers(data[0]?.list || []);
+      const player = data[0]?.list?.find((item: any) => item.email === email);
       if (player) setDataSheet(player.data);
     }
-  }
+  }, [data, loading, email, setPlayers, setDataSheet]);
 	
   const returnValues = async () => {
     const auth = await authenticate(setShowMessage);

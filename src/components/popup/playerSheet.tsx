@@ -26,7 +26,7 @@ export default function PlayerSheet() {
     const playerData = players.find((item: any) => item.email === showPlayer.email);
     setPlayer(playerData);
     setNewName(playerData.data.name)
-  }, []);
+  }, [players]);
 
   const updateValue = async (key: string, value: string) => {
     if (player.data[key] !== value) {
@@ -130,8 +130,8 @@ export default function PlayerSheet() {
             </button>
           </div>
           <div className="pt-3 w-full h-full sm:px-5 sm:pb-5 p-3">
-            <SheetPoints />
-            <SheetData />
+            <SheetPoints player={player} />
+            <SheetData player={player} />
             <button
             type="button"
             className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
