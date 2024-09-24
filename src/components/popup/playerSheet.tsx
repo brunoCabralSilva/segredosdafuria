@@ -8,6 +8,7 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import SheetPoints from "../master/sheetPoints";
 import SheetData from "../master/sheetData";
+import SheetForms from "../master/sheetForms";
 
 export default function PlayerSheet() {
   const [ player, setPlayer ]: any = useState({});
@@ -131,6 +132,7 @@ export default function PlayerSheet() {
           </div>
           <div className="pt-3 w-full h-full sm:px-5 sm:pb-5 p-3">
             <SheetPoints player={player} />
+            <SheetForms player={player} />
             <SheetData player={player} />
             <button
             type="button"

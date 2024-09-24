@@ -54,7 +54,7 @@ export default function SheetPoints(props: { player: any }) {
               { showHarano && <HaranoHaugloskMaster type="harano" /> }
             </div>
           </div>
-          <div className="pt-5 sm:pt-10 pb-5 font-bold text-2xl">Habilidades</div>
+          <div className="pt-5 sm:pt-10 font-bold text-2xl">Habilidades</div>
           <div className="grid grid-cols-1 sm:grid-cols-3 w-full pb-10">
             <div>
               <ItemSkillMaster player={player} name="athletics" namePtBr="Atletismo" quant={5} />
