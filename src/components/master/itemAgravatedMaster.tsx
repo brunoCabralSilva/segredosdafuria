@@ -4,22 +4,15 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useEffect, useState } from "react";
 
 export default function ItemAgravatedMaster(props: any) {
+  const { player } = props;
   const [totalItem, setTotalItem] = useState(0);
-  const [player, setPlayer]: any = useState({});
   const { name, namePtBr } = props;
-	const {
-    showPlayer,
-    session,
-    players,
-    setShowMessage,
-  } = useContext(contexto);
+	const { session, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
-    const playerData: any = players.find((item: any) => item.email === showPlayer.email);
-    setPlayer(playerData);
     const returnValues = async (): Promise<void> => {
-      if (name === 'willpower') setTotalItem(Number(playerData.data.attributes.composure) + Number(playerData.data.attributes.resolve));
-      if (name === 'health') setTotalItem(Number(playerData.data.attributes.stamina) + 3);
+      if (name === 'willpower') setTotalItem(Number(player.data.attributes.composure) + Number(player.data.attributes.resolve));
+      if (name === 'health') setTotalItem(Number(player.data.attributes.stamina) + 3);
     };
     returnValues();
   }, []);

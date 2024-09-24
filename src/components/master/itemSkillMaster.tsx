@@ -6,16 +6,14 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 
 export default function ItemSkillMaster(props: any) {
-	const { name, namePtBr, quant } = props;
+	const { player, name, namePtBr, quant } = props;
 	const { showPlayer, players, session, setShowMessage } = useContext(contexto);
-  const [player, setPlayer]: any = useState({});
   const [ skill, setSkill ] = useState({ value: 0, specialty: '' });
   const [input, setInput ] = useState(false);
 
   useEffect(() => {
     const playerData: any = players.find((item: any) => item.email === showPlayer.email);
     setSkill({ value: playerData.data.skills[name].value, specialty: playerData.data.skills[name].specialty });
-    setPlayer(playerData);
   }, []);
 
   const typeText = (e: any) => {

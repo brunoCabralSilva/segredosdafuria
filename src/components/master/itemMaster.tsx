@@ -5,24 +5,17 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useEffect, useState } from "react";
 
 export default function ItemMaster(props: any) {
-	const { name, quant, namePtBr } = props;
+	const { player, name, quant, namePtBr } = props;
   const [points, setPoints]: any = useState([]);
-  const [player, setPlayer]: any = useState({});
 	const {
     session,
-    players,
-    showPlayer,
     setShowMessage,
     setShowHarano,
     setShowHauglosk,
     setShowMenuSession,
   } = useContext(contexto);
 
-  useEffect(() => {
-    const playerData: any = players.find((item: any) => item.email === showPlayer.email);
-    setPlayer(playerData);
-    setPoints(Array(quant).fill(''));
-  }, []);
+  useEffect(() => { setPoints(Array(quant).fill('')) }, []);
 
   const updateValue = async (value: number) => {
       if (player.data[name] === 1 && value === 1) player.data[name] = 0;
@@ -37,7 +30,7 @@ export default function ItemMaster(props: any) {
         <div className="w-full">
         <div className="flex flex-wrap gap-2 pt-1">
           {
-            player.data && points.map((item: any, index: number) => {
+            player && player.data && points.map((item: any, index: number) => {
               if (player.data[name] >= index + 1) {
                 return (
                   <button

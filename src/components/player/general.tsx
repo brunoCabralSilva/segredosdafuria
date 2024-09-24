@@ -11,6 +11,7 @@ import ResetSheet from "../popup/resetSheet";
 
 export default function General() {
   const [input, setInput ] = useState('');
+  const [newName, setNewName] = useState('');
 	const {
 		sessionId, email,
     dataSheet, setDataSheet,
@@ -23,15 +24,18 @@ export default function General() {
   useEffect(() => {
     setShowGiftRoll({ show: false, gift: {}});
     setShowRitualRoll({ show: false, ritual: {}});
+    setNewName(dataSheet.name);
   }, [])
 
   const typeName = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-    setDataSheet({ ...dataSheet, name: sanitizedValue });
+    setNewName(sanitizedValue);
   };
 
   const updateValue = async (key: string, value: string) => {
-		await updateDataPlayer(sessionId, email, { ...dataSheet, [key]: value }, setShowMessage);
+    setDataSheet({ ...dataSheet, name: newName });
+		await updateDataPlayer(sessionId, email, { ...dataSheet, [key]: newName }, setShowMessage);
+    setNewName(dataSheet.name);
   };
 
   return(
@@ -58,7 +62,7 @@ export default function General() {
               type="text"
               className="border-2 border-white text-white text-center w-full mr-1 bg-black"
               placeholder="Nome"
-              value={ dataSheet.name }
+              value={ newName }
               onChange={(e) => typeName(e)}
             />
           }
