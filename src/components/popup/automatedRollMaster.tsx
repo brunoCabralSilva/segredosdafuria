@@ -2,37 +2,28 @@ import { useContext, useEffect, useState } from "react";
 import dataSheet from '../../data/sheet.json';
 import { FaMinus, FaPlus } from "react-icons/fa";
 import contexto from "@/context/context";
-import { authenticate } from "@/firebase/authenticate";
-import { useRouter } from "next/navigation";
 import { registerAutomatedRoll } from "@/firebase/messagesAndRolls";
-import { getPlayerByEmail } from "@/firebase/players";
-import { playerSheet } from "@/firebase/utilities";
+import { sheetStructure } from "@/firebase/utilities";
 
-export default function AutomatedRoll() {
+export default function AutomatedRollMaster() {
   const [atrSelected, setAtrSelected] = useState<string>('0');
   const [sklSelected, setSklSelected] = useState<string>('0');
   const [renSelected, setRenSelected] = useState<string>('0');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
-  const [dataUser, setDataUser] = useState<any>(playerSheet);
+  const [dataPlayerSelected, setDataPlayerSelected] = useState<any>(sheetStructure('', '', ''));
   const [playerSelected, setPlayerSelected] = useState<any>('0');
   const { setShowMenuSession, sessionId, setShowMessage, players } = useContext(contexto);
-  const router = useRouter();
-
-  useEffect(() => { verifyUser() }, []);
-  
-  const verifyUser = async() => {
-    const auth: any = await authenticate(setShowMessage);
-    if (auth && auth.email) {
-      setPlayerSelected(auth.email);
-      const data = await getPlayerByEmail(sessionId, auth.email, setShowMessage);
-      setDataUser(data.data);
-    } else router.push('/login');
-  }
 
   const disabledButton = () => {
     return ((atrSelected === '0' || atrSelected === '1') && (sklSelected === '0' || sklSelected === '1') && (renSelected === '0' || renSelected === '1')) || dificulty <= 0;
   }
+
+  useEffect(() => {
+    if (playerSelected !== '0') {
+      setDataPlayerSelected(players.find((item: any) => item.email === playerSelected));
+    }
+  }, [players]);
 
   const rollDices = async () => {
     await registerAutomatedRoll(
@@ -50,6 +41,35 @@ export default function AutomatedRoll() {
 
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+      <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
+        <select
+          onChange={(e: any) => {
+            setPlayerSelected(e.target.value);
+            setDataPlayerSelected(players.find((item: any) => item.email === e.target.value))
+          }}
+          value={playerSelected}
+          className="w-full py-3 text-black capitalize cursor-pointer"
+        >
+          <option
+            className="capitalize text-center text-black"
+            value="0"
+            disabled
+          >
+            Escolha um Jogador
+          </option>
+          {
+            players.map((player: any, index: number) => (
+              <option
+                className="capitalize text-center text-black"
+                key={index}
+                value={player.email}
+              >
+                { player.user } ({ player.data.name })
+              </option>
+            ))
+          }
+        </select>
+      </label>
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Atributo</p>
           <select
@@ -78,7 +98,7 @@ export default function AutomatedRoll() {
                   key={index}
                   value={item.value}
                 >
-                  { item.namePtBr } ({ dataUser.attributes[item.value] })
+                  { item.namePtBr } ({ dataPlayerSelected.data.attributes[item.value] })
                 </option>
               ))
             }
@@ -114,7 +134,7 @@ export default function AutomatedRoll() {
                     value={item.value}
                   >
                     { item.namePtBr }
-                    ({ dataUser.skills[item.value].value })
+                    ({ dataPlayerSelected.data.skills[item.value].value })
                   </option>
                 ))
             }
@@ -148,7 +168,7 @@ export default function AutomatedRoll() {
                   key={index}
                   value={item.value}
                 >
-                  { item.namePtBr } ({ dataUser[item.value] })
+                  { item.namePtBr } ({ dataPlayerSelected.data[item.value] })
                 </option>
               ))
             }

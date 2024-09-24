@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import AutomatedRoll from "./automatedRoll";
 import ManualRoll from "./manualRoll";
+import AutomatedRollMaster from "./automatedRollMaster";
 
 export default function MenuRoll(props: { gameMaster: boolean }) {
   const { gameMaster } = props;
@@ -32,7 +33,7 @@ export default function MenuRoll(props: { gameMaster: boolean }) {
         </div>
         {
           optionRadio === 'automated'
-          ? <AutomatedRoll gameMaster={gameMaster} />
+          ? gameMaster ? <AutomatedRollMaster /> : <AutomatedRoll />
           : <ManualRoll />
         }
     </div>

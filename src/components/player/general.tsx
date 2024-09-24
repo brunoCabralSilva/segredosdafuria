@@ -33,7 +33,16 @@ export default function General() {
   };
 
   const updateValue = async (key: string, value: string) => {
-    setDataSheet({ ...dataSheet, name: newName });
+    const newDataSheet = dataSheet;
+    if (key === 'name') newDataSheet.name = newName;
+    else newDataSheet[key] = value;
+		await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+    if (key === 'name') setNewName(newDataSheet.name);
+    setDataSheet(newDataSheet);
+  };
+
+  const updateName = async (key: string, value: string) => {
+    setDataSheet({ ...dataSheet, [key]: newName });
 		await updateDataPlayer(sessionId, email, { ...dataSheet, [key]: newName }, setShowMessage);
     setNewName(dataSheet.name);
   };

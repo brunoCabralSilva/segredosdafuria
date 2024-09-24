@@ -4,10 +4,9 @@ import { updateDataPlayer } from '@/firebase/players';
 import { useContext, useEffect, useState } from "react";
 
 export default function ItemAtrMaster(props: any) {
-  const { value, name, namePtBr, quant } = props;
+  const { player, name, namePtBr, quant } = props;
   const [points, setPoints]: any = useState([]);
-  const [player, setPlayer]: any = useState({});
-	const { session, showPlayer, players, setShowMessage } = useContext(contexto);
+	const { session, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
     if (player.data.attributes[name] === 1 && value === 1) player.data.attributes[name] = 0;
@@ -15,18 +14,14 @@ export default function ItemAtrMaster(props: any) {
     await updateDataPlayer(session.id, player.email, player.data, setShowMessage);
   };
 
-  useEffect(() => {
-    const playerData: any = players.find((item: any) => item.email === showPlayer.email);
-    setPlayer(playerData);
-    setPoints(Array(quant).fill(''));
-  }, []);
+  useEffect(() => { setPoints(Array(quant).fill('')) }, []);
 
   const returnPoints = (name: string) => {
     return (
       <div className="flex flex-wrap gap-2 pt-1">
         {
           points.map((item: any, index: number) => {
-            if (value >= index + 1) {
+            if (player.data.attributes[name] >= index + 1) {
               return (
                 <button
                   type="button"

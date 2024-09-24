@@ -80,8 +80,8 @@ function App() {
         {
           !showData 
             ? <Loading />            
-            : <div className="break-words p-1 bg-prot-light w-full rounded-lg shadow dark:border sm:max-w-md dark:border-gray-700 z-50 my-5">
-                <div className="break-words rounded-lg shadow dark:border md:mt-0 w-full xl:p-0 dark:border-gray-700 ">
+            : <div className="break-words p-1 bg-prot-light w-full rounded-lg shadow sm:max-w-md z-50 my-5">
+                <div className="break-words rounded-lg shadow md:mt-0 w-full xl:p-0">
                   <div className="break-words p-4 space-y-4 md:space-y-6 sm:p-8">
                     <div className="break-words space-y-4 md:space-y-6">
                       <div>

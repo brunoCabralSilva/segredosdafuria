@@ -16,19 +16,19 @@ export default function SheetPoints(props: { player: any }) {
           <div className="w-full">
             <div className="grid grid-cols-1 sm:grid-cols-3 w-full">
               <div className="w-full">
-                <ItemAtrMaster value={player.data.attributes.strength} name="strength" namePtBr="Força" quant={6} />
-                <ItemAtrMaster value={player.data.attributes.dexterity} name="dexterity" namePtBr="Destreza" quant={6} />
-                <ItemAtrMaster value={player.data.attributes.stamina} name="stamina" namePtBr="Vigor" quant={6} />
+                <ItemAtrMaster player={player} name="strength" namePtBr="Força" quant={6} />
+                <ItemAtrMaster player={player} name="dexterity" namePtBr="Destreza" quant={6} />
+                <ItemAtrMaster player={player} name="stamina" namePtBr="Vigor" quant={6} />
               </div>
               <div className="w-full">
-                <ItemAtrMaster value={player.data.attributes.charisma} name="charisma" namePtBr="Carisma" quant={6} />
-                <ItemAtrMaster value={player.data.attributes.manipulation} name="manipulation" namePtBr="Manipulação" quant={6} />
-                <ItemAtrMaster value={player.data.attributes.composure} name="composure" namePtBr="Autocontrole" quant={6} />
+                <ItemAtrMaster player={player} name="charisma" namePtBr="Carisma" quant={6} />
+                <ItemAtrMaster player={player} name="manipulation" namePtBr="Manipulação" quant={6} />
+                <ItemAtrMaster player={player} name="composure" namePtBr="Autocontrole" quant={6} />
               </div>
               <div className="w-full">
-                <ItemAtrMaster value={player.data.attributes.intelligence} name="intelligence" namePtBr="Inteligência" quant={6} />
-                <ItemAtrMaster value={player.data.attributes.wits} name="wits" namePtBr="Raciocínio" quant={6} />
-                <ItemAtrMaster value={player.data.attributes.resolve} name="resolve" namePtBr="Determinação" quant={6} />
+                <ItemAtrMaster player={player} name="intelligence" namePtBr="Inteligência" quant={6} />
+                <ItemAtrMaster player={player} name="wits" namePtBr="Raciocínio" quant={6} />
+                <ItemAtrMaster player={player} name="resolve" namePtBr="Determinação" quant={6} />
               </div>
             </div>
           </div>

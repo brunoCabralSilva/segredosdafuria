@@ -161,7 +161,7 @@ const Register = () => {
                 onClick={ handleRegisterDev }
                 className="break-words relative inline-flex items-center justify-center p-0.5 mb-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-600 to-red-900 hover:from-red-900 hover:to-red-600 hover:text-white focus:ring-4 focus:outline-none w-full"
               >
-                <span className="break-words relative px-5 py-2.5 transition-all ease-in duration-75 text-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                <span className="break-words relative px-5 py-2.5 transition-all ease-in duration-75 text-white rounded-md group-hover:bg-opacity-0">
                   { loading ? 'Registrando, por favor aguarde' : 'Registrar' }
                 </span>
               </button>
