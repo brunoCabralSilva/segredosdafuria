@@ -85,6 +85,10 @@ interface RecipesContext {
   showRitualRoll: { show: boolean, ritual: any },
   setShowRitualRoll: (state: { show: boolean, ritual: any }) => void,
   resetPopups: () => void,
+  addTouchstone: { show: boolean, data: any},
+  setAddTouchstone: (state: { show: boolean, data: any}) => void,
+  showDeleteTouchstone: { show: boolean, name: string},
+  setShowDeleteTouchstone: (state: { show: boolean, name: string}) => void,
   //gameMaster
   session: any,
   setSession: (state: any) => void,
@@ -187,6 +191,10 @@ const initialValue: RecipesContext = {
   showRitualRoll: { show: false, ritual: {} },
   setShowRitualRoll: () => {},
   resetPopups: () => {},
+  addTouchstone: { show: false, data: { } },
+  setAddTouchstone: () => {},
+  showDeleteTouchstone: { show: false, name: ''},
+  setShowDeleteTouchstone: () => {},
   //gameMaster
   session: {},
   setSession: () => {},

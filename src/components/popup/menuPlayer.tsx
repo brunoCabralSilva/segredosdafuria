@@ -14,6 +14,7 @@ import Background from "../player/background";
 import HaranoHauglosk from "./haranoHauglosk";
 import GiftRoll from "./giftRoll";
 import RitualRoll from "./ritualRoll";
+import Touchstones from "../player/touchstones";
 
 export default function MenuPlayer() {
   const [optionSelect, setOptionSelect] = useState('general');
@@ -34,6 +35,7 @@ export default function MenuPlayer() {
       case ('advantages-flaws'): return (<AdvantagesAndFlaws />);
       case ('forms'): return (<Forms />);
       case ('session'): return (<Details />);
+      case ('touchstones'): return (<Touchstones />);
       case ('background'): return (<Background type="background" />);
       case ('anotations'): return (<Anotations type="notes" />);
       case ('gifts'): return (<Gifts />);
@@ -75,10 +77,9 @@ export default function MenuPlayer() {
           <option value={'skills'}>Habilidades</option>
           <option value={'gifts'}>Dons</option>
           <option value={'rituals'}>Rituais</option>
+          <option value={'touchstones'}>Pilares</option>
           <option value={'advantages-flaws'}>Vantagens e Defeitos</option>
-          <option value={'forms'}>
-            Formas ( Atual: { dataSheet.form } )
-          </option>
+          <option value={'forms'}>Formas ( Atual: { dataSheet.form } )</option>
           <option value={'session'}>Sessão</option>
           <option value={'background'}>Background</option>
           <option value={'anotations'}>Anotações</option>
