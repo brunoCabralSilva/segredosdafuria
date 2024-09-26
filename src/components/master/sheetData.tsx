@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function SheetData(props: { player: any }) {
   const { player } = props;
   return(
@@ -126,8 +128,19 @@ export default function SheetData(props: { player: any }) {
               player.data.background !== '' &&
               <div className="pt-10 pb-5 font-bold text-2xl">História</div>
             }
-            <div className="pb-10 sm:text-justify">
+            <div className="sm:text-justify">
               { player.data.background }
+            </div>
+            { 
+              player.data.touchstones.length > 0 &&
+              <div className="pt-10 pb-5 font-bold text-2xl">Pilares</div>
+            }
+            <div className="pb-10 sm:text-justify">
+              { player.data.touchstones.map((touchstone: any, index: number) => (
+                <div key={index} className="pt-3 sm:text-justify">
+                  <p>{ touchstone.name } - { touchstone.description }</p>
+                </div>
+              )) }
             </div>
         </div>
       }
