@@ -54,6 +54,7 @@ export default function Provider({children }: IProvider) {
   const [showRitualRoll, setShowRitualRoll] = useState({ show: false, ritual: {} });
   const [addTouchstone, setAddTouchstone] = useState({show: false, data: {}});
   const [showDeleteTouchstone, setShowDeleteTouchstone] = useState({ show: false, name: '' });
+  const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: {} });
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -110,6 +111,7 @@ export default function Provider({children }: IProvider) {
     setShowRemovePlayer({ show: false, email: '' });
     setAddTouchstone({ show: false, data: {} });
     setShowDeleteTouchstone({ show: false, name: '' });
+    setShowEvaluateSheet({show: false, data: {} });
   }
 
   return (
@@ -164,6 +166,7 @@ export default function Provider({children }: IProvider) {
         showRitualRoll, setShowRitualRoll,
         addTouchstone, setAddTouchstone,
         showDeleteTouchstone, setShowDeleteTouchstone,
+        showEvaluateSheet, setShowEvaluateSheet,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,

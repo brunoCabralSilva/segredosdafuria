@@ -23,6 +23,7 @@ import RemovePlayer from "@/components/popup/removePlayer";
 import ResetPlayer from "@/components/popup/resetPlayer";
 import AddTouchstone from "@/components/popup/addTouchstone";
 import DeleteTouchstone from "@/components/popup/deleteTouchstone";
+import EvaluateSheet from "@/components/popup/evaluateSheet";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -50,6 +51,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     showResetPlayer,
     showDeleteHistoric,
     showDeleteTouchstone,
+    showEvaluateSheet,
     email,
     showMenuSession,
   } = useContext(contexto);
@@ -138,6 +140,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showRemovePlayer.show && <RemovePlayer /> }
       { addTouchstone.show && <AddTouchstone /> }
       { showDeleteTouchstone.show && <DeleteTouchstone /> }
+      { showEvaluateSheet.show && <EvaluateSheet /> }
       <Nav />
       {
         showData

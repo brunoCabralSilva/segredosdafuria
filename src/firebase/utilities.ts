@@ -53,6 +53,7 @@ export const playerSheet = {
     resolve: 1,
   },
   skills: {
+    type: '',
     athletics: { value: 0, specialty: '' },
     animalKen: { value: 0, specialty: '' },
     academics: { value: 0, specialty: '' },
@@ -124,6 +125,7 @@ export const sheetStructure = (email: string, user: string, message: any) => {
         resolve: 1,
       },
       skills: {
+        type: '',
         athletics: { value: 0, specialty: '' },
         animalKen: { value: 0, specialty: '' },
         academics: { value: 0, specialty: '' },

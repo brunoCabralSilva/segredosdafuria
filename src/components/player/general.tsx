@@ -19,6 +19,7 @@ export default function General() {
     setShowGiftRoll,
     setShowRitualRoll,
     setShowMessage,
+    setShowEvaluateSheet,
 	} = useContext(contexto);
 
   useEffect(() => {
@@ -141,9 +142,16 @@ export default function General() {
 				<Item quant={5} name="glory" namePtBr="Glória" />
 				<Item quant={5} name="wisdom" namePtBr="Sabedoria" />
         <button
+          type="button"
+          onClick={ () => setShowEvaluateSheet({show: true, data: dataSheet }) }
+          className="mt-8 mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
+        >
+          Avaliar Ficha 
+        </button>
+        <button
 					type="button"
 					onClick={ () => setShowResetSheet(true) }
-					className="mt-8 mb-5 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+					className="mb-5 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
 				>
 					Redefinir Ficha
         </button>

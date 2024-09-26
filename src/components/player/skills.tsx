@@ -1,11 +1,30 @@
 'use client'
-
+import { updateDataPlayer } from "@/firebase/players";
 import ItemSkill from "./itemSkill";
+import { useContext } from "react";
+import contexto from "@/context/context";
 
 export default function Skills() {
+  const { dataSheet, sessionId, email, setShowMessage } = useContext(contexto);
+  const updateValue = async (value: string) => {
+    const newDataSheet = dataSheet;
+    newDataSheet.skills.type = value;
+    await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+  }
+
   return(
     <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
       <div className="w-full h-full mb-2 p-1 text-white flex-col items-start justify-center font-bold">
+        <select
+          className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
+          value={ dataSheet.skills.type }
+          onChange={ (e) => updateValue(e.target.value) }
+        >
+          <option disabled value="">Escolha um Modelo de distribuição</option>
+          <option value="Pau pra toda Obra">Pau pra toda obra</option>
+          <option value="Equilibrado">Equilibrado</option>
+          <option value="Especialista">Especialista</option>
+        </select>
         <div className="w-full px-4 pt-4">
           <ItemSkill name="athletics" namePtBr="Atletismo" quant={5} />
           <ItemSkill name="brawl" namePtBr="Briga" quant={5} />

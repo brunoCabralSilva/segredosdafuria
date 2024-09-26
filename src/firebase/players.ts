@@ -69,6 +69,41 @@ export const updateDataPlayer = async (sessionId: string, email: string, newData
   }
 };
 
+export const updateValueOfSheet = async (setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const collectionRef = collection(db, 'players');
+    const querySnapshot = await getDocs(collectionRef);
+
+    if (querySnapshot.empty) {
+      setShowMessage({ show: true, text: 'Nenhum jogador encontrado.' });
+      return;
+    }
+
+    await runTransaction(db, async (transaction) => {
+      querySnapshot.forEach((playerDoc) => {
+        const playerData = playerDoc.data();
+        const docRef = doc(db, 'players', playerDoc.id);
+        if (Array.isArray(playerData.list)) {
+          const updatedList = playerData.list.map((item: any) => {
+            return {
+              ...item,
+              data: {
+                ...item.data,
+                skills: { ...item.data.skills, type: '' },
+              }
+            };
+          });
+          transaction.update(docRef, { list: updatedList });
+        }
+      });
+    });
+    setShowMessage({ show: true, text: 'Todos os jogadores foram atualizados com sucesso.' });
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os jogadores: ' + err.message });
+  }
+};
+
 export const updateDataWithRage = async (sessionId: string, email: string, newData: any, nameForm: string, setShowMessage: any) => {
   try {
     let numberOfChecks = 1;

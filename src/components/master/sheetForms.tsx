@@ -11,14 +11,11 @@ export default function SheetForms(props: { player: any }) {
   const {
     session,
     showPlayer,
-    players,
     setShowMessage,
     setShowMenuSession,
   } = useContext(contexto);
 
   const updateValue = async (newForm: string) => {
-
-    const player: any = players.find((item: any) => item.data.email = showPlayer.email);
     const actualForm = player.data.form;
     if (newForm !== actualForm) {
       if (newForm === 'Hominídeo' || newForm === 'Lupino') {

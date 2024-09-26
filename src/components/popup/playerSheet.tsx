@@ -18,6 +18,7 @@ export default function PlayerSheet() {
     showPlayer, setShowPlayer,
     players,
     session,
+    setShowEvaluateSheet,
     setShowMessage,
     setShowResetPlayer,
     setShowRemovePlayer,
@@ -135,25 +136,32 @@ export default function PlayerSheet() {
             <SheetForms player={player} />
             <SheetData player={player} />
             <button
-            type="button"
-            className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
-            onClick={ () => {
-              setShowPlayer({ show: false, email: showPlayer.email });
-              setShowResetPlayer({ show: true, email: player.email });
-            }}
-          >
-            Limpar Ficha
-          </button>
-          <button
-            type="button"
-            className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
-            onClick={ () => {
-              setShowPlayer({ show: false, email: showPlayer.email });
-              setShowRemovePlayer({ show: true, email: player.email })
-            }}
-          >
-            Remover da Sessão
-          </button>
+              type="button"
+              onClick={ () => setShowEvaluateSheet({show: true, data: player.data }) }
+              className="mt-8 mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
+            >
+              Avaliar Ficha 
+            </button>
+            <button
+              type="button"
+              className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+              onClick={ () => {
+                setShowPlayer({ show: false, email: showPlayer.email });
+                setShowResetPlayer({ show: true, email: player.email });
+              }}
+            >
+              Limpar Ficha
+            </button>
+            <button
+              type="button"
+              className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+              onClick={ () => {
+                setShowPlayer({ show: false, email: showPlayer.email });
+                setShowRemovePlayer({ show: true, email: player.email })
+              }}
+            >
+              Remover da Sessão
+            </button>
           </div>
         </div>
       </div>
