@@ -570,7 +570,7 @@ export default function EvaluateSheet() {
   }
 
   return (
-    <div className="z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
+    <div className="z-80 sm:z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
       <div className="w-full flex justify-center pt-3 bg-black">
         <p className="px-6 sm:px-10 text-white font-bold text-2xl w-full">Verificação de Ficha:</p>
         <IoIosCloseCircleOutline
@@ -585,10 +585,10 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
               {
                 name.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
+                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p>Inserir o nome do Personagem</p>
+              <p className="w-full">Inserir o nome do Personagem</p>
             </div>
               <p className="pl-5">
                 { !name.correct && <p> - { name.errorMessage }</p> }
@@ -599,10 +599,10 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
               {
                 auspice.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
+                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p>Escolher um Augúrio</p>
+              <p className="w-full">Escolher um Augúrio</p>
             </div>
             <p className="pl-5">
               { !auspice.correct && <p> - { auspice.errorMessage }</p> }
@@ -613,10 +613,10 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
               {
                 trybe.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
+                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p>Escolher uma Tribo</p>
+              <p className="w-full">Escolher uma Tribo</p>
             </div>
               <p className="pl-5">
                 { !trybe.correct && <p> - { trybe.errorMessage }</p> }
@@ -627,30 +627,30 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
               {
                 renownSum.correct && renownTrybe.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
+                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p>Preencher Renome</p>
+              <p className="w-full">Preencher Renome</p>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   renownSum.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>A Soma dos Renomes precisa ser igual a 3</p>
+                <p className="w-full">A Soma dos Renomes precisa ser igual a 3</p>
               </div>
               <div className="pl-10">
                 { !renownSum.correct && <p> - { renownSum.errorMessage }</p> }
               </div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   renownTrybe.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>O renome relacionado ao patrono precisa ser igual a 2</p>
+                <p className="w-full">O renome relacionado ao patrono precisa ser igual a 2</p>
               </div>
               <div className="pl-10">
                 { !renownTrybe.correct && <p> - { renownTrybe.errorMessage }</p> }
@@ -662,58 +662,58 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
                 {
                   attributes3.correct && attributes2.correct && attributes1.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p>Atributos:</p>
+              <p className="w-full">Atributos:</p>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   attributes4.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Preencher Um atributo com 4 pontos</p>
+                <p className="w-full">Preencher Um atributo com 4 pontos</p>
               </div>
               <div className="pl-10">
                 { !attributes4.correct && <p> - { attributes4.errorMessage }</p> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   attributes3.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Preencher Três atributos com 3 pontos</p>
+                <p className="w-full">Preencher Três atributos com 3 pontos</p>
               </div>
               <div className="pl-10">
                 { !attributes3.correct && <p> - { attributes3.errorMessage }</p> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   attributes2.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Preencher Quatro atributos com 2 pontos</p>
+                <p className="w-full">Preencher Quatro atributos com 2 pontos</p>
               </div>
               <div className="pl-10">
                 { !attributes2.correct && <p> - { attributes2.errorMessage }</p> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   attributes1.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Preencher Um atributo com 1 ponto</p>
+                <p className="w-full">Preencher Um atributo com 1 ponto</p>
               </div>
               <div className="pl-10">
                 { !attributes1.correct && <p> - { attributes1.errorMessage }</p> }
@@ -725,19 +725,19 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
                 {
                   verifyCorrectlySkills()
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p>Habilidades:</p>
+              <p className="w-full">Habilidades:</p>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   skillsType.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Escolher um Modelo de Distribuição { data.skills.type !== '' && '(' + data.skills.type + ')'}</p>
+                <p className="w-full">Escolher um Modelo de Distribuição { data.skills.type !== '' && '(' + data.skills.type + ')'}</p>
               </div>
               <div className="pl-10">
                 { !skillsType.correct && <p> - { skillsType.errorMessage }</p> }
@@ -750,37 +750,37 @@ export default function EvaluateSheet() {
                   { 
                     data.skills.type === 'Especialista'
                     ? <div>
-                        <div className="flex gap-2 items-center pl-5">
+                        <div className="flex gap-2 pl-5">
                           {
                             skillsCountPlus.correct
-                            ? <FaRegCheckCircle className="text-green-500" />
-                            : <FaRegCircle className="text-red-500" />
+                            ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                            : <FaRegCircle className="text-red-500 text-lg mt-1" />
                           }
-                          <p>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</p>
+                          <p className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</p>
                         </div>
                         <div className="pl-10">
                           { !skillsCountPlus.correct && <p> - { skillsCountPlus.errorMessage }</p> }
                         </div>
-                        <div className="flex gap-2 items-center pl-5">
+                        <div className="flex gap-2 pl-5">
                           {
                             skillsCount4.correct
-                            ? <FaRegCheckCircle className="text-green-500" />
-                            : <FaRegCircle className="text-red-500" />
+                            ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                            : <FaRegCircle className="text-red-500 text-lg mt-1" />
                           }
-                          <p>{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</p>
+                          <p className="w-full">{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</p>
                         </div>
                         <div className="pl-10">
                           { !skillsCount4.correct && <p> - { skillsCount4.errorMessage }</p> }
                         </div>
                       </div>
                     : <div>
-                        <div className="flex gap-2 items-center pl-5">
+                        <div className="flex gap-2 pl-5">
                           {
                             skillsCountPlus4.correct
-                            ? <FaRegCheckCircle className="text-green-500" />
-                            : <FaRegCircle className="text-red-500" />
+                            ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                            : <FaRegCircle className="text-red-500 text-lg mt-1" />
                           }
-                          <p>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</p>
+                          <p className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</p>
                         </div>
                         <div className="pl-10">
                           { !skillsCountPlus4.correct && <p> - { skillsCountPlus4.errorMessage }</p> }
@@ -789,52 +789,52 @@ export default function EvaluateSheet() {
                     }
                 </div>
                 <div>
-                  <div className="flex gap-2 items-center pl-5">
+                  <div className="flex gap-2 pl-5">
                     {
                       skillsCount3.correct
-                      ? <FaRegCheckCircle className="text-green-500" />
-                      : <FaRegCircle className="text-red-500" />
+                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p>{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</p>
+                    <p className="w-full">{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</p>
                   </div>
                   <div className="pl-10">
                     { !skillsCount3.correct && <p> - { skillsCount3.errorMessage }</p> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 items-center pl-5">
+                  <div className="flex gap-2 pl-5">
                     {
                       skillsCount2.correct
-                      ? <FaRegCheckCircle className="text-green-500" />
-                      : <FaRegCircle className="text-red-500" />
+                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p>{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</p>
+                    <p className="w-full">{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</p>
                   </div>
                   <div className="pl-10">
                     { !skillsCount2.correct && <p> - { skillsCount2.errorMessage }</p> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 items-center pl-5">
+                  <div className="flex gap-2 pl-5">
                     {
                       skillsCount1.correct
-                      ? <FaRegCheckCircle className="text-green-500" />
-                      : <FaRegCircle className="text-red-500" />
+                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p>{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</p>
+                    <p className="w-full">{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</p>
                   </div>
                   <div className="pl-10">
                     { !skillsCount1.correct && <p> - { skillsCount1.errorMessage }</p> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 items-center pl-5">
+                  <div className="flex gap-2 pl-5">
                     {
                       skillsCount0.correct
-                      ? <FaRegCheckCircle className="text-green-500" />
-                      : <FaRegCircle className="text-red-500" />
+                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p>{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</p>
+                    <p className="w-full">{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</p>
                   </div>
                   <div className="pl-10">
                     { !skillsCount0.correct && <p> - { skillsCount0.errorMessage }</p> }
@@ -843,13 +843,13 @@ export default function EvaluateSheet() {
                 {
                   data.skills.academics.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 items-center pl-5">
+                    <div className="flex gap-2 pl-5">
                       {
                         skillAcademics.correct
-                        ? <FaRegCheckCircle className="text-green-500" />
-                        : <FaRegCircle className="text-red-500" />
+                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p>Preencher uma Especialização em Acadêmicos</p>
+                      <p className="w-full">Preencher uma Especialização em Acadêmicos</p>
                     </div>
                     <div className="pl-10">
                       { !skillAcademics.correct && <p> - { skillAcademics.errorMessage }</p> }
@@ -859,13 +859,13 @@ export default function EvaluateSheet() {
                 {
                   data.skills.craft.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 items-center pl-5">
+                    <div className="flex gap-2 pl-5">
                       {
                         skillCraft.correct
-                        ? <FaRegCheckCircle className="text-green-500" />
-                        : <FaRegCircle className="text-red-500" />
+                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p>Preencher uma Especialização em Ofícios</p>
+                      <p className="w-full">Preencher uma Especialização em Ofícios</p>
                     </div>
                     <div className="pl-10">
                       { !skillCraft.correct && <p> - { skillCraft.errorMessage }</p> }
@@ -875,13 +875,13 @@ export default function EvaluateSheet() {
                 {
                   data.skills.performance.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 items-center pl-5">
+                    <div className="flex gap-2 pl-5">
                       {
                         skillPerformance.correct
-                        ? <FaRegCheckCircle className="text-green-500" />
-                        : <FaRegCircle className="text-red-500" />
+                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p>Preencher uma Especialização em Performance</p>
+                      <p className="w-full">Preencher uma Especialização em Performance</p>
                     </div>
                     <div className="pl-10">
                       { !skillPerformance.correct && <p> - { skillPerformance.errorMessage }</p> }
@@ -891,13 +891,13 @@ export default function EvaluateSheet() {
                 {
                   data.skills.science.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 items-center pl-5">
+                    <div className="flex gap-2 pl-5">
                       {
                         skillScience.correct
-                        ? <FaRegCheckCircle className="text-green-500" />
-                        : <FaRegCircle className="text-red-500" />
+                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p>Preencher uma Especialização em Science</p>
+                      <p className="w-full">Preencher uma Especialização em Science</p>
                     </div>
                     <div className="pl-10">
                       { !skillScience.correct && <p> - { skillScience.errorMessage }</p> }
@@ -905,26 +905,26 @@ export default function EvaluateSheet() {
                   </div>
                 }
                 <div>
-                  <div className="flex gap-2 items-center pl-5">
+                  <div className="flex gap-2 pl-5">
                     {
                       skillNewSpecialty.correct
-                      ? <FaRegCheckCircle className="text-green-500" />
-                      : <FaRegCircle className="text-red-500" />
+                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p>Adicionar uma nova Especialização em uma Habilidade à sua escolha</p>
+                    <p className="w-full">Adicionar uma nova Especialização em uma Habilidade à sua escolha</p>
                   </div>
                   <div className="pl-10">
                     { !skillNewSpecialty.correct && <p> - { skillNewSpecialty.errorMessage }</p> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 items-center pl-5">
+                  <div className="flex gap-2 pl-5">
                     {
                       skillSpecialtyZero.correct
-                      ? <FaRegCheckCircle className="text-green-500" />
-                      : <FaRegCircle className="text-red-500" />
+                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p>Nenhuma Habilidade com 0 pontos pode ter uma Especialização</p>
+                    <p className="w-full">Nenhuma Habilidade com 0 pontos pode ter uma Especialização</p>
                   </div>
                   <div className="pl-10">
                     { !skillSpecialtyZero.correct && <p> - { skillSpecialtyZero.errorMessage }</p> }
@@ -938,57 +938,57 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
                 {
                   gifts.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p>Dons:</p>
+              <p className="w-full">Dons:</p>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   gifts.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Adicionar 3 Dons</p>
+                <p className="w-full">Adicionar 3 Dons</p>
               </div>
               <div className="pl-10">
                 { !gifts.correct && <p> - { gifts.errorMessage }</p> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   giftsGlobal.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Adicionar um Dom Nativo</p>
+                <p className="w-full">Adicionar um Dom Nativo</p>
               </div>
               <div className="pl-10">
                 { !giftsGlobal.correct && <p> - { giftsGlobal.errorMessage }</p> }
               </div>
               <div>
                 <div>
-                  <div className="flex gap-2 items-center pl-5">
+                  <div className="flex gap-2 pl-5">
                     {
                       giftsTrybe.correct
-                      ? <FaRegCheckCircle className="text-green-500" />
-                      : <FaRegCircle className="text-red-500" />
+                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p>Adicionar um Dom da Tribo ({ capitalizeFirstLetter(data.trybe) })</p>
+                    <p className="w-full">Adicionar um Dom da Tribo ({ capitalizeFirstLetter(data.trybe) })</p>
                   </div>
                   <div className="pl-10">
                     { !giftsTrybe.correct && <p> - { giftsTrybe.errorMessage }</p> }
                   </div>
                 </div>
-                <div className="flex gap-2 items-center pl-5">
+                <div className="flex gap-2 pl-5">
                   {
                     giftsAuspice.correct
-                    ? <FaRegCheckCircle className="text-green-500" />
-                    : <FaRegCircle className="text-red-500" />
+                    ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                    : <FaRegCircle className="text-red-500 text-lg mt-1" />
                   }
-                  <p>Adicionar um Dom do Augúrio <span className="capitalize">({ data.auspice })</span></p>
+                  <p className="w-full">Adicionar um Dom do Augúrio <span className="capitalize">({ data.auspice })</span></p>
                 </div>
                 <div className="pl-10">
                   { !giftsAuspice.correct && <p> - { giftsAuspice.errorMessage }</p> }
@@ -1001,10 +1001,10 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
               {
                 rituals.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
+                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p>Adicionar um Ritual</p>
+              <p className="w-full">Adicionar um Ritual</p>
             </div>
             <div className="pl-5">
               { !rituals.correct && <p> - { rituals.errorMessage }</p> }
@@ -1015,10 +1015,10 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
               {
                 touchstone.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
+                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p>Adicionar Pilares para o Personagem</p>
+              <p className="w-full">Adicionar Pilares para o Personagem</p>
             </div>
             <div className="pl-5">
               { !touchstone.correct && <p> - { touchstone.errorMessage }</p> }
@@ -1029,32 +1029,32 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
                 {
                   advantages.correct && flaws.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p>Vantagens e Defeitos:</p>
+              <p className="w-full">Vantagens e Defeitos:</p>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   advantages.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                    ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                    : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Preencher 7 pontos em Vantagens (Méritos e Background, Loresheets e/ou Talismãs)</p>
+                <p className="w-full">Preencher 7 pontos em Vantagens (Méritos e Background, Loresheets e/ou Talismãs)</p>
               </div>
               <div className="pl-10">
                 { !advantages.correct && <p> - { advantages.errorMessage }</p> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 items-center pl-5">
+              <div className="flex gap-2 pl-5">
                 {
                   flaws.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p>Preencher 2 pontos em Defeitos</p>
+                <p className="w-full">Preencher 2 pontos em Defeitos</p>
               </div>
               <div className="pl-10">
                 { !flaws.correct && <p> - { flaws.errorMessage }</p> }
@@ -1066,10 +1066,10 @@ export default function EvaluateSheet() {
             <div className="flex gap-2 items-center">
               {
                 background.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
+                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
+                : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p>Inserir a história do personagem</p>
+              <p className="w-full">Inserir a história do personagem</p>
             </div>
             <div className="pl-5">
               { !background.correct && <p> - { background.errorMessage }</p> }
