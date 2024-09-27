@@ -81,12 +81,6 @@ export default function AdvantagesAndFlaws() {
             <AdvAdded key={index} item={item} />
           ))
         }
-        <div className="w-full mt-5 mb-3">Defeitos</div>
-        {
-          dataSheet.advantagesAndFlaws.flaws.map((item: any, index: number) => (
-            <AdvAdded key={index} item={item} />
-          ))
-        }
         <div className="w-full mt-5 mb-3">Talismãs</div>
         {
           dataSheet.advantagesAndFlaws.talens.map((item: any, index: number) => (
@@ -97,6 +91,12 @@ export default function AdvantagesAndFlaws() {
         {
           dataSheet.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
             <AdvLoresheetsAdded key={index} item={item} />
+          ))
+        }
+        <div className="w-full mt-5 mb-3">Defeitos</div>
+        {
+          dataSheet.advantagesAndFlaws.flaws.map((item: any, index: number) => (
+            <AdvAdded key={index} item={item} />
           ))
         }
       </div>

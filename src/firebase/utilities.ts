@@ -177,3 +177,36 @@ export const capitalizeFirstLetter = (str: string): String => {
     .join(' ');
   }
 };
+
+export const translateSkill = (str: string): string => {
+  switch(str) {
+    case 'athletics': return 'Atletismo';
+    case 'brawl': return 'Briga';
+    case 'craft': return 'Ofícios';
+    case 'driving': return 'Condução';
+    case 'firearms': return 'Armas de Fogo';
+    case 'larceny': return 'Furto';
+    case 'melee': return 'Armas Brancas';
+    case 'stealth': return 'Furtividade';
+    case 'survival': return 'Sobrevivência';
+    case 'animalKen': return 'Empatia com Animais';
+    case 'etiquette': return 'Etiqueta';
+    case 'insight': return 'Intuição';
+    case 'intimidation': return 'Intimidação';
+    case 'leadership': return 'Liderança';
+    case 'performance': return 'Performance';
+    case 'persuasion': return 'Persuasão';
+    case 'streetwise': return 'Manha';
+    case 'subterfuge': return 'Lábia';
+    case 'academics': return 'Acadêmicos';
+    case 'awareness': return 'Percepção';
+    case 'finance': return 'Finanças';
+    case 'investigation': return 'Investigação';
+    case 'medicine': return 'Medicina';
+    case 'occult': return 'Ocultismo';
+    case 'politics': return 'Política';
+    case 'science': return 'Ciência';
+    case 'technology': return 'Tecnologia';
+    default: return str;
+  }
+}

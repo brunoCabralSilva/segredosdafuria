@@ -24,6 +24,7 @@ export default function MenuPlayer() {
     showHauglosk, setShowHauglosk,
     showGiftRoll, setShowGiftRoll,
     showRitualRoll, setShowRitualRoll,
+    setShowEvaluateSheet,
     setShowMenuSession,
   } = useContext(contexto);
 
@@ -56,6 +57,7 @@ export default function MenuPlayer() {
               setShowGiftRoll({ show: false, gift: {}});
               setShowRitualRoll({ show: false, ritual: {}});
             } else setShowMenuSession('');
+            setShowEvaluateSheet({ show: false, data: '' });
           }}
         />
       </div>

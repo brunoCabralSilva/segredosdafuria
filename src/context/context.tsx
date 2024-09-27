@@ -89,7 +89,7 @@ interface RecipesContext {
   setAddTouchstone: (state: { show: boolean, data: any}) => void,
   showDeleteTouchstone: { show: boolean, name: string},
   setShowDeleteTouchstone: (state: { show: boolean, name: string}) => void,
-  showEvaluateSheet: { show: boolean, data: any },
+  showEvaluateSheet: { show: boolean, data: string },
   setShowEvaluateSheet: (state: { show: boolean, data: any }) => void,
   //gameMaster
   session: any,
@@ -197,7 +197,7 @@ const initialValue: RecipesContext = {
   setAddTouchstone: () => {},
   showDeleteTouchstone: { show: false, name: ''},
   setShowDeleteTouchstone: () => {},
-  showEvaluateSheet: { show: false, data: { } },
+  showEvaluateSheet: { show: false, data: '' },
   setShowEvaluateSheet: () => {},
   //gameMaster
   session: {},

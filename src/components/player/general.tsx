@@ -143,7 +143,7 @@ export default function General() {
 				<Item quant={5} name="wisdom" namePtBr="Sabedoria" />
         <button
           type="button"
-          onClick={ () => setShowEvaluateSheet({show: true, data: dataSheet }) }
+          onClick={ () => setShowEvaluateSheet({show: true, data: 'player' }) }
           className="mt-8 mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
         >
           Avaliar Ficha 

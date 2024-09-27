@@ -1,6 +1,6 @@
 'use client'
 import contexto from "@/context/context";
-import { updateValueOfSheet } from "@/firebase/players";
+import { capitalizeFirstLetter, translateSkill } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircle } from "react-icons/fa6";
@@ -8,8 +8,19 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function EvaluateSheet() {
   const {
-    showEvaluateSheet, setShowEvaluateSheet, setShowMessage,
+    showEvaluateSheet, setShowEvaluateSheet, setShowMessage, dataSheet, players,
   } = useContext(contexto);
+  const [data, setData] = useState({
+    skills: {
+      type: '',
+      academics: { value: 0 },
+      craft: { value: 0 },
+      performance: { value: 0 },
+      science: { value: 0 },
+    },
+    auspice: '',
+    trybe: '',
+  });
   const [name, setName] = useState({ correct: false, errorMessage: '' });
   const [trybe, setTrybe] = useState({ correct: false, errorMessage: '' });
   const [auspice, setAuspice] = useState({ correct: false, errorMessage: '' });
@@ -24,7 +35,6 @@ export default function EvaluateSheet() {
   const [advantages, setAdvantages] = useState({ correct: false, errorMessage: '' });
   const [flaws, setFlaws] = useState({ correct: false, errorMessage: '' });
   const [rituals, setRituals] = useState({ correct: false, errorMessage: '' });
-  const [gifts, setGifts] = useState({ correct: false, errorMessage: '' });
   const [skillsType, setSkillsType] = useState({ correct: false, errorMessage: '' });
   const [skillsCountPlus, setSkillsCountPlus] = useState({ correct: true, errorMessage: '' });
   const [skillsCountPlus4, setSkillsCountPlus4] = useState({ correct: true, errorMessage: '' });
@@ -39,9 +49,25 @@ export default function EvaluateSheet() {
   const [number2, setNumber2] = useState(0);
   const [number1, setNumber1] = useState(0);
   const [number0, setNumber0] = useState(0);
+  const [skillAcademics, setSkillAcademics] = useState({ correct: true, errorMessage: '' });
+  const [skillCraft, setSkillCraft] = useState({ correct: true, errorMessage: '' });
+  const [skillPerformance, setSkillPerformance] = useState({ correct: true, errorMessage: '' });
+  const [skillScience, setSkillScience] = useState({ correct: true, errorMessage: '' });
+  const [skillNewSpecialty, setSkillNewSpecialty] = useState({ correct: false, errorMessage: '' });
+  const [skillSpecialtyZero, setSkillSpecialtyZero] = useState({ correct: false, errorMessage: '' });
+  const [gifts, setGifts] = useState({ correct: false, errorMessage: '' });
+  const [giftsGlobal, setGiftsGlobal] = useState({ correct: false, errorMessage: '' });
+  const [giftsTrybe, setGiftsTrybe] = useState({ correct: false, errorMessage: '' });
+  const [giftsAuspice, setGiftsAuspice] = useState({ correct: false, errorMessage: '' });
 
   useEffect(() => {
-    const data = showEvaluateSheet.data;
+    let data: any = {};
+    if (showEvaluateSheet.data === 'master') {
+
+    } else {
+      data = dataSheet;
+      setData(dataSheet);
+    }
     //Verificação de Nome de Personagem
     if (data.name.length === 0) {
       setName({
@@ -68,7 +94,7 @@ export default function EvaluateSheet() {
       setRituals({ correct: false, errorMessage: 'Necessário navegar até a aba "Rituais" e adicionar 1 Ritual. Atualmente, você tem ' + data.rituals.length + '.'  });
     } else setRituals({ correct: true, errorMessage: '' });
     //Verificação de Touchstones
-    if (data.touchstones.length < 1 && data.touchstones.length > 3) {
+    if (data.touchstones.length < 1 || data.touchstones.length > 3) {
       let text = '';
       if (data.touchstones.length === 0) {
         text = 'Não existem Pilares preenchidos. É necessário preencher de um a três deles.'
@@ -90,12 +116,52 @@ export default function EvaluateSheet() {
     verifyAdvantagesAndFlaws(data);
     verifyGifts(data);
     verifySkills(data);
-  }, []);
+  }, [players, dataSheet]);
 
   const verifyGifts = (data: any) => {
-    // Dons:
-    // 1 nativo, um da tribo e um do augúrio
-    //Verificação de Rituais
+    if (data.gifts.length !== 3) {
+      let text = '';
+      if (data.gifts.length === 0) text = 'não existem DSons adicionados.'
+      else if (data.gifts.length === 1) text = 'existe apenas 1 Dom adicionado.';
+      else text = 'existem ' + data.gifts.length + ' Dons adicionados.'
+      setGifts({ correct: false, errorMessage: 'Necessário ir até a aba "Dons", clicar no botão "+" e adicionar 3: 1 Dom Nativo, 1 Dom do Augúrio e 1 Dom da Tribo. Atualmente, ' + text });
+    } else setGifts({ correct: true, errorMessage: '' });
+
+    const findGlobals = data.gifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === 'global'));
+    if (findGlobals.length === 0) {
+      setGiftsGlobal({ correct: false, errorMessage: 'Necessário navegar até a aba "Dons", clicar no botão "+" e adicionar um Dom que pertenca a Dons Nativos.' });
+    } else setGiftsGlobal({ correct: true, errorMessage: '' });
+
+    const findTrybe = data.gifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === data.trybe));
+    if (findTrybe.length === 0) {
+      setGiftsTrybe({ correct: false, errorMessage: 'Necessário navegar até a aba "Dons", clicar no botão "+" e adicionar um Dom que Pertença à Tribo ' + capitalizeFirstLetter(data.trybe) + '.' });
+    } else setGiftsTrybe({ correct: true, errorMessage: '' });
+
+    const findAuspice = data.gifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === data.auspice));
+    if (findAuspice.length === 0) {
+      setGiftsAuspice({ correct: false, errorMessage: 'Necessário navegar até a aba "Dons", clicar no botão "+" e adicionar um Dom que Pertença ao Augúrio ' + capitalizeFirstLetter(data.auspice) + '.' });
+    } else setGiftsAuspice({ correct: true, errorMessage: '' });
+  }
+
+  const verifyCorrectlySkills = (): boolean => {
+    let condition = skillsType.correct && skillsCount3.correct && skillsCount2.correct && skillsCount1.correct && skillsCount0.correct && skillNewSpecialty.correct;
+    if (data.skills.performance.value !== 0) {
+      condition = condition && skillPerformance.correct;
+    }
+    if (data.skills.craft.value !== 0) {
+      condition = condition && skillCraft.correct;
+    }
+    if (data.skills.academics.value !== 0) {
+      condition = condition && skillAcademics.correct;
+    }
+    if (data.skills.science.value !== 0) {
+      condition = condition && skillScience.correct;
+    }
+
+    if (data.skills.type === 'Especialista') {
+      condition = condition && skillsCountPlus.correct && skillsCount4.correct;
+    } else condition = condition && skillsCountPlus4.correct;
+    return condition;
   }
 
   const verifySkills = async (data: any) => {
@@ -323,6 +389,67 @@ export default function EvaluateSheet() {
           }
         }
       }
+      
+      //academics, craft, performance, science + more one
+      if (data.skills.academics.value !== 0) {
+        if (data.skills.academics.specialty === '') {
+          setSkillAcademics({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Acadêmicos". No campo de preenchimento, deve ser inserida uma Especialização.' });
+        } else setSkillAcademics({ correct: true, errorMessage: '' });
+      }
+
+      if (data.skills.craft.value !== 0) {
+        if (data.skills.craft.specialty === '') {
+          setSkillCraft({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Ofícios". No campo de preenchimento, deve ser inserida uma Especialização.' });
+        } else setSkillCraft({ correct: true, errorMessage: '' });
+      }
+
+      if (data.skills.performance.value !== 0) {
+        if (data.skills.performance.specialty === '') {
+          setSkillPerformance({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Performance". No campo de preenchimento, deve ser inserida uma Especialização.' });
+        } else setSkillPerformance({ correct: true, errorMessage: '' });
+      }
+
+      if (data.skills.science.value !== 0) {
+        if (data.skills.performance.specialty === '') {
+          setSkillScience({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Ciências". No campo de preenchimento, deve ser inserida uma Especialização.' });
+        } else setSkillScience({ correct: true, errorMessage: '' });
+      }
+      
+      const valueNonEmptySpecialty: string[] = [];
+      Object.entries(data.skills).forEach(([key, skill]: any) => {
+        if (key !== 'type' && skill.value === 0 && skill.specialty !== "")
+          valueNonEmptySpecialty.push(translateSkill(key));
+      });
+      if (valueNonEmptySpecialty.length !== 0) {
+        let text = '';
+        if (valueNonEmptySpecialty.length === 1) text = valueNonEmptySpecialty[0] + '" e apagar a Especialização';
+        else {
+          const lastItem = valueNonEmptySpecialty.pop();
+          text = valueNonEmptySpecialty.join(', ') + ' e ' + lastItem;
+          text += '" e apagar as Especializações das Habilidades citadas.';
+        }
+        setSkillSpecialtyZero({ correct: false, errorMessage: 'Não é possível adicionar especializações em Habilidades com 0 pontos. Necessário navegar até a aba "Habilidades", clicar no botão de edição de "' + text });
+      } else setSkillSpecialtyZero({ correct: true, errorMessage: '' });
+
+      const valueWithSpecialty: string[] = [];
+      Object.entries(data.skills).forEach(([key, skill]: any) => {
+        if (key !== 'type' && key !== 'academics' && key !== 'craft' && key !== 'performance' && key !== 'science' && skill.value > 0 && skill.specialty !== "")
+          valueWithSpecialty.push(translateSkill(key));
+      });
+      if (valueWithSpecialty.length !== 1) {
+        let text1 = '';
+        let text2 = '';
+        if (valueWithSpecialty.length === 0) {
+          text1 = 'e adicionar pelo menos uma';
+          text2 = 'Atualmente, não existe nenhuma com uma Especialização.';
+        } else {
+          text1 = 'e adicionar apenas uma ';
+          const lastItem = valueWithSpecialty.pop();
+          text2 = valueWithSpecialty.join(', ') + ' e ' + lastItem;
+          text2 += '" e apagar as Especializações das Habilidades citadas.';
+        }
+        setSkillNewSpecialty({ correct: false, errorMessage: 'Além de Especializações em Acadêmicos, Ofícios, Performance e Ciência (caso você possua pelo menos um ponto), é necessário adicionar ' + text1 + ' Especialização em alguma outra Habilidade que possua pelo menos um ponto. ' + text2 });
+      } else setSkillNewSpecialty({ correct: true, errorMessage: '' });
     }
   }
 
@@ -350,27 +477,27 @@ export default function EvaluateSheet() {
     } else {
       if (count4 !== 1) {
         let text = '';
-        if (count4 === 1) text = 'Existe apenas Um atributo com 3 pontos. Na aba "Atribudos", é necessário preencher Um atributo com este valor.';
-        else  text = 'Existem ' + count4 + ' atributos com 4 pontos. Na aba "Atribudos", é necessário preencher Um atributo com este valor.';
+        if (count4 === 1) text = 'Existe apenas Um atributo com 3 pontos. Na aba "Atributos", é necessário preencher Um atributo com este valor.';
+        else  text = 'Existem ' + count4 + ' atributos com 4 pontos. Na aba "Atributos", é necessário preencher Um atributo com este valor.';
         setAttributes4({ correct: false, errorMessage: text });
       } else setAttributes4({ correct: true, errorMessage: '' });
       
       if (count3 !== 3) {
         let text = '';
-        if (count3 === 1) text = 'Existe apenas Um atributo com 3 pontos. Na aba "Atribudos", é necessário preencher Três atributos com este valor.';
-        else  text = 'Existem ' + count3 + ' atributos com 3 pontos. Na aba "Atribudos", é necessário preencher Três atributos com este valor.';
+        if (count3 === 1) text = 'Existe apenas Um atributo com 3 pontos. Na aba "Atributos", é necessário preencher Três atributos com este valor.';
+        else  text = 'Existem ' + count3 + ' atributos com 3 pontos. Na aba "Atributos", é necessário preencher Três atributos com este valor.';
         setAttributes3({ correct: false, errorMessage: text });
       } else setAttributes3({ correct: true, errorMessage: '' });
 
       if (count2 !== 4) {
         let text = '';
-        if (count2 === 1) text = 'Existe apenas Um atributo com 2 pontos. Na aba "Atribudos", é necessário preencher Quatro atributos com este valor.';
-        else  text = 'Existem ' + count2 + ' atributos com 2 pontos. Na aba "Atribudos", é necessário preencher Quatro atributos com este valor.';
+        if (count2 === 1) text = 'Existe apenas Um atributo com 2 pontos. Na aba "Atributos", é necessário preencher Quatro atributos com este valor.';
+        else  text = 'Existem ' + count2 + ' atributos com 2 pontos. Na aba "Atributos", é necessário preencher Quatro atributos com este valor.';
         setAttributes2({ correct: false, errorMessage: text });
       } else setAttributes2({ correct: true, errorMessage: '' });
 
       if (count1 !== 1) {
-        setAttributes1({ correct: false, errorMessage: 'Existem ' + count1 + ' atributos com 2 pontos. Na aba "Atribudos", é necessário preencher apenas Um atributo com este valor.' });
+        setAttributes1({ correct: false, errorMessage: 'Existem ' + count1 + ' atributos com 2 pontos. Na aba "Atributos", é necessário preencher apenas Um atributo com este valor.' });
       } else setAttributes1({ correct: true, errorMessage: '' });
     }
   }
@@ -443,22 +570,18 @@ export default function EvaluateSheet() {
   }
 
   return (
-    <div className="z-60 fixed top-0 left-0 w-1/2 h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0">
-      <div className="w-full overflow-y-auto h-full flex flex-col justify-start items-center bg-black relative border-white border-2 py-5">
-        <div className="w-full flex flex-between">
-          <p className="px-6 sm:px-10 text-white font-bold text-2xl w-full">Verificação de Ficha:</p>
-          <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
-            
-            <IoIosCloseCircleOutline
-              className="text-4xl text-white cursor-pointer"
-              onClick={ () => setShowEvaluateSheet({ show: false, data: {} }) }
-            />
-          </div>
-        </div>
+    <div className="z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
+      <div className="w-full flex justify-center pt-3 bg-black">
+        <p className="px-6 sm:px-10 text-white font-bold text-2xl w-full">Verificação de Ficha:</p>
+        <IoIosCloseCircleOutline
+          className="text-4xl text-white cursor-pointer mr-5"
+          onClick={ () => setShowEvaluateSheet({ show: false, data: {} }) }
+        />
+      </div>
+      <div className="w-full overflow-y-auto h-full flex flex-col justify-start items-center bg-black relative pb-5">
         <div className="px-6 sm:px-10 w-full text-white">
-          
           {/* Nome */}
-          <div>
+          <div className="pt-3">
             <div className="flex gap-2 items-center">
               {
                 name.correct
@@ -469,20 +592,6 @@ export default function EvaluateSheet() {
             </div>
               <p className="pl-5">
                 { !name.correct && <p> - { name.errorMessage }</p> }
-              </p>
-          </div>
-          {/* Tribo */}
-          <div>
-            <div className="flex gap-2 items-center">
-              {
-                trybe.correct
-                ? <FaRegCheckCircle className="text-green-500" />
-                : <FaRegCircle className="text-red-500" />
-              }
-              <p>Escolher uma Tribo</p>
-            </div>
-              <p className="pl-5">
-                { !trybe.correct && <p> - { trybe.errorMessage }</p> }
               </p>
           </div>
           {/* Augúrio */}
@@ -498,6 +607,20 @@ export default function EvaluateSheet() {
             <p className="pl-5">
               { !auspice.correct && <p> - { auspice.errorMessage }</p> }
             </p>
+          </div>
+          {/* Tribo */}
+          <div>
+            <div className="flex gap-2 items-center">
+              {
+                trybe.correct
+                ? <FaRegCheckCircle className="text-green-500" />
+                : <FaRegCircle className="text-red-500" />
+              }
+              <p>Escolher uma Tribo</p>
+            </div>
+              <p className="pl-5">
+                { !trybe.correct && <p> - { trybe.errorMessage }</p> }
+              </p>
           </div>
           {/* Renome */}
           <div>
@@ -601,7 +724,7 @@ export default function EvaluateSheet() {
           <div>
             <div className="flex gap-2 items-center">
                 {
-                  skillsType.correct
+                  verifyCorrectlySkills()
                   ? <FaRegCheckCircle className="text-green-500" />
                   : <FaRegCircle className="text-red-500" />
                 }
@@ -614,105 +737,201 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500" />
                   : <FaRegCircle className="text-red-500" />
                 }
-                <p>Escolher um Modelo de Distribuição { showEvaluateSheet.data.skills.type !== '' && '(' + showEvaluateSheet.data.skills.type + ')'}</p>
+                <p>Escolher um Modelo de Distribuição { data.skills.type !== '' && '(' + data.skills.type + ')'}</p>
               </div>
               <div className="pl-10">
                 { !skillsType.correct && <p> - { skillsType.errorMessage }</p> }
               </div>
             </div>
-            <div>
-              { showEvaluateSheet.data.skills.type === 'Especialista'
-                ? <div>
+            {
+              data.skills.type !== '' &&
+              <div>
+                <div>
+                  { 
+                    data.skills.type === 'Especialista'
+                    ? <div>
+                        <div className="flex gap-2 items-center pl-5">
+                          {
+                            skillsCountPlus.correct
+                            ? <FaRegCheckCircle className="text-green-500" />
+                            : <FaRegCircle className="text-red-500" />
+                          }
+                          <p>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</p>
+                        </div>
+                        <div className="pl-10">
+                          { !skillsCountPlus.correct && <p> - { skillsCountPlus.errorMessage }</p> }
+                        </div>
+                        <div className="flex gap-2 items-center pl-5">
+                          {
+                            skillsCount4.correct
+                            ? <FaRegCheckCircle className="text-green-500" />
+                            : <FaRegCircle className="text-red-500" />
+                          }
+                          <p>{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</p>
+                        </div>
+                        <div className="pl-10">
+                          { !skillsCount4.correct && <p> - { skillsCount4.errorMessage }</p> }
+                        </div>
+                      </div>
+                    : <div>
+                        <div className="flex gap-2 items-center pl-5">
+                          {
+                            skillsCountPlus4.correct
+                            ? <FaRegCheckCircle className="text-green-500" />
+                            : <FaRegCircle className="text-red-500" />
+                          }
+                          <p>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</p>
+                        </div>
+                        <div className="pl-10">
+                          { !skillsCountPlus4.correct && <p> - { skillsCountPlus4.errorMessage }</p> }
+                        </div>
+                      </div>
+                    }
+                </div>
+                <div>
+                  <div className="flex gap-2 items-center pl-5">
+                    {
+                      skillsCount3.correct
+                      ? <FaRegCheckCircle className="text-green-500" />
+                      : <FaRegCircle className="text-red-500" />
+                    }
+                    <p>{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</p>
+                  </div>
+                  <div className="pl-10">
+                    { !skillsCount3.correct && <p> - { skillsCount3.errorMessage }</p> }
+                  </div>
+                </div>
+                <div>
+                  <div className="flex gap-2 items-center pl-5">
+                    {
+                      skillsCount2.correct
+                      ? <FaRegCheckCircle className="text-green-500" />
+                      : <FaRegCircle className="text-red-500" />
+                    }
+                    <p>{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</p>
+                  </div>
+                  <div className="pl-10">
+                    { !skillsCount2.correct && <p> - { skillsCount2.errorMessage }</p> }
+                  </div>
+                </div>
+                <div>
+                  <div className="flex gap-2 items-center pl-5">
+                    {
+                      skillsCount1.correct
+                      ? <FaRegCheckCircle className="text-green-500" />
+                      : <FaRegCircle className="text-red-500" />
+                    }
+                    <p>{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</p>
+                  </div>
+                  <div className="pl-10">
+                    { !skillsCount1.correct && <p> - { skillsCount1.errorMessage }</p> }
+                  </div>
+                </div>
+                <div>
+                  <div className="flex gap-2 items-center pl-5">
+                    {
+                      skillsCount0.correct
+                      ? <FaRegCheckCircle className="text-green-500" />
+                      : <FaRegCircle className="text-red-500" />
+                    }
+                    <p>{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</p>
+                  </div>
+                  <div className="pl-10">
+                    { !skillsCount0.correct && <p> - { skillsCount0.errorMessage }</p> }
+                  </div>
+                </div>
+                {
+                  data.skills.academics.value !== 0 &&
+                  <div>
                     <div className="flex gap-2 items-center pl-5">
                       {
-                        skillsCountPlus.correct
+                        skillAcademics.correct
                         ? <FaRegCheckCircle className="text-green-500" />
                         : <FaRegCircle className="text-red-500" />
                       }
-                      <p>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</p>
+                      <p>Preencher uma Especialização em Acadêmicos</p>
                     </div>
                     <div className="pl-10">
-                      { !skillsCountPlus.correct && <p> - { skillsCountPlus.errorMessage }</p> }
-                    </div>
-                    <div className="flex gap-2 items-center pl-5">
-                      {
-                        skillsCount4.correct
-                        ? <FaRegCheckCircle className="text-green-500" />
-                        : <FaRegCircle className="text-red-500" />
-                      }
-                      <p>{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</p>
-                    </div>
-                    <div className="pl-10">
-                      { !skillsCount4.correct && <p> - { skillsCount4.errorMessage }</p> }
+                      { !skillAcademics.correct && <p> - { skillAcademics.errorMessage }</p> }
                     </div>
                   </div>
-                : <div>
+                }
+                {
+                  data.skills.craft.value !== 0 &&
+                  <div>
                     <div className="flex gap-2 items-center pl-5">
                       {
-                        skillsCountPlus4.correct
+                        skillCraft.correct
                         ? <FaRegCheckCircle className="text-green-500" />
                         : <FaRegCircle className="text-red-500" />
                       }
-                      <p>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</p>
+                      <p>Preencher uma Especialização em Ofícios</p>
                     </div>
                     <div className="pl-10">
-                      { !skillsCountPlus4.correct && <p> - { skillsCountPlus4.errorMessage }</p> }
+                      { !skillCraft.correct && <p> - { skillCraft.errorMessage }</p> }
                     </div>
                   </div>
-              }
-            </div>
-            <div>
-              <div className="flex gap-2 items-center pl-5">
-                {
-                  skillsCount3.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
                 }
-                <p>{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</p>
-              </div>
-              <div className="pl-10">
-                { !skillsCount3.correct && <p> - { skillsCount3.errorMessage }</p> }
-              </div>
-            </div>
-            <div>
-              <div className="flex gap-2 items-center pl-5">
                 {
-                  skillsCount2.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  data.skills.performance.value !== 0 &&
+                  <div>
+                    <div className="flex gap-2 items-center pl-5">
+                      {
+                        skillPerformance.correct
+                        ? <FaRegCheckCircle className="text-green-500" />
+                        : <FaRegCircle className="text-red-500" />
+                      }
+                      <p>Preencher uma Especialização em Performance</p>
+                    </div>
+                    <div className="pl-10">
+                      { !skillPerformance.correct && <p> - { skillPerformance.errorMessage }</p> }
+                    </div>
+                  </div>
                 }
-                <p>{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</p>
-              </div>
-              <div className="pl-10">
-                { !skillsCount2.correct && <p> - { skillsCount2.errorMessage }</p> }
-              </div>
-            </div>
-            <div>
-              <div className="flex gap-2 items-center pl-5">
                 {
-                  skillsCount1.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
+                  data.skills.science.value !== 0 &&
+                  <div>
+                    <div className="flex gap-2 items-center pl-5">
+                      {
+                        skillScience.correct
+                        ? <FaRegCheckCircle className="text-green-500" />
+                        : <FaRegCircle className="text-red-500" />
+                      }
+                      <p>Preencher uma Especialização em Science</p>
+                    </div>
+                    <div className="pl-10">
+                      { !skillScience.correct && <p> - { skillScience.errorMessage }</p> }
+                    </div>
+                  </div>
                 }
-                <p>{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</p>
+                <div>
+                  <div className="flex gap-2 items-center pl-5">
+                    {
+                      skillNewSpecialty.correct
+                      ? <FaRegCheckCircle className="text-green-500" />
+                      : <FaRegCircle className="text-red-500" />
+                    }
+                    <p>Adicionar uma nova Especialização em uma Habilidade à sua escolha</p>
+                  </div>
+                  <div className="pl-10">
+                    { !skillNewSpecialty.correct && <p> - { skillNewSpecialty.errorMessage }</p> }
+                  </div>
+                </div>
+                <div>
+                  <div className="flex gap-2 items-center pl-5">
+                    {
+                      skillSpecialtyZero.correct
+                      ? <FaRegCheckCircle className="text-green-500" />
+                      : <FaRegCircle className="text-red-500" />
+                    }
+                    <p>Nenhuma Habilidade com 0 pontos pode ter uma Especialização</p>
+                  </div>
+                  <div className="pl-10">
+                    { !skillSpecialtyZero.correct && <p> - { skillSpecialtyZero.errorMessage }</p> }
+                  </div>
+                </div>
               </div>
-              <div className="pl-10">
-                { !skillsCount1.correct && <p> - { skillsCount1.errorMessage }</p> }
-              </div>
-            </div>
-            <div>
-              <div className="flex gap-2 items-center pl-5">
-                {
-                  skillsCount0.correct
-                  ? <FaRegCheckCircle className="text-green-500" />
-                  : <FaRegCircle className="text-red-500" />
-                }
-                <p>{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</p>
-              </div>
-              <div className="pl-10">
-                { !skillsCount0.correct && <p> - { skillsCount0.errorMessage }</p> }
-              </div>
-            </div>
+            }
           </div>
           {/* Dons */}
           <div>
@@ -735,6 +954,45 @@ export default function EvaluateSheet() {
               </div>
               <div className="pl-10">
                 { !gifts.correct && <p> - { gifts.errorMessage }</p> }
+              </div>
+            </div>
+            <div>
+              <div className="flex gap-2 items-center pl-5">
+                {
+                  giftsGlobal.correct
+                  ? <FaRegCheckCircle className="text-green-500" />
+                  : <FaRegCircle className="text-red-500" />
+                }
+                <p>Adicionar um Dom Nativo</p>
+              </div>
+              <div className="pl-10">
+                { !giftsGlobal.correct && <p> - { giftsGlobal.errorMessage }</p> }
+              </div>
+              <div>
+                <div>
+                  <div className="flex gap-2 items-center pl-5">
+                    {
+                      giftsTrybe.correct
+                      ? <FaRegCheckCircle className="text-green-500" />
+                      : <FaRegCircle className="text-red-500" />
+                    }
+                    <p>Adicionar um Dom da Tribo ({ capitalizeFirstLetter(data.trybe) })</p>
+                  </div>
+                  <div className="pl-10">
+                    { !giftsTrybe.correct && <p> - { giftsTrybe.errorMessage }</p> }
+                  </div>
+                </div>
+                <div className="flex gap-2 items-center pl-5">
+                  {
+                    giftsAuspice.correct
+                    ? <FaRegCheckCircle className="text-green-500" />
+                    : <FaRegCircle className="text-red-500" />
+                  }
+                  <p>Adicionar um Dom do Augúrio <span className="capitalize">({ data.auspice })</span></p>
+                </div>
+                <div className="pl-10">
+                  { !giftsAuspice.correct && <p> - { giftsAuspice.errorMessage }</p> }
+                </div>
               </div>
             </div>
           </div>

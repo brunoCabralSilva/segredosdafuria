@@ -38,7 +38,7 @@ export default function AddGift() {
   }
 
   return(
-    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70 font-normal p-5 pb-3">
+    <div className="z-80 fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70 font-normal p-5 pb-3">
       <div className="bg-black border-2 border-white w-full h-full p-5">
         <div className="flex justify-between">
           <p className="text-white font-bold text-2xl py-3 pt-2">Dons</p>

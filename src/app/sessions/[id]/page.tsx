@@ -140,33 +140,37 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showRemovePlayer.show && <RemovePlayer /> }
       { addTouchstone.show && <AddTouchstone /> }
       { showDeleteTouchstone.show && <DeleteTouchstone /> }
-      { showEvaluateSheet.show && <EvaluateSheet /> }
+      {/* { showEvaluateSheet.show && <EvaluateSheet /> } */}
       <Nav />
       {
         showData
         ? <div className="flex bg-black/80">
-            <div className="flex flex-col w-full relative">
-              <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
-                {
-                  chat
-                  && chat.length > 0
-                  && chat[0].list
-                  && chat[0].list.length >= 0
-                  ? chat[0]
+            {
+              showEvaluateSheet.show
+              ? <EvaluateSheet />
+              : <div className="flex flex-col w-full relative">
+                <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
+                  {
+                    chat
+                    && chat.length > 0
                     && chat[0].list
-                      .sort((a: any, b: any) => a.order - b.order)
-                      .map((msg: any, index: number) => {
-                        if (email !== '' && email === msg.email) {
-                          return (<Message key={index} dataMessage={msg} color="green" />);
-                        } return (<Message key={index} dataMessage={msg} color="gray" />);
-                      })
-                  : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
-                      <Loading />
-                    </div>
-                }
+                    && chat[0].list.length >= 0
+                    ? chat[0]
+                      && chat[0].list
+                        .sort((a: any, b: any) => a.order - b.order)
+                        .map((msg: any, index: number) => {
+                          if (email !== '' && email === msg.email) {
+                            return (<Message key={index} dataMessage={msg} color="green" />);
+                          } return (<Message key={index} dataMessage={msg} color="gray" />);
+                        })
+                    : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
+                        <Loading />
+                      </div>
+                  }
+                </div>
+                <SessionBar gameMaster={gameMaster} />
               </div>
-              <SessionBar gameMaster={gameMaster} />
-            </div>
+            }
             {
               showMenuSession === 'dices' &&
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
