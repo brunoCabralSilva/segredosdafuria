@@ -24,6 +24,7 @@ import ResetPlayer from "@/components/popup/resetPlayer";
 import AddTouchstone from "@/components/popup/addTouchstone";
 import DeleteTouchstone from "@/components/popup/deleteTouchstone";
 import EvaluateSheet from "@/components/popup/evaluateSheet";
+import ConvertToPdf from "@/components/convertToPdf";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -54,6 +55,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     showEvaluateSheet,
     email,
     showMenuSession,
+    showDownloadPdf,
   } = useContext(contexto);
 
   const dataRefPlayer = collection(db, "players");
@@ -140,7 +142,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showRemovePlayer.show && <RemovePlayer /> }
       { addTouchstone.show && <AddTouchstone /> }
       { showDeleteTouchstone.show && <DeleteTouchstone /> }
-      {/* { showEvaluateSheet.show && <EvaluateSheet /> } */}
+      { showDownloadPdf && <ConvertToPdf /> }
       <Nav />
       {
         showData

@@ -55,6 +55,7 @@ export default function Provider({children }: IProvider) {
   const [addTouchstone, setAddTouchstone] = useState({show: false, data: {}});
   const [showDeleteTouchstone, setShowDeleteTouchstone] = useState({ show: false, name: '' });
   const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: '' });
+  const [showDownloadPdf, setShowDownloadPdf] = useState(false);
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -112,6 +113,7 @@ export default function Provider({children }: IProvider) {
     setAddTouchstone({ show: false, data: {} });
     setShowDeleteTouchstone({ show: false, name: '' });
     setShowEvaluateSheet({show: false, data: '' });
+    setShowDownloadPdf(false);
   }
 
   return (
@@ -167,6 +169,7 @@ export default function Provider({children }: IProvider) {
         addTouchstone, setAddTouchstone,
         showDeleteTouchstone, setShowDeleteTouchstone,
         showEvaluateSheet, setShowEvaluateSheet,
+        showDownloadPdf, setShowDownloadPdf,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,

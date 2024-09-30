@@ -20,6 +20,7 @@ export default function General() {
     setShowRitualRoll,
     setShowMessage,
     setShowEvaluateSheet,
+    setShowDownloadPdf,
 	} = useContext(contexto);
 
   useEffect(() => {
@@ -147,6 +148,13 @@ export default function General() {
           className="mt-8 mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
         >
           Avaliar Ficha 
+        </button>
+        <button
+          type="button"
+          onClick={ () => setShowDownloadPdf(true) }
+          className="mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
+        >
+          Exportar Ficha 
         </button>
         <button
 					type="button"
