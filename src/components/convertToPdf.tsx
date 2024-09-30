@@ -149,7 +149,7 @@ export default function ConvertToPdf() {
               <div className="flex flex-wrap gap-1 pt-1">
                 {
                   number.map((item2, index2) => (
-                    <button type="button"  className="h-5 w-5 rounded-full bg-white border-black border" />
+                    <button key={index2} type="button"  className="h-5 w-5 rounded-full bg-white border-black border" />
                   ))
                 }
               </div>
