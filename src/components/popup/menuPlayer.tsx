@@ -40,6 +40,7 @@ export default function MenuPlayer() {
       case ('touchstones'): return (<Touchstones />);
       case ('background'): return (<Background type="background" />);
       case ('principles-of-the-chronicle'): return (<Principles />);
+      case ('favor-ban'): return (<Principles />);
       case ('anotations'): return (<Anotations type="notes" />);
       case ('gifts'): return (<Gifts />);
       case ('rituals'): return (<Rituals />);
@@ -85,6 +86,7 @@ export default function MenuPlayer() {
           <option value={'advantages-flaws'}>Vantagens e Defeitos</option>
           <option value={'forms'}>Formas ( Atual: { dataSheet.form } )</option>
           <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>
+          <option value={'favor-ban'}>Favores e Proibições</option>
           <option value={'session'}>Sessão</option>
           <option value={'background'}>Background</option>
           <option value={'anotations'}>Anotações</option>
