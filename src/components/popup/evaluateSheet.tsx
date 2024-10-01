@@ -1,6 +1,6 @@
 'use client'
 import contexto from "@/context/context";
-import { capitalizeFirstLetter, translateSkill } from "@/firebase/utilities";
+import { capitalizeFirstLetter, playerSheet, translateSkill } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircle } from "react-icons/fa6";
@@ -10,17 +10,7 @@ export default function EvaluateSheet() {
   const {
     showEvaluateSheet, setShowEvaluateSheet, setShowMessage, dataSheet, players,
   } = useContext(contexto);
-  const [data, setData] = useState({
-    skills: {
-      type: '',
-      academics: { value: 0 },
-      craft: { value: 0 },
-      performance: { value: 0 },
-      science: { value: 0 },
-    },
-    auspice: '',
-    trybe: '',
-  });
+  const [data, setData] = useState(playerSheet);
   const [name, setName] = useState({ correct: false, errorMessage: '' });
   const [trybe, setTrybe] = useState({ correct: false, errorMessage: '' });
   const [auspice, setAuspice] = useState({ correct: false, errorMessage: '' });
@@ -62,8 +52,15 @@ export default function EvaluateSheet() {
 
   useEffect(() => {
     let data: any = {};
-    if (showEvaluateSheet.data === 'master') {
-
+    if (showEvaluateSheet.data !== 'player') {
+      const findPlayer = players.find((player: any) => player.email === showEvaluateSheet.data);
+      if (findPlayer) {
+        data = findPlayer.data;
+        setData(findPlayer.data);
+      } else {
+        setShowMessage({ show: true, text: 'Não foi possível localizar o Jogador.' });
+        setShowEvaluateSheet({ show: false, data: {} });
+      }
     } else {
       data = dataSheet;
       setData(dataSheet);

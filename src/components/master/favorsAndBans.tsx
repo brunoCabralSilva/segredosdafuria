@@ -84,7 +84,7 @@ export default function FavorsAndBans() {
                     player.data.favorsAndBans.map(( item: any, index: number) => (
                       <div key={index} className="pb-3 border-white border-2 p-4 mt-2">
                         <div className="flex w-full justify-between items-center">
-                          <div className="text-white">Favor / Ban imposto pelo jogador ({item.order})</div>
+                          <div className="text-white">Favor / Proibição imposto pelo Jogador ({item.order})</div>
                         </div>
                         <div className="text-justify pt-2 font-normal">
                           { item.description }

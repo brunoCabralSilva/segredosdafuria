@@ -11,7 +11,7 @@ import SheetData from "../master/sheetData";
 import SheetForms from "../master/sheetForms";
 
 export default function PlayerSheet() {
-  const [ player, setPlayer ]: any = useState({});
+  const [player, setPlayer ]: any = useState({});
   const [edit, setEdit] = useState(false);
   const [newName, setNewName] = useState('');
   const {
@@ -20,6 +20,7 @@ export default function PlayerSheet() {
     session,
     setShowEvaluateSheet,
     setShowMessage,
+    setShowDownloadPdf,
     setShowResetPlayer,
     setShowRemovePlayer,
   } = useContext(contexto);
@@ -137,10 +138,20 @@ export default function PlayerSheet() {
             <SheetData player={player} />
             <button
               type="button"
-              onClick={ () => setShowEvaluateSheet({show: true, data: 'master' }) }
+              onClick={ () => {
+                setShowEvaluateSheet({show: true, data: player.email });
+                setShowPlayer({ show: false, email: '' });
+              }}
               className="mt-8 mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
             >
-              Avaliar Ficha 
+              Avaliar Ficha
+            </button>
+            <button
+              type="button"
+              onClick={ () => setShowDownloadPdf(true) }
+              className="mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
+            >
+              Exportar Ficha
             </button>
             <button
               type="button"
