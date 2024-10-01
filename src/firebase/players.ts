@@ -185,6 +185,7 @@ export const addNewSheet = async (sessionId: string, sheet: any, setShowMessage:
     setShowMessage('Ocorreu um erro ao criar uma nova Ficha: ' + error);
   }
 };
+
 export const removePlayerFromSession = async (sessionId: string, email: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);

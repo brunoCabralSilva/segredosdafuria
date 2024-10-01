@@ -4,36 +4,14 @@ import { useContext, useEffect, useState } from "react";
 import LeaveFromSession from "../popup/leaveFromSession";
 
 export default function Details() {
-  const [nameSession, setNameSession] = useState('');
-  const [creationDate, setCreationDate] = useState('');
-  const [description, setDescription] = useState('');
-  const [gameMaster, setGameMaster] = useState('');
   const {
-    sessionId,
     showDelFromSession,
     email,
     name,
+    session,
     players,
-    setShowMessage,
     setShowDelFromSession,
   } = useContext(contexto);
-
-  const returnValue = async () => {
-    const sessionData: any = await getSessionById(sessionId);
-    if (sessionData) {
-      setNameSession(sessionData.name);
-      setCreationDate(sessionData.creationDate);
-      setDescription(sessionData.description);
-      setGameMaster(sessionData.gameMaster);
-    } else {
-      setShowMessage({ show: true, text: 'Não foi encontrada um Sessão com as referências mencionadas. Por favor, atualize a página e tente novamente.' })
-    }
-  };
-
-  useEffect(() => {
-    returnValue();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return(
     <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
@@ -42,14 +20,14 @@ export default function Details() {
           className="w-full mt-2 flex justify-between items-start"
         >
           {
-            creationDate !== ''
+            session.creationDate !== ''
             ? <div className="h-full w-full">
                 <div className="flex flex-col items-center justify-start w-full">
                   <div
                     className="w-full capitalize flex justify-between items-center pr-2 border-2 border-white mb-2"
                   >
                     <span className="text-white font-bold text-2xl my-3 capitalize break-words w-full px-4">
-                      { nameSession }
+                      { session.name }
                     </span>
                   </div>
                   <div className="w-full mb-2 flex-col font-bold border-2 border-white">
@@ -64,7 +42,7 @@ export default function Details() {
                         <div
                             className="text-white font-normal p-4 text-justify w-full h-full break-words"
                           >
-                          { description }
+                          { session.description }
                         </div>
                     </div>
                   </div>
@@ -77,17 +55,17 @@ export default function Details() {
                       </span>
                     </div>
                     <span className="border border-transparent text-sm text-white w-full p-2 break-words">
-                      { gameMaster }
+                      { session.gameMaster }
                     </span>
                   </div>
                   <p className="mt-1 text-white sm:text-left w-full text-center border-2 border-white p-4">
                     <span className="font-bold pr-1">Data de Criação:</span>
-                    <span>{ creationDate }</span>
+                    <span>{ session.creationDate }</span>
                   </p>
                   <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3">
                     <span className="pr-1 font-bold">Jogadores:</span>
                     {
-                      players.filter((player:any) => player.email !== gameMaster ).map((item: any, index: number) => (
+                      players.filter((player:any) => player.email !== session.gameMaster ).map((item: any, index: number) => (
                         <span className="capitalize" key={index}>
                           { index === players.length -1 ? item.user + '.' : item.user + ', ' }
                         </span>

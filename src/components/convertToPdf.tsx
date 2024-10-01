@@ -88,7 +88,6 @@ export default function ConvertToPdf() {
   };
 
   const returnAdvantage = (cost: number) => {
-    console.log(cost);
     const points = Array(7).fill('');
     return (
       <div className="flex flex-wrap gap-1 pt-1">

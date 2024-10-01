@@ -1,8 +1,8 @@
 'use client'
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import { collection, doc, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
 import Loading from "../../../components/loading";
 import Nav from '@/components/nav';
 import SessionBar from "../../../components/sessionBar";
@@ -25,6 +25,8 @@ import AddTouchstone from "@/components/popup/addTouchstone";
 import DeleteTouchstone from "@/components/popup/deleteTouchstone";
 import EvaluateSheet from "@/components/popup/evaluateSheet";
 import ConvertToPdf from "@/components/convertToPdf";
+import AddPrinciple from "@/components/popup/addPrinciple";
+import DeletePrinciple from "@/components/popup/deletePrinciple";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -52,6 +54,8 @@ export default function SessionId({ params } : { params: { id: string } }) {
     showResetPlayer,
     showDeleteHistoric,
     showDeleteTouchstone,
+    addPrinciple,
+    showDeletePrinciple,
     showEvaluateSheet,
     email,
     showMenuSession,
@@ -60,12 +64,20 @@ export default function SessionId({ params } : { params: { id: string } }) {
 
   const dataRefPlayer = collection(db, "players");
   const queryDataPlayer = query(dataRefPlayer, where("sessionId", "==", id));
-  const [data, loading, error] = useCollectionData(queryDataPlayer, { idField: "id" } as any);
+  const [data, loading] = useCollectionData(queryDataPlayer, { idField: "id" } as any);
+
+  const dataRefSession = doc(db, "sessions", id);
+  const [dataSession, loadingSession] = useDocumentData(dataRefSession, { idField: "id" } as any);
+
   if (data) {
     setPlayers(data[0].list);
     const player = data[0].list.find((item: any) => item.email === email);
     if (player) setDataSheet(player.data);
   }
+
+  useEffect(() => {
+    if (dataSession && !loadingSession) setSession(dataSession);
+  }, [dataSession, loadingSession, email, setSession]);
   
   useEffect(() => {
     if (data && !loading) {
@@ -79,8 +91,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     const auth = await authenticate(setShowMessage);
     const dataSession: any = await getSessionById(id);
     if (auth) {
-      if (dataSession.gameMaster === auth.email) setSession(dataSession);
-      else {
+      if (dataSession.gameMaster !== auth.email) {
         const player: any = await getPlayerByEmail(id, auth.email, setShowMessage);
         if (player) setDataSheet(player.data);
       }
@@ -142,6 +153,8 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showRemovePlayer.show && <RemovePlayer /> }
       { addTouchstone.show && <AddTouchstone /> }
       { showDeleteTouchstone.show && <DeleteTouchstone /> }
+      { addPrinciple.show && <AddPrinciple /> }
+      { showDeletePrinciple.show && <DeletePrinciple /> }
       { showDownloadPdf && <ConvertToPdf /> }
       <Nav />
       {

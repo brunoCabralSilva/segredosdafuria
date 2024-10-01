@@ -65,6 +65,7 @@ export const createSession = async (
       gameMaster: email,
       anotations: '',
       description,
+      principles: [],
     });
     await createNotificationData(newSession.id, setShowMessage);
     await createPlayersData(newSession.id, setShowMessage);

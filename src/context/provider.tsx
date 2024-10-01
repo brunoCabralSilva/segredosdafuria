@@ -54,6 +54,8 @@ export default function Provider({children }: IProvider) {
   const [showRitualRoll, setShowRitualRoll] = useState({ show: false, ritual: {} });
   const [addTouchstone, setAddTouchstone] = useState({show: false, data: {}});
   const [showDeleteTouchstone, setShowDeleteTouchstone] = useState({ show: false, name: '' });
+  const [addPrinciple, setAddPrinciple] = useState({show: false, data: {}});
+  const [showDeletePrinciple, setShowDeletePrinciple] = useState({ show: false, name: '' });
   const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: '' });
   const [showDownloadPdf, setShowDownloadPdf] = useState(false);
   //gameMaster
@@ -114,6 +116,8 @@ export default function Provider({children }: IProvider) {
     setShowDeleteTouchstone({ show: false, name: '' });
     setShowEvaluateSheet({show: false, data: '' });
     setShowDownloadPdf(false);
+    setAddPrinciple({show: false, data: {}});
+    setShowDeletePrinciple({ show: false, name: '' });
   }
 
   return (
@@ -170,6 +174,8 @@ export default function Provider({children }: IProvider) {
         showDeleteTouchstone, setShowDeleteTouchstone,
         showEvaluateSheet, setShowEvaluateSheet,
         showDownloadPdf, setShowDownloadPdf,
+        addPrinciple, setAddPrinciple,
+        showDeletePrinciple, setShowDeletePrinciple,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,

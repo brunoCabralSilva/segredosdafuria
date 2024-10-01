@@ -61,20 +61,20 @@ export default function Background(props: { type: string }) {
                   className="text-3xl text-white cursor-pointer" />
           }
         </div>
-          { 
-            textArea ?
-            <textarea
-              className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full mb-5"
-              value={ text }
-              onChange={(e) => typeText(e)}
-            />
-            : <div
-                className="text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full cursor-pointer mb-5"
-                onClick={() => setTextArea(true)} 
-              >
-              { text }
-            </div>
-          }
+        { 
+          textArea ?
+          <textarea
+            className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full mb-5"
+            value={ text }
+            onChange={(e) => typeText(e)}
+          />
+          : <div
+              className={`text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 ${text.length < 720 && 'h-full'} cursor-pointer mb-5`}
+              onClick={() => setTextArea(true)} 
+            >
+            { text }
+          </div>
+        }
       </div>
     </div>
   );

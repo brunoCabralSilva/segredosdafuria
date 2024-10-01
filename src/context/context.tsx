@@ -93,6 +93,10 @@ interface RecipesContext {
   setShowEvaluateSheet: (state: { show: boolean, data: any }) => void,
   showDownloadPdf: boolean,
   setShowDownloadPdf: (state: boolean) => void,
+  addPrinciple: { show: boolean, data: any },
+  setAddPrinciple: (state: {show: boolean, data: {}}) => void,
+  showDeletePrinciple: { show: boolean, name: string },
+  setShowDeletePrinciple: (state: { show: boolean, name: string }) => void,
   //gameMaster
   session: any,
   setSession: (state: any) => void,
@@ -203,6 +207,10 @@ const initialValue: RecipesContext = {
   setShowEvaluateSheet: () => {},
   showDownloadPdf: false,
   setShowDownloadPdf: () => {},
+  addPrinciple: { show: false, data: {} },
+  setAddPrinciple: () => {},
+  showDeletePrinciple: { show: false, name: '' },
+  setShowDeletePrinciple: () => {},
   //gameMaster
   session: {},
   setSession: () => {},
