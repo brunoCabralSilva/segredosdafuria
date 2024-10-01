@@ -7,7 +7,7 @@ import AddRitual from "../popup/addRitual";
 export default function Rituals() {
   const { dataSheet, showRitualsToAdd, setShowRitualsToAdd } = useContext(contexto);
 	return(
-    <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
+    <div className="flex flex-col w-full h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 p-1 text-white flex-col items-start justify-center font-bold">
         <div className="w-full mb-2 flex items-center justify-between font-bold">
           <p className="w-full mt-5 mb-3">Rituals</p>

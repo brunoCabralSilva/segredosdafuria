@@ -7,7 +7,7 @@ import { MdDelete } from "react-icons/md";
 export default function Principles() {
   const { setAddPrinciple, setShowDeletePrinciple, session } =  useContext(contexto);
   return(
-    <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
+    <div className="flex flex-col w-full h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         <button
           type="button"

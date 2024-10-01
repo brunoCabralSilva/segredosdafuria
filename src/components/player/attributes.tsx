@@ -6,7 +6,7 @@ import ItemAtr from "./itemAtr";
 export default function Attributes() {
 	const { dataSheet } = useContext(contexto);
   return(
-    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-5">
+    <div className="flex flex-col w-full h-75vh overflow-y-auto pr-2">
       <div className="w-full h-full mb-2 p-1 flex-col text-white items-start justify-center font-bold">
         <div className="w-full p-4">
           <span className="w-full text-center">Físicos</span>

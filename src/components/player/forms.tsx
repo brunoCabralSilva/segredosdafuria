@@ -76,7 +76,7 @@ export default function Forms() {
   };
 
   return(
-    <div className="flex flex-col w-full overflow-y-auto pr-2 h-full mb-3">
+    <div className="flex flex-col w-full pr-2 h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         <div className="w-full mt-2 text-black">
           <div className="w-full pb-5"> 

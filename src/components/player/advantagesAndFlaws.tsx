@@ -9,24 +9,12 @@ import AdvTalensAdded from './advTalensAdded';
 import AdvLoresheetsAdded from './advLoresheetsAdded';
 
 export default function AdvantagesAndFlaws() {
-  const [adv, setAdv] = useState<any>([]);
   const {
     dataSheet,
-    sessionId, email,
     setShowMessage,
     showAllFlaws, setShowAllFlaws,
     showAllAdvantages, setShowAllAdvantages,
   } = useContext(contexto);
-
-  useEffect(() => {
-    const getAllAdvantages = async () => {
-      const player = await getPlayerByEmail(sessionId, email, setShowMessage);
-      if (player) setAdv(player.data.advantagesAndFlaws);
-      else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
-    }
-    getAllAdvantages();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const sumAllAdvantagesAndFlaws = () => {
     let advantageSum = 0;
@@ -72,7 +60,7 @@ export default function AdvantagesAndFlaws() {
   }
 
   return(
-    <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
+    <div className="flex flex-col w-full h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         { sumAllAdvantagesAndFlaws() }
         <div className="w-full mt-5 mb-3">Méritos e Backgrounds</div>

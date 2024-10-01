@@ -200,7 +200,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
             }
             {
               showMenuSession === 'sheet' && 
-                <div className="w-full md:w-3/5 absolute sm:relative z-50">
+                <div className="w-full h-screen md:w-3/5 absolute sm:relative z-50">
                 {
                  gameMaster 
                   ? <MenuGameMaster />
@@ -209,7 +209,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
                 </div>
             }
           </div>
-        : <div className="h-screen w-full bg-black/80">
+        : <div className="h-full w-full bg-black/80">
             <Loading />
           </div>
       }

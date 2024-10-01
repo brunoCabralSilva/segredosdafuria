@@ -1,6 +1,6 @@
 'use client'
 import { FaRegEdit } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import contexto from "@/context/context";
 import { MdDelete } from "react-icons/md";
 
@@ -12,7 +12,7 @@ export default function Touchstones() {
   } =  useContext(contexto);
 
   return(
-    <div className="flex flex-col w-full overflow-y-auto h-full mb-3">
+    <div className="flex flex-col w-full h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         {
           dataSheet.touchstones.length < 3 &&
