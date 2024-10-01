@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import contexto from "@/context/context";
@@ -6,42 +6,48 @@ import Image from "next/image";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import Loading from "./loading";
 
-export default function ConvertToPdf() {
-  const { dataSheet, setShowDownloadPdf, session } = useContext(contexto);
+export default function ConvertToPdf(props: { data: any }) {
+  const { data } = props;
+  const { setShowDownloadPdf, session } = useContext(contexto);
   const pdfRef: any = useRef(null);
   const pdfRef2: any = useRef(null);
-
-  useEffect(() => {
-    const handleDownloadPdf = async () => {
-      const pdfContainer1 = document.createElement('div');
-      pdfContainer1.style.width = '1300px';
-      pdfContainer1.style.overflow = 'hidden';
-      pdfContainer1.appendChild(pdfRef.current.cloneNode(true));
-      document.body.appendChild(pdfContainer1);
-      const pdf = new jsPDF();
-      const captureElement = async (element: any) => {
-        const canvas = await html2canvas(element);
-        const imgData = canvas.toDataURL("image/png");
-        const imgWidth = pdf.internal.pageSize.getWidth();
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        return { imgData, imgWidth, imgHeight };
-      };
-      const { imgData: imgData1, imgWidth: imgWidth1, imgHeight: imgHeight1 } = await captureElement(pdfContainer1);
-      pdf.addImage(imgData1, "PNG", 0, 0, imgWidth1, imgHeight1);
-      pdf.addPage();
-      const pdfContainer2 = document.createElement('div');
-      pdfContainer2.style.width = '1400px';
-      pdfContainer2.style.overflow = 'hidden';
-      pdfContainer2.appendChild(pdfRef2.current.cloneNode(true));
-      document.body.appendChild(pdfContainer2);
-      const { imgData: imgData2, imgWidth: imgWidth2, imgHeight: imgHeight2 } = await captureElement(pdfContainer2);
-      pdf.addImage(imgData2, "PNG", 0, 0, imgWidth2, imgHeight2);
-      pdf.save(dataSheet.name + ".pdf");
-      document.body.removeChild(pdfContainer1);
-      document.body.removeChild(pdfContainer2);
+  
+  console.log(data);
+  
+  // useEffect(() => {
+  // }, []);
+  const handleDownloadPdf = async () => {
+    const pdfContainer1 = document.createElement('div');
+    pdfContainer1.style.width = '1300px';
+    pdfContainer1.style.overflow = 'hidden';
+    pdfContainer1.appendChild(pdfRef.current.cloneNode(true));
+    document.body.appendChild(pdfContainer1);
+    const pdf = new jsPDF();
+    const captureElement = async (element: any) => {
+      const canvas = await html2canvas(element);
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = pdf.internal.pageSize.getWidth();
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      return { imgData, imgWidth, imgHeight };
     };
+    const { imgData: imgData1, imgWidth: imgWidth1, imgHeight: imgHeight1 } = await captureElement(pdfContainer1);
+    pdf.addImage(imgData1, "PNG", 0, 0, imgWidth1, imgHeight1);
+    pdf.addPage();
+    const pdfContainer2 = document.createElement('div');
+    pdfContainer2.style.width = '1400px';
+    pdfContainer2.style.overflow = 'hidden';
+    pdfContainer2.appendChild(pdfRef2.current.cloneNode(true));
+    document.body.appendChild(pdfContainer2);
+    const { imgData: imgData2, imgWidth: imgWidth2, imgHeight: imgHeight2 } = await captureElement(pdfContainer2);
+    pdf.addImage(imgData2, "PNG", 0, 0, imgWidth2, imgHeight2);
+    pdf.save(data.name + ".pdf");
+    document.body.removeChild(pdfContainer1);
+    document.body.removeChild(pdfContainer2);
+  };
+  
+  useLayoutEffect(() => {
     handleDownloadPdf();
-    setTimeout(() => setShowDownloadPdf(false), 3000);
+    setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 3000);
   }, []);
 
   const returnPoints = (name: string) => {
@@ -50,7 +56,7 @@ export default function ConvertToPdf() {
       <div className={`flex flex-wrap ${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'gap-2' : 'gap-1'} pt-1`}>
         {
           points.map((item, index) => {
-            if (dataSheet[name] >= index + 1) {
+            if (data[name] >= index + 1) {
               return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-black border-black border`} />
             } return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-white border-black border`} />
           })
@@ -66,8 +72,8 @@ export default function ConvertToPdf() {
 
   const typeInTouchstones = (text: string) => {
     let length = 700;
-    if (dataSheet.touchstones.length === 3) length = 185;
-    else if (dataSheet.touchstones.length === 2) length = 330;
+    if (data.touchstones.length === 3) length = 185;
+    else if (data.touchstones.length === 2) length = 330;
     if (text.length > length) return text.slice(0, length) + '...';
     return text;
   };
@@ -78,7 +84,7 @@ export default function ConvertToPdf() {
       <div className="flex flex-wrap gap-1 pt-1">
         {
           points.map((item, index) => {
-            if (dataSheet.attributes[name] >= index + 1) {
+            if (data.attributes[name] >= index + 1) {
               return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black border" />
             } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black" />
           })
@@ -108,7 +114,7 @@ export default function ConvertToPdf() {
       <div className="flex flex-wrap gap-1 pt-1">
         {
           points.map((item, index) => {
-            if (dataSheet.skills[name].value >= index + 1) {
+            if (data.skills[name].value >= index + 1) {
               return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black border" />
             } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black" />
           })
@@ -135,7 +141,7 @@ export default function ConvertToPdf() {
   };
 
   const returnEmpty = () => {
-    let length = 13 - (dataSheet.advantagesAndFlaws.flaws.length + dataSheet.advantagesAndFlaws.advantages.length + dataSheet.advantagesAndFlaws.loresheets.length + dataSheet.advantagesAndFlaws.talens.length);
+    let length = 13 - (data.advantagesAndFlaws.flaws.length + data.advantagesAndFlaws.advantages.length + data.advantagesAndFlaws.loresheets.length + data.advantagesAndFlaws.talens.length);
     if (length < 0) length = 0;
     const points = Array(length).fill('');
     const number = Array(7).fill('');
@@ -160,7 +166,7 @@ export default function ConvertToPdf() {
   };
 
   const returnEmptyGifts = () => {
-    let length = 18 - (dataSheet.gifts.length - dataSheet.rituals.length);
+    let length = 18 - (data.gifts.length - data.rituals.length);
     if (length < 0) length = 0;
     const points = Array(length).fill('');
     return (
@@ -200,7 +206,7 @@ export default function ConvertToPdf() {
             <div className="grid grid-cols-3 border border-black w-full">
               <div className="px-1 pb-3 w-full border border-b-black flex items-center justify-start">
                 <p className="pr-1 font-bold">Nome:</p>
-                <p className="">{ dataSheet.name }</p>
+                <p className="">{ data.name }</p>
               </div>
               <div className="w-full px-1 pb-3 border border-l-black border-b-black flex items-center justify-start">
                 <p className="pr-1 font-bold">Conceito:</p>
@@ -210,17 +216,17 @@ export default function ConvertToPdf() {
                 <p className="pr-1 font-bold">Patrono:</p>
                 <p></p>
               </div>
-              <div className="w-full px-1 pb-3 border">
+              <div className="w-full px-1 pb-3 border flex">
                 <p className="pr-1 font-bold">Crônica:</p>
                 <p>{ session.name }</p>
               </div>
               <div className="w-full px-1 pb-3 border border-l-black flex">
                 <p className="pr-1 font-bold">Augúrio:</p>
-                <p className="capitalize">{ dataSheet.auspice }</p>
+                <p className="capitalize">{ data.auspice }</p>
               </div>
               <div className="w-full px-1 pb-3 border border-l-black flex">
                 <p className="pr-1 font-bold">Tribo:</p>
-                <p>{ capitalizeFirstLetter(dataSheet.trybe) }</p>
+                <p>{ capitalizeFirstLetter(data.trybe) }</p>
               </div>
             </div>
           </div>
@@ -308,115 +314,115 @@ export default function ConvertToPdf() {
             <div className="grid grid-cols-3">
               <div className="pr-5">
                 <div className="flex justify-between items-center pt-3">
-                  <p>Atletismo { dataSheet.skills.athletics.specialty !== '' && `(${ dataSheet.skills.athletics.specialty})` }</p>
+                  <p>Atletismo { data.skills.athletics.specialty !== '' && `(${ data.skills.athletics.specialty})` }</p>
                   { returnSkills('athletics') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Briga { dataSheet.skills.brawl.specialty !== '' && `(${ dataSheet.skills.brawl.specialty})` }</p>
+                  <p>Briga { data.skills.brawl.specialty !== '' && `(${ data.skills.brawl.specialty})` }</p>
                   { returnSkills('brawl') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Ofícios { dataSheet.skills.craft.specialty !== '' && `(${ dataSheet.skills.craft.specialty})` }</p>
+                  <p>Ofícios { data.skills.craft.specialty !== '' && `(${ data.skills.craft.specialty})` }</p>
                   { returnSkills('craft') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Condução { dataSheet.skills.driving.specialty !== '' && `(${ dataSheet.skills.driving.specialty})` }</p>
+                  <p>Condução { data.skills.driving.specialty !== '' && `(${ data.skills.driving.specialty})` }</p>
                   { returnSkills('driving') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Armas de Fogo { dataSheet.skills.firearms.specialty !== '' && `(${ dataSheet.skills.firearms.specialty})` }</p>
+                  <p>Armas de Fogo { data.skills.firearms.specialty !== '' && `(${ data.skills.firearms.specialty})` }</p>
                   { returnSkills('firearms') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Furto { dataSheet.skills.larceny.specialty !== '' && `(${ dataSheet.skills.larceny.specialty})` }</p>
+                  <p>Furto { data.skills.larceny.specialty !== '' && `(${ data.skills.larceny.specialty})` }</p>
                   { returnSkills('larceny') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Armas Brancas { dataSheet.skills.melee.specialty !== '' && `(${ dataSheet.skills.melee.specialty})` }</p>
+                  <p>Armas Brancas { data.skills.melee.specialty !== '' && `(${ data.skills.melee.specialty})` }</p>
                   { returnSkills('melee') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Furtividade { dataSheet.skills.stealth.specialty !== '' && `(${ dataSheet.skills.stealth.specialty})` }</p>
+                  <p>Furtividade { data.skills.stealth.specialty !== '' && `(${ data.skills.stealth.specialty})` }</p>
                   { returnSkills('stealth') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Sobrevivência { dataSheet.skills.survival.specialty !== '' && `(${ dataSheet.skills.survival.specialty})` }</p>
+                  <p>Sobrevivência { data.skills.survival.specialty !== '' && `(${ data.skills.survival.specialty})` }</p>
                   { returnSkills('survival') }
                 </div>
               </div>
               <div className="px-5">
                 <div className="flex justify-between items-center pt-3">
-                  <p>Emp. com Animais { dataSheet.skills.animalKen.specialty !== '' && `(${ dataSheet.skills.animalKen.specialty})` }</p>
+                  <p>Emp. com Animais { data.skills.animalKen.specialty !== '' && `(${ data.skills.animalKen.specialty})` }</p>
                   { returnSkills('animalKen') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Etiqueta { dataSheet.skills.etiquette.specialty !== '' && `(${ dataSheet.skills.etiquette.specialty})` }</p>
+                  <p>Etiqueta { data.skills.etiquette.specialty !== '' && `(${ data.skills.etiquette.specialty})` }</p>
                   { returnSkills('etiquette') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Intuição { dataSheet.skills.insight.specialty !== '' && `(${ dataSheet.skills.insight.specialty})` }</p>
+                  <p>Intuição { data.skills.insight.specialty !== '' && `(${ data.skills.insight.specialty})` }</p>
                   { returnSkills('insight') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Intimidação { dataSheet.skills.intimidation.specialty !== '' && `(${ dataSheet.skills.intimidation.specialty})` }</p>
+                  <p>Intimidação { data.skills.intimidation.specialty !== '' && `(${ data.skills.intimidation.specialty})` }</p>
                   { returnSkills('intimidation') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Liderança { dataSheet.skills.leadership.specialty !== '' && `(${ dataSheet.skills.leadership.specialty})` }</p>
+                  <p>Liderança { data.skills.leadership.specialty !== '' && `(${ data.skills.leadership.specialty})` }</p>
                   { returnSkills('leadership') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Performance { dataSheet.skills.performance.specialty !== '' && `(${ dataSheet.skills.performance.specialty})` }</p>
+                  <p>Performance { data.skills.performance.specialty !== '' && `(${ data.skills.performance.specialty})` }</p>
                   { returnSkills('performance') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Persuasão { dataSheet.skills.persuasion.specialty !== '' && `(${ dataSheet.skills.persuasion.specialty})` }</p>
+                  <p>Persuasão { data.skills.persuasion.specialty !== '' && `(${ data.skills.persuasion.specialty})` }</p>
                   { returnSkills('persuasion') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Manha { dataSheet.skills.streetwise.specialty !== '' && `(${ dataSheet.skills.streetwise.specialty})` }</p>
+                  <p>Manha { data.skills.streetwise.specialty !== '' && `(${ data.skills.streetwise.specialty})` }</p>
                   { returnSkills('streetwise') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Lábia { dataSheet.skills.subterfuge.specialty !== '' && `(${ dataSheet.skills.subterfuge.specialty})` }</p>
+                  <p>Lábia { data.skills.subterfuge.specialty !== '' && `(${ data.skills.subterfuge.specialty})` }</p>
                   { returnSkills('subterfuge') }
                 </div>
               </div>
               <div className="pl-5">
                 <div className="flex justify-between items-center pt-3">
-                  <p>Acadêmicos { dataSheet.skills.academics.specialty !== '' && `(${ dataSheet.skills.academics.specialty})` }</p>
+                  <p>Acadêmicos { data.skills.academics.specialty !== '' && `(${ data.skills.academics.specialty})` }</p>
                   { returnSkills('academics') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Percepção { dataSheet.skills.awareness.specialty !== '' && `(${ dataSheet.skills.awareness.specialty})` }</p>
+                  <p>Percepção { data.skills.awareness.specialty !== '' && `(${ data.skills.awareness.specialty})` }</p>
                   { returnSkills('awareness') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Finanças { dataSheet.skills.finance.specialty !== '' && `(${ dataSheet.skills.finance.specialty})` }</p>
+                  <p>Finanças { data.skills.finance.specialty !== '' && `(${ data.skills.finance.specialty})` }</p>
                   { returnSkills('finance') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Investigação { dataSheet.skills.investigation.specialty !== '' && `(${ dataSheet.skills.investigation.specialty})` }</p>
+                  <p>Investigação { data.skills.investigation.specialty !== '' && `(${ data.skills.investigation.specialty})` }</p>
                   { returnSkills('investigation') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Medicina { dataSheet.skills.medicine.specialty !== '' && `(${ dataSheet.skills.medicine.specialty})` }</p>
+                  <p>Medicina { data.skills.medicine.specialty !== '' && `(${ data.skills.medicine.specialty})` }</p>
                   { returnSkills('medicine') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Ocultismo { dataSheet.skills.occult.specialty !== '' && `(${ dataSheet.skills.occult.specialty})` }</p>
+                  <p>Ocultismo { data.skills.occult.specialty !== '' && `(${ data.skills.occult.specialty})` }</p>
                   { returnSkills('occult') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Política { dataSheet.skills.politics.specialty !== '' && `(${ dataSheet.skills.politics.specialty})` }</p>
+                  <p>Política { data.skills.politics.specialty !== '' && `(${ data.skills.politics.specialty})` }</p>
                   { returnSkills('politics') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Ciência { dataSheet.skills.science.specialty !== '' && `(${ dataSheet.skills.science.specialty})` }</p>
+                  <p>Ciência { data.skills.science.specialty !== '' && `(${ data.skills.science.specialty})` }</p>
                   { returnSkills('science') }
                 </div>
                 <div className="flex justify-between items-center pt-3">
-                  <p>Tecnologia { dataSheet.skills.technology.specialty !== '' && `(${ dataSheet.skills.technology.specialty})` }</p>
+                  <p>Tecnologia { data.skills.technology.specialty !== '' && `(${ data.skills.technology.specialty})` }</p>
                   { returnSkills('technology') }
                 </div>
               </div>
@@ -447,7 +453,7 @@ export default function ConvertToPdf() {
             <div className="w-full flex flex-col items-center">
               <p className="mb-3">Vantagens e Defeitos</p>
               <div className="w-full pr-4">
-                { dataSheet.advantagesAndFlaws.advantages.map((item: any, index: number) => (
+                { data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
                   <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
                     <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
@@ -455,7 +461,7 @@ export default function ConvertToPdf() {
                 )) }
               </div>
               <div className="w-full pr-4">
-                { dataSheet.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
+                { data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
                   <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
                     <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
@@ -463,7 +469,7 @@ export default function ConvertToPdf() {
                 )) }
               </div>
               <div className="w-full pr-4">
-                { dataSheet.advantagesAndFlaws.talens.map((item: any, index: number) => (
+                { data.advantagesAndFlaws.talens.map((item: any, index: number) => (
                   <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
                     <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.value) }
@@ -471,7 +477,7 @@ export default function ConvertToPdf() {
                 )) }
               </div>
               <div className="w-full pr-4">
-                { dataSheet.advantagesAndFlaws.flaws.map((item: any, index: number) => (
+                { data.advantagesAndFlaws.flaws.map((item: any, index: number) => (
                   <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
                     <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
@@ -604,22 +610,22 @@ export default function ConvertToPdf() {
                   <div className="col-span-1 border border-black border-transparent border-r-black px-2 pb-3">Página</div>
                 </div>
                 {
-                  dataSheet.rituals.map((item: any, index: number) => (
+                  data.rituals.map((item: any, index: number) => (
                     <div key={ index } className="grid grid-cols-10 w-full">
-                      <div className={`col-span-3 border pb-3 border-black px-2 py-1 ${index === dataSheet.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.titlePtBr }</div>
-                      <div className={`col-span-2 border  pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === dataSheet.gifts.length - 1 && 'border-b-black'}`}></div>
-                      <div className={`col-span-4 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === dataSheet.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
-                      <div className={`col-span-1 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === dataSheet.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
+                      <div className={`col-span-3 border pb-3 border-black px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.titlePtBr }</div>
+                      <div className={`col-span-2 border  pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}></div>
+                      <div className={`col-span-4 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
+                      <div className={`col-span-1 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
                     </div>
                   ))
                 }
                 {
-                  dataSheet.gifts.map((item: any, index: number) => (
+                  data.gifts.map((item: any, index: number) => (
                     <div key={ index } className="grid grid-cols-10 w-full">
-                      <div className={`col-span-3 border pb-3 border-black px-2 py-1 ${index === dataSheet.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.giftPtBr }</div>
-                      <div className={`col-span-2 border  pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === dataSheet.gifts.length - 1 && 'border-b-black'}`}>{ item.cost }</div>
-                      <div className={`col-span-4 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === dataSheet.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
-                      <div className={`col-span-1 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === dataSheet.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
+                      <div className={`col-span-3 border pb-3 border-black px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.giftPtBr }</div>
+                      <div className={`col-span-2 border  pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.cost }</div>
+                      <div className={`col-span-4 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
+                      <div className={`col-span-1 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
                     </div>
                   ))
                 }
@@ -636,7 +642,7 @@ export default function ConvertToPdf() {
                 <div className="h-96 border border-black">
                   <ul className="px-4 py-2">
                   {
-                    dataSheet.touchstones.map((item: any, index: number) => (
+                    data.touchstones.map((item: any, index: number) => (
                       <li key={index} className="pb-2">
                         - <span className="font-bold">{ item.name }</span> - { typeInTouchstones(item.description) }
                       </li>
@@ -651,11 +657,11 @@ export default function ConvertToPdf() {
               </div>
               <div className="w-full">
                 <p className="text-center w-full pb-3">Notas</p>
-                <div className="px-4 py-2 h-96 border border-black">{ truncateText(dataSheet.notes, 710) }</div>
+                <div className="px-4 py-2 h-96 border border-black">{ truncateText(data.notes, 710) }</div>
               </div>
               <div className="col-span-2 w-full">
                 <p className="text-center w-full pb-3">História</p>
-                <div className="px-4 py-2 h-96 border border-black">{ truncateText(dataSheet.background, 1600) }</div>
+                <div className="px-4 py-2 h-96 border border-black">{ truncateText(data.background, 1600) }</div>
               </div>
             </div>
             <div className="">

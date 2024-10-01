@@ -144,7 +144,7 @@ export default function General() {
       </button>
       <button
         type="button"
-        onClick={ () => setShowDownloadPdf(true) }
+        onClick={ () => setShowDownloadPdf({ show: true, email: '' }) }
         className="mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
       >
         Exportar Ficha 

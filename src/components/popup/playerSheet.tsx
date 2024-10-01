@@ -139,7 +139,7 @@ export default function PlayerSheet() {
             <button
               type="button"
               onClick={ () => {
-                setShowEvaluateSheet({show: true, data: player.email });
+                setShowEvaluateSheet({show: true, data: showPlayer.email });
                 setShowPlayer({ show: false, email: '' });
               }}
               className="mt-8 mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
@@ -148,7 +148,7 @@ export default function PlayerSheet() {
             </button>
             <button
               type="button"
-              onClick={ () => setShowDownloadPdf(true) }
+              onClick={ () => setShowDownloadPdf({ show: true, email: showPlayer.email }) }
               className="mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
             >
               Exportar Ficha

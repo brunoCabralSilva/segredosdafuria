@@ -59,7 +59,7 @@ export default function Provider({children }: IProvider) {
   const [addFavorAndBan, setAddFavorAndBan] = useState({show: false, data: {}, type: ''});
   const [showDeleteFavorAndBan, setShowDeleteFavorAndBan] = useState({ show: false, name: '', type: '' });
   const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: '' });
-  const [showDownloadPdf, setShowDownloadPdf] = useState(false);
+  const [showDownloadPdf, setShowDownloadPdf] = useState({ show: false, email: '' });
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -117,7 +117,7 @@ export default function Provider({children }: IProvider) {
     setAddTouchstone({ show: false, data: {} });
     setShowDeleteTouchstone({ show: false, name: '' });
     setShowEvaluateSheet({show: false, data: '' });
-    setShowDownloadPdf(false);
+    setShowDownloadPdf({ show: false, email: '' });
     setAddPrinciple({show: false, data: {}});
     setShowDeletePrinciple({ show: false, name: '' });
     setAddFavorAndBan({show: false, data: {}, type: ''});

@@ -41,13 +41,13 @@ export default function SessionId({ params } : { params: { id: string } }) {
 	const [showData, setShowData] = useState(false);
 	const [gameMaster, setGameMaster] = useState(false);
   const {
-    setDataSheet,
     setName,
     setEmail,
     setSessionId,
     resetPopups,
     setPlayers,
     setSession,
+    dataSheet, setDataSheet,
     showMessage, setShowMessage,
     addFavorAndBan,
     showDeleteFavorAndBan,
@@ -59,6 +59,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     showDeleteHistoric,
     showDeleteTouchstone,
     addPrinciple,
+    players,
     showDeletePrinciple,
     showEvaluateSheet,
     email,
@@ -147,6 +148,12 @@ export default function SessionId({ params } : { params: { id: string } }) {
     if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
   });
 
+  const verifyConvert = () => {
+    if (showDownloadPdf.email === '') return <ConvertToPdf data={ dataSheet } />;
+    const player = players.find((player: any) => player.email === showDownloadPdf.email);
+    return <ConvertToPdf data={ player.data } />
+  }
+
   return (
     <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
       { showMessage.show && <MessageToUser /> }
@@ -161,7 +168,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showDeletePrinciple.show && <DeletePrinciple /> }
       { addFavorAndBan.show && <AddFavorAndBan /> }
       { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
-      { showDownloadPdf && <ConvertToPdf /> }
+      { showDownloadPdf.show && verifyConvert() }
       <Nav />
       {
         showData
