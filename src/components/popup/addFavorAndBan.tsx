@@ -1,42 +1,37 @@
 import contexto from "@/context/context";
-import { authenticate } from "@/firebase/authenticate";
 import { updateDataPlayer } from "@/firebase/players";
-import { updateSession } from "@/firebase/sessions";
-import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
-export default function AddPrinciple() {
+export default function AddFavorAndBan() {
   const [description, setDescription] = useState('');
-  const [listPrinciples, setListPrinciples] = useState({});
+  const [listFavorAndBan, setListFavorAndBan] = useState({});
   const {
-    addPrinciple, setAddPrinciple,
+    addFavorAndBan, setAddFavorAndBan,
     setShowMessage,
-    session,
+    sessionId,
+    dataSheet,
+    email,
   } = useContext(contexto);
-  const router = useRouter();
 
   useEffect(() => {
-    if (addPrinciple.data.description) {
-      setDescription(addPrinciple.data.description);
-      setListPrinciples(session.principles.filter((principle: any) => principle.order !== addPrinciple.data.order));
+    if (addFavorAndBan.data.description) {
+      setDescription(addFavorAndBan.data.description);
+      setListFavorAndBan(dataSheet.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== addFavorAndBan.data.order));
     }
   }, []);
 
-  const createPrinciple = async () => {
-    const auth = await authenticate(setShowMessage);
-    const newDataSession = session;
-    if (auth) {
-      if (addPrinciple.data.description) {
-        newDataSession.principles = listPrinciples;
-        newDataSession.principles = [...newDataSession.principles, { email: auth.email, description, order: newDataSession.principles.length + 1 }];
-        await updateSession(newDataSession, setShowMessage);
-      } else {
-        newDataSession.principles = [...newDataSession.principles, { email: auth.email, description, order: newDataSession.principles.length + 1 }];
-        await updateSession(newDataSession, setShowMessage);
-      }
-    } else router.push('/login');
-    setAddPrinciple({ show: false, data: {} });
+  const createFavorAndBan = async () => {
+    const newDataSheet = dataSheet;
+    if (addFavorAndBan.data.name) {
+      newDataSheet.favorsAndBans = listFavorAndBan;
+      newDataSheet.favorsAndBans = [...newDataSheet.favorsAndBans, { description, order: newDataSheet.favorsAndBans.length + 1 }];
+      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+    } else {
+      newDataSheet.favorsAndBans = [...newDataSheet.favorsAndBans, { description, order: newDataSheet.favorsAndBans.length + 1 }];
+      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+    }
+    setAddFavorAndBan({ show: false, data: {} });
   }
 
   return(
@@ -46,11 +41,11 @@ export default function AddPrinciple() {
           <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
             <IoIosCloseCircleOutline
               className="text-4xl text-white cursor-pointer"
-              onClick={() => setAddPrinciple({ show: false, data: {} }) }
+              onClick={() => setAddFavorAndBan({ show: false, data: {} }) }
             />
           </div>
           <div className="pb-5 px-5 w-full">
-            <p className="font-bold pb-1 pt-4">Descreva o Princípio</p>
+            <p className="font-bold pb-1 pt-4">Descreva o Favor / Proibição</p>
             <textarea
               className="focus:outline-none text-white bg-black font-normal p-3 border-2 border-white w-full mr-1 mt-1"
               value={ description }
@@ -61,10 +56,10 @@ export default function AddPrinciple() {
             />
             <button
               type="button"
-              onClick={ createPrinciple }
+              onClick={ createFavorAndBan }
               className="mt-2 mb-5 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
             >
-              { addPrinciple.data.description ? 'Atualizar': 'Adicionar' } Princípio
+              { addFavorAndBan.data.description ? 'Atualizar': 'Adicionar' } Favor / Proibição
             </button>
           </div>
         </div>

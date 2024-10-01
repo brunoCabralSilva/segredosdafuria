@@ -22,7 +22,7 @@ export default function Principles() {
               .map((item: any, index: number) => (
                 <div key={index} className="pb-3 border-white border-2 p-4">
                   <div className="flex w-full justify-between items-center">
-                    <div>{ item.name }</div>
+                    <div>Princípio { item.order }</div>
                     <div className="flex items-center gap-1">
                       <FaRegEdit
                         onClick={(e: any) => {

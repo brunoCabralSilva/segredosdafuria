@@ -16,6 +16,7 @@ import GiftRoll from "./giftRoll";
 import RitualRoll from "./ritualRoll";
 import Touchstones from "../player/touchstones";
 import Principles from "../player/principles";
+import FavorsAndBans from "../player/favorsAndBans";
 
 export default function MenuPlayer() {
   const [optionSelect, setOptionSelect] = useState('general');
@@ -40,7 +41,7 @@ export default function MenuPlayer() {
       case ('touchstones'): return (<Touchstones />);
       case ('background'): return (<Background type="background" />);
       case ('principles-of-the-chronicle'): return (<Principles />);
-      case ('favor-ban'): return (<Principles />);
+      case ('favor-ban'): return (<FavorsAndBans />);
       case ('anotations'): return (<Anotations type="notes" />);
       case ('gifts'): return (<Gifts />);
       case ('rituals'): return (<Rituals />);

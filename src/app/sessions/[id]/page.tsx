@@ -27,6 +27,8 @@ import EvaluateSheet from "@/components/popup/evaluateSheet";
 import ConvertToPdf from "@/components/convertToPdf";
 import AddPrinciple from "@/components/popup/addPrinciple";
 import DeletePrinciple from "@/components/popup/deletePrinciple";
+import AddFavorAndBan from "@/components/popup/addFavorAndBan";
+import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -47,6 +49,8 @@ export default function SessionId({ params } : { params: { id: string } }) {
     setPlayers,
     setSession,
     showMessage, setShowMessage,
+    addFavorAndBan,
+    showDeleteFavorAndBan,
     addTouchstone,
     showRemovePlayer,
     showPlayer,
@@ -155,6 +159,8 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { showDeleteTouchstone.show && <DeleteTouchstone /> }
       { addPrinciple.show && <AddPrinciple /> }
       { showDeletePrinciple.show && <DeletePrinciple /> }
+      { addFavorAndBan.show && <AddFavorAndBan /> }
+      { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
       { showDownloadPdf && <ConvertToPdf /> }
       <Nav />
       {

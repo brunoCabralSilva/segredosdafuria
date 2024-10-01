@@ -97,6 +97,10 @@ interface RecipesContext {
   setAddPrinciple: (state: {show: boolean, data: {}}) => void,
   showDeletePrinciple: { show: boolean, name: string },
   setShowDeletePrinciple: (state: { show: boolean, name: string }) => void,
+  addFavorAndBan: { show: boolean, data: any },
+  setAddFavorAndBan: (state: {show: boolean, data: {}}) => void,
+  showDeleteFavorAndBan: { show: boolean, name: string },
+  setShowDeleteFavorAndBan: (state: { show: boolean, name: string }) => void,
   //gameMaster
   session: any,
   setSession: (state: any) => void,
@@ -211,6 +215,10 @@ const initialValue: RecipesContext = {
   setAddPrinciple: () => {},
   showDeletePrinciple: { show: false, name: '' },
   setShowDeletePrinciple: () => {},
+  addFavorAndBan: { show: false, data: {} },
+  setAddFavorAndBan: () => {},
+  showDeleteFavorAndBan: { show: false, name: '' },
+  setShowDeleteFavorAndBan: () => {},
   //gameMaster
   session: {},
   setSession: () => {},

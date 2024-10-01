@@ -66,6 +66,7 @@ export const createSession = async (
       anotations: '',
       description,
       principles: [],
+      favorsAndBans: [],
     });
     await createNotificationData(newSession.id, setShowMessage);
     await createPlayersData(newSession.id, setShowMessage);
@@ -209,3 +210,26 @@ export const deleteSessionById = async (sessionId: string, setShowMessage: any) 
     return false;
   }
 };
+
+// export const createFavoresAndBansInAllSessions = async () => {
+//   try {
+//     const db = getFirestore(firebaseConfig);
+//     const sessionsCollectionRef = collection(db, 'sessions');
+//     const sessionsSnapshot = await getDocs(sessionsCollectionRef);
+//     await runTransaction(db, async (transaction) => {
+//       sessionsSnapshot.forEach((sessionDoc) => {
+//         if (sessionDoc.exists()) {
+//           const sessionData = sessionDoc.data();
+//           const sessionDocRef = doc(sessionsCollectionRef, sessionDoc.id);
+//           transaction.update(sessionDocRef, {
+//             ...sessionData,
+//             favorsAndBans: sessionData.favorsAndBans || [],
+//           });
+//         }
+//       });
+//     });
+//     console.log('Principles adicionados a todas as sessões com sucesso');
+//   } catch (err: any) {
+//     console.error('Ocorreu um erro ao atualizar as sessões: ', err.message);
+//   }
+// };
