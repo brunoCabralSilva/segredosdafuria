@@ -98,7 +98,7 @@ export default function Profile() {
                       <button
                         type="button"
                         key={index}
-                        className="text-center border-2 border-white bg-black px-4 py-2 rounded-full text-white hover:border-red-800 break-all"
+                        className="text-center border-2 border-white bg-black px-4 py-2 rounded-full text-white hover:border-red-800 break-all capitalize"
                         onClick={ () => setDataSession({ show: true, id: sessions.id }) }
                       >
                         { sessions.name }

@@ -138,38 +138,30 @@ export const leaveFromSession = async (sessionId: string, email: string, name: s
 export const getAllSessionsByFunction = async (email: string) => {
   const db = getFirestore(firebaseConfig);
   const playersCollectionRef = collection(db, 'players');
-  const playersQuerySnapshot = await getDocs(playersCollectionRef);
+  const playersSnapshot = await getDocs(playersCollectionRef);
   const sessionIds: string[] = [];
-
-  playersQuerySnapshot.forEach((doc) => {
+  playersSnapshot.forEach((doc) => {
     const data = doc.data();
-    if (Array.isArray(data.list)) {
-      data.list.forEach((item: any) => {
-        if (item.email === email) sessionIds.push(data.sessionId);
-      });
-    }
+    data.list.forEach((item: any) => {
+      if (item.email === email) sessionIds.push(data.sessionId);
+    });
   });
 
-  if (sessionIds.length === 0) return { list1: [], list2: [] };
-
-  const sessionsCollectionRef = collection(db, 'sessions');
   const list1: { id: string; name: string }[] = [];
   const list2: { id: string; name: string }[] = [];
 
-  for (const sessionId of sessionIds) {
-    const sessionDoc = await getDoc(doc(sessionsCollectionRef, sessionId));
-    if (sessionDoc.exists()) {
-      const data = sessionDoc.data();
-      if (data.gameMaster === email) {
-        list1.push({ id: sessionDoc.id, name: data.name });
-      } else {
-        list2.push({ id: sessionDoc.id, name: data.name });
-      }
-    }
-  }
+  const sessionsCollectionRef = collection(db, 'sessions');
+  const sessionsSnapshot: any = await getDocs(sessionsCollectionRef);
+  sessionsSnapshot.forEach((doc: any) => {
+    const data = doc.data();
+    if (data.gameMaster === email)
+      list1.push({ id: doc.id, name: data.name });
+    if (sessionIds.includes(doc.id))
+      list2.push({ id: doc.id, name: data.name });
+  });
 
   return { list1, list2 };
-};
+}
 
 export const deleteSessionById = async (sessionId: string, setShowMessage: any) => {
   const db = getFirestore(firebaseConfig);
