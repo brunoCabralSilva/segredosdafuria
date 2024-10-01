@@ -5,9 +5,9 @@ import contexto from "@/context/context";
 import { MdDelete } from "react-icons/md";
 
 export default function Principles() {
-  const { setAddPrinciple, setShowDeletePrinciple, session } =  useContext(contexto);
+  const { setAddPrinciple, setShowDeletePrinciple, session, email } =  useContext(contexto);
   return(
-    <div className="flex flex-col w-full h-75vh overflow-y-auto">
+    <div className="flex flex-col w-full h-75vh overflow-y-auto text-white">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         <button
           type="button"
@@ -24,20 +24,26 @@ export default function Principles() {
                   <div className="flex w-full justify-between items-center">
                     <div>Princípio { item.order }</div>
                     <div className="flex items-center gap-1">
-                      <FaRegEdit
-                        onClick={(e: any) => {
-                          setAddPrinciple({ show: true, data: item });
-                          e.stopPropagation();
-                        }}
-                        className="text-2xl text-white cursor-pointer"
-                      />
-                      <MdDelete
-                        onClick={(e: any) => {
-                          setShowDeletePrinciple({ show: true, name: item.order });
-                          e.stopPropagation();
-                        }}
-                        className="text-2xl text-white cursor-pointer"
-                      />
+                      {
+                        item.email === email &&
+                        <FaRegEdit
+                          onClick={(e: any) => {
+                            setAddPrinciple({ show: true, data: item });
+                            e.stopPropagation();
+                          }}
+                          className="text-2xl text-white cursor-pointer"
+                        />
+                      }
+                      {
+                        item.email === email &&
+                        <MdDelete
+                          onClick={(e: any) => {
+                            setShowDeletePrinciple({ show: true, name: item.order });
+                            e.stopPropagation();
+                          }}
+                          className="text-2xl text-white cursor-pointer"
+                        />
+  	                  }
                     </div>
                   </div>
                   <div className="text-justify pt-2">

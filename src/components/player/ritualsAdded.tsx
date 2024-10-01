@@ -46,21 +46,21 @@ export default function RitualsAdded(props: { ritual: any }) {
           <div className="px-4 pb-4">
             { 
               ritual.pool !== '' &&
-              <p>
+              <div>
                 <span className="pr-1 font-bold">Teste:</span>
-                { ritual.pool }.
-              </p>
+                <span className="font-normal">{ ritual.pool }.</span>
+              </div>
             }
-            <p className="pt-2 font-normal">
+            <div className="pt-2 font-normal">
               <span className="pr-1 font-bold">Descrição:</span>
-              { ritual.descriptionPtBr }
-            </p>
+              <span className="font-normal">{ ritual.descriptionPtBr }</span>
+            </div>
             { 
               ritual.pool !== '' &&
-              <p className="pt-2">
+              <div className="pt-2">
                 <span className="pr-1 font-bold">Sistema:</span>
-                { ritual.systemPtBr }
-              </p>
+                <span className="font-normal">{ ritual.systemPtBr }</span>
+              </div>
             }
           </div>
         }

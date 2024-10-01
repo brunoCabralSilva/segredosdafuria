@@ -1,5 +1,6 @@
 import contexto from "@/context/context";
 import { updateDataPlayer } from "@/firebase/players";
+import { updateSession } from "@/firebase/sessions";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -10,28 +11,49 @@ export default function AddFavorAndBan() {
     addFavorAndBan, setAddFavorAndBan,
     setShowMessage,
     sessionId,
+    session,
     dataSheet,
     email,
   } = useContext(contexto);
 
   useEffect(() => {
-    if (addFavorAndBan.data.description) {
-      setDescription(addFavorAndBan.data.description);
-      setListFavorAndBan(dataSheet.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== addFavorAndBan.data.order));
+    if (addFavorAndBan.type === 'player') {
+      if (addFavorAndBan.data.description) {
+        setDescription(addFavorAndBan.data.description);
+        setListFavorAndBan(dataSheet.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== addFavorAndBan.data.order));
+      }
+    } else {
+      if (addFavorAndBan.data.description) {
+        setDescription(addFavorAndBan.data.description);
+        setListFavorAndBan(session.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== addFavorAndBan.data.order));
+      }
     }
   }, []);
 
   const createFavorAndBan = async () => {
-    const newDataSheet = dataSheet;
-    if (addFavorAndBan.data.name) {
-      newDataSheet.favorsAndBans = listFavorAndBan;
-      newDataSheet.favorsAndBans = [...newDataSheet.favorsAndBans, { description, order: newDataSheet.favorsAndBans.length + 1 }];
-      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+    if (addFavorAndBan.type === 'player') {
+      const newDataSheet = dataSheet;
+      if (addFavorAndBan.data.description) {
+        newDataSheet.favorsAndBans = listFavorAndBan;
+        newDataSheet.favorsAndBans = [...newDataSheet.favorsAndBans, { description, order: newDataSheet.favorsAndBans.length + 1 }];
+        await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+      } else {
+        newDataSheet.favorsAndBans = [...newDataSheet.favorsAndBans, { description, order: newDataSheet.favorsAndBans.length + 1 }];
+        await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+      }
+      setAddFavorAndBan({ show: false, data: {}, type: '' });
     } else {
-      newDataSheet.favorsAndBans = [...newDataSheet.favorsAndBans, { description, order: newDataSheet.favorsAndBans.length + 1 }];
-      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+      const newDataSession = session;
+      if (addFavorAndBan.data.description) {
+        newDataSession.favorsAndBans = listFavorAndBan;
+        newDataSession.favorsAndBans = [...newDataSession.favorsAndBans, { description, order: newDataSession.favorsAndBans.length + 1 }];
+        await updateSession(newDataSession, setShowMessage);
+      } else {
+        newDataSession.favorsAndBans = [...newDataSession.favorsAndBans, { description, order: newDataSession.favorsAndBans.length + 1 }];
+        await updateSession(newDataSession, setShowMessage);
+      }
+      setAddFavorAndBan({ show: false, data: {}, type: '' });
     }
-    setAddFavorAndBan({ show: false, data: {} });
   }
 
   return(
@@ -41,7 +63,7 @@ export default function AddFavorAndBan() {
           <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
             <IoIosCloseCircleOutline
               className="text-4xl text-white cursor-pointer"
-              onClick={() => setAddFavorAndBan({ show: false, data: {} }) }
+              onClick={() => setAddFavorAndBan({ show: false, data: {}, type: '' }) }
             />
           </div>
           <div className="pb-5 px-5 w-full">

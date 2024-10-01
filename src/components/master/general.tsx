@@ -66,7 +66,7 @@ export default function General() {
   }
 
   return(
-    <div className="h-full w-full">
+    <div className="w-full overflow-y-auto h-75vh">
       { showChangeGameMaster.show && <ChangeGameMaster setGameMaster={setGameMaster} /> }
       { showDelGMFromSession && <LeaveGMFromSession /> }
       {
@@ -218,7 +218,7 @@ export default function General() {
               </div>
               <button
                 type="button"
-                className="mb-3 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+                className="p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
                 onClick={() => setShowDelGMFromSession(true) }
               >
                 Sair da Sessão

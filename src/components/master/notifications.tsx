@@ -12,7 +12,7 @@ export default function Notifications() {
   }
 
   return(
-    <div className="text-white w-full">
+    <div className="text-white w-full overflow-y-auto h-75vh">
       <div className="w-full">
         {
           listNotification.map((listNot: any, index: number) => (

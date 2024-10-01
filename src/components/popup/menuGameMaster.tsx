@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { collection, query, where, getFirestore } from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import General from '../master/general';
 import Notifications from '../master/notifications';
 import Players from '../master/players';
 import Anotations from '../master/anotations';
-import { collection, query, where, getFirestore } from 'firebase/firestore';
 import firebaseConfig from '@/firebase/connection';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import contexto from '@/context/context';
+import Principles from '../player/principles';
+import FavorsAndBans from '../master/favorsAndBans';
 
 export default function MenuGameMaster() {
   const [optionSelect, setOptionSelect] = useState('general');
@@ -43,9 +45,13 @@ export default function MenuGameMaster() {
         </option>
         <option value={'players'}>Personagens</option>
         <option value={'anotations'}>Anotações</option>
+        <option value={'principles-of-chronicles'}>Princípios da Crônica</option>
+        <option value={'favor-and-ban'}>Favores e Proibições</option>
       </select>
       {optionSelect === 'general' && <General />}
       {optionSelect === 'notifications' && <Notifications />}
+      {optionSelect === 'favor-and-ban' &&  <FavorsAndBans /> }
+      {optionSelect === 'principles-of-chronicles' && <Principles />}
       {optionSelect === 'players' && <Players />}
       {optionSelect === 'anotations' && <Anotations />}
     </div>

@@ -46,7 +46,7 @@ export default function GiftsAdded(props: { gift: any }) {
         {
           showData &&
           <div className="px-4 pb-4">
-            <p>
+            <div>
               <span className="pr-1 font-bold">Pertence à:</span>
               { 
                 gift.belonging.map((belong: { type: string, totalRenown: number }, index: number) => (
@@ -56,40 +56,40 @@ export default function GiftsAdded(props: { gift: any }) {
                   </span>
                 ))
               }
-            </p>
-            <p>
-            <span className="pr-1 font-bold">Ação:</span>
-              { gift.action }.
-            </p>
-            <p>
+            </div>
+            <div>
+              <span className="pr-1 font-bold">Ação:</span>
+              <span className="font-normal">{ gift.action }.</span>
+            </div>
+            <div>
               <span className="pr-1 font-bold">Renome:</span>
-              { gift.renown }.
-            </p>
-            <p>
+              <span className="font-normal">{ gift.renown }.</span>
+            </div>
+            <div>
               <span className="pr-1 font-bold">Custo:</span>
-              { gift.cost }.
-            </p>
+              <span className="font-normal">{ gift.cost }.</span>
+            </div>
             {
               gift.pool !== '' &&
-              <p>
+              <div>
                 <span className="pr-1 font-bold">Teste:</span>
-                { gift.pool }.
-              </p>
+                <span className="font-normal">{ gift.pool }.</span>
+              </div>
             }
-            <p className="pt-2">
+            <div className="pt-2">
               <span className="pr-1 font-bold">Descrição:</span>
-              { gift.descriptionPtBr }
-            </p>
-            <p className="pt-2">
+              <span className="font-normal">{ gift.descriptionPtBr }</span>
+            </div>
+            <div className="pt-2">
               <span className="pr-1 font-bold">Sistema:</span>
-              { gift.systemPtBr }
-            </p>
+              <span className="font-normal">{ gift.systemPtBr }</span>
+            </div>
             {
               gift.duration !== '' &&
-              <p className="pt-2">
+              <div className="pt-2">
                 <span className="pr-1 font-bold">Duração:</span>
-                { gift.duration }.
-              </p>
+                <span className="font-normal">{ gift.duration }.</span>
+              </div>
             }
           </div>
         }

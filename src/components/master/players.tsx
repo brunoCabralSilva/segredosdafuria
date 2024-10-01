@@ -5,7 +5,7 @@ import { useContext } from "react";
 export default function Players() {
   const { players, session, setShowPlayer, setShowCreateSheet } = useContext(contexto);
   return(
-    <div className="flex flex-col items-center justify-start h-screen z-60 top-0 right-0 w-full">
+    <div className="flex flex-col items-center justify-start z-60 top-0 right-0 w-full overflow-y-auto h-75vh">
       <button
         type="button"
         onClick={() => setShowCreateSheet(true) }
@@ -35,7 +35,7 @@ export default function Players() {
               }
             </button>
           ))
-        } 
+        }
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 'use client'
 import contexto from "@/context/context";
 import { updateDataPlayer } from "@/firebase/players";
+import { updateSession } from "@/firebase/sessions";
 import { useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -10,15 +11,23 @@ export default function DeleteFavorAndBan() {
     showDeleteFavorAndBan, setShowDeleteFavorAndBan,
     dataSheet,
     sessionId,
+    session,
     email,
   } = useContext(contexto);
 
   const deleteFavorAndBan = async () => {
-    const newDataSheet = dataSheet;
-    newDataSheet.favorsAndBans = newDataSheet.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== showDeleteFavorAndBan.name);
-    await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
-    setShowMessage({ show: true, text: 'O Favor / Proibição foi excluído.' });
-    setShowDeleteFavorAndBan({ show: false, name: '' });
+    if (showDeleteFavorAndBan.type === 'player') {
+      const newDataSheet = dataSheet;
+      newDataSheet.favorsAndBans = newDataSheet.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== showDeleteFavorAndBan.name);
+      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+      setShowMessage({ show: true, text: 'O Favor / Proibição foi excluído.' });
+    } else {
+      const newDataSession = session;
+      newDataSession.favorsAndBans = newDataSession.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== showDeleteFavorAndBan.name);
+      await updateSession(newDataSession, setShowMessage);
+      setShowMessage({ show: true, text: 'O Favor / Proibição foi excluído.' });
+    }
+    setShowDeleteFavorAndBan({ show: false, name: '', type: '' });
   };
 
   return(
@@ -27,7 +36,7 @@ export default function DeleteFavorAndBan() {
         <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer"
-            onClick={() => setShowDeleteFavorAndBan({ show: false, name: '' }) }
+            onClick={() => setShowDeleteFavorAndBan({ show: false, name: '', type: '' }) }
           />
         </div>
         <div className="pb-5 px-5 w-full">
@@ -39,7 +48,7 @@ export default function DeleteFavorAndBan() {
           <div className="flex w-full gap-2">
             <button
               type="button"
-              onClick={() => setShowDeleteFavorAndBan({ show: false, name: '' }) }
+              onClick={() => setShowDeleteFavorAndBan({ show: false, name: '', type: '' }) }
               className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
               Não
