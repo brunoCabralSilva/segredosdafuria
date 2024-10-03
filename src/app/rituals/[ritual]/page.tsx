@@ -14,8 +14,8 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
 
   useEffect(() => {
     resetPopups();
-    const findRitual: IRitual | undefined = listRituals
-      .find((rtl: IRitual) => params.ritual === rtl.id);
+    const findRitual: any | undefined = listRituals
+      .find((rtl: any) => params.ritual === rtl.id);
     setDataRitual(findRitual);
     setListOfRituais(listRituals);
   // eslint-disable-next-line react-hooks/exhaustive-deps
