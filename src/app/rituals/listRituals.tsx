@@ -27,7 +27,7 @@ export default function ListRituals() {
               <p className="text-center w-full p-2 relative font-bold">
                 { `${item.titlePtBr} (${item.title})` }
                 { ` - ` }
-                { item.type === 'social' ? "Social" : 'Comum' }
+                { item.type }
               </p>
             </Link>
           ))

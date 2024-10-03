@@ -31,7 +31,7 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
             <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 bg-black/70 text-white overflow-y-auto">
               <div className="flex flex-col justify-center items-center sm:items-start">
                 <h1 className="font-bold text-lg text-center sm:text-left w-full">
-                  {`${ dataRitual.titlePtBr } (${ dataRitual.title }) - ${ dataRitual.type === 'social' ? "Social" : 'Comum' }`}
+                  {`${ dataRitual.titlePtBr } (${ dataRitual.title }) - ${ dataRitual.type}`}
                 </h1>
                 <hr className="w-10/12 my-4 sm:my-2" />
               </div>
@@ -49,18 +49,24 @@ export default function Ritual({ params } : { params: { ritual: String } }) {
                 <span className="font-bold pr-1">Descrição:</span>
                 { dataRitual.descriptionPtBr }
               </p>
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">Sistema:</span>
-                { dataRitual.systemPtBr }
-              </p>
+              {
+                dataRitual.systemPtBr !== '' &&
+                <p className="pt-1 text-justify">
+                  <span className="font-bold pr-1">Sistema:</span>
+                  { dataRitual.systemPtBr }
+                </p>
+              }
               <p className="pt-3 text-justify">
                 <span className="font-bold pr-1">Description (original):</span>
                 { dataRitual.description }
               </p>
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">System (original):</span>
-                { dataRitual.system }
-              </p>
+              {
+                dataRitual.system !== '' &&
+                <p className="pt-1 text-justify">
+                  <span className="font-bold pr-1">System (original):</span>
+                  { dataRitual.system }
+                </p>
+              }
               <div className="flex flex-col sm:flex-row sm:justify-between">
               </div>
               <div className="flex flex-col sm:flex-row sm:justify-between">
