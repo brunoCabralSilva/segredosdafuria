@@ -135,6 +135,18 @@
         "description": "Feio(a) - Você perde um dado de todos os testes Sociais relevantes."
       },
       {
+        "cost": 1,
+        "title": "Fedorento(a)",
+        "type": "radio",
+        "description": "Fedorento(a) - Seu hálito e odor corporal são sobrenaturalmente repugnantes, lembrando cachorro molhado e meias suadas. Até os Roedores de Ossos se incomodam com o seu fedor. Você pode tomar pequenas medidas para minimizar o cheiro, como usar bastante colônia, mas isso causa outros problemas. Perca um dado em testes de sedução e similares que envolvam Social, e perca dois dados em testes de Furtividade contra oponentes que possam sentir o cheiro, a menos que você esteja contra o vento."
+      },
+      {
+        "cost": 1,
+        "title": "Transparente",
+        "type": "radio",
+        "description": "Transparente - Por algum motivo, você não é um bom mentiroso, e isso fica evidente. Você tem uma péssima cara de pôquer ou seus pais lhe ensinaram a forte obrigação de dizer a verdade, mesmo quando dói. Perca um dado em qualquer teste que exija Lábia. Você não pode ganhar pontos em Lábia."
+      },
+      {
         "cost": 2,
         "title": "Repulsivo(a)",
         "type": "radio",
@@ -150,6 +162,12 @@
     "flaws": [
       {
         "cost": 1,
+        "title": "Fome de Conhecimento",
+        "type": "checkbox",
+        "description": "Fome de Conhecimento - Você sempre temeu que não teria tempo suficiente para aprender tudo o que considera realmente importante. Bem, esse é um problema parcialmente resolvido. O tempo para aprender nem sempre é agora, no entanto — você, com pesar, coloca um marcador em seus estudos e se dedica a assuntos mais urgentes e ameaçadores à sua vida. Na criação do personagem, escolha um tópico sobre o qual seu personagem tem uma fome de estudar. Quando seu personagem se deparar com livros, vídeos tutoriais, seminários universitários ou outros métodos de aprendizado sobre o assunto escolhido, faça um teste de Força de Vontade com Dificuldade 3 para resistir a perseguir sua obsessão."
+      },
+      {
+        "cost": 1,
         "title": "Vício",
         "type": "radio",
         "description": "Vício - Perde um dado de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto as paradas de ações que obtenham sua droga imediatamente."
@@ -160,6 +178,31 @@
         "type": "radio",
         "description": "Vício Desesperado - Perde dois dados de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto paradas para ações que obtenham sua droga imediatamente."
       }
+    ]
+  },
+  {
+    "name": "Ritos",
+    "type": "méritos",
+    "description": "A maestria e a habilidade de realizar rituais são dons valiosos entre os Garou. Nem todos os lobisomens têm a destreza de realizar rituais em condições adversas ou a presença social necessária para liderar uma assembleia, mas aqueles que dominam essas artes ganham o respeito de sua tribo. Esses méritos garantem vantagens significativas em rituais sociais e espirituais, permitindo que o Garou mostre seu conhecimento e habilidade em momentos críticos.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Improvisador",
+        "description": "Improvisador - Você sofre dois dados a menos de penalidade ao realizar rituais em condições subótimas."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Convocador da Assembléia",
+        "description": "Convocador da Assembléia - Selecione 5 rituais sociais que você tenha dominado. Se permitido durante uma Assembléia, você pode auxiliar em qualquer ritual, desde que seja realizado em uma Assembléia ou em uma reunião substancialmente semelhante de Garou."
+      },
+      {
+        "cost": 3,
+        "type": "checkbox",
+        "title": "Mestre de Rituais",
+        "description": "Mestre de Rituais - Você adiciona +1 dado a qualquer teste que envolva o conhecimento ou a realização de rituais."
+      }      
     ]
   },
   {
@@ -249,6 +292,12 @@
         "type": "checkbox",
         "title": "Submisso à Lua",
         "description": "Submisso à Lua - A lua tem uma influência indevida sobre você. Sempre que você vê a lua pela primeira vez em uma determinada noite, você deve mudar para a forma glabro ou hispo (e fazer quaisquer verificações de Fúria concomitantes)."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Banimento Adicional",
+        "description": "Banimento Adicional - Seja porque você renunciou à sua tribo, tentou se juntar a uma segunda ou foi tocado por um patrono de outra tribo, você carrega o fardo de um segundo Banimento. Escolha outra tribo e sofra o Banimento dela, além do Banimento da sua tribo original. O Narrador pode proibir esse Defeito se o segundo Banimento causar problemas ou não tiver impacto na crônica."
       }
     ]
   },
