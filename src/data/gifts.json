@@ -1,6 +1,7 @@
 
 [
   {
+    "id": "1",
     "gift":"Catfeet",
     "giftPtBr":"Pé de Gato",
     "belonging": [
@@ -22,6 +23,7 @@
     "page": 146
   },
   {
+    "id": "2",
     "gift":"Eyes of the Owl",
     "giftPtBr":"Olhos da Coruja",
     "belonging": [
@@ -43,6 +45,7 @@
     "page": 146
   },
   {
+    "id": "3",
     "gift":"Hare's Leap",
     "giftPtBr":"Salto da Lebre",
     "belonging": [
@@ -64,6 +67,7 @@
     "page": 147
   },
   {
+    "id": "4",
     "gift":"Penumbral Senses",
     "giftPtBr":"Sentido Penumbral",
     "belonging": [
@@ -85,6 +89,7 @@
     "page": 147
   },
   {
+    "id": "5",
     "gift":"Raging Strike",
     "giftPtBr":"Ataque Furioso",
     "belonging": [
@@ -106,6 +111,7 @@
     "page": 147
   },
   {
+    "id": "6",
     "gift":"Staredown",
     "giftPtBr":"Olhar para Baixo",
     "belonging": [
@@ -127,6 +133,7 @@
     "page": 147
   },
   {
+    "id": "7",
     "gift":"Sharpened Senses",
     "giftPtBr":"Sentidos Aguçados",
     "belonging": [
@@ -148,6 +155,7 @@
     "page": 147
   },
   {
+    "id": "8",
     "gift":"Spirit of the Fray",
     "giftPtBr":"Espírito da Briga",
     "belonging": [
@@ -169,6 +177,7 @@
     "page": 148
   },
   {
+    "id": "9",
     "gift":"Thwarting the Arrow",
     "giftPtBr":"Frustrando a Flecha",
     "belonging": [
@@ -190,6 +199,7 @@
     "page": 148
   },
   {
+    "id": "10",
     "gift":"Body Shift",
     "giftPtBr":"Mudança Corporal",
     "belonging": [
@@ -211,6 +221,7 @@
     "page": 148
   },
   {
+    "id": "11",
     "gift":"Jam Technology",
     "giftPtBr":"Tecnologia Jam",
     "belonging": [
@@ -232,6 +243,7 @@
     "page": 148
   },
   {
+    "id": "12",
     "gift":"Tongue of Beasts",
     "giftPtBr":"Língua das Feras",
     "belonging": [
@@ -253,6 +265,7 @@
     "page": 149
   },
   {
+    "id": "13",
     "gift":"Blissful Ignorance",
     "giftPtBr":"Abençoada Ignorância",
     "belonging": [
@@ -278,6 +291,7 @@
     "page": 149
   },
   {
+    "id": "14",
     "gift": "Crow's Laughter",
     "giftPtBr": "Risada do Corvo",
     "belonging": [
@@ -303,6 +317,7 @@
     "page": 149
   },
   {
+    "id": "15",
     "gift": "Blessed Brew",
     "giftPtBr": "Bebida Abençoada",
     "belonging": [
@@ -324,6 +339,7 @@
     "page": 149
   },
   {
+    "id": "16",
     "gift":"Gremlins",
     "giftPtBr":"Gremlins",
     "belonging": [
@@ -345,6 +361,7 @@
     "page": 149
   },
   {
+    "id": "17",
     "gift":"Spider's Song",
     "giftPtBr":"Canção da Aranha",
     "belonging": [
@@ -370,6 +387,7 @@
     "page": 150
   },
   {
+    "id": "18",
     "gift":"Blur of the Milky Eye",
     "giftPtBr":"Desfocar o Olho",
     "belonging": [
@@ -395,6 +413,7 @@
     "page": 150
   },
   {
+    "id": "19",
     "gift":"Open Seal",
     "giftPtBr":"Selo Aberto",
     "belonging": [
@@ -420,6 +439,7 @@
     "page": 150
   },
   {
+    "id": "20",
     "gift":"Pulse of the Prey",
     "giftPtBr":"Pulso da Presa",
     "belonging": [
@@ -445,6 +465,7 @@
     "page": 150
   },
   {
+    "id": "21",
     "gift": "Scent of Running Water",
     "giftPtBr": "Cheiro de Água Corrente",
     "belonging": [
@@ -470,6 +491,7 @@
     "page": 151
   },
   {
+    "id": "22",
     "gift": "Luna's Blessing",
     "giftPtBr": "Bênção de Luna",
     "belonging": [
@@ -495,6 +517,7 @@
     "page": 151
   },
   {
+    "id": "23",
     "gift": "Thieving Talons of the Magpie",
     "giftPtBr": "Garras Ladinas do Pica-pau",
     "belonging": [
@@ -520,6 +543,7 @@
     "page": 151
   },
   {
+    "id": "24",
     "gift": "The Thousand Forms",
     "giftPtBr": "As Mil Formas",
     "belonging": [
@@ -545,6 +569,7 @@
     "page": 152
   },
   {
+    "id": "25",
     "gift": "Whelp Body",
     "giftPtBr": "Corpo de Filhote",
     "belonging": [
@@ -570,6 +595,7 @@
     "page": 152
   },
   {
+    "id": "26",
     "gift": "Ensnare Spirit",
     "giftPtBr": "Enredar Espírito",
     "belonging": [
@@ -595,6 +621,7 @@
     "page": 152
   },
   {
+    "id": "27",
     "gift": "Mother's Touch",
     "giftPtBr": "Toque da Mãe",
     "belonging": [
@@ -620,6 +647,7 @@
     "page": 153
   },
   {
+    "id": "28",
     "gift": "Shadow Sense",
     "giftPtBr": "Sentidos Sombrio",
     "belonging": [
@@ -645,6 +673,7 @@
     "page": 153
   },
   {
+    "id": "29",
     "gift": "Sight from Beyond",
     "giftPtBr": "Visões do Além",
     "belonging": [
@@ -670,6 +699,7 @@
     "page": 153
   },
   {
+    "id": "30",
     "gift": "Banish Spirit",
     "giftPtBr": "Banir Espírito",
     "belonging": [
@@ -691,6 +721,7 @@
     "page": 153
   },
   {
+    "id": "31",
     "gift": "Grasp from Beyond",
     "giftPtBr": "Compreender o Além",
     "belonging": [
@@ -716,6 +747,7 @@
     "page": 154
   },
   {
+    "id": "32",
     "gift": "Mindspeak",
     "giftPtBr": "Comunicação Mental",
     "belonging": [
@@ -741,6 +773,7 @@
     "page": 154
   },
   {
+    "id": "33",
     "gift": "Umbral Tether",
     "giftPtBr": "Corrente Umbral",
     "belonging": [
@@ -766,6 +799,7 @@
     "page": 154
   },
   {
+    "id": "34",
     "gift": "Command Spirit",
     "giftPtBr": "Espírito de Comando",
     "belonging": [
@@ -791,6 +825,7 @@
     "page": 154
   },
   {
+    "id": "35",
     "gift": "Drain Spirit",
     "giftPtBr": "Drenar Espírito",
     "belonging": [
@@ -816,6 +851,7 @@
     "page": 155
   },
   {
+    "id": "36",
     "gift": "Feral Regression",
     "giftPtBr": "Regressão Feral",
     "belonging": [
@@ -841,6 +877,7 @@
     "page": 155
   },
   {
+    "id": "37",
     "gift": "Living Ward",
     "giftPtBr": "Proteção Viva",
     "belonging": [
@@ -866,6 +903,7 @@
     "page": 155
   },
   {
+    "id": "38",
     "gift": "Ancestral Conviction",
     "giftPtBr": "Convicção Ancestral",
     "belonging": [
@@ -887,6 +925,7 @@
     "page": 155
   },
   {
+    "id": "39",
     "gift": "Gaia's Candor",
     "giftPtBr": "Verdade de Gaia",
     "belonging": [
@@ -912,6 +951,7 @@
     "page": 156
   },
   {
+    "id": "40",
     "gift": "Porcupine's Reprisal",
     "giftPtBr": "Retaliação do Porco-Espinho",
     "belonging": [
@@ -937,6 +977,7 @@
     "page": 156
   },
   {
+    "id": "41",
     "gift": "Sense the True Form",
     "giftPtBr": "Faro para a Forma Verdadeira",
     "belonging": [
@@ -962,6 +1003,7 @@
     "page": 156
   },
   {
+    "id": "42",
     "gift": "Beast's Fealty",
     "giftPtBr": "Lealdade da Fera",
     "belonging": [
@@ -987,6 +1029,7 @@
     "page": 156
   },
   {
+    "id": "43",
     "gift": "Command the Gathering",
     "giftPtBr": "Comandar a Reunião",
     "belonging": [
@@ -1012,6 +1055,7 @@
     "page": 156
   },
   {
+    "id": "44",
     "gift": "Fangs of Judgment",
     "giftPtBr": "Presas do Julgamento",
     "belonging": [
@@ -1037,6 +1081,7 @@
     "page": 157
   },
   {
+    "id": "45",
     "gift": "Scent of the Past",
     "giftPtBr": "Aroma do Passado",
     "belonging": [
@@ -1062,6 +1107,7 @@
     "page": 157
   },
   {
+    "id": "46",
     "gift": "Geas",
     "giftPtBr": "Geas",
     "belonging": [
@@ -1087,6 +1133,7 @@
     "page": 157
   },
   {
+    "id": "47",
     "gift": "Oathbreaker's Bane",
     "giftPtBr": "Flagelo do Juramento Quebrado",
     "belonging": [
@@ -1112,6 +1159,7 @@
     "page": 158
   },
   {
+    "id": "48",
     "gift": "Strength of Purpose",
     "giftPtBr": "Força do Propósito",
     "belonging": [
@@ -1137,6 +1185,7 @@
     "page": 158
   },
   {
+    "id": "49",
     "gift": "Take the True Form",
     "giftPtBr": "Adote a Forma Verdadeira",
     "belonging": [
@@ -1162,6 +1211,7 @@
     "page": 158
   },
   {
+    "id": "50",
     "gift": "Animal Magnetism",
     "giftPtBr": "Magnetismo Animal",
     "belonging": [
@@ -1187,6 +1237,7 @@
     "page": 158
   },
   {
+    "id": "51",
     "gift": "Howl of Assembly",
     "giftPtBr": "Uivo de Assembléia",
     "belonging": [
@@ -1212,6 +1263,7 @@
     "page": 159
   },
   {
+    "id": "52",
     "gift": "Song of Rage",
     "giftPtBr": "Canção da Fúria",
     "belonging": [
@@ -1237,6 +1289,7 @@
     "page": 159
   },
   {
+    "id": "53",
     "gift": "Song of Serenity",
     "giftPtBr": "Canção da Serenidade",
     "belonging": [
@@ -1262,6 +1315,7 @@
     "page": 159
   },
   {
+    "id": "54",
     "gift": "Call the Ridden",
     "giftPtBr": "Chamar os Possuídos",
     "belonging": [
@@ -1287,6 +1341,7 @@
     "page": 159
   },
   {
+    "id": "55",
     "gift": "Eyes of the Cobra",
     "giftPtBr": "Olhos de Cobra",
     "belonging": [
@@ -1312,6 +1367,7 @@
     "page": 159
   },
   {
+    "id": "56",
     "gift": "Song of Valor",
     "giftPtBr": "Canção do Valor",
     "belonging": [
@@ -1333,6 +1389,7 @@
     "page": 160
   },
   {
+    "id": "57",
     "gift": "Song of Inspiration",
     "giftPtBr": "Canção da Inspiração",
     "belonging": [
@@ -1358,6 +1415,7 @@
     "page": 160
   },
   {
+    "id": "58",
     "gift": "Against the Odds",
     "giftPtBr": "Contra as Probabilidades",
     "belonging": [
@@ -1383,6 +1441,7 @@
     "page": 160
   },
   {
+    "id": "59",
     "gift": "Break the Shackles",
     "giftPtBr": "Quebrar as Correntes",
     "belonging": [
@@ -1408,6 +1467,7 @@
     "page": 160
   },
   {
+    "id": "60",
     "gift": "Defy Death",
     "giftPtBr": "Desafiar a Morte",
     "belonging": [
@@ -1433,6 +1493,7 @@
     "page": 160
   },
   {
+    "id": "61",
     "gift": "Dreamwalk",
     "giftPtBr": "Caminhante dos Sonhos",
     "belonging": [
@@ -1458,6 +1519,7 @@
     "page": 160
   },
   {
+    "id": "62",
     "gift": "Halt the Coward's Flight",
     "giftPtBr": "Interromper a Fuga do Covarde",
     "belonging": [
@@ -1483,6 +1545,7 @@
     "page": 161
   },
   {
+    "id": "63",
     "gift": "Rapid Shift",
     "giftPtBr": "Mudança Rápida",
     "belonging": [
@@ -1508,8 +1571,8 @@
     "book": "Werewolf: The Apocalypse 5th",
     "page": 161
   },
-
   {
+    "id": "64",
     "gift": "Razor Claws",
     "giftPtBr": "Garras Afiadas",
     "belonging": [
@@ -1535,6 +1598,7 @@
     "page": 162
   },
   {
+    "id": "65",
     "gift": "Sense Danger",
     "giftPtBr": "Sentir Perigo",
     "belonging": [
@@ -1560,6 +1624,7 @@
     "page": 162
   },
   {
+    "id": "66",
     "gift": "Primal Anger",
     "giftPtBr": "Fúria Primal",
     "belonging": [
@@ -1581,6 +1646,7 @@
     "page": 162
   },
   {
+    "id": "67",
     "gift": "Snarl of Challenge",
     "giftPtBr": "Rosnado de Alerta",
     "belonging": [
@@ -1606,6 +1672,7 @@
     "page": 162
   },
   {
+    "id": "68",
     "gift": "True Fear",
     "giftPtBr": "Medo Verdadeiro",
     "belonging": [
@@ -1631,6 +1698,7 @@
     "page": 162
   },
   {
+    "id": "69",
     "gift": "Wind Claws",
     "giftPtBr": "Garras do Vento",
     "belonging": [
@@ -1656,6 +1724,7 @@
     "page": 163
   },
   {
+    "id": "70",
     "gift": "Closing the Gap",
     "giftPtBr": "Encurtar a Distância",
     "belonging": [
@@ -1681,6 +1750,7 @@
     "page": 163
   },
   {
+    "id": "71",
     "gift": "Kiss of Helios",
     "giftPtBr": "Beijo de Hélios",
     "belonging": [
@@ -1706,6 +1776,7 @@
     "page": 163
   },
   {
+    "id": "72",
     "gift": "Luna's Armor",
     "giftPtBr": "Armadura de Luna",
     "belonging": [
@@ -1731,6 +1802,7 @@
     "page": 163
   },
   {
+    "id": "73",
     "gift": "Silver Claws",
     "giftPtBr": "Garras de Prata",
     "belonging": [
@@ -1756,6 +1828,7 @@
     "page": 164
   },
   {
+    "id": "74",
     "gift": "Curse of Aeolus",
     "giftPtBr": "Maldição de Aeolus",
     "belonging": [
@@ -1777,6 +1850,7 @@
     "page": 164
   },
   {
+    "id": "75",
     "gift": "Coup de Grâce",
     "giftPtBr": "Golpe de Misericórdia",
     "belonging": [
@@ -1798,6 +1872,7 @@
     "page": 164
   },
   {
+    "id": "76",
     "gift": "Kali's Scar",
     "giftPtBr": "Cicatriz de Kali",
     "belonging": [
@@ -1819,6 +1894,7 @@
     "page": 164
   },
   {
+    "id": "77",
     "gift": "Wasp Talons",
     "giftPtBr": "Garras de Vespa",
     "belonging": [
@@ -1840,6 +1916,7 @@
     "page": 164
   },
   {
+    "id": "78",
     "gift": "Gorgon's Visage",
     "giftPtBr": "Olhar da Górgona",
     "belonging": [
@@ -1861,6 +1938,7 @@
     "page": 165
   },
   {
+    "id": "79",
     "gift": "Odious Aroma",
     "giftPtBr": "Odor Repugnante",
     "belonging": [
@@ -1882,6 +1960,7 @@
     "page": 166
   },
   {
+    "id": "80",
     "gift": "Face in the Crowd",
     "giftPtBr": "Rosto na Multidão",
     "belonging": [
@@ -1903,6 +1982,7 @@
     "page": 166
   },
   {
+    "id": "81",
     "gift": "Streets tell Stories",
     "giftPtBr": "Histórias das Ruas",
     "belonging": [
@@ -1924,6 +2004,7 @@
     "page": 166
   },
   {
+    "id": "82",
     "gift": "A Thousand Eyes",
     "giftPtBr": "Mil Olhos",
     "belonging": [
@@ -1945,6 +2026,7 @@
     "page": 167
   },
   {
+    "id": "83",
     "gift": "Between the Cracks",
     "giftPtBr": "Entre as Fendas",
     "belonging": [
@@ -1966,6 +2048,7 @@
     "page": 167
   },
   {
+    "id": "84",
     "gift": "Brother's Scent",
     "giftPtBr": "Cheiro de Irmão",
     "belonging": [
@@ -1987,6 +2070,7 @@
     "page": 167
   },
   {
+    "id": "85",
     "gift": "Calm the Furious Beast",
     "giftPtBr": "Acalmar a Fera Furiosa",
     "belonging": [
@@ -2008,6 +2092,7 @@
     "page": 167
   },
   {
+    "id": "86",
     "gift": "Reveal Trauma",
     "giftPtBr": "Revelar Trauma",
     "belonging": [
@@ -2029,6 +2114,7 @@
     "page": 168
   },
   {
+    "id": "87",
     "gift": "Life's Presence",
     "giftPtBr": "Presença da Vida",
     "belonging": [
@@ -2050,6 +2136,7 @@
     "page": 168
   },
   {
+    "id": "88",
     "gift": "Share the Pain",
     "giftPtBr": "Compartilhar a Dor",
     "belonging": [
@@ -2071,6 +2158,7 @@
     "page": 168
   },
   {
+    "id": "89",
     "gift": "Camouflage",
     "giftPtBr": "Camuflagem",
     "belonging": [
@@ -2092,6 +2180,7 @@
     "page": 168
   },
   {
+    "id": "90",
     "gift": "Lacerating Wind",
     "giftPtBr": "Vento Lacerante",
     "belonging": [
@@ -2113,6 +2202,7 @@
     "page": 169
   },
   {
+    "id": "91",
     "gift": "Chill Cloak",
     "giftPtBr": "Manto Gélido",
     "belonging": [
@@ -2134,6 +2224,7 @@
     "page": 169
   },
   {
+    "id": "92",
     "gift": "Blood of the Wastes",
     "giftPtBr": "Sangue dos Desertos",
     "belonging": [
@@ -2155,6 +2246,7 @@
     "page": 169
   },
   {
+    "id": "93",
     "gift": "Claws of Frozen Death",
     "giftPtBr": "Garras da Morte Congelada",
     "belonging": [
@@ -2176,6 +2268,7 @@
     "page": 169
   },
   {
+    "id": "94",
     "gift": "Augur",
     "giftPtBr": "Oráculo",
     "belonging": [
@@ -2197,27 +2290,7 @@
     "page": 170
   },
   {
-    "gift": "Blackout",
-    "giftPtBr": "Blackout",
-    "belonging": [
-      {
-        "type": "ghost council",
-        "totalRenown": 3
-      }
-    ],
-    "description": "This Gift allows the Garou to extinguish light sources around them, making darkness their ally. The spirit of a nocturnal animal or a spirit associated with darkness grants this Gift.",
-    "descriptionPtBr": "Este Dom permite ao Garou extinguir fontes de luz ao seu redor, transformando a escuridão em sua aliada. O espírito de um animal noturno ou um espírito associado à escuridão concede esse Dom.",
-    "renown": "Sabedoria",
-    "cost": "1 Teste de Fúria",
-    "action": "Total",
-    "pool": "",
-    "system": "The Gift user can extinguish one light source in line of sight per dot of Wisdom. Anyone lacking night vision or additional light sources is subject to a one- to three-dice penalty (depending on ambient light) to all sight-reliant tests. This Gift can be used in any form.",
-    "systemPtBr": "O usuário do Dom pode extinguir uma fonte de luz à vista para cada ponto de Sabedoria. Qualquer pessoa que não possua visão noturna ou fontes adicionais de luz está sujeita a uma penalidade de um a três dados (dependendo da luz ambiente) em todos os testes dependentes da visão. Este Dom pode ser usado em qualquer forma.",
-    "duration": "Uma Cena",
-    "book": "Werewolf: The Apocalypse 5th",
-    "page": 170
-  },
-  {
+    "id": "95",
     "gift": "Serpent's Coil",
     "giftPtBr": "Espirais da Serpente",
     "belonging": [
@@ -2239,6 +2312,7 @@
     "page": 170
   },
   {
+    "id": "96",
     "gift": "Hands of Earth",
     "giftPtBr": "Mãos da Terra",
     "belonging": [
@@ -2260,6 +2334,7 @@
     "page": 170
   },
   {
+    "id": "97",
     "gift": "Shrouded Aspect",
     "giftPtBr": "Aspecto Oculto",
     "belonging": [
@@ -2281,6 +2356,7 @@
     "page": 171
   },
   {
+    "id": "98",
     "gift": "Skinbind",
     "giftPtBr": "",
     "belonging": [
@@ -2302,6 +2378,7 @@
     "page": 171
   },
   {
+    "id": "99",
     "gift": "Energize",
     "giftPtBr": "Energizar",
     "belonging": [
@@ -2323,6 +2400,7 @@
     "page": 171
   },
   {
+    "id": "100",
     "gift": "Control Machine",
     "giftPtBr": "Controlar Máquinas",
     "belonging": [
@@ -2344,6 +2422,7 @@
     "page": 171
   },
   {
+    "id": "101",
     "gift": "Doppelganger",
     "giftPtBr": "Doppelganger",
     "belonging": [
@@ -2365,6 +2444,7 @@
     "page": 172
   },
   {
+    "id": "102",
     "gift": "Recovery Memory",
     "giftPtBr": "Recuperar Memória",
     "belonging": [
@@ -2386,6 +2466,7 @@
     "page": 172
   },
   {
+    "id": "103",
     "gift": "Sacred Boundary",
     "giftPtBr": "Fronteira Sagrada",
     "belonging": [
@@ -2407,6 +2488,7 @@
     "page": 172
   },
   {
+    "id": "104",
     "gift": "Territorial Dominance",
     "giftPtBr": "Domínio Territorial",
     "belonging": [
@@ -2428,6 +2510,7 @@
     "page": 173
   },
   {
+    "id": "105",
     "gift": "Balor's Gaze",
     "giftPtBr": "O Olhar de Balor",
     "belonging": [
@@ -2449,6 +2532,7 @@
     "page": 173
   },
   {
+    "id": "106",
     "gift": "The Living Wood",
     "giftPtBr": "A Madeira Viva",
     "belonging": [
@@ -2470,6 +2554,7 @@
     "page": 173
   },
   {
+    "id": "107",
     "gift": "Hidden Killer",
     "giftPtBr": "Assassino Oculto",
     "belonging": [
@@ -2491,6 +2576,7 @@
     "page": 174
   },
   {
+    "id": "108",
     "gift": "Render Down",
     "giftPtBr": "Decompor",
     "belonging": [
@@ -2512,6 +2598,7 @@
     "page": 174
   },
   {
+    "id": "109",
     "gift": "Gaia's Embrace",
     "giftPtBr": "Abraço de Gaia",
     "belonging": [
@@ -2533,6 +2620,7 @@
     "page": 175
   },
   {
+    "id": "110",
     "gift": "Quicksand",
     "giftPtBr": "Areia Movediça",
     "belonging": [
@@ -2554,6 +2642,7 @@
     "page": 175
   },
   {
+    "id": "111",
     "gift": "Shield of the Wyld",
     "giftPtBr": "Escudo do Wyld",
     "belonging": [
@@ -2575,6 +2664,7 @@
     "page": 175
   },
   {
+    "id": "112",
     "gift": "Fatal Flaw",
     "giftPtBr": "Fraquezas Fatais",
     "belonging": [
@@ -2596,6 +2686,7 @@
     "page": 175
   },
   {
+    "id": "113",
     "gift": "Icy Chill of Despair",
     "giftPtBr": "Frio Gélido do Desespero",
     "belonging": [
@@ -2617,6 +2708,7 @@
     "page": 175
   },
   {
+    "id": "114",
     "gift": "Dire Distraction",
     "giftPtBr": "Distração Direta",
     "belonging": [
@@ -2638,6 +2730,7 @@
     "page": 176
   },
   {
+    "id": "115",
     "gift": "Thunderclap",
     "giftPtBr": "Aplauso Trovejante",
     "belonging": [
@@ -2659,6 +2752,7 @@
     "page": 176
   },
   {
+    "id": "116",
     "gift": "Under the Gun",
     "giftPtBr": "Sob a Mira",
     "belonging": [
@@ -2680,6 +2774,7 @@
     "page": 177
   },
   {
+    "id": "117",
     "gift": "Fetch Bounty",
     "giftPtBr": "Busca Abundante",
     "belonging": [
@@ -2701,6 +2796,7 @@
     "page": 177
   },
   {
+    "id": "118",
     "gift": "Speech of the World",
     "giftPtBr": "Fala do Mundo",
     "belonging": [
@@ -2722,6 +2818,7 @@
     "page": 177
   },
   {
+    "id": "119",
     "gift": "Whispered Passage",
     "giftPtBr": "Silêncio",
     "belonging": [
@@ -2743,6 +2840,7 @@
     "page": 178
   },
   {
+    "id": "120",
     "gift": "Burrow",
     "giftPtBr": "Cavar",
     "belonging": [
@@ -2764,6 +2862,7 @@
     "page": 178
   },
   {
+    "id": "121",
     "gift": "The Golden Path",
     "giftPtBr": "O Caminho Dourado",
     "belonging": [
@@ -2785,6 +2884,7 @@
     "page": 178
   },
   {
+    "id": "122",
     "gift": "Pack Instinct",
     "giftPtBr": "Instinto de Matilha",
     "belonging": [
@@ -2806,6 +2906,7 @@
     "page": 178
   },
   {
+    "id": "123",
     "gift": "The Silver Compact",
     "giftPtBr": "O Pacto de Prata",
     "belonging": [
@@ -2827,6 +2928,7 @@
     "page": 179
   },
   {
+    "id": "124",
     "gift": "Blood of the Pack",
     "giftPtBr": "Sangue da Matilha",
     "belonging": [
@@ -2848,6 +2950,7 @@
     "page": 179
   },
   {
+    "id": "125",
     "gift": "Unity of the Pack",
     "giftPtBr": "Unidade da Matilha",
     "belonging": [
@@ -2869,6 +2972,7 @@
     "page": 179
   },
   {
+    "id": "126",
     "gift": "Luna's Avenger",
     "giftPtBr": "Vingador de Luna",
     "belonging": [
@@ -2888,5 +2992,27 @@
     "duration": "Uma Cena",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 179
+  },
+  {
+    "id": "127",
+    "gift": "Blackout",
+    "giftPtBr": "Blackout",
+    "belonging": [
+      {
+        "type": "ghost council",
+        "totalRenown": 3
+      }
+    ],
+    "description": "This Gift allows the Garou to extinguish light sources around them, making darkness their ally. The spirit of a nocturnal animal or a spirit associated with darkness grants this Gift.",
+    "descriptionPtBr": "Este Dom permite ao Garou extinguir fontes de luz ao seu redor, transformando a escuridão em sua aliada. O espírito de um animal noturno ou um espírito associado à escuridão concede esse Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "",
+    "system": "The Gift user can extinguish one light source in line of sight per dot of Wisdom. Anyone lacking night vision or additional light sources is subject to a one- to three-dice penalty (depending on ambient light) to all sight-reliant tests. This Gift can be used in any form.",
+    "systemPtBr": "O usuário do Dom pode extinguir uma fonte de luz à vista para cada ponto de Sabedoria. Qualquer pessoa que não possua visão noturna ou fontes adicionais de luz está sujeita a uma penalidade de um a três dados (dependendo da luz ambiente) em todos os testes dependentes da visão. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Uma Cena",
+    "book": "Werewolf: The Apocalypse 5th",
+    "page": 170
   }
 ]

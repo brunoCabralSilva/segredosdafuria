@@ -14,7 +14,7 @@ export default function Loresheet({ params } : { params: { loresheet: String } }
   useEffect(() => {
     resetPopups();
     const findLoresheet: ILoresheet | undefined = listLoresheets
-      .find((lrsht: ILoresheet) => params.loresheet.replace(/-/g, ' ') === lrsht.title.toLowerCase());
+      .find((lrsht: ILoresheet) => Number(params.loresheet) === lrsht.id);
     setDataLoresheet(findLoresheet);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

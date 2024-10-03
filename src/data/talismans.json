@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "title": "Apeskin",
     "titlePtBr": "Pele de Macaco",
     "description": "This talisman takes the form of a patch of skin, ape or human. When worn directly on the owner's own skin it makes the wearer immune to silver while in glabro or hispo form, but it also severely inhibits their ability to regenerate. Few Garou now living know how to make these talismans, but their creation is said to be particularly gruesome. Those found using them are treated with suspicion, if not outright hostility.",
@@ -22,6 +23,7 @@
     "page": 188
   },
   {
+    "id": "2",
     "title": "Gaia's Tear",
     "titlePtBr": "Lágrima de Gaia",
     "description": "Garou occasionally find strange, stony “fossils” in the Umbra that are infused with the spiritual world-energy of what they believe to be the world-spirit Gaia. These objects may appear gem-like and brilliant, or they might be dull and pliant, almost like folkloric madstone, and draw out sorrow or fury when used. They are exceedingly rare — none can say reliably how they originate (or even if they actually originate with Gaia…) — being unique in that they can actually cross into the physical world and retain their form. When a Garou communes with one of Gaia's Tears, they find that it renews their sense of purpose, and perhaps even invigorates their spiritual makeup itself.",
@@ -40,6 +42,7 @@
     "page": 188
   },
   {
+    "id": "3",
     "title": "Harmony Flute",
     "titlePtBr": "Flauta da Harmonia",
     "description": "The peaceful notes from this flute, carved with the images of Luna and Helios dancing, can calm even the most aggressive creatures. Even Garou in the grip of Rage can be soothed, assuming the talisman user lives longer than for a few bars. While flutes are the most common form of this talisman, variants include other kinds of (usually portable) musical instruments.",
@@ -58,6 +61,7 @@
     "page": 188
   },
   {
+    "id": "4",
     "title": "Klaive",
     "titlePtBr": "Klaive",
     "description": "The signature weapon of Garou culture, the klaive is a reinforced silver dagger used in ritual combat, and their wielders or creators may decorate them with any sort of unique adornments. In certain environments, such as moots, a klaive is a status symbol that invites the owner to tell how they came into its possession, or of glorious kills made with it.\nKlaives are particularly associated with the Garou Nation, and as such have an air of the old-fashioned or even obsolete about them. That stated, it's hard to argue with a klaive's effectiveness when a rival shoves one through your face and it comes out the back of your head.",
@@ -80,6 +84,7 @@
     "page": 188
   },
   {
+    "id": "5",
     "title": "Partridge Wing",
     "titlePtBr": "Asa de Perdiz",
     "description": "A partridge wing sweeps away the ancestral terror humans have when confronting the Garou. It can be fashioned from an actual partridge-spirit in the Umbra, or it can be more metaphorical in its fashioning and crafted from a spirit of forgetfulness or even fear. It may take the form of an actual wing or feather, or it might be, again, something more metaphorical in function, such as a veil or even a spiderweb placed across the eyes.",
@@ -98,6 +103,7 @@
     "page": 189
   },
   {
+    "id": "6",
     "title": "Shadowshard",
     "titlePtBr": "Fragmento das Sombras",
     "description": "A shadowshard is a fragment of the world's spiritual reflection, a literal piece of the Umbra. It appears as a hunk of glass or other semi-reflective material but seems to contain shadow itself, whether in the form of roiling, turbulent darkness, or a heavy, mist-like gloom. A Garou may break the shadowshard, freeing the shadow within and pulling the werewolf across the Gauntlet, into the Umbra.",
@@ -120,6 +126,7 @@
     "page": 189
   },
   {
+    "id": "7",
     "title": "Spirit Catcher",
     "titlePtBr": "Apanhador de Espírito",
     "description": "A spirit-catcher is a talisman that spirits find captivating, to the point that they'll refuse to leave the spirit-catcher's presence when a Garou presents one. They may have almost any physical appearance, whether otherworldly “fossils” of bygone spirits brought back by Ghost Council Garou after journeys into the Spirit Wilds or technological gewgaws dedicated by Glass Walkers.",
@@ -138,6 +145,7 @@
     "page": 189
   },
   {
+    "id": "8",
     "title": "Wind Whistle",
     "titlePtBr": "Apito do Vento",
     "description": "Blowing this whistle causes a gust of wind to blow up, carrying with it dust, snow, or other local detritus that covers the tracks of the user and their pack. Pursuers find it hard to pick up a trace and any trail looks older than it should be. Making this whistle requires several pacts with spirits of the land and sky, and the whistle itself must be made from the bone of an animal that died from cold or some other form of environmental exposure.",

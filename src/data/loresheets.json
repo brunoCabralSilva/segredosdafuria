@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "titlePtBr": "Projeto Crepúsculo",
     "title": "Project Twilight",
     "descriptionPtBr": "Projeto Crepúsculo, Operação Ninho do Corvo, Divisão de Assuntos Especiais: Seja qual for o nome que você queira dar a isso, é um esquadrão de eliminação financiado pelo governo. Eles não são todos a mesma coisa... mas são todos a mesma coisa, se você souber como olhar para isso. E não importa como você olhe para isso, você tem alguma sujeira sobre a organização que você pode usar para influenciar suas operações. É algo realmente perigoso — seja qual for o motivo, você tem alguma influência sobre uma (ou várias...) organização governamental extremamente bem financiada que existe para erradicar a ameaça dos lobisomens. E você é a ameaça. E aqui está você, brincando com isso como se não fosse rapidamente colocá-lo na mira assim que descobrir o truque que você o fez executar. Você vai colocar a matilha inteira em perigo, e o dossiê na mesa de trabalho de algum burocrata vai duplicar de tamanho. Não, sério, o que diabos você está fazendo?",
@@ -35,6 +36,7 @@
     "page": 296
   },
   {
+    "id": 2,
     "titlePtBr": "Destruidores de Planos",
     "title": "Monkeywrenchers",
     "descriptionPtBr": "Você fez parte de uma matilha — uma matilha grande, descentralizada e geograficamente dispersa — de Garou cujo objetivo coletivo é atrapalhar completamente os esforços das frentes do Grupo Pentex especificamente. Ok, é menos uma matilha e mais um movimento, mas isso não importa. O que importa é que os Destruidores de Planos compartilham informações uns com os outros sobre quais frentes estão ativas, onde e como sabotá-las. Esses idiotas sempre têm uma quantidade constrangedora de documentação e dados que mostram quem está apoiando o quê, onde e quando acontecerá a próxima entrega de suprimentos. Você e os outros Destruidores de Planos descobriram algumas das maneiras mais eficazes de minar a logística e as operações do Grupo Pentex e você quase sentiria pena dos coitados fazendo o trabalho sujo, mas — nah, dane-se eles. Brinque com fogo, se queime.",
@@ -70,7 +72,8 @@
     "page": 295
   },
   {
-    "titlePtBr": "Viajante do Umbral",
+    "id": 3,
+    "titlePtBr": "Viajante Umbral",
     "title": "Umbral Traveler",
     "descriptionPtBr": "As Terras Espirituais constituem um mistério mesmo para os Garou, cuja visão animista os torna familiares ao mundo espiritual, mas não estritamente parte dele. Embora seja um lugar sempre mutável de pensamento, espírito e emoção, algumas verdades e até mesmo locais dentro de suas sombras espelhadas permanecem constantes... até certo ponto. Certamente, as coisas podem mudar em um piscar de olhos, especialmente durante a era do Apocalipse, mas para aqueles Garou que fazem das explorações do Umbral sua especialidade, é possível entender as regras do mundo espiritual, se souber onde procurar — pelo menos por enquanto.",
     "description": "The Spirit Wilds constitute a mystery even to the Garou, whose animistic outlook makes them familiar with the spirit world but not strictly of it. Although it is an ever-changing place of thought, spirit and emotion, some truths and even locations within its mirror-shadows remain constant… to a certain degree. Certainly, things can change at a moment's notice, especially during the era of Apocalypse, but to those Garou who make explorations of the Umbra their specialty, one can understand the rules of the spirit world if one knows what to look for — at least for now.",
@@ -105,6 +108,7 @@
     "page": 297
   },
   {
+    "id": 4,
     "titlePtBr": "Renunciante de Fenris",
     "title": "Renunciate of Fenris",
     "descriptionPtBr": "O destino do Culto de Fenris é motivo de grande debate entre os Garou. A perspectiva do Culto, é claro, é que seus membros sabem o que estão fazendo e que apenas um covarde enfraquecido pela Wyrm ousaria questionar sua disposição para ir direto à garganta do Grande Destruidor - especialmente de um lugar sem risco nas arquibancadas. Fora do próprio Culto, o que aconteceu é menos claro. Uma teoria é que a Incarna Lobo foi enganada por um aspecto da Wyrm e agora serve como serva desse espírito. A outra teoria é que algum aspecto da Wyrm realmente matou o Lobo de alguma forma, e a tribo agora segue inconscientemente a patronagem desse espírito desconhecido. A teoria mais provável é também a mais direta: que o hauglosk, de fato, reivindicou o Culto, e o Lobo não tolera dissidência em seus seguidores. Mas é claro que, até que o Lobo ou outro grande espírito ofereça algum tipo de prova verificável da verdade, essa verdade permanece um dos mistérios do mundo espiritual. Nem todos os membros do Culto de Fenris seguiram seus companheiros pelo caminho do hauglosk. Alguns quebraram seu pacto com o Lobo assim que viram a direção que a tribo estava tomando e se comprometeram com outra tribo.",
@@ -141,6 +145,7 @@
     
   },
   {
+    "id": 5,
     "titlePtBr": "A Espiral Negra",
     "title": "The Black Spiral",
     "descriptionPtBr": "Muitos Garou acreditam que a Espiral Negra esteja escondida em algum lugar nas profundezas da Umbra - provavelmente em uma porção dela ferozmente próxima ao Wyrm, ou de alguma forma, algo que se assemelha à sua atenção, se uma afirmação assim puder ser precisa. Outros Garou acreditam que a 'Labirinto Negro' seja um local no mundo físico, ou até mesmo um local metafórico que se move pelo mundo físico, para lugares onde a profanação humana se mostra mais satisfatória para o Wyrm... novamente, se pode ser dito que o Wyrm 'prefere' coisas. Seja qual for o caso, a Espiral Negra é um lugar importante para os Garou alinhados com o Wyrm do mesmo nome (veja a pág. 277). Uma combinação de um Caern infernal e uma forja onde os Dançarinos da Espiral Negra em potencial são desfeitos e forjados novamente, é ao mesmo tempo um lugar, um horror espiritual e uma perspectiva implacavelmente cruel sobre o mundo. Pode ser o locus do câncer final que consome Gaia.",
@@ -176,6 +181,7 @@
     "page": 299
   },
   {
+    "id": 6,
     "titlePtBr": "Os Emissários de Atena",
     "title": "The Emissaries of Athena",
     "descriptionPtBr": "Helena 'Hel' Thompson e Tallulah McCoy são um par de Silent Striders que formaram uma matilha de dois. Em vez de reivindicar um território físico, eles percorrem o mundo em busca de informações sobre lobisomens e metamorfos fora da Nação Garou. Eles se tornaram especialistas em proteger matilhas de ameaças como os Dançarinos da Espiral Negra, o Culto de Fenris, metamorfos não-lobos e outros. Tallulah adora trocar histórias com outros Galliards, enquanto Hel, como Filodox, ajuda a decidir se a dupla ajudará uma matilha com informações ou se unirá a uma batalha iminente. Suas metodologias combinam o melhor dos dois mundos. Hel usa técnicas rituais e ocultas para perseguir espíritos que podem ter visto metamorfos renegados. Tallulah trabalha em bares e roadhouses como garçonete, mantendo os ouvidos abertos para avistamentos estranhos e contos sussurrados à meia-noite. Essas informações os mantêm rastreando um monstro ou outro, embora tenham cuidado em respeitar a maioria dos territórios das matilhas. Eles frequentemente trocam ajuda a uma matilha com um problema local por passagem gratuita pela área ou recebendo informações sobre um de seus alvos. Eles escolheram Atena como sua luz guia por causa de sua associação com a coruja, seu espírito patrono. Ela é conhecida como uma deusa da sabedoria que não tem medo de lutar. Seu estilo de guerra se concentra em estudar o inimigo e usar esse conhecimento para desenvolver táticas adequadas. Embora muita mitologia se concentre na história das tribos da Nação Garou, as informações sobre outros lobisomens são menos concretas. Esses inimigos precisam ser compreendidos antes de serem destruídos, para que, da próxima vez que apareçam, possam ser destruídos de maneira mais eficiente. Atena funciona como um símbolo de sua missão para Hel, mas Tallulah às vezes insiste que pode ouvir a deusa durante a caçada. Embora não sejam parentes, eles frequentemente discutem como irmãos. Ambos amam sua Dodge Ram Charger azul bebê chamada Daisy, mas muitas vezes discutem sobre de quem é a vez de abastecer e manter a grande caminhonete. Hel zomba de Tallulah chamando-a de 'Tall', mesmo que sua forma homid mal alcance cinco pés. Tallulah oferece elogios sarcásticos sobre como todas as noites que Hel passa sozinha em cemitérios valeram a pena quando a pesquisa oculta de Hel descobre algo. No entanto, eles também se unem se alguém decidir zombar de qualquer um dos Emissários. Eles podem não ter um território específico para defender, mas quando lutam um pelo outro, a batalha não é menos feroz.",
@@ -209,5 +215,257 @@
     ],
     "book": "Werewolf The Apocalypse The Emissaries of Athena",
     "page": 1
+  },
+  {
+    "id": 7,
+    "titlePtBr": "Aino “Lil Gaia” Metsälä",
+    "title": "Aino “Lil Gaia” Metsälä",
+    "descriptionPtBr": "Uma Ragabash dos Garra Vermelha, essa ativista finlandesa teve sua Primeira Mudança recentemente, mas já se tornou lendária na luta por Gaia. Mesmo antes de conhecer sua verdadeira natureza, ela já dizia a todos que pudessem ouvir para deixarem de lado sua busca por sucesso, realização profissional, vida familiar perfeita e as novas polêmicas de celebridades para focar na única coisa que realmente importa: impedir a mudança climática e a perda de biodiversidade antes que seja tarde demais. Tornar-se um lobisomem deu um impulso enorme à sua missão. Aino tem defendido com sucesso seus objetivos tanto entre humanos quanto entre os Garou. Sua ONG, “Gaia First”, conta com muitos membros e eles organizam manifestações, desobediência civil e campanhas nas redes sociais para conscientizar a população e exigir que governos e corporações ajam conforme suas metas. Aino considera a Weaver uma ameaça maior que o Wyrm. Alguns afirmam que ela é uma Lua Roubada., outros dizem que não há provas disso, que é apenas preconceito contra sua natureza inflexível. Muitos já a viram se transformar em um lobo euroasiático de pelagem castanho-amarelada. Ela considera O Trailblazer um traidor de Gaia (Ver Loresheet Oba “Trailblazer” Makinde, no livro Shattered Nation, pág. 138).",
+    "description": "A Red Talon Ragabash, this Finnish activist had her First Change only recently but has already become legendary in the fight for Gaia. Even before she knew her true nature, she was telling as many people as she  could to put aside their hunt for success, professional achievement, happy picket-fence family life, and new pop-star controversies to focus on the only thing that truly matters: stopping climate change and biodiversity loss before it's too late. Becoming a werewolf has turbocharged her mission. Aino has successfully advocated for her goals both among humans and with the Garou. Her NGO, Gaia First, has plenty of members, and they organize demonstrations, civil disobedience, and social media campaigns to inform the populace and to demand that governments and corporations act according to their aims. Aino considers the Weaver a bigger threat than the Wyrm. Some claim she's a Stolen Moon. Others say there's no proof of this; it's just prejudice against her uncompromising nature. Many have seen her change into a tawny Eurasian wolf. She considers Trailblazer a traitor to Gaia.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "A Gaia First Member: Apply a bonus die to all tests when working against the Weaver or its agents. If you travel by plane, litter, pollute, or eat industrially manufactured meat, you take a one-die penalty to all tests for the rest of the session, cumulative with similar penalties from this Loresheet.",
+        "skillPtBr": "Membro da Gaia First: Aplique um dado de bônus a todos os testes ao trabalhar contra a Weaver ou seus agentes. Se você viajar de avião, jogar lixo, poluir ou comer carne industrialmente processada, você sofre uma penalidade de um dado em todos os testes pelo restante da sessão, cumulativa com penalidades semelhantes desta Loresheet"
+      },
+      {
+        "cost": 2,
+        "skill": "Networked: In any city, you can call on the Gaia First network for a Safe House for one night or local insight. The network is worth two dots in Allies. Any attempts to find you by the authorities or your enemies get a onedie penalty. But they'll try because this also counts as a Flaw: Dark Secret (•)",
+        "skillPtBr": "Conectado: Em qualquer cidade, você pode recorrer à rede da Gaia First para obter um Refúgio Seguro por uma noite ou informações locais. A rede vale dois pontos em Aliados. Qualquer tentativa das autoridades ou inimigos de encontrá-lo sofre uma penalidade de um dado. No entanto, eles vão tentar, pois isso também conta como um Defeito: Segredo Sombrio (•)."
+      },
+      {
+        "cost": 3,
+        "skill": "Devotion to the Cause: If you have another engagement (such as a date or a work shift) you skip to fight the Weaver or the Wyrm, you gain a two-dice bonus to all tests during that scene. You also suffer whatever repercussions come from taking a raincheck (breaking up, losing the job), of course. If you travel by plane, litter, pollute, or eat industrially manufactured meat, you take a two-dice penalty to all tests for the rest of the, cumulative with similar penalties from this Loresheet.",
+        "skillPtBr": "Devoção à Causa: Se você tiver outro compromisso (como um encontro ou um turno de trabalho) que decide ignorar para lutar contra a Weaver ou o Wyrm, você ganha um bônus de dois dados em todos os testes durante essa cena. Claro, você também sofre as repercussões por adiar o compromisso (terminar o relacionamento, perder o emprego, etc.). Se você viajar de avião, jogar lixo, poluir ou comer carne industrialmente processada, você sofre uma penalidade de dois dados em todos os testes pelo restante da sessão, cumulativa com penalidades semelhantes desta Loresheet."
+      },
+      {
+        "cost": 4,
+        "skill": "Committed Activist: You can call on the Gaia First network to raise a protest the shape of which depends on the circumstances. In a city you'll involves a maximum of 30 people and is non-violent. The activists try to escape if the conditions became lifethreatening. This can be used once per story and requires a Difficulty 3 Charisma + Politics test.",
+        "skillPtBr": "Ativista Comprometido: Você pode recorrer à rede Gaia First para organizar um protesto, cujo formato depende das circunstâncias. Em uma cidade, isso envolverá no máximo 30 pessoas e será não-violento. Os ativistas tentarão escapar se as condições se tornarem ameaçadoras à vida. Isso pode ser utilizado uma vez por história e requer um teste de Carisma + Política com Dificuldade 3."
+      },
+      {
+        "cost": 5,
+        "skill": "Fire Marshal: You're Aino Metsälä's confidante, and a fully-fledged member of the board of Gaia First. Once per story, your influence decides what attacks, demonstrations, sit-ins, or smear campaigns are directed at the enemies of Gaia First. These assaults range from distracting to debilitating, but Storytellers are encouraged to embrace their impact. You maintain plausible deniability over these attacks but the target know's it was you, even if they can't legally prove it.",
+        "skillPtBr": "Marechal do Fogo: Você é confidente de Aino Metsälä e um membro pleno do conselho da Gaia First. Uma vez por história, sua influência decide quais ataques, manifestações, ocupações ou campanhas difamatórias serão direcionados aos inimigos da Gaia First. Esses ataques variam de distrativos a debilitantes, mas os Narradores são incentivados a abraçar seu impacto. Você mantém uma negação plausível sobre esses ataques, mas o alvo sabe que foi você, mesmo que não possa provar legalmente."
+      }
+    ],
+    "book": "Shattered Nation",
+    "page": 134
+  },
+  {
+    "id": 8,
+    "titlePtBr": "Alejandro “Vaporfang” Mendoza",
+    "title": "Alejandro “Vaporfang” Mendoza",
+    "descriptionPtBr": "Q Wyrm tem seus tentáculos corruptos e malignos em todos os aspectos da sociedade, desde escolas e igrejas até exércitos e governos. Essa corrupção está escondida sob muitas camadas de segredos, documentos classificados, arquivos protegidos por senhas e cofres trancados. Geralmente, eles permanecem desconhecidos para sempre. A menos que alguém como Vaporfang, um Galliard dos Roedores de Ossos, apareça, hackeie bancos de dados e vaze informações para o público. Alguns o consideram um traidor de seu país. Outros o veem como um herói da liberdade de expressão e da democracia. Para a maioria dos Garou, a questão é muito mais clara: ele estava protegendo Gaia da Wyrm, embora alguns Andarilhos do Asfalto digam que ele estava atacando a Weaver e, na verdade, piorando tudo, o que significa que seu relacionamento com seu antigo amigo Trailblazer está, no mínimo, tenso (ver Loresheet Oba “Trailblazer” Makinde, no livro Shattered Nation, pág. 138). Vaporfang cresceu na Bolívia e se transforma em um lobo-guará. Ele está atualmente cumprindo 35 anos de prisão nos Estados Unidos, condenado por dezenove crimes, incluindo espionagem e conspiração. É necessário ter pelo menos dois pontos em Tecnologia para aceitar esta Loresheet e não pode trabalhar para o governo ou para uma fachada da Pentex.",
+    "description": "The Wyrm has its nasty, corrupting tentacles in every aspect of society, from schools and churches to militaries and governments. This taint is hidden under many layers of secrecy, classified documents, password- protected files, and locked vaults. Usually, they remain unknown forever. Unless someone like Vaporfang, a Bone Gnawer galliard, comes along, hacks into databases, and leaks information to the public. Some consider him a traitor to his country. Others consider him a hero of free speech and democracy. For most Garou, the question is much more clear-cut: He was protecting Gaia from the Wyrm. (But some Glass Walkers say he was attacking the Weaver and actually making everything worse, which means his relationship with his old pal Trailblazer is strained at best.) Vaporfang grew up in Bolivia and changes into a maned wolf. He is currently serving 35 years in prison in the United States, sentenced for nineteen crimes, including espionage and conspiracy. You need to have at least two dots in Technology to take this Loresheet and cannot work for the government or  a Pentex front.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "/access: Once per session, you can add two additional Rage dice to Technology rolls related to computers, the internet, coding, data mining, hacking, networks, phones, or surveillance systems, or to Investigation tests if the investigation is conducted online.",
+        "skillPtBr": "/access: Uma vez por sessão, você pode adicionar dois dados adicionais de Fúria a testes de Tecnologia relacionados a computadores, internet, programação, mineração de dados, hacking, redes, telefones ou sistemas de vigilância, ou a testes de Investigação, se a investigação for conduzida online."
+      },
+      {
+        "cost": 2,
+        "skill": "/join: You know the right protected forums and anonymous group chats for asking about very specific things. Once per session, you can ask for people in there to conduct a Denial-ofService attack, a character assassination, rumor spreading, or even phish a password. You obviously need to be able to get online to do this. For this purpose, these contacts are considered three-dot Allies.",
+        "skillPtBr": "/join: Você conhece os fóruns protegidos e os chats anônimos certos para perguntar sobre coisas muito específicas. Uma vez por sessão, você pode pedir para que as pessoas nesses grupos conduzam um ataque de Negação de Serviço, uma difamação, espalhem rumores ou até mesmo um ataque phishing para obter uma senha. Obviamente, você precisa estar online para fazer isso. Para esse propósito, esses contatos são considerados Aliados com 3 pontos."
+      },
+      {
+        "cost": 3,
+        "skill": "/whois: You can find out almost anything about anyone or anything through your contacts, your access to databases, and your ability to hack networks and social media accounts. Once per story, you can add four additional dice to an Investigation test if the investigation happens online.",
+        "skillPtBr": "/whois: Você pode descobrir quase tudo sobre qualquer pessoa ou coisa através de seus contatos, seu acesso a bancos de dados e sua habilidade em hackear redes e contas de mídia social. Uma vez por história, você pode adicionar quatro dados adicionais a um teste de Investigação se a investigação ocorrer online."
+      },
+      {
+        "cost": 4,
+        "skill": "/override: You can talk to machine spirits in digital devices as if you had the Glass Walker Gift Control Machine. They will attempt to follow your wishes once per story with no test required, as long as no harm comes to machinery. The Storyteller has the final say in what they are able to perform.",
+        "skillPtBr": "Você pode conversar com os espíritos das máquinas em dispositivos digitais como se tivesse o Dom “Controlar Máquinas” dos Andarilhos do Asfalto. Eles tentarão seguir seus desejos uma vez por história, sem necessidade de teste, desde que não causem dano à maquinaria. O Narrador tem a palavra final sobre o que eles podem realizar."
+      },
+      {
+        "cost": 5,
+        "skill": "/chmod: Once per story, you can publicize any piece of information (false or accurate), and it will be spread on internet forums, stored on wikis, published on the front pages of newspapers, discussed on talk radio, and joked about on television. This can have serious effects on politics, brands, public images, personal relationships, and many other things, at the Storyteller's discretion — whilst falsities may be eventually discredited,  the damage never truly fades. Whoever controls the media controls the world.",
+        "skillPtBr": "/chmod: Uma vez por história, você pode divulgar qualquer informação (falsa ou precisa), e ela será espalhada em fóruns da internet, armazenada em wikis, publicada nas capas de jornais, discutida em programas de rádio e zombada na televisão. Isso pode ter efeitos sérios na política, marcas, imagens públicas, relacionamentos pessoais e muitas outras coisas, a critério do Narrador — enquanto as falsidades podem eventualmente ser desmentidas, o dano nunca desaparece de fato. Quem controla a mídia controla o mundo."
+      }
+    ],
+    "book": "Shattered Nation",
+    "page": 135
+  },
+  {
+    "id": 9,
+    "titlePtBr": "Jonas Albrecht",
+    "title": "Jonas Albrecht",
+    "descriptionPtBr": "Nascido em uma família de imigrantes poloneses pobres em Vermont, ele trabalhou em refinarias de petróleo por todo os Estados Unidos. Quando sua transformação ocorreu, isso o alterou para sempre. Ele se tornou Jonas Albrecht, um destemido guerreiro Presas de Prata, protegendo outros Garou e lutando contra as forças do Wyrm, incluindo seus antigos empregadores. Jonas Albrecht, um Ahroun Presas de Prata, rapidamente ascendeu nas fileiras dos Garou e finalmente se tornou o lendário rei da Nação Garou. Histórias de suas façanhas são cantadas em encontros ao redor do mundo, e vários Rituais Lendários permitem que os lobisomens sigam seus passos. Ele personificava a glória da Nação Garou. Ele era a Nação Garou. E então, à medida que a Nação Garou se desintegrava, ele também se quebrou. Agora, ele existe como um remanescente de tempos melhores, mal vivo, fraco demais para se transformar e caído em harano. Poucos sabem que ele ainda vive. Todos os seus seguidores o abandonaram, exceto por um punhado que ainda acredita que a Nação Garou poderia ser reconstruída e faz o possível para convencer Jonas Albrecht a acreditar nisso também.",
+    "description": "Born to a family of poor Polish immigrants in Vermont, he worked in oil refineries across the United States. When his change came upon him, it forever altered him. He became Jonas Albrecht, a fearless Silver Fang warrior, protecting other Garou and fighting the forces of the Wyrm, including his former employers. Jonas Albrecht, a Silver Fang ahroun, quickly rose in the ranks of the Garou and finally became the legendary king of the Garou Nation. Stories of his exploits are sung at moots around the world, and several Legendary Rites allow werewolves to follow in his footsteps. He epitomized the glory of the Garou Nation. He was the Garou Nation. And then, as the Garou Nation was broken, he broke, too. Now he exists as a remnant of better times, barely alive, too weak to change, and fallen to harano. Few even know he still lives. All his followers have forsaken him, save for the handful who still believe the Garou Nation could be remade, and try their best to convince Jonas Albrecht to believe this as well.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Memories of a Broken Nation: You wallow in nostalgia for the glorious past of the Garou, which you know will never return. Once per session, you can add your Harano score to your dice pool.",
+        "skillPtBr": "Memórias de uma Nação Quebrada: Você se entrega à nostalgia pelo glorioso passado dos Garou, que sabe que nunca retornará. Uma vez por sessão, você pode adicionar sua pontuação de Harano à sua parada de dados."
+      },
+      {
+        "cost": 2,
+        "skill": "Sharing the Dream: You tell stories of Jonas Albrecht and the Garou Nation, seeking the support of others in finding inspiration there. You share your memories and dreams with them. Build confidence and relationships. Find the lingering flame within them and help them heal. Once per session you can take 1 point of Harano for yourself from someone else. When assisting a skill test, add two dice instead of one.",
+        "skillPtBr": "Compartilhando o Sonho: Você conta histórias de Jonas Albrecht e da Nação Garou, buscando o apoio de outros para encontrar inspiração nelas. Você compartilha suas memórias e sonhos com eles. Construa confiança e relacionamentos. Encontre a chama que ainda persiste dentro deles e ajude-os a se curar. Uma vez por sessão, você pode tomar 1 ponto de Harano para si de outra pessoa. Ao ajudar em um teste de habilidade, adicione dois dados em vez de um."
+      },
+      {
+        "cost": 3,
+        "skill": "A Slim Chance: You set small goals and plan for Jonas Albrecht's return as one of his lieutenants. Once per story you may make a Harano test, suffering Aggravated Willpower damage equal to the number of failed dice, and heal 1 point of Harano. When defending the old ideals of the Garou Nation, Jonas Albrecht, or some similar goal, you gain one additional die for all tests.",
+        "skillPtBr": "Uma Chance Mínima: Você estabelece pequenas metas e planeja o retorno de Jonas Albrecht como um de seus tenentes. Uma vez por história, você pode fazer um teste de Harano, sofrendo dano de Vontade Agravado igual ao número de dados falhados e curando 1 ponto de Harano. Ao defender os antigos ideais da Nação Garou, Jonas Albrecht ou algum objetivo semelhante, você ganha um dado adicional em todos os testes."
+      },
+      {
+        "cost": 4,
+        "skill": "Fighting Spirit: You have already lost everything, so you can go all the way. Return and rematch as you, the champion, return to the ring to reignite the flame as Jonas Albrecht's general. Once per session, you can take 1 point of Harano and change it into Hauglosk. When defending the old ideals of the Garou Nation, Jonas Albrecht, or some similar goal, you gain two additional dice for all tests. (This does not stack with A Slim Chance, above.) You have followers locally worth two dots in Allies.",
+        "skillPtBr": "Espírito de Luta: Você já perdeu tudo, então pode ir até o fim. Retorne e faça uma revanche como você, o campeão, voltando ao ringue para reacender a chama como general de Jonas Albrecht. Uma vez por sessão, você pode pegar 1 ponto de Harano e transformá-lo em Hauglosk. Ao defender os antigos ideais da Nação Garou, Jonas Albrecht ou algum objetivo semelhante, você ganha dois dados adicionais em todos os testes (isso não se acumula com uma chance mínima, acima). Você tem seguidores locais que valem dois pontos em Aliados."
+      },
+      {
+        "cost": 5,
+        "skill": "Mended Nation: All true Garou look to you for leadership and gladly join in your cause, which was the cause of Jonas Albrecht before you and the previous kings and queens before him. Will you be the one to mend the nation? Will you be the monarch of the reforged Garou Nation? Once per session you can take 1 point of Harano or Hauglosk to gain a four-dice bonus to any test.",
+        "skillPtBr": "Nação Curada: Todos os verdadeiros Garou olham para você em busca de liderança e se juntam alegremente à sua causa, que era a causa de Jonas Albrecht antes de você e dos reis e rainhas anteriores a ele. Você será aquele que restaurará a nação? Você será o monarca da Nação Garou reconfigurada? Uma vez por sessão, você pode adicionar 1 ponto de Harano ou Hauglosk para ganhar um bônus de quatro dados em qualquer teste."
+      }
+    ],
+    "book": "Shattered Nation",
+    "page": 136
+  },
+  {
+    "id": 10,
+    "titlePtBr": "Liu “Donzela Retornante” Aihan",
+    "title": "Liu “Returning Maiden” Aihan",
+    "descriptionPtBr": "Liu Aihan cresceu em Xangai e se formou como médica e piloto. Com a ascensão do Programa Espacial Tripulado da China, ela se tornou uma taikonauta em um dos voos Shenzhou. Ela se transformou em uma lobo mongol pela primeira vez enquanto orbitava a Lua e sentiu uma imensa conexão com a própria Luna. Desde então, ela sonha com uma grande peregrinação, uma viagem à superfície da Lua onde finalmente tocará o rosto de Luna. Quem sabe um dia. Seu nome de lobo, “Donzela Retornante”, faz referência à deusa chinesa da lua, Chang'e. A Andarilha do Asfalto Liu Aihan não tem Augúrio, pois as fases lunares só existem em relação à Terra. Quando orbitando a Lua, todas existem simultaneamente. Alguns a consideram uma Theurge a serviço de Luna, outros uma Galliard espalhando a sabedoria da ciência, mas ela possui uma maneira Ragabash de questionar verdades geralmente aceitas, julga como uma Philodox e é feroz em batalha como uma Ahroun. Quando não está de serviço no programa espacial, ela viaja pelo mundo, ensinando outros Garou sobre Luna e como eles podem se livrar dos limites de seus Augúrios. Alguns a chamam de cultista da Lua ou de Portadora da Luz Interior; outros a chamam de professora iluminada. De acordo com os rumores, ela nunca sofre os males da fúria.",
+    "description": "Liu Aihan grew up in Shanghai and trained as a physician and a pilot. With the ascent of the China Manned Space Program, she became a taikonaut on one of the Shenzhou flights. She changed into a Mongolian wolf for the first time when orbiting the Moon and felt an immense connection to Luna herself. Since then, she's dreamt of a great pilgrimage, a trip to the surface of the Moon where she'll finally touch the face of Luna. Perhaps one day. Her wolf name, Returning Maiden, references the Chinese moon goddess Chang'e. The Galestalker Liu Aihan has no auspice since lunar phases only exist in relation to Earth. When orbiting the Moon, they all exist simultaneously. Some consider her a theurge in service to Luna, others a galliard spreading the wisdom of science, but she has a ragabash way of questioning otherwise accepted truths, renders judgment like a philodox, and is fierce in battle like an ahroun. When off-duty from the space program, she travels the world, teaching other Garou about Luna and how they can shed the limits of their auspices. Some call her a Moon cultist or a Stargazer; others call her an enlightened teacher. According to the rumors, she never suffers the pangs of rage.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Moon Cultist: You've heard Returning Maiden talk and have found wisdom in her words. You may learn one Gift from those of another auspice, either instead of your starting Native Gift or by spending Experience during a chronicle.",
+        "skillPtBr": "Cultista da Lua: Você ouviu a Donzela Retornante falar e encontrou sabedoria em suas palavras. Você pode aprender um Dom de outro auspício, seja em vez de seu Dom Nativo inicial ou gastando Experiência durante uma crônica."
+      },
+      {
+        "cost": 2,
+        "skill": "Constant Flux: You are able to count as another auspice for the purpose of a Rite, Legendary Rite or other ceremonial purpose, though any auspice- related test required is done at a +1 Difficulty.",
+        "skillPtBr": "Fluxo Constante: Você é capaz de ser considerado como outro Augúrio para fins de um Rito, Rito Lendário ou outro propósito cerimonial, embora qualquer teste relacionado ao Augúrio exigido seja realizado com +1 de Dificuldade."
+      },
+      {
+        "cost": 3,
+        "skill": "Lune Speaker: By meeting Liu and speaking to her at length you have gained a closer understanding of spirits associated with Luna. Gain two bonus dice on any test related to lunes and other spirits of Luna (including Luna herself), except when in conflict with them.",
+        "skillPtBr": "Falante dos Lunos: Ao conhecer Liu e conversar com ela por um longo período, você ganhou uma compreensão mais próxima dos espíritos associados à Lua. Ganhe dois dados de bônus em qualquer teste relacionado a lunos e outros espíritos da Lua (incluindo a própria Lua), exceto quando em conflito com eles."
+      },
+      {
+        "cost": 4,
+        "skill": "Mercurial: There is something deeper in your relationship with Luna than usual among the Garou. Once per session, and on one, single attack, you may treat damage dealt by silver as if it were Superficial.",
+        "skillPtBr": ""
+      },
+      {
+        "cost": 5,
+        "skill": "Moon Path: During the full moon, while in the Umbra, you may travel between two caerns anywhere in the world in as little as a day and a night. This requires a test of Composure + Occult at Difficulty 3, +1 for each Garou brought along on the journey. If you haven't visited the destination before, you need to possess an object that has previously been part of it. On a failure, you encounter one or more obstacles or hazards on your journey, escalating with the margin of failure. A Brutal outcome means that you also need to fight the path's guardian, usually a powerful spirit associated with the destination.",
+        "skillPtBr": "Caminho da Lua: Durante a lua cheia, enquanto estiver na Umbra, você pode viajar entre dois caerns em qualquer lugar do mundo em tão pouco tempo quanto um dia e uma noite. Isso requer um teste de Autocontrole + Ocultismo com Dificuldade 3, +1 para cada Garou levado na jornada. Se você nunca visitou o destino antes, precisa possuir um objeto que já tenha feito parte dele. Em caso de falha, você encontrará um ou mais obstáculos ou perigos em sua jornada, escalando com a margem de falha. Um resultado Brutal significa que você também precisará lutar contra o guardião do caminho, geralmente um espírito poderoso associado ao destino."
+      }
+    ],
+    "book": "Shattered Nation",
+    "page": 137
+  },
+  {
+    "id": 11,
+    "titlePtBr": "Oba “Trailblazer” Makinde",
+    "title": "Oba “Trailblazer” Makinde",
+    "descriptionPtBr": "Trailblazer, um Theurge Andarilho do Asfalto, é um empreendedor nascido na Nigéria que vive no Vale do Silício. Desde que se transformou em um lobo dourado, ele tem estado mais interessado na Weaver do que em Gaia, afirmando querer mudar o sistema de dentro. Se não fosse por seus sucessos ocasionais, provavelmente já teria sido morto por outros Garou, mas há algo persuasivo em seus argumentos e planos. Se você pudesse voltar as armas do inimigo contra eles, não seria um grande triunfo? Isso seria incrível se Trailblazer não tivesse se tornado o CEO e CTO de uma frente da Pentex, a Omniscent, que fornece soluções de vigilância baseadas em IA para o complexo militar-industrial em vários países, incluindo os EUA, China, Rússia, Brasil, Israel e Turquia. Dados coletados de redes sociais e dispositivos móveis estão sendo usados para localizar e assassinar remotamente dissidentes, jornalistas, políticos da oposição e ativistas ao redor do mundo. Às vezes, Garou também são alvos. Trailblazer é frequentemente difamado e desafiado por Aino Metsälä e Vaporfang, mas ele continua avançando.",
+    "description": "Trailblazer, a Glass Walker theurge, is a Nigerian-born entrepreneur who lives in Silicon Valley. Ever since his change into a golden wolf, he's been more interested in the Weaver than in Gaia, claiming to want to change the system from within. If not for his occasional successes, he would have probably been killed already by other Garou, but there's something persuasive about his arguments and plans. If you could turn the enemy's weapons against them, wouldn't that be a great triumph? But then, that is a big if… Trailblazer has managed to become the CEO and CTO of a Pentex front, Omniscent, which provides AI-based surveillance solutions to the military-industrial complex in several countries, including the US, China, Russia, Brazil, Israel, and Turkey. Data scavenged from social media and mobile devices is being used to sniff out and remotely assassinate dissidents, journalists, opposition politicians, and activists around the world. Sometimes Garou are also targeted. Trailblazer is often defamed and challenged by Aino Metsälä and Vaporfang, but he still keeps pushing onward.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Loved Me as a Loser: You are an Omniscent freelancer and have access to digital tools that can help infiltrate and monitor Pentex fronts, as well as the associates of Vaporfang and Aino Metsälä. You get a bonus die to any such rolls.",
+        "skillPtBr": "Me ame como um Perdedor: Você é um freelancer da Omniscent e tem acesso a ferramentas digitais que podem ajudar a infiltrar e monitorar as frentes da Pentex, assim como os associados de Vaporfang e Aino Metsälä. Você ganha um dado bônus em qualquer uma dessas rolagens."
+      },
+      {
+        "cost": 2,
+        "skill": "I Don't Like What Happened: As an Omniscent trainee, you have a low-level job worth one dot of Resources. You have access to information about Pentex fronts and several other potential Wyrm organizations. You have limited access to Omniscent's main product and can gain a three-dice bonus once per story to locate almost anyone worldwide if they have a digital footprint.",
+        "skillPtBr": "Eu Não Gosto do que Aconteceu: Como estagiário da Omniscent, você tem um trabalho de baixo nível que vale um ponto de Recursos. Você tem acesso a informações sobre frentes da Pentex e várias outras organizações potenciais do Wyrm. Você tem acesso limitado ao produto principal da Omniscent e pode ganhar um bônus de três dados uma vez por história para localizar quase qualquer pessoa no mundo, se elas tiverem uma pegada digital."
+      },
+      {
+        "cost": 3,
+        "skill": "Now You're Worried That I Just Might Win: You have a nice job at Omniscent worth two dots of Resources. You get a two-dice bonus to all Finance tests against Pentex fronts, other Wyrm organizations, fomori, and people working for them.",
+        "skillPtBr": "Agora Você Está Preocupado que Eu Posso Ganhar: Você tem um bom trabalho na Omniscent que vale dois pontos de Recursos. Você ganha um bônus de dois dados em todos os testes de Finanças contra frentes da Pentex, outras organizações do Wyrm, fomori e pessoas que trabalham para eles."
+      },
+      {
+        "cost": 4,
+        "skill": "Twenty Years of Boredom: You have a great job at Omniscent worth three dots of Resources. You have a trusted co-worker within the company comparable to a two-dot Contact and the Day Job merit. Your time spent in the trenches of the Weaver and Wyrm has given you a permanent point of Harano or Hauglosk (player's choice).",
+        "skillPtBr": "Vinte Anos de Tédio: Você tem um ótimo trabalho na Omniscent que vale três pontos de Recursos. Você tem um colega de trabalho confiável dentro da empresa comparável a um Contato de dois pontos e ao mérito “Trabalho Diário”. Seu tempo passado nas trincheiras da Weaver e do Wyrm lhe deu um ponto permanente de Harano ou Hauglosk (à escolha do jogador)."
+      },
+      {
+        "cost": 5,
+        "skill": "Guided by the Beauty of Your Weapons: You are in the top echelons of Omniscent, and your position is worth four dots of Resources. You have great connections to Weaver- and Wyrm-influenced individuals, politicians, and businesspeople, comparable to a three-dot Contact. Trailblazer is a personal friend of yours. You gain a level of Aggravated Willpower damage if you attempt to harm Omniscent, Trailblazer, or any of their business partners, including Pentex and its fronts.",
+        "skillPtBr": "Guiado pela Beleza de Suas Armas: Você está nas camadas superiores da Omniscent, e sua posição vale quatro pontos de Recursos. Você tem ótimas conexões com indivíduos influenciados pela Weaver e pela Wyrm, políticos e empresários, comparáveis a um Contato de três pontos. Trailblazer é um amigo pessoal seu. Você recebe um nível de dano Agravado na Força de Vontade se tentar prejudicar a Omniscent, Trailblazer ou qualquer um de seus parceiros de negócios, incluindo a Pentex e suas frentes."
+      }
+    ],
+    "book": "Shattered Nation",
+    "page": 138
+  },
+  {
+    "id": 12,
+    "titlePtBr": "Ross the She-Wolf Jackson",
+    "title": "Ross the She-Wolf Jackson",
+    "descriptionPtBr": "Um empoderado homem LGBTQIAP+, o Philodox dos Peregrinos Silenciosos, Ross Jackson, é dito se transformar em um Coyote e liderar uma matilha de Coywolves, híbridos de coyote e lobo. Se isso é verdade, quem pode dizer? Ele dedicou sua vida a lutar contra a poluição ambiental em todas as suas formas e é particularmente conhecido pelo ataque de Union Bromide em Nagpur, que é o tema de um Ritual Lendário. Ele adotou um bebê humano, que carrega consigo em um carregador de bebê quando está em hominídeo e pelas roupas quando em lupino. O bebê parece ser uma criança humana comum que se dá bem com ambas as espécies, exceto que parece ser imune ao Delírio.",
+    "description": "A proud gay man in human form, the Silent Strider philodox Ross Jackson is said to change into a female coyote and lead a pack of coywolves, coyote-wolf hybrids. Whether this is true, who can say? He's dedicated his life to fighting environmental pollution in all its forms and is particularly known for the Union Bromide attack in Nagpur, which is the topic of a Legendary Rite. He has adopted a human infant, which he carries with him in a baby carrier when he's got hands and by its clothes when equipped with paws. The baby seems to be a regular human who gets along with both species, except it seems immune to the Delirium.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Pollution Down to Zero: You have a special ability to notice pollution in the environment. Once per session, you may smell an area to tell how badly the environment and wildlife suffer from pollution, and whether it stems from toxins, radiation, or some other source.",
+        "skillPtBr": "Poluição Zero: Você tem uma habilidade especial para notar a poluição no ambiente. Uma vez por sessão, você pode cheirar uma área para saber quão mal o meio ambiente e a vida selvagem sofrem com a poluição, e se ela provém de toxinas, radiação ou alguma outra fonte."
+      },
+      {
+        "cost": 2,
+        "skill": "Change Is in the Air: Inspired by Ross, you gain a one-die bonus to the first test you make after changing shape to glabro, crinos, or hispo.",
+        "skillPtBr": "A Mudança Está no Ar: Inspirado por Ross, você ganha um bônus de um dado no primeiro teste que fizer após mudar de forma para glabro, crinos ou hispo."
+      },
+      {
+        "cost": 3,
+        "skill": "The Power is Yours: You fought with Ross at Nagpur, and the experience taught you much. When directly preventing pollution, you gain a four-dice bonus on any single test, once per session.",
+        "skillPtBr": "Você lutou com Ross em Nagpur, e a experiência lhe ensinou muito. Ao prevenir diretamente a poluição, você ganha um bônus de quatro dados em qualquer teste único, uma vez por sessão."
+      },
+      {
+        "cost": 4,
+        "skill": "Trans Wolf: Just like Ross, you can change your sex as you change shape. This requires an additional Rage check and the expenditure of 1 Willpower. You keep the sex until this ability is used again, regardless of future (regular) shapechanging.",
+        "skillPtBr": "Conteúdo removido em respeito à comunidade LGBTQIAP+"
+      },
+      {
+        "cost": 5,
+        "skill": "Pride: You are a member of a minority group. Once per story, if you spend a scene hanging out with members of this community, you recover all lost Willpower. As with Ross, you are expected to help and protect this group, and if you ever refuse a call for help from someone in this minority, you sustain three points of Aggravated Willpower damage and lose this trait until you have provided said help.",
+        "skillPtBr": "Orgulho: Você é membro de um grupo minoritário. Uma vez por história, se você passar uma cena passando tempo com membros dessa comunidade, você recupera todos os pontos de Força de Vontade perdidos. Assim como Ross, espera-se que você ajude e proteja esse grupo, e se você algum dia se recusar a atender a um pedido de ajuda de alguém dessa minoria, você sofrerá três pontos de dano Agravado na Força de Vontade e perderá essa característica até que tenha prestado a ajuda mencionada."
+      }
+    ],
+    "book": "Shattered Nation",
+    "page": 139
+  },
+  {
+    "id": 13,
+    "titlePtBr": "Vandana “The Impresario” Puri",
+    "title": "Vandana “The Impresario” Puri",
+    "descriptionPtBr": "Nascida como uma esguia loba marathi de pelagem vermelha, a Impresario se tornou a mestre da mudança e dos eventos. De fato, ela começou facilitando Ritos de Passagem focados na mudança, mas agora é amplamente reconhecida como a melhor organizadora de eventos Garou. As Assembléias em que ela atua como Mestre de Cerimônias são comentadas por anos. Ela ganha a vida planejando casamentos e outras festas para humanos. A Impresario, uma Galliard Guarda do Cervo, prefere assumir as formas hispo ou glabro e despreza os Luas Roubadas, tendo perdido muitos amigos para esses assassinos depravados.",
+    "description": "",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Killer Organizer: You get a two-dice bonus to organizing any event, negotiating any wages, fees, or rents, and getting the word out these events via newspapers, social media, leaflets, posters, television ads, word of mouth, scent trails, howls, or any other way.",
+        "skillPtBr": "Organizador Assassino: Você ganha um bônus de dois dados para organizar qualquer evento, negociar salários, taxas ou aluguéis e divulgar esses eventos através de jornais, redes sociais, panfletos, cartazes, anúncios na televisão, boca a boca, trilhas de cheiro, uivos ou qualquer outro meio."
+      },
+      {
+        "cost": 2,
+        "skill": "Find the Thief: You can smell Stolen Moons from miles away, sometimes literally. You gain two bonus dice on any test to locate or track a Stolen Moon.",
+        "skillPtBr": "Encontrar o Ladrão: Você consegue sentir o cheiro de Luas Roubadas a quilômetros de distância, às vezes, literalmente. Você ganha dois dados de bônus em qualquer teste para localizar ou rastrear uma Lua Roubada."
+      },
+      {
+        "cost": 3,
+        "skill": "Preferred Partner: You have three one-dot contacts who are performers, cooks, venue workers, or restaurant employees. You also have two dots in Fame as a party planner, as well as a two-dot Adversary in the form of a rival Garou in the event business.",
+        "skillPtBr": "Parceiro Preferencial: Você tem três contatos de um ponto que são artistas, cozinheiros, funcionários de eventos ou empregados de restaurantes. Você também tem dois pontos em Fama como organizador de festas, além de um adversário de dois pontos na forma de um Garou rival no negócio de eventos."
+      },
+      {
+        "cost": 4,
+        "skill": "Catch the Thief: Your disgust for these blood thieves rivals that of the Impresario herself, letting you take a voluntary Frenzy test whenever you discover one. If you succumb to Frenzy you increase damage dealt to the Stolen Moon by one, while also reducing any damage received from them by one for the duration of the Frenzy.",
+        "skillPtBr": "Pegar o Ladrão: Seu desgosto por esses ladrões de sangue rivaliza com o da própria Impresário, permitindo que você faça um teste de Frenesi voluntário sempre que descobrir um. Se você sucumbir ao Frenesi, aumenta o dano causado à Lua Roubada em um, enquanto também reduz qualquer dano recebido deles em um durante a duração do Frenesi."
+      },
+      {
+        "cost": 5,
+        "skill": "Protégé: As the Impresario's protégé, you are a legendary party planner yourself, giving you four dots in Fame. You can get an invitation to your events delivered to anyone in contact with human or Garou society, and assuming they are not under perceived threat or busy running a country, they will try to attend. (Note that this does not necessarily mean that you know how to find them, only that you know who to talk to in order to send the message on its way.) If they suspect they'll be walking into a trap, they'll take necessary precautions but might still attend.",
+        "skillPtBr": "Pupilo: Como o pupilo da Impresário, você é um planejador de festas lendário, dando-lhe quatro pontos em Fama. Você pode fazer um convite para seus eventos ser entregue a qualquer pessoa em contato com a sociedade humana ou Garou, e, assumindo que não estejam sob uma ameaça percebida ou ocupados governando um país, eles tentarão comparecer (note que isso não significa necessariamente que você saiba como encontrá-los, apenas que sabe a quem conversar para enviar a mensagem). Se eles suspeitarem que estão caminhando para uma armadilha, tomarão as precauções necessárias, mas podem ainda assim comparecer."
+      }
+    ],
+    "book": "Shattered Nation",
+    "page": 140
   }
 ]

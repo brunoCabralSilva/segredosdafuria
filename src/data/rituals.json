@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "titlePtBr": "Ritual de Abjuração",
     "title":"Rite of Abjuration",
     "type": "common",
@@ -12,6 +13,7 @@
     "page": 180
   },
   {
+    "id": "2",
     "titlePtBr": "Ritual da Fúria",
     "title":"Rite of Rage",
     "type": "common",
@@ -24,6 +26,7 @@
     "page": 181
   },
   {
+    "id": "3",
     "titlePtBr": "Ritual da Tranquilidade",
     "title":"Rite of Tranquility",
     "type": "common",
@@ -36,6 +39,7 @@
     "page": 181
   },
   {
+    "id": "4",
     "titlePtBr": "Ritual de Contrição",
     "title":"Rite of Contrition",
     "type": "common",
@@ -48,6 +52,7 @@
     "page": 182
   },
   {
+    "id": "5",
     "titlePtBr": "Ritual do Registro Esquecido",
     "title":"Rite of the Forgetful Record",
     "type": "common",
@@ -60,6 +65,7 @@
     "page": 182
   },
   {
+    "id": "6",
     "titlePtBr": "Ritual do Caern Vivo",
     "title":"Rite of the Living Caern",
     "type": "common",
@@ -72,6 +78,7 @@
     "page": 182
   },
   {
+    "id": "7",
     "titlePtBr": "Ritual da Passagem das Sombras",
     "title":"Rite of Shadow Passage",
     "type": "common",
@@ -84,6 +91,7 @@
     "page": 182
   },
   {
+    "id": "8",
     "titlePtBr": "Ritual da Dedicação",
     "title":"Rite of Dedication",
     "type": "common",
@@ -96,6 +104,7 @@
     "page": 183
   },
   {
+    "id": "9",
     "titlePtBr": "Rito da Busca pelos Parentes",
     "title":"Rite of Kinseeking",
     "type": "common",
@@ -108,6 +117,7 @@
     "page": 183
   },
   {
+    "id": "10",
     "titlePtBr": "Rito da Invocação de Espírito",
     "title":"Rite of Spirit Summoning",
     "type": "common",
@@ -120,6 +130,7 @@
     "page": 183
   },
   {
+    "id": "11",
     "titlePtBr": "Rito de Vinculação",
     "title":"Rite of Binding",
     "type": "common",
@@ -132,6 +143,7 @@
     "page": 184
   },
   {
+    "id": "12",
     "titlePtBr": "Rito da Vergonha",
     "title":"Rite of Shame",
     "type": "common",
@@ -144,6 +156,7 @@
     "page": 184
   },
   {
+    "id": "13",
     "titlePtBr": "Rito do Patrono",
     "title":"Rite of Patronage",
     "type": "common",
@@ -156,6 +169,7 @@
     "page": 184
   },
   {
+    "id": "14",
     "titlePtBr": "Rito da Celebração",
     "title":"Rite of Celebration",
     "type": "common",
@@ -168,6 +182,7 @@
     "page": 185
   },
   {
+    "id": "15",
     "titlePtBr": "Rito de Criação de Caern",
     "title":"Rite of Caern Building",
     "type": "common",
@@ -181,6 +196,7 @@
     "page": 185
   },
   {
+    "id": "16",
     "titlePtBr": "Rito do Lobo Renascido",
     "title":"Rite of the Wolf Reborn",
     "type": "common",
@@ -193,6 +209,7 @@
     "page": 186
   },
   {
+    "id": "17",
     "titlePtBr": "Rito do Campo Sussurrante",
     "title":"Rite of the Whispering Field",
     "type": "common",
@@ -205,6 +222,7 @@
     "page": 186
   },
   {
+    "id": "18",
     "titlePtBr": "Rito do Vale Encoberto",
     "title":"Rite of the Shrouded Glen",
     "type": "common",
@@ -217,6 +235,7 @@
     "page": 186
   },
   {
+    "id": "19",
     "titlePtBr": "Ritual de Passagem",
     "title": "Rite of Passage",
     "type": "social",
@@ -229,6 +248,7 @@
     "page": 187
   },
   {
+    "id": "20",
     "titlePtBr": "Rito da Sátira",
     "title": "Satire Rite",
     "type": "social",
@@ -241,6 +261,7 @@
     "page": 187
   },
   {
+    "id": "21",
     "titlePtBr": "Ritual das Conquistas",
     "title": "Rite of Accomplishment",
     "type": "social",
@@ -253,6 +274,7 @@
     "page": 187
   },
   {
+    "id": "22",
     "titlePtBr": "Reunião em Memória dos Falecidos",
     "title": "Gathering for the Departed",
     "type": "social",
@@ -265,6 +287,7 @@
     "page": 187
   },
   {
+    "id": "23",
     "titlePtBr": "Ritual do Lobo de Inverno",
     "title": "Rite of the Winter Wolf",
     "type": "social",

@@ -17,7 +17,7 @@ export default function ListTalismans() {
         {
           listOfTalismans.map((item: ITalisman, index: number) => (
             <Link
-              href={`/talismans/${item.title.toLowerCase().replace(/ /g, '-')}`}
+              href={`/talismans/${item.id}`}
               className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
             >

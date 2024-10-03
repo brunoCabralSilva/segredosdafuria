@@ -12,10 +12,6 @@ export default function ConvertToPdf(props: { data: any }) {
   const pdfRef: any = useRef(null);
   const pdfRef2: any = useRef(null);
   
-  console.log(data);
-  
-  // useEffect(() => {
-  // }, []);
   const handleDownloadPdf = async () => {
     const pdfContainer1 = document.createElement('div');
     pdfContainer1.style.width = '1300px';

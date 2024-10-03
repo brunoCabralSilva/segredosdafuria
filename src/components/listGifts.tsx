@@ -15,19 +15,13 @@ export default function ListGifts() {
           <p className="w-full text-center">
             Total de Dons Encontrados: { listOfGift.length }
           </p>
-          {/* {
-            slice.message.text !== '' &&
-            <p className="w-full text-center">
-              Filtros Selecionados: { slice.message.text }
-            </p>
-          } */}
         </div>
       }
       <div className={`grid grid-cols-1 ${listOfGift.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>
         {
           listOfGift.map((item: IGift, index: number) => (
             <Link
-              href={`/gifts/${item.gift.toLowerCase().replace(/ /g, '-')}`}
+              href={`/gifts/${item.id}`}
               className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
             >

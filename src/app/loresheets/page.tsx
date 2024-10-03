@@ -36,37 +36,38 @@ export default function Loresheets() {
             Em geral, os jogadores devem trabalhar com seu Narrador para esclarecer alguns dos detalhes de seus Traços de Loresheet, para que possam ter uma aparência coerente na história. No entanto, alguns Traços de Loresheet provavelmente são melhores mantidos em segredo pelos personagens de outros jogadores...
           </p>
         </div>
-        <div className="grid grid-cols-1 mobile:grid-cols-2 sm:grid-cols-3 gap-2 w-full">
-          {
-            listLoresheets.map((loresheet: ILoresheet, index: number) => (
-              <Link
-                href={`/loresheets/${loresheet.title.toLowerCase().replace(/ /g, '-')}`}
-                key={ index }
-                className="w-full bg-02 bg-cover h-30vh text-white flex relative cursor-pointer border-transparent items-end"
-              >
-                <Image
-                  src={ `/images/loresheets/${loresheet.titlePtBr}.png` }
-                  alt=""
-                  className="absolute w-full h-full object-cover object-top"
-                  width={ 1200 }
-                  height={ 800 }
-                />
-                <div className="absolute w-full h-full bg-black/60" />
-                <div className="text-left relative w-full font-bold text-base px-3 p-2">
-                  <p>{ loresheet.titlePtBr }</p>
-                  <p>({ loresheet.title })</p>
-                </div>
-              </Link>
-            ))
-          }
+        <div  className="bg-black/90 pb-6 px-5">
+          <div className="grid grid-cols-1  mobile:grid-cols-2 sm:grid-cols-3 gap-2 w-full">
+            {
+              listLoresheets.map((loresheet: ILoresheet, index: number) => (
+                <Link
+                  href={`/loresheets/${loresheet.id}`}
+                  key={ index }
+                  className="w-full p-2 rounded bg-black text-white flex relative cursor-pointer items-center border border-white/20"
+                >
+                  <Image
+                    src={ `/images/loresheets/${loresheet.titlePtBr}.png` }
+                    alt=""
+                    className="w-20 h-20 object-cover object-top rounded-full"
+                    width={ 1200 }
+                    height={ 800 }
+                  />
+                  <div className="text-left relative w-full text-base px-3 p-2">
+                    <p className="font-bold">{ loresheet.titlePtBr }</p>
+                    <p>({ loresheet.title })</p>
+                  </div>
+                </Link>
+              ))
+            }
+          </div>
+          <button
+            type="button"
+            className="w-full text-center pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
+            onClick={() => setShowFeedback(true) }
+          >
+            Enviar Feedback
+          </button>
         </div>
-        <button
-          type="button"
-          className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-          onClick={() => setShowFeedback(true) }
-        >
-          Enviar Feedback
-        </button>
         {
           showFeedback && <Feedback title={ 'Página "Loresheets"' } /> 
         }

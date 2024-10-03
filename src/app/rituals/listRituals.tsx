@@ -17,7 +17,7 @@ export default function ListRituals() {
         {
           listOfRituals.map((item: IRitual, index: number) => (
             <Link
-              href={`/rituals/${item.title.toLowerCase().replace(/ /g, '-')}`}
+              href={`/rituals/${item.id}`}
               className="p-3 border-white border-2 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
               key={ index }
             >

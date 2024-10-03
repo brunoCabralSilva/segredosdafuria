@@ -16,7 +16,7 @@ export default function Gift({ params } : { params: { gift: String } }) {
   useEffect(() => {
     resetPopups();
     const findGift: IGift | undefined = listGifts
-      .find((gft: IGift) => params.gift.replace(/-/g, ' ').replace(/%C3%A2/g, "â") === gft.gift.toLowerCase());
+      .find((gft: IGift) => params.gift === gft.id);
     setDataGift(findGift);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

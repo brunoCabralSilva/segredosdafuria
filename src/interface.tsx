@@ -30,6 +30,7 @@ export interface IAdvantageAndFlaw {
 }
 
 export interface IGift {
+  id: string;
   gift: string;
   giftPtBr: string;
   belonging: ITypeGift[];
@@ -52,6 +53,7 @@ interface IBelonging {
 }
 
 export interface IRitual {
+  id: string;
   titlePtBr: String;
   title: string;
   type: String;
@@ -65,6 +67,7 @@ export interface IRitual {
 }
 
 export interface ITalisman {
+  id: string;
   title :string;
   titlePtBr :String;
   description :String;
@@ -93,6 +96,7 @@ export interface IForm {
 }
 
 export interface ILoresheet {
+  id: number,
   titlePtBr: String,
   title: string,
   descriptionPtBr: String,

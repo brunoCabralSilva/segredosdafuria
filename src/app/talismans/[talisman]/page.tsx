@@ -14,7 +14,7 @@ export default function Talisman({ params } : { params: { talisman: String } }) 
   useEffect(() => {
     resetPopups();
     const findTalisman: ITalisman | undefined = listTalismans
-      .find((tlsmn: ITalisman) => params.talisman.replace(/-/g, ' ') === tlsmn.title.toLowerCase());
+      .find((tlsmn: ITalisman) => params.talisman === tlsmn.id);
     setDataTalisman(findTalisman);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
