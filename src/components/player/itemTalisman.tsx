@@ -41,7 +41,7 @@ export default function ItemTalisman(props: { item: any }) {
   }
 
   return (
-    <div className={`${verifySelected() && !showTalisman ? 'bg-black' : 'bg-gray-whats'} border-2 border-white`}>
+    <div className={`${verifySelected() && !showTalisman ? 'bg-black border-2 border-red-500' : 'bg-gray-whats-dark border-2 border-white'} `}>
       <button
         type="button"
         onClick={ () => setShowTalisman(!showTalisman)}
@@ -66,7 +66,7 @@ export default function ItemTalisman(props: { item: any }) {
               onClick={() => {
                 updateTalen(item.titlePtBr, item.descriptionPtBr, adv.value, adv.type) 
               }}
-              className={`${dataSheet.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value) ? 'bg-black' : ''} mt-3 pt-3 border-2 border-white p-4 cursor-pointer`}
+              className={`${dataSheet.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value) ? 'bg-black border-red-500' : 'border-white '} mt-3 pt-3 border-2 p-4 cursor-pointer`}
             >
               <p>Custo do { adv.type } - { adv.value }</p>
             </div>

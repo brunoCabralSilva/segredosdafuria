@@ -34,7 +34,7 @@ export default function ItemLoresheet(props: { item: any }) {
   }
 
   return(
-    <div className={`${verifySelected() && !showLoresheet ? 'bg-black' : 'bg-gray-whats'} border-2 border-white`}>
+    <div className={`${verifySelected() && !showLoresheet ? 'bg-black border-2 border-red-500' : 'bg-gray-whats-dark border-2 border-white'}`}>
       <button
         type="button"
         onClick={ () => setShowLoresheet(!showLoresheet)}
@@ -58,7 +58,7 @@ export default function ItemLoresheet(props: { item: any }) {
                 onClick={() => {
                   updateLoresheet(item.titlePtBr, item.descriptionPtBr, adv.cost, adv.skillPtBr) 
                 }}
-                className={`${dataSheet.advantagesAndFlaws.loresheets.find((item2: any) => item2.skill === adv.skillPtBr) ? 'bg-black' : ''} mb-3 pt-3 border-2 border-white p-4 cursor-pointer`}
+                className={`${dataSheet.advantagesAndFlaws.loresheets.find((item2: any) => item2.skill === adv.skillPtBr) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mb-3 pt-3  p-4 cursor-pointer`}
               >
                 <p>Custo { adv.cost } - { adv.skillPtBr }</p>
               </div>

@@ -6,8 +6,8 @@ import dataAdvAndFlaws from '../../data/advantagesAndFlaws.json';
 import AdvOrFlawAdded from "../player/advOrFlawAdded";
 import dataTalens from '../../data/talismans.json';
 import dataLoresheets from '../../data/loresheets.json';
-import ItemLoresheet from "../player/loresheets";
-import ItemTalisman from "../player/talisman";
+import ItemLoresheet from "../player/itemLoresheets";
+import ItemTalisman from "../player/itemTalisman";
 import ItemAdvantage from "../player/itemAdvantage";
 
 export default function AddAdvOrFlaw(props: { type: string }) {

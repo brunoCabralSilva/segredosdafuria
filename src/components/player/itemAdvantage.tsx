@@ -62,7 +62,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
       {
         type === 'advantage' &&
         dataAdvAndFlaws &&
-          <div className={`${verifySelected() && !showAdvantage ? 'bg-black' : 'bg-gray-whats'} border-2 border-white`}>
+          <div className={`${verifySelected() && !showAdvantage ? 'bg-black border-2 border-red-500' : 'bg-gray-whats-dark border-2 border-white'} `}>
             <button
               type="button"
               onClick={ () => setShowAdvantage(!showAdvantage)}
@@ -85,7 +85,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
                     onClick={() => {
                       updateAdvantageOrFlaw(item.name, adv.cost, adv.type, adv.description, adv.title, 'advantage') 
                     }}
-                    className={`${dataSheet.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description) ? 'bg-black' : ''} mt-3 pt-3 border-2 border-white p-4 cursor-pointer`}
+                    className={`${dataSheet.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mt-3 pt-3 p-4 cursor-pointer`}
                   >
                     <p>Custo { adv.cost } - { adv.description }</p>
                   </div>
@@ -121,7 +121,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
                       onClick={() => {
                         updateAdvantageOrFlaw(item.name, adv.cost, adv.type, adv.description, adv.title, 'flaw')
                       }}
-                      className={`${dataSheet.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description) ? 'bg-black' : ''} mt-3 pt-3 border-2 border-white p-4 cursor-pointer`}
+                      className={`${dataSheet.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mt-3 pt-3 p-4 cursor-pointer`}
                     >
                       <p>Custo { adv.cost } - { adv.description }</p>
                     </div>
