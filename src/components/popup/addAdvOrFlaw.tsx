@@ -2,18 +2,21 @@
 import { useContext, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import contexto from "@/context/context";
-import AdvOrFlaw from "../player/advOrFlaw";
+import dataAdvAndFlaws from '../../data/advantagesAndFlaws.json';
 import AdvOrFlawAdded from "../player/advOrFlawAdded";
-import AdvTalens from "../player/advTalens";
-import AdvLoresheets from "../player/advLoresheets";
+import dataTalens from '../../data/talismans.json';
+import dataLoresheets from '../../data/loresheets.json';
+import ItemLoresheet from "../player/loresheets";
+import ItemTalisman from "../player/talisman";
+import ItemAdvantage from "../player/itemAdvantage";
 
 export default function AddAdvOrFlaw(props: { type: string }) {
   const [ selectOption, setSelectOption ] = useState('merits');
   const { type } = props;
   const { setShowAllAdvantages, setShowAllFlaws } =  useContext(contexto);
   return(
-    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70  p-5 pb-3">
-      <div className="bg-black border-2 border-white w-full h-full p-5">
+    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70  p-2 pb-3">
+      <div className="bg-black border-2 border-white w-full h-full p-2 sm:p-5">
         <div className="flex justify-between">
           <p className="text-white font-bold text-2xl py-3 pt-2">{ type === 'advantage' ? 'Vantagens' : 'Defeitos' }</p>
           <button
@@ -38,7 +41,7 @@ export default function AddAdvOrFlaw(props: { type: string }) {
           <select
             value={selectOption}
             onChange={(e) => setSelectOption(e.target.value) }
-            className="border-2 cursor-pointer border-white mx-3 p-2 mt-2 bg-black w-full text-white font-bold"
+            className="border-2 cursor-pointer border-white p-2 mt-2 bg-black w-full text-white font-bold"
           >
             <option value="merits">Méritos e Backgrounds</option>
             <option value="talens">Talismãs</option>
@@ -49,13 +52,49 @@ export default function AddAdvOrFlaw(props: { type: string }) {
           {
             type === 'advantage'
             ? <div className={`flex-1 pt-3 pb-2 text-justify overflow-y-auto ${ type === 'advantage' ? 'col1': 'col1-73' }`}>
-              { selectOption === 'merits' && <AdvOrFlaw type="advantage" /> }
-              { selectOption === 'talens' && <AdvTalens /> }
-              { selectOption === 'loresheets' && <AdvLoresheets /> }
+              { 
+                selectOption === 'merits' &&
+                <div>{
+                  dataAdvAndFlaws.map((item: any, index: number) => (
+                    <div key={index} className="pb-2">
+                      <ItemAdvantage type="advantage" item={item} />
+                    </div>
+                  ))
+                }</div>
+              }
+              { 
+                selectOption === 'talens' &&
+                <div>{
+                  dataTalens.map((item: any, index: number) => (
+                    <div key={index} className="pb-2">
+                      <ItemTalisman item={item} />
+                    </div>
+                  ))
+                }</div>
+              }
+              {
+                selectOption === 'loresheets' &&
+                <div>{
+                  dataLoresheets.map((item: any, index: number) => (
+                    <div key={index} className="pb-2">
+                      <ItemLoresheet item={item} />
+                    </div>
+                  ))
+                }</div>
+              }
               
             </div>
             : <div className={`flex-1 pt-3 pb-2 text-justify overflow-y-auto ${ type === 'advantage' ? 'col1': 'col1-73' }`}>
-              { type === 'flaw' && <AdvOrFlaw type="flaw" /> }
+              { 
+                type === 'flaw' &&
+                <div>{
+                  dataAdvAndFlaws.map((item: any, index: number) => (
+                    <div key={index} className="pb-2">
+                      <ItemAdvantage type="flaw" item={item} />
+                    </div>
+                  ))
+                }</div>
+              }
             </div>
           }
           <div className={`${ type === 'advantage' ? 'col2': 'col2-73'} hidden sm:flex w-full pl-2 pt-3`}>

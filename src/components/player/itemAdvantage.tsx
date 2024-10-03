@@ -1,0 +1,136 @@
+import dataAdvAndFlaws from '../../data/advantagesAndFlaws.json';
+import contexto from "@/context/context";
+import { updateDataPlayer } from '@/firebase/players';
+import { useContext, useState } from "react";
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+
+export default function ItemAdvantage(props: { item: any, type: string }) {
+  const { type, item } = props;
+  const [showAdvantage, setShowAdvantage] = useState(false);
+  const {
+    email,
+    dataSheet,
+    sessionId,
+    setShowMessage,
+  } = useContext(contexto);
+
+  const updateAdvantageOrFlaw = async (
+    name: string,
+    cost: string,
+    type: string,
+    description: string,
+    title: string,
+    advOfFlaw: string,
+  ) => {
+    const obj = { name, cost, description, type, title };
+    let newList: any = [];
+    if (advOfFlaw === 'flaw') newList = dataSheet.advantagesAndFlaws.flaws;
+    else newList = dataSheet.advantagesAndFlaws.advantages;
+    if (newList.length === 0) newList.push(obj);
+    else {
+      const sameName = newList.filter((item: any) => item.name === name);
+      if (sameName.length > 0) {
+        const equal = newList.find((item: any) => item.description === description);
+        if (equal) {
+          newList = newList.filter((item: any) => item.description !== description);
+        } else {
+          if (type === 'radio') {
+            newList = newList.filter((item: any) => item.name !== name || (item.name === name && type !== 'radio'));
+            newList.push(obj);
+          } else newList.push(obj);
+        }
+      } else newList.push(obj);
+    }
+    if (advOfFlaw === 'flaw') dataSheet.advantagesAndFlaws.flaws = newList;
+    else dataSheet.advantagesAndFlaws.advantages = newList;
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+  }
+
+  const verifySelected = () => {
+    if (type === 'flaw') {
+      return item.flaws.find((adv: any) => {
+        return dataSheet.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description)
+      });
+    }
+    return item.advantages.find((adv: any) => {
+      return dataSheet.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description)
+    });
+  }
+
+  return (
+    <div>
+      {
+        type === 'advantage' &&
+        dataAdvAndFlaws &&
+          <div className={`${verifySelected() && !showAdvantage ? 'bg-black' : 'bg-gray-whats'} border-2 border-white`}>
+            <button
+              type="button"
+              onClick={ () => setShowAdvantage(!showAdvantage)}
+              className="capitalize p-4 font-bold flex w-full justify-between items-center "
+            >
+              <p className="text-base sm:text-lg w-full text-left">{ item.name }</p>
+              { showAdvantage
+                ? <IoIosArrowUp  />
+                : <IoIosArrowDown />
+              }
+            </button>
+            {
+              showAdvantage &&
+              <div className="px-4 pb-4">
+              <p>{ item.description }</p>
+              {
+                item.advantages.map((adv: any, index2: number) => (
+                  <div
+                    key={index2}
+                    onClick={() => {
+                      updateAdvantageOrFlaw(item.name, adv.cost, adv.type, adv.description, adv.title, 'advantage') 
+                    }}
+                    className={`${dataSheet.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description) ? 'bg-black' : ''} mt-3 pt-3 border-2 border-white p-4 cursor-pointer`}
+                  >
+                    <p>Custo { adv.cost } - { adv.description }</p>
+                  </div>
+                ))
+              }
+              </div>
+            }
+          </div>
+        }
+        {
+          type === 'flaw' &&
+          dataAdvAndFlaws &&
+          <div className={`${verifySelected() && !showAdvantage ? 'bg-black' : 'bg-gray-whats'} border-2 border-white`}>
+            <button
+              type="button"
+              onClick={ () => setShowAdvantage(!showAdvantage)}
+              className="capitalize p-4 font-bold flex w-full justify-between items-center "
+            >
+              <p className="text-base sm:text-lg w-full text-left">{ item.name }</p>
+              { showAdvantage
+                ? <IoIosArrowUp  />
+                : <IoIosArrowDown />
+              }
+            </button>
+            {
+              showAdvantage &&
+              <div className="px-4 pb-4">
+                <p>{ item.description }</p>
+                {
+                  item.flaws.map((adv: any, index2: number) => (
+                    <div
+                      key={index2}
+                      onClick={() => {
+                        updateAdvantageOrFlaw(item.name, adv.cost, adv.type, adv.description, adv.title, 'flaw')
+                      }}
+                      className={`${dataSheet.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description) ? 'bg-black' : ''} mt-3 pt-3 border-2 border-white p-4 cursor-pointer`}
+                    >
+                      <p>Custo { adv.cost } - { adv.description }</p>
+                    </div>
+                  ))
+                }
+              </div>
+            }
+          </div>
+        }
+    </div>
+  );
+}

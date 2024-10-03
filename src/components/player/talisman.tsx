@@ -1,0 +1,79 @@
+import contexto from "@/context/context";
+import { updateDataPlayer } from '@/firebase/players';
+import { useContext, useState } from "react";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+
+export default function ItemTalisman(props: { item: any }) {
+  const { item } = props;
+  const [showTalisman, setShowTalisman] = useState(false);
+  const {
+    email,
+    dataSheet,
+    sessionId,
+    setShowMessage,
+  } = useContext(contexto);
+
+  const updateTalen = async (
+    name: string,
+    description: string,
+    value: number,
+    type: string,
+  ) => {
+    const obj = { name, value, description, type };
+    let newList = dataSheet.advantagesAndFlaws.talens;
+    if (newList.length === 0) newList.push(obj);
+    else {
+      const sameName = newList.filter((item: any) => item.name === name);
+      if (sameName.length > 0) {
+        const equal = newList.find((item: any) => item.name === name && item.value === value && item.type === type);
+        if (equal) newList = newList.filter((item: any) => item.name !== name || (item.name === name && item.value !== value));
+        else newList.push(obj);
+      } else newList.push(obj);
+    }
+    dataSheet.advantagesAndFlaws.talens = newList;
+    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+  }
+
+  const verifySelected = () => {
+    return item.cost.find((adv: any) => {
+      return dataSheet.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value)
+    });
+  }
+
+  return (
+    <div className={`${verifySelected() && !showTalisman ? 'bg-black' : 'bg-gray-whats'} border-2 border-white`}>
+      <button
+        type="button"
+        onClick={ () => setShowTalisman(!showTalisman)}
+        className="capitalize p-4 font-bold flex w-full justify-between items-center "
+      >
+        <p className="text-base sm:text-lg w-full text-left">{ item.titlePtBr }</p>
+        { showTalisman
+          ? <IoIosArrowUp  />
+          : <IoIosArrowDown />
+        }
+      </button>
+      {
+        showTalisman &&
+        <div className="px-4 pb-4 bg-gray-whats">
+        <p>{ item.descriptionPtBr }</p>
+        <p>{ item.systemPtBr }</p>
+        <p>{ item.backgroundCostPtBr }</p>
+        {
+          item.cost.map((adv: any, index2: number) => (
+            <div
+              key={index2}
+              onClick={() => {
+                updateTalen(item.titlePtBr, item.descriptionPtBr, adv.value, adv.type) 
+              }}
+              className={`${dataSheet.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value) ? 'bg-black' : ''} mt-3 pt-3 border-2 border-white p-4 cursor-pointer`}
+            >
+              <p>Custo do { adv.type } - { adv.value }</p>
+            </div>
+          ))
+        }
+        </div>
+      }
+    </div>
+  );
+}
