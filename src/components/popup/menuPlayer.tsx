@@ -73,7 +73,7 @@ export default function MenuPlayer() {
           && !showRitualRoll.show
           && <div className="w-full h-full">
           <select
-            defaultValue='general'
+            value={optionSelect}
             onChange={ (e) => {
             setOptionSelect(e.target.value);
             }}

@@ -3014,5 +3014,27 @@
     "duration": "Uma Cena",
     "book": "Werewolf: The Apocalypse 5th",
     "page": 170
+  },
+  {
+    "id": "128",
+    "gift": "The Howl Carries",
+    "giftPtBr": "O Uivo se Propaga",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 1
+      }
+    ],
+    "description": "Many wolfborn who eschew technology send messages the old fashioned way, by howling. With some supernatural assistance, their families in the area carry that howl for miles. For the informational potential content of the howls, see the relevant section on p. 41.",
+    "descriptionPtBr": "Muitos nascidos lobos que rejeitam a tecnologia e enviam mensagens à moda antiga, através de uivos. Com alguma assistência sobrenatural, suas famílias na área propagam esse uivo por quilômetros. Para informações detalhadas sobre o conteúdo potencial dos uivos, consulte a seção relevante na p. 41.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade (e 1 Teste de Fúria Condicional)",
+    "action": "Livre",
+    "pool": "",
+    "system": "The Garou steels themselves and howl loudly. That howl is picked up and repeated by mundane wolves who travel some distance and then repeat the howl until the sun next rises or sets. Any Garou within a few miles recognizes the howl as unusual (including Garou unknown to the howler), as do some spirits. Humans, however, have no chance of intercepting the message. The message is heard sporadically, and the supernatural force of the Gift ensures the howls carry further than normal to the Garou's ears. If the Garou also makes a Rage check while howling, the effect can be limited to the bawn of a caern they are within. This Gift is taught by a wolf spirit or any spirit known to be loud or communicative.",
+    "systemPtBr": "O Garou se prepara e uiva alto. Esse uivo é captado e repetido por lobos mundanos, que viajam uma certa distância e, em seguida, repetem o uivo até que o sol nasça ou se ponha. Qualquer Garou a alguns quilômetros reconhece o uivo como algo incomum (incluindo Garou desconhecidos pelo que uivou), assim como alguns espíritos. No entanto, humanos não têm chance de interceptar a mensagem. O uivo é ouvido de forma intermitente, e a força sobrenatural do Dom garante que os uivos viajem mais longe do que o normal até os ouvidos dos Garou. Se o Garou também fizer um teste de Fúria durante o uivo, o efeito pode ser limitado à zona de proteção ao redor do caern onde ele esteja. Esse Dom é ensinado por um espírito lobo ou qualquer espírito conhecido por ser barulhento ou comunicativo.",
+    "duration": "Até o anoitecer ou o amanhecer",
+    "book": "Shattered Nation",
+    "page": 133
   }
 ]

@@ -69,7 +69,7 @@ export function RiteOfTheSacredScar() {
         </div>
       </label>
       <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Dificuldade do Teste</p>
+        <p className="text-white w-full pb-3">Dificuldade do Teste (A Dificuldade é igual ao maior Renome do destinatário, mas nunca menor que 2):</p>
         <div className="flex w-full">
           <div
             className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}

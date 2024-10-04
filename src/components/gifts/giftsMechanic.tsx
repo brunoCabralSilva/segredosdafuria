@@ -13,6 +13,7 @@ import { TongueofBeasts } from "./tongueOfBeasts";
 import { LunasBlessing } from "./lunasBlessing";
 import { SilverClaws } from "./silverClaws";
 import { SpiritOfTheFray } from "./spiritOfTheFray";
+import { TheHowlCarries } from "./TheHowlCarries";
 
 export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
@@ -230,6 +231,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Tongue of Beasts": return <TongueofBeasts />
     case "Luna's Blessing": return <LunasBlessing />
     case 'Spirit of the Fray': return <SpiritOfTheFray />
+    case 'The Howl Carries': return <TheHowlCarries />
     // case 'Grasp from Beyond': return <GraspFromBeyond />
     // case "Rapid Shift": return <RapidShift />
     // case "Energize": return <Energize />
