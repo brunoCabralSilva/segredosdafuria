@@ -155,7 +155,8 @@ export default function Relationship() {
     };
 
   return (
-    <div className="w-screen h-screen z-80 fixed top-0 left-0 bg-black text-black">
+    <div className="w-screen h-screen z-80 fixed top-0 left-0 bg-ritual bg-cover bg-top text-black">
+      <div className="bg-black/80 absolute w-full h-full"/>
       <ReactFlow
         nodes={nodes}
         edges={edges}
