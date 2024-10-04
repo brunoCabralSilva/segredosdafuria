@@ -49,7 +49,7 @@ export default function AddRitual() {
             </div>
           </div>
           <div className="col2-73 hidden sm:flex flex-col w-full pl-2 pt-3">
-            <div className="bg-gray-whats w-full h-full overflow-y-auto p-5">
+            <div className="bg-gray-whats-dark w-full h-full overflow-y-auto p-5">
               <p className="capitalize text-lg pb-3 font-bold">Rituais Adicionados</p>
               {
                 dataSheet.rituals.map((item: any, index: number) => (

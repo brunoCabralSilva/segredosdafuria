@@ -47,6 +47,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
   }
 
   const verifySelected = () => {
+    console.log(item);
     if (type === 'flaw') {
       return item.flaws.find((adv: any) => {
         return dataSheet.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description)
@@ -98,7 +99,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
         {
           type === 'flaw' &&
           dataAdvAndFlaws &&
-          <div className={`${verifySelected() && !showAdvantage ? 'bg-black' : 'bg-gray-whats'} border-2 border-white`}>
+          <div className={`${verifySelected() && !showAdvantage ? 'bg-black border-2 border-red-500' : 'border-2 border-white bg-gray-whats-dark'}`}>
             <button
               type="button"
               onClick={ () => setShowAdvantage(!showAdvantage)}

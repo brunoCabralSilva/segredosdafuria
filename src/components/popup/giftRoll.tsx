@@ -7,7 +7,7 @@ export default function GiftRoll() {
   const { showGiftRoll } =  useContext(contexto);
 
   return(
-    <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+    <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
         <p className="text-white w-full pb-1 text-xl font-bold">Dom:  { showGiftRoll.gift.giftPtBr }</p>
       </label>

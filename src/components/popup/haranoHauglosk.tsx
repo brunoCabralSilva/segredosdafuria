@@ -36,7 +36,7 @@ export default function HaranoHauglosk(props: { type: string }) {
   };
 
   return(
-    <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+    <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
         <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Teste de { type }</p>
       </label>

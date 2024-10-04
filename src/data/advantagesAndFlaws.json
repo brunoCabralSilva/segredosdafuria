@@ -203,7 +203,8 @@
         "title": "Mestre de Rituais",
         "description": "Mestre de Rituais - Você adiciona +1 dado a qualquer teste que envolva o conhecimento ou a realização de rituais."
       }      
-    ]
+    ],
+    "flaws": []
   },
   {
     "name": "Refúgio Seguro",

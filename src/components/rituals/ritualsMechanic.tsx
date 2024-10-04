@@ -1,6 +1,7 @@
 import { RiteOfBinding } from "./riteOfBinding";
 import { RiteOfPatronage } from "./riteOfPatronage";
 import { RiteOfShadowPassage } from "./riteOfShadowPassage";
+import { RiteOfTheSacredScar } from "./RiteOfTheSacredScar";
 import { RiteOfTheWolfReborn } from "./riteOfTheWolfReborn";
 import { RiteWithRoll } from "./riteWithRoll";
 import { SimpleTest } from "./simpleTest";
@@ -32,6 +33,34 @@ export default function RitualsMechanic(props: { title: string }) {
       return <RiteWithRoll renown="wisdom" skill="survival" textDifficult="A Dificuldade do Rito é 2 mais 1 para cada participante, além do Mestre do Rito." />
     case 'Rite of the Shrouded Glen':
       return <RiteWithRoll renown="wisdom" skill="craft" textDifficult="A Dificuldade para realizar este Rito é 2 + o Valor do Caern." />
+    case 'Rite of the Borne Word':
+      return <RiteWithRoll renown="honor" skill="etiquette" textDifficult="A Dificuldade é 3 (ou mais alta, se o espírito for hostil)." />
+    case 'Rite of the Broken Sun':
+      return <RiteWithRoll renown="honor" skill="occult" textDifficult="A Dificuldade do Ritual é igual ao maior valor de Renome do Garou sendo punido." />
+    case 'Rite of Caging':
+      return <RiteWithRoll renown="wisdom" skill="awareness" textDifficult="A Dificuldade do Ritual é igual à classificação da Película local: um caern ativo pode ser 2, um beco urbano 3 ou 4, enquanto um ambiente de laboratório estéril pode chegar até 6." />
+    case 'Rite of Chiminage':
+      return <RiteWithRoll renown="wisdom" skill="etiquette" textDifficult="A Dificuldade base varia de 2 para gafflings menores a 6 para entidades quase divinas, como os Celestinos." />
+    case 'Rite of the Grim Reach':
+      return <RiteWithRoll renown="glory" skill="survival" textDifficult="A Dificuldade é igual à Classificação da Película" />
+    case 'Rite of the Living Tale':
+      return <RiteWithRoll renown="wisdom" skill="survival" textDifficult="A Dificuldade é 2 (ou mais, dependendo da complexidade do cheiro)." />
+    case "Rite of the Moon's Fickle Grace":
+      return <RiteWithRoll renown="glory" skill="performance" textDifficult="A Dificuldade é 3" />
+    case 'Rite of Shared Fury':
+      return <RiteWithRoll renown="honor" skill="politics" textDifficult="A Dificuldade base do Ritual é igual ao número de participantes, embora nunca seja menor que 3." />
+    case 'Rite of the Ban Shared':
+      return <SimpleTest />
+    case 'Cleansing Rite':
+      return <SimpleTest />
+    case 'The Long Vigil':
+      return <SimpleTest />
+    case 'Pledging Rite':
+      return <SimpleTest />
+    case 'The Renewal Circle':
+      return <SimpleTest />
+    case 'Rite of Renunciation':
+      return <SimpleTest />
     case 'Rite of the Winter Wolf':
       return <SimpleTest />
     case 'Gathering for the Departed':
@@ -46,6 +75,8 @@ export default function RitualsMechanic(props: { title: string }) {
       return <SimpleTest />
     case 'Rite of Dedication':
       return <SimpleTest />
+    case 'Rite of the Sacred Scar':
+      return <RiteOfTheSacredScar />
     case 'Rite of the Wolf Reborn':
       return <RiteOfTheWolfReborn />
     case 'Rite of Patronage':

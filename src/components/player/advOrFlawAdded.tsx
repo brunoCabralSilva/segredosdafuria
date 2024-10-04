@@ -19,7 +19,7 @@ export default function AdvOrFlawAdded(props: { type: string }) {
   }
 
   return (
-    <div className="bg-gray-whats w-full h-full overflow-y-auto p-5">
+    <div className="bg-gray-whats-dark w-full h-full overflow-y-auto p-5">
       <p className="capitalize text-lg pb-3 font-bold">
       {
         type === 'advantage' &&
@@ -77,7 +77,7 @@ export default function AdvOrFlawAdded(props: { type: string }) {
         dataSheet.advantagesAndFlaws.talens
           .sort((a: any, b: any) => a.name.localeCompare(b.name))
           .map((item: any, index: number) => (
-          <div key={index} className="bg-gray-whats">
+          <div key={index} className="bg-gray-whats-dark">
             <p className="text-base">
               <span className="pr-1">{ item.name }</span> - { item.value } - { item.type }
             </p>
