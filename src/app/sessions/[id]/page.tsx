@@ -29,6 +29,7 @@ import AddPrinciple from "@/components/popup/addPrinciple";
 import DeletePrinciple from "@/components/popup/deletePrinciple";
 import AddFavorAndBan from "@/components/popup/addFavorAndBan";
 import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
+import Relationship from "@/components/popup/relationship";
 
 export default function SessionId({ params } : { params: { id: string } }) {
 	const { id } = params;
@@ -51,6 +52,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
     showMessage, setShowMessage,
     addFavorAndBan,
     showDeleteFavorAndBan,
+    showRelationship,
     addTouchstone,
     showRemovePlayer,
     showPlayer,
@@ -169,6 +171,7 @@ export default function SessionId({ params } : { params: { id: string } }) {
       { addFavorAndBan.show && <AddFavorAndBan /> }
       { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
       { showDownloadPdf.show && verifyConvert() }
+      { showRelationship && <Relationship /> }
       <Nav />
       {
         showData

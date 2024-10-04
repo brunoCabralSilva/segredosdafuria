@@ -8,12 +8,13 @@ import contexto from "@/context/context";
 import Item from "./item";
 import ItemAgravated from "./itemAgravated";
 import ResetSheet from "../popup/resetSheet";
+import { updateSession } from "@/firebase/sessions";
 
 export default function General() {
   const [input, setInput ] = useState('');
   const [newName, setNewName] = useState('');
 	const {
-		sessionId, email,
+		sessionId, email, session,
     dataSheet, setDataSheet,
 		showResetSheet, setShowResetSheet,
     setShowGiftRoll,
@@ -36,7 +37,17 @@ export default function General() {
 
   const updateValue = async (key: string, value: string) => {
     const newDataSheet = dataSheet;
-    if (key === 'name') newDataSheet.name = newName;
+    if (key === 'name') {
+      newDataSheet.name = newName;
+      const newDataSession = session;
+      const findUser = newDataSession.relationships.nodes.find((item: any) => item.email === email);
+      if (findUser) {
+        const filterOtherUsers = newDataSession.relationships.nodes.filter((item: any) => item.email !== email);
+        findUser.data = newName;
+        newDataSession.relationships.nodes = [ ...filterOtherUsers, findUser];
+        await updateSession(newDataSession, setShowMessage);
+      } else setShowMessage( { show: true, text: 'Não foi possível atualizar dados do usuário (o mesmo não foi encontrado no mapa de relacionamentos'});
+    }
     else newDataSheet[key] = value;
 		await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
     if (key === 'name') setNewName(newDataSheet.name);

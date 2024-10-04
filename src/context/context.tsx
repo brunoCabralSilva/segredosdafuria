@@ -101,6 +101,8 @@ interface RecipesContext {
   setAddFavorAndBan: (state: {show: boolean, data: {}, type: string}) => void,
   showDeleteFavorAndBan: { show: boolean, name: string, type: string },
   setShowDeleteFavorAndBan: (state: { show: boolean, name: string, type: string }) => void,
+  showRelationship: boolean,
+  setShowRelationship: (state: boolean) => void,
   //gameMaster
   session: any,
   setSession: (state: any) => void,
@@ -219,6 +221,8 @@ const initialValue: RecipesContext = {
   setAddFavorAndBan: () => {},
   showDeleteFavorAndBan: { show: false, name: '', type: '' },
   setShowDeleteFavorAndBan: () => {},
+  showRelationship: false,
+  setShowRelationship: () => {},
   //gameMaster
   session: {},
   setSession: () => {},

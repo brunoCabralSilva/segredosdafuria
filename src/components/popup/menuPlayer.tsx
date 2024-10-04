@@ -17,6 +17,7 @@ import RitualRoll from "./ritualRoll";
 import Touchstones from "../player/touchstones";
 import Principles from "../player/principles";
 import FavorsAndBans from "../player/favorsAndBans";
+import Relationship from "./relationship";
 
 export default function MenuPlayer() {
   const [optionSelect, setOptionSelect] = useState('general');
@@ -26,6 +27,7 @@ export default function MenuPlayer() {
     showHauglosk, setShowHauglosk,
     showGiftRoll, setShowGiftRoll,
     showRitualRoll, setShowRitualRoll,
+    showRelationship, setShowRelationship,
     setShowEvaluateSheet,
     setShowMenuSession,
   } = useContext(contexto);
@@ -42,6 +44,10 @@ export default function MenuPlayer() {
       case ('background'): return (<Background type="background" />);
       case ('principles-of-the-chronicle'): return (<Principles />);
       case ('favor-ban'): return (<FavorsAndBans />);
+      case ('relationship'): 
+        if (showRelationship) setOptionSelect('general');
+        else setShowRelationship(true);
+          return <div></div>;
       case ('anotations'): return (<Anotations type="notes" />);
       case ('gifts'): return (<Gifts />);
       case ('rituals'): return (<Rituals />);
@@ -89,6 +95,7 @@ export default function MenuPlayer() {
             <option value={'forms'}>Formas ( Atual: { dataSheet.form } )</option>
             <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>
             <option value={'favor-ban'}>Favores e Proibições</option>
+            <option value={'relationship'}>Mapa de Relacionamentos</option>
             <option value={'session'}>Sessão</option>
             <option value={'background'}>Background</option>
             <option value={'anotations'}>Anotações</option>

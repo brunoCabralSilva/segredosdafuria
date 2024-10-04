@@ -60,6 +60,7 @@ export default function Provider({children }: IProvider) {
   const [showDeleteFavorAndBan, setShowDeleteFavorAndBan] = useState({ show: false, name: '', type: '' });
   const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: '' });
   const [showDownloadPdf, setShowDownloadPdf] = useState({ show: false, email: '' });
+  const [showRelationship, setShowRelationship] = useState(false);
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -76,17 +77,6 @@ export default function Provider({children }: IProvider) {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
   };
-
-  const returnSessionValues = async () => {
-    const auth: any = await authenticate(setShowMessage);
-		if (auth && auth.email && auth.displayName) {
-			setEmail(auth.email);
-      setName(auth.displayName);
-			const session: any = await getSessionById(sessionId);
-      if (session.name) setSession(session);
-			else setShowMessage({ show: true, text: 'Sessão não encontrada! Por favor, atualize a página e tente novamente' });
-		}
-  }
 
   const resetPopups = () => {
     setShowForgotPassword(false);
@@ -182,6 +172,7 @@ export default function Provider({children }: IProvider) {
         showDeletePrinciple, setShowDeletePrinciple,
         addFavorAndBan, setAddFavorAndBan,
         showDeleteFavorAndBan, setShowDeleteFavorAndBan,
+        showRelationship, setShowRelationship,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,

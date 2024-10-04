@@ -3,6 +3,7 @@ import { capitalize, getOfficialTimeBrazil, sheetStructure } from "./utilities";
 import { authenticate } from "./authenticate";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
+import { updateSession } from "./sessions";
 
 export const getNotificationsById = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
@@ -108,11 +109,19 @@ export const removeNotification = async (sessionId: string, message: string, set
   }
 };
 
-export const approveUser = async (notification: any, sessionId: string, setShowMessage: any) => {
+const recalculateNodePositions = (nodes: Node[]) => {
+  return nodes.map((node, index) => {
+    const positionY = index < nodes.length / 2 ? 100 : 300;
+    const positionX = 100 + (index % (nodes.length / 2)) * 200;
+    return { ...node, position: { x: positionX, y: positionY } };
+  });
+};
+
+export const approveUser = async (notification: any, session: any, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const playersCollectionRef = collection(db, 'players');
-    const querySession = query(playersCollectionRef, where("sessionId", "==", sessionId));
+    const querySession = query(playersCollectionRef, where("sessionId", "==", session.id));
     const querySnapshot = await getDocs(querySession);
     if (querySnapshot.empty) {
       setShowMessage({ show: true, text: 'Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.' });
@@ -126,8 +135,28 @@ export const approveUser = async (notification: any, sessionId: string, setShowM
         const dateMessage = await getOfficialTimeBrazil();
         const sheet = sheetStructure(notification.email, notification.user, dateMessage);
         transaction.update(playerDocRef, { list: arrayUnion(sheet) });
+        const newId = session.relationships.nodes.reduce((maxId: any, node: any) => {
+          const id = parseInt(node.id, 10);
+          return id > maxId ? id : maxId;
+        }, 0) + 1;
+        const newNode = { id: newId, data: sheet.data.name, email: notification.email, position: { x: 0, y: 0 }, isInitial: true };
+        const sessionData = session;
+        sessionData.relationships.nodes.push(newNode);
+        sessionData.relationships.nodes = recalculateNodePositions(sessionData.relationships.nodes);
+
+        for (let i = 0; i < sessionData.relationships.nodes.length; i += 1) {
+          if (sessionData.relationships.nodes[i].id !== newId) {
+            sessionData.relationships.edges.push(
+            {
+              id: `rel-${newId}-${sessionData.relationships.nodes[i].id}`,
+              source: `${newId}`,
+              target: `${sessionData.relationships.nodes[i].id}`,
+              label: `Relacionamento entre ${sheet.data.name} e ${sessionData.relationships.nodes[i].data}` });
+          }
+        }
+        await updateSession(sessionData, setShowMessage);
         await registerMessage(
-          sessionId,
+          session.id,
           {
             message: `${capitalize(notification.user)} iniciou sua jornada nesta Sessão! Seja bem-vindo!`,
             type: 'notification',
@@ -135,7 +164,7 @@ export const approveUser = async (notification: any, sessionId: string, setShowM
           null,
           setShowMessage,
         );
-        await removeNotification(sessionId, notification.message, setShowMessage);
+        await removeNotification(session.id, notification.message, setShowMessage);
       } else {
         setShowMessage({ show: true, text: 'O usuário já está na sessão.' });
       }

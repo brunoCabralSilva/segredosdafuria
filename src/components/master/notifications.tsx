@@ -4,7 +4,7 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { approveUser, removeNotification } from '@/firebase/notifications';
 
 export default function Notifications() {
-  const { sessionId, listNotification, setListNotification, setShowMessage } = useContext(contexto);
+  const { session, sessionId, listNotification, setListNotification, setShowMessage } = useContext(contexto);
   
   const remNotFromCache = async(list: any[]) => {
     const listNotif = listNotification.filter(listNot => JSON.stringify(listNot) !== JSON.stringify(list));
@@ -36,7 +36,7 @@ export default function Notifications() {
                 </button>
                 <button
                   type="button"
-                  onClick={ () => approveUser(listNot, sessionId, setShowMessage) }
+                  onClick={ () => approveUser(listNot, session, setShowMessage) }
                   className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
                 >
                   Aceitar
