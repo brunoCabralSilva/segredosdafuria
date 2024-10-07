@@ -1,4 +1,4 @@
-import { capitalize, getOfficialTimeBrazil } from "./utilities";
+import { capitalize, getOfficialTimeBrazil, translate } from "./utilities";
 import firebaseConfig from "./connection";
 import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
@@ -98,6 +98,7 @@ export const rollTest = (
 		dificulty,
 		penaltyOrBonus,
 		type: 'roll',
+		test: '',
 	}
 }
 
@@ -147,6 +148,11 @@ export const registerManualRoll = async(
   setShowMessage: any,
 ) => {
 	const roll = rollTest(rage, valueOf, penaltyOrBonus, dificulty);
+	const sumDices = rage + valueOf + penaltyOrBonus;
+	roll.test = `Foi realizado um teste com ${ sumDices } ${ sumDices > 1 ? 'dados' : 'dado'}`;
+	if (rage > 0 && penaltyOrBonus === 0 && valueOf === 0) 
+		roll.test += ` de Fúria.`;
+	else if (rage > 0) roll.test += `, onde ${rage} desses dados ${rage === 1 ? 'é' : 'são'} de Fúria.`;
 	await registerMessage(sessionId, roll, null, setShowMessage);
 }
 
@@ -164,19 +170,29 @@ export const registerAutomatedRoll = async(
 	let rage = 0;
 	try {
 		const player = await getPlayerByEmail(sessionId, emailUser, setShowMessage);
+		let text = 'Foi realizado um teste de ';
 		if (player) {
 			rage = Number(player.data.rage);
-			if (atrSelected !== '0' && atrSelected !== '1')
+			if (atrSelected !== '0' && atrSelected !== '1') {
 				valueOf += Number(player.data.attributes[atrSelected]);
-			if (sklSelected !== '0' && sklSelected !== '1')
+				text += translate(atrSelected) + ' (' + player.data.attributes[atrSelected] + ')';
+			}
+			if (sklSelected !== '0' && sklSelected !== '1') {
 				valueOf += Number(player.data.skills[sklSelected].value);
-			if (renSelected !== '0' && renSelected !== '1')
+				if (text !== 'Foi realizado um teste de ') text += ' + ';
+				text += translate(sklSelected) + ' (' + player.data.skills[sklSelected].value + ')';
+			}
+			if (renSelected !== '0' && renSelected !== '1') {
 				valueOf += Number(player.data[renSelected]);
+				if (text !== 'Foi realizado um teste de ') text += ' + ';
+				text += translate(renSelected) + ' (' + player.data[renSelected] + ')';
+			}
 			if (rage > valueOf) {
 				rage = valueOf;
 				valueOf = 0;
 			} else valueOf -= rage;
 			const roll = rollTest(rage, valueOf, penaltyOrBonus, dificulty);
+			roll.test = text;
 			await registerMessage(sessionId, roll, emailUser, setShowMessage);
 		} else setShowMessage({ show: true, text: 'Sessão não encontrada.' });
 	} catch(error) {

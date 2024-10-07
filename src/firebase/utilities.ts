@@ -180,8 +180,20 @@ export const capitalizeFirstLetter = (str: string): String => {
   }
 };
 
-export const translateSkill = (str: string): string => {
+export const translate = (str: string): string => {
   switch(str) {
+    case 'honor': return 'Honra';
+    case 'glory': return 'Glória';
+    case 'wisdom': return 'Sabedoria';
+    case 'strength': return 'Força';
+    case 'dexterity': return 'Destreza';
+    case 'stamina': return 'Vigor';
+    case 'manipulation': return 'Manipulação';
+    case 'charisma': return 'Carisma';
+    case 'composure': return 'Autocontrole';
+    case 'intelligence': return 'Inteligência';
+    case 'wits': return 'Raciocínio';
+    case 'resolve': return 'Determinação';
     case 'athletics': return 'Atletismo';
     case 'brawl': return 'Briga';
     case 'craft': return 'Ofícios';

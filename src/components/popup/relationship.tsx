@@ -6,13 +6,11 @@ import {
   Controls,
   reconnectEdge,
   addEdge,
-  Node,
   Edge,
   applyNodeChanges,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { MdDelete } from 'react-icons/md';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
 import contexto from '@/context/context';
 import { updateSession } from '@/firebase/sessions';
 import { BiMenuAltLeft } from 'react-icons/bi';

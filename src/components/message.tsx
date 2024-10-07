@@ -35,7 +35,12 @@ export default function Message(props: { dataMessage: any, color: string }) {
                   ))
                 }
               </div>
-              <div className="font-bold py-2 text-left">
+              { dataMessage.test !== '' &&
+                <div className="pt-2 text-left">
+                  { dataMessage.test }
+                </div>
+              }
+              <div className="font-bold pb-2 text-left">
                 { dataMessage.message }
               </div>
               <div className="flex justify-start items-center">
