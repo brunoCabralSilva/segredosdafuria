@@ -40,7 +40,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                   { dataMessage.test }
                 </div>
               }
-              <div className="font-bold pb-2 text-left">
+              <div className="font-bold pt-2 pb-2 text-left">
                 { dataMessage.message }
               </div>
               <div className="flex justify-start items-center">

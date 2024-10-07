@@ -75,11 +75,15 @@ export const rollTest = (
 	penaltyOrBonus: number,
 	dificulty: number,
 ) => {
+	let realRage = valueOfRage;
 	let resultOfRage = [];
 	let resultOf = [];
 	let valueWithPenaltyOfBonus = Number(penaltyOrBonus) + Number(valueOf);
-
-	for (let i = 0; i < Number(valueOfRage); i += 1) {
+	if (valueWithPenaltyOfBonus < 0) {
+		realRage += valueWithPenaltyOfBonus;
+		valueWithPenaltyOfBonus = 0;
+	}
+	for (let i = 0; i < Number(realRage); i += 1) {
 		const value = Math.floor(Math.random() * 10) + 1;
 		resultOfRage.push(value);
 	}
@@ -148,11 +152,15 @@ export const registerManualRoll = async(
   setShowMessage: any,
 ) => {
 	const roll = rollTest(rage, valueOf, penaltyOrBonus, dificulty);
-	const sumDices = rage + valueOf + penaltyOrBonus;
+	const sumDices = rage + valueOf;
 	roll.test = `Foi realizado um teste com ${ sumDices } ${ sumDices > 1 ? 'dados' : 'dado'}`;
 	if (rage > 0 && penaltyOrBonus === 0 && valueOf === 0) 
-		roll.test += ` de Fúria.`;
-	else if (rage > 0) roll.test += `, onde ${rage} desses dados ${rage === 1 ? 'é' : 'são'} de Fúria.`;
+		roll.test += ` de Fúria`;
+	else if (rage > 0) roll.test += `, onde ${rage} desses dados ${rage === 1 ? 'é' : 'são'} de Fúria`;
+
+	if (penaltyOrBonus > 0) roll.test += ' e ' + penaltyOrBonus + ' desses dados é de Bônus';
+	if (penaltyOrBonus < 0) roll.test += ` (${(penaltyOrBonus * -1)} ${(penaltyOrBonus * -1) > 1 ? 'dados foram subtraídos': 'dado foi subtraído'} por conta da penalidade preenchida)`;
+	roll.test += '.'
 	await registerMessage(sessionId, roll, null, setShowMessage);
 }
 
@@ -187,6 +195,9 @@ export const registerAutomatedRoll = async(
 				if (text !== 'Foi realizado um teste de ') text += ' + ';
 				text += translate(renSelected) + ' (' + player.data[renSelected] + ')';
 			}
+			if (penaltyOrBonus > 0) text += ' com um Bônus de +' + penaltyOrBonus;
+			if (penaltyOrBonus < 0) text += ' com uma penalidade de ' + penaltyOrBonus;
+			text += '.';
 			if (rage > valueOf) {
 				rage = valueOf;
 				valueOf = 0;
