@@ -67,7 +67,11 @@ export const createSession = async (
       description,
       principles: [],
       favorsAndBans: [],
-      relationships: { nodes: [], edges: [] },
+      relationships: { nodes: [], links: [] },
+    });
+    const newSessionRef = doc(db, 'sessions', newSession.id);
+    await runTransaction(db, async (transaction) => {
+      transaction.update(newSessionRef, { id: newSession.id });
     });
     await createNotificationData(newSession.id, setShowMessage);
     await createPlayersData(newSession.id, setShowMessage);
@@ -147,10 +151,8 @@ export const getAllSessionsByFunction = async (email: string) => {
       if (item.email === email) sessionIds.push(data.sessionId);
     });
   });
-
   const list1: { id: string; name: string }[] = [];
   const list2: { id: string; name: string }[] = [];
-
   const sessionsCollectionRef = collection(db, 'sessions');
   const sessionsSnapshot: any = await getDocs(sessionsCollectionRef);
   sessionsSnapshot.forEach((doc: any) => {

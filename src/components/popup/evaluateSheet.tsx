@@ -1,6 +1,6 @@
 'use client'
 import contexto from "@/context/context";
-import { capitalizeFirstLetter, playerSheet, translateSkill } from "@/firebase/utilities";
+import { capitalizeFirstLetter, playerSheet, translate } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircle } from "react-icons/fa6";
@@ -415,7 +415,7 @@ export default function EvaluateSheet() {
       const valueNonEmptySpecialty: string[] = [];
       Object.entries(data.skills).forEach(([key, skill]: any) => {
         if (key !== 'type' && skill.value === 0 && skill.specialty !== "")
-          valueNonEmptySpecialty.push(translateSkill(key));
+          valueNonEmptySpecialty.push(translate(key));
       });
       if (valueNonEmptySpecialty.length !== 0) {
         let text = '';
@@ -431,7 +431,7 @@ export default function EvaluateSheet() {
       const valueWithSpecialty: string[] = [];
       Object.entries(data.skills).forEach(([key, skill]: any) => {
         if (key !== 'type' && key !== 'academics' && key !== 'craft' && key !== 'performance' && key !== 'science' && skill.value > 0 && skill.specialty !== "")
-          valueWithSpecialty.push(translateSkill(key));
+          valueWithSpecialty.push(translate(key));
       });
       if (valueWithSpecialty.length !== 1) {
         let text1 = '';

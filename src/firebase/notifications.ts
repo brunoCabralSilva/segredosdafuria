@@ -109,14 +109,6 @@ export const removeNotification = async (sessionId: string, message: string, set
   }
 };
 
-const recalculateNodePositions = (nodes: Node[]) => {
-  return nodes.map((node, index) => {
-    const positionY = index < nodes.length / 2 ? 100 : 300;
-    const positionX = 100 + (index % (nodes.length / 2)) * 200;
-    return { ...node, position: { x: positionX, y: positionY } };
-  });
-};
-
 export const approveUser = async (notification: any, session: any, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
@@ -135,26 +127,6 @@ export const approveUser = async (notification: any, session: any, setShowMessag
         const dateMessage = await getOfficialTimeBrazil();
         const sheet = sheetStructure(notification.email, notification.user, dateMessage);
         transaction.update(playerDocRef, { list: arrayUnion(sheet) });
-        const newId = session.relationships.nodes.reduce((maxId: any, node: any) => {
-          const id = parseInt(node.id, 10);
-          return id > maxId ? id : maxId;
-        }, 0) + 1;
-        const newNode = { id: newId, data: sheet.data.name, email: notification.email, position: { x: 0, y: 0 }, isInitial: true };
-        const sessionData = session;
-        sessionData.relationships.nodes.push(newNode);
-        sessionData.relationships.nodes = recalculateNodePositions(sessionData.relationships.nodes);
-
-        for (let i = 0; i < sessionData.relationships.nodes.length; i += 1) {
-          if (sessionData.relationships.nodes[i].id !== newId) {
-            sessionData.relationships.edges.push(
-            {
-              id: `rel-${newId}-${sessionData.relationships.nodes[i].id}`,
-              source: `${newId}`,
-              target: `${sessionData.relationships.nodes[i].id}`,
-              label: `Relacionamento entre ${sheet.data.name} e ${sessionData.relationships.nodes[i].data}` });
-          }
-        }
-        await updateSession(sessionData, setShowMessage);
         await registerMessage(
           session.id,
           {
