@@ -407,7 +407,7 @@ export default function EvaluateSheet() {
       }
 
       if (data.skills.science.value !== 0) {
-        if (data.skills.performance.specialty === '') {
+        if (data.skills.science.specialty === '') {
           setSkillScience({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Ciências". No campo de preenchimento, deve ser inserida uma Especialização.' });
         } else setSkillScience({ correct: true, errorMessage: '' });
       }

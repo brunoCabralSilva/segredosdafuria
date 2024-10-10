@@ -143,6 +143,7 @@ export default function General() {
       <Item quant={5} name="rage" namePtBr="Fúria" />
       <Item quant={5} name="harano" namePtBr="Harano" />
       <Item quant={5} name="hauglosk" namePtBr="Hauglosk" />
+      <div className="pt-8 text-xl">Renome </div>
       <Item quant={5} name="honor" namePtBr="Honra" />
       <Item quant={5} name="glory" namePtBr="Glória" />
       <Item quant={5} name="wisdom" namePtBr="Sabedoria" />
