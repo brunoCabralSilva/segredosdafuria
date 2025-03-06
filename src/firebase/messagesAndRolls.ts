@@ -2,7 +2,7 @@ import { capitalize, getOfficialTimeBrazil, translate } from "./utilities";
 import firebaseConfig from "./connection";
 import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
-import { getPlayerByEmail } from "./players";
+import { getPlayerByEmail, getPlayerById } from "./players";
 
 const verifyResult = (
 	rollOfRage: number[],
@@ -211,13 +211,13 @@ export const registerAutomatedRoll = async(
 	}
 }
 
-export const rageCheck = async(sessionId: string, email: string, setShowMessage: any) => {
+export const rageCheck = async(sessionId: string, email: string, sheetId: string, setShowMessage: any, dataSheet: any) => {
   let resultOfRage = [];
   let success = 0;
   const value = Math.floor(Math.random() * 10) + 1;
   if (value >= 6) success += 1;
   resultOfRage.push(value);
-  const player = await getPlayerByEmail(sessionId, email, setShowMessage);
+  const player = await getPlayerById(sheetId, setShowMessage);
   if (player) {
     if (player.data.rage <= 0) {
       setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
@@ -230,7 +230,7 @@ export const rageCheck = async(sessionId: string, email: string, setShowMessage:
       await registerMessage(
         sessionId,
         {
-        message: 'Foi realizado um Teste de Fúria.',
+        message: 'Foi realizado um Teste de Fúria para o personagem "' + dataSheet.data.name + '".',
         rollOfRage: resultOfRage,
         result: text,
         rage: player.data.rage,
@@ -242,17 +242,17 @@ export const rageCheck = async(sessionId: string, email: string, setShowMessage:
         setShowMessage,
       );
     }
-  }
-  return player.data.rage;
+	return player.data.rage;
+  } return 0;
 }
 
-export const calculateRageCheck = async(sessionId: string, email: string, setShowMessage: any) => {
+export const calculateRageCheck = async(sheetId: any, setShowMessage: any) => {
 	let resultOfRage = [];
 	let success = 0;
 	const value = Math.floor(Math.random() * 10) + 1;
 	if (value >= 6) success += 1;
 	resultOfRage.push(value);
-	const player = await getPlayerByEmail(sessionId, email, setShowMessage);
+	const player = await getPlayerById(sheetId, setShowMessage);
 	if (player) {
 	  if (player.data.rage <= 0) {
 		  setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
@@ -273,8 +273,8 @@ export const calculateRageCheck = async(sessionId: string, email: string, setSho
   }
 }
 
-export const calculateRageChecks = async(sessionId: string, email: string, number: number, setShowMessage: any) => {
-	const player = await getPlayerByEmail(sessionId, email, setShowMessage);
+export const calculateRageChecks = async(sheetId: string, number: number, setShowMessage: any) => {
+	const player = await getPlayerById(sheetId, setShowMessage);
 	if (player) {
     if (player.data.rage < number) {
       setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
@@ -316,8 +316,8 @@ export const haranoHaugloskCheck = async(
   let rollTest = [];
   let success = 0;
   let sumData = 0;
-  sumData += Number(dataSheet.harano);
-  sumData += Number(dataSheet.hauglosk);
+  sumData += Number(dataSheet.data.harano);
+  sumData += Number(dataSheet.data.hauglosk);
   if (sumData === 0) sumData = 1;
   for (let i = 0; i < sumData; i += 1) {
     const value = Math.floor(Math.random() * 10) + 1;
@@ -326,22 +326,22 @@ export const haranoHaugloskCheck = async(
   }
   let text = '';
   if (success < dificulty) {
-    dataSheet[type] += 1;
-    text = `Não obteve sucesso no Teste. O ${type} foi aumentado para ` + dataSheet[type] + '.';
+    dataSheet.data[type] += 1;
+    text = `Não obteve sucesso no Teste. O ${type} foi aumentado para ` + dataSheet.data[type] + '.';
   } else text = 'Obteve sucesso no Teste. Não houve aumento em ' + type + '.';
   let emailRoll = null;
   if (email !== '') emailRoll = email;
   await registerMessage(
     sessionId,
     {
-      message: `Foi realizado um Teste de ${capitalize(type)}.`,
+      message: `Foi realizado um Teste de ${capitalize(type)} para o personagem "${dataSheet.data.name}"`,
       rollOf: rollTest,
       result: text,
-      value: dataSheet[type],
+      value: dataSheet.data[type],
       type: 'harano-hauglosk',
     },
     emailRoll,
     setShowMessage,
   );
-  return dataSheet[type];
+  return dataSheet.data[type];
 }

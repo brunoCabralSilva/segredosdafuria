@@ -7,12 +7,11 @@ import { IoArrowDownCircleSharp, IoArrowUpCircleSharp, IoCheckmarkDone } from "r
 export default function Advantage(props: any) {
   const { item, adv } = props;
   const [ showAd, setShowAd ] = useState(false);
-  const { sessionId, email, setShowMessage } = useContext(contexto);
+  const { sessionId, sheetId, email, setShowMessage, dataSheet } = useContext(contexto);
 
   const setAdvantageValueItem = async (obj: IAdvantageAndFlaw) => {
-    const searchPlayer = await getPlayerByEmail(sessionId, email, setShowMessage);
-    const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === obj.name);
-    const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== obj.name);
+    const foundAdvantage = dataSheet.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === obj.name);
+    const otherAdvantages = dataSheet.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== obj.name);
     const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
     if (obj.type === '') {
       if (foundAdvantage.advantages) {
@@ -23,8 +22,8 @@ export default function Advantage(props: any) {
           item: obj.item,
         }
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
-        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+        dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       } else {
         const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantageAndFlaw) => item.type !== 'radio');
         const updatedAdvantage = {
@@ -33,9 +32,9 @@ export default function Advantage(props: any) {
           flaws: foundAdvantage.flaws,
           item: obj.item,
         }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       }
     } else if (foundAdvantage.advantages.length === 0) {
       const updated = {
@@ -44,9 +43,9 @@ export default function Advantage(props: any) {
         flaws: foundAdvantage.flaws,
         item: obj.item,
       }
-      searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
+      dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updated];
       props.setAdv([...restOfAdvantage, updated]);
-      await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     } else {
       if (obj.type === 'radio') {
         const updateAdvantage = foundAdvantage.advantages.filter((item: IAdvantageAndFlaw) => item.type !== 'radio' && item.advantage !== obj.advantage);
@@ -56,9 +55,9 @@ export default function Advantage(props: any) {
           flaws: foundAdvantage.flaws,
           item: obj.item,
         }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       }
       if (obj.type === 'checkbox') {
         const updateAdvantage = foundAdvantage.advantages.find((item: IAdvantageAndFlaw) => item.advantage === obj.advantage);
@@ -70,9 +69,9 @@ export default function Advantage(props: any) {
             flaws: foundAdvantage.flaws,
             item: obj.item,
           }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+          await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         } else {
           const updatedAdvantage = {
             name: obj.name, 
@@ -80,18 +79,17 @@ export default function Advantage(props: any) {
             flaws: foundAdvantage.flaws,
             item: obj.item,
           }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+          await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         }
       }
     }
   };
 
   const setFlawValueItem = async(obj: IAdvantageAndFlaw) => {
-    const searchPlayer = await getPlayerByEmail(sessionId, email, setShowMessage);
-    const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === obj.name);
-    const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== obj.name);
+    const foundAdvantage = dataSheet.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === obj.name);
+    const otherAdvantages = dataSheet.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== obj.name);
     const restOfAdvantage = adv.filter((ad: any) => ad.name !== obj.name);
 
     if (obj.type === '') {
@@ -101,9 +99,9 @@ export default function Advantage(props: any) {
           advantages: foundAdvantage.advantages,
           flaws: [],
         }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       } else {
         const updateAdvantage = foundAdvantage.flaws.filter((item: IAdvantageAndFlaw) => item.type !== 'radio');
         const updatedAdvantage = {
@@ -111,9 +109,9 @@ export default function Advantage(props: any) {
           advantages: foundAdvantage.advantages,
           flaws: updateAdvantage,
         }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       }
     } else if (foundAdvantage.flaws.length === 0) {
       const updated = {
@@ -122,9 +120,9 @@ export default function Advantage(props: any) {
         flaws: [obj],
         item: obj.item,
       }
-      searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updated];
+      dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updated];
       props.setAdv([...restOfAdvantage, updated]);
-      await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     } else {
       if (obj.type === 'radio') {
         const updateAdvantage = foundAdvantage.flaws.filter((item: IAdvantageAndFlaw) => {
@@ -136,9 +134,9 @@ export default function Advantage(props: any) {
           flaws: [...updateAdvantage, obj],
           item: obj.item,
         }
-        searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+        dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
         props.setAdv([...restOfAdvantage, updatedAdvantage]);
-        await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       }
       if (obj.type === 'checkbox') {
         const updateAdvantage = foundAdvantage.flaws.find((item: IAdvantageAndFlaw) => item.flaw === obj.flaw);
@@ -150,9 +148,9 @@ export default function Advantage(props: any) {
             flaws: newObject,
             item: obj.item,
           }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+          await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         } else {
           const updatedAdvantage = {
             name: obj.name, 
@@ -160,9 +158,9 @@ export default function Advantage(props: any) {
             flaws: [...foundAdvantage.flaws, obj],
             item: obj.item,
           }
-          searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+          dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
           props.setAdv([...restOfAdvantage, updatedAdvantage]);
-          await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+          await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         }
       }
     }

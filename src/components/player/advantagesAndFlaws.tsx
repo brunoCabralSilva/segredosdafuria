@@ -19,10 +19,10 @@ export default function AdvantagesAndFlaws() {
   const sumAllAdvantagesAndFlaws = () => {
     let advantageSum = 0;
     let flawSum = 0;
-    dataSheet.advantagesAndFlaws.advantages.forEach((item: any) => advantageSum += item.cost);
-    dataSheet.advantagesAndFlaws.talens.forEach((item: any) => advantageSum += item.value);
-    dataSheet.advantagesAndFlaws.loresheets.forEach((item: any) => advantageSum += item.cost);
-    dataSheet.advantagesAndFlaws.flaws.forEach((item: any) => flawSum += item.cost);
+    dataSheet.data.advantagesAndFlaws.advantages.forEach((item: any) => advantageSum += item.cost);
+    dataSheet.data.advantagesAndFlaws.talens.forEach((item: any) => advantageSum += item.value);
+    dataSheet.data.advantagesAndFlaws.loresheets.forEach((item: any) => advantageSum += item.cost);
+    dataSheet.data.advantagesAndFlaws.flaws.forEach((item: any) => flawSum += item.cost);
     let textAdvantage = advantageSum + ' / 7 ';
     let textFlaw = flawSum + ' / 2 ';
     return (
@@ -65,25 +65,25 @@ export default function AdvantagesAndFlaws() {
         { sumAllAdvantagesAndFlaws() }
         <div className="w-full mt-5 mb-3">Méritos e Backgrounds</div>
         {
-          dataSheet.advantagesAndFlaws.advantages.map((item: any, index: number) => (
+          dataSheet.data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
             <AdvAdded key={index} item={item} />
           ))
         }
         <div className="w-full mt-5 mb-3">Talismãs</div>
         {
-          dataSheet.advantagesAndFlaws.talens.map((item: any, index: number) => (
+          dataSheet.data.advantagesAndFlaws.talens.map((item: any, index: number) => (
             <AdvTalensAdded key={index} item={item} />
           ))
         }
         <div className="w-full mt-5 mb-3">Loresheets</div>
         {
-          dataSheet.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
+          dataSheet.data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
             <AdvLoresheetsAdded key={index} item={item} />
           ))
         }
         <div className="w-full mt-5 mb-3">Defeitos</div>
         {
-          dataSheet.advantagesAndFlaws.flaws.map((item: any, index: number) => (
+          dataSheet.data.advantagesAndFlaws.flaws.map((item: any, index: number) => (
             <AdvAdded key={index} item={item} />
           ))
         }

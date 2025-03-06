@@ -11,27 +11,25 @@ export default function AddTouchstone() {
     dataSheet,
     addTouchstone, setAddTouchstone,
     setShowMessage,
-    sessionId,
-    email,
+    sheetId,
    } = useContext(contexto);
 
   useEffect(() => {
     if (addTouchstone.data.name) {
       setName(addTouchstone.data.name);
       setDescription(addTouchstone.data.description);
-      setListTouchstones(dataSheet.touchstones.filter((touchstone: any) => touchstone.name !== addTouchstone.data.name));
+      setListTouchstones(dataSheet.data.touchstones.filter((touchstone: any) => touchstone.name !== addTouchstone.data.name));
     }
   }, []);
 
   const createTouchstone = async () => {
-    const newDataSheet = dataSheet;
     if (addTouchstone.data.name) {
-      newDataSheet.touchstones = listTouchstones;
-      newDataSheet.touchstones = [...newDataSheet.touchstones, { name, description }];
-      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+      dataSheet.data.touchstones = listTouchstones;
+      dataSheet.data.touchstones = [...dataSheet.data.touchstones, { name, description }];
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     } else {
-      newDataSheet.touchstones = [...newDataSheet.touchstones, { name, description }];
-      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+      dataSheet.data.touchstones = [...dataSheet.data.touchstones, { name, description }];
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     }
     setAddTouchstone({ show: false, data: {} });
   }

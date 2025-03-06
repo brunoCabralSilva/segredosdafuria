@@ -8,9 +8,8 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
   const { type, item } = props;
   const [showAdvantage, setShowAdvantage] = useState(false);
   const {
-    email,
+    sheetId,
     dataSheet,
-    sessionId,
     setShowMessage,
   } = useContext(contexto);
 
@@ -24,8 +23,8 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
   ) => {
     const obj = { name, cost, description, type, title };
     let newList: any = [];
-    if (advOfFlaw === 'flaw') newList = dataSheet.advantagesAndFlaws.flaws;
-    else newList = dataSheet.advantagesAndFlaws.advantages;
+    if (advOfFlaw === 'flaw') newList = dataSheet.data.advantagesAndFlaws.flaws;
+    else newList = dataSheet.data.advantagesAndFlaws.advantages;
     if (newList.length === 0) newList.push(obj);
     else {
       const sameName = newList.filter((item: any) => item.name === name);
@@ -41,20 +40,19 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
         }
       } else newList.push(obj);
     }
-    if (advOfFlaw === 'flaw') dataSheet.advantagesAndFlaws.flaws = newList;
-    else dataSheet.advantagesAndFlaws.advantages = newList;
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    if (advOfFlaw === 'flaw') dataSheet.data.advantagesAndFlaws.flaws = newList;
+    else dataSheet.data.advantagesAndFlaws.advantages = newList;
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   }
 
   const verifySelected = () => {
-    console.log(item);
     if (type === 'flaw') {
       return item.flaws.find((adv: any) => {
-        return dataSheet.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description)
+        return dataSheet.data.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description)
       });
     }
     return item.advantages.find((adv: any) => {
-      return dataSheet.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description)
+      return dataSheet.data.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description)
     });
   }
 
@@ -86,7 +84,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
                     onClick={() => {
                       updateAdvantageOrFlaw(item.name, adv.cost, adv.type, adv.description, adv.title, 'advantage') 
                     }}
-                    className={`${dataSheet.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mt-3 pt-3 p-4 cursor-pointer`}
+                    className={`${dataSheet.data.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mt-3 pt-3 p-4 cursor-pointer`}
                   >
                     <p>Custo { adv.cost } - { adv.description }</p>
                   </div>
@@ -122,7 +120,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
                       onClick={() => {
                         updateAdvantageOrFlaw(item.name, adv.cost, adv.type, adv.description, adv.title, 'flaw')
                       }}
-                      className={`${dataSheet.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mt-3 pt-3 p-4 cursor-pointer`}
+                      className={`${dataSheet.data.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mt-3 pt-3 p-4 cursor-pointer`}
                     >
                       <p>Custo { adv.cost } - { adv.description }</p>
                     </div>

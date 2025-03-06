@@ -62,8 +62,8 @@ export default function EvaluateSheet() {
         setShowEvaluateSheet({ show: false, data: {} });
       }
     } else {
-      data = dataSheet;
-      setData(dataSheet);
+      data = dataSheet.data;
+      setData(dataSheet.data);
     }
     //Verificação de Nome de Personagem
     if (data.name.length === 0) {
@@ -569,7 +569,7 @@ export default function EvaluateSheet() {
   return (
     <div className="z-80 sm:z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
       <div className="w-full flex justify-center pt-3 bg-black">
-        <p className="px-6 sm:px-10 text-white font-bold text-2xl w-full">Verificação de Ficha:</p>
+        <div className="px-6 sm:px-10 text-white font-bold text-2xl w-full">Verificação de Ficha:</div>
         <IoIosCloseCircleOutline
           className="text-4xl text-white cursor-pointer mr-5"
           onClick={ () => setShowEvaluateSheet({ show: false, data: {} }) }
@@ -585,11 +585,11 @@ export default function EvaluateSheet() {
                 ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                 : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p className="w-full">Inserir o nome do Personagem</p>
+              <div className="w-full">Inserir o nome do Personagem</div>
             </div>
-              <p className="pl-5">
-                { !name.correct && <p> - { name.errorMessage }</p> }
-              </p>
+              <div className="pl-5">
+                { !name.correct && <div> - { name.errorMessage }</div> }
+              </div>
           </div>
           {/* Augúrio */}
           <div>
@@ -599,11 +599,11 @@ export default function EvaluateSheet() {
                 ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                 : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p className="w-full">Escolher um Augúrio</p>
+              <div className="w-full">Escolher um Augúrio</div>
             </div>
-            <p className="pl-5">
-              { !auspice.correct && <p> - { auspice.errorMessage }</p> }
-            </p>
+            <div className="pl-5">
+              { !auspice.correct && <div> - { auspice.errorMessage }</div> }
+            </div>
           </div>
           {/* Tribo */}
           <div>
@@ -613,11 +613,11 @@ export default function EvaluateSheet() {
                 ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                 : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p className="w-full">Escolher uma Tribo</p>
+              <div className="w-full">Escolher uma Tribo</div>
             </div>
-              <p className="pl-5">
-                { !trybe.correct && <p> - { trybe.errorMessage }</p> }
-              </p>
+              <div className="pl-5">
+                { !trybe.correct && <div> - { trybe.errorMessage }</div> }
+              </div>
           </div>
           {/* Renome */}
           <div>
@@ -627,7 +627,7 @@ export default function EvaluateSheet() {
                 ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                 : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p className="w-full">Preencher Renome</p>
+              <div className="w-full">Preencher Renome</div>
             </div>
             <div>
               <div className="flex gap-2 pl-5">
@@ -636,10 +636,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">A Soma dos Renomes precisa ser igual a 3</p>
+                <div className="w-full">A Soma dos Renomes precisa ser igual a 3</div>
               </div>
               <div className="pl-10">
-                { !renownSum.correct && <p> - { renownSum.errorMessage }</p> }
+                { !renownSum.correct && <div> - { renownSum.errorMessage }</div> }
               </div>
               <div className="flex gap-2 pl-5">
                 {
@@ -647,10 +647,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">O renome relacionado ao patrono precisa ser igual a 2</p>
+                <div className="w-full">O renome relacionado ao patrono precisa ser igual a 2</div>
               </div>
               <div className="pl-10">
-                { !renownTrybe.correct && <p> - { renownTrybe.errorMessage }</p> }
+                { !renownTrybe.correct && <div> - { renownTrybe.errorMessage }</div> }
               </div>
             </div>
           </div>
@@ -662,7 +662,7 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p className="w-full">Atributos:</p>
+              <div className="w-full">Atributos:</div>
             </div>
             <div>
               <div className="flex gap-2 pl-5">
@@ -671,10 +671,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Preencher Um atributo com 4 pontos</p>
+                <div className="w-full">Preencher Um atributo com 4 pontos</div>
               </div>
               <div className="pl-10">
-                { !attributes4.correct && <p> - { attributes4.errorMessage }</p> }
+                { !attributes4.correct && <div> - { attributes4.errorMessage }</div> }
               </div>
             </div>
             <div>
@@ -684,10 +684,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Preencher Três atributos com 3 pontos</p>
+                <div className="w-full">Preencher Três atributos com 3 pontos</div>
               </div>
               <div className="pl-10">
-                { !attributes3.correct && <p> - { attributes3.errorMessage }</p> }
+                { !attributes3.correct && <div> - { attributes3.errorMessage }</div> }
               </div>
             </div>
             <div>
@@ -697,10 +697,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Preencher Quatro atributos com 2 pontos</p>
+                <div className="w-full">Preencher Quatro atributos com 2 pontos</div>
               </div>
               <div className="pl-10">
-                { !attributes2.correct && <p> - { attributes2.errorMessage }</p> }
+                { !attributes2.correct && <div> - { attributes2.errorMessage }</div> }
               </div>
             </div>
             <div>
@@ -710,10 +710,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Preencher Um atributo com 1 ponto</p>
+                <div className="w-full">Preencher Um atributo com 1 ponto</div>
               </div>
               <div className="pl-10">
-                { !attributes1.correct && <p> - { attributes1.errorMessage }</p> }
+                { !attributes1.correct && <div> - { attributes1.errorMessage }</div> }
               </div>
             </div>
           </div>
@@ -725,7 +725,7 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p className="w-full">Habilidades:</p>
+              <div className="w-full">Habilidades:</div>
             </div>
             <div>
               <div className="flex gap-2 pl-5">
@@ -734,10 +734,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Escolher um Modelo de Distribuição { data.skills.type !== '' && '(' + data.skills.type + ')'}</p>
+                <div className="w-full">Escolher um Modelo de Distribuição { data.skills.type !== '' && '(' + data.skills.type + ')'}</div>
               </div>
               <div className="pl-10">
-                { !skillsType.correct && <p> - { skillsType.errorMessage }</p> }
+                { !skillsType.correct && <div> - { skillsType.errorMessage }</div> }
               </div>
             </div>
             {
@@ -753,10 +753,10 @@ export default function EvaluateSheet() {
                             ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                             : <FaRegCircle className="text-red-500 text-lg mt-1" />
                           }
-                          <p className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</p>
+                          <div className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</div>
                         </div>
                         <div className="pl-10">
-                          { !skillsCountPlus.correct && <p> - { skillsCountPlus.errorMessage }</p> }
+                          { !skillsCountPlus.correct && <div> - { skillsCountPlus.errorMessage }</div> }
                         </div>
                         <div className="flex gap-2 pl-5">
                           {
@@ -764,10 +764,10 @@ export default function EvaluateSheet() {
                             ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                             : <FaRegCircle className="text-red-500 text-lg mt-1" />
                           }
-                          <p className="w-full">{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</p>
+                          <div className="w-full">{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</div>
                         </div>
                         <div className="pl-10">
-                          { !skillsCount4.correct && <p> - { skillsCount4.errorMessage }</p> }
+                          { !skillsCount4.correct && <div> - { skillsCount4.errorMessage }</div> }
                         </div>
                       </div>
                     : <div>
@@ -777,10 +777,10 @@ export default function EvaluateSheet() {
                             ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                             : <FaRegCircle className="text-red-500 text-lg mt-1" />
                           }
-                          <p className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</p>
+                          <div className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</div>
                         </div>
                         <div className="pl-10">
-                          { !skillsCountPlus4.correct && <p> - { skillsCountPlus4.errorMessage }</p> }
+                          { !skillsCountPlus4.correct && <div> - { skillsCountPlus4.errorMessage }</div> }
                         </div>
                       </div>
                     }
@@ -792,10 +792,10 @@ export default function EvaluateSheet() {
                       ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                       : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p className="w-full">{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</p>
+                    <div className="w-full">{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</div>
                   </div>
                   <div className="pl-10">
-                    { !skillsCount3.correct && <p> - { skillsCount3.errorMessage }</p> }
+                    { !skillsCount3.correct && <div> - { skillsCount3.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
@@ -805,10 +805,10 @@ export default function EvaluateSheet() {
                       ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                       : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p className="w-full">{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</p>
+                    <div className="w-full">{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</div>
                   </div>
                   <div className="pl-10">
-                    { !skillsCount2.correct && <p> - { skillsCount2.errorMessage }</p> }
+                    { !skillsCount2.correct && <div> - { skillsCount2.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
@@ -818,10 +818,10 @@ export default function EvaluateSheet() {
                       ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                       : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p className="w-full">{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</p>
+                    <div className="w-full">{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</div>
                   </div>
                   <div className="pl-10">
-                    { !skillsCount1.correct && <p> - { skillsCount1.errorMessage }</p> }
+                    { !skillsCount1.correct && <div> - { skillsCount1.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
@@ -831,10 +831,10 @@ export default function EvaluateSheet() {
                       ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                       : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p className="w-full">{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</p>
+                    <div className="w-full">{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</div>
                   </div>
                   <div className="pl-10">
-                    { !skillsCount0.correct && <p> - { skillsCount0.errorMessage }</p> }
+                    { !skillsCount0.correct && <div> - { skillsCount0.errorMessage }</div> }
                   </div>
                 </div>
                 {
@@ -846,10 +846,10 @@ export default function EvaluateSheet() {
                         ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                         : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p className="w-full">Preencher uma Especialização em Acadêmicos</p>
+                      <div className="w-full">Preencher uma Especialização em Acadêmicos</div>
                     </div>
                     <div className="pl-10">
-                      { !skillAcademics.correct && <p> - { skillAcademics.errorMessage }</p> }
+                      { !skillAcademics.correct && <div> - { skillAcademics.errorMessage }</div> }
                     </div>
                   </div>
                 }
@@ -862,10 +862,10 @@ export default function EvaluateSheet() {
                         ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                         : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p className="w-full">Preencher uma Especialização em Ofícios</p>
+                      <div className="w-full">Preencher uma Especialização em Ofícios</div>
                     </div>
                     <div className="pl-10">
-                      { !skillCraft.correct && <p> - { skillCraft.errorMessage }</p> }
+                      { !skillCraft.correct && <div> - { skillCraft.errorMessage }</div> }
                     </div>
                   </div>
                 }
@@ -878,10 +878,10 @@ export default function EvaluateSheet() {
                         ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                         : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p className="w-full">Preencher uma Especialização em Performance</p>
+                      <div className="w-full">Preencher uma Especialização em Performance</div>
                     </div>
                     <div className="pl-10">
-                      { !skillPerformance.correct && <p> - { skillPerformance.errorMessage }</p> }
+                      { !skillPerformance.correct && <div> - { skillPerformance.errorMessage }</div> }
                     </div>
                   </div>
                 }
@@ -894,10 +894,10 @@ export default function EvaluateSheet() {
                         ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                         : <FaRegCircle className="text-red-500 text-lg mt-1" />
                       }
-                      <p className="w-full">Preencher uma Especialização em Science</p>
+                      <div className="w-full">Preencher uma Especialização em Science</div>
                     </div>
                     <div className="pl-10">
-                      { !skillScience.correct && <p> - { skillScience.errorMessage }</p> }
+                      { !skillScience.correct && <div> - { skillScience.errorMessage }</div> }
                     </div>
                   </div>
                 }
@@ -908,10 +908,10 @@ export default function EvaluateSheet() {
                       ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                       : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p className="w-full">Adicionar uma nova Especialização em uma Habilidade à sua escolha</p>
+                    <div className="w-full">Adicionar uma nova Especialização em uma Habilidade à sua escolha</div>
                   </div>
                   <div className="pl-10">
-                    { !skillNewSpecialty.correct && <p> - { skillNewSpecialty.errorMessage }</p> }
+                    { !skillNewSpecialty.correct && <div> - { skillNewSpecialty.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
@@ -921,10 +921,10 @@ export default function EvaluateSheet() {
                       ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                       : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p className="w-full">Nenhuma Habilidade com 0 pontos pode ter uma Especialização</p>
+                    <div className="w-full">Nenhuma Habilidade com 0 pontos pode ter uma Especialização</div>
                   </div>
                   <div className="pl-10">
-                    { !skillSpecialtyZero.correct && <p> - { skillSpecialtyZero.errorMessage }</p> }
+                    { !skillSpecialtyZero.correct && <div> - { skillSpecialtyZero.errorMessage }</div> }
                   </div>
                 </div>
               </div>
@@ -938,7 +938,7 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p className="w-full">Dons:</p>
+              <div className="w-full">Dons:</div>
             </div>
             <div>
               <div className="flex gap-2 pl-5">
@@ -947,10 +947,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Adicionar 3 Dons</p>
+                <div className="w-full">Adicionar 3 Dons</div>
               </div>
               <div className="pl-10">
-                { !gifts.correct && <p> - { gifts.errorMessage }</p> }
+                { !gifts.correct && <div> - { gifts.errorMessage }</div> }
               </div>
             </div>
             <div>
@@ -960,10 +960,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Adicionar um Dom Nativo</p>
+                <div className="w-full">Adicionar um Dom Nativo</div>
               </div>
               <div className="pl-10">
-                { !giftsGlobal.correct && <p> - { giftsGlobal.errorMessage }</p> }
+                { !giftsGlobal.correct && <div> - { giftsGlobal.errorMessage }</div> }
               </div>
               <div>
                 <div>
@@ -973,10 +973,10 @@ export default function EvaluateSheet() {
                       ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                       : <FaRegCircle className="text-red-500 text-lg mt-1" />
                     }
-                    <p className="w-full">Adicionar um Dom da Tribo ({ capitalizeFirstLetter(data.trybe) })</p>
+                    <div className="w-full">Adicionar um Dom da Tribo ({ capitalizeFirstLetter(data.trybe) })</div>
                   </div>
                   <div className="pl-10">
-                    { !giftsTrybe.correct && <p> - { giftsTrybe.errorMessage }</p> }
+                    { !giftsTrybe.correct && <div> - { giftsTrybe.errorMessage }</div> }
                   </div>
                 </div>
                 <div className="flex gap-2 pl-5">
@@ -985,10 +985,10 @@ export default function EvaluateSheet() {
                     ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                     : <FaRegCircle className="text-red-500 text-lg mt-1" />
                   }
-                  <p className="w-full">Adicionar um Dom do Augúrio <span className="capitalize">({ data.auspice })</span></p>
+                  <div className="w-full">Adicionar um Dom do Augúrio <span className="capitalize">({ data.auspice })</span></div>
                 </div>
                 <div className="pl-10">
-                  { !giftsAuspice.correct && <p> - { giftsAuspice.errorMessage }</p> }
+                  { !giftsAuspice.correct && <div> - { giftsAuspice.errorMessage }</div> }
                 </div>
               </div>
             </div>
@@ -1001,10 +1001,10 @@ export default function EvaluateSheet() {
                 ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                 : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p className="w-full">Adicionar um Ritual</p>
+              <div className="w-full">Adicionar um Ritual</div>
             </div>
             <div className="pl-5">
-              { !rituals.correct && <p> - { rituals.errorMessage }</p> }
+              { !rituals.correct && <div> - { rituals.errorMessage }</div> }
             </div>
           </div>
           {/* Pilares */}
@@ -1015,10 +1015,10 @@ export default function EvaluateSheet() {
                 ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                 : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p className="w-full">Adicionar Pilares para o Personagem</p>
+              <div className="w-full">Adicionar Pilares para o Personagem</div>
             </div>
             <div className="pl-5">
-              { !touchstone.correct && <p> - { touchstone.errorMessage }</p> }
+              { !touchstone.correct && <div> - { touchstone.errorMessage }</div> }
             </div>
           </div>
           {/* Vantagens e Defeitos */}
@@ -1029,7 +1029,7 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-              <p className="w-full">Vantagens e Defeitos:</p>
+              <div className="w-full">Vantagens e Defeitos:</div>
             </div>
             <div>
               <div className="flex gap-2 pl-5">
@@ -1038,10 +1038,10 @@ export default function EvaluateSheet() {
                     ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                     : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Preencher 7 pontos em Vantagens (Méritos e Background, Loresheets e/ou Talismãs)</p>
+                <div className="w-full">Preencher 7 pontos em Vantagens (Méritos e Background, Loresheets e/ou Talismãs)</div>
               </div>
               <div className="pl-10">
-                { !advantages.correct && <p> - { advantages.errorMessage }</p> }
+                { !advantages.correct && <div> - { advantages.errorMessage }</div> }
               </div>
             </div>
             <div>
@@ -1051,10 +1051,10 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                   : <FaRegCircle className="text-red-500 text-lg mt-1" />
                 }
-                <p className="w-full">Preencher 2 pontos em Defeitos</p>
+                <div className="w-full">Preencher 2 pontos em Defeitos</div>
               </div>
               <div className="pl-10">
-                { !flaws.correct && <p> - { flaws.errorMessage }</p> }
+                { !flaws.correct && <div> - { flaws.errorMessage }</div> }
               </div>
             </div>
           </div>
@@ -1066,10 +1066,10 @@ export default function EvaluateSheet() {
                 ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
                 : <FaRegCircle className="text-red-500 text-lg mt-1" />
               }
-              <p className="w-full">Inserir a história do personagem</p>
+              <div className="w-full">Inserir a história do personagem</div>
             </div>
             <div className="pl-5">
-              { !background.correct && <p> - { background.errorMessage }</p> }
+              { !background.correct && <div> - { background.errorMessage }</div> }
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ export function SpiritOfTheFray() {
   const {
     sessionId,
     email,
+    sheetId,
     dataSheet,
     setShowMessage,
     showGiftRoll, setShowGiftRoll,
@@ -17,10 +18,10 @@ export function SpiritOfTheFray() {
   } = useContext(contexto);
 
   const rollRage = async () => {
-    if (dataSheet.rage >= dificulty) {
-      const rageTest = await calculateRageChecks(sessionId, email, dificulty, setShowMessage);
-      dataSheet.rage = rageTest?.rage;
-      await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    if (dataSheet.data.rage >= dificulty) {
+      const rageTest = await calculateRageChecks(sheetId, dificulty, setShowMessage);
+      dataSheet.data.rage = rageTest?.rage;
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       await registerMessage(
         sessionId,
         {
@@ -60,7 +61,7 @@ export function SpiritOfTheFray() {
           <div
             className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
             onClick={ () => {
-              if (dificulty < dataSheet.glory) setDificulty(dificulty + 1)
+              if (dificulty < dataSheet.data.glory) setDificulty(dificulty + 1)
             }}
           >
             <FaPlus />

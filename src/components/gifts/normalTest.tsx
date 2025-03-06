@@ -11,9 +11,9 @@ export function NormalTest(props: { attribute: string, renown: string }) {
 
   const rollTestOfUser = async () => {
     let pool = 0;
-    if (renown !== '') pool += Number(dataSheet[renown]);
-    if (attribute !== '') pool += Number(dataSheet.attributes[attribute]);
-    let rage = Number(dataSheet.rage);
+    if (renown !== '') pool += Number(dataSheet.data[renown]);
+    if (attribute !== '') pool += Number(dataSheet.data.attributes[attribute]);
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;

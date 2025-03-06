@@ -21,7 +21,7 @@ export default function Rituals() {
         </div>
         <div className="pb-5">
           {
-            dataSheet.rituals.map((item: any, index: number) => (
+            dataSheet.data.rituals.map((item: any, index: number) => (
               <RitualsAdded key={ index } ritual={ item } />
             ))
           }

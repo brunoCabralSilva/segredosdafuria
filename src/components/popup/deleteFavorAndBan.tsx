@@ -10,16 +10,14 @@ export default function DeleteFavorAndBan() {
     setShowMessage,
     showDeleteFavorAndBan, setShowDeleteFavorAndBan,
     dataSheet,
-    sessionId,
+    sheetId,
     session,
-    email,
   } = useContext(contexto);
 
   const deleteFavorAndBan = async () => {
     if (showDeleteFavorAndBan.type === 'player') {
-      const newDataSheet = dataSheet;
-      newDataSheet.favorsAndBans = newDataSheet.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== showDeleteFavorAndBan.name);
-      await updateDataPlayer(sessionId, email, newDataSheet, setShowMessage);
+      dataSheet.data.favorsAndBans = dataSheet.data.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== showDeleteFavorAndBan.name);
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       setShowMessage({ show: true, text: 'O Favor / Proibição foi excluído.' });
     } else {
       const newDataSession = session;

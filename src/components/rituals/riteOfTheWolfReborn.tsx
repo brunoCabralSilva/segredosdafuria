@@ -9,14 +9,14 @@ export function RiteOfTheWolfReborn() {
   const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
-    let pool = dataSheet.skill.leadership.value;
-    let greatestRenown = Number(dataSheet.glory);
-    if (Number(dataSheet.honor) > greatestRenown)
-      greatestRenown = Number(dataSheet.honor);
-    if (Number(dataSheet.wisdom) > greatestRenown)
-      greatestRenown = Number(dataSheet.wisdom);
+    let pool = dataSheet.data.skill.leadership.value;
+    let greatestRenown = Number(dataSheet.data.glory);
+    if (Number(dataSheet.data.honor) > greatestRenown)
+      greatestRenown = Number(dataSheet.data.honor);
+    if (Number(dataSheet.data.wisdom) > greatestRenown)
+      greatestRenown = Number(dataSheet.data.wisdom);
     pool += greatestRenown;
-    let rage = Number(dataSheet.rage);
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;

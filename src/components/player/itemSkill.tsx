@@ -7,22 +7,20 @@ import { FaRegEdit } from "react-icons/fa";
 
 export default function ItemSkill(props: any) {
 	const { name, namePtBr, quant } = props;
-	const { dataSheet, sessionId, email, setShowMessage } = useContext(contexto);
-  const [ skill, setSkill ] = useState<string>(dataSheet.skills[name].specialty);
+	const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
+  const [ skill, setSkill ] = useState<string>(dataSheet.data.skills[name].specialty);
   const [input, setInput ] = useState(false);
 
   const updateValue = async (value: number) => {
-    const player = dataSheet;
-    if (player.skills[name].value === 1 && value === 1) 
-      player.skills[name] = { value: 0, specialty: skill };
-    else player.skills[name] = { value, specialty: skill };
-    await updateDataPlayer(sessionId, email, player, setShowMessage);
+    if (dataSheet.data.skills[name].value === 1 && value === 1) 
+      dataSheet.data.skills[name] = { value: 0, specialty: skill };
+    else dataSheet.data.skills[name] = { value, specialty: skill };
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   };
 
   const updateSpecialty = async () => {
-    const player = dataSheet;
-    player.skills[name] = { value: player.skills[name].value, specialty: skill };
-    await updateDataPlayer(sessionId, email, player, setShowMessage);
+    dataSheet.data.skills[name] = { value: dataSheet.data.skills[name].value, specialty: skill };
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   };
 
   const returnPoints = () => {
@@ -30,8 +28,8 @@ export default function ItemSkill(props: any) {
     return (
       <div className="flex gap-2 pt-1">
         {
-          dataSheet && points.map((item, index) => {
-            if (dataSheet.skills[name].value >= index + 1) {
+          dataSheet && dataSheet.data && points.map((item, index) => {
+            if (dataSheet.data.skills[name].value >= index + 1) {
               return (
                 <button
                   type="button"
@@ -93,9 +91,11 @@ export default function ItemSkill(props: any) {
       </div>
       { 
         !input
-        && dataSheet.skills[name].specialty !== ''
-        && dataSheet.skills[name].specialty !== ' '
-        && <span className="text-sm capitalize">{ dataSheet.skills[name].specialty }</span>
+        && dataSheet.data
+        && dataSheet.data.skills
+        && dataSheet.data.skills[name].specialty !== ''
+        && dataSheet.data.skills[name].specialty !== ' '
+        && <span className="text-sm capitalize">{ dataSheet.data.skills[name].specialty }</span>
       }
       <div className="w-full">
         { returnPoints() }

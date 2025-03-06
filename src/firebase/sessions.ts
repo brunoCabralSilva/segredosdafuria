@@ -3,7 +3,6 @@ import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
 import { createChatData } from "./chats";
-import { createPlayersData } from "./players";
 
 export const getSessions = async () => {
   const db = getFirestore(firebaseConfig);
@@ -66,15 +65,13 @@ export const createSession = async (
       anotations: '',
       description,
       principles: [],
-      favorsAndBans: [],
-      relationships: { nodes: [], links: [] },
+      favorsAndBans: []
     });
     const newSessionRef = doc(db, 'sessions', newSession.id);
     await runTransaction(db, async (transaction) => {
       transaction.update(newSessionRef, { id: newSession.id });
     });
     await createNotificationData(newSession.id, setShowMessage);
-    await createPlayersData(newSession.id, setShowMessage);
     await createChatData(newSession.id, setShowMessage);
     return newSession.id;
   } catch (err: any) {
@@ -203,28 +200,5 @@ export const deleteSessionById = async (sessionId: string, setShowMessage: any) 
   } catch (error) {
     setShowMessage({ show: true, text: `Erro ao deletar sessão. Atualize a página e tente novamente (${error}).` });
     return false;
-  }
-};
-
-export const updateNewKeysInSessions = async () => {
-  try {
-    const db = getFirestore(firebaseConfig);
-    const sessionsCollectionRef = collection(db, 'sessions');
-    const sessionsSnapshot = await getDocs(sessionsCollectionRef);
-    await runTransaction(db, async (transaction) => {
-      sessionsSnapshot.forEach((sessionDoc) => {
-        if (sessionDoc.exists()) {
-          const sessionData = sessionDoc.data();
-          const sessionDocRef = doc(sessionsCollectionRef, sessionDoc.id);
-          transaction.update(sessionDocRef, {
-            ...sessionData,
-            relationships: { nodes: [], edges: [] },
-          });
-        }
-      });
-    });
-    console.log('Principles adicionados a todas as sessões com sucesso');
-  } catch (err: any) {
-    console.error('Ocorreu um erro ao atualizar as sessões: ', err.message);
   }
 };

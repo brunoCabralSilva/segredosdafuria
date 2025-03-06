@@ -10,8 +10,8 @@ export function RiteOfBinding() {
   const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
-    let pool = Number(dataSheet.skills.occult.value) + Number(dataSheet.glory);
-    let rage = Number(dataSheet.rage);
+    let pool = Number(dataSheet.data.skills.occult.value) + Number(dataSheet.data.glory);
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;

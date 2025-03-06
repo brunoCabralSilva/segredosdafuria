@@ -12,19 +12,19 @@ export default function Attributes() {
           <span className="w-full text-center">Físicos</span>
           <hr className="h-1 w-full" />
           <ItemAtr
-						value={dataSheet.attributes.strength}
+						value={dataSheet.data.attributes.strength}
 						namePtBr="Força"
 						name="strength"
 						quant={6}
 					/>
 					<ItemAtr
-						value={dataSheet.attributes.dexterity}
+						value={dataSheet.data.attributes.dexterity}
 						name="dexterity"
 						namePtBr="Destreza"
 						quant={6}
 					/>
 					<ItemAtr
-						value={dataSheet.attributes.stamina}
+						value={dataSheet.data.attributes.stamina}
 						name="stamina"
 						namePtBr="Vigor"
 						quant={6}
@@ -34,19 +34,19 @@ export default function Attributes() {
           <span className="w-full text-center">Sociais</span>
           <hr className="h-1 w-full" />
 					<ItemAtr
-						value={dataSheet.attributes.charisma}
+						value={dataSheet.data.attributes.charisma}
 						name="charisma"
 						namePtBr="Carisma"
 						quant={6}
 					/>
 					<ItemAtr
-						value={dataSheet.attributes.manipulation}
+						value={dataSheet.data.attributes.manipulation}
 						name="manipulation"
 						namePtBr="Manipulação"
 						quant={6}
 					/>
 					<ItemAtr
-						value={dataSheet.attributes.composure}
+						value={dataSheet.data.attributes.composure}
 						name="composure"
 						namePtBr="Autocontrole"
 						quant={6}
@@ -56,19 +56,19 @@ export default function Attributes() {
           <span className="w-full text-center">Mentais</span>
           <hr className="h-1 w-full" />
 					<ItemAtr
-						value={dataSheet.attributes.intelligence}
+						value={dataSheet.data.attributes.intelligence}
 						name="intelligence"
 						namePtBr="Inteligência"
 						quant={6}
 					/>
 					<ItemAtr
-						value={dataSheet.attributes.wits}
+						value={dataSheet.data.attributes.wits}
 						name="wits"
 						namePtBr="Raciocínio"
 						quant={6}
 					/>
 					<ItemAtr
-						value={dataSheet.attributes.resolve}
+						value={dataSheet.data.attributes.resolve}
 						name="resolve"
 						namePtBr="Determinação"
 						quant={6}

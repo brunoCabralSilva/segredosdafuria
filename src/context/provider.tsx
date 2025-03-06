@@ -2,8 +2,6 @@
 import { ReactNode, useState } from 'react';
 import contexto from './context';
 import { playerSheet } from '@/firebase/utilities';
-import { authenticate } from '@/firebase/authenticate';
-import { getSessionById } from '@/firebase/sessions';
 
 interface IProvider { children: ReactNode }
 
@@ -61,6 +59,7 @@ export default function Provider({children }: IProvider) {
   const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: '' });
   const [showDownloadPdf, setShowDownloadPdf] = useState({ show: false, email: '' });
   const [showRelationship, setShowRelationship] = useState(false);
+  const [sheetId, setSheetId] = useState('');
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -173,6 +172,7 @@ export default function Provider({children }: IProvider) {
         addFavorAndBan, setAddFavorAndBan,
         showDeleteFavorAndBan, setShowDeleteFavorAndBan,
         showRelationship, setShowRelationship,
+        sheetId, setSheetId,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,

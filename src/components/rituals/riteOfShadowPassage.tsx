@@ -10,8 +10,8 @@ export function RiteOfShadowPassage() {
   const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
-    let pool = dataSheet.skills.occult.value + dataSheet[renown];
-    let rage = Number(dataSheet.rage);
+    let pool = dataSheet.data.skills.occult.value + dataSheet.data[renown];
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;

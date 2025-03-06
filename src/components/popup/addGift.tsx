@@ -13,10 +13,10 @@ export default function AddGift() {
   } =  useContext(contexto);
 
   const generateList = () => {
-    const sumRenown = Number(dataSheet.glory) + Number(dataSheet.wisdom) + Number(dataSheet.honor);
+    const sumRenown = Number(dataSheet.data.glory) + Number(dataSheet.data.wisdom) + Number(dataSheet.data.honor);
     const data = dataGifts.filter((gift: any) => {
       const data = gift.belonging.filter((belong: any) => {
-        if ((belong.type === 'global' || belong.type === dataSheet.trybe || belong.type === dataSheet.auspice) && belong.totalRenown <= sumRenown) {
+        if ((belong.type === 'global' || belong.type === dataSheet.data.trybe || belong.type === dataSheet.data.auspice) && belong.totalRenown <= sumRenown) {
           return belong;
         } else return null;
       });
@@ -55,7 +55,7 @@ export default function AddGift() {
             <div className="bg-gray-whats-dark w-full h-full overflow-y-auto p-5">
               <p className="capitalize text-lg pb-3 font-bold">Dons Adicionados</p>
               {
-                dataSheet.gifts.map((item: any, index: number) => (
+                dataSheet.data.gifts.map((item: any, index: number) => (
                   <div key={index} className="mt-2">
                      - { item.giftPtBr } ({item.gift}) - { 
                     item.belonging.map((belong: { type: string, totalRenown: number }, index: number) => (

@@ -6,16 +6,16 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 export default function Ritual(props: { ritual: any, index: number, length: number }) {
   const [showRitual, setShowRitual] = useState(false);
   const { ritual, index, length } = props;
-  const { dataSheet, sessionId, email, setShowMessage } = useContext(contexto);
+  const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
   const registerRitual = async () => {
-    if (dataSheet.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr))
-      dataSheet.rituals = dataSheet.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr)
-    else dataSheet.rituals.push(ritual);
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    if (dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr))
+      dataSheet.data.rituals = dataSheet.data.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr)
+    else dataSheet.data.rituals.push(ritual);
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   }
 
   return(
-    <div className={`${dataSheet.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr) ? 'bg-black border-red-500': 'bg-gray-whats-dark border-white'} border-2 ${ index === length - 1 ? '' : 'mb-3'} font-normal`}>
+    <div className={`${dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr) ? 'bg-black border-red-500': 'bg-gray-whats-dark border-white'} border-2 ${ index === length - 1 ? '' : 'mb-3'} font-normal`}>
       <button
         type="button"
         onClick={ () => setShowRitual(!showRitual) }
@@ -56,7 +56,7 @@ export default function Ritual(props: { ritual: any, index: number, length: numb
             onClick={ () => { registerRitual()}}
             >
             {
-              dataSheet.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr)
+              dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr)
               ? 'Remover'
               : 'Adicionar'
             }

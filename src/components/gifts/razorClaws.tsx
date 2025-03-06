@@ -4,14 +4,14 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function RazorClaws() {
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sheetId, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
     if (dataSheet.form !== "Crinos") {
       if (dataSheet.rage >= 1) {
-        const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
+        const rageTest = await calculateRageCheck(sheetId, setShowMessage);
         dataSheet.rage = rageTest?.rage;
-        await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         await registerMessage(
           sessionId,
           {

@@ -17,9 +17,9 @@ export function RiteWithRoll(
 
   const rollTestOfUser = async () => {
     let pool = 0;
-    if (skill !== '') pool += Number(dataSheet.skills[skill].value);
-    if (renown !== '') pool += Number(dataSheet[renown]);
-    let rage = Number(dataSheet.rage);
+    if (skill !== '') pool += Number(dataSheet.data.skills[skill].value);
+    if (renown !== '') pool += Number(dataSheet.data[renown]);
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;

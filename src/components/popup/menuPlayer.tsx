@@ -1,5 +1,5 @@
 import contexto from "@/context/context";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Skills from "../player/skills";
 import AdvantagesAndFlaws from "../player/advantagesAndFlaws";
@@ -18,23 +18,35 @@ import Touchstones from "../player/touchstones";
 import Principles from "../player/principles";
 import FavorsAndBans from "../player/favorsAndBans";
 import Relationship from "./relationship";
+import Notifications from "../player/notifications";
+import Players from "../player/players";
 
 export default function MenuPlayer() {
-  const [optionSelect, setOptionSelect] = useState('general');
+  const [optionSelect, setOptionSelect] = useState('players');
   const {
-    dataSheet,
+    dataSheet, setDataSheet,
+    players,
     showHarano, setShowHarano,
     showHauglosk, setShowHauglosk,
     showGiftRoll, setShowGiftRoll,
     showRitualRoll, setShowRitualRoll,
-    showRelationship, setShowRelationship,
+    sheetId, setSheetId,
     setShowEvaluateSheet,
     setShowMenuSession,
   } = useContext(contexto);
 
+  useEffect(() => {
+    if (sheetId && optionSelect === 'players') {
+      setOptionSelect('general');
+      setDataSheet(players.find((player: any) => player.id === sheetId));
+    }
+  }, [sheetId, dataSheet])
+
 
 	const returnDataSheet = () => {
     switch(optionSelect) {
+      case ('players'): return (<Players setOptionSelect={setOptionSelect} />);
+      case ('notifications'): return (<Notifications />);
       case ('attributes'): return (<Attributes />);
       case ('skills'): return (<Skills />);
       case ('advantages-flaws'): return (<AdvantagesAndFlaws />);
@@ -44,10 +56,6 @@ export default function MenuPlayer() {
       case ('background'): return (<Background type="background" />);
       case ('principles-of-the-chronicle'): return (<Principles />);
       case ('favor-ban'): return (<FavorsAndBans />);
-      case ('relationship'): 
-        if (showRelationship) setOptionSelect('general');
-        else setShowRelationship(true);
-          return <div></div>;
       case ('anotations'): return (<Anotations type="notes" />);
       case ('gifts'): return (<Gifts />);
       case ('rituals'): return (<Rituals />);
@@ -56,8 +64,8 @@ export default function MenuPlayer() {
   };
 
   return(
-    <div className={`w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center h-screen z-50 top-0 right-0 text-white`}>
-      <div className="w-full flex justify-end my-3">
+    <div className={`md:w-3/5 absolute sm:relative z-50 w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center h-screen z-50 top-0 right-0 text-white`}>
+      <div className="w-full flex justify-end my-1">
         <IoIosCloseCircleOutline
           className="text-4xl text-white cursor-pointer mb-2"
           onClick={ () => {
@@ -85,19 +93,20 @@ export default function MenuPlayer() {
             }}
             className="w-full mb-2 border border-white p-3 cursor-pointer bg-black text-white flex items-center justify-center font-bold text-center"
         >
-            <option value={'general'}>Geral</option>
-            <option value={'attributes'}>Atributos</option>
-            <option value={'skills'}>Habilidades</option>
-            <option value={'gifts'}>Dons</option>
-            <option value={'rituals'}>Rituais</option>
-            <option value={'touchstones'}>Pilares</option>
-            <option value={'advantages-flaws'}>Vantagens e Defeitos</option>
-            <option value={'forms'}>Formas ( Atual: { dataSheet.form } )</option>
+            <option value={'players'}>Personagens</option>
+            <option value={'notifications'}>Notificações</option>
+            { sheetId !== '' && <option value={'general'}>Geral</option> }
+            { sheetId !== '' && <option value={'attributes'}>Atributos</option> }
+            { sheetId !== '' && <option value={'skills'}>Habilidades</option> }
+            { sheetId !== '' && <option value={'gifts'}>Dons</option> }
+            { sheetId !== '' && <option value={'rituals'}>Rituais</option> }
+            { sheetId !== '' && <option value={'touchstones'}>Pilares</option> }
+            { sheetId !== '' && <option value={'advantages-flaws'}>Vantagens e Defeitos</option> }
+            { sheetId !== '' && <option value={'forms'}>Formas ( Atual: { dataSheet.data.form } )</option> }
             <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>
             <option value={'favor-ban'}>Favores e Proibições</option>
-            <option value={'relationship'}>Mapa de Relacionamentos</option>
-            <option value={'session'}>Sessão</option>
-            <option value={'background'}>Background</option>
+            { sheetId !== '' && <option value={'session'}>Sessão</option> }
+            { sheetId !== '' && <option value={'background'}>Background</option> }
             <option value={'anotations'}>Anotações</option>
           </select>
             { returnDataSheet() }

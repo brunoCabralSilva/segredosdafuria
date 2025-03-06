@@ -17,13 +17,13 @@ export function RageOrWpWithRoll(
   const { type, attribute, renown, dificulty: dif, textDificulty } = props;
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(dif);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
-    if (renown !== '') pool += Number(dataSheet[renown]);
-    if (attribute !== '') pool += Number(dataSheet.attributes[attribute]);
-    let rage = Number(dataSheet.rage);
+    if (renown !== '') pool += Number(dataSheet.data[renown]);
+    if (attribute !== '') pool += Number(dataSheet.data.attributes[attribute]);
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;
@@ -33,11 +33,11 @@ export function RageOrWpWithRoll(
   }
 
   const rollRage = async () => {
-    if (dataSheet.rage >= 1) {
+    if (dataSheet.data.rage >= 1) {
       const roll = await rollTestOfUser();
-      const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
-      dataSheet.rage = rageTest?.rage;
-      await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+      const rageTest = await calculateRageCheck(sheetId, setShowMessage);
+      dataSheet.data.rage = rageTest?.rage;
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       await registerMessage(
         sessionId,
         {
@@ -54,32 +54,32 @@ export function RageOrWpWithRoll(
 
   const discountWillpower = async() => {
     let agravatedValue = false;
-    const actualWillpower = dataSheet.attributes.composure + dataSheet.attributes.resolve - dataSheet.willpower.length;
+    const actualWillpower = dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length;
     if (actualWillpower < 0) agravatedValue =  true;
-    if (dataSheet.willpower.length === 0) {
-      if (agravatedValue) dataSheet.willpower.push({ value: 1, agravated: true });
-      else dataSheet.willpower.push({ value: 1, agravated: false });
+    if (dataSheet.data.willpower.length === 0) {
+      if (agravatedValue) dataSheet.data.willpower.push({ value: 1, agravated: true });
+      else dataSheet.data.willpower.push({ value: 1, agravated: false });
     } else {
-      const resolveComposure = dataSheet.attributes.resolve + dataSheet.attributes.composure;
-      const agravated = dataSheet.willpower.filter((fdv: any) => fdv.agravated === true).map((fd: any) => fd.value);
-      const superficial = dataSheet.willpower.filter((fdv: any) => fdv.agravated === false).map((fd: any) => fd.value);
+      const resolveComposure = dataSheet.data.attributes.resolve + dataSheet.data.attributes.composure;
+      const agravated = dataSheet.data.willpower.filter((fdv: any) => fdv.agravated === true).map((fd: any) => fd.value);
+      const superficial = dataSheet.data.willpower.filter((fdv: any) => fdv.agravated === false).map((fd: any) => fd.value);
       const allValues = Array.from({ length: resolveComposure }, (_, i) => i + 1);
       const missingInBoth = allValues.filter(value => !agravated.includes(value) && !superficial.includes(value));
       if (missingInBoth.length > 0) {
         const smallestNumber = Math.min(...missingInBoth);
-        if (agravatedValue) dataSheet.willpower.push({ value: smallestNumber, agravated: true });
-        else dataSheet.willpower.push({ value: smallestNumber, agravated: false });
+        if (agravatedValue) dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
+        else dataSheet.data.willpower.push({ value: smallestNumber, agravated: false });
       } else {
         const missingInAgravated = allValues.filter(value => !agravated.includes(value));
         if (missingInAgravated.length > 0) {
           const smallestNumber = Math.min(...missingInAgravated);
-          dataSheet.willpower.push({ value: smallestNumber, agravated: true });
+          dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
         } else {
           setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
         }
       }
     }
-    updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    updateDataPlayer(sheetId, dataSheet, setShowMessage);
     const roll = await rollTestOfUser();
     await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email, setShowMessage);
   }

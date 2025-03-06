@@ -5,14 +5,11 @@ import { useContext } from "react";
 
 export default function ItemAtr(props: any) {
   const { value, name, namePtBr, quant } = props;
-	const { sessionId, email, dataSheet, setShowMessage } = useContext(contexto);
+	const { sessionId, sheetId, email, dataSheet, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
-    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
-    if (player) {
-			player.data.attributes[name] = value;
-			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
-    } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
+    dataSheet.data.attributes[name] = value;
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   };
 
   const returnPoints = (name: string) => {
@@ -26,7 +23,7 @@ export default function ItemAtr(props: any) {
                 <button
                   type="button"
                   onClick={ () => {
-                    if (dataSheet.form === 'Hominídeo' || dataSheet.form === 'Lupino')
+                    if (dataSheet.data.form === 'Hominídeo' || dataSheet.data.form === 'Lupino')
                       updateValue(name, index + 1)
                     else setShowMessage({ show: true, text: 'Os Atributos só podem ser atualizados na forma Hominídea ou Lupina' })
                   }}
@@ -38,7 +35,7 @@ export default function ItemAtr(props: any) {
               <button
                 type="button"
                 onClick={ () => {
-                  if (dataSheet.form === 'Hominídeo' || dataSheet.form === 'Lupino') updateValue(name, index + 1)
+                  if (dataSheet.data.form === 'Hominídeo' || dataSheet.data.form === 'Lupino') updateValue(name, index + 1)
                   else setShowMessage({ show: true, text: 'Os Atributos só podem ser atualizados na forma Hominídea ou Lupina' })
                 }}
                 key={index}

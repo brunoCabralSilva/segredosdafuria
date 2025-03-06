@@ -1,6 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
-import dataTalens from '../../data/talismans.json';
+import { useState } from "react";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
 
 export default function AdvLoresheetsAdded(props: { item: any }) {

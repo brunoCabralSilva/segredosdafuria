@@ -15,7 +15,7 @@ export default function Touchstones() {
     <div className="flex flex-col w-full h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         {
-          dataSheet.touchstones.length < 3 &&
+          dataSheet.data.touchstones.length < 3 &&
           <button
             type="button"
             onClick={() => setAddTouchstone({ show: true, data: {} }) }
@@ -26,7 +26,7 @@ export default function Touchstones() {
         }
         <div className="grid grid-cols-1 gap-3 pb-5">
           {
-            dataSheet.touchstones
+            dataSheet.data.touchstones
               .sort((a: { name: string; description: string },b: { name: string; description: string }) => {
                 return a.name.localeCompare(b.name);
               })

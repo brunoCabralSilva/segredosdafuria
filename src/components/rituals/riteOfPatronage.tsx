@@ -10,8 +10,8 @@ export function RiteOfPatronage() {
   const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
-    let pool = dataSheet.skills.etiquette.value + dataSheet[renown];
-    let rage = Number(dataSheet.rage);
+    let pool = dataSheet.data.skills.etiquette.value + dataSheet.data[renown];
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;

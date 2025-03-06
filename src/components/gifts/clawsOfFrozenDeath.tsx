@@ -7,11 +7,11 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 export function ClawsOfFrozenDeath() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sheetId, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
-    let pool = Number(dataSheet.attributes.wits) + Number(dataSheet.honor);
-    let rage = Number(dataSheet.rage);
+    let pool = Number(dataSheet.data.attributes.wits) + Number(dataSheet.data.honor);
+    let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
       pool = 0;
@@ -21,12 +21,12 @@ export function ClawsOfFrozenDeath() {
   }
 
   const rollRage = async () => {
-    if (dataSheet.rage >= 1) {
+    if (dataSheet.data.rage >= 1) {
       let roll = await rollTestOfUser();
-      if (dataSheet.form !== 'Crinos') {
+      if (dataSheet.data.form !== 'Crinos') {
         const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
-        dataSheet.rage = rageTest?.rage;
-        await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+        dataSheet.data.rage = rageTest?.rage;
+        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'rage-with-test', rageResults: rageTest, results: roll }, email, setShowMessage);
       } else {
         await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);

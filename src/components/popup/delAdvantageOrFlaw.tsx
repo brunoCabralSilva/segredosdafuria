@@ -11,12 +11,11 @@ function limitCaracteres(texto: string) {
 
 export default function DelAdvantageOrFlaw(props: any) {
   const { adv, setAdv } = props;
-  const { sessionId, email, deleteAdvOrFlaw, setDeleteAdvOrFlaw, setShowMessage } = useContext(contexto);
+  const { sheetId, dataSheet, sessionId, email, deleteAdvOrFlaw, setDeleteAdvOrFlaw, setShowMessage } = useContext(contexto);
 
   const removeAdv = async () => {
-    const searchPlayer = await getPlayerByEmail(sessionId, email, setShowMessage);
-    const foundAdvantage = searchPlayer.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === deleteAdvOrFlaw.name);
-    const otherAdvantages = searchPlayer.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== deleteAdvOrFlaw.name);
+    const foundAdvantage = dataSheet.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === deleteAdvOrFlaw.name);
+    const otherAdvantages = dataSheet.data.advantagesAndFlaws.filter((item: IAdvantageAndFlaw) => item.name !== deleteAdvOrFlaw.name);
 
     if (deleteAdvOrFlaw.type === 'advantage') {
       const remoteItemAdv = foundAdvantage.advantages.filter((ad: any) => ad.advantage !== deleteAdvOrFlaw.desc);
@@ -34,7 +33,7 @@ export default function DelAdvantageOrFlaw(props: any) {
       } else {
         setAdv([...restOfAdvantage, updatedAdvantage]);
       }
-      searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+      dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
     }
     
     if (deleteAdvOrFlaw.type === 'flaw') {
@@ -53,10 +52,10 @@ export default function DelAdvantageOrFlaw(props: any) {
       } else {
         setAdv([...restOfAdvantage, updatedAdvantage]);
       }
-      searchPlayer.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
+      dataSheet.data.advantagesAndFlaws = [...otherAdvantages, updatedAdvantage];
     }
 
-    await updateDataPlayer(sessionId, email, searchPlayer, setShowMessage);
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     setDeleteAdvOrFlaw({show: false, adv: {}, type:'' });
   };
 

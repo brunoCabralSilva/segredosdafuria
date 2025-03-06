@@ -11,10 +11,11 @@ export default function ConvertToPdf(props: { data: any }) {
   const { setShowDownloadPdf, session } = useContext(contexto);
   const pdfRef: any = useRef(null);
   const pdfRef2: any = useRef(null);
+  const hasDownloaded = useRef(false);
   
   const handleDownloadPdf = async () => {
     const pdfContainer1 = document.createElement('div');
-    pdfContainer1.style.width = '1300px';
+    pdfContainer1.style.width = '1400px';
     pdfContainer1.style.overflow = 'hidden';
     pdfContainer1.appendChild(pdfRef.current.cloneNode(true));
     document.body.appendChild(pdfContainer1);
@@ -42,8 +43,11 @@ export default function ConvertToPdf(props: { data: any }) {
   };
   
   useLayoutEffect(() => {
-    handleDownloadPdf();
-    setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 3000);
+    if (!hasDownloaded.current) {
+      handleDownloadPdf();
+      setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 3000);
+      hasDownloaded.current = true;
+    }
   }, []);
 
   const returnPoints = (name: string) => {
@@ -53,8 +57,8 @@ export default function ConvertToPdf(props: { data: any }) {
         {
           points.map((item, index) => {
             if (data[name] >= index + 1) {
-              return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-black border-black border`} />
-            } return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-white border-black border`} />
+              return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-black border-black !border-solid border`} />
+            } return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-white border-black !border-solid border`} />
           })
         }
       </div>
@@ -81,8 +85,8 @@ export default function ConvertToPdf(props: { data: any }) {
         {
           points.map((item, index) => {
             if (data.attributes[name] >= index + 1) {
-              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black border" />
-            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black" />
+              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black !border-solid border" />
+            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black !border-solid" />
           })
         }
       </div>
@@ -96,8 +100,8 @@ export default function ConvertToPdf(props: { data: any }) {
         {
           points.map((item, index) => {
             if (cost >= index + 1) {
-              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black border" />
-            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black" />
+              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black !border-solid border" />
+            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black !border-solid" />
           })
         }
       </div>
@@ -111,8 +115,8 @@ export default function ConvertToPdf(props: { data: any }) {
         {
           points.map((item, index) => {
             if (data.skills[name].value >= index + 1) {
-              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black border" />
-            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black" />
+              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black !border-solid border" />
+            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black !border-solid" />
           })
         }
       </div>
@@ -128,7 +132,7 @@ export default function ConvertToPdf(props: { data: any }) {
             <button
               type="button"
               key={index}
-              className="h-6 w-6 bg-white border-black border cursor-pointer"
+              className="h-6 w-6 bg-white border-black !border-solid border cursor-pointer"
             />
           ))
         }
@@ -145,12 +149,12 @@ export default function ConvertToPdf(props: { data: any }) {
       <div className="flex flex-col w-full gap-1 pt-1 pr-4">
         {
           points.map((item, index) => (
-            <div key={index} className="flex justify-between w-full px-3 py-2 border border-black">
+            <div key={index} className="flex justify-between w-full px-3 py-2 border border-black !border-solid">
               <span></span>
               <div className="flex flex-wrap gap-1 pt-1">
                 {
                   number.map((item2, index2) => (
-                    <button key={index2} type="button"  className="h-5 w-5 rounded-full bg-white border-black border" />
+                    <button key={index2} type="button"  className="h-5 w-5 rounded-full bg-white border-black !border-solid border" />
                   ))
                 }
               </div>
@@ -170,10 +174,10 @@ export default function ConvertToPdf(props: { data: any }) {
         {
           points.map((item, index) => (
             <div key={ index } className="grid grid-cols-10 w-full h-8 border-b-transparent">
-              <div className={`col-span-3 border border-black border-l-black border-transparent border-b-black border-r-black ${index === length - 1 && 'border-b-black'}`}></div>
-              <div className={`col-span-2 border border-black border-transparent border-r-black border-b-black ${index === length - 1 && 'border-b-black'}`}></div>
-              <div className={`col-span-4 border border-black border-transparent border-r-black border-b-black ${index === length - 1 && 'border-b-black'}`}></div>
-              <div className={`col-span-1 border border-black border-transparent border-r-black border-b-black ${index === length - 1 && 'border-b-black'}`}></div>
+              <div className={`col-span-3 border border-black !border-solid border-l-black border-transparent border-b-black border-r-black ${index === length - 1 && 'border-b-black'}`}></div>
+              <div className={`col-span-2 border border-black !border-solid border-transparent border-r-black border-b-black ${index === length - 1 && 'border-b-black'}`}></div>
+              <div className={`col-span-4 border border-black !border-solid border-transparent border-r-black border-b-black ${index === length - 1 && 'border-b-black'}`}></div>
+              <div className={`col-span-1 border border-black !border-solid border-transparent border-r-black border-b-black ${index === length - 1 && 'border-b-black'}`}></div>
             </div>
           ))
         }
@@ -186,8 +190,8 @@ export default function ConvertToPdf(props: { data: any }) {
       <div className="fixed bg-black z-80 h-screen w-full">
         <Loading />
       </div>
-      <div ref={pdfRef} className="bg-white p-8 border border-black" id="pdf-content">
-        <div className="border-2 border-black p-4 mt-3">
+      <div ref={pdfRef} className="bg-white p-8 border border-black !border-solid" id="pdf-content">
+        <div className="border-2 border-black !border-solid p-4 mt-3">
           <div className="flex w-full justify-center items-center">
             <Image
               src="/images/logos/text-black.png"
@@ -199,7 +203,7 @@ export default function ConvertToPdf(props: { data: any }) {
             />
           </div>
           <div>
-            <div className="grid grid-cols-3 border border-black w-full">
+            <div className="grid grid-cols-3 border border-black !border-solid w-full">
               <div className="px-1 pb-3 w-full border border-b-black flex items-center justify-start">
                 <p className="pr-1 font-bold">Nome:</p>
                 <p className="">{ data.name }</p>
@@ -228,54 +232,54 @@ export default function ConvertToPdf(props: { data: any }) {
           </div>
           {/* Atributos */}
           <div className="flex flex-col">
-            <div className="flex items-center justify-center my-1">
-              <p className="bg-black text-white px-2 py-1 pb-4">Atributos</p>
+            <div className="flex items-center justify-center">
+              <p className="bg-black text-white px-2 pt-1 pb-3 mt-1">Atributos</p>
             </div>
-            <div className="grid grid-cols-3 pb-3">
+            <div className="grid grid-cols-3">
               <p className="text-center">Físicos</p>
               <p className="text-center">Sociais</p>
               <p className="text-center">Mentais</p>
             </div>
             <div className="grid grid-cols-3">
               <div className="pr-10 border border-transparent border-r-black">
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Força</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Força</p>
                   { returnAttributes('strength') }
                 </div>
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Destreza</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Destreza</p>
                   { returnAttributes('dexterity') }
                 </div>
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Vigor</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Vigor</p>
                   { returnAttributes('stamina') }
                 </div>
               </div>
               <div className="px-10 border border-transparent border-r-black">
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Carisma</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Carisma</p>
                   { returnAttributes('charisma') }
                 </div>
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Manipulação</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Manipulação</p>
                   { returnAttributes('manipulation') }
                 </div>
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Autocontrole</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Autocontrole</p>
                   { returnAttributes('composure') }
                 </div>
               </div>
               <div className="pl-10">
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Inteligência</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Inteligência</p>
                   { returnAttributes('intelligence') }
                 </div>
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Raciocínio</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Raciocínio</p>
                   { returnAttributes('wits') }
                 </div>
-                <div className="flex justify-between items-center pb-2">
-                  <p className="pb-2">Autocontrole</p>
+                <div className="flex justify-between items-center ">
+                  <p className="">Determinação</p>
                   { returnAttributes('resolve') }
                 </div>
               </div>
@@ -285,20 +289,20 @@ export default function ConvertToPdf(props: { data: any }) {
           <div className="grid grid-cols-3 w-full py-3 mt-5">
             <div className="flex items-center justify-center">
               <div className="flex flex-col items-center justify-start">
-                <p className="pb-2">Vitalidade</p>
+                <p className="">Vitalidade</p>
                 { returnAgravated('health', 8) }
               </div>
               <div className="flex flex-col items-center justify-start ml-5">
-                <p className="pb-2">Crinos</p>
+                <p className="">Crinos</p>
                 { returnAgravated('health', 4) }
               </div>
             </div>
             <div className="flex flex-col items-center justify-start">
-              <p className="pb-2">Força de Vontade</p>
+              <p className="">Força de Vontade</p>
               { returnAgravated('willpower', 8) }
             </div>
             <div className="flex flex-col items-center justify-start">
-              <p className="px-1 pb-2">Fúria</p>
+              <p className="px-1 ">Fúria</p>
               { returnAgravated('rage', 5) }
             </div>
           </div>
@@ -309,115 +313,115 @@ export default function ConvertToPdf(props: { data: any }) {
             </div>
             <div className="grid grid-cols-3">
               <div className="pr-5">
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Atletismo { data.skills.athletics.specialty !== '' && `(${ data.skills.athletics.specialty})` }</p>
                   { returnSkills('athletics') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Briga { data.skills.brawl.specialty !== '' && `(${ data.skills.brawl.specialty})` }</p>
                   { returnSkills('brawl') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Ofícios { data.skills.craft.specialty !== '' && `(${ data.skills.craft.specialty})` }</p>
                   { returnSkills('craft') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Condução { data.skills.driving.specialty !== '' && `(${ data.skills.driving.specialty})` }</p>
                   { returnSkills('driving') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Armas de Fogo { data.skills.firearms.specialty !== '' && `(${ data.skills.firearms.specialty})` }</p>
                   { returnSkills('firearms') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Furto { data.skills.larceny.specialty !== '' && `(${ data.skills.larceny.specialty})` }</p>
                   { returnSkills('larceny') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Armas Brancas { data.skills.melee.specialty !== '' && `(${ data.skills.melee.specialty})` }</p>
                   { returnSkills('melee') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Furtividade { data.skills.stealth.specialty !== '' && `(${ data.skills.stealth.specialty})` }</p>
                   { returnSkills('stealth') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Sobrevivência { data.skills.survival.specialty !== '' && `(${ data.skills.survival.specialty})` }</p>
                   { returnSkills('survival') }
                 </div>
               </div>
               <div className="px-5">
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Emp. com Animais { data.skills.animalKen.specialty !== '' && `(${ data.skills.animalKen.specialty})` }</p>
                   { returnSkills('animalKen') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Etiqueta { data.skills.etiquette.specialty !== '' && `(${ data.skills.etiquette.specialty})` }</p>
                   { returnSkills('etiquette') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Intuição { data.skills.insight.specialty !== '' && `(${ data.skills.insight.specialty})` }</p>
                   { returnSkills('insight') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Intimidação { data.skills.intimidation.specialty !== '' && `(${ data.skills.intimidation.specialty})` }</p>
                   { returnSkills('intimidation') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Liderança { data.skills.leadership.specialty !== '' && `(${ data.skills.leadership.specialty})` }</p>
                   { returnSkills('leadership') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Performance { data.skills.performance.specialty !== '' && `(${ data.skills.performance.specialty})` }</p>
                   { returnSkills('performance') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Persuasão { data.skills.persuasion.specialty !== '' && `(${ data.skills.persuasion.specialty})` }</p>
                   { returnSkills('persuasion') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Manha { data.skills.streetwise.specialty !== '' && `(${ data.skills.streetwise.specialty})` }</p>
                   { returnSkills('streetwise') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Lábia { data.skills.subterfuge.specialty !== '' && `(${ data.skills.subterfuge.specialty})` }</p>
                   { returnSkills('subterfuge') }
                 </div>
               </div>
               <div className="pl-5">
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Acadêmicos { data.skills.academics.specialty !== '' && `(${ data.skills.academics.specialty})` }</p>
                   { returnSkills('academics') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Percepção { data.skills.awareness.specialty !== '' && `(${ data.skills.awareness.specialty})` }</p>
                   { returnSkills('awareness') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Finanças { data.skills.finance.specialty !== '' && `(${ data.skills.finance.specialty})` }</p>
                   { returnSkills('finance') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Investigação { data.skills.investigation.specialty !== '' && `(${ data.skills.investigation.specialty})` }</p>
                   { returnSkills('investigation') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Medicina { data.skills.medicine.specialty !== '' && `(${ data.skills.medicine.specialty})` }</p>
                   { returnSkills('medicine') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Ocultismo { data.skills.occult.specialty !== '' && `(${ data.skills.occult.specialty})` }</p>
                   { returnSkills('occult') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Política { data.skills.politics.specialty !== '' && `(${ data.skills.politics.specialty})` }</p>
                   { returnSkills('politics') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Ciência { data.skills.science.specialty !== '' && `(${ data.skills.science.specialty})` }</p>
                   { returnSkills('science') }
                 </div>
-                <div className="flex justify-between items-center pt-3">
+                <div className="flex justify-between items-center">
                   <p>Tecnologia { data.skills.technology.specialty !== '' && `(${ data.skills.technology.specialty})` }</p>
                   { returnSkills('technology') }
                 </div>
@@ -429,17 +433,17 @@ export default function ConvertToPdf(props: { data: any }) {
             <div className="flex items-center justify-center my-1">
               <p className="bg-black text-white px-2 py-1 pb-4">Renome</p>
             </div>
-            <div className="grid grid-cols-3 border border-black w-full">
+            <div className="grid grid-cols-3 border border-black !border-solid w-full">
               <div className="w-full p-1 py-2 border border-transparent flex items-center justify-between pr-3">
-                <p className="px-1 pb-2 font-bold">Glória</p>
+                <p className="px-1 font-bold">Glória</p>
                 { returnPoints('glory') }
               </div>
               <div className="w-full p-1 py-2 border border-l-black flex items-center justify-between pr-3">
-                <p className="px-1 pb-2 font-bold">Honra</p>
+                <p className="px-1 font-bold">Honra</p>
                 { returnPoints('honor') }
               </div>
               <div className="w-full p-1 border border-l-black flex items-center justify-between pr-3">
-                <p className="px-1 pb-2 font-bold">Sabedoria</p>
+                <p className="px-1 font-bold">Sabedoria</p>
                 { returnPoints('wisdom') }
               </div>
             </div>
@@ -450,32 +454,32 @@ export default function ConvertToPdf(props: { data: any }) {
               <p className="mb-3">Vantagens e Defeitos</p>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
-                    <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center">
+                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
                   </div>
                 )) }
               </div>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
-                    <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center">
+                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
                   </div>
                 )) }
               </div>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.talens.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
-                    <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center">
+                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.value) }
                   </div>
                 )) }
               </div>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.flaws.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 py-2 border border-black mt-1">
-                    <p className="pb-2">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center">
+                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
                   </div>
                 )) }
@@ -497,7 +501,7 @@ export default function ConvertToPdf(props: { data: any }) {
             </div>
             <div className="w-full flex flex-col items-center">
               <p className="mb-3">Formas dos Garou</p>
-              <div className="border border-black w-full">
+              <div className="border border-black !border-solid w-full">
                 <div className="grid grid-cols-5 w-full px-3 pb-1 pt-3">
                   <p className="col-span-1 font-bold">Hominídeo</p>
                   <ul className="col-span-3">
@@ -515,7 +519,7 @@ export default function ConvertToPdf(props: { data: any }) {
                     />
                   </div>
                 </div>
-                <div className="grid grid-cols-5 w-full px-3 py-1">
+                <div className="grid grid-cols-5 w-full px-3">
                   <p className="col-span-1 font-bold">Glabro</p>
                   <ul className="col-span-3">
                     <li>Custo: Um Teste de Fúria</li>
@@ -532,7 +536,7 @@ export default function ConvertToPdf(props: { data: any }) {
                     priority
                   />
                 </div>
-                <div className="grid grid-cols-5 w-full px-3 py-1">
+                <div className="grid grid-cols-5 w-full px-3">
                   <p className="col-span-1 font-bold">Crinos</p>
                   <ul className="col-span-3">
                     <li>Custo: Dois Testes de Fúria</li>
@@ -554,7 +558,7 @@ export default function ConvertToPdf(props: { data: any }) {
                     priority
                   />
                 </div>
-                <div className="grid grid-cols-5 w-full px-3 py-1">
+                <div className="grid grid-cols-5 w-full px-3">
                   <p className="col-span-1 font-bold">Hispo</p>
                   <ul className="col-span-3">
                     <li>Custo: um Teste de Fúria</li>
@@ -572,7 +576,7 @@ export default function ConvertToPdf(props: { data: any }) {
                     priority
                   />
                 </div>
-                <div className="grid grid-cols-5 w-full px-3 py-1">
+                <div className="grid grid-cols-5 w-full px-3">
                   <p className="col-span-1 font-bold">Lupino</p>
                   <ul className="col-span-3">
                     <li>Custo: Nenhum</li>
@@ -593,35 +597,35 @@ export default function ConvertToPdf(props: { data: any }) {
         </div>
       </div>
       <div ref={pdfRef2} className="bg-white p-8" id="pdf-content">
-        <div className="border-2 border-black p-4 mt-3">
+        <div className="border-2 border-black !border-solid p-4 mt-3">
           <div className="flex flex-col">
             {/* Dons e Rituais */}
             <div className="flex flex-col items-center justify-center my-1">
               <p className="bg-black text-white px-2 py-1 pb-4">Dons e Rituais</p>
               <div className="w-full pt-4">
                 <div className="grid grid-cols-10 w-full font-bold">
-                  <div className="col-span-3 border border-black border-transparent border-l-black border-r-black px-2 pb-3">Nome</div>
-                  <div className="col-span-2 border border-black border-transparent border-r-black px-2 pb-3">Custo</div>
-                  <div className="col-span-4 border border-black border-transparent border-r-black px-2 pb-3">Teste</div>
-                  <div className="col-span-1 border border-black border-transparent border-r-black px-2 pb-3">Página</div>
+                  <div className="col-span-3 border border-black !border-solid px-2 pb-3">Nome</div>
+                  <div className="col-span-2 border border-black !border-solid px-2">Custo</div>
+                  <div className="col-span-4 border border-black !border-solid px-2">Teste</div>
+                  <div className="col-span-1 border border-black !border-solid px-2">Página</div>
                 </div>
                 {
                   data.rituals.map((item: any, index: number) => (
                     <div key={ index } className="grid grid-cols-10 w-full">
-                      <div className={`col-span-3 border pb-3 border-black px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.titlePtBr }</div>
-                      <div className={`col-span-2 border  pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}></div>
-                      <div className={`col-span-4 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
-                      <div className={`col-span-1 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
+                      <div className={`col-span-3 border pb-3 border-black !border-solid px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.titlePtBr }</div>
+                      <div className={`col-span-2 border  pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}></div>
+                      <div className={`col-span-4 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
+                      <div className={`col-span-1 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
                     </div>
                   ))
                 }
                 {
                   data.gifts.map((item: any, index: number) => (
                     <div key={ index } className="grid grid-cols-10 w-full">
-                      <div className={`col-span-3 border pb-3 border-black px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.giftPtBr }</div>
-                      <div className={`col-span-2 border  pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.cost }</div>
-                      <div className={`col-span-4 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
-                      <div className={`col-span-1 border pb-3 border-black border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
+                      <div className={`col-span-3 border pb-3 border-black !border-solid px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.giftPtBr }</div>
+                      <div className={`col-span-2 border  pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.cost }</div>
+                      <div className={`col-span-4 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
+                      <div className={`col-span-1 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
                     </div>
                   ))
                 }
@@ -631,11 +635,11 @@ export default function ConvertToPdf(props: { data: any }) {
             <div className="grid grid-cols-3 pt-2 gap-2">
               <div className="w-full">
                 <p className="text-center w-full pb-3">Princípios da Crônica</p>
-                <div className="px-4 py-2 h-96 border border-black"></div>
+                <div className="px-4 py-2 h-96 border border-black !border-solid"></div>
               </div>
               <div>
                 <p className="text-center w-full pb-3">Pedras de Toque</p>
-                <div className="h-96 border border-black">
+                <div className="h-96 border border-black !border-solid">
                   <ul className="px-4 py-2">
                   {
                     data.touchstones.map((item: any, index: number) => (
@@ -649,15 +653,15 @@ export default function ConvertToPdf(props: { data: any }) {
               </div>
               <div>
                 <p className="text-center w-full pb-3">Favores e Proibições</p>
-                <div className="px-4 py-2 h-96 border border-black"></div>
+                <div className="px-4 py-2 h-96 border border-black !border-solid"></div>
               </div>
               <div className="w-full">
                 <p className="text-center w-full pb-3">Notas</p>
-                <div className="px-4 py-2 h-96 border border-black">{ truncateText(data.notes, 710) }</div>
+                <div className="px-4 py-2 h-96 border border-black !border-solid">{ truncateText(data.notes, 710) }</div>
               </div>
               <div className="col-span-2 w-full">
                 <p className="text-center w-full pb-3">História</p>
-                <div className="px-4 py-2 h-96 border border-black">{ truncateText(data.background, 1600) }</div>
+                <div className="px-4 py-2 h-96 border border-black !border-solid">{ truncateText(data.background, 1600) }</div>
               </div>
             </div>
             <div className="">

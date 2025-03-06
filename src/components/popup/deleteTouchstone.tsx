@@ -6,8 +6,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function DeleteTouchstone() {
   const {
-    email,
-    sessionId,
+    sheetId,
     dataSheet,
     showDeleteTouchstone,
     setShowDeleteTouchstone,
@@ -15,9 +14,8 @@ export default function DeleteTouchstone() {
   } = useContext(contexto);
 
   const deleteTouchstone = async () => {
-    const updatedDataSheet = dataSheet;
-    updatedDataSheet.touchstones = updatedDataSheet.touchstones.filter((touchstone: any) => touchstone.name !== showDeleteTouchstone.name);
-    await updateDataPlayer(sessionId, email, updatedDataSheet, setShowMessage);
+    dataSheet.data.touchstones = dataSheet.data.touchstones.filter((touchstone: any) => touchstone.name !== showDeleteTouchstone.name);
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     setShowMessage({ show: true, text: 'O Pilar foi removido.' });
     setShowDeleteTouchstone({ show: false, name: '' });
   };

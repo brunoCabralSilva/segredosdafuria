@@ -7,8 +7,9 @@ import contexto from "@/context/context";
 
 export default function ResetSheet() {
 	const {
-    email,
-    sessionId,
+    sheetId,
+    dataSheet,
+    setDataSheet,
     setShowMessage,
     setShowResetSheet,
     setShowMenuSession,
@@ -16,7 +17,8 @@ export default function ResetSheet() {
 
   const resetSheet = async () => {
     try {
-      await updateDataPlayer(sessionId, email, playerSheet, setShowMessage);
+      setDataSheet({ ...dataSheet, data: playerSheet });
+      await updateDataPlayer(sheetId, { ...dataSheet, data: playerSheet }, setShowMessage);
       setShowMessage({ show: true, text: "Sua ficha foi redefinida!" });
       setShowResetSheet(false);
       setShowMenuSession('');

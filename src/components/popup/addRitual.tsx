@@ -8,18 +8,17 @@ import Ritual from "../player/ritual";
 
 export default function AddRitual() {
   const {
-    email,
-    sessionId,
+    sheetId,
     dataSheet,
     setShowRitualsToAdd,
     setShowMessage,
   } =  useContext(contexto);
   
   const registerRitual = async (ritual: any) => {
-    if (dataSheet.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr))
-      dataSheet.rituals = dataSheet.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr)
-    else dataSheet.rituals.push(ritual);
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    if (dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr))
+      dataSheet.data.rituals = dataSheet.data.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr)
+    else dataSheet.data.rituals.push(ritual);
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   }
 
   return(
@@ -52,7 +51,7 @@ export default function AddRitual() {
             <div className="bg-gray-whats-dark w-full h-full overflow-y-auto p-5">
               <p className="capitalize text-lg pb-3 font-bold">Rituais Adicionados</p>
               {
-                dataSheet.rituals.map((item: any, index: number) => (
+                dataSheet.data.rituals.map((item: any, index: number) => (
                   <div key={index} className="mt-2 ">
                      - { item.titlePtBr } ({item.title})
                   </div>

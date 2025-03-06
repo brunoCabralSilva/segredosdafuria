@@ -10,6 +10,7 @@ export default function Item(props: any) {
     email,
     dataSheet,
     sessionId,
+    sheetId,
     setShowMessage,
     setShowHarano,
     setShowHauglosk,
@@ -17,41 +18,9 @@ export default function Item(props: any) {
   } = useContext(contexto);
   
   const updateValue = async (name: string, value: number) => {
-    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
-    if (player) {
-      if (player.data[name] === 1 && value === 1) player.data[name] = 0;
-      else player.data[name] = value;
-			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
-    } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
-  };
-
-  const returnPoints = (name: string) => {
-    const points = Array(quant).fill('');
-    return (
-      <div className="flex flex-wrap gap-2 pt-1">
-        {
-          points.map((item, index) => {
-            if (dataSheet[name] >= index + 1) {
-              return (
-                <button
-                  type="button"
-                  onClick={ () => updateValue(name, index + 1) }
-                  key={index}
-                  className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
-                />
-              );
-            } return (
-              <button
-                type="button"
-                onClick={ () => updateValue(name, index + 1) }
-                key={index}
-                className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
-              />
-            );
-          })
-        }
-      </div>
-    );
+    if (dataSheet.data[name] === 1 && value === 1) dataSheet.data[name] = 0;
+    else dataSheet.data[name] = value;
+		await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   };
 
   return(
@@ -59,14 +28,36 @@ export default function Item(props: any) {
       <span className="capitalize">{ namePtBr }</span>
       <div className="flex flex-col items-center lg:flex-row">
         <div className="w-full">
-          { returnPoints(name) }
+          <div className="flex flex-wrap gap-2 pt-1">
+            {
+              Array(quant).fill('').map((item, index) => {
+                if (dataSheet.data[name] >= index + 1) {
+                  return (
+                    <button
+                      type="button"
+                      onClick={ () => updateValue(name, index + 1) }
+                      key={index}
+                      className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
+                    />
+                  );
+                } return (
+                  <button
+                    type="button"
+                    onClick={ () => updateValue(name, index + 1) }
+                    key={index}
+                    className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
+                  />
+                );
+              })
+            }
+          </div>
         </div>
         {
           namePtBr === 'Fúria' &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
               onClick={ async () => {
-                const rage = await rageCheck(sessionId, email, setShowMessage);
+                const rage: number = await rageCheck(sessionId, email, sheetId, setShowMessage, dataSheet);
                 updateValue('rage', rage);
                 setShowMenuSession('');
               }}

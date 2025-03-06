@@ -8,7 +8,7 @@ import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
 export default function Background(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
-  const { sessionId, email, dataSheet, setShowMessage } =  useContext(contexto);
+  const { sheetId, dataSheet, setShowMessage } =  useContext(contexto);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
@@ -22,10 +22,9 @@ export default function Background(props: { type: string }) {
   }, []);
 
   const updateValue = async () => {
-    const player: any = await getPlayerByEmail(sessionId, email, setShowMessage);
-    if (player) {
-      player.data[type] = text;
-			await updateDataPlayer(sessionId, email, player.data, setShowMessage);
+    if (dataSheet) {
+      dataSheet.data[type] = text;
+			await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

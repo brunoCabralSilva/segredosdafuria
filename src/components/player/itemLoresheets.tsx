@@ -6,7 +6,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 export default function ItemLoresheet(props: { item: any }) {
   const { item } = props;
   const [showLoresheet, setShowLoresheet] = useState(false);
-  const { dataSheet, sessionId, email, setShowMessage } = useContext(contexto);
+  const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
 
   const updateLoresheet = async(
     name: string,
@@ -15,7 +15,7 @@ export default function ItemLoresheet(props: { item: any }) {
     skill: string,
   )  => {
     const obj = { name, cost, description, skill };
-    let newList = dataSheet.advantagesAndFlaws.loresheets;
+    let newList = dataSheet.data.advantagesAndFlaws.loresheets;
     const equal = newList.find((item: any) => item.skill === skill);
     const different = newList.find((item: any) => item.name !== name);
     if (equal) newList = newList.filter((item: any) => item.skill !== skill);
@@ -23,13 +23,13 @@ export default function ItemLoresheet(props: { item: any }) {
       newList = newList.filter((item: any) => item.name === name);
       newList.push(obj);
     } else newList.push(obj);
-    dataSheet.advantagesAndFlaws.loresheets = newList;
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    dataSheet.data.advantagesAndFlaws.loresheets = newList;
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   }
 
   const verifySelected = () => {
     return item.habilities.find((adv: any) => {
-      return dataSheet.advantagesAndFlaws.loresheets.find((item2: any) => item2.skill === adv.skillPtBr)
+      return dataSheet.data.advantagesAndFlaws.loresheets.find((item2: any) => item2.skill === adv.skillPtBr)
     });
   }
 
@@ -58,7 +58,7 @@ export default function ItemLoresheet(props: { item: any }) {
                 onClick={() => {
                   updateLoresheet(item.titlePtBr, item.descriptionPtBr, adv.cost, adv.skillPtBr) 
                 }}
-                className={`${dataSheet.advantagesAndFlaws.loresheets.find((item2: any) => item2.skill === adv.skillPtBr) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mb-3 pt-3  p-4 cursor-pointer`}
+                className={`${dataSheet.data.advantagesAndFlaws.loresheets.find((item2: any) => item2.skill === adv.skillPtBr) ? 'bg-black border-2 border-red-500' : 'border-2 border-white'} mb-3 pt-3  p-4 cursor-pointer`}
               >
                 <p>Custo { adv.cost } - { adv.skillPtBr }</p>
               </div>

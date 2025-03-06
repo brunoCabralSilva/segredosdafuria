@@ -4,37 +4,37 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function SilverClaws() {
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
-    if (dataSheet.form !== "Crinos") {
+    if (dataSheet.data.form !== "Crinos") {
         let agravatedValue = false;
-        const actualWillpower = dataSheet.attributes.composure + dataSheet.attributes.resolve - dataSheet.willpower.length;
+        const actualWillpower = dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length;
         if (actualWillpower < 0) agravatedValue =  true;
-        if (dataSheet.willpower.length === 0) {
-          if (agravatedValue) dataSheet.willpower.push({ value: 1, agravated: true });
-          else dataSheet.willpower.push({ value: 1, agravated: false });
+        if (dataSheet.data.willpower.length === 0) {
+          if (agravatedValue) dataSheet.data.willpower.push({ value: 1, agravated: true });
+          else dataSheet.data.willpower.push({ value: 1, agravated: false });
         } else {
-          const resolveComposure = dataSheet.attributes.resolve + dataSheet.attributes.composure;
-          const agravated = dataSheet.willpower.filter((fdv: any) => fdv.agravated === true).map((fd: any) => fd.value);
-          const superficial = dataSheet.willpower.filter((fdv: any) => fdv.agravated === false).map((fd: any) => fd.value);
+          const resolveComposure = dataSheet.data.attributes.resolve + dataSheet.data.attributes.composure;
+          const agravated = dataSheet.data.willpower.filter((fdv: any) => fdv.agravated === true).map((fd: any) => fd.value);
+          const superficial = dataSheet.data.willpower.filter((fdv: any) => fdv.agravated === false).map((fd: any) => fd.value);
           const allValues = Array.from({ length: resolveComposure }, (_, i) => i + 1);
           const missingInBoth = allValues.filter(value => !agravated.includes(value) && !superficial.includes(value));
           if (missingInBoth.length > 0) {
             const smallestNumber = Math.min(...missingInBoth);
-            if (agravatedValue) dataSheet.willpower.push({ value: smallestNumber, agravated: true });
-            else dataSheet.willpower.push({ value: smallestNumber, agravated: false });
+            if (agravatedValue) dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
+            else dataSheet.data.willpower.push({ value: smallestNumber, agravated: false });
           } else {
             const missingInAgravated = allValues.filter(value => !agravated.includes(value));
             if (missingInAgravated.length > 0) {
               const smallestNumber = Math.min(...missingInAgravated);
-              dataSheet.willpower.push({ value: smallestNumber, agravated: true });
+              dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
             } else {
               setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
             }
           }
         }
-        updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+        updateDataPlayer(sheetId, dataSheet, setShowMessage);
     }
     await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift }, email, setShowMessage);
   }

@@ -7,17 +7,17 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 export default function Gift(props: { gift: any, index: number, length: number }) {
   const [showGift, setShowGift] = useState(false);
   const { gift, index, length } = props;
-  const { dataSheet, sessionId, email, setShowMessage } = useContext(contexto);
+  const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
 
   const registerGift = async (gift: any) => {
-    if (dataSheet.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr))
-      dataSheet.gifts = dataSheet.gifts.filter((item: any) => item.giftPtBr !== gift.giftPtBr)
-    else dataSheet.gifts.push(gift);
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    if (dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr))
+      dataSheet.data.gifts = dataSheet.data.gifts.filter((item: any) => item.giftPtBr !== gift.giftPtBr)
+    else dataSheet.data.gifts.push(gift);
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   }
 
   return(
-    <div className={`${dataSheet.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr) ? 'bg-black border-red-500': 'bg-gray-whats-dark border-white'} border-2 ${ index === length - 1 ? '' : 'mb-3'}`}>
+    <div className={`${dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr) ? 'bg-black border-red-500': 'bg-gray-whats-dark border-white'} border-2 ${ index === length - 1 ? '' : 'mb-3'}`}>
       <button
         type="button"
         onClick={ () => setShowGift(!showGift) }
@@ -86,7 +86,7 @@ export default function Gift(props: { gift: any, index: number, length: number }
             onClick={ () => { registerGift(gift)}}
             >
             {
-              dataSheet.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr)
+              dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr)
               ? 'Remover'
               : 'Adicionar'
             }

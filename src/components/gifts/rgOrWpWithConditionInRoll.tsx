@@ -19,7 +19,7 @@ export function RgOrWpWithConditionInRoll(
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(dif);
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, sheetId, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -39,9 +39,9 @@ export function RgOrWpWithConditionInRoll(
     if (dataSheet.rage >= 1) {
       let roll = null;
       if (marked) roll = await rollTestOfUser();
-      const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
+      const rageTest = await calculateRageCheck(sheetId, setShowMessage);
       dataSheet.rage = rageTest?.rage;
-      await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       if (marked) {
       await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll:  'rage-with-test', rageResults: rageTest, results: roll }, email, setShowMessage);
       } else {
@@ -77,7 +77,7 @@ export function RgOrWpWithConditionInRoll(
         }
       }
     }
-    updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    updateDataPlayer(sheetId, dataSheet, setShowMessage);
     if (marked) {
       const roll = await rollTestOfUser();
       await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'willpower', results: roll }, email, setShowMessage);

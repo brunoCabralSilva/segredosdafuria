@@ -10,9 +10,9 @@ export default function HaranoHauglosk(props: { type: string }) {
   const [haranoHauglosk, setHaranoHauglosk] = useState<number>(1);
   const [dificulty, setDificulty] = useState<number>(1);
   const {
-    email,
     sessionId,
     dataSheet,
+    sheetId,
     setShowHauglosk,
     setShowHarano,
     setShowMenuSession,
@@ -20,16 +20,16 @@ export default function HaranoHauglosk(props: { type: string }) {
   } =  useContext(contexto);
 
   useEffect(() => {
-    if (Number(dataSheet.harano) + Number(dataSheet.hauglosk) === 0)
+    if (Number(dataSheet.data.harano) + Number(dataSheet.data.hauglosk) === 0)
       setHaranoHauglosk(1);
     else
-      setHaranoHauglosk(Number(dataSheet.harano) + Number(dataSheet.hauglosk));
+      setHaranoHauglosk(Number(dataSheet.data.harano) + Number(dataSheet.data.hauglosk));
   });
 
   const rollDices = async () => {
     const typeEdited = type.toLocaleLowerCase();
-    dataSheet[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty, '', setShowMessage);
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    dataSheet.data[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty, '', setShowMessage);
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     setShowHauglosk(false);
     setShowHarano(false);
     setShowMenuSession('');

@@ -7,9 +7,8 @@ export default function ItemTalisman(props: { item: any }) {
   const { item } = props;
   const [showTalisman, setShowTalisman] = useState(false);
   const {
-    email,
+    sheetId,
     dataSheet,
-    sessionId,
     setShowMessage,
   } = useContext(contexto);
 
@@ -20,7 +19,7 @@ export default function ItemTalisman(props: { item: any }) {
     type: string,
   ) => {
     const obj = { name, value, description, type };
-    let newList = dataSheet.advantagesAndFlaws.talens;
+    let newList = dataSheet.data.advantagesAndFlaws.talens;
     if (newList.length === 0) newList.push(obj);
     else {
       const sameName = newList.filter((item: any) => item.name === name);
@@ -30,13 +29,13 @@ export default function ItemTalisman(props: { item: any }) {
         else newList.push(obj);
       } else newList.push(obj);
     }
-    dataSheet.advantagesAndFlaws.talens = newList;
-    await updateDataPlayer(sessionId, email, dataSheet, setShowMessage);
+    dataSheet.data.advantagesAndFlaws.talens = newList;
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
   }
 
   const verifySelected = () => {
     return item.cost.find((adv: any) => {
-      return dataSheet.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value)
+      return dataSheet.data.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value)
     });
   }
 
@@ -66,7 +65,7 @@ export default function ItemTalisman(props: { item: any }) {
               onClick={() => {
                 updateTalen(item.titlePtBr, item.descriptionPtBr, adv.value, adv.type) 
               }}
-              className={`${dataSheet.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value) ? 'bg-black border-red-500' : 'border-white '} mt-3 pt-3 border-2 p-4 cursor-pointer`}
+              className={`${dataSheet.data.advantagesAndFlaws.talens.find((item2: any) => item2.name === item.titlePtBr && item2.type === adv.type && item2.value === adv.value) ? 'bg-black border-red-500' : 'border-white '} mt-3 pt-3 border-2 p-4 cursor-pointer`}
             >
               <p>Custo do { adv.type } - { adv.value }</p>
             </div>

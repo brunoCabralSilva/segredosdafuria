@@ -1,4 +1,4 @@
-import { addDoc, arrayUnion, collection, doc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
+import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 
@@ -28,6 +28,23 @@ export const getPlayersBySession = async (sessionId: string, setShowMessage: any
   }
 };
 
+export const getPlayerById = async (id: string, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const docRef = doc(db, 'players', id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) return docSnap.data();
+    else {
+      setShowMessage({ show: true, text: 'Jogador não encontrado.' });
+      return null;
+    }
+  } catch (err) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar o jogador: ' + err });
+    return null;
+  }
+};
+
+
 export const getPlayerByEmail = async (sessionId: string, email: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
@@ -44,30 +61,52 @@ export const getPlayerByEmail = async (sessionId: string, email: string, setShow
   }
 };
 
-export const updateDataPlayer = async (sessionId: string, email: string, newData: any, setShowMessage: any) => {
+export const updateDataPlayer = async (
+  id: string,
+  newData: any,
+  setShowMessage: any
+) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'players');
-    const q = query(collectionRef, where('sessionId', '==', sessionId));
+    const docRef = doc(db, 'players', id);
     await runTransaction(db, async (transaction) => {
-      const querySnapshot = await getDocs(q);
-      if (querySnapshot.empty) {
-        setShowMessage({ show: true, text: 'Sessão não encontrada.' });
+      const docSnap = await transaction.get(docRef);
+      if (!docSnap.exists()) {
+        setShowMessage({ show: true, text: 'Jogador não encontrado.' });
         return;
       }
-      const dataDoc = querySnapshot.docs[0];
-      const docRef = doc(db, 'players', dataDoc.id);
-      const data = dataDoc.data();
-      const playerIndex = data.list.findIndex((item: any) => item.email === email);  
-      if (playerIndex !== -1) {
-        data.list[playerIndex].data = newData;
-        transaction.update(docRef, { list: data.list });
-      } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
+      transaction.update(docRef, newData);
     });
   } catch (err: any) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err.message });
+    setShowMessage({
+      show: true,
+      text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err.message,
+    });
   }
-};
+}
+ 
+  // try {
+  //   const db = getFirestore(firebaseConfig);
+  //   const collectionRef = collection(db, 'players');
+  //   const q = query(collectionRef, where('sessionId', '==', sessionId));
+  //   await runTransaction(db, async (transaction) => {
+  //     const querySnapshot = await getDocs(q);
+  //     if (querySnapshot.empty) {
+  //       setShowMessage({ show: true, text: 'Sessão não encontrada.' });
+  //       return;
+  //     }
+  //     const dataDoc = querySnapshot.docs[0];
+  //     const docRef = doc(db, 'players', dataDoc.id);
+  //     const data = dataDoc.data();
+  //     const playerIndex = data.list.findIndex((item: any) => item.email === email);  
+  //     if (playerIndex !== -1) {
+  //       data.list[playerIndex].data = newData;
+  //       transaction.update(docRef, { list: data.list });
+  //     } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
+  //   });
+  // } catch (err: any) {
+  //   setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err.message });
+  // }
 
 export const updateValueOfSheet = async (setShowMessage: any) => {
   try {
@@ -104,7 +143,7 @@ export const updateValueOfSheet = async (setShowMessage: any) => {
   }
 };
 
-export const updateDataWithRage = async (sessionId: string, email: string, newData: any, nameForm: string, setShowMessage: any) => {
+export const updateDataWithRage = async (sessionId: string, email: string, sheetId: string, newData: any, nameForm: string, setShowMessage: any) => {
   try {
     let numberOfChecks = 1;
     if (nameForm === 'Crinos') numberOfChecks = 2;
@@ -115,10 +154,10 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
       if (value >= 6) success += 1;
       resultOfRage.push(value);
     }
-    const newRage = newData.rage - (resultOfRage.length - success);
-    if (newRage < 0) newData.rage = 0;
+    const newRage = newData.data.rage - (resultOfRage.length - success);
+    if (newRage < 0) newData.data.rage = 0;
 
-    newData.rage = newRage;
+    newData.data.rage = newRage;
 
     let textNumberofChecks = '';
     let textActualRage = '';
@@ -127,11 +166,11 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
     if (numberOfChecks === 2) {
       textNumberofChecks = 'Foram realizados dois Testes de Fúria';
       if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a Fúria foi mantida.';
-      else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + newData.rage + '.'
-      else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + newData.rage + '.';
+      else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.'
+      else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + newData.data.rage + '.';
     } else {
       textNumberofChecks = 'Foi realizado um Teste de Fúria';
-      if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A Fúria foi reduzida para ' + newData.rage + '.';
+      if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.';
       else textActualRage = 'Obteve sucesso no Teste. A fúria foi mantida.';
     }
     await registerMessage(
@@ -140,7 +179,7 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
         message: textNumberofChecks + textForm,
         rollOfRage: resultOfRage,
         result: textActualRage,
-        rage: newData.rage,
+        rage: newData.data.rage,
         success,
         type: 'rage-check',
       },
@@ -148,22 +187,14 @@ export const updateDataWithRage = async (sessionId: string, email: string, newDa
       setShowMessage,
     );
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'players');
-    const q = query(collectionRef, where('sessionId', '==', sessionId));
+    const docRef = doc(db, 'players', sheetId);
     await runTransaction(db, async (transaction) => {
-      const querySnapshot = await getDocs(q);
-      if (querySnapshot.empty) {
-        setShowMessage({ show: true, text: 'Sessão não encontrada.' });
+      const docSnap = await transaction.get(docRef);
+      if (!docSnap.exists()) {
+        setShowMessage({ show: true, text: 'Jogador não encontrado.' });
         return;
       }
-      const dataDoc = querySnapshot.docs[0];
-      const docRef = doc(db, 'players', dataDoc.id);
-      const data = dataDoc.data();
-      const playerIndex = data.list.findIndex((item: any) => item.email === email);
-      if (playerIndex !== -1) {
-        data.list[playerIndex].data = newData;
-        transaction.update(docRef, { list: data.list });
-      } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
+      transaction.update(docRef, { ...newData });
     });
   } catch (err) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err });
@@ -174,15 +205,11 @@ export const addNewSheet = async (sessionId: string, sheet: any, setShowMessage:
   try {
     const db = getFirestore(firebaseConfig);
     const sessionsCollectionRef = collection(db, 'players');
-    const q = query(sessionsCollectionRef, where('sessionId', '==', sessionId));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) throw new Error('Sessão não encontrada');
-    const docRef = querySnapshot.docs[0].ref;
-    await runTransaction(db, async (transaction) => {
-      transaction.update(docRef, { list: arrayUnion(sheet) });
-    });
-  } catch(error: any) {
-    setShowMessage('Ocorreu um erro ao criar uma nova Ficha: ' + error);
+    const newDoc = { sessionId: sessionId, ...sheet };
+    await addDoc(sessionsCollectionRef, newDoc);
+    setShowMessage('Nova ficha criada com sucesso');
+  } catch (error: any) {
+    setShowMessage('Ocorreu um erro ao criar uma nova Ficha: ' + error.message);
   }
 };
 
@@ -212,35 +239,3 @@ export const removePlayerFromSession = async (sessionId: string, email: string, 
     setShowMessage({ show: true, text: 'Ocorreu um erro ao remover o jogador: ' + error.message });
   }
 };
-
-// export const updateAllPlayers = async (setShowMessage: any) => {
-//   try {
-//     const db = getFirestore(firebaseConfig);
-//     const collectionRef = collection(db, 'players');
-//     const querySnapshot = await getDocs(collectionRef);
-//     if (querySnapshot.empty) {
-//       setShowMessage({ show: true, text: 'Nenhum jogador encontrado.' });
-//       return;
-//     }
-//     await runTransaction(db, async (transaction) => {
-//       querySnapshot.forEach((playerDoc) => {
-//         const playerData = playerDoc.data();
-//         const docRef = doc(db, 'players', playerDoc.id);
-//         if (Array.isArray(playerData.list)) {
-//           const updatedList = playerData.list.map((item: any) => {
-//             return { 
-//               ...item,
-//               data: {
-//                 ...item.data,
-//                 favorsAndBans: item.favorsAndBans || [] }
-//               };
-//           });
-//           transaction.update(docRef, { list: updatedList });
-//         }
-//       });
-//     });
-//     setShowMessage({ show: true, text: 'Todos os jogadores foram atualizados com sucesso.' });
-//   } catch (err: any) {
-//     setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os jogadores: ' + err.message });
-//   }
-// };
