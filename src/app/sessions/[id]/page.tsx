@@ -49,7 +49,6 @@ export default function SessionId() {
     resetPopups,
     setPlayers,
     setSession,
-    setListNotification,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
     addFavorAndBan,

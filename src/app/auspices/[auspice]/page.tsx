@@ -7,8 +7,11 @@ import { IAuspice } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from '@/context/context';
 import Nav from '@/components/nav';
+import { useParams } from 'next/navigation';
 
-export default function Auspice({ params } : { params: { auspice: String } }) {
+export default function Auspice() {
+  const params = useParams();
+  const auspice = params?.auspice as string;
   const [isLoading, setIsLoading] = useState(true);
   const [dataAuspice, setDataAuspice] = useState<IAuspice>();
   const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
@@ -16,7 +19,7 @@ export default function Auspice({ params } : { params: { auspice: String } }) {
   useEffect(() => {
     resetPopups();
     const findAuspice: IAuspice | undefined = listAuspices
-      .find((ausp: IAuspice) => params.auspice === ausp.name.toLowerCase()
+      .find((ausp: IAuspice) => auspice === ausp.name.toLowerCase()
     );
     setDataAuspice(findAuspice);
   // eslint-disable-next-line react-hooks/exhaustive-deps

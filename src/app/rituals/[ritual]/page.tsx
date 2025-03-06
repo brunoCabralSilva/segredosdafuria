@@ -6,16 +6,19 @@ import listRituals from '../../../data/rituals.json';
 import { IRitual } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from "@/context/context";
+import { useParams } from "next/navigation";
 
 
-export default function Ritual({ params } : { params: { ritual: String } }) {
+export default function Ritual() {
+  const params = useParams();
+  const ritual = params?.ritual as string;
   const [dataRitual, setDataRitual] = useState<IRitual>();
   const { showFeedback, setShowFeedback, setListOfRituais, resetPopups } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
     const findRitual: any | undefined = listRituals
-      .find((rtl: any) => params.ritual === rtl.id);
+      .find((rtl: any) => ritual === rtl.id);
     setDataRitual(findRitual);
     setListOfRituais(listRituals);
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,10 +1,7 @@
 'use client'
-import { GiD10 } from "react-icons/gi";
 import { IoIosSend } from "react-icons/io";
-import { FaFile } from "react-icons/fa";
 import { FaEraser } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { FaAngleDown } from "react-icons/fa6";
 import { useContext, useState } from 'react';
 import contexto from '@/context/context';
 import { registerMessage } from "../firebase/messagesAndRolls";
@@ -13,6 +10,9 @@ export default function SessionBar() {
   const [text, setText] = useState('');
   const {
     sessionId,
+    session,
+    email,
+    setShowDeleteHistoric,
     scrollToBottom,
     setShowMessage,
     showMenuSession, setShowMenuSession,
@@ -65,6 +65,21 @@ export default function SessionBar() {
               <FaPlus />
             </button>
           </div>
+          { 
+            session.gameMaster === email &&
+              <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+                <button
+                  className="p-2"
+                  title="Apagar o histórico de conversas"
+                  onClick={ async () => {
+                    setShowDeleteHistoric(true);
+                    scrollToBottom();
+                  }}
+                >
+                  <FaEraser />
+                </button>
+              </div>
+            }
         </div>
       </div>
     </div>

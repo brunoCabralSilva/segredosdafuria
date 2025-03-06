@@ -126,9 +126,9 @@ export default function MenuPlayer() {
             { sheetId !== '' && <option value={'forms'}>Formas ( Atual: { dataSheet.data.form } )</option> }
             <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>
             <option value={'favor-ban'}>Favores e Proibições</option>
-            { sheetId !== '' && <option value={'session'}>Sessão</option> }
             { sheetId !== '' && <option value={'background'}>Background</option> }
             <option value={'anotations'}>Anotações</option>
+            <option value={'session'}>Sessão</option>
           </select>
             { returnDataSheet() }
           </div>

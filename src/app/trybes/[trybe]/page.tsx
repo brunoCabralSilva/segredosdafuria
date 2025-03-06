@@ -7,8 +7,11 @@ import listTrybes from '../../../data/trybes.json';
 import { IArchetypes, ITrybe } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from '@/context/context';
+import { useParams } from 'next/navigation';
 
-export default function Trybe({ params } : { params: { trybe: String } }) {
+export default function Trybe() {
+  const params = useParams();
+  const trybe = params?.trybe as string;
   const [isLoading, setIsLoading] = useState(true);
   const [dataTrybe, setDataTrybe] = useState<ITrybe>();
   const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto)
@@ -16,7 +19,7 @@ export default function Trybe({ params } : { params: { trybe: String } }) {
   useEffect(() => {
     resetPopups();
     const findTrybe: ITrybe | undefined = listTrybes
-      .find((trb: ITrybe) => params.trybe
+      .find((trb: ITrybe) => trybe
       .replace(/-/g, ' ') === trb.nameEn
     );
     setDataTrybe(findTrybe);

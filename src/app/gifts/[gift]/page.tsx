@@ -8,15 +8,18 @@ import { IGift, ITypeGift } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { useParams } from "next/navigation";
 
-export default function Gift({ params } : { params: { gift: String } }) {
+export default function Gift() {
+  const params = useParams();
+  const gift = params?.gift as string;
   const [dataGift, setDataGift] = useState<IGift>();
   const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
     const findGift: IGift | undefined = listGifts
-      .find((gft: IGift) => params.gift === gft.id);
+      .find((gft: IGift) => gift === gft.id);
     setDataGift(findGift);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

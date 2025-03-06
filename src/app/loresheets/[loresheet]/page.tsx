@@ -6,15 +6,18 @@ import listLoresheets from '../../../data/loresheets.json';
 import { IHabilities, ILoresheet } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from "@/context/context";
+import { useParams } from "next/navigation";
 
-export default function Loresheet({ params } : { params: { loresheet: String } }) {
+export default function Loresheet() {
+  const params = useParams();
+  const loresheet = params?.loresheet as string;
   const [dataLoresheet, setDataLoresheet] = useState<ILoresheet>();
   const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
     const findLoresheet: ILoresheet | undefined = listLoresheets
-      .find((lrsht: ILoresheet) => Number(params.loresheet) === lrsht.id);
+      .find((lrsht: ILoresheet) => Number(loresheet) === lrsht.id);
     setDataLoresheet(findLoresheet);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

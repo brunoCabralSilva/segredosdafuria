@@ -7,8 +7,11 @@ import listForms from '../../../data/forms.json';
 import { IForm } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from "@/context/context";
+import { useParams } from "next/navigation";
 
-export default function Form({ params } : { params: { form: String } }) {
+export default function Form() {
+  const params = useParams();
+  const form = params?.form as string;
   const [isLoading, setIsLoading] = useState(true);
   const [dataForm, setDataForm] = useState<IForm>();
   const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
@@ -19,7 +22,7 @@ export default function Form({ params } : { params: { form: String } }) {
       .find((frm: IForm) => {
         if (params.form === 'hominideo') {
           return 'hominídeo' === frm.name.toLowerCase()
-        } return params.form === frm.name.toLowerCase()
+        } return form === frm.name.toLowerCase()
       }
     );
     setDataForm(findForm);
