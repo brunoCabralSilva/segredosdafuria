@@ -15,18 +15,16 @@ export const createPlayersData = async (sessionId: string, setShowMessage: any) 
 export const getPlayersBySession = async (sessionId: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'players'); 
-    const q = query(collectionRef, where('sessionId', '==', sessionId));
-    const querySnapshot = await getDocs(q);
-    if (!querySnapshot.empty) {
-      const dataDoc = querySnapshot.docs[0];
-      const data = dataDoc.data();
-      return data.list;
-    } return [];
+    const sessionRef = doc(db, 'sessions', sessionId);
+    const sessionSnap = await getDoc(sessionRef);
+    if (sessionSnap.exists()) return sessionSnap.data().players;
+    return null;
   } catch (err) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar os usuários da Sessão: ' + err });
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar a Sessão: ' + err });
+    return null;
   }
 };
+
 
 export const getPlayerById = async (id: string, setShowMessage: any) => {
   try {

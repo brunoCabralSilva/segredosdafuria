@@ -17,23 +17,41 @@ import RitualRoll from "./ritualRoll";
 import Touchstones from "../player/touchstones";
 import Principles from "../player/principles";
 import FavorsAndBans from "../player/favorsAndBans";
-import Relationship from "./relationship";
 import Notifications from "../player/notifications";
 import Players from "../player/players";
+import firebaseConfig from "@/firebase/connection";
+import { collection, getFirestore, query, where } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function MenuPlayer() {
   const [optionSelect, setOptionSelect] = useState('players');
   const {
     dataSheet, setDataSheet,
+    session,
+    email,
     players,
     showHarano, setShowHarano,
     showHauglosk, setShowHauglosk,
     showGiftRoll, setShowGiftRoll,
     showRitualRoll, setShowRitualRoll,
-    sheetId, setSheetId,
+    sheetId,
+    listNotification,
+    setListNotification,
     setShowEvaluateSheet,
     setShowMenuSession,
   } = useContext(contexto);
+
+  const db = getFirestore(firebaseConfig);
+  const sessionRef = collection(db, 'notifications');
+  const querySession = query(sessionRef, where('sessionId', '==', session.id));
+  const [notifications] = useCollectionData(querySession, { idField: 'id' } as any);
+
+  useEffect(() => {
+    if (notifications) {
+      const allLists = notifications.flatMap(notification => notification.list || []);
+      setListNotification(allLists);
+    }
+  }, [notifications, setListNotification]);
 
   useEffect(() => {
     if (sheetId && optionSelect === 'players') {
@@ -94,7 +112,10 @@ export default function MenuPlayer() {
             className="w-full mb-2 border border-white p-3 cursor-pointer bg-black text-white flex items-center justify-center font-bold text-center"
         >
             <option value={'players'}>Personagens</option>
-            <option value={'notifications'}>Notificações</option>
+            {
+              email === session.gameMaster &&
+              <option value={'notifications'}>Notificações { listNotification.length > 0 ? '(' + listNotification.length + ')' : ''}</option>
+            }
             { sheetId !== '' && <option value={'general'}>Geral</option> }
             { sheetId !== '' && <option value={'attributes'}>Atributos</option> }
             { sheetId !== '' && <option value={'skills'}>Habilidades</option> }

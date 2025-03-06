@@ -68,7 +68,7 @@ export default function Background(props: { type: string }) {
             onChange={(e) => typeText(e)}
           />
           : <div
-              className={`text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 ${text.length < 720 && 'h-full'} cursor-pointer mb-5`}
+              className={`text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 ${text && text.length < 720 && 'h-full'} ${!text && 'h-full'} cursor-pointer mb-5`}
               onClick={() => setTextArea(true)} 
             >
             { text }

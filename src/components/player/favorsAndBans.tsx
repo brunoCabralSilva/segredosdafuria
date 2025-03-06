@@ -32,13 +32,16 @@ export default function FavorsAndBans() {
   return(
     <div className="flex flex-col w-full h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
-        <button
-          type="button"
-          onClick={() => setAddFavorAndBan({ show: true, data: {}, type: dataSheet.email === email ? 'master': 'player' }) }
-          className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold"
-        >
-          Adicionar Novo Favor ou Proibição
-        </button>
+        {
+          session.gameMaster === email &&
+          <button
+            type="button"
+            onClick={() => setAddFavorAndBan({ show: true, data: {}, type: dataSheet.email === email ? 'master': 'player' }) }
+            className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold"
+          >
+            Adicionar Novo Favor ou Proibição
+          </button>
+        }
         <div className="grid grid-cols-1 gap-3 pb-5">
           {
             dataSheet && dataSheet.data &&
@@ -86,35 +89,6 @@ export default function FavorsAndBans() {
                         />
                       </div>
                     }
-                  </div>
-                  <div className="text-justify pt-2">
-                    { item.description }
-                  </div>
-                </div>
-              ))
-          }
-          {
-            dataSheet && dataSheet.data && dataSheet.data.favorsAndBans
-              .map((item: any, index: number) => (
-                <div key={index} className="pb-3 border-white border-2 p-4">
-                  <div className="flex w-full justify-between items-center">
-                    <div>Favor / Proibição imposta por Jogadores ({ item.order })</div>
-                    <div className="flex items-center gap-1">
-                      <FaRegEdit
-                        onClick={(e: any) => {
-                          setAddFavorAndBan({ show: true, data: item, type: 'player' });
-                          e.stopPropagation();
-                        }}
-                        className="text-2xl text-white cursor-pointer"
-                      />
-                      <MdDelete
-                        onClick={(e: any) => {
-                          setShowDeleteFavorAndBan({ show: true, name: item.order, type: 'player' });
-                          e.stopPropagation();
-                        }}
-                        className="text-2xl text-white cursor-pointer"
-                      />
-                    </div>
                   </div>
                   <div className="text-justify pt-2">
                     { item.description }

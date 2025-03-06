@@ -65,7 +65,8 @@ export const createSession = async (
       anotations: '',
       description,
       principles: [],
-      favorsAndBans: []
+      favorsAndBans: [],
+      players: [],
     });
     const newSessionRef = doc(db, 'sessions', newSession.id);
     await runTransaction(db, async (transaction) => {

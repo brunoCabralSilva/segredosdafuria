@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation";
-import React, { use, useContext, useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { collection, doc, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { useCollection, useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
@@ -12,7 +12,7 @@ import MenuPlayer from "@/components/popup/menuPlayer";
 import MenuRoll from "@/components/popup/menuRoll";
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
-import { getPlayerByEmail, getPlayersBySession } from "@/firebase/players";
+import { getPlayersBySession } from "@/firebase/players";
 import { getSessionById } from "@/firebase/sessions";
 import firestoreConfig from "@/firebase/connection";
 import MessageToUser from "@/components/popup/messageToUser";
@@ -49,6 +49,7 @@ export default function SessionId() {
     resetPopups,
     setPlayers,
     setSession,
+    setListNotification,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
     addFavorAndBan,
@@ -125,7 +126,7 @@ export default function SessionId() {
         if (sessionData) {
           const players = await getPlayersBySession(id, setShowMessage);
           if (sessionData.gameMaster === authData.email) setGameMaster(true);
-          else if (players.find((player: any) => player.email === authData.email)) {
+          else if (players.find((player: any) => player === authData.email)) {
             setGameMaster(false);
           } else {
             setShowMessage({ show: true, text: 'você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.' });

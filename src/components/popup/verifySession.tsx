@@ -47,8 +47,8 @@ export default function VerifySession() {
           } else {
             let auth = false;
             const getPlayers = await getPlayersBySession(dataSession.id, setShowMessage);
-            getPlayers.forEach((player: { email: string }) => {
-              if (player.email === email) auth = true;
+            getPlayers.forEach((player: any) => {
+              if (player === email) auth = true;
             });
             if (auth) {
               router.push(`/sessions/${dataSession.id}`);

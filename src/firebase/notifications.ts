@@ -110,39 +110,29 @@ export const removeNotification = async (sessionId: string, message: string, set
 };
 
 export const approveUser = async (notification: any, session: any, setShowMessage: any) => {
-  try {
-    const db = getFirestore(firebaseConfig);
-    const playersCollectionRef = collection(db, 'players');
-    const querySession = query(playersCollectionRef, where("sessionId", "==", session.id));
-    const querySnapshot = await getDocs(querySession);
-    if (querySnapshot.empty) {
-      setShowMessage({ show: true, text: 'Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente.' });
+    try {
+      const db = getFirestore(firebaseConfig);
+      const sessionsCollectionRef = collection(db, 'sessions');
+      const sessionDocRef = doc(sessionsCollectionRef, session.id);
+      await runTransaction(db, async (transaction) => {
+        const sessionDocSnapshot = await getDoc(sessionDocRef);
+        if (sessionDocSnapshot.exists()) {
+          transaction.update(sessionDocRef, { players: arrayUnion(notification.email) });
+          await registerMessage(
+            session.id,
+            {
+              message: `${capitalize(notification.user)} iniciou sua jornada nesta Sessão! Seja bem-vindo!`,
+              type: 'notification',
+            },
+            null,
+            setShowMessage,
+          );
+          await removeNotification(session.id, notification.message, setShowMessage);
+        } else throw new Error('Sessão não encontrada');
+      });
+    } catch (err: any) {
+      setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados da Sessão: ' + err.message });
     }
-    const playerDocRef = querySnapshot.docs[0].ref;
-    await runTransaction(db, async (transaction: any) => {
-      const playerDocSnapshot = await transaction.get(playerDocRef);
-      const playerData = playerDocSnapshot.data();
-      const findByEmail = playerData.list.find((user: any) => user.email === notification.email);
-      if (!findByEmail) {
-        const dateMessage = await getOfficialTimeBrazil();
-        const sheet = sheetStructure(notification.email, notification.user, dateMessage);
-        transaction.update(playerDocRef, { list: arrayUnion(sheet) });
-        await registerMessage(
-          session.id,
-          {
-            message: `${capitalize(notification.user)} iniciou sua jornada nesta Sessão! Seja bem-vindo!`,
-            type: 'notification',
-          },
-          null,
-          setShowMessage,
-        );
-        await removeNotification(session.id, notification.message, setShowMessage);
-      } else {
-        setShowMessage({ show: true, text: 'O usuário já está na sessão.' });
-      }
-    });
-  } catch (error) {
-    setShowMessage({ show: true, text: "Ocorreu um erro ao tentar aprovar usuário: " + error });
-  }
+
 };
 
