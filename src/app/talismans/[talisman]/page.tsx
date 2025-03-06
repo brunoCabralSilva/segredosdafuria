@@ -6,15 +6,18 @@ import listTalismans from '../../../data/talismans.json';
 import { ITalisman } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from "@/context/context";
+import { useParams } from "next/navigation";
 
-export default function Talisman({ params } : { params: { talisman: String } }) {
+export default function Talisman() {
+  const params = useParams();
+  const talisman = params?.talisman as string;
   const [dataTalisman, setDataTalisman] = useState<ITalisman>();
   const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
     const findTalisman: ITalisman | undefined = listTalismans
-      .find((tlsmn: ITalisman) => params.talisman === tlsmn.id);
+      .find((tlsmn: ITalisman) => talisman === tlsmn.id);
     setDataTalisman(findTalisman);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
