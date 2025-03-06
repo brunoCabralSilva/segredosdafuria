@@ -24,7 +24,7 @@ export function ClawsOfFrozenDeath() {
     if (dataSheet.data.rage >= 1) {
       let roll = await rollTestOfUser();
       if (dataSheet.data.form !== 'Crinos') {
-        const rageTest = await calculateRageCheck(sessionId, email, setShowMessage);
+        const rageTest = await calculateRageCheck(sheetId, setShowMessage);
         dataSheet.data.rage = rageTest?.rage;
         await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'rage-with-test', rageResults: rageTest, results: roll }, email, setShowMessage);
