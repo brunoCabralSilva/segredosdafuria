@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import AutomatedRoll from "./automatedRoll";
 import ManualRoll from "./manualRoll";
-import AutomatedRollMaster from "./automatedRollMaster";
 
 export default function MenuRoll() {
   const { setShowMenuSession, session, email } = useContext(contexto);
