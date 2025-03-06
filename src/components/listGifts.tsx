@@ -31,7 +31,7 @@ export default function ListGifts() {
                   item.belonging.map((trybe: ITypeGift, index: number) => (
                     <Image
                       key={ index }
-                      src={ `/images/glifs/${capitalizeFirstLetter(trybe.type)}.png` }
+                      src={ `/images/gifts/${capitalizeFirstLetter(trybe.type)}.png` }
                       alt={`Glifo ${capitalizeFirstLetter(trybe.type)}`}
                       className={`${trybe.type !== 'global' ? 'h-8' : ''} w-10 object-cover object-center`}
                       width={ 1200 }

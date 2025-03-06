@@ -54,9 +54,17 @@ export default function Forms() {
               <Link
                 key={ index }
                 href={`/forms/${forms.name.replace('í', 'i').toLowerCase()}`}
-                className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer h-15vh"
+                className="border-white border-2 p-3 flex items-center justify-center flex-col bg-trybes-background bg-center bg-opacity-10 relative cursor-pointer h-20vh"
               >
               <div className="absolute w-full h-full bg-black/80" />
+                <Image
+                    key={ index }
+                    src={ `/images/forms/${forms.name}-white.png` }
+                    alt={`Glifo ${forms.name}`}
+                    className={`h-12' w-20 object-cover object-center mb-3`}
+                    width={ 1200 }
+                    height={ 800 }
+                  />
                 <p className="relative font-bold text-center">
                   { forms.name }
                 </p>

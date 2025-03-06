@@ -88,7 +88,7 @@ export default function AdvOrFlawAdded(props: { type: string }) {
         type === 'advantage'
         && dataSheet.data.advantagesAndFlaws.loresheets.length > 0
         && <div className="py-2">
-            <p>Loresheets</p>
+            <p>Loresheets 2</p>
             <hr />
           </div>
       }

@@ -63,29 +63,49 @@ export default function AdvantagesAndFlaws() {
     <div className="flex flex-col w-full h-75vh overflow-y-auto">
       <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
         { sumAllAdvantagesAndFlaws() }
-        <div className="w-full mt-5 mb-3">Méritos e Backgrounds</div>
         {
-          dataSheet.data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
-            <AdvAdded key={index} item={item} />
-          ))
+          dataSheet && dataSheet.data && dataSheet.data.advantagesAndFlaws && dataSheet.data.advantagesAndFlaws.advantages && dataSheet.data.advantagesAndFlaws.advantages.length > 0 &&
+          <div>
+            <div className="w-full mt-5 mb-3">Méritos e Backgrounds</div>
+            {
+              dataSheet.data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
+                <AdvAdded key={index} item={item} />
+              ))
+            }
+          </div>
         }
-        <div className="w-full mt-5 mb-3">Talismãs</div>
         {
-          dataSheet.data.advantagesAndFlaws.talens.map((item: any, index: number) => (
-            <AdvTalensAdded key={index} item={item} />
-          ))
+          dataSheet && dataSheet.data && dataSheet.data.advantagesAndFlaws && dataSheet.data.advantagesAndFlaws.talens && dataSheet.data.advantagesAndFlaws.talens.length > 0 &&
+          <div>
+            <div className="w-full mt-5 mb-3">Talismãs</div>
+            {
+              dataSheet.data.advantagesAndFlaws.talens.map((item: any, index: number) => (
+                <AdvTalensAdded key={index} item={item} />
+              ))
+            }
+          </div>
         }
-        <div className="w-full mt-5 mb-3">Loresheets</div>
         {
-          dataSheet.data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
-            <AdvLoresheetsAdded key={index} item={item} />
-          ))
+          dataSheet && dataSheet.data && dataSheet.data.advantagesAndFlaws && dataSheet.data.advantagesAndFlaws.loresheets && dataSheet.data.advantagesAndFlaws.loresheets.length > 0 &&
+          <div>
+            <div className="w-full mt-5 mb-3">Loresheets</div>
+            {
+              dataSheet.data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
+                <AdvLoresheetsAdded key={index} item={item} />
+              ))
+            }
+          </div>
         }
-        <div className="w-full mt-5 mb-3">Defeitos</div>
         {
-          dataSheet.data.advantagesAndFlaws.flaws.map((item: any, index: number) => (
-            <AdvAdded key={index} item={item} />
-          ))
+          dataSheet && dataSheet.data && dataSheet.data.advantagesAndFlaws && dataSheet.data.advantagesAndFlaws.flaws && dataSheet.data.advantagesAndFlaws.flaws.length > 0 &&
+          <div>
+            <div className="w-full mt-5 mb-3">Defeitos</div>
+            {
+              dataSheet.data.advantagesAndFlaws.flaws.map((item: any, index: number) => (
+                <AdvAdded key={index} item={item} />
+              ))
+            }
+          </div>
         }
       </div>
       { showAllAdvantages && <AddAdvOrFlaw type="advantage" />}
