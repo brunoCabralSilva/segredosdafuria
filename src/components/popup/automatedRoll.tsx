@@ -6,7 +6,6 @@ import { authenticate } from "@/firebase/authenticate";
 import { useRouter } from "next/navigation";
 import { registerAutomatedRoll } from "@/firebase/messagesAndRolls";
 import { getPlayerByEmail } from "@/firebase/players";
-import { playerSheet } from "@/firebase/utilities";
 
 export default function AutomatedRoll() {
   const [atrSelected, setAtrSelected] = useState<string>('0');
@@ -14,7 +13,7 @@ export default function AutomatedRoll() {
   const [renSelected, setRenSelected] = useState<string>('0');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
-  const [dataUser, setDataUser] = useState<any>(playerSheet);
+  // const [dataUser, setDataUser] = useState<any>(playerSheet);
   const [playerSelected, setPlayerSelected] = useState<any>('0');
   const { setShowMenuSession, sessionId, setShowMessage, players } = useContext(contexto);
   const router = useRouter();
@@ -26,7 +25,7 @@ export default function AutomatedRoll() {
     if (auth && auth.email) {
       setPlayerSelected(auth.email);
       const data = await getPlayerByEmail(sessionId, auth.email, setShowMessage);
-      setDataUser(data.data);
+      // setDataUser(data.data);
     } else router.push('/login');
   }
 
@@ -78,7 +77,7 @@ export default function AutomatedRoll() {
                   key={index}
                   value={item.value}
                 >
-                  { item.namePtBr } ({ dataUser.attributes[item.value] })
+                  {/* { item.namePtBr } ({ dataUser.attributes[item.value] }) */}
                 </option>
               ))
             }
@@ -114,7 +113,7 @@ export default function AutomatedRoll() {
                     value={item.value}
                   >
                     { item.namePtBr }
-                    ({ dataUser.skills[item.value].value })
+                    {/* ({ dataUser.skills[item.value].value }) */}
                   </option>
                 ))
             }
@@ -148,7 +147,7 @@ export default function AutomatedRoll() {
                   key={index}
                   value={item.value}
                 >
-                  { item.namePtBr } ({ dataUser[item.value] })
+                  {/* { item.namePtBr } ({ dataUser[item.value] }) */}
                 </option>
               ))
             }

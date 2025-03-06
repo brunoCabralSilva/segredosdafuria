@@ -9,13 +9,12 @@ export default function ResetPlayer() {
 	const {
     setShowMessage,
     setShowResetPlayer,
-    session,
-    showPlayer,
+    sheetId,
   } = useContext(contexto);
 
   const resetSheet = async () => {
     try {
-      await updateDataPlayer(session.id, showPlayer.email, playerSheet, setShowMessage);
+      await updateDataPlayer(sheetId, playerSheet, setShowMessage);
       setShowMessage({ show: true, text: "A ficha do Jogador foi redefinida!" });
       setShowResetPlayer({show: false, email: ''})
     } catch(error) {

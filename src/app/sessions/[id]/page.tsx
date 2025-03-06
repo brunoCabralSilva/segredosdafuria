@@ -16,7 +16,6 @@ import { getPlayersBySession } from "@/firebase/players";
 import { getSessionById } from "@/firebase/sessions";
 import firestoreConfig from "@/firebase/connection";
 import MessageToUser from "@/components/popup/messageToUser";
-import PlayerSheet from "@/components/popup/playerSheet";
 import DeleteHistoric from "@/components/popup/deleteHistoric";
 import RemovePlayer from "@/components/popup/removePlayer";
 import ResetPlayer from "@/components/popup/resetPlayer";
@@ -152,7 +151,6 @@ export default function SessionId() {
   return (
     <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
       { showMessage.show && <MessageToUser /> }
-      { showPlayer.show && <PlayerSheet /> }
       { showDeleteHistoric && <DeleteHistoric /> }
       { showResetPlayer.show && <ResetPlayer /> }
       { showRemovePlayer.show && <RemovePlayer /> }
