@@ -5,10 +5,9 @@ import AutomatedRoll from "./automatedRoll";
 import ManualRoll from "./manualRoll";
 import AutomatedRollMaster from "./automatedRollMaster";
 
-export default function MenuRoll(props: { gameMaster: boolean }) {
-  const { gameMaster } = props;
-  const [optionRadio, setOptionRadio] = useState<string>('automated');
-  const { setShowMenuSession } = useContext(contexto);
+export default function MenuRoll() {
+  const { setShowMenuSession, session, email } = useContext(contexto);
+  const [optionRadio, setOptionRadio] = useState<string>(session.gameMaster === email ? 'manual': 'automated');
   return(
     <div className="w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto text-white">
       <div className="w-full flex justify-end my-3">
@@ -33,7 +32,7 @@ export default function MenuRoll(props: { gameMaster: boolean }) {
         </div>
         {
           optionRadio === 'automated'
-          ? gameMaster ? <AutomatedRollMaster /> : <AutomatedRoll />
+          ? <AutomatedRoll />
           : <ManualRoll />
         }
     </div>

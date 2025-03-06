@@ -24,7 +24,6 @@ import { collection, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 export default function MenuPlayer() {
-  const [optionSelect, setOptionSelect] = useState('players');
   const {
     dataSheet, setDataSheet,
     session,
@@ -34,6 +33,7 @@ export default function MenuPlayer() {
     showHauglosk, setShowHauglosk,
     showGiftRoll, setShowGiftRoll,
     showRitualRoll, setShowRitualRoll,
+    optionSelect, setOptionSelect,
     sheetId,
     listNotification,
     setListNotification,
@@ -63,7 +63,7 @@ export default function MenuPlayer() {
 
 	const returnDataSheet = () => {
     switch(optionSelect) {
-      case ('players'): return (<Players setOptionSelect={setOptionSelect} />);
+      case ('players'): return (<Players />);
       case ('notifications'): return (<Notifications />);
       case ('attributes'): return (<Attributes />);
       case ('skills'): return (<Skills />);

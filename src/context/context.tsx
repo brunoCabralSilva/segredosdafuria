@@ -105,6 +105,10 @@ interface RecipesContext {
   setShowRelationship: (state: boolean) => void,
   sheetId: string,
   setSheetId: (state: string) => void,
+  showSelectSheet: boolean,
+  setShowSelectSheet: (state: boolean) => void,
+  optionSelect: string,
+  setOptionSelect: (state: string) => void,
   //gameMaster
   session: any,
   setSession: (state: any) => void,
@@ -227,6 +231,10 @@ const initialValue: RecipesContext = {
   setShowRelationship: () => {},
   sheetId: '',
   setSheetId: () => {},
+  showSelectSheet: false,
+  setShowSelectSheet: () => {},
+  optionSelect: '',
+  setOptionSelect: () => {},
   //gameMaster
   session: {},
   setSession: () => {},

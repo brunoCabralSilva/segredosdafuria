@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import dataSheet from '../../data/sheet.json';
+import sheetData from '../../data/sheet.json';
 import { FaMinus, FaPlus } from "react-icons/fa";
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
 import { useRouter } from "next/navigation";
 import { registerAutomatedRoll } from "@/firebase/messagesAndRolls";
-import { getPlayerByEmail } from "@/firebase/players";
 
 export default function AutomatedRoll() {
   const [atrSelected, setAtrSelected] = useState<string>('0');
@@ -13,20 +12,16 @@ export default function AutomatedRoll() {
   const [renSelected, setRenSelected] = useState<string>('0');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
-  // const [dataUser, setDataUser] = useState<any>(playerSheet);
   const [playerSelected, setPlayerSelected] = useState<any>('0');
-  const { setShowMenuSession, sessionId, setShowMessage, players } = useContext(contexto);
+  const { setShowMenuSession, sheetId, sessionId, setShowMessage, dataSheet, setOptionSelect } = useContext(contexto);
   const router = useRouter();
 
   useEffect(() => { verifyUser() }, []);
   
   const verifyUser = async() => {
     const auth: any = await authenticate(setShowMessage);
-    if (auth && auth.email) {
-      setPlayerSelected(auth.email);
-      const data = await getPlayerByEmail(sessionId, auth.email, setShowMessage);
-      // setDataUser(data.data);
-    } else router.push('/login');
+    if (auth && auth.email) setPlayerSelected(auth.email);
+    else router.push('/login');
   }
 
   const disabledButton = () => {
@@ -35,6 +30,7 @@ export default function AutomatedRoll() {
 
   const rollDices = async () => {
     await registerAutomatedRoll(
+      sheetId,
       sessionId,
       playerSelected,
       atrSelected,
@@ -47,6 +43,7 @@ export default function AutomatedRoll() {
     setShowMenuSession('');
   };
 
+  if (sheetId !== '')
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
@@ -70,14 +67,14 @@ export default function AutomatedRoll() {
               Nenhum
             </option>
             {
-              dataSheet.attributes
+              sheetData.attributes
                 .map((item, index) => (
                 <option
                   className="capitalize text-center text-black"
                   key={index}
                   value={item.value}
                 >
-                  {/* { item.namePtBr } ({ dataUser.attributes[item.value] }) */}
+                  { item.namePtBr } ({ dataSheet.data.attributes[item.value] })
                 </option>
               ))
             }
@@ -104,7 +101,7 @@ export default function AutomatedRoll() {
               Nenhuma
             </option>
             {
-              dataSheet.skills
+              sheetData.skills
                 .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr))
                 .map((item, index) => (
                   <option
@@ -113,7 +110,7 @@ export default function AutomatedRoll() {
                     value={item.value}
                   >
                     { item.namePtBr }
-                    {/* ({ dataUser.skills[item.value].value }) */}
+                    ({ dataSheet.data.skills[item.value].value })
                   </option>
                 ))
             }
@@ -140,14 +137,14 @@ export default function AutomatedRoll() {
               Nenhum
             </option>
             {
-              dataSheet.renown
+              sheetData.renown
                 .map((item, index) => (
                 <option
                   className="capitalize text-center text-black"
                   key={index}
                   value={item.value}
                 >
-                  {/* { item.namePtBr } ({ dataUser[item.value] }) */}
+                  { item.namePtBr } ({ dataSheet.data[item.value] })
                 </option>
               ))
             }
@@ -218,4 +215,21 @@ export default function AutomatedRoll() {
       </button>
     </div>
   );
+  return(
+    <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
+      <div className="text-center">
+        <span className="pr-1">Você ainda não selecionou uma Ficha de Personagem para utilizar os Testes Automatizados.</span>
+        <span
+          onClick={ () => {
+            setShowMenuSession('sheet');
+            setOptionSelect('players');
+          }}
+          className="underline font-bold text-white hover:text-red-500 cursor-pointer"
+        >
+          Clique aqui
+        </span>
+        <span className="pl-1">para ser redirecionado à escolha ou criação de personagens!</span>
+      </div>
+    </div>
+  )
 }

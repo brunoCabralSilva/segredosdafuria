@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa6";
 import { useContext, useState } from 'react';
 import contexto from '@/context/context';
 import { registerMessage } from "../firebase/messagesAndRolls";
+import { GiD10 } from "react-icons/gi";
 
 export default function SessionBar() {
   const [text, setText] = useState('');
@@ -56,15 +57,30 @@ export default function SessionBar() {
           <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
             <button
               className="p-2"
-              title="Acessar o Menu da Sessão"
+              title="Realizar um teste com dados"
               onClick={() => {
-                setShowMenuSession('sheet');
+                setShowMenuSession('dices');
                 scrollToBottom();
               }}
             >
-              <FaPlus />
+              <GiD10 />
             </button>
           </div>
+          {
+            showMenuSession === '' &&
+            <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+              <button
+                className="p-2"
+                title="Acessar o Menu da Sessão"
+                onClick={() => {
+                  setShowMenuSession('sheet');
+                  scrollToBottom();
+                }}
+              >
+                <FaPlus />
+              </button>
+            </div>
+          }
           { 
             session.gameMaster === email &&
               <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">

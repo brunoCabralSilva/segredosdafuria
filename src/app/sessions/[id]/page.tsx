@@ -28,6 +28,7 @@ import DeletePrinciple from "@/components/popup/deletePrinciple";
 import AddFavorAndBan from "@/components/popup/addFavorAndBan";
 import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
 import Relationship from "@/components/popup/relationship";
+import SheetSelector from "@/components/popup/sheetSelector";
 
 export default function SessionId() {
 	const params = useParams();
@@ -50,17 +51,16 @@ export default function SessionId() {
     setSession,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
+    showSelectSheet, setShowSelectSheet,
     addFavorAndBan,
     showDeleteFavorAndBan,
     showRelationship,
     addTouchstone,
     showRemovePlayer,
-    showPlayer,
     showResetPlayer,
     showDeleteHistoric,
     showDeleteTouchstone,
     addPrinciple,
-    players,
     showDeletePrinciple,
     showEvaluateSheet,
     email,
@@ -87,17 +87,6 @@ export default function SessionId() {
   useEffect(() => {
     if (dataSession && !loadingSession) setSession(dataSession);
   }, [dataSession, loadingSession, email, setSession]);
-	
-  // const returnValues = async () => {
-  //   const auth = await authenticate(setShowMessage);
-  //   const dataSession: any = await getSessionById(id);
-  //   if (auth) {
-  //     if (dataSession.gameMaster !== auth.email) {
-  //       const player: any = await getPlayerByEmail(id, auth.email, setShowMessage);
-  //       if (player) setDataSheet(player);
-  //     }
-  //   }
-  // };
 
   useEffect(() => {
     resetPopups();
@@ -126,6 +115,7 @@ export default function SessionId() {
           if (sessionData.gameMaster === authData.email) setGameMaster(true);
           else if (players.find((player: any) => player === authData.email)) {
             setGameMaster(false);
+            setShowSelectSheet(true);
           } else {
             setShowMessage({ show: true, text: 'você não é autorizado a estar nesta sessão. Solicite a aprovação do narrador clicando na Sessão em questão.' });
             router.push('/sessions');
@@ -150,6 +140,7 @@ export default function SessionId() {
 
   return (
     <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
+      { showSelectSheet && <SheetSelector /> }
       { showMessage.show && <MessageToUser /> }
       { showDeleteHistoric && <DeleteHistoric /> }
       { showResetPlayer.show && <ResetPlayer /> }
@@ -195,7 +186,7 @@ export default function SessionId() {
             {
               showMenuSession === 'dices' &&
               <div className="w-full md:w-3/5 absolute sm:relative z-50">
-                <MenuRoll gameMaster={gameMaster} />
+                <MenuRoll />
               </div>
             }
             { showMenuSession === 'sheet' && <MenuPlayer /> }

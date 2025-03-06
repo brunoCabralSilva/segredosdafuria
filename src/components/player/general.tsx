@@ -8,17 +8,18 @@ import contexto from "@/context/context";
 import Item from "./item";
 import ItemAgravated from "./itemAgravated";
 import ResetSheet from "../popup/resetSheet";
+import { getUserByEmail } from "@/firebase/user";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function General() {
   const [input, setInput] = useState('');
   const [input2, setInput2] = useState('');
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
-  const [isGameMaster, setIsGameMaster] = useState('');
 	const {
     players,
     email,
-    dataSheet, setDataSheet,
+    dataSheet,
 		showResetSheet, setShowResetSheet,
     setShowGiftRoll,
     setShowRitualRoll,
@@ -34,7 +35,7 @@ export default function General() {
     setShowRitualRoll({ show: false, ritual: {}});
     setNewName(dataSheet.data.name);
     setNewEmail(dataSheet.email);
-  }, [])
+  }, [dataSheet])
 
   const typeName = (e: any) => {
     const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
@@ -59,7 +60,9 @@ export default function General() {
   const updateEmail = async (value: string) => {
     const findPlayer = players.find((player: any) => player.id === sheetId);
     if (findPlayer) {
+      const playerData = await getUserByEmail(value, setShowMessage);
       findPlayer.email = value;
+      findPlayer.user = capitalizeFirstLetter(playerData.firstName) + ' ' + capitalizeFirstLetter(playerData.lastName);
       const validate = /\S+@\S+\.\S+/;
       const vEmail = !validate.test(value) || value === '';
       if (vEmail) {

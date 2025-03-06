@@ -60,6 +60,8 @@ export default function Provider({children }: IProvider) {
   const [showDownloadPdf, setShowDownloadPdf] = useState({ show: false, email: '' });
   const [showRelationship, setShowRelationship] = useState(false);
   const [sheetId, setSheetId] = useState('');
+  const [showSelectSheet, setShowSelectSheet] = useState(false);
+  const [optionSelect, setOptionSelect] = useState('players');
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -78,6 +80,7 @@ export default function Provider({children }: IProvider) {
   };
 
   const resetPopups = () => {
+    setShowSelectSheet(false);
     setShowForgotPassword(false);
     setShowFeedback(false);
     setLogoutUser(false);
@@ -173,6 +176,8 @@ export default function Provider({children }: IProvider) {
         showDeleteFavorAndBan, setShowDeleteFavorAndBan,
         showRelationship, setShowRelationship,
         sheetId, setSheetId,
+        showSelectSheet, setShowSelectSheet,
+        optionSelect, setOptionSelect,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,

@@ -211,6 +211,19 @@ export const addNewSheet = async (sessionId: string, sheet: any, setShowMessage:
   }
 };
 
+export const addNewSheetMandatory = async (sessionId: string, sheet: any, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const sessionsCollectionRef = collection(db, 'players');
+    const newDocRef = await addDoc(sessionsCollectionRef, { sessionId, ...sheet });
+    setShowMessage('Nova ficha criada com sucesso');
+    return newDocRef.id;
+  } catch (error: any) {
+    setShowMessage('Ocorreu um erro ao criar uma nova Ficha: ' + error.message);
+    return '';
+  }
+};
+
 export const removePlayerFromSession = async (sessionId: string, email: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);

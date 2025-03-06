@@ -165,6 +165,7 @@ export const registerManualRoll = async(
 }
 
 export const registerAutomatedRoll = async(
+	sheetId: string,
 	sessionId: string,
 	emailUser: string,
 	atrSelected: string,
@@ -177,7 +178,7 @@ export const registerAutomatedRoll = async(
 	let valueOf = 0;
 	let rage = 0;
 	try {
-		const player = await getPlayerByEmail(sessionId, emailUser, setShowMessage);
+		const player = await getPlayerById(sheetId, setShowMessage);
 		let text = 'Foi realizado um teste de ';
 		if (player) {
 			rage = Number(player.data.rage);
