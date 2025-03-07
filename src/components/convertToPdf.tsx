@@ -31,7 +31,7 @@ export default function ConvertToPdf(props: { data: any }) {
     pdf.addImage(imgData1, "PNG", 0, 0, imgWidth1, imgHeight1);
     pdf.addPage();
     const pdfContainer2 = document.createElement('div');
-    pdfContainer2.style.width = '1400px';
+    pdfContainer2.style.width = '1300px';
     pdfContainer2.style.overflow = 'hidden';
     pdfContainer2.appendChild(pdfRef2.current.cloneNode(true));
     document.body.appendChild(pdfContainer2);
