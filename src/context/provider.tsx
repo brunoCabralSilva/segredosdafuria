@@ -41,6 +41,7 @@ export default function Provider({children }: IProvider) {
   const [dataSheet, setDataSheet] = useState(playerSheet);
   const [showDelFromSession, setShowDelFromSession] = useState(false);
   const [showResetSheet, setShowResetSheet] = useState(false);
+  const [showDeleteSheet, setShowDeleteSheet] = useState(false);
   const [deleteAdvOrFlaw, setDeleteAdvOrFlaw] = useState({ show: false });
   const [showAllFlaws, setShowAllFlaws] = useState(false);
   const [showAllAdvantages, setShowAllAdvantages] = useState(false);
@@ -158,6 +159,7 @@ export default function Provider({children }: IProvider) {
         resetPopups,
         showDelFromSession, setShowDelFromSession,
         showResetSheet, setShowResetSheet,
+        showDeleteSheet, setShowDeleteSheet,
         deleteAdvOrFlaw, setDeleteAdvOrFlaw,
         showAllFlaws, setShowAllFlaws,
         showAllAdvantages, setShowAllAdvantages,

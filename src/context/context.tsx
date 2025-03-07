@@ -58,6 +58,8 @@ interface RecipesContext {
   //sheet
   showResetSheet: boolean,
   setShowResetSheet: (state: boolean) => void,
+  showDeleteSheet: boolean,
+  setShowDeleteSheet: (state: boolean) => void,
   showDelFromSession: boolean,
   setShowDelFromSession: (state: boolean) => void,
   email: string,
@@ -186,6 +188,8 @@ const initialValue: RecipesContext = {
   //sheet
   showResetSheet: false,
   setShowResetSheet: () => {},
+  showDeleteSheet: false,
+  setShowDeleteSheet: () => {},
   showDelFromSession: false,
   setShowDelFromSession: () => {},
   email: '',

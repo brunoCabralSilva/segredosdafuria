@@ -12,6 +12,7 @@ import { getUserByEmail } from "@/firebase/user";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { CiEdit } from "react-icons/ci";
 import Image from "next/image";
+import DeleteSheet from "../popup/deleteSheet";
 
 export default function General() {
   const [input, setInput] = useState('');
@@ -23,10 +24,12 @@ export default function General() {
     email,
     dataSheet,
 		showResetSheet, setShowResetSheet,
+    showDeleteSheet,
     setShowMenuSession,
     setShowGiftRoll,
     setShowRitualRoll,
     setShowMessage,
+    setShowDeleteSheet,
     setShowEvaluateSheet,
     setShowDownloadPdf,
     sheetId,
@@ -267,14 +270,18 @@ export default function General() {
       >
         Redefinir Ficha
       </button>
-      <button
-        type="button"
-        onClick={ () => setShowResetSheet(true) }
-        className="mt-2 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
-      >
-        Excluir Personagem
-      </button>
+      {
+        session.gameMaster === email &&
+        <button
+          type="button"
+          onClick={ () => setShowDeleteSheet(true) }
+          className="mt-2 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+        >
+          Excluir Personagem
+        </button>
+      }
       { showResetSheet && <ResetSheet /> }
+      { showDeleteSheet && <DeleteSheet /> }
     </div>
   );
 }

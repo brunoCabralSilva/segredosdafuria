@@ -1,6 +1,7 @@
 import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
+import { deletePlayerImage } from "./storage";
 
 export const createPlayersData = async (sessionId: string, setShowMessage: any) => {
   try {
@@ -82,6 +83,35 @@ export const updateDataPlayer = async (
     });
   }
 }
+
+export const deleteDataPlayer = async (
+  id: string,
+  sessionId: string,
+  imageUrl: string,
+  setShowMessage: any
+) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const docRef = doc(db, 'players', id);
+
+    await runTransaction(db, async (transaction) => {
+      const docSnap = await transaction.get(docRef);
+      if (!docSnap.exists()) {
+        setShowMessage({ show: true, text: 'Personagem não encontrado.' });
+        return;
+      }
+      await deletePlayerImage(sessionId, id, imageUrl, setShowMessage);
+      transaction.delete(docRef);
+    });
+
+    setShowMessage({ show: true, text: 'Personagem excluído com sucesso.' });
+  } catch (err: any) {
+    setShowMessage({
+      show: true,
+      text: 'Ocorreu um erro ao excluir o Personagem: ' + err.message,
+    });
+  }
+};
  
   // try {
   //   const db = getFirestore(firebaseConfig);

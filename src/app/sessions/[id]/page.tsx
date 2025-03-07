@@ -30,6 +30,7 @@ import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
 import Relationship from "@/components/popup/relationship";
 import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
+import DeleteSheet from "@/components/popup/deleteSheet";
 
 export default function SessionId() {
 	const params = useParams();
@@ -58,6 +59,7 @@ export default function SessionId() {
     showRelationship,
     addTouchstone,
     showRemovePlayer,
+    showDeleteSheet,
     showResetPlayer,
     showDeleteHistoric,
     showDeleteTouchstone,
