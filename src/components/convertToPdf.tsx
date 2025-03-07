@@ -235,7 +235,7 @@ export default function ConvertToPdf(props: { data: any }) {
             <div className="flex items-center justify-center">
               <p className="bg-black text-white px-2 pt-1 pb-3 mt-1">Atributos</p>
             </div>
-            <div className="grid grid-cols-3 pb-1">
+            <div className="grid grid-cols-3 pb-3">
               <p className="text-center">Físicos</p>
               <p className="text-center">Sociais</p>
               <p className="text-center">Mentais</p>
@@ -454,32 +454,32 @@ export default function ConvertToPdf(props: { data: any }) {
               <p className="mb-3">Vantagens e Defeitos</p>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center pb-2">
-                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center py-2">
+                    <p className="pb-1">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
                   </div>
                 )) }
               </div>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center pb-2">
-                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center py-2">
+                    <p className="pb-1">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
                   </div>
                 )) }
               </div>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.talens.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center pb-2">
-                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center py-2">
+                    <p className="pb-1">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.value) }
                   </div>
                 )) }
               </div>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.flaws.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center pb-2">
-                    <p className="">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center py-2">
+                    <p className="pb-1">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
                   </div>
                 )) }
