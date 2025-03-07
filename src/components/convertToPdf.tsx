@@ -661,16 +661,16 @@ export default function ConvertToPdf(props: { data: any }) {
               </div>
               <div className="col-span-2 w-full">
                 <p className="text-center w-full pb-3">História</p>
-                <div className="px-4 py-2 h-96 border border-black !border-solid text-justify">{ truncateText(data.background, 1530) }</div>
+                <div className="px-4 py-2 h-96 border border-black !border-solid text-justify">{ truncateText(data.background, 1410) }</div>
               </div>
             </div>
             <div className="">
               <p className="col-span-1 pt-5">Experiência Total</p>
-              <hr />
+              <hr className="mt-2" />
             </div>
             <div>
               <p className="col-span-1 pt-5">Experiência Gasta</p>
-              <hr />
+              <hr className="mt-2" />
             </div>
           </div>
         </div>
