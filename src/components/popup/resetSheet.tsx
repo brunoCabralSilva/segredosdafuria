@@ -50,16 +50,16 @@ export default function ResetSheet() {
             <button
               type="button"
               onClick={() => setShowResetSheet(false) }
-              className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
+              className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
-              Não
+              Não Redefinir
             </button>
             <button
               type="button"
               onClick={ resetSheet }
-              className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
+              className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
-              Sim
+              Redefinir Ficha
             </button>
           </div>
         </div>

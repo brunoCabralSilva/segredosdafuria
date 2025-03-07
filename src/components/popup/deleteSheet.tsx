@@ -54,16 +54,16 @@ export default function DeleteSheet() {
             <button
               type="button"
               onClick={() => setShowDeleteSheet(false) }
-              className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
+              className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
-              Não
+              Não Excluir
             </button>
             <button
               type="button"
               onClick={ deleteSheet }
-              className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
+              className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
-              Sim
+              Excluir Ficha
             </button>
           </div>
         </div>
