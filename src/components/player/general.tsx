@@ -267,6 +267,13 @@ export default function General() {
       >
         Redefinir Ficha
       </button>
+      <button
+        type="button"
+        onClick={ () => setShowResetSheet(true) }
+        className="mt-2 p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+      >
+        Excluir Personagem
+      </button>
       { showResetSheet && <ResetSheet /> }
     </div>
   );
