@@ -38,7 +38,7 @@ export default function ItemAgravated(props: any) {
   };
 
   return(
-    <div className={ `w-full ${ name === 'willpower' ? 'mt-8' : 'mt-4' }` }>
+    <div className={ `w-full ${ name === 'willpower' ? 'mt-6' : 'mt-4' }` }>
       Dano em <span className="capitalize">{ namePtBr }:</span>
       <div className="w-full mt-1">
         <div className="flex flex-wrap gap-2 pt-1">

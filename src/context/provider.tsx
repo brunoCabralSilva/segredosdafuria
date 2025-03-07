@@ -62,6 +62,7 @@ export default function Provider({children }: IProvider) {
   const [sheetId, setSheetId] = useState('');
   const [showSelectSheet, setShowSelectSheet] = useState(false);
   const [optionSelect, setOptionSelect] = useState('players');
+  const [showEditImage, setShowEditImage] = useState(true);
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -178,6 +179,7 @@ export default function Provider({children }: IProvider) {
         sheetId, setSheetId,
         showSelectSheet, setShowSelectSheet,
         optionSelect, setOptionSelect,
+        showEditImage, setShowEditImage,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,

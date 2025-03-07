@@ -22,6 +22,7 @@ import Players from "../player/players";
 import firebaseConfig from "@/firebase/connection";
 import { collection, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import EditImage from "./editImage";
 
 export default function MenuPlayer() {
   const {

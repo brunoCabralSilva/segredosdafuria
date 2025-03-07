@@ -4,10 +4,12 @@ import { useContext } from "react";
 import { updateDataPlayer } from "@/firebase/players";
 import { playerSheet } from "@/firebase/utilities";
 import contexto from "@/context/context";
+import { deletePlayerImage } from "@/firebase/storage";
 
 export default function ResetSheet() {
 	const {
     sheetId,
+    session,
     dataSheet,
     setDataSheet,
     setShowMessage,
@@ -22,6 +24,7 @@ export default function ResetSheet() {
       setShowMessage({ show: true, text: "Sua ficha foi redefinida!" });
       setShowResetSheet(false);
       setShowMenuSession('');
+      await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
       setShowResetSheet(false);

@@ -29,6 +29,7 @@ import AddFavorAndBan from "@/components/popup/addFavorAndBan";
 import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
 import Relationship from "@/components/popup/relationship";
 import SheetSelector from "@/components/popup/sheetSelector";
+import EditImage from "@/components/popup/editImage";
 
 export default function SessionId() {
 	const params = useParams();
@@ -181,6 +182,12 @@ export default function SessionId() {
                   }
                 </div>
                 <SessionBar />
+              </div>
+            }
+            {
+              showMenuSession === 'edit-image' && 
+              <div className="w-full md:w-3/5 absolute sm:relative z-50">
+                <EditImage />
               </div>
             }
             {

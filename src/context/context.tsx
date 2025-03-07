@@ -109,6 +109,8 @@ interface RecipesContext {
   setShowSelectSheet: (state: boolean) => void,
   optionSelect: string,
   setOptionSelect: (state: string) => void,
+  showEditImage: boolean,
+  setShowEditImage: (state: boolean) => void,
   //gameMaster
   session: any,
   setSession: (state: any) => void,
@@ -235,6 +237,8 @@ const initialValue: RecipesContext = {
   setShowSelectSheet: () => {},
   optionSelect: '',
   setOptionSelect: () => {},
+  showEditImage: false,
+  setShowEditImage: () => {},
   //gameMaster
   session: {},
   setSession: () => {},

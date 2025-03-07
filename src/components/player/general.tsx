@@ -10,6 +10,8 @@ import ItemAgravated from "./itemAgravated";
 import ResetSheet from "../popup/resetSheet";
 import { getUserByEmail } from "@/firebase/user";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { CiEdit } from "react-icons/ci";
+import Image from "next/image";
 
 export default function General() {
   const [input, setInput] = useState('');
@@ -21,6 +23,7 @@ export default function General() {
     email,
     dataSheet,
 		showResetSheet, setShowResetSheet,
+    setShowMenuSession,
     setShowGiftRoll,
     setShowRitualRoll,
     setShowMessage,
@@ -173,42 +176,66 @@ export default function General() {
           </div>
         </div>
       }
-      <div className="mt-5 capitalize flex-col justify-between items-center w-full">
-        <span className="pr-3">Augúrio</span>
-        <select
-          className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
-          value={dataSheet.data.auspice}
-          onChange={ (e) => updateValue('auspice', e.target.value) }
-        >
-          <option disabled value="">Escolha um Augúrio</option>
-          <option value="ragabash">Ragabash</option>
-          <option value="theurge">Theurge</option>
-          <option value="philodox">Philodox</option>
-          <option value="galliard">Galliard</option>
-          <option value="ahroun">Ahroun</option>
-        </select>
-      </div>
-      <div className="mt-5 capitalize flex-col justify-between items-center w-full">
-        <span className="pr-3">Tribo</span>
-        <select
-          className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
-          value={ dataSheet.data.trybe }
-          onChange={ (e) => updateValue('trybe', e.target.value) }
-        >
-          <option disabled value="">Escolha uma Tribo</option>
+      <div className="w-full flex sm:flex-row flex-col justify-between items-center gap-4 mt-5">
+        <div className="w-full sm:w-60 h-44 border-2 border-white bg-black relative">
           {
-            dataTrybes
-              .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr))
-              .map((trybe, index) => (
-              <option
-                key={index}
-                value={ trybe.nameEn }
-              >
-                { trybe.namePtBr }
-              </option>
-            ))
+            dataSheet && dataSheet.data && dataSheet.data.profileImage ?
+            <Image
+              src={ dataSheet.data.profileImage }
+              alt="Imagem de Perfil"
+              className="w-full h-full object-cover object-center"
+              width={ 1200 }
+              height={ 800 }
+            />
+            : <p className="w-full h-full flex items-center justify-center text-center px-2">Sem imagem de Perfil</p>
           }
-        </select>
+          <button
+            type="button"
+            onClick={ () => setShowMenuSession('edit-image') }
+            className="bg-black rounded absolute bottom-1 right-1 text-xl border border-white hover:bg-white hover:text-black transition-colors duration-400"
+          >
+            <CiEdit />
+          </button>
+        </div>
+        <div className="w-full">
+          <div className="capitalize flex-col justify-between items-center w-full">
+          <span className="pr-3">Augúrio</span>
+          <select
+            className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
+            value={dataSheet.data.auspice}
+            onChange={ (e) => updateValue('auspice', e.target.value) }
+          >
+            <option disabled value="">Escolha um Augúrio</option>
+            <option value="ragabash">Ragabash</option>
+            <option value="theurge">Theurge</option>
+            <option value="philodox">Philodox</option>
+            <option value="galliard">Galliard</option>
+            <option value="ahroun">Ahroun</option>
+          </select>
+        </div>
+        <div className="mt-5 capitalize flex-col justify-between items-center w-full">
+          <span className="pr-3">Tribo</span>
+          <select
+            className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
+            value={ dataSheet.data.trybe }
+            onChange={ (e) => updateValue('trybe', e.target.value) }
+          >
+            <option disabled value="">Escolha uma Tribo</option>
+            {
+              dataTrybes
+                .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr))
+                .map((trybe, index) => (
+                <option
+                  key={index}
+                  value={ trybe.nameEn }
+                >
+                  { trybe.namePtBr }
+                </option>
+              ))
+            }
+          </select>
+        </div>
+        </div>
       </div>
       <ItemAgravated name="willpower" namePtBr="Força de Vontade" />
       <ItemAgravated name="health" namePtBr="Vitalidade" />

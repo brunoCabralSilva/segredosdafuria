@@ -1,4 +1,4 @@
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { deleteObject, getDownloadURL, getStorage, listAll, ref, uploadBytes } from "firebase/storage";
 import firebaseConfig from "./connection";
 import { doc, getFirestore, runTransaction } from "firebase/firestore";
 
@@ -23,6 +23,19 @@ export async function createSessionImage(id: string, data: any, setShowMessage: 
   }
 }
 
+export const deletePlayerImage = async (sessionId: string, playerId: string, imageUrl: string, setShowMessage: any) => {
+  if (!imageUrl) return;
+  
+  try {
+    const storage = getStorage();
+    const imageRef = ref(storage, imageUrl);
+    await deleteObject(imageRef);
+    setShowMessage({ type: "success", text: "Imagem removida com sucesso!" });
+  } catch (error) {
+    setShowMessage({ type: "error", text: "Erro ao remover a imagem!" });
+  }
+};
+
 export async function createProfileImage(id: string, img: any, setShowMessage: any) {
   const db = getFirestore(firebaseConfig);
   const storage = getStorage(firebaseConfig);
@@ -41,5 +54,23 @@ export async function createProfileImage(id: string, img: any, setShowMessage: a
   } catch (error: any) {
     setShowMessage({ show: true, text: "Erro ao fazer upload da mídia de imagem: " + error.message });
     return false;
+  }
+}
+
+export async function updatePlayerImage(sessionId: string, playerId: string, newImage: any, setShowMessage: any) {
+  const storage = getStorage(firebaseConfig);
+  const folderRef = ref(storage, `images/sessions/${sessionId}/players/${playerId}`);
+  try {
+    const folderContents = await listAll(folderRef);
+    for (const itemRef of folderContents.items) {
+      await deleteObject(itemRef);
+    }
+    const newImageRef = ref(storage, `images/sessions/${sessionId}/players/${playerId}/${newImage.name}`);
+    await uploadBytes(newImageRef, newImage);
+    const newImageUrl = await getDownloadURL(newImageRef);
+    return newImageUrl;
+  } catch (error: any) {
+    setShowMessage({ show: true, text: "Erro ao atualizar imagem: " + error.message });
+    return error.message;
   }
 }
