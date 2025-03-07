@@ -15,7 +15,7 @@ export default function ConvertToPdf(props: { data: any }) {
   
   const handleDownloadPdf = async () => {
     const pdfContainer1 = document.createElement('div');
-    pdfContainer1.style.width = '1400px';
+    pdfContainer1.style.width = '1300px';
     pdfContainer1.style.overflow = 'hidden';
     pdfContainer1.appendChild(pdfRef.current.cloneNode(true));
     document.body.appendChild(pdfContainer1);

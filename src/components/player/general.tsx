@@ -128,7 +128,7 @@ export default function General() {
       {
         session.gameMaster === email &&
         <div className="w-full">
-          <p className="mt-5">Email do Usuário (Mude para o Email do jogador se quiser compartilhar a ficha com ele)</p>
+          <p className="mt-5">Email do Usuário (Altere o Email se quiser compartilhar a ficha com outro jogador)</p>
           <div
             className="w-full flex justify-between items-center cursor-pointer bg-black p-2 mt-1 border border-white"
             onClick={() => setInput2('emailCharacter')}
