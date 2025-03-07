@@ -177,7 +177,7 @@ export default function General() {
         </div>
       }
       <div className="w-full flex sm:flex-row flex-col justify-between items-center gap-4 mt-5">
-        <div className="w-full sm:w-60 h-44 border-2 border-white bg-black relative">
+        <div className="w-full sm:w-60 h-60 sm:h-44 border-2 border-white bg-black relative">
           {
             dataSheet && dataSheet.data && dataSheet.data.profileImage ?
             <Image
