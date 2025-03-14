@@ -9,7 +9,7 @@ import { updateSession } from "@/firebase/sessions";
 export default function Notes(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
-  const { session, email, sheetId, dataSheet, setShowMessage } =  useContext(contexto);
+  const { session, setShowMessage } =  useContext(contexto);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
@@ -18,19 +18,13 @@ export default function Notes(props: { type: string }) {
   };
 
   useEffect(() => {
-    if (dataSheet.data) setText(dataSheet.data[type]);
-  }, []);
+    if (session.anotations) setText(session.anotations);
+  }, [session]);
 
   const updateValue = async () => {
-    if (!dataSheet.data || email === dataSheet.email) {
-      if (session.anotations !== text) {
-        session.anotations = text;
-        await updateSession(session, setShowMessage);
-      } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
-    } else {
-      dataSheet.data[type] = text;
-      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    }
+    const dataSession = session;
+    dataSession.anotations = text;
+    await updateSession(dataSession, setShowMessage);
   };
 
   return(

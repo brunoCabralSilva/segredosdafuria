@@ -68,30 +68,31 @@ export default function FavorsAndBans() {
             session.favorsAndBans
               .map((item: any, index: number) => (
                 <div key={index} className="pb-3 border-white border-2 p-4">
-                  <div className="flex w-full justify-between items-center">
-                    <div>Favor / Proibição imposta pelo Narrador ({ item.order })</div>
+                  <div className="flex w-full">
                     {
                       (dataSheet.email === email || session.gameMaster === email) &&
-                      <div className="flex items-center gap-1">
-                        <FaRegEdit
-                          onClick={(e: any) => {
-                            setAddFavorAndBan({ show: true, data: item, type: 'master' });
-                            e.stopPropagation();
-                          }}
-                          className="text-2xl text-white cursor-pointer"
-                        />
-                        <MdDelete
-                          onClick={(e: any) => {
-                            setShowDeleteFavorAndBan({ show: true, name: item.order, type: 'master' });
-                            e.stopPropagation();
-                          }}
-                          className="text-2xl text-white cursor-pointer"
-                        />
+                      <div className="flex justify-between items-start w-full">
+                        <div className="">
+                          { item.description }
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <FaRegEdit
+                            onClick={(e: any) => {
+                              setAddFavorAndBan({ show: true, data: item, type: 'master' });
+                              e.stopPropagation();
+                            }}
+                            className="text-2xl text-white cursor-pointer"
+                          />
+                          <MdDelete
+                            onClick={(e: any) => {
+                              setShowDeleteFavorAndBan({ show: true, name: item.order, type: 'master' });
+                              e.stopPropagation();
+                            }}
+                            className="text-2xl text-white cursor-pointer"
+                          />
+                        </div>
                       </div>
                     }
-                  </div>
-                  <div className="text-justify pt-2">
-                    { item.description }
                   </div>
                 </div>
               ))

@@ -3,7 +3,7 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import contexto from "@/context/context";
-import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
+import { updateDataPlayer } from "@/firebase/players";
 
 export default function Background(props: { type: string }) {
   const { type } = props;
@@ -17,14 +17,15 @@ export default function Background(props: { type: string }) {
   };
 
   useEffect(() => {
-    setText(dataSheet[type]);
+    setText(dataSheet.data[type]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dataSheet]);
 
   const updateValue = async () => {
     if (dataSheet) {
-      dataSheet.data[type] = text;
-			await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+      const dataItem = dataSheet;
+      dataItem.data[type] = text;
+			await updateDataPlayer(sheetId, dataItem, setShowMessage);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 
