@@ -2,6 +2,7 @@ import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, que
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 import { deletePlayerImage } from "./storage";
+import { parseDate } from "./utilities";
 
 export const createPlayersData = async (sessionId: string, setShowMessage: any) => {
   try {
@@ -12,6 +13,34 @@ export const createPlayersData = async (sessionId: string, setShowMessage: any) 
     setShowMessage({ show: true, text: 'Ocorreu um erro ao criar jogadores para a Sessão: ' + err.message });
   }
 };
+
+export const getOldestUserBySession = async (sessionId: string, gameMaster: string, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const collectionRef = collection(db, "players");
+    const q = query(collectionRef, where("sessionId", "==", sessionId));
+
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) return null;
+
+    let oldestUser = null;
+    let oldestDate = new Date(9999, 11, 31);
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.email !== gameMaster) {
+        const creationDateStr = data.creationDate || "01/01/1970, 00:00:00";
+        const creationDate = parseDate(creationDateStr);
+        if (creationDate < oldestDate) oldestUser = data.email;
+      }
+    });
+    return oldestUser;
+  } catch (err: any) {
+    setShowMessage({show: true, text: "Erro ao buscar usuário mais antigo:" + err.message});
+    return null;
+  }
+};
+
 
 export const getPlayersBySession = async (sessionId: string, setShowMessage: any) => {
   try {

@@ -17,6 +17,13 @@ export const capitalize = (string: string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+export const parseDate = (dateStr: string): Date => {
+  const [datePart, timePart] = dateStr.split(", ");
+  const [day, month, year] = datePart.split("/").map(Number);
+  const [hours, minutes, seconds] = timePart.split(":").map(Number);
+  return new Date(year, month - 1, day, hours, minutes, seconds);
+};
+
 export const playerSheet = {
   advantagesAndFlaws: {
     flaws: [],

@@ -112,31 +112,49 @@ export const clearHistory = async (id: string, setShowMessage: any) => {
   }
 };
 
-export const leaveFromSession = async (sessionId: string, email: string, name: string, setShowMessage: any) => {
+export const leaveFromSession = async (
+  sessionId: string,
+  email: string,
+  name: string,
+  setShowMessage: any
+) => {
   try {
     const db = getFirestore(firebaseConfig);
-    const collectionRef = collection(db, 'players');
-    const q = query(collectionRef, where('sessionId', '==', sessionId));
+    const collectionRef = collection(db, "players");
+    const q = query(collectionRef, where("sessionId", "==", sessionId), where("email", "==", email));
+
     await runTransaction(db, async (transaction) => {
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
-        const dataDoc = querySnapshot.docs[0];
-        const docRef = doc(db, 'players', dataDoc.id);
-        const data = dataDoc.data();
-        data.list = data.list.filter((player: any) => player.email !== email);
-        transaction.update(docRef, { list: data.list });
+        querySnapshot.docs.forEach((playerDoc) => {
+          const playerRef = doc(db, "players", playerDoc.id);
+          transaction.delete(playerRef);
+        });
+
         const dataNotification = {
-          message: `Olá, tudo bem? O jogador ${capitalize(name)} saiu desta sala. Você pode integrá-lo novamente, caso o mesmo solicite novamente acessar esta sessão.`,
-          type: 'transfer',
+          message: `Olá, tudo bem? O jogador ${capitalize(name)} saiu desta sala. Você pode integrá-lo novamente, caso ele solicite acessar esta sessão.`,
+          type: "transfer",
         };
+
         await registerNotification(sessionId, dataNotification, setShowMessage);
-        setShowMessage({ show: true, text: "Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!" });
-      } else throw new Error('Sessão não encontrada.');
+
+        setShowMessage({
+          show: true,
+          text: "Esperamos que sua jornada nessa Sessão tenha sido divertida e gratificante. Até logo!",
+        });
+      } else {
+        throw new Error("Jogador não encontrado na sessão.");
+      }
     });
   } catch (err: any) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err.message });
+    setShowMessage({
+      show: true,
+      text: "Ocorreu um erro ao remover o jogador: " + err.message,
+    });
   }
 };
+
+
 
 export const getAllSessionsByFunction = async (email: string) => {
   const db = getFirestore(firebaseConfig);

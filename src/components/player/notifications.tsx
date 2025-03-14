@@ -11,8 +11,6 @@ export default function Notifications() {
     setListNotification(listNotif);
   }
 
-  console.log(listNotification);
-
   return(
     <div className="text-white w-full overflow-y-auto h-75vh">
       <div className="w-full">
