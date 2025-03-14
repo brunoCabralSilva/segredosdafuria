@@ -515,36 +515,47 @@ export default function EvaluateSheet() {
         case 'glass walkers':
           renownValue.en = 'wisdom';
           renownValue.pb = 'Sabedoria';
+          break;
         case 'silent striders':
           renownValue.en = 'wisdom';
           renownValue.pb = 'Sabedoria';
+          break;
         case 'black furies':
           renownValue.en = 'glory';
           renownValue.pb = 'Glória';
+          break;
         case 'silver fangs':
           renownValue.en = 'honor';
           renownValue.pb = 'Honra';
+          break;
         case 'ghost council':
           renownValue.en = 'wisdom';
           renownValue.pb = 'Sabedoria';
+          break;
         case 'hart wardens':
           renownValue.en = 'glory';
           renownValue.pb = 'Glória';
+          break;
         case 'galestalkers':
           renownValue.en = 'honor';
           renownValue.pb = 'Honra';
+          break;
         case 'bone gnawers':
           renownValue.en = 'honor';
           renownValue.pb = 'Honra';
+          break;
         case 'shadow lords':
           renownValue.en = 'glory';
           renownValue.pb = 'Glória';
+          break;
         case 'children of gaia':
           renownValue.en = 'wisdom';
           renownValue.pb = 'Sabedoria';
+          break;
         case 'red talons':
           renownValue.en = 'honor';
           renownValue.pb = 'Honra';
+          break;
       }
       if (Number(data[renownValue.en]) !==  2) {
         setRenownTrybe({ correct: false, errorMessage: 'Necessário navegar até a aba "Geral" e preencher o renome relacionado ao patrono da sua tribo (' + renownValue.pb + ') com dois pontos.' });
