@@ -30,28 +30,16 @@ export default function AddFavorAndBan() {
   }, []);
 
   const createFavorAndBan = async () => {
-    if (addFavorAndBan.type === 'player') {
-      if (addFavorAndBan.data.description) {
-        dataSheet.data.favorsAndBans = listFavorAndBan;
-        dataSheet.data.favorsAndBans = [...dataSheet.data.favorsAndBans, { description, order: dataSheet.data.favorsAndBans.length + 1 }];
-        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-      } else {
-        dataSheet.data.favorsAndBans = [...dataSheet.data.favorsAndBans, { description, order: dataSheet.data.favorsAndBans.length + 1 }];
-        await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-      }
-      setAddFavorAndBan({ show: false, data: {}, type: '' });
+    const newDataSession = session;
+    if (addFavorAndBan.data.description) {
+      newDataSession.favorsAndBans = listFavorAndBan;
+      newDataSession.favorsAndBans = [...newDataSession.favorsAndBans, { description, order: newDataSession.favorsAndBans.length + 1 }];
+      await updateSession(newDataSession, setShowMessage);
     } else {
-      const newDataSession = session;
-      if (addFavorAndBan.data.description) {
-        newDataSession.favorsAndBans = listFavorAndBan;
-        newDataSession.favorsAndBans = [...newDataSession.favorsAndBans, { description, order: newDataSession.favorsAndBans.length + 1 }];
-        await updateSession(newDataSession, setShowMessage);
-      } else {
-        newDataSession.favorsAndBans = [...newDataSession.favorsAndBans, { description, order: newDataSession.favorsAndBans.length + 1 }];
-        await updateSession(newDataSession, setShowMessage);
-      }
-      setAddFavorAndBan({ show: false, data: {}, type: '' });
+      newDataSession.favorsAndBans = [...newDataSession.favorsAndBans, { description, order: newDataSession.favorsAndBans.length + 1 }];
+      await updateSession(newDataSession, setShowMessage);
     }
+    setAddFavorAndBan({ show: false, data: {}, type: '' });
   }
 
   return(
