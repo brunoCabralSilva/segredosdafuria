@@ -35,6 +35,7 @@ export default function Provider({children }: IProvider) {
   const [showDeleteHistoric, setShowDeleteHistoric] = useState(false);
   //notification
   const [listNotification, setListNotification] = useState([0]);
+  const [showDeletePlayer, setShowDeletePlayer] = useState({ show: false, userEmail: '' });
   //sheet
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -147,6 +148,7 @@ export default function Provider({children }: IProvider) {
         dataSession, setDataSession,
         showInfoSessions, setShowInfoSessions,
         showCreateSession, setShowCreateSession,
+        showDeletePlayer, setShowDeletePlayer,
         //session bar
         showOptions, setShowOptions,
         showMenuSession, setShowMenuSession,

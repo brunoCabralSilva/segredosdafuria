@@ -30,6 +30,8 @@ interface RecipesContext {
   setListOfTalismans: (state: any) => void,
   listOfGift: any,
   setListOfGift: (state: any) => void,
+  showDeletePlayer: { show: boolean, userEmail: string },
+  setShowDeletePlayer: (state: { show: boolean, userEmail: string }) => void,
   //pages
   showFeedback: boolean,
   setShowFeedback: (state: boolean) => void,
@@ -169,6 +171,8 @@ const initialValue: RecipesContext = {
   setShowFeedback: () => {},
   showMessage: { show: false, text: '' },
   setShowMessage: () => {},
+  showDeletePlayer: { show: false, userEmail: '' },
+  setShowDeletePlayer: () => {},
   //sessions
   sessionId: '',
   setSessionId: () => {},

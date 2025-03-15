@@ -154,6 +154,64 @@ export const leaveFromSession = async (
   }
 };
 
+export const removeFromSession = async (
+  sessionId: string,
+  email: string,
+  setShowMessage: any
+) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const collectionRef = collection(db, "players");
+    const q = query(collectionRef, where("sessionId", "==", sessionId), where("email", "==", email));
+
+    await runTransaction(db, async (transaction) => {
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        querySnapshot.docs.forEach((playerDoc) => {
+          const playerRef = doc(db, "players", playerDoc.id);
+          transaction.delete(playerRef);
+        })
+        setShowMessage({ show: true, text: "Jogador Removido com sucesso!" });
+      } else throw new Error("Jogador não encontrado na sessão.");
+    });
+  } catch (err: any) {
+    setShowMessage({
+      show: true,
+      text: "Ocorreu um erro ao remover o jogador: " + err.message,
+    });
+  }
+};
+
+export const transferSheetToGameMaster = async (
+  sessionId: string,
+  emailPlayer: string,
+  emailGameMaster: string,
+  setShowMessage: any
+) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const collectionRef = collection(db, "players");
+    const q = query(collectionRef, where("sessionId", "==", sessionId), where("email", "==", emailPlayer));
+
+    await runTransaction(db, async (transaction) => {
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        querySnapshot.docs.forEach((playerDoc) => {
+          const playerRef = doc(db, "players", playerDoc.id);
+          transaction.update(playerRef, { email: emailGameMaster });
+        });
+        setShowMessage({ show: true, text: "Jogador Removido com sucesso! Todas as Fichas que esse usuário possuía foram atribuídas a você." });
+      } else {
+        throw new Error("Jogador não encontrado na sessão.");
+      }
+    });
+  } catch (err: any) {
+    setShowMessage({
+      show: true,
+      text: "Ocorreu um erro ao transferir o jogador: " + err.message,
+    });
+  }
+};
 
 
 export const getAllSessionsByFunction = async (email: string) => {

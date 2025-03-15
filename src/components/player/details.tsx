@@ -7,16 +7,18 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { updateSession } from "@/firebase/sessions";
 import { getUserByEmail } from "@/firebase/user";
+import { MdDelete } from "react-icons/md";
+import DeleteUserFromSession from "../popup/deleteUserFromSession";
 
 export default function Details() {
   const {
-    showDelFromSession,
     email,
-    name,
     session,
     players,
+    showDeletePlayer,
     showDelGMFromSession,
     setShowMessage,
+    setShowDeletePlayer,
     setShowDelGMFromSession,
     showChangeGameMaster, setShowChangeGameMaster,
   } = useContext(contexto);
@@ -139,6 +141,7 @@ export default function Details() {
     <div className="w-full overflow-y-auto h-75vh">
       { showChangeGameMaster.show && <ChangeGameMaster setGameMaster={setGameMaster} /> }
       { showDelGMFromSession && <LeaveGMFromSession /> }
+      { showDeletePlayer.show && <DeleteUserFromSession /> }
       {
         creationDate !== ''
         ? <div className="h-full w-full">
@@ -227,11 +230,40 @@ export default function Details() {
               <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3">
                 <span className="pr-1 font-bold">Jogadores:</span>
                 {
-                  players.filter((player:any) => player.email !== gameMaster ).map((item: any, index: number) => (
-                    <span className="capitalize" key={index}>
-                      { index === players.length -1 ? item.user + '.' : item.user + ', ' }
-                    </span>
-                  ))
+                  players
+                  .filter((player: any) => player.email !== gameMaster)
+                  .map((item: any, index: number, arr: any[]) => {
+                    if (email !== gameMaster) {
+                      if (index === arr.length - 1) {
+                        return (
+                        <span key={index} className="">
+                          <span className=""> e </span>
+                          <span className="capitalize" key={index}>{item.user}</span>
+                        </span>
+                        );
+                      } else if (index === arr.length - 2) {
+                        return <span className="capitalize" key={index}>{item.user}</span>;
+                      } else {
+                        return <span className="capitalize" key={index}>{item.user}, </span>;
+                      }
+                    } else {
+                      return (
+                        <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3 flex justify-between items-center">
+                          <div className="flex flex-col">
+                            <span className="capitalize">{item.user}</span>
+                            <span className="text-xs">{item.email}</span>
+                          </div>
+                          <button
+                            type="button"
+                            className="cursor-pointer"
+                            onClick={ () => setShowDeletePlayer({ show: true, userEmail: item.email }) }
+                          >
+                            <MdDelete className="text-lg" />
+                          </button>
+                        </div>
+                      );
+                    }
+                    })
                 }
               </div>
               <button
