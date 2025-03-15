@@ -1,9 +1,10 @@
 import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
-import { capitalize } from "./utilities";
+import { capitalize, getOfficialTimeBrazil, sheetStructure } from "./utilities";
 import { authenticate } from "./authenticate";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 import { createConsentForm } from "./consentForm";
+import { addNewSheetMandatory } from "./players";
 
 export const getNotificationsById = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
@@ -112,6 +113,7 @@ export const removeNotification = async (sessionId: string, message: string, set
 export const approveUser = async (notification: any, session: any, setShowMessage: any) => {
     try {
       const db = getFirestore(firebaseConfig);
+      const dateMessage = await getOfficialTimeBrazil();
       const sessionsCollectionRef = collection(db, 'sessions');
       const sessionDocRef = doc(sessionsCollectionRef, session.id);
       await runTransaction(db, async (transaction) => {
@@ -119,6 +121,8 @@ export const approveUser = async (notification: any, session: any, setShowMessag
         if (sessionDocSnapshot.exists()) {
           transaction.update(sessionDocRef, { players: arrayUnion(notification.email) });
           await createConsentForm(session.id, notification.email, setShowMessage);
+          const sheet = sheetStructure(notification.email, notification.user, dateMessage); 
+          await addNewSheetMandatory(session.id, sheet, setShowMessage);
           await registerMessage(
             session.id,
             {

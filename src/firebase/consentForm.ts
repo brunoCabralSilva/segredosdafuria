@@ -79,7 +79,7 @@ export const updateConsentList = async (email: string, sessionId: string, newLis
   }
 };
 
-export const deleteConsentByEmailAndSessionId = async (email: string, sessionId: string, setShowMessage: any) => {
+export const deleteConsent = async (email: string, sessionId: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
     const collectionRef = collection(db, 'consents');

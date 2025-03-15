@@ -1,5 +1,6 @@
 'use client'
 import contexto from '@/context/context';
+import { deleteConsent } from '@/firebase/consentForm';
 import { registerMessage } from '@/firebase/messagesAndRolls';
 import { registerNotification } from '@/firebase/notifications';
 import { getOldestUserBySession } from '@/firebase/players';
@@ -37,6 +38,7 @@ export default function LeaveGMFromSession() {
         router.push('/sessions'); 
         setShowDelGMFromSession(false);
         await leaveFromSession(session.id, email, name, setShowMessage);
+        await deleteConsent(email, session.id, setShowMessage);
         const newPlayers = session;
         newPlayers.players = session.players.filter((emailUser: any) => emailUser !== email);
         newPlayers.gameMaster = oldestUser;
@@ -46,6 +48,7 @@ export default function LeaveGMFromSession() {
         setShowDelGMFromSession(false);
         await leaveFromSession(session.id, email, name, setShowMessage);
         await deleteSessionById(session.id, setShowMessage);
+        location.reload();
       }
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
@@ -56,10 +59,12 @@ export default function LeaveGMFromSession() {
     try {
       router.push('/sessions');
 			await leaveFromSession(session.id, email, name, setShowMessage);
+      await deleteConsent(email, session.id, setShowMessage);
       setShowDelGMFromSession(false);
       const newPlayers = session;
       newPlayers.players = session.players.filter((emailUser: any) => emailUser !== email);
       await updateSession(newPlayers, setShowMessage);
+      location.reload();
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
     }
