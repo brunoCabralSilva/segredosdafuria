@@ -46,6 +46,7 @@ export default function LeaveGMFromSession() {
       } else {
         router.push('/sessions');
         setShowDelGMFromSession(false);
+        await deleteConsent(email, session.id, setShowMessage);
         await leaveFromSession(session.id, email, name, setShowMessage);
         await deleteSessionById(session.id, setShowMessage);
         location.reload();
