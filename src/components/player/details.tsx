@@ -248,7 +248,7 @@ export default function Details() {
                       }
                     } else {
                       return (
-                        <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3 flex justify-between items-center">
+                        <div key={index} className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3 flex justify-between items-center">
                           <div className="flex flex-col">
                             <span className="capitalize">{item.user}</span>
                             <span className="text-xs">{item.email}</span>
