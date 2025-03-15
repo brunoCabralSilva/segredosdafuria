@@ -31,6 +31,7 @@ import Relationship from "@/components/popup/relationship";
 import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
 import DeleteSheet from "@/components/popup/deleteSheet";
+import ConsentForm from "@/components/popup/consentForm";
 
 export default function SessionId() {
 	const params = useParams();
@@ -66,6 +67,7 @@ export default function SessionId() {
     addPrinciple,
     showDeletePrinciple,
     showEvaluateSheet,
+    showConsentForm,
     email,
     showMenuSession,
     showDownloadPdf,
@@ -163,7 +165,9 @@ export default function SessionId() {
             {
               showEvaluateSheet.show
               ? <EvaluateSheet />
-              : <div className="flex flex-col w-full relative">
+              : showConsentForm ?
+                <ConsentForm />
+                : <div className="flex flex-col w-full relative">
                 <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
                   {
                     chat

@@ -1,9 +1,9 @@
 import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
-import { capitalize, getOfficialTimeBrazil, sheetStructure } from "./utilities";
+import { capitalize } from "./utilities";
 import { authenticate } from "./authenticate";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
-import { updateSession } from "./sessions";
+import { createConsentForm } from "./consentForm";
 
 export const getNotificationsById = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
@@ -118,6 +118,7 @@ export const approveUser = async (notification: any, session: any, setShowMessag
         const sessionDocSnapshot = await getDoc(sessionDocRef);
         if (sessionDocSnapshot.exists()) {
           transaction.update(sessionDocRef, { players: arrayUnion(notification.email) });
+          await createConsentForm(session.id, notification.email, setShowMessage);
           await registerMessage(
             session.id,
             {

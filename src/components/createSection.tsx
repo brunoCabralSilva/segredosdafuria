@@ -5,6 +5,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { authenticate } from "@/firebase/authenticate";
 import { createSession, getSessionByName } from '@/firebase/sessions';
 import contexto from '@/context/context';
+import { createConsentForm } from '@/firebase/consentForm';
 
 export default function CreateSection() {
   const router = useRouter();
@@ -68,7 +69,10 @@ export default function CreateSection() {
             email,
             setShowMessage,
           );
-          if (docRef) router.push(`/sessions/${docRef}`);
+          if (docRef) {
+            router.push(`/sessions/${docRef}`);
+            await createConsentForm(docRef, email, setShowMessage);
+          }
           else {
             setShowMessage({ show: true, text: 'Ocorreu um erro ao tentar criar uma nova Sessão. Por favor, atualize a página e tente novamente.' });
           }

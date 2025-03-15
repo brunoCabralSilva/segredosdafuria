@@ -22,7 +22,6 @@ import Players from "../player/players";
 import firebaseConfig from "@/firebase/connection";
 import { collection, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
-import EditImage from "./editImage";
 
 export default function MenuPlayer() {
   const {
@@ -37,6 +36,7 @@ export default function MenuPlayer() {
     optionSelect, setOptionSelect,
     sheetId,
     listNotification,
+    setShowConsentForm,
     setListNotification,
     setShowEvaluateSheet,
     setShowMenuSession,
@@ -95,6 +95,7 @@ export default function MenuPlayer() {
               setShowRitualRoll({ show: false, ritual: {}});
             } else setShowMenuSession('');
             setShowEvaluateSheet({ show: false, data: '' });
+            setShowConsentForm(false);
           }}
         />
       </div>

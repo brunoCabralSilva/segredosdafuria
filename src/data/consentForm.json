@@ -1,0 +1,66 @@
+[
+    {
+        "nameTopic": "Horror",
+        "list": [
+            { "namePtBr": "Aranhas", "name": "spiders", "value": 0 },
+            { "namePtBr": "Demônios", "name": "demons", "value": 0 },
+            { "namePtBr": "Ferir Animais", "name": "animals", "value": 0 },
+            { "namePtBr": "Ferir crianças", "name": "childrens", "value": 0 },
+            { "namePtBr": "Globos oculares", "name": "oculars", "value": 0 },
+            { "namePtBr": "Insetos", "name": "insects", "value": 0 },
+            { "namePtBr": "Nojeira", "name": "gross", "value": 0 },
+            { "namePtBr": "Ratos", "name": "rats", "value": 0 },
+            { "namePtBr": "Sangue", "name": "blood", "value": 0 }
+        ]
+    },
+    {
+        "nameTopic": "Relacionamentos",
+        "list": [
+            { "namePtBr": "Romance(A tela escurece (acontece mas não é mostrado))", "name": "romance-shadows", "value": 0 },
+            { "namePtBr": "Romance(Explícito)", "name": "romance-explicit", "value": 0 },
+            { "namePtBr": "Romance(Entre PJs e NPJs)", "name": "romance-npjs", "value": 0 },
+            { "namePtBr": "Romance(Entre PJs)", "name": "romance-pjs", "value": 0 },
+            { "namePtBr": "Sexo (A tela escurece (acontece mas não é mostrado))", "name": "sex-shadows", "value": 0 },
+            { "namePtBr": "Sexo (Explícito)", "name": "sex-explicit", "value": 0 },
+            { "namePtBr": "Sexo (Entre PJs e NPJs)", "name": "sex-npjs", "value": 0 },
+            { "namePtBr": "Sexo (Entre PJs)", "name": "sex-pjs", "value": 0 },
+            { "namePtBr": "Problemas familiares (divórcio, abandono, etc)", "name": "family", "value": 0 }
+        ]
+    },
+    {
+        "nameTopic": "Questões sociais e culturais",
+        "list": [
+            { "namePtBr": "Homofobia", "name": "homophobia", "value": 0 },
+            { "namePtBr": "Questões culturais específicas", "name": "culturals", "value": 0 },
+            { "namePtBr": "Racismo", "name": "racism", "value": 0 },
+            { "namePtBr": "Religião do mundo real", "name": "religion", "value": 0 },
+            { "namePtBr": "Sexismo", "name": "sexism", "value": 0 },
+            { "namePtBr": "Transfobia", "name": "transphobia", "value": 0 },
+            { "namePtBr": "Xenofobia", "name": "xenophobia", "value": 0 }
+        ]
+    },
+    {
+        "nameTopic": "Saúde Mental e Física",
+        "list": [
+            { "namePtBr": "Acidentes de trânsito", "name": "acidents", "value": 0 },
+            { "namePtBr": "Agressão sexual", "name": "sexual-assault", "value": 0 },
+            { "namePtBr": "Auto-mutilação", "name": "self-mutilation","value": 0 },
+            { "namePtBr": "Doenças incuráveis (câncer, ELA, etc)", "name": "diseases", "value": 0 },
+            { "namePtBr": "Claustrofobia", "name": "claustrophobia", "value": 0 },
+            { "namePtBr": "Congelando até a morte", "name": "cold", "value": 0 },
+            { "namePtBr": "Desastres naturais (terremotos, incêndios florestais)", "name": "naturals", "value": 0 },
+            { "namePtBr": "Fome", "name": "hunger", "value": 0 },
+            { "namePtBr": "Gaslighting", "name": "gaslighting", "value": 0 },
+            { "namePtBr": "Genocídio", "name": "genocide", "value": 0 },
+            { "namePtBr": "Gravidez, aborto espontâneo ou aborto", "name": "abortion", "value": 0 },
+            { "namePtBr": "Insolação", "name": "insolation", "value": 0 },
+            { "namePtBr": "Mau tempo (furacões, tornados)", "name": "bad-weather", "value": 0 },
+            { "namePtBr": "Paralisia / restrição física", "name": "paralized", "value": 0 },
+            { "namePtBr": "Polícia, agressão policial", "name": "policy", "value": 0 },
+            { "namePtBr": "Sede", "name": "thirst", "value": 0 },
+            { "namePtBr": "Suicídio", "name": "suicide", "value": 0 },
+            { "namePtBr": "Terrorismo", "name": "terrorism", "value": 0 },
+            { "namePtBr": "Tortura", "name": "torture", "value": 0 }
+        ]
+    }
+]

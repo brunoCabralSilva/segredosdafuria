@@ -64,6 +64,8 @@ export default function Provider({children }: IProvider) {
   const [showSelectSheet, setShowSelectSheet] = useState(false);
   const [optionSelect, setOptionSelect] = useState('players');
   const [showEditImage, setShowEditImage] = useState(true);
+  const [showConsentForm, setShowConsentForm] = useState(false);
+  const [consents, setConsents] = useState({});
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
@@ -82,6 +84,7 @@ export default function Provider({children }: IProvider) {
   };
 
   const resetPopups = () => {
+    setShowConsentForm(false);
     setShowSelectSheet(false);
     setShowForgotPassword(false);
     setShowFeedback(false);
@@ -182,6 +185,8 @@ export default function Provider({children }: IProvider) {
         showSelectSheet, setShowSelectSheet,
         optionSelect, setOptionSelect,
         showEditImage, setShowEditImage,
+        showConsentForm, setShowConsentForm,
+        consents, setConsents,
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,
