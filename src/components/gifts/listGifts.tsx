@@ -1,5 +1,5 @@
 'use client'
-import { IGift, ITypeGift } from "../interface";
+import { IGift, ITypeGift } from "../../interface";
 import Image from 'next/image';
 import Link from 'next/link';
 import { capitalizeFirstLetter } from "@/firebase/utilities";

@@ -1,5 +1,4 @@
 import contexto from "@/context/context";
-import { updateDataPlayer } from "@/firebase/players";
 import { updateSession } from "@/firebase/sessions";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";

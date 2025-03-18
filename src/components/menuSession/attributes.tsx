@@ -1,7 +1,7 @@
 'use client'
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import contexto from "@/context/context";
-import ItemAtr from "./itemAtr";
+import ItemAtr from "../sheetItems/itemAtr";
 
 export default function Attributes() {
 	const { dataSheet } = useContext(contexto);

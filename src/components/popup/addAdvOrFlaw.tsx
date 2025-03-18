@@ -3,12 +3,12 @@ import { useContext, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import contexto from "@/context/context";
 import dataAdvAndFlaws from '../../data/advantagesAndFlaws.json';
-import AdvOrFlawAdded from "../player/advOrFlawAdded";
+import AdvOrFlawAdded from "../advantagesAndFlaws/advOrFlawAdded";
 import dataTalens from '../../data/talismans.json';
 import dataLoresheets from '../../data/loresheets.json';
-import ItemLoresheet from "../player/itemLoresheets";
-import ItemTalisman from "../player/itemTalisman";
-import ItemAdvantage from "../player/itemAdvantage";
+import ItemLoresheet from "../sheetItems/itemLoresheets";
+import ItemTalisman from "../sheetItems/itemTalisman";
+import ItemAdvantage from "../sheetItems/itemAdvantage";
 
 export default function AddAdvOrFlaw(props: { type: string }) {
   const [ selectOption, setSelectOption ] = useState('merits');

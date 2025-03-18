@@ -1,6 +1,6 @@
 'use client'
 import { updateDataPlayer } from "@/firebase/players";
-import ItemSkill from "./itemSkill";
+import ItemSkill from "../sheetItems/itemSkill";
 import { useContext } from "react";
 import contexto from "@/context/context";
 

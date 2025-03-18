@@ -60,7 +60,6 @@ export default function Provider({children }: IProvider) {
   const [showDeleteFavorAndBan, setShowDeleteFavorAndBan] = useState({ show: false, name: '', type: '' });
   const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: '' });
   const [showDownloadPdf, setShowDownloadPdf] = useState({ show: false, email: '' });
-  const [showRelationship, setShowRelationship] = useState(false);
   const [sheetId, setSheetId] = useState('');
   const [showSelectSheet, setShowSelectSheet] = useState(false);
   const [optionSelect, setOptionSelect] = useState('players');
@@ -182,7 +181,6 @@ export default function Provider({children }: IProvider) {
         showDeletePrinciple, setShowDeletePrinciple,
         addFavorAndBan, setAddFavorAndBan,
         showDeleteFavorAndBan, setShowDeleteFavorAndBan,
-        showRelationship, setShowRelationship,
         sheetId, setSheetId,
         showSelectSheet, setShowSelectSheet,
         optionSelect, setOptionSelect,

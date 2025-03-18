@@ -1,27 +1,28 @@
 import contexto from "@/context/context";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import Skills from "../player/skills";
-import AdvantagesAndFlaws from "../player/advantagesAndFlaws";
-import General from "../player/general";
-import Rituals from "../player/rituals";
-import Anotations from "../player/notes";
-import Gifts from "../player/gifts";
-import Details from "../player/details";
-import Attributes from "../player/attributes";
-import Forms from "../player/forms";
-import Background from "../player/background";
-import HaranoHauglosk from "./haranoHauglosk";
-import GiftRoll from "./giftRoll";
-import RitualRoll from "./ritualRoll";
-import Touchstones from "../player/touchstones";
-import Principles from "../player/principles";
-import FavorsAndBans from "../player/favorsAndBans";
-import Notifications from "../player/notifications";
-import Players from "../player/players";
+import Skills from "./menuSession/skills";
+import AdvantagesAndFlaws from "./advantagesAndFlaws/advantagesAndFlaws";
+import General from "./menuSession/general";
+import Rituals from "./rituals/rituals";
+import Anotations from "./menuSession/notes";
+import Gifts from "./menuSession/gifts";
+import Details from "./menuSession/details";
+import Attributes from "./menuSession/attributes";
+import Forms from "./forms";
+import Background from "./menuSession/background";
+import HaranoHauglosk from "./popup/haranoHauglosk";
+import GiftRoll from "./gifts/giftRoll";
+import RitualRoll from "./rituals/ritualRoll";
+import Touchstones from "./menuSession/touchstones";
+import Principles from "./menuSession/principles";
+import FavorsAndBans from "./menuSession/favorsAndBans";
+import Notifications from "./menuSession/notifications";
+import Players from "./menuSession/players";
 import firebaseConfig from "@/firebase/connection";
 import { collection, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import Consent from "./menuSession/consent";
 
 export default function MenuPlayer() {
   const {
@@ -75,6 +76,7 @@ export default function MenuPlayer() {
       case ('background'): return (<Background type="background" />);
       case ('principles-of-the-chronicle'): return (<Principles />);
       case ('favor-ban'): return (<FavorsAndBans />);
+      case ('consent'): return (<Consent />);
       case ('anotations'): return (<Anotations type="notes" />);
       case ('gifts'): return (<Gifts />);
       case ('rituals'): return (<Rituals />);
@@ -128,6 +130,7 @@ export default function MenuPlayer() {
             { sheetId !== '' && <option value={'forms'}>Formas ( Atual: { dataSheet.data.form } )</option> }
             <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>
             <option value={'favor-ban'}>Favores e Proibições</option>
+            <option value={'consent'}>Ficha de Consentimento</option>
             { sheetId !== '' && <option value={'background'}>Background</option> }
             <option value={'anotations'}>Anotações</option>
             <option value={'session'}>Sessão</option>

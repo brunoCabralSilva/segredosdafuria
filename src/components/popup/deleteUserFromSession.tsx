@@ -2,7 +2,6 @@
 import contexto from '@/context/context';
 import { deleteConsent } from '@/firebase/consentForm';
 import { removeFromSession, transferSheetToGameMaster, updateSession } from '@/firebase/sessions';
-import { useRouter } from 'next/navigation';
 import { useContext, useState } from 'react';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 

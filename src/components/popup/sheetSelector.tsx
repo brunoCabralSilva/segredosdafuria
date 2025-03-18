@@ -1,6 +1,5 @@
 'use client'
 import contexto from "@/context/context";
-import { clearHistory } from "@/firebase/sessions";
 import { useContext } from "react";
 import { capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
 import { addNewSheetMandatory } from "@/firebase/players";
@@ -9,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 export default function SheetSelector() {
   const router = useRouter();
-  const { setSheetId, setShowSelectSheet, setDataSheet, dataUser, players, email, session, setShowMessage } = useContext(contexto);
+  const { setSheetId, setShowSelectSheet, setDataSheet, players, email, session, setShowMessage } = useContext(contexto);
 
   return(
     <div className="z-50 fixed top-0 left-0 w-full h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0">

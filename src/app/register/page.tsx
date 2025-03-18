@@ -6,7 +6,7 @@ import { FaBackward } from "react-icons/fa6";
 import Loading from '@/components/loading';
 import contexto from '@/context/context';
 import { authenticate } from '@/firebase/authenticate';
-import MessageToUser from '@/components/popup/messageToUser';
+import MessageToUser from '@/components/dicesAndMessages/messageToUser';
 
 const Register = () => {
   const [firstName, setFirstName] = useState('');

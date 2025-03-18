@@ -7,15 +7,15 @@ import { useCollection, useCollectionData, useDocumentData } from "react-firebas
 import Loading from "../../../components/loading";
 import Nav from '@/components/nav';
 import SessionBar from "../../../components/sessionBar";
-import Message from "@/components/message";
-import MenuPlayer from "@/components/popup/menuPlayer";
-import MenuRoll from "@/components/popup/menuRoll";
+import Message from "@/components/dicesAndMessages/message";
+import MenuPlayer from "@/components/menuPlayer";
+import MenuRoll from "@/components/dicesAndMessages/menuRoll";
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
 import { getPlayersBySession } from "@/firebase/players";
 import { getSessionById } from "@/firebase/sessions";
 import firestoreConfig from "@/firebase/connection";
-import MessageToUser from "@/components/popup/messageToUser";
+import MessageToUser from "@/components/dicesAndMessages/messageToUser";
 import DeleteHistoric from "@/components/popup/deleteHistoric";
 import RemovePlayer from "@/components/popup/removePlayer";
 import ResetPlayer from "@/components/popup/resetPlayer";
@@ -27,12 +27,9 @@ import AddPrinciple from "@/components/popup/addPrinciple";
 import DeletePrinciple from "@/components/popup/deletePrinciple";
 import AddFavorAndBan from "@/components/popup/addFavorAndBan";
 import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
-import Relationship from "@/components/popup/relationship";
 import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
-import DeleteSheet from "@/components/popup/deleteSheet";
 import ConsentForm from "@/components/popup/consentForm";
-import DeleteUserFromSession from "@/components/popup/deleteUserFromSession";
 
 export default function SessionId() {
 	const params = useParams();
@@ -58,7 +55,6 @@ export default function SessionId() {
     showSelectSheet, setShowSelectSheet,
     addFavorAndBan,
     showDeleteFavorAndBan,
-    showRelationship,
     addTouchstone,
     showRemovePlayer,
     showResetPlayer,
@@ -157,7 +153,6 @@ export default function SessionId() {
       { addFavorAndBan.show && <AddFavorAndBan /> }
       { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
       { showDownloadPdf.show && verifyConvert() }
-      { showRelationship && <Relationship /> }
       <Nav />
       {
         showData

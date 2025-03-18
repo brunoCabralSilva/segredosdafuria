@@ -6,7 +6,6 @@ import { useContext, useState } from 'react';
 import contexto from '@/context/context';
 import { registerMessage } from "../firebase/messagesAndRolls";
 import { GiD10 } from "react-icons/gi";
-import { CiFileOn } from "react-icons/ci";
 
 export default function SessionBar() {
   const [text, setText] = useState('');

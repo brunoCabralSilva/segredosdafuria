@@ -1,11 +1,11 @@
 'use client'
 import contexto from '@/context/context';
-import { getPlayerByEmail, updateDataPlayer } from '@/firebase/players';
+import { updateDataPlayer } from '@/firebase/players';
 import { useContext } from "react";
 
 export default function ItemAtr(props: any) {
   const { value, name, namePtBr, quant } = props;
-	const { sessionId, sheetId, email, dataSheet, setShowMessage } = useContext(contexto);
+	const { sheetId, dataSheet, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
     dataSheet.data.attributes[name] = value;

@@ -1,41 +1,40 @@
 'use client'
 import { useContext } from "react";
 import contexto from "@/context/context";
-import GiftsMechanic from "../gifts/giftsMechanic";
+import RitualsMechanic from "./ritualsMechanic";
 
-export default function GiftRoll() {
-  const { showGiftRoll } =  useContext(contexto);
-
+export default function RitualRoll() {
+  const { showRitualRoll } =  useContext(contexto);
   return(
     <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl font-bold">Dom:  { showGiftRoll.gift.giftPtBr }</p>
+      <label htmlFor="valueofRage" className="w-full flex flex-col items-center">
+        <p className="text-white w-full pb-1 text-xl mb-3 font-bold">{ showRitualRoll.ritual.titlePtBr }</p>
       </label>
       {
-        showGiftRoll.gift.cost &&
+        showRitualRoll.ritual.cost &&
         <label className="w-full flex flex-col items-center">
           <p className="text-white w-full pb-1 text-justify">
             <span className="pr-2 font-bold">Custo:</span>
-            { showGiftRoll.gift.cost }
+            { showRitualRoll.ritual.cost }
           </p>
         </label>
       }
       {
-        showGiftRoll.gift.pool &&
+        showRitualRoll.ritual.pool &&
         <label className="w-full flex flex-col items-center">
-          <p className="text-white w-full pb-1 text-justify">
+          <p className="text-white w-full pb-1 mb-2 text-justify">
             <span className="pr-2 font-bold">Teste:</span>
-            { showGiftRoll.gift.pool }
+            { showRitualRoll.ritual.pool }
           </p>
         </label>
       }
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
         <p className="text-white w-full pb-1 text-justify">
           <span className="pr-2 font-bold">Sistema:</span>
-          { showGiftRoll.gift.systemPtBr }
+          { showRitualRoll.ritual.systemPtBr === "" ? showRitualRoll.ritual.descriptionPtBr : showRitualRoll.ritual.systemPtBr }
         </p>
       </label>
-      <GiftsMechanic name={showGiftRoll.gift.gift} />
+      <RitualsMechanic title={showRitualRoll.ritual.title} />
     </div>
   );
 }

@@ -2,9 +2,9 @@
 import { useContext, useEffect, useRef } from 'react';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import DataGifts from '../../components/dataGifts';
-import FilterGifts from '../../components/filterGifts';
-import ListGifts from '../../components/listGifts';
+import DataGifts from '../../components/gifts/dataGifts';
+import FilterGifts from '../../components/gifts/filterGifts';
+import ListGifts from '../../components/gifts/listGifts';
 import Feedback from '@/components/feedback';
 import contexto from '@/context/context';
 import jsonGifts from '../../data/gifts.json';

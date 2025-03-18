@@ -4,7 +4,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import dataRituals from '../../data/rituals.json';
 import contexto from "@/context/context";
 import { updateDataPlayer } from "@/firebase/players";
-import Ritual from "../player/ritual";
+import Ritual from "../menuSession/ritual";
 
 export default function AddRitual() {
   const {

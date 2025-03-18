@@ -1,6 +1,6 @@
 'use client'
 import { FaRegEdit } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import contexto from "@/context/context";
 import { MdDelete } from "react-icons/md";
 

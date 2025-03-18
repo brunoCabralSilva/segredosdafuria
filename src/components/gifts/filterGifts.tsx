@@ -1,7 +1,7 @@
 'use client'
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import jsonTrybes from '../data/trybes.json';
-import jsonAuspices from '../data/auspices.json';
+import jsonTrybes from '../../data/trybes.json';
+import jsonAuspices from '../../data/auspices.json';
 import contexto from "@/context/context";
 
 export default function FilterGifts(props: { title: string }) {

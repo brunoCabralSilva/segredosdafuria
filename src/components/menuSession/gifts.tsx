@@ -2,7 +2,7 @@ import contexto from "@/context/context";
 import { useContext } from "react";
 import { IoAdd } from "react-icons/io5";
 import AddGift from "../popup/addGift";
-import GiftsAdded from "./giftsAdded";
+import GiftsAdded from "../gifts/giftsAdded";
 
 export default function Gifts() {
   const { dataSheet, showGiftsToAdd, setShowGiftsToAdd, setShowMessage } = useContext(contexto);

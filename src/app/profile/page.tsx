@@ -8,7 +8,7 @@ import Image from "next/image";
 import VerifySession from '@/components/popup/verifySession';
 import contexto from '@/context/context';
 import { getAllSessionsByFunction } from '@/firebase/sessions';
-import MessageToUser from '@/components/popup/messageToUser';
+import MessageToUser from '@/components/dicesAndMessages/messageToUser';
 
 export default function Profile() {
   const [showData, setShowData] = useState(false);

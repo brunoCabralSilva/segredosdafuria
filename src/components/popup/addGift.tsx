@@ -4,7 +4,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import dataGifts from '../../data/gifts.json';
 import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
-import Gift from "../player/gift";
+import Gift from "../gifts/gift";
 
 export default function AddGift() {
   const {

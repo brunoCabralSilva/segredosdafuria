@@ -1,7 +1,6 @@
 'use client'
 import contexto from '@/context/context';
 import { removePlayerFromSession } from '@/firebase/players';
-import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { IoIosCloseCircleOutline } from "react-icons/io";
 

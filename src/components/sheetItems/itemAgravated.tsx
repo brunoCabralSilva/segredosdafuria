@@ -1,12 +1,12 @@
 'use client'
 import contexto from "@/context/context";
-import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
+import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useEffect, useState } from "react";
 
 export default function ItemAgravated(props: any) {
   const [totalItem, setTotalItem] = useState(0);
   const { name, namePtBr } = props;
-	const { sessionId, email, dataSheet, setShowMessage, sheetId } = useContext(contexto);
+	const { dataSheet, setShowMessage, sheetId } = useContext(contexto);
 
   useEffect(() => {
     const returnValues = async (): Promise<void> => {

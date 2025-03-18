@@ -3,7 +3,6 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import contexto from "@/context/context";
-import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
 import { updateSession } from "@/firebase/sessions";
 
 export default function Notes(props: { type: string }) {

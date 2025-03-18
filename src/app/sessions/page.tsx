@@ -6,13 +6,13 @@ import { IoIosInformationCircle, IoMdAdd } from "react-icons/io";
 import { useRouter } from 'next/navigation';
 import { authenticate } from "@/firebase/authenticate";
 import { ISessions } from "@/interface";
-import CreateSection from "../../components/createSection";
+import CreateSection from "../../components/popup/createSection";
 import { getSessions } from "@/firebase/sessions";
 import contexto from "@/context/context";
 import Info from "../../components/info";
 import Loading from "../../components/loading";
 import VerifySession from "../../components/popup/verifySession";
-import MessageToUser from "@/components/popup/messageToUser";
+import MessageToUser from "@/components/dicesAndMessages/messageToUser";
 import Image from "next/image";
 
 export default function Sessions() {

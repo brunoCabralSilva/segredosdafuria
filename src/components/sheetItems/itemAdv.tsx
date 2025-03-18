@@ -7,7 +7,7 @@ import { IoArrowDownCircleSharp, IoArrowUpCircleSharp, IoCheckmarkDone } from "r
 export default function Advantage(props: any) {
   const { item, adv } = props;
   const [ showAd, setShowAd ] = useState(false);
-  const { sessionId, sheetId, email, setShowMessage, dataSheet } = useContext(contexto);
+  const { sheetId, setShowMessage, dataSheet } = useContext(contexto);
 
   const setAdvantageValueItem = async (obj: IAdvantageAndFlaw) => {
     const foundAdvantage = dataSheet.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === obj.name);

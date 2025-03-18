@@ -1,7 +1,7 @@
 'use client'
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IAdvantageAndFlaw } from "@/interface";
-import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
+import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 import contexto from "@/context/context";
 
@@ -11,7 +11,7 @@ function limitCaracteres(texto: string) {
 
 export default function DelAdvantageOrFlaw(props: any) {
   const { adv, setAdv } = props;
-  const { sheetId, dataSheet, sessionId, email, deleteAdvOrFlaw, setDeleteAdvOrFlaw, setShowMessage } = useContext(contexto);
+  const { sheetId, dataSheet, deleteAdvOrFlaw, setDeleteAdvOrFlaw, setShowMessage } = useContext(contexto);
 
   const removeAdv = async () => {
     const foundAdvantage = dataSheet.data.advantagesAndFlaws.find((item: IAdvantageAndFlaw) => item.name === deleteAdvOrFlaw.name);

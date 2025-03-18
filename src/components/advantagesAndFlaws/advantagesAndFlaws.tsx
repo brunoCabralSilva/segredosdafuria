@@ -1,6 +1,5 @@
 'use client'
-import { useContext, useEffect, useState } from 'react';
-import { getPlayerByEmail } from '@/firebase/players';
+import { useContext } from 'react';
 import contexto from '@/context/context';
 import { IoAdd } from 'react-icons/io5';
 import AddAdvOrFlaw from '../popup/addAdvOrFlaw';
@@ -11,7 +10,6 @@ import AdvLoresheetsAdded from './advLoresheetsAdded';
 export default function AdvantagesAndFlaws() {
   const {
     dataSheet,
-    setShowMessage,
     showAllFlaws, setShowAllFlaws,
     showAllAdvantages, setShowAllAdvantages,
   } = useContext(contexto);

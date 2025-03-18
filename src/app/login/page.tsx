@@ -7,7 +7,7 @@ import contexto from "@/context/context";
 import ForgotPassword from "@/components/popup/forgotPassword";
 import Loading from "@/components/loading";
 import Nav from "@/components/nav";
-import MessageToUser from "@/components/popup/messageToUser";
+import MessageToUser from "@/components/dicesAndMessages/messageToUser";
 
 function App() {
   const [showData, setShowData] = useState(false);

@@ -1,7 +1,7 @@
 'use client'
 import contexto from "@/context/context";
 import { rageCheck } from "@/firebase/messagesAndRolls";
-import { getPlayerByEmail, updateDataPlayer } from "@/firebase/players";
+import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export default function Item(props: any) {

@@ -1,6 +1,5 @@
 import contexto from "@/context/context";
 import { useContext, useEffect, useState } from "react";
-import LeaveFromSession from "../popup/leaveFromSession";
 import ChangeGameMaster from "../popup/changeGameMaster";
 import LeaveGMFromSession from "../popup/leaveGMFromSession";
 import { BsCheckSquare } from "react-icons/bs";

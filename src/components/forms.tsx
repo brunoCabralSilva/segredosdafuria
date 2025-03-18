@@ -1,6 +1,6 @@
 'use client'
 import { useContext } from "react";
-import dataForms from '../../data/forms.json';
+import dataForms from '../data/forms.json';
 import Image from 'next/image';
 import contexto from "@/context/context";
 import { updateDataPlayer, updateDataWithRage } from "@/firebase/players";

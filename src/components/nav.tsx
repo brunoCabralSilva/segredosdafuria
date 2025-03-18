@@ -17,9 +17,7 @@ export default function Nav() {
       const authData = await authenticate(setShowMessage);
       if (authData && authData.email && authData.displayName) {
         setLoginLogout('logout');
-      } else {
-        setLoginLogout('login');
-      }
+      } else setLoginLogout('login');
     };
     fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
