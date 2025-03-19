@@ -41,7 +41,7 @@ export default function Players() {
     setDataSheet(player);
     setShowMessage({ show: true, text: `Você Selecionou o Personagem ${player.data.name !== '' ? player.data.name : ''} (${capitalizeFirstLetter(player.user)})` });
     if (dataSheet.id !== player.id) {
-      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(player.user)} selecionou um personagem ${ session.gameMaster === email ? `de ${capitalizeFirstLetter(player.user)}` : ''} ${player.data.name !== '' ? `(${player.data.name})` : ''}.`, type: 'notification' }, null,  setShowMessage);
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(player.user)} selecionou um personagem ${ session.gameMaster === email ? `de ${capitalizeFirstLetter(player.user)}` : ''}${player.data.name !== '' ? ` (${player.data.name}).` : '.'}`, type: 'notification' }, null,  setShowMessage);
     }
   }
 
