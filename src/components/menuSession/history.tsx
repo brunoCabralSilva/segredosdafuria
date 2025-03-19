@@ -16,7 +16,7 @@ export default function History() {
   const [history] = useCollectionData(queryData, { idField: "id" } as any);
 
   return(
-    <div className="pt-5 w-full h-75vh overflow-y-auto mb-3 p-1 text-white items-start justify-start font-bold bg-black scrollbar">
+    <div className="py-5 w-full h-75vh overflow-y-auto mb-3 p-1 text-white items-start justify-start font-bold bg-black scrollbar">
       {
         history
         && history.length > 0

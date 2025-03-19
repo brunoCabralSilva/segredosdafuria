@@ -1,4 +1,4 @@
-import { capitalize, getOfficialTimeBrazil, translate } from "./utilities";
+import { capitalizeFirstLetter, getOfficialTimeBrazil, translate } from "./utilities";
 import firebaseConfig from "./connection";
 import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
@@ -335,7 +335,7 @@ export const haranoHaugloskCheck = async(
   await registerMessage(
     sessionId,
     {
-      message: `Foi realizado um Teste de ${capitalize(type)} para o personagem "${dataSheet.data.name}"`,
+      message: `Foi realizado um Teste de ${capitalizeFirstLetter(type)} para o personagem "${dataSheet.data.name}"`,
       rollOf: rollTest,
       result: text,
       value: dataSheet.data[type],

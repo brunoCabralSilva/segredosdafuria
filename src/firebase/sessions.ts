@@ -1,5 +1,5 @@
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
-import { capitalize, getOfficialTimeBrazil } from "./utilities";
+import { capitalizeFirstLetter, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
 import { createChatData } from "./chats";
@@ -134,7 +134,7 @@ export const leaveFromSession = async (
         });
 
         const dataNotification = {
-          message: `Olá, tudo bem? O jogador ${capitalize(name)} saiu desta sala. Você pode integrá-lo novamente, caso ele solicite acessar esta sessão.`,
+          message: `Olá, tudo bem? O jogador ${capitalizeFirstLetter(name)} saiu desta sala. Você pode integrá-lo novamente, caso ele solicite acessar esta sessão.`,
           type: "transfer",
         };
 

@@ -13,10 +13,6 @@ export const getOfficialTimeBrazil = async () => {
   return brazilTime;
 };
 
-export const capitalize = (string: string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
 export const parseDate = (dateStr: string): Date => {
   const [datePart, timePart] = dateStr.split(", ");
   const [day, month, year] = datePart.split("/").map(Number);

@@ -2,7 +2,7 @@ import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
 import { registerHistory } from "@/firebase/history";
 import { addNewSheetMandatory } from "@/firebase/players";
-import { capitalize, capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
+import { capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
 import { useContext } from "react";
 
 export default function Players() {
@@ -24,7 +24,7 @@ export default function Players() {
         } 
       }
       const register: string = await addNewSheetMandatory(session.id, sheet, setShowMessage);
-      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalize(sheet.user)} criou um novo personagem`, type: 'notification' }, null,  setShowMessage);
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(sheet.user)} criou um novo personagem.`, type: 'notification' }, null,  setShowMessage);
       if (register) {
         setSheetId(register);
         setDataSheet(sheet);
@@ -41,7 +41,7 @@ export default function Players() {
     setDataSheet(player);
     setShowMessage({ show: true, text: `Você Selecionou o Personagem ${player.data.name !== '' ? player.data.name : ''} (${capitalizeFirstLetter(player.user)})` });
     if (dataSheet.id !== player.id) {
-      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalize(player.user)} selecionou um personagem ${ session.gameMaster === email ? `de ${capitalize(player.user)}` : ''} ${player.data.name !== '' ? `(${player.data.name})` : ''}`, type: 'notification' }, null,  setShowMessage);
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(player.user)} selecionou um personagem ${ session.gameMaster === email ? `de ${capitalizeFirstLetter(player.user)}` : ''} ${player.data.name !== '' ? `(${player.data.name})` : ''}.`, type: 'notification' }, null,  setShowMessage);
     }
   }
 

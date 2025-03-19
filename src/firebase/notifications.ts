@@ -1,5 +1,5 @@
 import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
-import { capitalize, getOfficialTimeBrazil, sheetStructure } from "./utilities";
+import { capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "./utilities";
 import { authenticate } from "./authenticate";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
@@ -60,7 +60,7 @@ export const requestApproval = async (sessionId: string, setShowMessage: any) =>
         const updatedList = [
           ...notificationData.list,
           {
-            message: `O Usuário ${capitalize(displayName)} de email "${email}" solicitou acesso à sua Sessão.`,
+            message: `O Usuário ${capitalizeFirstLetter(displayName)} de email "${email}" solicitou acesso à sua Sessão.`,
             email: email,
             type: 'approval',
             user: displayName,
@@ -127,13 +127,13 @@ export const approveUser = async (notification: any, session: any, setShowMessag
           await registerMessage(
             session.id,
             {
-              message: `${capitalize(notification.user)} iniciou sua jornada nesta Sessão! Seja bem-vindo!`,
+              message: `${capitalizeFirstLetter(notification.user)} iniciou sua jornada nesta Sessão! Seja bem-vindo!`,
               type: 'notification',
             },
             null,
             setShowMessage,
           );
-          await registerHistory(session.id, { message: `${capitalize(notification.user)} ingressou na Sessão.`, type: 'notification' }, null, setShowMessage);
+          await registerHistory(session.id, { message: `${capitalizeFirstLetter(notification.user)} ingressou na Sessão.`, type: 'notification' }, null, setShowMessage);
           await removeNotification(session.id, notification.message, setShowMessage);
         } else throw new Error('Sessão não encontrada');
       });
