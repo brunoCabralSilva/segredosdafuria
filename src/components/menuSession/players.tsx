@@ -1,7 +1,8 @@
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
+import { registerMessage } from "@/firebase/messagesAndRolls";
 import { addNewSheetMandatory } from "@/firebase/players";
-import { capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
+import { capitalize, capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
 import { useContext } from "react";
 
 export default function Players() {
@@ -59,11 +60,12 @@ export default function Players() {
             <button
               type="button"
               key={index}
-              onClick={ () => {
+              onClick={ async () => {
                 setSheetId(player.id);
                 setOptionSelect('general');
                 setDataSheet(player);
                 setShowMessage({ show: true, text: `Você Selecionou o Personagem ${player.data.name !== '' ? player.data.name : ''} (${capitalizeFirstLetter(player.user)})` });
+                await registerMessage(session.id, { message: `${capitalize(player.user)} selecionou um personagem ${player.data.name !== '' ? `(${player.data.name})` : ''}`, type: 'notification' }, null,  setShowMessage);
               }}
               className={`w-full py-4 border cursor-pointer text-white text-center font-bold border-white flex items-center justify-center gap-3 ${player.data.name === dataSheet && dataSheet.data && dataSheet.data.name ? 'bg-ritual bg-cover' : ''} px-4`}
             >
