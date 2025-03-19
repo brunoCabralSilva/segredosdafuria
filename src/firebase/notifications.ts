@@ -5,6 +5,7 @@ import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 import { createConsentForm } from "./consentForm";
 import { addNewSheetMandatory } from "./players";
+import { registerHistory } from "./history";
 
 export const getNotificationsById = async (sessionId: string) => {
   const db = getFirestore(firebaseConfig);
@@ -132,6 +133,7 @@ export const approveUser = async (notification: any, session: any, setShowMessag
             null,
             setShowMessage,
           );
+          await registerHistory(session.id, { message: `${capitalize(notification.user)} ingressou na Sessão.`, type: 'notification' }, null, setShowMessage);
           await removeNotification(session.id, notification.message, setShowMessage);
         } else throw new Error('Sessão não encontrada');
       });

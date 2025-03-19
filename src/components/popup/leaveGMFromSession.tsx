@@ -1,6 +1,7 @@
 'use client'
 import contexto from '@/context/context';
 import { deleteConsent } from '@/firebase/consentForm';
+import { registerHistory } from '@/firebase/history';
 import { registerMessage } from '@/firebase/messagesAndRolls';
 import { registerNotification } from '@/firebase/notifications';
 import { getOldestUserBySession } from '@/firebase/players';
@@ -35,6 +36,7 @@ export default function LeaveGMFromSession() {
           null,
           setShowMessage,
         );
+        await registerHistory(session.id, { message: `O antigo Narrador saiu da sessão e o cargo foi repassado para ${capitalizeFirstLetter(nameOfUser)}.`,type: 'notification' }, null, setShowMessage);
         router.push('/sessions'); 
         setShowDelGMFromSession(false);
         await leaveFromSession(session.id, email, name, setShowMessage);

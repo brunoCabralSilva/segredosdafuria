@@ -3,6 +3,7 @@ import { capitalize, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
 import { createChatData } from "./chats";
+import { createHistory } from "./history";
 
 export const getSessions = async () => {
   const db = getFirestore(firebaseConfig);
@@ -74,6 +75,7 @@ export const createSession = async (
     });
     await createNotificationData(newSession.id, setShowMessage);
     await createChatData(newSession.id, setShowMessage);
+    await createHistory(newSession.id, setShowMessage);
     return newSession.id;
   } catch (err: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err.message });
@@ -271,6 +273,14 @@ export const deleteSessionById = async (sessionId: string, setShowMessage: any) 
       notificationsSnapshot.forEach((notificationDoc) => {
         const notificationDocRef = doc(notificationsRef, notificationDoc.id);
         transaction.delete(notificationDocRef);
+      });
+      //Deletar Históricos relacionados
+      const historyRef = collection(db, 'history');
+      const historyQuery = query(historyRef, where('sessionId', '==', sessionId));
+      const historySnapshot = await getDocs(historyQuery);
+      historySnapshot.forEach((chatDoc) => {
+        const chatDocRef = doc(historyRef, chatDoc.id);
+        transaction.delete(chatDocRef);
       });
     });
     setShowMessage({ show: true, text: 'A Sessão foi excluída. Esperamos que sua jornada tenha sido divertida e gratificante. Até logo!' });

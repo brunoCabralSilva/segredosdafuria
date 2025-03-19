@@ -23,6 +23,7 @@ import firebaseConfig from "@/firebase/connection";
 import { collection, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Consent from "./menuSession/consent";
+import History from "./menuSession/history";
 
 export default function MenuPlayer() {
   const {
@@ -67,6 +68,7 @@ export default function MenuPlayer() {
     switch(optionSelect) {
       case ('players'): return (<Players />);
       case ('notifications'): return (<Notifications />);
+      case ('history'): return (<History />);
       case ('attributes'): return (<Attributes />);
       case ('skills'): return (<Skills />);
       case ('advantages-flaws'): return (<AdvantagesAndFlaws />);
@@ -120,6 +122,7 @@ export default function MenuPlayer() {
               email === session.gameMaster &&
               <option value={'notifications'}>Notificações { listNotification.length > 0 ? '(' + listNotification.length + ')' : ''}</option>
             }
+            { email === session.gameMaster && <option value={'history'}>Histórico</option> }
             { sheetId !== '' && <option value={'general'}>Geral</option> }
             { sheetId !== '' && <option value={'attributes'}>Atributos</option> }
             { sheetId !== '' && <option value={'skills'}>Habilidades</option> }
@@ -127,7 +130,7 @@ export default function MenuPlayer() {
             { sheetId !== '' && <option value={'rituals'}>Rituais</option> }
             { sheetId !== '' && <option value={'touchstones'}>Pilares</option> }
             { sheetId !== '' && <option value={'advantages-flaws'}>Vantagens e Defeitos</option> }
-            { sheetId !== '' && <option value={'forms'}>Formas ( Atual: { dataSheet.data.form } )</option> }
+            { sheetId !== '' && <option value={'forms'}>Formas { dataSheet && dataSheet.data && dataSheet.data.form ? `( Atual: ${ dataSheet.data.form } )` : '' } </option> }
             <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>
             <option value={'favor-ban'}>Favores e Proibições</option>
             <option value={'consent'}>Ficha de Consentimento</option>

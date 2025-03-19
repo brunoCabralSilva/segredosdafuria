@@ -99,25 +99,22 @@ export default function SessionBar() {
               <IoIosSend />
             </button>
           </div>
-          {
-            showMenuSession === '' &&
-            <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
-              <button
-                className="p-2"
-                title="Acessar o Menu da Sessão"
-                onClick={() => {
-                  setMenu(!menu);
-                  scrollToBottom();
-                }}
-              >
-                {
-                  menu
-                  ? <FaChevronDown />
-                  : <FaPlus />
-                }
-              </button>
-            </div>
-          }
+          <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+            <button
+              className="p-2"
+              title="Acessar o Menu da Sessão"
+              onClick={() => {
+                setMenu(!menu);
+                scrollToBottom();
+              }}
+            >
+              {
+                menu
+                ? <FaChevronDown />
+                : <FaPlus />
+              }
+            </button>
+          </div>
         </div>
       </div>
     </div>
