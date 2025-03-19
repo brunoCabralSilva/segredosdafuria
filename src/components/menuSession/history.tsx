@@ -16,7 +16,7 @@ export default function History() {
   const [history] = useCollectionData(queryData, { idField: "id" } as any);
 
   return(
-    <div className="flex flex-col w-full pr-2 h-75vh overflow-y-auto mb-3 p-1 text-white items-start justify-start font-bold">
+    <div className="pt-5 w-full h-75vh overflow-y-auto mb-3 p-1 text-white items-start justify-start font-bold bg-black scrollbar">
       {
         history
         && history.length > 0
@@ -24,10 +24,10 @@ export default function History() {
         && history[0].list.length >= 0
         ? history[0]
           && history[0].list
-            .sort((a: any, b: any) => a.order - b.order)
+            .sort((a: any, b: any) => b.order - a.order)
             .map((msg: any, index: number) => (
               <div key={ index }className={`w-full flex justify-end text-white`}>
-                <div className={`rounded-xl w-full pl-3 text-sm font-normal`}>
+                <div className={`rounded-xl w-full pl-3 text-xs font-normal`}>
                   <div className="">
                     <span className="text-[#dd6b67]">{ msg.date && msg.date }</span> - <span className="">{ msg.message }</span>
                   </div>

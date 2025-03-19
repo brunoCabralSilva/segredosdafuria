@@ -128,3 +128,20 @@ input[type=number] {
 ::-webkit-scrollbar {
   width: 0px;
 }
+
+.scrollbar {
+  overflow: auto !important; /* Garante que a rolagem apareça quando necessário */
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px !important; /* Define a largura da barra de rolagem */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #1a202c !important; /* Cor do fundo da scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #4a5568 !important; /* Cor da barra de rolagem */
+  border-radius: 4px;
+}

@@ -65,7 +65,7 @@ export default function Notifications() {
         }
         {
           listNotification.length === 0 &&
-          <div className="w-full text-white text-lg text-center mt-4">
+          <div className="w-full text-white text-sm text-center mt-4">
             Você não possui notificações.
           </div>
         }
