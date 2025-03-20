@@ -1,15 +1,19 @@
 'use client'
 import contexto from '@/context/context';
+import { registerHistory } from '@/firebase/history';
 import { updateDataPlayer } from '@/firebase/players';
+import { capitalizeFirstLetter, translate } from '@/firebase/utilities';
 import { useContext } from "react";
 
 export default function ItemAtr(props: any) {
   const { value, name, namePtBr, quant } = props;
-	const { sheetId, dataSheet, setShowMessage } = useContext(contexto);
+	const { sheetId, dataSheet, email, session, setShowMessage } = useContext(contexto);
 
   const updateValue = async (name: string, value: number) => {
+    const dataPersist = dataSheet.data.attributes[name];
     dataSheet.data.attributes[name] = value;
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o atributo ${translate(name)} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`, type: 'notification' }, null, setShowMessage);
   };
 
   const returnPoints = (name: string) => {

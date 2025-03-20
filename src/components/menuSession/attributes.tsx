@@ -15,19 +15,19 @@ export default function Attributes() {
 						value={dataSheet.data.attributes.strength}
 						namePtBr="Força"
 						name="strength"
-						quant={6}
+						quant={dataSheet && dataSheet.data && dataSheet.data.form && dataSheet.data.form === 'Crinos' ? 10 : 6}
 					/>
 					<ItemAtr
 						value={dataSheet.data.attributes.dexterity}
 						name="dexterity"
 						namePtBr="Destreza"
-						quant={6}
+						quant={dataSheet && dataSheet.data && dataSheet.data.form && dataSheet.data.form === 'Crinos' ? 10 : 6}
 					/>
 					<ItemAtr
 						value={dataSheet.data.attributes.stamina}
 						name="stamina"
 						namePtBr="Vigor"
-						quant={6}
+						quant={dataSheet && dataSheet.data && dataSheet.data.form && dataSheet.data.form === 'Crinos' ? 10 : 6}
 					/>
         </div>
         <div className="w-full mt-2 md:mt-3 p-4">

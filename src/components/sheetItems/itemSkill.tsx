@@ -1,26 +1,32 @@
 'use client'
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
+import { capitalizeFirstLetter, translate } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 
 export default function ItemSkill(props: any) {
 	const { name, namePtBr, quant } = props;
-	const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
+	const { dataSheet, session, email, sheetId, setShowMessage } = useContext(contexto);
   const [ skill, setSkill ] = useState<string>(dataSheet.data.skills[name].specialty);
   const [input, setInput ] = useState(false);
 
   const updateValue = async (value: number) => {
+    const dataPersist = dataSheet.data.skills[name].value;
     if (dataSheet.data.skills[name].value === 1 && value === 1) 
       dataSheet.data.skills[name] = { value: 0, specialty: skill };
     else dataSheet.data.skills[name] = { value, specialty: skill };
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Habilidade ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`, type: 'notification' }, null, setShowMessage);
   };
 
   const updateSpecialty = async () => {
+    const dataPersist = dataSheet.data.skills[name].specialty;
     dataSheet.data.skills[name] = { value: dataSheet.data.skills[name].value, specialty: skill };
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a especialização da Habilidade ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de '${dataPersist}' para '${skill}'.`, type: 'notification' }, null, setShowMessage);
   };
 
   const returnPoints = () => {

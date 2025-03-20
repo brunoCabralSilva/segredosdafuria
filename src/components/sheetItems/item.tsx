@@ -1,7 +1,9 @@
 'use client'
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { rageCheck } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext } from "react";
 
 export default function Item(props: any) {
@@ -11,6 +13,7 @@ export default function Item(props: any) {
     dataSheet,
     sessionId,
     sheetId,
+    session,
     setShowMessage,
     setShowHarano,
     setShowHauglosk,
@@ -18,9 +21,11 @@ export default function Item(props: any) {
   } = useContext(contexto);
   
   const updateValue = async (name: string, value: number) => {
+    const dataPersist = dataSheet.data[name];
     if (dataSheet.data[name] === 1 && value === 1) dataSheet.data[name] = 0;
     else dataSheet.data[name] = value;
 		await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${dataPersist} para ${value}.`, type: 'notification' }, null, setShowMessage);
   };
 
   return(

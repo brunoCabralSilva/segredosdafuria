@@ -122,7 +122,7 @@ export default function MenuPlayer() {
               email === session.gameMaster &&
               <option value={'notifications'}>Notificações { listNotification.length > 0 ? '(' + listNotification.length + ')' : ''}</option>
             }
-            { email === session.gameMaster && <option value={'history'}>Histórico</option> }
+            <option value={'history'}>Histórico</option>
             { sheetId !== '' && <option value={'general'}>Geral</option> }
             { sheetId !== '' && <option value={'attributes'}>Atributos</option> }
             { sheetId !== '' && <option value={'skills'}>Habilidades</option> }

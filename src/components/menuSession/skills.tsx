@@ -3,13 +3,17 @@ import { updateDataPlayer } from "@/firebase/players";
 import ItemSkill from "../sheetItems/itemSkill";
 import { useContext } from "react";
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function Skills() {
-  const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
+  const { dataSheet, session, email, sheetId, setShowMessage } = useContext(contexto);
   const updateValue = async (value: string) => {
     const newDataSheet = dataSheet;
+    const dataPersist = newDataSheet.data.skills.type;
     newDataSheet.data.skills.type = value;
     await updateDataPlayer(sheetId, newDataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o modelo de distribuição de habilidades do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`, type: 'notification' }, null, setShowMessage);
   }
 
   return(

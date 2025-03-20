@@ -1,17 +1,22 @@
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export default function Ritual(props: { ritual: any, index: number, length: number }) {
   const [showRitual, setShowRitual] = useState(false);
   const { ritual, index, length } = props;
-  const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
+  const { dataSheet, session, email, sheetId, setShowMessage } = useContext(contexto);
+
   const registerRitual = async () => {
-    if (dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr))
+    const findRitual = dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr);
+    if (findRitual)
       dataSheet.data.rituals = dataSheet.data.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr)
     else dataSheet.data.rituals.push(ritual);
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${findRitual ? ' removeu' : ' adicionou'} o ${ritual.titlePtBr} ${findRitual ? 'do' : 'ao'} personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
   }
 
   return(

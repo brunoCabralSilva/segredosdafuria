@@ -2,12 +2,14 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useContext } from "react";
 import { updateDataPlayer } from "@/firebase/players";
-import { playerSheet } from "@/firebase/utilities";
+import { capitalizeFirstLetter, playerSheet } from "@/firebase/utilities";
 import contexto from "@/context/context";
 import { deletePlayerImage } from "@/firebase/storage";
+import { registerHistory } from "@/firebase/history";
 
 export default function ResetSheet() {
 	const {
+    email,
     sheetId,
     session,
     dataSheet,
@@ -20,11 +22,13 @@ export default function ResetSheet() {
   const resetSheet = async () => {
     try {
       setDataSheet({ ...dataSheet, data: playerSheet });
+      const dataPersist = dataSheet.data.name;
       await updateDataPlayer(sheetId, { ...dataSheet, data: playerSheet }, setShowMessage);
       setShowMessage({ show: true, text: "Sua ficha foi redefinida!" });
       setShowResetSheet(false);
       setShowMenuSession('');
       await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} redefiniu a ficha do personagem${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' }.`, type: 'notification' }, null, setShowMessage);
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
       setShowResetSheet(false);

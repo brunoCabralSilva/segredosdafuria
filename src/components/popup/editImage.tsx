@@ -1,6 +1,8 @@
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { updatePlayerImage } from "@/firebase/storage";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -8,7 +10,7 @@ export default function EditImage() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const { setShowMenuSession, dataSheet, session, sheetId, setShowMessage } = useContext(contexto);
+  const { setShowMenuSession, dataSheet, session, sheetId, setShowMessage, email } = useContext(contexto);
 
   useEffect(() => {
     return () => {
@@ -32,6 +34,7 @@ export default function EditImage() {
       dataSheet.data.profileImage = updateStorage;
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       setShowMenuSession("sheet");
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a imagem de perfil do personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
       setLoading(false);
     } catch (error) {
       console.error("Erro ao atualizar imagem:", error);

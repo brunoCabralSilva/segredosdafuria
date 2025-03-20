@@ -13,6 +13,7 @@ import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { CiEdit } from "react-icons/ci";
 import Image from "next/image";
 import DeleteSheet from "../popup/deleteSheet";
+import { registerHistory } from "@/firebase/history";
 
 export default function General() {
   const [input, setInput] = useState('');
@@ -48,9 +49,10 @@ export default function General() {
     setNewName(sanitizedValue);
   };
 
-  const updateValue = async (key: string, value: string) => {
+  const updateValue = async (key: string, value: string, namePtBr: string) => {
     const findPlayer = players.find((player: any) => player.id === sheetId);
     if (findPlayer) {
+      const dataPersist = findPlayer.data[key];
       findPlayer.data[key] = value;
       if (key === 'name') {
         if (value === '' || value === ' ') {
@@ -58,8 +60,13 @@ export default function General() {
         } else {
           await updateDataPlayer(sheetId, findPlayer, setShowMessage);
           setNewName(findPlayer.data.name);
+          await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(findPlayer.user)} alterou o nome do personagem ${dataPersist}${findPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(findPlayer.user)}` : '' } para ${capitalizeFirstLetter(value)}.`, type: 'notification' }, null, setShowMessage);
+        await updateDataPlayer(sheetId, findPlayer, setShowMessage);
         }
-      } else await updateDataPlayer(sheetId, findPlayer, setShowMessage);
+      } else {
+        await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(findPlayer.user)} alterou ${namePtBr === 'Tribo' ? 'a' : 'o'} ${namePtBr} do personagem ${findPlayer.data.name}${findPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(findPlayer.user)}` : '' } ${dataPersist !== '' ? `de ${capitalizeFirstLetter(dataPersist)} ` : ' '}para ${capitalizeFirstLetter(value)}.`, type: 'notification' }, null, setShowMessage);
+        await updateDataPlayer(sheetId, findPlayer, setShowMessage);
+      }
     }
   };
 
@@ -76,6 +83,7 @@ export default function General() {
       } else {
         await updateDataPlayer(sheetId, findPlayer, setShowMessage);
         setNewEmail(findPlayer.email);
+        await registerHistory(session.id, { message: `O Narrador alterou o email do personagem ${capitalizeFirstLetter(findPlayer.user)} para ${value}.`, type: 'notification' }, null, setShowMessage);
       }
     }
   };
@@ -112,7 +120,7 @@ export default function General() {
           input === 'nameCharacter'
             ? <BsCheckSquare
                 onClick={(e:any) => {
-                  updateValue('name', newName);
+                  updateValue('name', newName, 'nome do personagem');
                   setInput('');
                   e.stopPropagation();
                 }}
@@ -206,7 +214,7 @@ export default function General() {
           <select
             className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={dataSheet.data.auspice}
-            onChange={ (e) => updateValue('auspice', e.target.value) }
+            onChange={ (e) => updateValue('auspice', e.target.value, 'Augúrio') }
           >
             <option disabled value="">Escolha um Augúrio</option>
             <option value="ragabash">Ragabash</option>
@@ -221,7 +229,7 @@ export default function General() {
           <select
             className="w-full text-center py-1 bg-gray-whats-dark border-2 border-white mt-2 cursor-pointer"
             value={ dataSheet.data.trybe }
-            onChange={ (e) => updateValue('trybe', e.target.value) }
+            onChange={ (e) => updateValue('trybe', e.target.value, 'Tribo') }
           >
             <option disabled value="">Escolha uma Tribo</option>
             {

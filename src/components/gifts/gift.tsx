@@ -1,4 +1,5 @@
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useState } from "react";
@@ -7,13 +8,15 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 export default function Gift(props: { gift: any, index: number, length: number }) {
   const [showGift, setShowGift] = useState(false);
   const { gift, index, length } = props;
-  const { dataSheet, sheetId, setShowMessage } = useContext(contexto);
+  const { dataSheet, email, session, sheetId, setShowMessage } = useContext(contexto);
 
   const registerGift = async (gift: any) => {
-    if (dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr))
-      dataSheet.data.gifts = dataSheet.data.gifts.filter((item: any) => item.giftPtBr !== gift.giftPtBr)
+    const findGift = dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr);
+    if (findGift)
+      dataSheet.data.gifts = dataSheet.data.gifts.filter((item: any) => item.giftPtBr !== gift.giftPtBr) 
     else dataSheet.data.gifts.push(gift);
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${findGift ? ' removeu' : ' adicionou'} o dom ${gift.giftPtBr} ${findGift ? 'do' : 'ao'} personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
   }
 
   return(

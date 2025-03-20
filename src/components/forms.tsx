@@ -38,9 +38,10 @@ export default function Forms() {
         }
         dataSheet.data.form = newForm;
         await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+        setShowMenuSession('');
       } else if (newForm === 'Crinos') {
         if (dataSheet.data.rage < 2) {
-          await registerMessage( sessionId, { message: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma Crinos).`, type: 'rage check' }, email, setShowMessage);
+          setShowMessage({show: true, text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma Crinos).`});
         } else {
           if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
             dataSheet.data.attributes.strength += 4;
@@ -53,10 +54,11 @@ export default function Forms() {
           }
           dataSheet.data.form = newForm;
           await updateDataWithRage(sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
+          setShowMenuSession('');
         }
       } else {
         if (dataSheet.data.rage < 1) {
-          await registerMessage( sessionId, { message: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`, type: 'rage check' }, email, setShowMessage);
+          setShowMessage({show: true, text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`});
         } else {
           if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
             dataSheet.data.attributes.strength += 2;
@@ -69,9 +71,9 @@ export default function Forms() {
           }
           dataSheet.data.form = newForm;
           await updateDataWithRage(sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
+          setShowMenuSession('');
         }
       }
-      setShowMenuSession('');
     }
   };
 

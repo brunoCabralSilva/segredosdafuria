@@ -1,12 +1,14 @@
 'use client'
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 
 export default function ItemAgravated(props: any) {
   const [totalItem, setTotalItem] = useState(0);
   const { name, namePtBr } = props;
-	const { dataSheet, setShowMessage, sheetId } = useContext(contexto);
+	const { dataSheet, setShowMessage, sheetId, session, email } = useContext(contexto);
 
   useEffect(() => {
     const returnValues = async (): Promise<void> => {
@@ -19,6 +21,12 @@ export default function ItemAgravated(props: any) {
   
   const updateValue = async (value: number) => {
     if (dataSheet) {
+      const dataPersist = dataSheet.data[name].reduce((acc: any, item: any) => {
+        item.agravated ? acc.agravated += 1 : acc.letal += 1;
+        return acc;
+      }, { agravated: 0, letal: 0 });
+      const persistMessage = `Dano Agravado(${dataPersist.agravated}) e Dano Letal (${dataPersist.letal})`;
+
       if (dataSheet.data[name].length === 0) {
         dataSheet.data[name] = [ { value, agravated: false }];
       } else {
@@ -34,6 +42,12 @@ export default function ItemAgravated(props: any) {
         }
       }
 			await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+      const newPersist = dataSheet.data[name].reduce((acc: any, item: any) => {
+        item.agravated ? acc.agravated += 1 : acc.letal += 1;
+        return acc;
+      }, { agravated: 0, letal: 0 });
+      const persistValue = `Dano Agravado(${newPersist.agravated}) e Dano Letal(${newPersist.letal})`;
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${persistMessage} para ${persistValue}.`, type: 'notification' }, null, setShowMessage);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

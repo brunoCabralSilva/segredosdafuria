@@ -2,16 +2,18 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useContext } from "react";
 import { deleteDataPlayer } from "@/firebase/players";
-import { playerSheet } from "@/firebase/utilities";
+import { capitalizeFirstLetter, playerSheet } from "@/firebase/utilities";
 import contexto from "@/context/context";
 import { deletePlayerImage } from "@/firebase/storage";
+import { registerHistory } from "@/firebase/history";
 
 export default function DeleteSheet() {
 	const {
     sheetId,
     session,
-    setSheetId,
+    email,
     dataSheet,
+    setSheetId,
     setDataSheet,
     setShowMessage,
     setShowDeleteSheet,
@@ -22,6 +24,7 @@ export default function DeleteSheet() {
   const deleteSheet = async () => {
     try {
       setDataSheet({ ...dataSheet, data: playerSheet });
+      const dataPersist = dataSheet.data.name;
       await deleteDataPlayer(sheetId, session.id, dataSheet.data.profileImage, setShowMessage);
       setShowDeleteSheet(false);
       setSheetId('');
@@ -29,6 +32,7 @@ export default function DeleteSheet() {
       setShowMenuSession('');
       setOptionSelect('players');
       await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} excluiu a Ficha do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' }.`, type: 'notification' }, null, setShowMessage);
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
       setShowDeleteSheet(false);

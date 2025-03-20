@@ -36,11 +36,13 @@ export default function Players() {
   }
 
   const selectSheet = async (player: any) => {
-    setSheetId(player.id);
-    setOptionSelect('general');
-    setDataSheet(player);
-    setShowMessage({ show: true, text: `Você Selecionou o Personagem ${player.data.name !== '' ? player.data.name : ''} (${capitalizeFirstLetter(player.user)})` });
     if (dataSheet.id !== player.id) {
+      console.log(dataSheet.id);
+      console.log(player.id);
+      setSheetId(player.id);
+      setOptionSelect('general');
+      setDataSheet(player);
+      setShowMessage({ show: true, text: `Você Selecionou o Personagem ${player.data.name !== '' ? player.data.name : ''} (${capitalizeFirstLetter(player.user)})` });
       await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(player.user)} selecionou um personagem ${ session.gameMaster === email ? `de ${capitalizeFirstLetter(player.user)}` : ''}${player.data.name !== '' ? ` (${player.data.name}).` : '.'}`, type: 'notification' }, null,  setShowMessage);
     }
   }
