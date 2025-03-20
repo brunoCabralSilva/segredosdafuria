@@ -21,7 +21,7 @@ export default function Touchstones() {
             onClick={() => setAddTouchstone({ show: true, data: {} }) }
             className="text-white bg-black border-2 border-white hover:border-red-800 transition-colors my-1 mb-3 cursor-pointer w-full p-2 font-bold"
           >
-            Adicionar Pilares
+            Adicionar Pilar
           </button>
         }
         <div className="grid grid-cols-1 gap-3 pb-5">

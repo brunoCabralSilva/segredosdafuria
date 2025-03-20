@@ -1,13 +1,17 @@
+import { registerHistory } from '@/firebase/history';
 import dataAdvAndFlaws from '../../data/advantagesAndFlaws.json';
 import contexto from "@/context/context";
 import { updateDataPlayer } from '@/firebase/players';
 import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { capitalizeFirstLetter } from '@/firebase/utilities';
 
 export default function ItemAdvantage(props: { item: any, type: string }) {
   const { type, item } = props;
   const [showAdvantage, setShowAdvantage] = useState(false);
   const {
+    email,
+    session,
     sheetId,
     dataSheet,
     setShowMessage,
@@ -23,8 +27,28 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
   ) => {
     const obj = { name, cost, description, type, title };
     let newList: any = [];
-    if (advOfFlaw === 'flaw') newList = dataSheet.data.advantagesAndFlaws.flaws;
-    else newList = dataSheet.data.advantagesAndFlaws.advantages;
+    let dataPersist = '';
+    if (advOfFlaw === 'flaw') {
+      newList = dataSheet.data.advantagesAndFlaws.flaws;
+      const findFlaw = dataSheet.data.advantagesAndFlaws.flaws.filter((flaw: any) => flaw.name === name);
+      dataPersist = findFlaw
+      .map((flaw: any) => {
+        let label = flaw.title || flaw.description;
+        return `"${label} (${flaw.cost})"`;
+      })
+      .join(', ')
+      .replace(/, ([^,]+)$/, ' e $1');
+    } else {
+      newList = dataSheet.data.advantagesAndFlaws.advantages;
+      const findAdvantage = dataSheet.data.advantagesAndFlaws.advantages.filter((flaw: any) => flaw.name === name);
+      dataPersist = findAdvantage
+      .map((flaw: any) => {
+        let label = flaw.title || flaw.description;
+        return `"${label} (${flaw.cost})"`;
+      })
+      .join(', ')
+      .replace(/, ([^,]+)$/, ' e $1');
+    }
     if (newList.length === 0) newList.push(obj);
     else {
       const sameName = newList.filter((item: any) => item.name === name);
@@ -43,6 +67,29 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
     if (advOfFlaw === 'flaw') dataSheet.data.advantagesAndFlaws.flaws = newList;
     else dataSheet.data.advantagesAndFlaws.advantages = newList;
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+
+    let newPersist = '';
+    if (advOfFlaw === 'flaw') {
+      const findFlaw = dataSheet.data.advantagesAndFlaws.flaws.filter((flaw: any) => flaw.name === name);
+      newPersist = findFlaw
+      .map((flaw: any) => {
+        let label = flaw.title || flaw.description;
+        return `"${label} (${flaw.cost})"`;
+      })
+      .join(', ')
+      .replace(/, ([^,]+)$/, ' e $1');
+    } else {
+      const findAdvantage = dataSheet.data.advantagesAndFlaws.advantages.filter((adv: any) => adv.name === name);
+      newPersist = findAdvantage
+        .map((flaw: any) => {
+          let label = flaw.title || flaw.description;
+          return `"${label} (${flaw.cost})"`;
+        })
+        .join(', ')
+        .replace(/, ([^,]+)$/, ' e $1');
+    }
+
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o ${advOfFlaw === 'flaw' ? 'Defeito' : 'Mérito/Background'} ${name} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${dataPersist === '' ? "''" : dataPersist} para ${newPersist === '' ? "''" : newPersist}.`, type: 'notification' }, null, setShowMessage);
   }
 
   const verifySelected = () => {
@@ -78,7 +125,8 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
               <div className="px-4 pb-4">
               <p>{ item.description }</p>
               {
-                item.advantages.map((adv: any, index2: number) => (
+                item.advantages
+                .map((adv: any, index2: number) => (
                   <div
                     key={index2}
                     onClick={() => {
@@ -114,7 +162,8 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
               <div className="px-4 pb-4">
                 <p>{ item.description }</p>
                 {
-                  item.flaws.map((adv: any, index2: number) => (
+                  item.flaws
+                  .map((adv: any, index2: number) => (
                     <div
                       key={index2}
                       onClick={() => {

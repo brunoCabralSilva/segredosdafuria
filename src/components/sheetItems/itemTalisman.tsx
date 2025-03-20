@@ -1,5 +1,7 @@
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from '@/firebase/players';
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -7,6 +9,8 @@ export default function ItemTalisman(props: { item: any }) {
   const { item } = props;
   const [showTalisman, setShowTalisman] = useState(false);
   const {
+    email,
+    session,
     sheetId,
     dataSheet,
     setShowMessage,
@@ -20,6 +24,11 @@ export default function ItemTalisman(props: { item: any }) {
   ) => {
     const obj = { name, value, description, type };
     let newList = dataSheet.data.advantagesAndFlaws.talens;
+    const findTls = dataSheet.data.advantagesAndFlaws.talens.filter((flaw: any) => flaw.name === name);
+    const dataPersist = findTls
+      .map((flaw: any) => `"${flaw.type} (${flaw.value})"`)
+      .join(', ')
+      .replace(/, ([^,]+)$/, ' e $1');
     if (newList.length === 0) newList.push(obj);
     else {
       const sameName = newList.filter((item: any) => item.name === name);
@@ -31,6 +40,14 @@ export default function ItemTalisman(props: { item: any }) {
     }
     dataSheet.data.advantagesAndFlaws.talens = newList;
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+
+    const findTalen = dataSheet.data.advantagesAndFlaws.talens.filter((flaw: any) => flaw.name === name);
+    const newPersist = findTalen
+      .map((flaw: any) => `"${flaw.type} (${flaw.value})"`)
+      .join(', ')
+      .replace(/, ([^,]+)$/, ' e $1');
+
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o Talismã ${name} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${findTls.length === 0 ? "''" : dataPersist} para ${findTalen.length === 0 ? "''" : newPersist}.`, type: 'notification' }, null, setShowMessage);
   }
 
   const verifySelected = () => {

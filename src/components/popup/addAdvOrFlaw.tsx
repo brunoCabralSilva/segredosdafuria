@@ -38,16 +38,31 @@ export default function AddAdvOrFlaw(props: { type: string }) {
         </div>
         {
           type === 'advantage' &&
-          <select
-            value={selectOption}
-            onChange={(e) => setSelectOption(e.target.value) }
-            className="border-2 cursor-pointer border-white p-2 mt-2 bg-black w-full text-white font-bold"
-          >
-            <option value="merits">Méritos e Backgrounds</option>
-            <option value="talens">Talismãs</option>
-            <option value="loresheets">Loresheets</option>
-          </select>
+          <div className="flex gap-1 mb-2">
+            <button
+              type="button"
+              className={`${selectOption === 'merits' ? 'border-red-500 bg-black' : 'border-white bg-gray-whats-dark'} px-3 py-1 border-2 rounded-full text-white`}
+              onClick={ (e) => setSelectOption('merits') }
+            >
+              Méritos e Backgrounds
+            </button>
+            <button
+              type="button"
+              className={`${selectOption === 'talens' ? 'border-red-500 bg-black' : 'border-white bg-gray-whats-dark'} px-3 py-1 border-2 rounded-full text-white`}
+              onClick={ (e) => setSelectOption('talens') }
+            >
+              Talismãs
+            </button>
+            <button
+              type="button"
+              className={`${selectOption === 'loresheets' ? 'border-red-500 bg-black' : 'border-white bg-gray-whats-dark'} border-2 px-3 py-1 rounded-full text-white`}
+              onClick={ (e) => setSelectOption('loresheets') }
+            >
+              Loresheets
+            </button>
+          </div>
         }
+        
         <div className="custom-grid">
           {
             type === 'advantage'
@@ -55,7 +70,9 @@ export default function AddAdvOrFlaw(props: { type: string }) {
               { 
                 selectOption === 'merits' &&
                 <div>{
-                  dataAdvAndFlaws.map((item: any, index: number) => (
+                  dataAdvAndFlaws
+                  .filter((adv: any) => adv.advantages?.length > 0)
+                  .map((item: any, index: number) => (
                     <div key={index} className="pb-2">
                       <ItemAdvantage type="advantage" item={item} />
                     </div>
@@ -65,7 +82,8 @@ export default function AddAdvOrFlaw(props: { type: string }) {
               { 
                 selectOption === 'talens' &&
                 <div>{
-                  dataTalens.map((item: any, index: number) => (
+                  dataTalens
+                  .map((item: any, index: number) => (
                     <div key={index} className="pb-2">
                       <ItemTalisman item={item} />
                     </div>
@@ -88,7 +106,9 @@ export default function AddAdvOrFlaw(props: { type: string }) {
               { 
                 type === 'flaw' &&
                 <div>{
-                  dataAdvAndFlaws.map((item: any, index: number) => (
+                  dataAdvAndFlaws
+                  .filter((adv: any) => adv.flaws?.length > 0)
+                  .map((item: any, index: number) => (
                     <div key={index} className="pb-2">
                       <ItemAdvantage type="flaw" item={item} />
                     </div>

@@ -1,5 +1,7 @@
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -8,10 +10,13 @@ export default function AddTouchstone() {
   const [description, setDescription] = useState('');
   const [listTouchstones, setListTouchstones] = useState({});
   const {
-    dataSheet,
-    addTouchstone, setAddTouchstone,
-    setShowMessage,
+    email,
+    session,
     sheetId,
+    dataSheet,
+    addTouchstone,
+    setAddTouchstone,
+    setShowMessage,
    } = useContext(contexto);
 
   useEffect(() => {
@@ -31,6 +36,7 @@ export default function AddTouchstone() {
       dataSheet.data.touchstones = [...dataSheet.data.touchstones, { name, description }];
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     }
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${addTouchstone.data.name ? ' atualizou' : ' adicionou'} o Pilar ${name} ${addTouchstone.data.name ? 'do' : 'ao'} personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
     setAddTouchstone({ show: false, data: {} });
   }
 

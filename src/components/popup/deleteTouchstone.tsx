@@ -1,11 +1,15 @@
 'use client'
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function DeleteTouchstone() {
   const {
+    email,
+    session,
     sheetId,
     dataSheet,
     showDeleteTouchstone,
@@ -18,6 +22,7 @@ export default function DeleteTouchstone() {
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     setShowMessage({ show: true, text: 'O Pilar foi removido.' });
     setShowDeleteTouchstone({ show: false, name: '' });
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} excluiu o Pilar ${showDeleteTouchstone.name} do personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
   };
 
   return(
@@ -32,7 +37,7 @@ export default function DeleteTouchstone() {
         <div className="pb-5 px-5 w-full">
           <label htmlFor="palavra-passe" className="flex flex-col items-center w-full">
             <p className="text-white w-full text-center pb-3">
-              Tem certeza de que quer apagar este Pilar?
+              Tem certeza de que quer excluir este Pilar?
             </p>
           </label>
           <div className="flex w-full gap-2">
@@ -48,7 +53,7 @@ export default function DeleteTouchstone() {
               onClick={ deleteTouchstone }
               className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
             >
-              Sim
+              Excluir Pilar
             </button>
           </div>
         </div>
