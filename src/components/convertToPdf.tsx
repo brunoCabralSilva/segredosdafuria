@@ -43,11 +43,15 @@ export default function ConvertToPdf(props: { data: any }) {
   };
   
   useLayoutEffect(() => {
-    if (!hasDownloaded.current) {
-      handleDownloadPdf();
-      setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 5000);
-      hasDownloaded.current = true;
-    }
+    const download = async () => {
+      if (!hasDownloaded.current) {
+        await handleDownloadPdf(); // espera a função terminar
+        // setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 5000);
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        hasDownloaded.current = true;
+      }
+    };
+    download();
   }, []);
 
   const returnPoints = (name: string) => {
