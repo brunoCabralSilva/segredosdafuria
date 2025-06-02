@@ -44,6 +44,7 @@ export default function ConvertToPdf(props: { data: any }) {
   
   useLayoutEffect(() => {
     const download = async () => {
+      console.log("Data para PDF:", data);
       if (!hasDownloaded.current) {
         await handleDownloadPdf();
         setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 5000);
