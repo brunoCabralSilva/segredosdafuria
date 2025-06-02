@@ -213,7 +213,6 @@ export const updateDataWithRage = async (sessionId: string, email: string, sheet
     }
     const newRage = newData.data.rage - (resultOfRage.length - success);
     if (newRage < 0) newData.data.rage = 0;
-
     newData.data.rage = newRage;
 
     let textNumberofChecks = '';

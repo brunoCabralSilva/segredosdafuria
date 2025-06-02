@@ -1,5 +1,7 @@
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateSession } from "@/firebase/sessions";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -9,7 +11,7 @@ export default function AddFavorAndBan() {
   const {
     addFavorAndBan, setAddFavorAndBan,
     setShowMessage,
-    sheetId,
+    email,
     session,
     dataSheet,
   } = useContext(contexto);
@@ -38,6 +40,7 @@ export default function AddFavorAndBan() {
       newDataSession.favorsAndBans = [...newDataSession.favorsAndBans, { description, order: newDataSession.favorsAndBans.length + 1 }];
       await updateSession(newDataSession, setShowMessage);
     }
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${addFavorAndBan.data.description ? ' atualizou' : ' adicionou'} um Favor / Proibição.`, type: 'notification' }, null, setShowMessage);
     setAddFavorAndBan({ show: false, data: {}, type: '' });
   }
 

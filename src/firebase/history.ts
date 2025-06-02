@@ -26,9 +26,7 @@ export const registerHistory = async (sessionId: string, data: any, email: strin
 		const chatsCollectionRef = collection(db, 'history');
 		const querySession = query(chatsCollectionRef, where("sessionId", "==", sessionId));
 		const querySnapshot = await getDocs(querySession);
-		if (querySnapshot.empty) {
-		  setShowMessage({ show: true, text: 'Não foi possível localizar a Sessão (1). Por favor, atualize a página e tente novamente.' });
-		} else {
+		if (!querySnapshot.empty) {
 			const sessionDocRef = querySnapshot.docs[0].ref;
 			await runTransaction(db, async (transaction: any) => {
         const sessionDocSnapshot = await transaction.get(sessionDocRef);

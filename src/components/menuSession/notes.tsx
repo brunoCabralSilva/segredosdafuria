@@ -4,11 +4,13 @@ import { FaRegEdit } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import contexto from "@/context/context";
 import { updateSession } from "@/firebase/sessions";
+import { registerHistory } from "@/firebase/history";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function Notes(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
-  const { session, setShowMessage } =  useContext(contexto);
+  const { session, dataSheet, email, setShowMessage } =  useContext(contexto);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
@@ -24,6 +26,7 @@ export default function Notes(props: { type: string }) {
     const dataSession = session;
     dataSession.anotations = text;
     await updateSession(dataSession, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} atualizou as Anotações da Sessão.`, type: 'notification' }, null, setShowMessage);
   };
 
   return(

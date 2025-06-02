@@ -1,7 +1,9 @@
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { updateSession } from "@/firebase/sessions";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -10,8 +12,11 @@ export default function AddPrinciple() {
   const [description, setDescription] = useState('');
   const [listPrinciples, setListPrinciples] = useState({});
   const {
-    addPrinciple, setAddPrinciple,
+    email,
+    dataSheet,
+    addPrinciple,
     setShowMessage,
+    setAddPrinciple,
     session,
   } = useContext(contexto);
   const router = useRouter();
@@ -35,6 +40,7 @@ export default function AddPrinciple() {
         newDataSession.principles = [...newDataSession.principles, { email: auth.email, description, order: newDataSession.principles.length + 1 }];
         await updateSession(newDataSession, setShowMessage);
       }
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${addPrinciple.data.description ? ' atualizou' : ' adicionou'} um Princípio ${addPrinciple.data.description ? 'do' : 'ao' } personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
     } else router.push('/login');
     setAddPrinciple({ show: false, data: {} });
   }

@@ -4,11 +4,13 @@ import { FaRegEdit } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import contexto from "@/context/context";
 import { updateDataPlayer } from "@/firebase/players";
+import { registerHistory } from "@/firebase/history";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function Background(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
-  const { sheetId, dataSheet, setShowMessage } =  useContext(contexto);
+  const { sheetId, session, email, dataSheet, setShowMessage } =  useContext(contexto);
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
@@ -26,6 +28,7 @@ export default function Background(props: { type: string }) {
       const dataItem = dataSheet;
       dataItem.data[type] = text;
 			await updateDataPlayer(sheetId, dataItem, setShowMessage);
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} atualizou o Background do personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
     } else setShowMessage({ show: true, text: 'Jogador não encontrado! Por favor, atualize a página e tente novamente' });
   };
 

@@ -1,20 +1,26 @@
 'use client'
 import contexto from "@/context/context";
+import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { updateSession } from "@/firebase/sessions";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 export default function DeleteFavorAndBan() {
   const {
-    setShowMessage,
-    showDeleteFavorAndBan, setShowDeleteFavorAndBan,
+    email,
+    showDeleteFavorAndBan,
     dataSheet,
     sheetId,
     session,
+    setShowMessage,
+    setShowDeleteFavorAndBan,
   } = useContext(contexto);
 
   const deleteFavorAndBan = async () => {
+    // const findItem = dataSheet.data.favorsAndBans.find((favorAndBan: any) => favorAndBan.order === showDeleteFavorAndBan.name);
+    // console.log(findItem);
     if (showDeleteFavorAndBan.type === 'player') {
       dataSheet.data.favorsAndBans = dataSheet.data.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== showDeleteFavorAndBan.name);
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
@@ -25,6 +31,7 @@ export default function DeleteFavorAndBan() {
       await updateSession(newDataSession, setShowMessage);
       setShowMessage({ show: true, text: 'O Favor / Proibição foi excluído.' });
     }
+    // await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} excluiu o Favor / Proibição "${showDeleteFavorAndBan.name}" do personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
     setShowDeleteFavorAndBan({ show: false, name: '', type: '' });
   };
 

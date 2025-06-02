@@ -1,14 +1,17 @@
 'use client'
 import { useContext } from "react";
-import dataForms from '../data/forms.json';
+import dataForms from '../../data/forms.json';
 import Image from 'next/image';
 import contexto from "@/context/context";
 import { updateDataPlayer, updateDataWithRage } from "@/firebase/players";
 import { registerMessage } from "@/firebase/messagesAndRolls";
+import { registerHistory } from "@/firebase/history";
+import { capitalizeFirstLetter } from "@/firebase/utilities";
 
 export default function Forms() {
   const {
     email,
+    session,
     dataSheet,
     sessionId,
     sheetId,
@@ -27,14 +30,17 @@ export default function Forms() {
           if (dataSheet.data.rage > 0) {
             dataSheet.data.rage = 1;
             await registerMessage( sessionId, { message: `O personagem ${dataSheet.data.name} Mudou para a forma ${newForm}. Fúria reduzida para 1 por ter saído da forma Crinos.`, type: 'transform' }, email, setShowMessage);
+            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${actualForm} para ${newForm} (Fúria reduzida para 1 por ter saído da forma Crinos.).`, type: 'notification' }, null, setShowMessage);
           }
         } else if (actualForm === 'Hispo' || actualForm === 'Glabro') {
           dataSheet.data.attributes.strength -= 2;
           dataSheet.data.attributes.stamina -= 2;
           dataSheet.data.attributes.dexterity -= 2;
           await registerMessage( sessionId, { message: `O personagem ${dataSheet.data.name} Mudou para a forma ${newForm}.`, type: 'transform' }, email, setShowMessage);
+          await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${actualForm} para ${newForm}.`, type: 'notification' }, null, setShowMessage);
         } else {
           await registerMessage( sessionId, { message: `O personagem ${dataSheet.data.name} Mudou para a forma ${newForm}.`, type: 'transform' }, email, setShowMessage);
+          await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${actualForm} para ${newForm}.`, type: 'notification' }, null, setShowMessage);
         }
         dataSheet.data.form = newForm;
         await updateDataPlayer(sheetId, dataSheet, setShowMessage);
@@ -52,8 +58,10 @@ export default function Forms() {
             dataSheet.data.attributes.stamina += 2;
             dataSheet.data.attributes.dexterity += 2;
           }
+          const oldRage = dataSheet.data.rage;
           dataSheet.data.form = newForm;
           await updateDataWithRage(sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
+          await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${actualForm} para ${dataSheet.data.form} (${ oldRage === dataSheet.data.rage ? 'Não houve perda de Fúria' : `Fúria atualizada de ${oldRage} para ${dataSheet.data.rage}` }).`, type: 'notification' }, null, setShowMessage);
           setShowMenuSession('');
         }
       } else {
@@ -70,7 +78,9 @@ export default function Forms() {
             dataSheet.data.attributes.dexterity -= 2;
           }
           dataSheet.data.form = newForm;
+          const oldRage = dataSheet.data.rage;
           await updateDataWithRage(sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
+          await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${actualForm} para ${dataSheet.data.form} (${ oldRage === dataSheet.data.rage ? 'Não houve perda de Fúria' : `Fúria atualizada de ${oldRage} para ${dataSheet.data.rage}` }).`, type: 'notification' }, null, setShowMessage);
           setShowMenuSession('');
         }
       }

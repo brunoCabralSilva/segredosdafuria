@@ -9,7 +9,6 @@ import Anotations from "./menuSession/notes";
 import Gifts from "./menuSession/gifts";
 import Details from "./menuSession/details";
 import Attributes from "./menuSession/attributes";
-import Forms from "./forms";
 import Background from "./menuSession/background";
 import HaranoHauglosk from "./popup/haranoHauglosk";
 import GiftRoll from "./gifts/giftRoll";
@@ -24,6 +23,7 @@ import { collection, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import Consent from "./menuSession/consent";
 import History from "./menuSession/history";
+import Forms from "./menuSession/forms";
 
 export default function MenuPlayer() {
   const {
