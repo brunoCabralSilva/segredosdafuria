@@ -45,7 +45,7 @@ export default function ConvertToPdf(props: { data: any }) {
   useLayoutEffect(() => {
     if (!hasDownloaded.current) {
       handleDownloadPdf();
-      setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 3000);
+      setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 5000);
       hasDownloaded.current = true;
     }
   }, []);
