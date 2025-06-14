@@ -182,7 +182,7 @@
   },
   {
     "id": 6,
-    "titlePtBr": "Os Emissários de Atena",
+    "titlePtBr": "As Emissárias de Atena",
     "title": "The Emissaries of Athena",
     "descriptionPtBr": "Helena 'Hel' Thompson e Tallulah McCoy são um par de Silent Striders que formaram uma matilha de dois. Em vez de reivindicar um território físico, eles percorrem o mundo em busca de informações sobre lobisomens e metamorfos fora da Nação Garou. Eles se tornaram especialistas em proteger matilhas de ameaças como os Dançarinos da Espiral Negra, o Culto de Fenris, metamorfos não-lobos e outros. Tallulah adora trocar histórias com outros Galliards, enquanto Hel, como Filodox, ajuda a decidir se a dupla ajudará uma matilha com informações ou se unirá a uma batalha iminente. Suas metodologias combinam o melhor dos dois mundos. Hel usa técnicas rituais e ocultas para perseguir espíritos que podem ter visto metamorfos renegados. Tallulah trabalha em bares e roadhouses como garçonete, mantendo os ouvidos abertos para avistamentos estranhos e contos sussurrados à meia-noite. Essas informações os mantêm rastreando um monstro ou outro, embora tenham cuidado em respeitar a maioria dos territórios das matilhas. Eles frequentemente trocam ajuda a uma matilha com um problema local por passagem gratuita pela área ou recebendo informações sobre um de seus alvos. Eles escolheram Atena como sua luz guia por causa de sua associação com a coruja, seu espírito patrono. Ela é conhecida como uma deusa da sabedoria que não tem medo de lutar. Seu estilo de guerra se concentra em estudar o inimigo e usar esse conhecimento para desenvolver táticas adequadas. Embora muita mitologia se concentre na história das tribos da Nação Garou, as informações sobre outros lobisomens são menos concretas. Esses inimigos precisam ser compreendidos antes de serem destruídos, para que, da próxima vez que apareçam, possam ser destruídos de maneira mais eficiente. Atena funciona como um símbolo de sua missão para Hel, mas Tallulah às vezes insiste que pode ouvir a deusa durante a caçada. Embora não sejam parentes, eles frequentemente discutem como irmãos. Ambos amam sua Dodge Ram Charger azul bebê chamada Daisy, mas muitas vezes discutem sobre de quem é a vez de abastecer e manter a grande caminhonete. Hel zomba de Tallulah chamando-a de 'Tall', mesmo que sua forma homid mal alcance cinco pés. Tallulah oferece elogios sarcásticos sobre como todas as noites que Hel passa sozinha em cemitérios valeram a pena quando a pesquisa oculta de Hel descobre algo. No entanto, eles também se unem se alguém decidir zombar de qualquer um dos Emissários. Eles podem não ter um território específico para defender, mas quando lutam um pelo outro, a batalha não é menos feroz.",
     "description": "Helena “Hel” Thompson and Tallulah McCoy are a pair of    Silent Striders who formed a pack of skill. Rather than lay claim to a physical territory, they wander the world seeking out information on werewolves and shapeshifters outside of the Garou Nation. They've become experts on protecting packs from the likes of the Black Spiral Dancers, the Cult of Fenris, non-wolf shifters and more. Tallulah loves to swap stories with fellow Galliards while Hel's Philodox Auspice helps them decide if the duo will help a pack with information or if they will join an upcoming battle. Their methodologies combine the best of both worlds. Hel uses ritual and occult techniques to pursue spirits who might have seen rogue shifters. Tallulah works bars and roadhouses as a waitress keeping her ears open for strange sightings and weird whispered tales at midnight. This information keeps them tracking one monster or another though they are careful to respect most pack territory. They will often exchange assisting a pack with a local problem for free passage through the area or receiving information about one of their quarries. They chose Athena as their guiding light because of her association with Owl, their patron spirit. She is known as a goddess of wisdom who isn't afraid to fight. Her style of warfare focuses on studying the enemy and using that knowledge to develop proper tactics. While a lot of mythology centers on the history of the Garou Nation tribes, the information on other werewolves is less concrete. These enemies must be understood before they are destroyed, so the next time they appear they can be destroyed more efficiently. Athena functions as a symbol of their mission to Hel but Tallulah sometimes insists that she can hear the goddess while on the hunt. Though not related, they often bicker like siblings. They both love their baby blue Dodge Ram Charger named Daisy but will often argue about whose turn it is to fuel and maintain the large pick-up. Hel chides Tallulah by calling her “Tall” even though her homid form barely reaches five feet. Tallulah offers backhanded compliments about how all the nights Hel hangs out alone in graveyards paid off when Hel's occult research turns up something. Yet they also unite should anyone else decide to mock either of the Emissaries. They may not have a specific territory to defend, but when they fight for each other, the battle is no less fierce.",
@@ -467,5 +467,113 @@
     ],
     "book": "Shattered Nation",
     "page": 140
+  },
+  {
+    "id": 14,
+    "title": "Tender of Banes",
+    "titlePtBr": "Vigia dos Malditos",
+    "description": "Many Garou follow the Litany to a fault and will always combat the Wyrm wherever it dwells and whenever it thrives. The question arises: what is combat? When you destroy the same Bane over and over again, each time thinking it will turn out differently than the last, it feels less like combat and more like insanity. The role of Bane Tender is very common among the members of the Ghost Council, with some stories saying that they were the first tribe to perform the Rite of Binding as a solution to Banes. Binding a Bane that cannot be destroyed by normal means would seem like a good solution, but like anything touched by the Wyrm, it is not that simple. These seals need to be kept in order and need to be attended. A Bane Tender must be sure that no one attempts to release the Bane, or that the influence of a Bane on the surrounding area is not significant. After the shattering of the Garou Nation, the rise of the Cult of Fenris, and the subsequent passing of many older werewolves, many complications revolve around the Bane Tenders. With them gone, substantial volumes of old seals remain unattended, turning them into impending disaster zones when the Bane escapes.",
+    "descriptionPtBr": "Muitos Garou seguem a Litania ao pé da letra e sempre combaterão a Wyrm onde quer que ela habite e sempre que ela prospere. Surge então a pergunta: o que é combate? Quando você destrói o mesmo Maldito repetidamente, cada vez pensando que o resultado será diferente da última vez, isso parece menos com combate e mais com insanidade. O papel de Vigia dos Malditos é muito comum entre os membros do Conselho dos Fantasmas, com algumas histórias dizendo que foram eles a primeira tribo a realizar o Ritual de Vinculação como uma solução para os Malditos. Vincular um Maldito que não pode ser destruído por meios normais pareceria uma boa solução, mas, como tudo que é tocado pela Wyrm, não é tão simples assim. Esses selos precisam ser mantidos em ordem e precisam ser vigiados. Um Vigia dos Malditos deve garantir que ninguém tente libertar o Maldito ou que a influência de um Maldito na área ao redor não se torne significativa. Após a fragmentação da Nação Garou, a ascensão da Seita de Fenris e o consequente desaparecimento de muitos dos anciãos, muitas complicações passaram a girar em torno dos Vigias dos Malditos. Com eles desaparecidos, grandes volumes de antigos selos permanecem sem supervisão, transformando-se em zonas de desastre iminente quando o Maldito escapar.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Canary: Recognizing the signs of a Bane around a seal takes years, but you have a sixth sense of sorts. You add two dice to Investigation rolls concerning Banes.",
+        "skillPtBr": "Canário: Reconhecer os sinais de um Maldito ao redor de um selo leva anos, mas você tem um tipo de sexto sentido. Você adiciona dois dados em testes de Investigação relacionados a Malditos."
+      },
+      {
+        "cost": 2,
+        "skill": "A Bane Tender's Map: You have a rabbit skin with a map painted on it containing the locations of imprisoned Banes in the area — the previous owner left both map and the duty to you.",
+        "skillPtBr": "Mapa do Vigia dos Malditos: Você possui uma pele de coelho com um mapa pintado que contém as localizações de Malditos aprisionados na região — o antigo dono deixou tanto o mapa quanto o dever para você."
+      },
+      {
+        "cost": 3,
+        "skill": "Cellmaker: With a bit of knowledge and tutelage, you can call yourself a Bane Tender as you know how to make a suitable prison for a Bane. Once per story, you can declare something to be suitable for housing a specific Bane and then add one additional normal die to the Rite of Binding when it is used for that.",
+        "skillPtBr": "Construtor de Celas: Com algum conhecimento e aprendizado, você pode se chamar de Vigia dos Malditos, pois sabe como criar uma prisão adequada para um Maldito. Uma vez por história, você pode declarar que algo é apropriado para aprisionar um Maldito específico e, ao fazer isso, adicionar um dado normal adicional ao Ritual de Vinculação quando ele for usado para esse fim."
+      },
+      {
+        "cost": 4,
+        "skill": "Warden's Routine: After spending so much time with your prisoner-Bane, its dark murmurings have grown to be a strange comfort for you. Once per story, spend a scene having a potentially one-sided conversation with the Bane and regain Aggravated Willpower as if it was a Touchstone.",
+        "skillPtBr": "Rotina do Guardião: Após passar tanto tempo com seu Maldito-prisioneiro, os sussurros sombrios dele se tornaram um estranho conforto para você. Uma vez por história, passe uma cena tendo uma conversa potencialmente unilateral com o Maldito e recupere Força de Vontade Agravada como se ele fosse um Pilar."
+      },
+      {
+        "cost": 5,
+        "skill": "Wisdom from the Void: You've been tasked with keeping a powerful Bane within its cage, but the sheer amount of forbidden knowledge that this spirit possesses made it more valuable than the average imprisoned Bane. So, it was bound to answer to the Bane Tender. This acts as a five-dot Spirit Pact but the spirit is trapped behind the seal. Once per session, you may consult this entity, adding its Power to a Dice Pool involving knowledge, but each consultation without a minor payment or trinket offered will have the Bane attempt to escape its shackles.",
+        "skillPtBr": "Sabedoria do Vazio: Você foi encarregado de manter um poderoso Maldito dentro de sua prisão, mas a quantidade de conhecimento proibido que esse espírito possui o tornou mais valioso do que um Maldito comum aprisionado. Por isso, ele foi vinculado a responder ao Vigia dos Malditos. Isso funciona como um Pacto Espiritual de cinco pontos, mas o espírito está preso atrás do selo. Uma vez por sessão, você pode consultar essa entidade, adicionando o Poder dela a um jogada envolvendo conhecimento, mas cada consulta sem oferecer um pagamento simbólico ou uma pequena oferenda fará com que o Maldito tente escapar de suas correntes."
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 35
+  },
+  {
+    "id": 15,
+    "title": "The Skinner",
+    "titlePtBr": "O Peleiro",
+    "description": "Each one of the Stolen Moons bears their own horror story, but The Skinner's story is one that drives a chill into even the bravest werewolf. For more than fifty years, legends worldwide tell of a man who not only wears a patchwork of the Garou's skin but perfectly replicates the abilities of those he skins. No one is sure who, if anyone, is beneath the hulking lupine mass of patchwork flesh that stalks Garou packs. Some Stolen Moons claim that The Skinner started them down their dark path. The Skinner is real; you know because you've met him. Perhaps you witnessed him slay and skin a comrade. Maybe he tempted someone you loved into becoming a Stolen Moon. You might have seen the business end of his blade and survived, coming away with deep scars and a deeper grudge. However he carved his way into your life, you're ready and willing to take him on. When you select your first Merit from this Loresheet, you receive The Skinner as a three-dot Adversary.",
+    "descriptionPtBr": "Cada um dos Luas Usurpadas carrega sua própria história de horror, mas a história do Peleiro é aquela que gela até mesmo os mais corajosos Garous. Há mais de cinquenta anos, lendas ao redor do mundo falam de um homem que não apenas veste um emaranhado de peles de Garous, mas também replica perfeitamente as habilidades daqueles que ele esfolou. Ninguém tem certeza de quem, se é que existe alguém, está sob a imensa massa lupina feita de retalhos de carne que persegue as alcatéias Garous. Alguns Luas Usurpadas afirmam que foi o Peleiro quem os conduziu por esse caminho sombrio. O Peleiro é real; você sabe porque já o encontrou. Talvez tenha testemunhado ele matar e esfolar um companheiro. Talvez ele tenha seduzido alguém que você amava a se tornar um Lua Usurpada. Pode ser que você tenha visto a lâmina dele de perto e sobrevivido, carregando cicatrizes profundas e um rancor ainda mais profundo. Seja como for que ele tenha entrado na sua vida, você está pronto e disposto a enfrentá-lo. Quando você seleciona sua primeira vantagem desta Ficha de Conhecimento, você recebe o Peleiro como um Adversário de três pontos.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Early Warning: You've become attuned to the aural and visual warning signs of The Skinner's presence. You'll never forget the sight of mismatched eyes in the dark or the sound of blades rubbing against each other. This vigilance helps you elsewhere. You always have a two-dice bonus when making Awareness tests to detect ambushes",
+        "skillPtBr": "Alerta Precoce: Você se tornou sintonizado com os sinais visuais e sonoros que anunciam a presença do Peleiro. Você nunca esquecerá a visão de olhos desalinhados no escuro ou o som de lâminas se atritando. Essa vigilância te ajuda em outras situações. Você sempre recebe um bônus de dois dados em testes de Consciência para detectar emboscadas."
+      },
+      {
+        "cost": 2,
+        "skill": "Strange Scholar: Legends claim that it's not only werewolf hides knitted into The Skinner's hideous pelt, but also the flesh of other creatures of the night. While you don't know if that's true, you're prepared all the same. Once per session, when you encounter a supernatural creature that is not a Garou or a spirit, you can use your knowledge of other supernatural creatures to gain a two-dice bonus to a test made against it.",
+        "skillPtBr": "Estranho Erudito: As lendas dizem que não são apenas peles de lobisomens costuradas na hedionda manta do Peleiro, mas também a carne de outras criaturas da noite. Embora você não saiba se isso é verdade, está preparado mesmo assim. Uma vez por sessão, ao encontrar uma criatura sobrenatural que não seja um Garou ou um espírito, você pode usar seu conhecimento sobre outras criaturas sobrenaturais para ganhar um bônus de dois dados em um teste feito contra ela."
+      },
+      {
+        "cost": 3,
+        "skill": "Support Network: The only thing that might be greater than The Skinner's body count is the lives he's torn apart. You keep in contact with these people to let them know they're not alone. You receive Allies (••••), representing a group of humans harmed indirectly by The Skinner. Though they don't know the full details of the creature, they're willing to help you in your fight against it.",
+        "skillPtBr": "Rede de Apoio: A única coisa que talvez seja maior do que o número de mortes causadas pelo Peleiro são as vidas que ele destruiu. Você mantém contato com essas pessoas para que saibam que não estão sozinhas. Você recebe quatro pontos em Aliados, representando um grupo de humanos prejudicados indiretamente pelo Peleiro. Embora não conheçam todos os detalhes da criatura, estão dispostos a ajudá-lo em sua luta contra ela."
+      },
+      {
+        "cost": 4,
+        "skill": "Skin Tearing: Your hatred for The Skinner extends to other Stolen Moons. You've become adept at manipulating their curse. Once per session, when you inflict Aggravated Health damage on a Stolen Moon in a conflict regardless of their form, they cannot shapeshift except back to human for the rest of the session.",
+        "skillPtBr": "Dilacerar a Pele: Seu ódio pelo Peleiro se estende a outros Luas Usurpadas. Você se tornou hábil em manipular a maldição deles. Uma vez por sessão, quando você causar dano Agravado de Vitalidade a um Lua Usurpada em um conflito, independentemente da forma em que ele esteja, ele não poderá mudar de forma, exceto para voltar à forma humana, pelo restante da sessão."
+      },
+      {
+        "cost": 5,
+        "skill": "Skinner's Bane: Through a bargain, a deadly fight, or just plain luck, you've obtained a weapon capable of destroying The Skinner and his ilk once and for all. Pick a melee weapon you own: this weapon now inflicts Aggravated Health damage on Stolen Moons.",
+        "skillPtBr": "Maldição do Peleiro: Através de um pacto, uma luta mortal ou pura sorte, você obteve uma arma capaz de destruir o Peleiro e seus semelhantes de uma vez por todas. Escolha uma arma de combate corpo a corpo que você possua: essa arma agora causa dano Agravado na Vitalidade de Luas Usurpadas."
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 36
+  },
+  {
+    "id": 16,
+    "title": "ZHYZHAK",
+    "titlePtBr": "ZHYZHAK",
+    "description": "Named after the sound of her snapping jaws after her First Change, Zhyzhak is one of the Black Spiral Dancers' oldest and greatest warriors. Her strength in human form can tear Garou in crinos form like paper. Her personal Talisman, a spiked leather whip, has spilled oceans of blood. Many among the Dancers see her as a dark messiah, the woman who will ensure the Wyrm's final victory. They have good reason to believe that; her long-time rival Jonas Albrecht has fled the battlefield while she continues to kill at her pleasure. Zhyzhak's reign of terror isn't unstoppable, and you'll prove it. Maybe you're an adoptee of the Albrecht line and seek to finish what your ancestor started. You could be the lone survivor of one of her massacres. You might just be a Garou who wants to see the legend for yourself and if she proves a match for your own incredible might. No matter your reasons, you've thrown down the gauntlet, and she'll answer sooner than you think. When you select your first Merit from this Loresheet, you receive Zhyzhak as a five-dot Adversary",
+    "descriptionPtBr": "Nomeada pelo som de suas mandíbulas se fechando com força após sua Primeira Mudança, Zhyzhak é uma das mais antigas e poderosas guerreiras dos Dançarinos da Espiral Negra. Sua força, mesmo em forma humana, pode rasgar Garous em forma de Crinos como se fossem papel. Seu Talismã pessoal, um chicote de couro cravejado de espinhos, já derramou oceanos de sangue. Muitos entre os Dançarinos a veem como uma messias sombria, a mulher que garantirá a vitória final da Wyrm. Eles têm bons motivos para acreditar nisso; seu antigo rival Jonas Albrecht fugiu do campo de batalha enquanto ela continua matando como bem entende. O reinado de terror de Zhyzhak não é imparável e você vai provar isso. Talvez você seja um descendente da linhagem de Albrecht e busque terminar o que seu ancestral começou. Você pode ser o único sobrevivente de um de seus massacres. Ou talvez você seja apenas um Garou que quer enfrentar a lenda pessoalmente e ver se ela está à altura da sua própria força impressionante. Não importa o motivo, você lançou o desafio e ela responderá mais rápido do que você imagina. Quando você selecionar sua primeira Vantagem desta Folha de Conhecimento, você recebe Zhyzhak como uma Adversária de cinco pontos.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Thicker Skin: Your pain tolerance is enough to withstand Zhyzhak's Talisman. When in homid form, you always have 1 armor against blades and lacerating weapons when unarmored. Thus, when suffering 1 or more Aggravated damage to Health from a rival's claws, one is downgraded to Superficial damage. This effect does not stack with additional armor",
+        "skillPtBr": "Pele Grossa: Sua tolerância à dor é suficiente para suportar o Talismã de Zhyzhak. Quando estiver na forma hominídea, você sempre possui 1 de armadura contra lâminas e armas cortantes enquanto estiver sem armadura. Assim, ao sofrer 1 ou mais de dano Agravado à Vitalidade pelas garras de um rival, um desses danos é reduzido para dano Superficial. Este efeito não se acumula com armaduras adicionais."
+      },
+      {
+        "cost": 2,
+        "skill": "Deadlier Uses: Zhyzhak isn't the only werewolf that knows how to use an uncommon item as a weapon. When you inflict a point of Aggravated Willpower damage on yourself before a round of conflict, any improvised weapon you wield inflicts Aggravated Health damage during the round",
+        "skillPtBr": "Usos Mais Mortais: Zhyzhak não é a única lobisomem que sabe usar um item incomum como arma. Quando você inflige um ponto de dano Agravado à sua própria Força de Vontade antes de um turno de conflito, qualquer arma improvisada que você empunhar causará dano Agravado à Vitalidade durante esse turno."
+      },
+      {
+        "cost": 3,
+        "skill": "Victory Tale: In your time as a werewolf, you've racked up plenty of victories. One day, defeating Zhyzhak will be your capstone. Until then, your tales of achievement leave a good impression. Once per session, when you include telling a tale of your previous victory while performing an action that requires a Charisma test, you may add four dice to the pool.",
+        "skillPtBr": "História de Vitória: Em seu tempo como lobisomem, você já acumulou muitas vitórias. Um dia, derrotar Zhyzhak será o auge da sua trajetória. Até lá, suas histórias de conquistas deixam uma forte impressão. Uma vez por sessão, ao incluir o relato de uma vitória anterior enquanto realiza uma ação que exija um teste de Carisma, você pode adicionar quatro dados à jogada."
+      },
+      {
+        "cost": 4,
+        "skill": "Physique to Match: Your brawn and reflexes are so well honed that even the monster barely keeps up. When outside of crinos form and in a physical conflict with werewolves in crinos form, they suffer a two-dice penalty to Physical tests against you, and the Difficulty to avoid their attacks is reduced by 1.",
+        "skillPtBr": "Físico à Altura: Sua força e reflexos são tão bem treinados que até mesmo o monstro mal consegue acompanhar. Quando estiver fora da forma crinos e em um conflito físico contra lobisomens em forma crinos, eles sofrem uma penalidade de dois dados em testes Físicos contra você e a Dificuldade para evitar os ataques deles é reduzida em 1."
+      },
+      {
+        "cost": 5,
+        "skill": "Destiny's Interloper: Many Black Spiral Dancers believe Zhyzhak is destined to usher in an era ruled by the Wyrm. You have a habit of breaking destinies like that. Once per story, when you intervene in prophecies or destinies put on a person, place, or thing, you may either prevent it from coming to pass, or twist it to benefit you. If someone made that prophecy or destiny, they know what you've done.",
+        "skillPtBr": "Intruso do Destino: Muitos Dançarinos da Espiral Negra acreditam que Zhyzhak está destinada a inaugurar uma era governada pela Wyrm. Você tem o hábito de quebrar destinos como esse. Uma vez por história, quando você intervém em profecias ou destinos atribuídos a uma pessoa, lugar ou objeto, você pode impedir que ele se cumpra ou distorcê-lo para se beneficiar. Se alguém foi responsável por essa profecia ou destino, essa pessoa saberá o que você fez."
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 37
   }
 ]

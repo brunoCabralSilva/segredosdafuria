@@ -110,9 +110,15 @@
     "advantages": [
       {
         "cost": 1,
-        "type": "radio",
+        "type": "checkbox",
         "title": "Clement Lupus",
         "description": "Clement Lupus - Sua forma lupina parece mais com um cachorro do que com um lobo, e a menos que tenham motivo para acreditar, nenhum observador humano que te veja na forma lupina pensa que você é um lobo."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Glabro Discreto",
+        "description": "Sua forma glabro é mais esguia do que robusta. À distância, você não chama atenção nem parece particularmente incomum. Mesmo de perto, pode parecer apenas uma pessoa um pouco peluda ou selvagem, mas ainda dentro dos limites da aparência humana comum. Por causa disso, você não sofre a penalidade usual de dois dados em testes Sociais enquanto estiver em glabro. (Veja Werewolf Corebook, p. 136.)"
       },
       {
         "cost": 2,
@@ -131,26 +137,38 @@
       {
         "cost": 1,
         "title": "Feio(a)",
-        "type": "radio",
+        "type": "checkbox",
         "description": "Feio(a) - Você perde um dado de todos os testes Sociais relevantes."
       },
       {
         "cost": 1,
         "title": "Fedorento(a)",
-        "type": "radio",
+        "type": "checkbox",
         "description": "Fedorento(a) - Seu hálito e odor corporal são sobrenaturalmente repugnantes, lembrando cachorro molhado e meias suadas. Até os Roedores de Ossos se incomodam com o seu fedor. Você pode tomar pequenas medidas para minimizar o cheiro, como usar bastante colônia, mas isso causa outros problemas. Perca um dado em testes de sedução e similares que envolvam Social, e perca dois dados em testes de Furtividade contra oponentes que possam sentir o cheiro, a menos que você esteja contra o vento."
       },
       {
         "cost": 1,
         "title": "Transparente",
-        "type": "radio",
+        "type": "checkbox",
         "description": "Transparente - Por algum motivo, você não é um bom mentiroso, e isso fica evidente. Você tem uma péssima cara de pôquer ou seus pais lhe ensinaram a forte obrigação de dizer a verdade, mesmo quando dói. Perca um dado em qualquer teste que exija Lábia. Você não pode ganhar pontos em Lábia."
       },
       {
         "cost": 2,
         "title": "Repulsivo(a)",
-        "type": "radio",
+        "type": "checkbox",
         "description": "Repulsivo(a) - Você perde dois dados de todos os testes Sociais relevantes."
+      },
+      {
+        "cost": 1,
+        "title": "Carne Marcada pela Wyrm",
+        "type": "checkbox",
+        "description": "Seja por influência de Morcego, Mosca ou de algum dos servos da Wyrm, suas formas sobrenaturais não são completamente lupinas. Sempre que você assume uma forma sobrenatural, certos traços visíveis ligados à Wyrm — como feridas abertas que nunca cicatrizam, gengivas sangrando constantemente ou manchas sem pelos e descoloridas — deixam outros Garou desconfiados da sua ligação com a Wyrm. Você perde dois dados em todas as situações sociais com Garou que saibam sobre sua forma sobrenatural, exceto com membros da sua alcatéia, Mentores ou conexões muito próximas no seu Mapa de Relacionamentos. Além disso, interagir de perto com humanos enquanto estiver em suas formas sobrenaturais representa um risco maior para a quebra do Véu."
+      },
+      {
+        "cost": 2,
+        "title": "Carne Marcada pela Wyrm Avançada",
+        "type": "checkbox",
+        "description": "Sua ligação com o Wyrm é ainda mais evidente. Além de marcar suas formas sobrenaturais, essas deformações se manifestam também na sua forma hominídea ou lupina (escolha uma). Isso faz com que você precise se afastar da sociedade humana na maior parte do tempo, já que sua aparência chama atenção e pode ser vista como perturbadora ou antinatural. Você perde dois dados em todas as situações sociais com Garou que conheçam sua forma sobrenatural, com exceção de membros da sua matilha, Mentores ou conexões muito próximas no seu Mapa de Relacionamentos. Além disso, interagir de perto com humanos em qualquer uma das suas formas afetadas representa um risco maior de quebrar o Véu."
       }
     ]
   },
@@ -198,6 +216,12 @@
         "description": "Convocador da Assembléia - Selecione 5 rituais sociais que você tenha dominado. Se permitido durante uma Assembléia, você pode auxiliar em qualquer ritual, desde que seja realizado em uma Assembléia ou em uma reunião substancialmente semelhante de Garou."
       },
       {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Assistente Especialista",
+        "description": "Assistente Especialista - Quando você auxilia na realização de um Rito que você conhece, você contribui com um dado adicional normal ao grupo de dados da execução."
+      },
+      {
         "cost": 3,
         "type": "checkbox",
         "title": "Mestre de Rituais",
@@ -227,6 +251,20 @@
     "flaws": []
   },
   {
+    "name": "Herança Selvagem",
+    "type": "méritos",
+    "description": "Sua pele é mais grossa, seus músculos mais densos, e seus ossos carregam a memória de incontáveis lutas de sobrevivência. Seu corpo parece esculpido para a guerra e a sobrevivência, marcado por cicatrizes e por uma presença física que impõe respeito. Essa herança selvagem é tanto uma dádiva quanto um lembrete da fera indomável que vive dentro de você.",
+    "advantages": [
+      {
+        "cost": 3,
+        "type": "radio",
+        "title": "Resiliência de Luna",
+        "description": "Você é muito mais resistente do que outros Garou. Sua Vitalidade é igual a 4 + seu valor de Vigor ao invés de 3 + seu valor de Vigor."
+      }
+    ],
+    "flaws": []
+  },
+  {
     "name": "Situações Sobrenaturais",
     "type": "méritos",
     "description": "Embora os Garou sejam eles mesmos sobrenaturais, às vezes mistérios maiores se abatem sobre os lobisomens para marcá-los de maneiras desconhecidas. Esses Méritos e Falhas não alteram a natureza de lobisomem do Garou, mas indicam circunstâncias em que as linhas de distinção entre lobisomens e outros elementos do mundo secreto não são tão absolutas.",
@@ -238,10 +276,52 @@
         "description": "Acelerado pela Lua - A lua o inspira mais do que outros lobisomens. A primeira vez que você uiva para a lua em uma determinada noite, você pode restaurar um ponto de dano Superficial de Força de Vontade."
       },
       {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Lua má Se Erguendo",
+        "description": "Lua má Se Erguendo - Talvez você tenha se transformado sob a lua de sangue ou, quem sabe, Luna simplesmente não sorria para você. Seja qual for o motivo, buscar a benção de Luna para restaurar sua Fúria é, no mínimo, incerto. Sempre que você uivar para a lua para recuperar Fúria, deve realizar um teste de Fúria; em caso de sucesso, sua Fúria é restaurada normalmente, mas em caso de falha, você não recupera Fúria alguma."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Cão do Inferno",
+        "description": "Cão do Inferno - A maldição do Delírio é anormalmente forte em você e tanto sua forma hispo quanto sua forma lupina são verdadeiros pesadelos. Sempre que você assume qualquer uma dessas formas, você impõe o Delírio nos humanos da mesma forma que um Garou em crinos."
+      },
+      {
         "cost": 3,
         "type": "checkbox",
         "title": "Afligido pela Lua",
         "description": "Afligido pela Lua - A lua inflama sua Fúria em um grau ainda maior do que a maioria dos outros lobisomens. Você ganha um ponto adicional de Fúria quando uiva para a lua pela primeira vez a cada noite."
+      } ,
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Domínio da Forma do Dom",
+        "description": "Domínio da Forma do Dom - Você pode selecionar um Dom cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Domínio da Forma do Dom",
+        "description": "Domínio da Forma do Dom - Você pode selecionar dois Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+      },
+      {
+        "cost": 3,
+        "type": "radio",
+        "title": "Domínio da Forma do Dom",
+        "description": "Domínio da Forma do Dom - Você pode selecionar três Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+      },
+      {
+        "cost": 4,
+        "type": "radio",
+        "title": "Domínio da Forma do Dom",
+        "description": "Domínio da Forma do Dom - Você pode selecionar quatro Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+      },
+      {
+        "cost": 5,
+        "type": "radio",
+        "title": "Domínio da Forma do Dom",
+        "description": "Domínio da Forma do Dom - Você pode selecionar cinco Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
       }
     ],
     "flaws": [
@@ -299,6 +379,30 @@
         "type": "checkbox",
         "title": "Banimento Adicional",
         "description": "Banimento Adicional - Seja porque você renunciou à sua tribo, tentou se juntar a uma segunda ou foi tocado por um patrono de outra tribo, você carrega o fardo de um segundo Banimento. Escolha outra tribo e sofra o Banimento dela, além do Banimento da sua tribo original. O Narrador pode proibir esse Defeito se o segundo Banimento causar problemas ou não tiver impacto na crônica."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Homem-Lobo",
+        "description": "Homem-Lobo - Sua forma de crinos, embora ainda seja primorosamente aterrorizante, reflete mais a sua herança humana do que a lupina, resultando em uma forma de guerra com traços faciais nitidamente hominídeos. Na forma de crinos, a ausência de um focinho impede você de realizar ataques de mordida e testemunhas humanas tratam seus testes de Delírio como se seus valores de Autocontrole + Determinação fossem dois pontos mais altos, tornando-as mais resistentes ao terror da sua presença. Além disso, seu rosto na forma de crinos ainda é reconhecidamente 'o seu' (embora distorcido e selvagem), criando um elo potencialmente perigoso com a sua identidade no mundo humano."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Tocado pela Wyrm - Wyrm da Calamidade",
+        "description": "Tocado pela Wyrm - Wyrm da Calamidade - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Besta-da-Guerra corre em suas veias, alimentando sua raiva constante. Você soma +1 à Dificuldade para resistir ao Frenesi."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Tocado pela Wyrm - Wyrm da Consumação",
+        "description": "Tocado pela Wyrm - Wyrm da Consumação - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Devoradora-de-Almas cravou seu domínio em sua mente e devora continuamente seu senso de valor próprio. Se você ainda não tiver feito um teste de Harano em uma sessão, deverá realizá-lo obrigatoriamente no final dela."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Tocado pela Wyrm - Wyrm Corruptora",
+        "description": "Tocado pela Wyrm - Wyrm Corruptora - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Wyrm Corruptora cravou suas garras profundamente na sua psique e todo o seu esforço é para manter a amargura sob controle. Se você ainda não tiver feito um teste de Hauglosk em uma sessão, deverá realizá-lo obrigatoriamente no final dela."
       }
     ]
   },

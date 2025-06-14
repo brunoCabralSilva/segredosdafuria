@@ -7,8 +7,8 @@
     "descriptionPtBr": "Este talismã assume a forma de um pedaço de pele, de macaco ou humano. Quando usado diretamente na pele do proprietário, ele torna o usuário imune à prata enquanto estiver nas formas glabro ou hispo, mas também inibe severamente sua capacidade de regeneração. Poucos Garou vivos sabem como fazer esses talismãs, mas dizem que sua criação é especialmente grotesca. Aqueles que são encontrados usando-os são tratados com suspeita, se não com hostilidade.",
     "system": "While this talisman is worn and the user is in glabro or hispo form they treat silver as if they were in homid or lupus. They also lose the ability to regenerate damage in any form during this time and for a full day and night after the talisman has been taken off.",
     "systemPtBr": "Enquanto este talismã estiver sendo usado e o usuário estiver na forma glabro ou hispo, eles tratam a prata como se estivessem na forma homid ou lupus. Eles também perdem a capacidade de regenerar danos em qualquer forma durante esse período e por um dia e uma noite completos após a remoção do talismã.",
-    "backgroundCost": "An apeskin talisman is a four-dot background, while a talen apeskin is worth two.",
-    "backgroundCostPtBr": "Um talismã de pele de macaco é um background de quatro pontos, enquanto um talen de pele de macaco vale dois.",
+    "backgroundCost": "An apeskin talisman is a four-dot background, while a Talen apeskin is worth two.",
+    "backgroundCostPtBr": "Um talismã de pele de macaco é um background de quatro pontos, enquanto um Talen de pele de macaco vale dois.",
     "cost": [
       {
         "type": "Talen",
@@ -30,8 +30,8 @@
     "descriptionPtBr": "De vez em quando, Garou encontram estranhos “fósseis” de pedra na Umbra que estão impregnados com a energia espiritual do que eles acreditam ser o espírito do mundo Gaia. Esses objetos podem parecer gemas brilhantes ou podem ser opacos e flexíveis, quase como o folclórico madstone, e despertam tristeza ou fúria quando usados. Eles são extremamente raros — ninguém pode dizer com confiabilidade como eles se originam (ou mesmo se eles realmente se originam com Gaia…) — sendo únicos no sentido de que podem realmente atravessar para o mundo físico e manter sua forma. Quando um Garou comunga com uma das Lágrimas de Gaia, eles descobrem que isso renova seu senso de propósito e talvez até mesmo revigora sua composição espiritual.",
     "system": "Spending a scene (or a period of downtime) contemplating one of Gaia's Tears allows the player to lower one level of either hauglosk or harano, at which point the Tear loses its luster and reverts to a mundane, mineral-like, makeup.",
     "systemPtBr": "Passar uma cena (ou um período de tempo livre) contemplando uma das Lágrimas de Gaia permite ao jogador diminuir um nível de hauglosk ou harano, momento em que a Lágrima perde seu brilho e volta a ser uma composição mineral comum.",
-    "backgroundCost": "Gaia's Tears are by their nature considered talens, but cannot be taken as a Background as there is no reliable way to find them.",
-    "backgroundCostPtBr": "As Lágrimas de Gaia são, por natureza, consideradas talens, mas não podem ser adquiridas como um Background, pois não há uma maneira confiável de encontrá-las.",
+    "backgroundCost": "Gaia's Tears are by their nature considered Talens, but cannot be taken as a Background as there is no reliable way to find them.",
+    "backgroundCostPtBr": "As Lágrimas de Gaia são, por natureza, consideradas Talens, mas não podem ser adquiridas como um Background, pois não há uma maneira confiável de encontrá-las.",
     "cost": [
       {
         "type": "Talen",
@@ -68,8 +68,8 @@
     "descriptionPtBr": "A arma característica da cultura Garou, o klaive é uma adaga de prata reforçada usada em combate ritual, e seus portadores ou criadores podem decorá-la com qualquer tipo de adornos únicos. Em certos ambientes, como moots, um klaive é um símbolo de status que convida o dono a contar como chegaram à sua posse, ou sobre mortes gloriosas feitas com ele.\nOs klaives são particularmente associados à Nação Garou e, como tal, têm uma aura de antiquado ou até obsoleto. Dito isso, é difícil argumentar contra a eficácia de um klaive quando um rival enfia um deles no seu rosto e ele sai pelo outro lado da sua cabeça.",
     "system": "A klaive does +2 silver-based Aggravated Health damage and may be wielded in homid or glabro form.",
     "systemPtBr": "Uma klaive causa +2 de dano à Vitalidade baseado em prata agravada e pode ser empunhado nas formas homid ou glabro.",
-    "backgroundCost": "The klaive is a three-dot Talisman, while a talen klaive is worth a single dot.",
-    "backgroundCostPtBr": "A klaive é um Talismã de três pontos, enquanto um klaive como talen vale um único ponto.",
+    "backgroundCost": "The klaive is a three-dot Talisman, while a Talen klaive is worth a single dot.",
+    "backgroundCostPtBr": "A klaive é um Talismã de três pontos, enquanto um klaive como Talen vale um único ponto.",
     "cost": [
       {
         "type": "Talen",
@@ -108,8 +108,8 @@
     "titlePtBr": "Fragmento das Sombras",
     "description": "A shadowshard is a fragment of the world's spiritual reflection, a literal piece of the Umbra. It appears as a hunk of glass or other semi-reflective material but seems to contain shadow itself, whether in the form of roiling, turbulent darkness, or a heavy, mist-like gloom. A Garou may break the shadowshard, freeing the shadow within and pulling the werewolf across the Gauntlet, into the Umbra.",
     "descriptionPtBr": "Um fragmento das sombras é um pedaço da reflexão espiritual do mundo, um pedaço literal do Umbra. Ele aparece como um pedaço de vidro ou outro material semi-reflexivo, mas parece conter a própria sombra, seja na forma de uma escuridão agitada e turbulenta, ou uma neblina densa e sombria. Um Garou pode quebrar o fragmento das sombras, liberando a sombra interior e puxando o lobisomem através do Véu, para o Umbra.",
-    "system": "Shadowshards exist only as talens. They allow a single user to enter the Umbra, so long as the Gauntlet rating is 3 or lower. That transit consumes the talisman upon its breakage and counts as a full action. Larger shadowshards also exist, permitting the user to take their entire pack across the Gauntlet. Shadowshards work only for Garou; they cannot pull humans or other individuals into the Umbra, presumably because they lack the same part-spiritual composition as werewolves.",
-    "systemPtBr": "Fragmentos das sombras existem apenas como talens. Eles permitem que um único usuário entre no Umbra, desde que a classificação do Véu seja 3 ou inferior. Essa travessia consome o talismã quando ele é quebrado e conta como uma ação completa. Fragmentos maiores das sombras também existem, permitindo que o usuário leve toda a matilha através do Véu. Fragmentos das sombras funcionam apenas para os Garou; eles não podem puxar humanos ou outras pessoas para o Umbra, presumivelmente porque eles não possuem a mesma composição parcialmente espiritual dos lobisomens.",
+    "system": "Shadowshards exist only as Talens. They allow a single user to enter the Umbra, so long as the Gauntlet rating is 3 or lower. That transit consumes the talisman upon its breakage and counts as a full action. Larger shadowshards also exist, permitting the user to take their entire pack across the Gauntlet. Shadowshards work only for Garou; they cannot pull humans or other individuals into the Umbra, presumably because they lack the same part-spiritual composition as werewolves.",
+    "systemPtBr": "Fragmentos das sombras existem apenas como Talens. Eles permitem que um único usuário entre no Umbra, desde que a classificação do Véu seja 3 ou inferior. Essa travessia consome o talismã quando ele é quebrado e conta como uma ação completa. Fragmentos maiores das sombras também existem, permitindo que o usuário leve toda a matilha através do Véu. Fragmentos das sombras funcionam apenas para os Garou; eles não podem puxar humanos ou outras pessoas para o Umbra, presumivelmente porque eles não possuem a mesma composição parcialmente espiritual dos lobisomens.",
     "backgroundCost": "Single-Garou shadowshards are worth one dot while pack-sized shards are worth three dots.",
     "backgroundCostPtBr": "Fragmentos das sombras para um único Garou valem um ponto, enquanto fragmentos de tamanho de matilha valem três pontos.",
     "cost": [
@@ -133,8 +133,8 @@
     "descriptionPtBr": "Um atrair-espírito é um talismã que os espíritos acham cativante, a ponto de recusarem a deixar a presença do atrair-espírito quando um Garou o apresenta. Eles podem ter quase qualquer aparência física, seja ela sobrenatural, como \"fósseis\" de espíritos de épocas passadas trazidos de volta por Garou do Conselho dos Fantasmas após jornadas nos Espíritos Selvagens, ou bugigangas tecnológicas dedicadas por Andarilhos do Vidro.",
     "system": "A spirit-catcher prevents one spirit per scene from leaving the presence of the Garou who brandishes it, as long as both are in the same realm (Umbra or physical). The Garou can usually choose the spirit, but if many spirits are present, exactly which it captivates is up to the Storyteller — it's not so precise as to be “aimed.” If the spirit wishes to leave, it must succeed on a test of its Power versus the rating of the spirit-catcher. If the spirit fails the test, it must stay in the vicinity of the spirit-catcher, but may hide, evade, etc., and if harmed it is free to flee. If used in conjunction with Gifts or Rites than bind or restrain spirits the spirit-catcher can provide half its rating as bonus dice, at the Storyteller's discretion.",
     "systemPtBr": "Um atrair-espírito impede que um espírito por cena deixe a presença do Garou que o empunha, desde que ambos estejam no mesmo plano (Umbra ou físico). O Garou normalmente pode escolher o espírito, mas se houver muitos espíritos presentes, exatamente qual será cativado fica a critério do Narrador - não é tão preciso a ponto de ser \"mirado\". Se o espírito desejar sair, ele deve ter sucesso em um teste de seu Poder versus a classificação do atrair-espírito. Se o espírito falhar no teste, ele deve permanecer nas proximidades do atrair-espírito, mas pode se esconder, evadir, etc., e se for ferido, está livre para fugir. Se usado em conjunto com Dons ou Ritos que prendem ou restringem espíritos, o atrair-espírito pode fornecer metade de sua classificação como dados de bônus, a critério do Narrador.",
-    "backgroundCost": "A general spirit-catcher able to attract all kinds of spirits is worth its full rating in Background dots. It is considered to be worth one dot less than its rating if it attracts one particular spirit type (such as Weaver or Gaian spirits) and is further reduced in cost by one if taken as a talen, to a minimum of one.",
-    "backgroundCostPtBr": "Um atrair-espírito geral capaz de atrair todos os tipos de espíritos vale a quantidade completa de pontos de Antecedente em Background. É considerado valer um ponto a menos do que sua classificação se atrair um tipo específico de espírito (como espíritos Tecelões ou Gaianos) e seu custo é reduzido em mais um ponto se for usado como um talen, até um mínimo de um.",
+    "backgroundCost": "A general spirit-catcher able to attract all kinds of spirits is worth its full rating in Background dots. It is considered to be worth one dot less than its rating if it attracts one particular spirit type (such as Weaver or Gaian spirits) and is further reduced in cost by one if taken as a Talen, to a minimum of one.",
+    "backgroundCostPtBr": "Um atrair-espírito geral capaz de atrair todos os tipos de espíritos vale a quantidade completa de pontos de Antecedente em Background. É considerado valer um ponto a menos do que sua classificação se atrair um tipo específico de espírito (como espíritos Tecelões ou Gaianos) e seu custo é reduzido em mais um ponto se for usado como um Talen, até um mínimo de um.",
     "cost": [
       {
         "type": "Capaz de atrair qualquer Espírito",
@@ -152,8 +152,8 @@
     "descriptionPtBr": "Soprando este apito, uma rajada de vento se levanta, carregando consigo poeira, neve ou outros detritos locais que cobrem as pegadas do usuário e seu grupo. Perseguidores acham difícil rastrear e qualquer trilha parece mais antiga do que deveria ser. Fazer este apito requer vários pactos com espíritos da terra e do céu, e o apito em si deve ser feito com os ossos de um animal que morreu de frio ou de alguma outra forma de exposição ambiental.",
     "system": "The user makes a Wits + Occult test, increasing the Difficulty to track them and their pack by half the number of successes rolled, rounded up. The wind whistle can only be used outdoors, and only once per session. The effect only applies to pursuits involving the location the talisman was used.",
     "systemPtBr": "O usuário faz um teste de Astúcia + Ocultismo, aumentando a Dificuldade para rastreá-los e ao seu grupo pela metade do número de sucessos rolados, arredondado para cima. O apito do vento só pode ser usado ao ar livre e apenas uma vez por sessão. O efeito se aplica apenas a perseguições que envolvem o local onde o talismã foi usado.",
-    "backgroundCost": "The wind whistle is a three-dot Talisman, while a talen whistle is worth a single dot.",
-    "backgroundCostPtBr": "O apito do vento é um Talismã de três pontos, enquanto um apito talen vale um único ponto.",
+    "backgroundCost": "The wind whistle is a three-dot Talisman, while a Talen whistle is worth a single dot.",
+    "backgroundCostPtBr": "O apito do vento é um Talismã de três pontos, enquanto um apito Talen vale um único ponto.",
     "cost": [
       {
         "type": "Talen",
@@ -166,5 +166,287 @@
     ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 190
+  },
+  {
+    "id": "9",
+    "title": "The Comerunnin",
+    "titlePtBr": "O Comerunnin",
+    "description": "The Emissaries of Athena often give out this talisman to friends who have provided critical aid in one of their hunts (and occasionally reclaim it when their friends have fallen). Hel carves a small wooden whistle the size of an adult human thumb in the shape of an owl and empowers it with a gift known only to her and Tallulah. Blowing into the whistle alerts the Emissaries that one of their friends is in need and that they should drop everything and come running. They can hear the whistle no matter how far away they might be. Of course, blowing the whistle doesn't guarantee that Hel and Tallulah show up anytime soon, only that they've vowed to try.",
+    "descriptionPtBr": "As Emissárias de Atena frequentemente entregam este talismã a amigos que ofereceram ajuda crucial em uma de suas caçadas (e, ocasionalmente, o retomam quando esses amigos caem). Hel esculpe um pequeno apito de madeira, do tamanho de um polegar humano adulto, no formato de uma coruja e o imbui com um dom conhecido apenas por ela e por Tallulah. Soprar o apito alerta As Emissárias de que um de seus amigos precisa de ajuda e que elas devem largar tudo e ir imediatamente. Elas conseguem ouvir o som do apito, não importa o quão longe estejam. É claro que soprar o apito não garante que Hel e Tallulah aparecerão rapidamente — apenas que elas prometeram tentar.",
+    "system": "Spending a point of Willpower while blowing into this whistle sends the note to Hel and Tallulah. They hear it no matter where they might be; across the country, around the world, even in the Umbra. No other information is given to them. They don't know if the talisman holder is harmed, if they were forced under duress to sound the note or if they are in immediate danger. All they know is that the sound means the owner of the talisman wants to get in contact, which is why it's usually saved for emergency use only.",
+    "systemPtBr": "Gastar um ponto de Força de Vontade ao soprar este apito envia o chamado para Hel e Tallulah. Elas o ouvirão, independentemente de onde estejam — do outro lado do país, em qualquer lugar do mundo ou até mesmo na Umbra. Nenhuma outra informação é transmitida. Elas não saberão se o portador do talismã está ferido, se foi forçado a tocar o apito sob ameaça, ou se está em perigo imediato. Tudo o que sabem é que o som significa que o dono do talismã quer entrar em contato, razão pela qual o objeto geralmente é reservado apenas para situações de emergência.",
+    "backgroundCost": "A Comerunnin Talisman is costs three dots, while a Talen costs one.",
+    "backgroundCostPtBr": "Um Talismã Comerunnin custa três pontos, enquanto um Talen custa um ponto.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 1
+      }, 
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "The Emissaries of Athena",
+    "page": 2
+  },
+  {
+    "id": "10",
+    "title": "Accounting Tablet",
+    "titlePtBr": "Tábua de Contabilidade",
+    "description": "Legends say the first Accounting Tablet was created during the final stages of a Garou civil war to force the warring factions to curtail their brutality against one another. The Children of Gaia particularly value the Accounting Tablet for its ability to force antagonistic Garou out of crinos. Each Accounting Tablet appears as a wooden or stone tablet about 3 cm high and 2 cm wide. There are notches and holes all along the edges where a wolf's tooth can be inserted. While there are many holes, only the two that correspond to “lupus” and “homid” are known to work. Other holes partnered with glyphs, even ones that can be easily identified, have not been activated by a Garou in living memory...",
+    "descriptionPtBr": "Dizem as lendas que a primeira Tábua de Contabilidade foi criada durante as fases finais de uma guerra civil Garou, com o propósito de forçar as facções em conflito a moderarem sua brutalidade umas contra as outras. Os Filhos de Gaia valorizam especialmente a Tábua de Contabilidade por sua capacidade de forçar Garou antagonistas a sair da forma crinos. Cada Tábua de Contabilidade se apresenta como uma pequena tábua de madeira ou pedra, com cerca de 3 cm de altura e 2 cm de largura. Ao longo de suas bordas, há entalhes e furos onde pode ser inserido o dente de um lobo. Embora existam muitos furos, apenas os dois que correspondem a “Lupino” e “Hominídeo” são conhecidos por funcionar. Outros furos acompanhados de glifos — mesmo aqueles que podem ser facilmente identificados — não foram ativados por nenhum Garou na memória viva...",
+    "system": "To activate, the user must pass a Rage test and place the wolf-fang “peg” into either the lupus or homid hole. When activated, the Tablet immediately forces all of the Garou in the scene (including the user) to adopt the form that corresponds to where the fang was inserted for a duration of three turns. No checks are required to adopt their forms due to the Tablet. However, Garou may not resist the Tablet's forced change. A failed attempt to correctly activate the Tablet unexpectedly forces the assembled Garou to adopt either glabro or hispo forms, depending on whether the goal was to force them into homid or lupus.",
+    "systemPtBr": "Para ativar, o usuário deve passar em um teste de Fúria e inserir a peça em formato de dente de lobo no furo correspondente a “lupus” ou “hômide”. Quando ativada, a Tábua força imediatamente todos os Garou presentes na cena (incluindo o próprio usuário) a adotarem a forma correspondente ao furo onde o dente foi inserido, por uma duração de três turnos. Não são necessários testes para assumir as formas impostas pela Tábua. No entanto, os Garou não podem resistir à mudança forçada causada pela Tábua. Uma tentativa fracassada de ativar corretamente a Tábua força, de maneira inesperada, os Garou presentes a adotarem as formas glabro ou hispo, dependendo se o objetivo original era forçá-los a assumir a forma hominídea ou lupina.",
+    "backgroundCost": "A talen, the Accounting Tablet is a three dot background.",
+    "backgroundCostPtBr": "A Tábua de Contabilidade é um Antecedente Talen que custa três pontos.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 3
+      }
+    ],
+    "book": "Storyteller's Tolkit",
+    "page": 33
+  },
+  {
+    "id": "11",
+    "title": "Aurashades",
+    "titlePtBr": "Ausashades",
+    "description": "Aurashades are mirrored sunglasses imbued with the essence of a glass spirit. They are often treasured by Glass Walkers and Bone Gnawers.",
+    "descriptionPtBr": "Aurashades são óculos escuros espelhados imbuídos com a essência de um espírito do vidro. Eles são frequentemente valorizados pelos Andarilhos do Asfalto e pelos Roedores de Ossos.",
+    "system": "To activate this talisman for a single scene, the user must spend a point of Willpower. When activated, the sunglasses allow the user to see spirits manifested in the physical world. Spirits hiding in a possessed creature or item glow to the viewer. Spirits outside of any object appear to the user as they would in the Umbra, even if they use powers to obfuscate their presence. Additionally, if the user participates in a Rite to enter the Umbra while in an urban environment, the Rite's difficulty is reduced by one. A total failure during a Rite that involves a pair of Aurashades makes the talisman disappear. Just like with regular sunglasses, the character has to return home and look for them. Spend an hour looking and make a Resolve + Investigation test (Difficulty 4). On success, the shades are found. Failure means another hour of looking and another test.",
+    "systemPtBr": "Para ativar este talismã por uma única cena, o usuário deve gastar um ponto de Força de Vontade. Quando ativados, os óculos de sol permitem que o usuário veja espíritos manifestados no mundo físico. Espíritos escondidos em uma criatura ou itens possuídos brilham aos olhos do usuário. Espíritos que estão fora de qualquer objeto aparecem para o usuário como se estivessem na Umbra, mesmo que utilizem poderes para ocultar sua presença. Além disso, se o usuário participar de um Rito para entrar na Umbra enquanto estiver em um ambiente urbano, a dificuldade do Rito é reduzida em um nível. Uma falha total durante um Rito envolvendo um par de Aurashades faz com que o talismã desapareça. Assim como acontece com óculos escuros comuns, o personagem precisa voltar para casa e procurá-los. Gaste uma hora procurando e faça um teste de Raciocínio + Investigação (Dificuldade 4). Com sucesso, os óculos são encontrados. Se falhar, gaste mais uma hora procurando e faça outro teste.",
+    "backgroundCost": "Aurashades is a three dot background.",
+    "backgroundCostPtBr": "Aurashades é um Antecedente que custa três pontos",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "Storyteller's Tolkit",
+    "page": 33
+  },
+  {
+    "id": "12",
+    "title": "Feral Wraps",
+    "titlePtBr": "Ataduras Selvagens",
+    "description": "Used when the Garou does not care about the safety of their surroundings, Feral Wraps overcharge the Garou's desire to maim, break, and destroy. The wraps are made of strips of white cloth that must be smeared with the user's own blood. Rumor around the campfire is that the Cult of Fenris first created this talisman.",
+    "descriptionPtBr": "Usadas quando o Garou não se importa com a segurança ao seu redor, as Ataduras Selvagens sobrecarregam o desejo do Garou de mutilar, quebrar e destruir. As ataduras são feitas de tiras de tecido branco que devem ser embebidas no próprio sangue do usuário. Corre um rumor nas rodas de conversa ao redor da fogueira de que foi a Seita de Fenris quem criou esse talismã pela primeira vez.",
+    "system": "While in homid, the cloth is wrapped repeatedly over the user's forearms and hands (like a boxer's hand wrappings). There is no activation roll. While in crinos, the character experiences a single Brutal result on a die rolled as part of a test if enough to cause a Brutal outcome, while normally two are required. Additionally, the talisman allows the character to inflict one point of Health damage to themselves in exchange for one Rage point, once per turn. The character can only apply and remove this talisman while in homid. After growing used to the Wraps, the user begins to attract unwanted attention from spirits of confusion, anger, and hate. Even when the user wants to interact with other spirits, those spirits tend to arrive uninvited and unwanted.",
+    "systemPtBr": "Enquanto estiver na forma hominídea, o tecido é repetidamente enrolado nos antebraços e mãos do usuário, como as bandagens de um boxeador. Não há necessidade de teste para ativação. Quando estiver em crinos, o personagem precisa de apenas um sucesso Brutal em um dado para causar um efeito Brutal, enquanto normalmente seriam necessários dois resultados. Além disso, o talismã permite que o personagem cause um ponto de dano à própria Vitalidade em troca de um ponto de Fúria, uma vez por turno. O personagem só pode colocar ou remover este talismã enquanto estiver na forma hominídea. Após se acostumar com as Ataduras, o usuário começa a atrair atenção indesejada de espíritos de confusão, raiva e ódio. Mesmo quando o usuário tenta interagir com outros tipos de espíritos, esses espíritos agressivos tendem a aparecer de forma inconveniente e indesejada.",
+    "backgroundCost": "Feral wraps are a two dot background.",
+    "backgroundCostPtBr": "Ataduras Selvagens é um Antecedente que custa dois pontos",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 2
+      }
+    ],
+    "book": "Storyteller's Tolkit",
+    "page": 34
+  },
+  {
+    "id": "13",
+    "title": "Nyx's Bangle",
+    "titlePtBr": "Bracelete de Nyx",
+    "description": "A ragabash favorite, this talisman resembles a silver bracelet with engraved glyphs honoring Luna. When activated, the talisman aids the user by covering their form with shifting shadows, to evade observation.",
+    "descriptionPtBr": "Favorito entre os Ragabash, este talismã se assemelha a um bracelete de prata com glifos gravados em homenagem a Luna. Quando ativado, o talismã auxilia o usuário, envolvendo sua forma em sombras em constante movimento, ajudando-o a escapar da observação.",
+    "system": "To activate the Bangle, the user must spend a point of Willpower. When activated, the user gains an extra die to their pool for subsequent Stealth tests during the scene. When used at night, the Bangle grants two extra dice.",
+    "systemPtBr": "Para ativar o Bracelete, o usuário deve gastar um ponto de Força de Vontade. Quando ativado, o usuário ganha um dado extra em seus testes de Furtividade durante o restante da cena. Quando utilizado à noite, o Bracelete concede dois dados extras.",
+    "backgroundCost": "Nyx's Bangle is a two dot background.",
+    "backgroundCostPtBr": "Bracelete de Nyx é um Antecedente que custa dois pontos",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 2
+      }
+    ],
+    "book": "Storyteller's Tolkit",
+    "page": 34
+  },
+  {
+    "id": "14",
+    "title": "Puzzle of Naivety",
+    "titlePtBr": "Enigma da Inocência",
+    "description": "The Puzzle is used by Garou that make frequent contact with normal humans and helps masquerade the Garou's supernatural nature. The Puzzle is particularly valued by packs and septs that operate in urban areas. This talisman is made of a single human hair wrapped around a small piece of amber.",
+    "descriptionPtBr": "O Enigma da Ingenuidade é usado por Garou que mantêm contato frequente com humanos comuns e ajuda a disfarçar a natureza sobrenatural do Garou. O Enigma é especialmente valorizado por alcatéias e seitas que operam em áreas urbanas. Este talismã é feito a partir de um único fio de cabelo humano enrolado em um pequeno pedaço de âmbar.",
+    "system": "To activate the Puzzle, the user must pass a Rage check. When activated, the Puzzle forces all humans to see the user as if they were in homid even though they're really in glabro or as if they were in lupus even though they're really in hispo. If the user is in some other form than hispo or glabro, the Puzzle does nothing. A total failure while wearing a Puzzle makes it grant the character a surprising new appearance, possibly that of someone the people around really detest.",
+    "systemPtBr": "Para ativar o Enigma, o usuário deve passar em um teste de Fúria. Quando ativado, o Enigma faz com que todos os humanos vejam o usuário como se ele estivesse na forma hominídea, mesmo que ele esteja, na verdade, em glabro, ou como se estivesse na forma lupina, mesmo que, na realidade, esteja em hispo. Se o usuário estiver em qualquer outra forma que não seja hispo ou glabro, o Enigma não tem efeito. Uma falha total ao usar o Enigma faz com que ele conceda ao personagem uma aparência surpreendentemente nova, possivelmente a de alguém que as pessoas ao redor realmente desprezam.",
+    "backgroundCost": "Puzzle of Naivety is a three dot background. As a talen, it is a one dot background.",
+    "backgroundCostPtBr": "O Enigma da Inocência é um Antecedente de três pontos. Como um talen, é um Antecedente de um ponto.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      },
+      {
+        "type": "Talen",
+        "value": 1
+      }
+    ],
+    "book": "Storyteller's Tolkit",
+    "page": 34
+  },
+  {
+    "id": "15",
+    "title": "Sanctuary Chime",
+    "titlePtBr": "Sino do Santuário",
+    "description": "This talisman has been used by the Garou through the ages to cleanse a location of spirits. The talisman appears as a simple wooden or metal bell with glyphs pertaining to the Umbra and spirits engraved onto the clapper and handle.",
+    "descriptionPtBr": "Este talismã tem sido usado pelos Garou através das eras para purificar locais de espíritos. O talismã se apresenta como um sino simples de madeira ou metal, com glifos relacionados à Umbra e aos espíritos gravados no badalo e na alça.",
+    "system": "When activated, this small tubular bell emits an improbably deep and sonorous sound. To activate, the user must spend a Willpower point and make a Resolve+ Etiquette test Difficulty 3). If successful, the Chime prevents all spirits of power 1-5 from materializing within 30 meters of where the Chime was rung unless explicitly invited to do so by the user. For each success beyond the first, more powerful spirits are affected. Add the margin on the test to the base power level of 5 to determine which spirits are affected. For example, two additional successes will prevent power level 7 spirits from entering the area (5 + 2 successes = 7). Additionally, all spirits already in the material world whose power level is matched or exceeded by the user's activation roll are forced to flee the scene. One activation lasts for a number of hours equal to the user's total Renown. Alternatively, the user can destroy the chimes. Doing so will release a powerful shriek into the Umbra, forcing all spirits from power level 1-5 to flee the area and not return for at least 24 hours. Spirits above power level 5 are unaffected",
+    "systemPtBr": "Quando ativado, este pequeno sino tubular emite um som improvavelmente profundo e retumbante. Para ativá-lo, o usuário deve gastar um ponto de Força de Vontade e realizar um teste de Determinação + Etiqueta (Dificuldade 3). Em caso de sucesso, o Sino impede que todos os espíritos de nível de poder entre 1 e 5 se materializem em um raio de 30 metros do local onde o sino foi tocado, a menos que sejam explicitamente convidados pelo usuário. Para cada sucesso adicional além do primeiro, espíritos mais poderosos também são afetados. Adicione a margem de sucesso no teste ao nível de poder base 5 para determinar quais espíritos são impedidos. Por exemplo, dois sucessos adicionais impedirão espíritos de nível de poder até 7 de entrarem na área (5 + 2 sucessos = 7). Além disso, todos os espíritos já presentes no mundo material cujo nível de poder seja igual ou inferior ao resultado do teste de ativação são forçados a fugir da cena. Uma ativação dura um número de horas igual ao total de Renome do usuário. Alternativamente, o usuário pode destruir o sino, liberando um grito poderoso na Umbra, que força todos os espíritos de nível de poder 1 a 5 a abandonar a área e a não retornar por pelo menos 24 horas. Espíritos com nível de poder acima de 5 não são afetados por esta destruição.",
+    "backgroundCost": "A Sanctuary Chime is a four dot background. As a talen, it is a one dot background.",
+    "backgroundCostPtBr": "Um Sino do Santuário é um Antecedente de quatro pontos. Como um talen, é um Antecedente de um ponto.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 4
+      },
+      {
+        "type": "Talen",
+        "value": 1
+      }
+    ],
+    "book": "Storyteller's Tolkit",
+    "page": 35
+  },
+  {
+    "id": "16",
+    "title": "Skull of Candor",
+    "titlePtBr": "Caveira da Verdade",
+    "description": "Created from a carefully cleaned human skull, the talisman is marked by the glyphs for “glory” over the left temple and “wisdom” over the right temple. “Honor” is written between and above the eyes. Garou throughout the ages have used Skulls of Candor to divine past events as seen through the eyes of their enemies and victims",
+    "descriptionPtBr": "Criado a partir de um crânio humano cuidadosamente limpo, este talismã é marcado com o glifo de 'lória' sobre a têmpora esquerda e o glifo de 'sabedoria' sobre a têmpora direita. A palavra 'honra' está gravada entre e acima dos olhos. Garou de diversas eras utilizaram a Caveira da Verdade para divinar eventos passados através dos olhos de seus inimigos e vítimas.",
+    "system": "To activate the Skull, the user must place an eye from someone they killed in the same scene in one of the Skull's eye sockets and then makes a test based on their current relevant Renown. Thus, if the user wants the Skull to speak about Glory, they need to test against their current Glory at a Difficulty of 3. If the test fails, the Skull cannot be activated for 24 hours. If successful, the user can ask the Skull to recount a story pertaining to the type of Renown the user tested with. The Skull speaks out loud of what the slain foe saw within the last 30 nights of their life (anything longer and the Skull does not respond). The Skull recounts only one story per activation. The user cannot force the Skull to tell a particular story or answer a particular question. If the eye that activates the Skull comes from someone who knew the user in life, they treat the user as a friend or foe depending on their opinion of the user before they were killed.",
+    "systemPtBr": "Para ativar a Caveira da Verdade, o usuário deve colocar um olho de alguém que tenha matado na mesma cena em uma das órbitas do crânio e realizar um teste baseado no seu Renome relevante no momento. Por exemplo, se o usuário deseja que a Caveira fale sobre Glória, ele deve realizar o teste de Renome de Glória contra uma Dificuldade 3. Caso falhe, a Caveira não poderá ser ativada por 24 horas. Se for bem-sucedido, o usuário pode pedir à Caveira que conte uma história relacionada ao tipo de Renome testado. A Caveira fala em voz alta sobre o que o inimigo morto viu nos últimos 30 dias de sua vida (qualquer coisa anterior a isso e a Caveira não responde). A Caveira conta apenas uma história por ativação. O usuário não pode forçar a Caveira a contar uma história específica, nem responder a uma pergunta exata. Se o olho utilizado para ativar a Caveira pertencer a alguém que conhecia o usuário em vida, a Caveira falará com ele como amigo ou inimigo, dependendo da opinião que tinha do usuário antes de morrer.",
+    "backgroundCost": "A Skull of Candor is a three dot background. As a talen, it is a one dot background (and represents a Skull whose magic is waning).",
+    "backgroundCostPtBr": "Uma Caveira da Verdade é um Antecedente de três pontos. Como um talen, é um Antecedente de um ponto (e representa uma Caveira cuja magia está se enfraquecendo).",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      },
+      {
+        "type": "Talen",
+        "value": 1
+      }
+    ],
+    "book": "Storyteller's Tolkit",
+    "page": 35
+  },
+  {
+    "id": "17",
+    "title": "Herald's Horn",
+    "titlePtBr": "Chifre do Arauto",
+    "description": "It's said that in the glory days of the Nation, these large wooden horns were seen in the panoply of the greatest packs ever to walk Gaia's surface. They were used in daring raids on Wyrmspawn, evening the odds in otherwise dire situations. Now, these instruments are few and far between, with many destroyed as packs dissolved due to age, death, and animosity. Herald's Horns are created by carving a horn from the wood of a dead stump and making a pact with either wildebeest-spirits, bird-spirits, or spirits of camaraderie. The first two invoke their strength in numbers, while the last invokes its ties that overcome time and distance. Those that experience its greatest effect describe feeling the sensation of stepping sideways but can't recall the exact details on how they arrived at the user's side.",
+    "descriptionPtBr": "Diz-se que, nos dias de glória da Nação, esses grandes Chifres de madeira faziam parte dos arsenais das maiores alcatéias que já caminharam sobre a superfície de Gaia. Elas eram usadas em ataques ousados contra os servos da Wyrm, equilibrando as chances em situações que, de outra forma, seriam desesperadoras. Hoje, esses instrumentos são raros, com muitos destruídos à medida que as alcatéias se dissolveram devido à idade, à morte ou à animosidade. Os Chifres do Arauto são criados esculpindo um chifre a partir da madeira de um toco morto e firmando um pacto com espíritos de gnus, aves ou espíritos de camaradagem. Os dois primeiros invocam sua força em números, enquanto o último invoca laços que superam o tempo e a distância. Aqueles que experimentam seu maior efeito descrevem a sensação de dar um passo lateral, mas não conseguem se lembrar exatamente como chegaram ao lado de quem soprou o chifre.",
+    "system": "Blowing the Herald's Horn allows every member of the user's pack to know their location and the safest, quickest method of meeting them. If a test is needed to arrive in time or in one piece, the pack members gain a two-dice bonus to the test.",
+    "systemPtBr": "Soprar o Chifre do Arauto permite que todos os membros da alcatéia do usuário saibam sua localização e o método mais seguro e rápido para encontrá-lo. Se for necessário um teste para chegar a tempo ou em segurança, os membros da alcatéia recebem um bônus de dois dados nesse teste.",
+    "backgroundCost": "The Herald's Horn is a threedot Talisman.",
+    "backgroundCostPtBr": "O Chifre do Arauto é um Talismã de três pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 31
+  },
+  {
+    "id": "18",
+    "title": "The Hammer of King Brennus",
+    "titlePtBr": "O Martelo do Rei Brennus",
+    "description": "As legend tells it, Brennus was the last of the legendary White Howlers, a once proud tribe now fallen to the temptations of the Black Spiral. Details of the King's life are few and far between as the Dancers destroyed any evidence of their legacy as surely as they destroyed their own connection to Gaia. Still, it's known that he fought to his last breath, fighting the freshly corrupted warriors of his tribe until he had nothing but his death left to offer. Whether this is truly Brennus's hammer is a mystery none but the greatest spirit could hope to answer. It's undoubtedly old, and while the gargantuan hammer isn't much to look at, it strikes fear into the remnants of the former White Howlers' tribe to this day",
+    "descriptionPtBr": "Conta a lenda que Brennus foi o último dos lendários Uivadores Brancos, uma tribo outrora orgulhosa que agora sucumbiu às tentações da Espiral Negra. Detalhes sobre a vida do Rei são raros e escassos, já que os Dançarinos destruíram qualquer evidência de seu legado tão completamente quanto destruíram sua própria conexão com Gaia. Ainda assim, sabe-se que ele lutou até seu último suspiro, enfrentando os guerreiros recém-corrompidos de sua tribo até não lhe restar nada além da própria morte para oferecer. Se este é realmente o martelo de Brennus, é um mistério que apenas os maiores espíritos poderiam esperar responder. É inegavelmente antigo e embora o martelo colossal não impressione à primeira vista, ele ainda inspira medo nos remanescentes da antiga tribo dos Uivadores Brancos até hoje.",
+    "system": "This ancient warhammer is unquestionably heavy, and attack pools suffer a two-dice penalty when wielded by any character with a Strength rating of less than 4. The weapon inflicts +4 damage, but Black Spiral Dancers suffer this as Aggravated and also suffer a two-dice penalty to attack pools when fighting against the weapon. Using the hammer is not without risk for the wielder, as if they lose a battle to any Dancer — or Gaia forbid, lose the hammer itself — they must make a Harano test at Difficulty 2.",
+    "systemPtBr": "Este antigo martelo de guerra é inquestionavelmente pesado e jogadas de ataque sofrem uma penalidade de dois dados quando empunhado por qualquer personagem com Força inferior a 4. A arma inflige +4 de dano, mas Dançarinos da Espiral Negra sofrem este dano como Agravado e também sofrem uma penalidade de dois dados em suas jogadas de ataque ao lutar contra a arma. Usar o martelo não está isento de riscos para quem o empunha, pois, se perderem uma batalha para qualquer Dançarino — ou Gaia os livre, perderem o próprio martelo — devem realizar um teste de Harano com Dificuldade 2.",
+    "backgroundCost": "The Hammer of King Brennus is a four-dot Talisman",
+    "backgroundCostPtBr": "O Martelo do Rei Brennus é um Talismã de quatro pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 4
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 32
+  },
+  {
+    "id": "19",
+    "title": "The Warm Stone - Wyrm-Tainted Talisman",
+    "titlePtBr": "A Pedra Quente - Talismã Corrompido pela Wyrm",
+    "description": "Said to have been found at a nuclear test site in Kazakhstan, the Warm Stone is a nondescript rock the size of a fist. It doesn't have any sharp edges and feels warm to the touch. The Stone is highly radioactive and prolonged exposure is going to cause radiation sickness, cancer, and probably death. Remember: There's nothing to prevent Garou from using or acquiring Talismans tainted by the Wyrm. The only issue is social: Their septmates may object. And of course, the Talisman may exhibit unwanted side effects.",
+    "descriptionPtBr": "Diz-se que foi encontrada em um local de testes nucleares no Cazaquistão, a Pedra Quente é uma rocha sem características marcantes, do tamanho de um punho. Ela não possui bordas afiadas e é quente ao toque. A Pedra é altamente radioativa, e a exposição prolongada provavelmente causará envenenamento por radiação, câncer e, possivelmente, a morte. Lembre-se: Nada impede que os Garou usem ou adquiram Talismãs corrompidos pela Wyrm. A única questão é social: seus companheiros de seita podem se opor. E, é claro, o Talismã pode apresentar efeitos colaterais indesejados.",
+    "system": "The presence of the Warm Stone inhibits the functioning of any and all healing, supernatural or not. The natural healing abilities of the Garou, Gifts, or any other form of regaining Health simply don't work if the Stone is in the same room. The effect is automatic.",
+    "systemPtBr": "A presença da Pedra Quente inibe o funcionamento de qualquer tipo de cura, seja sobrenatural ou não. As habilidades naturais de cura dos Garou, Dons ou qualquer outra forma de recuperação de Vitalidade simplesmente não funcionam se a Pedra estiver no mesmo ambiente. O efeito é automático.",
+    "backgroundCost": "The Warm Stone is a three-dot Talisman",
+    "backgroundCostPtBr": "A Pedra Quente é um Talismã de três pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 32
+  },
+  {
+    "id": "20",
+    "title": "The Killer's Crown - Wyrm-Tainted Talisman",
+    "titlePtBr": "A Coroa do Assassino - Talismã Corrompido pela Wyrm.",
+    "description": "Who is the greatest killer of all? Many Black Spiral Dancers and Cult of Fenris Garou would fight for such an honor, and perhaps even some of the more violently minded among the tribes of Gaia. The Killer's Crown is a Talisman created for just such contests, to celebrate the winner and make it easier for them to kill again. The Crown is crude and black, as if welded together from scrap iron by an inexpert hand. Remember: There's nothing to prevent Garou from using or acquiring Talismans tainted by the Wyrm. The only issue is social: Their septmates may object. And of course, the Talisman may exhibit unwanted side effects.",
+    "descriptionPtBr": "Quem é o maior assassino de todos? Muitos Dançarinos da Espiral Negra e Garous da Seita de Fenris lutariam por tal honra e talvez até mesmo alguns dos mais violentos entre as tribos de Gaia. A Coroa do Assassino é um Talismã criado justamente para esses tipos de disputas, para celebrar o vencedor e tornar mais fácil para ele matar novamente. A Coroa é rudimentar e negra, como se tivesse sido soldada a partir de sucata por uma mão inexperiente. Lembre-se: Nada impede que os Garou usem ou adquiram Talismãs corrompidos pela Wyrm. A única questão é social: seus companheiros de seita podem se opor. E, é claro, o Talismã pode apresentar efeitos colaterais indesejados.",
+    "system": "The wearer of the Killer's Crown cannot lose the wolf. They always have a minimum of one Rage, regardless of how much Rage they use. For the purposes of Rage dice, their effective Rage is always assumed to be 2 higher than it actually is, to a maximum of 5. Thus, if the wearer's Rage is 2, they roll 4 Rage dice in tests. Removing the Killer's Crown is bloody business because it attaches directly to the skull of the wearer, its iron spikes penetrating through the skin and flesh of the head. Wearing it is painful in itself, but removing it causes three levels of Aggravated damage. Getting it off requires a successful Strength + Medicine test. The Difficulty is 3 if someone else wrenches it off from you, and 4 if you do it yourself.",
+    "systemPtBr": "Quem usa a Coroa do Assassino não pode perder o lobo. Sempre terá no mínimo um ponto de Fúria, independentemente de quanta Fúria utilizar. Para fins de dados de Fúria, considera-se que sua Fúria efetiva é sempre 2 pontos maior do que realmente é, até o máximo de 5. Assim, se a Fúria do portador for 2, ele rola 4 dados de Fúria nos testes. Remover a Coroa do Assassino é um processo sangrento, pois ela se prende diretamente ao crânio do portador, com seus espinhos de ferro penetrando a pele e a carne da cabeça. Usá-la já é doloroso por si só, mas removê-la causa três níveis de dano Agravado. Retirá-la exige um teste bem-sucedido de Força + Medicina. A Dificuldade é 3 se outra pessoa arrancá-la de você e 4 se tentar fazer isso sozinho.",
+    "backgroundCost": "The Killer's Crown is a threedot Talisman.",
+    "backgroundCostPtBr": "A Coroa do Assassino é um Talismã de três pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 32
+  },
+  {
+    "id": "21",
+    "title": "The Iron Hatchet - Wyrm-Tainted Talisman",
+    "titlePtBr": "O Machado de Ferro - Talismã Corrompido pela Wyrm",
+    "description": "A true servant of the Wyrm is always ready to hurt themselves if it means hurting the enemy. The Iron Hatchet doesn't have a history or a legend. It's just a tool used by Black Spiral Dancers to hack at the flesh of their enemies, tearing themselves open in the process. Remember: There's nothing to prevent Garou from using or acquiring Talismans tainted by the Wyrm. The only issue is social: Their septmates may object. And of course, the Talisman may exhibit unwanted side effects.",
+    "descriptionPtBr": "Um verdadeiro servo da Wyrm está sempre pronto para se ferir se isso significar ferir o inimigo. O Machado de Ferro não possui história ou lenda. É apenas uma ferramenta usada pelos Dançarinos da Espiral Negra para dilacerar a carne de seus inimigos, rasgando a si mesmos no processo. Lembre-se: Nada impede que os Garou usem ou adquiram Talismãs corrompidos pela Wyrm. A única questão é social: seus companheiros de seita podem se opor. E, é claro, o Talismã pode apresentar efeitos colaterais indesejados.",
+    "system": "The Hatchet inflicts +2 damage. On a successful hit, the user may spend their own Health levels (Superficial or Aggravated) to cause more damage of the same type on a one-to-one basis, to a maximum of 3 extra levels of damage.",
+    "systemPtBr": "O Machado inflige +2 de dano. Em um ataque bem-sucedido, o usuário pode gastar seus próprios níveis de Vitalidade (Superficiais ou Agravados) para causar mais dano do mesmo tipo, numa proporção de um para um, até um máximo de 3 níveis extras de dano.",
+    "backgroundCost": "The Iron Hatchet is a two-dot Talisman.",
+    "backgroundCostPtBr": "O Machado de Ferro é um Talismã de dois pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 2
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 33
+  },
+  {
+    "id": "22",
+    "title": "The Bone Scourge - Wyrm-Tainted Talisman",
+    "titlePtBr": "O Chicote de Ossos - Talismã Corrompido pela Wyrm",
+    "description": "The Bone Scourge is a weapon wielded by the favored daughter of the Wyrm, Zhyzhak herself. There are many legends surrounding its origin but the most common is that it's made from the skin and bone of a mighty Shadow Lord who surrendered himself to save his child from capture by the Black Spiral Dancers. To repay such an affront, his remains are now used to flay the skin off any who dare to oppose Zhyzhak. The Scourge is a long black leather whip studded with bone spikes. Remember: There's nothing to prevent Garou from using or acquiring Talismans tainted by the Wyrm. The only issue is social: Their septmates may object. And of course, the Talisman may exhibit unwanted side effects.",
+    "descriptionPtBr": "O Chicote de Ossos é uma arma empunhada pela filha favorita da Wyrm, Zhyzhak em pessoa. Existem muitas lendas sobre sua origem, mas a mais comum diz que ele foi feito com a pele e os ossos de um poderoso Senhor das Sombras que se rendeu para salvar seu filho de ser capturado pelos Dançarinos da Espiral Negra. Como forma de vingança por tal afronta, seus restos agora são usados para arrancar a pele de qualquer um que ouse se opor a Zhyzhak. O Chicote é um longo chicote de couro negro cravejado com espinhos de osso. Lembre-se: Nada impede que os Garou usem ou adquiram Talismãs corrompidos pela Wyrm. A única questão é social: seus companheiros de seita podem se opor. E, é claro, o Talismã pode apresentar efeitos colaterais indesejados.",
+    "system": "The Scourge inflicts +3 damage. Each successful hit also inflicts a level of Willpower damage. The Willpower damage is increased to 2 levels if the victim is acting in defense of their family or loved ones.",
+    "systemPtBr": "O Chicote causa +3 de dano. Cada golpe bem-sucedido também inflige um nível de dano de Força de Vontade. O dano de Força de Vontade é aumentado para 2 níveis se a vítima estiver agindo em defesa de sua família ou entes queridos.",
+    "backgroundCost": "The Bone Scourge is a threedot Talisman.",
+    "backgroundCostPtBr": "O Flagelo de Osso é um Talismã de três pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "Wyrmtide",
+    "page": 33
   }
 ]

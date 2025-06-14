@@ -63,6 +63,7 @@ const config: Config = {
         '80vh': '80vh',
         '85vh': '85vh',
         '90vh': '90vh',
+        '50vw': '50vw',
       },
     },
   },

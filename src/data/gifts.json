@@ -3036,5 +3036,181 @@
     "duration": "Até o anoitecer ou o amanhecer",
     "book": "Shattered Nation",
     "page": 133
+  },
+  {
+    "id": "129",
+    "gift": "Shredding Skin",
+    "giftPtBr": "Pele Lacerante",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 1
+      }
+    ],
+    "description": "Tearing at their skin and lacerating their flesh to reveal the monster lurking beneath, the Garou fuels their changes through pain and sacrifice instead of precious Rage. This Gift is taught by a spirit of pain.",
+    "descriptionPtBr": "Dilacerando sua própria pele e lacerando sua carne para revelar o monstro que espreita por baixo, o Garou alimenta suas transformações por meio da dor e do sacrifício, em vez de consumir sua preciosa Fúria. Este Dom é ensinado por um espírito da dor.",
+    "renown": "Honra",
+    "cost": "Nenhum",
+    "action": "Livre",
+    "pool": "",
+    "system": "Whenever the Garou would need to make one or more Rage checks to fuel a change, they can instead choose to sacrifice Superficial Health levels on a one-for-one basis (characters cannot use a combination of Health and Rage). The pain caused by these injuries cannot restore Rage.",
+    "systemPtBr": "Sempre que o Garou precisar realizar um ou mais testes de Fúria para realizar uma transformação, ele pode optar por sacrificar níveis de Vitalidade causando dano Superficial, em uma proporção de um para um (os personagens não podem combinar o uso de Vitalidade e Fúria no mesmo teste). A dor causada por essas feridas não pode ser usada para recuperar Fúria.",
+    "duration": "",
+    "book": "Wyrmtide",
+    "page": 29
+  },
+  {
+    "id": "130",
+    "gift": "Bite of the Lycan",
+    "giftPtBr": "Mordida de Lycan",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 4
+      }
+    ],
+    "description": "Myths abound about the power of a werewolf's bite, with many tales suggesting it's responsible for turning a regular human into a slavering beast — this Gift likely inspired some of these stories. Following a bite from the Garou, the human victim gives into their basest urges and goes feral — although no physical changes occur. This Gift can be used in any form and is taught by spirits associated with venom or darkness, such as snake-spirits, bat-spirits, or even Banes.",
+    "descriptionPtBr": "Mitos abundam sobre o poder da mordida de um lobisomem, com muitas histórias sugerindo que ela é responsável por transformar um humano comum em uma besta ensandecida — provavelmente, este Dom inspirou algumas dessas lendas. Após ser mordida pelo Garou, a vítima humana cede aos seus impulsos mais primitivos e torna-se selvagem — embora nenhuma mudança física ocorra. Este Dom pode ser usado em qualquer forma e é ensinado por espíritos associados ao veneno ou à escuridão, como espíritos-serpente, espíritos-morcego ou até mesmo Malditos.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "Manipulação + Glória vs. Autocontrole + Determinação",
+    "system": "After a successful bite, make a Gift test against the victim's Composure + Resolve; the effects persist for one night for every point of success in the margin. Once bitten, the human begins to feel overwhelmed by their darker urges: on the first night they're constantly angry, alienating those around them; on the second night, they turn violent at the slightest provocation, and by the third night they lose any inhibitions, fully willing to kill should the opportunity present itself.",
+    "systemPtBr": "Após uma mordida bem-sucedida, faça um teste de Manipulação + Glória contra o Autocontrole + Determinação da vítima; os efeitos persistem por uma noite para cada ponto de sucesso na margem. Uma vez mordido, o humano começa a ser dominado por seus impulsos mais sombrios: na primeira noite, sente uma raiva constante, afastando as pessoas ao seu redor; na segunda noite, torna-se violento diante da menor provocação; e na terceira noite, perde totalmente suas inibições, estando plenamente disposto a matar caso a oportunidade se apresente.",
+    "duration": "Uma noite por sucesso adicional na margem.",
+    "book": "Wyrmtide",
+    "page": 29
+  },
+  {
+    "id": "131",
+    "gift": "Urban Hunter",
+    "giftPtBr": "Caçador Urbano",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 4
+      }
+    ],
+    "description": "Some Garou learn the ways of the city, reveling in hunting the most dangerous game. This Gift is taught by Elemental spirits and Ooralath or Scryer Banes.",
+    "descriptionPtBr": "Alguns Garou aprendem os caminhos da cidade, deleitando-se no jogo perigoso da caçada. Este Dom é ensinado por espíritos Elementais, Ooralath ou Malditos Videntes.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Mínima",
+    "pool": "",
+    "system": "The Garou names their quarry as they activate this Gift. Then the Garou adds half their Wisdom (rounded up) to all dice pools to track, notice, stalk, and ambush their prey, so long as it is within an urban environment.",
+    "systemPtBr": "O Garou nomeia sua presa ao ativar este Dom. A partir de então, o Garou adiciona metade de sua Sabedoria (arredondada para cima) a todos os testes para rastrear, perceber, perseguir e emboscar sua presa, desde que ela esteja em um ambiente urbano.",
+    "duration": "Uma cena",
+    "book": "Wyrmtide",
+    "page": 30
+  },
+  {
+    "id": "132",
+    "gift": "Corrupted Memories",
+    "giftPtBr": "Memórias Corrompidas",
+    "belonging": [
+      {
+        "type": "ragabash",
+        "totalRenown": 2
+      }
+    ],
+    "description": "Using this Gift, the Garou keeps up the Veil by hiding themselves from the memories of a target. This Gift suffers from a bad reputation, as countless reckless ragabash have used it to remove themselves from a situation, fostering a dangerous feeling they live free from any consequences.",
+    "descriptionPtBr": "Usando este Dom, o Garou mantém o Véu ao se esconder das memórias de um alvo. Este Dom carrega uma má reputação, pois inúmeros ragabash imprudentes o usaram para se apagar de situações delicadas, cultivando a perigosa sensação de que vivem livres de qualquer consequência.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Livre",
+    "pool": "Inteligência + Sabedoria",
+    "system": "To use the Gift, the character makes a resisted test against the victim's Wits + Resolve. If the test is successful, the target remembers everything that happened in the previous scene, but every memory of the ragabash is replaced with the identity of someone else — the ragabash chooses this identity upon activating the Gift. Only humans are affected by this Gift, and its use is limited to those without any experience or awareness of the Garou. Storytellers may want to make this test in secret so that characters are unaware if their target remembers them or not.",
+    "systemPtBr": "Para usar o Dom, o personagem realiza um teste resistido contra a combinação de Raciocínio + Determinação da vítima. Se o teste for bem-sucedido, o alvo se lembrará de tudo o que aconteceu na cena anterior, mas todas as memórias envolvendo o ragabash serão substituídas pela identidade de outra pessoa — escolhida pelo ragabash no momento da ativação do Dom. Este Dom afeta apenas humanos e seu uso é restrito àqueles que não possuem qualquer experiência ou conhecimento sobre os Garou. É recomendado que os Narradores realizem este teste em segredo, para que os personagens não saibam se o alvo ainda se lembra deles ou não.",
+    "duration": "Uma cena",
+    "book": "Wyrmtide",
+    "page": 30
+  },
+  {
+    "id": "133",
+    "gift": "Cutting Words",
+    "giftPtBr": "Palavras Cortadas",
+    "belonging": [
+      {
+        "type": "galliard",
+        "totalRenown": 2
+      }
+    ],
+    "description": "The galliard's way with words takes a sinister turn as their conversation directs spirits of painful memories and confusion to assault the mind of their target. The resulting mental anguish causes the victim to visibly bleed from their nose, ears, and eyes as they struggle to hold a coherent conversation. This Gift is taught by spirits of sickness and disease.",
+    "descriptionPtBr": "O domínio das palavras do Galliard assume um tom sinistro quando sua conversa convoca espíritos de memórias dolorosas e confusão para atacar a mente de seu alvo. A angústia mental resultante é tão intensa que a vítima começa a sangrar visivelmente pelo nariz, ouvidos e olhos enquanto luta para manter uma conversa coerente. Este Dom é ensinado por espíritos de doença e enfermidade.",
+    "renown": "Honra",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "Manipulação + Honra vs. Autocontrole + Inteligência",
+    "system": "The Garou must be involved in direct conversation with the target before making a Gift test against the target's Composure + Intelligence. If successful, the victim suffers Impairment on Social and Mental pools for a number of turns equal to the margin. The blood loss looks dramatic and will attract unwarranted attention in the wrong environment but only causes damage on a Brutal result — in these instances, the victim also suffers a level of Superficial Health damage. The conversation itself isn't noticeably malicious, but those observing with supernatural perception can detect something is amiss (use the successes rolled as the Difficulty to detect the Gift's usage).",
+    "systemPtBr": "O Garou deve estar envolvido em uma conversa direta com o alvo antes de realizar um teste de Dom contra o Autocontrole + Inteligência da vítima. Se for bem-sucedido, o alvo sofre desvantagens em testes Sociais e Mentais por um número de turnos igual à margem de sucesso. A perda de sangue é visualmente dramática e pode atrair atenção indesejada no ambiente errado, mas só causa dano em caso de Falha Brutal — nesses casos, a vítima também sofre um nível de Dano Superficial. A conversa, por si só, não parece maliciosa, mas aqueles que observam com percepções sobrenaturais podem notar que algo está errado (use o número de sucessos obtidos como a Dificuldade para detectar o uso do Dom).",
+    "duration": "Um turno por sucesso adicional na margem",
+    "book": "Wyrmtide",
+    "page": 30
+  },
+  {
+    "id": "134",
+    "gift": "Hungry Teeth",
+    "giftPtBr": "Presas Famintas",
+    "belonging": [
+      {
+        "type": "theurge",
+        "totalRenown": 2
+      }
+    ],
+    "description": "The Garou's teeth seem unchanged in the mundane world but appear even sharper and more vicious than usual in the Umbra. The teeth can bite into spirits more easily, granting the Garou the ability to absorb some of the spirit's essence. A hunger-spirit or scavenger pack grants this Gift.",
+    "descriptionPtBr": "Os dentes do Garou parecem inalterados no mundo físico, mas na Umbra se mostram ainda mais afiados e cruéis do que o normal. Com eles, o Garou pode morder espíritos com maior facilidade, ganhando a capacidade de absorver parte da essência da criatura espiritual atacada. Esse Dom é geralmente concedido por espíritos da fome ou por bandos de espíritos necrófagos.",
+    "renown": "Sabedoria",
+    "cost": "Nenhum / 1 Teste de Fúria",
+    "action": "Livre / Mínima",
+    "pool": "",
+    "system": "This Gift is free and instantaneous while in crinos form. The Garou adds half their Wisdom rating (round up) to damage from bite attacks against spirits while in the Umbra, or gains a one-die bonus against spirits and fomori in the mundane world. If the Garou kills a supernatural opponent with this Gift active during a scene, they restore one point of Superficial Willpower — the Storyteller may allow for the recovery of Aggravated Willpower if the entity was sufficiently powerful.",
+    "systemPtBr": "Este Dom é gratuito e instantâneo enquanto o Garou está na forma Crinos. O Garou adiciona metade de seus pontos de Sabedoria (arredondada para cima) ao dano de ataques de mordida contra espíritos enquanto estiver na Umbra ou ganha um bônus de um dado contra espíritos e fomori no mundo físico. Se o Garou matar um oponente sobrenatural com este Dom ativo durante uma cena, ele recupera um ponto de Força de Vontade Superficial — o Narrador pode permitir a recuperação de Força de Vontade Agravada se a entidade derrotada for suficientemente poderosa.",
+    "duration": "Uma cena",
+    "book": "Wyrmtide",
+    "page": 30
+  },
+  {
+    "id": "135",
+    "gift": "Fala da Wyrm",
+    "giftPtBr": "Presas Famintas",
+    "belonging": [
+      {
+        "type": "philodox",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Names are power. With this Gift, the philodox turns their very voice into a weapon, tearing into a spirit as if they existed in the primordial times when to speak was to give form to the entities of the Umbra. Only now, such abilities have becomes debased and what's left is the use of the voice to cause hurt and damage, to tear at the name of the spirit without even understanding what it is. This Gift is taught by Nameless spirits, but also Drattosi and Grey Masses.",
+    "descriptionPtBr": "Nomes são poder. Com este Dom, o Philodox transforma sua própria voz em uma arma, dilacerando um espírito como se existisse nos tempos primordiais, quando falar era dar forma às entidades da Umbra. Agora, tais habilidades se tornaram degradadas e o que resta é o uso da voz para causar dor e dano, para dilacerar o nome do espírito sem nem mesmo entender o que ele é. Este Dom é ensinado por espíritos Sem Nome, mas também por Drattosi e Massas Cinzentas.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Carisma + Glória vs. Autocontrole + Determinação",
+    "system": "Unleashing a loud roar or a fell chant, the Garou tears at a spirit or creature's true name. Most targets resist this power with their Composure + Resolve, though in combat any Conflict pool might be used to resist the effects of Wyrm-speech. The target takes Superficial damage to Health or Willpower for each point of margin on a success (Gift user's choice). Each pair of 10s (critical results) can make one of those levels of damage Aggravated in addition to counting towards the margin of success. Additionally, this Gift can target and destroy Talismans. When targeting a Talisman, the Difficulty equals 2 + the Talisman or Talen's cost. On a success the Talisman or Talen is rendered inert for the rest of the story. With a critical or a margin of 2 or higher, a Talen is destroyed. A critical result or margin of 4 or higher destroys a Talisman.",
+    "systemPtBr": "Soltando um rugido alto ou um canto fúnebre, o Garou dilacera o verdadeiro nome de um espírito ou criatura. A maioria dos alvos resiste a este poder com seu Autocontrole + Determinação, embora em combate qualquer reserva de Conflito possa ser usada para resistir aos efeitos da Fala da Wyrm. O alvo sofre dano Superficial à Vitalidade ou Força de Vontade para cada ponto de margem em um sucesso (à escolha do usuário do Dom). Cada par de 10's (resultados críticos) pode tornar um desses níveis de dano Agravado, além de contar para a margem de sucesso. Além disso, este Dom pode ter como alvo destruir Talismãs. Ao direcionar o ataque a um Talismã, a Dificuldade é igual a 2 + o custo do Talismã ou Talen. Em caso de sucesso, o Talismã ou Talen é considerado inerte pelo restante da história. Com um resultado crítico ou uma margem de 2 ou mais, um Talen é destruído. Um resultado crítico ou uma margem de 4 ou mais destrói um Talismã.",
+    "duration": "Enquanto o dano infligido persistir.",
+    "book": "Wyrmtide",
+    "page": 31
+  },
+  {
+    "id": "136",
+    "gift": "Mouth Full of Teeth",
+    "giftPtBr": "Boca Cheia da Dentes",
+    "belonging": [
+      {
+        "type": "Ahroun",
+        "totalRenown": 2
+      }
+    ],
+    "description": "The Garo's teeth multiply, leaving their mouth bursting with razor-sharp teeth — deadly, but fragile and prone to breaking off as they bite. This Gift is taught by a shark-, rodent-, or bat-spirit.",
+    "descriptionPtBr": "Os dentes do Garou se multiplicam, deixando sua boca repleta de dentes afiados como navalhas — letais, mas frágeis e propensos a se quebrarem conforme ele morde. Este Dom é ensinado por um espírito de tubarão, roedor ou morcego.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "",
+    "system": "When activated, the Garou's bite deals additional damage equal to half their Glory rating (round up). With every bite they make, the damage bonus decreases by 1 until their bite damage rating reaches 0. At this point, they're unable to make further bite attacks until they rest in their breed form.",
+    "systemPtBr": "Quando ativado, a mordida do Garou causa dano adicional igual à metade de sua Glória, arredondado para cima. A cada mordida, o bônus de dano é reduzido em 1, até que o valor de dano extra da mordida chegue a 0. Nesse ponto, o Garou não pode mais realizar ataques de mordida até descansar em sua forma de nascimento.",
+    "duration": "Uma cena ou até seu bônus de dano chegar a zero.",
+    "book": "Wyrmtide",
+    "page": 31
   }
 ]
