@@ -2,17 +2,17 @@
   {
     "id": "1",
     "title": "Apeskin",
-    "titlePtBr": "Pele de Macaco",
+    "titlePtBr": "Pele de Símio",
     "description": "This talisman takes the form of a patch of skin, ape or human. When worn directly on the owner's own skin it makes the wearer immune to silver while in glabro or hispo form, but it also severely inhibits their ability to regenerate. Few Garou now living know how to make these talismans, but their creation is said to be particularly gruesome. Those found using them are treated with suspicion, if not outright hostility.",
-    "descriptionPtBr": "Este talismã assume a forma de um pedaço de pele, de macaco ou humano. Quando usado diretamente na pele do proprietário, ele torna o usuário imune à prata enquanto estiver nas formas glabro ou hispo, mas também inibe severamente sua capacidade de regeneração. Poucos Garou vivos sabem como fazer esses talismãs, mas dizem que sua criação é especialmente grotesca. Aqueles que são encontrados usando-os são tratados com suspeita, se não com hostilidade.",
+    "descriptionPtBr": "O talismã assume a forma de um pedaço de pele de origem hominoide (seres humanos, gorilas, orangotangos, chimpanzés, bonobos e gibões). Aplicado diretamente à pele do usuário, torna-o imune à prata nas formas glabro ou hispo, mas inibe de maneira drástica sua capacidade de regeneração. São poucos os garous hoje em dia que sabem fazer este talismã, mas se diz por aí que sua criação é particularmente macabra. Quem usa um deles costuma ser tratado com desconfiança, quando não com hostilidade escancarada.",
     "system": "While this talisman is worn and the user is in glabro or hispo form they treat silver as if they were in homid or lupus. They also lose the ability to regenerate damage in any form during this time and for a full day and night after the talisman has been taken off.",
-    "systemPtBr": "Enquanto este talismã estiver sendo usado e o usuário estiver na forma glabro ou hispo, eles tratam a prata como se estivessem na forma homid ou lupus. Eles também perdem a capacidade de regenerar danos em qualquer forma durante esse período e por um dia e uma noite completos após a remoção do talismã.",
+    "systemPtBr": "Enquanto usar o talismã e estiver na forma glabro ou hispo, o personagem tratará a prata como se ele estivesse na forma hominídeo ou lupino. Também perderá a capacidade de se regenerar em qualquer uma das formas nesse intervalo de tempo e durante um dia e uma noite após a remoção do talismã.",
     "backgroundCost": "An apeskin talisman is a four-dot background, while a Talen apeskin is worth two.",
-    "backgroundCostPtBr": "Um talismã de pele de macaco é um background de quatro pontos, enquanto um Talen de pele de macaco vale dois.",
+    "backgroundCostPtBr": "O talismã Pele de Símio é um Antecedente de 4 pontos; como tálen, vale 2.",
     "cost": [
       {
         "type": "Talen",
-        "value": 1
+        "value": 2
       }, 
       {
         "type": "Talismã",
@@ -20,18 +20,18 @@
       }
     ],
     "book": "Werewolf: The Apocalypse 5th",
-    "page": 188
+    "page": 189
   },
   {
     "id": "2",
     "title": "Gaia's Tear",
     "titlePtBr": "Lágrima de Gaia",
     "description": "Garou occasionally find strange, stony “fossils” in the Umbra that are infused with the spiritual world-energy of what they believe to be the world-spirit Gaia. These objects may appear gem-like and brilliant, or they might be dull and pliant, almost like folkloric madstone, and draw out sorrow or fury when used. They are exceedingly rare — none can say reliably how they originate (or even if they actually originate with Gaia…) — being unique in that they can actually cross into the physical world and retain their form. When a Garou communes with one of Gaia's Tears, they find that it renews their sense of purpose, and perhaps even invigorates their spiritual makeup itself.",
-    "descriptionPtBr": "De vez em quando, Garou encontram estranhos “fósseis” de pedra na Umbra que estão impregnados com a energia espiritual do que eles acreditam ser o espírito do mundo Gaia. Esses objetos podem parecer gemas brilhantes ou podem ser opacos e flexíveis, quase como o folclórico madstone, e despertam tristeza ou fúria quando usados. Eles são extremamente raros — ninguém pode dizer com confiabilidade como eles se originam (ou mesmo se eles realmente se originam com Gaia…) — sendo únicos no sentido de que podem realmente atravessar para o mundo físico e manter sua forma. Quando um Garou comunga com uma das Lágrimas de Gaia, eles descobrem que isso renova seu senso de propósito e talvez até mesmo revigora sua composição espiritual.",
+    "descriptionPtBr": "As vezes os garous acham na Umbra estranhos “fósseis” petrificados e impregnados com a energia espiritual do que eles acreditam ser o espírito-mundo Gaia. Esses objetos podem lembrar pedras preciosas e brilhantes ou se apresentar opacos e dúcteis, parecidos com o bezoar do folclore. Quando utilizados, extraem a tristeza ou a ira. São raros ao extremo - não há relatos confiáveis de como se formariam (ou se viriam mesmo de Gaia) - e únicos no sentido de que podem fazer a travessia para o mundo físico sem alterar sua configuração. Ao interagir com uma das Lágrimas de Gaia, a garou descobre que o talismã renova sua razão de ser e, possivelmente, revigora até mesmo sua constituição espiritual.",
     "system": "Spending a scene (or a period of downtime) contemplating one of Gaia's Tears allows the player to lower one level of either hauglosk or harano, at which point the Tear loses its luster and reverts to a mundane, mineral-like, makeup.",
-    "systemPtBr": "Passar uma cena (ou um período de tempo livre) contemplando uma das Lágrimas de Gaia permite ao jogador diminuir um nível de hauglosk ou harano, momento em que a Lágrima perde seu brilho e volta a ser uma composição mineral comum.",
+    "systemPtBr": "Passar uma cena (ou um interlúdio) contemplando uma Lágrima de Gaia permite à jogadora reduzir hauglosk ou harano em um nível. Quando isso acontece, a Lágrima perde o lustro e reverte para uma forma de aparência mineral e prosaica.",
     "backgroundCost": "Gaia's Tears are by their nature considered Talens, but cannot be taken as a Background as there is no reliable way to find them.",
-    "backgroundCostPtBr": "As Lágrimas de Gaia são, por natureza, consideradas Talens, mas não podem ser adquiridas como um Background, pois não há uma maneira confiável de encontrá-las.",
+    "backgroundCostPtBr": "Por sua própria natureza, as Lágrimas de Gaia são consideradas tálens, mas não podem ser adquiridas como Antecedente, pois não há maneira certa e segura de encontrá-las.",
     "cost": [
       {
         "type": "Talen",
@@ -39,18 +39,18 @@
       }
     ],
     "book": "Werewolf: The Apocalypse 5th",
-    "page": 188
+    "page": 189
   },
   {
     "id": "3",
     "title": "Harmony Flute",
     "titlePtBr": "Flauta da Harmonia",
     "description": "The peaceful notes from this flute, carved with the images of Luna and Helios dancing, can calm even the most aggressive creatures. Even Garou in the grip of Rage can be soothed, assuming the talisman user lives longer than for a few bars. While flutes are the most common form of this talisman, variants include other kinds of (usually portable) musical instruments.",
-    "descriptionPtBr": "As notas pacíficas desta flauta, esculpidas com as imagens de Luna e Helios dançando, podem acalmar até as criaturas mais agressivas. Mesmo os Garou dominados pela Fúria podem ser acalmados, desde que o usuário do talismã viva mais do que algumas notas. Embora as flautas sejam a forma mais comum deste talismã, variantes incluem outros tipos de instrumentos musicais (geralmente portáteis).",
+    "descriptionPtBr": "As notas serenas desta flauta toda trabalhada com imagens de Luna e Hélios dançando conseguem acalmar as criaturas mais agressivas. É possível tranquilizar até mesmo os garous tomados pela Fúria, presumindo-se que a usuária viva tempo suficiente para tocar mais do que um ou dois compassos. A flauta é a forma mais comum que o talismã assume, mas as variações incluem outros tipos de instrumentos musicais (geralmente portáteis).",
     "system": "The flute's user must spend two turns and a Willpower, and then make a Composure + Performance test against the current Rage of a target in frenzy, or a Difficulty of 3 in the case of other creatures. If the user is successful, the target is brought out of frenzy, reverting to their natural form (if Garou), per the normal rules for leaving Crinos form.",
-    "systemPtBr": "O usuário da flauta deve gastar dois turnos e um Ponto de Força de Vontade e, em seguida, fazer um teste de Compostura + Performance contra a Fúria atual de um alvo em frenesi, ou uma Dificuldade de 3 no caso de outras criaturas. Se o usuário for bem-sucedido, o alvo é retirado do frenesi, revertendo para sua forma natural (se for um Garou), conforme as regras normais para sair da forma Crinos.",
+    "systemPtBr": "A flautista precisa de dois turnos e 1 ponto de Força de Vontade. Aí faz um teste de Autocontrole + Performance contra a Fúria atual do alvo frenético ou com Dificuldade 3, no caso de outras criaturas. Se a usuária do Dom for bem-sucedida, o alvo sairá do frenesi e voltará à sua forma natural (se for um garou) de acordo com as regras de praxe para deixar a forma crinos.",
     "backgroundCost": "A harmony flute is a three-dot background.",
-    "backgroundCostPtBr": "Uma flauta da harmonia é um background de três pontos.",
+    "backgroundCostPtBr": "A Flauta da Harmonia é um Antecedente de três pontos.",
     "cost": [
       {
         "type": "Talismã",
@@ -58,18 +58,18 @@
       }
     ],
     "book": "Werewolf: The Apocalypse 5th",
-    "page": 188
+    "page": 189
   },
   {
     "id": "4",
     "title": "Klaive",
     "titlePtBr": "Klaive",
     "description": "The signature weapon of Garou culture, the klaive is a reinforced silver dagger used in ritual combat, and their wielders or creators may decorate them with any sort of unique adornments. In certain environments, such as moots, a klaive is a status symbol that invites the owner to tell how they came into its possession, or of glorious kills made with it.\nKlaives are particularly associated with the Garou Nation, and as such have an air of the old-fashioned or even obsolete about them. That stated, it's hard to argue with a klaive's effectiveness when a rival shoves one through your face and it comes out the back of your head.",
-    "descriptionPtBr": "A arma característica da cultura Garou, o klaive é uma adaga de prata reforçada usada em combate ritual, e seus portadores ou criadores podem decorá-la com qualquer tipo de adornos únicos. Em certos ambientes, como moots, um klaive é um símbolo de status que convida o dono a contar como chegaram à sua posse, ou sobre mortes gloriosas feitas com ele.\nOs klaives são particularmente associados à Nação Garou e, como tal, têm uma aura de antiquado ou até obsoleto. Dito isso, é difícil argumentar contra a eficácia de um klaive quando um rival enfia um deles no seu rosto e ele sai pelo outro lado da sua cabeça.",
+    "descriptionPtBr": "Arma típica da cultura garou, a klaive é uma adaga de prata reforçada que se usa no combate ritualístico. Seus usuários ou criadores podem enfeitá-la com todo tipo de adorno. Em certos ambientes, como as assembleias, a klaive é um símbolo de status que inspira o proprietário a contar como a adquiriu ou quantos matou gloriosamente com ela. As klaives estão associadas particularmente à Nação Garou e, por conta disso, exalam um certo ar antiquado ou mesmo obsoleto. Mas fica difícil contestar a eficácia de uma klaive quando um rival atravessa seu crânio com uma delas.",
     "system": "A klaive does +2 silver-based Aggravated Health damage and may be wielded in homid or glabro form.",
-    "systemPtBr": "Uma klaive causa +2 de dano à Vitalidade baseado em prata agravada e pode ser empunhado nas formas homid ou glabro.",
+    "systemPtBr": "Uma klaive causa +2 de dano Agravado por prata à Vitalidade e pode ser usada por garous na forma hominídeo ou glabro.",
     "backgroundCost": "The klaive is a three-dot Talisman, while a Talen klaive is worth a single dot.",
-    "backgroundCostPtBr": "A klaive é um Talismã de três pontos, enquanto um klaive como Talen vale um único ponto.",
+    "backgroundCostPtBr": "O talismã Klaive é um Antecedente de 3 pontos; como tálen, vale apenas 1 ponto.",
     "cost": [
       {
         "type": "Talen",
@@ -81,18 +81,18 @@
       }
     ],
     "book": "Werewolf: The Apocalypse 5th",
-    "page": 188
+    "page": 189
   },
   {
     "id": "5",
     "title": "Partridge Wing",
     "titlePtBr": "Asa de Perdiz",
     "description": "A partridge wing sweeps away the ancestral terror humans have when confronting the Garou. It can be fashioned from an actual partridge-spirit in the Umbra, or it can be more metaphorical in its fashioning and crafted from a spirit of forgetfulness or even fear. It may take the form of an actual wing or feather, or it might be, again, something more metaphorical in function, such as a veil or even a spiderweb placed across the eyes.",
-    "descriptionPtBr": "Uma asa de perdiz afasta o terror ancestral que os humanos têm ao confrontar os Garou. Ela pode ser feita a partir de um espírito de perdiz real no Umbra, ou pode ser mais metafórica em sua criação e ser fabricada a partir de um espírito do esquecimento ou até mesmo do medo. Pode assumir a forma de uma asa ou pena real, ou pode ser algo mais metafórico em sua função, como um véu ou até mesmo uma teia de aranha colocada diante dos olhos.",
+    "descriptionPtBr": "A asa da perdiz elimina o pavor ancestral que os seres humanos sentem ao confrontar os garous. Pode ser criada a partir de um legítimo espírito-perdiz na Umbra ou pode ser mais metafórica, usando em sua criação um espírito do esquecimento ou mesmo do medo. Pode ter a forma de asa ou pena ou, mais uma vez, pode ser algo de funcionalidade mais metafórica, como um véu ou mesmo uma teia de aranha sobre os olhos.",
     "system": "The partridge wing prevents a single individual from experiencing the Delirium while they are the subject of its effect. A single partridge wing “protects” only one individual at a time from the Delirium in this way, and the individual must carry the wing on their person, knowingly or unknowingly. If a subject loses the wing they are thereafter affected as usual by the Delirium, gradually losing recollection of any memories they have in which they observed Delirium-causing effects and doubting any such memories that might later resurface.",
-    "systemPtBr": "A asa de perdiz impede que um único indivíduo experimente o Delírio enquanto é o objeto de seu efeito. Uma única asa de perdiz “protege” apenas um indivíduo por vez do Delírio dessa maneira, e o indivíduo deve carregar a asa consigo, conscientemente ou inconscientemente. Se um indivíduo perder a asa, ele será afetado como de costume pelo Delírio, gradualmente perdendo a recordação de quaisquer memórias em que tenham observado efeitos causadores de Delírio e duvidando de tais memórias que possam ressurgir posteriormente.",
+    "systemPtBr": "A asa da perdiz, enquanto afetar um indivíduo, não o deixará experimentar o Delírio. Cada exemplar da asa da perdiz “protege” do Delírio apenas um indivíduo por vez e, tendo ou não ciência disso, a pessoa precisa portar a asa junto ao corpo. Se perder a asa, será afetada normalmente pelo Delírio e perderá aos poucos toda lembrança que possa ter de incidentes causadores de Delírio que tenha presenciado, além de duvidar das memórias que ressurgirem posteriormente.",
     "backgroundCost": "The partridge wing is a two-dot Talisman.",
-    "backgroundCostPtBr": "A asa de perdiz é um Talismã de dois pontos.",
+    "backgroundCostPtBr": "O talismã Asa da Perdiz é um Antecedente de 2 pontos.",
     "book": "Werewolf: The Apocalypse 5th",
     "cost": [
       {
@@ -100,22 +100,22 @@
         "value": 2
       }
     ],
-    "page": 189
+    "page": 188
   },
   {
     "id": "6",
     "title": "Shadowshard",
-    "titlePtBr": "Fragmento das Sombras",
+    "titlePtBr": "Umbrestilha",
     "description": "A shadowshard is a fragment of the world's spiritual reflection, a literal piece of the Umbra. It appears as a hunk of glass or other semi-reflective material but seems to contain shadow itself, whether in the form of roiling, turbulent darkness, or a heavy, mist-like gloom. A Garou may break the shadowshard, freeing the shadow within and pulling the werewolf across the Gauntlet, into the Umbra.",
-    "descriptionPtBr": "Um fragmento das sombras é um pedaço da reflexão espiritual do mundo, um pedaço literal do Umbra. Ele aparece como um pedaço de vidro ou outro material semi-reflexivo, mas parece conter a própria sombra, seja na forma de uma escuridão agitada e turbulenta, ou uma neblina densa e sombria. Um Garou pode quebrar o fragmento das sombras, liberando a sombra interior e puxando o lobisomem através do Véu, para o Umbra.",
+    "descriptionPtBr": "A umbrestilha é um fragmento do reflexo espiritual do mundo. Literalmente, um pedaço da Umbra. Lembra um caco de vidro ou outro material semirrefletor, mas parece conter a substância da própria sombra, seja na forma de trevas turbulentas ou de uma escuridão densa e semelhante a uma névoa. Um garou pode partir a umbrestilha e libertar a sombra em seu interior, que o transportará para a Umbra através da Película.",
     "system": "Shadowshards exist only as Talens. They allow a single user to enter the Umbra, so long as the Gauntlet rating is 3 or lower. That transit consumes the talisman upon its breakage and counts as a full action. Larger shadowshards also exist, permitting the user to take their entire pack across the Gauntlet. Shadowshards work only for Garou; they cannot pull humans or other individuals into the Umbra, presumably because they lack the same part-spiritual composition as werewolves.",
-    "systemPtBr": "Fragmentos das sombras existem apenas como Talens. Eles permitem que um único usuário entre no Umbra, desde que a classificação do Véu seja 3 ou inferior. Essa travessia consome o talismã quando ele é quebrado e conta como uma ação completa. Fragmentos maiores das sombras também existem, permitindo que o usuário leve toda a matilha através do Véu. Fragmentos das sombras funcionam apenas para os Garou; eles não podem puxar humanos ou outras pessoas para o Umbra, presumivelmente porque eles não possuem a mesma composição parcialmente espiritual dos lobisomens.",
+    "systemPtBr": "As umbrestilhas existem apenas como tálens. Permitem a um - e apenas um - usuário entrar na Umbra desde que o valor da Película seja 3 ou menos. A travessia consome o tálen assim que este é partido, e conta como uma ação completa. Também existem umbrestilhas grandes que permitem ao usuário transportar a alcateia inteira através da Película. As umbrestilhas funcionam apenas com os garous: elas não conseguem levar seres humanos nem outros indivíduos para a Umbra, resumivelmente porque essa gente não é em parte espírito como os lobisomens.",
     "backgroundCost": "Single-Garou shadowshards are worth one dot while pack-sized shards are worth three dots.",
-    "backgroundCostPtBr": "Fragmentos das sombras para um único Garou valem um ponto, enquanto fragmentos de tamanho de matilha valem três pontos.",
+    "backgroundCostPtBr": "As Umbrestilhas de um garou só valem 1 ponto; as estilhas tamanho alcateia valem 3.",
     "cost": [
       {
         "type": "Um Único Garou",
-        "value": 2
+        "value": 1
       },
       {
         "type": "Toda a Matilha",
@@ -130,30 +130,38 @@
     "title": "Spirit Catcher",
     "titlePtBr": "Apanhador de Espírito",
     "description": "A spirit-catcher is a talisman that spirits find captivating, to the point that they'll refuse to leave the spirit-catcher's presence when a Garou presents one. They may have almost any physical appearance, whether otherworldly “fossils” of bygone spirits brought back by Ghost Council Garou after journeys into the Spirit Wilds or technological gewgaws dedicated by Glass Walkers.",
-    "descriptionPtBr": "Um atrair-espírito é um talismã que os espíritos acham cativante, a ponto de recusarem a deixar a presença do atrair-espírito quando um Garou o apresenta. Eles podem ter quase qualquer aparência física, seja ela sobrenatural, como \"fósseis\" de espíritos de épocas passadas trazidos de volta por Garou do Conselho dos Fantasmas após jornadas nos Espíritos Selvagens, ou bugigangas tecnológicas dedicadas por Andarilhos do Vidro.",
+    "descriptionPtBr": "O apanhador de espíritos é um talismã que os espíritos acham tão cativante que se recusam a sair de perto dele quando um garou o apresenta. Em termos de aparência física, os apanhadores podem ser qualquer coisa, desde “fósseis” sobrenaturais de espíritos do passado e recuperados por garous do Conselho dos Fantasmas em suas jornadas pelas Imensidões Espirituais a tralhas tecnológicas dedicadas por Andarilhos do Asfalto.",
     "system": "A spirit-catcher prevents one spirit per scene from leaving the presence of the Garou who brandishes it, as long as both are in the same realm (Umbra or physical). The Garou can usually choose the spirit, but if many spirits are present, exactly which it captivates is up to the Storyteller — it's not so precise as to be “aimed.” If the spirit wishes to leave, it must succeed on a test of its Power versus the rating of the spirit-catcher. If the spirit fails the test, it must stay in the vicinity of the spirit-catcher, but may hide, evade, etc., and if harmed it is free to flee. If used in conjunction with Gifts or Rites than bind or restrain spirits the spirit-catcher can provide half its rating as bonus dice, at the Storyteller's discretion.",
-    "systemPtBr": "Um atrair-espírito impede que um espírito por cena deixe a presença do Garou que o empunha, desde que ambos estejam no mesmo plano (Umbra ou físico). O Garou normalmente pode escolher o espírito, mas se houver muitos espíritos presentes, exatamente qual será cativado fica a critério do Narrador - não é tão preciso a ponto de ser \"mirado\". Se o espírito desejar sair, ele deve ter sucesso em um teste de seu Poder versus a classificação do atrair-espírito. Se o espírito falhar no teste, ele deve permanecer nas proximidades do atrair-espírito, mas pode se esconder, evadir, etc., e se for ferido, está livre para fugir. Se usado em conjunto com Dons ou Ritos que prendem ou restringem espíritos, o atrair-espírito pode fornecer metade de sua classificação como dados de bônus, a critério do Narrador.",
+    "systemPtBr": "Sistema: O apanhador de espíritos impedirá um espírito por cena de sair de perto do garou que o empunha desde que o lobisomem e a entidade se encontrem no mesmo reino (umbrático ou físico). Normalmente, o garou pode escolher o espírito, mas, se houver vários presentes, qual deles se deixará cativar ficará a cargo do Narrador: o talismã não é tão preciso assim para que se possa “apontá-lo” para um alvo. Se quiser ir embora, o espírito terá de vencer um teste de Poder contra o valor do apanhador de espíritos. Se falhar, o espírito será obrigado a permanecer na vizinhança do apanhador, mas poderá se esconder, esquivar etc. Se alguém lhe fizer mal, o espírito estará livre para fugir. Se usado em conjunto com Dons ou Rituais que confinam ou detêm espíritos, o apanhador poderá, a critério do Narrador, oferecer metade de seu valor como dados bônus.",
     "backgroundCost": "A general spirit-catcher able to attract all kinds of spirits is worth its full rating in Background dots. It is considered to be worth one dot less than its rating if it attracts one particular spirit type (such as Weaver or Gaian spirits) and is further reduced in cost by one if taken as a Talen, to a minimum of one.",
-    "backgroundCostPtBr": "Um atrair-espírito geral capaz de atrair todos os tipos de espíritos vale a quantidade completa de pontos de Antecedente em Background. É considerado valer um ponto a menos do que sua classificação se atrair um tipo específico de espírito (como espíritos Tecelões ou Gaianos) e seu custo é reduzido em mais um ponto se for usado como um Talen, até um mínimo de um.",
+    "backgroundCostPtBr": "Um apanhador de espíritos genérico e capaz de atrair todos os tipos de espírito custa seu valor cheio em pontos de Antecedente. Custará um ponto a menos que seu valor se atrair um tipo particular de espírito (por exemplo, um espírito de Gaia ou da Weaver) e, se adquirido como tálen, terá seu custo reduzido em mais 1 ponto (sendo o mínimo 1).",
     "cost": [
       {
-        "type": "Capaz de atrair qualquer Espírito",
+        "type": "Talismã (Capaz de atrair qualquer Espírito)",
         "value": 7
+      },
+      {
+        "type": "Talismã (Capaz de atrair um tipo particular de Espírito)",
+        "value": 6
+      },
+      {
+        "type": "Talen",
+        "value": 5
       }
     ],
     "book": "Werewolf: The Apocalypse 5th",
-    "page": 189
+    "page": 188
   },
   {
     "id": "8",
     "title": "Wind Whistle",
-    "titlePtBr": "Apito do Vento",
+    "titlePtBr": "Apito para Vento",
     "description": "Blowing this whistle causes a gust of wind to blow up, carrying with it dust, snow, or other local detritus that covers the tracks of the user and their pack. Pursuers find it hard to pick up a trace and any trail looks older than it should be. Making this whistle requires several pacts with spirits of the land and sky, and the whistle itself must be made from the bone of an animal that died from cold or some other form of environmental exposure.",
-    "descriptionPtBr": "Soprando este apito, uma rajada de vento se levanta, carregando consigo poeira, neve ou outros detritos locais que cobrem as pegadas do usuário e seu grupo. Perseguidores acham difícil rastrear e qualquer trilha parece mais antiga do que deveria ser. Fazer este apito requer vários pactos com espíritos da terra e do céu, e o apito em si deve ser feito com os ossos de um animal que morreu de frio ou de alguma outra forma de exposição ambiental.",
+    "descriptionPtBr": "Soprar o apito suscita uma rajada de vento que traz consigo poeira, neve ou outros resíduos da área e cobre os rastros da usuária e sua alcateia. Perseguidores acharão difícil localizar a pista, e todo rastro parecerá mais antigo do que deveria. Fabricar o apito exige vários pactos com espíritos da terra e do céu, e o apito em si precisa ser feito dos ossos de um animal que tenha morrido de frio ou outro tipo de exposição aos elementos.",
     "system": "The user makes a Wits + Occult test, increasing the Difficulty to track them and their pack by half the number of successes rolled, rounded up. The wind whistle can only be used outdoors, and only once per session. The effect only applies to pursuits involving the location the talisman was used.",
-    "systemPtBr": "O usuário faz um teste de Astúcia + Ocultismo, aumentando a Dificuldade para rastreá-los e ao seu grupo pela metade do número de sucessos rolados, arredondado para cima. O apito do vento só pode ser usado ao ar livre e apenas uma vez por sessão. O efeito se aplica apenas a perseguições que envolvem o local onde o talismã foi usado.",
+    "systemPtBr": "A usuária faz um teste de Raciocínio + Ocultismo e, se bem-sucedida, soma metade da quantidade de sucessos obtidos (arredondada para cima) à Dificuldade dos testes que se fizerem para tentar rastrear tanto ela quanto sua alcateia. Só é possível usar o apito para vento ao ar livre e uma vez por sessão. O efeito se aplica apenas às perseguições que ocorrem no local onde o talismã foi usado.",
     "backgroundCost": "The wind whistle is a three-dot Talisman, while a Talen whistle is worth a single dot.",
-    "backgroundCostPtBr": "O apito do vento é um Talismã de três pontos, enquanto um apito Talen vale um único ponto.",
+    "backgroundCostPtBr": "O Apito para Vento, como talismã, é um Antecedente de três pontos; como tálen, vale apenas 1.",
     "cost": [
       {
         "type": "Talen",
@@ -165,7 +173,7 @@
       }
     ],
     "book": "Werewolf: The Apocalypse 5th",
-    "page": 190
+    "page": 188
   },
   {
     "id": "9",
