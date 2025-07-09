@@ -171,7 +171,7 @@ export default function Trybe() {
               <div className="flex flex-col items-center justify-center w-full text-sm">
                 {
                   dataTrybe.alternativePhrases.map((phrase: string, index: number) => 
-                  <p className="mt-1 sm:mt-2 text-center sm:w-1/2">
+                  <p key={ index } className="mt-1 sm:mt-2 text-center sm:w-1/2">
                     &quot;{ phrase }&quot;
                   </p>
                   )
