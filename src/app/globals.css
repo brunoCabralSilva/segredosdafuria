@@ -145,3 +145,7 @@ input[type=number] {
   background: #4a5568 !important; /* Cor da barra de rolagem */
   border-radius: 4px;
 }
+
+.block-item {
+  max-width: 1170px !important;
+}

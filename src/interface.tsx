@@ -154,6 +154,18 @@ export interface ITrybe {
   favor: String;
   ban: String;
   archetypes: IArchetypes[];
+  alternativeTitle: string;
+  alternativePhrases: string[];
+  alternativeDescription: string[];
+  alternativeCustoms: string[];
+  alternativeIdeology: string[];
+  alternativeAuspices: {
+    ragabash: string[],
+    theurge: string[],
+    phillodox: string[],
+    galliard: string[],
+    ahroun: string[]
+  }
 };
 
 export interface IAtribute {

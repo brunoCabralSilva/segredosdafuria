@@ -170,9 +170,9 @@ export const capitalizeFirstLetter = (str: string): String => {
     case 'silent striders': return 'Peregrinos Silenciosos';
     case 'black furies': return 'Fúrias Negras';
     case 'silver fangs': return 'Presas de Prata';
-    case 'hart wardens': return 'Guarda do Cervo';
-    case 'ghost council': return 'Conselho Fantasma';
-    case 'galestalkers': return 'Perseguidores da Tempestade';
+    case 'hart wardens': return 'Guardadores do Galhado';
+    case 'ghost council': return 'Conselho dos Fantasmas';
+    case 'galestalkers': return 'Espreitadores do Vento';
     case 'glass walkers': return 'Andarilhos do Asfalto';
     case 'bone gnawers': return 'Roedores de Ossos';
     case 'shadow lords': return 'Senhores das Sombras';
