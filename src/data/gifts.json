@@ -1510,7 +1510,7 @@
     "descriptionPtBr": "O Garou pode fazer com que um espírito entre nos sonhos de outro por meio de caminhos estranhos através das profundezas da Umbra, alterando esses sonhos ou simplesmente participando de sua narrativa enigmática. Este Dom pode ser usado para deixar mensagens, perturbar o sonhador ou obter uma compreensão melhor da mente de um estranho. Um espírito dos sonhos concede este Dom.",
     "renown": "Sabedoria",
     "cost": "1 ponto de Força de Vontade",
-    "action": "Cena Completa",
+    "action": "Total",
     "pool": "Raciocínio + Sabedoria",
     "system": "The Gift user's player makes a Gift test against a Difficulty set by the Storyteller, depending on what they're trying to accomplish: 2 to simply observe, 3 to leave a message, and up to 4 or more to completely alter the dreamscape to affect the dreamer in some way. If used to unnerve or otherwise frighten the dreamer, the dreamer regains no Willpower through natural means for the rest of the session and loses an additional Willpower point for each success in the  margin. The Gift can be used as long as the user knows the subject's location, though extreme distances (such as cross-continent) add 1 to the Difficulty. This Gift can be used in any form.",
     "systemPtBr": "O Garou faz um teste de Dom com uma Dificuldade estabelecida pelo Narrador, dependendo do que estão tentando realizar: 2 para simplesmente observar, 3 para deixar uma mensagem e até 4 ou mais para alterar completamente a paisagem dos sonhos para afetar o sonhador de alguma forma. Se usado para perturbar ou assustar o sonhador, o sonhador não recupera Força de Vontade de maneira natural pelo restante da sessão e perde um ponto adicional de Força de Vontade para cada sucesso na margem. O Dom pode ser usado desde que o usuário conheça a localização do sujeito, embora distâncias extremas (como entre continentes) acrescentem 1 à Dificuldade. Este Dom pode ser usado em qualquer forma.",
@@ -3197,7 +3197,7 @@
     "giftPtBr": "Boca Cheia da Dentes",
     "belonging": [
       {
-        "type": "Ahroun",
+        "type": "ahroun",
         "totalRenown": 2
       }
     ],
@@ -3212,5 +3212,74 @@
     "duration": "Uma cena ou até seu bônus de dano chegar a zero.",
     "book": "Wyrmtide",
     "page": 31
+  },
+  {
+    "id": "137",
+    "gift": "An Exchange With Luna",
+    "giftPtBr": "Uma Troca com Luna",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 1
+      }
+    ],
+    "description": "The Garou sends their Rage to Luna herself, maintaining control until Luna returns the Rage to them. With this Gift, a Garou can regulate their Rage independently, even losing the Wolf when they want to. The Lair (see p. 127) makes extensive use of this Gift. A Lune or servant of Luna teaches this Gift.",
+    "descriptionPtBr": "O Garou envia sua Fúria diretamente para Luna, mantendo o controle até que Luna a devolva. Com este Dom, o Garou pode regular sua Fúria de forma independente, até mesmo perdendo o Lobo quando desejar. O Antro (ver p. 127) faz uso extensivo deste Dom. Um Lúnio ou servo de Luna ensina este Dom.",
+    "renown": "Honra",
+    "cost": "Nenhum",
+    "action": "Livre",
+    "pool": "",
+    "system": "When the Garou makes one or more Rage checks, they can choose to fail one or all of them automatically. Keep track of every level of Rage lost this way, particularly if it exceeds the Garou's Honor. When the Garou can see the moon, they can attempt a Resolve + Honor test against a Difficulty of 3. If successful, they can reclaim any levels of Rage they have exchanged. This Gift can be used in any form.",
+    "systemPtBr": "Quando o Garou fizer um ou mais testes de Fúria, ele pode escolher falhar automaticamente em um ou todos eles. Registre cada ponto de Fúria perdido dessa forma, especialmente se exceder a Honra do Garou. Quando o Garou puder ver a lua, ele pode realizar um teste de Raciocínio + Honra com Dificuldade 3. Se for bem-sucedido, pode recuperar qualquer nível de Fúria trocado. Este Dom pode ser usado em qualquer forma.",
+    "duration": "",
+    "book": "The Moonlit Path",
+    "page": 60
+  },
+  {
+    "id": "138",
+    "gift": "Resist Toxin",
+    "giftPtBr": "Resistir a Toxina",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 1
+      }
+    ],
+    "description": "Garou are naturally hardy when it comes to poisons and toxins, and there's very little that can take them down permanently. However, that doesn't mean they're immune; it's just that they recover quickly. Werewolves with this Gift instinctively purge their bodies of any unwanted contaminants, shrugging off the effects as if it were nothing. A toad or trash-spirit teaches this Gift.",
+    "descriptionPtBr": "Garou são naturalmente resistentes a venenos e toxinas, e há muito pouco que possa derrubá-los permanentemente. No entanto, isso não significa que sejam imunes; apenas se recuperam rapidamente. Lobisomens com este Dom purgam instintivamente seus corpos de contaminantes indesejados, ignorando os efeitos como se não fosse nada. Um espírito de sapo ou de lixo ensina este Dom.",
+    "renown": "Honra",
+    "cost": "Nenhum / 1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "Vigor + Honra",
+    "system": "A Garou with this Gift adds their Honor to all tests to resist poison, venom, toxins, diseases, and similar maladies. If a test isn't usually allowed, the Garou may make a Stamina + Honor test against a Difficulty set by the Storyteller to resist the deleterious effects, reducing the damage inflicted or duration of the effect. A critical success or margin of 4 or higher may avoid the effects entirely. A Garou affected by simple intoxicants can use this Gift actively, making a Rage check and a Stamina + Honor test at Difficulty 2 to shrug off the effects of recreational drugs.",
+    "systemPtBr": "Um Garou com este Dom adiciona sua Honra a todos os testes para resistir a venenos, toxinas, doenças e enfermidades semelhantes. Se um teste normalmente não for permitido, o Garou pode realizar um teste de Vigor + Honra com uma Dificuldade definida pelo Narrador para resistir aos efeitos nocivos, reduzindo o dano ou a duração do efeito. Um sucesso crítico ou uma margem de 4 ou mais pode evitar totalmente os efeitos. Um Garou afetado por entorpecentes simples pode usar este Dom ativamente, realizando um Teste de Fúria e um teste de Vigor + Honra com Dificuldade 2 para ignorar os efeitos de drogas recreativas.",
+    "duration": "",
+    "book": "The Moonlit Path",
+    "page": 60
+  },
+  {
+    "id": "139",
+    "gift": "Bestial Regression",
+    "giftPtBr": "Regressão Bestial",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 4
+      }
+    ],
+    "description": "The Garou forces a human to connect with their feral side, removing any ability to access the language centers of their mind, gutting their ability to communicate, and reducing them to little more than animalistic grunts and growls. Any spirit of a wild animal can teach this Gift.",
+    "descriptionPtBr": "O Garou força um humano a se conectar com seu lado selvagem, removendo sua capacidade de acessar os centros de linguagem do cérebro, eliminando sua habilidade de se comunicar e reduzindo-o a pouco mais do que grunhidos e rosnados animalescos. Qualquer espírito de animal selvagem pode ensinar este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Raciocínio + Sabedoria",
+    "system": "To affect a victim, including Banes fomori, vampires, or other werewolves, the Garou touches their target and tests Resolve + Wisdom in a contest against their Composure + Resolve. If successful, the affected target becomes incapable of talking, writing, sign language, or even simplistic gestures — any attempt to communicate meaningfully is removed. The Delirium affects human targets affected by this Gift, who are likely to rationalize away being compelled by primal spirits. Supernatural victims can spend a point of Willpower to shrug off the full effect, but suffer a two-dice penalty to social pools for the rest of the scene. This Gift can be used in any form.",
+    "systemPtBr": "Para afetar uma vítima, incluindo Malditos Fomori, vampiros ou outros lobisomens, o Garou toca o alvo e realiza um teste de Raciocínio + Sabedoria em um confronto contra a Determinação + Raciocínio do alvo. Se for bem-sucedido, o alvo afetado se torna incapaz de falar, escrever, usar linguagem de sinais ou até gestos simples — qualquer tentativa de comunicação significativa é removida. O Delírio afeta alvos humanos impactados por este Dom, que provavelmente racionalizarão a experiência como sendo compelidos por forças primais. Vítimas sobrenaturais podem gastar um ponto de Força de Vontade para ignorar completamente o efeito, mas sofrem uma penalidade de dois dados em testes sociais pelo restante da cena. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Uma cena",
+    "book": "The Moonlit Path",
+    "page": 61
   }
+
+
+
 ]

@@ -118,7 +118,7 @@
         "value": 1
       },
       {
-        "type": "Toda a Matilha",
+        "type": "Toda a Alcateia",
         "value": 3
       } 
     ],
@@ -456,5 +456,165 @@
     ],
     "book": "Wyrmtide",
     "page": 33
+  },
+  {
+    "id": "23",
+    "title": "Death's Head Brooch",
+    "titlePtBr": "Broche Cabeça da Morte",
+    "description": "These bejeweled trinkets allow the wearer to pass as one of the undead, their living essence undetectable by the Leeches. A few dozen death's head brooches exist, but they're considered cursed objects. If the stories are to be believed, the Ghost Council created them to broker a tenuous peace with some local Leeches, only to be slaughtered by another pack that mistook them for the real thing.",
+    "descriptionPtBr": "Esses enfeites cravejados de joias permitem ao usuário passar por um dos mortos-vivos, com sua essência viva indetectável pelos Sanguessugas. Existem algumas poucas dúzias de Broches Cabeça da Morte, mas são considerados objetos amaldiçoados. Se as histórias forem verdadeiras, o Conselho dos Fantasmas os criou para firmar uma paz frágil com alguns Sangues-sugas locais, mas foram massacrados por outra alcateia que os confundiu com os verdadeiros.",
+    "system": "If worn, the brooch makes its wearer indistinguishable from the undead. They appear pallid and cool to the touch; their heart makes no sound; they don't appear to breathe; even their blood tastes and smells as the Leech would expect. This talisman cannot duplicate their powers or weaknesses, only the outward appearance of being undead.",
+    "systemPtBr": "Se usado, o Talismã torna seu usuário indistinguível dos mortos-vivos. Eles parecem pálidos e frios ao toque; seu coração não produz som; não aparentam respirar; até seu sangue tem gosto e cheiro conforme o esperado pelo Sanguesuga. Este talismã não pode duplicar seus poderes ou fraquezas, apenas a aparência externa de estar morto-vivo.",
+    "backgroundCost": "This is a one-dot Background as a talen and a two-dot Background as a talisman.",
+    "backgroundCostPtBr": "Este é um Antecedente de 1 ponto como tálen e de 2 pontos como talismã.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 1
+      },
+      {
+        "type": "Talismã",
+        "value": 2
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 58
+  },
+  {
+    "id": "24",
+    "title": "Eletric Camouflage",
+    "titlePtBr": "Camuflagem Elétrica",
+    "description": "Delirium has long protected Garou from human knowledge, but the relentless advance of technology is changing that. Where once the Garou knew their secrets were safe from witnesses, now there's a permanent record of their shapeshifting abilities with no blessed terror to keep them safe. This talisman blurs their visages from electronic record, but this type of security comes at a cost, for the brooch contains slivers of silver. If nobody in a pack knows the Rite of the Forgetful Record (*Werewolf*, p. 182), the expense is worth it.",
+    "descriptionPtBr": "O Delírio há muito protege os Garou do conhecimento humano, mas o avanço implacável da tecnologia está mudando isso. Antes, os Garou sabiam que seus segredos estavam a salvo dos olhos das testemunhas; agora, há registros permanentes de suas transformações, sem nenhum terror sagrado para protegê-los. Este talismã distorce sua imagem em registros eletrônicos, mas esse tipo de segurança tem um preço, pois o broche contém fragmentos de prata. Se ninguém na Alcateia conhece o Ritual do Registro Esquecido (*Werewolf*, p. 182), o custo ainda vale a pena.",
+    "system": "Silver dust is mixed with clay from a riverbed and various oils to create an ointment and then applied to the faces of all who need its cover. The paste can be washed off without losing its abilities, though silver flecks linger in the skin. Until the next sunrise, cameras fail to record the wearer, displaying nothing but a blurred, glitchy mess. If the Garou shifts into crinos while under the effects, they automatically take Aggravated damage as the silver burns their skin.",
+    "systemPtBr": "Pó de prata é misturado com argila de um leito de rio e diversos óleos para criar uma pomada, depois aplicada ao rosto de quem precisa de sua proteção. A pasta pode ser lavada sem perder suas propriedades, embora partículas de prata permaneçam na pele. Até o próximo nascer do sol, câmeras não conseguem registrar o portador, mostrando apenas uma imagem borrada e distorcida. Se o Garou assumir a forma de crinos enquanto estiver sob o efeito, ele sofre automaticamente dano Agravado, pois a prata queima sua pele.",
+    "backgroundCost": "This talisman is a three-dot Background.",
+    "backgroundCostPtBr": "Este talismã é um Antecedente de três pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 58
+  },
+  {
+    "id": "25",
+    "title": "Grand Klaive",
+    "titlePtBr": "Grand Klaive",
+    "description": "These massive silver swords are rare and incredibly expensive talismans possessed by very few Garou. Two spirits are bound in each grand klaive, a war spirit and another. The other spirit might provide something extra, such as a fire spirit lighting the sword on fire, or an ancestor-spirit providing forgotten wisdom.",
+    "descriptionPtBr": "Essas espadas maciças de prata são talismãs raros e incrivelmente caros, possuídos por pouquíssimos Garou. Dois espíritos são vinculados a cada grand klaive, um espírito de guerra e outro. Esse segundo espírito pode fornecer algo extra, como um espírito de fogo que incendeia a lâmina ou um espírito ancestral que concede sabedoria esquecida.",
+    "system": "A Rage Check is required every time a grand klaive is wielded. On a failure, in addition to losing the point of Rage, the blade is dropped. A grand klaive does +3 silver-based Aggravated Health damage and may be wielded in homid or glabro form. Depending on the other bound spirit, the grand klaive could also inflict fire-, frost-, or electrical-based damage, or even Willpower damage.",
+    "systemPtBr": "Um Teste de Fúria é exigido sempre que um grand klaive é empunhado. Em caso de falha, além de perder o ponto de Fúria, a lâmina é derrubada. Um grand klaive causa +3 de dano Agravado à Saúde com base em prata e pode ser usado nas formas hominídea ou glabro. Dependendo do outro espírito vinculado, o grand klaive também pode causar dano baseado em fogo, gelo, eletricidade ou até mesmo dano à Força de Vontade.",
+    "backgroundCost": "The grand klaive is a five-dot Background. Ideally, it should be acquired during play.",
+    "backgroundCostPtBr": "O grand klaive é um Antecedente de cinco pontos. Idealmente, deve ser adquirido durante o jogo.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 5
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 58
+  },
+  {
+    "id": "26",
+    "title": "Shadow Mirror",
+    "titlePtBr": "Espelho das Sombras",
+    "description": "This mirror shows things invisible to mundane eyes. It will show the presence of any spirit; a Garou in homid form will seem to be in lupus and vice versa; fomori will look like sick people with foul Banes riding them. The mirror is made of glass and can be broken like a regular mirror.",
+    "descriptionPtBr": "Este espelho revela coisas invisíveis aos olhos mundanos. Ele mostrará a presença de qualquer espírito; um Garou em forma hominídea parecerá estar em forma lupina e vice-versa; fomori parecerão pessoas doentes com Banes repulsivos montados sobre eles. O espelho é feito de vidro e pode ser quebrado como um espelho comum.",
+    "system": "A Garou can spend one Willpower to look into the mirror and see all spirits, all invisible creatures, and the true nature of all creatures for the duration of one scene. If the spirit bound to a shadow mirror tries to act on its own, such as to contact an outsider, these attempts will be visible in the mirror. The mirror grants a two-dice bonus to the pool if used as the reflective surface of the Augur Gift (Werewolf, p. 170).",
+    "systemPtBr": "Um Garou pode gastar um ponto de Força de Vontade para olhar no espelho e ver todos os espíritos, todas as criaturas invisíveis e a verdadeira natureza de todas as criaturas pela duração de uma cena. Se o espírito vinculado ao espelho das sombras tentar agir por conta própria, como entrar em contato com um forasteiro, essas tentativas serão visíveis no espelho. O espelho concede um bônus de dois dados no grupo se for usado como superfície refletiva do Dom Augúrio (Werewolf, p. 170).",
+    "backgroundCost": "This talisman is a three-dot Background.",
+    "backgroundCostPtBr": "Este talismã é um Antecedente de três pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 59
+  },
+  {
+    "id": "27",
+    "title": "Spider Box",
+    "titlePtBr": "Caixa-Aranha",
+    "description": "To be effective, packs need to work in perfect synchronicity, ever aware of their packmates' movements — an almost impossible situation should the pack become separated on different sides of the Umbra. Spider boxes cross that boundary, giving packs a means to communicate across the Gauntlet. Pairs of Weaver-spirits are bound to old phones, walkie-talkies, and even pagers, creating an open channel between realities. Of course, not every Garou is so accepting of working so closely with the Weaver, but sometimes they must.",
+    "descriptionPtBr": "Para serem eficazes, as Alcateias precisam trabalhar em perfeita sincronia, sempre cientes dos movimentos de seus companheiros — uma situação quase impossível caso fiquem separados em lados diferentes da Umbra. As caixas-aranha cruzam essa barreira, oferecendo às Alcateias um meio de comunicação através do Véu. Pares de espíritos da Tecelã são vinculados a telefones antigos, rádios comunicadores e até pagers, criando um canal aberto entre realidades. Claro, nem todo Garou aceita trabalhar tão de perto com a Tecelã, mas às vezes é necessário.",
+    "system": "Spider boxes always come in pairs and can only communicate with their twin. Distance makes no difference to them, but they won't function when both boxes are on the same side of the Gauntlet.",
+    "systemPtBr": "Caixas-aranha sempre vêm em pares e só conseguem se comunicar com sua gêmea. A distância não interfere, mas elas não funcionam quando ambas estão do mesmo lado do Véu.",
+    "backgroundCost": "This talisman is a two-dot Background.",
+    "backgroundCostPtBr": "Este talismã é um Antecedente de dois pontos.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 2
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 59
+  },
+  {
+    "id": "28",
+    "title": "Spirit Prison",
+    "titlePtBr": "Prisão Espiritual",
+    "description": "A spirit prison is a wish-granting talen that has a limited number of uses, which is traditionally three, but could also be just one. They are often crafted in the shape of old oil lamps, rings, or jugs. When the item is rubbed or the right phrase is uttered, the spirit will appear and offer its services. It will not make any wish come true, but it will try to perform whatever task is given to it, as long as it is within its means. It might try to haggle or negotiate, but ultimately, if the owner persists, the spirit will perform the task.",
+    "descriptionPtBr": "Uma prisão espiritual é um talen que concede desejos e possui um número limitado de usos, tradicionalmente três, mas podendo ser apenas um. Costumam ser confeccionadas no formato de velhas lamparinas, anéis ou jarros. Quando o item é esfregado ou a frase correta é dita, o espírito aparece e oferece seus serviços. Ele não realizará qualquer desejo, mas tentará executar a tarefa solicitada, desde que esteja dentro de suas capacidades. Pode tentar barganhar ou negociar, mas, no fim, se o dono insistir, o espírito realizará a tarefa.",
+    "system": "The prison's owner must spend one Willpower to summon the spirit from the prison and tell it what to do. The spirit will then go off in pursuit of that goal and return once it has completed it (or it has been proven impossible). The spirit will remain bound to the prison until all wishes are spent. If there is room for passive-aggressive misunderstanding on purpose, the spirit will likely take this opportunity.",
+    "systemPtBr": "O dono da prisão deve gastar um ponto de Força de Vontade para invocar o espírito da prisão e dizer o que ele deve fazer. O espírito partirá então em busca de cumprir o objetivo e retornará quando o concluir (ou se provar impossível). O espírito permanecerá preso à prisão até que todos os desejos sejam usados. Se houver espaço para mal-entendidos passivo-agressivos de propósito, é provável que o espírito aproveite essa oportunidade.",
+    "backgroundCost": "A spirit prison is a two-dot Background for a prison with a gaffling in it and a three-dot Background for a jaggling.",
+    "backgroundCostPtBr": "Uma prisão espiritual é um Antecedente de dois pontos se contiver um gaffling e de três pontos se contiver um jaggling.",
+    "cost": [
+      {
+        "type": "Talismã",
+        "value": 2
+      },
+      {
+        "type": "Talismã",
+        "value": 3
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 60
+  },
+  {
+    "id": "29",
+    "title": "Umbral Dust",
+    "titlePtBr": "Pó Umbral",
+    "description": "This chalky paste can sometimes be found coating the terrain following the passing of Umbral storms. Urban packs place a high value on bags of Umbral dust, as for many, it makes crossing over to the Umbra possible.",
+    "descriptionPtBr": "Essa pasta calcária pode às vezes ser encontrada cobrindo o terreno após a passagem de tempestades Umbrais. Alcateias urbanas atribuem alto valor a sacos de pó Umbral, pois, para muitos, ele torna possível a travessia para a Umbra.",
+    "system": "The Rite Master covers the palms, eyelids, and soles of their feet with the dust before attempting to enter the Umbra. This talen adds a one-die bonus to tests when performing the Rite of Shadow Passage (Werewolf, pp. 182-183).",
+    "systemPtBr": "O Mestre de Rito cobre as palmas das mãos, pálpebras e solas dos pés com o pó antes de tentar entrar na Umbra. Este talen adiciona um bônus de um dado nos testes ao realizar o Rito da Passagem Sombria (Werewolf, pp. 182-183).",
+    "backgroundCost": "This talen is a one-dot Background.",
+    "backgroundCostPtBr": "Este talen é um Antecedente de um ponto.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 1
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 60
+  },
+  {
+    "id": "30",
+    "title": "Wolf Musk",
+    "titlePtBr": "Almíscar de Lobo",
+    "description": "This simple talen comes in small vials of colorless liquid and is often favored by wolfborn Garou. Wolf musk allows the Garou to “swap scents” with someone, either using them to lay a false trail, incur some misplaced wrath, or simply buy some time against dedicated hunters.",
+    "descriptionPtBr": "Este talen simples vem em pequenos frascos de líquido incolor e é frequentemente preferido pelos Garou nascidos de lobos. O almíscar de lobo permite ao Garou 'trocar cheiros' com alguém, seja para criar uma trilha falsa, atrair alguma fúria equivocada ou simplesmente ganhar tempo contra caçadores persistentes.",
+    "system": "Both targets must be sprayed liberally with the musk, although this can be done with subtlety if needed. Until either target next washes, the scents of the Garou and their target are switched.",
+    "systemPtBr": "Ambos os alvos devem ser borrifados generosamente com o almíscar, embora isso possa ser feito com sutileza, se necessário. Até que um dos alvos tome banho, os cheiros do Garou e de seu alvo estão trocados.",
+    "backgroundCost": "This talen is a one-dot Background.",
+    "backgroundCostPtBr": "Este talen é um Antecedente de um ponto.",
+    "cost": [
+      {
+        "type": "Talen",
+        "value": 1
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 60
   }
 ]
