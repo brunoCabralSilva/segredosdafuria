@@ -3278,8 +3278,335 @@
     "duration": "Uma cena",
     "book": "The Moonlit Path",
     "page": 61
+  },
+  {
+    "id": "140",
+    "gift": "Gnaw",
+    "giftPtBr": "Roer",
+    "belonging": [
+      {
+        "type": "global",
+        "totalRenown": 4
+      }
+    ],
+    "description": "This Gift allows the Garou to use their terrifying maws to chew through and shred any barrier unlucky enough to get in their way. Wooden doors, concrete walls, prison bars, or restraints — as long as the Garou can get their teeth around it, its days are numbered. Gnaw can be used in crinos, hispo, and lupus forms. A termite-spirit teaches this Gift.",
+    "descriptionPtBr": "Este Dom permite que o Garou use suas mandíbulas aterrorizantes para mastigar e destroçar qualquer barreira azarada o suficiente para estar em seu caminho. Portas de madeira, paredes de concreto, grades de prisão ou restrições — desde que o Garou consiga cravar os dentes, seus dias estão contados. Roer pode ser usado nas formas crinos, hispo e lupus. Um espírito de cupim ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "",
+    "system": "When using their jaws to break through a physical barrier, the Garou adds their Glory rating to any relevant pool (see “Feats of Strength” in Werewolf, p. 130). Any substance can be gnawed through given enough time, although toxic materials remain so.",
+    "systemPtBr": "Ao usar suas mandíbulas para romper uma barreira física, o Garou adiciona sua classificação de Glória a qualquer teste relevante (veja “Proezas de Força” em Lobisomem, p. 130). Qualquer substância pode ser roída com tempo suficiente, embora materiais tóxicos permaneçam tóxicos.",
+    "duration": "Uma cena",
+    "book": "The Moonlit Path",
+    "page": 61
+  },
+  {
+    "id": "141",
+    "gift": "Umbral Pocket",
+    "giftPtBr": "Bolso Umbral",
+    "belonging": [
+      {
+        "type": "ragabash",
+        "totalRenown": 2
+      },
+      {
+        "type": "bone gnawers",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The werewolf can do more than simply conceal an object, they can make it truly disappear — or at least disappear from the physical realm, as they hide their belongings beyond the Gauntlet. Whatever they hide must be removed from plain sight, but once so obscured, no amount of searching will uncover it. A mouse-spirit teaches this Gift.",
+    "descriptionPtBr": "O lobisomem pode fazer mais do que simplesmente ocultar um objeto, ele pode fazê-lo realmente desaparecer — ou ao menos desaparecer do reino físico, ao esconder seus pertences além da Película. O que quer que esconda deve ser retirado da vista, mas uma vez oculto, nenhuma busca conseguirá encontrá-lo. Um espírito de rato ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Mínima",
+    "pool": "",
+    "system": "The Garou can use the palm of their hand, a pocket, a small bag, or something similar to enable this Gift, but the object being hidden must be small enough to fit into it naturally. Once inside, the item cannot be found by mundane means, although someone peeking into the Umbra can see it with ease. The Garou can remove it at will.",
+    "systemPtBr": "O Garou pode usar a palma da mão, um bolso, uma pequena bolsa ou algo semelhante para ativar este Dom, mas o objeto a ser escondido deve ser pequeno o suficiente para caber naturalmente. Uma vez dentro, o item não pode ser encontrado por meios mundanos, embora alguém que olhe para a Umbra possa vê-lo com facilidade. O Garou pode removê-lo à vontade.",
+    "duration": "Uma cena ou até ser removido",
+    "book": "The Moonlit Path",
+    "page": 61
+  },
+  {
+    "id": "142",
+    "gift": "Jump Scare",
+    "giftPtBr": "Susto Súbito",
+    "belonging": [
+      {
+        "type": "ragabash",
+        "totalRenown": 5
+      },
+      {
+        "type": "shadow lords",
+        "totalRenown": 6
+      }
+    ],
+    "description": "There are untold horrors lurking beyond the Gauntlet, and the deeper one goes, the more terrifying and alien they become. The Garou momentarily peels away these layers, exposing an unwitting victim to flashes of unfathomable chaos and horror. While these glimpses of the unknown are only caught in the corner of the eye, it's enough to break even the most courageous will. Spirits of abstract concepts from the depths of the Umbra teach this Gift.",
+    "descriptionPtBr": "Há horrores incontáveis espreitando além da Película e, quanto mais fundo se avança, mais aterrorizantes e alienígenos eles se tornam. O Garou momentaneamente arranca essas camadas, expondo uma vítima desavisada a vislumbres de caos e horror insondáveis. Embora essas imagens do desconhecido sejam percebidas apenas de relance, são suficientes para quebrar até mesmo a vontade mais corajosa. Espíritos de conceitos abstratos das profundezas da Umbra ensinam este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Menor",
+    "pool": "Manipulação + Glória",
+    "system": "The Garou selects a target and makes a Manipulation + Glory test against the target's Composure + Wits. If the werewolf wins, the target must spend 1 point of Willpower or lose their next action. If they do so, they cannot spend Willpower to reroll dice. They may still take a minor action. This Gift can be used in any form.",
+    "systemPtBr": "O Garou seleciona um alvo e realiza um teste de Manipulação + Glória contra a Autocontrole + Astúcia do alvo. Se o lobisomem vencer, o alvo deve gastar 1 ponto de Força de Vontade ou perder sua próxima ação. Se o fizer, não poderá gastar Força de Vontade para rerrolar dados. Ele ainda pode realizar uma ação menor. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Uma ação",
+    "book": "The Moonlit Path",
+    "page": 62
+  },
+  {
+    "id": "143",
+    "gift": "Entreat",
+    "giftPtBr": "Rogar",
+    "belonging": [
+      {
+        "type": "theurge",
+        "totalRenown": 2
+      },
+      {
+        "type": "ghost council",
+        "totalRenown": 3
+      }
+    ],
+    "description": "This Gift allows the theurge to charm, cajole, or even force a spirit to temporarily bond with them, taking a sliver of the entity's power for themselves. Occasionally, reckless Garou use this Gift on Banes, thinking themselves clever as they turn the spirit's own power against them. A magpie-spirit teaches this Gift.",
+    "descriptionPtBr": "Este Dom permite que o theurge encante, convença ou até mesmo force um espírito a se vincular temporariamente a ele, tomando para si uma fração do poder da entidade. Ocasionalmente, Garou imprudentes usam este Dom em Malditos, achando-se espertos ao voltar o próprio poder do espírito contra ele. Um espírito de pega ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Carisma + Glória",
+    "system": "The target spirit must be in the Garou's presence, and the Garou must be aware of it, even if it's on a different spiritual plane. The spirit needn't be friendly but cannot be in active conflict with the werewolf or their pack. The player engages in a contest between Charisma + Glory and the Spirit's power (if the Spirit chooses to resist). If successful, the Garou adds a two-dice bonus to tests involving a single Skill with which the Spirit shares an affinity. The Storyteller has the final say regarding any suitability.",
+    "systemPtBr": "O espírito alvo deve estar na presença do Garou, e o Garou deve estar ciente dele, mesmo que esteja em um plano espiritual diferente. O espírito não precisa ser amigável, mas não pode estar em conflito ativo com o lobisomem ou sua matilha. O jogador realiza um confronto entre Carisma + Glória e o poder do Espírito (se o Espírito escolher resistir). Se for bem-sucedido, o Garou adiciona um bônus de dois dados a testes envolvendo uma única Habilidade com a qual o Espírito compartilhe afinidade. O Narrador tem a palavra final sobre a adequação.",
+    "duration": "Uma cena",
+    "book": "The Moonlit Path",
+    "page": 62
+  },
+  {
+    "id": "144",
+    "gift": "Summon Implement",
+    "giftPtBr": "Invocar Implemento",
+    "belonging": [
+      {
+        "type": "theurge",
+        "totalRenown": 2
+      },
+      {
+        "type": "silent striders",
+        "totalRenown": 3
+      }
+    ],
+    "description": "A life spent on the move means traveling light whenever possible, as unnecessary equipment can mean the difference between life and death. Of course, the reverse is just as true, so how can one hope to plan accordingly? With this Gift, the user doesn't need to, as they can pluck what they need from the ether. An owl-spirit or servant of Owl teaches this Gift.",
+    "descriptionPtBr": "Uma vida passada em constante movimento significa viajar leve sempre que possível, já que equipamentos desnecessários podem significar a diferença entre a vida e a morte. É claro que o inverso também é verdadeiro, então como planejar adequadamente? Com este Dom, o usuário não precisa, pois pode arrancar do éter o que precisar. Um espírito de coruja ou um servo da Coruja ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Menor",
+    "pool": "Raciocínio + Sabedoria",
+    "system": "The Garou makes a Gift test against Difficulty 3. If successful, any talisman that belongs to them, or any item that has been Dedicated to them through the Rite of Dedication, is instantly brought to their hands regardless of its current location.",
+    "systemPtBr": "O Garou realiza um teste de Dom contra Dificuldade 3. Se for bem-sucedido, qualquer talismã que pertença a ele, ou qualquer item que tenha sido Dedicado a ele através do Rito de Dedicação, é instantaneamente trazido para suas mãos, independentemente de sua localização atual.",
+    "duration": "",
+    "book": "The Moonlit Path",
+    "page": 62
+  },
+  {
+    "id": "145",
+    "gift": "Bolt Hole",
+    "giftPtBr": "Refúgio",
+    "belonging": [
+      {
+        "type": "theurge",
+        "totalRenown": 5
+      },
+      {
+        "type": "hart wardens",
+        "totalRenown": 6
+      }
+    ],
+    "description": "With this Gift, the Garou carves out a small piece of the Umbra which they can retreat to, a place of familiarity and peace in an increasingly dangerous world. Many theurges carry objects that remind them of home, all the better to aid their passage to the Umbra. A fox-spirit teaches this Gift.",
+    "descriptionPtBr": "Com este Dom, o Garou esculpe um pequeno fragmento da Umbra para onde pode se retirar, um lugar de familiaridade e paz em um mundo cada vez mais perigoso. Muitos theurges carregam objetos que lhes lembram o lar, para melhor auxiliar sua passagem à Umbra. Um espírito de raposa ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Autocontrole + Sabedoria",
+    "system": "The Garou makes a Gift test against Difficulty equal to the local Gauntlet rating. If successful, they're immediately pulled into their pocket realm, and cannot be tracked or followed by spirits less powerful than Incarnae. For every additional point of the margin, the Garou can pull another friend along with them, but they must remain in physical contact until safely in the bolt hole. The hole is as big as a large room and represents the hopes and dreams of its owner, though a Brutal outcome twists the place to represent their fears instead. The only exit takes them back to their point of origin, and at the scene's end, everyone is returned there.",
+    "systemPtBr": "O Garou realiza um teste de Dom contra uma Dificuldade igual à classificação local da Película. Se for bem-sucedido, ele é imediatamente puxado para seu refúgio particular e não pode ser rastreado ou seguido por espíritos menos poderosos que Incarnae. Para cada ponto adicional na margem, o Garou pode levar consigo mais um aliado, mas devem permanecer em contato físico até estarem em segurança no refúgio. O refúgio é do tamanho de uma sala grande e representa as esperanças e sonhos de seu dono, embora um resultado Brutal distorça o lugar para refletir seus medos. A única saída leva de volta ao ponto de origem e, ao final da cena, todos retornam para lá.",
+    "duration": "Uma cena",
+    "book": "The Moonlit Path",
+    "page": 62
+  },
+  {
+    "id": "146",
+    "gift": "Ghost Walk",
+    "giftPtBr": "Caminho Fantasma",
+    "belonging": [
+      {
+        "type": "theurge",
+        "totalRenown": 8
+      }
+    ],
+    "description": "The werewolf attunes themselves to the Gauntlet itself, shifting into a state neither fully material nor spirit. While occupying this semi-intangible state, they can pass through walls as if they weren't there. For the Garou, they aren't. A wind-spirit teaches this Gift.",
+    "descriptionPtBr": "O lobisomem sintoniza-se com a própria Película, entrando em um estado nem totalmente material nem espiritual. Enquanto ocupa esse estado semi-intangível, pode atravessar paredes como se elas não estivessem lá. Para o Garou, de fato, não estão. Um espírito do vento ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Vigor + Honra",
+    "system": "The Garou touches a non-organic surface they wish to pass through and makes a Gift test (Difficulty equals the local Gauntlet -1). If successful, they can walk through whatever surface they're in contact with. This state of intangibility only applies to the surface they're passing through, so it cannot be used to avoid attacks or escape grapples. As with regular Umbral travel, only Dedicated items can be brought with them.",
+    "systemPtBr": "O Garou toca uma superfície não orgânica que deseja atravessar e realiza um teste de Dom (Dificuldade igual à Película local -1). Se for bem-sucedido, ele pode atravessar qualquer superfície com a qual esteja em contato. Esse estado de intangibilidade se aplica apenas à superfície pela qual está passando, portanto não pode ser usado para evitar ataques ou escapar de agarrões. Assim como na viagem Umbral normal, apenas itens Dedicados podem ser levados consigo.",
+    "duration": "Até emergir do outro lado da superfície",
+    "book": "The Moonlit Path",
+    "page": 63
+  },
+  {
+    "id": "147",
+    "gift": "Indomitable Spirit",
+    "giftPtBr": "Espírito Indomável",
+    "belonging": [
+      {
+        "type": "philodox",
+        "totalRenown": 2
+      },
+      {
+        "type": "galestalkers",
+        "totalRenown": 3
+      }
+    ],
+    "description": "For the philodox to be successful, they must lead by example. This Gift removes the adverse effects of injury, allowing the half moon to fight through the pain as if but scratched. An ancestor-spirit grants this Gift.",
+    "descriptionPtBr": "Para que o philodox seja bem-sucedido, ele deve liderar pelo exemplo. Este Dom remove os efeitos adversos de ferimentos, permitindo que o meia-lua lute através da dor como se tivesse apenas arranhões. Um espírito ancestral concede este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "",
+    "system": "The Garou can ignore the effects of impairment by activating this Gift.",
+    "systemPtBr": "O Garou pode ignorar os efeitos de debilitação ao ativar este Dom.",
+    "duration": "Uma cena",
+    "book": "The Moonlit Path",
+    "page": 64
+  },
+  {
+    "id": "148",
+    "gift": "Calcify",
+    "giftPtBr": "Calcificar",
+    "belonging": [
+      {
+        "type": "philodox",
+        "totalRenown": 5
+      },
+      {
+        "type": "glass walkers",
+        "totalRenown": 6
+      }
+    ],
+    "description": "The physical and spiritual realms exist as reflections of each other, with actions in one causing reactions in the other in a perpetual feedback loop. By calling upon the Weaver's servants, the philodox temporarily halts this loop and induces permanence in a physical feature, such as imbuing plate glass with the strength of steel or rotting wooden doors the impenetrability of a bank vault. Pattern spiders grant this Gift.",
+    "descriptionPtBr": "Os reinos físico e espiritual existem como reflexos um do outro, com ações em um causando reações no outro em um ciclo contínuo. Ao invocar os servos do Tecelão, o philodox interrompe temporariamente esse ciclo e induz permanência em uma característica física, como imbuir vidro laminado com a força do aço ou tornar portas de madeira apodrecidas tão impenetráveis quanto um cofre. Aranhas de padrão concedem este Dom.",
+    "renown": "Honra",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Autocontrole + Honra",
+    "system": "The player tests Composure + Honor against Difficulty 3. If successful, anyone attempting to either open, destroy, or otherwise “traverse” the object via feats of strength or Larceny tests must succeed at an appropriate test at Difficulty 3 + the player's margin of success. Calcification of an object stretches no further than one meter in each direction.",
+    "systemPtBr": "O jogador realiza um teste de Autocontrole + Honra contra Dificuldade 3. Se for bem-sucedido, qualquer um que tente abrir, destruir ou de outra forma “atravessar” o objeto através de proezas de força ou testes de Larápio deve ter sucesso em um teste apropriado com Dificuldade 3 + a margem de sucesso do jogador. A calcificação de um objeto não se estende além de um metro em cada direção.",
+    "duration": "Uma cena",
+    "book": "The Moonlit Path",
+    "page": 64
+  },
+  {
+    "id": "149",
+    "gift": "Howl of Despair",
+    "giftPtBr": "Uivo do Desespero",
+    "belonging": [
+      {
+        "type": "galliard",
+        "totalRenown": 2
+      },
+      {
+        "type": "black furies",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Throwing back their heads, the werewolf releases all their pain and fury in an earsplitting, keening howl. For those exposed to the harrowing scream, the only feeling is one of emptiness, as if their soul were being fed to the wolves. A servant of Gorgon grants this Gift.",
+    "descriptionPtBr": "Jogando a cabeça para trás, o lobisomem libera toda sua dor e fúria em um uivo estridente e lamentoso. Para aqueles expostos ao grito angustiante, o único sentimento é de vazio, como se suas almas estivessem sendo devoradas pelos lobos. Um servo de Górgon concede este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Carisma + Glória",
+    "system": "The Garou howls or screams and makes a Gift test against Difficulty 3. If successful, everyone in earshot that isn't a part of the Garou's pack suffers 1 Willpower damage, or 2, if the result was a critical win. This Gift can also be used in lupus form.",
+    "systemPtBr": "O Garou uiva ou grita e realiza um teste de Dom contra Dificuldade 3. Se for bem-sucedido, todos ao alcance do som que não fazem parte da matilha do Garou sofrem 1 ponto de dano de Força de Vontade, ou 2 se o resultado for um sucesso crítico. Este Dom também pode ser usado na forma lupus.",
+    "duration": "",
+    "book": "The Moonlit Path",
+    "page": 64
+  },
+  {
+    "id": "150",
+    "gift": "Lullaby",
+    "giftPtBr": "Canção de Ninar",
+    "belonging": [
+      {
+        "type": "galliard",
+        "totalRenown": 5
+      },
+      {
+        "type": "children of gaia",
+        "totalRenown": 5
+      }
+    ],
+    "description": "By calling upon the spirits of slumber with their song, the Garou urges them to visit their target, forcing them into an irresistible slumber, blissfully unaware of the actions of the werewolf. A dream-spirit grants this Gift.",
+    "descriptionPtBr": "Ao invocar os espíritos do sono com sua canção, o Garou os incita a visitar seu alvo, forçando-o a um sono irresistível, alheio às ações do lobisomem. Um espírito do sonho concede este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Autocontrole + Sabedoria",
+    "system": "The target must be capable of natural sleep and within earshot of the Garou. The player makes a Composure + Wisdom test against the Wits + Resolve of the target, and if successful, the victim drifts into a deep, peaceful slumber. While sleeping, the target is still awoken by noises and disturbances as usual unless the Garou scores a critical win, in which case they only wake if hurt. Supernatural targets can resist the effects by spending a Willpower, and will regardlessly wake if threatened. If left undisturbed, slumbering victims sleep for hours.",
+    "systemPtBr": "O alvo deve ser capaz de dormir naturalmente e estar ao alcance auditivo do Garou. O jogador realiza um teste de Autocontrole + Sabedoria contra Astúcia + Determinação do alvo e, se bem-sucedido, a vítima entra em um sono profundo e pacífico. Enquanto dorme, o alvo ainda pode ser acordado por ruídos e distúrbios como de costume, a menos que o Garou obtenha uma vitória crítica, caso em que só acorda se ferido. Alvos sobrenaturais podem resistir aos efeitos gastando um ponto de Força de Vontade, e acordarão de qualquer forma se ameaçados. Se não forem perturbados, os alvos adormecidos dormem por horas.",
+    "duration": "Até ser acordado ou o final da cena",
+    "book": "The Moonlit Path",
+    "page": 64
+  },
+  {
+    "id": "151",
+    "gift": "Tug the Leash",
+    "giftPtBr": "Puxar a Guia",
+    "belonging": [
+      {
+        "type": "ahroun",
+        "totalRenown": 2
+      },
+      {
+        "type": "red talons",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Frenzies are often as destructive to a Garou's allies as they are to their enemies, as one can never predict in which direction the Rage will be directed. This Gift allows the ahroun a modicum of control when in the grip of frenzy. A Lune grants this Gift.",
+    "descriptionPtBr": "Frenesis são frequentemente tão destrutivos para os aliados de um Garou quanto para seus inimigos, já que nunca se pode prever para que direção a Fúria será direcionada. Este Dom permite ao ahroun algum controle enquanto está dominado pelo frenesi. Um Luno concede este Dom.",
+    "renown": "Honra",
+    "cost": "Livre",
+    "action": "",
+    "pool": "Autocontrole + Honra",
+    "system": "While in a state of frenzy, a Garou possessing this Gift can make a Gift test at Difficulty 2 to choose an eligible target for their attack rather than following the urges of the frenzy. They must perform an attack, however, and follow all other frenzy rules. When testing to exit frenzy they can add their Honor to the dice pool.",
+    "systemPtBr": "Enquanto em estado do frenesi, um Garou que possua este Dom pode realizar um teste de Dom com Dificuldade 2 para escolher um alvo elegível para seu ataque em vez de seguir os impulsos do frenesi. No entanto, ele deve realizar um ataque e seguir todas as demais regras do frenesi. Ao testar para sair do frenesi, pode adicionar sua Honra à reserva de dados.",
+    "duration": "—",
+    "book": "The Moonlit Path",
+    "page": 65
+  },
+  {
+    "id": "152",
+    "gift": "Light of the Moon",
+    "giftPtBr": "Luz da Lua",
+    "belonging": [
+      {
+        "type": "ahroun",
+        "totalRenown": 5
+      },
+      {
+        "type": "silver fangs",
+        "totalRenown": 6
+      }
+    ],
+    "description": "The Garou of the full moon shine with an inner radiance befitting their auspice. The resulting glare is strong enough to temporarily blind onlookers and send the undead into piques of terror. A Lune or servant of Falcon teaches this Gift.",
+    "descriptionPtBr": "Os Garou da lua cheia brilham com uma radiância interior condizente com seu auspício. O brilho resultante é forte o suficiente para cegar temporariamente os observadores e provocar picos de terror nos mortos-vivos. Um Lune ou servo do Falcão ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Mínima",
+    "pool": "Carisma + Glória",
+    "system": "Anyone looking directly at the werewolf (typically those involved in close combat or targeting them with ranged attacks or powers) must make a Wits + Composure test against the ahroun's Charisma + Glory or be dazzled by the light. Dazzled characters receive a two-dice penalty to all dice pools relying on sight. Vampires and creatures susceptible to sunlight sustain one level of Aggravated Health damage each round they are exposed to the light. The Gift ends prematurely if the Garou is incapacitated by filling either their Health or Willpower tracker or chooses to end it.",
+    "systemPtBr": "Qualquer um que olhe diretamente para o lobisomem (normalmente aqueles envolvidos em combate corpo a corpo ou que o miram com ataques à distância ou poderes) deve realizar um teste de Astúcia + Autocontrole contra Carisma + Glória do ahroun ou ficar ofuscado pela luz. Personagens ofuscados recebem uma penalidade de dois dados em todas as reservas de dados que dependam da visão. Vampiros e criaturas suscetíveis à luz solar sofrem um nível de dano Agravado a cada rodada de exposição à luz. O Dom termina prematuramente se o Garou ficar incapacitado ao preencher seu rastreador de Saúde ou Força de Vontade ou optar por encerrá-lo.",
+    "duration": "Uma cena ou até ser encerrado",
+    "book": "The Moonlit Path",
+    "page": 65
   }
-
-
-
 ]
