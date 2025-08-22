@@ -718,6 +718,42 @@
       }
     ],
     "book": "Criado por Bruno Cabral para o personagem de Audeam Figueiredo",
-    "page": 165
+    "page": 1
+  },
+  {
+    "id": 20,
+    "title": "Guia do Além",
+    "titlePtBr": "Guia do Além",
+    "description": "Alguns indivíduos não apenas percebem a morte — eles caminham entre ela. Você vê o que outros não veem: almas errantes, sombras do passado, ecos de vidas que não se foram totalmente. Para alguns, essas visões são aterrorizantes; para outros, uma fonte de sabedoria. Você sabe quando uma alma está próxima, sente suas intenções e pode até interagir com ela.  Dentro de você, pulsa uma responsabilidade de ser um guia para os mortos, ajudando-os a encontrar descanso ou a transmitir mensagens importantes e também evitando que eles cometam transgressões no mundo dos vivos.",
+    "descriptionPtBr": "Alguns indivíduos não apenas percebem a morte — eles caminham entre ela. Você vê o que outros não veem: almas errantes, sombras do passado, ecos de vidas que não se foram totalmente. Para alguns, essas visões são aterrorizantes; para outros, uma fonte de sabedoria. Você sabe quando uma alma está próxima, sente suas intenções e pode até interagir com ela.  Dentro de você, pulsa uma responsabilidade de ser um guia para os mortos, ajudando-os a encontrar descanso ou a transmitir mensagens importantes e também evitando que eles cometam transgressões no mundo dos vivos.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Demagogo do Além: Você aprendeu a usar sua conexão com os mortos para influenciar os vivos. Uma vez por história, sempre que tentar inspirar, convencer ou incitar um grupo de humanos a agir, usando uma situação que você já viveu com um dos fantasmas que já cruzou — seja com coragem, medo ou determinação — você pode somar dois dados ao teste pertinente.",
+        "skillPtBr": "Demagogo do Além: Você aprendeu a usar sua conexão com os mortos para influenciar os vivos. Uma vez por história, sempre que tentar inspirar, convencer ou incitar um grupo de humanos a agir, usando uma situação que você já viveu com um dos fantasmas que já cruzou — seja com coragem, medo ou determinação — você pode somar dois dados ao teste pertinente."
+      },
+      {
+        "cost": 2,
+        "skill": "Seguindo da Trilha: Mortos rastros que os vivos não percebem. Você consegue segui-los, mesmo quando estão tentando se ocultar. Uma vez por cena, pode localizar um fantasma específico ou seguir a origem de uma perturbação espiritual gerada por um.",
+        "skillPtBr": "Seguindo da Trilha: Mortos deixam rastros que os vivos não percebem. Você consegue segui-los, mesmo quando estão tentando se ocultar. Uma vez por cena, pode localizar um fantasma específico ou seguir a origem de uma perturbação espiritual gerada por um."
+      },
+      {
+        "cost": 3,
+        "skill": "Você sabe guiar os mortos para a paz, evitando que permaneçam atormentados entre os mundos. Uma vez por sessão, você pode dissipar a presença de um fantasma hostil ou perturbado, dando-lhe a escolha de partir ou permanecer em segurança. A ação é influenciada pela sua conexão com o mundo espiritual e pela força do vínculo que você tem com o fantasma (Defina com o Narrador se é necessário realizar algum teste e qual seria mais aplicável de acordo com a situação).",
+        "skillPtBr": "Você sabe guiar os mortos para a paz, evitando que permaneçam atormentados entre os mundos. Uma vez por sessão, você pode dissipar a presença de um fantasma hostil ou perturbado, dando-lhe a escolha de partir ou permanecer em segurança. A ação é influenciada pela sua conexão com o mundo espiritual e pela força do vínculo que você tem com o fantasma (Defina com o Narrador se é necessário realizar algum teste e qual seria mais aplicável de acordo com a situação)."
+      },
+      {
+        "cost": 4,
+        "skill": "Pilar do Além: Você aprendeu a se apoiar em almas confiáveis. Uma vez por sessão, você pode usar um fantasma como se ele fosse um pilar, refletindo a influência estabilizadora do além. A escolha do benefício é sua no momento de uso.",
+        "skillPtBr": "Pilar do Além: Você aprendeu a se apoiar em almas confiáveis. Uma vez por sessão, você pode usar um fantasma como se ele fosse um pilar, refletindo a influência estabilizadora do além. A escolha do benefício é sua no momento de uso."
+      },
+      {
+        "cost": 5,
+        "skill": "Resiliência do Além: A convivência com o sofrimento dos mortos e a compreensão das consequências das ações humanas fortaleceu sua mente e espírito. Você soma dois dados aos testes de resistência ao Harano e ao Hauglosk, representando sua familiaridade com a dor, o tormento e os ecos das escolhas impensadas, e sua capacidade de não sucumbir às pressões do além ou às desordens do mundo vivo.",
+        "skillPtBr": "Resiliência do Além: A convivência com o sofrimento dos mortos e a compreensão das consequências das ações humanas fortaleceu sua mente e espírito. Você soma dois dados aos testes de resistência ao Harano e ao Hauglosk, representando sua familiaridade com a dor, o tormento e os ecos das escolhas impensadas, e sua capacidade de não sucumbir às pressões do além ou às desordens do mundo vivo."
+      }
+    ],
+    "book": "Criado por Bruno Cabral para o personagem de Emmanuel Robson",
+    "page": 1
   }
 ]
