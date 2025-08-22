@@ -683,5 +683,41 @@
     ],
     "book": "The Moonlit Path",
     "page": 165
+  },
+  {
+    "id": 20,
+    "title": "Tocado pela Caipora",
+    "titlePtBr": "Tocado pela Caipora",
+    "description": "Algumas fadas são apenas histórias contadas para assustar crianças ou ensinar respeito à natureza. A Caipora é outra coisa. Ela é a guardiã da mata, invisível e imprevisível, capaz de se mover entre árvores e sombras como se fossem caminhos familiares. Nenhum caçador, nenhum invasor da floresta, nenhum ser imprudente consegue atravessar seu domínio sem sentir sua presença. Dizem que ela protegia os animais, amaldiçoava caçadores e confundia viajantes perdidos com risos e sussurros. Quem encontrou a Caipora nunca a esqueceu: pode ser por um encontro fugaz, uma travessura que mudou sua vida ou um aviso que deixou marcas profundas. A Caipora foi real e você sabe disso, porque ela já cruzou seu caminho. Talvez tenha sido uma lição dura que a floresta lhe ensinou, ou um presente inesperado escondido na sombra das árvores. Seja como for que você a encontrou, está pronto para entender seus segredos e agir em sua proteção.",
+    "descriptionPtBr": "Algumas fadas são apenas histórias contadas para assustar crianças ou ensinar respeito à natureza. A Caipora é outra coisa. Ela é a guardiã da mata, invisível e imprevisível, capaz de se mover entre árvores e sombras como se fossem caminhos familiares. Nenhum caçador, nenhum invasor da floresta, nenhum ser imprudente consegue atravessar seu domínio sem sentir sua presença. Dizem que ela protegia os animais, amaldiçoava caçadores e confundia viajantes perdidos com risos e sussurros. Quem encontrou a Caipora nunca a esqueceu: pode ser por um encontro fugaz, uma travessura que mudou sua vida ou um aviso que deixou marcas profundas. A Caipora foi real e você sabe disso, porque ela já cruzou seu caminho. Talvez tenha sido uma lição dura que a floresta lhe ensinou, ou um presente inesperado escondido na sombra das árvores. Seja como for que você a encontrou, está pronto para entender seus segredos e agir em sua proteção.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Alerta da Floresta: Animais selvagens e espíritos menores da floresta indicam perigo para você, lhe concedendo +2 dados em testes de rastrear ou detectar ameaças na mata.",
+        "skillPtBr": "Alerta da Floresta: Animais selvagens e espíritos menores da floresta indicam perigo para você, lhe concedendo +2 dados em testes de rastrear ou detectar ameaças na mata."
+      },
+      {
+        "cost": 2,
+        "skill": "Compartilhando os Encantos da Caipora: Você aprendeu a valorizar as histórias e travessuras que ouviu da Caipora, especialmente aquelas que ensinam respeito à floresta ou às criaturas do Sonhar. Uma vez por noite, ao contar uma história ou lenda da Caipora, você recupera 1 ponto de Força de Vontade, evocando a inspiração e o legado que a guardiã deixou.",
+        "skillPtBr": "Compartilhando os Encantos da Caipora: Você aprendeu a valorizar as histórias e travessuras que ouviu da Caipora, especialmente aquelas que ensinam respeito à floresta ou às criaturas do Sonhar. Uma vez por noite, ao contar uma história ou lenda da Caipora, você recupera 1 ponto de Força de Vontade, evocando a inspiração e o legado que a guardiã deixou."
+      },
+      {
+        "cost": 3,
+        "skill": "Rede da Floresta - Você mantém contato com aqueles que foram tocados pela magia de entidades do sonhar ligadas à floresta — animais salvos, viajantes guiados, guardiões da mata — e eles estão dispostos a ajudá-lo. Você recebe três pontos em Aliados, representando indivíduos, espíritos ou criaturas da floresta que cruzaram seu caminho e se conectaram com você de alguma forma.",
+        "skillPtBr": "Rede da Floresta - Você mantém contato com aqueles que foram tocados pela magia de entidades do sonhar ligadas à floresta — animais salvos, viajantes guiados, guardiões da mata — e eles estão dispostos a ajudá-lo. Você recebe três pontos em Aliados, representando indivíduos, espíritos ou criaturas da floresta que cruzaram seu caminho e se conectaram com você de alguma forma."
+      },
+      {
+        "cost": 4,
+        "skill": "Espírito da Guardiã - Você viu a Caipora sacrificar-se para protegê-lo e agora carrega o legado de sua coragem. Mesmo diante do perigo, você se levanta e enfrenta qualquer ameaça à floresta, à magia das fadas ou àqueles que ela protegeu. Uma vez por sessão, você pode pegar 1 ponto de Harano e transformá-lo em Hauglosk, evocando a força que a Caipora lhe deixou. Ao defender o equilíbrio da mata, espíritos da floresta ou algum ideal que a Caipora representava, você ganha dois dados adicionais em todos os testes (não cumulativos).",
+        "skillPtBr": "Espírito da Guardiã - Você viu a Caipora sacrificar-se para protegê-lo e agora carrega o legado de sua coragem. Mesmo diante do perigo, você se levanta e enfrenta qualquer ameaça à floresta, à magia das fadas ou àqueles que ela protegeu. Uma vez por sessão, você pode pegar 1 ponto de Harano e transformá-lo em Hauglosk, evocando a força que a Caipora lhe deixou. Ao defender o equilíbrio da mata, espíritos da floresta ou algum ideal que a Caipora representava, você ganha dois dados adicionais em todos os testes (não cumulativos)."
+      },
+      {
+        "cost": 5,
+        "skill": "Favor da Guardiã: Os espíritos e entidades da floresta sentem a sua conexão com a Caipora e respeitam isso. Uma vez por história, você pode invocar um protetor da mata, seja para defender aliados, criar distrações com animais e vegetação ou proteger-se de ataques. Esta habilidade representa o legado que a magia da guardiã da floresta atuando em seu favor.",
+        "skillPtBr": "Favor da Guardiã: Os espíritos e entidades da floresta sentem a sua conexão com a Caipora e respeitam isso. Uma vez por história, você pode invocar um protetor da mata, seja para defender aliados, criar distrações com animais e vegetação ou proteger-se de ataques. Esta habilidade representa o legado que a magia da guardiã da floresta atuando em seu favor."
+      }
+    ],
+    "book": "Criado por Bruno Cabral para o personagem de Audeam Figueiredo",
+    "page": 165
   }
 ]
