@@ -2,7 +2,7 @@
   {
     "name": "Caern",
     "type": "méritos",
-    "description": "Central para a sociedade e práticas dos Garou, os Caerns são pontos de energia espiritual, e muito esforço é dedicado a encontrar, manter e defender esses lugares. As matilhas frequentemente fazem parte de um septo de um caern ou são dedicadas a encontrar um novo para chamar de seu. Enquanto o despertar e nutrir um caern geralmente estão no domínio da história, esta Vantagem permite que um personagem tenha uma vantagem inicial (ou desvantagem) nessas buscas. Veja Acessos a Caerns na página 190–195 para mais informações.",
+    "description": "Central para a sociedade e práticas dos Garou, os Caerns são pontos de energia espiritual, e muito esforço é dedicado a encontrar, manter e defender esses lugares. As matilhas frequentemente fazem parte de um septo de um caern ou são dedicadas a encontrar um novo para chamar de seu. Enquanto o despertar e nutrir um caern geralmente estão no domínio da história, esta Vantagem permite que um personagem tenha uma vantagem inicial (ou desvantagem) nessas buscas. Veja Acessos a Caerns na página 190-195 para mais informações.",
     "advantages": [
       {
         "cost": 1,
@@ -251,20 +251,6 @@
     "flaws": []
   },
   {
-    "name": "Herança Selvagem",
-    "type": "méritos",
-    "description": "Sua pele é mais grossa, seus músculos mais densos, e seus ossos carregam a memória de incontáveis lutas de sobrevivência. Seu corpo parece esculpido para a guerra e a sobrevivência, marcado por cicatrizes e por uma presença física que impõe respeito. Essa herança selvagem é tanto uma dádiva quanto um lembrete da fera indomável que vive dentro de você.",
-    "advantages": [
-      {
-        "cost": 3,
-        "type": "radio",
-        "title": "Resiliência de Luna",
-        "description": "Você é muito mais resistente do que outros Garou. Sua Vitalidade é igual a 4 + seu valor de Vigor ao invés de 3 + seu valor de Vigor."
-      }
-    ],
-    "flaws": []
-  },
-  {
     "name": "Situações Sobrenaturais",
     "type": "méritos",
     "description": "Embora os Garou sejam eles mesmos sobrenaturais, às vezes mistérios maiores se abatem sobre os lobisomens para marcá-los de maneiras desconhecidas. Esses Méritos e Falhas não alteram a natureza de lobisomem do Garou, mas indicam circunstâncias em que as linhas de distinção entre lobisomens e outros elementos do mundo secreto não são tão absolutas.",
@@ -288,11 +274,17 @@
         "description": "Cão do Inferno - A maldição do Delírio é anormalmente forte em você e tanto sua forma hispo quanto sua forma lupina são verdadeiros pesadelos. Sempre que você assume qualquer uma dessas formas, você impõe o Delírio nos humanos da mesma forma que um Garou em crinos."
       },
       {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Prática em ritual",
+        "description": "Prática em ritual - Escolha um Rito que você conheça. Ao conduzir esse Rito, você ignora um resultado Brutal (1-2 em um dado de Fúria) rolado, tratando-o como um espaço em branco (3-5), embora ainda não possa rerrolar. Você pode adquirir este Mérito várias vezes, mas deve escolher um Rito diferente a cada vez."
+      },
+      {
         "cost": 3,
         "type": "checkbox",
         "title": "Afligido pela Lua",
         "description": "Afligido pela Lua - A lua inflama sua Fúria em um grau ainda maior do que a maioria dos outros lobisomens. Você ganha um ponto adicional de Fúria quando uiva para a lua pela primeira vez a cada noite."
-      } ,
+      },
       {
         "cost": 1,
         "type": "radio",
@@ -403,6 +395,128 @@
         "type": "radio",
         "title": "Tocado pela Wyrm - Wyrm Corruptora",
         "description": "Tocado pela Wyrm - Wyrm Corruptora - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Wyrm Corruptora cravou suas garras profundamente na sua psique e todo o seu esforço é para manter a amargura sob controle. Se você ainda não tiver feito um teste de Hauglosk em uma sessão, deverá realizá-lo obrigatoriamente no final dela."
+      }
+    ]
+  },
+  {
+    "name": "Mentais",
+    "type": "méritos",
+    "description": "Os Garou carregam dentro de si tanto a fúria de Gaia quanto as marcas da própria alma. Nem todos os fardos são físicos ou espirituais — muitos se escondem na mente, moldando como cada um vê o mundo, enfrenta a luta e convive com a matilha. Defeitos mentais revelam cicatrizes invisíveis: rancores que nunca se curam, pessimismo que colore cada vitória com sombras e instintos que dificultam o aprendizado. Para alguns, esses traços são fraquezas; para outros, apenas mais um reflexo do peso de ser meio-humano e meio-lobo em uma guerra sem fim.",
+    "advantages": [],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Amargurado",
+        "description": "Amargurado - Mesmo entre os Garou que guardam rancor, você é do tipo que não consegue deixar o passado para trás, e sua raiva permanece sempre latente, incapaz de encontrar verdadeiro alívio. Depois de ganhar seu primeiro ponto de Hauglosk, todos os testes de Hauglosk são feitos com +1 de Dificuldade."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Taciturno",
+        "description": "Taciturno - Um verdadeiro fatalista da vida, para você, toda luz prateada sempre carrega uma nuvem. Embora seja dedicado à luta, para você ela será sempre apenas isso: uma luta. Depois de ganhar seu primeiro ponto de Harano, todos os testes de Harano são feitos com +1 de Dificuldade."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Aprendiz Tátil",
+        "description": "Aprendiz Tátil - Você é uma criatura de instinto, e nenhum estudo ou prática ajuda a internalizar o que aprendeu até que a memória muscular seja criada. Qualquer aquisição de um ponto de Perícia ou de uma Especialidade exige que você tenha usado a Perícia com sucesso na sessão anterior."
+      }
+    ]
+  },
+  {
+    "name": "Mudança de Forma",
+    "type": "méritos",
+    "description": "Os Garou tomam sua habilidade de mudar de forma como algo natural; afinal, é seu direito de nascimento e sua característica mais definidora. Para a maioria dos lobisomens, essas capacidades são dadas como certas. No entanto, outros descobrem que o processo nem sempre é tão simples quanto se poderia esperar.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Mudança Umbral",
+        "description": "Mudança Umbral - A Umbra desperta seu instinto primal. Sempre que você entra na Umbra ou no bawn do seu caern, você pode mudar para a forma glabro ou hispo gratuitamente, sem precisar fazer uma checagem de Fúria, contanto que não tenha perdido o lobo. Sempre que sair da Umbra ou do bawn do seu caern, você pode mudar instantaneamente para forma homid ou lupus. Para este Mérito, “seu caern” pode ser qualquer caern com o qual você tenha um vínculo próximo, como aquele guardado pelo seu sept ou um com uma Vantagem na sua ficha de matilha (ver Pack Sheets em Shattered Nation, p. 143). Um Defeito como Caern Pária (permanente ou temporário) impede o uso dessa Vantagem nesse caern."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Crinos intencional",
+        "description": "Crinos intencional - Na primeira vez de cada mudança para a forma crinos em que você precise gastar Força de Vontade para resistir à frenesi, você não precisa gastar nada para fazê-lo."
+      },
+      {
+        "cost": 3,
+        "type": "checkbox",
+        "title": "Forma Favorita",
+        "description": "Forma Favorita - Mudar de forma é tão natural para você quanto respirar, e desde o momento em que mudou, percebeu que algumas formas exigem menos esforço para assumir do que outras. Escolha uma das formas sobrenaturais; sempre que mudar para essa forma, você pode rerrolar um único teste de Checagem de Fúria falho."
+      }  
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Amargurado",
+        "description": "Amargurado - Mesmo entre os Garou que guardam rancor, você é do tipo que não consegue deixar o passado para trás, e sua raiva permanece sempre latente, incapaz de encontrar verdadeiro alívio. Depois de ganhar seu primeiro ponto de Hauglosk, todos os testes de Hauglosk são feitos com +1 de Dificuldade."
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Mudança Lenta",
+        "description": "Mudança Lenta - A Wyld está dentro de você, mas demora um pouco mais para se manifestar, e sua capacidade de mudar de forma sofre em consequência. A mudança de forma custa o mesmo que o habitual, mas requer uma ação completa; durante esse tempo, o lobisomem não pode fazer nada além de se concentrar na transformação. Dons ou outras situações que normalmente reduziriam a velocidade de mudança podem reduzir essa penalidade para uma ação menor, mas não mais do que isso."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Lupino Retraído",
+        "description": "Lupino Retraído - Você não tem problemas para mudar entre as diversas formas do Garou quando Luna está com você, mas uma limitação perigosa se impõe quando sua Fúria vacila. Sempre que você perde o lobo, em vez de escolher sua forma mundana, é forçado a assumir a forma lupina."
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Mudança Dolorosa",
+        "description": "Mudança Dolorosa - Para você, cada mudança traz consigo um sofrimento agonizante, sentindo sua pele esticada, ossos quebrados e reformados, e seu corpo deformado além dos limites naturais. Sempre que assumir uma forma sobrenatural, você sofre um nível de dano Superficial de Vitalidade."
+      },
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Formas Limitadas",
+        "description": "Formas Limitadas - Sua habilidade de mudar para as formas sobrenaturais é restrita, e embora homid, crinos e lupus estejam ao seu alcance, certas formas parciais são impossíveis para você. Com um ponto, você não pode assumir a forma hispo."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Formas Limitadas",
+        "description": "Formas Limitadas - Sua habilidade de mudar para as formas sobrenaturais é restrita, e embora homid, crinos e lupus estejam ao seu alcance, certas formas parciais são impossíveis para você. Com dois pontos, você não pode assumir a forma hispo e a forma glabro."
+      }
+    ]
+  },
+  {
+    "name": "Herança Selvagem",
+    "type": "méritos",
+    "description": "Os Garou não são apenas criaturas de espírito e carne, mas também de lobo e homem. Embora grandes matilhas de lobos tenham percorrido o mundo por milênios, as raças específicas permanecem amplamente irrelevantes para o lobisomem médio. No entanto, existem situações em que essa herança se manifesta e se torna útil. Apenas um tipo de Mérito de Herança Selvagem pode ser adquirido por personagem.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Lobo da Tundra",
+        "description": "Lobo da Tundra - Sua herança lupina vem das partes mais frias de Gaia e seu pelo branco e amor por temperaturas baixas revelam isso. Você sofre penalidades reduzidas pela metade devido ao frio (arredondadas para baixo), embora o Narrador possa considerar certas circunstâncias (imersão em nitrogênio líquido) além da sua resistência natural."
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Lobo Cinzento",
+        "description": "Lobo Cinzento - O mais comum dos lobos também é o animal de matilha mais bem adaptado e, como seus irmãos lupinos, você se adaptou particularmente bem à vida em grupo. Sempre que se beneficiar de trabalho em equipe, você recebe um dado bônus adicional quando assistido por dois ou mais ajudantes (veja Corebook, p. 122 para regras de trabalho em equipe)."
+      },
+      {
+        "cost": 3,
+        "type": "radio",
+        "title": "Resiliência de Luna",
+        "description": "Resiliência de Luna - Você é muito mais resistente do que outros Garou. Sua Vitalidade é igual a 4 + seu valor de Vigor ao invés de 3 + seu valor de Vigor."
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Odor Distintivo",
+        "description": "Odor Distintivo - Embora não seja desagradável, seu cheiro pessoal é distinto e constante, e não importa quantas vezes você se lave ou tente disfarçá-lo, ele nunca desaparece. Qualquer tentativa de rastreá-lo, reconhecê-lo ou detectá-lo pelo olfato recebe um bônus de dois dados, e certos testes Sociais são feitos com penalidade de dois dados, a critério do Narrador."
       }
     ]
   },
