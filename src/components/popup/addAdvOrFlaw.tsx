@@ -9,6 +9,7 @@ import dataLoresheets from '../../data/loresheets.json';
 import ItemLoresheet from "../sheetItems/itemLoresheets";
 import ItemTalisman from "../sheetItems/itemTalisman";
 import ItemAdvantage from "../sheetItems/itemAdvantage";
+import { ILoresheet } from "@/interface";
 
 export default function AddAdvOrFlaw(props: { type: string }) {
   const [ selectOption, setSelectOption ] = useState('merits');
@@ -92,13 +93,27 @@ export default function AddAdvOrFlaw(props: { type: string }) {
               }
               {
                 selectOption === 'loresheets' &&
-                <div>{
-                  dataLoresheets.map((item: any, index: number) => (
-                    <div key={index} className="pb-2">
-                      <ItemLoresheet item={item} />
-                    </div>
-                  ))
-                }</div>
+                <div>
+                  {
+                    dataLoresheets
+                    .filter((loresheet: ILoresheet) => !loresheet.custom)
+                    .map((item: any, index: number) => (
+                      <div key={index} className="pb-2">
+                        <ItemLoresheet item={item} />
+                      </div>
+                    ))
+                  }
+                  <div className="pt-3 pb-5 text-center sm:text-left text-lg">Loresheets não oficiais (Criadas pela comunidade)</div>
+                  {
+                    dataLoresheets
+                      .filter((loresheet: ILoresheet) => loresheet.custom)
+                      .map((item: any, index: number) => (
+                      <div key={index} className="pb-2">
+                        <ItemLoresheet item={item} />
+                      </div>
+                    ))
+                  }
+                </div>
               }
               
             </div>

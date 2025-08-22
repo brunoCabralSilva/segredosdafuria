@@ -92,6 +92,11 @@ export default function AdvantagesAndFlaws() {
                 <AdvLoresheetsAdded key={index} item={item} />
               ))
             }
+            {
+              dataSheet.data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
+                <AdvLoresheetsAdded key={index} item={item} />
+              ))
+            }
           </div>
         }
         {
