@@ -70,7 +70,7 @@ export default function Loresheet() {
                 ))
               }
             </ul>
-            <p className="pt-3 text-justify">
+            {/* <p className="pt-3 text-justify">
               <span className="font-bold pr-1">Description (original):</span>
               { dataLoresheet.description }
             </p>
@@ -82,7 +82,7 @@ export default function Loresheet() {
                   </div>
                 ))
               }
-            </ul>
+            </ul> */}
             <div className="flex flex-col sm:flex-row sm:justify-between">
             <button
                 type="button"
