@@ -97,6 +97,7 @@ export interface IForm {
 
 export interface ILoresheet {
   id: number,
+  custom?: boolean,
   titlePtBr: String,
   title: string,
   descriptionPtBr: String,

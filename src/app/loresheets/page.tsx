@@ -37,9 +37,37 @@ export default function Loresheets() {
           </p>
         </div>
         <div  className="bg-black/90 pb-6 px-5">
-          <div className="grid grid-cols-1  mobile:grid-cols-2 sm:grid-cols-3 gap-2 w-full">
+          <div className="grid grid-cols-1 mobile:grid-cols-2 sm:grid-cols-3 gap-2 w-full">
             {
-              listLoresheets.map((loresheet: ILoresheet, index: number) => (
+              listLoresheets
+                .filter((loresheet: ILoresheet) => !loresheet.custom)
+                .map((loresheet: ILoresheet, index: number) => (
+                <Link
+                  href={`/loresheets/${loresheet.id}`}
+                  key={ index }
+                  className="w-full p-2 rounded bg-black text-white flex relative cursor-pointer items-center border border-white/20"
+                >
+                  <Image
+                    src={ `/images/loresheets/${loresheet.titlePtBr}.png` }
+                    alt=""
+                    className="w-20 h-20 object-cover object-top rounded-full"
+                    width={ 1200 }
+                    height={ 800 }
+                  />
+                  <div className="text-left relative w-full text-base px-3 p-2">
+                    <p className="font-bold">{ loresheet.titlePtBr }</p>
+                    <p>({ loresheet.title })</p>
+                  </div>
+                </Link>
+              ))
+            }
+          </div>
+          <div className="py-5 text-center sm:text-left">Loresheets não oficiais (Criadas pela comunidade)</div>
+          <div className="grid grid-cols-1 mobile:grid-cols-2 sm:grid-cols-3 gap-2 w-full">
+            {
+              listLoresheets
+                .filter((loresheet: ILoresheet) => loresheet.custom)
+                .map((loresheet: ILoresheet, index: number) => (
                 <Link
                   href={`/loresheets/${loresheet.id}`}
                   key={ index }

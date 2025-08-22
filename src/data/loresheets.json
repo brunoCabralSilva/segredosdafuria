@@ -688,6 +688,7 @@
     "id": 20,
     "title": "Tocado pela Caipora",
     "titlePtBr": "Tocado pela Caipora",
+    "custom": true,
     "description": "Algumas fadas são apenas histórias contadas para assustar crianças ou ensinar respeito à natureza. A Caipora é outra coisa. Ela é a guardiã da mata, invisível e imprevisível, capaz de se mover entre árvores e sombras como se fossem caminhos familiares. Nenhum caçador, nenhum invasor da floresta, nenhum ser imprudente consegue atravessar seu domínio sem sentir sua presença. Dizem que ela protegia os animais, amaldiçoava caçadores e confundia viajantes perdidos com risos e sussurros. Quem encontrou a Caipora nunca a esqueceu: pode ser por um encontro fugaz, uma travessura que mudou sua vida ou um aviso que deixou marcas profundas. A Caipora foi real e você sabe disso, porque ela já cruzou seu caminho. Talvez tenha sido uma lição dura que a floresta lhe ensinou, ou um presente inesperado escondido na sombra das árvores. Seja como for que você a encontrou, está pronto para entender seus segredos e agir em sua proteção.",
     "descriptionPtBr": "Algumas fadas são apenas histórias contadas para assustar crianças ou ensinar respeito à natureza. A Caipora é outra coisa. Ela é a guardiã da mata, invisível e imprevisível, capaz de se mover entre árvores e sombras como se fossem caminhos familiares. Nenhum caçador, nenhum invasor da floresta, nenhum ser imprudente consegue atravessar seu domínio sem sentir sua presença. Dizem que ela protegia os animais, amaldiçoava caçadores e confundia viajantes perdidos com risos e sussurros. Quem encontrou a Caipora nunca a esqueceu: pode ser por um encontro fugaz, uma travessura que mudou sua vida ou um aviso que deixou marcas profundas. A Caipora foi real e você sabe disso, porque ela já cruzou seu caminho. Talvez tenha sido uma lição dura que a floresta lhe ensinou, ou um presente inesperado escondido na sombra das árvores. Seja como for que você a encontrou, está pronto para entender seus segredos e agir em sua proteção.",
     "habilities": [
@@ -717,13 +718,14 @@
         "skillPtBr": "Favor da Guardiã: Os espíritos e entidades da floresta sentem a sua conexão com a Caipora e respeitam isso. Uma vez por história, você pode invocar um protetor da mata, seja para defender aliados, criar distrações com animais e vegetação ou proteger-se de ataques. Esta habilidade representa o legado que a magia da guardiã da floresta atuando em seu favor."
       }
     ],
-    "book": "Criado por Bruno Cabral para o personagem de Audeam Figueiredo",
+    "book": "Criado por Bruno Cabral para a Crônica 'Ventos do Apocalipse'",
     "page": 1
   },
   {
     "id": 21,
     "title": "Guia do Além",
     "titlePtBr": "Guia do Além",
+    "custom": true,
     "description": "Alguns indivíduos não apenas percebem a morte — eles caminham entre ela. Você vê o que outros não veem: almas errantes, sombras do passado, ecos de vidas que não se foram totalmente. Para alguns, essas visões são aterrorizantes; para outros, uma fonte de sabedoria. Você sabe quando uma alma está próxima, sente suas intenções e pode até interagir com ela.  Dentro de você, pulsa uma responsabilidade de ser um guia para os mortos, ajudando-os a encontrar descanso ou a transmitir mensagens importantes e também evitando que eles cometam transgressões no mundo dos vivos.",
     "descriptionPtBr": "Alguns indivíduos não apenas percebem a morte — eles caminham entre ela. Você vê o que outros não veem: almas errantes, sombras do passado, ecos de vidas que não se foram totalmente. Para alguns, essas visões são aterrorizantes; para outros, uma fonte de sabedoria. Você sabe quando uma alma está próxima, sente suas intenções e pode até interagir com ela.  Dentro de você, pulsa uma responsabilidade de ser um guia para os mortos, ajudando-os a encontrar descanso ou a transmitir mensagens importantes e também evitando que eles cometam transgressões no mundo dos vivos.",
     "habilities": [
@@ -753,7 +755,7 @@
         "skillPtBr": "Resiliência do Além: A convivência com o sofrimento dos mortos e a compreensão das consequências das ações humanas fortaleceu sua mente e espírito. Você soma dois dados aos testes de resistência ao Harano e ao Hauglosk, representando sua familiaridade com a dor, o tormento e os ecos das escolhas impensadas, e sua capacidade de não sucumbir às pressões do além ou às desordens do mundo vivo."
       }
     ],
-    "book": "Criado por Bruno Cabral para o personagem de Emmanuel Robson",
+    "book": "Criado por Bruno Cabral para a Crônica 'Ventos do Apocalipse'",
     "page": 1
   }
 ]
