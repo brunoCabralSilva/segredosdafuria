@@ -575,5 +575,113 @@
     ],
     "book": "Wyrmtide",
     "page": 37
+  },
+  {
+    "id": 17,
+    "title": "First Fortress",
+    "titlePtBr": "Primeira Fortaleza",
+    "description": "The First Fortress was many things according to Garou legend: an outpost in the Umbra, a library, a meeting place, and a courthouse. Lunes assist its visitors. It is safe for Garou to visit, protected by a spirit of great power who stalks its hallways on silent paws. Some claim it was once the Garou Nation's capital. Some say it exists half in the Umbra, half in the physical world. No record of a 'First Fortress' exists, and some believe it never existed at all. You know First Fortress is real; you've been there, perhaps by accident, through a forgotten Garou Nation document, or chosen by its spirits. Whatever the reason, you remind the Garou of their ancient glories.",
+    "descriptionPtBr": "A Primeira Fortaleza era muitas coisas, segundo a lenda Garou: um posto avançado na Umbra, uma biblioteca, um local de reuniões e um tribunal. Lunos auxiliam seus visitantes. É seguro para os Garou visitarem, protegido por um espírito de grande poder que percorre seus corredores com passos silenciosos. Alguns afirmam que já foi a capital da Nação Garou. Outros dizem que existe metade na Umbra, metade no mundo físico. Não há registros de uma 'Primeira Fortaleza', e alguns acreditam que ela nunca existiu. Você sabe que a Primeira Fortaleza é real; você esteve lá, talvez por acidente, através de um documento esquecido da Nação Garou, ou escolhido pelos espíritos. Seja qual for o motivo, você lembra os Garou de suas glórias antigas.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Waypoint: The location of First Fortress is etched in your mind. When you navigate the Umbra with First Fortress as a stop or destination, you receive a two-dice bonus to all navigation tests during your journey.",
+        "skillPtBr": "Marco: A localização da Primeira Fortaleza está gravada em sua mente. Quando você navega pela Umbra com a Primeira Fortaleza como parada ou destino, recebe um bônus de dois dados em todos os testes de navegação durante sua jornada."
+      },
+      {
+        "cost": 2,
+        "skill": "Ancient Panoply: You have access to First Fortress' treasures. You may begin each story with a new talisman of up to two dots retrieved from the First Fortress. These are one-of-a-kind and risk being lost or destroyed.",
+        "skillPtBr": "Panóplia Antiga: Você tem acesso aos tesouros da Primeira Fortaleza. Pode começar cada história com um novo talismã de até dois pontos retirado da Primeira Fortaleza. Eles são únicos e correm o risco de serem perdidos ou destruídos."
+      },
+      {
+        "cost": 3,
+        "skill": "Fortress Servants: Once per story, you may invoke the name of a spirit with a Power of 6, and it performs one task for you to the best of its ability. The spirit can manifest in the physical world and possess hosts. Once the task is done, it is freed and exists freely in the Umbra.",
+        "skillPtBr": "Servos da Fortaleza: Uma vez por história, você pode invocar o nome de um espírito com Poder 6, e ele realiza uma tarefa para você da melhor forma possível. O espírito pode se manifestar no mundo físico e possuir hospedeiros. Quando a tarefa termina, ele é liberado e existe livremente na Umbra."
+      },
+      {
+        "cost": 4,
+        "skill": "Historian: Once per story, with the Storyteller's approval, you may make one statement about the Garou Nation's past that is more or less true. No one is obligated to believe you without proof.",
+        "skillPtBr": "Historiador: Uma vez por história, com a aprovação do Narrador, você pode fazer uma afirmação sobre o passado da Nação Garou que seja mais ou menos verdadeira. Ninguém é obrigado a acreditar em você sem provas."
+      },
+      {
+        "cost": 5,
+        "skill": "Final Defense: Inside the First Fortress, you always have a four-dice bonus to Brawl and Melee tests, stacking with other bonuses. Once per chronicle, you may sing the song that self-destructs the Fortress. All supporting characters are Incapacitated and permanently killed at the end of the next turn. If you cannot escape, this includes you.",
+        "skillPtBr": "Defesa Final: Dentro da Primeira Fortaleza, você sempre recebe um bônus de quatro dados em testes de Briga e Combate Corpo a Corpo, que se acumula com outros bônus. Uma vez por crônica, você pode cantar a canção que autodestroi a Fortaleza. Todos os personagens de apoio ficam Incapacitados e permanentemente mortos ao final do próximo turno. Se não conseguir escapar, isso inclui você."
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 163
+  },
+  {
+    "id": 18,
+    "title": "The Moonlit Path",
+    "titlePtBr": "O Caminho à Luz da Lua",
+    "description": "The Umbra is a dangerous, hostile place that defies logic, separating even the most prepared Garou from their pack and pulling the unwary deeper into its chaos. Once lost, few return. You are one such survivor, subjected to its unfathomable depths until almost perishing. A manifestation of Luna herself came and found you, sheltering you from danger and illuminating the path to safety. Not everyone believes your tales, but so far, no one has a better explanation for your miraculous return. While these Gifts are aligned with moon phases, any auspice may benefit from them.",
+    "descriptionPtBr": "A Umbra é um lugar perigoso e hostil que desafia a lógica, separando até os Garous mais preparados de sua matilha e arrastando os desavisados para seu caos. Poucos retornam uma vez perdidos. Você é um desses sobreviventes, submetido às profundezas insondáveis da Umbra até quase perecer. Uma manifestação da própria Lua veio encontrá-lo, protegendo-o do perigo e iluminando o caminho para a segurança. Nem todos acreditam em suas histórias, mas até agora ninguém tem uma explicação melhor para seu retorno milagroso. Embora estes dons estejam alinhados às fases da lua, qualquer auspício pode se beneficiar deles.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Travel in Darkness: As long as you remain still, you can remain invisible to any single nominated spirit while in the Umbra.",
+        "skillPtBr": "Viagem na Escuridão: Enquanto permanecer imóvel, você pode permanecer invisível para qualquer espírito indicado enquanto estiver na Umbra."
+      },
+      {
+        "cost": 2,
+        "skill": "The Open Door: Once per session, you may ignore the damage inflicted by a Brutal result on the Rite of Shadow Passage.",
+        "skillPtBr": "A Porta Aberta: Uma vez por sessão, você pode ignorar o dano infligido por um resultado Brutal no Rito da Passagem Sombria."
+      },
+      {
+        "cost": 3,
+        "skill": "The Road Less Followed: When negotiating with spirits in the Umbra, you may ignore any negative effects from your Rage dice.",
+        "skillPtBr": "O Caminho Menos Seguido: Ao negociar com espíritos na Umbra, você pode ignorar quaisquer efeitos negativos de seus dados de Fúria."
+      },
+      {
+        "cost": 4,
+        "skill": "The Path of Sustenance: You only need to spend Willpower once per session to remain in the Umbra.",
+        "skillPtBr": "O Caminho da Sustentação: Você só precisa gastar Força de Vontade uma vez por sessão para permanecer na Umbra."
+      },
+      {
+        "cost": 5,
+        "skill": "The Route Home: If you die in the Umbra, at the scene's end, you come back to life with one Health level left unblemished. Your final location is determined by the Storyteller.",
+        "skillPtBr": "A Rota de Retorno: Se você morrer na Umbra, ao final da cena, você volta à vida com um nível de Vitalidade intacto. Sua localização final será determinada pelo Narrador."
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 164
+  },
+  {
+    "id": 19,
+    "title": "Possessed Flesh",
+    "titlePtBr": "Carne Possuída",
+    "description": "Garou, as a rule, cannot be possessed by spirits. However, the rare Bane of uncontrolled rage, Howling Insanity, can accomplish this seemingly impossible feat. You were possessed by a Howling Insanity and, through a Gift, a Rite, or sheer force of will, it was driven out. Though it is gone, the experience left an indelible mark on you. Discuss with the Storyteller the circumstances of the possession and how the spirit was banished.",
+    "descriptionPtBr": "Os Garou, como regra, não podem ser possuídos por espíritos. No entanto, o raro maldito de fúria descontrolada, Insanidade Uivante, pode realizar esse feito aparentemente impossível. Você foi possuído por uma Insanidade Uivante e, através de um Dom, Rito ou pura força de vontade, o espírito foi expulso. Embora tenha ido embora, a experiência deixou uma marca permanente em você. Converse com o Narrador sobre as circunstâncias da possessão e como o espírito foi banido.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Spiritual Eye Contact: You can test Wits + Insight (Difficulty 3) to discern whether a person is possessed.",
+        "skillPtBr": "Contato Espiritual: Você pode testar Astúcia + Percepção (Dificuldade 3) para discernir se uma pessoa está possuída."
+      },
+      {
+        "cost": 2,
+        "skill": "Spirit Talker: Any Rite dealing with Banes allows you to set a Rage die from the dice pool as a success before the roll.",
+        "skillPtBr": "Falante de Espíritos: Qualquer Rito que envolva Malditos permite que você adicione um dado de Fúria na parada de dados como um sucesso antes da rolagem."
+      },
+      {
+        "cost": 3,
+        "skill": "Branded: Possession triggered your First Change, leaving your flesh marred. You get a two-dice bonus to social tests when interacting with Banes.",
+        "skillPtBr": "Marcado: A possessão desencadeou sua Primeira Mudança, deixando sua carne marcada. Você recebe um bônus de dois dados em testes sociais ao interagir com Malditos."
+      },
+      {
+        "cost": 4,
+        "skill": "Symbiotic Bond: Once per session, you can draw up one of the spirit's exceptional skills and add it to your dice pool, though it displays the presence of said spirit.",
+        "skillPtBr": "Vínculo Simbiótico: Uma vez por sessão, você pode usar uma das habilidades excepcionais do espírito e adicioná-la à sua parada de dados, embora isso demonstre a presença do espírito."
+      },
+      {
+        "cost": 5,
+        "skill": "Liberator: You can work to separate a spirit from its host no matter how long the possession has lasted, or contribute to a Rite that aims to do so.",
+        "skillPtBr": "Libertador: Você pode trabalhar para separar um espírito de seu hospedeiro, não importando há quanto tempo a possessão dura, ou contribuir em um Rito que tenha esse objetivo."
+      }
+    ],
+    "book": "The Moonlit Path",
+    "page": 165
   }
 ]
