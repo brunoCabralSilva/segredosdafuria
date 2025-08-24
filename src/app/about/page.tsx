@@ -116,9 +116,9 @@ export default function About() {
                     <span className="pr-1 font-bold">Portfólio:</span>
                     <a
                       target="_blank"
-                      href="https://brunocabralsilva.github.io/"
+                      href="https://bruno-cabral-portfolio.vercel.app/"
                       className="pt-3 pb-2 sm:py-0 cursor-pointer underline $font-bold">
-                      brunocabralsilva.github.io/
+                      bruno-cabral-portfolio.vercel.app/
                     </a>
                   </p>
                 </div>

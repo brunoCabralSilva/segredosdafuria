@@ -85,30 +85,37 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sobre</p>
           </div>
         </Link>
-        <Link href="/sessions" className="col-span-1 row-span-3 sm:row-span-4 sm:col-span-3">
+        <Link href="/sessions" className="col-span-2 sm:row-span-2 sm:col-span-3">
           <div
-            className={`bg-boca01 bg-cover bg-center h-full text-white flex relative cursor-pointer border-transparent items-end`}>
+            className={`bg-boca01 bg-cover bg-center h-20vh sm:h-full text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-full bg-black/40`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sessões</p>
           </div>
         </Link>
-        <Link href="/talismans" className="col-span-1 sm:row-span-2 sm:col-span-3">
+        <Link href="/talismans" className="col-span-1 row-span-3 sm:row-span-2 sm:col-span-3">
           <div
-            className={`bg-08 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
+            className={`bg-08 bg-cover bg-center h-60vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-full bg-black/40`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Talismãs</p>
           </div>
         </Link>
-        <Link href="/loresheets" className="col-span-1 row-span-2 sm:row-span-2 sm:col-span-2">
+        <Link href="/loresheets" className="col-span-1 row-span-1 sm:row-span-2 sm:col-span-2">
           <div
-            className={`bg-07 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
+            className={`bg-12 bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-fullbg-black/40`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Loresheets</p>
           </div>
         </Link>
-        <Link href="/profile" className="col-span-2 sm:col-span-5 sm:row-span-2">
+        <Link href="/advantagesAndFlaws" className="col-span-1 row-span-1 sm:col-span-4 sm:row-span-4">
           <div
-            className={`bg-09 bg-bottom bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
+            className={`bg-10 bg-top bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
+            <div className={`absolute w-full h-full bg-black/40`} />
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Vantagens e Defeitos</p>
+          </div>
+        </Link>
+        <Link href="/profile" className="col-span-1 row-span-1 sm:col-span-4 sm:row-span-4">
+          <div
+            className={`bg-11 bg-top bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-full bg-black/40`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Perfil</p>
           </div>
