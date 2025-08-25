@@ -450,12 +450,6 @@
     ],
     "flaws": [
       {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Amargurado",
-        "description": "Amargurado - Mesmo entre os Garou que guardam rancor, você é do tipo que não consegue deixar o passado para trás, e sua raiva permanece sempre latente, incapaz de encontrar verdadeiro alívio. Depois de ganhar seu primeiro ponto de Hauglosk, todos os testes de Hauglosk são feitos com +1 de Dificuldade."
-      },
-      {
         "cost": 2,
         "type": "checkbox",
         "title": "Mudança Lenta",
