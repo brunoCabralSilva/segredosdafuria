@@ -143,7 +143,7 @@ export default function Details() {
       { showDeletePlayer.show && <DeleteUserFromSession /> }
       {
         creationDate !== ''
-        ? <div className="h-full w-full">
+        ? <div className="h-full w-full pr-1">
             <div className="flex flex-col items-center justify-start w-full">
               <div
                 className="w-full mt-2 capitalize flex justify-between items-center cursor-pointer pr-2 border-2 border-white mb-2"

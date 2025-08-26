@@ -59,7 +59,7 @@ export default function Consent() {
 
   return(
     <div className="flex flex-col w-full h-75vh overflow-y-auto">
-      <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold">
+      <div className="w-full h-full mb-2 flex-col items-start justify-center font-bold pr-1">
       <button
           type="button"
           onClick={() => {
