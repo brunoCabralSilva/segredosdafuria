@@ -218,29 +218,37 @@ export const transferSheetToGameMaster = async (
 
 export const getAllSessionsByFunction = async (email: string) => {
   const db = getFirestore(firebaseConfig);
-  const playersCollectionRef = collection(db, 'players');
-  const playersSnapshot = await getDocs(playersCollectionRef);
+
+  const playersCollectionRef = collection(db, "players");
+  const q = query(playersCollectionRef, where("email", "==", email));
+  const playersSnapshot = await getDocs(q);
+
   const sessionIds: string[] = [];
   playersSnapshot.forEach((doc) => {
     const data = doc.data();
-    data.list.forEach((item: any) => {
-      if (item.email === email) sessionIds.push(data.sessionId);
-    });
+    if (data.sessionId) {
+      sessionIds.push(data.sessionId);
+    }
   });
+
+  const sessionsCollectionRef = collection(db, "sessions");
+  const sessionsSnapshot = await getDocs(sessionsCollectionRef);
+
   const list1: { id: string; name: string }[] = [];
   const list2: { id: string; name: string }[] = [];
-  const sessionsCollectionRef = collection(db, 'sessions');
-  const sessionsSnapshot: any = await getDocs(sessionsCollectionRef);
-  sessionsSnapshot.forEach((doc: any) => {
+
+  sessionsSnapshot.forEach((doc) => {
     const data = doc.data();
-    if (data.gameMaster === email)
+    if (data.gameMaster === email) {
       list1.push({ id: doc.id, name: data.name });
-    if (sessionIds.includes(doc.id))
+    }
+    if (sessionIds.includes(doc.id)) {
       list2.push({ id: doc.id, name: data.name });
+    }
   });
 
   return { list1, list2 };
-}
+};
 
 export const deleteSessionById = async (sessionId: string, setShowMessage: any) => {
   const db = getFirestore(firebaseConfig);

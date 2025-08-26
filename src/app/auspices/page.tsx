@@ -16,15 +16,6 @@ export default function Auspices() {
       <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <section className="mb-2 relative px-2">
-        <div className="h-40vh relative flex bg-black items-end text-black">
-          <Image
-            src={ "/images/49.png" }
-            alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-            className="absolute w-full h-40vh object-cover"
-            width={ 1200 }
-            height={ 800 }
-          />
-        </div>
         <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
           <h1 className="text-4xl relative">Augúrios</h1>
           <hr className="w-10/12 my-6" />

@@ -3,15 +3,6 @@ import Image from 'next/image';
 export default function DataGifts() {
   return (
     <section className="mb-2">
-      <div className="h-40vh relative flex bg-white items-end text-black">
-        <Image
-          src={ "/images/84.png" }
-          alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-          className="absolute w-full h-40vh object-contain bg-white"
-          width={ 1200 }
-          height={ 800 }
-        />
-      </div>
       <div className="py-6 px-5 bg-black/90 mt-2 flex flex-col items-center sm:items-start text-justify">
         <h1 className="text-4xl relative">Dons</h1>
         <hr className="w-10/12 my-6" />

@@ -21,15 +21,6 @@ export default function Gifts() {
       <div className="bg-black/60 absolute w-full h-full" />
       <div className="px-2 z-10 relative">
         <Nav />
-        <div className="h-40vh relative flex bg-white items-end text-black">
-            <Image
-              src={ "/images/84.png" }
-              alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-              className="absolute w-full h-40vh object-contain bg-white"
-              width={ 1200 }
-              height={ 800 }
-            />
-        </div>
         <div className="py-6 px-5 bg-black/90 mt-2 flex flex-col items-center sm:items-start text-justify">
           <h1 className="text-4xl relative">Vantagens e Defeitos</h1>
           <hr className="w-10/12 my-6" />

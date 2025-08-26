@@ -17,15 +17,6 @@ export default function Loresheets() {
       <div className="absolute w-full h-fullbg-black/80" />
       <Nav />
       <section className="mb-2 relative px-2">
-        <div className="h-40vh relative flex bg-white items-end text-black">
-          <Image
-            src={ "/images/25.jpg" }
-            alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-            className="absolute w-full h-40vh object-cover object-center"
-            width={ 1200 }
-            height={ 800 }
-          />
-        </div>
         <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
           <h1 className="text-4xl relative">Loresheets</h1>
           <hr className="w-10/12 my-6" />

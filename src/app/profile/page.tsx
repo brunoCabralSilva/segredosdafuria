@@ -42,24 +42,15 @@ export default function Profile() {
   }, []);
 
   return (
-    <div className="h-full overflow-y-auto bg-ritual bg-cover bg-top">
+    <div className="h-screen overflow-y-auto bg-ritual bg-cover bg-top">
       { showMessage.show && <MessageToUser /> }
       <Nav />
       {
         showData
-        ? <div className="w-full bg-ritual bg-cover bg-top relative">
+        ? <div className="h-full w-full bg-ritual bg-cover bg-top relative">
             <div className="absolute w-full h-full bg-black/90" />
             <Nav />
-            <section className="relative">
-              <div className="h-40vh relative flex bg-white items-end text-black">
-                <Image
-                  src={ "/images/25.jpg" }
-                  alt="Matilha contemplando o fim do mundo diante de um espírito maldito"
-                  className="absolute w-full h-40vh object-cover object-center"
-                  width={ 1200 }
-                  height={ 800 }
-                />
-              </div>
+            <section className="h-full relative">
               <div className="py-6 sm:px-5 text-white flex flex-col items-center sm:items-start text-justify">
                 <h1 className="text-4xl relative">Perfil</h1>
                 <hr className="w-10/12 mt-6" />
