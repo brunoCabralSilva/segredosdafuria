@@ -85,5 +85,15 @@ export default function RitualsMechanic(props: { title: string }) {
       return <RiteOfBinding />
     case 'Rite of Shadow Passage':
       return <RiteOfShadowPassage />
+    case 'Rite of the Broken Wolf':
+      return <RiteWithRoll renown="honor" skill="leadership" textDifficult="A Dificuldade deste Rito é igual a 2 + o maior valor de Renome do alvo" />
+    case 'Rite of the Capricious Sky':
+      return <RiteWithRoll renown="glory" skill="etiquette" textDifficult="A Dificuldade do Rito depende da intensidade e da rapidez da mudança desejada. Mudanças menores, como aumentar ou diminuir alguns graus de temperatura ou fazer nuvens leves se dissiparem ou choverem suavemente, têm Dificuldade 2. Alterações mais intensas, como transformar nuvens em tempestade ou névoa densa, são Dificuldade 4. Grandes mudanças, como invocar tempestades violentas em um dia de verão calmo, têm Dificuldade 6" />
+    case 'Rite of Forging':
+      return <RiteWithRoll renown="honor" skill="craft" textDifficult="Dificuldade é igual ao valor em pontos do Talismã" />
+    case "Rite of Gaia's Bravery":
+      return <RiteWithRoll renown="honor" skill="leadership" textDifficult="A Dificuldade deste Rito é 2 + 1 para cada participante humano" />
+    case "Rite of Spiritual Succor":
+      return <RiteWithRoll renown="wisdom" skill="etiquette" textDifficult="A Dificuldade básica do Rito é igual ao número de participantes, nunca inferior a 3" />
   }
 }
