@@ -275,8 +275,8 @@ export default function GiftsMechanic(props: { name: string }) {
     // case "Energize": return <Energize />
     // case "Hands of Earth": return <HandsOfEarth />
     // case "The Living Wood": return <TheLivingWood />
-    // case "Shredding Skin":
-    // case 'Resist Toxin':
+    // case "Shredding Skin": return <ShreddingSkin />
+    // case 'Resist Toxin': return <ResistToxin />
   }
 }
 
