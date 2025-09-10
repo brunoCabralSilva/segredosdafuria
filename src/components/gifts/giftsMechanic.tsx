@@ -14,6 +14,7 @@ import { LunasBlessing } from "./lunasBlessing";
 import { SilverClaws } from "./silverClaws";
 import { SpiritOfTheFray } from "./spiritOfTheFray";
 import { TheHowlCarries } from "./TheHowlCarries";
+import { HungryTeeth } from "./HungryTeeth";
 
 export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
@@ -254,6 +255,8 @@ export default function GiftsMechanic(props: { name: string }) {
       return <NormalTest attribute="" renown="honor" />
     case "Primal Anger":
       return <NormalTest attribute="" renown="glory" />
+    case "Tug the Leash":
+      return <NormalTest attribute="composure" renown="glory" />
 
     //Testes Individuais
     case 'Pack Instinct': return <PackInstinct />
@@ -266,15 +269,14 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Luna's Blessing": return <LunasBlessing />
     case 'Spirit of the Fray': return <SpiritOfTheFray />
     case 'The Howl Carries': return <TheHowlCarries />
+    case 'Hungry Teeth': return <HungryTeeth />
     // case 'Grasp from Beyond': return <GraspFromBeyond />
     // case "Rapid Shift": return <RapidShift />
     // case "Energize": return <Energize />
     // case "Hands of Earth": return <HandsOfEarth />
     // case "The Living Wood": return <TheLivingWood />
     // case "Shredding Skin":
-    // case 'Hungry Teeth':
     // case 'Resist Toxin':
-    // case 'Tug the Leash':
   }
 }
 
