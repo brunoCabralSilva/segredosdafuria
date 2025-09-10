@@ -16,6 +16,8 @@ import { SpiritOfTheFray } from "./spiritOfTheFray";
 import { TheHowlCarries } from "./TheHowlCarries";
 import { HungryTeeth } from "./hungryTeeth";
 import { TheLivingWood } from "./theLivingWood";
+import { GraspFromBeyond } from "./graspFromBeyond";
+import { RapidShift } from "./rapidShift";
 
 export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
@@ -272,8 +274,8 @@ export default function GiftsMechanic(props: { name: string }) {
     case 'The Howl Carries': return <TheHowlCarries />
     case 'Hungry Teeth': return <HungryTeeth />
     case "The Living Wood": return <TheLivingWood />
-    // case 'Grasp from Beyond': return <GraspFromBeyond />
-    // case "Rapid Shift": return <RapidShift />
+    case 'Grasp from Beyond': return <GraspFromBeyond />
+    case "Rapid Shift": return <RapidShift />
     // case "Energize": return <Energize />
     // case "Hands of Earth": return <HandsOfEarth />
     // case "Shredding Skin": return <ShreddingSkin />
