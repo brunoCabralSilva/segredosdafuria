@@ -38,8 +38,11 @@ export default function GiftsMechanic(props: { name: string }) {
     case 'Share the Pain': return <RageTestOrWp type="rage" />;
     case 'The Silver Compact': return <RageTestOrWp type="rage" />;
     case "Territorial Dominance": return <RageTestOrWp type="rage" />;
-    case "Serpent's Coil": return <RageTestOrWp type="rage" />
-
+    case "Serpent's Coil": return <RageTestOrWp type="rage" />;
+    case "Mouth Full of Teeth": return <RageTestOrWp type="rage" />;
+    case "Gnaw": return <RageTestOrWp type="rage" />;
+    case "Indomitable Spirit": return <RageTestOrWp type="rage" />;
+    
     //Dons que custam 1 ponto de Força de Vontade
     case 'Ancestral Conviction': return <RageTestOrWp type="willpower" />;
     case 'Blessed Brew': return <RageTestOrWp type="willpower" />;
@@ -61,6 +64,8 @@ export default function GiftsMechanic(props: { name: string }) {
     case 'Under the Gun': return <RageTestOrWp type="willpower" />;
     case 'Unity of the Pack': return <RageTestOrWp type="willpower" />;
     case 'Whispered Passage': return <RageTestOrWp type="willpower" />;
+    case 'Urban Hunter': return <RageTestOrWp type="willpower" />;
+    case 'Umbral Pocket': return <RageTestOrWp type="willpower" />;
 
     //Dons que custam 1 Teste de Fúria + 1 teste
     case "Hare's Leap":
@@ -111,6 +116,24 @@ export default function GiftsMechanic(props: { name: string }) {
       return <RageOrWpWithRoll skill="" type="rage" attribute="stamina" renown="glory" dificulty={2} textDificulty="" />
     case 'Break the Shackles':
       return <RageOrWpWithRoll skill="" type="rage" attribute="resolve" renown="glory" dificulty={3} textDificulty="A Dificuldade depende do tipo de efeito que está controlando o alvo e do poder da criatura por trás disso, mas o padrão é 3. O Narrador pode permitir que o alvo adicione sua Determinação ao conjunto de dados do teste do Dom se estiver ativamente tentando resistir ao efeito por conta própria." />
+    case "Bite of the Lycan":
+      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Determinação, ou um valor imposto pelo Narrador)." />
+    case 'Cutting Words':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Inteligência, ou um valor imposto pelo Narrador)." />
+    case "Wyrm Speech":
+      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Determinação, ou um valor imposto pelo Narrador, embora em combate qualquer reserva de Conflito possa ser usada para resistir aos efeitos da Fala da Wyrm. Ao direcionar o ataque a um Talismã, a Dificuldade é igual a 2 + o custo do Talismã ou Talen)." />
+    case "Bestial Regression":
+      return <RageOrWpWithRoll skill="" type="rage" attribute="wits" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Determinação + Raciocínio, ou um valor imposto pelo Narrador)." />
+    case 'Jump Scare':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Astúcia, ou um valor imposto pelo Narrador)." />
+    case 'Entreat':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={1} textDificulty={'Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo espírito alvo em um teste de Poder, ou um valor imposto pelo Narrador).'} />
+    case 'Calcify':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="composure" renown="honor" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
+    case 'Howl of Despair':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
+    case 'Light of the Moon':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Astúcia, ou um valor imposto pelo Narrador)." />
 
     //Dons que custam 1 ponto de Força de Vontade + 1 teste
     case 'Penumbral Senses':
@@ -177,6 +200,16 @@ export default function GiftsMechanic(props: { name: string }) {
       return <RageOrWpWithRoll skill="" type="willpower" attribute="intelligence" renown="glory" dificulty={1} textDificulty="" />
     case "Drain Spirit":
       return <RageOrWpWithRoll skill="" type="willpower" attribute="resolve" renown="glory" dificulty={1} textDificulty={'Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo espírito alvo em um teste de Poder, ou um valor imposto pelo Narrador).'} />
+    case 'Corrupted Memories':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="intelligence" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Raciocínio + Determinação, ou um valor imposto pelo Narrador)." />
+    case 'Summon Implement':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="wits" renown="wisdom" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
+    case 'Bolt Hole':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="composure" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser igual a classificação local da Película)" />
+    case 'Ghost Walk':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="stamina" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser igual à Película local - 1)" />
+    case 'Lullaby':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="composure" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Determinação + Astúcia, ou um valor imposto pelo Narrador)." />
 
     //Dons que custam 1 teste de Fúria + 1 teste condicional
     case 'Staredown':
@@ -212,6 +245,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Sense Danger": return <SimpleTest />
     case "Blood of the Wastes": return <SimpleTest />
     case "Sacred Boundary": return <SimpleTest />
+    case "An Exchange With Luna": return <SimpleTest />
 
     //Dons que não utilizam Força de Vontade ou Fúria
     case 'Wasp Talons':
@@ -237,6 +271,10 @@ export default function GiftsMechanic(props: { name: string }) {
     // case "Energize": return <Energize />
     // case "Hands of Earth": return <HandsOfEarth />
     // case "The Living Wood": return <TheLivingWood />
+    // case "Shredding Skin":
+    // case 'Hungry Teeth':
+    // case 'Resist Toxin':
+    // case 'Tug the Leash':
   }
 }
 
