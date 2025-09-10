@@ -204,17 +204,17 @@ export default function Message(props: { dataMessage: any, color: string }) {
                   </p>
                 }
                 {
-                  dataMessage.systemPtBr !== '' &&
-                  <p className="pt-2">
-                    <span className="pr-1 font-bold">Sistema:</span>
-                    { dataMessage.systemPtBr }
-                  </p>
-                }
-                {
                   dataMessage.descriptionPtBr !== '' &&
                   <p className="pt-2">
                     <span className="pr-1 font-bold">Descrição:</span>
                     { dataMessage.descriptionPtBr }
+                  </p>
+                }
+                {
+                  dataMessage.systemPtBr !== '' &&
+                  <p className="pt-2">
+                    <span className="pr-1 font-bold">Sistema:</span>
+                    { dataMessage.systemPtBr }
                   </p>
                 }
               </div>
