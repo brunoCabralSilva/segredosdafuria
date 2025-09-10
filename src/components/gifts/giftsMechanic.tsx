@@ -14,7 +14,7 @@ import { LunasBlessing } from "./lunasBlessing";
 import { SilverClaws } from "./silverClaws";
 import { SpiritOfTheFray } from "./spiritOfTheFray";
 import { TheHowlCarries } from "./TheHowlCarries";
-import { HungryTeeth } from "./HungryTeeth";
+import { HungryTeeth } from "./hungryTeeth";
 
 export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
