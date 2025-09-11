@@ -18,6 +18,9 @@ import { HungryTeeth } from "./hungryTeeth";
 import { TheLivingWood } from "./theLivingWood";
 import { GraspFromBeyond } from "./graspFromBeyond";
 import { RapidShift } from "./rapidShift";
+import { Energize } from "./energize";
+import { HandsOfEarth } from "./handsOfEarth";
+import { ResistToxin } from "./resistToxin";
 
 export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
@@ -250,6 +253,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Blood of the Wastes": return <SimpleTest />
     case "Sacred Boundary": return <SimpleTest />
     case "An Exchange With Luna": return <SimpleTest />
+    case 'Shredding Skin': return <SimpleTest />
 
     //Dons que não utilizam Força de Vontade ou Fúria
     case 'Wasp Talons':
@@ -276,10 +280,9 @@ export default function GiftsMechanic(props: { name: string }) {
     case "The Living Wood": return <TheLivingWood />
     case 'Grasp from Beyond': return <GraspFromBeyond />
     case "Rapid Shift": return <RapidShift />
-    // case "Energize": return <Energize />
-    // case "Hands of Earth": return <HandsOfEarth />
-    // case "Shredding Skin": return <ShreddingSkin />
-    // case 'Resist Toxin': return <ResistToxin />
+    case "Energize": return <Energize />
+    case "Hands of Earth": return <HandsOfEarth />
+    case 'Resist Toxin': return <ResistToxin />
   }
 }
 

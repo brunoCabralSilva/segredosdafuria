@@ -4,7 +4,7 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-export function TheLivingWood() {
+export function ResistToxin() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [type, setType] = useState<number>(0);
@@ -12,9 +12,7 @@ export function TheLivingWood() {
 
   const rollTestOfUser = async () => {
     let pool = 0;
-    if (type === 1) {
-      pool = Number(dataSheet.data.glory) + Number(dataSheet.data.attributes.manipulation);
-    } else if (type === 2) pool = Number(dataSheet.data.glory);
+    pool = Number(dataSheet.data.glory) + Number(dataSheet.data.attributes.manipulation);
     let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
@@ -25,36 +23,27 @@ export function TheLivingWood() {
   }
 
   const rollRage = async () => {
-    if (dataSheet.data.rage >= 1) {
+    const roll = await rollTestOfUser();
+    if (type === 1) {
+      await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift,  results: roll }, email, setShowMessage);
+    } else {
+      if (dataSheet.data.rage >= 1) {
       const rageTest = await calculateRageCheck(sheetId, setShowMessage);
       dataSheet.data.rage = rageTest?.rage;
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-      if (type === 1 || type === 2) {
-        const roll = await rollTestOfUser();
-        await registerMessage(
-          sessionId,
-          {
-            type: 'gift',
-            ...showGiftRoll.gift,
-            roll: 'rage-with-test',
-            rageResults: rageTest,
-            results: roll,
-          },
-          email,
-          setShowMessage);
-      } else {
-        await registerMessage(
-          sessionId,
-          {
-            type: 'gift',
-            ...showGiftRoll.gift,
-            roll: 'rage',
-            rageResults: rageTest,
-          },
-          email,
-          setShowMessage);
-      }
-    } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
+      await registerMessage(
+        sessionId,
+        {
+          type: 'gift',
+          ...showGiftRoll.gift,
+          roll: 'rage-with-test',
+          rageResults: rageTest,
+          results: roll,
+        },
+        email,
+        setShowMessage);
+      } else setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Dom.' });
+    }
   }
 
   return(
@@ -77,18 +66,18 @@ export function TheLivingWood() {
             value={ 1 }
             className="p-3 bg-black text-center text-white w-full"
           >
-            Existem árvores por perto
+            Garou resistindo quando um teste normalmente não é permitido
           </option>
           <option
             value={ 2 }
             className="p-3 bg-black text-center text-white w-full"
           >
-            Há apenas arbustos ou outras plantas menores presentes
+            Garou resistindo a entorpecentes simples usando o Dom ativamente
           </option>
         </select>
       </label>
       {
-        type !== 0 &&
+        type !== 0 && type !== 3 &&
         <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
           <div className="flex w-full">
@@ -122,7 +111,7 @@ export function TheLivingWood() {
         </label>
       }
       {
-        type !== 0 &&
+        type !== 0 && type !== 3 &&
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Dificuldade do Teste</p>
           <div className="flex w-full">

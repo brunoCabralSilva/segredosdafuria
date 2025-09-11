@@ -292,7 +292,7 @@ export const calculateRageChecks = async(sheetId: string, number: number, setSho
         text = 'Obteve sucesso em todos os Testes de Fúria. A fúria foi mantida.';
       else {
         if (success === 0) text = `Não obteve sucesso em nenhum Teste de Fúria. A fúria foi reduzida para ' + ${(player.data.rage)}.`;
-        else text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nos Testes de Fúria e ${(number - success)} ${number - success === 1 ? 'falha': 'falhas.'}. A fúria foi reduzida para ${(player.data.rage)}.`;
+        else text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nos Testes de Fúria e ${(number - success)} ${number - success === 1 ? 'falha': 'falhas.'}`;
       }
       player.data.rage -= (number - success);
       return({

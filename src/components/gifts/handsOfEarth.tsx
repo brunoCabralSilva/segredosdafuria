@@ -4,7 +4,7 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 
-export function TheLivingWood() {
+export function HandsOfEarth() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [type, setType] = useState<number>(0);
@@ -12,9 +12,11 @@ export function TheLivingWood() {
 
   const rollTestOfUser = async () => {
     let pool = 0;
-    if (type === 1) {
-      pool = Number(dataSheet.data.glory) + Number(dataSheet.data.attributes.manipulation);
-    } else if (type === 2) pool = Number(dataSheet.data.glory);
+    if (type === 2) {
+      pool = Number(dataSheet.data.wisdom) + Number(dataSheet.data.attributes.resolve);
+    } else if (type === 3) {
+      pool = Number(dataSheet.data.wisdom) + Number(dataSheet.data.attributes.wits);
+    }
     let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;
@@ -29,7 +31,7 @@ export function TheLivingWood() {
       const rageTest = await calculateRageCheck(sheetId, setShowMessage);
       dataSheet.data.rage = rageTest?.rage;
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-      if (type === 1 || type === 2) {
+      if (type === 2 || type === 3) {
         const roll = await rollTestOfUser();
         await registerMessage(
           sessionId,
@@ -60,7 +62,7 @@ export function TheLivingWood() {
   return(
     <div className="w-full">
       <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Selecione a Condição</p>
+        <p className="text-white w-full pb-3">Selecione a ação</p>
         <select
           className="flex w-full text-black p-3"
           value={type}
@@ -71,24 +73,30 @@ export function TheLivingWood() {
             value={ 0 }
             disabled
           >
-            Escolha uma Condição
+            Escolha uma ação
           </option>
           <option
             value={ 1 }
             className="p-3 bg-black text-center text-white w-full"
           >
-            Existem árvores por perto
+            Mover um objeto que não é pesado
           </option>
           <option
             value={ 2 }
             className="p-3 bg-black text-center text-white w-full"
           >
-            Há apenas arbustos ou outras plantas menores presentes
+            Mover um objeto pesado
+          </option>
+          <option
+            value={ 3 }
+            className="p-3 bg-black text-center text-white w-full"
+          >
+            Lançar um objeto leve como um ataque à distância
           </option>
         </select>
       </label>
       {
-        type !== 0 &&
+        type !== 0 && type !== 1 &&
         <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
           <div className="flex w-full">
@@ -122,9 +130,9 @@ export function TheLivingWood() {
         </label>
       }
       {
-        type !== 0 &&
+        type !== 0 && type !== 1 &&
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Dificuldade do Teste</p>
+          <p className="text-white w-full pb-3">Dificuldade do Teste (para cada 10 metros além dos primeiros 10, a dificuldade aumenta em 1)</p>
           <div className="flex w-full">
             <div
               className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}

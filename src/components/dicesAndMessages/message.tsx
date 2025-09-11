@@ -135,7 +135,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                 </div>
               }
               {
-                dataMessage && (dataMessage.roll === 'willpower' || dataMessage.roll === 'rage-with-test') &&
+                dataMessage && (dataMessage.roll === 'willpower' || dataMessage.roll === 'rage-with-test' || dataMessage.results) &&
                 <div className="px-3">
                   <div className="border-white ">
                     <div className="flex gap-1 flex-wrap">
