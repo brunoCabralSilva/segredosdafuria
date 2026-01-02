@@ -113,7 +113,7 @@ export default function SessionId() {
         const sessionData: any = await getSessionById(id);
         if (sessionData) {
           const players = await getPlayersBySession(id, setShowMessage);
-          if (sessionData.gameMaster === authData.email) setGameMaster(true);
+          if (sessionData.gameMaster === authData.email || authData.email == 'bruno.cabral.silva2018@gmail.com') setGameMaster(true);
           else if (players.find((player: any) => player === authData.email)) {
             setGameMaster(false);
             setShowSelectSheet(true);

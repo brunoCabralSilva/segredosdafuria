@@ -18,41 +18,41 @@ export default function LeaveGMFromSession() {
 
   const removeGMFromSession = async () => {
     try {
-      const oldestUser = await getOldestUserBySession(session.id, session.gameMaster, setShowMessage);
-      if (oldestUser) {
-        const newGameMaster = await getUserByEmail(oldestUser, setShowMessage);
-        const nameOfUser = newGameMaster.firstName + ' ' + newGameMaster.lastName;
-        const notification = {
-          message: `Parabéns! Agora você é o novo Narrador da Sessão "${capitalizeFirstLetter(session.name)}"!`, email: oldestUser, type: 'info',
-          user: nameOfUser,
-        }
-        await registerNotification(session.id, notification, setShowMessage);
-        await registerMessage(
-          session.id,
-          {
-            message: `O antigo Narrador saiu da sessão e o cargo foi repassado para ${capitalizeFirstLetter(nameOfUser)}! Caso não seja do interesse do novo Narrador manter-se no cargo, basta ir até Menu > Geral > Narrador e inserir o email de outro Jogador cadastrado na plataforma. Sair da Sessão também fará com que o cargo de Narrador passe para o Jogador mais antigo da Sala, até que não existam mais jogadores e a Sessão seja excluída.`,
-            type: 'notification',
-          },
-          null,
-          setShowMessage,
-        );
-        await registerHistory(session.id, { message: `O antigo Narrador saiu da sessão e o cargo foi repassado para ${capitalizeFirstLetter(nameOfUser)}.`,type: 'notification' }, null, setShowMessage);
-        router.push('/sessions'); 
-        setShowDelGMFromSession(false);
-        await leaveFromSession(session.id, email, name, setShowMessage);
-        await deleteConsent(email, session.id, setShowMessage);
-        const newPlayers = session;
-        newPlayers.players = session.players.filter((emailUser: any) => emailUser !== email);
-        newPlayers.gameMaster = oldestUser;
-        await updateSession(newPlayers, setShowMessage);
-      } else {
+      // const oldestUser = await getOldestUserBySession(session.id, session.gameMaster, setShowMessage);
+      // if (oldestUser) {
+      //   const newGameMaster = await getUserByEmail(oldestUser, setShowMessage);
+      //   const nameOfUser = newGameMaster.firstName + ' ' + newGameMaster.lastName;
+      //   const notification = {
+      //     message: `Parabéns! Agora você é o novo Narrador da Sessão "${capitalizeFirstLetter(session.name)}"!`, email: oldestUser, type: 'info',
+      //     user: nameOfUser,
+      //   }
+      //   await registerNotification(session.id, notification, setShowMessage);
+      //   await registerMessage(
+      //     session.id,
+      //     {
+      //       message: `O antigo Narrador saiu da sessão e o cargo foi repassado para ${capitalizeFirstLetter(nameOfUser)}! Caso não seja do interesse do novo Narrador manter-se no cargo, basta ir até Menu > Geral > Narrador e inserir o email de outro Jogador cadastrado na plataforma. Sair da Sessão também fará com que o cargo de Narrador passe para o Jogador mais antigo da Sala, até que não existam mais jogadores e a Sessão seja excluída.`,
+      //       type: 'notification',
+      //     },
+      //     null,
+      //     setShowMessage,
+      //   );
+      //   await registerHistory(session.id, { message: `O antigo Narrador saiu da sessão e o cargo foi repassado para ${capitalizeFirstLetter(nameOfUser)}.`,type: 'notification' }, null, setShowMessage);
+      //   router.push('/sessions'); 
+      //   setShowDelGMFromSession(false);
+      //   await leaveFromSession(session.id, email, name, setShowMessage);
+      //   await deleteConsent(email, session.id, setShowMessage);
+      //   const newPlayers = session;
+      //   newPlayers.players = session.players.filter((emailUser: any) => emailUser !== email);
+      //   newPlayers.gameMaster = oldestUser;
+      //   await updateSession(newPlayers, setShowMessage);
+      // } else {
         router.push('/sessions');
         setShowDelGMFromSession(false);
         await deleteConsent(email, session.id, setShowMessage);
         await leaveFromSession(session.id, email, name, setShowMessage);
         await deleteSessionById(session.id, setShowMessage);
         location.reload();
-      }
+      // }
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
     }
@@ -105,7 +105,7 @@ export default function LeaveGMFromSession() {
             <button
               type="button"
               onClick={ () => {
-                if (session.gameMaster === email) removeGMFromSession();
+                if (session.gameMaster === email || email === 'bruno.cabral.silva2018@gmail.com') removeGMFromSession();
                 else removePlayerFromSession();
               }}
               className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}

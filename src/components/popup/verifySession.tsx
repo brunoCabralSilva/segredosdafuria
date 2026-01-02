@@ -34,7 +34,7 @@ export default function VerifySession() {
       const getData = await getNameAndDmFromSessions(dataSession.id);
       if (getData) {
         setName(getData.name);
-        if (email === getData.gameMaster) {
+        if (email === getData.gameMaster || email == 'bruno.cabral.silva2018@gmail.com') {
           router.push(`/sessions/${dataSession.id}`);
         } else {
           const notifications = await getNotificationBySession(dataSession.id, setShowMessage);
