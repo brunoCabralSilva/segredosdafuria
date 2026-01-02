@@ -42,6 +42,7 @@ export default function ConvertToPdf(props: { data: any }) {
     document.body.removeChild(pdfContainer2);
   };
   
+  
   useLayoutEffect(() => {
     if (!hasDownloaded.current) {
       handleDownloadPdf();
