@@ -149,7 +149,7 @@ export default function MenuPlayer() {
         { showRitualRoll.show && <RitualRoll /> }
         { showHarano && <HaranoHauglosk type="Harano" /> }
         { showHauglosk && <HaranoHauglosk type="Hauglosk" /> }
-        { showWillpowerTest && <WillpowerTest type="type" /> }
+        { showWillpowerTest && <WillpowerTest /> }
       </div>
     </div>
   );
