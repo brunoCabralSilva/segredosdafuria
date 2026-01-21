@@ -24,6 +24,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import Consent from "./menuSession/consent";
 import History from "./menuSession/history";
 import Forms from "./menuSession/forms";
+import WillpowerTest from "./popup/willpowerTest";
 
 export default function MenuPlayer() {
   const {
@@ -31,6 +32,7 @@ export default function MenuPlayer() {
     session,
     email,
     players,
+    showWillpowerTest, setShowWillpowerTest,
     showHarano, setShowHarano,
     showHauglosk, setShowHauglosk,
     showGiftRoll, setShowGiftRoll,
@@ -87,16 +89,17 @@ export default function MenuPlayer() {
   };
 
   return(
-    <div className={`md:w-3/5 absolute sm:relative z-50 w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center h-screen z-50 top-0 right-0 text-white`}>
+    <div className={`md:w-3/5 absolute sm:relative z-50 w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center h-screen z-50 top-0 right-0 text-white`}>
       <div className="w-full flex justify-end my-1">
         <IoIosCloseCircleOutline
           className="text-4xl text-white cursor-pointer mb-2"
           onClick={ () => {
-            if (showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show) {
+            if (showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest) {
               setShowHarano(false);
               setShowHauglosk(false);
               setShowGiftRoll({ show: false, gift: {}});
               setShowRitualRoll({ show: false, ritual: {}});
+              setShowWillpowerTest(false);
             } else setShowMenuSession('');
             setShowEvaluateSheet({ show: false, data: '' });
             setShowConsentForm(false);
@@ -109,6 +112,7 @@ export default function MenuPlayer() {
           && !showHauglosk
           && !showGiftRoll.show
           && !showRitualRoll.show
+          && !showWillpowerTest
           && <div className="w-full h-full">
           <select
             value={optionSelect}
@@ -145,6 +149,7 @@ export default function MenuPlayer() {
         { showRitualRoll.show && <RitualRoll /> }
         { showHarano && <HaranoHauglosk type="Harano" /> }
         { showHauglosk && <HaranoHauglosk type="Hauglosk" /> }
+        { showWillpowerTest && <WillpowerTest type="type" /> }
       </div>
     </div>
   );

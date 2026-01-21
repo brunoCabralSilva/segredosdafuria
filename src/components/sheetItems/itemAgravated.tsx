@@ -4,11 +4,12 @@ import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
+import { GiD10 } from "react-icons/gi";
 
 export default function ItemAgravated(props: any) {
   const [totalItem, setTotalItem] = useState(0);
   const { name, namePtBr } = props;
-	const { dataSheet, setShowMessage, sheetId, session, email } = useContext(contexto);
+	const { dataSheet, setShowMessage, sheetId, session, email, setShowWillpowerTest } = useContext(contexto);
 
   useEffect(() => {
     const returnValues = async (): Promise<void> => {
@@ -54,8 +55,8 @@ export default function ItemAgravated(props: any) {
   return(
     <div className={ `w-full ${ name === 'willpower' ? 'mt-6' : 'mt-4' }` }>
       Dano em <span className="capitalize">{ namePtBr }:</span>
-      <div className="w-full mt-1">
-        <div className="flex flex-wrap gap-2 pt-1">
+      <div className="w-full mt-1 flex flex-between items-center">
+        <div className="flex flex-wrap gap-2 pt-1 w-full">
           {
             Array(totalItem).fill('').map((item, index) => {
               const willpowerMap: number[] = dataSheet.data[name].map((element: any) => element.value);
@@ -89,6 +90,15 @@ export default function ItemAgravated(props: any) {
             })
           }
         </div>
+        {
+          namePtBr == "Força de Vontade" &&
+          <button
+            className="text-3xl flex justify-center transition-colors text-white px-2"
+            onClick={ async () => setShowWillpowerTest(true) }
+          >
+            <GiD10 />
+          </button>
+        }
       </div>
     </div>
   );

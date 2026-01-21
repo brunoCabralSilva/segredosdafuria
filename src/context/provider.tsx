@@ -75,6 +75,7 @@ export default function Provider({children }: IProvider) {
   const [showCreateSheet, setShowCreateSheet] = useState(false);
   const [showResetPlayer, setShowResetPlayer] = useState({ show: false, email: '' });
   const [showRemovePlayer, setShowRemovePlayer] = useState({ show: false, email: '' });
+  const [showWillpowerTest, setShowWillpowerTest] = useState(false);
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -196,6 +197,7 @@ export default function Provider({children }: IProvider) {
         showCreateSheet, setShowCreateSheet,
         showResetPlayer, setShowResetPlayer,
         showRemovePlayer, setShowRemovePlayer,
+        showWillpowerTest, setShowWillpowerTest,
       }}
     >
       {children}

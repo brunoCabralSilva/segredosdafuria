@@ -7,6 +7,7 @@ import { registerManualRoll } from "@/firebase/messagesAndRolls";
 export default function ManualRoll() {
 	const [valueOfRage, setValueOfRage] = useState<number>(0);
   const [valueOf, setValueOf] = useState<number>(0);
+  const [totalDices, setTotalDices] = useState<number>(1);
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
 	const { setShowMenuSession, sessionId, setShowMessage } = useContext(contexto);
@@ -16,13 +17,14 @@ export default function ManualRoll() {
   }
 
 	const rollDices = async () => {
-    await registerManualRoll(sessionId, valueOfRage, valueOf, penaltyOrBonus, dificulty, setShowMessage);
+    
+    await registerManualRoll(sessionId, valueOfRage, (totalDices - valueOfRage), penaltyOrBonus, dificulty, setShowMessage);
     setShowMenuSession('');
   };
 
   return(
     <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
+      {/* <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
         <p className="text-white w-full pb-1">Dados de Fúria</p>
         <p className="text-white w-full pb-3">(Dados pretos definem o total de dados de Fúria)</p>
         <div className="grid grid-cols-5 gap-2 w-full bg-gray-400 p-1">
@@ -82,50 +84,95 @@ export default function ManualRoll() {
             }}
           />
         </div>
-      </label>
+      </label> */}
       <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Dados Restantes (Parada de dados - Fúria)</p>
+        <p className="text-white w-full pb-3">Quantidade de Dados Totais:</p>
         <div className="flex w-full">
-          <div
-            className={`w-10 border border-white p-3 cursor-pointer ${ valueOf === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+          <button
+            type="button"
+            className={`w-10 border border-white p-3 cursor-pointer ${ totalDices === 1 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
             onClick={ () => {
-              if (valueOf > 0) setValueOf(valueOf - 1);
+              if (totalDices > 1) {
+                setTotalDices(totalDices - 1);
+                if (totalDices - 1 < valueOfRage)
+                  setValueOfRage(totalDices - 1);
+              }
             }}
           >
             <FaMinus />
-          </div>
+          </button>
           <div
-            id="valueOf"
+            id="totalDices"
             className="p-2 text-center bg-white text-black w-full"
             onChange={ (e: any) => {
-              if (Number(e.target.value > 0 && Number(e.target.value) > 50)) setValueOf(50);
-              else if (e.target.value >= 0) setValueOf(Number(e.target.value));
-              else setValueOf(0);
+              if (Number(e.target.value > 0 && Number(e.target.value) > 50)) setTotalDices(50);
+              else if (e.target.value >= 0) setTotalDices(Number(e.target.value));
+              else setTotalDices(0);
             }}
           >
-            {valueOf}
+            {totalDices}
           </div>
-          <div
-            className={`w-10 border border-white p-3 cursor-pointer ${ valueOf === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+          <button
+            type="button"
+            className={`w-10 border border-white p-3 cursor-pointer ${ totalDices === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
             onClick={ () => {
-              if (valueOf < 50) setValueOf(valueOf + 1)
+              if (totalDices < 50) {
+                setTotalDices(totalDices + 1);
+                if (totalDices + 1 < valueOfRage)
+                  setValueOfRage(totalDices + 1);
+              }
             }}
           >
             <FaPlus />
+          </button>
+        </div>
+      </label>
+      <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
+        <p className="text-white w-full pb-3">Dentre estes, quantos são de Fúria?</p>
+        <div className="flex w-full">
+          <button
+            type="button"
+            className={`w-10 border border-white p-3 cursor-pointer ${ valueOfRage === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (valueOfRage > 0) setValueOfRage(valueOfRage - 1);
+            }}
+          >
+            <FaMinus />
+          </button>
+          <div
+            id="valueOfRage"
+            className="p-2 text-center bg-white text-black w-full"
+            onChange={ (e: any) => {
+              if (Number(e.target.value > 0 && Number(e.target.value) > 50)) setValueOfRage(50);
+              else if (e.target.value >= 0) setValueOfRage(Number(e.target.value));
+              else setValueOfRage(0);
+            }}
+          >
+            {valueOfRage}
           </div>
+          <button
+            type="button"
+            className={`w-10 border border-white p-3 cursor-pointer ${ (valueOfRage === 5 || valueOfRage === totalDices) ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (valueOfRage < 5 && valueOfRage < totalDices) setValueOfRage(valueOfRage + 1)
+            }}
+          >
+            <FaPlus />
+          </button>
         </div>
       </label>
       <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
         <div className="flex w-full">
-          <div
+          <button
+            type="button"
             className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
             onClick={ () => {
               if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
             }}
           >
             <FaMinus />
-          </div>
+          </button>
           <div
             id="penaltyOrBonus"
             className="p-2 text-center text-black bg-white w-full appearance-none"
@@ -136,27 +183,29 @@ export default function ManualRoll() {
           >
             {penaltyOrBonus}
           </div>
-          <div
+          <button
+            type="button"
             className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
             onClick={ () => {
               if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
             }}
           >
             <FaPlus />
-          </div>
+          </button>
         </div>
       </label>
       <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Dificuldade do Teste</p>
         <div className="flex w-full">
-          <div
+          <button
+            type="button"
             className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
             onClick={ () => {
               if (dificulty > 0) setDificulty(dificulty - 1);
             }}
           >
             <FaMinus />
-          </div>
+          </button>
           <div
             id="dificulty"
             className="p-2 bg-white text-center text-black w-full"
@@ -168,14 +217,15 @@ export default function ManualRoll() {
           >
             {dificulty}
           </div>
-          <div
+          <button
+            type="button"
             className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
             onClick={ () => {
               if (dificulty < 15) setDificulty(dificulty + 1)
             }}
           >
             <FaPlus />
-          </div>
+          </button>
         </div>
       </label>
       <button

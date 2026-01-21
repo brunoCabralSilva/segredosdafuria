@@ -2,43 +2,35 @@
 import { useContext, useEffect, useState } from "react";
 import contexto from "@/context/context";
 import { FaMinus, FaPlus } from "react-icons/fa";
-import { haranoHaugloskCheck } from "@/firebase/messagesAndRolls";
-import { updateDataPlayer } from "@/firebase/players";
+import { registerWillpowerRoll } from "@/firebase/messagesAndRolls";
 
-export default function HaranoHauglosk(props: { type: string }) {
-  const { type } = props;
-  const [haranoHauglosk, setHaranoHauglosk] = useState<number>(1);
+export default function WillpowerTest() {
+  const [willpowerValue, setWillpowerValue] = useState<number>(1);
+  const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const {
     sessionId,
     dataSheet,
-    sheetId,
-    setShowHauglosk,
-    setShowHarano,
+    setShowWillpowerTest,
     setShowMenuSession,
     setShowMessage,
   } =  useContext(contexto);
 
   useEffect(() => {
-    if (Number(dataSheet.data.harano) + Number(dataSheet.data.hauglosk) === 0)
-      setHaranoHauglosk(1);
-    else
-      setHaranoHauglosk(Number(dataSheet.data.harano) + Number(dataSheet.data.hauglosk));
+    setWillpowerValue(dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length);
   });
 
   const rollDices = async () => {
-    const typeEdited = type.toLocaleLowerCase();
-    dataSheet.data[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty, '', setShowMessage);
-    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    setShowHauglosk(false);
-    setShowHarano(false);
+    const actualWillpower = dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length;
+    await registerWillpowerRoll(sessionId, dataSheet.data.name, actualWillpower, penaltyOrBonus, dificulty, setShowMessage);
+    setShowWillpowerTest(false);
     setShowMenuSession('');
   };
 
   return(
     <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Teste de { type }</p>
+        <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Teste de Força de Vontade</p>
       </label>
       <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Parada de Dados</p>
@@ -53,11 +45,44 @@ export default function HaranoHauglosk(props: { type: string }) {
             id="dices"
             className="p-2 bg-white text-center text-black w-full"
           >
-            {haranoHauglosk}
+            {willpowerValue}
           </div>
           <button
             type="button"
             className="border border-white p-3 cursor-pointer bg-gray-400 text-black"
+          >
+            <FaPlus />
+          </button>
+        </div>
+      </label>
+      <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
+        <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
+        <div className="flex w-full">
+          <button
+            type="button"
+            className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
+            }}
+          >
+            <FaMinus />
+          </button>
+          <div
+            id="penaltyOrBonus"
+            className="p-2 text-center text-black bg-white w-full appearance-none"
+            onChange={(e: any) => {
+              if (Number(e.target.value) < 0 && Number(e.target.value) < -50) setPenaltyOrBonus(-50);
+              else setPenaltyOrBonus(Number(e.target.value))
+            }}
+          >
+            {penaltyOrBonus}
+          </div>
+          <button
+            type="button"
+            className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
+            }}
           >
             <FaPlus />
           </button>

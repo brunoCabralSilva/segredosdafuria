@@ -134,6 +134,8 @@ interface RecipesContext {
   setShowResetPlayer: (state: { show: boolean, email: string }) => void,
   showRemovePlayer: { show: boolean, email: string },
   setShowRemovePlayer: (state: { show: boolean, email: string }) => void,
+  showWillpowerTest: boolean,
+  setShowWillpowerTest: (state: boolean) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -268,6 +270,8 @@ const initialValue: RecipesContext = {
   setShowResetPlayer: () => {},
   showRemovePlayer: { show: false, email: '' },
   setShowRemovePlayer: () => {},
+  showWillpowerTest: false,
+  setShowWillpowerTest: () => {},
 }
 
 const contexto = createContext(initialValue);
