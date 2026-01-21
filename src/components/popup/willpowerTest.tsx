@@ -1,11 +1,11 @@
 'use client'
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import contexto from "@/context/context";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { registerWillpowerRoll } from "@/firebase/messagesAndRolls";
 
 export default function WillpowerTest() {
-  const [willpowerValue, setWillpowerValue] = useState<number>(1);
+  const [willpowerType, setWillpowerType] = useState<string>('Aguardando Seleção');
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const {
@@ -16,45 +16,43 @@ export default function WillpowerTest() {
     setShowMessage,
   } =  useContext(contexto);
 
-  useEffect(() => {
-    setWillpowerValue(dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length);
-  });
-
   const rollDices = async () => {
-    const actualWillpower = dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length;
-    await registerWillpowerRoll(sessionId, dataSheet.data.name, actualWillpower, penaltyOrBonus, dificulty, setShowMessage);
+    const actualWillpower = Number(willpowerType.replace('total -', '').replace('restante -', ''));
+    let type = '';
+    if (willpowerType.includes('total')) type = 'total';
+    else type = 'restante';
+    await registerWillpowerRoll(sessionId, type, dataSheet.data.name, actualWillpower, penaltyOrBonus, dificulty, setShowMessage);
     setShowWillpowerTest(false);
     setShowMenuSession('');
   };
 
   return(
-    <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
+    <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto pr-2">
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Teste de Força de Vontade</p>
+        <p className="text-white w-full pb-1 text-xl mb-4 font-bold">Teste de Força de Vontade</p>
       </label>
-      <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Parada de Dados</p>
-        <div className="flex w-full">
-          <button
-            type="button"
-            className="border border-white p-3 cursor-pointer bg-gray-400 text-black"
-          >
-            <FaMinus />
-          </button>
-          <div
-            id="dices"
-            className="p-2 bg-white text-center text-black w-full"
-          >
-            {willpowerValue}
-          </div>
-          <button
-            type="button"
-            className="border border-white p-3 cursor-pointer bg-gray-400 text-black"
-          >
-            <FaPlus />
-          </button>
-        </div>
-      </label>
+      <select
+        className="w-full text-center bg-black border-2 border-white cursor-pointer mb-4 py-2 outline-none"
+        value={willpowerType}
+        onChange={ (e) => setWillpowerType(e.target.value) }
+      >
+        <option
+          disabled
+          value='Aguardando Seleção'
+        >
+          Selecione a parada de dados
+        </option>
+        <option
+          value={ 'restante -' + (dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length) }
+        >
+          Usar Força de Vontade restante ({ dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length })
+        </option>
+        <option
+          value={ 'total - ' + (dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve) }
+        >
+          Usar Força de Vontade total ({ dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve })
+        </option>
+      </select>
       <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
         <div className="flex w-full">
@@ -121,10 +119,27 @@ export default function WillpowerTest() {
           </button>
         </div>
       </label>
+      <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
+        <p className="text-white w-full pb-3">Parada de Dados</p>
+        <div className="flex w-full">
+          <div
+            id="dices"
+            className="p-2 bg-white text-center text-black w-full"
+          >
+            { willpowerType.replace('total -', '').replace('restante -', '') }
+          </div>
+        </div>
+      </label>
+      {
+        (willpowerType === '0') &&
+        <div className="text-center">
+          Você não possui Força de Vontade disponível para realizar este teste
+        </div>
+      }
       <button
-        className={`${dificulty <= 0 ? 'text-black bg-gray-400' : 'text-white bg-black hover:border-red-800' } border-2 border-white  transition-colors cursor-pointer w-full p-2 mt-6 font-bold`}
+        className={`${willpowerType.replace('total -', '').replace('restante -', '') === '0' || willpowerType.replace('total -', '').replace('restante -', '') === 'Aguardando Seleção' ? 'text-black bg-gray-400' : 'text-white bg-black hover:border-red-800' } border-2 border-white  transition-colors cursor-pointer w-full p-2 mt-4 font-bold`}
         onClick={ rollDices }
-        disabled={ dificulty <= 0 }
+        disabled={ willpowerType.replace('total -', '').replace('restante -', '') === '0' || willpowerType.replace('total -', '').replace('restante -', '') === 'Aguardando Seleção' }
       >
         Rolar dados
       </button>

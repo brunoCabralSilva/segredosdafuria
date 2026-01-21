@@ -145,6 +145,7 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
 
 export const registerWillpowerRoll = async(
 	sessionId: string,
+	type: string,
 	name: string,
 	totalDices: number,
 	penaltyOrBonus: number,
@@ -153,7 +154,7 @@ export const registerWillpowerRoll = async(
 ) => {
 	const roll = rollTest(0, totalDices, penaltyOrBonus, dificulty);
 	const sumDices = totalDices;
-	roll.test = `Foi realizado um teste de Força de Vontade para o personagem ${name} com ${ sumDices } ${ sumDices > 1 ? 'dados' : 'dado'}`;
+	roll.test = `Foi realizado um teste de Força de Vontade (${type == 'restante' ? 'parada de dados restante' : 'parada de dados total' }) para o personagem ${name} com ${ sumDices } ${ sumDices > 1 ? 'dados' : 'dado'}`;
 	if (penaltyOrBonus > 0) roll.test += ' e ' + penaltyOrBonus + ' desses dados é de Bônus';
 	if (penaltyOrBonus < 0) roll.test += ` (${(penaltyOrBonus * -1)} ${(penaltyOrBonus * -1) > 1 ? 'dados foram subtraídos': 'dado foi subtraído'} por conta da penalidade preenchida)`;
 	roll.test += '.'
