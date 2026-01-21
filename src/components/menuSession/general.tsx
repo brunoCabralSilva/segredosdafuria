@@ -20,6 +20,7 @@ export default function General() {
   const [input2, setInput2] = useState('');
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
+  const [xp, setXp] = useState('0');
 	const {
     players,
     email,
@@ -42,6 +43,7 @@ export default function General() {
     setShowRitualRoll({ show: false, ritual: {}});
     setNewName(dataSheet.data.name);
     setNewEmail(dataSheet.email);
+    setXp(dataSheet.data.xp ? dataSheet.data.xp : 0);
   }, [dataSheet])
 
   const typeName = (e: any) => {
@@ -257,6 +259,48 @@ export default function General() {
       <Item quant={5} name="honor" namePtBr="Honra" />
       <Item quant={5} name="glory" namePtBr="Glória" />
       <Item quant={5} name="wisdom" namePtBr="Sabedoria" />
+      <div className="pt-8 text-xl">Experiência (XP)</div>
+      <div
+        className="w-full flex justify-between items-center cursor-pointer bg-white p-2 mt-1 border border-white"
+        onClick={() => setInput('xp')}
+      >
+        { 
+          input !== 'xp' && <span className="text-black break-words w-full text-center">{
+            !dataSheet.data.xp
+            ? <span className=" w-full">XP</span>
+            : <span className="w-full">{ dataSheet.data.xp }</span>
+          }</span>
+        }
+        { 
+          input === 'xp' &&
+          <input
+            type="text"
+            className="text-center w-full mr-1 text-black outline-none"
+            placeholder="Valor de XP"
+            value={ xp }
+            onChange={(e) => setXp(e.target.value)}
+          />
+        }
+        { 
+          input === 'xp'
+            ? <BsCheckSquare
+                onClick={(e:any) => {
+                  updateValue('xp', xp, 'XP');
+                  setInput('');
+                  e.stopPropagation();
+                }}
+                className="text-3xl text-black"
+              />
+            : <FaRegEdit
+                onClick={
+                  (e:any) => {
+                    setInput('xp');
+                    e.stopPropagation();
+                  }}
+                className="text-3xl text-black"
+              />
+        }
+      </div>
       <button
         type="button"
         onClick={ () => setShowEvaluateSheet({show: true, data: 'player' }) }

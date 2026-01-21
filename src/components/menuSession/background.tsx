@@ -14,7 +14,7 @@ export default function Background(props: { type: string }) {
   const [text, setText] = useState<string>('');
 
   const typeText = (e: any) => {
-    const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
+    const sanitizedValue = e.target.value.replace(/[ \t]+/g, ' ');
     setText(sanitizedValue);
   };
 
@@ -67,12 +67,12 @@ export default function Background(props: { type: string }) {
         { 
           textArea ?
           <textarea
-            className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full mb-5"
+            className="text-white bg-black font-normal p-2 border-2 border-white w-full mr-1 mt-1 h-full mb-5 whitespace-pre-line"
             value={ text }
             onChange={(e) => typeText(e)}
           />
           : <div
-              className={`text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 ${text && text.length < 720 && 'h-full'} ${!text && 'h-full'} cursor-pointer mb-5`}
+              className={`text-white font-normal p-2 border-2 border-white w-full mr-1 mt-1 whitespace-pre-line ${text && text.length < 720 && 'h-full'} ${!text && 'h-full'} cursor-pointer mb-5`}
               onClick={() => setTextArea(true)} 
             >
             { text }

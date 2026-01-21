@@ -21,6 +21,7 @@ export const parseDate = (dateStr: string): Date => {
 };
 
 export const playerSheet = {
+  xp: '0',
   advantagesAndFlaws: {
     flaws: [],
     advantages: [],
@@ -94,6 +95,7 @@ export const sheetStructure = (email: string, user: string, message: any) => {
     user: user,
     creationDate: message,
     data: {
+      xp: '0',
       advantagesAndFlaws: {
         flaws: [],
         advantages: [],
