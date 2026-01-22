@@ -7,10 +7,10 @@ export function RazorClaws() {
   const { sheetId, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
-    if (dataSheet.form !== "Crinos") {
-      if (dataSheet.rage >= 1) {
+    if (dataSheet.data.form !== "Crinos") {
+      if (dataSheet.data.rage >= 1) {
         const rageTest = await calculateRageCheck(sheetId, setShowMessage);
-        dataSheet.rage = rageTest?.rage;
+        dataSheet.data.rage = rageTest?.rage;
         await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         await registerMessage(
           sessionId,

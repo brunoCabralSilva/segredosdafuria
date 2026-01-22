@@ -2,7 +2,7 @@
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { useContext } from "react";
 import { deleteDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter, playerSheet } from "@/firebase/utilities";
+import { capitalizeFirstLetter, playerSheet, sheetStructure } from "@/firebase/utilities";
 import contexto from "@/context/context";
 import { deletePlayerImage } from "@/firebase/storage";
 import { registerHistory } from "@/firebase/history";
@@ -28,7 +28,7 @@ export default function DeleteSheet() {
       await deleteDataPlayer(sheetId, session.id, dataSheet.data.profileImage, setShowMessage);
       setShowDeleteSheet(false);
       setSheetId('');
-      setDataSheet({});
+      setDataSheet(sheetStructure('', '', ''));
       setShowMenuSession('');
       setOptionSelect('players');
       await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);

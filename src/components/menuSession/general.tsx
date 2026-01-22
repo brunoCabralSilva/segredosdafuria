@@ -104,7 +104,7 @@ export default function General() {
                 Insira um nome
               </span>
             : <span className="w-full">
-                { dataSheet.data.name }
+                { dataSheet && dataSheet.data && dataSheet.data.name }
               </span>
           }</span>
         }

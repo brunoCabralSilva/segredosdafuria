@@ -23,6 +23,7 @@ export default function Sessions() {
     dataSession, setDataSession,
     dataUser, setDataUser,
     resetPopups,
+    setOptionSelect,
     showMessage, setShowMessage,
   } = useContext(contexto);
   const [sessions, setSessions] = useState<any[]>([]);

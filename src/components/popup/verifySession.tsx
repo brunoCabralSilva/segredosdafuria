@@ -14,7 +14,7 @@ export default function VerifySession() {
   const router = useRouter();
   const [popup, setPopup] = useState('');
   const [name, setName] = useState('');
-	const { dataUser, dataSession, setDataSession, setShowMessage } = useContext(contexto);
+	const { dataUser, dataSession, setDataSession, setShowMessage, setOptionSelect } = useContext(contexto);
 
   useEffect(() => {
     requestSession();
@@ -36,7 +36,9 @@ export default function VerifySession() {
         setName(getData.name);
         if (email === getData.gameMaster || email == 'bruno.cabral.silva2018@gmail.com') {
           router.push(`/sessions/${dataSession.id}`);
+          setOptionSelect('players');
         } else {
+          setOptionSelect('general');
           const notifications = await getNotificationBySession(dataSession.id, setShowMessage);
           let authNotification = false;
           notifications.forEach((notification: { email: string, type: string }) => {

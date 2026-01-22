@@ -37,8 +37,6 @@ export default function Players() {
 
   const selectSheet = async (player: any) => {
     if (dataSheet.id !== player.id) {
-      console.log(dataSheet.id);
-      console.log(player.id);
       setSheetId(player.id);
       setOptionSelect('general');
       setDataSheet(player);

@@ -25,6 +25,7 @@ import Consent from "./menuSession/consent";
 import History from "./menuSession/history";
 import Forms from "./menuSession/forms";
 import WillpowerTest from "./popup/willpowerTest";
+import { sheetStructure } from "@/firebase/utilities";
 
 export default function MenuPlayer() {
   const {
@@ -60,8 +61,10 @@ export default function MenuPlayer() {
 
   useEffect(() => {
     if (sheetId && optionSelect === 'players') {
-      setOptionSelect('general');
-      setDataSheet(players.find((player: any) => player.id === sheetId));
+      // setOptionSelect('general');
+      const playerFounded = players.find((player: any) => player.id === sheetId);
+      if (playerFounded) setDataSheet(playerFounded);
+      else setDataSheet(sheetStructure('', '', ''));
     }
   }, [sheetId, dataSheet])
 

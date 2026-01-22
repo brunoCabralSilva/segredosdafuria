@@ -22,7 +22,6 @@ export default function ResetSheet() {
   const resetSheet = async () => {
     try {
       setDataSheet({ ...dataSheet, data: playerSheet });
-      const dataPersist = dataSheet.data.name;
       await updateDataPlayer(sheetId, { ...dataSheet, data: playerSheet }, setShowMessage);
       setShowMessage({ show: true, text: "Sua ficha foi redefinida!" });
       setShowResetSheet(false);

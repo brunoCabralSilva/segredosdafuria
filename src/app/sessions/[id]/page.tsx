@@ -30,6 +30,7 @@ import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
 import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
 import ConsentForm from "@/components/popup/consentForm";
+import { playerSheet } from "@/firebase/utilities";
 
 export default function SessionId() {
 	const params = useParams();
@@ -49,6 +50,7 @@ export default function SessionId() {
     setSessionId,
     resetPopups,
     setPlayers,
+    optionSelect,
     setSession,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
@@ -97,6 +99,8 @@ export default function SessionId() {
     // returnValues();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(optionSelect);
 
   const verifyUser = async () => {
     const authData: any = await authenticate(setShowMessage);

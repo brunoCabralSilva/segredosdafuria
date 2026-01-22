@@ -1,7 +1,7 @@
 'use client'
 import { ReactNode, useState } from 'react';
 import contexto from './context';
-import { playerSheet } from '@/firebase/utilities';
+import { sheetStructure } from '@/firebase/utilities';
 
 interface IProvider { children: ReactNode }
 
@@ -39,7 +39,7 @@ export default function Provider({children }: IProvider) {
   //sheet
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
-  const [dataSheet, setDataSheet] = useState(playerSheet);
+  const [dataSheet, setDataSheet] = useState(sheetStructure('', '', ''));
   const [showDelFromSession, setShowDelFromSession] = useState(false);
   const [showResetSheet, setShowResetSheet] = useState(false);
   const [showDeleteSheet, setShowDeleteSheet] = useState(false);
