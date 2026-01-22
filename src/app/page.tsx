@@ -57,11 +57,11 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Augúrios</p>
           </div>
         </Link>
-        <Link href="/gifts" className="col-span-2 sm:col-span-4 sm:row-span-2">
+        <Link href="/sessions" className="col-span-2 sm:col-span-4 sm:row-span-2">
           <div
-            className={`bg-03 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
-            <div className={`absolute w-full h-full bg-black/40`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Dons</p>
+            className={`bg-boca01 bg-cover bg-center h-20vh sm:h-full text-white flex relative cursor-pointer border-transparent items-end`}>
+            {/* <div className={`absolute w-full h-full bg-black/40`} /> */}
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sessões</p>
           </div>
         </Link>
         <Link href="/forms" className="col-span-1 sm:col-span-2 sm:row-span-2">
@@ -85,11 +85,11 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sobre</p>
           </div>
         </Link>
-        <Link href="/sessions" className="col-span-2 sm:row-span-2 sm:col-span-3">
+        <Link href="/gifts" className="col-span-2 sm:row-span-2 sm:col-span-3">
           <div
-            className={`bg-boca01 bg-cover bg-center h-20vh sm:h-full text-white flex relative cursor-pointer border-transparent items-end`}>
+            className={`bg-03 bg-cover bg-center h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-full bg-black/40`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sessões</p>
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Dons</p>
           </div>
         </Link>
         <Link href="/talismans" className="col-span-1 row-span-3 sm:row-span-2 sm:col-span-3">

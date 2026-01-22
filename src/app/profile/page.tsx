@@ -66,7 +66,7 @@ export default function Profile() {
                 <p className="w-full text-center sm:text-left pt-6 pb-2">
                   {`${listSessions.length > 0 ? 'Sessões em que você é Jogador (clique para ser redirecionado):' : 'Você não possui sessões onde é um jogador.'}`}
                   </p>
-                <div className="pt-3 gap-3 w-full grid sm:grid-cols-2 md:grid-cols-5">
+                <div className="gap-3 w-full grid sm:grid-cols-2 md:grid-cols-3 pt-3">
                   {
                     listSessions.map((sessions: any, index: number) => (
                       <button

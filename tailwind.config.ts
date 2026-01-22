@@ -37,8 +37,8 @@ const config: Config = {
         '10': "url('/images/wallpapers/45.jpg')",
         '11': "url('/images/wallpapers/78.jpg')",
         '12': "url('/images/wallpapers/0001.png')",
-        'boca': "url('/images/Pedra da Boca.jpg')",
-        'boca01': "url('/images/Pedra da Boca01.png')",
+        'boca': "url('/images/wallpaper.png')",
+        'boca01': "url('/images/wallpaper.png')",
         "filters": "url('/images/wallpapers/filters.png')",
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
