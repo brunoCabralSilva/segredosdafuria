@@ -333,7 +333,7 @@ export default function General() {
         </button>
       }
       { showResetSheet && <ResetSheet /> }
-      { showDeleteSheet && <DeleteSheet /> }
+      { showDeleteSheet && <DeleteSheet isGameMaster={ session.gameMaster === email } /> }
     </div>
   );
 }
