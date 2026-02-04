@@ -270,12 +270,6 @@
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Cão do Inferno",
-        "description": "Cão do Inferno - A maldição do Delírio é anormalmente forte em você e tanto sua forma hispo quanto sua forma lupina são verdadeiros pesadelos. Sempre que você assume qualquer uma dessas formas, você impõe o Delírio nos humanos da mesma forma que um Garou em crinos."
-      },
-      {
-        "cost": 2,
-        "type": "checkbox",
         "title": "Prática em ritual",
         "description": "Prática em ritual - Escolha um Rito que você conheça. Ao conduzir esse Rito, você ignora um resultado Brutal (1-2 em um dado de Fúria) rolado, tratando-o como um espaço em branco (3-5), embora ainda não possa rerrolar. Você pode adquirir este Mérito várias vezes, mas deve escolher um Rito diferente a cada vez."
       },
@@ -353,6 +347,12 @@
           "O leite estraga e as plantas murcham com a sua chegada",
           "Algo mais que você e o Narrador concordem"
         ]
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Cão do Inferno",
+        "description": "Cão do Inferno - A maldição do Delírio é anormalmente forte em você e tanto sua forma hispo quanto sua forma lupina são verdadeiros pesadelos. Sempre que você assume qualquer uma dessas formas, você impõe o Delírio nos humanos da mesma forma que um Garou em crinos."
       },
       {
         "cost": 2,
