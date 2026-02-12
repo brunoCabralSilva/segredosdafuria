@@ -1,20 +1,80 @@
 [
   {
+    "name": "Abuso de Substâncias",
+    "type": "méritos",
+    "description": "Infelizmente, muitos garous se entregam ao consumo de certas substâncias para conseguir lidar tanto com o atual Apocalipse quanto com a sensação de que eles têm a obrigação de fazer algo a respeito. Com um desses Defeitos, seu personagem tem um vício em alguma substância, talvez até mesmo em uma droga sobrenatural. Lembre-se de especificar a substância. O jogador e o Narrador decidem quais outros efeitos a droga escolhida possui, mas poucas substâncias têm efeitos melhores do que uma penalidade temporária a certas paradas de dados, independentemente do quão bem façam ao usuário se sentir. Observe que o Abuso de Substâncias é um verdadeiro problema de saúde, e foi incluído para representar os inconvenientes sistêmicos e narrativos da forma como isso afeta um garou. Rotulá-lo como um Defeito aqui não é um julgamento de valor.",
+    "advantages": [],
+    "flaws": [
+      {
+        "cost": 1,
+        "title": "Fome de Conhecimento",
+        "type": "checkbox",
+        "description": "Fome de Conhecimento - Você sempre temeu que não teria tempo suficiente para aprender tudo o que considera realmente importante. Bem, esse é um problema parcialmente resolvido. O tempo para aprender nem sempre é agora, no entanto — você, com pesar, coloca um marcador em seus estudos e se dedica a assuntos mais urgentes e ameaçadores à sua vida. Na criação do personagem, escolha um tópico sobre o qual seu personagem tem uma fome de estudar. Quando seu personagem se deparar com livros, vídeos tutoriais, seminários universitários ou outros métodos de aprendizado sobre o assunto escolhido, faça um teste de Força de Vontade com Dificuldade 3 para resistir a perseguir sua obsessão.",
+        "font": "Nação Fragmentada",
+        "page": "132"
+      },
+      {
+        "cost": 1,
+        "title": "Dependência",
+        "type": "radio",
+        "description": "Dependência - Perca um dado em todas as paradas sempre que não tiver usado sua substância escolhida durante a última cena, com exceção para as paradas de dados de ações usadas para obter sua droga imediatamente",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
+      },
+      {
+        "cost": 2,
+        "title": "Vício Incurável",
+        "type": "radio",
+        "description": "Vício Incurável - Perca dois dados em todas as paradas sempre que não tiver usado sua substância escolhida durante a última cena, com exceção para as paradas de dados de ações usadas para obter sua droga imediatamente.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
+      }
+    ]
+  },
+  {
+    "name": "Aparelho",
+    "type": "méritos",
+    "description": "Aparelho (referência a locais usados como refúgio por ''células'' de resistência à ditadura militar no Brasil) representa um grau de segurança ou distinção na morada de um lobisomem, tornando-o mais do que um lugar para dormir e preparar refeições. Pode ser um apartamento, uma casa, um loft, uma cabana rústica, caverna ou toca: não importa, desde que o garou considere o lugar seguro. O personagem, se assim desejar, poderá adquirir as duas variantes da Qualidade Aparelho.",
+    "advantages": [
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Aparelho Escondido",
+        "description": "Aparelho Escondido - As tentativas de localizar o garou e quem estiver com ele enquanto se encontrarem no Aparelho estarão sujeitas a uma penalidade de 2 dados.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Aparelho Seguro",
+        "description": "Aparelho Seguro - Adicione 2 dados às paradas de dados relevantes para se inteirar de ou resistir a entradas não autorizadas no seu Aparelho.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
+      }
+    ],
+    "flaws": []
+  },
+  {
     "name": "Caern",
     "type": "méritos",
-    "description": "Central para a sociedade e práticas dos Garou, os Caerns são pontos de energia espiritual, e muito esforço é dedicado a encontrar, manter e defender esses lugares. As matilhas frequentemente fazem parte de um septo de um caern ou são dedicadas a encontrar um novo para chamar de seu. Enquanto o despertar e nutrir um caern geralmente estão no domínio da história, esta Vantagem permite que um personagem tenha uma vantagem inicial (ou desvantagem) nessas buscas. Veja Acessos a Caerns na página 190-195 para mais informações.",
+    "description": "Os caerns são nodos de energia espiritual fundamentais para a sociedade e as práticas garous, por isso estes se esforçam muito para localizar, manter e defender esses lugares. Muitas vezes, as alcateias são parte da fratria de um caem ou dedicam-se a procurar um novo para chamar de seu. Despertar e cultivar um caem geralmente fica a cargo da narrativa, mas esta Vantagem permite a um personagem já sair na dianteira (ou na lanterninha).",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
         "title": "Acesso a Caern",
-        "description": "Acesso a Caern - Você tem permissão para fazer uso de um Caern específico pertencente a outro septo, contanto que suas ações não interfiram em suas atividades ou coloquem em risco a segurança do caern. Você deve concordar com a natureza do caern e o septo de proteção com o Narrador."
+        "description": "Acesso a Caern - Você tem permissão para usar um Caern específico que pertence a uma outra fratria, desde que suas ações não interfiram nas atividades da fratria nem coloquem em risco a segurança do caern. Você e o Narrador devem chegar a um acordo quanto à natureza do caerb e da fratria que zela por ele.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
       },
       {
         "cost": 5,
         "type": "radio",
         "title": "Caern Desperto",
-        "description": "Caern Desperto - Você faz parte de um septo que guarda um caern que já foi despertado em algum grau, ou está prestes a descobrir um caern de significância, já parcialmente despertado. Adicione um ao valor do caern do primeiro caern que você se juntar ou descobrir. Essa Vantagem não acumula, mas vários membros podem 'contribuir' para acumular os cinco pontos, a critério do Narrador."
+        "description": "Caern Desperto - Você faz parte de uma fratria que zela por um caern até certo ponto desperto, ou você está prestes a descobrir um caern importante e já meio-desperto. Aumente em 1 a Graduação do primeiro caern para o qual você entrar ou do primeiro que você descobrir. Esta Qualidade não é cumulativa, mas, a critério do Narrador, vários personagens podem contribuir e juntar os cinco pontos necessários para adquiri-la.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
       }
     ],
     "flaws": [
@@ -22,26 +82,32 @@
         "cost": 1,
         "type": "radio",
         "title": "Pária do Caern",
-        "description": "Pária do Caern - Você se tornou indesejado em todos os caerns em seu território (cidade natal ou outra área central à crônica). Você precisa pagar caro pelo privilégio de acesso, geralmente realizando serviços perigosos, ou recorrer à furtividade. Se pego, as coisas provavelmente escalarão para a violência. Isso não se aplica a um caern cujo septo você pertence, embora possa fornecer uma desculpa caso alguém em seu septo queira que você vá embora."
+        "description": "Pária do Caern - Você se tornou persona non grata em todos os caerns do seu pedaço (a cidade onde mora ou outra área essencial para a crônica). Você precisa pagar caro pelo privilégio do acesso (geralmente prestando serviços perigosos) ou recorrer à furtividade. Se você for pego, é bem provável que a coisa descambe para a violência. Não se aplica ao caem protegido pela fratria da qual você faz parte, mas pode ser a desculpa perfeita para alguém da sua fratria que queira se livrar de você.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
       }
     ]
   },
   {
-    "name": "Trabalho Diário",
+    "name": "Emprego",
     "type": "méritos",
-    "description": "Apesar de ser um maldito lobisomem, você de alguma forma consegue manter um emprego estável, ou pelo menos a aparência disso. Esse emprego pode fornecer desde um álibi para sua localização até a proteção do seu segredo peludo. Não necessariamente proporciona uma renda notável — para isso, existe Recursos, embora uma combinação de um Emprego Diurno e Recursos significativos possa resultar em um lobisomem curioso, de fato.",
+    "description": "Mesmo sendo um maldito lobisomem, você consegue manter ou ao menos aparenta ter um emprego fixo. Esse serviço pode lhe dar um álibi ou proteger seu segredinho peludo. Não necessariamente implica uma renda digna de nota - aí estaríamos falando de Recursos. No entanto, combinar Emprego com Recursos substanciais poderia criar um lobisomem bem interessante.",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
-        "title": "Emprego Diurno",
-        "description": "Emprego Diurno - Esforços para obscurecer sua natureza de Garou ao usar o emprego ganham um bônus de um dado para piscinas relevantes, como Subterfúgio ('Não fui eu; eu estava no trabalho naquele dia') ou Persuasão ('Quantos lobisomens você acha que a empresa de TV a cabo emprega para fazer instalações?')."
+        "title": "Emprego",
+        "description": "Emprego - Some um dado às paradas das tentativas de esconder sua natureza garou usando o emprego como desculpa, como para Subterfúgio ('Não fui eu: nesse dia, eu tava trabalhando') ou Persuasão ('Quantos instaladores lobisomens você acha que a operadora de internet emprega?').",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
       },
       {
         "cost": 2,
         "type": "radio",
-        "title": "Emprego Diurno Corroborado",
-        "description": "Emprego Diurno Corroborado - Assim como o Emprego Diurno, acima, mas pessoas com quem você trabalha (ou finge trabalhar) corroboram suas alegações de trabalho, fornecendo uma substanciação além dos documentos básicos de emprego. Adicione dois dados às piscinas semelhantes às acima."
+        "title": "Emprego Confirmado",
+        "description": "Emprego Confirmado - Idêntico a Emprego acima, mas os indivíduos com quem você trabalha (ou finge trabalhar) corroboram suas alegações, oferecendo mais uma comprovação além dos documentos de trabalho.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "98"
       }
     ],
     "flaws": []
@@ -49,49 +115,63 @@
   {
     "name": "Linguística",
     "type": "méritos",
-    "description": "Todo personagem tem fluência em seu idioma de nascimento e (a menos que o jogador e o Narrador tenham uma razão para declarar o contrário) no idioma dominante do cenário da crônica. Por exemplo, um lobisomem mexicano em uma crônica ambientada nos Utah Badlands pode falar e ler espanhol e inglês. Narradores podem optar por permitir que Garou cuja língua nativa coincide com a do cenário escolham uma segunda língua de qualquer maneira. Cada ponto em Linguística permite que o personagem fale, escreva e leia fluentemente uma língua adicional, além dessas duas línguas padrão. Observe que a leitura de certos documentos antigos ou recitar em um dialeto estranho pode impor uma Dificuldade adicional aos testes de Acadêmicos ou Ocultismo.",
+    "description": "Todo personagem é fluente na sua língua materna e (a menos que o jogador e o Narrador tenham um motivo para que isso não ocorra) na língua dominante do cenário da crônica. Por exemplo, uma lobisomem mexicana em uma crônica ambientada no sertão do estado norte-americano de Utah fala e lê espanhol e inglês. Narradores generosos podem permitir que garous cuja língua materna coincida com a do cenário adotem um segundo idioma. Cada ponto em Linguística permite que o personagem fale, escreva e leia fluentemente um idioma adicional além dos dois idiomas padrão. Tenha em mente que a leitura de certos documentos antigos ou cânticos em um dialeto estranho pode impor uma Dificuldade adicional aos testes de Erudição ou Ocultismo.",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
         "title": "Idioma adicional",
-        "description": "1 Idioma adicional - Permite que o personagem fale, escreva e leia fluentemente uma língua adicional, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "1 Idioma adicional - Permite que o personagem fale, escreva e leia fluentemente uma língua adicional, além de sua língua de nascimento e do idioma dominante do cenário.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Idiomas adicionais",
-        "description": "2 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente duas línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "2 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente duas línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 3,
         "type": "radio",
         "title": "Idiomas adicionais",
-        "description": "3 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente três línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "3 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente três línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost":4,
         "type": "radio",
         "title": "Idiomas adicionais",
-        "description": "4 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente quatro línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "4 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente quatro línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 5,
         "type": "radio",
         "title": "Idiomas adicionais",
-        "description": "5 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente cinco línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "5 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente cinco línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 6,
         "type": "radio",
         "title": "Idiomas adicionais",
-        "description": "6 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente seis línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "6 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente seis línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 7,
         "type": "radio",
         "title": "Idiomas adicionais",
-        "description": "7 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente sete línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário."
+        "description": "7 Idiomas adicionais - Permite que o personagem fale, escreva e leia fluentemente sete línguas adicionais, além de sua língua de nascimento e do idioma dominante do cenário.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       }
     ],
     "flaws": [
@@ -99,449 +179,326 @@
         "cost": 2,
         "type": "radio",
         "title": "Anafalbetismo",
-        "description": "Analfabetismo - Você não pode ler nem escrever. Suas habilidades de Acadêmicos e Ciências são limitadas a 1, e você não pode ter uma Especialidade nelas que incorpore conhecimento moderno."
+        "description": "Você não sabe ler nem escrever. Suas Habilidades Erudição e Ciência estão limitadas a 1, e elas não podem ter nenhuma Especialização que incorpore conhecimentos modernos.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       }
     ]
-  },
-  {
-    "name": "Aparência",
-    "type": "méritos",
-    "description": "Nem todos os lobisomens têm o glamour de um modelo de capa ou um ator icônico. Alguns deles parecem ainda melhores. E alguns, é claro, parecem muito piores. Modificadores de Aparência se aplicam apenas quando você pode ser visto. O Narrador decide se esses modificadores se aplicam durante conflitos Sociais caso a caso (ou até mesmo em cada teste).",
-    "advantages": [
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Clement Lupus",
-        "description": "Clement Lupus - Sua forma lupina parece mais com um cachorro do que com um lobo, e a menos que tenham motivo para acreditar, nenhum observador humano que te veja na forma lupina pensa que você é um lobo."
-      },
-      {
-        "cost": 2,
-        "type": "checkbox",
-        "title": "Glabro Discreto",
-        "description": "Sua forma glabro é mais esguia do que robusta. À distância, você não chama atenção nem parece particularmente incomum. Mesmo de perto, pode parecer apenas uma pessoa um pouco peluda ou selvagem, mas ainda dentro dos limites da aparência humana comum. Por causa disso, você não sofre a penalidade usual de dois dados em testes Sociais enquanto estiver em glabro. (Veja Werewolf Corebook, p. 136.)"
-      },
-      {
-        "cost": 2,
-        "type": "radio",
-        "title": "Bonito(a)",
-        "description": "Bonito(a) - Você adiciona um dado extra a todos os testes Sociais apropriados."
-      },
-      {
-        "cost": 4,
-        "type": "radio",
-        "title": "Deslumbrante",
-        "description": "Deslumbrante - Você adiciona dois dados extras a todos os testes Sociais apropriados, como mencionado acima."
-      }
-    ],
-    "flaws": [
-      {
-        "cost": 1,
-        "title": "Feio(a)",
-        "type": "checkbox",
-        "description": "Feio(a) - Você perde um dado de todos os testes Sociais relevantes."
-      },
-      {
-        "cost": 1,
-        "title": "Fedorento(a)",
-        "type": "checkbox",
-        "description": "Fedorento(a) - Seu hálito e odor corporal são sobrenaturalmente repugnantes, lembrando cachorro molhado e meias suadas. Até os Roedores de Ossos se incomodam com o seu fedor. Você pode tomar pequenas medidas para minimizar o cheiro, como usar bastante colônia, mas isso causa outros problemas. Perca um dado em testes de sedução e similares que envolvam Social, e perca dois dados em testes de Furtividade contra oponentes que possam sentir o cheiro, a menos que você esteja contra o vento."
-      },
-      {
-        "cost": 1,
-        "title": "Transparente",
-        "type": "checkbox",
-        "description": "Transparente - Por algum motivo, você não é um bom mentiroso, e isso fica evidente. Você tem uma péssima cara de pôquer ou seus pais lhe ensinaram a forte obrigação de dizer a verdade, mesmo quando dói. Perca um dado em qualquer teste que exija Lábia. Você não pode ganhar pontos em Lábia."
-      },
-      {
-        "cost": 2,
-        "title": "Repulsivo(a)",
-        "type": "checkbox",
-        "description": "Repulsivo(a) - Você perde dois dados de todos os testes Sociais relevantes."
-      },
-      {
-        "cost": 1,
-        "title": "Carne Marcada pela Wyrm",
-        "type": "checkbox",
-        "description": "Seja por influência de Morcego, Mosca ou de algum dos servos da Wyrm, suas formas sobrenaturais não são completamente lupinas. Sempre que você assume uma forma sobrenatural, certos traços visíveis ligados à Wyrm — como feridas abertas que nunca cicatrizam, gengivas sangrando constantemente ou manchas sem pelos e descoloridas — deixam outros Garou desconfiados da sua ligação com a Wyrm. Você perde dois dados em todas as situações sociais com Garou que saibam sobre sua forma sobrenatural, exceto com membros da sua alcatéia, Mentores ou conexões muito próximas no seu Mapa de Relacionamentos. Além disso, interagir de perto com humanos enquanto estiver em suas formas sobrenaturais representa um risco maior para a quebra do Véu."
-      },
-      {
-        "cost": 2,
-        "title": "Carne Marcada pela Wyrm Avançada",
-        "type": "checkbox",
-        "description": "Sua ligação com o Wyrm é ainda mais evidente. Além de marcar suas formas sobrenaturais, essas deformações se manifestam também na sua forma hominídea ou lupina (escolha uma). Isso faz com que você precise se afastar da sociedade humana na maior parte do tempo, já que sua aparência chama atenção e pode ser vista como perturbadora ou antinatural. Você perde dois dados em todas as situações sociais com Garou que conheçam sua forma sobrenatural, com exceção de membros da sua matilha, Mentores ou conexões muito próximas no seu Mapa de Relacionamentos. Além disso, interagir de perto com humanos em qualquer uma das suas formas afetadas representa um risco maior de quebrar o Véu."
-      }
-    ]
-  },
-  {
-    "name": "Abuso de Substâncias",
-    "type": "méritos",
-    "description": "Não todos os lobisomens têm o glamour de um modelo de capa ou um ator icônico. Alguns deles parecem ainda melhores. E alguns, é claro, parecem muito piores. Modificadores de Aparência se aplicam apenas quando você pode ser visto. O Narrador decide se esses modificadores se aplicam durante conflitos Sociais caso a caso (ou até mesmo em cada rolagem).",
-    "advantages": [],
-    "flaws": [
-      {
-        "cost": 1,
-        "title": "Fome de Conhecimento",
-        "type": "checkbox",
-        "description": "Fome de Conhecimento - Você sempre temeu que não teria tempo suficiente para aprender tudo o que considera realmente importante. Bem, esse é um problema parcialmente resolvido. O tempo para aprender nem sempre é agora, no entanto — você, com pesar, coloca um marcador em seus estudos e se dedica a assuntos mais urgentes e ameaçadores à sua vida. Na criação do personagem, escolha um tópico sobre o qual seu personagem tem uma fome de estudar. Quando seu personagem se deparar com livros, vídeos tutoriais, seminários universitários ou outros métodos de aprendizado sobre o assunto escolhido, faça um teste de Força de Vontade com Dificuldade 3 para resistir a perseguir sua obsessão."
-      },
-      {
-        "cost": 1,
-        "title": "Vício",
-        "type": "radio",
-        "description": "Vício - Perde um dado de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto as paradas de ações que obtenham sua droga imediatamente."
-      },
-      {
-        "cost": 2,
-        "title": "Vício Desesperado",
-        "type": "radio",
-        "description": "Vício Desesperado - Perde dois dados de todas as paradas quando você não ingeriu sua substância de escolha durante a última cena, exceto paradas para ações que obtenham sua droga imediatamente."
-      }
-    ]
-  },
-  {
-    "name": "Ritos",
-    "type": "méritos",
-    "description": "A maestria e a habilidade de realizar rituais são dons valiosos entre os Garou. Nem todos os lobisomens têm a destreza de realizar rituais em condições adversas ou a presença social necessária para liderar uma assembleia, mas aqueles que dominam essas artes ganham o respeito de sua tribo. Esses méritos garantem vantagens significativas em rituais sociais e espirituais, permitindo que o Garou mostre seu conhecimento e habilidade em momentos críticos.",
-    "advantages": [
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Improvisador",
-        "description": "Improvisador - Você sofre dois dados a menos de penalidade ao realizar rituais em condições subótimas."
-      },
-      {
-        "cost": 2,
-        "type": "checkbox",
-        "title": "Convocador da Assembléia",
-        "description": "Convocador da Assembléia - Selecione 5 rituais sociais que você tenha dominado. Se permitido durante uma Assembléia, você pode auxiliar em qualquer ritual, desde que seja realizado em uma Assembléia ou em uma reunião substancialmente semelhante de Garou."
-      },
-      {
-        "cost": 2,
-        "type": "checkbox",
-        "title": "Assistente Especialista",
-        "description": "Assistente Especialista - Quando você auxilia na realização de um Rito que você conhece, você contribui com um dado adicional normal ao grupo de dados da execução."
-      },
-      {
-        "cost": 3,
-        "type": "checkbox",
-        "title": "Mestre de Rituais",
-        "description": "Mestre de Rituais - Você adiciona +1 dado a qualquer teste que envolva o conhecimento ou a realização de rituais."
-      }      
-    ],
-    "flaws": []
-  },
-  {
-    "name": "Refúgio Seguro",
-    "type": "méritos",
-    "description": "Refúgio Seguro representa um grau de segurança ou distinção para o domicílio acima e além de um lugar para dormir e preparar refeições. Pode ser um apartamento, uma casa, um loft, cabana de madeira, caverna ou toca - seja o que for, desde que o Garou o considere seguro. Um personagem pode adquirir ambos os Méritos Refúgio Seguro, se desejar.",
-    "advantages": [
-      {
-        "cost": 2,
-        "type": "checkbox",
-        "title": "Refúgio Seguro e Oculto",
-        "description": "Refúgio Seguro e Oculto - Os esforços para encontrar o Garou e qualquer pessoa com eles enquanto estão na safe house sofrem uma penalidade de 2 dados."
-      },
-      {
-        "cost": 2,
-        "type": "checkbox",
-        "title": "Refúgio Seguro e Protegido",
-        "description": "Refúgio Seguro e Protegido - Adicione 2 dados aos testes relevantes para descobrir ou resistir à entrada não autorizada em seu Refúgio Seguro."
-      }
-    ],
-    "flaws": []
   },
   {
     "name": "Situações Sobrenaturais",
     "type": "méritos",
-    "description": "Embora os Garou sejam eles mesmos sobrenaturais, às vezes mistérios maiores se abatem sobre os lobisomens para marcá-los de maneiras desconhecidas. Esses Méritos e Falhas não alteram a natureza de lobisomem do Garou, mas indicam circunstâncias em que as linhas de distinção entre lobisomens e outros elementos do mundo secreto não são tão absolutas.",
+    "description": "Apesar de já serem criaturas sobrenaturais, os garous volta e meia são afetados por mistérios ainda maiores que os marcam de maneiras mais estranhas. As Qualidades e os Defeitos a seguir não mudam a condição licantrópica dos garous, mas sugerem circunstâncias onde as linhas divisórias que os separam de outros elementos do mundo secreto não são tão absolutas.",
     "advantages": [
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Acelerado pela Lua",
-        "description": "Acelerado pela Lua - A lua o inspira mais do que outros lobisomens. A primeira vez que você uiva para a lua em uma determinada noite, você pode restaurar um ponto de dano Superficial de Força de Vontade."
+        "title": "Revigorado pela Lua",
+        "description": "Revigorado pela Lua - Você se deixa inspirar pela lua mais do que outros lobisomens. Na primeira vez que uivar para a lua em uma determinada noite, você poderá recuperar um ponto de dano Superficial à Força de Vontade.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Lua má Se Erguendo",
-        "description": "Lua má Se Erguendo - Talvez você tenha se transformado sob a lua de sangue ou, quem sabe, Luna simplesmente não sorria para você. Seja qual for o motivo, buscar a benção de Luna para restaurar sua Fúria é, no mínimo, incerto. Sempre que você uivar para a lua para recuperar Fúria, deve realizar um teste de Fúria; em caso de sucesso, sua Fúria é restaurada normalmente, mas em caso de falha, você não recupera Fúria alguma."
+        "title": "Mau Agouro da Lua",
+        "description": "Mau Agouro da Lua - Talvez você tenha se transformado sob a lua de sangue ou, quem sabe, Luna simplesmente não sorria para você. Seja qual for o motivo, buscar a benção de Luna para restaurar sua Fúria é, no mínimo, incerto. Sempre que você uivar para a lua para recuperar Fúria, deve realizar um teste de Fúria; em caso de sucesso, sua Fúria é restaurada normalmente, mas em caso de falha, você não recupera Fúria alguma.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 2,
         "type": "checkbox",
         "title": "Prática em ritual",
-        "description": "Prática em ritual - Escolha um Rito que você conheça. Ao conduzir esse Rito, você ignora um resultado Brutal (1-2 em um dado de Fúria) rolado, tratando-o como um espaço em branco (3-5), embora ainda não possa rerrolar. Você pode adquirir este Mérito várias vezes, mas deve escolher um Rito diferente a cada vez."
+        "description": "Prática em ritual - Escolha um Rito que você conheça. Ao conduzir esse Rito, você ignora um resultado Brutal (1-2 em um dado de Fúria) rolado, tratando-o como um espaço em branco (3-5), embora ainda não possa rerrolar. Você pode adquirir este Mérito várias vezes, mas deve escolher um Rito diferente a cada vez.",
+        "font": "Trilha Enluarada",
+        "page": "69"
       },
-      {
+      { 
         "cost": 3,
         "type": "checkbox",
-        "title": "Afligido pela Lua",
-        "description": "Afligido pela Lua - A lua inflama sua Fúria em um grau ainda maior do que a maioria dos outros lobisomens. Você ganha um ponto adicional de Fúria quando uiva para a lua pela primeira vez a cada noite."
+        "title": "Atiçado pela Lua",
+        "description": "Atiçado pela Lua - A lua incita sua Fúria muito mais que a de outros lobisomens. Você ganhará um ponto adicional de Fúria na primeira vez que uivar para a lua a cada noite.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 1,
         "type": "radio",
         "title": "Domínio da Forma do Dom",
-        "description": "Domínio da Forma do Dom - Você pode selecionar um Dom cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+        "description": "Domínio da Forma do Dom - Você pode selecionar um Dom cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Domínio da Forma do Dom",
-        "description": "Domínio da Forma do Dom - Você pode selecionar dois Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+        "description": "Domínio da Forma do Dom - Você pode selecionar dois Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 3,
         "type": "radio",
         "title": "Domínio da Forma do Dom",
-        "description": "Domínio da Forma do Dom - Você pode selecionar três Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+        "description": "Domínio da Forma do Dom - Você pode selecionar três Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 4,
         "type": "radio",
         "title": "Domínio da Forma do Dom",
-        "description": "Domínio da Forma do Dom - Você pode selecionar quatro Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+        "description": "Domínio da Forma do Dom - Você pode selecionar quatro Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 5,
         "type": "radio",
         "title": "Domínio da Forma do Dom",
-        "description": "Domínio da Forma do Dom - Você pode selecionar cinco Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem."
+        "description": "Domínio da Forma do Dom - Você pode selecionar cinco Dons cujo uso pode ser estendido para a forma hominídea ou lupina. A critério do Narrador, cada ponto dessa Vantagem pode exigir a bênção de um espírito ancestral ou — se o Dom e a Vantagem forem adquiridos simultaneamente — barganhas adicionais com o espírito que ensina o Dom escolhido. Um Dom que exige um aspecto físico específico de uma forma metamorfoseada (como garras, por exemplo) não pode ser ampliado por meio dessa Vantagem.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       }
     ],
     "flaws": [
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Maldição Folclórica",
-        "description": "Maldição Folclórica - Você sofre dano Agravado de uma proibição folclórica. Proibições folclóricas incluem: água benta (dano como fogo), uma arma empunhada por um crente devoto em sua própria fé, uma arma adornada com pedra-da lua (hecatolite), ou a própria pedra-da-lua (dano como dano de arma; simplesmente tocar uma pedra-da-lua ou uma joia de pedra-da-lua causa um ponto de dano Agravado), ou outra proibição acordada entre você e o Narrador.",
+        "title": "Perdição Folclórica",
+        "description": "Perdição Folclórica - Você sofre dano Agravado de algo que, no folclore, costuma ser a perdição dos lobisomens. Entre as perdições folclóricas, temos:",
         "sugestions": [
-          "Água benta (dano como fogo)",
-          "Uma arma empunhada por um crente devoto em sua própria fé",
-          "Uma arma adornada com pedra-da lua (hecatolita), ou a pedra-da lua em si (dano como dano de arma; simplesmente tocar em uma pedra-da lua ou em uma joia de pedra-da lua causa um ponto de dano Agravado)"
-        ]
+          "Água benta (dano idêntico ao do fogo)",
+          "Uma arma empunhada por um devoto fervoroso de uma religião qualquer",
+          "Uma arma adornada com pedras da lua (adulárias) ou as pedras da lua em si (dano idêntico ao da arma; meramente encostar em uma pedra da lua ou em uma joia feita com pedras da lua causa um ponto de dano Agravado)",
+          "Outra perdição que você tenha combinado com o Narrador"
+        ],
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "99"
       },
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Bloqueio Folclórico",
-        "description": "Bloqueio Folclórico - Ao enfrentar um bloqueio folclórico, você deve se afastar ou gastar um ponto de Força de Vontade para ultrapassá-lo. Cada bloqueio folclórico que você aceita conta como uma Falha separada de um ponto. Blocos folclóricos incluem: aconitina ou outras ervas consideradas ter propriedades místicas, símbolos sagrados apresentados por qualquer crente, a presença de uma virgem maior de idade, símbolos religiosos, prata mostrada (além da aversão normal dos Garou à prata), ser abordado três vezes consecutivas pelo nome que você tinha antes de sua Primeira Mudança (mesmo que seja o mesmo que seu nome agora), ou outro bloqueio acordado entre você e o Narrador.",
+        "title": "Tabu Folclórico",
+        "description": "Tabu Folclórico - Quando confrontado com um tabu folclórico, você deve se afastar dele ou gastar um ponto de Força de Vontade para superá-lo. Cada tabu folclórico que você escolhe conta como um Defeito próprio de um ponto. Os tabus folclóricos incluem:",
         "sugestions": [
-          "Aconitina ou outras ervas consideradas ter propriedades místicas",
-          "Símbolos sagrados apresentados por qualquer crente",
-          "A presença de uma virgem na maioridade ou mais velha",
-          "Ver prata empunhada (além da aversão normal dos Garou à prata - ver p. 134)",
-          "Ser chamado três vezes consecutivas pelo nome que você tinha antes da sua Primeira Mudança (mesmo que seja o mesmo que seu nome atual)",
-          "Algum outro obstáculo com o qual você e o Narrador concordem"
-        ]
+          "Acônito ou outras ervas com propriedades consideradas místicas",
+          "Símbolos sagrados apresentados por um fiel de uma religião qualquer",
+          "A presença de uma pessoa virgem e maior de idade",
+          "Ver alguém brandir um objeto de prata (soma-se à aversão normal dos Garou à prata; p. 134",
+          "Ser chamado três vezes seguidas pelo nome que você costumava ter antes da Primeira Transformação (mesmo que seja idêntico a seu nome atual",
+          "Outro tabu que você tenha combinado com o Narrador"
+        ],
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
       },
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Conto Folclórico",
-        "description": "Conto Folclórico - Você tem algum indicador que faz as pessoas pensarem que há algo perturbador sobre você, independentemente de associarem o indicador especificamente aos lobisomens. Aqueles que discernem seu indicador folclórico desconfiam de você, dando a você uma penalidade de -1 dado aos testes sociais, exceto aqueles baseados em Intimidação. Cada indicador folclórico que você aceita conta como uma Falha separada de um ponto. Indicadores folclóricos incluem: pessoas ouvem uivos em sua presença (mesmo que nada esteja uivando de fato), sua sombra é a de um lobo quando você está na forma humana e humana quando está na forma de lobo, leite estraga e plantas murcham em sua chegada, ou outro indicador acordado entre você e o Narrador.",
+        "title": "Sinal Folclórico",
+        "description": "Sinal Folclórico - Você ostenta algum tipo de indicador que leva as pessoas a pensar que há algo perturbador a seu respeito, independentemente de associarem ou não esse sinal aos lobisomens. Aqueles que percebem seu sinal folclórico não confiam em você, acarretando uma penalidade de 1 dado nas paradas de todos os testes Sociais que não envolvam Intimidação. (No caso deste Defeito, o que importa é a reação provocada, não o sinal específico.) Cada sinal folclórico que você adquirir contará como um Defeito de 1 ponto. Entre os sinais folclóricos, temos:",
         "sugestions:": [
-          "As pessoas ouvem uivos em sua presença (seja ou não algo realmente uivando)",
-          "Sua sombra é a de um lobo quando você está em forma humana e humana quando está em forma de lobo",
-          "O leite estraga e as plantas murcham com a sua chegada",
-          "Algo mais que você e o Narrador concordem"
-        ]
+          "As pessoas escutam uivos quando estão em sua presença (exista ou alguma coisa uivando no momento)",
+          "Sua sombra é a de um lobo quando você está em forma humana e a de um ser humano quando você está em forma lupina",
+          "O leite coalha e as plantas secam quando você chega",
+          "Outro sinal que você tenha combinado com o Narrador"
+        ],
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Interdição Adicional",
+        "description": "Interdição Adicional - Seja por renunciar à sua tribo, tentado a se juntar a uma outra ou simplesmente por ser tocado pelo espírito padroeiro de outra tribo, você carrega uma segunda Interdição. Escolha outra tribo e sofra a interdição dela além da de sua tribo atual. O Narrador pode vetar este Defeito se a segunda Interdição causar problemas ou tiver pouco impacto na crônica.",
+        "font": "Nação Fragmentada",
+        "page": "132"
       },
       {
         "cost": 2,
         "type": "checkbox",
         "title": "Cão do Inferno",
-        "description": "Cão do Inferno - A maldição do Delírio é anormalmente forte em você e tanto sua forma hispo quanto sua forma lupina são verdadeiros pesadelos. Sempre que você assume qualquer uma dessas formas, você impõe o Delírio nos humanos da mesma forma que um Garou em crinos."
+        "description": "Cão do Inferno - A maldição do Delírio é anormalmente forte em você e tanto sua forma hispo quanto sua forma lupina são verdadeiros pesadelos. Sempre que você assume qualquer uma dessas formas, você impõe o Delírio nos humanos da mesma forma que um Garou em crinos.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 2,
         "type": "checkbox",
         "title": "Maldição da Anciã",
-        "description": "Maldição da Anciã - Alguma maldição espiritual o afetou e o envelheceu rapidamente, como o desfavor de um Bane ou alguma circunstância profética, ou você simplesmente experimentou a Primeira Mudança bem depois do seu auge. Sua saúde sofreu, e você tem uma caixa a menos em sua trilha de saúde do que teria."
+        "description": "Maldição da Anciã - Você foi afetado por uma maldição espiritual que fez com que você envelhecesse rapidamente - a desaprovação de um Maldito ou uma circunstância profética - ou simplesmente sofresse a Primeira Transformação quando já tinha passado bastante da idade. Sua vitalidade sofreu e você tem uma caixa a menos na sua trilha de Vitalidade do que normalmente teria.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
       },
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Submisso à Lua",
-        "description": "Submisso à Lua - A lua tem uma influência indevida sobre você. Sempre que você vê a lua pela primeira vez em uma determinada noite, você deve mudar para a forma glabro ou hispo (e fazer quaisquer verificações de Fúria concomitantes)."
-      },
-      {
-        "cost": 2,
-        "type": "checkbox",
-        "title": "Banimento Adicional",
-        "description": "Banimento Adicional - Seja porque você renunciou à sua tribo, tentou se juntar a uma segunda ou foi tocado por um patrono de outra tribo, você carrega o fardo de um segundo Banimento. Escolha outra tribo e sofra o Banimento dela, além do Banimento da sua tribo original. O Narrador pode proibir esse Defeito se o segundo Banimento causar problemas ou não tiver impacto na crônica."
+        "title": "Escravo da Lua",
+        "description": "Escravo da Lua - A lua exerce sobre você uma influência indevida. Sempre que você avistar a lua pela primeira vez em uma determinada noite, terá de mudar para a forma glabro ou hispo (e fazer as checagens de Fúria concomitantes).",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
       },
       {
         "cost": 2,
         "type": "checkbox",
         "title": "Homem-Lobo",
-        "description": "Homem-Lobo - Sua forma de crinos, embora ainda seja primorosamente aterrorizante, reflete mais a sua herança humana do que a lupina, resultando em uma forma de guerra com traços faciais nitidamente hominídeos. Na forma de crinos, a ausência de um focinho impede você de realizar ataques de mordida e testemunhas humanas tratam seus testes de Delírio como se seus valores de Autocontrole + Determinação fossem dois pontos mais altos, tornando-as mais resistentes ao terror da sua presença. Além disso, seu rosto na forma de crinos ainda é reconhecidamente 'o seu' (embora distorcido e selvagem), criando um elo potencialmente perigoso com a sua identidade no mundo humano."
+        "description": "Homem-Lobo - Sua forma de crinos, embora ainda seja primorosamente aterrorizante, reflete mais a sua herança humana do que a lupina, resultando em uma forma de guerra com traços faciais nitidamente hominídeos. Na forma de crinos, a ausência de um focinho impede você de realizar ataques de mordida e testemunhas humanas tratam seus testes de Delírio como se seus valores de Autocontrole + Determinação fossem dois pontos mais altos, tornando-as mais resistentes ao terror da sua presença. Além disso, seu rosto na forma de crinos ainda é reconhecidamente 'o seu' (embora distorcido e selvagem), criando um elo potencialmente perigoso com a sua identidade no mundo humano.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 2,
         "type": "radio",
-        "title": "Tocado pela Wyrm - Wyrm da Calamidade",
-        "description": "Tocado pela Wyrm - Wyrm da Calamidade - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Besta-da-Guerra corre em suas veias, alimentando sua raiva constante. Você soma +1 à Dificuldade para resistir ao Frenesi."
+        "title": "Tocado pela Wyrm da Calamidade",
+        "description": "Tocado pela Wyrm da Calamidade - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Fera-da-Guerra corre em suas veias, alimentando sua raiva constante. Você soma +1 à Dificuldade para resistir ao Frenesi.",
+        "font": "Maré da Wyrm",
+        "page": "29"
       },
       {
         "cost": 2,
         "type": "radio",
-        "title": "Tocado pela Wyrm - Wyrm da Consumação",
-        "description": "Tocado pela Wyrm - Wyrm da Consumação - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Devoradora-de-Almas cravou seu domínio em sua mente e devora continuamente seu senso de valor próprio. Se você ainda não tiver feito um teste de Harano em uma sessão, deverá realizá-lo obrigatoriamente no final dela."
+        "title": "Tocado pela Wyrm da Devoradora-de-Almas",
+        "description": "Tocado pela Wyrm da Devoradora-de-Almas - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Devoradora-de-Almas cravou seu domínio em sua mente e devora continuamente seu senso de valor próprio. Se você ainda não tiver feito um teste de Harano em uma sessão, deverá realizá-lo obrigatoriamente no final dela.",
+        "font": "Maré da Wyrm",
+        "page": "29"
       },
       {
         "cost": 2,
         "type": "radio",
-        "title": "Tocado pela Wyrm - Wyrm Corruptora",
-        "description": "Tocado pela Wyrm - Wyrm Corruptora - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Wyrm Corruptora cravou suas garras profundamente na sua psique e todo o seu esforço é para manter a amargura sob controle. Se você ainda não tiver feito um teste de Hauglosk em uma sessão, deverá realizá-lo obrigatoriamente no final dela."
+        "title": "Tocado pela Wyrm da Corrupção",
+        "description": "Tocado pela Wyrm da Corrupção - Apesar da sua devoção a Gaia, o Wyrm se infiltrou profundamente na sua alma, e sua corrupção, embora não seja explícita, o contaminou — ou talvez você simplesmente acredite que foi contaminado, culpando suas próprias fraquezas no espírito maligno. Essa maldição pode ser a sua ruína ou pode impulsioná-lo à grandeza, destinado a desafiar a corrupção que destruiria um Garou inferior. A Wyrm Corruptora cravou suas garras profundamente na sua psique e todo o seu esforço é para manter a amargura sob controle. Se você ainda não tiver feito um teste de Hauglosk em uma sessão, deverá realizá-lo obrigatoriamente no final dela.",
+        "font": "Maré da Wyrm",
+        "page": "29"
       }
     ]
   },
   {
-    "name": "Mentais",
+    "name": "Visual",
     "type": "méritos",
-    "description": "Os Garou carregam dentro de si tanto a fúria de Gaia quanto as marcas da própria alma. Nem todos os fardos são físicos ou espirituais — muitos se escondem na mente, moldando como cada um vê o mundo, enfrenta a luta e convive com a matilha. Defeitos mentais revelam cicatrizes invisíveis: rancores que nunca se curam, pessimismo que colore cada vitória com sombras e instintos que dificultam o aprendizado. Para alguns, esses traços são fraquezas; para outros, apenas mais um reflexo do peso de ser meio-humano e meio-lobo em uma guerra sem fim.",
-    "advantages": [],
-    "flaws": [
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Amargurado",
-        "description": "Amargurado - Mesmo entre os Garou que guardam rancor, você é do tipo que não consegue deixar o passado para trás, e sua raiva permanece sempre latente, incapaz de encontrar verdadeiro alívio. Depois de ganhar seu primeiro ponto de Hauglosk, todos os testes de Hauglosk são feitos com +1 de Dificuldade."
-      },
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Taciturno",
-        "description": "Taciturno - Um verdadeiro fatalista da vida, para você, toda luz prateada sempre carrega uma nuvem. Embora seja dedicado à luta, para você ela será sempre apenas isso: uma luta. Depois de ganhar seu primeiro ponto de Harano, todos os testes de Harano são feitos com +1 de Dificuldade."
-      },
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Aprendiz Tátil",
-        "description": "Aprendiz Tátil - Você é uma criatura de instinto, e nenhum estudo ou prática ajuda a internalizar o que aprendeu até que a memória muscular seja criada. Qualquer aquisição de um ponto de Perícia ou de uma Especialidade exige que você tenha usado a Perícia com sucesso na sessão anterior."
-      }
-    ]
-  },
-  {
-    "name": "Mudança de Forma",
-    "type": "méritos",
-    "description": "Os Garou tomam sua habilidade de mudar de forma como algo natural; afinal, é seu direito de nascimento e sua característica mais definidora. Para a maioria dos lobisomens, essas capacidades são dadas como certas. No entanto, outros descobrem que o processo nem sempre é tão simples quanto se poderia esperar.",
+    "description": "Nem todos os lobisomens se parecem com atores da televisão e modelos. Alguns deles são ainda mais bonitos. E outros, é claro, são muito mais feios. Os seguintes modificadores se aplicam apenas quando você puder ser visto. O Narrador determina, caso a caso, quando eles se aplicam durante conflitos Sociais (ou mesmo a uma parada e a outra não, dentro da mesma disputa).",
     "advantages": [
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Mudança Umbral",
-        "description": "Mudança Umbral - A Umbra desperta seu instinto primal. Sempre que você entra na Umbra ou no bawn do seu caern, você pode mudar para a forma glabro ou hispo gratuitamente, sem precisar fazer uma checagem de Fúria, contanto que não tenha perdido o lobo. Sempre que sair da Umbra ou do bawn do seu caern, você pode mudar instantaneamente para forma homid ou lupus. Para este Mérito, “seu caern” pode ser qualquer caern com o qual você tenha um vínculo próximo, como aquele guardado pelo seu sept ou um com uma Vantagem na sua ficha de matilha (ver Pack Sheets em Shattered Nation, p. 143). Um Defeito como Caern Pária (permanente ou temporário) impede o uso dessa Vantagem nesse caern."
+        "title": "Lupino Bonzinho",
+        "description": "Lupino Bonzinho - Sua forma lupina lembra mais um cachorro do que um lobo e, a não ser que tenha motivos para acreditar no contrário, nenhum ser humano que avistar sua forma lupina achará que você é um lobo.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
       },
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Crinos intencional",
-        "description": "Crinos intencional - Na primeira vez de cada mudança para a forma crinos em que você precise gastar Força de Vontade para resistir à frenesi, você não precisa gastar nada para fazê-lo."
-      },
-      {
-        "cost": 3,
-        "type": "checkbox",
-        "title": "Forma Favorita",
-        "description": "Forma Favorita - Mudar de forma é tão natural para você quanto respirar, e desde o momento em que mudou, percebeu que algumas formas exigem menos esforço para assumir do que outras. Escolha uma das formas sobrenaturais; sempre que mudar para essa forma, você pode rerrolar um único teste de Checagem de Fúria falho."
-      }  
-    ],
-    "flaws": [
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Mudança Lenta",
-        "description": "Mudança Lenta - A Wyld está dentro de você, mas demora um pouco mais para se manifestar, e sua capacidade de mudar de forma sofre em consequência. A mudança de forma custa o mesmo que o habitual, mas requer uma ação completa; durante esse tempo, o lobisomem não pode fazer nada além de se concentrar na transformação. Dons ou outras situações que normalmente reduziriam a velocidade de mudança podem reduzir essa penalidade para uma ação menor, mas não mais do que isso."
-      },
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Lupino Retraído",
-        "description": "Lupino Retraído - Você não tem problemas para mudar entre as diversas formas do Garou quando Luna está com você, mas uma limitação perigosa se impõe quando sua Fúria vacila. Sempre que você perde o lobo, em vez de escolher sua forma mundana, é forçado a assumir a forma lupina."
-      },
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Mudança Dolorosa",
-        "description": "Mudança Dolorosa - Para você, cada mudança traz consigo um sofrimento agonizante, sentindo sua pele esticada, ossos quebrados e reformados, e seu corpo deformado além dos limites naturais. Sempre que assumir uma forma sobrenatural, você sofre um nível de dano Superficial de Vitalidade."
-      },
-      {
-        "cost": 1,
-        "type": "radio",
-        "title": "Formas Limitadas",
-        "description": "Formas Limitadas - Sua habilidade de mudar para as formas sobrenaturais é restrita, e embora homid, crinos e lupus estejam ao seu alcance, certas formas parciais são impossíveis para você. Com um ponto, você não pode assumir a forma hispo."
+        "title": "Glabro Imponente",
+        "description": "Glabro Imponente - Sua forma glabro é mais esguia do que robusta. À distância, você não chama atenção nem parece particularmente incomum. Mesmo de perto, pode parecer apenas uma pessoa um pouco peluda ou selvagem, mas ainda dentro dos limites da aparência humana comum. Por causa disso, você não sofre a penalidade usual de dois dados em testes Sociais enquanto estiver em glabro. (Veja Werewolf Corebook, p. 136.)",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 2,
         "type": "radio",
-        "title": "Formas Limitadas",
-        "description": "Formas Limitadas - Sua habilidade de mudar para as formas sobrenaturais é restrita, e embora homid, crinos e lupus estejam ao seu alcance, certas formas parciais são impossíveis para você. Com dois pontos, você não pode assumir a forma hispo e a forma glabro."
-      }
-    ]
-  },
-  {
-    "name": "Herança Selvagem",
-    "type": "méritos",
-    "description": "Os Garou não são apenas criaturas de espírito e carne, mas também de lobo e homem. Embora grandes matilhas de lobos tenham percorrido o mundo por milênios, as raças específicas permanecem amplamente irrelevantes para o lobisomem médio. No entanto, existem situações em que essa herança se manifesta e se torna útil. Apenas um tipo de Mérito de Herança Selvagem pode ser adquirido por personagem.",
-    "advantages": [
-      {
-        "cost": 1,
-        "type": "radio",
-        "title": "Lobo da Tundra",
-        "description": "Lobo da Tundra - Sua herança lupina vem das partes mais frias de Gaia e seu pelo branco e amor por temperaturas baixas revelam isso. Você sofre penalidades reduzidas pela metade devido ao frio (arredondadas para baixo), embora o Narrador possa considerar certas circunstâncias (imersão em nitrogênio líquido) além da sua resistência natural."
+        "title": "Belo",
+        "description": "Belo - Você adiciona um dado extra a todas as paradas de dados Sociais apropriadas.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
       },
       {
-        "cost": 2,
+        "cost": 4,
         "type": "radio",
-        "title": "Lobo Cinzento",
-        "description": "Lobo Cinzento - O mais comum dos lobos também é o animal de matilha mais bem adaptado e, como seus irmãos lupinos, você se adaptou particularmente bem à vida em grupo. Sempre que se beneficiar de trabalho em equipe, você recebe um dado bônus adicional quando assistido por dois ou mais ajudantes (veja Corebook, p. 122 para regras de trabalho em equipe)."
-      },
-      {
-        "cost": 3,
-        "type": "radio",
-        "title": "Resiliência de Luna",
-        "description": "Resiliência de Luna - Você é muito mais resistente do que outros Garou. Sua Vitalidade é igual a 4 + seu valor de Vigor ao invés de 3 + seu valor de Vigor."
+        "title": "Deslumbrante",
+        "description": "Deslumbrante - Você adiciona dois dados extras a todas as paradas de dados Sociais apropriadas, como acima.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
       }
     ],
     "flaws": [
       {
         "cost": 1,
+        "title": "Feio",
+        "type": "radio",
+        "description": "Feio - Você perde um dado em todas as paradas de dados Sociais relevantes",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
+      },
+      {
+        "cost": 1,
+        "title": "Fedor",
         "type": "checkbox",
-        "title": "Odor Distintivo",
-        "description": "Odor Distintivo - Embora não seja desagradável, seu cheiro pessoal é distinto e constante, e não importa quantas vezes você se lave ou tente disfarçá-lo, ele nunca desaparece. Qualquer tentativa de rastreá-lo, reconhecê-lo ou detectá-lo pelo olfato recebe um bônus de dois dados, e certos testes Sociais são feitos com penalidade de dois dados, a critério do Narrador."
+        "description": "Fedor - Seu hálito e odor corporal são sobrenaturalmente repugnantes, lembrando cachorro molhado e meias suadas. Até os Roedores de Ossos se incomodam com o seu fedor. Você pode tomar pequenas medidas para minimizar o cheiro, como usar bastante colônia, mas isso causa outros problemas. Perca um dado em testes de sedução e similares que envolvam Social, e perca dois dados em testes de Furtividade contra oponentes que possam sentir o cheiro, a menos que você esteja contra o vento.",
+        "font": "Nação Fragmentada",
+        "page": "132"
+      },
+      {
+        "cost": 1,
+        "title": "Transparente",
+        "type": "checkbox",
+        "description": "Transparente - Por algum motivo, você não é um bom mentiroso, e isso fica evidente. Você tem uma péssima cara de pôquer ou seus pais lhe ensinaram a forte obrigação de dizer a verdade, mesmo quando dói. Perca um dado em qualquer teste que exija Lábia. Você não pode ganhar pontos em Lábia.",
+        "font": "Nação Fragmentada",
+        "page": "132"
+      },
+      {
+        "cost": 2,
+        "title": "Repulsivo",
+        "type": "radio",
+        "description": "Repulsivo - Você perde dois dados em todas as paradas de dados Sociais relevantes.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "100"
+      },
+      {
+        "cost": 1,
+        "title": "Carne Marcada pela Wyrm",
+        "type": "checkbox",
+        "description": "Seja por influência de Morcego, Mosca ou de algum dos servos da Wyrm, suas formas sobrenaturais não são completamente lupinas. Sempre que você assume uma forma sobrenatural, certos traços visíveis ligados à Wyrm — como feridas abertas que nunca cicatrizam, gengivas sangrando constantemente ou manchas sem pelos e descoloridas — deixam outros Garou desconfiados da sua ligação com a Wyrm. Você perde dois dados em todas as situações sociais com Garou que saibam sobre sua forma sobrenatural, exceto com membros da sua alcateia, Mentores ou conexões muito próximas no seu Mapa de Relacionamentos. Além disso, interagir de perto com humanos enquanto estiver em suas formas sobrenaturais representa um risco maior para a quebra do Véu.",
+        "font": "Maré da Wyrm",
+        "page": "28"
+      },
+      {
+        "cost": 2,
+        "title": "Carne Marcada pela Wyrm Avançada",
+        "type": "checkbox",
+        "description": "Sua ligação com o Wyrm é ainda mais evidente. Além de marcar suas formas sobrenaturais, essas deformações se manifestam também na sua forma hominídea ou lupina (escolha uma). Isso faz com que você precise se afastar da sociedade humana na maior parte do tempo, já que sua aparência chama atenção e pode ser vista como perturbadora ou antinatural. Você perde dois dados em todas as situações sociais com Garou que conheçam sua forma sobrenatural, com exceção de membros da sua matilha, Mentores ou conexões muito próximas no seu Mapa de Relacionamentos. Além disso, interagir de perto com humanos em qualquer uma das suas formas afetadas representa um risco maior de quebrar o Véu.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       }
     ]
   },
   {
     "name": "Aliados - Efetividade",
     "type": "background",
-    "description": "Pessoas que oferecem apoio e ajuda, como família, amigos ou até mesmo uma organização que lhe é leal. Embora normalmente ajudem de bom grado, eles nem sempre estão disponíveis. Têm suas próprias preocupações e fazem apenas o suficiente pelo relacionamento. Geralmente, aparecem cerca de uma vez por história. Não fazem parte da matilha, não são Garou nem espíritos. Podem ser quase qualquer pessoa com alguma conexão razoável, dependendo do que o Narrador permitir. Use as regras do Modelo de Personagem de Apoio para criá-los. Eles são geralmente confiáveis, embora provavelmente não saibam sobre sua natureza de lobisomem ou mesmo sobre o sobrenatural. Nada é de graça, e se pedir favores, eles provavelmente pedirão um favor em troca no futuro. Inimigos são o oposto de Aliados e são considerados Defeitos. Eles podem ser criados usando as regras do Modelo de Personagem de Apoio, anotados no Mapa de Relacionamentos ou deixados a cargo do Narrador. Construa Aliados ou Inimigos com base em um orçamento de pontos, levando em consideração a Eficácia e a Confiabilidade. O máximo de pontos para um Aliado é seis. Grupos de Aliados ou Inimigos aparecem em número igual ao número de personagens dos jogadores. Todos os Inimigos têm dois pontos a menos do que sua Eficácia. Por exemplo, um indivíduo Talentoso custa três pontos como Aliado, mas fornece apenas um ponto como Defeito. Todos os Inimigos têm a mesma Confiabilidade: sempre que o Narrador achar que eles deveriam aparecer, mas provavelmente pelo menos uma vez por história (mesmo que indiretamente).",
+    "description": "Aliados são outras pessoas que o apoiam e o ajudam: família, amigos ou até mesmo uma organização que lhe deve alguma lealdade. Embora os Aliados costumem ajudá-lo voluntariamente, sem necessidade de persuasão ou coerção, nem sempre eles estão disponíveis para oferecer assistência; eles têm seus próprios assuntos para resolver e há um limite para o que podem fazer em nome da sua relação. Aliados costumam aparecer uma vez por história. Não são parte da alcateia, não são garous nem espíritos. Aliados podem ser quase qualquer pessoa com alguma conexão razoável com você, dependendo do que o Narrador permitirá. Você pode ter amigos no necrotério da delegacia, em um jornal sensacionalista ou blog de fofocas, entre nômades ferroviários ou em um centro de distribuição para e-commerce na zona rural. Os Aliados costumam ser dignos de confiança (embora provavelmente não saibam que você é um lobisomem nem que o sobrenatural existe). No entanto, tudo tem um preço. Se você acabar pedindo favores ao seu amigo no Departamento de Operações de Fronteira, ele provavelmente pedirá favores em troca. Inimigos são o oposto de Aliados e são considerados Defeitos. Você pode usar as regras de Modelo de Personagem Secundário para criar Aliados ou Inimigos ao adquiri-los ou convocá-los pela primeira vez, e pode anotá-los no Mapa de Relacionamentos (p. 111), embora muitos grupos deixem esse processo para o Narrador. Crie Aliados ou Inimigos a partir de um total de pontos baseado na Efetividade e Confiabilidade deles. O valor máximo de um Aliado é de seis pontos. Grupos de Aliados ou Inimigos aparecem na mesma quantidade que o número de personagens dos jogadores. Todos os Inimigos valem dois pontos a menos que sua Efetividade; um indivíduo Talentoso custa três pontos como Aliado, mas contará como um Inimigo de apenas 1 ponto se for adquirido como Defeito. Todos os Inimigos têm a mesma Confiabilidade: sempre que o Narrador achar que eles devem aparecer, eles aparecem, mas isso deve ocorrer provavelmente ao menos uma vez por história (mesmo que indiretamente).",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
         "title": "Indivíduo Fraco",
-        "description": "Indivíduo fraco, provavelmente inútil em uma situação violenta ou potencialmente violenta."
+        "description": "Indivíduo Fraco, provavelmente inútil em uma situação violenta ou potencialmente violenta.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Indivíduo Médio / Grupo Fraco",
-        "description": "Indivíduo médio ou um grupo coeso de indivíduos fracos (trabalhadores portuários imprevisíveis, um sindicato mal organizado, capítulo de uma ONG)."
+        "description": "Indivíduo Médio ou um grupo coeso de indivíduos Fracos (estivadores instáveis, um sindicato mal organizado, comitê de ONG).",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       },
       {
         "cost": 3,
         "type": "radio",
         "title": "Indivíduo Talentoso / Grupo Médio",
-        "description": "Indivíduo talentoso ou um grupo perigoso de indivíduos médios (gangue de rua, acompanhantes de celebridades, sindicato operário bem organizado)."
+        "description": "Indivíduo Talentoso ou um grupo perigoso de indivíduos Médios (uma gangue, o séquito de uma celebridade, um sindicato bem organizado).",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       },
       {
         "cost": 4,
         "type": "radio",
-        "title": "Indivíduo Superlativo / Grupo Talentoso",
-        "description": "Indivíduo superlativo, um indivíduo talentoso potencialmente com poderes sobrenaturais, ou um grupo bem armado de indivíduos talentosos (equipe de segurança privada, grupo de advogados, equipe de atletas treinados)"
+        "title": "Indivíduo Mortífero / Grupo Talentoso",
+        "description": "Indivíduo Mortífero, indivíduo Talentoso e talvez dotado de poderes sobrenaturais ou um grupo bem armado de indivíduos Talentosos (um pelotão de seguranças particulares, um exército de advogados, uma equipe de atletas treinados).",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       }
     ],
     "flaws": [
@@ -549,13 +506,26 @@
         "title": "Inimigo",
         "cost": 1,
         "type": "radio",
-        "description": "Inimigo (1) - Todos os inimigos são classificados com dois pontos a menos que sua Eficácia. Por exemplo, um indivíduo dotado com três pontos como aliado fornece apenas um ponto como defeito."
+        "description": "Inimigo (1) - Todos os inimigos são classificados com dois pontos a menos que sua Eficácia. Por exemplo, um indivíduo dotado com três pontos como aliado fornece apenas um ponto como defeito.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       },
       {
         "title": "Inimigo",
         "cost": 2,
         "type": "radio",
-        "description": "Inimigo (2) - Todos os inimigos são classificados com dois pontos a menos que sua Eficácia. Por exemplo, um indivíduo dotado com três pontos como aliado mas fornece apenas um ponto como defeito."
+        "description": "Inimigo (2) - Todos os inimigos são classificados com dois pontos a menos que sua Eficácia. Por exemplo, um indivíduo dotado com quatro pontos como aliado mas fornece apenas dois pontos como defeito.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
+      },
+      
+      {
+        "title": "Inimigo",
+        "cost": 3,
+        "type": "radio",
+        "description": "Inimigo (2) - Todos os inimigos são classificados com dois pontos a menos que sua Eficácia. Por exemplo, um indivíduo dotado com cinco pontos como aliado mas fornece apenas 3 pontos como defeito.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       }
     ]
   },
@@ -568,19 +538,25 @@
         "cost": 1,
         "type": "radio",
         "title": "Metade do tempo",
-        "description": "Quando você os chama, eles aparecem em metade do tempo."
+        "description": "Quando você os convoca, eles aparecem na metade das vezes.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "De 1 a 10 horas",
-        "description": "Quando você os chama, eles aparecem dentro de 1 a 10 horas (role um dado)."
+        "description": "Quando você os convoca, eles aparecem dentro de 1 a 10 horas (role um dado).",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       },
       {
         "cost": 3,
         "type": "radio",
         "title": "O mais rápido possível",
-        "description": "Quando você os chama, eles aparecem o mais rápido possível."
+        "description": "Quando você os convoca, eles aparecem o mais rápido possível.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       }
     ],
     "flaws": [
@@ -588,32 +564,40 @@
         "title": "Perseguidor",
         "cost": 1,
         "type": "radio",
-        "description": "Perseguidor - Você tem uma tendência a atrair pessoas que ficam um pouco obcecadas por você para o seu próprio bem. Um Perseguidor abriga sentimentos não saudáveis por você e deseja um relacionamento mais substancial, quer você concorde ou não. Eles podem estar com ciúmes, enlouquecidos pelo amor, desesperados, oportunistas, ou qualquer combinação ou variação disso. Se você se livrar deles, outro logo aparece."
+        "description": "Perseguidor - Você tem uma tendência a atrair pessoas abusivas que se sentem demasiadamente impressionadas por você. O Perseguidor_nutre sentimentos nocivos por você e, à sua revelia, deseja um relacionamento mais sério. Pode ser uma pessoa ciumenta, cega de amor, desesperada, ser uma oportunista ou qualquer combinação ou variação dessas opções. Se você se livrar dele, outro logo aparecerá",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "101"
       }
     ]
   },
   {
     "name": "Contatos",
     "type": "background",
-    "description": "Você conhece pessoas - pessoas úteis - de muitas áreas diferentes da vida. Contatos fornecem principalmente informações em suas áreas de especialização e podem querer trocar favores de vários tipos. Para diferentes tipos de ajuda, conte com seus Aliados (p. 101) ou Mentor (p. 104). Um Contato é alguém em excelente posição para obter informações. Eles podem ser um despachante da polícia, em vez de um tenente de homicídios, ou um funcionário do Congresso, em vez de um senador. Corretores de informações, repórteres, solucionadores do submundo e motoristas de transporte são excelentes Contatos. Você pode definir seus Contatos ao comprar este Antecedente ou conforme precisar apresentá-los durante o jogo. Sempre que criá-los, certifique-se de adicioná-los ao Mapa de Relacionamentos (veja p. 111).",
+    "description": "Você conhece pessoas - pessoas úteis - de várias esferas da vida. Contatos fornecem principalmente informações em suas próprias áreas de especialização e podem querer trocar favores de vários tipos. Se quiser outra espécie de ajuda, recorra a Aliados (p. 101) ou Mentor (p. 104). Um contato é alguém em uma excelente posição para obter informações. Pode ser um atendente do COPOM em vez de um investigador do DHPP, ou um assessor parlamentar em vez de um senador. Consultores, repórteres, integrantes do submundo e motoristas de transportadoras dão excelentes Contatos. Você pode definir seus Contatos ao comprar este Antecedente ou conforme precisar deles no jogo. Sempre que criar um Contato, adicione-o ao Mapa de Relacionamentos (p. 111).",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
         "title": "Informações comuns, mas especializadas",
-        "description": "Um Contato que pode fornecer informações comuns, mas especializadas, como um traficante de drogas ou um vendedor de carros."
+        "description": "Um Contato capaz de dar a você informações comuns, mas especializadas, como um fornecedor de maconha ou um vendedor de carros.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "102"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Informações incomuns e privilegiadas",
-        "description": "Um Contato que pode fornecer informações incomuns e privilegiadas, como um pequeno traficante de armas ou um psiquiatra."
+        "description": "Um Contato capaz de dar a você informações incomuns e privilegiadas, como um traficantezinho de armas ou uma psiquiatra.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "102"
       },
       {
         "cost": 3,
         "type": "radio",
-        "title": "Informações críticas",
-        "description": "Um Contato que pode fornecer informações críticas e até mesmo classificadas como do governo, como um especialista em sistemas de segurança, agente de narcóticos ou lobista de elite."
+        "title": "Informações importantíssimas",
+        "description": "Um Contato capaz de dar a você informações importantíssimas e até mesmo classificadas pelo governo como confidenciais; por exemplo, um especialista em sistemas de segurança, um policial infiltrado do DENARC ou um lobista de elite.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "102"
       }
     ],
     "flaws": []
@@ -621,139 +605,177 @@
   {
     "name": "Fama",
     "type": "background",
-    "description": "As pessoas conhecem seu nome e procuram avidamente notícias sobre suas atividades. Você pode ser uma estrela de cinema, estrela do rock ou outra celebridade. A Fama concede influência na mídia em massa e social; você tem mais maneiras do que a maioria das pessoas para influenciar o que grupos específicos (geralmente) de seres humanos pensam. Você provavelmente tem maneiras, como um sósia, de esconder o fato de que está envolvido em coisas que prefere manter em segredo. Em algumas circunstâncias, o Narrador pode permitir que você use a Fama em um grupo de dados de teste Social, em vez de algum outro Atributo, especialmente para entrar em um local ou evento exclusivo. 'Você sabe quem eu sou?' não funciona em todos os lugares, mas funciona. Cada nível de Fama subtrai um do Dificuldade de testes Sociais envolvendo seu público ou apoiadores, desde que o teste não envolva nada muito extravagante. (Se envolver, consequências certamente seguirão.) A Fama tem seus contras, é claro - é mais difícil para você seguir alguém discretamente, por exemplo, e se fãs começarem a rondar o caern, esse caern provavelmente está comprometido por algo lamentavelmente mundano, como o Instagram. Você deve considerar a possibilidade de adquirir Disfarce como uma Especialização de Habilidade. Por padrão, a Fama se aplica entre os humanos, mas você pode argumentar a favor de uma espécie de Fama específica dos lobos. Algumas criaturas sobrenaturais estão especialmente cientes de notícias e tendências e podem estar cientes de você, Garou incluído, então o Narrador determina se os benefícios da Fama se aplicam a qualquer indivíduo sobrenatural específico.",
+    "description": "As pessoas sabem seu nome e consomem avidamente notícias sobre o que você anda fazendo. Você pode ser uma estrela do cinema, um astro do rock ou outra celebridade do gênero. A Fama lhe dá certa influência na comunicação de massas e nas mídias sociais: você tem à sua disposição mais meios de afetar o que grupos específicos de seres humanos (essa é a norma) pensam do que a maioria das pessoas. Você provavelmente possui maneiras de mascarar o fato de estar envolvido em coisas que prefere manter em segredo, como por exemplo tendo um sósia. Em algumas circunstâncias, o Narrador pode permitir que você use Fama em uma parada de dados de um teste Social no lugar de outra Característica, especialmente para entrar em um local ou evento exclusivo. 'Você sabe com quem está falando?' não funciona em todos os lugares, mas funciona em alguns. Cada nível de Fama subtrai um da Dificuldade de testes Sociais envolvendo seu público ou seus apoiadores, desde que não envolva nada que seja estranho demais. (Caso contrário, haverá consequências.) É claro que a Fama tem seu lado ruim. Por exemplo, para você será mais difícil seguir discretamente uma pessoa e, se as tietes começarem a se juntar nos arredores do caem, é bem provável que esse caem se veja comprometido por algo tão prosaico quanto o Instagram. Você deve considerar adquirir Disfarce como uma Especialização. Via de regra, Fama se aplica a grupos humanos, mas seria possível defender um caso especial de Fama entre lobos. Algumas criaturas sobrenaturais, mesmo outros garous, seguem com atenção as notícias e tendências e talvez saibam que você existe; portanto, caberá ao Narrador decidir se os benefícios da Fama se aplicam a um determinado indivíduo de origem sobrenatural",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
         "title": "Famoso em uma subcultura",
-        "description": "Uma subcultura sabe quem você é e o admira."
+        "description": "Uma subcultura bem restrita o conhece e admira.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "102"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Celebridade local da cidade",
-        "description": "Você é uma celebridade local, reconhecida pela maioria da cidade."
+        "description": "Você é uma celebridade local, reconhecida por grande parte da cidade.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "102"
       },
       {
         "cost": 3,
         "type": "radio",
         "title": "Conhecido pelo país",
-        "description": "A maioria das pessoas no país conhece pelo menos o seu nome."
+        "description": "A maioria dos habitantes do país conhece pelo menos seu nome.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "102"
       },
       {
         "cost": 4,
         "type": "radio",
         "title": "Conhecido por todos do ramo",
-        "description": "Todo mundo que se importa vagamente com as tendências sociais ou seu campo sabe algo sobre você."
+        "description": "Todos que se importam, ainda que vagamente, com tendências sociais ou com a sua área de atuação sabem algo sobre você.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       },
       {
         "cost": 5,
         "type": "radio",
         "title": "Audência Nacional / Global",
-        "description": "Sua Fama atinge audiências nacionais ou até mesmo globais em massa. Você é uma grande estrela de cinema, uma banda de rock que lota estádios ou uma personalidade da Internet."
+        "description": "Sua fama alcança públicos nacionais ou mesmo globais. Você é uma grande estrela do cinema, um astro do rock que lota estádios ou uma celebridade da internet.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       }
     ],
     "flaws": [
       {
         "cost": 1,
-        "type": "checkbox",
+        "type": "radio",
         "title": "Segredo Sombrio",
-        "description": "Segredo Sombrio - O Defeito do Segredo Sombrio é semelhante à Infâmia, mas suas ações obscuras permanecem desconhecidas para todos, exceto você e talvez um ou dois inimigos muito motivados. Também é mais fácil de descobrir do que um segredo verdadeiramente ameaçador. Exemplos incluem uma dívida significativa com um criminoso ou ter um arquivo em uma agência governamental de caça a lobisomens."
+        "description": "Segredo Sombrio - O Defeito Segredo Sombrio é parecido com o da Infâmia, mas seus atos ilícitos são conhecidos apenas por você mesmo e talvez por um ou dois inimigos que se deram ao trabalho de levantar seus podres. Também é algo mais fácil de vir à tona do que um segredo que colocaria realmente sua vida em risco. Entre os exemplos, temos: uma dívida considerável com um criminoso; um dossiê a seu respeito feito por uma agência do governo que caça lobisomens.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       },
       {
         "cost": 1,
         "type": "checkbox",
         "title": "Parceiro Infame",
-        "description": "Parceiro Infame - Seu cônjuge, amante ou alguma outra pessoa significativa para você tem Infâmia (como acima) que ocasionalmente mancha sua reputação por associação."
+        "description": "Parceiro Infame - Seu cônjuge, amante ou outro indivíduo significativo tem Infâmia (como acima), e ocasionalmente isso prejudica você por associação.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       },
       {
         "cost": 2,
-        "type": "checkbox",
+        "type": "radio",
         "title": "Infâmia",
-        "description": "Infâmia - Você é famoso por algo horrível. Pelo menos, a Dificuldade da maioria dos testes de reação aumenta pela quantidade do Defeito; na pior das hipóteses, as autoridades tentam matar ou capturar você à vista. Você pode estar na lista dos mais procurados de um governo, ou o Grupo Pentex pode circular sua descrição como um indivíduo perigoso entre suas várias frentes."
+        "description": "Infâmia - Você é famoso por algo terrível. No melhor dos casos, a Dificuldade da maioria dos testes de reação aumenta na mesma quantidade do valor do Defeito; no pior, as autoridades tentarão matá-lo ou capturá-lo à primeira vista. Você pode estar na lista dos mais procurados pelo governo ou talvez o Pentex Group circule pelas subsidiárias e fachadas uma descrição sua como indivíduo perigoso.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       }
     ]
   },
   {
     "name": "Máscara",
     "type": "background",
-    "description": "Como indivíduos que às vezes precisam trabalhar em segredo ou com um grau de negação plausível, os Garou encontram grande valor em poder se proteger com identidades falsas, ou até mesmo em ficar completamente 'invisíveis'. Por padrão (sem pontos), um lobisomem ou não precisa de uma Máscara, como aqueles que ainda não entraram em conflito com a lei ou outras agências governamentais para gerar tais registros, ou possui uma identidade falsa viável que pode resistir a uma parada de trânsito ou escrutínio superficial semelhante. Uma Máscara de zero pontos não pode passar em uma verificação de antecedentes, muito menos em uma investigação adequada pelas autoridades.",
+    "description": "Como indivíduos que precisam, às vezes, trabalhar em segredo ou com certo nível de negação plausível, garous veem grande valor em poderem se proteger com identidades falsas ou até mesmo em ficar completamente 'invisíveis'. Via de regra (valor zero), um lobisomem não precisa de Máscara - é o caso daqueles que ainda não se encrencaram com a polícia nem outras agências do governo para terem fichas corridas - ou tem um documento de identidade falso e viável, capaz de sobreviver a uma batida da polícia rodoviária ou outra inspeção superficial. Alguém com zero ponto em Máscara não passa em uma verificação de histórico, muito menos em uma investigação mais atenciosa das autoridades.",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
         "title": "Identidade Falsa de Qualidade",
-        "description": "Identidade Falsa de Qualidade - Inclui cartão de crédito, conta bancária, histórico de crédito, certidão de nascimento, etc., todos no nome da sua Máscara. Você pode passar em uma verificação de antecedentes estadual ou provincial."
+        "description": "Identidade Falsa de Qualidade - Você tem uma boa identidade falsa, incluindo cartão de crédito, conta bancária, histórico na praça, certidão de nascimento etc., tudo no nome da sua Máscara. Você pode passar por uma verificação de antecedentes estadual ou municipal.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Verificação de Antecedentes",
-        "description": "Verificação de Antecedentes - Sua Máscara pode passar em uma verificação de antecedentes com a polícia nacional: FBI, Scotland Yard ou equivalente. Se você tiver um registro militar ou de inteligência, ele foi classificado."
+        "description": "Verificação de Antecedentes - Sua Máscara pode passar por uma verificação de antecedentes feita pela polícia federal: PF, FBI, Scotland Yard ou o equivalente. Se você teve um registro militar ou de serviço de inteligência em vida, ele foi classificado como confidencial.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       },
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Apagado",
-        "description": "Apagado - Alguém em posições elevadas eliminou seus registros reais. Oficialmente, você não existe."
+        "title": "Zerado",
+        "description": "Zerado - Alguém em altas posições eliminou seus registros reais. Você não existe oficialmente (Válido apenas se possuir uma Máscara de dois pontos).",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "103"
       },
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Mestre das Máscaras",
-        "description": "Mestre das Máscaras - Você pode criar ou obter Máscaras. Criar uma Máscara leva três dias por ponto e possivelmente expõe você online; obter Máscaras leva um dia por ponto, mas custa algo em troca. O quanto depende da sua alavancagem, margem no teste social ou qualquer outra coisa que o Narrador decida"
+        "title": "Sapateiro",
+        "description": "Sapateiro - Você pode obter ou criar Máscaras. Fabricar uma Máscara leva três dias por ponto e possivelmente o expõe online; a obtenção de Máscaras leva um dia por ponto, mas custa algo em troca. O preço depende da sua influência, margem em um teste Social ou qualquer outra coisa que o Narrador decida (Válido apenas se possuir uma Máscara de dois pontos).",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       }
     ],
     "flaws": [
       {
         "cost": 2,
         "type": "checkbox",
-        "title": "Pessoa de Interesse",
-        "description": "Pessoa de Interesse - Suas biometrias, nome, histórico, associados conhecidos e pseudônimos aparecem em vários bancos de dados de agências de inteligência, provavelmente identificando você como um potencial terrorista. Qualquer operador de agência governamental (ou analista comparável) provavelmente conseguirá juntar as peças para perceber o que você anda fazendo."
+        "title": "Suspeito",
+        "description": "Suspeito - Sua biometria, nome, histórico, associados conhecidos e nomes falsos aparecem em vários bancos de dados de agências de inteligência, possivelmente sinalizando-o corno um potencial terrorista. Qualquer agente (ou analista comparável) pode ler nas entrelinhas e perceber o que você vem fazendo.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       },
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Erro de Série",
-        "description": "Erro de Série - Em algum lugar, alguém cometeu um erro em detrimento ao seu. Como resultado, qualquer pessoa que faça uma verificação de antecedentes em você descobrirá que você morreu recentemente, está em uma lista de observação como perigoso ou, de alguma forma, merece detenção ou uma chamada para a polícia. Este defeito também se aplica a qualquer pesquisa de banco de dados em sua identidade."
+        "title": "Erro Recorrente",
+        "description": "Erro Recorrente - Em algum lugar, alguém cometeu um erro que o prejudica. Como resultado, qualquer pessoa que verifique seu histórico descobrirá que você morreu há pouco tempo, que está numa lista de vigilância perigosa, ou que é (injustamente) digno de detenção ou de uma ligação à polícia. (Claro que você pode muito bem ser digno de ir para a prisão, mas não por esse motivo). Este Defeito também se aplica a qualquer pesquisa de banco de dados sobre a sua identidade.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       }
     ]
   },
   {
     "name": "Mentor",
     "type": "background",
-    "description": "Este Traço representa um Garou solitário, ou até mesmo uma matilha, que cuida de você oferecendo orientação, informações ou ajuda de vez em quando. Essa função pode ser desempenhada por um indivíduo que o ajudou a iniciar nas tradições de sua tribo ou auspício, ou pode ser alguém que o ajudou a evitar um fim desastroso após sua Primeira Mudança. Ou podem ter uma perspectiva totalmente diferente; você pode nem mesmo saber que tem um Mentor, se eles forem do tipo que intervém em seu nome de algum nível de distância e obscuridade.",
+    "description": "Esta Característica representa um garou ou mesmo uma alcateia de lobisomens que cuida de você, oferecendo orientação, informações ou ajuda de tempos em tempos. O papel pode caber a um indivíduo que ajudou a iniciá-lo na sua tribo ou augúrio, ou pode ser alguém que ajudou a salvá-lo de um fim catastrófico após a Primeira Transformação. Ou talvez seja um indivíduo com uma visão de mundo totalmente diferente. Pode ser que você nem sequer saiba que tem um Mentor, caso se trate de alguém que prefira intervir a seu favor apenas de longe ou em segredo. Essa relação pode até ser controversa ou puramente pragmática. Seu Mentor pode trocar informações com você para benefício mútuo ou até mesmo ajudá-lo, se você tiver respeitado o relacionamento. Um Mentor pode ser poderoso, mas tal poder não precisa atuar de forma direta. Dependendo do valor deste Antecedente, o Mentor pode não passar de um velho ressentido com uma extraordinária rede de informações à disposição dele, ou pode ser quase uma lenda do Apocalipse com uma reputação e um poder de influência absurdos entre aqueles que frequentam as assembleias e suas fogueiras. Ele pode dar conselhos, negociar por você com uma fratria poderosa ou desviar a atenção da polícia para longe de você. Além disso, é quase certo que avisará quando você estiver prestes a se meter em situações que você não entende. O Mentor poderia ser até mesmo um espírito, criando aí um relacionamento diferente daquele que você mantém com o Espírito Padroeiro da sua tribo (se bem que seu Mentor poderia ser um avatar ou outra encarnação menor). Mais informações sobre a hierarquia espiritual podem ser encontradas na p. 232. Seu Mentor pode esperar reciprocidade, ou então algum tipo de retorno para o investimento pessoal feito em você. Seja quem for essa figura, registre-a no seu Mapa de Relacionamentos ao adquirir o Antecedente (p. 111). Como regra geral, Mentores oferecem aconselhamento e o ocasional apoio político ou encobrimento, mas não arranjam altos favores para você ou lutam suas batalhas em seu lugar. Se forem forçados a ajudá-lo para além desses limites, ficarão irados e provavelmente você perderá um ponto ou mais neste Antecedente.",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
-        "title":  "Garou de Renome 1 / Gaffling respeitado",
-        "description": "Garou de Renome 1 / Gaffling respeitado."
+        "title":  "Garou de Renome 1 na categoria mais aclamada / gafarete respeitado.",
+        "description": "Garou de Renome 1 na categoria mais aclamada / gafarete respeitado.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       },
       {
         "cost": 2,
         "type": "radio",
-        "title":  "Garou de Renome 2 / Jaggling estabelecido",
-        "description": "Garou de Renome 2 / Jaggling estabelecido."
+        "title":  "Garou de Renome 2 na categoria mais aclamada / jagrete reconhecido.",
+        "description": "Garou de Renome 2 na categoria mais aclamada / jagrete reconhecido.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       },
       {
         "cost": 3,
         "type": "radio",
-        "title":  "Garou de Renome 3 / Jaggling respeitado",
-        "description": "Garou de Renome 3 / Jaggling respeitado."
+        "title":  "Garou de Renome 3 na categoria mais aclamada / jagrete respeitado.",
+        "description": "Garou de Renome 3 na categoria mais aclamada / jagrete respeitado.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       },
       {
         "cost": 4,
         "type": "radio",
-        "title":  "Garou de Renome 4 / Jaggling honrado",
-        "description": "Garou de Renome 4 / Jaggling honrado."
+        "title":  "Garou de Renome 4 na categoria mais aclamada / jagrete ilustre.",
+        "description": "Garou de Renome 4 na categoria mais aclamada / jagrete ilustre.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       },
       {
         "cost": 5,
         "type": "radio",
-        "title": "Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmática",
-        "description": "Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmática, agindo em seu nome de maneiras que precisam ser interpretadas."
+        "title": "Garou de Renome 5 na categoria mais aclamada / jagrete lendário ou Incarna menor e enigmático",
+        "description": "Garou de Renome 5 na categoria mais aclamada / jagrete lendário ou Incarna menor e enigmático, agindo em seu benefício de maneiras que precisariam de interpretação.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       }
     ],
     "flaws": [
@@ -761,56 +783,145 @@
         "cost": 1,
         "type": "radio",
         "title": "Adversário Novato",
-        "description": "Adversário Novato - Garou de Renome 3 / Jaggling respeitado."
+        "description": "Adversário Novato - Garou de Renome 3 / Jagrete respeitado.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Adversário Veterano",
-        "description": "Adversário Veterano - Garou de Renome 4 / Jaggling honrado."
+        "description": "Adversário Veterano - Garou de Renome 4 / Jagrete honrado.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
       },
       {
         "cost": 3,
         "type": "radio",
         "title": "Adversário Ancião",
-        "description": "Adversário Ancião - Garou de Renome 5 / Jaggling lendário ou Incarna menor e enigmático, agindo contra seu nome de maneiras que precisam ser interpretadas."
+        "description": "Adversário Ancião - Garou de Renome 5 / Jagrete lendário ou Incarna menor e enigmático, agindo contra seu nome de maneiras que precisam ser interpretadas.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "104"
+      }
+    ]
+  },
+  {
+    "name": "Pacto Espiritual",
+    "type": "background",
+    "description": "Você fez um pacto com um espírito menor e ganhou a lealdade dele. O espírito se comporta como aliado o ajudará na medida do possível quando invocado, geralmente pelo Ritual de Invocação de Espíritos (p. 185). O tipo exato de espírito deve ser decidido em conjunto com o Narrador, mas os diversos espíritos do capítulo 'Aliados e Antagonistas' (p. 239) podem ser um ótimo ponto de partida. A maioria dos garous prefere fazer pactos com espíritos-gaianos ou espíritos-wyldianos, mas alguns podem fechar acordos com os servos da Weaver, como é o caso dos Roedores de Ossos e Andarilhos do Asfalto. Outros - geralmente do Conselho dos Fantasmas ou da tribo das Garras Vermelhas - chegam a selar pactos com Malditos e outros espíritos-wyrmianos, mas o fazem com muito cuidado e absoluto sigilo. O tipo de auxílio que você pode esperar depende do espírito. Os gafaretes e a maioria dos jagretes inferiores têm uma visão muito tacanha da vida. Por exemplo, perguntar a um espírito-animal o que há atrás da próxima porta poderia levá-lo a responder apenas se haveria no outro recinto algo assustador ou comestível, ao passo que um espírito-máquina só daria informações sobre a eficiência e a funcionalidade dos objetos que se encontrassem lá. Mesmo assim, muitos espíritos têm uma ou duas aptidões ou Habilidades que podem vir a calhar e, caso possam conceder Dons, estarão sempre à disposição para ensiná-los.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Espírito de Poder 1 / gafarete menor",
+        "description": "Espírito de Poder 1 / gafarete menor.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Espírito de Poder 2 / gafarete médio",
+        "description": "Espírito de Poder 2 / gafarete médio.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
+      },
+      {
+        "cost": 3,
+        "type": "radio",
+        "title": "Espírito de Poder 3 / gafarete maior ou jagrete inferior",
+        "description": "Espírito de Poder 3 / gafarete maior ou jagrete inferior.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
+      },
+      {
+        "cost": 4,
+        "type": "radio",
+        "title": "Espírito de Poder 4 / jagrete menor",
+        "description": "Espírito de Poder 4 / jagrete menor.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
+      },
+      {
+        "cost": 5,
+        "type": "radio",
+        "title": "Espírito de Poder 5 / jagrete médio",
+        "description": "Espírito de Poder 5 / jagrete médio.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Acompanhante",
+        "description": "Acompanhante (Requer Pacto Espiritual pelo menos em 1) - O espírito será capaz de acompanhá-lo a toda parte desde que você não tope com salvaguardas espirituais nem outras contramedidas pertinentes. Se o espírito não tiver um hospedeiro físico (veja a seguir), a comunicação com ele ficará restrita à Umbra ou dependerá do acesso às Imensidões Espirituais por meio do Dom Sentidos Crepusculares (p. 147). Áreas de Película forte, portanto, podem cortar a comunicação com o espírito mesmo que ele se encontre logo do outro lado da barreira.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Hospedeiro",
+        "description": "Hospedeiro (Requer Pacto Espiritual pelo menos em 1) - O espírito tem um corpo hospedeiro persistente, como um animal, ou a capacidade de possuir outro tipo de elemento recorrente, como árvores ou monitores de vídeo. Dessa maneira, ele consegue interagir com você e outras pessoas no mundo físico. (Observe que os espíritos sem a característicaAcompanhante ainda precisarão ser invocados.)",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "radio",
+        "title": "Pacto Condicional",
+        "description": "Pacto Condicional (Requer Pacto Espiritual pelo menos em 1) - Os termos do pacto estabelecem que você deve executar ou evitar certos atos em troca dos serviços do espírito. Por exemplo, um espírito-fogo poderia exigir que você acendesse uma vela em todo edifício no qual entrasse; um espírito-besouro poderia proibí-lo de fazer mal aos insetos de maneira proposital. Deixar de cumprir a condição irritará o espírito, que só voltará a contar como seu aliado depois de você pagar uma penitência a ser definida pelo Narrador.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
       }
     ]
   },
   {
     "name": "Recursos",
     "type": "background",
-    "description": "Este Antecedente descreve uma forma abstrata de riqueza ou outros ativos que você pode aproveitar em muitas situações. Esses benefícios não são necessariamente de natureza financeira e raramente são completamente líquidos. Especialmente à medida que o estado da banca moderna se torna quase inteiramente digital, rivais bem conectados e nêmesis sobrenaturais podem congelar ou esgotar contas bancárias, então Garou podem acumular seus Recursos como dinheiro, ouro, arte, material ou até mesmo contrabando.",
+    "description": "Este Antecedente descreve uma forma abstrata de riqueza ou patrimônio que você poderá usar em proveito próprio em várias situações. Essas benesses não são necessariamente de caráter financeiro e raras vezes têm liquidez total. (Os jogos do Mundo das Trevas não utilizam muitas 'listas de preços' porque esses detalhezinhos não costumam ser importantes para a narrativa.) Particularmente agora que as transações bancárias são quase todas digitais, rivais e arqui-inimigos sobrenaturais bem-relacionados podem bloquear ou limpar contas bancárias e, sendo assim, pode ser que os garous acumulem Recursos em dinheiro vivo, ouro, obras de arte, equipamento ou até mesmo contrabando. Para usar este Antecedente, some o valor de Recursos a uma parada de dados pertinente uma vez a cada sessão de jogo. Essa fórmula representa, por exemplo, a aquisição às pressas de uma lancha que já estava à venda, negociação ou suborno, mas não foi pensada para simular coisas como 'comprar a empresa' ou 'fundar minha própria organização de caçadores'. Como exemplos, temos: Manipulação + Subterfúgio + Recursos para subornar alguém com toda discrição; Carisma + Política + Recursos para afetar a eleição municipal; Inteligência + Manha + Recursos para comprar uma quantidade significativa de drogas etc. A condição garou costuma entrar em conflito com empregos tradicionais ou horários normais de expediente. Pontos em Recursos fornecem uma renda para que você mantenha seu padrão de vida, mas você deve detalhar a fonte de sua renda e a forma que este Antecedente assume. Afinal, sua riqueza pode secar, ser roubada ou desaparecer durante a crônica. Observe também que, no caso de valores elevados de Recursos, pode ser que o personagem tenha algum envolvimento com o tipo de exploração abusiva e especulação financeira que abriu as portas para a Idade do Apocalipse, o que seria de uma hipocrisia gritante, para dizer o mínimo, e provavelmente angariaria a inimizade dos garous que não aceitam a procedência do dinheiro do personagem.",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
         "title": "Salário Mínimo",
-        "description": "Estilo de vida de salário mínimo."
+        "description": "De contracheque a contracheque.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
       },
       {
         "cost": 2,
         "type": "radio",
         "title": "Classe Média",
-        "description": "Estilo de vida de classe média."
+        "description": "Estilo de vida de classe média.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
       },
       {
         "cost": 3,
         "type": "radio",
         "title": "Classe Alta",
-        "description": "Estilo de vida de classe alta."
+        "description": "Estilo de vida de classe alta.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
       },
       {
         "cost": 4,
         "type": "radio",
         "title": "Rico",
-        "description": "Estilo de vida rico."
+        "description": "Estilo de vida rico.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
       },
       {
         "cost": 5,
         "type": "radio",
-        "title": "Ultra rico",
-        "description": "Estilo de vida ultra-rico."
+        "title": "Podre de rico",
+        "description": "Estilo de vida Podre de rico.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
       }
     ],
     "flaws": [
@@ -818,64 +929,204 @@
         "cost": 1,
         "type": "radio",
         "title": "Destituído",
-        "description": "Destituído - Você não tem dinheiro e nem casa."
+        "description": "Destituído - Você não tem dinheiro e nem casa.",
+        "font": "Lobisomem: O Apocalipse 5ed",
+        "page": "105"
       }
     ]
   },
   {
-    "name": "Pacto Espiritual",
-    "type": "background",
-    "description": "Você fez um pacto mútuo com um espírito menor e ganhou sua lealdade. O espírito age como um aliado e fornecerá ajuda da melhor maneira possível quando convocado, geralmente com o Ritual de Invocação de Espíritos.",
+    "name": "Ritos",
+    "type": "méritos",
+    "description": "A maestria e a habilidade de realizar rituais são dons valiosos entre os Garou. Nem todos os lobisomens têm a destreza de realizar rituais em condições adversas ou a presença social necessária para liderar uma assembleia, mas aqueles que dominam essas artes ganham o respeito de sua tribo. Esses méritos garantem vantagens significativas em rituais sociais e espirituais, permitindo que o Garou mostre seu conhecimento e habilidade em momentos críticos.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Improvisador",
+        "description": "Improvisador - Você sofre dois dados a menos de penalidade ao realizar rituais em condições subótimas.",
+        "font": "Nação Fragmentada",
+        "page": "132"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Convocador da Assembléia",
+        "description": "Convocador da Assembléia - Selecione 5 rituais sociais que você tenha dominado. Se permitido durante uma Assembléia, você pode auxiliar em qualquer ritual, desde que seja realizado em uma Assembléia ou em uma reunião substancialmente semelhante de Garou.",
+        "font": "Nação Fragmentada",
+        "page": "132"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Assistente Perito",
+        "description": "Assistente Perito - Quando você auxilia na realização de um Rito que você conhece, você contribui com um dado regular adicional à parada de dados.",
+        "font": "Maré da Wyrm",
+        "page": "28"
+      },
+      {
+        "cost": 3,
+        "type": "checkbox",
+        "title": "Mestre de Rituais",
+        "description": "Mestre de Rituais - Você adiciona +1 dado a qualquer teste que envolva o conhecimento ou a realização de rituais.",
+        "font": "Nação Fragmentada",
+        "page": "132"
+      }      
+    ],
+    "flaws": []
+  },
+  {
+    "name": "Mentais",
+    "type": "méritos",
+    "description": "Os Garou carregam dentro de si tanto a fúria de Gaia quanto as marcas da própria alma. Nem todos os fardos são físicos ou espirituais — muitos se escondem na mente, moldando como cada um vê o mundo, enfrenta a luta e convive com a matilha. Defeitos mentais revelam cicatrizes invisíveis: rancores que nunca se curam, pessimismo que colore cada vitória com sombras e instintos que dificultam o aprendizado. Para alguns, esses traços são fraquezas; para outros, apenas mais um reflexo do peso de ser meio-humano e meio-lobo em uma guerra sem fim.",
+    "advantages": [],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Amargurado",
+        "description": "Amargurado - Mesmo entre os Garou que guardam rancor, você é do tipo que não consegue deixar o passado para trás, e sua raiva permanece sempre latente, incapaz de encontrar verdadeiro alívio. Depois de ganhar seu primeiro ponto de Hauglosk, todos os testes de Hauglosk são feitos com +1 de Dificuldade.",
+        "font": "Trilha Enluarada",
+        "page": "68"
+
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Taciturno",
+        "description": "Taciturno - Um verdadeiro fatalista da vida, para você, toda luz prateada sempre carrega uma nuvem. Embora seja dedicado à luta, para você ela será sempre apenas isso: uma luta. Depois de ganhar seu primeiro ponto de Harano, todos os testes de Harano são feitos com +1 de Dificuldade.",
+        "font": "Trilha Enluarada",
+        "page": "68"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Aprendiz Tátil",
+        "description": "Aprendiz Tátil - Você é uma criatura de instinto, e nenhum estudo ou prática ajuda a internalizar o que aprendeu até que a memória muscular seja criada. Qualquer aquisição de um ponto de Perícia ou de uma Especialidade exige que você tenha usado a Perícia com sucesso na sessão anterior.",
+        "font": "Trilha Enluarada",
+        "page": "68"
+      }
+    ]
+  },
+  {
+    "name": "Herança Selvagem",
+    "type": "méritos",
+    "description": "Os Garou não são apenas criaturas de espírito e carne, mas também de lobo e homem. Embora grandes matilhas de lobos tenham percorrido o mundo por milênios, as raças específicas permanecem amplamente irrelevantes para o lobisomem médio. No entanto, existem situações em que essa herança se manifesta e se torna útil. Apenas um tipo de Mérito de Herança Selvagem pode ser adquirido por personagem.",
     "advantages": [
       {
         "cost": 1,
         "type": "radio",
-        "title": "Espírito / Gaffling menor",
-        "description": "Espírito / Gaffling menor."
+        "title": "Lobo da Tundra",
+        "description": "Lobo da Tundra - Sua herança lupina vem das partes mais frias de Gaia e seu pelo branco e amor por temperaturas baixas revelam isso. Você sofre penalidades reduzidas pela metade devido ao frio (arredondadas para baixo), embora o Narrador possa considerar certas circunstâncias (imersão em nitrogênio líquido) além da sua resistência natural.",
+        "font": "Trilha Enluarada",
+        "page": "69"
       },
       {
         "cost": 2,
         "type": "radio",
-        "title": "Espírito / Gaffling moderado",
-        "description": "Espírito / Gaffling moderado."
+        "title": "Lobo Cinzento",
+        "description": "Lobo Cinzento - O mais comum dos lobos também é o animal de matilha mais bem adaptado e, como seus irmãos lupinos, você se adaptou particularmente bem à vida em grupo. Sempre que se beneficiar de trabalho em equipe, você recebe um dado bônus adicional quando assistido por dois ou mais ajudantes (veja Corebook, p. 122 para regras de trabalho em equipe).",
+        "font": "Trilha Enluarada",
+        "page": "69"
       },
       {
         "cost": 3,
-        "type": "radio",
-        "title": "Espírito / Gaffling maior ou Jagling menor",
-        "description": "Espírito / Gaffling maior ou Jagling menor."
-      },
-      {
-        "cost": 4,
-        "type": "radio",
-        "title": "Espírito / Jagling menor",
-        "description": "Espírito / Jagling menor."
-      },
-      {
-        "cost": 5,
-        "type": "radio",
-        "title": "Espírito / Jagling moderado",
-        "description": "Espírito / Jagling moderado."
-      },
-      {
-        "cost": 2,
         "type": "checkbox",
-        "title": "Companheiro",
-        "description": "Companheiro - O espírito pode acompanhá-lo onde quer que você vá, desde que não encontre barreiras espirituais ou outras contramedidas aplicáveis. A comunicação com ele é restrita à Umbra ou ao acessar os Espíritos Selvagens através do uso dos Sentidos Penumbrais."
-      },
-      {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Hospedeiro",
-        "description": "Hospedeiro (Requer Pacto Espiritual pelo menos em 1) - O espírito possui um corpo hospedeiro persistente, como um animal, ou a capacidade de possuir outro tipo de característica recorrente, como árvores ou monitores. Isso permite que ele interaja com você e qualquer outra pessoa no mundo físico."
+        "title": "Pele Espessa",
+        "description": "Pele Espessa - Você é muito mais resistente do que outros Garou. Sua Vitalidade é igual a 4 + seu valor de Vigor ao invés de 3 + seu valor de Vigor.",
+        "font": "Maré da Wyrm",
+        "page": "29"
       }
     ],
     "flaws": [
       {
         "cost": 1,
+        "type": "checkbox",
+        "title": "Odor Distintivo",
+        "description": "Odor Distintivo - Embora não seja desagradável, seu cheiro pessoal é distinto e constante, e não importa quantas vezes você se lave ou tente disfarçá-lo, ele nunca desaparece. Qualquer tentativa de rastreá-lo, reconhecê-lo ou detectá-lo pelo olfato recebe um bônus de dois dados, e certos testes Sociais são feitos com penalidade de dois dados, a critério do Narrador.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      }
+    ]
+  },
+  {
+    "name": "Metamorfose",
+    "type": "méritos",
+    "description": "Os Garou tomam sua habilidade de mudar de forma como algo natural; afinal, é seu direito de nascimento e sua característica mais definidora. Para a maioria dos lobisomens, essas capacidades são dadas como certas. No entanto, outros descobrem que o processo nem sempre é tão simples quanto se poderia esperar.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Mudança Umbral",
+        "description": "Mudança Umbral - A Umbra desperta seu instinto primal. Sempre que você entra na Umbra ou no bawn do seu caern, você pode mudar para a forma glabro ou hispo gratuitamente, sem precisar fazer uma checagem de Fúria, contanto que não tenha perdido o lobo. Sempre que sair da Umbra ou do bawn do seu caern, você pode mudar instantaneamente para forma homid ou lupus. Para este Mérito, “seu caern” pode ser qualquer caern com o qual você tenha um vínculo próximo, como aquele guardado pelo seu sept ou um com uma Vantagem na sua ficha de matilha (ver Pack Sheets em Shattered Nation, p. 143). Um Defeito como Caern Pária (permanente ou temporário) impede o uso dessa Vantagem nesse caern.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Crinos intencional",
+        "description": "Crinos intencional - Na primeira vez de cada mudança para a forma crinos em que você precise gastar Força de Vontade para resistir à frenesi, você não precisa gastar nada para fazê-lo.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Resiliência de Luna",
+        "description": "Nas Formas Glabro e Hispo, você ganha duas caixas adicionais no seu medidor de Vitalidade.",
+        "font": "Maré da Wyrm",
+        "page": "28"
+      },
+      {
+        "cost": 3,
+        "type": "checkbox",
+        "title": "Forma Favorita",
+        "description": "Forma Favorita - Mudar de forma é tão natural para você quanto respirar, e desde o momento em que mudou, percebeu que algumas formas exigem menos esforço para assumir do que outras. Escolha uma das formas sobrenaturais; sempre que mudar para essa forma, você pode rerrolar um único teste de Checagem de Fúria falho.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Lupino Retraído",
+        "description": "Lupino Retraído - Você não tem problemas para mudar entre as diversas formas do Garou quando Luna está com você, mas uma limitação perigosa se impõe quando sua Fúria vacila. Sempre que você perde o lobo, em vez de escolher sua forma mundana, é forçado a assumir a forma lupina.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Mudança Dolorosa",
+        "description": "Mudança Dolorosa - Para você, cada mudança traz consigo um sofrimento agonizante, sentindo sua pele esticada, ossos quebrados e reformados, e seu corpo deformado além dos limites naturais. Sempre que assumir uma forma sobrenatural, você sofre um nível de dano Superficial de Vitalidade.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      },
+      {
+        "cost": 1,
         "type": "radio",
-        "title": "Condição de Pacto",
-        "description": "Condição de Pacto (Requer Pacto Espiritual pelo menos em 1) - Seu pacto depende de você realizar ou evitar certos atos em troca do serviço, como um espírito do fogo exigindo que você acenda uma vela em cada edifício que você entrar. Não cumprir essa condição irrita o espírito, e ele não será considerado um aliado até que uma penitência adequada seja feita, conforme decidido pelo Narrador."
+        "title": "Formas Limitadas",
+        "description": "Formas Limitadas - Sua habilidade de mudar para as formas sobrenaturais é restrita, e embora hominídeo, crinos e lupino estejam ao seu alcance, certas formas parciais são impossíveis para você. Com um ponto, você não pode assumir a forma hispo.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Formas Limitadas",
+        "description": "Formas Limitadas - Sua habilidade de mudar para as formas sobrenaturais é restrita, e embora hominídeo, crinos e lupino estejam ao seu alcance, certas formas parciais são impossíveis para você. Com dois pontos, você não pode assumir a forma hispo e a forma glabro.",
+        "font": "Trilha Enluarada",
+        "page": "69"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Mudança Lenta",
+        "description": "Mudança Lenta - A Wyld está dentro de você, mas demora um pouco mais para se manifestar, e sua capacidade de mudar de forma sofre em consequência. A mudança de forma custa o mesmo que o habitual, mas requer uma ação completa; durante esse tempo, o lobisomem não pode fazer nada além de se concentrar na transformação. Dons ou outras situações que normalmente reduziriam a velocidade de mudança podem reduzir essa penalidade para uma ação menor, mas não mais do que isso.",
+        "font": "Trilha Enluarada",
+        "page": "69"
       }
     ]
   }
