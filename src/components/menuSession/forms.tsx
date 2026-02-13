@@ -21,6 +21,7 @@ export default function Forms() {
 
   const updateValue = async (newForm: string) => {
     const actualForm = dataSheet.data.form;
+    var findResilienciaDeLuna = dataSheet.data.advantagesAndFlaws.advantages.find((advantage: { title: string }) => advantage.title == 'Resiliência de Luna');
     if (newForm !== actualForm) {
       if (newForm === 'Hominídeo' || newForm === 'Lupino') {
         if (actualForm === 'Crinos') {
@@ -34,8 +35,10 @@ export default function Forms() {
           }
         } else if (actualForm === 'Hispo' || actualForm === 'Glabro') {
           dataSheet.data.attributes.strength -= 2;
-          dataSheet.data.attributes.stamina -= 2;
           dataSheet.data.attributes.dexterity -= 2;
+          if (findResilienciaDeLuna) {
+            dataSheet.data.attributes.stamina -= 4;
+          } else dataSheet.data.attributes.stamina -= 2;
           await registerMessage( sessionId, { message: `O personagem ${dataSheet.data.name} Mudou para a forma ${newForm}.`, type: 'transform' }, email, setShowMessage);
           await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${actualForm} para ${newForm}.`, type: 'notification' }, null, setShowMessage);
         } else {
@@ -55,27 +58,28 @@ export default function Forms() {
             dataSheet.data.attributes.dexterity += 4;
           } else if (actualForm === 'Hispo' || actualForm === 'Glabro') {
             dataSheet.data.attributes.strength += 2;
-            dataSheet.data.attributes.stamina += 2;
             dataSheet.data.attributes.dexterity += 2;
+            if (!findResilienciaDeLuna) dataSheet.data.attributes.stamina += 2;
           }
           const oldRage = dataSheet.data.rage;
           dataSheet.data.form = newForm;
           await updateDataWithRage(sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
           await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${actualForm} para ${dataSheet.data.form} (${ oldRage === dataSheet.data.rage ? 'Não houve perda de Fúria' : `Fúria atualizada de ${oldRage} para ${dataSheet.data.rage}` }).`, type: 'notification' }, null, setShowMessage);
-          setShowMenuSession('');
         }
+        setShowMenuSession('');
       } else {
         if (dataSheet.data.rage < 1) {
           setShowMessage({show: true, text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`});
         } else {
           if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
             dataSheet.data.attributes.strength += 2;
-            dataSheet.data.attributes.stamina += 2;
             dataSheet.data.attributes.dexterity += 2;
+            if (findResilienciaDeLuna) dataSheet.data.attributes.stamina += 4;
+            else dataSheet.data.attributes.stamina += 2;
           } else if (actualForm === 'Crinos') {
             dataSheet.data.attributes.strength -= 2;
-            dataSheet.data.attributes.stamina -= 2;
             dataSheet.data.attributes.dexterity -= 2;
+            if (!findResilienciaDeLuna) dataSheet.data.attributes.stamina -= 2;
           }
           dataSheet.data.form = newForm;
           const oldRage = dataSheet.data.rage;

@@ -199,14 +199,6 @@
         "page": "99"
       },
       {
-        "cost": 1,
-        "type": "checkbox",
-        "title": "Mau Agouro da Lua",
-        "description": "Mau Agouro da Lua - Talvez você tenha se transformado sob a lua de sangue ou, quem sabe, Luna simplesmente não sorria para você. Seja qual for o motivo, buscar a benção de Luna para restaurar sua Fúria é, no mínimo, incerto. Sempre que você uivar para a lua para recuperar Fúria, deve realizar um teste de Fúria; em caso de sucesso, sua Fúria é restaurada normalmente, mas em caso de falha, você não recupera Fúria alguma.",
-        "font": "Maré da Wyrm",
-        "page": "28"
-      },
-      {
         "cost": 2,
         "type": "checkbox",
         "title": "Prática em ritual",
@@ -277,6 +269,14 @@
         ],
         "font": "Lobisomem: O Apocalipse 5ed",
         "page": "99"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Mau Agouro da Lua",
+        "description": "Mau Agouro da Lua - Talvez você tenha se transformado sob a lua de sangue ou, quem sabe, Luna simplesmente não sorria para você. Seja qual for o motivo, buscar a benção de Luna para restaurar sua Fúria é, no mínimo, incerto. Sempre que você uivar para a lua para recuperar Fúria, deve realizar um teste de Fúria; em caso de sucesso, sua Fúria é restaurada normalmente, mas em caso de falha, você não recupera Fúria alguma.",
+        "font": "Maré da Wyrm",
+        "page": "28"
       },
       {
         "cost": 1,
@@ -1074,7 +1074,7 @@
         "cost": 2,
         "type": "checkbox",
         "title": "Resiliência de Luna",
-        "description": "Nas Formas Glabro e Hispo, você ganha duas caixas adicionais no seu medidor de Vitalidade.",
+        "description": "Resiliência de Luna - Nas Formas Glabro e Hispo, você ganha duas caixas adicionais no seu medidor de Vitalidade.",
         "font": "Maré da Wyrm",
         "page": "28"
       },

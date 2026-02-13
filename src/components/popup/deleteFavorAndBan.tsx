@@ -20,7 +20,6 @@ export default function DeleteFavorAndBan() {
 
   const deleteFavorAndBan = async () => {
     // const findItem = dataSheet.data.favorsAndBans.find((favorAndBan: any) => favorAndBan.order === showDeleteFavorAndBan.name);
-    // console.log(findItem);
     if (showDeleteFavorAndBan.type === 'player') {
       dataSheet.data.favorsAndBans = dataSheet.data.favorsAndBans.filter((favorAndBan: any) => favorAndBan.order !== showDeleteFavorAndBan.name);
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);

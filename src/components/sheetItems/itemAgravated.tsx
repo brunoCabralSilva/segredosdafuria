@@ -14,7 +14,18 @@ export default function ItemAgravated(props: any) {
   useEffect(() => {
     const returnValues = async (): Promise<void> => {
       if (name === 'willpower') setTotalItem(Number(dataSheet.data.attributes.composure) + Number(dataSheet.data.attributes.resolve));
-      if (name === 'health') setTotalItem(Number(dataSheet.data.attributes.stamina) + 3);
+      if (name === 'health') {
+        var findMaldicaoDaAncia = dataSheet.data.advantagesAndFlaws.flaws.find((advantage: { title: string }) => advantage.title == 'Maldição da Anciã');
+        var findPeleEspessa = dataSheet.data.advantagesAndFlaws.advantages.find((advantage: { title: string }) => advantage.title == 'Pele Espessa');
+
+        if (findMaldicaoDaAncia && findPeleEspessa) {
+          setTotalItem(Number(dataSheet.data.attributes.stamina) + 3);
+        } else if (findMaldicaoDaAncia) {
+          setTotalItem(Number(dataSheet.data.attributes.stamina) + 2);
+        } else if (findPeleEspessa) {
+          setTotalItem(Number(dataSheet.data.attributes.stamina) + 4);
+        } else setTotalItem(Number(dataSheet.data.attributes.stamina) + 3);
+      }
     };
     returnValues();
   }, []);

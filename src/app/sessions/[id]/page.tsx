@@ -100,8 +100,6 @@ export default function SessionId() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(optionSelect);
-
   const verifyUser = async () => {
     const authData: any = await authenticate(setShowMessage);
     if (authData && authData.email && authData.displayName) {
