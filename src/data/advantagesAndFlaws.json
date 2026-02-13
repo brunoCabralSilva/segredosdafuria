@@ -1,5 +1,6 @@
 [
   {
+    "id": "1",
     "name": "Abuso de Substâncias",
     "type": "méritos",
     "description": "Infelizmente, muitos garous se entregam ao consumo de certas substâncias para conseguir lidar tanto com o atual Apocalipse quanto com a sensação de que eles têm a obrigação de fazer algo a respeito. Com um desses Defeitos, seu personagem tem um vício em alguma substância, talvez até mesmo em uma droga sobrenatural. Lembre-se de especificar a substância. O jogador e o Narrador decidem quais outros efeitos a droga escolhida possui, mas poucas substâncias têm efeitos melhores do que uma penalidade temporária a certas paradas de dados, independentemente do quão bem façam ao usuário se sentir. Observe que o Abuso de Substâncias é um verdadeiro problema de saúde, e foi incluído para representar os inconvenientes sistêmicos e narrativos da forma como isso afeta um garou. Rotulá-lo como um Defeito aqui não é um julgamento de valor.",
@@ -32,6 +33,7 @@
     ]
   },
   {
+    "id": "2",
     "name": "Aparelho",
     "type": "méritos",
     "description": "Aparelho (referência a locais usados como refúgio por ''células'' de resistência à ditadura militar no Brasil) representa um grau de segurança ou distinção na morada de um lobisomem, tornando-o mais do que um lugar para dormir e preparar refeições. Pode ser um apartamento, uma casa, um loft, uma cabana rústica, caverna ou toca: não importa, desde que o garou considere o lugar seguro. O personagem, se assim desejar, poderá adquirir as duas variantes da Qualidade Aparelho.",
@@ -56,6 +58,7 @@
     "flaws": []
   },
   {
+    "id": "2",
     "name": "Caern",
     "type": "méritos",
     "description": "Os caerns são nodos de energia espiritual fundamentais para a sociedade e as práticas garous, por isso estes se esforçam muito para localizar, manter e defender esses lugares. Muitas vezes, as alcateias são parte da fratria de um caem ou dedicam-se a procurar um novo para chamar de seu. Despertar e cultivar um caem geralmente fica a cargo da narrativa, mas esta Vantagem permite a um personagem já sair na dianteira (ou na lanterninha).",
@@ -89,6 +92,7 @@
     ]
   },
   {
+    "id": "3",
     "name": "Emprego",
     "type": "méritos",
     "description": "Mesmo sendo um maldito lobisomem, você consegue manter ou ao menos aparenta ter um emprego fixo. Esse serviço pode lhe dar um álibi ou proteger seu segredinho peludo. Não necessariamente implica uma renda digna de nota - aí estaríamos falando de Recursos. No entanto, combinar Emprego com Recursos substanciais poderia criar um lobisomem bem interessante.",
@@ -113,6 +117,7 @@
     "flaws": []
   },
   {
+    "id": "4",
     "name": "Linguística",
     "type": "méritos",
     "description": "Todo personagem é fluente na sua língua materna e (a menos que o jogador e o Narrador tenham um motivo para que isso não ocorra) na língua dominante do cenário da crônica. Por exemplo, uma lobisomem mexicana em uma crônica ambientada no sertão do estado norte-americano de Utah fala e lê espanhol e inglês. Narradores generosos podem permitir que garous cuja língua materna coincida com a do cenário adotem um segundo idioma. Cada ponto em Linguística permite que o personagem fale, escreva e leia fluentemente um idioma adicional além dos dois idiomas padrão. Tenha em mente que a leitura de certos documentos antigos ou cânticos em um dialeto estranho pode impor uma Dificuldade adicional aos testes de Erudição ou Ocultismo.",
@@ -186,6 +191,7 @@
     ]
   },
   {
+    "id": "5",
     "name": "Situações Sobrenaturais",
     "type": "méritos",
     "description": "Apesar de já serem criaturas sobrenaturais, os garous volta e meia são afetados por mistérios ainda maiores que os marcam de maneiras mais estranhas. As Qualidades e os Defeitos a seguir não mudam a condição licantrópica dos garous, mas sugerem circunstâncias onde as linhas divisórias que os separam de outros elementos do mundo secreto não são tão absolutas.",
@@ -375,6 +381,7 @@
     ]
   },
   {
+    "id": "6",
     "name": "Visual",
     "type": "méritos",
     "description": "Nem todos os lobisomens se parecem com atores da televisão e modelos. Alguns deles são ainda mais bonitos. E outros, é claro, são muito mais feios. Os seguintes modificadores se aplicam apenas quando você puder ser visto. O Narrador determina, caso a caso, quando eles se aplicam durante conflitos Sociais (ou mesmo a uma parada e a outra não, dentro da mesma disputa).",
@@ -464,6 +471,7 @@
     ]
   },
   {
+    "id": "7",
     "name": "Aliados - Efetividade",
     "type": "background",
     "description": "Aliados são outras pessoas que o apoiam e o ajudam: família, amigos ou até mesmo uma organização que lhe deve alguma lealdade. Embora os Aliados costumem ajudá-lo voluntariamente, sem necessidade de persuasão ou coerção, nem sempre eles estão disponíveis para oferecer assistência; eles têm seus próprios assuntos para resolver e há um limite para o que podem fazer em nome da sua relação. Aliados costumam aparecer uma vez por história. Não são parte da alcateia, não são garous nem espíritos. Aliados podem ser quase qualquer pessoa com alguma conexão razoável com você, dependendo do que o Narrador permitirá. Você pode ter amigos no necrotério da delegacia, em um jornal sensacionalista ou blog de fofocas, entre nômades ferroviários ou em um centro de distribuição para e-commerce na zona rural. Os Aliados costumam ser dignos de confiança (embora provavelmente não saibam que você é um lobisomem nem que o sobrenatural existe). No entanto, tudo tem um preço. Se você acabar pedindo favores ao seu amigo no Departamento de Operações de Fronteira, ele provavelmente pedirá favores em troca. Inimigos são o oposto de Aliados e são considerados Defeitos. Você pode usar as regras de Modelo de Personagem Secundário para criar Aliados ou Inimigos ao adquiri-los ou convocá-los pela primeira vez, e pode anotá-los no Mapa de Relacionamentos (p. 111), embora muitos grupos deixem esse processo para o Narrador. Crie Aliados ou Inimigos a partir de um total de pontos baseado na Efetividade e Confiabilidade deles. O valor máximo de um Aliado é de seis pontos. Grupos de Aliados ou Inimigos aparecem na mesma quantidade que o número de personagens dos jogadores. Todos os Inimigos valem dois pontos a menos que sua Efetividade; um indivíduo Talentoso custa três pontos como Aliado, mas contará como um Inimigo de apenas 1 ponto se for adquirido como Defeito. Todos os Inimigos têm a mesma Confiabilidade: sempre que o Narrador achar que eles devem aparecer, eles aparecem, mas isso deve ocorrer provavelmente ao menos uma vez por história (mesmo que indiretamente).",
@@ -530,6 +538,7 @@
     ]
   },
   {
+    "id": "8",
     "name": "Aliados - Confiabilidade",
     "type": "background",
     "description": "(Requer Aliados Efetividade em pelo menos 1) - Caso não invista nenhum ponto neste item, o aliado pode ser chamado à vontade, mas ajudará apenas quando estiver nas proximidades.",
@@ -571,6 +580,7 @@
     ]
   },
   {
+    "id": "9",
     "name": "Contatos",
     "type": "background",
     "description": "Você conhece pessoas - pessoas úteis - de várias esferas da vida. Contatos fornecem principalmente informações em suas próprias áreas de especialização e podem querer trocar favores de vários tipos. Se quiser outra espécie de ajuda, recorra a Aliados (p. 101) ou Mentor (p. 104). Um contato é alguém em uma excelente posição para obter informações. Pode ser um atendente do COPOM em vez de um investigador do DHPP, ou um assessor parlamentar em vez de um senador. Consultores, repórteres, integrantes do submundo e motoristas de transportadoras dão excelentes Contatos. Você pode definir seus Contatos ao comprar este Antecedente ou conforme precisar deles no jogo. Sempre que criar um Contato, adicione-o ao Mapa de Relacionamentos (p. 111).",
@@ -603,6 +613,7 @@
     "flaws": []
   },
   {
+    "id": "10",
     "name": "Fama",
     "type": "background",
     "description": "As pessoas sabem seu nome e consomem avidamente notícias sobre o que você anda fazendo. Você pode ser uma estrela do cinema, um astro do rock ou outra celebridade do gênero. A Fama lhe dá certa influência na comunicação de massas e nas mídias sociais: você tem à sua disposição mais meios de afetar o que grupos específicos de seres humanos (essa é a norma) pensam do que a maioria das pessoas. Você provavelmente possui maneiras de mascarar o fato de estar envolvido em coisas que prefere manter em segredo, como por exemplo tendo um sósia. Em algumas circunstâncias, o Narrador pode permitir que você use Fama em uma parada de dados de um teste Social no lugar de outra Característica, especialmente para entrar em um local ou evento exclusivo. 'Você sabe com quem está falando?' não funciona em todos os lugares, mas funciona em alguns. Cada nível de Fama subtrai um da Dificuldade de testes Sociais envolvendo seu público ou seus apoiadores, desde que não envolva nada que seja estranho demais. (Caso contrário, haverá consequências.) É claro que a Fama tem seu lado ruim. Por exemplo, para você será mais difícil seguir discretamente uma pessoa e, se as tietes começarem a se juntar nos arredores do caem, é bem provável que esse caem se veja comprometido por algo tão prosaico quanto o Instagram. Você deve considerar adquirir Disfarce como uma Especialização. Via de regra, Fama se aplica a grupos humanos, mas seria possível defender um caso especial de Fama entre lobos. Algumas criaturas sobrenaturais, mesmo outros garous, seguem com atenção as notícias e tendências e talvez saibam que você existe; portanto, caberá ao Narrador decidir se os benefícios da Fama se aplicam a um determinado indivíduo de origem sobrenatural",
@@ -676,6 +687,7 @@
     ]
   },
   {
+    "id": "11",
     "name": "Máscara",
     "type": "background",
     "description": "Como indivíduos que precisam, às vezes, trabalhar em segredo ou com certo nível de negação plausível, garous veem grande valor em poderem se proteger com identidades falsas ou até mesmo em ficar completamente 'invisíveis'. Via de regra (valor zero), um lobisomem não precisa de Máscara - é o caso daqueles que ainda não se encrencaram com a polícia nem outras agências do governo para terem fichas corridas - ou tem um documento de identidade falso e viável, capaz de sobreviver a uma batida da polícia rodoviária ou outra inspeção superficial. Alguém com zero ponto em Máscara não passa em uma verificação de histórico, muito menos em uma investigação mais atenciosa das autoridades.",
@@ -733,6 +745,7 @@
     ]
   },
   {
+    "id": "12",
     "name": "Mentor",
     "type": "background",
     "description": "Esta Característica representa um garou ou mesmo uma alcateia de lobisomens que cuida de você, oferecendo orientação, informações ou ajuda de tempos em tempos. O papel pode caber a um indivíduo que ajudou a iniciá-lo na sua tribo ou augúrio, ou pode ser alguém que ajudou a salvá-lo de um fim catastrófico após a Primeira Transformação. Ou talvez seja um indivíduo com uma visão de mundo totalmente diferente. Pode ser que você nem sequer saiba que tem um Mentor, caso se trate de alguém que prefira intervir a seu favor apenas de longe ou em segredo. Essa relação pode até ser controversa ou puramente pragmática. Seu Mentor pode trocar informações com você para benefício mútuo ou até mesmo ajudá-lo, se você tiver respeitado o relacionamento. Um Mentor pode ser poderoso, mas tal poder não precisa atuar de forma direta. Dependendo do valor deste Antecedente, o Mentor pode não passar de um velho ressentido com uma extraordinária rede de informações à disposição dele, ou pode ser quase uma lenda do Apocalipse com uma reputação e um poder de influência absurdos entre aqueles que frequentam as assembleias e suas fogueiras. Ele pode dar conselhos, negociar por você com uma fratria poderosa ou desviar a atenção da polícia para longe de você. Além disso, é quase certo que avisará quando você estiver prestes a se meter em situações que você não entende. O Mentor poderia ser até mesmo um espírito, criando aí um relacionamento diferente daquele que você mantém com o Espírito Padroeiro da sua tribo (se bem que seu Mentor poderia ser um avatar ou outra encarnação menor). Mais informações sobre a hierarquia espiritual podem ser encontradas na p. 232. Seu Mentor pode esperar reciprocidade, ou então algum tipo de retorno para o investimento pessoal feito em você. Seja quem for essa figura, registre-a no seu Mapa de Relacionamentos ao adquirir o Antecedente (p. 111). Como regra geral, Mentores oferecem aconselhamento e o ocasional apoio político ou encobrimento, mas não arranjam altos favores para você ou lutam suas batalhas em seu lugar. Se forem forçados a ajudá-lo para além desses limites, ficarão irados e provavelmente você perderá um ponto ou mais neste Antecedente.",
@@ -806,6 +819,7 @@
     ]
   },
   {
+    "id": "13",
     "name": "Pacto Espiritual",
     "type": "background",
     "description": "Você fez um pacto com um espírito menor e ganhou a lealdade dele. O espírito se comporta como aliado o ajudará na medida do possível quando invocado, geralmente pelo Ritual de Invocação de Espíritos (p. 185). O tipo exato de espírito deve ser decidido em conjunto com o Narrador, mas os diversos espíritos do capítulo 'Aliados e Antagonistas' (p. 239) podem ser um ótimo ponto de partida. A maioria dos garous prefere fazer pactos com espíritos-gaianos ou espíritos-wyldianos, mas alguns podem fechar acordos com os servos da Weaver, como é o caso dos Roedores de Ossos e Andarilhos do Asfalto. Outros - geralmente do Conselho dos Fantasmas ou da tribo das Garras Vermelhas - chegam a selar pactos com Malditos e outros espíritos-wyrmianos, mas o fazem com muito cuidado e absoluto sigilo. O tipo de auxílio que você pode esperar depende do espírito. Os gafaretes e a maioria dos jagretes inferiores têm uma visão muito tacanha da vida. Por exemplo, perguntar a um espírito-animal o que há atrás da próxima porta poderia levá-lo a responder apenas se haveria no outro recinto algo assustador ou comestível, ao passo que um espírito-máquina só daria informações sobre a eficiência e a funcionalidade dos objetos que se encontrassem lá. Mesmo assim, muitos espíritos têm uma ou duas aptidões ou Habilidades que podem vir a calhar e, caso possam conceder Dons, estarão sempre à disposição para ensiná-los.",
@@ -879,6 +893,7 @@
     ]
   },
   {
+    "id": "14",
     "name": "Recursos",
     "type": "background",
     "description": "Este Antecedente descreve uma forma abstrata de riqueza ou patrimônio que você poderá usar em proveito próprio em várias situações. Essas benesses não são necessariamente de caráter financeiro e raras vezes têm liquidez total. (Os jogos do Mundo das Trevas não utilizam muitas 'listas de preços' porque esses detalhezinhos não costumam ser importantes para a narrativa.) Particularmente agora que as transações bancárias são quase todas digitais, rivais e arqui-inimigos sobrenaturais bem-relacionados podem bloquear ou limpar contas bancárias e, sendo assim, pode ser que os garous acumulem Recursos em dinheiro vivo, ouro, obras de arte, equipamento ou até mesmo contrabando. Para usar este Antecedente, some o valor de Recursos a uma parada de dados pertinente uma vez a cada sessão de jogo. Essa fórmula representa, por exemplo, a aquisição às pressas de uma lancha que já estava à venda, negociação ou suborno, mas não foi pensada para simular coisas como 'comprar a empresa' ou 'fundar minha própria organização de caçadores'. Como exemplos, temos: Manipulação + Subterfúgio + Recursos para subornar alguém com toda discrição; Carisma + Política + Recursos para afetar a eleição municipal; Inteligência + Manha + Recursos para comprar uma quantidade significativa de drogas etc. A condição garou costuma entrar em conflito com empregos tradicionais ou horários normais de expediente. Pontos em Recursos fornecem uma renda para que você mantenha seu padrão de vida, mas você deve detalhar a fonte de sua renda e a forma que este Antecedente assume. Afinal, sua riqueza pode secar, ser roubada ou desaparecer durante a crônica. Observe também que, no caso de valores elevados de Recursos, pode ser que o personagem tenha algum envolvimento com o tipo de exploração abusiva e especulação financeira que abriu as portas para a Idade do Apocalipse, o que seria de uma hipocrisia gritante, para dizer o mínimo, e provavelmente angariaria a inimizade dos garous que não aceitam a procedência do dinheiro do personagem.",
@@ -936,6 +951,7 @@
     ]
   },
   {
+    "id": "15",
     "name": "Ritos",
     "type": "méritos",
     "description": "A maestria e a habilidade de realizar rituais são dons valiosos entre os Garou. Nem todos os lobisomens têm a destreza de realizar rituais em condições adversas ou a presença social necessária para liderar uma assembleia, mas aqueles que dominam essas artes ganham o respeito de sua tribo. Esses méritos garantem vantagens significativas em rituais sociais e espirituais, permitindo que o Garou mostre seu conhecimento e habilidade em momentos críticos.",
@@ -976,6 +992,7 @@
     "flaws": []
   },
   {
+    "id": "16",
     "name": "Mentais",
     "type": "méritos",
     "description": "Os Garou carregam dentro de si tanto a fúria de Gaia quanto as marcas da própria alma. Nem todos os fardos são físicos ou espirituais — muitos se escondem na mente, moldando como cada um vê o mundo, enfrenta a luta e convive com a matilha. Defeitos mentais revelam cicatrizes invisíveis: rancores que nunca se curam, pessimismo que colore cada vitória com sombras e instintos que dificultam o aprendizado. Para alguns, esses traços são fraquezas; para outros, apenas mais um reflexo do peso de ser meio-humano e meio-lobo em uma guerra sem fim.",
@@ -1009,6 +1026,7 @@
     ]
   },
   {
+    "id": "17",
     "name": "Herança Selvagem",
     "type": "méritos",
     "description": "Os Garou não são apenas criaturas de espírito e carne, mas também de lobo e homem. Embora grandes matilhas de lobos tenham percorrido o mundo por milênios, as raças específicas permanecem amplamente irrelevantes para o lobisomem médio. No entanto, existem situações em que essa herança se manifesta e se torna útil. Apenas um tipo de Mérito de Herança Selvagem pode ser adquirido por personagem.",
@@ -1050,6 +1068,7 @@
     ]
   },
   {
+    "id": "18",
     "name": "Metamorfose",
     "type": "méritos",
     "description": "Os Garou tomam sua habilidade de mudar de forma como algo natural; afinal, é seu direito de nascimento e sua característica mais definidora. Para a maioria dos lobisomens, essas capacidades são dadas como certas. No entanto, outros descobrem que o processo nem sempre é tão simples quanto se poderia esperar.",

@@ -5,14 +5,16 @@ import Footer from '@/components/footer';
 import Feedback from '@/components/feedback';
 import contexto from '@/context/context';
 import jsonAdvantages from '../../data/advantagesAndFlaws.json';
-import Image from 'next/image';
-import AdvantageOrFlaw from './AdvantageOrFlaw';
+import { useRouter } from "next/navigation";
+import { IAdOrFlaws } from '@/interface';
+import Link from 'next/link';
 
 export default function Gifts() {
   const describe = useRef<HTMLDivElement | null>(null);
   const {
     showFeedback, setShowFeedback, resetPopups
   } = useContext(contexto);
+  var router = useRouter();
 
   useEffect(() => resetPopups(), []);
 
@@ -32,11 +34,22 @@ export default function Gifts() {
           </p>
         </div>
         <div ref={ describe } />
-        {
-          jsonAdvantages.length > 0 && jsonAdvantages.map((item: any, index: number) => (
-            <AdvantageOrFlaw key={ index } item={ item }/>
-          ))
-        }
+        <div className={`grid grid-cols-1 ${jsonAdvantages.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>
+          {
+            jsonAdvantages.length > 0 && jsonAdvantages.map((item: IAdOrFlaws, index: number) => (
+              <Link
+                href={`/advantagesAndFlaws/${item.id}`}
+                className="border-white border-2 p-3 flex items-center justify-center flex-col bg-cover bg-center bg-filters relative cursor-pointer"
+                key={ index }
+              >
+                <div className="absolute w-full h-full bg-black/90" />
+                <p className="text-center w-full p-2 relative font-bold">
+                  { item.name  }
+                </p>
+              </Link>
+            ))
+          }
+        </div>
         <button
           type="button"
           className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"

@@ -29,8 +29,8 @@ export default function Gift() {
       <div className="w-full bg-ritual bg-cover bg-top relative">
         <div className="absolute w-full h-full bg-black/90" />
         <Nav />
-        <section className="mb-2 relative px-2 min-h-screen">
-          <div className="py-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
+        <section className="relative min-h-screen">
+          <div className="pt-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
             <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 bg-black/70 text-white">
               <div className="flex flex-col justify-center dataGifts-center sm:dataGifts-start">
                 <div className="relative text-white flex sm:hidden w-full justify-center pb-5">

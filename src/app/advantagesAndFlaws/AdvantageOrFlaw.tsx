@@ -1,10 +1,12 @@
 'use client'
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export default function AdvantageOrFlaw(props: { item: any }) {
   const { item } = props;
   const [showAdvantage, setShowAdvantage] = useState(false);
+  const router = useRouter();
   
   const returnDot = (value: number) => {
     let text = '';
@@ -18,7 +20,10 @@ export default function AdvantageOrFlaw(props: { item: any }) {
     <div className="border-2 border-white my-2 bg-black">
       <button
         type="button"
-        onClick={ () => setShowAdvantage(!showAdvantage)}
+        onClick={ () => 
+          // setShowAdvantage(!showAdvantage)
+          router.push('/advantagesAndFlaws/' + item.name)
+        }
         className="capitalize p-4 font-bold flex w-full justify-between items-center "
       >
         <p className="text-base sm:text-lg w-full text-left">{ item.name }</p>

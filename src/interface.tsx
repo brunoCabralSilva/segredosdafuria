@@ -20,6 +20,29 @@ export interface IItem {
   quant?: number;
 }
 
+export interface IAdOrFlaws {
+  id: string;
+  advantages?: {
+    title: string,
+    description: string,
+    cost: number,
+    type: string,
+    font: string,
+    page: string,
+  }[];
+  flaws?: {
+    title: string,
+    description: string,
+    cost: number,
+    type: string,
+    font: string,
+    page: string,
+  }[];
+  name: string;
+  type: string;
+  description: string;
+}
+
 export interface IAdvantageAndFlaw {
   advantage?: string;
   flaw?: string;
