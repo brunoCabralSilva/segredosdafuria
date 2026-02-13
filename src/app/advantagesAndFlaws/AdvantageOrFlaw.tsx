@@ -31,31 +31,41 @@ export default function AdvantageOrFlaw(props: { item: any }) {
         showAdvantage &&
         <div className="px-4 pb-4">
           <p>{ item.description }</p>
-          <p className="pt-3 font-bold">Vantagens:</p>
           {
-            item.advantages
-            .sort((a: any, b: any) => a.cost - b.cost)
-            .map((adv: any, index2: number) => (
-              <div
-                key={index2}
-                className="border-2 border-white'} mt-3 pt-3 p-4"
-              >
-                <p>{ returnDot(adv.cost) }{ adv.description }</p>
-              </div>
-            ))
+            item.advantages.length > 0 &&
+            <div className="w-full">
+              <p className="pt-3 font-bold">Vantagens:</p>
+              {
+                item.advantages
+                .sort((a: any, b: any) => a.cost - b.cost)
+                .map((adv: any, index2: number) => (
+                  <div
+                    key={index2}
+                    className="border-2 border-white'} mt-3 pt-3 p-4"
+                  >
+                    <p>{ returnDot(adv.cost) }{ adv.description }</p>
+                  </div>
+                ))
+              }
+            </div>
           }
-          <p className="pt-3 font-bold">Defeitos</p>
           {
-            item.flaws
-            .sort((a: any, b: any) => a.cost - b.cost)
-            .map((adv: any, index2: number) => (
-              <div
-                key={index2}
-                className="border-2 border-white'} mt-3 pt-3 p-4"
-              >
-                <p>Custo { adv.cost } - { adv.description }</p>
-              </div>
-            ))
+            item.flaws.length > 0 &&
+            <div className="w-full">
+              <p className="pt-3 font-bold">Defeitos</p>
+              {
+                item.flaws
+                .sort((a: any, b: any) => a.cost - b.cost)
+                .map((adv: any, index2: number) => (
+                  <div
+                    key={index2}
+                    className="border-2 border-white'} mt-3 pt-3 p-4"
+                  >
+                    <p>{ returnDot(adv.cost) }{ adv.description }</p>
+                  </div>
+                ))
+              }
+            </div>
           }
         </div>
       }
