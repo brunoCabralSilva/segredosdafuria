@@ -5,7 +5,6 @@ import Footer from '@/components/footer';
 import Feedback from '@/components/feedback';
 import contexto from '@/context/context';
 import jsonAdvantages from '../../data/advantagesAndFlaws.json';
-import { useRouter } from "next/navigation";
 import { IAdOrFlaws } from '@/interface';
 import Link from 'next/link';
 
@@ -14,7 +13,6 @@ export default function Gifts() {
   const {
     showFeedback, setShowFeedback, resetPopups
   } = useContext(contexto);
-  var router = useRouter();
 
   useEffect(() => resetPopups(), []);
 
