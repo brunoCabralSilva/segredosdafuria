@@ -24,7 +24,7 @@ export default function Loresheets() {
             <p className="pb-2">
               As Fichas de Conhecimento representam ligações com diversos acontecimentos ou facções específicas que são importantes para a sociedade garou. Para ter esta Vantagem, você precisará adquirir uma Característica específica de uma Ficha de Conhecimento e integrar a narrativa correspondente ao histórico e às relações do seu personagem. Pode ser que algumas Fichas de Conhecimento tenham pré-requisitos específicos, como tribo, augúrio ou coisas assim.</p>
             <p className="pb-2">
-              Cada nível de uma dada Ficha de Conhecimento é independente dos demais e deve ser comprado à parte. Ele não contém automaticamente os níveis "mais baixos" da sua Ficha de Conhecimento.
+              Cada nível de uma dada Ficha de Conhecimento é independente dos demais e deve ser comprado à parte. Ele não contém automaticamente os níveis &quot;mais baixos&quot; da sua Ficha de Conhecimento.
             </p>
             <p className="pb-2">
               Um personagem não pode ter Características de mais de uma Ficha de Conhecimento. Naturalmente, o Narrador pode ficar à vontade para revogar essa regra ou, dependendo da crônica, proibir que os personagens tenham certas Fichas de Conhecimento.

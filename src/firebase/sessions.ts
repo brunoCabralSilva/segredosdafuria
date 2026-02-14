@@ -4,7 +4,6 @@ import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
 import { createChatData } from "./chats";
 import { createHistory } from "./history";
-import { getUserByEmail } from "./user";
 
 export const getSessions = async () => {
   const db = getFirestore(firebaseConfig);

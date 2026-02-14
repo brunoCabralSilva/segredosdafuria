@@ -13,25 +13,42 @@ import Info from "../../components/info";
 import Loading from "../../components/loading";
 import VerifySession from "../../components/popup/verifySession";
 import MessageToUser from "@/components/dicesAndMessages/messageToUser";
-import Image from "next/image";
+import SessionItem from "./sessionItem";
 
 export default function Sessions() {
   const router = useRouter();
   const {
     showInfoSessions, setShowInfoSessions,
     showCreateSession, setShowCreateSession,
-    dataSession, setDataSession,
+    dataSession,
     dataUser, setDataUser,
     resetPopups,
     showMessage, setShowMessage,
   } = useContext(contexto);
-  const [sessions, setSessions] = useState<any[]>([]);
+  const [sessionsAsGM, setSessionsAsGM] = useState<any[]>([]);
+  const [sessionsAsPlayer, setSessionsAsPlayer] = useState<any[]>([]);
+  const [sessionsOthers, setSessionsOthers] = useState<any[]>([]);
   const [showData, setShowData] = useState(false);
 
-  const resumeSinopse = (text: string) => {
-    const totalLength = 220;
-    if (text.length > totalLength) return text.slice(0, totalLength) + '...';
-    return text.slice(0, totalLength);
+  const organizeSession = (sessionsList: any, email: string) => {
+    const gmList = sessionsList.filter(
+        (s: any) => s.gameMaster === email
+      );
+
+      const playerList = sessionsList.filter(
+        (s: any) =>
+          s.players && Array.isArray(s.players) && s.players.includes(email)
+      );
+
+      const othersList = sessionsList.filter(
+        (s: any) =>
+          s.gameMaster !== email &&
+          (!s.players || !s.players.includes(email))
+      );
+
+      setSessionsAsGM(gmList);
+      setSessionsAsPlayer(playerList);
+      setSessionsOthers(othersList);
   }
   
   useEffect(() => {
@@ -40,7 +57,10 @@ export default function Sessions() {
     const fetchData = async (): Promise<void> => {
       if (dataUser.email !== '' && dataUser.displayName !== '') {
         const sessionsList = await getSessions();
-        setSessions(sessionsList);
+        const orderedSessions = sessionsList.sort((a: any, b: any) =>
+          a.name.localeCompare(b.name)
+        );
+        organizeSession(orderedSessions, dataUser.email);
         setShowData(true);
       } else {
         const authData: any = await authenticate(setShowMessage);
@@ -48,7 +68,10 @@ export default function Sessions() {
           if (authData && authData.email && authData.displayName) {
             setDataUser({ email: authData.email, displayName: authData.displayName });
             const sessionsList = await getSessions();
-            setSessions(sessionsList);
+            const orderedSessions = sessionsList.sort((a: any, b: any) =>
+              a.name.localeCompare(b.name)
+            );
+            organizeSession(orderedSessions, authData.email);
             setShowData(true);
           } else router.push('/login');
         } catch (error) {
@@ -61,13 +84,13 @@ export default function Sessions() {
   }, []);
 
   return(
-    <div className="h-screen bg-ritual bg-top bg-cover w-full">
+    <div className="h-full bg-ritual bg-top bg-cover w-full">
       { 
         showData
-        ? <div className="h-full bg-black/80">
+        ? <div className="h-full bg-black/90">
             { showMessage.show && <MessageToUser /> }
             <Nav />
-            <section className="h-full relative px-2 overflow-y-auto bg-black/10">
+            <section className="h-full relative px-2 bg-black/10">
               <div className="pt-6 pb-3 px-5 text-white mt-2 flex flex-col items-center sm:items-start text-justify bg-black/10">
                 <h1 className="relative flex items-center justify-between w-full">
                   <div className="flex gap-2 items-center">
@@ -90,50 +113,44 @@ export default function Sessions() {
                     setShowCreateSession(true);
                     setShowInfoSessions(false);
                   }}
-                  className="px-4 py-2 border rounded-full border-white text-black font-bold flex items-center justify-center cursor-pointer bg-white mr-5"
+                  className="px-4 py-2 border rounded-full border-white text-black font-bold flex items-center justify-center cursor-pointer bg-white mr-5 w-full sm:w-40"
                 >
                   Nova Sessão
                 </button>
               </div>
               <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-3 pb-4 bg-transparent">
                 {
-                  sessions.map((session: ISession, index: number) =>
-                  <button
-                    type="button"
-                    key={ index }
-                    onClick={ () => setDataSession({ show: true, id: session.id })}
-                    className="border border-white text-white cursor-pointer bg-ritual bg-cover capitalize rounded-xl"
-                    >
-                      <div className="w-full h-full bg-black/90 font-bold rounded-xl">
-                        <div className="flex items-center justify-center w-full">
-                          <Image
-                            src={`/images/sessions/${ session.imageName}.png` }
-                            alt="Glifo de um lobo"
-                            className="w-full h-32 relative object-cover object-center mb-2 rounded-t-xl"
-                            width={1000}
-                            height={1000}
-                          />
-                        </div>
-                        <div className="w-full pb-8 px-8 pt-4">
-                          <p className="text-left">{ session.name }</p>
-                          <div className="w-full pt-1 pb-2">
-                            <hr />
-                          </div>
-                          <p className="text-sm font-normal text-justify">
-                            Narrador: { session.nameMaster }
-                          </p>
-                          <p className="text-sm font-normal text-justify">
-                            Jogadores: { session.players.length }
-                          </p>
-                          <p className="text-sm font-normal text-justify">
-                            Data de Criação: { session.creationDate.toString() }
-                          </p>
-                          <p className="text-sm font-normal text-justify">
-                            Sinopse: { resumeSinopse(session.description) }
-                          </p>
-                        </div>
-                      </div>
-                    </button>
+                  sessionsAsGM.length > 0 &&
+                  <div
+                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left">
+                      Sessões em que você é Narrador:
+                    </div>
+                }
+                {
+                  sessionsAsGM.map((session: ISession, index: number) =>
+                    <SessionItem key={index} session={ session } />
+                  )
+                }
+                {
+                  sessionsAsPlayer.length > 0 &&
+                  <div
+                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left"
+                  >
+                    Sessões em que você é Jogador:
+                  </div>
+                }
+                {
+                  sessionsAsPlayer.map((session: ISession, index: number) =>
+                    <SessionItem key={index} session={ session } />
+                  )
+                }
+                {
+                  sessionsAsPlayer.length > 0 || sessionsAsGM.length > 0 &&
+                  <div className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left">Demais Sessões:</div>
+                }
+                {
+                  sessionsOthers.map((session: ISession, index: number) =>
+                    <SessionItem key={index} session={ session } />
                   )
                 }
               </div>
