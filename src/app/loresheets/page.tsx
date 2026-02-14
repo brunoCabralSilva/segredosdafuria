@@ -17,15 +17,19 @@ export default function Loresheets() {
       <div className="absolute w-full h-fullbg-black/80" />
       <Nav />
       <section className="mb-2 relative px-2">
-        <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start text-justify">
-          <h1 className="text-4xl relative">Loresheets</h1>
+        <div className="py-6 px-5 bg-black/90 text-white mt-2 flex flex-col items-center sm:items-start">
+          <h1 className="text-4xl relative">Fichas de Conhecimento</h1>
           <hr className="w-10/12 my-6" />
-          <p className="pb-2">
-            As Loresheets ajudam a vincular os personagens da sua crônica ao amplo Mundo das Trevas, conectando-os a eventos e organizações que afetam o cenário de Lobisomem. Em geral, elas oferecem um benefício ligeiramente mais significativo do que seu nível e custo de Vantagem sugerem, mas geralmente também têm amarras ou riscos adicionais associados.
-          </p>
-          <p className="pb-2">
-            Em geral, os jogadores devem trabalhar com seu Narrador para esclarecer alguns dos detalhes de seus Traços de Loresheet, para que possam ter uma aparência coerente na história. No entanto, alguns Traços de Loresheet provavelmente são melhores mantidos em segredo pelos personagens de outros jogadores...
-          </p>
+          <div className="text-justify">
+            <p className="pb-2">
+              As Fichas de Conhecimento representam ligações com diversos acontecimentos ou facções específicas que são importantes para a sociedade garou. Para ter esta Vantagem, você precisará adquirir uma Característica específica de uma Ficha de Conhecimento e integrar a narrativa correspondente ao histórico e às relações do seu personagem. Pode ser que algumas Fichas de Conhecimento tenham pré-requisitos específicos, como tribo, augúrio ou coisas assim.</p>
+            <p className="pb-2">
+              Cada nível de uma dada Ficha de Conhecimento é independente dos demais e deve ser comprado à parte. Ele não contém automaticamente os níveis "mais baixos" da sua Ficha de Conhecimento.
+            </p>
+            <p className="pb-2">
+              Um personagem não pode ter Características de mais de uma Ficha de Conhecimento. Naturalmente, o Narrador pode ficar à vontade para revogar essa regra ou, dependendo da crônica, proibir que os personagens tenham certas Fichas de Conhecimento.
+            </p>
+          </div>
         </div>
         <div  className="bg-black/90 pb-6 px-5">
           <div className="grid grid-cols-1 mobile:grid-cols-2 sm:grid-cols-3 gap-2 w-full">

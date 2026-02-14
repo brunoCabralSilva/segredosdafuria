@@ -30,7 +30,7 @@ import DeleteFavorAndBan from "@/components/popup/deleteFavorAndBan";
 import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
 import ConsentForm from "@/components/popup/consentForm";
-import { playerSheet } from "@/firebase/utilities";
+import EditBannerSession from "@/components/popup/editBannerSession";
 
 export default function SessionId() {
 	const params = useParams();
@@ -50,7 +50,6 @@ export default function SessionId() {
     setSessionId,
     resetPopups,
     setPlayers,
-    optionSelect,
     setSession,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
@@ -69,6 +68,7 @@ export default function SessionId() {
     email,
     showMenuSession,
     showDownloadPdf,
+    showBannerSession,
   } = useContext(contexto);
 
   const dataRefPlayer = collection(db, "players");
@@ -155,6 +155,7 @@ export default function SessionId() {
       { addFavorAndBan.show && <AddFavorAndBan /> }
       { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
       { showDownloadPdf.show && verifyConvert() }
+      { showBannerSession.show && <EditBannerSession /> }
       <Nav />
       {
         showData

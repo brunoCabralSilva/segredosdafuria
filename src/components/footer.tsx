@@ -11,7 +11,7 @@ export default function Footer() {
           alt="Logo do Garou Nordeste"
           width={1000}
           height={800}
-          className="w-12 mr-3"
+          className="w-10 mr-3"
         />
         <Image
           src="/images/logos/icon.webp"

@@ -1,5 +1,5 @@
 import contexto from "@/context/context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Skills from "./menuSession/skills";
 import AdvantagesAndFlaws from "./advantagesAndFlaws/advantagesAndFlaws";

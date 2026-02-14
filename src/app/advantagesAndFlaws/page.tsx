@@ -21,15 +21,17 @@ export default function Gifts() {
       <div className="bg-black/60 absolute w-full h-full" />
       <div className="px-2 z-10 relative">
         <Nav />
-        <div className="py-6 px-5 bg-black/90 mt-2 flex flex-col items-center sm:items-start text-justify">
+        <div className="py-6 px-5 bg-black/90 mt-2 flex flex-col items-center sm:items-start">
           <h1 className="text-4xl relative">Vantagens e Defeitos</h1>
           <hr className="w-10/12 my-6" />
-          <p className="pb-2">
-            Além dos Atríbutos exclusivos e das Habilidades diferenciadas, os personagens garous , recém-criados têm várias Vantagens, seja uma facilidade com idiomas ou uma tropa de arruaceiros armados com tacos de beisebol sempre à disposição. Como tudo o mais, medimos as Vantagens com pontos, geralmente variando de um a cinco. Não há penalidade por se ter zero ponto em uma Vantagem - esse é o padrão.
-          </p>
-          <p className="pb-2">
-            Poucas rolagens envolvem Vantagens, se bem que o Narrador poderia pedir Inteligência + Linguística para decifrar os diários de couro esfarrapados de um ancião garou já falecido, ou Subterfúgio + Contatos para plantar um boato a respeito daquela maldita Presa de Prata na zona do baixo meretrício. As Vantagens são divididas em Qualidades e Antecedentes. O outro lado das Vantagens, os Defeitos causam problemas contínuos aos personagens. Observe que o Narrador pode proibir ou limitar as Vantagens que entram em conflito com o cenário da crônica
-          </p>
+          <div className="text-justify">
+            <p className="pb-2">
+              Além dos Atríbutos exclusivos e das Habilidades diferenciadas, os personagens garous, recém-criados têm várias Vantagens, seja uma facilidade com idiomas ou uma tropa de arruaceiros armados com tacos de beisebol sempre à disposição. Como tudo o mais, medimos as Vantagens com pontos, geralmente variando de um a cinco. Não há penalidade por se ter zero ponto em uma Vantagem - esse é o padrão. Poucas rolagens envolvem Vantagens, se bem que o Narrador poderia pedir Inteligência + Linguística para decifrar os diários de couro esfarrapados de um ancião garou já falecido, ou Subterfúgio + Contatos para plantar um boato a respeito daquela maldita Presa de Prata na zona do baixo meretrício.
+            </p>
+            <p className="pb-2">
+              As Vantagens são divididas em Qualidades e Antecedentes. O outro lado das Vantagens, os Defeitos causam problemas contínuos aos personagens. Observe que o Narrador pode proibir ou limitar as Vantagens que entram em conflito com o cenário da crônica.
+            </p>
+        </div>
         </div>
         <div ref={ describe } />
         <div className={`grid grid-cols-1 ${jsonAdvantages.length > 1 ? 'mobile:grid-cols-2' : ''} gap-3 mt-2`}>

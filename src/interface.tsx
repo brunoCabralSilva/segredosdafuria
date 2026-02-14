@@ -14,6 +14,20 @@ export interface ISessions {
   image: string;
 };
 
+export interface ISession {
+  anotations: string,
+  creationDate: '',
+  description: string,
+  favorsAndBans: string[],
+  gameMaster: string,
+  nameMaster: string,
+  id: string,
+  imageName: string,
+  name: string,
+  players: string[],
+  principles: { description: string, email: string, order: number }[],
+}
+
 export interface IItem {
   name: string;
   namePtBr: string;

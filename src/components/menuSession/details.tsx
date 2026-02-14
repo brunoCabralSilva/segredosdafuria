@@ -8,6 +8,7 @@ import { updateSession } from "@/firebase/sessions";
 import { getUserByEmail } from "@/firebase/user";
 import { MdDelete } from "react-icons/md";
 import DeleteUserFromSession from "../popup/deleteUserFromSession";
+import Image from "next/image";
 
 export default function Details() {
   const {
@@ -15,9 +16,11 @@ export default function Details() {
     session,
     players,
     showDeletePlayer,
+    setShowBannerSession,
     showDelGMFromSession,
     setShowMessage,
     setShowDeletePlayer,
+    setShowMenuSession,
     setShowDelGMFromSession,
     showChangeGameMaster, setShowChangeGameMaster,
   } = useContext(contexto);
@@ -27,6 +30,8 @@ export default function Details() {
     const [gameMaster, setGameMaster] = useState('');
     const [newGameMaster, setNewGameMaster] = useState('');
     const [creationDate, setCreationDate] = useState('olá');
+    const [nameMaster, setNameMaster] = useState('');
+    const [image, setImage] = useState('');
     const [input, setInput] = useState('');
     const [textArea, setTextArea] = useState(false);
 
@@ -36,6 +41,8 @@ export default function Details() {
       setNameSession(session.name);
       setCreationDate(session.creationDate);
       setDescription(session.description);
+      setNameMaster(session.nameMaster);
+      setImage(session.imageName);
     }, []);
 
     const typeText = (e: any, type: string) => {
@@ -201,25 +208,29 @@ export default function Details() {
                 </div>
               </div>
               <div
-                className={`w-full mb-2 mt-1 flex flex-col justify-between items-center cursor-pointer p-2 border-2 border-white`}
-                onClick={() => setInput('gameMaster')}
+                className={`w-full mb-2 mt-1 flex flex-col justify-between items-center p-2 border-2 border-white`}
+                onClick={() => {
+                  if (gameMaster === email) setInput('gameMaster')
+                }}
               >
                 <div className="flex w-full">
                   <span className="text-white break-words w-full p-2">
-                    <span className="font-bold pr-1">Narrador:</span>
+                    <span className="font-bold pr-1">{ gameMaster === email ? 'Você é o Narrador desta Sessão' : 'Narrador'}</span>
                   </span>
-                { gameMaster === email && editGameMasterSession() }
+                  { gameMaster === email && editGameMasterSession() }
                 </div>
                 { 
                   input === 'gameMaster'?
                   <input
                     type="text"
-                    className="text-sm border border-white text-white text-left w-full bg-black p-2"
+                    className="text-sm border border-white text-white text-left w-full bg-black p-2 cursor-pointer"
                     placeholder="Email"
                     value={ newGameMaster }
                     onChange={(e) => setNewGameMaster(e.target.value)}
                   />
-                  : <span className="border border-transparent text-sm text-white w-full p-2 break-words">{ newGameMaster }</span>
+                  : <span className={`border border-transparent text-sm text-white w-full capitalize p-2 break-words ${gameMaster === email ? 'cursor-pointer' : ''}`}>
+                    { gameMaster === email ? newGameMaster : nameMaster }
+                  </span>
                 }
               </div>
               <p className="mt-1 text-white sm:text-left w-full text-center border-2 border-white p-4">
@@ -265,10 +276,38 @@ export default function Details() {
                     })
                 }
               </div>
+
+              <div className="text-white pb-3 sm:text-left w-full text-center border-2 border-white p-4 mb-3">
+                <div className="flex w-full justify-bewteen items-center">
+                  <span className="pr-1 font-bold w-full">Banner da Sessão:</span>
+                  {
+                    email === gameMaster &&
+                    <FaRegEdit
+                      onClick={ () => {
+                        setShowBannerSession({ show: true, sessionId: session.id });
+                        setShowMenuSession('');
+                      }}
+                      className="text-3xl cursor-pointer"
+                    />
+                  }
+                </div>
+                <div className="flex items-center justify-center w-full mt-2">
+                  <Image
+                    src={`/images/sessions/${ image }.png` }
+                    alt="Glifo de um lobo"
+                    className="w-full h-32 relative object-cover object-center"
+                    width={1000}
+                    height={1000}
+                  />
+                </div>
+              </div>
+
               <button
                 type="button"
                 className="p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
-                onClick={() => setShowDelGMFromSession(true) }
+                onClick={() => {
+                  setShowDelGMFromSession(true);
+                }}
               >
                 Sair da Sessão
               </button>

@@ -82,7 +82,7 @@ export default function Home() {
           <div
             className={`bg-05 bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-full bg-black/40`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Sobre</p>
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Quem Somos</p>
           </div>
         </Link>
         <Link href="/gifts" className="col-span-2 sm:row-span-2 sm:col-span-3">
@@ -102,8 +102,8 @@ export default function Home() {
         <Link href="/loresheets" className="col-span-1 row-span-1 sm:row-span-2 sm:col-span-2">
           <div
             className={`bg-12 bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
-            <div className={`absolute w-full h-fullbg-black/40`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Loresheets</p>
+            <div className={`absolute w-full h-full bg-black/40`} />
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Fichas de Conhecimento</p>
           </div>
         </Link>
         <Link href="/advantagesAndFlaws" className="col-span-1 row-span-1 sm:col-span-4 sm:row-span-4">

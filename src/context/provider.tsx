@@ -76,6 +76,7 @@ export default function Provider({children }: IProvider) {
   const [showResetPlayer, setShowResetPlayer] = useState({ show: false, email: '' });
   const [showRemovePlayer, setShowRemovePlayer] = useState({ show: false, email: '' });
   const [showWillpowerTest, setShowWillpowerTest] = useState(false);
+  const [showBannerSession, setShowBannerSession] = useState({ show: false, sessionId: '' });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -120,6 +121,7 @@ export default function Provider({children }: IProvider) {
     setShowDeletePrinciple({ show: false, name: '' });
     setAddFavorAndBan({show: false, data: {}, type: ''});
     setShowDeleteFavorAndBan({ show: false, name: '', type: '' });
+    setShowBannerSession({ show: false, sessionId: '' });
   }
 
   return (
@@ -198,6 +200,7 @@ export default function Provider({children }: IProvider) {
         showResetPlayer, setShowResetPlayer,
         showRemovePlayer, setShowRemovePlayer,
         showWillpowerTest, setShowWillpowerTest,
+        showBannerSession, setShowBannerSession,
       }}
     >
       {children}

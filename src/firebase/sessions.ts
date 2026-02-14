@@ -4,6 +4,7 @@ import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
 import { createChatData } from "./chats";
 import { createHistory } from "./history";
+import { getUserByEmail } from "./user";
 
 export const getSessions = async () => {
   const db = getFirestore(firebaseConfig);
@@ -53,6 +54,8 @@ export const createSession = async (
   nameSession: string,
   description: string,
   email: string,
+  image: string,
+  displayName: string,
   setShowMessage: any,
 ) => {
   try {
@@ -63,7 +66,9 @@ export const createSession = async (
       name: nameSession.toLowerCase(),
       creationDate: dateMessage,
       gameMaster: email,
+      nameMaster: displayName,
       anotations: '',
+      imageName: image,
       description,
       principles: [],
       favorsAndBans: [],
@@ -81,6 +86,39 @@ export const createSession = async (
     setShowMessage({ show: true, text: 'Ocorreu um erro ao criar uma sessão: ' + err.message });
   }
 };
+
+export const updateBannerSession = async (
+  sessionId: string,
+  image: string,
+  setShowMessage: any
+) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const sessionsCollectionRef = collection(db, "sessions");
+    const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+
+    await runTransaction(db, async (transaction) => {
+      const sessionDocSnapshot = await getDoc(sessionDocRef);
+
+      if (sessionDocSnapshot.exists()) {
+        transaction.update(sessionDocRef, { imageName: image });
+        setShowMessage({
+          show: true,
+          text: "Imagem da Sessão Atualizada com sucesso!",
+        });
+      } else {
+        throw new Error("Sessão não encontrada");
+      }
+    });
+  } catch (err: any) {
+    setShowMessage({
+      show: true,
+      text:
+        "Ocorreu um erro ao atualizar os dados da Sessão: " + err.message,
+    });
+  }
+};
+
 
 export const updateSession = async (session: any, setShowMessage: any) => {
   try {

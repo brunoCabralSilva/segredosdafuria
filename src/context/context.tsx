@@ -136,6 +136,8 @@ interface RecipesContext {
   setShowRemovePlayer: (state: { show: boolean, email: string }) => void,
   showWillpowerTest: boolean,
   setShowWillpowerTest: (state: boolean) => void,
+  showBannerSession: { show: boolean, sessionId: string },
+  setShowBannerSession: ( state: { show: boolean, sessionId: string }) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -272,6 +274,8 @@ const initialValue: RecipesContext = {
   setShowRemovePlayer: () => {},
   showWillpowerTest: false,
   setShowWillpowerTest: () => {},
+  showBannerSession: { show: false, sessionId: '' },
+  setShowBannerSession: () => {},
 }
 
 const contexto = createContext(initialValue);

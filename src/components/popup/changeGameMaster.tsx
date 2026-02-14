@@ -2,6 +2,7 @@
 import contexto from '@/context/context';
 import { registerNotification } from '@/firebase/notifications';
 import { updateSession } from '@/firebase/sessions';
+import { getUserByEmail } from '@/firebase/user';
 import { capitalizeFirstLetter } from '@/firebase/utilities';
 import { useRouter } from 'next/navigation';
 import { useContext } from 'react';
@@ -19,6 +20,9 @@ export default function ChangeGameMaster(props: { setGameMaster: any }) {
     try {
 			const sessionData = session;
       sessionData.gameMaster = showChangeGameMaster.data.email;
+      const getUser = await getUserByEmail(showChangeGameMaster.data.email, setShowMessage);
+      if (getUser)
+        sessionData.nameMaster = getUser.firstName + ' ' + getUser.lastName;
       await updateSession(sessionData, setShowMessage);
       const notification = {
         message: `Parabéns! Agora você é o novo Narrador da Sessão "${capitalizeFirstLetter(session.name)}"!`,

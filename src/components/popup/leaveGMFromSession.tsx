@@ -44,6 +44,7 @@ export default function LeaveGMFromSession() {
         const newPlayers = session;
         newPlayers.players = session.players.filter((emailUser: any) => emailUser !== email);
         newPlayers.gameMaster = oldestUser;
+        newPlayers.nameMaster = nameOfUser;
         await updateSession(newPlayers, setShowMessage);
       } else {
         router.push('/sessions');

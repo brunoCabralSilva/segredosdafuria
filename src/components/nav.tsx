@@ -126,7 +126,7 @@ export default function Nav() {
               onClick={ () => setShowMenu(!showMenu) }
               className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
             >
-              Loresheets
+              Fichas de Conhecimento
             </Link>
           </li>
           <li className="pt-4">
