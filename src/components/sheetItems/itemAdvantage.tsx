@@ -71,7 +71,7 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
             newList = newList.filter((item: any) => item.description !== description);
           } else {
             if (type === 'radio') {
-              newList = newList.filter((item: any) => item.name !== name || (item.name === name && type !== 'radio'));
+              newList = newList.filter((item: any) => item.name !== name || (item.name === name && item.type !== 'radio'));
               newList.push(obj);
             } else newList.push(obj);
           }
