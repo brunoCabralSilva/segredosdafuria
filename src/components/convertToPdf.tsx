@@ -191,7 +191,7 @@ export default function ConvertToPdf(props: { data: any }) {
       <div className="fixed bg-black z-80 h-screen w-full">
         <Loading />
       </div>
-      <div ref={pdfRef} className="bg-white p-8 border border-black !border-solid" id="pdf-content">
+      <div ref={pdfRef} className="bg-white text-black p-8 border border-black !border-solid" id="pdf-content">
         <div className="border-2 border-black !border-solid p-4 mt-3">
           <div className="flex w-full justify-center items-center">
             <Image
@@ -455,8 +455,8 @@ export default function ConvertToPdf(props: { data: any }) {
               <p className="mb-3">Vantagens e Defeitos</p>
               <div className="w-full pr-4">
                 { data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
-                  <div key={index} className="flex justify-between w-full px-3 border border-black !border-solid mt-1 items-center py-2">
-                    <p className="pb-1">{ item.name }{item.title && ` - ${item.title}` }</p>
+                  <div key={index} className="flex justify-between w-full px-3 border border-black text-black !border-solid mt-1 items-center py-2">
+                    <p className="pb-1 text-black">{ item.name }{item.title && ` - ${item.title}` }</p>
                     { returnAdvantage(item.cost) }
                   </div>
                 )) }
@@ -597,7 +597,7 @@ export default function ConvertToPdf(props: { data: any }) {
           </div>
         </div>
       </div>
-      <div ref={pdfRef2} className="bg-white p-8" id="pdf-content">
+      <div ref={pdfRef2} className="bg-white text-black p-8" id="pdf-content">
         <div className="border-2 border-black !border-solid p-4 mt-3">
           <div className="flex flex-col">
             {/* Dons e Rituais */}
