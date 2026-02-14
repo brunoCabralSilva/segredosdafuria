@@ -106,14 +106,14 @@ export default function Sessions() {
                 </h1>
                 <hr className="w-10/12 mt-6" />
               </div>
-              <div className="flex w-full justify-end mb-5">
+              <div className="flex w-full justify-end mb-3 sm:mb-5 px-4 sm:px-0">
                 <button
                   type="button"
                   onClick={ () => {
                     setShowCreateSession(true);
                     setShowInfoSessions(false);
                   }}
-                  className="px-4 py-2 border rounded-full border-white text-black font-bold flex items-center justify-center cursor-pointer bg-white mr-5 w-full sm:w-40"
+                  className="px-4 py-2 border rounded-xl border-white text-black font-bold flex items-center justify-center cursor-pointer bg-white sm:mr-5 w-full sm:w-40"
                 >
                   Nova Sessão
                 </button>
@@ -122,9 +122,9 @@ export default function Sessions() {
                 {
                   sessionsAsGM.length > 0 &&
                   <div
-                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black p-3 border border-white rounded-xl"
+                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black px-3 py-5 border border-white rounded-xl"
                   >
-                      Sessões em que você é Narrador:
+                      Sessões em que você é Narrador
                     </div>
                 }
                 {
@@ -135,9 +135,9 @@ export default function Sessions() {
                 {
                   sessionsAsPlayer.length > 0 &&
                   <div
-                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black p-3 border border-white rounded-xl"
+                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black px-3 py-5 border border-white rounded-xl"
                   >
-                    <p className="">Sessões em que você é Jogador:</p>
+                    <p className="">Sessões em que você é Jogador</p>
                   </div>
                 }
                 {
@@ -147,7 +147,7 @@ export default function Sessions() {
                 }
                 {
                   (sessionsAsPlayer.length > 0 || sessionsAsGM.length > 0) &&
-                  <div className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black p-3 border border-white rounded-xl">Demais Sessões:</div>
+                  <div className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black px-3 py-5 border border-white rounded-xl">Demais Sessões</div>
                 }
                 {
                   sessionsOthers.map((session: ISession, index: number) =>
