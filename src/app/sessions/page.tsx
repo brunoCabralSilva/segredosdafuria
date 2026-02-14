@@ -113,7 +113,7 @@ export default function Sessions() {
                     setShowCreateSession(true);
                     setShowInfoSessions(false);
                   }}
-                  className="px-4 py-2 border rounded-xl border-white text-black font-bold flex items-center justify-center cursor-pointer bg-white sm:mr-5 w-full sm:w-40"
+                  className="px-4 py-2 border-2 rounded-xl border-black text-black font-bold flex items-center justify-center cursor-pointer bg-white sm:mr-5 w-full sm:w-40 hover:border-white transition-colors duration-400 hover:underline"
                 >
                   Nova Sessão
                 </button>
