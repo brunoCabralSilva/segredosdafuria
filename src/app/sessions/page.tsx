@@ -122,7 +122,8 @@ export default function Sessions() {
                 {
                   sessionsAsGM.length > 0 &&
                   <div
-                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left">
+                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black p-3 border border-white rounded-xl"
+                  >
                       Sessões em que você é Narrador:
                     </div>
                 }
@@ -134,9 +135,9 @@ export default function Sessions() {
                 {
                   sessionsAsPlayer.length > 0 &&
                   <div
-                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left"
+                    className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black p-3 border border-white rounded-xl"
                   >
-                    Sessões em que você é Jogador:
+                    <p className="">Sessões em que você é Jogador:</p>
                   </div>
                 }
                 {
@@ -145,8 +146,8 @@ export default function Sessions() {
                   )
                 }
                 {
-                  sessionsAsPlayer.length > 0 || sessionsAsGM.length > 0 &&
-                  <div className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left">Demais Sessões:</div>
+                  (sessionsAsPlayer.length > 0 || sessionsAsGM.length > 0) &&
+                  <div className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-left bg-black p-3 border border-white rounded-xl">Demais Sessões:</div>
                 }
                 {
                   sessionsOthers.map((session: ISession, index: number) =>
