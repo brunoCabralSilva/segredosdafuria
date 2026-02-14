@@ -45,13 +45,13 @@ export default function AdvantagesAndFlaws() {
          flex justify-between
       `}>
         <p><span>Total em Defeitos: {textFlaw}</span></p>
-        <button
+        {/* <button
           type="button"
           className="p-1 border-2 border-white bg-white right-3"
           onClick={ () => setShowAllFlaws(true) }
         >
           <IoAdd className="text-black text-xl" />
-        </button>
+        </button> */}
       </div>
     </div>
     );

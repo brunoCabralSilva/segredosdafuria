@@ -26,70 +26,97 @@ export default function ItemAdvantage(props: { item: any, type: string }) {
     advOfFlaw: string,
   ) => {
     const obj = { name, cost, description, type, title };
-    let newList: any = [];
-    let dataPersist = '';
-    if (advOfFlaw === 'flaw') {
-      newList = dataSheet.data.advantagesAndFlaws.flaws;
-      const findFlaw = dataSheet.data.advantagesAndFlaws.flaws.filter((flaw: any) => flaw.name === name);
-      dataPersist = findFlaw
-      .map((flaw: any) => {
-        let label = flaw.title || flaw.description;
-        return `"${label} (${flaw.cost})"`;
-      })
-      .join(', ')
-      .replace(/, ([^,]+)$/, ' e $1');
-    } else {
-      newList = dataSheet.data.advantagesAndFlaws.advantages;
-      const findAdvantage = dataSheet.data.advantagesAndFlaws.advantages.filter((flaw: any) => flaw.name === name);
-      dataPersist = findAdvantage
-      .map((flaw: any) => {
-        let label = flaw.title || flaw.description;
-        return `"${label} (${flaw.cost})"`;
-      })
-      .join(', ')
-      .replace(/, ([^,]+)$/, ' e $1');
-    }
-    if (newList.length === 0) newList.push(obj);
-    else {
-      const sameName = newList.filter((item: any) => item.name === name);
-      if (sameName.length > 0) {
-        const equal = newList.find((item: any) => item.description === description);
-        if (equal) {
-          newList = newList.filter((item: any) => item.description !== description);
-        } else {
-          if (type === 'radio') {
-            newList = newList.filter((item: any) => item.name !== name || (item.name === name && type !== 'radio'));
-            newList.push(obj);
-          } else newList.push(obj);
-        }
-      } else newList.push(obj);
-    }
-    if (advOfFlaw === 'flaw') dataSheet.data.advantagesAndFlaws.flaws = newList;
-    else dataSheet.data.advantagesAndFlaws.advantages = newList;
-    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
 
-    let newPersist = '';
-    if (advOfFlaw === 'flaw') {
-      const findFlaw = dataSheet.data.advantagesAndFlaws.flaws.filter((flaw: any) => flaw.name === name);
-      newPersist = findFlaw
-      .map((flaw: any) => {
-        let label = flaw.title || flaw.description;
-        return `"${label} (${flaw.cost})"`;
-      })
-      .join(', ')
-      .replace(/, ([^,]+)$/, ' e $1');
+    const aliadosEfetividade = dataSheet.data.advantagesAndFlaws.advantages.find((adv: { cost: number, description: string, name: string, title: string, type: string }) => adv.name == 'Aliados - Efetividade');
+
+    const pactoEspiritual = dataSheet.data.advantagesAndFlaws.advantages.find((adv: { cost: number, description: string, name: string, title: string, type: string }) => adv.name == 'Pacto Espiritual');
+
+    if (name === 'Aliados - Confiabilidade' && !aliadosEfetividade) {
+      setShowMessage({ show: true, text: 'A Vantagem "Aliados - Confiabilidade" só pode ser adquirida caso o personagem possua pelo menos 1 ponto em "Aliados - Efetividade".' });
+    } else if ((title === 'Acompanhante' || title === 'Hospedeiro') && !pactoEspiritual) {
+      setShowMessage({ show: true, text: 'A Vantagem "' + title + '" só pode ser adquirida caso o personagem possua pelo menos 1 ponto em "Pacto Espiritual - Espírito de Poder 1 / gafarete menor".' });
+    } else if (title === 'Pacto Condicional' && !pactoEspiritual) {
+      setShowMessage({ show: true, text: 'O Defeito "Pacto Condicional" só pode ser adquirido caso o personagem possua pelo menos 1 ponto em "Pacto Espiritual - Espírito de Poder 1 / gafarete menor".' });
     } else {
-      const findAdvantage = dataSheet.data.advantagesAndFlaws.advantages.filter((adv: any) => adv.name === name);
-      newPersist = findAdvantage
+      let newList: any = [];
+      let dataPersist = '';
+      if (advOfFlaw === 'flaw') {
+        newList = dataSheet.data.advantagesAndFlaws.flaws;
+        const findFlaw = dataSheet.data.advantagesAndFlaws.flaws.filter((flaw: any) => flaw.name === name);
+        dataPersist = findFlaw
         .map((flaw: any) => {
           let label = flaw.title || flaw.description;
           return `"${label} (${flaw.cost})"`;
         })
         .join(', ')
         .replace(/, ([^,]+)$/, ' e $1');
-    }
+      } else {
+        newList = dataSheet.data.advantagesAndFlaws.advantages;
+        const findAdvantage = dataSheet.data.advantagesAndFlaws.advantages.filter((adv: any) => adv.name === name);
+        dataPersist = findAdvantage
+        .map((adv: any) => {
+          let label = adv.title || adv.description;
+          return `"${label} (${adv.cost})"`;
+        })
+        .join(', ')
+        .replace(/, ([^,]+)$/, ' e $1');
+      }
 
-    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o ${advOfFlaw === 'flaw' ? 'Defeito' : 'Mérito/Background'} ${name} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${dataPersist === '' ? "''" : dataPersist} para ${newPersist === '' ? "''" : newPersist}.`, type: 'notification' }, null, setShowMessage);
+      if (newList.length === 0) newList.push(obj);
+      else {
+        const sameName = newList.filter((item: any) => item.name === name);
+        if (sameName.length > 0) {
+          const equal = newList.find((item: any) => item.description === description);
+          if (equal) {
+            newList = newList.filter((item: any) => item.description !== description);
+          } else {
+            if (type === 'radio') {
+              newList = newList.filter((item: any) => item.name !== name || (item.name === name && type !== 'radio'));
+              newList.push(obj);
+            } else newList.push(obj);
+          }
+        } else newList.push(obj);
+      }
+
+      if (name === 'Aliados - Efetividade') {
+        newList = newList.filter((item: any) => item.name !== 'Aliados - Confiabilidade');
+      }
+
+      const titlePactoEspiritual = title === 'Espírito de Poder 5 / jagrete médio' || title === 'Espírito de Poder 4 / jagrete menor' || title === 'Espírito de Poder 3 / gafarete maior ou jagrete inferior' || title === 'Espírito de Poder 2 / gafarete médio' || title === 'Espírito de Poder 1 / gafarete menor';
+
+      if (titlePactoEspiritual) {
+        newList = newList.filter((item: any) => item.title !== 'Acompanhante' && item.title !== 'Hospedeiro');
+
+        dataSheet.data.advantagesAndFlaws.flaws =
+    dataSheet.data.advantagesAndFlaws.flaws.filter((flaw: any) => flaw.title !== 'Pacto Condicional');
+      }
+
+      if (advOfFlaw === 'flaw') dataSheet.data.advantagesAndFlaws.flaws = newList;
+      else dataSheet.data.advantagesAndFlaws.advantages = newList;
+      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+  
+      let newPersist = '';
+      if (advOfFlaw === 'flaw') {
+        const findFlaw = dataSheet.data.advantagesAndFlaws.flaws.filter((flaw: any) => flaw.name === name);
+        newPersist = findFlaw
+        .map((flaw: any) => {
+          let label = flaw.title || flaw.description;
+          return `"${label} (${flaw.cost})"`;
+        })
+        .join(', ')
+        .replace(/, ([^,]+)$/, ' e $1');
+      } else {
+        const findAdvantage = dataSheet.data.advantagesAndFlaws.advantages.filter((adv: any) => adv.name === name);
+        newPersist = findAdvantage
+          .map((flaw: any) => {
+            let label = flaw.title || flaw.description;
+            return `"${label} (${flaw.cost})"`;
+          })
+          .join(', ')
+          .replace(/, ([^,]+)$/, ' e $1');
+      }
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o ${advOfFlaw === 'flaw' ? 'Defeito' : 'Mérito/Background'} ${name} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${dataPersist === '' ? "''" : dataPersist} para ${newPersist === '' ? "''" : newPersist}.`, type: 'notification' }, null, setShowMessage);
+    }
   }
 
   const verifySelected = () => {

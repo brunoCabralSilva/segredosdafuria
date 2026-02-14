@@ -35,7 +35,7 @@ export default function AdvOrFlawAdded(props: { type: string }) {
       {
         type === 'flaw' &&
         <p>
-          <span>Total em Desvantagens:</span>
+          <span>Total em Defeitos:</span>
           <span className={`pl-2 ${returnColor('flaw')}` }>
           { 
             dataSheet.data.advantagesAndFlaws.flaws.reduce((total: number, item: any) => total + Number(item.cost), 0)
