@@ -718,7 +718,7 @@
         "skillPtBr": "Favor da Guardiã: Os espíritos e entidades da floresta sentem a sua conexão com a Caipora e respeitam isso. Uma vez por história, você pode invocar um protetor da mata, seja para defender aliados, criar distrações com animais e vegetação ou proteger-se de ataques. Esta habilidade representa o legado que a magia da guardiã da floresta atuando em seu favor."
       }
     ],
-    "book": "Criado por Bruno Cabral para a Crônica 'Ventos do Apocalipse'",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   },
   {
@@ -755,7 +755,44 @@
         "skillPtBr": "Resiliência do Além: A convivência com o sofrimento dos mortos e a compreensão das consequências das ações humanas fortaleceu sua mente e espírito. Você soma dois dados aos testes de resistência ao Harano e ao Hauglosk, representando sua familiaridade com a dor, o tormento e os ecos das escolhas impensadas, e sua capacidade de não sucumbir às pressões do além ou às desordens do mundo vivo."
       }
     ],
-    "book": "Criado por Bruno Cabral para a Crônica 'Ventos do Apocalipse'",
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 22,
+    "title": "Espírito Ancestral",
+    "titlePtBr": "Espírito Ancestral",
+    "custom": true,
+    "description": "Muitos Garou sentem um frio na espinha ao atravessar a Película, mas para você, o Uivo de Gaia é uma realidade tátil e ensurdecedora, do qual tratar simplesmente como um ruído de fundo enquanto estamos na Umbra é impossível e inaceitável. Nas últimas décadas, a Umbra tornou-se um lugar hostil, onde a agonia da Mãe Terra se manifesta como uma distorção multissensorial que pode assumir diversas facetas aos ouvidos de quem a ouve. Enquanto muitos Garous sucumbem ao Harano ao ouvir esse lamento, vendo-o apenas como o estertor de morte do planeta, você se recusa a ser silenciado. Você faz parte daqueles que buscam nas Tempestades Uivantes (fenômenos Umbráticos capazes de dilacerar a substância dos espíritos e a Força de Vontade dos viajantes) instruções codificadas que podem ajudar na batalha final e até mesmo na salvação de Gaia. Ao escolher esta Ficha de Conhecimento, você deixa de ser mais do que um simples sobrevivente das Tormentas Espirituais e se torna seu maestro, capaz de navegar por desolações umbrais e canalizar a própria fúria da Terra contra os servos da destruição.",
+    "descriptionPtBr": "Muitos Garou sentem um frio na espinha ao atravessar a Película, mas para você, o Uivo de Gaia é uma realidade tátil e ensurdecedora, do qual tratar simplesmente como um ruído de fundo enquanto estamos na Umbra é impossível e inaceitável. Nas últimas décadas, a Umbra tornou-se um lugar hostil, onde a agonia da Mãe Terra se manifesta como uma distorção multissensorial que pode assumir diversas facetas aos ouvidos de quem a ouve. Enquanto muitos Garous sucumbem ao Harano ao ouvir esse lamento, vendo-o apenas como o estertor de morte do planeta, você se recusa a ser silenciado. Você faz parte daqueles que buscam nas Tempestades Uivantes (fenômenos Umbráticos capazes de dilacerar a substância dos espíritos e a Força de Vontade dos viajantes) instruções codificadas que podem ajudar na batalha final e até mesmo na salvação de Gaia. Ao escolher esta Ficha de Conhecimento, você deixa de ser mais do que um simples sobrevivente das Tormentas Espirituais e se torna seu maestro, capaz de navegar por desolações umbrais e canalizar a própria fúria da Terra contra os servos da destruição.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Sussurros Ancestrais: Uma vez por sessão, você pode convocar a atenção de um Espírito Ancestral (••) por uma cena. Ele fornece conselhos, pistas enigmáticas, advertências ou interpretações espirituais que a sabedoria ancestral seria capaz de proporcionar.",
+        "skillPtBr": "Sussurros Ancestrais: Uma vez por sessão, você pode convocar a atenção de um Espírito Ancestral (••) por uma cena. Ele fornece conselhos, pistas enigmáticas, advertências ou interpretações espirituais que a sabedoria ancestral seria capaz de proporcionar."
+      },
+      {
+        "cost": 2,
+        "skill": "Bênção Ancestral: Uma vez por história, você pode recorrer ao seu Ancestral como se ele fosse um Pilar, recebendo todos os benefícios normalmente concedidos por um. Após uma cena de comunhão — seja em meditação, cântico ritual, oferenda ou sonho guiado — você pode reduzir o nível de Fúria, curar um ponto de dano Agravado em sua Força de Vontade ou mover um ponto de Harano para Hauglosk, ou o contrário. Quando o contato se encerra, resta uma sensação profunda de ter caminhado, ainda que por um instante, dentro das memórias e da sabedoria de sua própria linhagem espiritual.",
+        "skillPtBr": "Bênção Ancestral: Uma vez por história, você pode recorrer ao seu Ancestral como se ele fosse um Pilar, recebendo todos os benefícios normalmente concedidos por um. Após uma cena de comunhão — seja em meditação, cântico ritual, oferenda ou sonho guiado — você pode reduzir o nível de Fúria, curar um ponto de dano Agravado em sua Força de Vontade ou mover um ponto de Harano para Hauglosk, ou o contrário. Quando o contato se encerra, resta uma sensação profunda de ter caminhado, ainda que por um instante, dentro das memórias e da sabedoria de sua própria linhagem espiritual."
+      },
+      {
+        "cost": 3,
+        "skill": "Escudo Espiritual: Um espírito ancestral lhe vigia, pronto para intervir em momentos de necessidade extrema. Uma vez por história, quando você estiver em sério perigo, você pode invocar o seu Escudo Espiritual com um teste de Renome + Ocultismo (dificuldade 3). Em caso de sucesso, o espírito se manifesta para protegê-lo, concedendo um aumento temporário de +2 em qualquer um dos Atributos durante a cena. A intervenção do espírito pode se manifestar na forma de habilidades físicas aprimoradas, sentidos aguçados ou até mesmo um breve momento de sorte sobrenatural.",
+        "skillPtBr": "Escudo Espiritual: Um espírito ancestral lhe vigia, pronto para intervir em momentos de necessidade extrema. Uma vez por história, quando você estiver em sério perigo, você pode invocar o seu Escudo Espiritual com um teste de Renome + Ocultismo (dificuldade 3). Em caso de sucesso, o espírito se manifesta para protegê-lo, concedendo um aumento temporário de +2 em qualquer um dos Atributos durante a cena. A intervenção do espírito pode se manifestar na forma de habilidades físicas aprimoradas, sentidos aguçados ou até mesmo um breve momento de sorte sobrenatural."
+      },
+      {
+        "cost": 4,
+        "skill": "Voz do Passado Vivo: Seu vínculo com um Ancestral evoluiu para algo íntimo e constante. Ele age como um Mentor (•••) completo — que provê orientação estratégica, instrução sobre ritos e visão política dentro da sociedade dos Garous, sendo frequentemente uma fonte vital para entender o dever para com Gaia e como atravessar a Película. Diferente de um mentor vivo, porém, sua orientação vem de fragmentos de memória, ecos espirituais ou aparições espectrais que surgem nos momentos em que você mais precisa, e não necessariamente nos momentos em que você deseja.",
+        "skillPtBr": "Voz do Passado Vivo: Seu vínculo com um Ancestral evoluiu para algo íntimo e constante. Ele age como um Mentor (•••) completo — que provê orientação estratégica, instrução sobre ritos e visão política dentro da sociedade dos Garous, sendo frequentemente uma fonte vital para entender o dever para com Gaia e como atravessar a Película. Diferente de um mentor vivo, porém, sua orientação vem de fragmentos de memória, ecos espirituais ou aparições espectrais que surgem nos momentos em que você mais precisa, e não necessariamente nos momentos em que você deseja."
+      },
+      {
+        "cost": 5,
+        "skill": "Transe Ancestral: Uma vez por história, você pode permitir que o espírito ancestral tome seu corpo, iniciando um Transe Ancestral que dura uma única cena. Ao começar o transe, você recupera imediatamente 3 pontos Superficiais de Força de Vontade. Durante essa cena, você recebe +2 pontos temporários em todas as suas habilidades, representando o peso do conhecimento, da experiência e dos instintos do seu Ancestral fluindo pelo seu corpo. Quando a cena termina, seu corpo sente o peso do espírito que o atravessou: você deve realizar um teste de Frenesi.",
+        "skillPtBr": "Transe Ancestral: Uma vez por história, você pode permitir que o espírito ancestral tome seu corpo, iniciando um Transe Ancestral que dura uma única cena. Ao começar o transe, você recupera imediatamente 3 pontos Superficiais de Força de Vontade. Durante essa cena, você recebe +2 pontos temporários em todas as suas habilidades, representando o peso do conhecimento, da experiência e dos instintos do seu Ancestral fluindo pelo seu corpo. Quando a cena termina, seu corpo sente o peso do espírito que o atravessou: você deve realizar um teste de Frenesi."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
     "page": 1
   }
 ]

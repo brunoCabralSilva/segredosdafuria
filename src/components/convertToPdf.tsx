@@ -8,6 +8,7 @@ import Loading from "./loading";
 
 export default function ConvertToPdf(props: { data: any }) {
   const { data } = props;
+  console.log(data);
   const { setShowDownloadPdf, session } = useContext(contexto);
   const pdfRef: any = useRef(null);
   const pdfRef2: any = useRef(null);
@@ -193,6 +194,7 @@ export default function ConvertToPdf(props: { data: any }) {
       </div>
       <div ref={pdfRef} className="bg-white text-black p-8 border border-black !border-solid" id="pdf-content">
         <div className="border-2 border-black !border-solid p-4 mt-3">
+          {/* Cabeçalho */}
           <div className="flex w-full justify-center items-center">
             <Image
               src="/images/logos/text-black.png"
