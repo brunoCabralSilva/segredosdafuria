@@ -1016,5 +1016,79 @@
     ],
     "book": "Criado por Bruno Cabral",
     "page": 1
+  },
+  {
+    "id": 29,
+    "title": "Espadas da Noite",
+    "titlePtBr": "Espadas da Noite",
+    "custom": true,
+    "description": "Enquanto a maioria da Nação Garou volta seus olhos para as ações dos Dançarinos da Espiral Negra e malditos da Wyrm, as Espadas da Noite focam em outras infecções urbanas que pulsam sob as luzes de neon. Para este grupo, as ''Sanguessugas'' são parasitas indesejados que agem como peões da corrupção que drenam a vitalidade de Gaia e aprisionam a humanidade em gaiolas de sangue. Como membro ou colaborador dos Espadas da Noite, você domina a noite das metrópoles, transformando o território inimigo em sua própria zona de extermínio. Aprende a detectar a quietude antinatural dos vampiros e a cercar seus domínios com uma rede de vigilância implacável, que vai de câmeras de segurança e tecnologia de ponta a informantes de rua atentos, garantindo que nenhum movimento passe despercebido. Ao escolher esta Ficha de Conhecimento, você se torna parte de uma linhagem de veteranos que trocou os contos de glória tradicionais pela eficiência tática, utilizando Redutos de Caça fortificados e a convocação das lâminas para garantir que, quando a noite eterna tentar se expandir, ela encontre Garras e Presas prontos para destroçá-la.",
+    "descriptionPtBr": "Enquanto a maioria da Nação Garou volta seus olhos para as ações dos Dançarinos da Espiral Negra e malditos da Wyrm, as Espadas da Noite focam em outras infecções urbanas que pulsam sob as luzes de neon. Para este grupo, as ''Sanguessugas'' são parasitas indesejados que agem como peões da corrupção que drenam a vitalidade de Gaia e aprisionam a humanidade em gaiolas de sangue. Como membro ou colaborador dos Espadas da Noite, você domina a noite das metrópoles, transformando o território inimigo em sua própria zona de extermínio. Aprende a detectar a quietude antinatural dos vampiros e a cercar seus domínios com uma rede de vigilância implacável, que vai de câmeras de segurança e tecnologia de ponta a informantes de rua atentos, garantindo que nenhum movimento passe despercebido. Ao escolher esta Ficha de Conhecimento, você se torna parte de uma linhagem de veteranos que trocou os contos de glória tradicionais pela eficiência tática, utilizando Redutos de Caça fortificados e a convocação das lâminas para garantir que, quando a noite eterna tentar se expandir, ela encontre Garras e Presas prontos para destroçá-la.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Olhar Clínico: Você desenvolveu um instinto preciso para reconhecer a quietude predatória dos mortos-vivos, mesmo quando tentam se misturar entre humanos. Uma vez por sessão, recebe três dados extras em um teste Mental para rastrear, identificar ou perseguir um Vampiro.",
+        "skillPtBr": "Olhar Clínico: Você desenvolveu um instinto preciso para reconhecer a quietude predatória dos mortos-vivos, mesmo quando tentam se misturar entre humanos. Uma vez por sessão, recebe três dados extras em um teste Mental para rastrear, identificar ou perseguir um Vampiro."
+      },
+      {
+        "cost": 2,
+        "skill": "Vigilância Territorial: Você mantém uma rede de observadores, câmeras, familiares bem colocados e pequenos favores espalhados pelo bairro. Uma vez por história, obtém dois sucessos automáticos em um teste de Investigação destinado a localizar a presença, o rastro ou a influência de Vampiros em sua área de atuação.",
+        "skillPtBr": "Vigilância Territorial: Você mantém uma rede de observadores, câmeras, familiares bem colocados e pequenos favores espalhados pelo bairro. Uma vez por história, obtém dois sucessos automáticos em um teste de Investigação destinado a localizar a presença, o rastro ou a influência de Vampiros em sua área de atuação."
+      },
+      {
+        "cost": 3,
+        "skill": "Reduto de Caça: Você possui um refúgio reforçado e preparado com armadilhas, superstição prática e conhecimento passado entre gerações de caçadores Garou. Além desse lugar funcionar como o Antecedente Aparelho Seguro (••), o personagem recebe quatro pontos para distribuir entre vantagens relacionadas à defesa contra mortos-vivos, sejam proteções físicas, sistemas de alerta, meios de conter intrusos ou rituais de impedimento.",
+        "skillPtBr": "Reduto de Caça: Você possui um refúgio reforçado e preparado com armadilhas, superstição prática e conhecimento passado entre gerações de caçadores Garou. Além desse lugar funcionar como o Antecedente Aparelho Seguro (••), o personagem recebe quatro pontos para distribuir entre vantagens relacionadas à defesa contra mortos-vivos, sejam proteções físicas, sistemas de alerta, meios de conter intrusos ou rituais de impedimento."
+      },
+      {
+        "cost": 4,
+        "skill": "Veterano da Noite Eterna: A experiência combate após combate aprimorou sua eficácia contra os mortos-vivos. Você recebe dois dados de bônus em checagens envolvendo Armas de Fogo ou Atletismo sempre que estiver enfrentando Vampiros, refletindo precisão, ferocidade e conhecimento de seus pontos fracos.",
+        "skillPtBr": "Veterano da Noite Eterna: A experiência combate após combate aprimorou sua eficácia contra os mortos-vivos. Você recebe dois dados de bônus em checagens envolvendo Armas de Fogo ou Atletismo sempre que estiver enfrentando Vampiros, refletindo precisão, ferocidade e conhecimento de seus pontos fracos."
+      },
+      {
+        "cost": 5,
+        "skill": "Convocação das Lâminas: Você é um membro notório dos Espadas da Noite e pode mobilizar reforços quando a ameaça vampírica exigir respostas rápidas. Uma vez por história, pode convocar Aliados (••••) que só atendem ao chamado quando Vampiros estão envolvidos, mas chegam determinados e bem armados para eliminar a ameaça.",
+        "skillPtBr": "Convocação das Lâminas: Você é um membro notório dos Espadas da Noite e pode mobilizar reforços quando a ameaça vampírica exigir respostas rápidas. Uma vez por história, pode convocar Aliados (••••) que só atendem ao chamado quando Vampiros estão envolvidos, mas chegam determinados e bem armados para eliminar a ameaça."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 30,
+    "title": "Seita da Lua regional",
+    "titlePtBr": "Seita da Lua regional",
+    "custom": true,
+    "description": "As Seitas da Lua são grupos que florescem no vácuo deixado pelo fracasso das tradições antigas, optando por virar as costas para o dever para com Gaia para servir prioritariamente à sua irmã, Luna. Para os membros dessa seita, frequentemente lobisomens jovens que rejeitam a inação de seus predecessores, se Gaia está de fato morrendo ou já morreu, é melhor saltar com ousadia para o que vem a seguir do que desaparecer na obscuridade com o passado e afundar junto com ela. Você conhece uma Seita da Lua que atua na sua região e reconhece que essa seita pode não ser uma heresia, mas outra visão do papel dos lobisomens no Apocalipse. Sua convivência com os membros da Seita é frequente e eles te respeitam, admirando sua capacidade de reconhecer o papel deles, enquanto alimentam a esperança de que um dia você se converterá integralmente para a causa. Por meio deste intercâmbio, você ganha acesso aos mistérios do Véu Lunar e a recursos que a Nação Fragmentada falhou em prover. Ao colaborar com a seita local, você aprendeu que, em um mundo onde o espírito é moldado pelo pensamento e pela emoção, a luz prateada de Luna oferece uma esperança tangível e novas formas de poder para aqueles corajosos o suficiente para abandonar o que já está perdido.",
+    "descriptionPtBr": "As Seitas da Lua são grupos que florescem no vácuo deixado pelo fracasso das tradições antigas, optando por virar as costas para o dever para com Gaia para servir prioritariamente à sua irmã, Luna. Para os membros dessa seita, frequentemente lobisomens jovens que rejeitam a inação de seus predecessores, se Gaia está de fato morrendo ou já morreu, é melhor saltar com ousadia para o que vem a seguir do que desaparecer na obscuridade com o passado e afundar junto com ela. Você conhece uma Seita da Lua que atua na sua região e reconhece que essa seita pode não ser uma heresia, mas outra visão do papel dos lobisomens no Apocalipse. Sua convivência com os membros da Seita é frequente e eles te respeitam, admirando sua capacidade de reconhecer o papel deles, enquanto alimentam a esperança de que um dia você se converterá integralmente para a causa. Por meio deste intercâmbio, você ganha acesso aos mistérios do Véu Lunar e a recursos que a Nação Fragmentada falhou em prover. Ao colaborar com a seita local, você aprendeu que, em um mundo onde o espírito é moldado pelo pensamento e pela emoção, a luz prateada de Luna oferece uma esperança tangível e novas formas de poder para aqueles corajosos o suficiente para abandonar o que já está perdido.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Cultistas da Lua: Você conhece um pequeno grupo de mortais devotos às doutrinas da Seita da Lua local, que criaram um culto que os atraiu. Eles funcionam como Aliados (•) capazes de conceder pequenos favores em nome da devoção à Lua.",
+        "skillPtBr": "Cultistas da Lua: Você conhece um pequeno grupo de mortais devotos às doutrinas da Seita da Lua local, que criaram um culto que os atraiu. Eles funcionam como Aliados (•) capazes de conceder pequenos favores em nome da devoção à Lua."
+      },
+      {
+        "cost": 2,
+        "skill": "Discípulo do Véu Lunar: Você possui, dentro do culto, o equivalente a um Mentor (•) que lhe transmite os mistérios dos espíritos de forma incomum - uma abordagem particular da Seita da Lua ao qual pertence, misturando rito, intuição e doutrina velada. Graças a esse aprendizado singular, o custo para adquirir uma habilidade específica é reduzido pela metade.",
+        "skillPtBr": "Discípulo do Véu Lunar: Você possui, dentro do culto, o equivalente a um Mentor (•) que lhe transmite os mistérios dos espíritos de forma incomum - uma abordagem particular da Seita da Lua ao qual pertence, misturando rito, intuição e doutrina velada. Graças a esse aprendizado singular, o custo para adquirir uma habilidade específica é reduzido pela metade."
+      },
+      {
+        "cost": 3,
+        "skill": "Sussurros da Lua: A Seita lhe concede acesso a um conhecimento secreto, revelado apenas a quem provou merecer a atenção da lua. Uma vez por sessão, você pode usar um Dom de qualquer Augúrio e que ainda não conheça, desde que ele seja de um nível igual ou inferior ao seu Renome Total.",
+        "skillPtBr": "Sussurros da Lua: A Seita lhe concede acesso a um conhecimento secreto, revelado apenas a quem provou merecer a atenção da lua. Uma vez por sessão, você pode usar um Dom de qualquer Augúrio e que ainda não conheça, desde que ele seja de um nível igual ou inferior ao seu Renome Total."
+      },
+      {
+        "cost": 4,
+        "skill": "Um de Nós: Para todos os efeitos, eles te veem como membro da seita. Você ganha acesso permanente aos recursos e esconderijos do grupo, recebendo Recursos (••) e Aliados (••). Além disso, você recebe um dado extra em todos os testes de Ocultismo.",
+        "skillPtBr": "Um de Nós: Para todos os efeitos, eles te veem como membro da seita. Você ganha acesso permanente aos recursos e esconderijos do grupo, recebendo Recursos (••) e Aliados (••). Além disso, você recebe um dado extra em todos os testes de Ocultismo."
+      },
+      {
+        "cost": 5,
+        "skill": "Débito Sob a Luz de Luna: Sua ligação com a Seita da Lua Local é profunda o suficiente para mover montanhas… ou corpos. Uma vez por história, você pode solicitar um favor maior: a tentativa de eliminação discreta de um alvo, a lavagem de grandes quantias de dinheiro, a ocultação de provas, ou até a purificação ritual de um local marcado pela violência. Qualquer pedido será atendido, ou pelo menos haverá esforço por parte da Seita para ajudá-lo a resolver a questão. Contudo, mais cedo ou mais tarde, a Seita exigirá um favor equivalente - e quando Luna iluminar a dívida, você não poderá recusar.",
+        "skillPtBr": "Débito Sob a Luz de Luna: Sua ligação com a Seita da Lua Local é profunda o suficiente para mover montanhas… ou corpos. Uma vez por história, você pode solicitar um favor maior: a tentativa de eliminação discreta de um alvo, a lavagem de grandes quantias de dinheiro, a ocultação de provas, ou até a purificação ritual de um local marcado pela violência. Qualquer pedido será atendido, ou pelo menos haverá esforço por parte da Seita para ajudá-lo a resolver a questão. Contudo, mais cedo ou mais tarde, a Seita exigirá um favor equivalente - e quando Luna iluminar a dívida, você não poderá recusar."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
   }
 ]
