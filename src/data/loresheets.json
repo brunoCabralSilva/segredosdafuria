@@ -792,6 +792,43 @@
         "skillPtBr": "Transe Ancestral: Uma vez por história, você pode permitir que o espírito ancestral tome seu corpo, iniciando um Transe Ancestral que dura uma única cena. Ao começar o transe, você recupera imediatamente 3 pontos Superficiais de Força de Vontade. Durante essa cena, você recebe +2 pontos temporários em todas as suas habilidades, representando o peso do conhecimento, da experiência e dos instintos do seu Ancestral fluindo pelo seu corpo. Quando a cena termina, seu corpo sente o peso do espírito que o atravessou: você deve realizar um teste de Frenesi."
       }
     ],
+    "book": "Criado por Bruno Cabral, com contribuição do Chokos (Nação Garou) para a característica 3",
+    "page": 1
+  },
+  {
+    "id": 23,
+    "title": "O Coven Crescente",
+    "titlePtBr": "O Coven Crescente",
+    "custom": true,
+    "description": "Enquanto a maioria dos Garou se perde em velhas rivalidades tribais ou se afoga no desespero do Uivo de Gaia, você encontrou uma perspectiva diferente distante da sociedade lobisomem e próximo de uma das Seitas da Lua. Suas andanças o levaram ao contato com o Coven Crescente, um grupo de místicos liderados por uma theurge dos Senhores das Sombras que tem o papel de Bruxa Anciã no culto. Esta, por sua vez, rejeita o papel de meros soldados de uma causa perdida e isso chamou a sua atenção. Para você, o Coven não é uma seita de hereges, mas uma outra visão baseada em conhecimentos práticos e perigosos que a Nação Fragmentada, em sua rigidez, escolheu esquecer ou rotular como heresia. Ao colaborar com eles e entender seu lado, você aprendeu que Luna pode ser vista como uma deusa mística de domínio absoluto (como a antiga Hekate), e não apenas um marcador de fase lunar. Eles lhe mostraram que a vontade de um Garou pode ser soberana, permitindo que você trate com espíritos não apenas como aliados distantes, mas como forças a serem contidas e moldadas para servir à sobrevivência de Gaia. Através desta convivência, você adquiriu ferramentas heterodoxas como o uso de sigilos lunares para silenciar a Fúria e a criação de simulacros para desviar a dor. Você não é um seguidor cego, mas um Garou que aprendeu com as bruxas que, para sobreviver ao Apocalipse, é preciso dominar a própria sombra antes que ela o consuma.",
+    "descriptionPtBr": "Enquanto a maioria dos Garou se perde em velhas rivalidades tribais ou se afoga no desespero do Uivo de Gaia, você encontrou uma perspectiva diferente distante da sociedade lobisomem e próximo de uma das Seitas da Lua. Suas andanças o levaram ao contato com o Coven Crescente, um grupo de místicos liderados por uma theurge dos Senhores das Sombras que tem o papel de Bruxa Anciã no culto. Esta, por sua vez, rejeita o papel de meros soldados de uma causa perdida e isso chamou a sua atenção. Para você, o Coven não é uma seita de hereges, mas uma outra visão baseada em conhecimentos práticos e perigosos que a Nação Fragmentada, em sua rigidez, escolheu esquecer ou rotular como heresia. Ao colaborar com eles e entender seu lado, você aprendeu que Luna pode ser vista como uma deusa mística de domínio absoluto (como a antiga Hekate), e não apenas um marcador de fase lunar. Eles lhe mostraram que a vontade de um Garou pode ser soberana, permitindo que você trate com espíritos não apenas como aliados distantes, mas como forças a serem contidas e moldadas para servir à sobrevivência de Gaia. Através desta convivência, você adquiriu ferramentas heterodoxas como o uso de sigilos lunares para silenciar a Fúria e a criação de simulacros para desviar a dor. Você não é um seguidor cego, mas um Garou que aprendeu com as bruxas que, para sobreviver ao Apocalipse, é preciso dominar a própria sombra antes que ela o consuma.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Vínculo Lunar: Você mantém um vínculo direto com um espírito Luno alinhado à Lua Crescente, equivalente à vantagem Pacto Espiritual. A presença desse aliado espiritual acompanha seus gestos rituais e fortalece seu foco. Enquanto esse vínculo existir, você recebe um bônus de +1 dado em todos os testes realizados para executar rituais, refletindo a influência crescente e inspiradora desse Luno sobre sua prática mística",
+        "skillPtBr": "Vínculo Lunar: Você mantém um vínculo direto com um espírito Luno alinhado à Lua Crescente, equivalente à vantagem Pacto Espiritual. A presença desse aliado espiritual acompanha seus gestos rituais e fortalece seu foco. Enquanto esse vínculo existir, você recebe um bônus de +1 dado em todos os testes realizados para executar rituais, refletindo a influência crescente e inspiradora desse Luno sobre sua prática mística"
+      },
+      {
+        "cost": 2,
+        "skill": "Confinamento: Sob orientação das bruxas e mentores do Coven Crescente, você aprende a canalizar o poder da Lua através de gestos de contenção e símbolos de limitação. Sua formação inclui o aprendizado completo do Ritual de Confinamento, além da aquisição da vantagem Praticante de Rituais.",
+        "skillPtBr": "Confinamento: Sob orientação das bruxas e mentores do Coven Crescente, você aprende a canalizar o poder da Lua através de gestos de contenção e símbolos de limitação. Sua formação inclui o aprendizado completo do Ritual de Confinamento, além da aquisição da vantagem Praticante de Rituais."
+      },
+      {
+        "cost": 3,
+        "skill": "Simulacro da Vitalidade: O Coven ensina um método ancestral de criar um simulacro de si mesmo, moldado a partir de galhos retorcidos, raízes vivas e fragmentos de luz lunar capturados na Umbra. O artefato funciona como uma extensão frágil da sua própria vitalidade. Uma vez por história, você pode queimá-lo em um pequeno rito de oferenda, absorvendo sua essência e curando até dois níveis de Dano Agravado de Vitalidade. A dor dessa restauração é desviada para outra pessoa distante em seu campo de visão, que a sente de maneira misteriosa e súbita, como um eco da magia lunar que você canalizou.",
+        "skillPtBr": "Simulacro da Vitalidade: O Coven ensina um método ancestral de criar um simulacro de si mesmo, moldado a partir de galhos retorcidos, raízes vivas e fragmentos de luz lunar capturados na Umbra. O artefato funciona como uma extensão frágil da sua própria vitalidade. Uma vez por história, você pode queimá-lo em um pequeno rito de oferenda, absorvendo sua essência e curando até dois níveis de Dano Agravado de Vitalidade. A dor dessa restauração é desviada para outra pessoa distante em seu campo de visão, que a sente de maneira misteriosa e súbita, como um eco da magia lunar que você canalizou."
+      },
+      {
+        "cost": 4,
+        "skill": "Sigilo do Coração: Os membros da seita aprendem a traçar um sigilo lunar sobre o próprio peito, feito com saliva, sangue ou fuligem. Uma vez por sessão, o personagem pode gastar uma ação completa para desenhar esse sigilo e cancelar automaticamente um teste de Fúria de algum dom ou transformação que deseja realizar.",
+        "skillPtBr": "Sigilo do Coração: Os membros da seita aprendem a traçar um sigilo lunar sobre o próprio peito, feito com saliva, sangue ou fuligem. Uma vez por sessão, o personagem pode gastar uma ação completa para desenhar esse sigilo e cancelar automaticamente um teste de Fúria de algum dom ou transformação que deseja realizar."
+      },
+      {
+        "cost": 5,
+        "skill": "Ponte da Lua: Uma vez por história, o personagem pode contratar uma ponte da lua sem a necessidade de um caern para transportar ele e um número de pessoas igual ao seu ocultismo com segurança de um ponto a outro ponto que não tenha forte influência sobrenatural e em que a lua esteja brilhando.",
+        "skillPtBr": "Ponte da Lua: Uma vez por história, o personagem pode contratar uma ponte da lua sem a necessidade de um caern para transportar ele e um número de pessoas igual ao seu ocultismo com segurança de um ponto a outro ponto que não tenha forte influência sobrenatural e em que a lua esteja brilhando."
+      }
+    ],
     "book": "Criado por Bruno Cabral",
     "page": 1
   }
