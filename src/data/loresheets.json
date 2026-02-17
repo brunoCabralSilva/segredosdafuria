@@ -1090,5 +1090,79 @@
     ],
     "book": "Criado por Bruno Cabral",
     "page": 1
+  },
+  {
+    "id": 31,
+    "title": "Inimigo dos Fenris",
+    "titlePtBr": "Inimigo dos Fenris",
+    "custom": true,
+    "description": "A Seita de Fenris representa uma das maiores tragédias e falhas dos Garous na era do Apocalipse. Após sucumbirem coletivamente ao Hauglosk — um estado de retidão fanática onde os fins justificam qualquer atrocidade — os Fenrir abandonaram seus antigos aliados, jurando inimizade a todos que não seguem sua visão de guerra total e sem misericórdia. Para eles, o mundo é um campo de extermínio onde a Wyrm está em tudo, e a única resposta é a violência absoluta; não existem espectadores ou vítimas inocentes, apenas os fortes e os que devem ser purgados. Você é alguém que presenciou o que acontece quando a honra de um lobo é substituída por uma sede de sangue dogmática e aprendeu que, para sobreviver aos Fenrir, é preciso entender a sua loucura e revidar. Ao escolher esta Ficha de Conhecimento, você se torna um especialista em enfrentar a Seita de Fenris e seus métodos. Seja por ter sobrevivido a um massacre ou por ter aprendido a mimetizá-los para se infiltrar em seus territórios, você possui um instinto quase sobrenatural para detectar o rastro de ferro e sangue que esses fanáticos deixam para trás. Sua convivência amarga com a Seita lhe concedeu uma proteção psicológica única contra o Hauglosk, permitindo que você identifique o fanatismo antes que ele o consuma, transformando sua dor em táticas de combate eficientes contra aqueles que outrora foram os maiores defensores de Gaia. No entanto, sua reputação como um ''Matador de Fanáticos'' pode torná-lo um alvo prioritário: para A Seita, pessoas como você não são apenas inimigos, mas uma heresia viva que deve ser silenciada para que a causa deles prevaleça.",
+    "descriptionPtBr": "A Seita de Fenris representa uma das maiores tragédias e falhas dos Garous na era do Apocalipse. Após sucumbirem coletivamente ao Hauglosk — um estado de retidão fanática onde os fins justificam qualquer atrocidade — os Fenrir abandonaram seus antigos aliados, jurando inimizade a todos que não seguem sua visão de guerra total e sem misericórdia. Para eles, o mundo é um campo de extermínio onde a Wyrm está em tudo, e a única resposta é a violência absoluta; não existem espectadores ou vítimas inocentes, apenas os fortes e os que devem ser purgados. Você é alguém que presenciou o que acontece quando a honra de um lobo é substituída por uma sede de sangue dogmática e aprendeu que, para sobreviver aos Fenrir, é preciso entender a sua loucura e revidar. Ao escolher esta Ficha de Conhecimento, você se torna um especialista em enfrentar a Seita de Fenris e seus métodos. Seja por ter sobrevivido a um massacre ou por ter aprendido a mimetizá-los para se infiltrar em seus territórios, você possui um instinto quase sobrenatural para detectar o rastro de ferro e sangue que esses fanáticos deixam para trás. Sua convivência amarga com a Seita lhe concedeu uma proteção psicológica única contra o Hauglosk, permitindo que você identifique o fanatismo antes que ele o consuma, transformando sua dor em táticas de combate eficientes contra aqueles que outrora foram os maiores defensores de Gaia. No entanto, sua reputação como um ''Matador de Fanáticos'' pode torná-lo um alvo prioritário: para A Seita, pessoas como você não são apenas inimigos, mas uma heresia viva que deve ser silenciada para que a causa deles prevaleça.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Rastro de Ferro e Sangue: Você já enfrentou - e sobreviveu - a uma investida da Seita de Fenris contra você. Sua experiência amarga lhe concedeu um instinto quase animalesco para reconhecer o fanatismo deles. Uma vez por sessão, você recebe +2 dados em qualquer teste Mental feito para identificar, pressentir ou deduzir a presença de sequazes, mesmo indiretamente (rumores, cheiros, padrões de ataque, marcas de território, táticas).",
+        "skillPtBr": "Rastro de Ferro e Sangue: Você já enfrentou - e sobreviveu - a uma investida da Seita de Fenris contra você. Sua experiência amarga lhe concedeu um instinto quase animalesco para reconhecer o fanatismo deles. Uma vez por sessão, você recebe +2 dados em qualquer teste Mental feito para identificar, pressentir ou deduzir a presença de sequazes, mesmo indiretamente (rumores, cheiros, padrões de ataque, marcas de território, táticas)."
+      },
+      {
+        "cost": 2,
+        "skill": "Falso Irmão dos Lobos Insanos: Seja por treinamento, sorte ou cicatrizes, você aprendeu a imitar a postura, o cheiro e os comportamentos rituais que a Seita exige de seus membros. Uma vez por história, você recebe sucesso automático em um teste de Subterfúgio, Manha ou Sobrevivência ao tentar se infiltrar entre eles, passar por um membro da seita temporariamente ou ocultar sua verdadeira lealdade. Eles ainda podem desconfiar, mas você sabe como passar despercebido… por tempo suficiente.",
+        "skillPtBr": "Falso Irmão dos Lobos Insanos: Seja por treinamento, sorte ou cicatrizes, você aprendeu a imitar a postura, o cheiro e os comportamentos rituais que a Seita exige de seus membros. Uma vez por história, você recebe sucesso automático em um teste de Subterfúgio, Manha ou Sobrevivência ao tentar se infiltrar entre eles, passar por um membro da seita temporariamente ou ocultar sua verdadeira lealdade. Eles ainda podem desconfiar, mas você sabe como passar despercebido… por tempo suficiente."
+      },
+      {
+        "cost": 3,
+        "skill": "Eco do Hauglosk: Você conhece bem a loucura dogmática da Seita de Fenris e essa familiaridade amarga funciona como uma proteção instintiva. Quando confrontado com situações que poderiam induzir você ao Hauglosk, você recebe +1 dado em qualquer teste para resistir a esse estado.",
+        "skillPtBr": "Eco do Hauglosk: Você conhece bem a loucura dogmática da Seita de Fenris e essa familiaridade amarga funciona como uma proteção instintiva. Quando confrontado com situações que poderiam induzir você ao Hauglosk, você recebe +1 dado em qualquer teste para resistir a esse estado."
+      },
+      {
+        "cost": 4,
+        "skill": "Matador de Fanáticos: Você já derrubou um deles - e isso fala muito sobre você. Outros Garous podem ver isso como coragem… ou como loucura. Uma vez por crônica, quando sua reputação de “Caçador da Seita” for relevante, você recebe um sucesso automático em qualquer teste Social envolvendo garous (Admiração ou Medo), mas falar sobre o que você fez com certeza vai atrair atenção indesejada por parte da seita de Fenris.",
+        "skillPtBr": "Matador de Fanáticos - Você já derrubou um deles - e isso fala muito sobre você. Outros Garous podem ver isso como coragem… ou como loucura. Uma vez por crônica, quando sua reputação de “Caçador da Seita” for relevante, você recebe um sucesso automático em qualquer teste Social envolvendo garous (Admiração ou Medo), mas falar sobre o que você fez com certeza vai atrair atenção indesejada por parte da seita de Fenris."
+      },
+      {
+        "cost": 5,
+        "skill": "Tática Quebra Lobo: Você estudou - ou testemunhou - como as alcateias da Seita lutam: ataques suicidas, investidas sem hesitação e redundância brutal. Uma vez por história, você pode invocar essa experiência para ganhar +3 dados durante uma cena para testes em que o alvo direto ou indireto seja a Seita de Fenris.",
+        "skillPtBr": "Tática Quebra Lobo: Você estudou - ou testemunhou - como as alcateias da Seita lutam: ataques suicidas, investidas sem hesitação e redundância brutal. Uma vez por história, você pode invocar essa experiência para ganhar +3 dados durante uma cena para testes em que o alvo direto ou indireto seja a Seita de Fenris."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 32,
+    "title": "Sobrevivente Solitário",
+    "titlePtBr": "Sobrevivente Solitário",
+    "custom": true,
+    "description": "A Primeira Mudança é um divisor de águas sangrento que, para a maioria, é seguido pelo acolhimento de mentores ou pela procura incessante de Buscadores de Parentes. No entanto, você é a prova viva de que o sistema da Nação Fragmentada é falho: você caiu pelas frestas. Por um bom tempo, você vagou pelo mundo sem um bando, sem ritos e sem ninguém para explicar por que o mundo espiritual sussurrava em seus ouvidos ou por que sua Fúria ameaçava consumir tudo ao seu redor. Enquanto os Garou criados em seitas aprendiam a Litania e os nomes das faces de Luna, você aprendia a sobreviver como um ''lobisomem miserável'', vivendo em acampamentos de desabrigados ou nas profundezas de florestas esquecidas, tratando sua natureza não como uma herança sagrada, mas como uma condição de sobrevivência brutal e solitária. Sua integração tardia à Nação Fragmentada trouxe conhecimento, mas não apagou as cicatrizes de sua autonomia. Para você, o Harano e o Hauglosk não são conceitos teológicos discutidos em Assembleias, mas velhos conhecidos com quem você aprendeu a coexistir instintivamente para não enlouquecer na solidão. Você possui o olhar humano de quem precisou ver os mortais como seus únicos aliados para não se tornar o monstro que eles temiam, e uma resiliência prática que nenhum treinamento tribal pode replicar como você conseguiu. Embora agora você uive com uma alcateia e conheça o que restou da cultura Garou, você não esquece do que viveu e como viveu.",
+    "descriptionPtBr": "A Primeira Mudança é um divisor de águas sangrento que, para a maioria, é seguido pelo acolhimento de mentores ou pela procura incessante de Buscadores de Parentes. No entanto, você é a prova viva de que o sistema da Nação Fragmentada é falho: você caiu pelas frestas. Por um bom tempo, você vagou pelo mundo sem um bando, sem ritos e sem ninguém para explicar por que o mundo espiritual sussurrava em seus ouvidos ou por que sua Fúria ameaçava consumir tudo ao seu redor. Enquanto os Garou criados em seitas aprendiam a Litania e os nomes das faces de Luna, você aprendia a sobreviver como um ''lobisomem miserável'', vivendo em acampamentos de desabrigados ou nas profundezas de florestas esquecidas, tratando sua natureza não como uma herança sagrada, mas como uma condição de sobrevivência brutal e solitária. Sua integração tardia à Nação Fragmentada trouxe conhecimento, mas não apagou as cicatrizes de sua autonomia. Para você, o Harano e o Hauglosk não são conceitos teológicos discutidos em Assembleias, mas velhos conhecidos com quem você aprendeu a coexistir instintivamente para não enlouquecer na solidão. Você possui o olhar humano de quem precisou ver os mortais como seus únicos aliados para não se tornar o monstro que eles temiam, e uma resiliência prática que nenhum treinamento tribal pode replicar como você conseguiu. Embora agora você uive com uma alcateia e conheça o que restou da cultura Garou, você não esquece do que viveu e como viveu.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Olhar Humano: Você vê humanos como pessoas iguais a você. Sua empatia e compreensão lhes conferem uma conexão rara entre os Garous. Uma vez por história, pode relançar qualquer falha em um teste Social envolvendo mortais.",
+        "skillPtBr": "Olhar Humano: Você vê humanos como pessoas iguais a você. Sua empatia e compreensão lhes conferem uma conexão rara entre os Garous. Uma vez por história, pode relançar qualquer falha em um teste Social envolvendo mortais."
+      },
+      {
+        "cost": 2,
+        "skill": "Sobrevivente Solitário: Sua vida sem mentores lhe ensinou a aprender por conta própria. Escolha três especializações entre Erudição, Ofícios, Etiqueta, Performance, Persuasão, Ciência ou Subterfúgio, representando o conhecimento adquirido na prática, sem orientação de outros Garous.",
+        "skillPtBr": "Sobrevivente Solitário: Sua vida sem mentores lhe ensinou a aprender por conta própria. Escolha três especializações entre Erudição, Ofícios, Etiqueta, Performance, Persuasão, Ciência ou Subterfúgio, representando o conhecimento adquirido na prática, sem orientação de outros Garous."
+      },
+      {
+        "cost": 3,
+        "skill": "Auto Convivência: Você passou anos aprendendo a lidar com Harano e Hauglosk de forma instintiva e cuidadosa, até ser finalmente encontrado e devidamente ensinado. Recebe +1 dado em ambos os testes, refletindo sua habilidade de conviver e compreender esses conflitos.",
+        "skillPtBr": "Auto Convivência: Você passou anos aprendendo a lidar com Harano e Hauglosk de forma instintiva e cuidadosa, até ser finalmente encontrado e devidamente ensinado. Recebe +1 dado em ambos os testes, refletindo sua habilidade de conviver e compreender esses conflitos."
+      },
+      {
+        "cost": 4,
+        "skill": "Instinto de Preservação: Viver sozinho ensinou você a nunca ser encurralado. Uma vez por combate, você pode gastar 1 ponto de Força de Vontade para ignorar a penalidade de dados por lutar contra múltiplos oponentes durante uma rodada inteira.",
+        "skillPtBr": "Instinto de Preservação: Viver sozinho ensinou você a nunca ser encurralado. Uma vez por combate, você pode gastar 1 ponto de Força de Vontade para ignorar a penalidade de dados por lutar contra múltiplos oponentes durante uma rodada inteira."
+      },
+      {
+        "cost": 5,
+        "skill": "Imparável: Para você, Harano e Hauglosk são dois lados da mesma dor que você presenciou sem conhecer sequer seus nomes. Uma vez por história, se você estiver prestes a preencher seu último marcador de Harano ou Hauglosk, realize um teste de Determinação + Autocontrole (Dificuldade 4). Se obtiver sucesso, você não adquire o ponto no marcador.",
+        "skillPtBr": "Imparável: Para você, Harano e Hauglosk são dois lados da mesma dor que você presenciou sem conhecer sequer seus nomes. Uma vez por história, se você estiver prestes a preencher seu último marcador de Harano ou Hauglosk, realize um teste de Determinação + Autocontrole (Dificuldade 4). Se obtiver sucesso, você não adquire o ponto no marcador."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
   }
 ]
