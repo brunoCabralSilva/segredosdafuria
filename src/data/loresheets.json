@@ -831,5 +831,79 @@
     ],
     "book": "Criado por Bruno Cabral",
     "page": 1
+  },
+  {
+    "id": 24,
+    "title": "O Covil",
+    "titlePtBr": "O Covil",
+    "custom": true,
+    "description": "Para muitos Garou, a Fúria é um fardo aterrorizante que ameaça consumir tudo o que amam, mas em suas explorações para além do que se entende como a Nação Fragmentada, você encontrou um grupo que oferece uma perspectiva diferente: O Covil. Esta Seita da Lua atua como um refúgio para os amedrontados e arrependidos, provendo um Santuário Umbrático onde é possível descansar sem que a Fúria atormente o sono ou a sanidade, ou recorrer quando a Fúria toma conta. Ao colaborar com eles e observar suas práticas, você compreendeu que o Covil vê Luna não apenas como um astro, mas como a Senhora da Fúria, uma figura materna que é, simultaneamente, violenta e protetora. Através dessa convivência, você aprendeu que a disciplina deles não se baseia na repressão cega, mas em um entendimento profundo e ritualístico do preço da Fúria, permitindo que seus membros realizem sacrifícios mútuos para manter o equilíbrio emocional. Embora você mantenha sua independência, os ensinamentos do Covil impregnaram sua alma com a capacidade de domar a tempestade interior e encontrar na Caverna Umbrática, um recanto espiritual encontrado pelos membros da Seita, um farol espiritual impossível de ignorar. Em um mundo que se fragmenta sob o peso do ódio, o Covil lhe mostrou que a evolução Garou depende de transformar e manipular a Fúria por diversos outros meios ensinados pela Irmã Luna.",
+    "descriptionPtBr": "Para muitos Garou, a Fúria é um fardo aterrorizante que ameaça consumir tudo o que amam, mas em suas explorações para além do que se entende como a Nação Fragmentada, você encontrou um grupo que oferece uma perspectiva diferente: O Covil. Esta Seita da Lua atua como um refúgio para os amedrontados e arrependidos, provendo um Santuário Umbrático onde é possível descansar sem que a Fúria atormente o sono ou a sanidade, ou recorrer quando a Fúria toma conta. Ao colaborar com eles e observar suas práticas, você compreendeu que o Covil vê Luna não apenas como um astro, mas como a Senhora da Fúria, uma figura materna que é, simultaneamente, violenta e protetora. Através dessa convivência, você aprendeu que a disciplina deles não se baseia na repressão cega, mas em um entendimento profundo e ritualístico do preço da Fúria, permitindo que seus membros realizem sacrifícios mútuos para manter o equilíbrio emocional. Embora você mantenha sua independência, os ensinamentos do Covil impregnaram sua alma com a capacidade de domar a tempestade interior e encontrar na Caverna Umbrática, um recanto espiritual encontrado pelos membros da Seita, um farol espiritual impossível de ignorar. Em um mundo que se fragmenta sob o peso do ódio, o Covil lhe mostrou que a evolução Garou depende de transformar e manipular a Fúria por diversos outros meios ensinados pela Irmã Luna.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Minha Fúria é Controlada: Uma vez por sessão, você pode ignorar a necessidade de realizar uma Checagem de Fúria, deixando que a calma fria do Covil silencie o impulso que deveria consumi-lo.",
+        "skillPtBr": "Minha Fúria é Controlada: Uma vez por sessão, você pode ignorar a necessidade de realizar uma Checagem de Fúria, deixando que a calma fria do Covil silencie o impulso que deveria consumi-lo."
+      },
+      {
+        "cost": 2,
+        "skill": "Não comungo com o Frenesi: Uma vez por história, você pode retirar um membro da alcateia ou a si mesmo do frenesi, canalizando a rígida disciplina lunar do Covil. A tempestade interior é acorrentada por um instante, domada por um lampejo de serenidade que corta o caos.",
+        "skillPtBr": "Não comungo com o Frenesi: Uma vez por história, você pode retirar um membro da alcateia ou a si mesmo do frenesi, canalizando a rígida disciplina lunar do Covil. A tempestade interior é acorrentada por um instante, domada por um lampejo de serenidade que corta o caos."
+      },
+      {
+        "cost": 3,
+        "skill": "Eu domino a minha Fúria: A convivência com o Covil impregnou sua alma com uma capacidade incomum de controlar a Fúria. Uma vez por sessão, após uma breve cena de respiração ritual, meditação ou foco inspirado pela memória da Caverna, você pode aumentar ou reduzir sua Fúria atual em 1 ponto, ajustando seu estado emocional como quem segue o ritmo das fases da lua.",
+        "skillPtBr": "Eu domino a minha Fúria: A convivência com o Covil impregnou sua alma com uma capacidade incomum de controlar a Fúria. Uma vez por sessão, após uma breve cena de respiração ritual, meditação ou foco inspirado pela memória da Caverna, você pode aumentar ou reduzir sua Fúria atual em 1 ponto, ajustando seu estado emocional como quem segue o ritmo das fases da lua."
+      },
+      {
+        "cost": 4,
+        "skill": "Sou o Bastião de Luna contra o Ímpeto Selvagem: Você é um exemplo para os outros quando o assunto é não sucumbir ao descontrole. Recebe +3 dados para resistir ao frenesi.",
+        "skillPtBr": "Sou o Bastião de Luna contra o Ímpeto Selvagem: Você é um exemplo para os outros quando o assunto é não sucumbir ao descontrole. Recebe +3 dados para resistir ao frenesi."
+      },
+      {
+        "cost": 5,
+        "skill": "O Covil é meu refúgio: Você conhece a localização exata da Caverna do Covil na Umbra, cujo chamado sutil ressoa em sua mente como um farol lunar impossível de ignorar. Uma vez por história, ao acessar a Umbra, você pode percorrer atalhos seguindo a luz de Luna espirituais e chegando em uma velocidade surpreendente à Caverna Umbrática da Seita (embora nem você saiba como os outros membros da Seita irão reagir a esse feito). Dentro da Caverna, nenhum Garou pode entrar em Frenesi e aqueles que chegam já tomados por esta condição saem imediatamente dele, como se a própria Luna lhes tocasse a alma e lhes trouxesse acalento. O Covil é um refúgio seguro na Umbra: enquanto estiver dentro de seus limites, sua Alcateia só precisa gastar Força de Vontade uma única vez por sessão para permanecer no mundo espiritual. Além disso, você recebe +2 dados para interagir com espíritos Luno ou usar Dons ensinados diretamente por entidades lunares.",
+        "skillPtBr": "O Covil é meu refúgio: Você conhece a localização exata da Caverna do Covil na Umbra, cujo chamado sutil ressoa em sua mente como um farol lunar impossível de ignorar. Uma vez por história, ao acessar a Umbra, você pode percorrer atalhos seguindo a luz de Luna espirituais e chegando em uma velocidade surpreendente à Caverna Umbrática da Seita (embora nem você saiba como os outros membros da Seita irão reagir a esse feito). Dentro da Caverna, nenhum Garou pode entrar em Frenesi e aqueles que chegam já tomados por esta condição saem imediatamente dele, como se a própria Luna lhes tocasse a alma e lhes trouxesse acalento. O Covil é um refúgio seguro na Umbra: enquanto estiver dentro de seus limites, sua Alcateia só precisa gastar Força de Vontade uma única vez por sessão para permanecer no mundo espiritual. Além disso, você recebe +2 dados para interagir com espíritos Luno ou usar Dons ensinados diretamente por entidades lunares."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 25,
+    "title": "O Sacerdócio do Marfim",
+    "titlePtBr": "O Sacerdócio do Marfim",
+    "custom": true,
+    "description": "A morte é o fim trágico de uma guerra perdida, mas não para o Sacerdócio do Marfim. Essa Seita da Lua se originou de uma dissidência dos Presas de Prata focada em tradições funerárias que se separou da ortodoxia para realizar o que chamam de ''o grande rito fúnebre para a Mãe Gaia''. Ao colaborar com eles, você entendeu que o Sacerdócio não busca a morte, mas sim a capacidade de dominá-la e, se isso não for possível, chegar o mais próximo possível. Conviver com a Seita mostrou para você uma visão nova sobre Luna: para além de todos os domínios em que é soberana, ela também é a luz que ilumina o caminho para o Mundo dos Mortos. Através dos ensinamentos compartilhados pelos sacerdotes da seita, você não se tornou um iniciado pleno de seus mistérios proibidos, mas adquiriu conhecimento suficiente para reconhecer seus motes secretos e até mesmo realizar feitos que desafiam a fronteira final, tornando o Sacerdócio do Marfim uma fonte de sabedoria mórbida e necessária. Em um mundo que está morrendo, entender a morte é a única maneira de realmente sobreviver a ela.",
+    "descriptionPtBr": "A morte é o fim trágico de uma guerra perdida, mas não para o Sacerdócio do Marfim. Essa Seita da Lua se originou de uma dissidência dos Presas de Prata focada em tradições funerárias que se separou da ortodoxia para realizar o que chamam de ''o grande rito fúnebre para a Mãe Gaia''. Ao colaborar com eles, você entendeu que o Sacerdócio não busca a morte, mas sim a capacidade de dominá-la e, se isso não for possível, chegar o mais próximo possível. Conviver com a Seita mostrou para você uma visão nova sobre Luna: para além de todos os domínios em que é soberana, ela também é a luz que ilumina o caminho para o Mundo dos Mortos. Através dos ensinamentos compartilhados pelos sacerdotes da seita, você não se tornou um iniciado pleno de seus mistérios proibidos, mas adquiriu conhecimento suficiente para reconhecer seus motes secretos e até mesmo realizar feitos que desafiam a fronteira final, tornando o Sacerdócio do Marfim uma fonte de sabedoria mórbida e necessária. Em um mundo que está morrendo, entender a morte é a única maneira de realmente sobreviver a ela.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Olhar do Marfim Silente: O estudo contínuo da morte abre seus sentidos para ecos que os vivos ignoram. Sempre que realizar testes associados à morte, decomposição ou transição espiritual, você recebe +2 dados. A frieza da morte tornou-se familiar demais para você.",
+        "skillPtBr": "Olhar do Marfim Silente: O estudo contínuo da morte abre seus sentidos para ecos que os vivos ignoram. Sempre que realizar testes associados à morte, decomposição ou transição espiritual, você recebe +2 dados. A frieza da morte tornou-se familiar demais para você."
+      },
+      {
+        "cost": 2,
+        "skill": "Doutrina do Apodrecimento: Como aspirante ao Sacerdócio do Marfim, você aprende técnicas específicas de leitura da decomposição e do silêncio pós-vida. Ao examinar cuidadosamente um cadáver mortal, você identifica imediatamente a causa da morte sem necessidade de testes. Se a causa estiver velada por forças sobrenaturais, você ainda poderá realizar um teste apropriado para tentar revelá-la, guiado pelo conhecimento mórbido transmitido pela seita.",
+        "skillPtBr": "Doutrina do Apodrecimento: Como aspirante ao Sacerdócio do Marfim, você aprende técnicas específicas de leitura da decomposição e do silêncio pós-vida. Ao examinar cuidadosamente um cadáver mortal, você identifica imediatamente a causa da morte sem necessidade de testes. Se a causa estiver velada por forças sobrenaturais, você ainda poderá realizar um teste apropriado para tentar revelá-la, guiado pelo conhecimento mórbido transmitido pela seita."
+      },
+      {
+        "cost": 3,
+        "skill": "Mote do Marfim: O Sacerdócio mantém uma frase secreta usada apenas entre seus iniciados. Quando você a pronuncia diante de um membro da seita, seu pedido assume o peso da tradição fúnebre e do reconhecimento interno. Em interações sociais envolvendo Persuasão para obter auxílio, você recebe +2 dados, desde que o interlocutor pertença ao Sacerdócio do Marfim.",
+        "skillPtBr": "Mote do Marfim: O Sacerdócio mantém uma frase secreta usada apenas entre seus iniciados. Quando você a pronuncia diante de um membro da seita, seu pedido assume o peso da tradição fúnebre e do reconhecimento interno. Em interações sociais envolvendo Persuasão para obter auxílio, você recebe +2 dados, desde que o interlocutor pertença ao Sacerdócio do Marfim."
+      },
+      {
+        "cost": 4,
+        "skill": "Um Novo Suspiro: Os sacerdotes mais avançados da seita do Marfim conhecem um segredo proibido que curva o fio da morte por um único instante. Uma vez por história, quando um ataque preencher todos os seus marcadores de vitalidade e deveria matar você, o efeito é anulado por um suspiro de impossível retorno. Você se reergue com 1 marcador de vitalidade completamente vazio, escapando da morte de maneira antinatural, como se tivesse respirado entre as rachaduras do túmulo.",
+        "skillPtBr": "Um Novo Suspiro: Os sacerdotes mais avançados da seita do Marfim conhecem um segredo proibido que curva o fio da morte por um único instante. Uma vez por história, quando um ataque preencher todos os seus marcadores de vitalidade e deveria matar você, o efeito é anulado por um suspiro de impossível retorno. Você se reergue com 1 marcador de vitalidade completamente vazio, escapando da morte de maneira antinatural, como se tivesse respirado entre as rachaduras do túmulo."
+      },
+      {
+        "cost": 5,
+        "skill": "Servidor Espectral Aprisionado: Você mantém sob seu comando um espectro arrancado do fluxo da morte, forçado a servi-lo por um vínculo ritualístico. Ele pode revelar segredos do Mundo dos Mortos, como ecos de almas, rastros fúnebres, memórias congeladas, que geralmente os Garous não conseguem enxergar. Porém, constantemente, o espectro tenta enfraquecer suas amarras: Uma vez ao dia, o personagem deve realizar um teste de Determinação + Ocultismo (Dificuldade 2) ou gastar 1 ponto de Força de Vontade para reforçar o lacre espiritual que o mantém preso. Falhar nesse teste permite que o espectro avance em sua liberdade e, se isso ocorrer três vezes ao longo da história, ele se liberta e volta imediatamente contra você, buscando devorar sua essência ou arrastá-lo para o Mundo dos Mortos.",
+        "skillPtBr": "Servidor Espectral Aprisionado: Você mantém sob seu comando um espectro arrancado do fluxo da morte, forçado a servi-lo por um vínculo ritualístico. Ele pode revelar segredos do Mundo dos Mortos, como ecos de almas, rastros fúnebres, memórias congeladas, que geralmente os Garous não conseguem enxergar. Porém, constantemente, o espectro tenta enfraquecer suas amarras: Uma vez ao dia, o personagem deve realizar um teste de Determinação + Ocultismo (Dificuldade 2) ou gastar 1 ponto de Força de Vontade para reforçar o lacre espiritual que o mantém preso. Falhar nesse teste permite que o espectro avance em sua liberdade e, se isso ocorrer três vezes ao longo da história, ele se liberta e volta imediatamente contra você, buscando devorar sua essência ou arrastá-lo para o Mundo dos Mortos."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
   }
 ]
