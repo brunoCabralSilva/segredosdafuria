@@ -1201,5 +1201,42 @@
     ],
     "book": "Criado por Bruno Cabral",
     "page": 1
+  },
+  {
+    "id": 34,
+    "title": "Caçador de Seitas da Lua",
+    "titlePtBr": "Caçador de Seitas da Lua",
+    "custom": true,
+    "description": "Para você, as Seitas da Lua não são apenas grupos de Garou que viraram as costas para o Uivo de Gaia em busca de uma saída fácil: são carniceiros místicos que transformaram a espiritualidade em um matadouro. Enquanto o restante da Nação Fragmentada lamenta a perda de guerreiros para a heresia, você é movido pelas atrocidades que viu serem cometidas contra os espíritos em nome da ''evolução Garou''. Você testemunhou ritos onde a senciência espiritual foi negada e entidades milenares foram sofrivelmente acorrentadas e contidas, tratadas não como aliadas, mas como combustível descartável para as ambições lunares de seitas como o Coven Crescente. Você conhece as Fraquezas do Inimigo porque seguiu o rastro de desolação deixado por suas práticas, vendo o Uivo de Gaia ser abafado por gritos de agonia de espíritos que foram submetidos a experimentos bárbaros de ''fortalecimento'''. Ao escolher esta Ficha de Conhecimento, você se torna o carrasco daqueles que transformaram o dever sagrado em exploração mística, ou heresia baseada em uma babaquice sobre a Fúria para pegar jovens desavisados.",
+    "descriptionPtBr": "Para você, as Seitas da Lua não são apenas grupos de Garou que viraram as costas para o Uivo de Gaia em busca de uma saída fácil: são carniceiros místicos que transformaram a espiritualidade em um matadouro. Enquanto o restante da Nação Fragmentada lamenta a perda de guerreiros para a heresia, você é movido pelas atrocidades que viu serem cometidas contra os espíritos em nome da ''evolução Garou''. Você testemunhou ritos onde a senciência espiritual foi negada e entidades milenares foram sofrivelmente acorrentadas e contidas, tratadas não como aliadas, mas como combustível descartável para as ambições lunares de seitas como o Coven Crescente. Você conhece as Fraquezas do Inimigo porque seguiu o rastro de desolação deixado por suas práticas, vendo o Uivo de Gaia ser abafado por gritos de agonia de espíritos que foram submetidos a experimentos bárbaros de ''fortalecimento'''. Ao escolher esta Ficha de Conhecimento, você se torna o carrasco daqueles que transformaram o dever sagrado em exploração mística, ou heresia baseada em uma babaquice sobre a Fúria para pegar jovens desavisados.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Caçador Implacável: Uma vez por sessão, você adiciona +2 dados a qualquer teste contra membros de uma Seita da Lua. Sua experiência em enfrentar esses hereges o torna um adversário temido.",
+        "skillPtBr": "Caçador Implacável: Uma vez por sessão, você adiciona +2 dados a qualquer teste contra membros de uma Seita da Lua. Sua experiência em enfrentar esses hereges o torna um adversário temido."
+      },
+      {
+        "cost": 2,
+        "skill": "Olhos da Verdade: Uma vez por sessão, ao investigar uma Seita da Lua, o Narrador fornece uma pista gratuita sobre a localização ou os planos atuais do grupo. Nada escapa ao seu olhar atento.",
+        "skillPtBr": "Olhos da Verdade: Uma vez por sessão, ao investigar uma Seita da Lua, o Narrador fornece uma pista gratuita sobre a localização ou os planos atuais do grupo. Nada escapa ao seu olhar atento."
+      },
+      {
+        "cost": 3,
+        "skill": "Voz que Move Multidões: O mesmo fervor que um dia incitou multidões humanas à obediência ou ao desespero ainda pulsa em sua voz. Uma vez por história, ao tentar persuadir uma multidão mortal, a herança do Impergium se manifesta como um comando ancestral, concedendo-lhe +2 dados adicionais.",
+        "skillPtBr": "Voz que Move Multidões: O mesmo fervor que um dia incitou multidões humanas à obediência ou ao desespero ainda pulsa em sua voz. Uma vez por história, ao tentar persuadir uma multidão mortal, a herança do Impergium se manifesta como um comando ancestral, concedendo-lhe +2 dados adicionais."
+      },
+      {
+        "cost": 4,
+        "skill": "Fraquezas do Inimigo: Você sabe onde procurar para identificar vulnerabilidades em seus inimigos. Uma vez por história, você recebe o equivalente a um Contato (•••) que deduz as fraquezas de um membro da Seita da Lua (Pilares, defesas, investimentos, falhas na segurança, etc.).",
+        "skillPtBr": "Fraquezas do Inimigo: Você sabe onde procurar para identificar vulnerabilidades em seus inimigos. Uma vez por história, você recebe o equivalente a um Contato (•••) que deduz as fraquezas de um membro da Seita da Lua (Pilares, defesas, investimentos, falhas na segurança, etc.)."
+      },
+      {
+        "cost": 5,
+        "skill": "Lenda Intimidante: Você é reconhecido pela destruição de um membro importante de uma Seita da Lua. Uma vez por história, essa reputação permite que você vença automaticamente um teste ou disputa em que intimidar ou silenciar oponentes dentro da Nação Fragmentada seja crucial.",
+        "skillPtBr": "Lenda Intimidante: Você é reconhecido pela destruição de um membro importante de uma Seita da Lua. Uma vez por história, essa reputação permite que você vença automaticamente um teste ou disputa em que intimidar ou silenciar oponentes dentro da Nação Fragmentada seja crucial."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
   }
 ]
