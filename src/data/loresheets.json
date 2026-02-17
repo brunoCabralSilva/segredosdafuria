@@ -905,5 +905,116 @@
     ],
     "book": "Criado por Bruno Cabral",
     "page": 1
+  },
+  {
+    "id": 26,
+    "title": "Sociedade de São Leopoldo",
+    "titlePtBr": "Sociedade de São Leopoldo",
+    "custom": true,
+    "description": "Desde sua fundação em 1231 por Leopoldo de Murnau e pelo Papa Gregório IX, a Sociedade de São Leopoldo tem sido a lâmina purificadora da Igreja Católica, caçando incansavelmente as criaturas sobrenaturais que espreitam nas sombras. Atualmente, sob a liderança fanática de Ingrid Bauer, a Dama de Ferro, a Sociedade foi reintegrada ao serviço de inteligência do Vaticano e se tornou a espinha dorsal da Segunda Inquisição. Eles não são mais apenas cavaleiros em uma cruzada supersticiosa: são operativos modernos que combinam rituais de teurgia radical com armamento hipermoderno, como granadas termobáricas e munições de prata, financiados por orçamentos clandestinos bilionários. Para a maioria dos Garou, eles são vistos apenas como mais um braço dos caçadores institucionais, buscando preservar estruturas de poder através da força e da fé, mas para você, a relação com o ''Gladius Dei'' não é uma parte da sua história pessoal que a Primeira Mudança mudou seu destino, não foi capaz de apagar. Ao escolher esta Ficha de Conhecimento, você representa o conflito entre a fé que outrora o guiou e a Fúria que agora o define. Você possui um conhecimento único sobre como esses inquisidores pensam, sendo um um infiltrado em um mundo de segredos sagrados, movendo-se entre o dever para com o seu povo e a memória de um tempo em que você acreditava que a salvação viria através da prece e não das garras. Mas tenha cuidado: para a Sociedade, você é apenas mais um corpo em branco em seus arquivos, uma besta que deve ser catalogada, capturada para estudo ou simplesmente eliminada. Se eles descobrirem o que você é, será o fim.",
+    "descriptionPtBr": "Desde sua fundação em 1231 por Leopoldo de Murnau e pelo Papa Gregório IX, a Sociedade de São Leopoldo tem sido a lâmina purificadora da Igreja Católica, caçando incansavelmente as criaturas sobrenaturais que espreitam nas sombras. Atualmente, sob a liderança fanática de Ingrid Bauer, a Dama de Ferro, a Sociedade foi reintegrada ao serviço de inteligência do Vaticano e se tornou a espinha dorsal da Segunda Inquisição. Eles não são mais apenas cavaleiros em uma cruzada supersticiosa: são operativos modernos que combinam rituais de teurgia radical com armamento hipermoderno, como granadas termobáricas e munições de prata, financiados por orçamentos clandestinos bilionários. Para a maioria dos Garou, eles são vistos apenas como mais um braço dos caçadores institucionais, buscando preservar estruturas de poder através da força e da fé, mas para você, a relação com o ''Gladius Dei'' não é uma parte da sua história pessoal que a Primeira Mudança mudou seu destino, não foi capaz de apagar. Ao escolher esta Ficha de Conhecimento, você representa o conflito entre a fé que outrora o guiou e a Fúria que agora o define. Você possui um conhecimento único sobre como esses inquisidores pensam, sendo um um infiltrado em um mundo de segredos sagrados, movendo-se entre o dever para com o seu povo e a memória de um tempo em que você acreditava que a salvação viria através da prece e não das garras. Mas tenha cuidado: para a Sociedade, você é apenas mais um corpo em branco em seus arquivos, uma besta que deve ser catalogada, capturada para estudo ou simplesmente eliminada. Se eles descobrirem o que você é, será o fim.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Postulante: Você já considerou seriamente seguir a Vida Religiosa e, durante o período de discernimento, mergulhou profundamente na história da arquidiocese e de suas organizações internas. Entre arquivos esquecidos e tradições pouco comentadas, você encontrou pistas sobre grupos que podem ter incluído um escritório vinculado à Sociedade de São Leopoldo. Uma vez por história, pode pedir ao Narrador uma informação conhecida sobre a Sociedade.",
+        "skillPtBr": "Postulante: Você já considerou seriamente seguir a Vida Religiosa e, durante o período de discernimento, mergulhou profundamente na história da arquidiocese e de suas organizações internas. Entre arquivos esquecidos e tradições pouco comentadas, você encontrou pistas sobre grupos que podem ter incluído um escritório vinculado à Sociedade de São Leopoldo. Uma vez por história, pode pedir ao Narrador uma informação conhecida sobre a Sociedade."
+      },
+      {
+        "cost": 2,
+        "skill": "Novato: Seu caminho para a vocação religiosa foi mais longe que o de muitos: você estava prestes a iniciar o noviciado quando sua primeira transformação tornou essa vida impossível. Apesar disso, mantém memória e alguns laços com a Igreja local. Esse vínculo representa o Antecedente Contatos (••), que incluem seu antigo confessor, membros da ordem que supervisionaram seu treinamento, outros noviços e voluntários engajados da comunidade religiosa.",
+        "skillPtBr": "Novato: Seu caminho para a vocação religiosa foi mais longe que o de muitos: você estava prestes a iniciar o noviciado quando sua primeira transformação tornou essa vida impossível. Apesar disso, mantém memória e alguns laços com a Igreja local. Esse vínculo representa o Antecedente Contatos (••), que incluem seu antigo confessor, membros da ordem que supervisionaram seu treinamento, outros noviços e voluntários engajados da comunidade religiosa."
+      },
+      {
+        "cost": 3,
+        "skill": "Irmão ou Irmã: Antes da Primeira Mudança, você fez votos e serviu ativamente a uma ordem religiosa contemplativa, monástica ou apostólica. A vocação precisou ser abandonada, obviamente, mas o conhecimento permanece. Você possui compreensão detalhada da diocese local: seus líderes, propriedades, agendas, grupos internos e aqueles discretamente associados à Sociedade. Recebe dois dados extras em testes de Acadêmicos e Ocultismo relacionados ao distrito religioso de sua formação. Uma vez por história, pode usar essa familiaridade para identificar um esconderijo entre as propriedades da Igreja que representa o antecedente Aparelho Seguro (••).",
+        "skillPtBr": "Irmão ou Irmã: Antes da Primeira Mudança, você fez votos e serviu ativamente a uma ordem religiosa contemplativa, monástica ou apostólica. A vocação precisou ser abandonada, obviamente, mas o conhecimento permanece. Você possui compreensão detalhada da diocese local: seus líderes, propriedades, agendas, grupos internos e aqueles discretamente associados à Sociedade. Recebe dois dados extras em testes de Acadêmicos e Ocultismo relacionados ao distrito religioso de sua formação. Uma vez por história, pode usar essa familiaridade para identificar um esconderijo entre as propriedades da Igreja que representa o antecedente Aparelho Seguro (••)."
+      },
+      {
+        "cost": 4,
+        "skill": "Padre ou Madre: Você foi um sacerdote plenamente ordenado ou uma canonisa sênior responsável por uma comunidade religiosa antes da Primeira Mudança. Embora afastado da prática formal, ainda carrega a influência obtida nesse período. Sabe exatamente quem são os membros da Sociedade de São Leopoldo na cidade, onde se reúnem, com que frequência atuam e quais forças seculares apoiam suas missões. Também domina estratégias para evitá-los ou enganá-los, garantindo Aliados (•••) dentro da diocese quando o assunto envolve a Sociedade. Esta característica inclui a Desvantagem Infâmia (•): a diocese pode confiar em você, mas a Sociedade não. Eles sabem quem você era e que se afastou… apenas não entendem por quê.",
+        "skillPtBr": "Padre ou Madre: Você foi um sacerdote plenamente ordenado ou uma canonisa sênior responsável por uma comunidade religiosa antes da Primeira Mudança. Embora afastado da prática formal, ainda carrega a influência obtida nesse período. Sabe exatamente quem são os membros da Sociedade de São Leopoldo na cidade, onde se reúnem, com que frequência atuam e quais forças seculares apoiam suas missões. Também domina estratégias para evitá-los ou enganá-los, garantindo Aliados (•••) dentro da diocese quando o assunto envolve a Sociedade. Esta característica inclui a Desvantagem Infâmia (•): a diocese pode confiar em você, mas a Sociedade não. Eles sabem quem você era e que se afastou… apenas não entendem por quê."
+      },
+      {
+        "cost": 5,
+        "skill": "Inquisidor: Você foi um membro verdadeiro da Sociedade de São Leopoldo ou de uma de suas organizações filiadas. Conhece seus métodos, suas estruturas internas, seus pecados antigos e seus protocolos modernos. Uma vez por história, pode pedir ao Narrador uma informação verdadeira, precisa e atual sobre a Sociedade e suas atividades. Seja considerado um traidor ou visto como uma arma recuperável, sua antiga posição ainda pode render frutos — para a manipulação, para o controle ou para a vingança.",
+        "skillPtBr": "Inquisidor: Você foi um membro verdadeiro da Sociedade de São Leopoldo ou de uma de suas organizações filiadas. Conhece seus métodos, suas estruturas internas, seus pecados antigos e seus protocolos modernos. Uma vez por história, pode pedir ao Narrador uma informação verdadeira, precisa e atual sobre a Sociedade e suas atividades. Seja considerado um traidor ou visto como uma arma recuperável, sua antiga posição ainda pode render frutos — para a manipulação, para o controle ou para a vingança."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 27,
+    "title": "FIRSTLIGHT",
+    "titlePtBr": "FIRSTLIGHT",
+    "custom": true,
+    "description": "Nas sombras da burocracia moderna, o governo coordena uma inquisição silenciosa sob o codinome FIRSTLIGHT. Operando através de braços como o IAO e remanescentes do Projeto Crepúsculo, esses caçadores institucionais veem os Garou não como guerreiros de Gaia, mas como ''Ameaças Incomuns'' que interferem na estabilidade econômica e social. Eles utilizam a infraestrutura da Weaver, como drones de vigilância, reconhecimento facial e análise de dados para rastrear o que chamam de ''anomalias biológicas'', buscando capturar espécimes para estudo em instalações de orçamento clandestino onde a ética humana é descartada em favor de resultados táticos. Você é um dos raros sobreviventes que cruzou o caminho desta máquina de guerra e permanece livre. Seja como uma testemunha de capturas discretas ou como alguém que sentiu o frio do metal em um laboratório de contenção, sua existência é uma falha no sistema deles. Ao escolher esta Ficha de Conhecimento, você representa o Garou que aprendeu a ler os sinais da agência entre a estática do mundo moderno. Você conhece o cheiro do ozônio de seus equipamentos e o olhar vazio de seus agentes operacionais, transformando seu trauma em uma arma de sobrevivência contra a força que busca catalogar Gaia como um erro sistêmico.",
+    "descriptionPtBr": "Nas sombras da burocracia moderna, o governo coordena uma inquisição silenciosa sob o codinome FIRSTLIGHT. Operando através de braços como o IAO e remanescentes do Projeto Crepúsculo, esses caçadores institucionais veem os Garou não como guerreiros de Gaia, mas como ''Ameaças Incomuns'' que interferem na estabilidade econômica e social. Eles utilizam a infraestrutura da Weaver, como drones de vigilância, reconhecimento facial e análise de dados para rastrear o que chamam de ''anomalias biológicas'', buscando capturar espécimes para estudo em instalações de orçamento clandestino onde a ética humana é descartada em favor de resultados táticos. Você é um dos raros sobreviventes que cruzou o caminho desta máquina de guerra e permanece livre. Seja como uma testemunha de capturas discretas ou como alguém que sentiu o frio do metal em um laboratório de contenção, sua existência é uma falha no sistema deles. Ao escolher esta Ficha de Conhecimento, você representa o Garou que aprendeu a ler os sinais da agência entre a estática do mundo moderno. Você conhece o cheiro do ozônio de seus equipamentos e o olhar vazio de seus agentes operacionais, transformando seu trauma em uma arma de sobrevivência contra a força que busca catalogar Gaia como um erro sistêmico.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Sussurros da Agência: Você ouviu histórias demais para serem coincidência: pessoas sumindo em estradas vazias, caminhonetes escuras sem placas, agentes com olhar vazio. Uma vez por história, você pode solicitar ao Narrador um rumor confiável sobre operações ou movimentos recentes da FIRSTLIGHT.",
+        "skillPtBr": "Sussurros da Agência: Você ouviu histórias demais para serem coincidência: pessoas sumindo em estradas vazias, caminhonetes escuras sem placas, agentes com olhar vazio. Uma vez por história, você pode solicitar ao Narrador um rumor confiável sobre operações ou movimentos recentes da FIRSTLIGHT."
+      },
+      {
+        "cost": 2,
+        "skill": "Testemunha Perigosa: Você viu algo que ninguém deveria ver — ou ajudou alguém a escapar de um apagamento. A experiência deixou marcas. Uma vez por história, você pode pedir ao Narrador uma informação concreta e verificável sobre anomalias, capturas ou ações da FIRSTLIGHT relacionadas ao que presenciou.",
+        "skillPtBr": "Testemunha Perigosa: Você viu algo que ninguém deveria ver — ou ajudou alguém a escapar de um apagamento. A experiência deixou marcas. Uma vez por história, você pode pedir ao Narrador uma informação concreta e verificável sobre anomalias, capturas ou ações da FIRSTLIGHT relacionadas ao que presenciou."
+      },
+      {
+        "cost": 3,
+        "skill": "Malha de Informantes: Você tem Contatos (••••), profundamente inseridos em estruturas ligadas à FIRSTLIGHT, forças especiais ou agências correlatas. Uma vez por sessão, você pode ativar esses contatos para obter dados operacionais, protocolos internos, movimentações de equipes ou acesso indirecto a arquivos restritos.",
+        "skillPtBr": "Malha de Informantes: Você tem Contatos (••••), profundamente inseridos em estruturas ligadas à FIRSTLIGHT, forças especiais ou agências correlatas. Uma vez por sessão, você pode ativar esses contatos para obter dados operacionais, protocolos internos, movimentações de equipes ou acesso indirecto a arquivos restritos."
+      },
+      {
+        "cost": 4,
+        "skill": "Sobrevivente de Caçada: Você enfrentou uma operação ativa da FIRSTLIGHT e viveu para contar a história — algo que poucos podem dizer. Você recebe dois dados extras em testes para detectar emboscadas, identificar armamento ou tecnologia da agência e prever seus procedimentos táticos. Uma vez por história, pode pedir ao Narrador informação privilegiada sobre o modus operandi da força que o caçou.",
+        "skillPtBr": "Sobrevivente de Caçada: Você enfrentou uma operação ativa da FIRSTLIGHT e viveu para contar a história — algo que poucos podem dizer. Você recebe dois dados extras em testes para detectar emboscadas, identificar armamento ou tecnologia da agência e prever seus procedimentos táticos. Uma vez por história, pode pedir ao Narrador informação privilegiada sobre o modus operandi da força que o caçou."
+      },
+      {
+        "cost": 5,
+        "skill": "Fugitivo de Laboratório: Você escapou de uma instalação de contenção da FIRSTLIGHT, embora sua memória ainda seja fragmentada pelo trauma, por drogas ou por protocolos de apagamento. Uma vez por sessão, pode solicitar ao Narrador um fragmento nítido de memória do seu cativeiro. Além disso, você se torna imune a qualquer forma de Frenesi induzido pela FIRSTLIGHT, seja por estímulos químicos, luminosos ou paratecnológicos.",
+        "skillPtBr": "Fugitivo de Laboratório: Você escapou de uma instalação de contenção da FIRSTLIGHT, embora sua memória ainda seja fragmentada pelo trauma, por drogas ou por protocolos de apagamento. Uma vez por sessão, pode solicitar ao Narrador um fragmento nítido de memória do seu cativeiro. Além disso, você se torna imune a qualquer forma de Frenesi induzido pela FIRSTLIGHT, seja por estímulos químicos, luminosos ou paratecnológicos."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 28,
+    "title": "Arauto da Tormenta Uivante",
+    "titlePtBr": "Arauto da Tormenta Uivante",
+    "custom": true,
+    "description": "Muitos Garou sentem um frio na espinha ao atravessar a Película, mas para você, o Uivo de Gaia é uma realidade tátil e ensurdecedora, do qual tratar simplesmente como um ruído de fundo enquanto estamos na Umbra é impossível e inaceitável. Nas últimas décadas, a Umbra tornou-se um lugar hostil, onde a agonia da Mãe Terra se manifesta como uma distorção multissensorial que pode assumir diversas facetas aos ouvidos de quem a ouve. Enquanto muitos Garous sucumbem ao Harano ao ouvir esse lamento, vendo-o apenas como o estertor de morte do planeta, você se recusa a ser silenciado. Você faz parte daqueles que buscam nas Tempestades Uivantes (fenômenos Umbráticos capazes de dilacerar a substância dos espíritos e a Força de Vontade dos viajantes) instruções codificadas que podem ajudar na batalha final e até mesmo na salvação de Gaia. Ao escolher esta Ficha de Conhecimento, você deixa de ser mais do que um simples sobrevivente das Tormentas Espirituais e se torna seu maestro, capaz de navegar por desolações umbrais e canalizar a própria fúria da Terra contra os servos da destruição.",
+    "descriptionPtBr": "Muitos Garou sentem um frio na espinha ao atravessar a Película, mas para você, o Uivo de Gaia é uma realidade tátil e ensurdecedora, do qual tratar simplesmente como um ruído de fundo enquanto estamos na Umbra é impossível e inaceitável. Nas últimas décadas, a Umbra tornou-se um lugar hostil, onde a agonia da Mãe Terra se manifesta como uma distorção multissensorial que pode assumir diversas facetas aos ouvidos de quem a ouve. Enquanto muitos Garous sucumbem ao Harano ao ouvir esse lamento, vendo-o apenas como o estertor de morte do planeta, você se recusa a ser silenciado. Você faz parte daqueles que buscam nas Tempestades Uivantes (fenômenos Umbráticos capazes de dilacerar a substância dos espíritos e a Força de Vontade dos viajantes) instruções codificadas que podem ajudar na batalha final e até mesmo na salvação de Gaia. Ao escolher esta Ficha de Conhecimento, você deixa de ser mais do que um simples sobrevivente das Tormentas Espirituais e se torna seu maestro, capaz de navegar por desolações umbrais e canalizar a própria fúria da Terra contra os servos da destruição.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Navegante da Tormenta: Você recebe um bônus de +2 dados nos testes de Autocontrole + Determinação para resistir a danos de Força de Vontade causados por Tempestades Uivantes no Umbra.",
+        "skillPtBr": "Navegante da Tormenta: Você recebe um bônus de +2 dados nos testes de Autocontrole + Determinação para resistir a danos de Força de Vontade causados por Tempestades Uivantes no Umbra."
+      },
+      {
+        "cost": 2,
+        "skill": "Decodificador: Uma vez por sessão, ao investigar uma zona de corrupção espiritual ou um local de desastre ambiental, você pode realizar um teste de Raciocínio + Ocultismo (Dificuldade 4). Em caso de vitória, o Narrador lhe concede uma pista ou ''mensagem'' do Uivo que indica a causa raiz do sofrimento local, ajudando o bando a focar na solução, e não apenas nos sintomas.",
+        "skillPtBr": "Decodificador: Uma vez por sessão, ao investigar uma zona de corrupção espiritual ou um local de desastre ambiental, você pode realizar um teste de Raciocínio + Ocultismo (Dificuldade 4). Em caso de vitória, o Narrador lhe concede uma pista ou ''mensagem'' do Uivo que indica a causa raiz do sofrimento local, ajudando o bando a focar na solução, e não apenas nos sintomas."
+      },
+      {
+        "cost": 3,
+        "skill": "Pilar de Gaia: Você não pode sucumbir enquanto Gaia depende de sua ação. Uma vez por sessão, você pode refazer qualquer teste de Habilidade, refletindo a inspiração e a força que o Uivo transmite quando o equilíbrio da Tríade está em risco.",
+        "skillPtBr": "Pilar de Gaia: Você não pode sucumbir enquanto Gaia depende de sua ação. Uma vez por sessão, você pode refazer qualquer teste de Habilidade, refletindo a inspiração e a força que o Uivo transmite quando o equilíbrio da Tríade está em risco."
+      },
+      {
+        "cost": 4,
+        "skill": "Grito de Guerra de Gaia: Você aprendeu a converter o desespero do Uivo em fúria combativa. Uma vez por história, quando você ou um membro do seu bando estiver prestes a ganhar um ponto de Harano, você pode soltar um uivo inspirador; se vencer um teste de Carisma + Performance (dificuldade 3), o ponto não é ganho e o personagem recupera 1 pontos de Fúria.",
+        "skillPtBr": "Grito de Guerra de Gaia: Você aprendeu a converter o desespero do Uivo em fúria combativa. Uma vez por história, quando você ou um membro do seu bando estiver prestes a ganhar um ponto de Harano, você pode soltar um uivo inspirador; se vencer um teste de Carisma + Performance (dificuldade 3), o ponto não é ganho e o personagem recupera 1 pontos de Fúria."
+      },
+      {
+        "cost": 5,
+        "skill": "Arauto da Tormenta: Uma vez por história, enquanto estiver na Umbra, você pode invocar uma Tempestade Uivante. Enquanto você e seu bando permanecem protegidos sem precisar realizar um teste de Autocontrole + Determinação para não sofrer dano superficial na Força de Vontade, todos os inimigos dentro da Tempestade Uivante devem realizar o teste com dificuldade 3 por turno ou sofrer 1 ponto de dano Agravado em Força de Vontade devido à agonia sensorial de Gaia que dilacera até a própria substância na qual os espíritos são feitos.",
+        "skillPtBr": "Arauto da Tormenta: Uma vez por história, enquanto estiver na Umbra, você pode invocar uma Tempestade Uivante. Enquanto você e seu bando permanecem protegidos sem precisar realizar um teste de Autocontrole + Determinação para não sofrer dano superficial na Força de Vontade, todos os inimigos dentro da Tempestade Uivante devem realizar o teste com dificuldade 3 por turno ou sofrer 1 ponto de dano Agravado em Força de Vontade devido à agonia sensorial de Gaia que dilacera até a própria substância na qual os espíritos são feitos."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
   }
 ]

@@ -41,8 +41,8 @@ export default function Loresheet() {
                 src={ `/images/loresheets/${dataLoresheet.titlePtBr}.png` }
                 alt={dataLoresheet.title}
                 className="w-full md:w-50vw object-cover object-center"
-                width={ 3000 }
-                height={ 3000 }
+                width={ 1000 }
+                height={ 1000 }
               />
               <div>
                 <div className="flex flex-col justify-center items-center sm:items-start">
