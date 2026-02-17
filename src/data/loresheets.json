@@ -1125,7 +1125,7 @@
         "skillPtBr": "Tática Quebra Lobo: Você estudou - ou testemunhou - como as alcateias da Seita lutam: ataques suicidas, investidas sem hesitação e redundância brutal. Uma vez por história, você pode invocar essa experiência para ganhar +3 dados durante uma cena para testes em que o alvo direto ou indireto seja a Seita de Fenris."
       }
     ],
-    "book": "Criado por Bruno Cabral",
+    "book": "Criado por Bruno Cabral, arte feita por @thamy_1109 (Instagram)",
     "page": 1
   },
   {
@@ -1160,6 +1160,43 @@
         "cost": 5,
         "skill": "Imparável: Para você, Harano e Hauglosk são dois lados da mesma dor que você presenciou sem conhecer sequer seus nomes. Uma vez por história, se você estiver prestes a preencher seu último marcador de Harano ou Hauglosk, realize um teste de Determinação + Autocontrole (Dificuldade 4). Se obtiver sucesso, você não adquire o ponto no marcador.",
         "skillPtBr": "Imparável: Para você, Harano e Hauglosk são dois lados da mesma dor que você presenciou sem conhecer sequer seus nomes. Uma vez por história, se você estiver prestes a preencher seu último marcador de Harano ou Hauglosk, realize um teste de Determinação + Autocontrole (Dificuldade 4). Se obtiver sucesso, você não adquire o ponto no marcador."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 33,
+    "title": "Eco do Impergium",
+    "titlePtBr": "Eco do Impergium",
+    "custom": true,
+    "description": "Na era das lendas, o Impergium foi o período em que os Garou reinaram absolutos sobre o mundo natural, mantendo a humanidade sob controle através de expurgos impiedosos e sistemáticos. No entanto, para você, essa era de terror não é um conceito político, mas uma marca intrínseca na sua essência. Você não sente saudades do tempo em que os lobos caçavam homens como gado; talvez você até despreze a brutalidade desse passado. O problema é que o sangue humano não esquece. A humanidade carrega uma cicatriz profunda - o Delírio - e a sua simples presença age como um gatilho para esse trauma ancestral. Mesmo quando você busca ser um protetor ou agir com sutileza, os mortais sentem o ''peso do monstro'' atrás dos seus olhos, reagindo instintivamente a você como a presa reage ao predador absoluto. Ao escolher esta Ficha de Conhecimento, você personifica o conflito de um Garou que, apesar de seus ideais, é um lembrete vivo do porquê os humanos construíram cidades de concreto para se esconderem da natureza. Seu olhar carrega a intensidade que deu origem ao pavor primitivo da nossa espécie, permitindo-lhe dobrar a vontade de multidões ou estilhaçar a resistência mental de um indivíduo apenas com a sua cadência predatória. Você caminha entre dois mundos como um rei indesejado: um guerreiro que talvez deseje a paz, mas cujas mãos e olhos estão perpetuamente manchados pelo eco de milhares de anos de matança. Para você, o Véu é mais do que uma lei: é a única coisa que impede que a sua mera existência mergulhe o mundo mortal em um pânico histérico e irracional.",
+    "descriptionPtBr": "Na era das lendas, o Impergium foi o período em que os Garou reinaram absolutos sobre o mundo natural, mantendo a humanidade sob controle através de expurgos impiedosos e sistemáticos. No entanto, para você, essa era de terror não é um conceito político, mas uma marca intrínseca na sua essência. Você não sente saudades do tempo em que os lobos caçavam homens como gado; talvez você até despreze a brutalidade desse passado. O problema é que o sangue humano não esquece. A humanidade carrega uma cicatriz profunda - o Delírio - e a sua simples presença age como um gatilho para esse trauma ancestral. Mesmo quando você busca ser um protetor ou agir com sutileza, os mortais sentem o ''peso do monstro'' atrás dos seus olhos, reagindo instintivamente a você como a presa reage ao predador absoluto. Ao escolher esta Ficha de Conhecimento, você personifica o conflito de um Garou que, apesar de seus ideais, é um lembrete vivo do porquê os humanos construíram cidades de concreto para se esconderem da natureza. Seu olhar carrega a intensidade que deu origem ao pavor primitivo da nossa espécie, permitindo-lhe dobrar a vontade de multidões ou estilhaçar a resistência mental de um indivíduo apenas com a sua cadência predatória. Você caminha entre dois mundos como um rei indesejado: um guerreiro que talvez deseje a paz, mas cujas mãos e olhos estão perpetuamente manchados pelo eco de milhares de anos de matança. Para você, o Véu é mais do que uma lei: é a única coisa que impede que a sua mera existência mergulhe o mundo mortal em um pânico histérico e irracional.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Lembrança do Impergium - A lembrança ancestral do Impergium permeia cada gesto seu; mesmo quando tenta ser sutil, os mortais sentem o peso de algo antigo e predatório atrás dos seus olhos. Por isso, você recebe +1 dado ao intimidar ou manipular humanos, cuja mente reage instintivamente ao eco desse antigo domínio Garou.",
+        "skillPtBr": "Lembrança do Impergium - A lembrança ancestral do Impergium permeia cada gesto seu; mesmo quando tenta ser sutil, os mortais sentem o peso de algo antigo e predatório atrás dos seus olhos. Por isso, você recebe +1 dado ao intimidar ou manipular humanos, cuja mente reage instintivamente ao eco desse antigo domínio Garou."
+      },
+      {
+        "cost": 2,
+        "skill": "Moldador de Vínculos Humanos: A influência ancestral do Impergium ainda ecoa em sua presença, permitindo-lhe remodelar as relações humanas como quem dobra metal aquecido. Uma vez por mês, você pode descartar um de seus Contatos ou Aliados e substituí-lo por outro de mesmo custo e valor narrativo, independentemente de sua esfera de atuação — como se antigos laços se partissem e novos surgissem sob sua vontade.",
+        "skillPtBr": "Moldador de Vínculos Humanos: A influência ancestral do Impergium ainda ecoa em sua presença, permitindo-lhe remodelar as relações humanas como quem dobra metal aquecido. Uma vez por mês, você pode descartar um de seus Contatos ou Aliados e substituí-lo por outro de mesmo custo e valor narrativo, independentemente de sua esfera de atuação — como se antigos laços se partissem e novos surgissem sob sua vontade."
+      },
+      {
+        "cost": 3,
+        "skill": "Voz que Move Multidões: O mesmo fervor que um dia incitou multidões humanas à obediência ou ao desespero ainda pulsa em sua voz. Uma vez por história, ao tentar persuadir uma multidão mortal, a herança do Impergium se manifesta como um comando ancestral, concedendo-lhe +2 dados adicionais.",
+        "skillPtBr": "Voz que Move Multidões: O mesmo fervor que um dia incitou multidões humanas à obediência ou ao desespero ainda pulsa em sua voz. Uma vez por história, ao tentar persuadir uma multidão mortal, a herança do Impergium se manifesta como um comando ancestral, concedendo-lhe +2 dados adicionais."
+      },
+      {
+        "cost": 4,
+        "skill": "Voz dilacerante: A simples cadência das suas palavras pode reabrir feridas antigas na psique humana, lembranças inconscientes de submissão e impotência que remontam ao Impergium. Uma vez por sessão, assim, ao vencer um teste resistido de Manipulação + Persuasão contra um mortal, você pode lançar o alvo em um abismo de desesperança, causando 1 ponto de dano Agravado de Força de Vontade.",
+        "skillPtBr": "Voz dilacerante: A simples cadência das suas palavras pode reabrir feridas antigas na psique humana, lembranças inconscientes de submissão e impotência que remontam ao Impergium. Uma vez por sessão, assim, ao vencer um teste resistido de Manipulação + Persuasão contra um mortal, você pode lançar o alvo em um abismo de desesperança, causando 1 ponto de dano Agravado de Força de Vontade."
+      },
+      {
+        "cost": 5,
+        "skill": "Olhar do Delírio: O seu olhar carrega a mesma intensidade que fez incontáveis humanos tremerem e enlouquecerem diante dos Garou antigos; é um lampejo de puro pavor primitivo, cuja origem a mente mortal não compreende, apenas teme. Uma vez por história, você pode induzir Delírio em um mortal apenas com um olhar, reativando reflexos herdados do Impergium que ainda sobrevivem no sangue humano.",
+        "skillPtBr": "Olhar do Delírio: O seu olhar carrega a mesma intensidade que fez incontáveis humanos tremerem e enlouquecerem diante dos Garou antigos; é um lampejo de puro pavor primitivo, cuja origem a mente mortal não compreende, apenas teme. Uma vez por história, você pode induzir Delírio em um mortal apenas com um olhar, reativando reflexos herdados do Impergium que ainda sobrevivem no sangue humano."
       }
     ],
     "book": "Criado por Bruno Cabral",
