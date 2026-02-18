@@ -53,7 +53,7 @@ export default function Loresheet() {
                 </div>
                 <p className="pt-1">
                   <span className="font-bold pr-1">Fonte:</span>
-                  { dataLoresheet.book }, pg. { dataLoresheet.page }.
+                  { dataLoresheet.book }{ dataLoresheet.book.includes('Criado por Bruno Cabral') || dataLoresheet.book.includes('Adaptado por Bruno Cabral') ? '' : `, pg. ${ dataLoresheet.page }.`}
                 </p>
                 <p className="pt-3 text-justify">
                   <span className="font-bold pr-1">Descrição:</span>

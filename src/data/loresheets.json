@@ -940,7 +940,7 @@
         "skillPtBr": "Inquisidor: Você foi um membro verdadeiro da Sociedade de São Leopoldo ou de uma de suas organizações filiadas. Conhece seus métodos, suas estruturas internas, seus pecados antigos e seus protocolos modernos. Uma vez por história, pode pedir ao Narrador uma informação verdadeira, precisa e atual sobre a Sociedade e suas atividades. Seja considerado um traidor ou visto como uma arma recuperável, sua antiga posição ainda pode render frutos — para a manipulação, para o controle ou para a vingança."
       }
     ],
-    "book": "Criado por Bruno Cabral",
+    "book": "Adaptado por Bruno Cabral",
     "page": 1
   },
   {
@@ -977,7 +977,7 @@
         "skillPtBr": "Fugitivo de Laboratório: Você escapou de uma instalação de contenção da FIRSTLIGHT, embora sua memória ainda seja fragmentada pelo trauma, por drogas ou por protocolos de apagamento. Uma vez por sessão, pode solicitar ao Narrador um fragmento nítido de memória do seu cativeiro. Além disso, você se torna imune a qualquer forma de Frenesi induzido pela FIRSTLIGHT, seja por estímulos químicos, luminosos ou paratecnológicos."
       }
     ],
-    "book": "Criado por Bruno Cabral",
+    "book": "Adaptado por Bruno Cabral",
     "page": 1
   },
   {
@@ -1234,6 +1234,154 @@
         "cost": 5,
         "skill": "Lenda Intimidante: Você é reconhecido pela destruição de um membro importante de uma Seita da Lua. Uma vez por história, essa reputação permite que você vença automaticamente um teste ou disputa em que intimidar ou silenciar oponentes dentro da Nação Fragmentada seja crucial.",
         "skillPtBr": "Lenda Intimidante: Você é reconhecido pela destruição de um membro importante de uma Seita da Lua. Uma vez por história, essa reputação permite que você vença automaticamente um teste ou disputa em que intimidar ou silenciar oponentes dentro da Nação Fragmentada seja crucial."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 35,
+    "title": "Irmandade Motoclube",
+    "titlePtBr": "Irmandade Motoclube",
+    "custom": true,
+    "description": "A vida após a Primeira Mudança é marcada muitas vezes por uma solidão devastadora e pela perda de conexões tradicionais, já que você é estimulado a tomar cuidado em manter conexões muito profundas com humanos pelo risco que pode causar a eles. No entanto, você encontrou um santuário improvável na Irmandade Motoclube, uma comunidade de rebeldes e párias que se organizam como um grupo de amantes de motos e da estrada. Para esses humanos, você não é um guerreiro de Gaia ou um monstro de pesadelos: você é simplesmente um irmão ou irmã de estrada. Eles não precisam ver o lobo para reconhecer um espírito marcado pela mesma inquietude que os move, oferecendo uma estrutura de lealdade e pertencimento que muitos lobisomens nunca chegam a conhecer fora de seus bandos. Essa irmandade opera sob um código de silêncio e honra próprio das ruas, criando uma rede de proteção nômade onde o vínculo é forjado no asfalto e no rugido dos motores. O que torna esse grupo especial é a pureza de seu sacrifício: muitos desses motociclistas não têm ideia do mundo espiritual ou da Fúria que habita em você, mas morreriam sem hesitar para defender um dos seus. Em um mundo que se fragmenta sob o peso do Apocalipse e onde a Nação Fragmentada muitas vezes se perde em rivalidades amargas, a Irmandade é o seu lembrete constante de que a humanidade ainda é capaz de uma devoção feroz. Eles são o seu porto seguro nas sombras, uma alcateia de sangue humano que o aceita pelo que você demonstra ser na estrada, protegendo sua identidade enquanto você protege o futuro deles.",
+    "descriptionPtBr": "A vida após a Primeira Mudança é marcada muitas vezes por uma solidão devastadora e pela perda de conexões tradicionais, já que você é estimulado a tomar cuidado em manter conexões muito profundas com humanos pelo risco que pode causar a eles. No entanto, você encontrou um santuário improvável na Irmandade Motoclube, uma comunidade de rebeldes e párias que se organizam como um grupo de amantes de motos e da estrada. Para esses humanos, você não é um guerreiro de Gaia ou um monstro de pesadelos: você é simplesmente um irmão ou irmã de estrada. Eles não precisam ver o lobo para reconhecer um espírito marcado pela mesma inquietude que os move, oferecendo uma estrutura de lealdade e pertencimento que muitos lobisomens nunca chegam a conhecer fora de seus bandos. Essa irmandade opera sob um código de silêncio e honra próprio das ruas, criando uma rede de proteção nômade onde o vínculo é forjado no asfalto e no rugido dos motores. O que torna esse grupo especial é a pureza de seu sacrifício: muitos desses motociclistas não têm ideia do mundo espiritual ou da Fúria que habita em você, mas morreriam sem hesitar para defender um dos seus. Em um mundo que se fragmenta sob o peso do Apocalipse e onde a Nação Fragmentada muitas vezes se perde em rivalidades amargas, a Irmandade é o seu lembrete constante de que a humanidade ainda é capaz de uma devoção feroz. Eles são o seu porto seguro nas sombras, uma alcateia de sangue humano que o aceita pelo que você demonstra ser na estrada, protegendo sua identidade enquanto você protege o futuro deles.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Estrada nas Veias: A vida em movimento endureceu seus instintos e seu corpo. Você reduz em um a dificuldade de todos os testes de Sobrevivência relacionados a viagens longas, intempéries ou atividades ao ar livre onde adaptação e resistência sejam essenciais.",
+        "skillPtBr": "Estrada nas Veias: A vida em movimento endureceu seus instintos e seu corpo. Você reduz em um a dificuldade de todos os testes de Sobrevivência relacionados a viagens longas, intempéries ou atividades ao ar livre onde adaptação e resistência sejam essenciais."
+      },
+      {
+        "cost": 2,
+        "skill": "Mestre da Máquina: Sua afinidade com motocicletas é quase espiritual, como se o motor respondesse ao seu humor. Sempre que pilota uma motocicleta, recebe dois dados extras em testes de Condução.",
+        "skillPtBr": "Mestre da Máquina: Sua afinidade com motocicletas é quase espiritual, como se o motor respondesse ao seu humor. Sempre que pilota uma motocicleta, recebe dois dados extras em testes de Condução."
+      },
+      {
+        "cost": 3,
+        "skill": "Rede da Estrada: A comunidade motociclista está repleta de aliados, mecânicos, caminhoneiros e clubes parceiros. Uma vez por história, você pode recorrer a esses contatos para obter assistência imediata, seja abrigo, transporte, informações ou apoio físico.",
+        "skillPtBr": "Rede da Estrada: A comunidade motociclista está repleta de aliados, mecânicos, caminhoneiros e clubes parceiros. Uma vez por história, você pode recorrer a esses contatos para obter assistência imediata, seja abrigo, transporte, informações ou apoio físico."
+      },
+      {
+        "cost": 4,
+        "skill": "Espírito Indomável: A vida dura dentro da Irmandade moldou sua presença intimidadora e sua força de vontade feroz. Uma vez por sessão, você se torna imune a uma única tentativa de intimidação ou coerção, seja mundana ou sobrenatural.",
+        "skillPtBr": "Espírito Indomável: A vida dura dentro da Irmandade moldou sua presença intimidadora e sua força de vontade feroz. Uma vez por sessão, você se torna imune a uma única tentativa de intimidação ou coerção, seja mundana ou sobrenatural."
+      },
+      {
+        "cost": 5,
+        "skill": "Caçada da Irmandade: Uma vez por história, você pode nomear alguém como alvo da fúria coletiva do Motoclube. A partir desse momento, os membros da Irmandade passam a atormentar e perseguir o escolhido até que o Clube considere a dívida quitada — ou o alvo destruído.",
+        "skillPtBr": "Caçada da Irmandade: Uma vez por história, você pode nomear alguém como alvo da fúria coletiva do Motoclube. A partir desse momento, os membros da Irmandade passam a atormentar e perseguir o escolhido até que o Clube considere a dívida quitada — ou o alvo destruído."
+      }
+    ],
+    "book": "Adaptado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 36,
+    "title": "Horizon Express",
+    "titlePtBr": "Horizon Express",
+    "custom": true,
+    "description": "Com o colapso da Nação Garou e o isolamento de muitos caerns, a necessidade de uma rede de comunicação física e segura tornou-se vital para a sobrevivência espiritual e tática dos lobisomens. O Horizon Express é operado por humanos e Garous que cruzam as rodovias do mundo físico, mantendo a Nação Fragmentada conectada ainda que minimamente quando o uivo à distância não é suficiente. Como colaborador desta rede, você faz parte do seu sistema circulatório. Você entende que, na era do Apocalipse, a verdadeira segurança não reside em mensagens criptografadas, mas em pendrives entregues em mãos, correspondências físicas e objetos de poder movidos através de uma malha complexa de ''entregas às cegas'' e encontros secretos. Ao operar microestações ou conduzir veículos anônimos por rotas que nunca se repetem, você garante que informações vitais sobre caerns e movimentos do inimigo circulem sem o risco de interceptação tecnológica. Para você, o Horizon Express é o que impede que o silêncio e o distanciamento se tornem a morte definitiva de Gaia.",
+    "descriptionPtBr": "Com o colapso da Nação Garou e o isolamento de muitos caerns, a necessidade de uma rede de comunicação física e segura tornou-se vital para a sobrevivência espiritual e tática dos lobisomens. O Horizon Express é operado por humanos e Garous que cruzam as rodovias do mundo físico, mantendo a Nação Fragmentada conectada ainda que minimamente quando o uivo à distância não é suficiente. Como colaborador desta rede, você faz parte do seu sistema circulatório. Você entende que, na era do Apocalipse, a verdadeira segurança não reside em mensagens criptografadas, mas em pendrives entregues em mãos, correspondências físicas e objetos de poder movidos através de uma malha complexa de ''entregas às cegas'' e encontros secretos. Ao operar microestações ou conduzir veículos anônimos por rotas que nunca se repetem, você garante que informações vitais sobre caerns e movimentos do inimigo circulem sem o risco de interceptação tecnológica. Para você, o Horizon Express é o que impede que o silêncio e o distanciamento se tornem a morte definitiva de Gaia.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Acesso à Rede: Você recebe autorização básica para usar o Correio Clandestino. Pode enviar ou receber mensagens e pequenos pacotes de forma segura entre quaisquer domínios onde a organização opere. O tempo de entrega varia entre três dias e uma semana, dependendo da distância, do risco e da disponibilidade das estações no caminho. O conteúdo é protegido por protocolos rigorosos: não é aberto, copiado ou rastreado.",
+        "skillPtBr": "Acesso à Rede: Você recebe autorização básica para usar o Correio Clandestino. Pode enviar ou receber mensagens e pequenos pacotes de forma segura entre quaisquer domínios onde a organização opere. O tempo de entrega varia entre três dias e uma semana, dependendo da distância, do risco e da disponibilidade das estações no caminho. O conteúdo é protegido por protocolos rigorosos: não é aberto, copiado ou rastreado."
+      },
+      {
+        "cost": 2,
+        "skill": "Agente de Estação: Você se torna coletor de correspondências e operador de uma micro estação local. Recebe Máscara (••) e Zerado (•), pois a rede apaga todos os rastros que ligam sua identidade ao serviço.",
+        "skillPtBr": "Agente de Estação: Você se torna coletor de correspondências e operador de uma micro estação local. Recebe Máscara (••) e Zerado (•), pois a rede apaga todos os rastros que ligam sua identidade ao serviço."
+      },
+      {
+        "cost": 3,
+        "skill": "Condutor da Noite: Você ganha acesso a veículos e rotas preparadas para transporte discreto dentro do país. Uma vez por história, pode requisitar um veículo adequado à missão — carro, moto, van ou similar — totalmente anônimo e equipado com compartimentos ocultos. Também obtém permissão para usar todas as estações nacionais, geralmente separadas por uma noite de viagem entre si.",
+        "skillPtBr": "Condutor da Noite: Você ganha acesso a veículos e rotas preparadas para transporte discreto dentro do país. Uma vez por história, pode requisitar um veículo adequado à missão — carro, moto, van ou similar — totalmente anônimo e equipado com compartimentos ocultos. Também obtém permissão para usar todas as estações nacionais, geralmente separadas por uma noite de viagem entre si."
+      },
+      {
+        "cost": 4,
+        "skill": "Rota Global: Você passa a integrar a parte internacional do Correio Clandestino. Isso inclui acesso a aeronaves noturnas adaptadas para criaturas sobrenaturais, cargueiros que não constam em nenhum manifesto e rotas clandestinas que cruzam fronteiras sem deixar vestígios. Pode viajar entre países ou transportar carga sensível desde que haja uma estação segura operando nos dois extremos da rota.",
+        "skillPtBr": "Rota Global: Você passa a integrar a parte internacional do Correio Clandestino. Isso inclui acesso a aeronaves noturnas adaptadas para criaturas sobrenaturais, cargueiros que não constam em nenhum manifesto e rotas clandestinas que cruzam fronteiras sem deixar vestígios. Pode viajar entre países ou transportar carga sensível desde que haja uma estação segura operando nos dois extremos da rota."
+      },
+      {
+        "cost": 5,
+        "skill": "Passagem Fantasma: A confiança da rede em você é absoluta. Uma vez por história, você e sua alcateia podem requisitar transporte completamente seguro para qualquer destino onde o Correio Clandestino atue, seja outro estado, outro país ou qualquer região obscura que exija máxima discrição. A viagem é protegida por protocolos especiais: ninguém rastreia, ninguém investiga e, oficialmente, vocês nunca passaram por ali.",
+        "skillPtBr": "Passagem Fantasma: A confiança da rede em você é absoluta. Uma vez por história, você e sua alcateia podem requisitar transporte completamente seguro para qualquer destino onde o Correio Clandestino atue, seja outro estado, outro país ou qualquer região obscura que exija máxima discrição. A viagem é protegida por protocolos especiais: ninguém rastreia, ninguém investiga e, oficialmente, vocês nunca passaram por ali."
+      }
+    ],
+    "book": "Adaptado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 37,
+    "title": "Reparador da Guerra da Fúria",
+    "titlePtBr": "Reparador da Guerra da Fúria",
+    "custom": true,
+    "description": "A história da Nação Garou é manchada não apenas pelo fracasso contra o Wyrm, mas pelo sangue de seus primos metamorfos derramado durante a Guerra da Fúria. Naquele tempo de lendas e sombras, a soberba dos lobos os levou a massacrar as outras raças que cuidavam de Gaia — metamorfos de urso, gato, corvo, rato e muitos outros — alegando uma exclusividade no dever sagrado que hoje se prova uma falácia trágica. Para a maioria dos Garous modernos, esses sobreviventes são mitos esquecidos ou estranhos hostis que mantêm sua guarda alta devido a séculos de assassinatos e tentativas de assimilação forçada. No entanto, você percebeu que no Apocalipse, a sobrevivência exige aliados, não apenas subordinados. Como um reconciliador dos metamorfos, você mergulha em histórias e culturas que a maioria dos Garou prefere ignorar para não confrontar sua própria vergonha. Você reconhece que a dominação física falhou e que a diplomacia oferece a melhor chance de enfrentar inimigos globais demais para uma única raça. Ao ser aceito como uma voz entre as raças, você ganhou acesso a perspectivas espirituais únicas e à sabedoria de outras raças metamórficas, descobrindo até mesmo caminhos na Umbra que desafiam as tradições. Em um mundo onde o ''Uivo de Gaia'' ecoa a dor de todas as criaturas, você é a ponte que tenta restaurar o círculo despedaçado, provando que o respeito mútuo pode ser a arma final contra a destruição.",
+    "descriptionPtBr": "A história da Nação Garou é manchada não apenas pelo fracasso contra o Wyrm, mas pelo sangue de seus primos metamorfos derramado durante a Guerra da Fúria. Naquele tempo de lendas e sombras, a soberba dos lobos os levou a massacrar as outras raças que cuidavam de Gaia — metamorfos de urso, gato, corvo, rato e muitos outros — alegando uma exclusividade no dever sagrado que hoje se prova uma falácia trágica. Para a maioria dos Garous modernos, esses sobreviventes são mitos esquecidos ou estranhos hostis que mantêm sua guarda alta devido a séculos de assassinatos e tentativas de assimilação forçada. No entanto, você percebeu que no Apocalipse, a sobrevivência exige aliados, não apenas subordinados. Como um Reconciliador dos Metamorfos, você mergulha em histórias e culturas que a maioria dos Garou prefere ignorar para não confrontar sua própria vergonha. Você reconhece que a dominação física falhou e que a diplomacia oferece a melhor chance de enfrentar inimigos globais demais para uma única raça. Ao ser aceito como uma voz entre as raças, você ganhou acesso a perspectivas espirituais únicas e à sabedoria de outras raças metamórficas, descobrindo até mesmo caminhos na Umbra que desafiam as tradições. Em um mundo onde o ''Uivo de Gaia'' ecoa a dor de todas as criaturas, você é a ponte que tenta restaurar o círculo despedaçado, provando que o respeito mútuo pode ser a arma final contra a destruição.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Voz Entre as Raças: Você demonstra uma postura conciliadora rara entre Garous e outros metamorfos. Ganha +2 dados em testes de Persuasão usados para obter ajuda, apoio ou informações de qualquer raça, desde que não tenha atacado membros desse povo recentemente.",
+        "skillPtBr": "Voz Entre as Raças: Você demonstra uma postura conciliadora rara entre Garous e outros metamorfos. Ganha +2 dados em testes de Persuasão usados para obter ajuda, apoio ou informações de qualquer raça, desde que não tenha atacado membros desse povo recentemente."
+      },
+      {
+        "cost": 2,
+        "skill": "Cronista das Raças Perdidas: Você estudou a fundo a história, as culturas e as tragédias que marcaram os povos metamórficos. Adicione +2 dados em testes de Conhecimento, Investigação ou Acadêmicos sempre que o assunto envolver outras raças que não os Garou — vivas, extintas ou esquecidas.",
+        "skillPtBr": "Cronista das Raças Perdidas: Você estudou a fundo a história, as culturas e as tragédias que marcaram os povos metamórficos. Adicione +2 dados em testes de Conhecimento, Investigação ou Acadêmicos sempre que o assunto envolver outras raças que não os Garou — vivas, extintas ou esquecidas."
+      },
+      {
+        "cost": 3,
+        "skill": "Sabedoria dos Fera: Você conheceu um membro de uma determinada Raça Metamórfica que te mostrou uma maneira diferente de acessar a Umbra. Ao realizar o Rito de Passagem das Sombras, a dificuldade da Película é reduzida em 1, independentemente do local.",
+        "skillPtBr": "Sabedoria dos Fera: Você conheceu um membro de uma determinada Raça Metamórfica que te mostrou uma maneira diferente de acessar a Umbra. Ao realizar o Rito de Passagem das Sombras, a dificuldade da Película é reduzida em 1, independentemente do local."
+      },
+      {
+        "cost": 4,
+        "skill": "Trégua: Uma vez por história, você pode declarar uma ''Trégua de Hospitalidade'' ao encontrar membros de outra raça metamorfa em seu território. Se você e seu bando não agirem com hostilidade, os outros metamorfos são compelidos por sua própria honra ou tradição fazer o mesmo. No entanto, se o seu bando quebrar a trégua, você adquire 1 ponto de Hauglosk.",
+        "skillPtBr": "Trégua: Uma vez por história, você pode declarar uma ''Trégua de Hospitalidade'' ao encontrar membros de outra raça metamorfa em seu território. Se você e seu bando não agirem com hostilidade, os outros metamorfos são compelidos por sua própria honra ou tradição fazer o mesmo. No entanto, se o seu bando quebrar a trégua, você adquire 1 ponto de Hauglosk."
+      },
+      {
+        "cost": 5,
+        "skill": "Chamado das Raças: O respeito que você inspira entre outros metamorfos é incomum. Uma vez por história, você pode invocar um Metamorfo Aliado (••••) em uma situação que não contradiga os princípios da raça convocada. O aliado parece disposto a cooperar… mas também espera que você honre esse vínculo no futuro.",
+        "skillPtBr": "Chamado das Raças: O respeito que você inspira entre outros metamorfos é incomum. Uma vez por história, você pode invocar um Metamorfo Aliado (••••) em uma situação que não contradiga os princípios da raça convocada. O aliado parece disposto a cooperar… mas também espera que você honre esse vínculo no futuro."
+      }
+    ],
+    "book": "Criado por Bruno Cabral",
+    "page": 1
+  },
+  {
+    "id": 38,
+    "title": "Especialista em Sanguessugas",
+    "titlePtBr": "Especialista em Sanguessugas",
+    "custom": true,
+    "description": "Onde muitos enxergam apenas uma abominação urbana sem alma, o seu olhar identifica um sistema predatório com falhas específicas e exploráveis. Forjado no entendimento tático, você compreende que as ''Sanguessugas'' são cadáveres animados movidos por uma lógica fria de preservação e fome constante. Sua trajetória permitiu que você decifrasse não apenas a anatomia desses parasitas, mas também a fragilidade psicológica que os mantém escravos de seus próprios pecados antigos. Além da força bruta, você domina o idioma do cálculo e do pragmatismo que esses seres respeitam, agindo como um conhecedor da psique dos mortos-vivos. Você sabe navegar pelas armadilhas mentais e pelo fascínio hipnótico que escraviza a humanidade, portando troféus que evocam o terror primordial da mortalidade mesmo nos monstros mais antigos. No tabuleiro do Apocalipse, você se posiciona como aquele que pode tanto ser o carrasco definitivo quanto o mediador implacável, forçando os Amaldiçoados a uma cooperação forjada sob a luz fria da necessidade mútua.",
+    "descriptionPtBr": "Onde muitos enxergam apenas uma abominação urbana sem alma, o seu olhar identifica um sistema predatório com falhas específicas e exploráveis. Forjado no entendimento tático, você compreende que as ''Sanguessugas'' são cadáveres animados movidos por uma lógica fria de preservação e fome constante. Sua trajetória permitiu que você decifrasse não apenas a anatomia desses parasitas, mas também a fragilidade psicológica que os mantém escravos de seus próprios pecados antigos. Além da força bruta, você domina o idioma do cálculo e do pragmatismo que esses seres respeitam, agindo como um conhecedor da psique dos mortos-vivos. Você sabe navegar pelas armadilhas mentais e pelo fascínio hipnótico que escraviza a humanidade, portando troféus que evocam o terror primordial da mortalidade mesmo nos monstros mais antigos. No tabuleiro do Apocalipse, você se posiciona como aquele que pode tanto ser o carrasco definitivo quanto o mediador implacável, forçando os Amaldiçoados a uma cooperação forjada sob a luz fria da necessidade mútua.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Não me toca, sanguessuga nojenta! - Sua raiva ancestral responde de imediato ao toque profano dos Amaldiçoados. Quando sofrer dano de um vampiro pela primeira vez no combate, você pode recuperar 2 pontos de Fúria ao invés de em vez do 1 único ponto.",
+        "skillPtBr": "Não me toca, sanguessuga nojenta! - Sua raiva ancestral responde de imediato ao toque profano dos Amaldiçoados. Quando sofrer dano de um vampiro pela primeira vez no combate, você pode recuperar 2 pontos de Fúria ao invés de em vez do 1 único ponto."
+      },
+      {
+        "cost": 2,
+        "skill": "''Esta Estaca tem destino!'': Você estudou a anatomia dos membros e domina a coordenação necessária para paralisá-los. Sempre que você e seus aliados tentam colocar um vampiro em torpor utilizando uma estaca, todos os participantes adicionam +1 dado à sua contribuição, independentemente da habilidade usada.",
+        "skillPtBr": "''Esta Estaca tem destino!'': Você estudou a anatomia dos membros e domina a coordenação necessária para paralisá-los. Sempre que você e seus aliados tentam colocar um vampiro em torpor utilizando uma estaca, todos os participantes adicionam +1 dado à sua contribuição, independentemente da habilidade usada."
+      },
+      {
+        "cost": 3,
+        "skill": "''Nem vem que não tem!'': Você reconhece as armadilhas das Disciplinas vampíricas e sabe como bloquear seus efeitos. Recebe +2 dados em testes para resistir a Presença ou Dominação. Além disso, se um vampiro tentar aplicar o Beijo em você durante o combate, ele não recebe o bônus automático de imobilização no primeiro turno. Sua mente e corpo rejeitam o fascínio frio dos cadáveres vivos.",
+        "skillPtBr": "''Nem vem que não tem!'': Você reconhece as armadilhas das Disciplinas vampíricas e sabe como bloquear seus efeitos. Recebe +2 dados em testes para resistir a Presença ou Dominação. Além disso, se um vampiro tentar aplicar o Beijo em você durante o combate, ele não recebe o bônus automático de imobilização no primeiro turno. Sua mente e corpo rejeitam o fascínio frio dos cadáveres vivos."
+      },
+      {
+        "cost": 4,
+        "skill": "''Memento Mori!'': Você porta um artefato temido entre os beberrões de sangue — as cinzas de um ancião destruído, ou uma estaca que já atravessou o coração de um Príncipe. Uma vez por história, ao revelar esse troféu, você pode forçar o vampiro alvo a realizar um teste de Frenesi de Terror (Rötschreck) - Dificuldade 3. Alternativamente, você pode garantir que sua reação inicial seja de submissão total, impedindo ataques diretos enquanto você não causar dano.",
+        "skillPtBr": "''Memento Mori!'': Você porta um artefato temido entre os beberrões de sangue — as cinzas de um ancião destruído, ou uma estaca que já atravessou o coração de um Príncipe. Uma vez por história, ao revelar esse troféu, você pode forçar o vampiro alvo a realizar um teste de Frenesi de Terror (Rötschreck) - Dificuldade 3. Alternativamente, você pode garantir que sua reação inicial seja de submissão total, impedindo ataques diretos enquanto você não causar dano."
+      },
+      {
+        "cost": 5,
+        "skill": "''Eu sou o Embaixador da Noite!'': Você compreende a psicologia dos membros e sabe falar em um idioma que eles respeitam: cálculo, sobrevivência e pragmatismo. Recebe +2 dados em todos os testes Sociais feitos para mediar conflitos, negociar tréguas ou reparar rixas entre Garous e vampiros. Uma vez por crônica, pode forçar uma cooperação temporária entre ambos os lados — sem necessidade de checagem — desde que o objetivo seja específico, urgente e de benefício mútuo.",
+        "skillPtBr": "''Eu sou o Embaixador da Noite!'': Você compreende a psicologia dos membros e sabe falar em um idioma que eles respeitam: cálculo, sobrevivência e pragmatismo. Recebe +2 dados em todos os testes Sociais feitos para mediar conflitos, negociar tréguas ou reparar rixas entre Garous e vampiros. Uma vez por crônica, pode forçar uma cooperação temporária entre ambos os lados — sem necessidade de checagem — desde que o objetivo seja específico, urgente e de benefício mútuo."
       }
     ],
     "book": "Criado por Bruno Cabral",
