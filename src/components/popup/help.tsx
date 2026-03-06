@@ -355,7 +355,7 @@ export default function Help() {
                     Subterfúgio
                   </div>
                   <div className="border border-b-white p-2 col-span-2 md:col-span-3">
-                    Arte de mentir de forma convincente, criar "narrativas" para pautar o debate e inventar ótimas desculpas para ações nada boas. 
+                    Arte de mentir de forma convincente, criar &quot;narrativas&quot; para pautar o debate e inventar ótimas desculpas para ações nada boas. 
                   </div>
                   <div className="border border-b-white p-2 text-center col-span-2 md:col-span-1">
                     Ciência
@@ -409,7 +409,7 @@ export default function Help() {
                     Tecnologia
                   </div>
                   <div className="border border-b-white p-2 col-span-2 md:col-span-3">
-                    Rege a operação e a compreensão de inovações tecnológicas "modernas", mas a definição de moderno é um tanto impressionista. Cem anos atrás, Tecnologia poderia abranger principalmente motores a vapor e eletricidade. Hoje em dia, implica computadores e sistemas de informática.
+                    Rege a operação e a compreensão de inovações tecnológicas &quot;modernas&quot;, mas a definição de moderno é um tanto impressionista. Cem anos atrás, Tecnologia poderia abranger principalmente motores a vapor e eletricidade. Hoje em dia, implica computadores e sistemas de informática.
                   </div>
                 </div>
               </div>
@@ -541,7 +541,7 @@ export default function Help() {
                           Para cada ponto de Fúria, troque um dado por um ponto de Fúria nas suas paradas.
                         </li>
                         <li className="list-disc">
-                          Os dados de Fúria têm os mesmos lados de um d10 comum, mas "1" e "2" são considerados resultados Brutais.
+                          Os dados de Fúria têm os mesmos lados de um d10 comum, mas &quot;1&quot; e &quot;2&quot; são considerados resultados Brutais.
                         </li>
                         <li className="list-disc">
                           Dois ou mais resultados Brutais provocam uma consequência Brutal, o que costuma produzir uma falha, a menos que o objetivo seja fazer mal ou causar dano.
@@ -1006,7 +1006,7 @@ export default function Help() {
                       1
                     </div>
                     <div className="border border-white p-2">
-                      "Conte algo importante que seu personagem aprendeu nesta sessão"
+                      &quot;Conte algo importante que seu personagem aprendeu nesta sessão&quot;
                     </div>
                     <div className="text-center border border-white p-2">
                       1
@@ -1300,7 +1300,7 @@ export default function Help() {
                   <div className="pb-5 text-justify">
                     <ul className="pl-5 text-sm font-normal text-white">
                       <li className="list-disc">
-                        Os Narradores podem deixar os jogadores "pegar metade" em vez de rolar os dados. Para tanto, conte o número de dados da parada, divida esse número pela metade (arredondando para baixo) e considere o resultado como o número de sucessos obtido.
+                        Os Narradores podem deixar os jogadores &quot;pegar metade&quot; em vez de rolar os dados. Para tanto, conte o número de dados da parada, divida esse número pela metade (arredondando para baixo) e considere o resultado como o número de sucessos obtido.
                       </li>
                       <li className="list-disc">
                         Recomenda-se aos Narradores usar esse método sempre que possível ao determinar os sucessos dos personagens do Narrador. Além de poupar tempo, também reduz as chances de se obter aqueles raros mas inevitáveis resultados aberrantes (pode ser, porém, que esse tipo de coisa seja desejável).
