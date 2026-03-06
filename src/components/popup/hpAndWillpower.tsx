@@ -125,7 +125,10 @@ export default function HpAndWillPower() {
                         );
                     })
                   }
-                  <FaFire className="text-blue-400 text-xl sm:text-normal" />
+                  <FaFire
+                    className="text-blue-400 text-xl sm:text-normal"
+                    title="Força de Vontade"
+                  />
                 </div>
                 <div className="flex items-center justify-end w-full">
                   {
@@ -160,7 +163,10 @@ export default function HpAndWillPower() {
                         );
                     })
                   }
-                  <FaHeart className="text-red-700 text-xl sm:text-normal" />
+                  <FaHeart
+                    className="text-red-700 text-xl sm:text-normal"
+                    title="Vitalidade"
+                  />
                 </div>
                 <div className="flex items-center justify-end w-full">
                   {
@@ -184,7 +190,10 @@ export default function HpAndWillPower() {
                       );
                     })
                   }
-                  <GiFangs className="text-xl sm:text-normal" />
+                  <GiFangs
+                    className="text-xl sm:text-normal"
+                    title="Fúria"
+                  />
                 </div>
               </div>
               <div className="ml-1 flex flex-col">
