@@ -76,7 +76,7 @@ export default function HpAndWillPower() {
   };
 
   return(
-    <div className={`z-50 w-50 absolute ${showMenuSession !== '' ? 'top-2' : 'top-12'} right-6 rounded-xl`}>
+    <div className={`z-50 w-50 absolute ${showMenuSession !== '' ? 'top-2' : 'top-12'} right-1 sm:right-6 rounded-xl`}>
         {
           !showData &&
           <MdOutlineDoubleArrow
@@ -104,7 +104,7 @@ export default function HpAndWillPower() {
                               type="button"
                               onClick={ () => updateValue(player, 'willpower', index + 1) }
                               key={index}
-                              className="h-3 w-3 rounded-full mr-1 bg-black border-white border cursor-pointer"
+                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-black border-white border cursor-pointer"
                             />
                           );
                         } return (
@@ -112,7 +112,7 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateValue(player, 'willpower', index + 1) }
                             key={index}
-                            className="h-3 w-3 rounded-full mr-1 bg-gray-500 border-white border cursor-pointer"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-gray-500 border-white border cursor-pointer"
                           />
                         );
                       } return (
@@ -120,12 +120,12 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateValue(player, 'willpower', index + 1) }
                             key={index}
-                            className="h-3 w-3 rounded-full mr-1 bg-white border-white border cursor-pointer"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-white border-white border cursor-pointer"
                           />
                         );
                     })
                   }
-                  <FaFire className="text-blue-400" />
+                  <FaFire className="text-blue-400 text-xl sm:text-normal" />
                 </div>
                 <div className="flex items-center justify-end w-full">
                   {
@@ -139,7 +139,7 @@ export default function HpAndWillPower() {
                               type="button"
                               onClick={ () => updateValue(player, 'health', index + 1) }
                               key={index}
-                              className="h-3 w-3 rounded-full mr-1 bg-black border-white border cursor-pointer"
+                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-black border-white border cursor-pointer"
                             />
                           );
                         } return (
@@ -147,7 +147,7 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateValue(player, 'health', index + 1) }
                             key={index}
-                            className="h-3 w-3 rounded-full mr-1 bg-gray-500 border-white border cursor-pointer"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-gray-500 border-white border cursor-pointer"
                           />
                         );
                       } return (
@@ -155,12 +155,12 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateValue(player, 'health', index + 1) }
                             key={index}
-                            className="h-3 w-3 rounded-full mr-1 bg-white border-white border cursor-pointer"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-white border-white border cursor-pointer"
                           />
                         );
                     })
                   }
-                  <FaHeart className="text-red-700" />
+                  <FaHeart className="text-red-700 text-xl sm:text-normal" />
                 </div>
                 <div className="flex items-center justify-end w-full">
                   {
@@ -171,7 +171,7 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateRageValue(player, index + 1) }
                             key={index}
-                            className="h-3 w-3 rounded-full bg-black border-white border cursor-pointer mr-1"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-black border-white border cursor-pointer mr-1"
                           />
                         );
                       } return (
@@ -179,12 +179,12 @@ export default function HpAndWillPower() {
                           type="button"
                           onClick={ () => updateRageValue(player, index + 1) }
                           key={index}
-                          className="h-3 w-3 rounded-full bg-white border-white border cursor-pointer mr-1"
+                          className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-white border-white border cursor-pointer mr-1"
                         />
                       );
                     })
                   }
-                  <GiFangs />
+                  <GiFangs className="text-xl sm:text-normal" />
                 </div>
               </div>
               <div className="ml-1 flex flex-col">
@@ -194,11 +194,11 @@ export default function HpAndWillPower() {
                     <Image
                       src={ player.data.profileImage }
                       alt=""
-                      className="w-10 h-12 object-cover rounded-lg border-2 border-white mb-1"
+                      className="w-12 sm:w-10 h-20 sm:h-14 object-cover rounded-lg border-2 border-white mb-1 ml-2 sm:ml-0"
                       width={ 1000 }
                       height={ 1000 }
                     />
-                  : <div className="w-10 h-12 border border-white rounded-lg flex items-center justify-center mb-1">
+                  : <div className="w-12 sm:w-10 h-20 sm:h-14 border border-white rounded-lg flex items-center justify-center mb-1 ml-2 sm:ml-0">
                       { player.data.name[0] }
                     </div>
                 }
