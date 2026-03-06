@@ -7,6 +7,8 @@ export function RiteOfBinding() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [marked, setMarked] = useState(false);
+  const [numberOfPjs, setNumberOfPjs] = useState<number>(0);
+  const [numberOfKnowPjs, setNumberOfKnowPjs] = useState<number>(0);
   const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
@@ -16,7 +18,9 @@ export function RiteOfBinding() {
       rage = pool;
       pool = 0;
     } else pool -= rage;
-    const roll = rollTest(rage, pool, penaltyOrBonus, dificulty);
+    const totalPool = pool + numberOfKnowPjs;
+    const totalRage = rage + numberOfPjs;
+    const roll = rollTest(totalRage, totalPool, penaltyOrBonus, dificulty);
     return roll;
   }
 
@@ -43,53 +47,91 @@ export function RiteOfBinding() {
         />
         <span>Marque se o espírito for resistir ao seu Ritual (espíritos em excepcionais bons termos com o mestre do Rito condedem um sucesso automaticno ritual)</span>
       </label>
-      {
-        marked &&
-        <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
-          <div className="flex w-full">
-            <div
-              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-              onClick={ () => {
-                if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
-              }}
-            >
-              <FaMinus />
-            </div>
-            <div
-              id="penaltyOrBonus"
-              className="p-2 text-center text-black bg-white w-full appearance-none"
-              onChange={(e: any) => {
-                if (Number(e.target.value) < 0 && Number(e.target.value) < -50) setPenaltyOrBonus(-50);
-                else setPenaltyOrBonus(Number(e.target.value))
-              }}
-            >
-              {penaltyOrBonus}
-            </div>
-            <div
-              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-              onClick={ () => {
-                if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
-              }}
-            >
-              <FaPlus />
-            </div>
+      <label htmlFor="numberOfPjs" className="mb-4 flex flex-col items-center w-full">
+        <p className="text-white w-full pb-3">
+          Quantidade de participantes além do Mestre do Ritual que estão participando (cada um dos outros participantes soma um dado de Fúria à parada):
+        </p>
+        <div className="flex w-full">
+          <button
+            type="button"
+            className={`border border-white p-3 cursor-pointer ${ numberOfPjs === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (numberOfPjs > 0) setNumberOfPjs(numberOfPjs - 1);
+              if (numberOfPjs < numberOfKnowPjs) setNumberOfKnowPjs(numberOfPjs - 1);
+            }}
+          >
+            <FaMinus />
+          </button>
+          <div
+            id="numberOfPjs"
+            className="p-2 bg-white text-center text-black w-full"
+            onChange={ (e: any) => {
+              if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setNumberOfPjs(15);
+              else if (e.target.value >= 0) setNumberOfPjs(Number(e.target.value));
+            }}
+          >
+            {numberOfPjs}
           </div>
-        </label>
-      }
+         <button
+            type="button"
+            className={`border border-white p-3 cursor-pointer ${ numberOfPjs === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (numberOfPjs < 15) setNumberOfPjs(numberOfPjs + 1)
+            }}
+          >
+            <FaPlus />
+          </button>
+        </div>
+      </label>
+      <label htmlFor="numberOfKnowPjs" className="mb-4 flex flex-col items-center w-full">
+        <p className="text-white w-full pb-3">
+          Dentre os informados acima, cite a quantidade de participantes além do Mestre do Ritual que conhecem o Ritual (cada um dos outros participantes que conhecerem o Ritual somarão um dado de Fúria e um dado comum à parada):
+        </p>
+        <div className="flex w-full">
+          <button
+            type="button"
+            className={`border border-white p-3 cursor-pointer ${ numberOfKnowPjs === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (numberOfKnowPjs > 0) setNumberOfKnowPjs(numberOfKnowPjs - 1);
+            }}
+          >
+            <FaMinus />
+          </button>
+          <div
+            id="numberOfKnowPjs"
+            className="p-2 bg-white text-center text-black w-full"
+            onChange={ (e: any) => {
+              if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setNumberOfKnowPjs(15);
+              else if (e.target.value >= 0) setNumberOfKnowPjs(Number(e.target.value));
+            }}
+          >
+            {numberOfKnowPjs}
+          </div>
+          <button
+            type="button"
+            className={`border border-white p-3 cursor-pointer ${ numberOfKnowPjs === numberOfPjs ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            onClick={ () => {
+              if (numberOfKnowPjs < numberOfPjs) setNumberOfKnowPjs(numberOfKnowPjs + 1)
+            }}
+          >
+            <FaPlus />
+          </button>
+        </div>
+      </label>
       {
         marked &&
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo espírito alvo em um teste de Poder, ou um valor imposto pelo Narrador)</p>
           <div className="flex w-full">
-            <div
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (dificulty > 0) setDificulty(dificulty - 1);
               }}
             >
               <FaMinus />
-            </div>
+            </button>
             <div
               id="dificulty"
               className="p-2 bg-white text-center text-black w-full"
@@ -100,14 +142,51 @@ export function RiteOfBinding() {
             >
               {dificulty}
             </div>
-            <div
+            <button
+              type="button"
               className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (dificulty < 15) setDificulty(dificulty + 1)
               }}
             >
               <FaPlus />
+            </button>
+          </div>
+        </label>
+      }
+      {
+        marked &&
+        <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
+          <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
+          <div className="flex w-full">
+            <button
+              type="button"
+              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+              onClick={ () => {
+                if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
+              }}
+            >
+              <FaMinus />
+            </button>
+            <div
+              id="penaltyOrBonus"
+              className="p-2 text-center text-black bg-white w-full appearance-none"
+              onChange={(e: any) => {
+                if (Number(e.target.value) < 0 && Number(e.target.value) < -50) setPenaltyOrBonus(-50);
+                else setPenaltyOrBonus(Number(e.target.value))
+              }}
+            >
+              {penaltyOrBonus}
             </div>
+            <button
+              type="button"
+              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+              onClick={ () => {
+                if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
+              }}
+            >
+              <FaPlus />
+            </button>
           </div>
         </label>
       }
