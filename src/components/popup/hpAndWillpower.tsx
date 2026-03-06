@@ -104,7 +104,7 @@ export default function HpAndWillPower() {
                               type="button"
                               onClick={ () => updateValue(player, 'willpower', index + 1) }
                               key={index}
-                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-black border-white border cursor-pointer"
+                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-black border-white border cursor-pointer"
                             />
                           );
                         } return (
@@ -112,7 +112,7 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateValue(player, 'willpower', index + 1) }
                             key={index}
-                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-gray-500 border-white border cursor-pointer"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-gray-500 border-white border cursor-pointer"
                           />
                         );
                       } return (
@@ -120,51 +120,53 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateValue(player, 'willpower', index + 1) }
                             key={index}
-                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-white border-white border cursor-pointer"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-white border-white border cursor-pointer"
                           />
                         );
                     })
                   }
                   <FaFire
-                    className="text-blue-400 text-xl sm:text-normal"
+                    className="text-blue-400 text-xl sm:text-xs"
                     title="Força de Vontade"
                   />
                 </div>
                 <div className="flex items-center justify-end w-full">
-                  {
-                    Array(returnTotalHealth(player)).fill('').map((item, index) => {
-                      const healthMap: number[] = player.data.health.map((element: any) => element.value);
-                      if (healthMap.includes(index + 1)) {
-                        const filterPoint = player.data.health.find((ht: any) => ht.value === index + 1 && ht.agravated === true);
-                        if (filterPoint) {
-                          return (
+                  <div className="flex flex-wrap justify-end w-full">
+                    {
+                      Array(returnTotalHealth(player)).fill('').map((item, index) => {
+                        const healthMap: number[] = player.data.health.map((element: any) => element.value);
+                        if (healthMap.includes(index + 1)) {
+                          const filterPoint = player.data.health.find((ht: any) => ht.value === index + 1 && ht.agravated === true);
+                          if (filterPoint) {
+                            return (
+                              <button
+                                type="button"
+                                onClick={ () => updateValue(player, 'health', index + 1) }
+                                key={index}
+                                className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-black border-white border cursor-pointer"
+                              />
+                            );
+                          } return (
                             <button
                               type="button"
                               onClick={ () => updateValue(player, 'health', index + 1) }
                               key={index}
-                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-black border-white border cursor-pointer"
+                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-gray-500 border-white border cursor-pointer"
                             />
                           );
                         } return (
-                          <button
-                            type="button"
-                            onClick={ () => updateValue(player, 'health', index + 1) }
-                            key={index}
-                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-gray-500 border-white border cursor-pointer"
-                          />
-                        );
-                      } return (
-                          <button
-                            type="button"
-                            onClick={ () => updateValue(player, 'health', index + 1) }
-                            key={index}
-                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 bg-white border-white border cursor-pointer"
-                          />
-                        );
-                    })
-                  }
+                            <button
+                              type="button"
+                              onClick={ () => updateValue(player, 'health', index + 1) }
+                              key={index}
+                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 bg-white border-white border cursor-pointer"
+                            />
+                          );
+                      })
+                    }
+                  </div>
                   <FaHeart
-                    className="text-red-700 text-xl sm:text-normal"
+                    className="text-red-700 text-xl sm:text-xs w-5 sm:w-3"
                     title="Vitalidade"
                   />
                 </div>
@@ -177,7 +179,7 @@ export default function HpAndWillPower() {
                             type="button"
                             onClick={ () => updateRageValue(player, index + 1) }
                             key={index}
-                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-black border-white border cursor-pointer mr-1"
+                            className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-black border-white border cursor-pointer mr-1 mt-1 sm:mt-0"
                           />
                         );
                       } return (
@@ -185,13 +187,13 @@ export default function HpAndWillPower() {
                           type="button"
                           onClick={ () => updateRageValue(player, index + 1) }
                           key={index}
-                          className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-white border-white border cursor-pointer mr-1"
+                          className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-white border-white border cursor-pointer mr-1 mt-1 sm:mt-0"
                         />
                       );
                     })
                   }
                   <GiFangs
-                    className="text-xl sm:text-normal"
+                    className="text-xl sm:text-xs w-5 sm:w-3"
                     title="Fúria"
                   />
                 </div>

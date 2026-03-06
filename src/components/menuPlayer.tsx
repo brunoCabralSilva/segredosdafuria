@@ -26,7 +26,6 @@ import History from "./menuSession/history";
 import Forms from "./menuSession/forms";
 import WillpowerTest from "./popup/willpowerTest";
 import { sheetStructure } from "@/firebase/utilities";
-import Help from "./popup/help";
 
 export default function MenuPlayer() {
   const {
@@ -94,7 +93,7 @@ export default function MenuPlayer() {
   };
 
   return(
-    <div className={`md:w-3/5 absolute sm:relative z-50 w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center h-screen z-50 top-0 right-0 text-white`}>
+    <div className={`w-full md:w-3/5 absolute sm:relative z-50 w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center h-screen z-50 top-0 right-0 text-white`}>
       <div className="w-full flex justify-end my-1">
         <IoIosCloseCircleOutline
           className="text-4xl text-white cursor-pointer mb-2"
