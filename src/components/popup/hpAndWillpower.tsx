@@ -76,7 +76,7 @@ export default function HpAndWillPower() {
   };
 
   return(
-    <div className={`z-30 w-50 absolute ${showMenuSession !== '' ? 'top-2' : 'top-12'} right-1 sm:right-6 rounded-xl`}>
+    <div className={`z-30 pl-1 w-50 absolute ${showMenuSession !== '' ? 'top-2' : 'top-12'} right-1 sm:right-6 rounded-xl`}>
         {
           !showData &&
           <MdOutlineDoubleArrow
