@@ -614,7 +614,7 @@ export default function Help() {
                   <div className="border-b-white border p-2 text-center col-span-3">Peso Levantado (kg)</div>
                   <div className="border-b-white border p-2 text-center">1</div>
                   <div className="border-b-white border p-2 text-center col-span-3">Amassar uma lata de cerveja</div>
-                  <div className="border-b-white border p-2 text-center col-span-3">20 (árvore de Natal, placa de "PARE")</div>
+                  <div className="border-b-white border p-2 text-center col-span-3">20 (árvore de Natal, placa de &quot;PARE&quot;)</div>
                   <div className="border-b-white border p-2 text-center">2</div>
                   <div className="border-b-white border p-2 text-center col-span-3">Quebrar uma cadeira de madeira</div>
                   <div className="border-b-white border p-2 text-center col-span-3">45 (vaso sanitário)</div>
