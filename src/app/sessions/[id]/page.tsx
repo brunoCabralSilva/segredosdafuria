@@ -31,7 +31,7 @@ import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
 import ConsentForm from "@/components/popup/consentForm";
 import EditBannerSession from "@/components/popup/editBannerSession";
-import Help from "@/components/popup/help";
+import HpAndWillPower from "@/components/popup/hpAndWillpower";
 
 export default function SessionId() {
 	const params = useParams();
@@ -167,27 +167,28 @@ export default function SessionId() {
               : showConsentForm ?
                 <ConsentForm />
                 : <div className="flex flex-col w-full relative">
-                <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
-                  {
-                    chat
-                    && chat.length > 0
-                    && chat[0].list
-                    && chat[0].list.length >= 0
-                    ? chat[0]
-                      && chat[0].list
-                        .sort((a: any, b: any) => a.order - b.order)
-                        .map((msg: any, index: number) => {
-                          if (email !== '' && email === msg.email) {
-                            return (<Message key={index} dataMessage={msg} color="green" />);
-                          } return (<Message key={index} dataMessage={msg} color="gray" />);
-                        })
-                    : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
-                        <Loading />
-                      </div>
-                  }
-                </div>
-                <SessionBar />
-              </div>
+                    <HpAndWillPower />
+                    <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
+                      {
+                        chat
+                        && chat.length > 0
+                        && chat[0].list
+                        && chat[0].list.length >= 0
+                        ? chat[0]
+                          && chat[0].list
+                            .sort((a: any, b: any) => a.order - b.order)
+                            .map((msg: any, index: number) => {
+                              if (email !== '' && email === msg.email) {
+                                return (<Message key={index} dataMessage={msg} color="green" />);
+                              } return (<Message key={index} dataMessage={msg} color="gray" />);
+                            })
+                        : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
+                            <Loading />
+                          </div>
+                      }
+                    </div>
+                    <SessionBar />
+                  </div>
             }
             {
               showMenuSession === 'edit-image' && 

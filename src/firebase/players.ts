@@ -89,6 +89,25 @@ export const getPlayerByEmail = async (sessionId: string, email: string, setShow
   }
 };
 
+export const getAllPlayersBySessionId = async (sessionId: string, setShowMessage: any) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const collectionRef = collection(db, 'players');
+    const q = query(collectionRef, where('sessionId', '==', sessionId));
+    const querySnapshot = await getDocs(q);
+    const players: any[] = [];
+    querySnapshot.forEach((doc) => {
+      players.push({ id: doc.id, ...doc.data() });
+    });
+    return players;
+  } catch (err) {
+    setShowMessage({
+      show: true,
+      text: 'Ocorreu um erro ao buscar os Jogadores da Sessão: ' + err
+    });
+  }
+};
+
 export const updateDataPlayer = async (
   id: string,
   newData: any,
