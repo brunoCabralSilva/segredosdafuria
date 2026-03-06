@@ -167,7 +167,10 @@ export default function SessionId() {
               : showConsentForm ?
                 <ConsentForm />
                 : <div className="flex flex-col w-full relative">
-                    <HpAndWillPower />
+                    {
+                      dataSession && dataSession.gameMaster == email &&
+                      <HpAndWillPower />
+                    }
                     <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
                       {
                         chat
