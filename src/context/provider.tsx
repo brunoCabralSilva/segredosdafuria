@@ -7,6 +7,8 @@ interface IProvider { children: ReactNode }
 
 export default function Provider({children }: IProvider) {
   //user
+  const [showHelp, setShowHelp] = useState(false);
+  const [simplify, setSimplify] = useState(false);
   const [dataUser, setDataUser] = useState({ email: '', displayName: '' });
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   //Gifts
@@ -86,6 +88,7 @@ export default function Provider({children }: IProvider) {
   };
 
   const resetPopups = () => {
+    setShowHelp(false);
     setShowConsentForm(false);
     setShowSelectSheet(false);
     setShowForgotPassword(false);
@@ -128,6 +131,8 @@ export default function Provider({children }: IProvider) {
     <contexto.Provider
       value={{
         //user
+        showHelp, setShowHelp,
+        simplify, setSimplify,
         dataUser, setDataUser,
         showForgotPassword, setShowForgotPassword,
         //pages

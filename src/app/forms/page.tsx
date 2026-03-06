@@ -7,12 +7,14 @@ import listForms from '../../data/forms.json';
 import Link from "next/link";
 import Feedback from '@/components/feedback';
 import contexto from '@/context/context';
+import Simplify from '@/components/simplify';
 
 export default function Forms() {
-  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
   useEffect(() => resetPopups(), []);
   return (
-    <div className="w-full bg-ritual bg-cover bg-top relative">
+    <div className={`w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top relative`}>
+      <Simplify />
       <div className="absolute w-full h-full bg-black/80" />
       <Nav />
       <section className="mb-2 relative px-2 pb-5">

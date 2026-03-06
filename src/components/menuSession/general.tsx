@@ -14,6 +14,7 @@ import { CiEdit } from "react-icons/ci";
 import Image from "next/image";
 import DeleteSheet from "../popup/deleteSheet";
 import { registerHistory } from "@/firebase/history";
+import Help from "../popup/help";
 
 export default function General() {
   const [input, setInput] = useState('');
@@ -27,6 +28,8 @@ export default function General() {
     dataSheet,
 		showResetSheet, setShowResetSheet,
     showDeleteSheet,
+    showHelp,
+    setShowHelp,
     setShowMenuSession,
     setShowGiftRoll,
     setShowRitualRoll,

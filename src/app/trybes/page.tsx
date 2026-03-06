@@ -7,14 +7,16 @@ import Link from "next/link";
 import Feedback from '@/components/feedback';
 import { useContext, useEffect } from "react";
 import contexto from "@/context/context";
+import Simplify from "@/components/simplify";
 
 export default function Trybes() {
-  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => resetPopups(), []);
   
   return (
-    <div className="w-full bg-ritual bg-cover bg-top relative">
+    <div className={`w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top relative`}>
+      <Simplify />
       <div className={`absolute w-full h-full bg-black/80`} />
       <Nav />
       <section className="mb-2 relative px-2">
@@ -38,7 +40,7 @@ export default function Trybes() {
               <Link
                 href={`/trybes/${trybe.nameEn.toLowerCase().replace(/ /g, '-')}`}
                 key={ index }
-                className="border-white border-2 p-3 flex items-center justify-center flex-col bg-filters bg-center bg-opacity-10 relative cursor-pointer"
+                className={`border-white border-2 p-3 flex items-center justify-center flex-col ${simplify ? 'bg-black' : 'bg-filters'} bg-center bg-opacity-10 relative cursor-pointer`}
               >
                 <div className={`absolute w-full h-full bg-black/80`} />
                 <Image

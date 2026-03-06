@@ -494,7 +494,7 @@ export default function EvaluateSheet() {
       } else setAttributes2({ correct: true, errorMessage: '' });
 
       if (count1 !== 1) {
-        setAttributes1({ correct: false, errorMessage: 'Existem ' + count1 + ' atributos com 2 pontos. Na aba "Atributos", é necessário preencher apenas Um atributo com este valor.' });
+        setAttributes1({ correct: false, errorMessage: 'Existem ' + count1 + ' atributos com 1 ponto. Na aba "Atributos", é necessário preencher apenas Um atributo com este valor.' });
       } else setAttributes1({ correct: true, errorMessage: '' });
     }
   }

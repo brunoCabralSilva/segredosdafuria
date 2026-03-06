@@ -8,13 +8,14 @@ import { IForm } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from "@/context/context";
 import { useParams } from "next/navigation";
+import Simplify from "@/components/simplify";
 
 export default function Form() {
   const params = useParams();
   const form = params?.form as string;
   const [isLoading, setIsLoading] = useState(true);
   const [dataForm, setDataForm] = useState<IForm>();
-  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
@@ -31,7 +32,8 @@ export default function Form() {
 
   if (dataForm) {
     return(
-      <div className="w-full bg-ritual bg-cover bg-top relative">
+      <div className={`w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top relative`}>
+        <Simplify />
         <div className="absolute w-full h-full bg-black/90" />
         <Nav />
         <section className="mb-2 relative px-2">

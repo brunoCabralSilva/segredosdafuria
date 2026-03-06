@@ -4,6 +4,10 @@ import { createContext } from 'react';
 
 interface RecipesContext {
   //users
+  showHelp: boolean,
+  setShowHelp: (state: boolean) => void,
+  simplify: boolean,
+  setSimplify: (state: boolean) => void,
   dataUser: { email: string, displayName: string },
   setDataUser: (state: { email: string, displayName: string }) => void,
   showForgotPassword: boolean,
@@ -142,6 +146,10 @@ interface RecipesContext {
 
 const initialValue: RecipesContext = {
   //users
+  simplify: false,
+  setSimplify: () => {},
+  showHelp: false,
+  setShowHelp: () => {},
   dataUser: { email: '', displayName: '' },
   setDataUser: () => {},
   showForgotPassword: false,

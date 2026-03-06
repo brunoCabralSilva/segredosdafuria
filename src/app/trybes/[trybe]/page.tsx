@@ -8,6 +8,7 @@ import { IArchetypes, ITrybe } from "../../../interface";
 import Feedback from "@/components/feedback";
 import contexto from '@/context/context';
 import { useParams } from 'next/navigation';
+import Simplify from '@/components/simplify';
 
 export default function Trybe() {
   const params = useParams();
@@ -15,7 +16,7 @@ export default function Trybe() {
   const [isLoading, setIsLoading] = useState(true);
   const [dataTrybe, setDataTrybe] = useState<ITrybe>();
   const [alternative, setAlternative] = useState<boolean>(true);
-  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
@@ -43,7 +44,8 @@ export default function Trybe() {
 
   if (dataTrybe) {
     return(
-      <div className="w-full bg-ritual bg-cover bg-top relative flex flex-col items-center">
+      <div className={`w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top relative flex flex-col items-center`}>
+        <Simplify />
         <div className="absolute w-full h-full bg-black/90" />
         <Nav />
         <section className="block-item mb-2 relative px-2 py-10 flex flex-col items-center sm:items-start w-full z-20 text-white text-justify overflow-y-auto">

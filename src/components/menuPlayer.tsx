@@ -26,6 +26,7 @@ import History from "./menuSession/history";
 import Forms from "./menuSession/forms";
 import WillpowerTest from "./popup/willpowerTest";
 import { sheetStructure } from "@/firebase/utilities";
+import Help from "./popup/help";
 
 export default function MenuPlayer() {
   const {
@@ -33,6 +34,7 @@ export default function MenuPlayer() {
     session,
     email,
     players,
+    setShowHelp,
     showWillpowerTest, setShowWillpowerTest,
     showHarano, setShowHarano,
     showHauglosk, setShowHauglosk,

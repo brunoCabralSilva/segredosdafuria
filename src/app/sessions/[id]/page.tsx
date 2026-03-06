@@ -31,6 +31,7 @@ import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
 import ConsentForm from "@/components/popup/consentForm";
 import EditBannerSession from "@/components/popup/editBannerSession";
+import Help from "@/components/popup/help";
 
 export default function SessionId() {
 	const params = useParams();
