@@ -1,6 +1,16 @@
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import Dice from "./dice";
 
+const ritualList = [
+'Ritual de Abjuração',
+'Ritual de Apadrinhamento',
+'Ritual do Caern Vivente',
+'Ritual da Fúria',
+'Ritual de Invocação de Espíritos',
+'Ritual da Travessia Umbrática',
+'Rito da Graça Inconstante da Lua',
+]
+
 export default function Message(props: { dataMessage: any, color: string }) {
 	const { dataMessage, color } = props;
 	switch(dataMessage.type) {
@@ -194,7 +204,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
             }
             <div className="border border-white p-5 text-sm">
               <div className="px-3 pb-3">
-                <p className="font-bold text-center w-full p-3">{ dataMessage.titlePtBr} ({ dataMessage.title })</p>
+                <p className="font-bold text-center w-full p-3">{ dataMessage.titlePtBr } ({ dataMessage.title })</p>
                 <hr className="mt-1 pb-5" />
                 {
                   dataMessage.pool !== '' &&
@@ -236,7 +246,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                     </div>
                     <div className="font-bold pt-4 text-left">Teste de ativação do Ritual:</div>
                     <div className="font-bold pt-1 text-left">
-                      { dataMessage.results.message }
+                      { ritualList.includes(dataMessage.titlePtBr) ? dataMessage.results.criticalPairs + dataMessage.results.success > dataMessage.results.dificulty ? 'Obteve Sucesso no Teste, mas haverão Complicações (Veja Sistema)' : 'Falhou no Teste e haverão Complicações (Veja Sistema)' : dataMessage.results.message }
                     </div>
                     <div className="flex justify-start items-center">
                         <span className="">{`Sucessos: `}</span>

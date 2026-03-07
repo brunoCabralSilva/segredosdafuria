@@ -43,7 +43,7 @@ export function RiteOfShadowPassage() {
       </select>
       <label htmlFor="numberOfPjs" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">
-          Quantidade de participantes além do Mestre do Ritual que estão participando (cada um dos outros participantes soma um dado de Fúria à parada):
+          Quantidade de participantes (que tem pelo menos um ponto de Fúria) além do Mestre do Ritual que estão participando (cada um dos outros participantes soma um dado de Fúria à parada):
         </p>
         <div className="flex w-full">
           <button

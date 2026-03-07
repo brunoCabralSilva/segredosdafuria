@@ -1,6 +1,7 @@
 import { RiteOfBinding } from "./riteOfBinding";
 import { RiteOfPatronage } from "./riteOfPatronage";
 import { RiteOfShadowPassage } from "./riteOfShadowPassage";
+import { RiteOfTheBorneWord } from "./riteOfTheBorneWord";
 import { RiteOfTheSacredScar } from "./RiteOfTheSacredScar";
 import { RiteOfTheWolfReborn } from "./riteOfTheWolfReborn";
 import { RiteWithRoll } from "./riteWithRoll";
@@ -34,7 +35,7 @@ export default function RitualsMechanic(props: { title: string }) {
     case 'Rite of the Shrouded Glen':
       return <RiteWithRoll renown="wisdom" skill="craft" textDifficult="A Dificuldade para realizar este Rito é 2 + o Valor do Caern." />
     case 'Rite of the Borne Word':
-      return <RiteWithRoll renown="honor" skill="etiquette" textDifficult="A Dificuldade é 3 (ou mais alta, se o espírito for hostil)." />
+      return <RiteOfTheBorneWord />
     case 'Rite of the Broken Sun':
       return <RiteWithRoll renown="honor" skill="occult" textDifficult="A Dificuldade do Ritual é igual ao maior valor de Renome do Garou sendo punido." />
     case 'Rite of Caging':
