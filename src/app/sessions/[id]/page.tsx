@@ -32,6 +32,7 @@ import EditImage from "@/components/popup/editImage";
 import ConsentForm from "@/components/popup/consentForm";
 import EditBannerSession from "@/components/popup/editBannerSession";
 import HpAndWillPower from "@/components/popup/hpAndWillpower";
+import Help from "@/components/popup/help";
 
 export default function SessionId() {
 	const params = useParams();
@@ -52,6 +53,7 @@ export default function SessionId() {
     resetPopups,
     setPlayers,
     setSession,
+    showHelp,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
     showSelectSheet, setShowSelectSheet,
@@ -157,6 +159,7 @@ export default function SessionId() {
       { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
       { showDownloadPdf.show && verifyConvert() }
       { showBannerSession.show && <EditBannerSession /> }
+      { showHelp && <Help /> }
       <Nav />
       {
         showData

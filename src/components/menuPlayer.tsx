@@ -33,7 +33,6 @@ export default function MenuPlayer() {
     session,
     email,
     players,
-    setShowHelp,
     showWillpowerTest, setShowWillpowerTest,
     showHarano, setShowHarano,
     showHauglosk, setShowHauglosk,

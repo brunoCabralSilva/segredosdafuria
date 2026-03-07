@@ -1,7 +1,7 @@
 'use client'
 import { IoIosSend } from "react-icons/io";
 import { FaEraser } from "react-icons/fa";
-import { FaChevronDown, FaFile, FaPlus } from "react-icons/fa6";
+import { FaChevronDown, FaCircleQuestion, FaFile, FaPlus } from "react-icons/fa6";
 import { useContext, useState } from 'react';
 import contexto from '@/context/context';
 import { registerMessage } from "../firebase/messagesAndRolls";
@@ -16,6 +16,7 @@ export default function SessionBar() {
     email,
     setShowDeleteHistoric,
     scrollToBottom,
+    setShowHelp,
     setShowMessage,
     showMenuSession, setShowMenuSession,
   } = useContext(contexto);
@@ -47,6 +48,18 @@ export default function SessionBar() {
               }}
             >
               <FaFile className="" />
+            </button>
+          </div>
+          <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
+            <button
+              className="p-2"
+              title="Acessar o Menu da Sessão"
+              onClick={() => {
+                setShowHelp(true);
+                scrollToBottom();
+              }}
+            >
+              <FaCircleQuestion className="" />
             </button>
           </div>
           { 

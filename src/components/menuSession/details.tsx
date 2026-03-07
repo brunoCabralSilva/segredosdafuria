@@ -9,7 +9,6 @@ import { getUserByEmail } from "@/firebase/user";
 import { MdDelete } from "react-icons/md";
 import DeleteUserFromSession from "../popup/deleteUserFromSession";
 import Image from "next/image";
-import Help from "../popup/help";
 
 export default function Details() {
   const {
@@ -17,7 +16,6 @@ export default function Details() {
     session,
     players,
     showHelp,
-    setShowHelp,
     showDeletePlayer,
     setShowBannerSession,
     showDelGMFromSession,
@@ -306,13 +304,6 @@ export default function Details() {
               </div>
               <button
                 type="button"
-                onClick={ () => setShowHelp(true) }
-                className="mt-8 mb-2 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
-              >
-                Ajuda
-              </button>
-              <button
-                type="button"
                 className="p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
                 onClick={() => {
                   setShowDelGMFromSession(true);
@@ -321,7 +312,7 @@ export default function Details() {
                 Sair da Sessão
               </button>
             </div>
-             { showHelp && <Help /> }
+             
           </div>
         : <div className="h-full flex items-center justify-center">
             <span className="loader z-50" />
