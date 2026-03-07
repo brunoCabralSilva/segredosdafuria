@@ -53,7 +53,7 @@ export default function SessionBar() {
           <div className="text-xl border border-white flex justify-center hover:bg-white transition-colors text-white hover:text-black">
             <button
               className="p-2"
-              title="Acessar o Menu da Sessão"
+              title="Ajuda com as Regras do Jogo"
               onClick={() => {
                 setShowHelp(true);
                 scrollToBottom();
