@@ -29,7 +29,7 @@ export function RiteOfBinding() {
       await registerMessage(sessionId, { type: 'ritual', ...showRitualRoll.ritual }, email, setShowMessage);
     } else {
       const roll = await rollTestOfUser();
-      await registerMessage(sessionId, { type: 'ritual', ...showRitualRoll.ritual, roll: 'willpower', results: roll }, email, setShowMessage);
+      await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', results: roll }, email, setShowMessage);
     }
   }
 
@@ -43,7 +43,7 @@ export function RiteOfBinding() {
           id="checkboxReflexive"
           className="mr-2 mt-1"
           checked={marked}
-          onChange={ (e: any) => setMarked(e.target.checked) }
+          onChange={ (e: any) => setMarked(!marked) }
         />
         <span>Marque se o espírito favorece os Garous</span>
       </label>
@@ -119,7 +119,7 @@ export function RiteOfBinding() {
         </div>
       </label>
       {
-        marked &&
+        !marked &&
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo espírito alvo em um teste de Poder, ou um valor imposto pelo Narrador)</p>
           <div className="flex w-full">
@@ -155,7 +155,7 @@ export function RiteOfBinding() {
         </label>
       }
       {
-        marked &&
+        !marked &&
         <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
           <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
           <div className="flex w-full">
