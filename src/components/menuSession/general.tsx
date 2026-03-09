@@ -200,8 +200,8 @@ export default function General() {
               src={ dataSheet.data.profileImage }
               alt="Imagem de Perfil"
               className="w-full h-full object-cover object-center"
-              width={ 1200 }
-              height={ 800 }
+              width={ 200 }
+              height={ 400 }
             />
             : <p className="w-full h-full flex items-center justify-center text-center px-2">Sem imagem de Perfil</p>
           }
