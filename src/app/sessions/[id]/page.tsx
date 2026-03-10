@@ -159,7 +159,6 @@ export default function SessionId() {
       { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
       { showDownloadPdf.show && verifyConvert() }
       { showBannerSession.show && <EditBannerSession /> }
-      { showHelp && <Help /> }
       <Nav />
       {
         showData
@@ -169,7 +168,9 @@ export default function SessionId() {
               ? <EvaluateSheet />
               : showConsentForm ?
                 <ConsentForm />
-                : <div className="flex flex-col w-full relative">
+                : showHelp 
+                  ? <Help />
+                  : <div className="flex flex-col w-full relative">
                     {
                       dataSession && dataSession.gameMaster == email &&
                       <HpAndWillPower />

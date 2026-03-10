@@ -11,7 +11,7 @@ export default function Help() {
   const order = ['Hispo', 'Glabro', 'Lupino', 'Humano'];
 
   return (
-    <div className="z-80 fixed top-0 left-0 w-full h-screen flex flex-col items-center justify-start px-3 sm:px-0 border-white border-2 bg-black">
+    <div className="z-80 sm:z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
       <div className="w-full flex justify-center pt-3 bg-black">
         <div className="px-2 sm:px-5 text-white font-bold text-2xl w-full">Ajuda (Regras Rápidas)</div>
         <IoIosCloseCircleOutline
@@ -1492,9 +1492,6 @@ export default function Help() {
                   <ul className="pl-5 text-sm font-normal text-white">
                     <li className="list-disc">
                       No começo de uma Sessão, um personagem pode remover uma quantidade de níveis de dano Superficial da sua trilha de Força de Vontade igual ao seu valor de Autocontrole ou Determinação (o que for maior), caso não tenha ido contra a Interdição do Patrono de sua tribo (nesse caso, o personagem recupera apenas 1).
-                    </li>
-                    <li className="list-disc">
-                      No final de cada sessão, os personagens que tiverem se portado de acordo com o Renome associado à sua tribo poderão curar 1 nível de dano Agravado à Força de Vontade.
                     </li>
                     <li className="list-disc">
                       No final de cada sessão, os personagens que tiverem se portado de acordo com o Renome associado à sua tribo poderão curar 1 nível de dano Agravado à Força de Vontade.

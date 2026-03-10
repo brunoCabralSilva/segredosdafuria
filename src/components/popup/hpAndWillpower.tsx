@@ -159,7 +159,7 @@ export default function HpAndWillPower() {
                               type="button"
                               onClick={ () => updateValue(player, 'health', index + 1) }
                               key={index}
-                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 bg-white border-white border cursor-pointer"
+                              className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-white border-white border cursor-pointer"
                             />
                           );
                       })
