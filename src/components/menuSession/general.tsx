@@ -264,44 +264,48 @@ export default function General() {
       <Item quant={5} name="wisdom" namePtBr="Sabedoria" />
       <div className="pt-8 text-xl">Experiência (XP)</div>
       <div
-        className="w-full flex justify-between items-center cursor-pointer bg-white p-2 mt-1 border border-white"
-        onClick={() => setInput('xp')}
+        className={`w-full flex justify-between items-center p-2 mt-1 border border-white ${input === 'xp' ? 'bg-white' : 'bg-gray-300' }`}
       >
         { 
-          input !== 'xp' && <span className="text-black break-words w-full text-center">{
-            !dataSheet.data.xp
-            ? <span className=" w-full">XP</span>
-            : <span className="w-full">{ dataSheet.data.xp }</span>
-          }</span>
-        }
-        { 
-          input === 'xp' &&
-          <input
-            type="text"
-            className="text-center w-full mr-1 text-black outline-none"
-            placeholder="Valor de XP"
-            value={ xp }
-            onChange={(e) => setXp(e.target.value)}
-          />
-        }
-        { 
           input === 'xp'
-            ? <BsCheckSquare
-                onClick={(e:any) => {
-                  updateValue('xp', xp, 'XP');
-                  setInput('');
-                  e.stopPropagation();
-                }}
-                className="text-3xl text-black"
-              />
-            : <FaRegEdit
-                onClick={
-                  (e:any) => {
-                    setInput('xp');
-                    e.stopPropagation();
-                  }}
-                className="text-3xl text-black"
-              />
+          ? <input
+              type="text"
+              className="text-center w-full mr-1 text-black outline-none"
+              placeholder="Valor de XP"
+              value={ xp }
+              onChange={(e) => setXp(e.target.value)}
+            />
+          : <span className="text-black break-words w-full text-center">
+              {
+                !dataSheet.data.xp
+                ? <span className=" w-full">XP</span>
+                : <span className="w-full">{ dataSheet.data.xp }</span>
+              }
+            </span>
+        }
+        {
+          session.gameMaster === email &&
+          <div>
+            { 
+              input === 'xp'
+                ? <BsCheckSquare
+                    onClick={(e:any) => {
+                      updateValue('xp', xp, 'XP');
+                      setInput('');
+                      e.stopPropagation();
+                    }}
+                    className="text-3xl text-black"
+                  />
+                : <FaRegEdit
+                    onClick={
+                      (e:any) => {
+                        setInput('xp');
+                        e.stopPropagation();
+                      }}
+                    className="text-3xl text-black"
+                  />
+            }
+          </div>
         }
       </div>
       <button
