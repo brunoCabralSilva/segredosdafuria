@@ -7,9 +7,9 @@ export default function Dice(props: { dice: number, type: string }) {
     imgItem = `critical${type}.png`;
   } else if (Number(dice) > 5 && Number(dice) < 10) {
     imgItem = `success${type}.png`;
-  } else {
-    imgItem = `falha${type}.png`;
-  }
+  } else if (type === '(rage)' && Number(dice) >= 1 && Number(dice) <= 2) {
+    imgItem = `brutal(rage).png`;
+  } else imgItem = `falha${type}.png`;
   return (
     <div className="flex flex-col items-center justify-center">
       <Image
