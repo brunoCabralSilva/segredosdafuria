@@ -8,7 +8,7 @@ export function ResistToxin() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [type, setType] = useState<number>(0);
-  const { sessionId, sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, session,sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -28,7 +28,7 @@ export function ResistToxin() {
       await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift,  results: roll }, email, setShowMessage);
     } else {
       if (dataSheet.data.rage >= 1) {
-      const rageTest = await calculateRageCheck(sheetId, setShowMessage);
+      const rageTest = await calculateRageCheck(session.typeSession, sheetId, setShowMessage);
       dataSheet.data.rage = rageTest?.rage;
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       await registerMessage(

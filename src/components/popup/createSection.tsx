@@ -15,6 +15,7 @@ export default function CreateSection() {
   const [image, setImage] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const [typeSession, setTypeSession] = useState('Regras Oficiais');
   const { dataUser, setShowCreateSession, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function CreateSection() {
           const docRef: any = await createSession(
             nameSession.toLowerCase(),
             description,
+            typeSession,
             email,
             image,
             dataUser.displayName,
@@ -105,6 +107,26 @@ export default function CreateSection() {
               }}
             />
           </label>
+          <label htmlFor="typeSession" className="flex flex-col items-center w-full">
+            <p className="text-white w-full pb-3">Tipo:</p>
+            <select
+              value={ typeSession }
+              id="typeSession"
+              className="bg-white w-full p-3 cursor-pointer text-black text-center"
+              onChange={ (e) => {
+                setTypeSession(e.target.value);
+              }}
+            >
+              <option value="Regras Oficiais">Regras Oficiais</option>
+              <option value="Regras Alternativas">Regras Alternativas</option>
+            </select>
+          </label>
+          <div className="text-center w-full p-4">
+            {
+              typeSession === 'Regras Oficiais' ? 'Você está criando uma Sessão que utiliza as regras oficiais da Quinta Edição de Lobisomem: O Apocalipse.'
+              : 'Você está criando uma Sessão que utiliza regras alternativas para a Quinta edição de Lobisomem: O Apocalipse: Falhas em Checagens de Fúria aumentam a Fúria ao invés de diminuir (mecânica oficial).'
+            }
+          </div>
           <label htmlFor="description" className="mt-4 flex flex-col items-center w-full">
             <p className="text-white w-full pb-3">Descrição:</p>
             <textarea

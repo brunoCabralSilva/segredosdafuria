@@ -199,7 +199,7 @@ export default function HpAndWillPower() {
                 </div>
               </div>
               <div className="ml-1 flex flex-col">
-                {
+                {/* {
                   player.data.profileImage
                   ?
                     <Image
@@ -209,10 +209,10 @@ export default function HpAndWillPower() {
                       width={ 100 }
                       height={ 200 }
                     />
-                  : <div className="w-12 sm:w-10 h-20 sm:h-14 border border-white rounded-lg flex items-center justify-center mb-1 ml-2 sm:ml-0">
-                      { player.data.name[0] }
-                    </div>
-                }
+                  :  */}
+                  <div className="w-12 sm:w-10 h-20 sm:h-14 border border-white rounded-lg flex items-center justify-center mb-1 ml-2 sm:ml-0">
+                    { player.data.name[0] }
+                  </div>
               </div>
             </div>
           ))

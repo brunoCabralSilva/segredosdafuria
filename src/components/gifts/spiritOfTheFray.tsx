@@ -10,6 +10,7 @@ export function SpiritOfTheFray() {
   const {
     sessionId,
     email,
+    session,
     sheetId,
     dataSheet,
     setShowMessage,
@@ -19,7 +20,7 @@ export function SpiritOfTheFray() {
 
   const rollRage = async () => {
     if (dataSheet.data.rage >= dificulty) {
-      const rageTest = await calculateRageChecks(sheetId, dificulty, setShowMessage);
+      const rageTest = await calculateRageChecks(session.typeSession, sheetId, dificulty, setShowMessage);
       dataSheet.data.rage = rageTest?.rage;
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       await registerMessage(

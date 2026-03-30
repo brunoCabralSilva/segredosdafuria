@@ -1,7 +1,7 @@
 import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
-import { deletePlayerImage } from "./storage";
+// import { deletePlayerImage } from "./storage";
 import { parseDate } from "./utilities";
 
 export const createPlayersData = async (sessionId: string, setShowMessage: any) => {
@@ -148,7 +148,7 @@ export const deleteDataPlayer = async (
         setShowMessage({ show: true, text: 'Personagem não encontrado.' });
         return;
       }
-      await deletePlayerImage(sessionId, id, imageUrl, setShowMessage);
+      // await deletePlayerImage(sessionId, id, imageUrl, setShowMessage);
       transaction.delete(docRef);
     });
 
@@ -160,29 +160,6 @@ export const deleteDataPlayer = async (
     });
   }
 };
- 
-  // try {
-  //   const db = getFirestore(firebaseConfig);
-  //   const collectionRef = collection(db, 'players');
-  //   const q = query(collectionRef, where('sessionId', '==', sessionId));
-  //   await runTransaction(db, async (transaction) => {
-  //     const querySnapshot = await getDocs(q);
-  //     if (querySnapshot.empty) {
-  //       setShowMessage({ show: true, text: 'Sessão não encontrada.' });
-  //       return;
-  //     }
-  //     const dataDoc = querySnapshot.docs[0];
-  //     const docRef = doc(db, 'players', dataDoc.id);
-  //     const data = dataDoc.data();
-  //     const playerIndex = data.list.findIndex((item: any) => item.email === email);  
-  //     if (playerIndex !== -1) {
-  //       data.list[playerIndex].data = newData;
-  //       transaction.update(docRef, { list: data.list });
-  //     } else setShowMessage({ show: true, text: 'Jogador não encontrado.' });
-  //   });
-  // } catch (err: any) {
-  //   setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados do Jogador: ' + err.message });
-  // }
 
 export const updateValueOfSheet = async (setShowMessage: any) => {
   try {
@@ -219,7 +196,7 @@ export const updateValueOfSheet = async (setShowMessage: any) => {
   }
 };
 
-export const updateDataWithRage = async (sessionId: string, email: string, sheetId: string, newData: any, nameForm: string, setShowMessage: any) => {
+export const updateDataWithRage = async (typeSession: string, sessionId: string, email: string, sheetId: string, newData: any, nameForm: string, setShowMessage: any) => {
   try {
     let numberOfChecks = 1;
     if (nameForm === 'Crinos') numberOfChecks = 2;
@@ -230,23 +207,40 @@ export const updateDataWithRage = async (sessionId: string, email: string, sheet
       if (value >= 6) success += 1;
       resultOfRage.push(value);
     }
-    const newRage = newData.data.rage - (resultOfRage.length - success);
-    if (newRage < 0) newData.data.rage = 0;
-    newData.data.rage = newRage;
-
     let textNumberofChecks = '';
     let textActualRage = '';
     let textForm = '.';
-    if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
-    if (numberOfChecks === 2) {
-      textNumberofChecks = 'Foram realizados dois Testes de Fúria';
-      if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a Fúria foi mantida.';
-      else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.'
-      else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + newData.data.rage + '.';
+
+    if (typeSession == 'Regras Alternativas') {
+      const newRage = newData.data.rage + (numberOfChecks - success);
+      newData.data.rage = newRage;
+      if (newData.data.rage  > 5) newData.data.rage = 5;
+      if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
+      if (numberOfChecks === 2) {
+        textNumberofChecks = 'Foram realizadas duas Checagens de Fúria';
+        if (success === 2) textActualRage = 'Obteve sucesso nas duas Checagens e a Fúria foi mantida.';
+        else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha na Checagem. A Fúria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
+        else textActualRage = 'Falhou nas duas Checagens. A Fúria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
+      } else {
+        textNumberofChecks = 'Foi realizada uma Checagem de Fúria';
+        if (success === 0) textActualRage = 'Não obteve sucesso na Checagem. A Fúria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
+        else textActualRage = 'Obteve sucesso na Checagem. A Fúria foi mantida.';
+      }
     } else {
-      textNumberofChecks = 'Foi realizado um Teste de Fúria';
-      if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.';
-      else textActualRage = 'Obteve sucesso no Teste. A fúria foi mantida.';
+        const newRage = newData.data.rage - (resultOfRage.length - success);
+        if (newRage < 0) newData.data.rage = 0;
+        newData.data.rage = newRage;
+        if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
+        if (numberOfChecks === 2) {
+          textNumberofChecks = 'Foram realizados dois Testes de Fúria';
+          if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a Fúria foi mantida.';
+          else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.'
+          else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + newData.data.rage + '.';
+        } else {
+          textNumberofChecks = 'Foi realizado um Teste de Fúria';
+          if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.';
+          else textActualRage = 'Obteve sucesso no Teste. A fúria foi mantida.';
+        }
     }
     await registerMessage(
       sessionId,

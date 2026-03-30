@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
 import { capitalizeFirstLetter, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
@@ -52,6 +52,7 @@ export const getNameAndDmFromSessions = async (sessionId: string) => {
 export const createSession = async (
   nameSession: string,
   description: string,
+  typeSession: string,
   email: string,
   image: string,
   displayName: string,
@@ -67,6 +68,7 @@ export const createSession = async (
       gameMaster: email,
       nameMaster: displayName,
       anotations: '',
+      typeSession,
       imageName: image,
       description,
       principles: [],
@@ -117,7 +119,6 @@ export const updateBannerSession = async (
     });
   }
 };
-
 
 export const updateSession = async (session: any, setShowMessage: any) => {
   try {

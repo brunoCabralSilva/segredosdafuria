@@ -1,7 +1,6 @@
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { updatePlayerImage } from "@/firebase/storage";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -26,20 +25,20 @@ export default function EditImage() {
     }
   }
 
-  const updateImage = async () => {
-    if (!imageFile) return;
-    try {
-      setLoading(true);
-      const updateStorage = await updatePlayerImage(session.id, sheetId, imageFile, setShowMessage);
-      dataSheet.data.profileImage = updateStorage;
-      await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-      setShowMenuSession("sheet");
-      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a imagem de perfil do personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
-      setLoading(false);
-    } catch (error) {
-      console.error("Erro ao atualizar imagem:", error);
-    }
-  };
+  // const updateImage = async () => {
+  //   if (!imageFile) return;
+  //   try {
+  //     setLoading(true);
+  //     const updateStorage = await updatePlayerImage(session.id, sheetId, imageFile, setShowMessage);
+  //     dataSheet.data.profileImage = updateStorage;
+  //     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+  //     setShowMenuSession("sheet");
+  //     await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a imagem de perfil do personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
+  //     setLoading(false);
+  //   } catch (error) {
+  //     console.error("Erro ao atualizar imagem:", error);
+  //   }
+  // };
 
   return (
     <div className="w-8/10 px-5 sm:px-8 pb-8 pt-3 bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto text-white">
@@ -77,7 +76,7 @@ export default function EditImage() {
               />
               {profileImage && (
                 <button
-                  onClick={updateImage}
+                  // onClick={updateImage}
                   className="bg-black items-center justify-center font-medium p-2 border-2 border-white w-full hover:border-red-400 hover:bg-black hover:text-red-400 transition-colors duration-400 mt-5"
                 >
                   { !loading ? 'Concluído' : 'Registrando...' }

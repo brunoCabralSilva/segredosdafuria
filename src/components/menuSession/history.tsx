@@ -1,5 +1,5 @@
 'use client'
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import contexto from "@/context/context";
 import { collection, getFirestore, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";

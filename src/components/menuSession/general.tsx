@@ -14,7 +14,6 @@ import { CiEdit } from "react-icons/ci";
 import Image from "next/image";
 import DeleteSheet from "../popup/deleteSheet";
 import { registerHistory } from "@/firebase/history";
-import Help from "../popup/help";
 
 export default function General() {
   const [input, setInput] = useState('');
@@ -193,7 +192,7 @@ export default function General() {
         </div>
       }
       <div className="w-full flex sm:flex-row flex-col justify-between items-center gap-4 mt-5">
-        <div className="w-full sm:w-60 h-60 sm:h-44 border-2 border-white bg-black relative">
+        {/* <div className="w-full sm:w-60 h-60 sm:h-44 border-2 border-white bg-black relative">
           {
             dataSheet && dataSheet.data && dataSheet.data.profileImage ?
             <Image
@@ -212,7 +211,7 @@ export default function General() {
           >
             <CiEdit />
           </button>
-        </div>
+        </div> */}
         <div className="w-full">
           <div className="capitalize flex-col justify-between items-center w-full">
           <span className="pr-3">Augúrio</span>

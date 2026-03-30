@@ -230,7 +230,7 @@ export const registerAutomatedRoll = async(
 	}
 }
 
-export const rageCheck = async(sessionId: string, email: string, sheetId: string, setShowMessage: any, dataSheet: any) => {
+export const rageCheck = async(typeSession: string, sessionId: string, email: string, sheetId: string, setShowMessage: any, dataSheet: any) => {
   let resultOfRage = [];
   let success = 0;
   const value = Math.floor(Math.random() * 10) + 1;
@@ -238,34 +238,61 @@ export const rageCheck = async(sessionId: string, email: string, sheetId: string
   resultOfRage.push(value);
   const player = await getPlayerById(sheetId, setShowMessage);
   if (player) {
-    if (player.data.rage <= 0) {
-      setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
+    if (typeSession === 'Regras Alternativas') {
+      if (player.data.rage === 0) {
+        setShowMessage({ show: true, text: 'Você perdeu o lobo e não é capaz de realizar esta Checagem de Fúria.' });
+      } else {
+        let text = '';
+        if (success === 0) {
+          player.data.rage += 1;
+          if (player.data.rage > 5) player.data.rage = 5;
+          text = 'Não obteve sucesso na Checagem. A Fúria foi aumentada para ' + (player.data.rage) + (player.data.rage >= 5 ? ' (o Personagem entrou em Frenesi)' : '') + '.';
+        } else text = 'Obteve sucesso na Checagem. A Fúria foi mantida.';
+        await registerMessage(
+          sessionId,
+          {
+            message: 'Foi realizada uma Checagem de Fúria para o personagem "' + dataSheet.data.name + '".',
+            rollOfRage: resultOfRage,
+            result: text,
+            rage: player.data.rage,
+            success,
+            user: player.user,
+            type: 'rage-check',
+          },
+          email,
+          setShowMessage,
+        );
+      }
     } else {
-      let text = '';
-      if (success === 0) {
-        player.data.rage -= 1;
-        text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + (player.data.rage) + '.';
-      } else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
-      await registerMessage(
-        sessionId,
-        {
-        message: 'Foi realizado um Teste de Fúria para o personagem "' + dataSheet.data.name + '".',
-        rollOfRage: resultOfRage,
-        result: text,
-        rage: player.data.rage,
-        success,
-		user: player.user,
-        type: 'rage-check',
-        },
-        email,
-        setShowMessage,
-      );
+      if (player.data.rage <= 0) {
+        setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para realizar esta Checagem.' });
+      } else {
+        let text = '';
+        if (success === 0) {
+          player.data.rage -= 1;
+          text = 'Não obteve sucesso na Checagem. A Fúria foi reduzida para ' + (player.data.rage) + '.';
+        } else text = 'Obteve sucesso na Checagem. A Fúria foi mantida.';
+        await registerMessage(
+          sessionId,
+          {
+          message: 'Foi realizada uma Checagem de Fúria para o personagem "' + dataSheet.data.name + '".',
+          rollOfRage: resultOfRage,
+          result: text,
+          rage: player.data.rage,
+          success,
+      user: player.user,
+          type: 'rage-check',
+          },
+          email,
+          setShowMessage,
+        );
+      }
     }
 	return player.data.rage;
   } return 0;
 }
 
-export const calculateRageCheck = async(sheetId: any, setShowMessage: any) => {
+export const calculateRageCheck = async(typeSession: string, sheetId: any, setShowMessage: any) => {
 	let resultOfRage = [];
 	let success = 0;
 	const value = Math.floor(Math.random() * 10) + 1;
@@ -273,54 +300,103 @@ export const calculateRageCheck = async(sheetId: any, setShowMessage: any) => {
 	resultOfRage.push(value);
 	const player = await getPlayerById(sheetId, setShowMessage);
 	if (player) {
-	  if (player.data.rage <= 0) {
-		  setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
-	  } else {
-      let text = '';
-      if (success === 0) {
-        player.data.rage -= 1;
-        text = 'Não obteve sucesso no Teste. A fúria foi reduzida para ' + (player.data.rage) + '.';
-      } else text = 'Obteve sucesso no Teste. A fúria foi mantida.';
-      return({
-        message: 'Foi realizado um Teste de Fúria.',
-        rollOfRage: resultOfRage,
-        result: text,
-        rage: player.data.rage,
-        success,
-      });
-	  }
+    if (typeSession === 'Regras Alternativas') {
+      if (player.data.rage === 0) {
+        setShowMessage({ show: true, text: 'Você perdeu o lobo e não é capaz de realizar esta Checagem de Fúria.' });
+      } else {
+        let text = '';
+        if (success === 0) {
+          player.data.rage += 1;
+          if (player.data.rage > 5) player.data.rage = 5;
+          text = 'Não obteve sucesso na Checagem. A fúria foi aumentada para ' + (player.data.rage) + (player.data.rage >= 5 ? ' (o Personagem entrou em Frenesi)' : '') + '.';
+        } else text = 'Obteve sucesso na Checagem. A fúria foi mantida.';
+        return({
+          message: 'Foi realizada uma Checagem de Fúria.',
+          rollOfRage: resultOfRage,
+          result: text,
+          rage: player.data.rage,
+          success,
+        });
+      }
+    } else {
+      if (player.data.rage <= 0) {
+        setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para realizar esta Checagem.' });
+      } else {
+        let text = '';
+        if (success === 0) {
+          player.data.rage -= 1;
+          text = 'Não obteve sucesso na Checagem. A fúria foi reduzida para ' + (player.data.rage) + '.';
+        } else text = 'Obteve sucesso na Checagem. A fúria foi mantida.';
+        return({
+          message: 'Foi realizada uma Checagem de Fúria.',
+          rollOfRage: resultOfRage,
+          result: text,
+          rage: player.data.rage,
+          success,
+        });
+      }
+    }
   }
 }
 
-export const calculateRageChecks = async(sheetId: string, number: number, setShowMessage: any) => {
+export const calculateRageChecks = async(typeSession: string, sheetId: string, number: number, setShowMessage: any) => {
 	const player = await getPlayerById(sheetId, setShowMessage);
 	if (player) {
-    if (player.data.rage < number) {
-      setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para ativar este Teste.' });
-	  } else {
-      let resultOfRage = [];
-      let success = 0;
-      for (let i = 0; i < number; i += 1) {
-      const value = Math.floor(Math.random() * 10) + 1;
-        if (value >= 6) success += 1;
-        resultOfRage.push(value);
+    if (typeSession === 'Regras Alternativas') {
+      if (player.data.rage === 0) {
+        setShowMessage({ show: true, text: 'Você perdeu o lobo e não é capaz de realizar esta Checagem de Fúria.' });
+      } else {
+        let resultOfRage = [];
+        let success = 0;
+        for (let i = 0; i < number; i += 1) {
+        const value = Math.floor(Math.random() * 10) + 1;
+          if (value >= 6) success += 1;
+          resultOfRage.push(value);
+        }
+        let text = '';
+        if (success === number)
+          text = 'Obteve sucesso em todas as Checagens de Fúria. A fúria foi mantida.';
+        else {
+          if (success === 0) text = `Não obteve sucesso em nenhuma Checagem de Fúria. A Fúria foi aumentada para ${(player.data.rage)}${player.data.rage >= 5 ? ' (o Personagem entrou em Frenesi)' : ''}.`;
+          else text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nas Checagens de Fúria e ${(number - success)} ${number - success === 1 ? 'falha': 'falhas.'}`;
+        }
+        player.data.rage += (number - success);
+        return({
+          message: number === 1 ? 'Foi realizada uma Checagem de Fúria.' : 'Foi realizado um conjunto de Checagens de Fúria.',
+          rollOfRage: resultOfRage,
+          result: text,
+          rage: player.data.rage,
+          success,
+        });
       }
-      let text = '';
-      if (success === number)
-        text = 'Obteve sucesso em todos os Testes de Fúria. A fúria foi mantida.';
-      else {
-        if (success === 0) text = `Não obteve sucesso em nenhum Teste de Fúria. A fúria foi reduzida para ' + ${(player.data.rage)}.`;
-        else text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nos Testes de Fúria e ${(number - success)} ${number - success === 1 ? 'falha': 'falhas.'}`;
+    } else {
+      if (player.data.rage < number) {
+        setShowMessage({ show: true, text: 'Você não possui Fúria suficiente para realizar esta Checagem.' });
+      } else {
+        let resultOfRage = [];
+        let success = 0;
+        for (let i = 0; i < number; i += 1) {
+        const value = Math.floor(Math.random() * 10) + 1;
+          if (value >= 6) success += 1;
+          resultOfRage.push(value);
+        }
+        let text = '';
+        if (success === number)
+          text = 'Obteve sucesso em todas as Checagens de Fúria. A Fúria foi mantida.';
+        else {
+          if (success === 0) text = `Não obteve sucesso em nenhuma Checagem de Fúria. A Fúria foi reduzida para ' + ${(player.data.rage)}.`;
+          else text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nas Checagens de Fúria e ${(number - success)} ${number - success === 1 ? 'falha': 'falhas.'}`;
+        }
+        player.data.rage -= (number - success);
+        return({
+          message: number === 1 ? 'Foi realizada uma Checagem de Fúria.' : 'Foi realizado um conjunto de Checagens de Fúria.',
+          rollOfRage: resultOfRage,
+          result: text,
+          rage: player.data.rage,
+          success,
+        });
       }
-      player.data.rage -= (number - success);
-      return({
-        message: number === 1 ? 'Foi realizado um Teste de Fúria.' : 'Foi realizado um conjunto de Testes de Fúria.',
-        rollOfRage: resultOfRage,
-        result: text,
-        rage: player.data.rage,
-        success,
-      });
-	  }
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 import contexto from "@/context/context";
-import { calculateRageCheck, registerMessage, rollTest } from "@/firebase/messagesAndRolls";
+import { registerMessage, rollTest } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";

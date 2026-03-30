@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { deleteDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter, playerSheet, sheetStructure } from "@/firebase/utilities";
 import contexto from "@/context/context";
-import { deletePlayerImage } from "@/firebase/storage";
 import { registerHistory } from "@/firebase/history";
 import { useRouter } from "next/navigation";
 
@@ -27,13 +26,12 @@ export default function DeleteSheet(props: { isGameMaster : any }) {
   const deleteSheet = async () => {
     try {
       setDataSheet({ ...dataSheet, data: playerSheet });
-      const dataPersist = dataSheet.data.name;
       await deleteDataPlayer(sheetId, session.id, dataSheet.data.profileImage, setShowMessage);
       setShowDeleteSheet(false);
       setSheetId('');
       setDataSheet(sheetStructure('', '', ''));
       setShowMenuSession('');
-      await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
+      // await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
       await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} excluiu a Ficha do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' }.`, type: 'notification' }, null, setShowMessage);
       if (isGameMaster) setOptionSelect('players');
       else location.reload();

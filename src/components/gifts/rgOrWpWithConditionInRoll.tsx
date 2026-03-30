@@ -19,7 +19,7 @@ export function RgOrWpWithConditionInRoll(
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(dif);
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, dataSheet, showGiftRoll, sheetId, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, session, email, dataSheet, showGiftRoll, sheetId, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -39,7 +39,7 @@ export function RgOrWpWithConditionInRoll(
     if (dataSheet.data.rage >= 1) {
       let roll = null;
       if (marked) roll = await rollTestOfUser();
-      const rageTest = await calculateRageCheck(sheetId, setShowMessage);
+      const rageTest = await calculateRageCheck(session.typeSession, sheetId, setShowMessage);
       dataSheet.data.rage = rageTest?.rage;
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
       if (marked) {

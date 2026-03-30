@@ -12,6 +12,7 @@ export function Energize() {
   const [dificulty, setDificulty] = useState<number>(1);
   const {
     sessionId,
+    session,
     email,
     sheetId,
     dataSheet,
@@ -34,7 +35,7 @@ export function Energize() {
   
     const rollRage = async () => {
       if (dataSheet.data.rage >= numberOfRageTest) {
-        const rageTest = await calculateRageChecks(sheetId, numberOfRageTest, setShowMessage);
+        const rageTest = await calculateRageChecks(session.typeSession, sheetId, numberOfRageTest, setShowMessage);
         dataSheet.data.rage = rageTest?.rage;
         await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         if (marked) {

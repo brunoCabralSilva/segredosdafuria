@@ -5,10 +5,10 @@ import { useContext, useState } from "react";
 
 export function TheHowlCarries() {
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, session, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
-    const rageTest = await calculateRageCheck(sheetId, setShowMessage);
+    const rageTest = await calculateRageCheck(session.typeSession, sheetId, setShowMessage);
     dataSheet.data.rage = rageTest?.rage;
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     await registerMessage(

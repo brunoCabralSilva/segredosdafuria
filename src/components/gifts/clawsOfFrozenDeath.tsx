@@ -7,7 +7,7 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 export function ClawsOfFrozenDeath() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
-  const { sheetId, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { session, sheetId, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = Number(dataSheet.data.attributes.wits) + Number(dataSheet.data.honor);
@@ -24,7 +24,7 @@ export function ClawsOfFrozenDeath() {
     if (dataSheet.data.rage >= 1) {
       let roll = await rollTestOfUser();
       if (dataSheet.data.form !== 'Crinos') {
-        const rageTest = await calculateRageCheck(sheetId, setShowMessage);
+        const rageTest = await calculateRageCheck(session.typeSession, sheetId, setShowMessage);
         dataSheet.data.rage = rageTest?.rage;
         await updateDataPlayer(sheetId, dataSheet, setShowMessage);
         await registerMessage(sessionId, { type: 'gift', ...showGiftRoll.gift, roll: 'rage-with-test', rageResults: rageTest, results: roll }, email, setShowMessage);

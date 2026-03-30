@@ -19,6 +19,13 @@ export default function Item(props: any) {
     setShowHauglosk,
     setShowMenuSession,
   } = useContext(contexto);
+
+  const updateValueAfterRageCheck = async (name: string, value: number) => {
+    const dataPersist = dataSheet.data[name];
+    dataSheet.data[name] = value;
+		await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${dataPersist} para ${value}.`, type: 'notification' }, null, setShowMessage);
+  };
   
   const updateValue = async (name: string, value: number) => {
     const dataPersist = dataSheet.data[name];
@@ -30,7 +37,7 @@ export default function Item(props: any) {
 
   return(
     <div className={ `w-full ${ name === 'rage' ? 'mt-8' : 'mt-4' }` }>
-      <span className="capitalize">{ namePtBr }</span>
+      <span className="capitalize">{ namePtBr } { session.typeSession === 'Regras Alternativas' && namePtBr === 'Fúria' && dataSheet.data.rage >= 5 ? '(em Frenesi)' : ''} </span>
       <div className="flex flex-col items-center lg:flex-row">
         <div className="w-full">
           <div className="flex flex-wrap gap-2 pt-1">
@@ -42,7 +49,7 @@ export default function Item(props: any) {
                       type="button"
                       onClick={ () => updateValue(name, index + 1) }
                       key={index}
-                      className="h-6 w-6 rounded-full bg-black border-white border-2 cursor-pointer"
+                      className={`h-6 w-6 rounded-full bg-black ${session.typeSession === 'Regras Alternativas' && namePtBr === 'Fúria' && dataSheet.data.rage >= 5 ? 'border-red-500' : 'border-white'} border-2 cursor-pointer`}
                     />
                   );
                 } return (
@@ -58,12 +65,25 @@ export default function Item(props: any) {
           </div>
         </div>
         {
-          namePtBr === 'Fúria' &&
+          session.typeSession === 'Regras Alternativas' && namePtBr === 'Fúria' && dataSheet.data.rage > 0 && dataSheet.data.rage < 5 &&
           <button
               className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
               onClick={ async () => {
-                const rage: number = await rageCheck(sessionId, email, sheetId, setShowMessage, dataSheet);
-                updateValue('rage', rage);
+                const rage: number = await rageCheck(session.typeSession, sessionId, email, sheetId, setShowMessage, dataSheet);
+                await updateValueAfterRageCheck('rage', rage);
+                setShowMenuSession('');
+              }}
+					>
+						Teste de Fúria
+					</button>
+        }
+        {
+          namePtBr === 'Fúria' && dataSheet.data.rage > 0 && session.typeSession !== 'Regras Alternativas' &&
+          <button
+              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
+              onClick={ async () => {
+                const rage: number = await rageCheck(session.typeSession, sessionId, email, sheetId, setShowMessage, dataSheet);
+                await updateValueAfterRageCheck('rage', rage);
                 setShowMenuSession('');
               }}
 					>

@@ -1,9 +1,7 @@
 'use client'
 import contexto from "@/context/context";
-import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { updateSession } from "@/firebase/sessions";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 

@@ -12,7 +12,7 @@ const Register = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [image, setImage] = useState<any>(null);
+  // const [image, setImage] = useState<any>(null);
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [loading, setLoading] = useState(false);
@@ -30,9 +30,11 @@ const Register = () => {
       setShowMessage({ show: true, text: 'Necessário preencher um Sobrenome com mais de 2 caracteres' });
     } else if(vEmail) {
       setShowMessage({ show: true, text: 'Necessário preencher um Email válido' });
-    } else if(image === '' || image === null) {
-      setShowMessage({ show: true, text: 'Necessário escolher uma imagem de perfil' });
-    } else if (!password || password.length < 6) {
+    } 
+    // else if(image === '' || image === null) {
+    //   setShowMessage({ show: true, text: 'Necessário escolher uma imagem de perfil' });
+    // } 
+    else if (!password || password.length < 6) {
       setShowMessage({ show: true, text: 'Necessário inserir uma Senha com pelo menos 6 dígitos' });
     } else if (password !== password2) {
       setShowMessage({ show: true, text: 'As senhas inseridas não conferem' });
@@ -43,7 +45,7 @@ const Register = () => {
         password,
         firstName,
         lastName,
-        image,
+        // image,
         setShowMessage,
       );
       if (reg) {
@@ -62,11 +64,11 @@ const Register = () => {
     setLoading(false);
   };
 
-  const handleImage = (e: any) => {
-    if (e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
+  // const handleImage = (e: any) => {
+  //   if (e.target.files[0]) {
+  //     setImage(e.target.files[0]);
+  //   }
+  // };
 
   return(
     <section className="bg-ritual break-words bg-dice bg-center bg-fixed min-h-screen w-full items-center justify-center">
@@ -122,7 +124,7 @@ const Register = () => {
                   required 
                 />
               </div>
-              <div className="break-words mb-5">
+              {/* <div className="break-words mb-5">
                 <label htmlFor="description" className="break-words block mb-2 text-sm font-medium text-white">Escolha uma Imagem de perfil</label>
                   <input 
                     id="image"
@@ -131,7 +133,7 @@ const Register = () => {
                     onChange={handleImage}
                     className="break-words shadow-sm bg-black border border-white text-white text-sm rounded-lg block w-full p-2.5 placeholder-gray-400"
                   />
-              </div>
+              </div> */}
               <div className="break-words mb-5">
                 <label htmlFor="password" className="break-words block mb-2 text-sm font-medium text-white">Senha</label>
                 <input 

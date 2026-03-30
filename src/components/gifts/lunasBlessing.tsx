@@ -7,6 +7,7 @@ export function LunasBlessing() {
   const {
     sessionId,
     email,
+    session,
     sheetId,
     dataSheet,
     setShowMessage,
@@ -15,7 +16,7 @@ export function LunasBlessing() {
   } = useContext(contexto);
 
   const rollRage = async () => {
-    const rageTest = await calculateRageCheck(sheetId, setShowMessage);
+    const rageTest = await calculateRageCheck(session.typeSession, sheetId, setShowMessage);
     dataSheet.data.rage = rageTest?.rage;
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     await registerMessage(
