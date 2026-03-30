@@ -143,7 +143,7 @@ export default function CreateSection() {
             <p className="text-white w-full pb-3">Selecione uma imagem para sua Sessão:</p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
               {
-                Array.from({ length: 30 }, (_, i) => (
+                Array.from({ length: 31 }, (_, i) => (
                   <Image
                     key={i}
                     src={`/images/sessions/${String(i + 1).padStart(2, '0')}.png`}
