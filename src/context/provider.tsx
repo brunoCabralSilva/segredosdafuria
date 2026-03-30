@@ -71,6 +71,7 @@ export default function Provider({children }: IProvider) {
   //gameMaster
   const [showChangeGameMaster, setShowChangeGameMaster] = useState({ show: false, data: {} });
   const [showDelGMFromSession, setShowDelGMFromSession] = useState(false);
+  const [showEndSession, setShowEndSession] = useState(false);
   const [session, setSession] = useState({});
   const [players, setPlayers] = useState([]);
   const [showPlayer, setShowPlayer] = useState({ show: false, email: {} });
@@ -101,6 +102,7 @@ export default function Provider({children }: IProvider) {
     setShowMenuSession('');
     setShowDelFromSession(false);
     setShowDelGMFromSession(false);
+    setShowEndSession(false);
     setShowResetSheet(false);
     setDeleteAdvOrFlaw({ show: false });
     setShowAllFlaws(false);
@@ -198,6 +200,7 @@ export default function Provider({children }: IProvider) {
         //gameMaster
         showChangeGameMaster, setShowChangeGameMaster,
         showDelGMFromSession, setShowDelGMFromSession,
+        showEndSession, setShowEndSession,
         showPlayer, setShowPlayer,
         session, setSession,
         players, setPlayers,

@@ -68,6 +68,7 @@ export const createSession = async (
       gameMaster: email,
       nameMaster: displayName,
       anotations: '',
+      statusSession: 'Ativa',
       typeSession,
       imageName: image,
       description,
@@ -133,6 +134,34 @@ export const updateSession = async (session: any, setShowMessage: any) => {
     });
   } catch (err: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar os dados da Sessão: ' + err.message });
+  }
+};
+
+export const updateStatusSession = async (
+  sessionId: string,
+  statusSession: string,
+  setShowMessage: any
+) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const sessionsCollectionRef = collection(db, 'sessions');
+    const sessionDocRef = doc(sessionsCollectionRef, sessionId);
+
+    await runTransaction(db, async (transaction) => {
+      const sessionDocSnapshot = await getDoc(sessionDocRef);
+
+      if (sessionDocSnapshot.exists()) {
+        transaction.update(sessionDocRef, { statusSession: statusSession });
+        setShowMessage({ show: true, text: 'O Status da Sessão foi atualizado para ' + statusSession });
+      } else {
+        throw new Error('Sessão não encontrada');
+      }
+    });
+  } catch (err: any) {
+    setShowMessage({
+      show: true,
+      text: 'Ocorreu um erro ao atualizar o status da Sessão: ' + err.message
+    });
   }
 };
 

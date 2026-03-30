@@ -26,26 +26,33 @@ export default function Sessions() {
     showMessage, setShowMessage,
   } = useContext(contexto);
   const [sessionsAsGM, setSessionsAsGM] = useState<any[]>([]);
+  const [sessionsEnded, setSessionsEnded] = useState<any[]>([]);
   const [sessionsAsPlayer, setSessionsAsPlayer] = useState<any[]>([]);
   const [sessionsOthers, setSessionsOthers] = useState<any[]>([]);
   const [showData, setShowData] = useState(false);
 
   const organizeSession = (sessionsList: any, email: string) => {
     const gmList = sessionsList.filter(
-        (s: any) => s.gameMaster === email
+        (s: any) => s.gameMaster === email && s.statusSession !== 'Finalizada'
       );
 
       const playerList = sessionsList.filter(
         (s: any) =>
-          s.players && Array.isArray(s.players) && s.players.includes(email)
+          s.players && Array.isArray(s.players) && s.players.includes(email)  && s.statusSession !== 'Finalizada'
       );
 
       const othersList = sessionsList.filter(
         (s: any) =>
           s.gameMaster !== email &&
+          s.statusSession !== 'Finalizada' &&
           (!s.players || !s.players.includes(email))
       );
 
+      const ended = sessionsList.filter(
+        (s: any) => s.statusSession === 'Finalizada'
+      );
+
+      setSessionsEnded(ended);
       setSessionsAsGM(gmList);
       setSessionsAsPlayer(playerList);
       setSessionsOthers(othersList);
@@ -154,7 +161,16 @@ export default function Sessions() {
                     <SessionItem key={index} session={ session } />
                   )
                 }
-              </div>
+                {
+                  sessionsEnded.length > 0 &&
+                  <div className="col-span-1 sm:col-span-3 md:col-span-3 text-lg sm:text-xl text-text-center sm:left bg-black px-3 py-5 border border-white rounded-xl">Sessões Finalizadas</div>
+                }
+                {
+                  sessionsEnded.map((session: ISession, index: number) =>
+                    <SessionItem key={index} session={ session } />
+                  )
+                }
+              </div>              
               { showInfoSessions && <Info /> }
               { showCreateSession && <CreateSection /> }
               { dataSession.show && <VerifySession /> }

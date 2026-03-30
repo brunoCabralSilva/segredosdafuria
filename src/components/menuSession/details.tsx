@@ -4,18 +4,20 @@ import ChangeGameMaster from "../popup/changeGameMaster";
 import LeaveGMFromSession from "../popup/leaveGMFromSession";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
-import { updateSession } from "@/firebase/sessions";
+import { updateSession, updateStatusSession } from "@/firebase/sessions";
 import { getUserByEmail } from "@/firebase/user";
 import { MdDelete } from "react-icons/md";
 import DeleteUserFromSession from "../popup/deleteUserFromSession";
 import Image from "next/image";
+import EndSession from "../popup/endSession";
 
 export default function Details() {
   const {
     email,
     session,
     players,
-    showHelp,
+    showEndSession,
+    setShowEndSession,
     showDeletePlayer,
     setShowBannerSession,
     showDelGMFromSession,
@@ -147,6 +149,7 @@ export default function Details() {
   return(
     <div className="w-full overflow-y-auto h-75vh">
       { showChangeGameMaster.show && <ChangeGameMaster setGameMaster={setGameMaster} /> }
+      { showEndSession && <EndSession /> }
       { showDelGMFromSession && <LeaveGMFromSession /> }
       { showDeletePlayer.show && <DeleteUserFromSession /> }
       {
@@ -302,6 +305,20 @@ export default function Details() {
                   />
                 </div>
               </div>
+              {
+                email === gameMaster &&
+                <button
+                  type="button"
+                  className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
+                  onClick={async () => {
+                    if (session.statusSession === 'Finalizada') {
+                      await updateStatusSession(session.id, 'Ativa', setShowMessage);
+                    } else setShowEndSession(true);
+                  }}
+                >
+                  {  session.statusSession === 'Finalizada' ? 'Reativar Sessão' : 'Finalizar Sessão' }
+                </button>
+              }
               <button
                 type="button"
                 className="p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"

@@ -38,6 +38,9 @@ export default function SessionItem(props: { session: any }) {
             Narrador: { session.nameMaster }
           </p>
           <p className="text-sm font-normal text-justify">
+            Status: { !session.statusSession ? 'Ativa' : session.statusSession }
+          </p>
+          <p className="text-sm font-normal text-justify">
             Jogadores: { session.players.length }
           </p>
           <p className="text-sm font-normal text-justify">
