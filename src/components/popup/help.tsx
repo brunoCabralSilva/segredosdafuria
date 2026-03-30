@@ -6,7 +6,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import dataForms from '../../data/forms.json';
 
 export default function Help() {
-  const { setShowHelp } = useContext(contexto);
+  const { setShowHelp, session } = useContext(contexto);
   const [type, setType] = useState('Lista de Atributos');
   const order = ['Hispo', 'Glabro', 'Lupino', 'Humano'];
 
@@ -511,22 +511,42 @@ export default function Help() {
                 <div className="pb-5 text-justify">
                   <ul className="pl-5 text-sm font-normal text-white">
                     <li className="list-disc">
-                      Uma checagem de Fúria é realizada com um único dado. Em caso de vitória - resultado 6 ou mais -, a Fúria do Garou continuará a mesma, mas uma falha - 5 ou menos - reduzirá sua Fúria em 1.
+                      {
+                        session.typeSession === 'Regras Alternativas'
+                        ? 'Uma checagem de Fúria é realizada com um único dado. Em caso de vitória - resultado 6 ou mais -, a Fúria do Garou continuará a mesma, mas uma falha - 5 ou menos - aumentará sua Fúria em 1.'
+                        : 'Uma checagem de Fúria é realizada com um único dado. Em caso de vitória - resultado 6 ou mais -, a Fúria do Garou continuará a mesma, mas uma falha - 5 ou menos - reduzirá sua Fúria em 1.'
+                      }
                     </li>
                     <li className="list-disc">
                       A Fúria é uma trilha que vai de 0 à 5.
                     </li>
                     <li className="list-disc">
-                      Ganha-se Fúria por meio do primeiro uivo da noite dirigido à lua (único método físico de ganhar Fúria se tiver perdido o lobo), sofrendo dano pela primeira vez durante um combate, tocar a prata (um ponto de Fúria por turno), sofrer dano de Prata (taxa de 1 ponto de Fúria para cada ponto de dano de Prata), provocações e certos Dons ou Rituais.
+                      {
+                        session.typeSession === 'Regras Alternativas'
+                        ? 'Nesse modelo de Regras Alternativas, caso não tenha perdido o lobo, o jogador pode escolher ganhar Fúria por meio do primeiro uivo da noite dirigido à lua, sofrendo dano pela primeira vez durante um combate, tocar a prata (um ponto de Fúria por turno), sofrer dano de Prata (taxa de 1 ponto de Fúria para cada ponto de dano de Prata), provocações e certos Dons ou Rituais. Essa ação traz benefícios pelo aumento de dados de Fúria, mas ao mesmo tempo traz problemas, pois quanto mais Fúria ganhar, mais próximo estará do Frenesi (Fúria 5), então ganhar Fúria requer cuidado.'
+                        : 'Ganha-se Fúria por meio do primeiro uivo da noite dirigido à lua (único método físico de ganhar Fúria se tiver perdido o lobo), sofrendo dano pela primeira vez durante um combate, tocar a prata (um ponto de Fúria por turno), sofrer dano de Prata (taxa de 1 ponto de Fúria para cada ponto de dano de Prata), provocações e certos Dons ou Rituais.'
+                      }
                     </li>
                     <li className="list-disc">
-                      Gasta-se Fúria por meio de checagens de Fúria realizadas com o intuito de regenerar, mudar de forma ou utilizar Dons.
+                      {
+                        session.typeSession === 'Regras Alternativas'
+                        ? 'Gasta-se Fúria por meio da utilização de Dons e da Caçada. Quando realizar uma Caçada, o personagem realiza uma Checagem com uma parada igual à quantidade de Fúria restante - 1. A quantidade de sucessos obtidos é reduzido na Fúria.'
+                        : 'Gasta-se Fúria por meio de checagens de Fúria realizadas com o intuito de regenerar, mudar de forma ou utilizar Dons.'
+                      }
                     </li>
                     <li className="list-disc">
-                      Ganhar Fúria suficiente para ultrapassar o limite de 5 pontos causa um de dano Superficial à Força de Vontade para cada ponto ultrapassado.
+                      {
+                        session.typeSession === 'Regras Alternativas'
+                        ? 'Ganhar Fúria suficiente para alcançar ou ultrapassar o limite de 5 pontos coloca o personagem em estado de Frenesi.'
+                        : 'Ganhar Fúria suficiente para ultrapassar o limite de 5 pontos causa um de dano Superficial à Força de Vontade para cada ponto ultrapassado.'
+                      }
                     </li>
                     <li className="list-disc">
-                      Um Garou com Fúria 0 não consegue praticar atos que exigem checagens de Fúria, manter uma forma sobrenatural ou utilizar Dons ou Rituais.
+                      {
+                        session.typeSession === 'Regras Alternativas'
+                        ? 'Um Garou com Fúria 0 não consegue praticar atos que exigem checagens de Fúria, manter uma forma sobrenatural ou utilizar Dons ou Rituais. Até que possa ver a lua novamente na próxima noite (mesmo sendo a lua nova), o Garou permanece nessa condição.'
+                        : 'Um Garou com Fúria 0 não consegue praticar atos que exigem checagens de Fúria, manter uma forma sobrenatural ou utilizar Dons ou Rituais.'
+                      }
                     </li>
                   </ul>
                 </div>
@@ -565,10 +585,18 @@ export default function Help() {
                 <div className="pb-5 text-justify">
                   <ul className="pl-5 text-sm font-normal text-white">
                     <li className="list-disc">
-                      Os personagens Garous entram em frenesi quando não gastam Força de Vontade por causa da forma crinos, ou quando são provocados ao extremo e não passam em um teste de Força de Vontade.
+                      {
+                        session.typeSession === 'Regras Alternativas'
+                        ? 'Os personagens Garous entram em Frenesi quando seus pontos de Fúria totalizam ou ultrapassam 5, ou quando são provocados ao extremo e não passam em um teste de Força de Vontade.'
+                        : 'Os personagens Garous entram em Frenesi quando não gastam Força de Vontade por causa da forma crinos, ou quando são provocados ao extremo e não passam em um teste de Força de Vontade.'
+                      }
                     </li>
                     <li className="list-disc">
-                      Ao entrar em Frenesi, os Garous aumentam sua Fúria para 5 e mudam para a forma crinos (Faça as checagens de Fúria habituais).
+                      {
+                        session.typeSession === 'Regras Alternativas'
+                        ? 'Ao entrar em Frenesi, os Garous aumentam sua Fúria para 5 e mudam para a forma Crinos.'
+                        : 'Ao entrar em Frenesi, os Garous aumentam sua Fúria para 5 e mudam para a forma Crinos (Faça as checagens de Fúria habituais).'
+                      } 
                     </li>
                     <li className="list-disc">
                       Durante o Frenesi, os Garous ignoram as penalidades de Debilitação (a não ser que tenha sofrido desmembramento) e têm um bônus de três dados para resistir à maioria dos poderes ou efeitos mentais.
@@ -863,14 +891,21 @@ export default function Help() {
                     <li className="list-disc">
                       Um Garou pode restaurar ou curar um ponto de dano Agravado à Força de Vontade passando uma cena ou um interlúdio na companhia de um Pilar. Esse benefício se soma à recuperação normal de Força de Vontade.
                     </li>
-                    <li className="list-disc">
-                      Ao passar uma cena ou interlúdio na companhia de um Pilar, um garou pode transferir uma marca de harano para hauglosk ou vice-versa.
-                    </li>
+                    {
+                      session.typeSession !== 'Regras Alternativas' &&
+                      <li className="list-disc">
+                        Ao passar uma cena ou interlúdio na companhia de um Pilar, um garou pode transferir uma marca de harano para hauglosk ou vice-versa.
+                      </li>
+                    }
                     <li className="list-disc">
                       Toda vez que o garou sofrer um contratempo sério ou uma ação (ou inação) sua colocar em perigo ou ferir seus Pilares, o jogador terá de fazer um teste de Harano.
                     </li>
                     <li className="list-disc">
-                      Quando um Pilar é perdido graças à ação (ou inação) do lobisomem, este ganha automaticamente 1 ponto de harano ou hauglosk (a ser aprovado pelo Narrador de acordo com o contexto), marcando-o na trilha correspondente.
+                      {
+                        session.typeSession === 'Regras Alternativas' 
+                        ? 'Quando um Pilar é perdido graças à ação (ou inação) do lobisomem, este ganha automaticamente 1 ponto de harano, marcando-o na trilha correspondente.'
+                        : 'Quando um Pilar é perdido graças à ação (ou inação) do lobisomem, este ganha automaticamente 1 ponto de harano ou hauglosk (a ser aprovado pelo Narrador de acordo com o contexto), marcando-o na trilha correspondente.'
+                      }
                     </li>
                   </ul>
                 </div>
@@ -890,10 +925,14 @@ export default function Help() {
                       Se o teste for malsucedido, mais um quadrado de harano será preenchido
                     </li>
                     <li className="list-disc">
-                      O jogador pode optar por preencher um quadrado da trilha de harano para elevar imediatamente sua Fúria a 5
+                      {
+                        session.typeSession === 'Regras Alternativas' 
+                        ? 'O jogador pode optar por preencher um quadrado da trilha de harano para reduzir imediatamente sua Fúria a 1'
+                        : 'O jogador pode optar por preencher um quadrado da trilha de harano para elevar imediatamente sua Fúria a 5'
+                      }
                     </li>
                     <li className="list-disc">
-                      Se a trilha de harano for preenchida totalmente, o personagem garou sucumbirá ao harano e sairá do jogo
+                      Se a trilha de harano for preenchida totalmente, o personagem garou sucumbirá ao harano e sairá do jogo.
                     </li>
                   </ul>
                 </div>

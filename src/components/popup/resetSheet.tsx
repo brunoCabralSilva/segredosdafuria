@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { updateDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter, playerSheet } from "@/firebase/utilities";
 import contexto from "@/context/context";
-import { deletePlayerImage } from "@/firebase/storage";
 import { registerHistory } from "@/firebase/history";
 
 export default function ResetSheet() {
@@ -26,7 +25,7 @@ export default function ResetSheet() {
       setShowMessage({ show: true, text: "Sua ficha foi redefinida!" });
       setShowResetSheet(false);
       setShowMenuSession('');
-      await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
+      // await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
       await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} redefiniu a ficha do personagem${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' }.`, type: 'notification' }, null, setShowMessage);
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
