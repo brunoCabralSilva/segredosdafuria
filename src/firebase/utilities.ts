@@ -204,7 +204,7 @@ export const translate = (str: string): string => {
     case 'craft': return 'Ofícios';
     case 'driving': return 'Condução';
     case 'firearms': return 'Armas de Fogo';
-    case 'larceny': return 'Furto';
+    case 'larceny': return 'Ladroagem';
     case 'melee': return 'Armas Brancas';
     case 'stealth': return 'Furtividade';
     case 'survival': return 'Sobrevivência';
@@ -216,8 +216,8 @@ export const translate = (str: string): string => {
     case 'performance': return 'Performance';
     case 'persuasion': return 'Persuasão';
     case 'streetwise': return 'Manha';
-    case 'subterfuge': return 'Lábia';
-    case 'academics': return 'Acadêmicos';
+    case 'subterfuge': return 'Sagacidade';
+    case 'academics': return 'Erudição';
     case 'awareness': return 'Percepção';
     case 'finance': return 'Finanças';
     case 'investigation': return 'Investigação';

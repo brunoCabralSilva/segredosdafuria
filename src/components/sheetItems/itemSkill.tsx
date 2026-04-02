@@ -8,7 +8,7 @@ import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 
 export default function ItemSkill(props: any) {
-	const { name, namePtBr, quant } = props;
+	const { name, quant } = props;
 	const { dataSheet, session, email, sheetId, setShowMessage } = useContext(contexto);
   const [ skill, setSkill ] = useState<string>(dataSheet.data.skills[name].specialty);
   const [input, setInput ] = useState(false);
@@ -19,14 +19,14 @@ export default function ItemSkill(props: any) {
       dataSheet.data.skills[name] = { value: 0, specialty: skill };
     else dataSheet.data.skills[name] = { value, specialty: skill };
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Habilidade ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`, type: 'notification' }, null, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Habilidade ${translate(name)} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`, type: 'notification' }, null, setShowMessage);
   };
 
   const updateSpecialty = async () => {
     const dataPersist = dataSheet.data.skills[name].specialty;
     dataSheet.data.skills[name] = { value: dataSheet.data.skills[name].value, specialty: skill };
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a especialização da Habilidade ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de '${dataPersist}' para '${skill}'.`, type: 'notification' }, null, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a especialização da Habilidade ${translate(name)} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de '${dataPersist}' para '${skill}'.`, type: 'notification' }, null, setShowMessage);
   };
 
   const returnPoints = () => {
@@ -61,7 +61,7 @@ export default function ItemSkill(props: any) {
   return(
     <div className="w-full mt-4">
       <div className={ `capitalize ${ input ? 'flex-col' : 'flex justify-between' } items-center cursor-pointer` } onClick={() => setInput(true)}>
-        <span>{ namePtBr } ({ name })</span>
+        <span>{ translate(name) } ({ name })</span>
         <div
           className="flex cursor-pointer"
         >
