@@ -530,7 +530,7 @@ export default function Help() {
                     <li className="list-disc">
                       {
                         session.typeSession === 'Regras Alternativas'
-                        ? 'Gasta-se Fúria por meio da utilização de Dons e da Caçada. Quando realizar uma Caçada, o personagem realiza uma Checagem com uma parada igual à quantidade de Fúria restante - 1. A quantidade de sucessos obtidos é reduzido na Fúria.'
+                        ? 'Ganha-se Fúria por meio da utilização de Dons, mudança de forma e da Caçada. Quando realizar uma Caçada, o personagem realiza uma Checagem com uma parada igual à quantidade de Fúria restante - 1. A quantidade de sucessos obtidos é reduzido na Fúria.'
                         : 'Gasta-se Fúria por meio de checagens de Fúria realizadas com o intuito de regenerar, mudar de forma ou utilizar Dons.'
                       }
                     </li>
