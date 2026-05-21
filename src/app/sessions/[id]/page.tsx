@@ -33,6 +33,7 @@ import ConsentForm from "@/components/popup/consentForm";
 import EditBannerSession from "@/components/popup/editBannerSession";
 import HpAndWillPower from "@/components/popup/hpAndWillpower";
 import Help from "@/components/popup/help";
+import RerollWithWillpower from "@/components/popup/rerollWithWillpower";
 
 export default function SessionId() {
 	const params = useParams();
@@ -72,6 +73,7 @@ export default function SessionId() {
     showMenuSession,
     showDownloadPdf,
     showBannerSession,
+    rerollWithWillPower,
   } = useContext(contexto);
 
   const dataRefPlayer = collection(db, "players");
@@ -159,6 +161,7 @@ export default function SessionId() {
       { showDeleteFavorAndBan.show && <DeleteFavorAndBan /> }
       { showDownloadPdf.show && verifyConvert() }
       { showBannerSession.show && <EditBannerSession /> }
+      { rerollWithWillPower.show && <RerollWithWillpower /> }
       <Nav />
       {
         showData

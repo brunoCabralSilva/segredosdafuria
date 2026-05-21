@@ -4,7 +4,7 @@ import { collection, getDocs, getFirestore, query, runTransaction, where } from 
 import { authenticate } from "./authenticate";
 import { getPlayerById } from "./players";
 
-const verifyResult = (
+export const verifyResult = (
 	rollOfRage: number[],
 	rollOfMargin: number[],
 	dificulty: number

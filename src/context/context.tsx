@@ -144,6 +144,8 @@ interface RecipesContext {
   setShowWillpowerTest: (state: boolean) => void,
   showBannerSession: { show: boolean, sessionId: string },
   setShowBannerSession: ( state: { show: boolean, sessionId: string }) => void,
+  rerollWithWillPower: { show: boolean, dataMessage: any },
+  setRerollWithWillPower: (state: { show: boolean, dataMessage: any }) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -288,6 +290,8 @@ const initialValue: RecipesContext = {
   setShowWillpowerTest: () => {},
   showBannerSession: { show: false, sessionId: '' },
   setShowBannerSession: () => {},
+  rerollWithWillPower: { show: false, dataMessage: {} },
+  setRerollWithWillPower: () => {},
 }
 
 const contexto = createContext(initialValue);

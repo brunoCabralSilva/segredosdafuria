@@ -80,6 +80,7 @@ export default function Provider({children }: IProvider) {
   const [showRemovePlayer, setShowRemovePlayer] = useState({ show: false, email: '' });
   const [showWillpowerTest, setShowWillpowerTest] = useState(false);
   const [showBannerSession, setShowBannerSession] = useState({ show: false, sessionId: '' });
+  const [rerollWithWillPower, setRerollWithWillPower] = useState({ show: false, dataMessage: {} });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -209,6 +210,7 @@ export default function Provider({children }: IProvider) {
         showRemovePlayer, setShowRemovePlayer,
         showWillpowerTest, setShowWillpowerTest,
         showBannerSession, setShowBannerSession,
+        rerollWithWillPower, setRerollWithWillPower,
       }}
     >
       {children}

@@ -1,5 +1,7 @@
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import Dice from "./dice";
+import { useContext } from "react";
+import contexto from "@/context/context";
 
 const ritualList = [
 'Ritual de Abjuração',
@@ -12,7 +14,13 @@ const ritualList = [
 ]
 
 export default function Message(props: { dataMessage: any, color: string }) {
-	const { dataMessage, color } = props;
+  const { dataMessage, color } = props;
+  const { setRerollWithWillPower } = useContext(contexto);
+
+  const reroll = (dataMessage: any) => {
+    setRerollWithWillPower({ show: true, dataMessage: dataMessage });
+  };
+  
 	switch(dataMessage.type) {
     case 'notification':
       return(
@@ -45,6 +53,15 @@ export default function Message(props: { dataMessage: any, color: string }) {
                   ))
                 }
               </div>
+              {
+                !dataMessage.willpower &&
+                <button
+                  onClick={ () => reroll(dataMessage) }
+                  className="px-2 py-1 border border-white cursor-pointer hover:bg-gray-whats rounded-lg"
+                >
+                  Rerrolar com Força de Vontade
+                </button>
+              }
               { dataMessage.test !== '' &&
                 <div className="pt-2 text-left">
                   { dataMessage.test }
