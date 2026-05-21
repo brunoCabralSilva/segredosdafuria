@@ -20,6 +20,21 @@ export default function Message(props: { dataMessage: any, color: string }) {
   const reroll = (dataMessage: any) => {
     setRerollWithWillPower({ show: true, dataMessage: dataMessage });
   };
+
+  const hasDicesToRoll = () => {
+    let dicesRage = [];
+    let dicesMargin = [];
+    if (dataMessage.type === 'roll') {
+      dicesRage = dataMessage.rage;
+      dicesMargin = dataMessage.margin;
+    } else {
+      dicesRage = dataMessage.results.rage;
+      dicesMargin = dataMessage.results.margin;
+    }
+    const findRage = dicesRage.find((rageDice: number) => rageDice > 2 && rageDice < 6);
+    const findMargin = dicesMargin.find((rageDice: number) => rageDice < 6);
+    return findRage || findMargin;
+  }
   
 	switch(dataMessage.type) {
     case 'notification':
@@ -54,7 +69,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                 }
               </div>
               {
-                !dataMessage.willpower &&
+                !dataMessage.willpower && color === 'green' && hasDicesToRoll() &&
                 <button
                   onClick={ () => reroll(dataMessage) }
                   className="px-2 py-1 border border-white cursor-pointer hover:bg-gray-whats rounded-lg"
@@ -173,10 +188,19 @@ export default function Message(props: { dataMessage: any, color: string }) {
                       }
                       {
                         dataMessage.results.margin.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
-                          <Dice key={index} dice={ dice } type="" />
+                          <Dice key={index} dice={ dice } type="gift-or-ritual" />
                         ))
                       }
                     </div>
+                    {
+                      !dataMessage.willpower && color === 'green' && hasDicesToRoll() &&
+                      <button
+                        onClick={ () => reroll(dataMessage) }
+                        className="px-2 py-1 border border-white cursor-pointer hover:bg-gray-whats rounded-lg mt-5"
+                      >
+                        Rerrolar com Força de Vontade
+                      </button>
+                    }
                     <div className="font-bold pt-2 text-left">Teste de ativação do Dom:</div>
                     <div className="font-bold pt-1 text-left">
                       { dataMessage.results.message }
@@ -261,6 +285,15 @@ export default function Message(props: { dataMessage: any, color: string }) {
                         ))
                       }
                     </div>
+                    {
+                      !dataMessage.willpower && color === 'green' && hasDicesToRoll() &&
+                      <button
+                        onClick={ () => reroll(dataMessage) }
+                        className="px-2 py-1 border border-white cursor-pointer hover:bg-gray-whats rounded-lg mt-5"
+                      >
+                        Rerrolar com Força de Vontade
+                      </button>
+                    }
                     <div className="font-bold pt-4 text-left">Teste de ativação do Ritual:</div>
                     <div className="font-bold pt-1 text-left">
                       { ritualList.includes(dataMessage.titlePtBr) ? dataMessage.results.criticalPairs + dataMessage.results.success > dataMessage.results.dificulty ? 'Obteve Sucesso no Teste, mas haverão Complicações (Veja Sistema)' : 'Falhou no Teste e haverão Complicações (Veja Sistema)' : dataMessage.results.message }
