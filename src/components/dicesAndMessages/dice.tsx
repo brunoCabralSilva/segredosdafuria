@@ -13,7 +13,7 @@ export default function Dice(props: { dice: number, type: string }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <Image
-        alt={`Dado representando o valor ${dice}`}
+        alt={`Valor ${dice} ${type}`}
         src={`/images/dices/${imgItem}`}
         width={500}
         height={500}

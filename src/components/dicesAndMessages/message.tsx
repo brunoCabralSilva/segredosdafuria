@@ -188,7 +188,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                       }
                       {
                         dataMessage.results.margin.sort((a: any, b: any) => a - b).map((dice: any, index: number) => (
-                          <Dice key={index} dice={ dice } type="gift-or-ritual" />
+                          <Dice key={index} dice={ dice } type="" />
                         ))
                       }
                     </div>
