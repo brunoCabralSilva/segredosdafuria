@@ -210,13 +210,13 @@ export const translate = (str: string): string => {
     case 'survival': return 'Sobrevivência';
     case 'animalKen': return 'Empatia com Animais';
     case 'etiquette': return 'Etiqueta';
-    case 'insight': return 'Intuição';
+    case 'insight': return 'Sagacidade';
     case 'intimidation': return 'Intimidação';
     case 'leadership': return 'Liderança';
     case 'performance': return 'Performance';
     case 'persuasion': return 'Persuasão';
     case 'streetwise': return 'Manha';
-    case 'subterfuge': return 'Sagacidade';
+    case 'subterfuge': return 'Subterfúgio';
     case 'academics': return 'Erudição';
     case 'awareness': return 'Percepção';
     case 'finance': return 'Finanças';
