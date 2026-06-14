@@ -112,6 +112,14 @@
         "description": "Emprego Confirmado - Idêntico a Emprego acima, mas os indivíduos com quem você trabalha (ou finge trabalhar) corroboram suas alegações, oferecendo mais uma comprovação além dos documentos de trabalho.",
         "font": "Lobisomem: O Apocalipse 5ed",
         "page": "98"
+      },
+      {
+        "cost": 2,
+        "type": "radio",
+        "title": "Emprego Informal",
+        "description": "Emprego Informal - Você labutou ao lado de temporários, trabalhadores de aplicativo, peões rurais sem documentação e diaristas migrantes. Enfrentar a rotina pesada enquanto é ignorado pelo resto do mundo tem um lado positivo: há muito o que encontrar quando se sabe a quem pedir. Uma vez por sessão, você pode conseguir um item, uma informação, um lugar para dormir ou acesso a um evento como se tivesse um ponto apropriado em Recursos, Contatos, Refúgio Seguro ou Influência. No entanto, isso exige cumprir um turno de trabalho diário para quem quer que forneça o favor.",
+        "font": "Tribos de Gaia",
+        "page": "201"
       }
     ],
     "flaws": []
@@ -205,6 +213,38 @@
         "page": "99"
       },
       {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Garras e Presas Vermelhas",
+        "description": "Garras e Presas Vermelhas - Você despreza a Weaver e seus agentes. Uma vez por sessão, quando for ferido ou frustrado por um espírito da Tecelã, uma ferramenta de alta tecnologia ou algo que perceba como um peão da Weaver, você pode ganhar 1 ponto adicional de Fúria.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Nascido da Tempestade",
+        "description": "Nascido da Tempestade - Você se sente em casa no vento e na chuva, sentindo-se revigorado pelos elementos enquanto eles açoitam você. Um raio nunca atingiu você, e jamais atingirá, mesmo que seja direcionado sobrenaturalmente. Você ganha um bônus de dois dados em todos os testes relacionados a evitar, resistir ou se mover durante tempestades, sejam elas de trovão, relâmpago, vento, chuva, neve ou granizo.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Vontade Desafiadora",
+        "description": "Vontade Desafiadora - Talvez você tenha treinado sua vontade, talvez esteja acostumado a lidar com pessoas que desejam manipulá-lo, ou talvez seja simplesmente teimoso por natureza. Seja como for, tentativas de manipular sua mente ou emoções por meios sobrenaturais têm suas Dificuldades aumentadas em 1, ou você recebe um bônus de dois dados em disputas para resistir.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Atração Umbrática",
+        "description": "Atração Umbrática - Sempre que você tenta entrar na Umbra, você ou quem quer que esteja levando você para a Umbra ganha um bônus de um dado em quaisquer testes envolvidos, e você sofre apenas dano Superficial caso fosse sofrer dano Agravado por entrar na Umbra. No entanto, isto não tem efeito ao sair da Umbra.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
         "cost": 2,
         "type": "checkbox",
         "title": "Prática em ritual",
@@ -275,6 +315,70 @@
         ],
         "font": "Lobisomem: O Apocalipse 5ed",
         "page": "99"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Idade de Lobo",
+        "description": "Idade de Lobo - Você envelhece na mesma velocidade que lobos naturais, cerca de cinco anos para cada ano que passa. Do jeito que as coisas estão, você já envelheceu o bastante para que sua identidade humana seja inacreditável, e sua Identidade ficará para sempre desatualizada.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Transformação reprimida",
+        "description": "Transformação reprimida - Você não consegue mudar de forma quando certas situações estão presentes. Escolha um dos Tabus Folclóricos abaixo:",
+        "sugestions": [
+          "Acônito ou outras ervas com propriedades consideradas místicas",
+          "Símbolos sagrados apresentados por um fiel de uma religião qualquer",
+          "A presença de uma pessoa virgem e maior de idade",
+          "Ver alguém brandir um objeto de prata (soma-se à aversão normal dos Garou à prata (Lobisomem: O Apocalipse 5ed, p. 134)",
+          "Ser chamado três vezes seguidas pelo nome que você costumava ter antes da Primeira Transformação (mesmo que seja idêntico a seu nome atual",
+          "Outro tabu que você tenha combinado com o Narrador"
+        ],
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Sangue de Chacal",
+        "description": "Sangue de Chacal - Na primeira vez em uma sessão que você obtiver um único resultado Brutal em um dado de Fúria em uma situação não violenta, mas não um resultado Brutal completo, trate o resultado como se fosse um resultado Brutal completo.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Menos Monstruoso",
+        "description": "Menos Monstruoso - Humanos são considerados como tendo 3 pontos adicionais de Autocontrole + Determinação para resistir ao Delírio quando veem você mudar de forma ou em Crinos. Isto não pode ser adquirido junto com outros Defeitos que afetem o Delírio, como Cão Infernal (Maré da Wyrm, p. 28).",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Marca do Predador",
+        "description": "Marca do Predador - Você sofre uma penalidade de dois dados ao interagir com animais que são presas, a menos que pretenda assustá-los ou atacá-los. O Narrador pode designar um humano no Mapa de Relacionamentos como um humano-presa, alguém que costuma ser dócil ou se enxergar como vítima. Você sofre uma penalidade de um dado ao interagir com esse humano.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Desfavor do Padroeiro",
+        "description": "Desfavor do Padroeiro - Você provou ser indigno de confiança para os espíritos, ou não se comprometeu com sua alcateia. Você não se beneficia do Padroeiro de sua alcateia, a menos que ele seja seu Padroeiro tribal, e não pode investir pontos na Vantagem Padroeiro da alcateia.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Psicopompo",
+        "description": "Psicopompo - Espíritos perdidos parecem ser atraídos por você como mariposas para a chama. Uma vez por história, um Gafarete perdido se prende a você, tentando fazer com que você o ajude com seu objetivo e ficando cada vez mais frustrado caso seja ignorado. Ele parte assim que for ajudado.",
+        "font": "Tribos de Gaia",
+        "page": "203"
       },
       {
         "cost": 1,
@@ -395,6 +499,14 @@
         "page": "100"
       },
       {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Ingênuo",
+        "description": "Ingênuo - Você parece completamente inocente e irrepreensível, fazendo com que os outros acreditem mais facilmente em suas boas intenções. Adicione dois dados a quaisquer testes relacionados a evitar suspeitas ou desviar a culpa, a critério do Narrador.",
+        "font": "Tribos de Gaia",
+        "page": "201"
+      },
+      {
         "cost": 2,
         "type": "checkbox",
         "title": "Glabro Imponente",
@@ -451,6 +563,14 @@
         "description": "Repulsivo - Você perde dois dados em todas as paradas de dados Sociais relevantes.",
         "font": "Lobisomem: O Apocalipse 5ed",
         "page": "100"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Olhar Suspeito",
+        "description": "Olhar Suspeito - Você parece culpado. As pessoas ficam de olho em você mesmo quando você não fez nada. Se alguém precisa levar a culpa, esse alguém será você. Adicione 1 a todas as Dificuldades para se defender de acusações ou desviar a culpa.",
+        "font": "Tribos de Gaia",
+        "page": "201"
       },
       {
         "cost": 1,
@@ -737,6 +857,14 @@
       {
         "cost": 1,
         "type": "checkbox",
+        "title": "Sem Passado",
+        "description": "Sem Passado - Talvez você tenha crescido como um lobo, ou talvez apenas tenha tido uma infância particularmente marcante. Seja como for, você não possui Máscara e, além disso, não vê necessidade alguma de ter uma, independentemente das evidências. Antes que possa obter qualquer Máscara ou Identidade — mesmo uma temporária ou necessária — você deve remover este Defeito, demonstrando que mudou de ideia.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
         "title": "Erro Recorrente",
         "description": "Erro Recorrente - Em algum lugar, alguém cometeu um erro que o prejudica. Como resultado, qualquer pessoa que verifique seu histórico descobrirá que você morreu há pouco tempo, que está numa lista de vigilância perigosa, ou que é (injustamente) digno de detenção ou de uma ligação à polícia. (Claro que você pode muito bem ser digno de ir para a prisão, mas não por esse motivo). Este Defeito também se aplica a qualquer pesquisa de banco de dados sobre a sua identidade.",
         "font": "Lobisomem: O Apocalipse 5ed",
@@ -868,7 +996,7 @@
         "cost": 2,
         "type": "checkbox",
         "title": "Acompanhante",
-        "description": "Acompanhante (Requer Pacto Espiritual pelo menos em 1) - O espírito será capaz de acompanhá-lo a toda parte desde que você não tope com salvaguardas espirituais nem outras contramedidas pertinentes. Se o espírito não tiver um hospedeiro físico (veja a seguir), a comunicação com ele ficará restrita à Umbra ou dependerá do acesso às Imensidões Espirituais por meio do Dom Sentidos Crepusculares (p. 147). Áreas de Película forte, portanto, podem cortar a comunicação com o espírito mesmo que ele se encontre logo do outro lado da barreira.",
+        "description": "Acompanhante (Requer Pacto Espiritual pelo menos em 1) - O espírito será capaz de acompanhá-lo a toda parte desde que você não tope com salvaguardas espiritos nem outras contramedidas pertinentes. Se o espírito não tiver um hospedeiro físico (veja a seguir), a comunicação com ele ficará restrita à Umbra ou dependerá do acesso às Imensidões Espiritos por meio do Dom Sentidos Crepusculares (p. 147). Áreas de Película forte, portanto, podem cortar a comunicação com o espírito mesmo que ele se encontre logo do outro lado da barreira.",
         "font": "Lobisomem: O Apocalipse 5ed",
         "page": "105"
       },
@@ -954,13 +1082,21 @@
     "id": "15",
     "name": "Ritos",
     "type": "méritos",
-    "description": "A maestria e a habilidade de realizar rituais são dons valiosos entre os Garou. Nem todos os lobisomens têm a destreza de realizar rituais em condições adversas ou a presença social necessária para liderar uma assembleia, mas aqueles que dominam essas artes ganham o respeito de sua tribo. Esses méritos garantem vantagens significativas em rituais sociais e espirituais, permitindo que o Garou mostre seu conhecimento e habilidade em momentos críticos.",
+    "description": "A maestria e a habilidade de realizar ritos são dons valiosos entre os Garou. Nem todos os lobisomens têm a destreza de realizar ritos em condições adversas ou a presença social necessária para liderar uma assembleia, mas aqueles que dominam essas artes ganham o respeito de sua tribo. Esses méritos garantem vantagens significativas em ritos sociais e espiritos, permitindo que o Garou mostre seu conhecimento e habilidade em momentos críticos.",
     "advantages": [
       {
         "cost": 1,
         "type": "checkbox",
+        "title": "Mestre de Ritos Preparado",
+        "description": "Mestre de Ritos Preparado - Você está sempre coletando informações sobre ritos e Dons, além de praticar novos. Uma vez por história, você pode gastar experiência no meio da sessão para comprar um Dom ou Ritual, desde que tenha acesso a uma biblioteca, mentor, espírito ou espaço pessoal privado — como seu refúgio seguro — por uma hora, e tenha tido acesso a ele durante o último mês.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
         "title": "Improvisador",
-        "description": "Improvisador - Você sofre dois dados a menos de penalidade ao realizar rituais em condições subótimas.",
+        "description": "Improvisador - Você sofre dois dados a menos de penalidade ao realizar ritos em condições subótimas.",
         "font": "Nação Fragmentada",
         "page": "132"
       },
@@ -968,7 +1104,7 @@
         "cost": 2,
         "type": "checkbox",
         "title": "Convocador da Assembléia",
-        "description": "Convocador da Assembléia - Selecione 5 rituais sociais que você tenha dominado. Se permitido durante uma Assembléia, você pode auxiliar em qualquer ritual, desde que seja realizado em uma Assembléia ou em uma reunião substancialmente semelhante de Garou.",
+        "description": "Convocador da Assembléia - Selecione 5 ritos sociais que você tenha dominado. Se permitido durante uma Assembléia, você pode auxiliar em qualquer ritual, desde que seja realizado em uma Assembléia ou em uma reunião substancialmente semelhante de Garou.",
         "font": "Nação Fragmentada",
         "page": "132"
       },
@@ -983,11 +1119,19 @@
       {
         "cost": 3,
         "type": "checkbox",
-        "title": "Mestre de Rituais",
-        "description": "Mestre de Rituais - Você adiciona +1 dado a qualquer teste que envolva o conhecimento ou a realização de rituais.",
+        "title": "Mestre de Ritos",
+        "description": "Mestre de Ritos - Você adiciona +1 dado a qualquer teste que envolva o conhecimento ou a realização de ritos.",
         "font": "Nação Fragmentada",
         "page": "132"
-      }      
+      },
+      {
+        "cost": 3,
+        "type": "checkbox",
+        "title": "Rito Vinculado",
+        "description": "Rito Vinculado - Seus Ritos Sociais possuem poder místico por trás deles. Quando adquire esta Vantagem, você aprende um Rito Social. Para cada Rito Social que conhece, na primeira vez em cada história que você realizar esse Rito, pode testar Liderança + seu Renome mais alto como se o Rito fosse místico, com Dificuldade 2, mais 1 por participante, até o máximo de 7. Para cada ponto na margem de sucesso, você pode escolher um participante para receber um benefício. Esse participante pode restaurar um ponto de dano Superficial à Força de Vontade ou à Vitalidade, ou mover um ponto de Harano para Hauglosk. Cada participante só pode se beneficiar disso uma vez por Rito por história. Resultados Brutais nesses Ritos Sociais deixam você esgotado, causando um ponto de dano Superficial à sua Força de Vontade.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      }
     ],
     "flaws": []
   },
@@ -995,8 +1139,25 @@
     "id": "16",
     "name": "Mentais",
     "type": "méritos",
-    "description": "Os Garou carregam dentro de si tanto a fúria de Gaia quanto as marcas da própria alma. Nem todos os fardos são físicos ou espirituais — muitos se escondem na mente, moldando como cada um vê o mundo, enfrenta a luta e convive com a matilha. Defeitos mentais revelam cicatrizes invisíveis: rancores que nunca se curam, pessimismo que colore cada vitória com sombras e instintos que dificultam o aprendizado. Para alguns, esses traços são fraquezas; para outros, apenas mais um reflexo do peso de ser meio-humano e meio-lobo em uma guerra sem fim.",
-    "advantages": [],
+    "description": "Os Garou carregam dentro de si tanto a fúria de Gaia quanto as marcas da própria alma. Nem todos os fardos são físicos ou espiritos — muitos se escondem na mente, moldando como cada um vê o mundo, enfrenta a luta e convive com a matilha. Defeitos mentais revelam cicatrizes invisíveis: rancores que nunca se curam, pessimismo que colore cada vitória com sombras e instintos que dificultam o aprendizado. Para alguns, esses traços são fraquezas; para outros, apenas mais um reflexo do peso de ser meio-humano e meio-lobo em uma guerra sem fim.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Dissipando a Fúria",
+        "description": "Dissipando a Fúria - Sempre que você obtiver um resultado Brutal ou um sucesso crítico, pode escolher reduzir sua Fúria em 1, até o mínimo de 1.",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      },
+      {
+        "cost": 3,
+        "type": "checkbox",
+        "title": "Temperamento Equilibrado",
+        "description": "Temperamento Equilibrado - Você tem uma mentalidade comparativamente saudável para um Garou. Testes de Harano e Hauglosk são feitos com um dado adicional, até o máximo de 10. Isto não pode ser adquirido em conjunto com os Defeitos Amargurado ou Melancólico (The Moonlit Path, p. 68).",
+        "font": "Tribos de Gaia",
+        "page": "202"
+      }
+    ],
     "flaws": [
       {
         "cost": 1,
@@ -1010,8 +1171,8 @@
       {
         "cost": 1,
         "type": "checkbox",
-        "title": "Taciturno",
-        "description": "Taciturno - Um verdadeiro fatalista da vida, para você, toda luz prateada sempre carrega uma nuvem. Embora seja dedicado à luta, para você ela será sempre apenas isso: uma luta. Depois de ganhar seu primeiro ponto de Harano, todos os testes de Harano são feitos com +1 de Dificuldade.",
+        "title": "Melancólico",
+        "description": "Melancólico - Um verdadeiro fatalista da vida, para você, toda luz prateada sempre carrega uma nuvem. Embora seja dedicado à luta, para você ela será sempre apenas isso: uma luta. Depois de ganhar seu primeiro ponto de Harano, todos os testes de Harano são feitos com +1 de Dificuldade.",
         "font": "Trilha Enluarada",
         "page": "68"
       },
@@ -1022,6 +1183,14 @@
         "description": "Aprendiz Tátil - Você é uma criatura de instinto, e nenhum estudo ou prática ajuda a internalizar o que aprendeu até que a memória muscular seja criada. Qualquer aquisição de um ponto de Perícia ou de uma Especialidade exige que você tenha usado a Perícia com sucesso na sessão anterior.",
         "font": "Trilha Enluarada",
         "page": "68"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Custe o que Custar",
+        "description": "Custe o que Custar - Você é exatamente o tipo de fanático sobre o qual as outras tribos alertam seus filhotes. Você se juntou à sua tribo com uma missão em mente, sem se importar se seu Espírito Padroeiro ou sua tribo aprovariam ou não. Talvez seja algo incrivelmente mesquinho — talvez você deseje vingança contra outro membro da tribo, ou talvez tenha contas a acertar com outro Garou. Seja como for, você é obcecado, e isso ocupa cada momento em que está acordado. Você perde um dado de todas as paradas ao realizar ações que entrem em conflito com sua missão pessoal.",
+        "font": "Tribos de Gaia",
+        "page": "202"
       }
     ]
   },
@@ -1031,6 +1200,22 @@
     "type": "méritos",
     "description": "Os Garou não são apenas criaturas de espírito e carne, mas também de lobo e homem. Embora grandes matilhas de lobos tenham percorrido o mundo por milênios, as raças específicas permanecem amplamente irrelevantes para o lobisomem médio. No entanto, existem situações em que essa herança se manifesta e se torna útil. Apenas um tipo de Mérito de Herança Selvagem pode ser adquirido por personagem.",
     "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Lupino Feral",
+        "description": "Lupino Feral - Na forma lupina, você atrai mais atenção do que o normal. Você ganha um bônus de um dado em todos os testes para intimidar ou assustar humanos ou animais.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Lupino Feral",
+        "description": "Lupino Feral - Quando você se move como lobo, sua passagem é como uma brisa suave numa manhã de verão. Enquanto estiver na forma lupina, seu bônus de forma em testes de Furtividade aumenta em um dado, e você pode ignorar o primeiro resultado Brutal que ocorrer durante a cena.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
       {
         "cost": 1,
         "type": "radio",
@@ -1046,6 +1231,14 @@
         "description": "Lobo Cinzento - O mais comum dos lobos também é o animal de matilha mais bem adaptado e, como seus irmãos lupinos, você se adaptou particularmente bem à vida em grupo. Sempre que se beneficiar de trabalho em equipe, você recebe um dado bônus adicional quando assistido por dois ou mais ajudantes (veja Corebook, p. 122 para regras de trabalho em equipe).",
         "font": "Trilha Enluarada",
         "page": "69"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Sem Odor",
+        "description": "Sem Odor - Seu cheiro é tão fraco que praticamente não existe. Você não pode ser rastreado pelo olfato, a menos que o rastreador obtenha um sucesso crítico.",
+        "font": "Tribos de Gaia",
+        "page": "203"
       },
       {
         "cost": 3,
@@ -1064,6 +1257,14 @@
         "description": "Odor Distintivo - Embora não seja desagradável, seu cheiro pessoal é distinto e constante, e não importa quantas vezes você se lave ou tente disfarçá-lo, ele nunca desaparece. Qualquer tentativa de rastreá-lo, reconhecê-lo ou detectá-lo pelo olfato recebe um bônus de dois dados, e certos testes Sociais são feitos com penalidade de dois dados, a critério do Narrador.",
         "font": "Trilha Enluarada",
         "page": "69"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Língua de Lobo",
+        "description": "Língua de Lobo - Você nunca se adaptou de verdade à fala humana, ou talvez uma lesão tenha arruinado suas cordas vocais, e agora sua fala é cheia de rosnados, ganidos e grunhidos. Você sofre uma penalidade de um dado em todos os testes ao se comunicar com humanos. Este Defeito não precisa ser interpretado.",
+        "font": "Tribos de Gaia",
+        "page": "203"
       }
     ]
   },
@@ -1146,6 +1347,56 @@
         "description": "Mudança Lenta - A Wyld está dentro de você, mas demora um pouco mais para se manifestar, e sua capacidade de mudar de forma sofre em consequência. A mudança de forma custa o mesmo que o habitual, mas requer uma ação completa; durante esse tempo, o lobisomem não pode fazer nada além de se concentrar na transformação. Dons ou outras situações que normalmente reduziriam a velocidade de mudança podem reduzir essa penalidade para uma ação menor, mas não mais do que isso.",
         "font": "Trilha Enluarada",
         "page": "69"
+      }
+    ]
+  },
+  {
+    "id": "19",
+    "name": "Padroeiro Tribal",
+    "type": "méritos",
+    "description": "Este tipo de Mérito funciona melhor em crônicas focadas em políticas tribais. Elas pressupõem que um Padroeiro está ativo na região e possui objetivos que deseja alcançar no mundo físico por meio de sua tribo Garou.",
+    "advantages": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Duplamente Favorecido",
+        "description": "Duplamente Favorecido - O Espírito Padroeiro de sua tribo olha por você com estima. Uma vez por sessão, quando você se aproveitar do Favor de sua tribo, pode definir um dado normal como 10 antes de rolar sua parada.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Oráculo do Padroeiro",
+        "description": "Oráculo do Padroeiro - Quando você dorme, às vezes sonha com o Padroeiro de sua tribo ou com seus servos. No início de cada sessão, ou quando dormir, o Narrador informará se seu Padroeiro tem uma mensagem para você. Além disso, quando encontrar um espírito, você reconhece instantaneamente se ele está a serviço do Padroeiro de sua tribo.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Comunhão",
+        "description": "Comunhão - Uma vez por história, você pode passar uma cena ou uma noite em reclusão tranquila, envolvido em uma atividade para atrair a atenção de seu Padroeiro. Se não for interrompido, você pode fazer uma única pergunta ao Padroeiro, e ele fornecerá uma resposta. Ela pode ser enigmática, incompleta ou pouco clara, mas será relevante para a pergunta.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      },
+      {
+        "cost": 2,
+        "type": "checkbox",
+        "title": "Vanguarda da Tribo",
+        "description": "Vanguarda da Tribo - Seus companheiros de tribo o veem como uma espécie de celebridade dentro de sua tribo. Fofocas sobre suas façanhas se espalham para regiões vizinhas. Você ganha um bônus de um dado em testes de Intimidação, Liderança e Persuasão para membros de sua própria tribo.",
+        "font": "Tribos de Gaia",
+        "page": "203"
+      }
+    ],
+    "flaws": [
+      {
+        "cost": 1,
+        "type": "checkbox",
+        "title": "Oráculo de Pesadelos",
+        "description": "Oráculo de Pesadelos - Seu Padroeiro envia mensagens em sonhos, mas elas tendem a perturbá-lo. Faça um teste especial de Força de Vontade no início de cada sessão ou quando o Narrador permitir que personagens recuperem Força de Vontade como se fosse o início de uma sessão. Role um dado: com um resultado de 1 a 5, você perde um ponto de Força de Vontade após recuperá-la. Com um resultado de 6 a 10, você não sofre efeitos de seus pesadelos. O Narrador também pode usar seus sonhos como meio de fornecer informações de seu Padroeiro, embora elas provavelmente sejam confusas ou enganosas.",
+        "font": "Tribos de Gaia",
+        "page": "203"
       }
     ]
   }

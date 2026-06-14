@@ -142,7 +142,6 @@
     ],
     "book": "Werewolf: The Apocalypse 5th",
     "page": 298
-    
   },
   {
     "id": 5,
@@ -1386,5 +1385,437 @@
     ],
     "book": "Criado por Bruno Cabral",
     "page": 1
+  },
+  {
+    "id": 39,
+    "title": "Convent of the Sacred Vigil",
+    "titlePtBr": "Convento da Vigília Sagrada",
+    "description": "The Black Fury Sora 'Vesper' Ionescu has left the violence and fury of her youth behind and now runs the Convent of the Sacred Vigil at a remote, hard-to-reach valley of the Carpathian Mountains. A minor, obscure religious retreat inhabited by reticent nuns, the convent is a peaceful place of healing for those Garou afflicted with harano or hauglosk. Some recover, some don't. Vesper's convent is no rest home though, and Garou seeking shelter there are expected to contribute according to their abilities, whether that means hunting for food or chopping the vegetables. The spartan lodgings may come as a shock for urban Garou more used to central heating and indoor toilets. One of the mysteries of the convent is how it seems to combine the Christian faith with helping the Garou. The convent welcomes all Garou who need help with their path, and many have emerged without understanding the seeming paradoxes of its worldview any better than when they entered.",
+    "descriptionPtBr": "A Fúria Negra Sora 'Vesper' Ionescu deixou para trás a violência e a fúria de sua juventude e agora administra o Convento da Vigília Sagrada em um vale remoto e de difícil acesso nas Montanhas dos Cárpatos. Um retiro religioso pequeno e obscuro, habitado por freiras reservadas, o convento é um lugar pacífico de cura para Garou afligidos por harano ou hauglosk. Alguns se recuperam, outros não. O convento de Vesper, porém, não é uma casa de repouso, e os Garou que buscam abrigo ali devem contribuir de acordo com suas capacidades, seja caçando comida ou picando legumes. As acomodações espartanas podem ser um choque para Garou urbanos mais acostumados com aquecimento e banheiros internos. Um dos mistérios do convento é como ele parece combinar a fé cristã com a ajuda aos Garou. O convento acolhe todos os Garou que precisam de ajuda em seu caminho, e muitos saem de lá sem compreender os aparentes paradoxos de sua visão de mundo melhor do que quando entraram.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Ticket to the Mountains: The character knows of the convent, and someone with resources owes them. Once per story, the character can call in a favor so that if someone other than the character wants to travel to the convent to get better, their costs are covered and entry assured. Beneficiaries of this service return changed and positively inclined to the character.",
+        "skillPtBr": "Passagem para as Montanhas: O personagem conhece o convento, e alguém com recursos lhe deve um favor. Uma vez por história, o personagem pode cobrar esse favor para que, caso alguém além dele queira viajar até o convento para se recuperar, seus custos sejam cobertos e sua entrada seja garantida. Beneficiários deste serviço retornam mudados e positivamente inclinados ao personagem."
+      },
+      {
+        "cost": 2,
+        "skill": "Sickness of the Spirit: The character has contemplated harano and hauglosk enough to recognize them. The character can make a Resolve + Insight test, with Difficulty equal to the target's highest Renown, and if successful, they are informed of a Garou subject's rough scores: low, middling, or high. This test can only be made once per Garou.",
+        "skillPtBr": "Doença do Espírito: O personagem adquiriu harano e hauglosk o bastante para reconhecê-los. O personagem pode fazer um teste de Determinação + Sagacidade, com Dificuldade igual ao Renome mais alto do alvo, e, se for bem-sucedido, recebe uma noção aproximada das pontuações de um Garou: baixa, mediana ou alta. Este teste só pode ser feito uma vez por Garou."
+      },
+      {
+        "cost": 3,
+        "skill": "Involuntary Care: The character has met Vesper and is familiar with her philosophy of care, enough that they can make her arguments sound like the right choice. Once per story, the character can petition their sept for help to have a Gaian Garou sent to the mountains to get better, even involuntarily. The Storyteller has to judge whether the local Garou actually have the ability to do so or whether the Garou in question is too powerful to be committed. Beneficiaries of this service return changed, although they may not be positively inclined to the character.",
+        "skillPtBr": "Cuidado Involuntário: O personagem conheceu Vesper e está familiarizado com sua filosofia de cuidado, o bastante para fazer seus argumentos parecerem a escolha certa. Uma vez por história, o personagem pode solicitar ajuda a seu septo para que um Garou gaiano seja enviado às montanhas para se recuperar, mesmo contra sua vontade. O Narrador deve julgar se os Garou locais realmente têm capacidade para fazer isso ou se o Garou em questão é poderoso demais para ser internado. Beneficiários deste serviço retornam mudados, embora possam não estar positivamente inclinados ao personagem."
+      },
+      {
+        "cost": 4,
+        "skill": "Words of Purpose: After a stay at the convent, the character has grasped something of how to alleviate the shocks that lead to harano and hauglosk. If the character has a chance to talk with a packmate making a Harano or Hauglosk test, that test is made with a one-die bonus.",
+        "skillPtBr": "Palavras de Propósito: Após uma estadia no convento, o personagem compreendeu algo sobre como aliviar os choques que levam ao harano e ao hauglosk. Se o personagem tiver a chance de conversar com um companheiro de matilha que esteja fazendo um teste de Harano ou Hauglosk, esse teste é feito com um bônus de um dado."
+      },
+      {
+        "cost": 5,
+        "skill": "Sainted Moon: After an extended stay at the convent working to help Garou who have sought refuge there, the character has glimpsed something of the true mysteries of the world. They see the moon in the sky and understand its purpose in a way impossible to put into words. Such illumination grants the ability to reroll any failed Harano or Hauglosk test, but at double the initial Difficulty. A test can be rerolled only once.",
+        "skillPtBr": "Lua Santificada: Após uma estadia prolongada no convento, trabalhando para ajudar Garou que buscaram refúgio ali, o personagem vislumbrou algo dos verdadeiros mistérios do mundo. Ele vê a lua no céu e compreende seu propósito de uma forma impossível de colocar em palavras. Tal iluminação concede a capacidade de rolar novamente qualquer teste fracassado de Harano ou Hauglosk, mas com o dobro da Dificuldade inicial. Um teste só pode ser realizado novamente uma vez."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 219
+  },
+  {
+    "id": 40,
+    "title": "The Dead Purge",
+    "titlePtBr": "O Expurgo dos Mortos",
+    "description": "For most werewolves, the Dead Purge is an ongoing Great Hunt, seeking to root out the infestation of the undead from cities around the world. For the Silent Striders, the Great Hunt is merely a welcome active phase in their ancient vendetta against the undead. The best-known Silent Strider stories about hunting the dead are from ancient Egypt. During the Middle Kingdom, a war erupted between Garou and the city-dwelling leeches. For centuries, the Silent Striders ran along the Nile, finding friends among entities such as jackal-headed Anubis, wolf-headed Wepwawet, and Set, Lord of the Red Lands, in order to resist the vampires and the Dark One's legacy. As such, while the Great Hunt rages, many among the Silent Striders believe that they're participating in something far older, a duty that takes them to the first days of their tribe.",
+    "descriptionPtBr": "Para a maioria dos lobisomens, o Expurgo dos Mortos é uma Grande Caçada contínua, dedicada a arrancar a infestação dos mortos-vivos das cidades ao redor do mundo. Para os Peregrinos Silenciosos, a Grande Caçada é apenas uma fase ativa e bem-vinda em sua antiga vendeta contra os mortos-vivos. As histórias mais conhecidas dos Peregrinos Silenciosos sobre a caça aos mortos vêm do Egito antigo. Durante o Médio Império, uma guerra irrompeu entre os Garou e as sanguessugas que habitavam as cidades. Por séculos, os Peregrinos Silenciosos correram ao longo do Nilo, encontrando aliados entre entidades como Anúbis, de cabeça de chacal; Wepwawet, de cabeça de lobo; e Set, Senhor das Terras Vermelhas, a fim de resistir aos vampiros e ao legado do Obscuro. Assim, enquanto a Grande Caçada se enfurece, muitos entre os Peregrinos Silenciosos acreditam estar participando de algo muito mais antigo: um dever que os leva de volta aos primeiros dias de sua tribo.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Leech-Spotter: You've been taught how to spot a vampire, even when they try to hide. Any tests of Awareness or Insight to detect vampires receive a two-dice bonus.",
+        "skillPtBr": "Farejador de Sanguessugas: Você foi ensinado a identificar um vampiro, mesmo quando ele tenta se esconder. Quaisquer testes de Prontidão ou Perspicácia para detectar vampiros recebem um bônus de dois dados."
+      },
+      {
+        "cost": 2,
+        "skill": "Graven Blood: Through communion with the spirits of death, you taught yourself how to resist a vampire's bite, making your blood taste like that of the grave and filled with Rage. Vampires must test for fury frenzy, Difficulty 3, if they bite you or otherwise taste your blood.",
+        "skillPtBr": "Sangue Sepulcral: Por meio da comunhão com os espíritos da morte, você ensinou a si mesmo como resistir à mordida de um vampiro, fazendo seu sangue ter gosto de túmulo e estar cheio de Fúria. Vampiros devem testar frenesi de fúria, Dificuldade 3, caso mordam você ou provem seu sangue de qualquer outra forma."
+      },
+      {
+        "cost": 3,
+        "skill": "Mimicry of the Night: Once the sun has gone down, the Garou can ceremonially bury themselves to slow their vitals enough to pass for a vampire, making them better suited to hunt the undead. Until the first ray of dawn, any means to detect what kind of creature the werewolf is suggest that they're a vampire.",
+        "skillPtBr": "Mimetismo da Noite: Depois que o sol se põe, o Garou pode se enterrar cerimonialmente para desacelerar seus sinais vitais o bastante para se passar por um vampiro, tornando-se mais apto a caçar os mortos-vivos. Até o primeiro raio da aurora, qualquer meio usado para detectar que tipo de criatura o lobisomem é indicará que ele é um vampiro."
+      },
+      {
+        "cost": 4,
+        "skill": "The Duat's Bounty: When you dedicate a slain vampire to the embrace of Anubis, the Guardian of the Underworld, you are rewarded with a temporary Gift of your choice — this temporary Gift does not increase the Experience cost of learning new Gifts. This Gift must be otherwise open to you, and only one such Gift can be maintained at a time. The Gift remains available to you for one session per century of the vampire's existence.",
+        "skillPtBr": "A Dádiva do Duat: Quando você dedica um vampiro abatido ao abraço de Anúbis, o Guardião do Submundo, é recompensado com um Dom temporário de sua escolha — esse Dom temporário não aumenta o custo de Experiência para aprender novos Dons. Esse Dom deve estar disponível para você de outra forma, e apenas um Dom desse tipo pode ser mantido por vez. O Dom permanece disponível para você por uma sessão para cada século de existência do vampiro."
+      },
+      {
+        "cost": 5,
+        "skill": "Revenge of Nut: Once per session, after the sun has set, you can howl with all the savage fury of the night, invoking a deep-seated dread in all vampires. Until dawn, any vampire hearing this howl is subject to the Delirium if confronted by a Garou in their crinos form unless they pass a Composure + Resolve test at Difficulty 4.",
+        "skillPtBr": "Vingança de Nut: Uma vez por sessão, depois que o sol se põe, você pode uivar com toda a fúria selvagem da noite, invocando um medo profundo em todos os vampiros. Até o amanhecer, qualquer vampiro que ouvir esse uivo estará sujeito ao Delírio se confrontado por um Garou em sua forma crinos, a menos que passe em um teste de Autocontrole + Determinação com Dificuldade 4."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 220
+  },
+  {
+    "id": 41,
+    "title": "Gaian Traditionalism",
+    "titlePtBr": "Tradicionalismo Gaiano",
+    "description": "The traditions of the Garou have lasted for thousands of years. Generation after generation has hunted in packs, tended caerns, and gathered together in moots. This is not something that has happened by itself. Through the ages, there have been those who have believed in the traditions of Gaia and taught the next generation of Garou their responsibilities. Such Gaian traditionalism represents the mainstream of Garou culture, yet its proponents and protectors are dwindling. So many young Garou believe that taking the fight to the enemy is more important than tending to the caern. Garou traditionalism as something more than just paying lip service is particularly common among the Hart Wardens and the Silver Fangs, who understand that it's not about belief but action. You have to put in the work of protecting the caern and the sept. Without that work, the traditions of Gaia are going to fade into obscurity. On the practical level, the Gaian traditionalist is protecting something concrete and tangible. The work of preservation and passing on your culture is local.",
+    "descriptionPtBr": "As tradições dos Garou duraram milhares de anos. Geração após geração caçou em alcateias, cuidou de caerns e se reuniu em assembleias. Isso não aconteceu por si só. Ao longo das eras, houve aqueles que acreditaram nas tradições de Gaia e ensinaram à geração seguinte de Garou suas responsabilidades. Esse tradicionalismo gaiano representa a corrente principal da cultura Garou, mas seus defensores e protetores estão diminuindo. Muitos jovens Garou acreditam que levar a luta ao inimigo é mais importante do que cuidar do caern. O tradicionalismo Garou como algo além de mero discurso é particularmente comum entre os Guardiões do Cervo e os Presas de Prata, que entendem que não se trata de crença, mas de ação. É preciso fazer o trabalho de proteger o caern e a fratria. Sem esse trabalho, as tradições de Gaia vão desaparecer na obscuridade. Em termos práticos, o tradicionalista gaiano está protegendo algo concreto e tangível. O trabalho de preservar e transmitir sua cultura é local.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Shelter: You have an eye for the perfect safe house, and you've already found something. You gain either the Secure or Obscure Safe House Advantage and may purchase the other for half the cost. The safe house comes with an obligation to protect an important natural site nearby, such as a brook in danger of being destroyed to make way for new housing development.",
+        "skillPtBr": "Abrigo: Você tem olho para o refúgio seguro perfeito, e já encontrou algo. Você ganha a Vantagem Aparelho Seguro Seguro ou Escondido, e pode comprar a outra pela metade do custo. O refúgio seguro vem com a obrigação de proteger um local natural importante nas proximidades, como um riacho em risco de ser destruído para dar lugar a um novo empreendimento habitacional."
+      },
+      {
+        "cost": 2,
+        "skill": "Home Is Where the Heart Is: You know what makes for the perfect safe space, and even when your situation is far from ideal, you're a master at adding certain personal touches to quickly bring it up to scratch. As long as you have a scene to prepare, any Safe House Merits you possess apply to anywhere you rest, subject to Storyteller discretion.",
+        "skillPtBr": "Lar é Onde Está o Coração: Você sabe o que torna um espaço seguro perfeito e, mesmo quando sua situação está longe do ideal, é mestre em acrescentar certos toques pessoais para rapidamente deixá-lo adequado. Desde que tenha uma cena para se preparar, quaisquer Méritos de Aparelho Seguro que possua se aplicam a qualquer lugar onde você descanse, a critério do Narrador."
+      },
+      {
+        "cost": 3,
+        "skill": "Respite: Your home is more than just a place to rest, it's soft, comfortable, and a place that immediately puts you at ease. Once per session, after sleeping in your chosen home, you can automatically downgrade 1 Aggravated Willpower or Health damage to Superficial. If you have no Aggravated damage, you can instead recover 1 Superficial damage of your choice.",
+        "skillPtBr": "Respiro: Seu lar é mais do que apenas um lugar para descansar; é acolhedor, confortável e imediatamente coloca você à vontade. Uma vez por sessão, após dormir em seu lar escolhido, você pode automaticamente reduzir 1 ponto de dano Agravado de Força de Vontade ou Vitalidade para Superficial. Se não tiver dano Agravado, você pode, em vez disso, recuperar 1 ponto de dano Superficial de sua escolha."
+      },
+      {
+        "cost": 4,
+        "skill": "Elemental Protection: Your home is protected by far more than mundane security, and the very elements will rise to your aid when called upon. When in your chosen home, after spending an action interacting with the element of choice, you summon a manifested elemental-spirit (Werewolf, p. 261) with a Power rating of 5. They remain for the scene's duration, cannot leave your land, and will perform any task they could conceivably help with.",
+        "skillPtBr": "Proteção Elemental: Seu lar é protegido por muito mais do que segurança mundana, e os próprios elementos se erguerão em seu auxílio quando chamados. Enquanto estiver em seu lar escolhido, após gastar uma ação interagindo com o elemento escolhido, você invoca um espírito elemental manifestado (Lobisomem: o Apocalipse 5ed, p. 261) com Poder 5. Ele permanece pela duração da cena, não pode deixar suas terras e realizará qualquer tarefa na qual possa concebivelmente ajudar."
+      },
+      {
+        "cost": 5,
+        "skill": "Thin Walls: The barrier between worlds isn't necessarily weaker in your home, but you know its ebbs and flows intimately. The Rite of Shadow Passage only takes one full action to perform within your four walls and the Difficulty is never higher than 3, regardless of the Gauntlet rating.",
+        "skillPtBr": "Paredes Finas: A barreira entre os mundos não é necessariamente mais fraca em seu lar, mas você conhece intimamente seus fluxos e refluxos. O Rito da Passagem Umbrática leva apenas uma ação completa para ser realizado dentro de suas quatro paredes, e a Dificuldade nunca é maior que 3, independentemente da classificação da Película."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 221
+  },
+  {
+    "id": 42,
+    "title": "Gaia's Vengeance",
+    "titlePtBr": "A Vingança de Gaia",
+    "description": "A movement begun by Red Talon theurges, the idea behind Gaia's Vengeance is to teach animals, plants, and even the weather to fight the malign influence of the Weaver on its own. It's a controversial idea among many Red Talons and Garou of other tribes because it endangers wild animals and may lead to violent backlashes as humans react with terror and fear. In practical terms, those who follow Gaia's Vengeance teach and goad various nature spirits to possess their physical counterparts and attack the most egregious enemies of the Earth. The movement has been born in part out of desperation and recognition that there are so few Garou who fight the Weaver out there; they need allies if they're ever going to continue the war. From a human point of view, Gaia's Vengeance manifests as orcas sinking luxury yachts, oil prospectors drowning in terrifying storms, and big game hunters getting mauled by surprisingly intelligent animals in Africa.",
+    "descriptionPtBr": "Um movimento iniciado por Theurges dos Garras Vermelhas, a ideia por trás da Vingança de Gaia é ensinar animais, plantas e até mesmo o clima a combater, por conta própria, a influência maligna da Weaver. É uma ideia controversa entre muitos Garras Vermelhas e Garou de outras tribos, pois coloca animais selvagens em perigo e pode levar a reações violentas quando humanos respondem com terror e medo. Em termos práticos, aqueles que seguem a Vingança de Gaia ensinam e incitam diversos espíritos da natureza a possuírem suas contrapartes físicas e atacarem os inimigos mais flagrantes da Terra. O movimento nasceu em parte do desespero e do reconhecimento de que há poucos Garou lutando contra a Tecelã por aí; eles precisam de aliados se quiserem continuar a guerra. Do ponto de vista humano, a Vingança de Gaia se manifesta como orcas afundando iates de luxo, prospectores de petróleo se afogando em tempestades aterradoras e caçadores de animais de grande porte sendo dilacerados por animais surpreendentemente inteligentes na África.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Rousing Spirits: You know many of the deals and compacts theurges have made with spirits to rouse them to anger. If you're trying to convince the spirits of animals, plants, weather, or other natural phenomena to possess and attack servants of the Weaver, you gain a two-dice bonus on the test. This bonus does not apply if you're using a coercive ability or power.",
+        "skillPtBr": "Incitando Espíritos: Você conhece muitos dos acordos e pactos que theurges fizeram com espíritos para despertá-los à ira. Se estiver tentando convencer espíritos de animais, plantas, clima ou outros fenômenos naturais a possuírem e atacarem servos da Weaver, você recebe um bônus de dois dados no teste. Este bônus não se aplica se você estiver usando uma habilidade ou poder coercitivo."
+      },
+      {
+        "cost": 2,
+        "skill": "Camouflaged Sabotage: You've learned from the spirits how to camouflage your acts of sabotage so that they're blamed on freak weather or animal attacks. If your initial act of sabotage was made with no witnesses, a successful Wits + Survival test at a Difficulty of 3 erases all signs that you were there.",
+        "skillPtBr": "Sabotagem Camuflada: Você aprendeu com os espíritos como camuflar seus atos de sabotagem para que sejam atribuídos a fenômenos climáticos incomuns ou ataques de animais. Se seu ato inicial de sabotagem foi realizado sem testemunhas, um teste bem-sucedido de Raciocínio + Sobrevivência com Dificuldade 3 apaga todos os sinais de que você esteve ali."
+      },
+      {
+        "cost": 3,
+        "skill": "Glory to Gaia's Vengeance: You're known to be a supporter of Gaia's Vengeance. Rightly or wrongly, you're often given credit when natural phenomena wreck industrial operations, tourist infrastructure, or the toys of the super-rich. Unfortunately, those who consider Gaia's Vengeance reckless and unwise view you with scorn. You gain either a two-dice bonus or suffer a two-dice penalty to Social dice pools when dealing with Garou who have strong opinions about Gaia's Vengeance.",
+        "skillPtBr": "Glória à Vingança de Gaia: Você é conhecido como apoiador da Vingança de Gaia. Com razão ou não, costuma receber crédito quando fenômenos naturais destroem operações industriais, infraestrutura turística ou os brinquedos dos super-ricos. Infelizmente, aqueles que consideram a Vingança de Gaia imprudente e insensata o veem com desprezo. Você recebe um bônus de dois dados ou sofre uma penalidade de dois dados em paradas Sociais ao lidar com Garou que tenham opiniões fortes sobre a Vingança de Gaia."
+      },
+      {
+        "cost": 4,
+        "skill": "Animal Rescue: Gaia's Vengeance is there for you in your hour of need. If you're Impaired in a fight and a manifested spirit or spirit possessing an animal could feasibly drag you to safety without risking itself, one will do so. This ability can be used at most once per session.",
+        "skillPtBr": "Resgate Animal: A Vingança de Gaia está ao seu lado em sua hora de necessidade. Se você estiver Debilitado em uma luta e um espírito manifestado ou um espírito possuindo um animal puder, de forma plausível, arrastá-lo para um lugar seguro sem se colocar em risco, ele o fará. Esta habilidade pode ser usada no máximo uma vez por sessão."
+      },
+      {
+        "cost": 5,
+        "skill": "You Are the Vengeance: If you successfully call a Great Hunt, Gaia's Vengeance is with you until victory or death. Although spirit-possessed natural phenomena won't take part in the biggest and most dangerous fights, they sabotage the enemy relentlessly. Much of this must be narrated by the Storyteller, but it can give the players' characters a two-dice bonus to many of their planning, stealth, and sabotage-related tests throughout the Great Hunt. For more on Great Hunts, see Shattered Nation (p. 65).",
+        "skillPtBr": "Você é a Vingança: Se você convocar uma Grande Caçada com sucesso, a Vingança de Gaia estará com você até a vitória ou a morte. Embora fenômenos naturais possuídos por espíritos não participem das maiores e mais perigosas batalhas, eles sabotam o inimigo implacavelmente. Grande parte disso deve ser narrada pelo Narrador, mas pode conceder aos personagens dos jogadores um bônus de dois dados em muitos de seus testes relacionados a planejamento, furtividade e sabotagem ao longo da Grande Caçada. Para mais sobre Grandes Caçadas, veja Maré da Wyrm, p. 65)."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 222
+  },
+  {
+    "id": 43,
+    "title": "Garou Enlightenment",
+    "titlePtBr": "Iluminismo Garou",
+    "description": "There's a series of utopian and progressive philosophies, as well as political movements, collectively called the “Garou Enlightenment,” principally but not exclusively associated with the Children of Gaia. One of the most common ways for them to emerge is when a Child of Gaia applies human ideals and concepts to Garou society, but sometimes they're inspired by contact with the spirits or even Rites involving psychoactive drugs. As a phenomenon, the Garou Enlightenment harkens back at least to the human Renaissance, and it has precursors in Medieval European and South Asian attempts to square Garou mythology and spirit hierarchies with Christianity, Hinduism, and Buddhism. In more recent decades, the Garou Enlightenment has involved advocating for democratically led septs and trying to envision a post-Apocalypse society after the Wyrm has been put back into place. Traditionally, the Garou Enlightenment has faced an uphill battle, often being openly ridiculed by members of more traditionalist tribes and septs. They receive little support even from potential allies, such as many Glass Walkers and Bone Gnawers, who see it as an attempt to erase Garou culture.",
+    "descriptionPtBr": "Há uma série de filosofias utópicas e progressistas, bem como movimentos políticos, coletivamente chamados de “Iluminismo Garou”, associados principalmente, mas não exclusivamente, aos Filhos de Gaia. Uma das formas mais comuns de surgirem é quando um Filho de Gaia aplica ideais e conceitos humanos à sociedade Garou, mas às vezes são inspirados pelo contato com espíritos ou até mesmo por Ritos envolvendo drogas psicoativas. Como fenômeno, o Iluminismo Garou remonta pelo menos ao Renascimento humano, e possui precursores em tentativas medievais europeias e sul-asiáticas de conciliar a mitologia Garou e as hierarquias espirituais com o Cristianismo, o Hinduísmo e o Budismo. Em décadas mais recentes, o Iluminismo Garou tem envolvido a defesa de septos liderados democraticamente e a tentativa de imaginar uma sociedade pós-Apocalipse depois que a Wyrm for colocada de volta em seu lugar. Tradicionalmente, o Iluminismo Garou enfrentou uma batalha difícil, sendo muitas vezes ridicularizado abertamente por membros de tribos e septos mais tradicionalistas. Eles recebem pouco apoio até mesmo de potenciais aliados, como muitos Andarilhos do Asfalto e Roedores de Ossos, que o veem como uma tentativa de apagar a cultura Garou.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "You Were Right: The character advocated for an idealistic, high-minded solution to a serious problem facing the local sept, and they were proven correct. Because of this, they have a certain cachet when making idealistic arguments in the future. Gain a one-die bonus to tests related to arguing for mercy, compassion, or similar values with local Garou.",
+        "skillPtBr": "Você Estava Certo: O personagem defendeu uma solução idealista e elevada para um problema sério enfrentado pela Fratria local, e acabou se provando correto. Por causa disso, ele possui certo prestígio ao apresentar argumentos idealistas no futuro. Receba um bônus de um dado em testes relacionados a defender misericórdia, compaixão ou valores semelhantes diante de Garou locais."
+      },
+      {
+        "cost": 2,
+        "skill": "Hated by the Cult: The character's idealism and beliefs have made them particularly hated by the Cult of Fenris, who believe the character is willfully destroying Garou tradition and defiling the old ways. Although this means the character suffers a one-die penalty on Social tests, including Intimidation, with Cult members, it also adds two dice to all Social tests against Gaian Garou when opposing the Cult in any way.",
+        "skillPtBr": "Odiado pela Seita: O idealismo e as crenças do personagem fizeram com que ele fosse particularmente odiado pela Seita de Fenris, que acredita que o personagem está destruindo deliberadamente a tradição Garou e profanando os velhos costumes. Embora isso signifique que o personagem sofre uma penalidade de um dado em testes Sociais, incluindo Intimidação, com membros da Seita, também adiciona dois dados a todos os testes Sociais contra Garou gaianos ao se opor à Seita de qualquer forma."
+      },
+      {
+        "cost": 3,
+        "skill": "Favored of Gaia: Whether the character belongs to the tribe or not, their utopian sensibility has impressed the local Children of Gaia. Once per story, they can ask one of the Children for a favor and expect to have it granted. The favor cannot involve hurting the innocent or wanton destruction, but it can place the Child in mortal danger as long as it isn't tantamount to suicide. The Children of Gaia are idealists, not cowards.",
+        "skillPtBr": "Favorecido por Gaia: Quer o personagem pertença à tribo ou não, sua sensibilidade utópica impressionou os Filhos de Gaia locais. Uma vez por história, ele pode pedir um favor a um dos Filhos e esperar que seja concedido. O favor não pode envolver ferir inocentes ou destruição gratuita, mas pode colocar o Filho em perigo mortal, desde que isso não seja equivalente a suicídio. Os Filhos de Gaia são idealistas, não covardes."
+      },
+      {
+        "cost": 4,
+        "skill": "Blessed Conviction: As long as the character hasn't engaged in violence since the last session, their Willpower is effectively one level higher. If Willpower is lost, it's first deducted from this extra level. This advantage is usable once per session.",
+        "skillPtBr": "Convicção Abençoada: Desde que o personagem não tenha se envolvido em violência desde a última sessão, sua Força de Vontade é efetivamente um nível mais alta. Se perder Força de Vontade, ela é primeiro deduzida desse nível extra. Esta vantagem pode ser usada uma vez por sessão."
+      },
+      {
+        "cost": 5,
+        "skill": "The Face of Progress: For good or ill, you're the face of one of the most important modern demands of the Garou Enlightenment, for example: “We must abolish the Veil,” “All Banes and Black Spiral Dancers must be rehabilitated,” or “Septs must share the property of their members with each other communally.” Whether you came up with it or just happen to be associated with it for some other reason, Garou near and far know you're the chief advocate for this position. Traditionalists hate you while your few fellow followers of Garou Enlightenment love you. Because of your status and fame, you're always allowed to speak at moots, although the audience may not like what you have to say. Similarly, you can always get an audience with any Gaian Garou leader, no matter how famous, but that doesn't mean they'll like you.",
+        "skillPtBr": "A Face do Progresso: Para o bem ou para o mal, você é a face de uma das demandas modernas mais importantes do Iluminismo Garou, por exemplo: “Devemos abolir o Véu”, “Todos os Malditos e Dançarinos da Espiral Negra devem ser reabilitados” ou “As Fratrias devem compartilhar comunitariamente as propriedades de seus membros entre si”. Quer a ideia tenha partido de você ou você apenas tenha sido associado a ela por algum outro motivo, Garou de perto e de longe sabem que você é o principal defensor dessa posição. Tradicionalistas odeiam você, enquanto seus poucos companheiros seguidores do Iluminismo Garou o amam. Por causa de seu status e fama, você sempre tem permissão para falar em assembleias, embora a audiência possa não gostar do que você tem a dizer. Da mesma forma, você sempre consegue uma audiência com qualquer líder Garou gaiano, por mais famoso que seja, mas isso não significa que ele vá gostar de você."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 223
+  },
+  {
+    "id": 44,
+    "title": "House Austere Howl",
+    "titlePtBr": "Casa Uivo Austero",
+    "description": "Among the great Silver Fang houses, House Austere Howl carries more baggage than most. Arising from the British Isles, its glory days coincided with the ascendancy of the British Empire. Many of its members, proud Silver Fangs, traveled the globe, disciplining local Garou as they went and teaching them better ways. Or at least, that's what they thought they were doing. Now, members of the House like to believe that their forebears acted in the spirit of the times. Sure, they used the British Empire for their own ends, but it's all good in the war for Gaia, right? Unfortunately, there are many, many stories and accounts from other Garou of the period, from Indigenous victims of Austere Howl crimes in the Americas, Africa, and beyond to Children of Gaia who denounced their cruelty in London. The truth is that even at the time, House Austere Howl was accused of being servants of the Wyrm, whether they realized it or not. Because of this colonial legacy, being associated with Austere Howl in the modern times is a complicated proposition. The House has vast resources, but its members are not welcome at many septs. This has caused some members of the House to double down on their traditions involving ancestor-spirits, living in their fantasy of a past that never really existed.",
+    "descriptionPtBr": "Entre as grandes casas dos Presas de Prata, a Casa Uivo Austero carrega mais peso do que a maioria. Originária das Ilhas Britânicas, seus dias de glória coincidiram com a ascensão do Império Britânico. Muitos de seus membros, orgulhosos Presas de Prata, viajaram pelo mundo, disciplinando Garou locais por onde passavam e ensinando-lhes caminhos melhores. Ou, pelo menos, era isso que eles achavam que estavam fazendo. Hoje, os membros da Casa gostam de acreditar que seus antepassados agiram de acordo com o espírito de sua época. Claro, eles usaram o Império Britânico para seus próprios fins, mas tudo vale na guerra por Gaia, certo? Infelizmente, existem muitas, muitas histórias e relatos de outros Garou daquele período, desde vítimas indígenas dos crimes do Uivo Austero nas Américas, na África e além, até Filhos de Gaia que denunciaram sua crueldade em Londres. A verdade é que, mesmo naquela época, a Casa Uivo Austero era acusada de servir à Wyrm, percebessem isso ou não. Por causa desse legado colonial, estar associado ao Uivo Austero nos tempos modernos é uma proposta complicada. A Casa possui vastos recursos, mas seus membros não são bem-vindos em muitas fratrias. Isso fez com que alguns membros da Casa se agarrassem ainda mais às suas tradições envolvendo espíritos ancestrais, vivendo em sua fantasia de um passado que nunca existiu de verdade.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Guidance from Beyond: Your ancestor-spirit plays an active role in your life, gently nudging you towards success. Once per session, the spirit gives you the benefit of teamwork on any single test.",
+        "skillPtBr": "Orientação do Além: Seu espírito ancestral desempenha um papel ativo em sua vida, guiando-o gentilmente rumo ao sucesso. Uma vez por sessão, o espírito concede a você o benefício de trabalho em equipe em um único teste."
+      },
+      {
+        "cost": 2,
+        "skill": "Cunning Crinos: You're able to retain some of your judgment and faculties even in the crinos war-form. Resisting frenzy while in crinos form is now made at -1 Difficulty.",
+        "skillPtBr": "Crinos Astuto: Você é capaz de conservar parte de seu julgamento e de suas faculdades mesmo na forma de guerra crinos. Resistir ao frenesi enquanto está na forma crinos agora é feito com -1 de Dificuldade."
+      },
+      {
+        "cost": 3,
+        "skill": "Rite of Contemplation: The ancestor-spirit counts as a Touchstone, and following a scene where your actions would have made them proud, you may spend a scene communing with them, receiving the same benefits as from a living Touchstone. This Merit is unusable while suffering from chagrin.",
+        "skillPtBr": "Rito de Contemplação: O espírito ancestral conta como um Pilar e, após uma cena em que suas ações o teriam deixado orgulhoso, você pode passar uma cena em comunhão com ele, recebendo os mesmos benefícios de um Pilar vivo. Este Mérito não pode ser usado enquanto você estiver sofrendo de chagrin."
+      },
+      {
+        "cost": 4,
+        "skill": "Deeds of Renown: The ancestor-spirit you share a connection with was deeply revered for one of the types of Renown: Glory, Honor, or Wisdom. You share that bond, and their subtle advice enables your progression. Choose one Renown type; all tests with that Renown add an additional die to the pool.",
+        "skillPtBr": "Feitos de Renome: O espírito ancestral com quem você compartilha uma conexão era profundamente reverenciado por um dos tipos de Renome: Glória, Honra ou Sabedoria. Você compartilha esse vínculo, e os conselhos sutis dele possibilitam sua progressão. Escolha um tipo de Renome; todos os testes com esse Renome adicionam um dado extra à parada."
+      },
+      {
+        "cost": 5,
+        "skill": "The Fate of Mary Campbell: The exiled leader of House Austere Howl has tracked you down, using her meticulous records to identify your ancestral nature. Mary counts as a Mentor (••••), and once per story she can also provide the entire pack a new Mask (•) or give them temporary access to one of her old safe houses (possessing the Obscure or Secure Merit). Mary is hunted by House Gleaming Eye, so if the relationship is discovered, they become an Enemy (•••)—unless Mary is handed over of course.",
+        "skillPtBr": "O Destino de Mary Campbell: A líder exilada da Casa Uivo Austero rastreou você, usando seus registros meticulosos para identificar sua natureza ancestral. Mary conta como uma Mentora (••••) e, uma vez por história, também pode fornecer a toda a matilha uma nova Máscara (•) ou dar a eles acesso temporário a um de seus antigos refúrios, que possuem o Mérito Aparelho Escondido ou Seguro. Mary é caçada pela Casa Olho Reluzente, então, se a relação for descoberta, eles se tornam um Inimigo (•••) — a menos que Mary seja entregue, é claro."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 224
+  },
+  {
+    "id": 45,
+    "title": "Human Essentialism",
+    "titlePtBr": "Essencialismo Humano",
+    "description": "A werewolf is not “a being of two worlds” or “born between the human and the wolf” or some such bullshit peddled by dimwitted Garou enamored with fantasies of being noble savages. The werewolf is a human who has the ability to transform into a wolf. That's all. This line of argument is fairly common among the Glass Walkers and not entirely unheard of among some of the more organized other tribes. It's called Human Essentialism, the idea that a Garou is essentially a human with some special abilities. Glass Walkers who subscribe to this belief often also denigrate the more traditionalist takes on the Gaia myth and frame their war against the Wyrm as a scientifically sensible, rational approach to conserving the environment. Human Essentialists are almost exclusively human-born; for a wolf-born Garou to share these views would be bizarre, but then again, stranger things have happened. Glass Walkers who believe in this are not well-liked among many Garou of other tribes because they deflate the very principles of Garou identity and belief. Perhaps perversely, some Red Talons egg them on, arguing that human-born Garou are indeed not real werewolves at all.",
+    "descriptionPtBr": "Um lobisomem não é “um ser de dois mundos”, nem “nascido entre o humano e o lobo”, nem qualquer bobagem desse tipo espalhada por Garou obtusos apaixonados por fantasias de serem selvagens nobres. O lobisomem é um humano que tem a capacidade de se transformar em lobo. Só isso. Essa linha de argumentação é bastante comum entre os Andarilhos do Asfalto e não é totalmente desconhecida entre algumas das outras tribos mais organizadas. Ela é chamada de Essencialismo Humano: a ideia de que um Garou é, essencialmente, um humano com algumas habilidades especiais. Andarilhos do Asfalto que adotam essa crença muitas vezes também depreciam interpretações mais tradicionalistas do mito de Gaia e enquadram sua guerra contra a Wyrm como uma abordagem cientificamente sensata e racional para a conservação do meio ambiente. Essencialistas Humanos são quase exclusivamente nascidos humanos; para um Garou nascido lobo compartilhar dessas visões seria bizarro, mas coisas mais estranhas já aconteceram. Andarilhos do Asfalto que acreditam nisso não são bem-vistos por muitos Garou de outras tribos, pois esvaziam os próprios princípios da identidade e da crença Garou. Talvez de forma perversa, alguns Garras Vermelhas os incentivem, argumentando que Garou nascidos humanos de fato não são lobisomens de verdade.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Freerunning: You're able to harness the strength and agility of your lupine half without even needing to shift forms. As long as you score even one success on your test, you can add one automatic success to any test related to running, jumping, and parkour in urban environments. On a Brutal outcome, you accidentally shift into lupus form, which may trigger Delirium in onlookers.",
+        "skillPtBr": "Corrida Livre: Você é capaz de aproveitar a força e a agilidade de sua metade lupina sem sequer precisar mudar de forma. Desde que obtenha ao menos um sucesso no teste, você pode adicionar um sucesso automático a qualquer teste relacionado a correr, saltar e praticar parkour em ambientes urbanos. Em um resultado Brutal, você acidentalmente muda para a forma lupina, o que pode desencadear o Delírio em observadores."
+      },
+      {
+        "cost": 2,
+        "skill": "Dexterous Digits: Your familiarity and experience with using tools carries over into your more feral forms. Weapons can now be used in crinos form, and even klaives can be wielded, albeit at a -2 penalty to dice pools. These items are abandoned if frenzy strikes. While hispo and lupus can't wield tools, there can be situations where the benefit still applies at the Storyteller's discretion.",
+        "skillPtBr": "Dedos hábeis: Sua familiaridade e experiência no uso de ferramentas se estendem às suas formas mais ferozes. Armas agora podem ser usadas na forma crinos e até klaives podem ser empunhadas, embora com uma penalidade de -2 nas paradas de dados. Esses itens são abandonados caso o frenesi ocorra. Embora hispos e lupinos não possam empunhar ferramentas, pode haver situações em que o benefício ainda se aplique, a critério do Narrador."
+      },
+      {
+        "cost": 3,
+        "skill": "Eyes of the City: For many Garou, the pillars of glass and steel that so define cities resemble nothing more than a spiritual blight. Not so for you, and these same reflective surfaces allow you to glimpse the Umbra. Test Resolve + Awareness (Difficulty 2 in cities, 3 in suburbs, and 4 in caerns or the wilderness). Success allows the Garou to perceive the local Umbra through these reflective surfaces, while Brutal outcomes see the mirror shatter of its own accord. No other senses or communication are conferred from this advantage.",
+        "skillPtBr": "Olhos da Cidade: Para muitos Garou, os pilares de vidro e aço que tanto definem as cidades não parecem nada além de uma praga espiritual. Não para você; essas mesmas superfícies reflexivas permitem que você vislumbre a Umbra. Teste Determinação + Percepção, com Dificuldade 2 em cidades, 3 em subúrbios e 4 em caerns ou áreas selvagens. Um sucesso permite que o Garou perceba a Umbra local por meio dessas superfícies reflexivas, enquanto resultados Brutais fazem o espelho se estilhaçar por conta própria. Nenhum outro sentido ou comunicação é concedido por esta vantagem."
+      },
+      {
+        "cost": 4,
+        "skill": "Scion of the Weaver: Weaver-spirits are positively inclined toward you, having followed and shaped the exploits of man since antiquity. Unless given reason to react differently, Weaver-spirits always give you the benefit of the doubt and you may add two dice to any non-combat pools when dealing with them.",
+        "skillPtBr": "Descendente da Weaver: Espíritos da Weaver são positivamente inclinados em relação a você, pois acompanharam e moldaram os feitos da humanidade desde a Antiguidade. A menos que tenham motivo para reagir de outra forma, espíritos da Tecelã sempre lhe concedem o benefício da dúvida, e você pode adicionar dois dados a quaisquer paradas que não sejam de combate ao lidar com eles."
+      },
+      {
+        "cost": 5,
+        "skill": "The Spider's Siphon: The spirit of the Weaver is stronger in you than most, a fact that makes many Garou give you a wide berth. When you touch or strike any Wyld- or Wyrm-spirit, in addition to your intended effect, the spirit's Power is reduced by 1 as their form becomes brittle and calcifies. While this makes you a feared warrior, it can lead to complications when dealing with both spirits and other Garou, as whether you intend it or not, your very presence is a threat.",
+        "skillPtBr": "O Sifão da Aranha: O espírito da Weaver é mais forte em você do que na maioria, fato que faz muitos Garou manterem distância. Quando você toca ou golpeia qualquer espírito da Wyld ou da Wyrm, além do efeito pretendido, o Poder do espírito é reduzido em 1 conforme sua forma se torna quebradiça e calcifica. Embora isso faça de você um guerreiro temido, pode levar a complicações ao lidar tanto com espíritos quanto com outros Garou, pois, queira você ou não, sua mera presença é uma ameaça."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 225
+  },
+  {
+    "id": 46,
+    "title": "Margrave Yuri Konietzko",
+    "titlePtBr": "Margrave Yuri Konietzko",
+    "description": "For most Shadow Lords, the margrave is a historical figure, someone who brought the tribe to new heights of greatness but who's not particularly relevant now. He has his loyalists, and there are those among the younger generation of Shadow Lords who believe that he was the last great hero of their tribe, even if they have never met him. Even beyond Thunder's tribe, he's well-known enough to be studied and sought out. Konietzko's legacy is twofold: for some, he's a conservative symbol of the lost greatness of the Garou Nation, while for others, he shows how even the bitterest loss can be overcome and learned from. For the select few, Konietzko is not just a legend, but a Garou who's still fighting the war for Gaia despite his age. For them, his example is something concrete and real, a reminder that history and legends don't win wars on their own — tactics and claws do.",
+    "descriptionPtBr": "Para a maioria dos Senhores das Sombras, o Margrave é uma figura histórica, alguém que levou a tribo a novos patamares de grandeza, mas que não é particularmente relevante agora. Ele tem seus lealistas, e há aqueles entre a geração mais jovem dos Senhores das Sombras que acreditam que ele foi o último grande herói de sua tribo, mesmo que nunca o tenham conhecido. Mesmo além da tribo do Trovão, ele é conhecido o bastante para ser estudado e procurado. O legado de Konietzko é duplo: para alguns, ele é um símbolo conservador da grandeza perdida da Nação Garou, enquanto, para outros, mostra como até mesmo a perda mais amarga pode ser superada e servir de aprendizado. Para uns poucos escolhidos, Konietzko não é apenas uma lenda, mas um Garou que ainda luta na guerra por Gaia apesar de sua idade. Para eles, seu exemplo é algo concreto e real, um lembrete de que história e lendas não vencem guerras por conta própria — táticas e garras vencem.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Memories of the Old Ways: You've studied Yuri Konietzko's legend and know how to use his story at moots. When you make an argument where you use his example to emphasize your point, gain two dice in tests.",
+        "skillPtBr": "Memórias dos Velhos Costumes: Você estudou a lenda de Yuri Konietzko e sabe como usar sua história em assembleias. Quando fizer um argumento usando o exemplo dele para enfatizar seu ponto, receba dois dados em testes."
+      },
+      {
+        "cost": 2,
+        "skill": "The Lessons of Past Victories: You know of the many victories Konietzko had against vampires. When fighting against the undead, you inflict +1 Health damage on your first successful attack in each physical conflict.",
+        "skillPtBr": "As Lições das Vitórias Passadas: Você conhece as muitas vitórias que Konietzko teve contra vampiros. Ao lutar contra mortos-vivos, você causa +1 de dano à Vitalidade em seu primeiro ataque bem-sucedido em cada conflito físico."
+      },
+      {
+        "cost": 3,
+        "skill": "Friendly Rivalry: Konietzko was always sparring with the Silver Fangs, challenging them so that the best Garou would lead. An old Silver Fang who knew him sees something of him in you and is willing to share certain secrets of the Silver Fangs with you. You may select three Silver Fang Gifts that you may learn as if they belonged to your tribe. These must still be purchased with Experience as usual.",
+        "skillPtBr": "Rivalidade Amistosa: Konietzko estava sempre competindo com os Presas de Prata, desafiando-os para que os melhores Garou liderassem. Um velho Presa de Prata que o conheceu vê algo dele em você e está disposto a compartilhar certos segredos dos Presas de Prata. Você pode escolher três Dons dos Presas de Prata que poderá aprender como se pertencessem à sua tribo. Eles ainda devem ser comprados com Experiência normalmente."
+      },
+      {
+        "cost": 4,
+        "skill": "Hour of Need: You have met Yuri Konietzko, and for whatever reason, he believes you have an important role to play in the war for Gaia. He acts as a Mentor (••••), and if your need is great, he'll come to help win a fight, plan a battle, or commune with the spirits of Thunder. He is unwilling to reveal himself to other septs or packs, nor does he want his presence used to gain status. If your connection to him is discovered by other Garou, you lose access to him as a Mentor.",
+        "skillPtBr": "Hora da Necessidade: Você conheceu Yuri Konietzko e, por alguma razão, ele acredita que você tem um papel importante a desempenhar na guerra por Gaia. Ele atua como um Mentor (••••) e, se sua necessidade for grande, virá ajudar a vencer uma luta, planejar uma batalha ou comungar com os espíritos do Trovão. Ele não está disposto a se revelar a outras Fratrias ou Alcateias, nem quer que sua presença seja usada para obter status. Se sua conexão com ele for descoberta por outros Garou, você perde acesso a ele como Mentor."
+      },
+      {
+        "cost": 5,
+        "skill": "Lord of Thunder: Yuri Konietzko has told Thunder of you. Because of this, the spirits of Thunder treat you as their ally. If you call a Great Hunt (see Shattered Nation, pp. 65 - 66), all relevant tests related to the spirits of Thunder have their Difficulty lowered by 1. In addition, Thunder sends a host of Stormcrows and other spirits from his brood to join the fight. The Storyteller is responsible for the specifics, but they offer a significant, if not decisive, contribution to the Garou forces.",
+        "skillPtBr": "Senhor do Trovão: Yuri Konietzko falou de você ao Trovão. Por causa disso, os espíritos do Trovão tratam você como aliado. Se você convocar uma Grande Caçada, veja Maré da Wyrm, pp. 65 - 66, todos os testes relevantes relacionados aos espíritos do Trovão têm sua Dificuldade reduzida em 1. Além disso, o Trovão envia uma hoste de Corvos da Tempestade e outros espíritos de sua ninhada para se juntar à luta. O Narrador é responsável pelos detalhes, mas eles oferecem uma contribuição significativa, ainda que não decisiva, às forças Garou."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 226
+  },
+  {
+    "id": 47,
+    "title": "The Many-Armed Matron",
+    "titlePtBr": "A Matrona de Muitos Braços",
+    "description": "Among the Garou, there are scores of half-true tales about tribes long gone. One starts with the spiteful Octopus, who was incensed by being passed over and sought to make a tribe of her own. Instead of approaching young Garou, the many-armed matron reached across the world in secret and recruited Garou who resonated with her guile and felt shamed for their own pragmatic methodology. From them, Octopus formed her own tribe, hidden within the tribes. These Hidden Claws understood infiltration, sacrifice, and patience, but often Octopus' teachings sent her Garou to an early grave or permanently into the darkness. Stories tell of their pride and their failures as they grew and spread across the tribes, causing steadfast and honorable Turtle to take note. Although Turtle's tribe tried to root out the followers of Octopus, the renegade Patron's influence remains among those Garou who understand hunting in the darkness. Among the current tribes, groups like the Cuckoos, Limited Liability, and the Bringers of Light share close similarities to Octopus' legacy and her tribe. Some of them remember her legacy and her teachings, for she was always comfortable in the darkest of places.",
+    "descriptionPtBr": "Entre os Garou, há dezenas de histórias parcialmente verdadeiras sobre tribos há muito desaparecidas. Uma delas começa com a rancorosa Polvo, que ficou enfurecida por ter sido preterida e tentou criar uma tribo própria. Em vez de se aproximar de jovens Garou, a matrona de muitos braços estendeu seus tentáculos pelo mundo em segredo e recrutou Garou que ressoavam com sua astúcia e se sentiam envergonhados por sua própria metodologia pragmática. A partir deles, Polvo formou sua própria tribo, escondida dentro das tribos. Esses Garras Ocultas entendiam de infiltração, sacrifício e paciência, mas os ensinamentos de Polvo frequentemente enviavam seus Garou a uma cova precoce ou permanentemente para a escuridão. Histórias contam sobre seu orgulho e seus fracassos conforme cresceram e se espalharam entre as tribos, fazendo com que a firme e honrada Tartaruga tomasse conhecimento. Embora a tribo da Tartaruga tenha tentado erradicar os seguidores de Polvo, a influência da Padroeira renegada permanece entre os Garou que entendem a caça na escuridão. Entre as tribos atuais, grupos como os Cucos, Responsabilidade Limitada e os Portadores da Luz compartilham fortes semelhanças com o legado de Polvo e sua tribo. Alguns deles lembram seu legado e seus ensinamentos, pois ela sempre se sentiu confortável nos lugares mais sombrios.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Endorsed: Sometimes the biggest issue with infiltrating a group is finding that “in.” Thankfully, you know people, and they in turn know other people, giving you a broad network of potential allies to call upon. As long as you score even one success on your test, you can add one automatic success to any tests related to gaining initial access to specific subcultures and other insular groups. However, one person will always remain skeptical.",
+        "skillPtBr": "Endossado: Às vezes, o maior problema ao se infiltrar em um grupo é encontrar uma porta de entrada. Felizmente, você conhece pessoas, e elas, por sua vez, conhecem outras pessoas, concedendo a você uma ampla rede de aliados em potencial a quem recorrer. Desde que obtenha ao menos um sucesso no teste, você pode adicionar um sucesso automático a quaisquer testes relacionados a conseguir acesso inicial a subculturas específicas e outros grupos fechados. Contudo, uma pessoa sempre permanecerá cética."
+      },
+      {
+        "cost": 2,
+        "skill": "An Eye for Weakness: You're constantly on the lookout for an advantage, no matter how small. When in direct conflict with an enemy, physical or social, you may add one die to your pool on the second and third turn of action as you learn their tricks and turn them against them.",
+        "skillPtBr": "Olho para a Fraqueza: Você está constantemente atento a qualquer vantagem, por menor que seja. Quando estiver em conflito direto com um inimigo, seja físico ou social, você pode adicionar um dado à sua parada no segundo e no terceiro turno de ação, conforme aprende os truques dele e os volta contra ele."
+      },
+      {
+        "cost": 3,
+        "skill": "One of Us: While humans can be quick to trust — or simply incapable of seeing the threat a Garou presents — the spirits are not so easily fooled. Once you've invested the time to infiltrate a group, usually a successful scene, but Storytellers might extend the time if needed, even the spirits in their service accept you. These spirits won't interfere with your investigations, even if you step into the Umbra, nor will they report on your actions unless you instigate violence. This benefit ends if the human side learns of your interference.",
+        "skillPtBr": "Um de Nós: Embora humanos possam confiar rapidamente — ou simplesmente ser incapazes de enxergar a ameaça que um Garou representa —, os espíritos não são enganados com tanta facilidade. Depois que você investir tempo para se infiltrar em um grupo, geralmente uma cena bem-sucedida, embora o Narrador possa estender esse tempo se necessário, até mesmo os espíritos a serviço deles aceitarão você. Esses espíritos não interferirão em suas investigações, mesmo que você entre na Umbra, nem relatarão suas ações, a menos que você instigue violência. Este benefício termina se o lado humano descobrir sua interferência."
+      },
+      {
+        "cost": 4,
+        "skill": "Fight Fire with Fire: Your past has brought you into contact with some very... interesting individuals and groups. You've maintained contact with one of them, and they consider you a ride or die ally — although the feeling is unlikely to be mutual. Define this entity; they can be a renegade member of an obscure, ancient cult, a spirit who has renounced the Gaian orthodoxy or a werewolf who has ventured beyond the usual ideas of Wyld, Weaver and Wyrm. They count as a ••• Ally with maximum reliability, use Mentor or Spirit Pact if using something beyond human. Other supporters of Gaia see this ally as a travesty at best and someone to kill on sight at worst, and if you're seen to mistreat your ally, there's always the risk they side with the enemy you brought them in to help with.",
+        "skillPtBr": "Combater Fogo com Fogo: Seu passado colocou você em contato com alguns indivíduos e grupos muito... interessantes. Você manteve contato com um deles, e ele considera você um aliado até o fim — embora seja improvável que o sentimento seja mútuo. Defina essa entidade; ela pode ser um membro renegado de a seita obscura e antiga, um espírito que renunciou à ortodoxia gaiana ou um lobisomem que se aventurou além das ideias usuais de Wyld, Weaver e Wyrm. Ela conta como um Aliado (•••) com confiabilidade máxima; use Mentor ou Pacto Espiritual se for algo além de humano. Outros apoiadores de Gaia veem esse aliado, na melhor das hipóteses, como uma aberração e, na pior, como alguém a ser morto assim que visto. Se você for visto maltratando seu aliado, sempre há o risco de que ele fique ao lado do inimigo que você o trouxe para ajudar a enfrentar."
+      },
+      {
+        "cost": 5,
+        "skill": "Dire Curse: The groups infiltrated by Garou have many ways to lay low their enemies, and you've picked up some of the worst they have to offer. The curse takes a few minutes to perform and requires either a personal object from the target or that they remain in line of sight during the ritual. Test Composure + Occult, Difficulty 1; for every two points of margin, the target loses one success from a single type of test of the character's choice. These can be spread across multiple tests, but the curse only persists for 24 hours. Storytellers should offer a more narrative resolution if the target is unlikely to make tests.",
+        "skillPtBr": "Maldição Terrível: Os grupos infiltrados por Garou possuem muitas formas de derrubar seus inimigos, e você aprendeu algumas das piores que eles têm a oferecer. A maldição leva alguns minutos para ser realizada e exige um objeto pessoal do alvo ou que ele permaneça na linha de visão durante o ritual. Teste Autocontrole + Ocultismo, Dificuldade 1; para cada dois sucessos de margem, o alvo perde um sucesso em um único tipo de teste à escolha do personagem. Esses sucessos perdidos podem ser distribuídos por múltiplos testes, mas a maldição persiste apenas por 24 horas. Narradores devem oferecer uma resolução mais narrativa caso seja improvável que o alvo faça testes."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 227
+  },
+  {
+    "id": 48,
+    "title": "Riders of the West Wind",
+    "titlePtBr": "Cavaleiros do Vento Oeste",
+    "description": "At the end of the War of Rage, many Garou had regrets over what had happened. They felt the consequences of victory and started to wonder if the cause had been just. Pacts maintained by now-dead shifters were left unattended; stories tell of one such pact performed with the West Wind, once maintained by an alliance of bat- and crow-shifters. Perhaps because of shame over the War of Rage or just a desire to connect Garou once more, different packs through the years have bonded with the West Wind. This bond is meant to bring the winds of change and good fortune to different septs while building links between them. Today, the modern incarnation of this loose fellowship is called the Riders of the West Wind, reformed after the Nation's collapse. Young Garou are now relearning what once kept the Nation connected, while also learning about old enemies who have sought to keep Garou society atomized. Their members are drawn from across the tribes, with Galestalkers and Silent Striders in the majority.",
+    "descriptionPtBr": "Ao fim da Guerra da Fúria, muitos Garou se arrependeram do que havia acontecido. Eles sentiram as consequências da vitória e começaram a se perguntar se a causa havia sido justa. Pactos mantidos por metamorfos agora mortos foram deixados sem cuidado; histórias falam de um desses pactos realizado com o Vento Oeste, outrora mantido por uma aliança de metamorfos-morcego e metamorfos-corvo. Talvez por vergonha da Guerra da Fúria, ou apenas pelo desejo de conectar os Garou mais uma vez, diferentes alcateias ao longo dos anos se vincularam ao Vento Oeste. Esse vínculo tem como propósito levar os ventos da mudança e da boa sorte a diferentes fratrias, ao mesmo tempo em que cria laços entre eles. Hoje, a encarnação moderna dessa irmandade informal é chamada de Cavaleiros do Vento Oeste, reformada após o colapso da Nação. Jovens Garou agora estão reaprendendo aquilo que um dia manteve a Nação conectada, ao mesmo tempo em que descobrem antigos inimigos que tentaram manter a sociedade Garou fragmentada. Seus membros vêm de várias tribos, com os Espreitadores do Vento e os Peregrinos Silenciosos em maioria.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Long-Running: Accustomed to the marathon over the sprint, you can run all night and still press on through daybreak. No matter how far you run, you suffer no penalties from exhaustion and only need to stop to eat and sleep.",
+        "skillPtBr": "Fôlego de Maratonista: Acostumado à maratona em vez da arrancada, você pode correr a noite inteira e ainda seguir em frente ao amanhecer. Não importa o quanto corra, você não sofre penalidades por exaustão e só precisa parar para comer e dormir."
+      },
+      {
+        "cost": 2,
+        "skill": "A Port in the Storm: For better or worse, you've been everywhere and know where to reach the local sept. Whenever you find yourself in a new location, the Storyteller will provide you with the details of at least one local Garou. This contact doesn't necessarily react positively toward you but they won't be hostile, at least not initially.",
+        "skillPtBr": "Um Porto na Tempestade: Para o bem ou para o mal, você já esteve em toda parte e sabe como encontrar a fratria local. Sempre que estiver em um novo local, o Narrador fornecerá os detalhes de pelo menos um Garou da região. Esse contato não necessariamente reagirá de forma positiva a você, mas não será hostil, pelo menos não inicialmente."
+      },
+      {
+        "cost": 3,
+        "skill": "Whispers on the Wind: The wind hears everything, and messengers of the West Wind hear the secrets others divulge. Once per session, you may ask a question to the wind and get an answer in reply. Make a test of Charisma + Insight, Difficulty 3, although Storytellers should increase this for closely guarded information. If successful, the supporting reply might be helpful or cryptic, but is always based on something that was actually said out loud by someone.",
+        "skillPtBr": "Sussurros no Vento: O vento ouve tudo, e os mensageiros do Vento Oeste escutam os segredos que outros revelam. Uma vez por sessão, você pode fazer uma pergunta ao vento e receber uma resposta. Faça um teste de Carisma + Sagacidade, Dificuldade 3, embora o Narrador deva aumentá-la para informações cuidadosamente guardadas. Se for bem-sucedido, a resposta recebida pode ser útil ou enigmática, mas sempre se baseia em algo que foi realmente dito em voz alta por alguém."
+      },
+      {
+        "cost": 4,
+        "skill": "Umbral Breeze: Few people have the patience to hear them, but if you listen closely enough, it's possible to hear the chatter of spirits, their voices carried across the Gauntlet by gentle breezes. When sitting perfectly still and maintaining a dedicated silence, you can hear the spirits as if you were in the Umbra, even as they remain ignorant of your eavesdropping.",
+        "skillPtBr": "Brisa Umbral: Poucas pessoas têm paciência para ouvi-los, mas, se você escutar com atenção suficiente, é possível ouvir a tagarelice dos espíritos, suas vozes carregadas através da Película por brisas suaves. Ao permanecer perfeitamente imóvel e manter um silêncio dedicado, você pode ouvir os espíritos como se estivesse na Umbra, enquanto eles permanecem alheios à sua escuta."
+      },
+      {
+        "cost": 5,
+        "skill": "The Storm Gathers: Like the dark clouds of a coming storm, the Wind Riders are considered a warning for what's on the horizon. You are the personification of this and, once per story, can summon a storm of your own. The storm takes one full turn of concentration to summon but arrives swiftly. Each turn, the Garou nominates a target to be struck by lightning; the bolts have a dice pool of 8 and inflict +2 Superficial Health Aggravated damage. Should a target take even one injury, they suffer a two-dice penalty to dice pools in the next turn.",
+        "skillPtBr": "A Tempestade se Forma: Como as nuvens escuras de uma tempestade vindoura, os Cavaleiros do Vento são considerados um aviso do que se aproxima no horizonte. Você é a personificação disso e, uma vez por história, pode convocar uma tempestade própria. A tempestade exige um turno completo de concentração para ser convocada, mas chega rapidamente. A cada turno, o Garou escolhe um alvo para ser atingido por um raio; os relâmpagos têm uma parada de dados de 8 e infligem +2 de dano Agravado à Vitalidade. Se um alvo sofrer ao menos um ferimento, sofre uma penalidade de dois dados em suas paradas no turno seguinte."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 228
+  },
+  {
+    "id": 49,
+    "title": "Shakespearean Scholar",
+    "titlePtBr": "Erudito Shakespeareano",
+    "description": "One of the most famous and well-regarded Bone Gnawers of the 20th century, Shakespeare — aka Wisdom-with-Whiskers — was a philodox and wide-roaming traveler. Born in New York and coming up around the city's many theaters, museums, and libraries, he accumulated and shared a wealth of knowledge on his travels across the country. Missing and presumed dead since the earliest days of the new millennium, Shakespeare's name fell into obscurity as a new generation of Garou gained access to the internet. However, as more and more werewolves sour on global communications infrastructure as yet another Weaver-imposed structure, Shakespeare is enjoying a renewed appreciation amongst Bone Gnawers. Scattered across America, Shakespeare's journals, notes, and ephemera contain a wealth of details from his life, with the most obviously valuable information being the locations of since-lost caerns, the identities of obscure spirits, and the histories of various divisions of the Bone Gnawer tribe. But a Bone Gnawer who dedicates themselves to recovering and integrating these materials may learn even deeper secrets.",
+    "descriptionPtBr": "Um dos Roedores de Ossos mais famosos e respeitados do século XX, Shakespeare — também conhecido como Sabedoria-com-Bigodes — era um philodox e viajante incansável. Nascido em Nova York e criado em meio aos muitos teatros, museus e bibliotecas da cidade, ele acumulou e compartilhou uma enorme riqueza de conhecimento em suas viagens pelo país. Desaparecido e presumido morto desde os primeiros dias do novo milênio, o nome de Shakespeare caiu na obscuridade à medida que uma nova geração de Garou ganhou acesso à internet. Contudo, conforme mais e mais lobisomens passam a ver com maus olhos a infraestrutura global de comunicação como mais uma estrutura imposta pela Weaver, Shakespeare desfruta de uma renovada apreciação entre os Roedores de Ossos. Espalhados pela América, os diários, anotações e efêmeros de Shakespeare contêm uma grande quantidade de detalhes de sua vida, sendo as informações mais obviamente valiosas as localizações de caerns perdidos, as identidades de espíritos obscuros e as histórias de várias divisões da tribo dos Roedores de Ossos. Mas um Roedor de Ossos que se dedique a recuperar e integrar esses materiais pode aprender segredos ainda mais profundos.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "An Eater of Broken Meats: Restricted databases, libraries, and archives are never quite as hermetically sealed as their owners might wish. Information has a habit of escaping, especially if you learn Shakespeare's ways of spotting clues in trash. As long as you score even one success on your test, you can add one automatic success to any tests related to finding discarded evidence. Other Garou may look down on you for your gutter-crawling ways.",
+        "skillPtBr": "Comedor de Restos: Bancos de dados restritos, bibliotecas e arquivos nunca são tão hermeticamente fechados quanto seus donos gostariam. A informação tem o hábito de escapar, especialmente se você aprender os métodos de Shakespeare para encontrar pistas no lixo. Desde que obtenha ao menos um sucesso no teste, você pode adicionar um sucesso automático a quaisquer testes relacionados a encontrar evidências descartadas. Outros Garou podem desprezá-lo por seus hábitos de rastejar pelas sarjetas."
+      },
+      {
+        "cost": 2,
+        "skill": "Dagger of the Mind: You have learned from Shakespeare's knack for using stories and legends to have his way. When engaging in social conflict at a moot or otherwise in front of the Garou community, you always inflict at least one level of Superficial Willpower damage, even if you fail the associated test.",
+        "skillPtBr": "Adaga da Mente: Você aprendeu com a aptidão de Shakespeare para usar histórias e lendas a fim de conseguir o que queria. Ao se envolver em um conflito social em uma assembleia, ou de outra forma diante da comunidade Garou, você sempre causa ao menos um nível de dano Superficial à Força de Vontade, mesmo que falhe no teste associado."
+      },
+      {
+        "cost": 3,
+        "skill": "The Dark Backward: Garou culture is largely oral, and finding out the actual truth of events, even just a decade ago, can be extremely difficult when every warrior is out there trying to enhance their reputations by embellishing on the truth. You have access to Shakespeare's notes and scraps, and once per story, you can automatically succeed at any single test related to determining the truth of Garou legends or to questions about the Renown of individual Garou.",
+        "skillPtBr": "O Passado Obscuro: A cultura Garou é, em grande parte, oral, e descobrir a verdade real sobre eventos, mesmo de apenas uma década atrás, pode ser extremamente difícil quando todo guerreiro por aí tenta engrandecer sua reputação enfeitando a verdade. Você tem acesso às notas e fragmentos de Shakespeare e, uma vez por história, pode obter sucesso automático em um único teste relacionado a determinar a verdade sobre lendas Garou ou a questões sobre o Renome de Garou individuais."
+      },
+      {
+        "cost": 4,
+        "skill": "Nature's Infinite Book of Secrecy: In the Umbra, a good story may become truth and eventually supersede reality. Once per story, you can explain why a gaffling is in fact another spirit entirely, and as your narrative reaches its end, it becomes true. A Bane can become a nature-spirit or any other shift you might desire. This requires a successful Manipulation + Occult test at a Difficulty equal to the Power of the spirit. The Power of the spirit does not change, but its other attributes and abilities change to those of its new identity.",
+        "skillPtBr": "O Livro Infinito de Segredos da Natureza: Na Umbra, uma boa história pode se tornar verdade e, eventualmente, suplantar a realidade. Uma vez por história, você pode explicar por que um gafarete é, na verdade, outro espírito completamente diferente e, quando sua narrativa chega ao fim, isso se torna verdade. Um Maldito pode se tornar um espírito da natureza, ou assumir qualquer outra mudança que você desejar. Isso exige um teste bem-sucedido de Manipulação + Ocultismo com Dificuldade igual ao Poder do espírito. O Poder do espírito não muda, mas seus outros atributos e habilidades passam a ser os de sua nova identidade."
+      },
+      {
+        "cost": 5,
+        "skill": "The Rest is Silence: Shakespeare is dead, long live Shakespeare. You have taken on the deed name of the great philodox, or it has been granted to you, and many regard you as something akin to his reincarnation. Once per story, you can call in a favor owed to the original Shakespeare from a Bone Gnawer elder, a friendly gaffling or jaggling ancestor-spirit, or a spirit of legend, story, or narrative.",
+        "skillPtBr": "O Resto é Silêncio: Shakespeare está morto, viva Shakespeare. Você assumiu o nome de feito do grande philodox, ou ele lhe foi concedido, e muitos o veem como algo semelhante à sua reencarnação. Uma vez por história, você pode cobrar um favor devido ao Shakespeare original de um ancião Roedor de Ossos, de um espírito ancestral gafarete ou jagrete amistoso, ou de um espírito de lenda, história ou narrativa."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 229
+  },
+  {
+    "id": 50,
+    "title": "The Weaver Digital",
+    "titlePtBr": "A Weaver Digital",
+    "description": "Few Garou today understand that the Weaver digital was born in the '90s amidst a flurry of CD-ROM advertisements and dial-up modems. A clear inspiration to the Glass Walkers of the day, now, few elders remain who remember the era before social media and constant connection to one another. The Weaver digital, or sometimes the Weaver ascendant, is the name a few Garou scholars and theurges give to this new aspect of the Weaver. Those who understand her, or gain her blessing, can sense the flow of information through her digital web. Garou who follow the Weaver digital don't merely include Glass Walkers but also young theurges of many tribes as well, who don't seem to question the Weaver digital's origin or motives.",
+    "descriptionPtBr": "Poucos Garou hoje entendem que a Weaver Digital nasceu nos anos 90, em meio a uma enxurrada de propagandas de CD-ROM e modems discados. Uma inspiração clara para os Andarilhos do Asfalto da época, hoje restam poucos anciões que se lembram da era anterior às redes sociais e à conexão constante entre todos. A Weaver Digital, ou às vezes a Weaver Ascendente, é o nome que alguns estudiosos e theurges Garou dão a este novo aspecto da Weaver. Aqueles que a compreendem, ou recebem sua bênção, conseguem sentir o fluxo de informações através de sua teia digital. Os Garou que seguem a Weaver Digital não incluem apenas Andarilhos do Asfalto, mas também jovens theurges de muitas tribos, que parecem não questionar a origem ou os motivos da Weaver Digital.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Overclocked: Machines never lag for you. You can accomplish tasks related to computers in half the usual time. Gain one Specialty related to computer use, such as cryptocurrency for Finance, digital media for Politics, or just about anything for Technology. Occasionally, Weaver-spirits watch you in envy or resentment.",
+        "skillPtBr": "Com Overclock: Máquinas nunca travam para você. Você consegue realizar tarefas relacionadas a computadores na metade do tempo usual. Receba uma Especialidade relacionada ao uso de computadores, como criptomoedas para Finanças, mídias digitais para Política, ou praticamente qualquer coisa para Tecnologia. Ocasionalmente, espíritos da Weaver observam você com inveja ou ressentimento."
+      },
+      {
+        "cost": 2,
+        "skill": "Spirits of Order and Circuitry: The Weaver digital's servants feel kinship with you. You gain a two-dice bonus on Social tests to interact with spirits of machinery specifically, or a one-die bonus on Social tests to interact with Weaver-spirits in general. The two do not stack.",
+        "skillPtBr": "Espíritos da Ordem e dos Circuitos: Os servos da Weaver Digital sentem afinidade com você. Você recebe um bônus de dois dados em testes Sociais para interagir especificamente com espíritos de máquinas, ou um bônus de um dado em testes Sociais para interagir com espíritos da Weaver em geral. Os dois bônus não se acumulam."
+      },
+      {
+        "cost": 3,
+        "skill": "Technological Manifestation: The Weaver digital uses you as a conduit to the Spirit Wilds, and your very presence empowers spirits to manifest via technology. By removing any mundane humans from your presence, calling out to spirits in the area, and spending 1 point of Willpower, you can ask them to manifest via nearby devices, even those that wouldn't ordinarily manifest via technology. Few refuse without good reason. They may appear and speak via a phone, tablet, TV, or similar device. Occasionally, spirits manifest themselves without your explicit call. These spirits cannot be recorded when they manifest this way.",
+        "skillPtBr": "Manifestação Tecnológica: A Weaver Digital usa você como um canal para os Ermos Espirituais, e sua simples presença fortalece espíritos para que se manifestem por meio da tecnologia. Ao remover quaisquer humanos mundanos de sua presença, chamar os espíritos da área e gastar 1 ponto de Força de Vontade, você pode pedir que eles se manifestem por dispositivos próximos, mesmo aqueles que normalmente não se manifestariam por meio da tecnologia. Poucos recusam sem um bom motivo. Eles podem aparecer e falar através de um telefone, tablet, TV ou dispositivo semelhante. Ocasionalmente, espíritos se manifestam sem seu chamado explícito. Esses espíritos não podem ser gravados quando se manifestam dessa forma."
+      },
+      {
+        "cost": 4,
+        "skill": "Encrypt: The Weaver digital teaches its followers to keep their secrets. Your devices are nearly impenetrable by mundane humans. Choose a number of devices equal to your Intelligence or Resolve. So long as you are their primary operator, the devices are inhabited by minor Weaver-spirits that prevent humans from accessing them by any means. Spirits, mystically endowed humans, and supernatural creatures, along with their powers, suffer a two-dice penalty to any attempts to access your devices. You may designate packmates as able to operate them until the next moonrise.",
+        "skillPtBr": "Criptografar: A Weaver Digital ensina seus seguidores a guardar seus segredos. Seus dispositivos são quase impenetráveis para humanos mundanos. Escolha um número de dispositivos igual à sua Inteligência ou Determinação. Enquanto você for o principal operador deles, os dispositivos são habitados por espíritos menores da Weaver que impedem humanos de acessá-los por qualquer meio. Espíritos, humanos misticamente dotados e criaturas sobrenaturais, junto com seus poderes, sofrem uma penalidade de dois dados em quaisquer tentativas de acessar seus dispositivos. Você pode designar companheiros de alcateia como capazes de operá-los até o próximo nascer da lua."
+      },
+      {
+        "cost": 5,
+        "skill": "Weaver's Eyes: You understand the strands connecting digital information and can break them. When attempting to bypass encryption, brute force network access, determine when devices are networked or connected, or identify which device or network another device was most recently connected to, you may treat your Rage pool as if it were doubled. In these situations, Brutal outcomes count in your favor, giving four successes to your test.",
+        "skillPtBr": "Olhos da Weaver: Você compreende os fios que conectam informações digitais e consegue rompê-los. Ao tentar contornar criptografia, forçar acesso a uma rede, determinar quando dispositivos estão em rede ou conectados, ou identificar a qual dispositivo ou rede outro dispositivo se conectou mais recentemente, você pode tratar sua parada de Fúria como se fosse dobrada. Nessas situações, resultados Brutais contam a seu favor, concedendo quatro sucessos ao seu teste."
+      }
+    ],
+    "book": "Tribos de Gaia",
+    "page": 230
   }
 ]
