@@ -21,9 +21,10 @@ import { RapidShift } from "./rapidShift";
 import { Energize } from "./energize";
 import { HandsOfEarth } from "./handsOfEarth";
 import { ResistToxin } from "./resistToxin";
-import { VisionsOfMomentsLost } from "./VisionsOfMomentsLost";
+import { VisionsOfMomentsLost } from "./visionsOfMomentsLost";
 import { SpeakTheForbiddenTongue } from "./speakTheForbiddenTongue";
 import { FinalSight } from "./finalSight";
+import { Moonscleansing } from "./moonscleansing";
 
 export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
@@ -340,6 +341,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case 'Visions of Moments Lost': return <VisionsOfMomentsLost />
     case 'Speak the Forbidden Tongue': return <SpeakTheForbiddenTongue />
     case 'Final Sight': return <FinalSight />
+    case "Moon's Cleansing": return <Moonscleansing />
   }
 }
 
