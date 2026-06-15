@@ -3608,5 +3608,875 @@
     "duration": "Uma cena ou até ser encerrado",
     "book": "The Moonlit Path",
     "page": 65
+  },
+  {
+    "id": "153",
+    "gift": "Traveler's Luck",
+    "giftPtBr": "Sorte do Viajante",
+    "belonging": [
+      {
+        "type": "silent striders",
+        "totalRenown": 3
+      },
+      {
+        "type": "ragabash",
+        "totalRenown": 5
+      }
+    ],
+    "description": "The spirits clear your path, allowing you to arrive at your destination suspiciously fast. A mole- or rabbit-spirit teaches this Gift.",
+    "descriptionPtBr": "Os espíritos limpam seu caminho, permitindo que você chegue ao seu destino suspeitosamente rápido. Um espírito-toupeira ou espírito-coelho ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "Nenhum / 1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "",
+    "system": "This Gift is free to activate for yourself or costs 1 Rage Check to bring your pack or up to your Wisdom in non-pack members. Unless an adversary is actively looking for you, mundane animals, humans, and machines do not track your expeditious path or speed. Afterwards, you won't be harassed by humans, delayed by traffic, or missing a train. You arrive as fast as practically possible. Environmental factors, including blizzards, storms, and rockslides, or human-made obstacles, such as police checkpoints and road closures, can still impede you, and spirits, Garou, other shifters, mystically endowed humans, and other supernatural beings can still interact with you or interrupt you. You add half your Wisdom, rounded up, to Driving, Streetwise, or other tests to avoid obstacles, delay, being intercepted, or being tailed.",
+    "systemPtBr": "Este Dom é gratuito para ser ativado em si mesmo ou custa 1 Chegagem de Fúria para levar sua alcateia ou até um número de não membros da alcateia igual à sua Sabedoria. A menos que um adversário esteja procurando ativamente por você, animais mundanos, humanos e máquinas não rastreiam seu caminho expedito ou sua velocidade. Depois disso, você não será importunado por humanos, atrasado pelo trânsito ou perderá um trem. Você chega tão rápido quanto for praticamente possível. Fatores ambientais, incluindo nevascas, tempestades e deslizamentos de rochas, ou obstáculos criados por humanos, como barreiras policiais e estradas fechadas, ainda podem impedi-lo, e espíritos, Garou, outros metamorfos, humanos misticamente dotados e outros seres sobrenaturais ainda podem interagir com você ou interrompê-lo. Você adiciona metade da sua Sabedoria, arredondada para cima, a testes de Condução, Manha ou outros testes para evitar obstáculos, atrasos, ser interceptado ou ser seguido.",
+    "duration": "Uma jornada",
+    "book": "Tribes of Gaia",
+    "page": 204
+  },
+  {
+    "id": "154",
+    "gift": "Second Skin",
+    "giftPtBr": "Segunda Pele",
+    "belonging": [
+      {
+        "type": "black furies",
+        "totalRenown": 3
+      },
+      {
+        "type": "ragabash",
+        "totalRenown": 5
+      }
+    ],
+    "description": "The Garou, already masters at shifting shapes, draws power from the spirits to fine-tune their appearance, temporarily shifting into a form humans perceive as fitting the situation. An ancestor-spirit teaches this Gift.",
+    "descriptionPtBr": "O Garou, já mestre em mudar de forma, extrai poder dos espíritos para ajustar sua aparência, transformando-se temporariamente em uma forma que os humanos percebem como adequada à situação. Um espírito ancestral ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Manipulação + Sabedoria",
+    "system": "The Garou envisions another human form in broad strokes, then assumes the gender, ethnicity, hairstyle, and other physical features they desire — this does not allow for the Garou to mimic another, nor change their Attributes, and they still look vaguely similar. Test Manipulation + Wisdom (Difficulty 3). On a win, you can change your sex and ethnicity plus another physical feature, such as build, hair, or eye color for each point of margin. On a critical, the margin can be used to purchase Looks Merits for the temporary form, while a Brutal outcome gives them a Looks Flaw. This Gift can only be used in homid or glabro forms.",
+    "systemPtBr": "O Garou imagina outra forma humana em linhas gerais e então assume o gênero, etnia, penteado e outras características físicas que desejar — isso não permite que o Garou imite outra pessoa, nem altere seus Atributos, e ele ainda se parece vagamente consigo mesmo. Teste Manipulação + Sabedoria (Dificuldade 3). Em caso de vitória, você pode alterar seu sexo e etnia, além de outra característica física, como compleição, cabelo ou cor dos olhos, para cada ponto de margem. Em um sucesso crítico, a margem pode ser usada para adquirir Méritos de Aparência para a forma temporária, enquanto um resultado Brutal concede a ela uma Falha de Aparência. Este Dom só pode ser usado nas formas hominídeo ou glabro.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 204
+  },
+  {
+    "id": "155",
+    "gift": "Word of Honor",
+    "giftPtBr": "Palavra de Honra",
+    "belonging": [
+      {
+        "type": "silver fangs",
+        "totalRenown": 3
+      },
+      {
+        "type": "philodox",
+        "totalRenown": 5
+      }
+    ],
+    "description": "Speak the truth and others follow — a simple message that others often forget. For the wolves of the Restorationists, it's just this type of earnestness that might bring the Nation back together; for everyone else, it demonstrates their intrinsic honor. This Gift is taught by an eagle-spirit.",
+    "descriptionPtBr": "Fale a verdade e os outros seguirão — uma mensagem simples que muitos costumam esquecer. Para os lobos dos Restauracionistas, é justamente esse tipo de sinceridade que pode reunir a Nação novamente; para todos os outros, demonstra sua honra intrínseca. Este Dom é ensinado por um espírito-águia.",
+    "renown": "Honra",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Livre",
+    "pool": "",
+    "system": "Add your Honor to any Etiquette, Leadership, Performance, or Persuasion test where you are speaking the truth. For the Gift's duration, if you lie or test Subterfuge, you fall into Honor chagrin. This Gift can be used in any form.",
+    "systemPtBr": "Adicione sua Honra a qualquer teste de Etiqueta, Liderança, Performance ou Persuasão em que você esteja falando a verdade. Pela duração do Dom, se você mentir ou testar Subterfúgio, cairá em Vexame de Honra. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Um dia",
+    "book": "Tribes of Gaia",
+    "page": 204
+  },
+  {
+    "id": "156",
+    "gift": "Wounding Lies",
+    "giftPtBr": "Mentiras Ferinas",
+    "belonging": [
+      {
+        "type": "shadow lords",
+        "totalRenown": 3
+      },
+      {
+        "type": "philodox",
+        "totalRenown": 5
+      }
+    ],
+    "description": "You can perform a spiritually augmented verbal assault, making up a terrible lie about your enemy at the spur of the moment. This leaves the aggressor feeling ashamed and defeated, a fact that pleases the Lords of the Summit. A snake- or eagle-spirit teaches this Gift.",
+    "descriptionPtBr": "Você pode realizar um ataque verbal espiritualmente ampliado, inventando uma mentira terrível sobre seu inimigo no calor do momento. Isso deixa o agressor envergonhado e derrotado, algo que agrada aos Senhores do Cume. Um espírito-serpente ou espírito-águia ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "",
+    "system": "After winning a Social contest, the Garou may invoke this Gift. The victim receives additional Willpower damage equal to half the user's Wisdom, rounded up. This Gift can be used in any form except crinos, assuming the victim can understand the Garou.",
+    "systemPtBr": "Após vencer uma disputa Social, o Garou pode invocar este Dom. A vítima recebe dano adicional de Força de Vontade igual à metade da Sabedoria do usuário, arredondada para cima. Este Dom pode ser usado em qualquer forma, exceto crinos, desde que a vítima consiga entender o Garou.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 204
+  },
+  {
+    "id": "157",
+    "gift": "The Line of No Approach",
+    "giftPtBr": "A Linha de Não Aproximação",
+    "belonging": [
+      {
+        "type": "children of gaia",
+        "totalRenown": 6
+      },
+      {
+        "type": "philodox",
+        "totalRenown": 8
+      }
+    ],
+    "description": "Sometimes for peace to blossom, a little space is needed before cooler heads can prevail. This Gift enforces that space, ensuring both parties are forced to maintain a civil distance from each other until they can be reasoned with. For the Crest of the Horn, this Gift has saved many a negotiation. An ox-spirit teaches this Gift.",
+    "descriptionPtBr": "Às vezes, para que a paz floresça, é necessário um pouco de espaço antes que cabeças mais frias possam prevalecer. Este Dom impõe esse espaço, garantindo que ambas as partes sejam forçadas a manter uma distância civilizada uma da outra até que possam ser convencidas pela razão. Para a Crista do Chifre, este Dom salvou muitas negociações. Um espírito-boi ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Autocontrole + Sabedoria",
+    "system": "The Garou nominates two targets, which may include themselves, and makes a Gift test at Difficulty 3; one or both supernatural targets may resist with their Strength + Resolve if they prefer. On a success, neither party may get any closer to the other than they already are, only able to advance if the other retreats. This enforced space remains for one turn per point of margin, or the full scene on a critical win. On a Brutal outcome, the two targets are violently thrust together as if dragged by invisible hands. The Gift user can end the effect at any time and use the Gift in any form.",
+    "systemPtBr": "O Garou escolhe dois alvos, que podem incluir ele mesmo, e realiza um teste de Dom com Dificuldade 3; um ou ambos os alvos sobrenaturais podem resistir com Força + Determinação, se preferirem. Em caso de sucesso, nenhuma das partes pode se aproximar mais da outra do que já está, podendo avançar apenas se a outra recuar. Esse espaço imposto permanece por um turno por ponto de margem, ou pela cena inteira em um sucesso crítico. Em um resultado Brutal, os dois alvos são violentamente lançados um contra o outro, como se fossem arrastados por mãos invisíveis. O usuário do Dom pode encerrar o efeito a qualquer momento e usar o Dom em qualquer forma.",
+    "duration": "Um turno por ponto de margem, ou uma cena em um sucesso crítico",
+    "book": "Tribes of Gaia",
+    "page": 205
+  },
+  {
+    "id": "158",
+    "gift": "Visions of Moments Lost",
+    "giftPtBr": "Visões de Momentos Perdidos",
+    "belonging": [
+      {
+        "type": "hart wardens",
+        "totalRenown": 6
+      },
+      {
+        "type": "galliard",
+        "totalRenown": 8
+      }
+    ],
+    "description": "Sitting around the sept's campfire, the Gift user tells a story of deeds done, summoning vibrant images in the minds of their eager listeners. This Gift makes that dream a reality, as the Garou is able to literally summon visions of memories. The Memory of Gaia are especially fond of this approach, whether for storytelling or by asking the right questions to pull vital memories from the minds of the unwilling. A dream-spirit teaches this Gift.",
+    "descriptionPtBr": "Sentado ao redor da fogueira da fratria, o usuário do Dom conta uma história de feitos realizados, evocando imagens vívidas nas mentes de seus ouvintes atentos. Este Dom torna esse sonho realidade, pois o Garou é capaz de literalmente invocar visões de memórias. As Memórias de Gaia são especialmente afeitas a essa abordagem, seja para contar histórias ou para fazer as perguntas certas e arrancar memórias vitais das mentes dos relutantes. Um espírito do sonho ensina este Dom.",
+    "renown": "Glória",
+    "cost": "Nenhum / 1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Autocontrole + Glória",
+    "system": "This Gift is free to apply to the user, and 1 Willpower for any other target, willing or not. When using this Gift on others, the user must engage the target in calm conversation, and unwilling targets must be restrained. The user makes a Gift test at Difficulty 3, or 1 for themselves; unwilling targets can instead resist with Composure + Resolve. If successful, a projection of whatever the target is thinking of becomes visible for all to see. Storytellers can define what additional Social tests are needed to summon the correct memory, but they needn't be made by the Gift owner. On a Brutal outcome, the target takes 1 level of Aggravated Willpower damage as their mind is wracked with pain.",
+    "systemPtBr": "Este Dom é gratuito para ser aplicado ao próprio usuário e custa 1 ponto de Força de Vontade para qualquer outro alvo, disposto ou não. Ao usar este Dom em outros, o usuário deve envolver o alvo em uma conversa calma, e alvos relutantes devem estar contidos. O usuário realiza um teste de Dom com Dificuldade 3, ou 1 para si mesmo; alvos relutantes podem resistir com Autocontrole + Determinação. Se for bem-sucedido, uma projeção do que quer que o alvo esteja pensando se torna visível para todos verem. Narradores podem definir quais testes Sociais adicionais são necessários para evocar a memória correta, mas eles não precisam ser feitos pelo dono do Dom. Em um resultado Brutal, o alvo sofre 1 nível de dano Agravado de Força de Vontade enquanto sua mente é atormentada pela dor.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 205
+  },
+  {
+    "id": "159",
+    "gift": "Consume Rage",
+    "giftPtBr": "Consumir Fúria",
+    "belonging": [
+      {
+        "type": "shadow lords",
+        "totalRenown": 6
+      },
+      {
+        "type": "ahroun",
+        "totalRenown": 8
+      }
+    ],
+    "description": "The Garou takes the Rage from a rival they've just overpowered. This Gift is taught by dominant lion- or bull-spirits.",
+    "descriptionPtBr": "O Garou toma a Fúria de um rival que acabou de subjugar. Este Dom é ensinado por espíritos-leão ou espíritos-touro dominantes.",
+    "renown": "Glória",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Livre",
+    "pool": "Glória",
+    "system": "The Garou invokes this Gift and nominates a target werewolf. For the rest of the scene, whenever the user causes Impairment in their target, either from Health or Willpower, the victim werewolf loses their remaining Rage, and the user gains an equal amount. This can cause the victim to lose the wolf.",
+    "systemPtBr": "O Garou invoca este Dom e escolhe um lobisomem como alvo. Pelo restante da cena, sempre que o usuário causar Debilitação em seu alvo, seja de Vitalidade ou de Força de Vontade, o lobisomem vítima perde sua Fúria restante, e o usuário ganha uma quantidade igual. Isso pode fazer com que a vítima perca o lobo.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 205
+  },
+  {
+    "id": "160",
+    "gift": "Harrowing Slash",
+    "giftPtBr": "Corte Angustiante",
+    "belonging": [
+      {
+        "type": "black furies",
+        "totalRenown": 3
+      },
+      {
+        "type": "children of gaia",
+        "totalRenown": 3
+      }
+    ],
+    "description": "This Gift makes the enemy understand how hopeless their position really is by subduing their mind as well as their body. A servitor of Gorgon or Unicorn teaches this Gift.",
+    "descriptionPtBr": "Este Dom faz o inimigo compreender o quão desesperadora sua posição realmente é, subjugando sua mente tanto quanto seu corpo. Um servo da Górgona ou Unicórnio ensina este Dom.",
+    "renown": "Honra",
+    "cost": "Nenhum / 1 Teste de Fúria",
+    "action": "Livre / Mínima",
+    "pool": "",
+    "system": "This Gift is free and instantaneous while in crinos form. Add half the Garou's Honor, rounded up, in Superficial Willpower damage to the damage of their claw attacks. If the current form doesn't have claws, they can activate the Gift with a Rage Check and make a claw attack at +0 Superficial Health damage in addition to the Willpower damage.",
+    "systemPtBr": "Este Dom é gratuito e instantâneo enquanto o Garou estiver na forma crinos. Adicione metade da Honra do Garou, arredondada para cima, em dano Superficial de Força de Vontade ao dano de seus ataques com garras. Se a forma atual não tiver garras, ele pode ativar o Dom com um Teste de Fúria e fazer um ataque com garras com +0 de dano Superficial de Vitalidade, além do dano de Força de Vontade.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 206
+  },
+  {
+    "id": "161",
+    "gift": "Mark of Prey",
+    "giftPtBr": "Marca da Presa",
+    "belonging": [
+      {
+        "type": "red talons",
+        "totalRenown": 3
+      },
+      {
+        "type": "black furies",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Once someone has been marked as a victim, they're fair game for everyone. They're suddenly thrust into a hostile world where everyone is against them. That's how this Gift, taught by a sun-spirit, works.",
+    "descriptionPtBr": "Uma vez que alguém é marcado como vítima, torna-se presa fácil para todos. De repente, é lançado em um mundo hostil onde todos estão contra ele. É assim que este Dom, ensinado por um espírito-sol, funciona.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "",
+    "system": "Choose one target. Humans or animals are automatically affected by this Gift. Spirits, Garou, and supernatural creatures, including humans with minor supernatural endowments, such as a fomor, a vampire's blood-addicted thrall, or a human enchanted by a fae spirit, may resist. To target a supernatural creature, the Garou enters a contest between their Charisma + Glory and the target's Composure + Resolve. Those afflicted by this curse are menaced by humans and animals alike. Humans tend to bully or verbally abuse the marked prey. Predator animals attack. Humans or animals are affected for the full duration. Those with mystical endowments or supernatural creatures shake off the effect early after they take damage, to either Willpower or Health, equal to the user's Glory + the margin of success. This Gift is usable in any form.",
+    "systemPtBr": "Escolha um alvo. Humanos ou animais são automaticamente afetados por este Dom. Espíritos, Garou e criaturas sobrenaturais, incluindo humanos com pequenos dons sobrenaturais, como um fomor, um servo viciado no sangue de um vampiro ou um humano encantado por um espírito feérico, podem resistir. Para mirar uma criatura sobrenatural, o Garou entra em uma disputa entre seu Carisma + Glória e o Autocontrole + Determinação do alvo. Aqueles afligidos por esta maldição são ameaçados por humanos e animais igualmente. Humanos tendem a intimidar ou abusar verbalmente da presa marcada. Animais predadores atacam. Humanos ou animais são afetados pela duração completa. Aqueles com dons místicos ou criaturas sobrenaturais se livram do efeito antes do tempo após sofrerem dano, seja de Força de Vontade ou Vitalidade, igual à Glória do usuário + a margem de sucesso. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Até o nascer do sol",
+    "book": "Tribes of Gaia",
+    "page": 206
+  },
+  {
+    "id": "162",
+    "gift": "Curse of Isolation",
+    "giftPtBr": "Maldição do Isolamento",
+    "belonging": [
+      {
+        "type": "black furies",
+        "totalRenown": 6
+      }
+    ],
+    "description": "The Black Furies often fight against those with superior resources — their enemy is better connected, better funded, and better armed. This Gift allows the Furies to level the playing field, isolating their target from their allies and support network. The Arae take this one step further, dragging their victims down to their level before issuing the killing blow. Gorgon herself teaches this Gift.",
+    "descriptionPtBr": "As Fúrias Negras frequentemente lutam contra aqueles com recursos superiores — seus inimigos são melhor conectados, melhor financiados e melhor armados. Este Dom permite que as Fúrias nivelem o campo de batalha, isolando seu alvo de seus aliados e de sua rede de apoio. As Arae levam isso um passo além, arrastando suas vítimas para o nível delas antes de desferir o golpe mortal. A própria Górgona ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Determinação + Glória",
+    "system": "The Garou selects a Background possessed by a target whose blood they have tasted and makes a Gift test at a Difficulty equal to its rating. On a success, the Background is temporarily reduced by 1, plus an additional level for every two points of margin. On a critical or Brutal outcome, the Background is temporarily set to a rating of 1, or 0 if it was already at 1; however, on a Brutal outcome, the character also loses access to a Background for the same amount of time; this is always the same one targeted if they possess it, or their highest rated Background if they don't. This Gift can be used in any form.",
+    "systemPtBr": "O Garou seleciona um Antecedente possuído por um alvo cujo sangue tenha provado e realiza um teste de Dom com Dificuldade igual à sua classificação. Em caso de sucesso, o Antecedente é temporariamente reduzido em 1, mais um nível adicional para cada dois pontos de margem. Em um resultado crítico ou Brutal, o Antecedente é temporariamente definido como classificação 1, ou 0 se já estivesse em 1; porém, em um resultado Brutal, o personagem também perde acesso a um Antecedente pelo mesmo período; este será sempre o mesmo alvo, se ele o possuir, ou seu Antecedente de maior classificação, se não o possuir. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Um número de dias igual à classificação de Glória do personagem",
+    "book": "Tribes of Gaia",
+    "page": 206
+  },
+  {
+    "id": "163",
+    "gift": "Eyes on the Inside",
+    "giftPtBr": "Olhar para o interior",
+    "belonging": [
+      {
+        "type": "bone gnawers",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Whether Kinseeking, traveling through hostile cities, or infiltrating enemy groups, sometimes a Garou just wants to know what's on the other side of something. A woodpecker- or mole-spirit teaches this Gift.",
+    "descriptionPtBr": "Seja buscando Parentes, viajando por cidades hostis ou infiltrando-se em grupos inimigos, às vezes um Garou só quer saber o que há do outro lado de alguma coisa. Um espírito-pica-pau ou espírito-toupeira ensina este Dom.",
+    "renown": "Honra",
+    "cost": "1 Teste de Fúria",
+    "action": "Padrão",
+    "pool": "Determinação + Honra",
+    "system": "The Garou touches a doorway, wall, or container, pressing their face up to it. Test Resolve + Honor against a Difficulty of 2 for thin things up to the thickness of a cheap door, 3 for a thickness of a thick door or standard wall, or 4 for a thick wall, up to about 1 foot or 0.3 meters. On a win, the Garou can sense things as though their face were on the other side of the object, whether it's inside a safe or just on the other side of a doorway. This Gift can be used in conjunction with other Gifts, forms, or other powers that grant exceptional senses, such as Eyes of the Owl. If used in the Umbra, the user's face usually can be seen sticking through on the other side of a wall or other barrier. This Gift can be used in any form.",
+    "systemPtBr": "O Garou toca uma porta, parede ou recipiente, pressionando o rosto contra ele. Teste Determinação + Honra contra uma Dificuldade de 2 para coisas finas até a espessura de uma porta barata, 3 para a espessura de uma porta grossa ou parede padrão, ou 4 para uma parede espessa, até cerca de 1 pé ou 0,3 metro. Em caso de vitória, o Garou pode perceber as coisas como se seu rosto estivesse do outro lado do objeto, seja dentro de um cofre ou apenas do outro lado de uma porta. Este Dom pode ser usado em conjunto com outros Dons, formas ou outros poderes que concedam sentidos excepcionais, como Olhos da Coruja. Se usado na Umbra, o rosto do usuário geralmente pode ser visto atravessando o outro lado de uma parede ou outra barreira. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Enquanto o Garou mantiver contato",
+    "book": "Tribes of Gaia",
+    "page": 206
+  },
+  {
+    "id": "164",
+    "gift": "Mutable Scent",
+    "giftPtBr": "Odor Mutável",
+    "belonging": [
+      {
+        "type": "bone gnawers",
+        "totalRenown": 3
+      },
+      {
+        "type": "ghost council",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The Garou can easily misdirect others in regards to their identity or background, making it simpler to lead a double life. A chameleon-spirit teaches this Gift.",
+    "descriptionPtBr": "O Garou pode facilmente enganar os outros em relação à sua identidade ou origem, tornando mais simples levar uma vida dupla. Um espírito-camaleão ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Livre",
+    "pool": "",
+    "system": "The Garou adds their Wisdom to Subterfuge and Stealth tests to impersonate others, deceive others about their tribe or Patron, or hide their Garou nature, and to all tests to avoid supernatural means of determining that they are Garou. This Gift can be used in any form except crinos, although glabro and hispo may arouse suspicion for their own reasons.",
+    "systemPtBr": "O Garou adiciona sua Sabedoria a testes de Subterfúgio e Furtividade para se passar por outros, enganar os outros sobre sua tribo ou Padroeiro, ou ocultar sua natureza Garou, e a todos os testes para evitar meios sobrenaturais de determinar que ele é Garou. Este Dom pode ser usado em qualquer forma, exceto crinos, embora glabro e hispo possam levantar suspeitas por seus próprios motivos.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 207
+  },
+  {
+    "id": "165",
+    "gift": "Umbral Endurance",
+    "giftPtBr": "Resistência Umbral",
+    "belonging": [
+      {
+        "type": "bone gnawers",
+        "totalRenown": 3
+      },
+      {
+        "type": "ghost council",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Some Garou have conditioned themselves to remain within the Umbra even when everything in their body is screaming at them to leave. The Returned claim it was this Gift that allowed them to survive their time in the Spirit Wilds; Those Who Endure use it to earn their namesake, enduring when others would fall. A lune-spirit teaches this Gift.",
+    "descriptionPtBr": "Alguns Garou se condicionaram a permanecer na Umbra mesmo quando tudo em seus corpos grita para que saiam. Os Retornados afirmam que foi este Dom que lhes permitiu sobreviver ao tempo que passaram nas Selvas Espirituais; Aqueles que Resistem o usam para fazer jus ao próprio nome, resistindo quando outros cairiam. Um espírito-luno ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "",
+    "system": "The Garou attunes themselves to the Spirit Wilds, allowing them to remain in the Umbra longer than most. Whenever the Garou would first be required to spend Willpower due to spending time in the Umbra, they can instead make a Rage Check. When they do this, they can remain in the Umbra for a number of scenes equal to their Wisdom, or about two hours per dot of Wisdom in narrative time without spending further Willpower. Should they wish to remain for longer, they must spend Willpower as usual. This Gift can be used again only once they leave and reenter the Umbra.",
+    "systemPtBr": "O Garou se sintoniza com as Selvas Espirituais, permitindo que permaneça na Umbra por mais tempo do que a maioria. Sempre que o Garou fosse obrigado pela primeira vez a gastar Força de Vontade devido ao tempo passado na Umbra, ele pode, em vez disso, fazer um Teste de Fúria. Ao fazer isso, pode permanecer na Umbra por um número de cenas igual à sua Sabedoria, ou cerca de duas horas por ponto de Sabedoria em tempo narrativo, sem gastar mais Força de Vontade. Caso deseje permanecer por mais tempo, deve gastar Força de Vontade normalmente. Este Dom só pode ser usado novamente depois que ele sair e reentrar na Umbra.",
+    "duration": "Uma cena ou duas horas por ponto de Sabedoria",
+    "book": "Tribes of Gaia",
+    "page": 208
+  },
+  {
+    "id": "166",
+    "gift": "The All-Seeing Eye",
+    "giftPtBr": "O Olho Que Tudo Vê",
+    "belonging": [
+      {
+        "type": "bone gnawers",
+        "totalRenown": 6
+      },
+      {
+        "type": "glass walkers",
+        "totalRenown": 6
+      }
+    ],
+    "description": "This Gift allows the user to effectively hack various spy devices, tapping into their feeds by using spirits of technology. A malware-spirit teaches this Gift.",
+    "descriptionPtBr": "Este Dom permite que o usuário efetivamente hackeie vários dispositivos de espionagem, acessando suas transmissões com o uso de espíritos da tecnologia. Um espírito-malware ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Inteligência + Sabedoria",
+    "system": "The Garou first needs a device of their own, such as a computer, tablet, or phone, to channel this Gift, before describing the targeted device to the spirits, spending a Willpower and making a Gift test at Difficulty 3; Storytellers should increase the Difficulty if the description was overly vague or if the targeted device is particularly hardened or hard to find. On a success, they can access either the audio or video feeds of the device. Other feeds can be accessed for one point of margin each.",
+    "systemPtBr": "O Garou primeiro precisa de um dispositivo próprio, como um computador, tablet ou telefone, para canalizar este Dom, antes de descrever o dispositivo alvo aos espíritos, gastar um ponto de Força de Vontade e realizar um teste de Dom com Dificuldade 3; Narradores devem aumentar a Dificuldade se a descrição for vaga demais ou se o dispositivo alvo for particularmente protegido ou difícil de encontrar. Em caso de sucesso, ele pode acessar as transmissões de áudio ou vídeo do dispositivo. Outras transmissões podem ser acessadas por um ponto de margem cada.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 208
+  },
+  {
+    "id": "167",
+    "gift": "Moon's Cleansing",
+    "giftPtBr": "Purificação da Lua",
+    "belonging": [
+      {
+        "type": "silver fangs",
+        "totalRenown": 3
+      },
+      {
+        "type": "children of gaia",
+        "totalRenown": 6
+      }
+    ],
+    "description": "The purity of moonlight can help the user purge harano or hauglosk, but at dire risk to their bodies. A lune-spirit teaches this Gift.",
+    "descriptionPtBr": "A pureza da luz da lua pode ajudar o usuário a expurgar harano ou hauglosk, mas com grave risco para seu corpo. Um espírito-luno ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "4 Testes de Fúria e 4 pontos de Força de Vontade",
+    "action": "Total",
+    "pool": "",
+    "system": "The user activates the Gift after gaining a point of Hauglosk or Harano in the same scene. Willpower is spent first, followed by the 4 Rage Checks. If these don't cause them to lose the wolf, they may make a special check: roll one Rage die. So long as it is not a Brutal outcome, the point of Hauglosk or Harano is removed; failure on this Rage die does not cause your Rage to fall. Alternately, the user can share this Gift with another Garou by embracing them when they activate the Gift, in which case both Garou need to spend the cost to activate it. If either party loses the wolf, the attempt fails. Only the beneficiary of the Gift makes the final Rage Check to see if they remove the harano or hauglosk. This Gift cannot be used on Garou whove fallen to either harano or hauglosk, only those on their way.",
+    "systemPtBr": "O usuário ativa o Dom após ganhar um ponto de Hauglosk ou Harano na mesma cena. A Força de Vontade é gasta primeiro, seguida pelos 4 Testes de Fúria. Se isso não fizer com que ele perca o lobo, ele pode fazer uma verificação especial: rolar um dado de Fúria. Desde que não seja um resultado Brutal, o ponto de Hauglosk ou Harano é removido; falhar nesse dado de Fúria não faz sua Fúria cair. Alternativamente, o usuário pode compartilhar este Dom com outro Garou ao abraçá-lo quando ativa o Dom, caso em que ambos os Garou precisam gastar o custo para ativá-lo. Se qualquer uma das partes perder o lobo, a tentativa falha. Apenas o beneficiário do Dom faz o Teste de Fúria final para ver se remove o harano ou hauglosk. Este Dom não pode ser usado em Garou que já tenham caído em harano ou hauglosk, apenas naqueles que estão a caminho.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 208
+  },
+  {
+    "id": "168",
+    "gift": "Den Guardian's Desperation",
+    "giftPtBr": "Desespero do Guardião da Toca",
+    "belonging": [
+      {
+        "type": "hart wardens",
+        "totalRenown": 9
+      },
+      {
+        "type": "children of gaia",
+        "totalRenown": 9
+      }
+    ],
+    "description": "Wolves are fiercely protective of their young. This Gift allows a Garou to dig deep into that ancient power and stand strong for those in their care, even when their bodies should have long fallen under the onslaught. A bear- or wolf-spirit teaches this Gift.",
+    "descriptionPtBr": "Lobos são ferozmente protetores com seus filhotes. Este Dom permite que um Garou busque profundamente esse poder ancestral e permaneça firme por aqueles sob seus cuidados, mesmo quando seu corpo já deveria ter caído há muito tempo diante do ataque. Um espírito-urso ou espírito-lobo ensina este Dom.",
+    "renown": "Honra",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Mínima",
+    "pool": "",
+    "system": "Once per conflict, when a Touchstone is threatened, the Garou may gain additional Health equal to their Honor. This Health functions as normal and disappears immediately at the end of the Gift user's last turn in a conflict. If the amount of either Superficial or Aggravated damage remaining is more than the Garou's typical Health pool, apply any additional injuries as Willpower damage and enter Honor chagrin.",
+    "systemPtBr": "Uma vez por conflito, quando um Pilar é ameaçado, o Garou pode ganhar Vitalidade adicional igual à sua Honra. Essa Vitalidade funciona normalmente e desaparece imediatamente ao final do último turno do usuário do Dom em um conflito. Se a quantidade de dano Superficial ou Agravado restante for maior que a parada de Vitalidade típica do Garou, aplique quaisquer ferimentos adicionais como dano de Força de Vontade e entre em Vexame de Honra.",
+    "duration": "Até o conflito terminar",
+    "book": "Tribes of Gaia",
+    "page": 208
+  },
+  {
+    "id": "169",
+    "gift": "Silence the Slain",
+    "giftPtBr": "Silenciar o Abatido",
+    "belonging": [
+      {
+        "type": "galestalkers",
+        "totalRenown": 3
+      },
+      {
+        "type": "red talons",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Hunting is easier if the prey cannot call for help or make noise. This Gift is taught by any predator-spirit.",
+    "descriptionPtBr": "Caçar é mais fácil se a presa não puder pedir ajuda ou fazer barulho. Este Dom é ensinado por qualquer espírito-predador.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "",
+    "system": "After damaging an opponent with a physical attack, the user makes a Rage Check. For the rest of the conflict, the victim cannot make noise — they can't speak; pounding on a wall or door makes no noise; gunfire is muted; and even dropping or throwing things makes no sound.",
+    "systemPtBr": "Após causar dano a um oponente com um ataque físico, o usuário faz um Teste de Fúria. Pelo restante do conflito, a vítima não pode fazer barulho — ela não consegue falar; bater em uma parede ou porta não produz som; disparos de arma de fogo são abafados; e até deixar cair ou arremessar objetos não faz nenhum som.",
+    "duration": "Um conflito",
+    "book": "Tribes of Gaia",
+    "page": 209
+  },
+  {
+    "id": "170",
+    "gift": "Primal Howl",
+    "giftPtBr": "Uivo Primitivo",
+    "belonging": [
+      {
+        "type": "galestalkers",
+        "totalRenown": 3
+      },
+      {
+        "type": "red talons",
+        "totalRenown": 3
+      }
+    ],
+    "description": "One of the oldest sounds in the collective imagination is the howl of a hungry wolf. This Gift reaches down into the primal mind and drags the fear of that sound to the forefront. A wolf-spirit teaches this Gift.",
+    "descriptionPtBr": "Um dos sons mais antigos da imaginação coletiva é o uivo de um lobo faminto. Este Dom alcança a mente primitiva e traz o medo desse som à tona. Um espírito-lobo ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Carisma + Glória",
+    "system": "The Garou makes a Gift test of Charisma + Glory against Difficulty 3. Humans and animals hearing this sound must test Composure + Resolve and gain more successes or flee in terror for a number of turns equal to the margin. Supernatural creatures resist with the same pool, but on a failure, they become temporarily Impaired, applying the two-dice penalty to Physical, Social, and Mental pools, for a number of turns equal to the margin. Success on the test renders the target immune for the rest of the scene.",
+    "systemPtBr": "O Garou realiza um teste de Dom de Carisma + Glória contra Dificuldade 3. Humanos e animais que ouvirem este som devem testar Autocontrole + Determinação e obter mais sucessos ou fugirão aterrorizados por um número de turnos igual à margem. Criaturas sobrenaturais resistem com a mesma parada, mas, em caso de falha, ficam temporariamente Debilitadas, aplicando a penalidade de dois dados às paradas Físicas, Sociais e Mentais, por um número de turnos igual à margem. Sucesso no teste torna o alvo imune pelo restante da cena.",
+    "duration": "Turnos iguais à margem",
+    "book": "Tribes of Gaia",
+    "page": 209
+  },
+  {
+    "id": "171",
+    "gift": "Perfect Bait",
+    "giftPtBr": "Isca Perfeita",
+    "belonging": [
+      {
+        "type": "galestalkers",
+        "totalRenown": 6
+      },
+      {
+        "type": "ghost council",
+        "totalRenown": 6
+      }
+    ],
+    "description": "Every hunter knows that it's more efficient to let your prey come to you. A Garou with this Gift opens their mouth and begins what sounds like a low-keening cry. However, as the sound travels out, it changes. Everyone outside the Garou's pack hears something different — a baby crying, the voice of a loved one, the sound of a rushing river in the desert — whatever sound a person is most likely to investigate. An anglerfish- or wind-spirit teaches this Gift.",
+    "descriptionPtBr": "Todo caçador sabe que é mais eficiente deixar que a presa venha até você. Um Garou com este Dom abre a boca e começa a emitir algo parecido com um lamento baixo. No entanto, à medida que o som se propaga, ele muda. Todos fora da alcateia do Garou ouvem algo diferente — um bebê chorando, a voz de um ente querido, o som de um rio caudaloso no deserto — qualquer som que uma pessoa seja mais propensa a investigar. Um espírito-peixe-pescador ou espírito-vento ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Manipulação + Sabedoria",
+    "system": "The Garou howls and makes a Gift test of Manipulation + Wisdom at Difficulty 3. If successful, anyone hearing this sound must gain more successes on a Resolve + Composure test or follow the noise to its source. A failure on the activation test ensures everyone hearing the call is immediately on edge, recognizing something is trying to lure them into a trap.",
+    "systemPtBr": "O Garou uiva e realiza um teste de Dom de Manipulação + Sabedoria contra Dificuldade 3. Se for bem-sucedido, qualquer um que ouvir este som deve obter mais sucessos em um teste de Determinação + Autocontrole ou seguirá o ruído até sua origem. Uma falha no teste de ativação garante que todos que ouvirem o chamado fiquem imediatamente em alerta, reconhecendo que algo está tentando atraí-los para uma armadilha.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 209
+  },
+  {
+    "id": "172",
+    "gift": "Final Offering",
+    "giftPtBr": "Oferta Final",
+    "belonging": [
+      {
+        "type": "galestalkers",
+        "totalRenown": 9
+      }
+    ],
+    "description": "For one brief moment, the Garou moves as fast as the wind, striking with all the speed and force of a hurricane. They move faster and faster, before becoming one with the wind itself, only reappearing once the fight is over, spent and ruined. North Wind itself must teach this Gift.",
+    "descriptionPtBr": "Por um breve momento, o Garou se move tão rápido quanto o vento, atacando com toda a velocidade e força de um furacão. Ele se move cada vez mais rápido, até se tornar um com o próprio vento, reaparecendo apenas quando a luta termina, exausto e arruinado. O próprio Vento Norte deve ensinar este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Vigor + Glória",
+    "system": "The Gift user makes a test using Stamina + Glory against a Difficulty equal to the number of opponents they face. If successful, each enemy in the conflict immediately takes 1 Aggravated Health damage for each success in the margin, as does the character. The character is removed from the scene until the fight is over, at which point they reappear unconscious and at death's door. Hopefully, their assault was enough to win the battle.",
+    "systemPtBr": "O usuário do Dom realiza um teste usando Vigor + Glória contra uma Dificuldade igual ao número de oponentes que enfrenta. Se for bem-sucedido, cada inimigo no conflito sofre imediatamente 1 ponto de dano Agravado de Vitalidade para cada sucesso na margem, assim como o personagem. O personagem é removido da cena até que a luta termine, momento em que reaparece inconsciente e às portas da morte. Com sorte, seu ataque foi suficiente para vencer a batalha.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 209
+  },
+  {
+    "id": "173",
+    "gift": "Shredded Gauntlet Strike",
+    "giftPtBr": "Golpe da Película Rasgada",
+    "belonging": [
+      {
+        "type": "galestalkers",
+        "totalRenown": 9
+      },
+      {
+        "type": "shadow lords",
+        "totalRenown": 9
+      }
+    ],
+    "description": "This Gift allows the Garou to strike through the Gauntlet from a physical distance, often via a savage gust of wind or by attacking the target's shadow. A cobra-spirit teaches this Gift.",
+    "descriptionPtBr": "Este Dom permite que o Garou ataque através da Película a partir de uma distância física, muitas vezes por meio de uma rajada selvagem de vento ou atacando a sombra do alvo. Um espírito-cobra ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Livre",
+    "pool": "",
+    "system": "This Gift can only be used when initiating combat with a surprise attack, as described in Storyteller's Toolkit, p. 12. The Garou must have sight of their target and be free to position themselves based on the lighting, wind, or other ephemeral features, and may attack from a distance of up to three meters/yards away per point of Wisdom. The Garou adds their Wisdom to their Dexterity + Stealth pool. On a Brutal outcome or total failure, the user suffers 1 Aggravated Health damage as the Umbra ravages their body.",
+    "systemPtBr": "Este Dom só pode ser usado ao iniciar combate com um ataque surpresa, conforme descrito no Kit de Ferramentas do Narrador, p. 12. O Garou deve ter o alvo em sua linha de visão e estar livre para se posicionar com base na iluminação, no vento ou em outras características efêmeras, podendo atacar de uma distância de até três metros/jardas por ponto de Sabedoria. O Garou adiciona sua Sabedoria à sua parada de Destreza + Furtividade. Em um resultado Brutal ou falha total, o usuário sofre 1 ponto de dano Agravado de Vitalidade enquanto a Umbra devasta seu corpo.",
+    "duration": "Uma ação",
+    "book": "Tribes of Gaia",
+    "page": 210
+  },
+  {
+    "id": "174",
+    "gift": "Bonds of Communion",
+    "giftPtBr": "Laços de Comunhão",
+    "belonging": [
+      {
+        "type": "ghost council",
+        "totalRenown": 3
+      },
+      {
+        "type": "hart wardens",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The Garou binds certain types of spirits to their own spirit and flesh, making them manifest for the user alone. A magpie-spirit teaches this Gift.",
+    "descriptionPtBr": "O Garou vincula certos tipos de espíritos ao seu próprio espírito e carne, fazendo com que se manifestem apenas para o usuário. Um espírito-pega ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "",
+    "system": "Choose one type of spirit, such as a termite-spirit or drattosi, and make a Rage Check to attune yourself to that type of spirit. You can have a number of types attuned equal to your Wisdom. While attuned, you can perceive that type of spirit, recognize if it is in the Umbra or manifested in the physical world, as well as communicate without further aid. You must also abide by a new Ban: should you ever directly or indirectly harm any spirit of that type, you lose your attunement to it and cannot re-attune for a full lunar cycle. If you attune yourself to more types of spirits than allowed, you must choose one to break the attunement with. While the effects of this Gift persist in all forms, it can only be activated in a supernatural form.",
+    "systemPtBr": "Escolha um tipo de espírito, como um espírito-cupim ou drattosi, e faça um Teste de Fúria para se sintonizar com esse tipo de espírito. Você pode ter um número de tipos sintonizados igual à sua Sabedoria. Enquanto estiver sintonizado, você pode perceber esse tipo de espírito, reconhecer se ele está na Umbra ou manifestado no mundo físico, bem como se comunicar sem auxílio adicional. Você também deve obedecer a uma nova Proibição: caso algum dia prejudique direta ou indiretamente qualquer espírito desse tipo, você perde sua sintonia com ele e não pode se sintonizar novamente por um ciclo lunar completo. Se você se sintonizar com mais tipos de espíritos do que o permitido, deve escolher um para romper a sintonia. Embora os efeitos deste Dom persistam em todas as formas, ele só pode ser ativado em uma forma sobrenatural.",
+    "duration": "Especial",
+    "book": "Tribes of Gaia",
+    "page": 210
+  },
+  {
+    "id": "175",
+    "gift": "Speak the Forbidden Tongue",
+    "giftPtBr": "Falar a Língua Proibida",
+    "belonging": [
+      {
+        "type": "ghost council",
+        "totalRenown": 3
+      },
+      {
+        "type": "shadow lords",
+        "totalRenown": 3
+      }
+    ],
+    "description": "Bound together by a common master, the Umbral followers of the Wyrm have a language that only they can speak. While anyone can mimic its sounds, you need to know how to lay bare your soul for them to carry any meaning. While it's possible to communicate with Wyrm creatures in other languages too, using their own language makes it much easier to impersonate a servant of the Wyrm. Both the Bringers of Light and the Spiral Carvers are the masters of this painful art, earning the trust of their enemies by speaking at their level. Any Wyrm-spirit can be forced to teach this Gift.",
+    "descriptionPtBr": "Unidos por um mestre comum, os seguidores Umbrais da Wyrm possuem uma língua que apenas eles conseguem falar. Embora qualquer um possa imitar seus sons, é preciso saber como expor a própria alma para que eles carreguem algum significado. Embora também seja possível se comunicar com criaturas da Wyrm em outros idiomas, usar a própria língua delas torna muito mais fácil se passar por um servo da Wyrm. Tanto os Portadores da Luz quanto os Entalhadores da Espiral são mestres desta arte dolorosa, conquistando a confiança de seus inimigos ao falar no mesmo nível que eles. Qualquer espírito da Wyrm pode ser forçado a ensinar este Dom.",
+    "renown": "Sabedoria",
+    "cost": "Livre ou 1 ponto de Força de Vontade",
+    "action": "Livre",
+    "pool": "Determinação + Sabedoria",
+    "system": "For basic conversations with Wyrm-beasts in their own language, this Gift is free to use. When trying to gain the trust of a new creature of the Wyrm by pretending to be one of them, the Gift user must spend 1 Willpower and make a Gift test at Difficulty 3; the Storyteller may increase this for especially potent foes. If successful, they may add their Wisdom to any subsequent Social tests against the creature in the scene. Combat automatically ends this benefit, as does any admission that the user is not a servant of the Wyrm. On a Brutal outcome, the user must immediately make a Harano or Hauglosk test, their choice. Only creatures aligned to the Wyrm and others with this Gift understand these conversations. This Gift can be used in any form.",
+    "systemPtBr": "Para conversas básicas com feras da Wyrm em sua própria língua, este Dom é gratuito. Ao tentar conquistar a confiança de uma nova criatura da Wyrm fingindo ser uma delas, o usuário do Dom deve gastar 1 ponto de Força de Vontade e realizar um teste de Dom com Dificuldade 3; o Narrador pode aumentar essa Dificuldade para inimigos especialmente poderosos. Se for bem-sucedido, ele pode adicionar sua Sabedoria a quaisquer testes Sociais subsequentes contra a criatura na cena. O combate encerra automaticamente esse benefício, assim como qualquer admissão de que o usuário não é um servo da Wyrm. Em um resultado Brutal, o usuário deve imediatamente fazer um teste de Harano ou Hauglosk, à sua escolha. Apenas criaturas alinhadas à Wyrm e outros com este Dom entendem essas conversas. Este Dom pode ser usado em qualquer forma.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 210
+  },
+  {
+    "id": "176",
+    "gift": "Reinforced Durance",
+    "giftPtBr": "Cativeiro Reforçado",
+    "belonging": [
+      {
+        "type": "shadow lords",
+        "totalRenown": 6
+      },
+      {
+        "type": "ghost council",
+        "totalRenown": 6
+      }
+    ],
+    "description": "The Garou strengthens the bonds holding a spirit. A vine- or spider-spirit teaches this Gift.",
+    "descriptionPtBr": "O Garou fortalece os laços que mantêm um espírito preso. Um espírito-vinha ou espírito-aranha ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Inteligência + Glória",
+    "system": "This Gift extends the time a spirit is bound or keeps a spirit in a talen to power it. The user selects a bound spirit or talen and tests their own Intelligence + Glory. For a bound spirit, the Difficulty is 2 or half the bound spirit's Power, whichever is higher. A win on the test extends the duration of the binding by a week plus another week per point of margin. For a talen, the Difficulty is 2 plus the talen's rating, and the talen must still be usable; it cannot already be exhausted. On a success, it can be used one additional time in this story. The user can only affect one talen per session, and a talen can be affected only once. Regardless of success or failure, use of this Gift is likely to anger the spirit, since it violates the original agreement that bound it.",
+    "systemPtBr": "Este Dom estende o tempo em que um espírito permanece vinculado ou mantém um espírito em um talismã para energizá-lo. O usuário seleciona um espírito vinculado ou um talismã e testa sua própria Inteligência + Glória. Para um espírito vinculado, a Dificuldade é 2 ou metade do Poder do espírito vinculado, o que for maior. Uma vitória no teste estende a duração do vínculo em uma semana, mais outra semana por ponto de margem. Para um talismã, a Dificuldade é 2 mais a classificação do talismã, e o talismã ainda deve estar utilizável; ele não pode já estar esgotado. Em caso de sucesso, ele pode ser usado uma vez adicional nesta história. O usuário só pode afetar um talismã por sessão, e um talismã só pode ser afetado uma vez. Independentemente de sucesso ou falha, o uso deste Dom provavelmente irritará o espírito, já que viola o acordo original que o vinculou.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 211
+  },
+  {
+    "id": "177",
+    "gift": "Power Surge",
+    "giftPtBr": "Surto de Energia",
+    "belonging": [
+      {
+        "type": "glass walkers",
+        "totalRenown": 3
+      },
+      {
+        "type": "red talons",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The spirits of electricity flee at your touch. They cease their workings long enough to bring darkness and stop machines. An electricity-spirit teaches this Gift.",
+    "descriptionPtBr": "Os espíritos da eletricidade fogem ao seu toque. Eles cessam seus trabalhos por tempo suficiente para trazer escuridão e parar máquinas. Um espírito-eletricidade ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Carisma + Glória",
+    "system": "The Garou tests Charisma + Glory, Difficulty 2. On a win, the wiring bringing power into a room ceases to function. For each point of margin, the space affected can be larger: 1, small house; 2, large house; 3, medium-sized business; 4, large business; 5, city block, skyscraper, or warehouse.",
+    "systemPtBr": "O Garou testa Carisma + Glória, Dificuldade 2. Em caso de vitória, a fiação que leva energia para uma sala deixa de funcionar. Para cada ponto de margem, o espaço afetado pode ser maior: 1, casa pequena; 2, casa grande; 3, comércio de médio porte; 4, comércio grande; 5, quarteirão, arranha-céu ou armazém.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 211
+  },
+  {
+    "id": "178",
+    "gift": "Well-Oiled Machine",
+    "giftPtBr": "Máquina bem lubrificada",
+    "belonging": [
+      {
+        "type": "glass walkers",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The Garou strengthens an object, allowing it to resist the elements and intentional damage alike. Glass Walkers aligned with Limited Liability use this Gift to ensure their gear is always perfect, with nary a scratch to ruin the image. A turtle-spirit teaches this Gift.",
+    "descriptionPtBr": "O Garou fortalece um objeto, permitindo que ele resista tanto aos elementos quanto a danos intencionais. Andarilhos do Asfalto alinhados à Responsabilidade Limitada usam este Dom para garantir que seus equipamentos estejam sempre perfeitos, sem sequer um arranhão para arruinar a imagem. Um espírito-tartaruga ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "",
+    "system": "Choose one handheld item within your grasp and make a Rage Check. You infuse it with spiritual energy, which keeps it functioning. As long as you handle the object each day, it is not damaged by fire, electricity, water, cold, minor impacts or falls, or neglect. The Difficulty to inflict intentional damage is increased by half the user's Wisdom, rounded up. If the user ever intentionally damages the item, it loses its infused status, which cannot be affected by the user again for a lunar month. You can infuse a number of objects equal to your Wisdom. These infused items shift with you like garments affected by the Rite of Dedication if they're on your person when you shift. If brought to the Umbra and left there, they are swiftly lost or destroyed.",
+    "systemPtBr": "Escolha um item de mão ao seu alcance e faça um Teste de Fúria. Você o infunde com energia espiritual, que o mantém funcionando. Enquanto você manusear o objeto todos os dias, ele não é danificado por fogo, eletricidade, água, frio, impactos ou quedas menores, ou negligência. A Dificuldade para causar dano intencional a ele aumenta em metade da Sabedoria do usuário, arredondada para cima. Se o usuário algum dia danificar o item intencionalmente, ele perde seu estado infundido, e não poderá ser afetado pelo usuário novamente por um mês lunar. Você pode infundir um número de objetos igual à sua Sabedoria. Esses itens infundidos mudam de forma com você como vestimentas afetadas pelo Rito de Dedicação, se estiverem com você quando se transformar. Se forem levados para a Umbra e deixados lá, são rapidamente perdidos ou destruídos.",
+    "duration": "Especial",
+    "book": "Tribes of Gaia",
+    "page": 212
+  },
+  {
+    "id": "179",
+    "gift": "Gauntlet Interface",
+    "giftPtBr": "Interface da Película",
+    "belonging": [
+      {
+        "type": "glass walkers",
+        "totalRenown": 3
+      }
+    ],
+    "description": "This Gift allows the Garou to view the Umbra with a degree of separation, using computer terminals to interface with the data. The savvy Glass Walkers of the Limited Liability division may not have discovered this Gift, but they sure have popularized it. A networking-spirit teaches this Gift.",
+    "descriptionPtBr": "Este Dom permite que o Garou visualize a Umbra com certo grau de separação, usando terminais de computador para interagir com os dados. Os astutos Andarilhos do Asfalto da divisão Responsabilidade Limitada podem não ter descoberto este Dom, mas certamente o popularizaram. Um espírito de rede ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Determinação + Sabedoria",
+    "system": "The Garou first needs a device of their own, such as a computer, tablet, or phone, to use this Gift, after which they make a Rage Check and test Resolve + Wisdom against a Difficulty equal to the local Gauntlet rating. On a success, they can ask a number of questions equal to their Wisdom about the local Umbra and get accurate responses and descriptions, including estimations of potency, hidden spirits, and potential threats. This Gift can be used in any form.",
+    "systemPtBr": "O Garou primeiro precisa de um dispositivo próprio, como um computador, tablet ou telefone, para usar este Dom; depois disso, ele faz um Teste de Fúria e testa Determinação + Sabedoria contra uma Dificuldade igual à classificação local da Película. Em caso de sucesso, ele pode fazer um número de perguntas igual à sua Sabedoria sobre a Umbra local e receber respostas e descrições precisas, incluindo estimativas de potência, espíritos ocultos e ameaças potenciais. Este Dom pode ser usado em qualquer forma.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 212
+  },
+  {
+    "id": "180",
+    "gift": "Scour Squirrel's Trove",
+    "giftPtBr": "Vasculhar o Tesouro do Esquilo",
+    "belonging": [
+      {
+        "type": "hart wardens",
+        "totalRenown": 3
+      },
+      {
+        "type": "silent striders",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The spirits know what secrets the earth hides. While some used this Gift in the Dead Purge's hunting for leeches or raiding tombs, many others find more mundane uses for this knowledge. A squirrel-, badger-, or other food-hoarding spirit teaches this Gift.",
+    "descriptionPtBr": "Os espíritos sabem quais segredos a terra esconde. Embora alguns tenham usado este Dom durante a Caçada dos Mortos para caçar sanguessugas ou saquear tumbas, muitos outros encontram usos mais mundanos para esse conhecimento. Um espírito-esquilo, espírito-texugo ou outro espírito acumulador de comida ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Inteligência + Sabedoria",
+    "system": "The Garou touches the ground and tests their Intelligence + Wisdom against a Difficulty of 2 for soft, natural soil or organic ground-covering such as piles of leaves or wood chips, 3 for stone or rocky ground, or 4 for concrete, asphalt, or other human-made materials. On a success, the Garou can do one of the following, plus an additional one for each point of margin: get an answer to what is directly beneath them, other than earth; get an answer to whether there is a specific object or type of object within about 6 feet or 2 meters; get an answer to what type of material comprises the ground cover beneath them; get an answer to whether a human, Garou, or spirit has passed by in the past day, hour, or minute; or retrieve a specific handheld item so long as it is hidden within about 10 feet or 3 meters.",
+    "systemPtBr": "O Garou toca o chão e testa sua Inteligência + Sabedoria contra uma Dificuldade de 2 para solo natural macio ou cobertura orgânica do solo, como pilhas de folhas ou lascas de madeira, 3 para pedra ou terreno rochoso, ou 4 para concreto, asfalto ou outros materiais feitos por humanos. Em caso de sucesso, o Garou pode fazer uma das seguintes opções, mais uma adicional para cada ponto de margem: obter uma resposta sobre o que está diretamente abaixo dele, além de terra; obter uma resposta sobre se há um objeto específico ou tipo de objeto dentro de cerca de 6 pés ou 2 metros; obter uma resposta sobre que tipo de material compõe a cobertura do solo abaixo dele; obter uma resposta sobre se um humano, Garou ou espírito passou por ali no último dia, hora ou minuto; ou recuperar um item específico de mão, desde que esteja escondido dentro de cerca de 10 pés ou 3 metros.",
+    "duration": "Um turno",
+    "book": "Tribes of Gaia",
+    "page": 212
+  },
+  {
+    "id": "181",
+    "gift": "Implacable Grip",
+    "giftPtBr": "Aperto Implacável",
+    "belonging": [
+      {
+        "type": "red talons",
+        "totalRenown": 3
+      },
+      {
+        "type": "silver fangs",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The Garou grabs on and refuses to let go, holding on so tight it's as if they're welded together. An opossum-, badger-, or crocodile-spirit teaches this Gift.",
+    "descriptionPtBr": "O Garou agarra e se recusa a soltar, segurando com tanta força que é como se estivessem soldados juntos. Um espírito-gambá, espírito-texugo ou espírito-crocodilo ensina este Dom.",
+    "renown": "Honra",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Livre",
+    "pool": "",
+    "system": "When making any test to grab hold of an object or grapple an opponent, the Garou may first activate this Gift. For the rest of the scene, add half your Honor, rounded up, to any relevant dice pool.",
+    "systemPtBr": "Ao realizar qualquer teste para agarrar um objeto ou agarrar um oponente, o Garou pode primeiro ativar este Dom. Pelo restante da cena, adicione metade da sua Honra, arredondada para cima, a qualquer parada de dados relevante.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 213
+  },
+  {
+    "id": "182",
+    "gift": "Exposed Desire",
+    "giftPtBr": "Desejo Exposto",
+    "belonging": [
+      {
+        "type": "shadow lords",
+        "totalRenown": 6
+      }
+    ],
+    "description": "This Gift allows the user to discern what someone or something wants, even if no word has been spoken. A desire-spirit teaches this Gift.",
+    "descriptionPtBr": "Este Dom permite ao usuário discernir o que alguém ou algo deseja, mesmo que nenhuma palavra tenha sido dita. Um espírito-desejo ensina este Dom.",
+    "renown": "Glória",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "Raciocínio + Glória",
+    "system": "The Garou first spends the turn observing the target and then spends the Willpower. No test is required against humans. Supernatural creatures as well as humans aware of Garou powers must beat the Garou in a contest of their Composure + Wits against the Gift pool. On a success, the Garou senses exactly what the target wants most in that moment. On a critical success, they gain a small sense as to why they want it. Brutal outcomes spill no secrets, but the target becomes aware they're being scrutinized. This Gift can be used in any form.",
+    "systemPtBr": "O Garou primeiro passa o turno observando o alvo e então gasta a Força de Vontade. Nenhum teste é exigido contra humanos. Criaturas sobrenaturais, assim como humanos cientes dos poderes Garou, devem vencer o Garou em uma disputa de Autocontrole + Raciocínio contra a parada do Dom. Em caso de sucesso, o Garou sente exatamente o que o alvo mais deseja naquele momento. Em um sucesso crítico, ele obtém uma pequena noção do motivo pelo qual o alvo deseja aquilo. Resultados Brutais não revelam nenhum segredo, mas o alvo percebe que está sendo examinado. Este Dom pode ser usado em qualquer forma.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 213
+  },
+  {
+    "id": "183",
+    "gift": "Final Sight",
+    "giftPtBr": "Visão Final",
+    "belonging": [
+      {
+        "type": "silent striders",
+        "totalRenown": 3
+      }
+    ],
+    "description": "A corpse can still reveal secrets for those who know how to see them. This Gift lets the Garou experience the final moments of a corpse's life. A raven-spirit teaches this Gift.",
+    "descriptionPtBr": "Um cadáver ainda pode revelar segredos para aqueles que sabem como vê-los. Este Dom permite que o Garou experimente os momentos finais da vida de um cadáver. Um espírito-corvo ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade ou Livre",
+    "action": "Padrão",
+    "pool": "Inteligência + Sabedoria",
+    "system": "The Garou must glare into the eyes of a corpse. Test Intelligence + Wisdom against a Difficulty of 2. Increase the Difficulty by 1 for every 24 hours since the corpse's death, to a maximum of 7. On a win, the user can experience the last moments of the corpse's life through one sense, plus another for every 2 points of the margin. On a Brutal outcome, the user takes 1 Aggravated Willpower damage as they relive the actual death. This Gift can be used without spending 1 point of Willpower if the user eats the sensory organ from the corpse, but doing so is taboo among many Garou.",
+    "systemPtBr": "O Garou deve encarar os olhos de um cadáver. Teste Inteligência + Sabedoria contra uma Dificuldade de 2. Aumente a Dificuldade em 1 para cada 24 horas desde a morte do cadáver, até um máximo de 7. Em caso de vitória, o usuário pode experimentar os últimos momentos da vida do cadáver por meio de um sentido, mais outro para cada 2 pontos de margem. Em um resultado Brutal, o usuário sofre 1 ponto de dano Agravado de Força de Vontade ao reviver a morte real. Este Dom pode ser usado sem gastar 1 ponto de Força de Vontade se o usuário comer o órgão sensorial do cadáver, mas fazer isso é tabu entre muitos Garou.",
+    "duration": "Instantâneo",
+    "book": "Tribes of Gaia",
+    "page": 214
+  },
+  {
+    "id": "184",
+    "gift": "Footsteps of the Past",
+    "giftPtBr": "Passos do Passado",
+    "belonging": [
+      {
+        "type": "silent striders",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The spirits of the city streets talk to you, allowing you to gather information on what transpired recently. An asphalt- or concrete-spirit teaches this Gift.",
+    "descriptionPtBr": "Os espíritos das ruas da cidade falam com você, permitindo que reúna informações sobre o que aconteceu recentemente. Um espírito-asfalto ou espírito-concreto ensina este Dom.",
+    "renown": "Honra",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Total",
+    "pool": "",
+    "system": "The user touches the street, sidewalk, pavement, or other road-like surface, spends 1 Willpower to activate this Gift, and then tests Resolve + Honor, Difficulty 3. On a win, you receive a high-level impression of who has traveled along this track in the past 24 hours. For each point of margin, you can ask one follow-up question of the Storyteller, related to anyone found journeying and of their travels.",
+    "systemPtBr": "O usuário toca a rua, calçada, pavimento ou outra superfície semelhante a uma via, gasta 1 ponto de Força de Vontade para ativar este Dom e então testa Determinação + Honra, Dificuldade 3. Em caso de vitória, você recebe uma impressão geral de quem passou por esse caminho nas últimas 24 horas. Para cada ponto de margem, você pode fazer uma pergunta adicional ao Narrador, relacionada a qualquer um encontrado em deslocamento e às suas viagens.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 214
+  },
+  {
+    "id": "185",
+    "gift": "Strength to Endure",
+    "giftPtBr": "Força para Resistir",
+    "belonging": [
+      {
+        "type": "silent striders",
+        "totalRenown": 3
+      },
+      {
+        "type": "silver fangs",
+        "totalRenown": 3
+      }
+    ],
+    "description": "The Garou bolsters an ally, keeping spirits of death from claiming them momentarily. A death- or ancestor-spirit teaches this Gift.",
+    "descriptionPtBr": "O Garou fortalece um aliado, impedindo momentaneamente que os espíritos da morte o reivindiquem. Um espírito da morte ou espírito ancestral ensina este Dom.",
+    "renown": "Honra",
+    "cost": "Nenhum",
+    "action": "Padrão",
+    "pool": "Determinação + Honra",
+    "system": "The Garou growls towards someone on the verge of death, temporarily scaring off the inevitable for a target who is Impaired or dying. Test Resolve + Honor against a Difficulty equal to the amount of Aggravated damage the physically Impaired target has received; ignore temporary Health levels, such as those from crinos form. On a win, the target stabilizes for the scene. Assuming their bodies are intact enough to speak or otherwise communicate, they can do so. A fully incapacitated target can take one action without penalty from impairment. Future attempts to heal the target via Gifts or simple Medicine tests have their Difficulty reduced by the margin of success.",
+    "systemPtBr": "O Garou rosna na direção de alguém à beira da morte, afastando temporariamente o inevitável de um alvo que esteja Debilitado ou morrendo. Teste Determinação + Honra contra uma Dificuldade igual à quantidade de dano Agravado que o alvo fisicamente Debilitado recebeu; ignore níveis temporários de Vitalidade, como aqueles da forma crinos. Em caso de vitória, o alvo se estabiliza pela cena. Presumindo que seu corpo esteja intacto o suficiente para falar ou se comunicar de outra forma, ele pode fazê-lo. Um alvo totalmente incapacitado pode realizar uma ação sem penalidade por debilitação. Tentativas futuras de curar o alvo por meio de Dons ou testes simples de Medicina têm sua Dificuldade reduzida pela margem de sucesso.",
+    "duration": "Uma cena",
+    "book": "Tribes of Gaia",
+    "page": 214
+  },
+  {
+    "id": "186",
+    "gift": "Death's Quiet Call",
+    "giftPtBr": "Chamado Silencioso da Morte",
+    "belonging": [
+      {
+        "type": "silent striders",
+        "totalRenown": 6
+      }
+    ],
+    "description": "For Silent Striders, death is often seen as a companion. Some, however, learn this Gift to help ease the transition, or send the unquiet dead back to the grave. A death-spirit teaches this Gift.",
+    "descriptionPtBr": "Para os Peregrinos Silenciosos, a morte é frequentemente vista como uma companheira. Alguns, porém, aprendem este Dom para ajudar a suavizar a transição ou enviar os mortos inquietos de volta ao túmulo. Um espírito da morte ensina este Dom.",
+    "renown": "Sabedoria",
+    "cost": "1 ponto de Força de Vontade",
+    "action": "Padrão",
+    "pool": "Carisma + Sabedoria",
+    "system": "The Garou chooses a target to hear Death call to them. To use the Gift, test Charisma + Wisdom against the target's Composure + Resolve. If successful, human targets simply die. If the target is a vampire, a ghost, or some other type of undead, on a win the target takes 2 Superficial damage to both Health and Willpower plus an additional point of damage to both for every point of margin. A target can take damage from this Gift only once per scene.",
+    "systemPtBr": "O Garou escolhe um alvo para ouvir a Morte chamá-lo. Para usar o Dom, teste Carisma + Sabedoria contra Autocontrole + Determinação do alvo. Se for bem-sucedido, alvos humanos simplesmente morrem. Se o alvo for um vampiro, um fantasma ou algum outro tipo de morto-vivo, em caso de vitória o alvo sofre 2 pontos de dano Superficial tanto em Vitalidade quanto em Força de Vontade, mais um ponto adicional de dano em ambos para cada ponto de margem. Um alvo só pode sofrer dano deste Dom uma vez por cena.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 214
+  },
+  {
+    "id": "187",
+    "gift": "The Ties That Bind",
+    "giftPtBr": "Os Laços que Unem",
+    "belonging": [
+      {
+        "type": "silver fangs",
+        "totalRenown": 6
+      }
+    ],
+    "description": "The interplay of relationships can be a minefield for the uninitiated, and doubly so for the Rage-bound Garou who blithely plows through a situation. This Gift allows a Garou to sense connections between people, uncovering sham friendships, unrequited love, and simmering resentments alike. While the Silver Fangs have used this to better understand their charges, the Masters of the Seal weaponized it. An ant- or bee-spirit teaches this Gift.",
+    "descriptionPtBr": "A interação entre relacionamentos pode ser um campo minado para os não iniciados, e ainda mais para os Garou vinculados à Fúria que avançam despreocupadamente por uma situação. Este Dom permite que um Garou sinta conexões entre pessoas, revelando amizades falsas, amores não correspondidos e ressentimentos latentes. Enquanto os Presas de Prata usaram isso para compreender melhor aqueles sob sua responsabilidade, os Mestres do Selo o transformaram em arma. Um espírito-formiga ou espírito-abelha ensina este Dom.",
+    "renown": "Honra",
+    "cost": "1 Teste de Fúria",
+    "action": "Total",
+    "pool": "Autocontrole + Honra",
+    "system": "The Garou makes a Gift test against Difficulty 3, asking one question, plus one more for each point of margin, about the relationships of any character in the scene. Example questions include: How does this person feel about me? Whom among the people here does this person hate the most? Is anyone here lying about their feelings towards someone? Answers are always a name, an emotion, or a yes, or a no. They won't reveal if or how a person is lying, just that their displayed feelings aren't honest. There are pitfalls with this approach, as the only people eligible as an answer are those directly in the scene. If you ask who the target hates the most, the result might ignore a hated sept leader because they're not present but highlight a new recruit the target finds annoying. This Gift can be used in any form but can only be used once per scene.",
+    "systemPtBr": "O Garou realiza um teste de Dom contra Dificuldade 3, fazendo uma pergunta, mais uma adicional para cada ponto de margem, sobre os relacionamentos de qualquer personagem na cena. Exemplos de perguntas incluem: Como esta pessoa se sente em relação a mim? Quem, entre as pessoas aqui, esta pessoa mais odeia? Alguém aqui está mentindo sobre seus sentimentos por alguém? As respostas são sempre um nome, uma emoção, um sim ou um não. Elas não revelam se ou como uma pessoa está mentindo, apenas que os sentimentos demonstrados não são honestos. Há armadilhas nessa abordagem, pois as únicas pessoas elegíveis como resposta são aquelas diretamente presentes na cena. Se você perguntar quem o alvo mais odeia, o resultado pode ignorar um líder de septo odiado por ele não estar presente, mas destacar um novo recruta que o alvo considera irritante. Este Dom pode ser usado em qualquer forma, mas só pode ser usado uma vez por cena.",
+    "duration": "",
+    "book": "Tribes of Gaia",
+    "page": 215
   }
 ]
