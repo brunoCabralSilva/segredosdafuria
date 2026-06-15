@@ -96,5 +96,19 @@ export default function RitualsMechanic(props: { title: string }) {
       return <RiteWithRoll renown="honor" skill="leadership" textDifficult="A Dificuldade deste Rito é 2 + 1 para cada participante humano" />
     case "Rite of Spiritual Succor":
       return <RiteWithRoll renown="wisdom" skill="etiquette" textDifficult="A Dificuldade básica do Rito é igual ao número de participantes, nunca inferior a 3" />
+    case "Rite of the Bloody Heart Freed":
+      return <RiteWithRoll renown="wisdom" skill="insight" textDifficult="A Dificuldade do Rito é 4, mais 1 para cada humano adicional submetido ao Rito. Libertar um Garou de tais vínculos impõe +1 de Dificuldade adicional" />
+    case "Rite of the Barrow's Insight":
+      return <RiteWithRoll renown="wisdom" skill="occult" textDifficult="A Dificuldade deste Rito é 3, mais 1 para cada ano desde que o corpo morreu" />
+    case "Rite of Disfigurement":
+      return <RiteWithRoll renown="glory" skill="intimidation" textDifficult="A Dificuldade do Rito é igual a 2 mais o maior Renome do Garou alvo" />
+    case "Rite of New Growth":
+      return <RiteWithRoll renown="wisdom" skill="survival" textDifficult="A Dificuldade do Rito é igual a 5 menos a quantidade de Vitalidade sacrificada" />
+    case "Rite of the Wight's Mantle":
+      return <RiteWithRoll renown="wisdom" skill="medicine" textDifficult="O Mestre do Rito realiza um teste com Dificuldade igual ao número de participantes que desejam ser afetados; é possível auxiliar neste Rito sem receber seus efeitos" />
+    case "Rite of the Unrisen":
+      return <RiteWithRoll renown="honor" skill="occult" textDifficult="O Mestre do Rito realiza um teste de Rito com Dificuldade 3; isso aumenta em +1 se qualquer alvo estiver relutante, ou +2 se estiver sendo ativamente contido" />
+    case 'Rite of Homage':
+      return <SimpleTest />   
   }
 }
