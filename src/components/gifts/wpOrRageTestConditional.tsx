@@ -3,7 +3,7 @@ import { registerMessage } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
 import { useContext, useState } from "react";
 
-export function WpConditional(props: { type: string, condition: string }) {
+export function WpOrRageTestConditional(props: { type: string, condition: string }) {
   const { condition } = props;
   const [marked, setMarked] = useState(false);
   const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);

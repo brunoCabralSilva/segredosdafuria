@@ -1,6 +1,6 @@
 import { RageOrWpWithRoll } from "./rageOrWpWithRoll";
 import { RageTestOrWp } from "./rageTestOrWp";
-import { WpConditional } from "./wpConditional";
+import { WpOrRageTestConditional } from "./wpOrRageTestConditional";
 import { RgOrWpWithConditionInRoll } from "./rgOrWpWithConditionInRoll";
 import { PackInstinct } from "./packInstinct";
 import { SightFromBeyond } from "./sightFromBeyond";
@@ -21,6 +21,9 @@ import { RapidShift } from "./rapidShift";
 import { Energize } from "./energize";
 import { HandsOfEarth } from "./handsOfEarth";
 import { ResistToxin } from "./resistToxin";
+import { VisionsOfMomentsLost } from "./VisionsOfMomentsLost";
+import { SpeakTheForbiddenTongue } from "./speakTheForbiddenTongue";
+import { FinalSight } from "./finalSight";
 
 export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
@@ -49,6 +52,12 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Mouth Full of Teeth": return <RageTestOrWp type="rage" />;
     case "Gnaw": return <RageTestOrWp type="rage" />;
     case "Indomitable Spirit": return <RageTestOrWp type="rage" />;
+    case "Wounding Lies": return <RageTestOrWp type="rage" />;
+    case "Umbral Endurance": return <RageTestOrWp type="rage" />;
+    case "Silence the Slain": return <RageTestOrWp type="rage" />;
+    case "Shredded Gauntlet Strike": return <RageTestOrWp type="rage" />;
+    case "Bonds of Communion": return <RageTestOrWp type="rage" />;
+    case "Well-Oiled Machine": return <RageTestOrWp type="rage" />;
     
     //Dons que custam 1 ponto de Força de Vontade
     case 'Ancestral Conviction': return <RageTestOrWp type="willpower" />;
@@ -73,6 +82,11 @@ export default function GiftsMechanic(props: { name: string }) {
     case 'Whispered Passage': return <RageTestOrWp type="willpower" />;
     case 'Urban Hunter': return <RageTestOrWp type="willpower" />;
     case 'Umbral Pocket': return <RageTestOrWp type="willpower" />;
+    case 'Word of Honor': return <RageTestOrWp type="willpower" />;
+    case 'Mutable Scent': return <RageTestOrWp type="willpower" />;
+    case "Den Guardian's Desperation": return <RageTestOrWp type="willpower" />;
+    case "Implacable Grip": return <RageTestOrWp type="willpower" />;
+    case "Footsteps of the Past": return <RageTestOrWp type="willpower" />;
 
     //Dons que custam 1 Teste de Fúria + 1 teste
     case "Hare's Leap":
@@ -141,6 +155,24 @@ export default function GiftsMechanic(props: { name: string }) {
       return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
     case 'Light of the Moon':
       return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Astúcia, ou um valor imposto pelo Narrador)." />
+    case 'Second Skin':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="wisdom" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
+    case 'Curse of Isolation':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="resolve" renown="glory" dificulty={1} textDificulty="Dificuldade (A Dificuldade é igual à classificação da Vantagem possuído por um alvo cujo sangue tenha provado)" />
+    case 'Eyes on the Inside':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="resolve" renown="honor" dificulty={2} textDificulty="Dificuldade (Dificuldade de 2 para coisas finas até a espessura de uma porta barata, 3 para a espessura de uma porta grossa ou parede padrão, ou 4 para uma parede espessa, até cerca de 1 pé ou 0,3 metro)" />
+    case 'Primal Howl':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
+    case 'Perfect Bait':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="wisdom" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
+    case 'Final Offering':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="stamina" renown="glory" dificulty={2} textDificulty="Dificuldade (A dificuldade deve ser igual ao número de oponentes que enfrenta)" />
+    case 'Power Surge':
+      return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 2)" />
+    case "Gauntlet Interface":
+      return <RageOrWpWithRoll skill="" type="rage" attribute="resolve" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser igual à classificação local da Película)" />
+    case "The Ties That Bind":
+      return <RageOrWpWithRoll skill="" type="rage" attribute="composure" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
 
     //Dons que custam 1 ponto de Força de Vontade + 1 teste
     case 'Penumbral Senses':
@@ -217,6 +249,18 @@ export default function GiftsMechanic(props: { name: string }) {
       return <RageOrWpWithRoll skill="" type="willpower" attribute="stamina" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser igual à Película local - 1)" />
     case 'Lullaby':
       return <RageOrWpWithRoll skill="" type="willpower" attribute="composure" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Determinação + Astúcia, ou um valor imposto pelo Narrador)." />
+    case 'The Line of No Approach':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="composure" renown="wisdom" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual à 3; um ou ambos os alvos sobrenaturais podem resistir com Força + Determinação, se preferirem" />
+    case 'Consume Rage':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="" renown="glory" dificulty={1} textDificulty="" />
+    case 'The All-Seeing Eye': 
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="intelligence" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser igual a 3 e Narradores devem aumentar a Dificuldade se a descrição for vaga demais ou se o dispositivo alvo for particularmente protegido ou difícil de encontrar)" />
+    case 'Reinforced Durance':
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="intelligence" renown="glory" dificulty={2} textDificulty="Dificuldade (Para um espírito vinculado, a Dificuldade é 2 ou metade do Poder do espírito vinculado, o que for maior. Para um talismã, a Dificuldade é 2 mais a classificação do talismã, e o talismã ainda deve estar utilizável, ele não pode já estar esgotado)" />
+    case "Scour Squirrel's Trove":
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="intelligence" renown="wisdom" dificulty={2} textDificulty="Dificuldade (A Dificuldade deve ser igual a 2 para solo natural macio ou cobertura orgânica do solo, como pilhas de folhas ou lascas de madeira, 3 para pedra ou terreno rochoso, ou 4 para concreto, asfalto ou outros materiais feitos por humanos)" />
+    case "Death's Quiet Call":
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="charisma" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Determinação, ou um valor imposto pelo Narrador)" />
 
     //Dons que custam 1 teste de Fúria + 1 teste condicional
     case 'Staredown':
@@ -227,6 +271,8 @@ export default function GiftsMechanic(props: { name: string }) {
       return <RgOrWpWithConditionInRoll type="rage" attribute="charisma" renown="glory" dificulty={2} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Lábia, ou um valor imposto pelo Narrador)." condition="Marque se o alvo é uma criatura sobrenatural ou um humano com experiência anterior com os Garou" />
     case "Halt the Coward's Flight":
       return <RgOrWpWithConditionInRoll type="rage" attribute="resolve" renown="honor" dificulty={2} condition="Marque se o alvo é uma criatura sobrenatural, como um vampiro ou outro Garou (o Dom é bem-sucedido automaticamente em pessoas comuns, veículos e animais)" textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Sobrevivência, ou um valor imposto pelo Narrador)." />
+    case "Mark of Prey":
+      return <RgOrWpWithConditionInRoll type="rage" attribute="charisma" renown="glory" dificulty={2} condition="Marque se o alvo é uma criatura sobrenatural" textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Determinação, ou um valor imposto pelo Narrador)." />
 
     //Dons que custam 1 ponto de Força de Vontade + 1 teste condicional
     case 'Catfeet':
@@ -239,14 +285,20 @@ export default function GiftsMechanic(props: { name: string }) {
       return <RgOrWpWithConditionInRoll type="willpower" attribute="charisma" renown="glory" dificulty={2} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Determinação, ou um valor imposto pelo Narrador)." condition="Marque se o alvo é uma criatura sobrenatural ou humana ciente dos Garou e seus poderes" />
     case "Life's Presence":
       return <RgOrWpWithConditionInRoll type="willpower" attribute="composure" renown="wisdom" dificulty={3} textDificulty="" condition="Marque se o alvo é uma Entidade sobrenatural que usa poderes para se ocultar" />
+    case "Exposed Desire":
+      return <RgOrWpWithConditionInRoll type="willpower" attribute="wits" renown="glory" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Raciocínio, ou um valor imposto pelo Narrador)" condition="Marque se o alvo é uma criatura não humana" />    
 
-    //Testes que requerem ou não 1 ponto de força de vontade
+    //Testes que requerem ou não apenas 1 ponto de força de vontade ou 1 teste de Fúria
     case "Scent of Running Water":
-      return <WpConditional type="willpower" condition="Marque se deseja estender os efeitos do Dom à parada de dados do seu personagem por uma cena" />
+      return <WpOrRageTestConditional type="willpower" condition="Marque se deseja estender os efeitos do Dom à parada de dados do seu personagem por uma cena" />
     case "Camouflage":
-      return <WpConditional type="willpower" condition="Marque se deseja estender seu efeito para os membros de sua matilha ao alcance" />
+      return <WpOrRageTestConditional type="willpower" condition="Marque se deseja estender seu efeito para os membros de sua matilha ao alcance" />
     case "Chill Cloak":
-      return <WpConditional type="willpower" condition="Marque se deseja estender seu efeito aos membros de sua matilha que estejam ao alcance." />
+      return <WpOrRageTestConditional type="willpower" condition="Marque se deseja estender seu efeito aos membros de sua matilha que estejam ao alcance." />
+    case "Traveler's Luck":
+      return <WpOrRageTestConditional type="rage" condition="Marque se este Dom está sendo conjurado para sua alcateia ou não membros dela" />
+    case "Harrowing Slash":
+      return <WpOrRageTestConditional type="rage" condition="Marque se este Dom está sendo conjurado em uma forma que não possui garras" />
 
     //Dons que não precisam de teste
     case "Sense Danger": return <SimpleTest />
@@ -264,6 +316,8 @@ export default function GiftsMechanic(props: { name: string }) {
       return <NormalTest attribute="" renown="glory" />
     case "Tug the Leash":
       return <NormalTest attribute="composure" renown="glory" />
+    case "Strength to Endure":
+      return <NormalTest attribute="resolve" renown="honor" />
 
     //Testes Individuais
     case 'Pack Instinct': return <PackInstinct />
@@ -283,6 +337,9 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Energize": return <Energize />
     case "Hands of Earth": return <HandsOfEarth />
     case 'Resist Toxin': return <ResistToxin />
+    case 'Visions of Moments Lost': return <VisionsOfMomentsLost />
+    case 'Speak the Forbidden Tongue': return <SpeakTheForbiddenTongue />
+    case 'Final Sight': return <FinalSight />
   }
 }
 
