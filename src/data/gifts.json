@@ -319,7 +319,7 @@
   {
     "id": "15",
     "gift": "Blessed Brew",
-    "giftPtBr": "Bebida Abençoada",
+    "giftPtBr": "Tisana Abençoada",
     "belonging": [
       {
         "type": "hart wardens",
@@ -336,7 +336,7 @@
     "systemPtBr": "Qualquer um que beba o equivalente a um copo de líquido afetado por este Dom recebe o seguinte benefício: Para o próximo teste de resistência a qualquer tipo de medo ou habilidade mental sobrenatural hostil, adicione um número de dados igual à Glória do usuário do Dom. O usuário do Dom pode infundir o equivalente a uma única garrafa de líquido, suficiente para toda uma matilha, e a infusão e seu efeito permanecem ativos até serem usados ou até o final da sessão. Este Dom só pode ser usado uma vez por sessão e pode ser usado em qualquer forma.",
     "duration": "Por até uma sessão",
     "book": "Werewolf: The Apocalypse 5th",
-    "page": 149
+    "page": 173
   },
   {
     "id": "16",
