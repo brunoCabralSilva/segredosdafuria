@@ -10,8 +10,6 @@ import ItemAgravated from "../sheetItems/itemAgravated";
 import ResetSheet from "../popup/resetSheet";
 import { getUserByEmail } from "@/firebase/user";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
-import { CiEdit } from "react-icons/ci";
-import Image from "next/image";
 import DeleteSheet from "../popup/deleteSheet";
 import { registerHistory } from "@/firebase/history";
 
@@ -27,9 +25,6 @@ export default function General() {
     dataSheet,
 		showResetSheet, setShowResetSheet,
     showDeleteSheet,
-    showHelp,
-    setShowHelp,
-    setShowMenuSession,
     setShowGiftRoll,
     setShowRitualRoll,
     setShowMessage,

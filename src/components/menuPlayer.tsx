@@ -26,6 +26,7 @@ import History from "./menuSession/history";
 import Forms from "./menuSession/forms";
 import WillpowerTest from "./popup/willpowerTest";
 import { sheetStructure } from "@/firebase/utilities";
+import Maps from "./menuSession/maps";
 
 export default function MenuPlayer() {
   const {

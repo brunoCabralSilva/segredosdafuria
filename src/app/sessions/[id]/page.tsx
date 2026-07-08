@@ -34,6 +34,7 @@ import EditBannerSession from "@/components/popup/editBannerSession";
 import HpAndWillPower from "@/components/popup/hpAndWillpower";
 import Help from "@/components/popup/help";
 import RerollWithWillpower from "@/components/popup/rerollWithWillpower";
+import Maps from "@/components/menuSession/maps";
 
 export default function SessionId() {
 	const params = useParams();
@@ -47,6 +48,7 @@ export default function SessionId() {
 	const [showData, setShowData] = useState(false);
 	const [gameMaster, setGameMaster] = useState(false);
   const {
+    showMaps,
     setName,
     sheetId,
     setEmail,
@@ -167,7 +169,9 @@ export default function SessionId() {
         showData
         ? <div className="flex bg-black/80">
             {
-              showEvaluateSheet.show
+              showMaps.show
+              ? <Maps />
+              : showEvaluateSheet.show
               ? <EvaluateSheet />
               : showConsentForm ?
                 <ConsentForm />

@@ -81,6 +81,7 @@ export default function Provider({children }: IProvider) {
   const [showWillpowerTest, setShowWillpowerTest] = useState(false);
   const [showBannerSession, setShowBannerSession] = useState({ show: false, sessionId: '' });
   const [rerollWithWillPower, setRerollWithWillPower] = useState({ show: false, dataMessage: {} });
+  const [showMaps, setShowMaps] = useState({ show: false, data: '' });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -128,12 +129,14 @@ export default function Provider({children }: IProvider) {
     setAddFavorAndBan({show: false, data: {}, type: ''});
     setShowDeleteFavorAndBan({ show: false, name: '', type: '' });
     setShowBannerSession({ show: false, sessionId: '' });
+    setShowMaps({ show: false, data: '' });
   }
 
   return (
     <contexto.Provider
       value={{
         //user
+        showMaps, setShowMaps,
         showHelp, setShowHelp,
         simplify, setSimplify,
         dataUser, setDataUser,
