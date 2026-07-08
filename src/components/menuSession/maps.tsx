@@ -29,6 +29,12 @@ import {
   FaOilCan,
   FaTruck,
   FaRulerCombined,
+  FaPaw,
+  FaChessRook,
+  FaChurch,
+  FaShieldAlt,
+  FaStore,
+  FaLandmark,
 } from "react-icons/fa";
 import { updateSession } from "@/firebase/sessions";
 
@@ -53,7 +59,13 @@ type MarkerIconType =
   | "toxico"
   | "reciclagem"
   | "petroleo"
-  | "caminhao";
+  | "caminhao"
+  | "zoologico"
+  | "castelo"
+  | "religioso"
+  | "delegacia"
+  | "comercio"
+  | "governo";
 
 type MarkerColorType =
   | "vermelho"
@@ -65,7 +77,15 @@ type MarkerColorType =
   | "rosa"
   | "ciano"
   | "preto"
-  | "branco";
+  | "branco"
+  | "indigo"
+  | "cinza";
+
+type LegacyMarkerColorType =
+  | MarkerColorType
+  | "vinho"
+  | "lima"
+  | "marrom";
 
 type Point = {
   id: number;
@@ -73,7 +93,7 @@ type Point = {
   y: number;
   name: string;
   icon: MarkerIconType;
-  color: MarkerColorType;
+  color: LegacyMarkerColorType;
 };
 
 type PendingPoint = {
@@ -122,6 +142,12 @@ const markerIcons = {
   reciclagem: { label: "Reciclagem", Icon: FaRecycle },
   petroleo: { label: "Petróleo", Icon: FaOilCan },
   caminhao: { label: "Caminhão / Cargas", Icon: FaTruck },
+  zoologico: { label: "Zoologico", Icon: FaPaw },
+  castelo: { label: "Castelo / Fortaleza", Icon: FaChessRook },
+  religioso: { label: "Centro religioso", Icon: FaChurch },
+  delegacia: { label: "Delegacia / Seguranca", Icon: FaShieldAlt },
+  comercio: { label: "Comercio / Loja", Icon: FaStore },
+  governo: { label: "Centro civico / Governo", Icon: FaLandmark },
 } satisfies Record<
   MarkerIconType,
   {
@@ -135,51 +161,73 @@ const markerColors = {
     label: "Vermelho",
     className: "bg-red-600 border-white text-white",
     previewClassName: "bg-red-600",
+    previewBorderClassName: "border-white",
   },
   azul: {
     label: "Azul",
     className: "bg-blue-600 border-white text-white",
     previewClassName: "bg-blue-600",
+    previewBorderClassName: "border-white",
   },
   verde: {
     label: "Verde",
     className: "bg-green-600 border-white text-white",
     previewClassName: "bg-green-600",
+    previewBorderClassName: "border-white",
   },
   amarelo: {
     label: "Amarelo",
     className: "bg-yellow-400 border-black text-black",
     previewClassName: "bg-yellow-400",
+    previewBorderClassName: "border-black",
   },
   laranja: {
     label: "Laranja",
     className: "bg-orange-600 border-white text-white",
     previewClassName: "bg-orange-600",
+    previewBorderClassName: "border-white",
   },
   roxo: {
     label: "Roxo",
     className: "bg-purple-600 border-white text-white",
     previewClassName: "bg-purple-600",
+    previewBorderClassName: "border-white",
   },
   rosa: {
     label: "Rosa",
     className: "bg-pink-600 border-white text-white",
     previewClassName: "bg-pink-600",
+    previewBorderClassName: "border-white",
   },
   ciano: {
     label: "Ciano",
     className: "bg-cyan-500 border-white text-white",
     previewClassName: "bg-cyan-500",
+    previewBorderClassName: "border-white",
   },
   preto: {
     label: "Preto",
     className: "bg-black border-white text-white",
     previewClassName: "bg-black",
+    previewBorderClassName: "border-white",
   },
   branco: {
     label: "Branco",
     className: "bg-white border-black text-black",
     previewClassName: "bg-white",
+    previewBorderClassName: "border-black",
+  },
+  indigo: {
+    label: "Indigo",
+    className: "bg-indigo-600 border-white text-white",
+    previewClassName: "bg-indigo-600",
+    previewBorderClassName: "border-white",
+  },
+  cinza: {
+    label: "Cinza",
+    className: "bg-slate-500 border-white text-white",
+    previewClassName: "bg-slate-500",
+    previewBorderClassName: "border-white",
   },
 } satisfies Record<
   MarkerColorType,
@@ -187,8 +235,15 @@ const markerColors = {
     label: string;
     className: string;
     previewClassName: string;
+    previewBorderClassName: string;
   }
 >;
+
+function normalizeMarkerColor(
+  color: LegacyMarkerColorType
+): MarkerColorType {
+  return color in markerColors ? (color as MarkerColorType) : "vermelho";
+}
 
 export default function Maps() {
   const {
@@ -399,7 +454,7 @@ export default function Maps() {
     setPendingPoint(null);
     setMarkerName(point.name);
     setSelectedIcon(point.icon);
-    setSelectedColor(point.color);
+    setSelectedColor(normalizeMarkerColor(point.color));
     setIsPopupOpen(true);
   }
 
@@ -648,7 +703,7 @@ export default function Maps() {
 
             {points.map((point) => {
               const marker = markerIcons[point.icon];
-              const markerColor = markerColors[point.color];
+              const markerColor = markerColors[normalizeMarkerColor(point.color)];
               const MarkerIcon = marker.Icon;
 
               return (
@@ -706,10 +761,6 @@ export default function Maps() {
                 </button>
               </div>
 
-              <label className="block text-sm mb-1">
-                Nome do marcador
-              </label>
-
               <input
                 type="text"
                 value={markerName}
@@ -722,33 +773,33 @@ export default function Maps() {
                 Escolha o ícone
               </label>
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-28 overflow-y-auto pr-1 mb-4">
+              <div className="grid grid-cols-5 sm:grid-cols-6 gap-2 max-h-36 overflow-y-auto pr-1 mb-4">
                 {Object.entries(markerIcons).map(([key, marker]) => {
                   const Icon = marker.Icon;
                   const isSelected = selectedIcon === key;
 
                   return (
-                    <button
+                    <div
                       key={key}
-                      type="button"
-                      onClick={() => {
-                        clearMeasurementLine();
-                        setSelectedIcon(key as MarkerIconType);
-                      }}
-                      className={`flex items-center gap-2 rounded border px-2 py-2 text-left text-xs transition ${
-                        isSelected
-                          ? "border-white bg-zinc-700"
-                          : "border-zinc-700 bg-zinc-900 hover:bg-zinc-800"
-                      }`}
+                      className="w-full h-full flex items-center justify-center"
                     >
-                      <span
-                        className={`w-7 h-7 rounded-full border-2 flex items-center justify-center text-sm ${selectedPreviewColor.className}`}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          clearMeasurementLine();
+                          setSelectedIcon(key as MarkerIconType);
+                        }}
+                        aria-label={marker.label}
+                        title={marker.label}
+                        className={`h-9 w-9 rounded-full border-2 flex items-center justify-center text-sm transition ${
+                          isSelected
+                            ? `${selectedPreviewColor.className} ring-2 ring-white ring-offset-2 ring-offset-zinc-950`
+                            : `${selectedPreviewColor.className} hover:scale-105`
+                        }`}
                       >
                         <Icon />
-                      </span>
-
-                      <span>{marker.label}</span>
-                    </button>
+                      </button>
+                    </div>
                   );
                 })}
               </div>
@@ -757,34 +808,34 @@ export default function Maps() {
                 Escolha a cor
               </label>
 
-              <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+              <div className="grid grid-cols-5 sm:grid-cols-6 gap-2">
                 {Object.entries(markerColors).map(([key, color]) => {
                   const isSelected = selectedColor === key;
 
                   return (
-                    <button
+                    <div
                       key={key}
-                      type="button"
-                      onClick={() => {
-                        clearMeasurementLine();
-                        setSelectedColor(key as MarkerColorType);
-                      }}
-                      className={`flex items-center gap-2 rounded border px-2 py-2 text-xs transition ${
-                        isSelected
-                          ? "border-white bg-zinc-700"
-                          : "border-zinc-700 bg-zinc-900 hover:bg-zinc-800"
-                      }`}
+                      className="flex items-center justify-center"
                     >
-                      <span
-                        className={`w-5 h-5 rounded-full border ${
-                          key === "branco"
-                            ? "border-black"
-                            : "border-white"
-                        } ${color.previewClassName}`}
-                      />
-
-                      <span>{color.label}</span>
-                    </button>
+                      <button 
+                        type="button"
+                        onClick={() => {
+                          clearMeasurementLine();
+                          setSelectedColor(key as MarkerColorType);
+                        }}
+                        aria-label={color.label}
+                        title={color.label}
+                        className={`h-6 w-6 rounded-full border transition ${
+                          isSelected
+                            ? "ring-2 ring-white ring-offset-2 ring-offset-zinc-950"
+                            : "hover:scale-105"
+                        }`}
+                      >
+                        <span
+                          className={`block h-full w-full rounded-full border ${color.previewBorderClassName} ${color.previewClassName}`}
+                        />
+                      </button>
+                    </div>
                   );
                 })}
               </div>
