@@ -68,18 +68,19 @@ type MarkerIconType =
   | "governo";
 
 type MarkerColorType =
-  | "vermelho"
+  | "ciano"
   | "azul"
-  | "verde"
-  | "amarelo"
-  | "laranja"
+  | "indigo"
   | "roxo"
   | "rosa"
-  | "ciano"
-  | "preto"
+  | "verdeEscuro"
+  | "verde"
+  | "cinza"
   | "branco"
-  | "indigo"
-  | "cinza";
+  | "preto"
+  | "amarelo"
+  | "laranja"
+  | "vermelho";
 
 type LegacyMarkerColorType =
   | MarkerColorType
@@ -113,12 +114,78 @@ type Measurement = {
   distanceKm: number;
 };
 
+type PopupPage = "details" | "gallery";
+
 const IMAGE_WIDTH = 2000;
 const IMAGE_HEIGHT = 800;
 
 const SCALE_BAR_KM = 10;
 const SCALE_BAR_LENGTH_IN_IMAGE_PIXELS = 500;
 const KM_PER_IMAGE_PIXEL = SCALE_BAR_KM / SCALE_BAR_LENGTH_IN_IMAGE_PIXELS;
+
+// Preencha aqui os nomes das imagens por marcador.
+// Exemplo:
+// "terminal central": ["imagem-1", "imagem-2"]
+// O caminho final sera:
+// /images/maps/{showMaps.data}/{nome-da-imagem}.png
+const markerGalleryByName: Record<string, string[]> = {
+  "aeroporto internacional de nova horizonte": [
+    "Aeroporto Internacional de Nova Horizonte 1",
+  ],
+  "alto da serra": [
+    "Alto da Serra 1",
+    "Alto da Serra 2",
+    "Alto da Serra 3",
+  ],
+  "bairro das artes": [
+    "Bairro das Artes 1",
+    "Bairro das Artes 2",
+    "Bairro das Artes 3",
+  ],
+  "bairro do sol": ["Bairro do Sol 1", "Bairro do Sol 2"],
+  belavista: [
+    "Belavista 1",
+    "Belavista 2",
+    "Belavista 3",
+    "Belavista 4",
+    "Belavista 5",
+  ],
+  "centro histórico": [
+    "Centro Histórico 1",
+    "Centro Histórico 2",
+    "Centro Histórico 3",
+  ],
+  "cidade industrial": ["Cidade Industrial 1", "Cidade Industrial 2"],
+  "cidade universitária": [
+    "Cidade Universitária 1",
+    "Cidade Universitária 2",
+    "Cidade Universitária 3",
+    "Cidade Universitária 4",
+  ],
+  "distrito central": ["Distrito Central 1", "Distrito Central 2"],
+  "distrito sudoeste": ["Distrito Sudoeste 1"],
+  "jardim celeste": [
+    "Jardim Celeste 1",
+    "Jardim Celeste 2",
+    "Jardim Celeste 3",
+  ],
+  "parque do rio": [
+    "Parque do Rio 1",
+    "Parque do Rio 2",
+    "Parque do Rio 3",
+  ],
+  "porto seco nova horizonte": [
+    "Porto Seco Nova Horizonte 1",
+    "Porto Seco Nova Horizonte 2",
+    "Porto Seco Nova Horizonte 3",
+  ],
+  "terminal multimodal central": [
+    "Terminal Multimodal Central 1",
+    "Terminal Multimodal Central 2",
+    "Terminal Multimodal Central 3",
+  ],
+  "vila nova": ["Vila Nova 1", "Vila Nova 2"],
+};
 
 const markerIcons = {
   metro: { label: "Metrô", Icon: FaSubway },
@@ -157,10 +224,10 @@ const markerIcons = {
 >;
 
 const markerColors = {
-  vermelho: {
-    label: "Vermelho",
-    className: "bg-red-600 border-white text-white",
-    previewClassName: "bg-red-600",
+  ciano: {
+    label: "Ciano",
+    className: "bg-cyan-500 border-white text-white",
+    previewClassName: "bg-cyan-500",
     previewBorderClassName: "border-white",
   },
   azul: {
@@ -169,22 +236,10 @@ const markerColors = {
     previewClassName: "bg-blue-600",
     previewBorderClassName: "border-white",
   },
-  verde: {
-    label: "Verde",
-    className: "bg-green-600 border-white text-white",
-    previewClassName: "bg-green-600",
-    previewBorderClassName: "border-white",
-  },
-  amarelo: {
-    label: "Amarelo",
-    className: "bg-yellow-400 border-black text-black",
-    previewClassName: "bg-yellow-400",
-    previewBorderClassName: "border-black",
-  },
-  laranja: {
-    label: "Laranja",
-    className: "bg-orange-600 border-white text-white",
-    previewClassName: "bg-orange-600",
+  indigo: {
+    label: "Indigo",
+    className: "bg-indigo-600 border-white text-white",
+    previewClassName: "bg-indigo-600",
     previewBorderClassName: "border-white",
   },
   roxo: {
@@ -199,16 +254,22 @@ const markerColors = {
     previewClassName: "bg-pink-600",
     previewBorderClassName: "border-white",
   },
-  ciano: {
-    label: "Ciano",
-    className: "bg-cyan-500 border-white text-white",
-    previewClassName: "bg-cyan-500",
+  verdeEscuro: {
+    label: "Verde escuro",
+    className: "bg-emerald-900 border-white text-white",
+    previewClassName: "bg-emerald-900",
     previewBorderClassName: "border-white",
   },
-  preto: {
-    label: "Preto",
-    className: "bg-black border-white text-white",
-    previewClassName: "bg-black",
+  verde: {
+    label: "Verde",
+    className: "bg-green-600 border-white text-white",
+    previewClassName: "bg-green-600",
+    previewBorderClassName: "border-white",
+  },
+  cinza: {
+    label: "Cinza",
+    className: "bg-slate-500 border-white text-white",
+    previewClassName: "bg-slate-500",
     previewBorderClassName: "border-white",
   },
   branco: {
@@ -217,16 +278,28 @@ const markerColors = {
     previewClassName: "bg-white",
     previewBorderClassName: "border-black",
   },
-  indigo: {
-    label: "Indigo",
-    className: "bg-indigo-600 border-white text-white",
-    previewClassName: "bg-indigo-600",
+  preto: {
+    label: "Preto",
+    className: "bg-black border-white text-white",
+    previewClassName: "bg-black",
     previewBorderClassName: "border-white",
   },
-  cinza: {
-    label: "Cinza",
-    className: "bg-slate-500 border-white text-white",
-    previewClassName: "bg-slate-500",
+  amarelo: {
+    label: "Amarelo",
+    className: "bg-yellow-400 border-black text-black",
+    previewClassName: "bg-yellow-400",
+    previewBorderClassName: "border-black",
+  },
+  laranja: {
+    label: "Laranja",
+    className: "bg-orange-600 border-white text-white",
+    previewClassName: "bg-orange-600",
+    previewBorderClassName: "border-white",
+  },
+  vermelho: {
+    label: "Vermelho",
+    className: "bg-red-600 border-white text-white",
+    previewClassName: "bg-red-600",
     previewBorderClassName: "border-white",
   },
 } satisfies Record<
@@ -245,14 +318,21 @@ function normalizeMarkerColor(
   return color in markerColors ? (color as MarkerColorType) : "vermelho";
 }
 
+function normalizeMarkerGalleryKey(name: string) {
+  return name.trim().toLowerCase();
+}
+
 export default function Maps() {
   const {
     showMaps,
     setShowMaps,
+    email,
     session,
     setSession,
     setShowMessage,
   } = useContext(contexto);
+
+  const isGameMaster = session?.gameMaster === email;
 
   const imageWrapperRef = useRef<HTMLDivElement | null>(null);
 
@@ -272,13 +352,94 @@ export default function Maps() {
   const [markerName, setMarkerName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState<MarkerIconType>("marcador");
   const [selectedColor, setSelectedColor] =
-    useState<MarkerColorType>("vermelho");
+    useState<MarkerColorType>(isGameMaster ? "azul" : "ciano");
+  const [galleryImageIndex, setGalleryImageIndex] = useState(0);
+  const [popupPage, setPopupPage] = useState<PopupPage>("details");
+  const [fullscreenImageName, setFullscreenImageName] = useState<
+    string | null
+  >(null);
 
   const [zoom, setZoom] = useState(1);
   const [isSavingMap, setIsSavingMap] = useState(false);
 
   // const hasMap = Boolean(session?.map);
   const hasMap = true;
+  const editingPoint =
+    editingPointId === null
+      ? null
+      : points.find((point) => point.id === editingPointId) ?? null;
+  const isBlueMarkerSelected =
+    editingPoint !== null &&
+    normalizeMarkerColor(editingPoint.color) === "azul";
+  const isReadOnlyPopup = isBlueMarkerSelected && !isGameMaster;
+  const availableMarkerColors = Object.entries(markerColors).filter(
+    ([key]) => isGameMaster || key !== "azul"
+  );
+  const readOnlyMarkerImageNames =
+    markerGalleryByName[normalizeMarkerGalleryKey(markerName)] ?? [];
+  const hasReadOnlyGalleryImages = readOnlyMarkerImageNames.length > 0;
+  const currentGalleryImageName = hasReadOnlyGalleryImages
+    ? readOnlyMarkerImageNames[
+        Math.min(galleryImageIndex, readOnlyMarkerImageNames.length - 1)
+      ]
+    : null;
+
+  function renderGalleryContent() {
+    if (!hasReadOnlyGalleryImages || !currentGalleryImageName) {
+      return (
+        <div className="rounded border border-dashed border-zinc-700 bg-black/30 px-4 py-6 text-center text-sm text-zinc-400">
+          Nenhuma imagem configurada para este marcador.
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <button
+          type="button"
+          onClick={() => setFullscreenImageName(currentGalleryImageName)}
+          className="relative mb-3 block aspect-video w-full overflow-hidden rounded border border-zinc-700 bg-black"
+        >
+          <Image
+            src={`/images/maps/${showMaps.data}/${currentGalleryImageName}.png`}
+            alt={`${markerName} - imagem ${galleryImageIndex + 1}`}
+            fill
+            className="object-contain"
+          />
+        </button>
+
+        <div className="flex items-center justify-between gap-2">
+          <button
+            type="button"
+            onClick={() =>
+              setGalleryImageIndex((prev) =>
+                prev === 0 ? readOnlyMarkerImageNames.length - 1 : prev - 1
+              )
+            }
+            className="rounded border border-zinc-600 bg-zinc-800 px-3 py-1 text-sm font-semibold text-white hover:bg-zinc-700"
+          >
+            Anterior
+          </button>
+
+          <span className="text-xs text-zinc-400">
+            {galleryImageIndex + 1} / {readOnlyMarkerImageNames.length}
+          </span>
+
+          <button
+            type="button"
+            onClick={() =>
+              setGalleryImageIndex((prev) =>
+                prev === readOnlyMarkerImageNames.length - 1 ? 0 : prev + 1
+              )
+            }
+            className="rounded border border-zinc-600 bg-zinc-800 px-3 py-1 text-sm font-semibold text-white hover:bg-zinc-700"
+          >
+            Proxima
+          </button>
+        </div>
+      </>
+    );
+  }
   
   async function updateMapPoints(nextPoints: Point[]) {
     if (!session?.id) {
@@ -411,7 +572,9 @@ export default function Maps() {
     setEditingPointId(null);
     setMarkerName("");
     setSelectedIcon("marcador");
-    setSelectedColor("vermelho");
+    setSelectedColor(isGameMaster ? "azul" : "ciano");
+    setGalleryImageIndex(0);
+    setPopupPage("details");
     setIsPopupOpen(true);
   }
 
@@ -446,7 +609,7 @@ export default function Maps() {
   }
 
   function openEditPopup(point: Point) {
-    if (!isMarkingEnabled) return;
+    if (isMeasuringEnabled) return;
 
     clearMeasurementLine();
 
@@ -455,6 +618,8 @@ export default function Maps() {
     setMarkerName(point.name);
     setSelectedIcon(point.icon);
     setSelectedColor(normalizeMarkerColor(point.color));
+    setGalleryImageIndex(0);
+    setPopupPage("details");
     setIsPopupOpen(true);
   }
 
@@ -464,10 +629,29 @@ export default function Maps() {
     setEditingPointId(null);
     setMarkerName("");
     setSelectedIcon("marcador");
-    setSelectedColor("vermelho");
+    setSelectedColor(isGameMaster ? "azul" : "ciano");
+    setGalleryImageIndex(0);
+    setPopupPage("details");
+    setFullscreenImageName(null);
   }
 
   async function saveMarker() {
+    if (!isGameMaster && selectedColor === "azul") {
+      setShowMessage({
+        show: true,
+        text: "A cor azul é reservada ao Narrador da sessao.",
+      });
+      return;
+    }
+
+    if (isReadOnlyPopup) {
+      setShowMessage({
+        show: true,
+        text: "Voce não tem permissão para editar marcadores azuis.",
+      });
+      return;
+    }
+
     const name = markerName.trim();
 
     if (!name) {
@@ -509,6 +693,14 @@ export default function Maps() {
 
   async function deleteMarker() {
     if (!editingPointId) return;
+
+    if (isReadOnlyPopup) {
+      setShowMessage({
+        show: true,
+        text: "Voce nao tem permissao para excluir marcadores azuis.",
+      });
+      return;
+    }
 
     const updatedPoints = points.filter(
       (point) => point.id !== editingPointId
@@ -711,24 +903,27 @@ export default function Maps() {
                   key={point.id}
                   type="button"
                   onClick={(event) => {
-                    if (!isMarkingEnabled) return;
+                    if (isMeasuringEnabled) return;
 
                     event.stopPropagation();
                     openEditPopup(point);
                   }}
-                  className={`absolute w-7 h-7 rounded-full border-2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-sm z-30 shadow-lg ${markerColor.className} ${
-                    isMarkingEnabled
-                      ? "pointer-events-auto cursor-pointer"
-                      : "pointer-events-none"
+                  className={`absolute h-7 w-7 rounded-full border-2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-sm z-30 shadow-lg ${markerColor.className} ${
+                    isMeasuringEnabled
+                      ? "pointer-events-none cursor-default"
+                      : "pointer-events-auto cursor-pointer"
                   }`}
                   style={{
                     left: `${point.x * 100}%`,
                     top: `${point.y * 100}%`,
                   }}
                   title={
-                    isMarkingEnabled
-                      ? `${point.name} - clique para editar`
-                      : point.name
+                    isMeasuringEnabled
+                      ? point.name
+                      : normalizeMarkerColor(point.color) === "azul" &&
+                        !isGameMaster
+                      ? `${point.name} - clique para visualizar`
+                      : `${point.name} - clique para editar`
                   }
                 >
                   <MarkerIcon />
@@ -746,7 +941,11 @@ export default function Maps() {
             >
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-lg font-bold">
-                  {editingPointId ? "Editar marcador" : "Novo marcador"}
+                  {isReadOnlyPopup
+                    ? "Visualizar marcador"
+                    : editingPointId
+                    ? "Editar marcador"
+                    : "Novo marcador"}
                 </h2>
 
                 <button
@@ -761,6 +960,88 @@ export default function Maps() {
                 </button>
               </div>
 
+              {hasReadOnlyGalleryImages && (
+                <div className="mb-4 grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPopupPage("details")}
+                    className={`rounded border px-3 py-2 text-sm font-semibold transition ${
+                      popupPage === "details"
+                        ? "border-white bg-zinc-100 text-black"
+                        : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                    }`}
+                  >
+                    {isReadOnlyPopup ? "Informacoes" : "Edicao"}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPopupPage("gallery")}
+                    className={`rounded border px-3 py-2 text-sm font-semibold transition ${
+                      popupPage === "gallery"
+                        ? "border-white bg-zinc-100 text-black"
+                        : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                    }`}
+                  >
+                    Imagens
+                  </button>
+                </div>
+              )}
+
+              {isReadOnlyPopup ? (
+                <div className="space-y-4">
+                  {popupPage === "details" ? (
+                    <>
+                  <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                    <p className="text-sm text-zinc-400 mb-1">
+                      Nome do marcador
+                    </p>
+                    <p className="text-sm font-semibold text-white">
+                      {markerName}
+                    </p>
+                  </div>
+
+                  <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                    <p className="text-sm text-zinc-400 mb-1">
+                      Icone selecionado
+                    </p>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`flex h-9 w-9 items-center justify-center rounded-full border-2 ${selectedPreviewColor.className}`}
+                      >
+                        <SelectedPreviewIcon />
+                      </span>
+                      <span className="text-sm font-semibold text-white">
+                        {markerIcons[selectedIcon].label}
+                      </span>
+                    </div>
+                  </div>
+                    </>
+                  ) : (
+
+                  <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                    <p className="text-sm text-zinc-400 mb-3">
+                      Galeria de imagens
+                    </p>
+                    {renderGalleryContent()}
+                  </div>
+
+                  )}
+
+                  {popupPage === "details" && (
+                    <p className="text-sm text-zinc-400">
+                      Voce nao tem permissao para editar marcadores azuis.
+                    </p>
+                  )}
+
+                  <p className="hidden">
+                    Voce nao tem permissao para editar este marcador porque a cor azul é exclusiva do Narrador.
+                  </p>
+                </div>
+              ) : (
+                <>
+              {popupPage === "details" ? (
+                <>
               <input
                 type="text"
                 value={markerName}
@@ -809,7 +1090,7 @@ export default function Maps() {
               </label>
 
               <div className="grid grid-cols-5 sm:grid-cols-6 gap-2">
-                {Object.entries(markerColors).map(([key, color]) => {
+                {availableMarkerColors.map(([key, color]) => {
                   const isSelected = selectedColor === key;
 
                   return (
@@ -880,6 +1161,46 @@ export default function Maps() {
                     {isSavingMap ? "Salvando..." : "Salvar"}
                   </button>
                 </div>
+              </div>
+                </>
+              ) : (
+                <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                  <p className="text-sm text-zinc-400 mb-3">
+                    Galeria de imagens
+                  </p>
+                  {renderGalleryContent()}
+                </div>
+              )}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {fullscreenImageName && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+            onClick={() => setFullscreenImageName(null)}
+          >
+            <div
+              className="relative h-full w-full max-w-7xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={() => setFullscreenImageName(null)}
+                className="absolute right-2 top-2 z-10 rounded border border-zinc-600 bg-black/70 px-3 py-2 text-sm font-semibold text-white hover:bg-black"
+              >
+                Fechar
+              </button>
+
+              <div className="relative h-full w-full">
+                <Image
+                  src={`/images/maps/${showMaps.data}/${fullscreenImageName}.png`}
+                  alt={fullscreenImageName}
+                  fill
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
