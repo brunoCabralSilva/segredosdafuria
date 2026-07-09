@@ -303,6 +303,30 @@ function normalizeMarkerImageNames(imageNames: string[]) {
     .filter((imageName) => imageName.length > 0);
 }
 
+function getNextTokenNumber(tokens: Token[]) {
+  const highestTokenNumber = tokens.reduce((highestNumber, token) => {
+    const tokenLabel = (token.imageName ?? token.name ?? "").trim();
+    const tokenMatch = tokenLabel.match(/^token\s+(\d+)$/i);
+
+    if (!tokenMatch) return highestNumber;
+
+    return Math.max(highestNumber, Number(tokenMatch[1]));
+  }, 0);
+
+  return highestTokenNumber + 1;
+}
+
+function getTokenFallbackLabel(tokenLabel: string) {
+  const trimmedTokenLabel = tokenLabel.trim();
+
+  if (!trimmedTokenLabel) return "T";
+
+  const firstLetter = trimmedTokenLabel.charAt(0).toUpperCase();
+  const matchedNumber = trimmedTokenLabel.match(/\d+/)?.[0] ?? "";
+
+  return `${firstLetter}${matchedNumber}`;
+}
+
 export default function Battle() {
   const {
     showBattle,
@@ -346,6 +370,10 @@ export default function Battle() {
   const [markerName, setMarkerName] = useState("");
   const [tokenName, setTokenName] = useState("");
   const [tokenColor, setTokenColor] = useState<"green" | "red">("green");
+  const [failedTokenImageIds, setFailedTokenImageIds] = useState<
+    Record<number, boolean>
+  >({});
+  const [isPreviewImageFailed, setIsPreviewImageFailed] = useState(false);
   const [markerImageNames, setMarkerImageNames] = useState<string[]>([]);
   const [newMarkerImageName, setNewMarkerImageName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState<MarkerIconType>("marcador");
@@ -864,13 +892,17 @@ export default function Battle() {
       return;
     }
 
+    const defaultTokenName = `Token ${getNextTokenNumber(tokens)}`;
+    const nextTokenName = isGameMaster
+      ? defaultTokenName
+      : selectedCharacterName;
+
     const newToken: Token = {
       id: Date.now(),
       x: position.x,
       y: position.y,
-      name: isGameMaster
-        ? selectedCharacterName || `Token ${tokens.length + 1}`
-        : selectedCharacterName,
+      name: nextTokenName,
+      imageName: nextTokenName,
       color: "green",
       ...(isGameMaster ? {} : { ownerEmail: email, sheetId }),
     };
@@ -1000,6 +1032,7 @@ export default function Battle() {
     setEditingTokenId(token.id);
     setTokenName(token.imageName ?? token.name);
     setTokenColor(token.color ?? "green");
+    setIsPreviewImageFailed(false);
     setIsTokenPopupOpen(true);
   }
 
@@ -1022,6 +1055,7 @@ export default function Battle() {
     setEditingTokenId(null);
     setTokenName("");
     setTokenColor("green");
+    setIsPreviewImageFailed(false);
   }
 
   async function saveToken() {
@@ -1042,6 +1076,11 @@ export default function Battle() {
         : token
     );
 
+    setFailedTokenImageIds((prevState) => {
+      const nextState = { ...prevState };
+      delete nextState[editingToken.id];
+      return nextState;
+    });
     await updateBattleTokens(updatedTokens);
     closeTokenPopup();
   }
@@ -1379,7 +1418,13 @@ export default function Battle() {
             {tokens.map((token) => {
               const tokenPosition =
                 draggedToken?.id === token.id ? draggedToken : token;
-              const resolvedTokenImageName = token.imageName ?? token.name;
+              const resolvedTokenImageName = (token.imageName ?? token.name ?? "").trim();
+              const shouldShowTokenImage =
+                resolvedTokenImageName.length > 0 &&
+                !failedTokenImageIds[token.id];
+              const tokenFallbackLabel = getTokenFallbackLabel(
+                resolvedTokenImageName || token.name || "Token"
+              );
               const tokenColorClassName =
                 (token.color ?? "green") === "red"
                   ? "border-red-500 bg-red-950/70"
@@ -1421,17 +1466,23 @@ export default function Battle() {
                   }}
                   title={token.name}
                 >
-                  {resolvedTokenImageName ? (
+                  {shouldShowTokenImage ? (
                     <Image
                       src={`/images/battle/${showBattle.data}/${resolvedTokenImageName}.png`}
                       alt={token.name}
                       fill
                       draggable={false}
                       className="pointer-events-none h-full w-full select-none object-cover"
+                      onError={() =>
+                        setFailedTokenImageIds((prevState) => ({
+                          ...prevState,
+                          [token.id]: true,
+                        }))
+                      }
                     />
                   ) : (
-                    <span className="line-clamp-2 break-words px-1">
-                      {token.name}
+                    <span className="pointer-events-none select-none text-[10px] font-black uppercase leading-none">
+                      {tokenFallbackLabel}
                     </span>
                   )}
 
@@ -1793,7 +1844,10 @@ export default function Battle() {
               <input
                 type="text"
                 value={tokenName}
-                onChange={(event) => setTokenName(event.target.value)}
+                onChange={(event) => {
+                  setTokenName(event.target.value);
+                  setIsPreviewImageFailed(false);
+                }}
                 placeholder="Ex: Luna Crinos"
                 className={`w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none ${
                   !isGameMaster
@@ -1848,12 +1902,19 @@ export default function Battle() {
                         : "border-green-500 bg-black"
                     }`}
                   >
-                    <Image
-                      src={`/images/battle/${showBattle.data}/${tokenName.trim()}.png`}
-                      alt={tokenName}
-                      fill
-                      className="h-full w-full object-cover"
-                    />
+                    {!isPreviewImageFailed ? (
+                      <Image
+                        src={`/images/battle/${showBattle.data}/${tokenName.trim()}.png`}
+                        alt={tokenName}
+                        fill
+                        className="h-full w-full object-cover"
+                        onError={() => setIsPreviewImageFailed(true)}
+                      />
+                    ) : (
+                      <div className="flex h-full w-full items-center justify-center text-lg font-black uppercase text-white">
+                        {getTokenFallbackLabel(tokenName)}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
