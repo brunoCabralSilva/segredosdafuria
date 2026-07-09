@@ -34,6 +34,7 @@ import RerollWithWillpower from "@/components/popup/rerollWithWillpower";
 import Maps from "@/components/menuSession/maps";
 import Battle from "@/components/menuSession/battle";
 import Chat from "@/components/menuSession/chat";
+import Relationships from "@/components/menuSession/relationships";
 
 export default function SessionId() {
 	const params = useParams();
@@ -48,6 +49,7 @@ export default function SessionId() {
   const {
     showMaps,
     showBattle,
+    showRelationshipMap,
     setName,
     sheetId,
     setEmail,
@@ -163,7 +165,9 @@ export default function SessionId() {
         showData
         ? <div className="flex bg-black/80">
             {
-              showMaps.show
+              showRelationshipMap.show
+              ? <Relationships />
+              : showMaps.show
               ? <Maps />
               : showBattle.show
               ? <Battle />

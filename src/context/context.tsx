@@ -151,6 +151,8 @@ interface RecipesContext {
   setShowMaps: (state: { show: boolean, data: any }) => void,
   showBattle: { show: boolean, data: string },
   setShowBattle: (state: { show: boolean, data: any }) => void,
+  showRelationshipMap: { show: boolean, data: string },
+  setShowRelationshipMap: (state: { show: boolean, data: any }) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -302,6 +304,8 @@ const initialValue: RecipesContext = {
   setShowMaps: () => {},
   showBattle: { show: false, data: '' },
   setShowBattle: () => {},
+  showRelationshipMap: { show: false, data: '' },
+  setShowRelationshipMap: () => {},
 }
 
 const contexto = createContext(initialValue);

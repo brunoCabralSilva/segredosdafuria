@@ -37,6 +37,8 @@ const config: Config = {
         '10': "url('/images/wallpapers/45.jpg')",
         '11': "url('/images/wallpapers/78.jpg')",
         '12': "url('/images/wallpapers/0001.png')",
+        '13': "url('/images/wallpapers/1000.png')",
+        '14': "url('/images/wallpapers/1001.png')",
         'boca': "url('/images/wallpaper.png')",
         'boca01': "url('/images/wallpaper.png')",
         "filters": "url('/images/wallpapers/filters.png')",

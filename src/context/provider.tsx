@@ -83,6 +83,7 @@ export default function Provider({children }: IProvider) {
   const [rerollWithWillPower, setRerollWithWillPower] = useState({ show: false, dataMessage: {} });
   const [showMaps, setShowMaps] = useState({ show: false, data: '' });
   const [showBattle, setShowBattle] = useState({ show: false, data: '' });
+  const [showRelationshipMap, setShowRelationshipMap] = useState({ show: false, data: '' });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
@@ -146,6 +147,7 @@ export default function Provider({children }: IProvider) {
     setShowBannerSession({ show: false, sessionId: '' });
     setShowMaps({ show: false, data: '' });
     setShowBattle({ show: false, data: '' });
+    setShowRelationshipMap({ show: false, data: '' });
   }
 
   return (
@@ -232,6 +234,7 @@ export default function Provider({children }: IProvider) {
         showWillpowerTest, setShowWillpowerTest,
         showBannerSession, setShowBannerSession,
         rerollWithWillPower, setRerollWithWillPower,
+        showRelationshipMap, setShowRelationshipMap,
       }}
     >
       {children}

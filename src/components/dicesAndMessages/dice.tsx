@@ -17,7 +17,7 @@ export default function Dice(props: { dice: number, type: string }) {
         src={`/images/dices/${imgItem}`}
         width={500}
         height={500}
-        className="w-10 sm:w-14"
+        className="w-10"
       />
     </div>
   );

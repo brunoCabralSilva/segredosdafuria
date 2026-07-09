@@ -26,6 +26,7 @@ export default function Details() {
     setShowMessage,
     setShowDeletePlayer,
     setShowMenuSession,
+    setShowRelationshipMap,
     setShowDelGMFromSession,
     showChangeGameMaster, setShowChangeGameMaster,
   } = useContext(contexto);
@@ -286,21 +287,36 @@ export default function Details() {
                 type="button"
                 className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
                 onClick={async () => {
-                  setShowMaps({ show: true, data: session.id });
-                  setShowMenuSession('');
+                  setShowRelationshipMap({ show: true, data: session.id });
                 }}
               >
-                Mapas
+                Mapa de Relacionamentos
               </button>
-              <button
-                type="button"
-                className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
-                onClick={async () => {
-                  setShowBattle({ show: true, data: session.id });
-                }}
-              >
-                Modo Combate
-              </button>
+              {
+                gameMaster == 'lycan.byell@gmail.com' &&
+                <button
+                  type="button"
+                  className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
+                  onClick={async () => {
+                    setShowMaps({ show: true, data: session.id });
+                    setShowMenuSession('');
+                  }}
+                >
+                  Mapa da Crônica
+                </button>
+              }
+              {
+                gameMaster == 'lycan.byell@gmail.com' &&
+                <button
+                  type="button"
+                  className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
+                  onClick={async () => {
+                    setShowBattle({ show: true, data: session.id });
+                  }}
+                >
+                  Modo Combate
+                </button>
+              }
               <div className="text-white pb-3 sm:text-left w-full text-center border-2 border-white p-4 mb-3">
                 <div className="flex w-full justify-bewteen items-center">
                   <span className="pr-1 font-bold w-full">Banner da Sessão:</span>
