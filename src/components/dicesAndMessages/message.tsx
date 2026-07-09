@@ -16,7 +16,7 @@ const ritualList = [
 export default function Message(props: { dataMessage: any, color: string }) {
   const { dataMessage, color } = props;
   const { setRerollWithWillPower, showBattle } = useContext(contexto);
-  const messageWidthClass = showBattle.show ? "w-[90%]" : "w-[40%]";
+  const messageWidthClass = showBattle.show ? "w-[90%]" : "w-[90%] lg:w-[50%] ";
 
   const reroll = (dataMessage: any) => {
     setRerollWithWillPower({ show: true, dataMessage: dataMessage });
