@@ -1,13 +1,11 @@
 'use client'
 import { useRouter } from "next/navigation";
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { collection, doc, getDocs, getFirestore, query, where } from "firebase/firestore";
-import { useCollection, useCollectionData, useDocumentData } from "react-firebase-hooks/firestore";
+import { useCollection, useDocumentData } from "react-firebase-hooks/firestore";
 import Loading from "../../../components/loading";
 import Nav from '@/components/nav';
-import SessionBar from "../../../components/sessionBar";
-import Message from "@/components/dicesAndMessages/message";
 import MenuPlayer from "@/components/menuPlayer";
 import MenuRoll from "@/components/dicesAndMessages/menuRoll";
 import contexto from "@/context/context";
@@ -31,10 +29,11 @@ import SheetSelector from "@/components/popup/sheetSelector";
 import EditImage from "@/components/popup/editImage";
 import ConsentForm from "@/components/popup/consentForm";
 import EditBannerSession from "@/components/popup/editBannerSession";
-import HpAndWillPower from "@/components/popup/hpAndWillpower";
 import Help from "@/components/popup/help";
 import RerollWithWillpower from "@/components/popup/rerollWithWillpower";
 import Maps from "@/components/menuSession/maps";
+import Battle from "@/components/menuSession/battle";
+import Chat from "@/components/menuSession/chat";
 
 export default function SessionId() {
 	const params = useParams();
@@ -42,13 +41,13 @@ export default function SessionId() {
   const db = getFirestore(firestoreConfig);
   const dataRef = collection(db, "chats");
   const queryData = query(dataRef, where("sessionId", "==", id));
-  const [chat] = useCollectionData(queryData, { idField: "id" } as any);
   
   const router = useRouter();
 	const [showData, setShowData] = useState(false);
 	const [gameMaster, setGameMaster] = useState(false);
   const {
     showMaps,
+    showBattle,
     setName,
     sheetId,
     setEmail,
@@ -139,11 +138,6 @@ export default function SessionId() {
     } else router.push('/login');
   };
   
-  useLayoutEffect(() => {
-    const messagesContainer: HTMLElement | null = document.getElementById('messages-container');
-    if (messagesContainer) messagesContainer.scrollTop = messagesContainer.scrollHeight;
-  });
-
   const verifyConvert = () => {
     return <ConvertToPdf data={ dataSheet.data } />;
   }
@@ -171,38 +165,15 @@ export default function SessionId() {
             {
               showMaps.show
               ? <Maps />
+              : showBattle.show
+              ? <Battle />
               : showEvaluateSheet.show
               ? <EvaluateSheet />
               : showConsentForm ?
                 <ConsentForm />
                 : showHelp 
                   ? <Help />
-                  : <div className="flex flex-col w-full relative">
-                      {
-                        dataSession && dataSession.gameMaster == email &&
-                        <HpAndWillPower />
-                      }
-                      <div id="messages-container" className={`relative h-90vh overflow-y-auto pt-2 px-2`}>
-                        {
-                          chat
-                          && chat.length > 0
-                          && chat[0].list
-                          && chat[0].list.length >= 0
-                          ? chat[0]
-                            && chat[0].list
-                              .sort((a: any, b: any) => a.order - b.order)
-                              .map((msg: any, index: number) => {
-                                if (email !== '' && email === msg.email) {
-                                  return (<Message key={index} dataMessage={msg} color="green" />);
-                                } return (<Message key={index} dataMessage={msg} color="gray" />);
-                              })
-                          : <div className="bg-black/60 text-white h-90vh flex items-center justify-center flex-col">
-                              <Loading />
-                            </div>
-                        }
-                      </div>
-                      <SessionBar />
-                    </div>
+                  : <Chat />
             }
             {
               showMenuSession === 'edit-image' && 

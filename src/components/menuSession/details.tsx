@@ -17,6 +17,7 @@ export default function Details() {
     session,
     players,
     setShowMaps,
+    setShowBattle,
     showEndSession,
     setShowEndSession,
     showDeletePlayer,
@@ -290,6 +291,15 @@ export default function Details() {
                 }}
               >
                 Mapas
+              </button>
+              <button
+                type="button"
+                className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
+                onClick={async () => {
+                  setShowBattle({ show: true, data: session.id });
+                }}
+              >
+                Modo Combate
               </button>
               <div className="text-white pb-3 sm:text-left w-full text-center border-2 border-white p-4 mb-3">
                 <div className="flex w-full justify-bewteen items-center">

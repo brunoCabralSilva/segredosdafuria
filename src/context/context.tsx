@@ -55,6 +55,7 @@ interface RecipesContext {
   setShowOptions: (state: boolean) => void,
   showMenuSession: string,
   setShowMenuSession: (state: string) => void,
+  forceHideSessionMenu: () => void,
   scrollToBottom: () => void,
   showDeleteHistoric: boolean,
   setShowDeleteHistoric: (state: boolean) => void,
@@ -148,6 +149,8 @@ interface RecipesContext {
   setRerollWithWillPower: (state: { show: boolean, dataMessage: any }) => void,
   showMaps: { show: boolean, data: string },
   setShowMaps: (state: { show: boolean, data: any }) => void,
+  showBattle: { show: boolean, data: string },
+  setShowBattle: (state: { show: boolean, data: any }) => void,
 }
 
 const initialValue: RecipesContext = {
@@ -203,6 +206,7 @@ const initialValue: RecipesContext = {
   setShowOptions: () => {},
   showMenuSession: '',
   setShowMenuSession: () => {},
+  forceHideSessionMenu: () => {},
   scrollToBottom: () => {},
   showDeleteHistoric: false,
   setShowDeleteHistoric: () => {},
@@ -296,6 +300,8 @@ const initialValue: RecipesContext = {
   setRerollWithWillPower: () => {},
   showMaps: { show: false, data: '' },
   setShowMaps: () => {},
+  showBattle: { show: false, data: '' },
+  setShowBattle: () => {},
 }
 
 const contexto = createContext(initialValue);

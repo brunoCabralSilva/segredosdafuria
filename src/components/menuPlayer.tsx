@@ -26,7 +26,7 @@ import History from "./menuSession/history";
 import Forms from "./menuSession/forms";
 import WillpowerTest from "./popup/willpowerTest";
 import { sheetStructure } from "@/firebase/utilities";
-import Maps from "./menuSession/maps";
+import Chat from "./menuSession/chat";
 
 export default function MenuPlayer() {
   const {
@@ -41,6 +41,7 @@ export default function MenuPlayer() {
     showRitualRoll, setShowRitualRoll,
     optionSelect, setOptionSelect,
     sheetId,
+    showBattle,
     listNotification,
     setShowConsentForm,
     setListNotification,
@@ -62,7 +63,6 @@ export default function MenuPlayer() {
 
   useEffect(() => {
     if (sheetId && optionSelect === 'players') {
-      // setOptionSelect('general');
       const playerFounded = players.find((player: any) => player.id === sheetId);
       if (playerFounded) setDataSheet(playerFounded);
       else setDataSheet(sheetStructure('', '', ''));
@@ -73,6 +73,7 @@ export default function MenuPlayer() {
 	const returnDataSheet = () => {
     switch(optionSelect) {
       case ('players'): return (<Players />);
+      case ('chat'): return (<Chat sidebar />);
       case ('notifications'): return (<Notifications />);
       case ('history'): return (<History />);
       case ('attributes'): return (<Attributes />);
@@ -145,6 +146,7 @@ export default function MenuPlayer() {
             { sheetId !== '' && <option value={'background'}>Background</option> }
             <option value={'anotations'}>Anotações</option>
             <option value={'session'}>Sessão</option>
+            { showBattle.show && <option value={'chat'}>Chat</option> }
           </select>
             { returnDataSheet() }
           </div>

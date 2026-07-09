@@ -15,6 +15,7 @@ export default function SessionBar() {
     session,
     email,
     setShowDeleteHistoric,
+    setOptionSelect,
     scrollToBottom,
     setShowHelp,
     setShowMessage,
@@ -43,6 +44,7 @@ export default function SessionBar() {
               className="p-2"
               title="Acessar o Menu da Sessão"
               onClick={() => {
+                setOptionSelect('players');
                 setShowMenuSession('sheet');
                 scrollToBottom();
               }}

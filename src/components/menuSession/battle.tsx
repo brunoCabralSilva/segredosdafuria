@@ -98,6 +98,18 @@ type Point = {
   imageNames?: string[];
 };
 
+type Token = {
+  id: number;
+  x: number;
+  y: number;
+  name: string;
+  imageName?: string;
+  isDead?: boolean;
+  color?: "green" | "red";
+  ownerEmail?: string;
+  sheetId?: string;
+};
+
 type PendingPoint = {
   x: number;
   y: number;
@@ -112,10 +124,16 @@ type Measurement = {
   id: number;
   start: MeasurementPoint;
   end: MeasurementPoint;
-  distanceKm: number;
+  distanceMeters: number;
 };
 
 type DraggedMarker = {
+  id: number;
+  x: number;
+  y: number;
+};
+
+type DraggedToken = {
   id: number;
   x: number;
   y: number;
@@ -129,14 +147,23 @@ type MarkerDragState = {
   hasDragged: boolean;
 };
 
+type TokenDragState = {
+  tokenId: number;
+  pointerId: number;
+  startClientX: number;
+  startClientY: number;
+  hasDragged: boolean;
+};
+
 type PopupPage = "details" | "gallery";
 
 const IMAGE_WIDTH = 2000;
 const IMAGE_HEIGHT = 800;
 
-const SCALE_BAR_KM = 10;
+const SCALE_BAR_METERS = 10;
 const SCALE_BAR_LENGTH_IN_IMAGE_PIXELS = 500;
-const KM_PER_IMAGE_PIXEL = SCALE_BAR_KM / SCALE_BAR_LENGTH_IN_IMAGE_PIXELS;
+const METERS_PER_IMAGE_PIXEL =
+  SCALE_BAR_METERS / SCALE_BAR_LENGTH_IN_IMAGE_PIXELS;
 const MARKER_DRAG_THRESHOLD_IN_PIXELS = 5;
 
 const markerIcons = {
@@ -276,25 +303,34 @@ function normalizeMarkerImageNames(imageNames: string[]) {
     .filter((imageName) => imageName.length > 0);
 }
 
-export default function Maps() {
+export default function Battle() {
   const {
-    showMaps,
-    setShowMaps,
+    showBattle,
+    setShowBattle,
+    dataSheet,
     email,
     session,
+    sheetId,
     setSession,
     setShowMessage,
+    setShowMenuSession,
+    forceHideSessionMenu,
   } = useContext(contexto);
 
   const isGameMaster = session?.gameMaster === email;
 
   const imageWrapperRef = useRef<HTMLDivElement | null>(null);
   const markerDragStateRef = useRef<MarkerDragState | null>(null);
+  const tokenDragStateRef = useRef<TokenDragState | null>(null);
   const suppressMarkerClickRef = useRef<number | null>(null);
+  const suppressTokenClickRef = useRef<number | null>(null);
 
-  const points: Point[] = session?.map?.points ?? [];
+  const points: Point[] = session?.battle?.points ?? [];
+  const tokens: Token[] = session?.battle?.tokens ?? [];
 
   const [isMarkingEnabled, setIsMarkingEnabled] = useState(false);
+  const [isTokenPlacementEnabled, setIsTokenPlacementEnabled] =
+    useState(false);
 
   const [isMeasuringEnabled, setIsMeasuringEnabled] = useState(false);
   const [measurementStart, setMeasurementStart] =
@@ -302,10 +338,14 @@ export default function Maps() {
   const [measurements, setMeasurements] = useState<Measurement[]>([]);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isTokenPopupOpen, setIsTokenPopupOpen] = useState(false);
   const [pendingPoint, setPendingPoint] = useState<PendingPoint | null>(null);
   const [editingPointId, setEditingPointId] = useState<number | null>(null);
+  const [editingTokenId, setEditingTokenId] = useState<number | null>(null);
 
   const [markerName, setMarkerName] = useState("");
+  const [tokenName, setTokenName] = useState("");
+  const [tokenColor, setTokenColor] = useState<"green" | "red">("green");
   const [markerImageNames, setMarkerImageNames] = useState<string[]>([]);
   const [newMarkerImageName, setNewMarkerImageName] = useState("");
   const [selectedIcon, setSelectedIcon] = useState<MarkerIconType>("marcador");
@@ -321,13 +361,18 @@ export default function Maps() {
   const [isSavingMap, setIsSavingMap] = useState(false);
   const [draggedMarker, setDraggedMarker] =
     useState<DraggedMarker | null>(null);
+  const [draggedToken, setDraggedToken] = useState<DraggedToken | null>(null);
 
-  // const hasMap = Boolean(session?.map);
+  // const hasMap = Boolean(session?.battle);
   const hasMap = true;
   const editingPoint =
     editingPointId === null
       ? null
       : points.find((point) => point.id === editingPointId) ?? null;
+  const editingToken =
+    editingTokenId === null
+      ? null
+      : tokens.find((token) => token.id === editingTokenId) ?? null;
   const isBlueMarkerSelected =
     editingPoint !== null &&
     normalizeMarkerColor(editingPoint.color) === "azul";
@@ -360,7 +405,7 @@ export default function Maps() {
           className="relative mb-3 block aspect-video w-full overflow-hidden rounded border border-zinc-700 bg-black"
         >
           <Image
-            src={`/images/maps/${showMaps.data}/${currentGalleryImageName}.png`}
+            src={`/images/battle/${showBattle.data}/${currentGalleryImageName}.png`}
             alt={`${markerName} - imagem ${galleryImageIndex + 1}`}
             fill
             className="object-contain"
@@ -463,7 +508,7 @@ export default function Maps() {
     );
   }
   
-  async function updateMapPoints(nextPoints: Point[]) {
+  async function updateBattlePoints(nextPoints: Point[]) {
     if (!session?.id) {
       setShowMessage({
         show: true,
@@ -474,9 +519,35 @@ export default function Maps() {
 
     const nextSession = {
       ...session,
-      map: {
-        ...(session.map ?? {}),
+      battle: {
+        ...(session.battle ?? {}),
         points: nextPoints,
+      },
+    };
+
+    try {
+      setIsSavingMap(true);
+      setSession(nextSession);
+      await updateSession(nextSession, setShowMessage);
+    } finally {
+      setIsSavingMap(false);
+    }
+  }
+
+  async function updateBattleTokens(nextTokens: Token[]) {
+    if (!session?.id) {
+      setShowMessage({
+        show: true,
+        text: "Sessao invalida. Nao foi possivel salvar os tokens da batalha.",
+      });
+      return;
+    }
+
+    const nextSession = {
+      ...session,
+      battle: {
+        ...(session.battle ?? {}),
+        tokens: nextTokens,
       },
     };
 
@@ -494,7 +565,7 @@ export default function Maps() {
     setMeasurementStart(null);
   }
 
-  function calculateDistanceKm(
+  function calculateDistanceMeters(
     start: MeasurementPoint,
     end: MeasurementPoint
   ) {
@@ -505,7 +576,7 @@ export default function Maps() {
       dxInImagePixels ** 2 + dyInImagePixels ** 2
     );
 
-    return distanceInImagePixels * KM_PER_IMAGE_PIXEL;
+    return distanceInImagePixels * METERS_PER_IMAGE_PIXEL;
   }
 
   function handleWheel(event: WheelEvent<HTMLDivElement>) {
@@ -563,9 +634,23 @@ export default function Maps() {
   }
 
   function canMoveMarker(point: Point) {
-    if (isMeasuringEnabled || isSavingMap || isPopupOpen) return false;
+    if (isMeasuringEnabled || isSavingMap || isPopupOpen || isTokenPopupOpen) {
+      return false;
+    }
 
     return !(normalizeMarkerColor(point.color) === "azul" && !isGameMaster);
+  }
+
+  function canEditToken(token: Token) {
+    return isGameMaster || token.ownerEmail === email;
+  }
+
+  function canMoveToken(token: Token) {
+    if (isMeasuringEnabled || isSavingMap || isPopupOpen || isTokenPopupOpen) {
+      return false;
+    }
+
+    return canEditToken(token);
   }
 
   function handleMarkerPointerDown(
@@ -654,12 +739,144 @@ export default function Maps() {
         : point
     );
 
-    await updateMapPoints(updatedPoints);
+    await updateBattlePoints(updatedPoints);
   }
 
   function handleMarkerPointerCancel() {
     markerDragStateRef.current = null;
     setDraggedMarker(null);
+  }
+
+  function handleTokenPointerDown(
+    event: PointerEvent<HTMLButtonElement>,
+    token: Token
+  ) {
+    if (!canMoveToken(token)) return;
+
+    event.stopPropagation();
+    clearMeasurementLine();
+
+    tokenDragStateRef.current = {
+      tokenId: token.id,
+      pointerId: event.pointerId,
+      startClientX: event.clientX,
+      startClientY: event.clientY,
+      hasDragged: false,
+    };
+
+    event.currentTarget.setPointerCapture(event.pointerId);
+  }
+
+  function handleTokenPointerMove(event: PointerEvent<HTMLButtonElement>) {
+    const dragState = tokenDragStateRef.current;
+
+    if (!dragState) return;
+
+    const distanceFromStart = Math.hypot(
+      event.clientX - dragState.startClientX,
+      event.clientY - dragState.startClientY
+    );
+
+    if (
+      !dragState.hasDragged &&
+      distanceFromStart < MARKER_DRAG_THRESHOLD_IN_PIXELS
+    ) {
+      return;
+    }
+
+    const nextPosition = getPositionFromClient(event.clientX, event.clientY);
+
+    if (!nextPosition) return;
+
+    dragState.hasDragged = true;
+    setDraggedToken({
+      id: dragState.tokenId,
+      x: nextPosition.x,
+      y: nextPosition.y,
+    });
+  }
+
+  async function handleTokenPointerUp(event: PointerEvent<HTMLButtonElement>) {
+    const dragState = tokenDragStateRef.current;
+
+    if (!dragState) return;
+
+    event.stopPropagation();
+    event.currentTarget.releasePointerCapture(dragState.pointerId);
+
+    tokenDragStateRef.current = null;
+
+    if (!dragState.hasDragged) {
+      setDraggedToken(null);
+      return;
+    }
+
+    const nextPosition = getPositionFromClient(event.clientX, event.clientY);
+
+    if (!nextPosition) {
+      setDraggedToken(null);
+      return;
+    }
+
+    suppressTokenClickRef.current = dragState.tokenId;
+    setDraggedToken(null);
+
+    const updatedTokens = tokens.map((token) =>
+      token.id === dragState.tokenId
+        ? {
+            ...token,
+            x: nextPosition.x,
+            y: nextPosition.y,
+          }
+        : token
+    );
+
+    await updateBattleTokens(updatedTokens);
+  }
+
+  function handleTokenPointerCancel() {
+    tokenDragStateRef.current = null;
+    setDraggedToken(null);
+  }
+
+  async function createToken(position: PendingPoint) {
+    if (!isGameMaster) {
+      const existingPlayerToken = tokens.find(
+        (token) => token.ownerEmail === email
+      );
+
+      if (existingPlayerToken) {
+        setShowMessage({
+          show: true,
+          text: "Voce ja possui um token nesta batalha.",
+        });
+        return;
+      }
+    }
+
+    const selectedCharacterName = dataSheet?.data?.name?.trim?.() ?? "";
+
+    if (!isGameMaster && !selectedCharacterName) {
+      setShowMessage({
+        show: true,
+        text: "Selecione um personagem antes de criar seu token.",
+      });
+      return;
+    }
+
+    const newToken: Token = {
+      id: Date.now(),
+      x: position.x,
+      y: position.y,
+      name: isGameMaster
+        ? selectedCharacterName || `Token ${tokens.length + 1}`
+        : selectedCharacterName,
+      color: "green",
+      ...(isGameMaster ? {} : { ownerEmail: email, sheetId }),
+    };
+
+    await updateBattleTokens([...tokens, newToken]);
+    setIsTokenPlacementEnabled(false);
   }
 
   function handleMapClick(event: MouseEvent<HTMLDivElement>) {
@@ -673,7 +890,7 @@ export default function Maps() {
         return;
       }
 
-      const distanceKm = calculateDistanceKm(
+      const distanceMeters = calculateDistanceMeters(
         measurementStart,
         clickedPosition
       );
@@ -684,11 +901,16 @@ export default function Maps() {
           id: Date.now(),
           start: measurementStart,
           end: clickedPosition,
-          distanceKm,
+          distanceMeters,
         },
       ]);
 
       setMeasurementStart(null);
+      return;
+    }
+
+    if (isTokenPlacementEnabled) {
+      createToken(clickedPosition);
       return;
     }
 
@@ -712,7 +934,23 @@ export default function Maps() {
 
       if (nextValue) {
         setIsMeasuringEnabled(false);
+        setIsTokenPlacementEnabled(false);
         setMeasurementStart(null);
+      }
+
+      return nextValue;
+    });
+  }
+
+  function toggleTokenPlacement() {
+    setIsTokenPlacementEnabled((prev) => {
+      const nextValue = !prev;
+
+      if (nextValue) {
+        setIsMarkingEnabled(false);
+        setIsMeasuringEnabled(false);
+        setMeasurementStart(null);
+        clearMeasurementLine();
       }
 
       return nextValue;
@@ -725,6 +963,7 @@ export default function Maps() {
 
       if (nextValue) {
         setIsMarkingEnabled(false);
+        setIsTokenPlacementEnabled(false);
       }
 
       if (!nextValue) {
@@ -753,6 +992,17 @@ export default function Maps() {
     setIsPopupOpen(true);
   }
 
+  function openTokenPopup(token: Token) {
+    if (isMeasuringEnabled || !canEditToken(token)) return;
+
+    clearMeasurementLine();
+
+    setEditingTokenId(token.id);
+    setTokenName(token.imageName ?? token.name);
+    setTokenColor(token.color ?? "green");
+    setIsTokenPopupOpen(true);
+  }
+
   function closePopup() {
     setIsPopupOpen(false);
     setPendingPoint(null);
@@ -765,6 +1015,61 @@ export default function Maps() {
     setGalleryImageIndex(0);
     setPopupPage("details");
     setFullscreenImageName(null);
+  }
+
+  function closeTokenPopup() {
+    setIsTokenPopupOpen(false);
+    setEditingTokenId(null);
+    setTokenName("");
+    setTokenColor("green");
+  }
+
+  async function saveToken() {
+    if (!editingToken || !canEditToken(editingToken)) return;
+
+    const nextName = isGameMaster
+      ? tokenName.trim() || editingToken.name
+      : editingToken.name;
+
+    const updatedTokens = tokens.map((token) =>
+      token.id === editingToken.id
+        ? {
+            ...token,
+            name: nextName,
+            imageName: nextName,
+            color: isGameMaster ? tokenColor : token.color ?? "green",
+          }
+        : token
+    );
+
+    await updateBattleTokens(updatedTokens);
+    closeTokenPopup();
+  }
+
+  async function deleteToken() {
+    if (!editingToken || !canEditToken(editingToken)) return;
+
+    const updatedTokens = tokens.filter(
+      (token) => token.id !== editingToken.id
+    );
+
+    await updateBattleTokens(updatedTokens);
+    closeTokenPopup();
+  }
+
+  async function toggleTokenDead() {
+    if (!editingToken || !canEditToken(editingToken)) return;
+
+    const updatedTokens = tokens.map((token) =>
+      token.id === editingToken.id
+        ? {
+            ...token,
+            isDead: !token.isDead,
+          }
+        : token
+    );
+
+    await updateBattleTokens(updatedTokens);
   }
 
   function addMarkerImageName() {
@@ -825,7 +1130,7 @@ export default function Maps() {
           : point
       );
 
-      await updateMapPoints(updatedPoints);
+      await updateBattlePoints(updatedPoints);
       closePopup();
       return;
     }
@@ -842,7 +1147,7 @@ export default function Maps() {
       imageNames,
     };
 
-    await updateMapPoints([...points, newPoint]);
+    await updateBattlePoints([...points, newPoint]);
     closePopup();
   }
 
@@ -861,7 +1166,7 @@ export default function Maps() {
       (point) => point.id !== editingPointId
     );
 
-    await updateMapPoints(updatedPoints);
+    await updateBattlePoints(updatedPoints);
     closePopup();
   }
 
@@ -870,11 +1175,14 @@ export default function Maps() {
 
   if (!hasMap) {
     return (
-      <div className="z-80 sm:z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
+      <div className="absolute inset-0 z-0 flex h-full w-full flex-col items-center justify-center border-2 border-white bg-black/80 px-3 sm:px-0">
         <div className="w-full flex items-center justify-end pt-1 pb-2 px-2 bg-black">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer mr-1 min-w-9"
-            onClick={() => setShowMaps({ show: false, data: "" })}
+            onClick={() => {
+              setShowBattle({ show: false, data: "" });
+              forceHideSessionMenu();
+            }}
           />
         </div>
 
@@ -928,6 +1236,23 @@ export default function Maps() {
 
           <button
             type="button"
+            onClick={toggleTokenPlacement}
+            className={`h-9 w-9 rounded-full border-2 flex items-center justify-center text-xs font-bold ${
+              isTokenPlacementEnabled
+                ? "border-green-300 bg-green-700 text-white"
+                : "border-green-500 bg-zinc-800 text-green-300"
+            }`}
+            title={
+              isTokenPlacementEnabled
+                ? "Criacao de token ativa"
+                : "Criar token"
+            }
+          >
+            T
+          </button>
+
+          <button
+            type="button"
             onClick={() => {
               clearMeasurementLine();
               zoomOut();
@@ -970,7 +1295,8 @@ export default function Maps() {
           className="text-4xl text-white cursor-pointer mr-1 min-w-9"
           onClick={() => {
             clearMeasurementLine();
-            setShowMaps({ show: false, data: "" });
+            setShowBattle({ show: false, data: "" });
+            forceHideSessionMenu();
           }}
         />
       </div>
@@ -979,23 +1305,25 @@ export default function Maps() {
         onWheel={handleWheel}
         className="w-full h-full bg-black overflow-auto relative"
       >
-        <div className="min-w-full min-h-full flex justify-center items-center">
+        <div className="flex h-full min-h-full w-full min-w-full items-center justify-center">
           <div
             ref={imageWrapperRef}
             onClick={handleMapClick}
             className={`relative shrink-0 ${
-              isMarkingEnabled || isMeasuringEnabled
+              isMarkingEnabled || isMeasuringEnabled || isTokenPlacementEnabled
                 ? "cursor-crosshair"
                 : "cursor-default"
             }`}
             style={{
-              width: `${zoom * 100}%`,
-              aspectRatio: `${IMAGE_WIDTH} / ${IMAGE_HEIGHT}`,
+              width: "100%",
+              height: "100%",
+              minWidth: `${zoom * 100}%`,
+              minHeight: `${zoom * 100}%`,
             }}
           >
             <Image
-              src={`/images/maps/${showMaps.data}/${showMaps.data}.png`}
-              alt="Mapa de Nova Horizonte"
+              src={`/images/battle/${showBattle.data}/${showBattle.data}.png`}
+              alt={`Mapa da Sessão ${session.name}`}
               fill
               className="object-contain select-none"
               priority
@@ -1043,8 +1371,76 @@ export default function Maps() {
                     top: `${middleY * 100}%`,
                   }}
                 >
-                  {measurement.distanceKm.toFixed(2)} km
+                  {measurement.distanceMeters.toFixed(2)} m
                 </div>
+              );
+            })}
+
+            {tokens.map((token) => {
+              const tokenPosition =
+                draggedToken?.id === token.id ? draggedToken : token;
+              const resolvedTokenImageName = token.imageName ?? token.name;
+              const tokenColorClassName =
+                (token.color ?? "green") === "red"
+                  ? "border-red-500 bg-red-950/70"
+                  : "border-green-500 bg-black/80";
+
+              return (
+                <button
+                  key={token.id}
+                  type="button"
+                  onPointerDown={(event) =>
+                    handleTokenPointerDown(event, token)
+                  }
+                  onPointerMove={handleTokenPointerMove}
+                  onPointerUp={handleTokenPointerUp}
+                  onPointerCancel={handleTokenPointerCancel}
+                  onDragStart={(event) => event.preventDefault()}
+                  onClick={(event) => {
+                    if (isMeasuringEnabled) return;
+
+                    event.stopPropagation();
+
+                    if (suppressTokenClickRef.current === token.id) {
+                      suppressTokenClickRef.current = null;
+                      return;
+                    }
+
+                    openTokenPopup(token);
+                  }}
+                  className={`absolute z-30 flex h-[27px] w-[27px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 text-center text-[8px] font-bold leading-none text-white shadow-lg ${tokenColorClassName} ${
+                    isMeasuringEnabled
+                      ? "pointer-events-none cursor-default"
+                      : canMoveToken(token)
+                      ? "cursor-grab touch-none active:cursor-grabbing"
+                      : "cursor-pointer"
+                  }`}
+                  style={{
+                    left: `${tokenPosition.x * 100}%`,
+                    top: `${tokenPosition.y * 100}%`,
+                  }}
+                  title={token.name}
+                >
+                  {resolvedTokenImageName ? (
+                    <Image
+                      src={`/images/battle/${showBattle.data}/${resolvedTokenImageName}.png`}
+                      alt={token.name}
+                      fill
+                      draggable={false}
+                      className="pointer-events-none h-full w-full select-none object-cover"
+                    />
+                  ) : (
+                    <span className="line-clamp-2 break-words px-1">
+                      {token.name}
+                    </span>
+                  )}
+
+                  {token.isDead && (
+                    <span className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-2xl font-black leading-none text-red-600 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+                      X
+                    </span>
+                  )}
+                </button>
               );
             })}
 
@@ -1105,7 +1501,7 @@ export default function Maps() {
         </div>
 
         {isPopupOpen && (
-          <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
+          <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
             <div
               className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
               onClick={(event) => event.stopPropagation()}
@@ -1368,9 +1764,164 @@ export default function Maps() {
           </div>
         )}
 
+        {isTokenPopupOpen && editingToken && (
+          <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
+            <div
+              className="max-h-[calc(100dvh-2rem)] w-full max-w-sm overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="mb-4 flex items-center justify-between gap-3">
+                <h2 className="text-sm font-bold">
+                  Editar token
+                </h2>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    clearMeasurementLine();
+                    closeTokenPopup();
+                  }}
+                  className="text-xl text-zinc-300 hover:text-white"
+                >
+                  x
+                </button>
+              </div>
+
+              <label className="mb-2 block text-sm">
+                Nome do token / imagem
+              </label>
+              <input
+                type="text"
+                value={tokenName}
+                onChange={(event) => setTokenName(event.target.value)}
+                placeholder="Ex: Luna Crinos"
+                className={`w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none ${
+                  !isGameMaster
+                    ? "cursor-not-allowed opacity-70"
+                    : ""
+                }`}
+                disabled={!isGameMaster}
+              />
+
+              {isGameMaster && (
+                <div className="mt-4">
+                  <label className="mb-2 block text-sm">
+                    Cor do token
+                  </label>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setTokenColor("green")}
+                      className={`rounded border px-3 py-2 text-sm font-semibold ${
+                        tokenColor === "green"
+                          ? "border-white bg-green-700 text-white"
+                          : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                      }`}
+                    >
+                      Verde
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setTokenColor("red")}
+                      className={`rounded border px-3 py-2 text-sm font-semibold ${
+                        tokenColor === "red"
+                          ? "border-white bg-red-700 text-white"
+                          : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                      }`}
+                    >
+                      Vermelho
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {tokenName.trim() && (
+                <div className="mt-4 rounded border border-zinc-700 bg-zinc-900 p-3">
+                  <p className="mb-3 text-sm text-zinc-400">
+                    Preview
+                  </p>
+                  <div
+                    className={`relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 ${
+                      tokenColor === "red"
+                        ? "border-red-500 bg-red-950/70"
+                        : "border-green-500 bg-black"
+                    }`}
+                  >
+                    <Image
+                      src={`/images/battle/${showBattle.data}/${tokenName.trim()}.png`}
+                      alt={tokenName}
+                      fill
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    disabled={isSavingMap}
+                    onClick={() => {
+                      clearMeasurementLine();
+                      deleteToken();
+                    }}
+                    className="rounded bg-red-700 px-3 py-2 text-sm font-semibold text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    Excluir
+                  </button>
+
+                  <button
+                    type="button"
+                    disabled={isSavingMap}
+                    onClick={() => {
+                      clearMeasurementLine();
+                      toggleTokenDead();
+                    }}
+                    className={`rounded px-3 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60 ${
+                      editingToken.isDead
+                        ? "bg-red-900 hover:bg-red-800"
+                        : "bg-zinc-700 hover:bg-zinc-600"
+                    }`}
+                  >
+                    Morto
+                  </button>
+                </div>
+
+                <div className="ml-auto flex gap-2">
+                <button
+                  type="button"
+                  disabled={isSavingMap}
+                  onClick={() => {
+                    clearMeasurementLine();
+                    closeTokenPopup();
+                  }}
+                  className="rounded bg-zinc-700 px-3 py-2 text-sm font-semibold text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  Cancelar
+                </button>
+
+                <button
+                  type="button"
+                  disabled={isSavingMap}
+                  onClick={() => {
+                    clearMeasurementLine();
+                    saveToken();
+                  }}
+                  className="rounded bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {isSavingMap ? "Salvando..." : "Salvar"}
+                </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {fullscreenImageName && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+            className="absolute inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             onClick={() => setFullscreenImageName(null)}
           >
             <div
@@ -1387,7 +1938,7 @@ export default function Maps() {
 
               <div className="relative h-full w-full">
                 <Image
-                  src={`/images/maps/${showMaps.data}/${fullscreenImageName}.png`}
+                  src={`/images/battle/${showBattle.data}/${fullscreenImageName}.png`}
                   alt={fullscreenImageName}
                   fill
                   className="object-contain"

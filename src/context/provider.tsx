@@ -33,7 +33,7 @@ export default function Provider({children }: IProvider) {
   const [showCreateSession, setShowCreateSession] = useState(false);
   //session bar
   const [showOptions, setShowOptions] = useState(false);
-  const [showMenuSession, setShowMenuSession] = useState('');
+  const [showMenuSession, setShowMenuSessionState] = useState('');
   const [showDeleteHistoric, setShowDeleteHistoric] = useState(false);
   //notification
   const [listNotification, setListNotification] = useState([0]);
@@ -82,12 +82,27 @@ export default function Provider({children }: IProvider) {
   const [showBannerSession, setShowBannerSession] = useState({ show: false, sessionId: '' });
   const [rerollWithWillPower, setRerollWithWillPower] = useState({ show: false, dataMessage: {} });
   const [showMaps, setShowMaps] = useState({ show: false, data: '' });
+  const [showBattle, setShowBattle] = useState({ show: false, data: '' });
 
   const scrollToBottom = () => {
     const messagesContainer = document.getElementById('messages-container');
     if (messagesContainer) {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
+  };
+
+  const forceHideSessionMenu = () => {
+    setShowMenuSessionState('');
+  };
+
+  const setShowMenuSession = (state: string) => {
+    if (state === '' && showBattle.show) {
+      setOptionSelect('chat');
+      setShowMenuSessionState('sheet');
+      return;
+    }
+
+    setShowMenuSessionState(state);
   };
 
   const resetPopups = () => {
@@ -101,7 +116,7 @@ export default function Provider({children }: IProvider) {
     setShowInfoSessions(false);
     setShowCreateSession(false);
     setShowOptions(false);
-    setShowMenuSession('');
+    setShowMenuSessionState('');
     setShowDelFromSession(false);
     setShowDelGMFromSession(false);
     setShowEndSession(false);
@@ -130,6 +145,7 @@ export default function Provider({children }: IProvider) {
     setShowDeleteFavorAndBan({ show: false, name: '', type: '' });
     setShowBannerSession({ show: false, sessionId: '' });
     setShowMaps({ show: false, data: '' });
+    setShowBattle({ show: false, data: '' });
   }
 
   return (
@@ -137,6 +153,7 @@ export default function Provider({children }: IProvider) {
       value={{
         //user
         showMaps, setShowMaps,
+        showBattle, setShowBattle,
         showHelp, setShowHelp,
         simplify, setSimplify,
         dataUser, setDataUser,
@@ -165,6 +182,7 @@ export default function Provider({children }: IProvider) {
         //session bar
         showOptions, setShowOptions,
         showMenuSession, setShowMenuSession,
+        forceHideSessionMenu,
         scrollToBottom,
         showDeleteHistoric, setShowDeleteHistoric,
         //notification

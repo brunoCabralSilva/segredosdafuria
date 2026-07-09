@@ -15,7 +15,8 @@ const ritualList = [
 
 export default function Message(props: { dataMessage: any, color: string }) {
   const { dataMessage, color } = props;
-  const { setRerollWithWillPower } = useContext(contexto);
+  const { setRerollWithWillPower, showBattle } = useContext(contexto);
+  const messageWidthClass = showBattle.show ? "w-[90%]" : "w-[40%]";
 
   const reroll = (dataMessage: any) => {
     setRerollWithWillPower({ show: true, dataMessage: dataMessage });
@@ -40,7 +41,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
     case 'notification':
       return(
         <div className="my-3 w-full flex justify-center text-gray-400">
-          <div className="bg-gray-whats text-sm text-center rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2">
+          <div className={`bg-gray-whats text-xs sm:text-sm text-center rounded-xl ${messageWidthClass} p-2 mb-2`}>
             { dataMessage.message }
           </div>
         </div>
@@ -48,7 +49,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
 		case 'roll':
 			return(
 				<div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
-					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2 pl-3`}>
+					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl ${messageWidthClass} p-2 mb-2 pl-3 text-xs`}>
             {
               color === 'gray' &&
               <div className="pb-2 capitalize font-bold flex items-center gap-2">
@@ -104,7 +105,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                 </span>
               </div>
               <div className="flex justify-end pt-2">
-                <span className="w-full text-right text-sm flex justify-end">
+                <span className="w-full text-right text-xs flex justify-end">
                   { dataMessage.date && dataMessage.date }
                 </span>
               </div>
@@ -115,12 +116,12 @@ export default function Message(props: { dataMessage: any, color: string }) {
     case 'gift':
       return(
         <div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
-          <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 mb-2 p-2`}>
+          <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl ${messageWidthClass} mb-2 p-2 text-xs`}>
             {
               color === 'gray' &&
               <div className="font-bold pl-1 pb-1">{ capitalizeFirstLetter(dataMessage.user) }</div>
             }
-            <div className="border border-white p-5 text-sm">
+            <div className="border border-white p-5 text-[11px] sm:text-xs">
               <div className="px-3 pb-3">
                 <p className="font-bold text-center w-full p-3">{ dataMessage.giftPtBr} ({ dataMessage.gift })</p>
                 <hr className="mt-1 pb-5" />
@@ -228,7 +229,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
               }
             </div>
             <div className="flex justify-end pt-2">
-							<span className="w-full text-right text-sm flex justify-end">
+							<span className="w-full text-right text-xs flex justify-end">
 								{ dataMessage.date && dataMessage.date }
 							</span>
 						</div>
@@ -238,12 +239,12 @@ export default function Message(props: { dataMessage: any, color: string }) {
     case 'ritual':
       return(
         <div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
-          <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 mb-2 p-2`}>
+          <div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl ${messageWidthClass} mb-2 p-2 text-xs`}>
             {
 							color === 'gray' &&
               <div className="pl-1 pb-1 font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
             }
-            <div className="border border-white p-5 text-sm">
+            <div className="border border-white p-5 text-[11px] sm:text-xs">
               <div className="px-3 pb-3">
                 <p className="font-bold text-center w-full p-3">{ dataMessage.titlePtBr } ({ dataMessage.title })</p>
                 <hr className="mt-1 pb-5" />
@@ -321,7 +322,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
               }
             </div>
             <div className="flex justify-end pt-2">
-              <span className="w-full text-right text-sm flex justify-end">
+              <span className="w-full text-right text-xs flex justify-end">
                 { dataMessage.date && dataMessage.date }
               </span>
             </div>
@@ -331,7 +332,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
     case 'rage-check':
 			return(
 				<div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
-					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2 pl-3`}>
+					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl ${messageWidthClass} p-2 mb-2 pl-3 text-xs`}>
             {
               color === 'gray' &&
               <div className="font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
@@ -350,7 +351,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                 Fúria Atual: {dataMessage.rage}
               </div>
               <div className="flex justify-end pt-2">
-                <span className="w-full text-right text-sm flex justify-end">
+                <span className="w-full text-right text-xs flex justify-end">
                   { dataMessage.date && dataMessage.date }
                 </span>
               </div>
@@ -361,7 +362,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
     case 'harano-hauglosk':
       return(
 				<div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
-					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2 pl-3`}>
+					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl ${messageWidthClass} p-2 mb-2 pl-3 text-xs`}>
             {
               color === 'gray' &&
               <div className="font-bold">{ capitalizeFirstLetter(dataMessage.user) }</div>
@@ -376,7 +377,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
 						<div className="font-bold py-2 text-left">{ dataMessage.message }</div>
             <div>{ dataMessage.result } </div>
 						<div className="flex justify-end pt-2">
-							<span className="w-full text-right text-sm flex justify-end">
+							<span className="w-full text-right text-xs flex justify-end">
 								{ dataMessage.date && dataMessage.date }
 							</span>
 						</div>
@@ -386,7 +387,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
     default:
 			return(
 				<div className={`w-full flex ${color === 'green' ? 'justify-end' : 'justify-start' } text-white`}>
-					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl w-11/12 sm:w-7/12 md:w-7/12 p-2 mb-2 pl-3`}>
+					<div className={`${color === 'green' ? 'bg-green-whats': 'bg-gray-whats'} rounded-xl ${messageWidthClass} p-2 mb-2 pl-3 text-xs`}>
 						{
 							color === 'gray' &&
 							<div className="pb-2 capitalize font-bold flex items-center gap-2">
@@ -395,7 +396,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
 						}
 						<div className="pl-1">{ dataMessage.message }</div>
 						<div className="flex justify-end pt-2">
-							<span className="w-full text-right text-sm flex justify-end">
+							<span className="w-full text-right text-xs flex justify-end">
 								{ dataMessage.date && dataMessage.date }
 							</span>
 						</div>
