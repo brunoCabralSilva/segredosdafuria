@@ -108,6 +108,9 @@ type Token = {
   color?: "green" | "red";
   ownerEmail?: string;
   sheetId?: string;
+  superficialDamage?: number;
+  aggravatedDamage?: number;
+  otherMarkers?: number;
 };
 
 type PendingPoint = {
@@ -156,6 +159,7 @@ type TokenDragState = {
 };
 
 type PopupPage = "details" | "gallery";
+type TokenPopupPage = "details" | "markers";
 
 const IMAGE_WIDTH = 2000;
 const IMAGE_HEIGHT = 800;
@@ -327,6 +331,12 @@ function getTokenFallbackLabel(tokenLabel: string) {
   return `${firstLetter}${matchedNumber}`;
 }
 
+function normalizeTokenStat(value: number) {
+  if (Number.isNaN(value) || value < 0) return 0;
+
+  return Math.floor(value);
+}
+
 export default function Battle() {
   const {
     showBattle,
@@ -335,6 +345,7 @@ export default function Battle() {
     email,
     session,
     sheetId,
+    players,
     setSession,
     setShowMessage,
     setShowMenuSession,
@@ -370,6 +381,9 @@ export default function Battle() {
   const [markerName, setMarkerName] = useState("");
   const [tokenName, setTokenName] = useState("");
   const [tokenColor, setTokenColor] = useState<"green" | "red">("green");
+  const [tokenSuperficialDamage, setTokenSuperficialDamage] = useState(0);
+  const [tokenAggravatedDamage, setTokenAggravatedDamage] = useState(0);
+  const [tokenOtherMarkers, setTokenOtherMarkers] = useState(0);
   const [failedTokenImageIds, setFailedTokenImageIds] = useState<
     Record<number, boolean>
   >({});
@@ -381,6 +395,8 @@ export default function Battle() {
     useState<MarkerColorType>(isGameMaster ? "azul" : "ciano");
   const [galleryImageIndex, setGalleryImageIndex] = useState(0);
   const [popupPage, setPopupPage] = useState<PopupPage>("details");
+  const [tokenPopupPage, setTokenPopupPage] =
+    useState<TokenPopupPage>("details");
   const [fullscreenImageName, setFullscreenImageName] = useState<
     string | null
   >(null);
@@ -401,6 +417,22 @@ export default function Battle() {
     editingTokenId === null
       ? null
       : tokens.find((token) => token.id === editingTokenId) ?? null;
+
+  function tokenHasSessionCharacter(token: Token) {
+    const tokenLabel = (token.imageName ?? token.name ?? "").trim().toLowerCase();
+
+    if (!tokenLabel) return false;
+
+    return players.some((player: any) => {
+      const playerName = player?.data?.name?.trim?.().toLowerCase?.() ?? "";
+      return playerName !== "" && playerName === tokenLabel;
+    });
+  }
+
+  const editingTokenHasSessionCharacter = editingToken
+    ? tokenHasSessionCharacter(editingToken)
+    : false;
+  const isAnyBattlePopupOpen = isPopupOpen || isTokenPopupOpen;
   const isBlueMarkerSelected =
     editingPoint !== null &&
     normalizeMarkerColor(editingPoint.color) === "azul";
@@ -608,7 +640,7 @@ export default function Battle() {
   }
 
   function handleWheel(event: WheelEvent<HTMLDivElement>) {
-    if (isPopupOpen) return;
+    if (isAnyBattlePopupOpen) return;
 
     event.preventDefault();
 
@@ -625,17 +657,17 @@ export default function Battle() {
   }
 
   function zoomIn() {
-    if (isPopupOpen) return;
+    if (isAnyBattlePopupOpen) return;
     setZoom((prevZoom) => Math.min(prevZoom + 0.25, 5));
   }
 
   function zoomOut() {
-    if (isPopupOpen) return;
+    if (isAnyBattlePopupOpen) return;
     setZoom((prevZoom) => Math.max(prevZoom - 0.25, 1));
   }
 
   function resetZoom() {
-    if (isPopupOpen) return;
+    if (isAnyBattlePopupOpen) return;
     setZoom(1);
   }
 
@@ -896,7 +928,6 @@ export default function Battle() {
     const nextTokenName = isGameMaster
       ? defaultTokenName
       : selectedCharacterName;
-
     const newToken: Token = {
       id: Date.now(),
       x: position.x,
@@ -904,7 +935,13 @@ export default function Battle() {
       name: nextTokenName,
       imageName: nextTokenName,
       color: "green",
-      ...(isGameMaster ? {} : { ownerEmail: email, sheetId }),
+      ...(isGameMaster
+        ? {
+            superficialDamage: 0,
+            aggravatedDamage: 0,
+            otherMarkers: 0,
+          }
+        : { ownerEmail: email, sheetId }),
     };
 
     await updateBattleTokens([...tokens, newToken]);
@@ -1032,6 +1069,10 @@ export default function Battle() {
     setEditingTokenId(token.id);
     setTokenName(token.imageName ?? token.name);
     setTokenColor(token.color ?? "green");
+    setTokenSuperficialDamage(token.superficialDamage ?? 0);
+    setTokenAggravatedDamage(token.aggravatedDamage ?? 0);
+    setTokenOtherMarkers(token.otherMarkers ?? 0);
+    setTokenPopupPage("details");
     setIsPreviewImageFailed(false);
     setIsTokenPopupOpen(true);
   }
@@ -1055,6 +1096,10 @@ export default function Battle() {
     setEditingTokenId(null);
     setTokenName("");
     setTokenColor("green");
+    setTokenSuperficialDamage(0);
+    setTokenAggravatedDamage(0);
+    setTokenOtherMarkers(0);
+    setTokenPopupPage("details");
     setIsPreviewImageFailed(false);
   }
 
@@ -1065,16 +1110,34 @@ export default function Battle() {
       ? tokenName.trim() || editingToken.name
       : editingToken.name;
 
-    const updatedTokens = tokens.map((token) =>
-      token.id === editingToken.id
-        ? {
-            ...token,
-            name: nextName,
-            imageName: nextName,
-            color: isGameMaster ? tokenColor : token.color ?? "green",
-          }
-        : token
-    );
+    const updatedTokens = tokens.map((token) => {
+      if (token.id !== editingToken.id) return token;
+
+      const nextToken = {
+        ...token,
+        name: nextName,
+        imageName: nextName,
+        color: isGameMaster ? tokenColor : token.color ?? "green",
+      };
+
+      if (tokenHasSessionCharacter(token)) {
+        const {
+          superficialDamage: _superficialDamage,
+          aggravatedDamage: _aggravatedDamage,
+          otherMarkers: _otherMarkers,
+          ...linkedToken
+        } = nextToken;
+
+        return linkedToken;
+      }
+
+      return {
+        ...nextToken,
+        superficialDamage: normalizeTokenStat(tokenSuperficialDamage),
+        aggravatedDamage: normalizeTokenStat(tokenAggravatedDamage),
+        otherMarkers: normalizeTokenStat(tokenOtherMarkers),
+      };
+    });
 
     setFailedTokenImageIds((prevState) => {
       const nextState = { ...prevState };
@@ -1453,7 +1516,7 @@ export default function Battle() {
 
                     openTokenPopup(token);
                   }}
-                  className={`absolute z-30 flex h-[27px] w-[27px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 text-center text-[8px] font-bold leading-none text-white shadow-lg ${tokenColorClassName} ${
+                  className={`absolute z-30 flex h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 text-center text-[8px] font-bold leading-none text-white shadow-lg ${tokenColorClassName} ${
                     isMeasuringEnabled
                       ? "pointer-events-none cursor-default"
                       : canMoveToken(token)
@@ -1822,9 +1885,37 @@ export default function Battle() {
               onClick={(event) => event.stopPropagation()}
             >
               <div className="mb-4 flex items-center justify-between gap-3">
-                <h2 className="text-sm font-bold">
-                  Editar token
-                </h2>
+                {editingTokenHasSessionCharacter ? (
+                  <h2 className="text-sm font-bold">
+                    Editar token
+                  </h2>
+                ) : (
+                  <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setTokenPopupPage("details")}
+                      className={`rounded border px-3 py-2 text-sm font-semibold transition ${
+                        tokenPopupPage === "details"
+                          ? "border-white bg-zinc-100 text-black"
+                          : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                      }`}
+                    >
+                      Edicao
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setTokenPopupPage("markers")}
+                      className={`rounded border px-3 py-2 text-sm font-semibold transition ${
+                        tokenPopupPage === "markers"
+                          ? "border-white bg-zinc-100 text-black"
+                          : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                      }`}
+                    >
+                      Marcadores
+                    </button>
+                  </div>
+                )}
 
                 <button
                   type="button"
@@ -1838,85 +1929,138 @@ export default function Battle() {
                 </button>
               </div>
 
-              <label className="mb-2 block text-sm">
-                Nome do token / imagem
-              </label>
-              <input
-                type="text"
-                value={tokenName}
-                onChange={(event) => {
-                  setTokenName(event.target.value);
-                  setIsPreviewImageFailed(false);
-                }}
-                placeholder="Ex: Luna Crinos"
-                className={`w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none ${
-                  !isGameMaster
-                    ? "cursor-not-allowed opacity-70"
-                    : ""
-                }`}
-                disabled={!isGameMaster}
-              />
-
-              {isGameMaster && (
-                <div className="mt-4">
+              {tokenPopupPage === "details" ? (
+                <>
                   <label className="mb-2 block text-sm">
-                    Cor do token
+                    Nome do token / imagem
                   </label>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setTokenColor("green")}
-                      className={`rounded border px-3 py-2 text-sm font-semibold ${
-                        tokenColor === "green"
-                          ? "border-white bg-green-700 text-white"
-                          : "border-zinc-600 bg-zinc-900 text-zinc-300"
-                      }`}
-                    >
-                      Verde
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setTokenColor("red")}
-                      className={`rounded border px-3 py-2 text-sm font-semibold ${
-                        tokenColor === "red"
-                          ? "border-white bg-red-700 text-white"
-                          : "border-zinc-600 bg-zinc-900 text-zinc-300"
-                      }`}
-                    >
-                      Vermelho
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {tokenName.trim() && (
-                <div className="mt-4 rounded border border-zinc-700 bg-zinc-900 p-3">
-                  <p className="mb-3 text-sm text-zinc-400">
-                    Preview
-                  </p>
-                  <div
-                    className={`relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 ${
-                      tokenColor === "red"
-                        ? "border-red-500 bg-red-950/70"
-                        : "border-green-500 bg-black"
+                  <input
+                    type="text"
+                    value={tokenName}
+                    onChange={(event) => {
+                      setTokenName(event.target.value);
+                      setIsPreviewImageFailed(false);
+                    }}
+                    placeholder="Ex: Luna Crinos"
+                    className={`w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none ${
+                      !isGameMaster
+                        ? "cursor-not-allowed opacity-70"
+                        : ""
                     }`}
-                  >
-                    {!isPreviewImageFailed ? (
-                      <Image
-                        src={`/images/battle/${showBattle.data}/${tokenName.trim()}.png`}
-                        alt={tokenName}
-                        fill
-                        className="h-full w-full object-cover"
-                        onError={() => setIsPreviewImageFailed(true)}
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-lg font-black uppercase text-white">
-                        {getTokenFallbackLabel(tokenName)}
+                    disabled={!isGameMaster}
+                  />
+
+                  {isGameMaster && (
+                    <div className="mt-4">
+                      <label className="mb-2 block text-sm">
+                        Cor do token
+                      </label>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setTokenColor("green")}
+                          className={`rounded border px-3 py-2 text-sm font-semibold ${
+                            tokenColor === "green"
+                              ? "border-white bg-green-700 text-white"
+                              : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                          }`}
+                        >
+                          Verde
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setTokenColor("red")}
+                          className={`rounded border px-3 py-2 text-sm font-semibold ${
+                            tokenColor === "red"
+                              ? "border-white bg-red-700 text-white"
+                              : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                          }`}
+                        >
+                          Vermelho
+                        </button>
                       </div>
-                    )}
-                  </div>
-                </div>
+                    </div>
+                  )}
+
+                  {tokenName.trim() && (
+                    <div className="mt-4 rounded border border-zinc-700 bg-zinc-900 p-3">
+                      <p className="mb-3 text-sm text-zinc-400">
+                        Preview
+                      </p>
+                      <div
+                        className={`relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 ${
+                          tokenColor === "red"
+                            ? "border-red-500 bg-red-950/70"
+                            : "border-green-500 bg-black"
+                        }`}
+                      >
+                        {!isPreviewImageFailed ? (
+                          <Image
+                            src={`/images/battle/${showBattle.data}/${tokenName.trim()}.png`}
+                            alt={tokenName}
+                            fill
+                            className="h-full w-full object-cover"
+                            onError={() => setIsPreviewImageFailed(true)}
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-lg font-black uppercase text-white">
+                            {getTokenFallbackLabel(tokenName)}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  {!editingTokenHasSessionCharacter ? (
+                    <div className="flex flex-col gap-3">
+                      <label className="block text-sm">
+                        <span className="mb-2 block">Dano Superficial</span>
+                        <input
+                          type="number"
+                          min={0}
+                          value={tokenSuperficialDamage}
+                          onChange={(event) =>
+                            setTokenSuperficialDamage(Number(event.target.value))
+                          }
+                          className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
+                        />
+                      </label>
+
+                      <label className="block text-sm">
+                        <span className="mb-2 block">Dano Agravado</span>
+                        <input
+                          type="number"
+                          min={0}
+                          value={tokenAggravatedDamage}
+                          onChange={(event) =>
+                            setTokenAggravatedDamage(Number(event.target.value))
+                          }
+                          className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
+                        />
+                      </label>
+
+                      <label className="block text-sm">
+                        <span className="mb-2 block">Outros marcadores</span>
+                        <input
+                          type="number"
+                          min={0}
+                          value={tokenOtherMarkers}
+                          onChange={(event) =>
+                            setTokenOtherMarkers(Number(event.target.value))
+                          }
+                          className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
+                        />
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="rounded border border-zinc-700 bg-zinc-900 p-3 text-sm text-zinc-400">
+                      Tokens vinculados a personagens da sessao nao usam esses marcadores extras.
+                    </div>
+                  )}
+                </>
               )}
 
               <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
