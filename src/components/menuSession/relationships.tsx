@@ -851,7 +851,7 @@ export default function Relationships() {
         </div>
 
         <div className="flex h-full min-h-0 w-full flex-col md:flex-row">
-          <div className="flex min-h-[260px] flex-1 items-center justify-center overflow-auto bg-black/45 p-4">
+          <div className="flex h-[90vh] flex-1 items-center justify-center overflow-auto bg-black/45 p-4">
           <svg
             ref={svgRef}
             viewBox={`0 0 ${CANVAS_WIDTH} ${CANVAS_HEIGHT}`}
@@ -1016,9 +1016,9 @@ export default function Relationships() {
           </div>
 
           {selectedNode && (
-            <div className="w-full border-t border-zinc-700 bg-black/60 p-4 md:w-[320px] md:border-l md:border-t-0">
+            <div className="w-full h-[90vh] overflow-y-auto border-t border-zinc-700 bg-black/60 p-4 md:w-[320px] md:border-l md:border-t-0">
               <div className="border border-zinc-700 bg-black/75 p-4">
-                <div className="mb-3 flex items-center justify-between gap-3">
+                <div className="mb-3 flex items-center justify-between gap-3 h-full overflow-y-auto">
                   <p className="text-sm font-semibold text-white">
                     Relacionamentos
                   </p>
