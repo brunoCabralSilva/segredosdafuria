@@ -288,6 +288,7 @@ export default function Details() {
                 className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
                 onClick={async () => {
                   setShowRelationshipMap({ show: true, data: session.id });
+                  setShowMenuSession('');
                 }}
               >
                 Mapa de Relacionamentos
