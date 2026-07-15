@@ -40,6 +40,8 @@ export default function Details() {
     const [image, setImage] = useState('');
     const [input, setInput] = useState('');
     const [textArea, setTextArea] = useState(false);
+    const isGameMasterUser = email === session.gameMaster;
+    const isBattleVisibleToPlayers = session?.battle?.isVisibleToPlayers === true;
 
     useEffect(() => {
       setGameMaster(session.gameMaster);
@@ -307,7 +309,7 @@ export default function Details() {
                 </button>
               }
               {
-                gameMaster == 'lycan.byell@gmail.com' &&
+                (isGameMasterUser || isBattleVisibleToPlayers) &&
                 <button
                   type="button"
                   className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"

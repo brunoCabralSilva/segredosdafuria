@@ -2,7 +2,7 @@
 
 import contexto from "@/context/context";
 import Image from "next/image";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import type { ElementType, MouseEvent, PointerEvent, WheelEvent } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -35,6 +35,8 @@ import {
   FaShieldAlt,
   FaStore,
   FaLandmark,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
 import { updateSession } from "@/firebase/sessions";
 
@@ -353,6 +355,8 @@ export default function Battle() {
   } = useContext(contexto);
 
   const isGameMaster = session?.gameMaster === email;
+  const isBattleVisibleToPlayers =
+    session?.battle?.isVisibleToPlayers === true;
 
   const imageWrapperRef = useRef<HTMLDivElement | null>(null);
   const markerDragStateRef = useRef<MarkerDragState | null>(null);
@@ -406,6 +410,24 @@ export default function Battle() {
   const [draggedMarker, setDraggedMarker] =
     useState<DraggedMarker | null>(null);
   const [draggedToken, setDraggedToken] = useState<DraggedToken | null>(null);
+
+  useEffect(() => {
+    if (!showBattle.show || isGameMaster || isBattleVisibleToPlayers) return;
+
+    setShowBattle({ show: false, data: "" });
+    forceHideSessionMenu();
+    setShowMessage({
+      show: true,
+      text: "O narrador ocultou o modo de combate para os jogadores.",
+    });
+  }, [
+    forceHideSessionMenu,
+    isBattleVisibleToPlayers,
+    isGameMaster,
+    setShowBattle,
+    setShowMessage,
+    showBattle.show,
+  ]);
 
   // const hasMap = Boolean(session?.battle);
   const hasMap = true;
@@ -608,6 +630,32 @@ export default function Battle() {
       battle: {
         ...(session.battle ?? {}),
         tokens: nextTokens,
+      },
+    };
+
+    try {
+      setIsSavingMap(true);
+      setSession(nextSession);
+      await updateSession(nextSession, setShowMessage);
+    } finally {
+      setIsSavingMap(false);
+    }
+  }
+
+  async function updateBattleVisibility(nextVisibility: boolean) {
+    if (!session?.id) {
+      setShowMessage({
+        show: true,
+        text: "Sessao invalida. Nao foi possivel atualizar a visibilidade do mapa.",
+      });
+      return;
+    }
+
+    const nextSession = {
+      ...session,
+      battle: {
+        ...(session.battle ?? {}),
+        isVisibleToPlayers: nextVisibility,
       },
     };
 
@@ -1352,6 +1400,29 @@ export default function Battle() {
           >
             T
           </button>
+
+          {isGameMaster && (
+            <button
+              type="button"
+              disabled={isSavingMap}
+              onClick={() => {
+                clearMeasurementLine();
+                updateBattleVisibility(!isBattleVisibleToPlayers);
+              }}
+              className={`w-9 h-9 rounded border flex items-center justify-center text-lg disabled:cursor-not-allowed disabled:opacity-60 ${
+                isBattleVisibleToPlayers
+                  ? "bg-green-600 text-white border-green-400"
+                  : "bg-zinc-700 text-zinc-300 border-zinc-500"
+              }`}
+              title={
+                isBattleVisibleToPlayers
+                  ? "Jogadores podem ver o modo de combate"
+                  : "Somente o narrador pode ver o modo de combate"
+              }
+            >
+              {isBattleVisibleToPlayers ? <FaEye /> : <FaEyeSlash />}
+            </button>
+          )}
 
           <button
             type="button"
