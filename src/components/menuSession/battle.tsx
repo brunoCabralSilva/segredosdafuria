@@ -333,6 +333,10 @@ function getTokenFallbackLabel(tokenLabel: string) {
   return `${firstLetter}${matchedNumber}`;
 }
 
+function normalizeBattleLabel(value: string) {
+  return value.trim().toLowerCase();
+}
+
 function normalizeTokenStat(value: number) {
   if (Number.isNaN(value) || value < 0) return 0;
 
@@ -441,12 +445,12 @@ export default function Battle() {
       : tokens.find((token) => token.id === editingTokenId) ?? null;
 
   function tokenHasSessionCharacter(token: Token) {
-    const tokenLabel = (token.imageName ?? token.name ?? "").trim().toLowerCase();
+    const tokenLabel = normalizeBattleLabel(token.imageName ?? token.name ?? "");
 
     if (!tokenLabel) return false;
 
     return players.some((player: any) => {
-      const playerName = player?.data?.name?.trim?.().toLowerCase?.() ?? "";
+      const playerName = normalizeBattleLabel(player?.data?.name ?? "");
       return playerName !== "" && playerName === tokenLabel;
     });
   }
@@ -469,6 +473,18 @@ export default function Battle() {
         Math.min(galleryImageIndex, galleryImageNames.length - 1)
       ]
     : null;
+  const selectedCharacterName = dataSheet?.data?.name?.trim?.() ?? "";
+
+  function tokenMatchesSelectedCharacter(token: Token) {
+    if (isGameMaster || !selectedCharacterName) return false;
+
+    if (sheetId && token.sheetId === sheetId) return true;
+
+    const tokenLabel = normalizeBattleLabel(token.imageName ?? token.name ?? "");
+    const selectedLabel = normalizeBattleLabel(selectedCharacterName);
+
+    return tokenLabel !== "" && tokenLabel === selectedLabel;
+  }
 
   function renderGalleryContent() {
     if (!hasGalleryImages || !currentGalleryImageName) {
@@ -750,7 +766,11 @@ export default function Battle() {
   }
 
   function canEditToken(token: Token) {
-    return isGameMaster || token.ownerEmail === email;
+    return (
+      isGameMaster ||
+      token.ownerEmail === email ||
+      tokenMatchesSelectedCharacter(token)
+    );
   }
 
   function canMoveToken(token: Token) {
@@ -935,6 +955,12 @@ export default function Battle() {
             ...token,
             x: nextPosition.x,
             y: nextPosition.y,
+            ...(tokenMatchesSelectedCharacter(token)
+              ? {
+                  ownerEmail: token.ownerEmail ?? email,
+                  sheetId: token.sheetId ?? sheetId,
+                }
+              : {}),
           }
         : token
     );
@@ -950,7 +976,8 @@ export default function Battle() {
   async function createToken(position: PendingPoint) {
     if (!isGameMaster) {
       const existingPlayerToken = tokens.find(
-        (token) => token.ownerEmail === email
+        (token) =>
+          token.ownerEmail === email || tokenMatchesSelectedCharacter(token)
       );
 
       if (existingPlayerToken) {
@@ -961,8 +988,6 @@ export default function Battle() {
         return;
       }
     }
-
-    const selectedCharacterName = dataSheet?.data?.name?.trim?.() ?? "";
 
     if (!isGameMaster && !selectedCharacterName) {
       setShowMessage({
@@ -1166,6 +1191,12 @@ export default function Battle() {
         name: nextName,
         imageName: nextName,
         color: isGameMaster ? tokenColor : token.color ?? "green",
+        ...(tokenMatchesSelectedCharacter(token)
+          ? {
+              ownerEmail: token.ownerEmail ?? email,
+              sheetId: token.sheetId ?? sheetId,
+            }
+          : {}),
       };
 
       if (tokenHasSessionCharacter(token)) {
