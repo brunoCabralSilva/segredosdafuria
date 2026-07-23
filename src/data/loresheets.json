@@ -1817,5 +1817,42 @@
     ],
     "book": "Tribos de Gaia",
     "page": 230
+  },
+  {
+    "id": 51,
+    "title": "Bringers of Light",
+    "titlePtBr": "Iluminados",
+    "custom": true,
+    "description": "Is it possible to infiltrate the servants of the Wyrm and even seek to rehabilitate the great Incarnae who act as their Patrons? Most Garou would answer with a resounding no, but the Bringers of Light believe that such a lack of faith and ambition merely reveals the narrow-mindedness of their brethren. Above all, the Bringers of Light believe in self-sacrifice, often approaching an ideal of martyrdom otherwise alien to the Shadow Lords. The Bringers of Light are a small network of packs and individual Shadow Lords who put their beliefs into practice by infiltrating the enemy. They pose as Black Spiral Dancers, gaining access to the inner workings of the Wyrm's minions. They travel through the Umbra, secretly seeking to rehabilitate Wyrm-spirits, believing that their dedication could bring even Fly and Bat back into the light. The Bringers of Light make deals and learn the enemy's methods, perhaps even taking a job at a Pentex front to gain access from within, or assuming a sham position in a Black Spiral Dancer Hive. Even by Garou standards, the Bringers of Light suffer an extraordinarily high mortality rate, and more than a few ultimately end up dancing the Spiral. Deceiving the enemy's minions is no easy task, and it often goes terribly wrong. Those Bringers of Light who succeed and remain alive tend to be exceptionally resilient individuals, often more than a little touched by visions from beyond.",
+    "descriptionPtBr": "É possível infiltrar-se entre os servos da Wyrm e até buscar a reabilitação dos grandes Incarnae que atuam como seus Padroeiros? A maioria dos Garou responderia com um sonoro não, mas os Iluminados acreditam que tamanha falta de fé e ambição apenas revela a estreiteza de visão de seus irmãos. Acima de tudo, os Iluminados acreditam no autossacrifício, frequentemente se aproximando de um ideal de martírio que, de outra forma, seria estranho aos Senhores das Sombras. Os Iluminados são uma pequena rede de alcateias e Senhores das Sombras individuais que colocam suas crenças em prática infiltrando-se no inimigo. Eles fingem ser Dançarinos da Espiral Negra e, assim, obtêm acesso ao funcionamento interno dos lacaios da Wyrm. Viajam pela Umbra, buscando reabilitar secretamente espíritos da Wyrm, pois acreditam que sua dedicação pode trazer até mesmo Mosca e Morcego de volta à luz. O Iluminados fazem acordos e aprendem os métodos do inimigo, podendo até aceitar um emprego em uma fachada da Pentex para acessá-la por dentro, ou um cargo fajuto em uma colmeia de Dançarinos da Espiral Negra. Mesmo para os Garou, os Iluminados apresentam uma taxa de mortalidade altíssima, e mais de alguns acabam dançando a Espiral. Enganar os lacaios do inimigo não é fácil e frequentemente dá errado. Os Iluminados que têm sucesso e permanecem vivos tendem a ser indivíduos excepcionalmente resistentes, muitas vezes mais do que um pouco tocados pelas visões do além.",
+    "habilities": [
+      {
+        "cost": 1,
+        "skill": "Signs of the Enemy: You have learned the glyphs, passwords, gestures, prayers, and subtle mannerisms used by the servants of the Wyrm. Gain two bonus dice on Awareness or Occult tests to recognize Wyrm servants, as well as on Subterfuge tests to impersonate one. If a Garou outside your current pack witnesses you using these signs, you suffer a one-die penalty on Social tests involving that Garou for the remainder of the session.",
+        "skillPtBr": "Sinais do Inimigo: Você aprendeu os glifos, senhas, gestos, orações e maneirismos sutis utilizados pelos servos da Wyrm. Ganhe dois dados de bônus em testes de Percepção ou Ocultismo para reconhecer servos da Wyrm, bem como em testes de Lábia para se passar por um deles. Se um Garou que não pertença à sua alcateia atual presenciar você utilizando esses sinais, você entrará em Vexame de seu Renome de maior valor."
+      },
+      {
+        "cost": 2,
+        "skill": "Friends in Dark Places: You maintain a dangerous relationship with a Black Spiral Dancer, a stable fomor, a vampire, a Pentex employee, or another individual involved with the servants of the Wyrm. Treat this individual as a two-dot Contact. Once per story, they can provide a relevant piece of information, a forged introduction, or safe passage into a place controlled by their faction. After calling upon this Contact, your Renown is treated as one lower during social interactions with Garou for the remainder of the session.",
+        "skillPtBr": "Amizades nas Trevas: Você mantém uma relação perigosa com um Dançarino da Espiral Negra, um fomor estável ou algum  outro tipo de servo da Wyrm. Considere esse indivíduo um Contato de dois pontos. Uma vez por história, ele poderá fornecer uma informação relevante, uma apresentação falsificada ou passagem segura para um lugar controlado por sua facção."
+      },
+      {
+        "cost": 3,
+        "skill": "Deep Cover: You have prepared a false identity within a Black Spiral Dancer pack, Wyrm cult, vampire coterie, Pentex front, or another organization associated with the enemy. Once per story, you may reveal this identity and use it for a single operation. Gain two bonus dice on tests to enter restricted locations, maintain your cover, manipulate members of the infiltrated group, or obtain internal records. A total failure burns the identity and gives you an active two-dot Adversary until the end of the story.",
+        "skillPtBr": "Cobertura Profunda: Você é relativamente conhecido dentro de uma alcateia de Dançarinos da Espiral Negra, culto da Wyrm ou outra organização associada ao inimigo. Uma vez por história, você pode usar este benefício para ganhar três dados de bônus em testes para entrar em locais restritos, manter sua cobertura, manipular integrantes do grupo infiltrado ou obter registros internos. Uma falha brutal compromete a identidade e concede a você um Adversário ativo de três pontos."
+      },
+      {
+        "cost": 4,
+        "skill": "Lost Lands Expert: Once per story, during a journey through the Umbra, you can find a secret path used by the servants of the Wyrm to reach a nearby Hive. This path allows you to cross a barrier, reach a hidden realm, or bypass a guardian. Anyone accompanying you along this path must make a Hauglosk test, as pressing onward means turning a blind eye to the defilement surrounding them and accepting, even if only for convenience, the use of the Wyrm’s own works to further their cause.",
+        "skillPtBr": "Conhecedor das Terras Perdidas: Uma vez por história, durante uma jornada pela Umbra, você pode encontrar um caminho secreto utilizado pelos servos da Wyrm até uma colmeia próxima. Esse caminho permite atravessar uma barreira, chegar a um domínio oculto ou evitar um guardião. Qualquer um que te te acompanhar neste caminho deverá realizar um teste de Hauglosk, pois seguir adiante é fechar os olhos à profanação que o cerca e aceitar, ainda que por conveniência, o uso das próprias obras da Wyrm em benefício de sua causa."
+      },
+      {
+        "cost": 5,
+        "skill": "Divide and Condemn: You understand the society surrounding the Wyrm so well that, once per story, you can turn an existing dispute among Black Spiral Dancers into an open schism. A pack, cult, or faction temporarily abandons its leadership and begins pursuing its own goals. The conflict fractures your enemies for the duration of the story, and you have no control over which side ultimately prevails. In the end, however, the victorious faction discovers that you were responsible and makes revenge against you a priority.",
+        "skillPtBr": "Dividir e Condenar - Você conhece tanto como a sociedade em volta da Wyrm funciona que, uma vez por história, pode transformar uma divergência existente entre Dançarinos da Espiral Negra em uma ruptura aberta. Uma alcateia, culto ou facção abandona temporariamente sua liderança e passa a perseguir seus próprios objetivos. O conflito fratura os inimigos durante uma história e você não controla qual lado vencerá, mas o lado ganhador, no fim, descobrirá que foi você e tornará prioridade se vingar."
+      }
+    ],
+    "book": "Conteúdo personalizado",
+    "page": 1
   }
 ]
