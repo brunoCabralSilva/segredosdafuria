@@ -161,7 +161,7 @@ export default function RerollWithWillpower() {
   }
 
   return(
-    <div className="z-50 fixed top-0 left-0 w-full h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0">
+    <div className="fixed top-0 left-0 z-[100] flex h-screen w-full items-center justify-center bg-black/80 px-3 sm:px-0">
       {
         result && (result.rage || result.margin) &&
         <div className="w-full sm:w-2/3 md:w-1/2 overflow-y-auto flex flex-col justify-center items-center bg-green-whats relative border-white border-2 pb-5">
