@@ -343,6 +343,10 @@ function normalizeTokenStat(value: number) {
   return Math.floor(value);
 }
 
+function getBattleImageSrc(imageName: string) {
+  return `/images/battle/${imageName}.png`;
+}
+
 export default function Battle() {
   const {
     showBattle,
@@ -503,7 +507,7 @@ export default function Battle() {
           className="relative mb-3 block aspect-video w-full overflow-hidden rounded border border-zinc-700 bg-black"
         >
           <Image
-            src={`/images/battle/${showBattle.data}/${currentGalleryImageName}.png`}
+            src={getBattleImageSrc(currentGalleryImageName)}
             alt={`${markerName} - imagem ${galleryImageIndex + 1}`}
             fill
             className="object-contain"
@@ -1526,7 +1530,7 @@ export default function Battle() {
             }}
           >
             <Image
-              src={`/images/battle/${showBattle.data}/${showBattle.data}.png`}
+              src={getBattleImageSrc(showBattle.data)}
               alt={`Mapa da Sessão ${session.name}`}
               fill
               className="object-contain select-none"
@@ -1633,7 +1637,7 @@ export default function Battle() {
                 >
                   {shouldShowTokenImage ? (
                     <Image
-                      src={`/images/battle/${showBattle.data}/${resolvedTokenImageName}.png`}
+                      src={getBattleImageSrc(resolvedTokenImageName)}
                       alt={token.name}
                       fill
                       draggable={false}
@@ -2099,7 +2103,7 @@ export default function Battle() {
                       >
                         {!isPreviewImageFailed ? (
                           <Image
-                            src={`/images/battle/${showBattle.data}/${tokenName.trim()}.png`}
+                            src={getBattleImageSrc(tokenName.trim())}
                             alt={tokenName}
                             fill
                             className="h-full w-full object-cover"
@@ -2245,7 +2249,7 @@ export default function Battle() {
 
               <div className="relative h-full w-full">
                 <Image
-                  src={`/images/battle/${showBattle.data}/${fullscreenImageName}.png`}
+                  src={getBattleImageSrc(fullscreenImageName)}
                   alt={fullscreenImageName}
                   fill
                   className="object-contain"
