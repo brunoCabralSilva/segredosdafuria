@@ -27,8 +27,12 @@ import Forms from "./menuSession/forms";
 import WillpowerTest from "./popup/willpowerTest";
 import { sheetStructure } from "@/firebase/utilities";
 import Chat from "./menuSession/chat";
+import { useRouter } from "next/navigation";
+import SessionLink from "./menuSession/sessionLink";
 
-export default function MenuPlayer() {
+export default function MenuPlayer(props: { standalone?: boolean }) {
+  const { standalone = false } = props;
+  const router = useRouter();
   const {
     dataSheet, setDataSheet,
     session,
@@ -51,7 +55,7 @@ export default function MenuPlayer() {
 
   const db = getFirestore(firebaseConfig);
   const sessionRef = collection(db, 'notifications');
-  const querySession = query(sessionRef, where('sessionId', '==', session.id));
+  const querySession = query(sessionRef, where('sessionId', '==', session?.id || '__no_session__'));
   const [notifications] = useCollectionData(querySession, { idField: 'id' } as any);
 
   useEffect(() => {
@@ -67,95 +71,104 @@ export default function MenuPlayer() {
       if (playerFounded) setDataSheet(playerFounded);
       else setDataSheet(sheetStructure('', '', ''));
     }
-  }, [sheetId, dataSheet])
+  }, [sheetId, dataSheet, optionSelect, players, setDataSheet]);
 
-
-	const returnDataSheet = () => {
-    switch(optionSelect) {
-      case ('players'): return (<Players />);
-      case ('chat'): return (<Chat sidebar />);
-      case ('notifications'): return (<Notifications />);
-      case ('history'): return (<History />);
-      case ('attributes'): return (<Attributes />);
-      case ('skills'): return (<Skills />);
-      case ('advantages-flaws'): return (<AdvantagesAndFlaws />);
-      case ('forms'): return (<Forms />);
-      case ('session'): return (<Details />);
-      case ('touchstones'): return (<Touchstones />);
-      case ('background'): return (<Background type="background" />);
-      case ('principles-of-the-chronicle'): return (<Principles />);
-      case ('favor-ban'): return (<FavorsAndBans />);
-      case ('consent'): return (<Consent />);
-      case ('anotations'): return (<Anotations type="notes" />);
-      case ('gifts'): return (<Gifts />);
-      case ('rituals'): return (<Rituals />);
+  const returnDataSheet = () => {
+    switch (optionSelect) {
+      case 'players': return (<Players />);
+      case 'chat': return (<Chat sidebar />);
+      case 'notifications': return (<Notifications />);
+      case 'history': return (<History />);
+      case 'attributes': return (<Attributes />);
+      case 'skills': return (<Skills />);
+      case 'advantages-flaws': return (<AdvantagesAndFlaws />);
+      case 'forms': return (<Forms />);
+      case 'session': return (<Details />);
+      case 'touchstones': return (<Touchstones />);
+      case 'background': return (<Background type="background" />);
+      case 'principles-of-the-chronicle': return (<Principles />);
+      case 'favor-ban': return (<FavorsAndBans />);
+      case 'consent': return (<Consent />);
+      case 'anotations': return (<Anotations type="notes" />);
+      case 'gifts': return (<Gifts />);
+      case 'rituals': return (<Rituals />);
+      case 'session-link': return (<SessionLink />);
       default: return (<General />);
     }
   };
 
-  return(
-    <div className={`w-full md:w-3/5 absolute sm:relative z-50 w-8/10 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center h-screen z-50 top-0 right-0 text-white`}>
+  return (
+    <div className={`${standalone ? 'w-full h-full relative' : 'w-full md:w-3/5 absolute sm:relative top-0 right-0 h-screen'} z-50 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center text-white overflow-y-auto`}>
       <div className="w-full flex justify-end my-1">
         <IoIosCloseCircleOutline
           className="text-4xl text-white cursor-pointer mb-2"
-          onClick={ () => {
+          onClick={() => {
+            if (standalone) {
+              router.push('/sheets');
+              return;
+            }
+
             if (showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest) {
               setShowHarano(false);
               setShowHauglosk(false);
-              setShowGiftRoll({ show: false, gift: {}});
-              setShowRitualRoll({ show: false, ritual: {}});
+              setShowGiftRoll({ show: false, gift: {} });
+              setShowRitualRoll({ show: false, ritual: {} });
               setShowWillpowerTest(false);
-            } else setShowMenuSession('');
+            } else {
+              setShowMenuSession('');
+            }
             setShowEvaluateSheet({ show: false, data: '' });
             setShowConsentForm(false);
           }}
         />
       </div>
       <div className="w-full h-full">
-        { 
+        {
           !showHarano
           && !showHauglosk
           && !showGiftRoll.show
           && !showRitualRoll.show
           && !showWillpowerTest
           && <div className="w-full h-full">
-          <select
-            value={optionSelect}
-            onChange={ (e) => {
-            setOptionSelect(e.target.value);
-            }}
-            className="w-full mb-2 border border-white p-3 cursor-pointer bg-black text-white flex items-center justify-center font-bold text-center"
-        >
-            <option value={'players'}>Personagens</option>
-            {
-              email === session.gameMaster &&
-              <option value={'notifications'}>Notificações { listNotification.length > 0 ? '(' + listNotification.length + ')' : ''}</option>
-            }
-            <option value={'history'}>Histórico</option>
-            { sheetId !== '' && <option value={'general'}>Geral</option> }
-            { sheetId !== '' && <option value={'attributes'}>Atributos</option> }
-            { sheetId !== '' && <option value={'skills'}>Habilidades</option> }
-            { sheetId !== '' && <option value={'gifts'}>Dons</option> }
-            { sheetId !== '' && <option value={'rituals'}>Rituais</option> }
-            { sheetId !== '' && <option value={'touchstones'}>Pilares</option> }
-            { sheetId !== '' && <option value={'advantages-flaws'}>Vantagens e Defeitos</option> }
-            { sheetId !== '' && <option value={'forms'}>Formas { dataSheet && dataSheet.data && dataSheet.data.form ? `( Atual: ${ dataSheet.data.form } )` : '' } </option> }
-            <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>
-            <option value={'favor-ban'}>Favores e Proibições</option>
-            <option value={'consent'}>Ficha de Consentimento</option>
-            { sheetId !== '' && <option value={'background'}>Background</option> }
-            <option value={'anotations'}>Anotações</option>
-            <option value={'session'}>Sessão</option>
-            { showBattle.show && <option value={'chat'}>Chat</option> }
-          </select>
-            { returnDataSheet() }
+            <select
+              value={optionSelect}
+              onChange={(e) => {
+                setOptionSelect(e.target.value);
+              }}
+              className="w-full mb-2 border border-white p-3 cursor-pointer bg-black text-white flex items-center justify-center font-bold text-center"
+            >
+              {!standalone && <option value={'players'}>Personagens</option>}
+              {
+                !standalone
+                && email === session.gameMaster
+                && <option value={'notifications'}>Notificações {listNotification.length > 0 ? `(${listNotification.length})` : ''}</option>
+              }
+              {!standalone && <option value={'history'}>Histórico</option>}
+              {sheetId !== '' && <option value={'general'}>Geral</option>}
+              {sheetId !== '' && <option value={'attributes'}>Atributos</option>}
+              {sheetId !== '' && <option value={'skills'}>Habilidades</option>}
+              {sheetId !== '' && <option value={'gifts'}>Dons</option>}
+              {sheetId !== '' && <option value={'rituals'}>Rituais</option>}
+              {sheetId !== '' && <option value={'touchstones'}>Pilares</option>}
+              {sheetId !== '' && <option value={'advantages-flaws'}>Vantagens e Defeitos</option>}
+              {standalone && <option value={'session-link'}>Vincular com Sessão</option>}
+              {!standalone && sheetId !== '' && <option value={'forms'}>Formas {dataSheet && dataSheet.data && dataSheet.data.form ? `( Atual: ${dataSheet.data.form} )` : ''} </option>}
+              {!standalone && <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>}
+              {!standalone && <option value={'favor-ban'}>Favores e Proibições</option>}
+              {!standalone && <option value={'consent'}>Ficha de Consentimento</option>}
+              {sheetId !== '' && <option value={'background'}>Background</option>}
+              {!standalone && <option value={'anotations'}>Anotações</option>}
+              {!standalone && <option value={'session'}>Sessão</option>}
+              {!standalone && showBattle.show && <option value={'chat'}>Chat</option>}
+            </select>
+            {returnDataSheet()}
           </div>
         }
-        { showGiftRoll.show && <GiftRoll /> }
-        { showRitualRoll.show && <RitualRoll /> }
-        { showHarano && <HaranoHauglosk type="Harano" /> }
-        { showHauglosk && <HaranoHauglosk type="Hauglosk" /> }
-        { showWillpowerTest && <WillpowerTest /> }
+        {showGiftRoll.show && <GiftRoll />}
+        {showRitualRoll.show && <RitualRoll />}
+        {showHarano && <HaranoHauglosk type="Harano" />}
+        {showHauglosk && <HaranoHauglosk type="Hauglosk" />}
+        {showWillpowerTest && <WillpowerTest />}
       </div>
     </div>
   );

@@ -1,18 +1,74 @@
-import React, { useContext, useLayoutEffect, useRef } from "react";
+﻿import React, { useContext, useLayoutEffect, useRef } from "react";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import contexto from "@/context/context";
 import Image from "next/image";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import Loading from "./loading";
+import { usePathname } from "next/navigation";
 
-export default function ConvertToPdf(props: { data: any }) {
-  const { data } = props;
-  console.log(data);
+export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
+  const { data, preview = false } = props;
+  const pathname = usePathname();
+  const isSheetStandalone = pathname?.startsWith('/sheets/');
+  const usePreviewPdfLayout = preview || isSheetStandalone;
+  const isExportMode = !preview;
   const { setShowDownloadPdf, session } = useContext(contexto);
   const pdfRef: any = useRef(null);
   const pdfRef2: any = useRef(null);
   const hasDownloaded = useRef(false);
+
+  const hasAdvantage = (title: string) => data.advantagesAndFlaws?.advantages?.some((advantage: { title: string }) => advantage.title === title);
+  const hasFlaw = (title: string) => data.advantagesAndFlaws?.flaws?.some((flaw: { title: string }) => flaw.title === title);
+  const getSheetStandalonePhysicalValue = (name: 'strength' | 'dexterity' | 'stamina') => {
+    const currentValue = Number(data.attributes?.[name] || 0);
+
+    if (!isSheetStandalone) return currentValue;
+
+    if (data.form === 'Crinos') {
+      return Math.max(0, currentValue - 4);
+    }
+
+    if (data.form === 'Hispo' || data.form === 'Glabro') {
+      return Math.max(0, currentValue - (hasAdvantage('Resiliência de Luna') ? 4 : 2));
+    }
+
+    return currentValue;
+  };
+
+  const getAttributeDisplayValue = (name: string) => {
+    if (name === 'strength' || name === 'dexterity' || name === 'stamina') {
+      return getSheetStandalonePhysicalValue(name);
+    }
+
+    return Number(data.attributes?.[name] || 0);
+  };
+
+  const getHealthDisplayTotal = () => {
+    const stamina = isSheetStandalone
+      ? getSheetStandalonePhysicalValue('stamina')
+      : Number(data.attributes?.stamina || 0);
+
+    if (hasFlaw('Maldição da Anciã') && hasAdvantage('Pele Espessa')) return stamina + 3;
+    if (hasFlaw('Maldição da Anciã')) return stamina + 2;
+    if (hasAdvantage('Pele Espessa')) return stamina + 4;
+    return stamina + 3;
+  };
+
+  const getWillpowerDisplayTotal = () => Number(data.attributes?.composure || 0) + Number(data.attributes?.resolve || 0);
+
+  const pointClass = (type: 'circle' | 'square', filled: boolean, large = false) => {
+    const baseSize = isExportMode
+      ? large ? 'h-6 w-6' : 'h-5 w-5'
+      : usePreviewPdfLayout
+        ? large ? 'h-5 w-5' : 'h-4 w-4'
+        : large ? 'h-6 w-6' : 'h-5 w-5';
+
+    const shapeClass = type === 'circle' ? 'rounded-full' : '';
+    const fillClass = filled ? 'bg-black' : 'bg-white';
+
+    return `${baseSize} ${shapeClass} ${fillClass} border border-black !border-solid`;
+  };
   
   const handleDownloadPdf = async () => {
     const pdfContainer1 = document.createElement('div');
@@ -21,7 +77,29 @@ export default function ConvertToPdf(props: { data: any }) {
     pdfContainer1.appendChild(pdfRef.current.cloneNode(true));
     document.body.appendChild(pdfContainer1);
     const pdf = new jsPDF();
+    const waitForImages = async (element: HTMLElement) => {
+      const images = Array.from(element.querySelectorAll('img'));
+
+      await Promise.all(
+        images.map((image) => new Promise<void>((resolve) => {
+          const finish = () => resolve();
+
+          if (image.complete && image.naturalWidth > 0) {
+            if (typeof image.decode === 'function') {
+              image.decode().then(finish).catch(finish);
+            } else {
+              finish();
+            }
+            return;
+          }
+
+          image.addEventListener('load', finish, { once: true });
+          image.addEventListener('error', finish, { once: true });
+        })),
+      );
+    };
     const captureElement = async (element: any) => {
+      await waitForImages(element);
       const canvas = await html2canvas(element);
       const imgData = canvas.toDataURL("image/png");
       const imgWidth = pdf.internal.pageSize.getWidth();
@@ -45,22 +123,22 @@ export default function ConvertToPdf(props: { data: any }) {
   
   
   useLayoutEffect(() => {
-    if (!hasDownloaded.current) {
+    if (!preview && !hasDownloaded.current) {
       handleDownloadPdf();
       setTimeout(() => setShowDownloadPdf({ show: false, email: '' }), 3000);
       hasDownloaded.current = true;
     }
-  }, []);
+  }, [preview, setShowDownloadPdf]);
 
-  const returnPoints = (name: string) => {
+  const returnPoints = (name: string, noWrap = false) => {
     const points = Array(5).fill('');
     return (
-      <div className={`flex flex-wrap ${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'gap-2' : 'gap-1'} pt-1`}>
+      <div className={`flex ${noWrap ? 'flex-nowrap min-w-max' : 'flex-wrap'} ${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'gap-2' : 'gap-1'} pt-1`}>
         {
           points.map((item, index) => {
             if (data[name] >= index + 1) {
-              return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-black border-black !border-solid border`} />
-            } return <button type="button" key={index} className={`${name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'h-6 w-6' : 'rounded-full h-5 w-5' } bg-white border-black !border-solid border`} />
+              return <button type="button" key={index} className={pointClass(name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'square' : 'circle', true, name === 'rage' || name === 'hauglosk' || name === 'harano')} />
+            } return <button type="button" key={index} className={pointClass(name === 'rage' || name === 'hauglosk' || name === 'harano' ? 'square' : 'circle', false, name === 'rage' || name === 'hauglosk' || name === 'harano')} />
           })
         }
       </div>
@@ -82,13 +160,14 @@ export default function ConvertToPdf(props: { data: any }) {
 
   const returnAttributes = (name: string) => {
     const points = Array(6).fill('');
+    const displayValue = getAttributeDisplayValue(name);
     return (
       <div className="flex flex-wrap gap-1 pt-1">
         {
           points.map((item, index) => {
-            if (data.attributes[name] >= index + 1) {
-              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black !border-solid border" />
-            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black !border-solid" />
+            if (displayValue >= index + 1) {
+              return <button type="button" key={index} className={pointClass('circle', true)} />
+            } return <button type="button" key={index} className={pointClass('circle', false)} />
           })
         }
       </div>
@@ -102,8 +181,8 @@ export default function ConvertToPdf(props: { data: any }) {
         {
           points.map((item, index) => {
             if (cost >= index + 1) {
-              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black !border-solid border" />
-            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black !border-solid" />
+              return <button type="button" key={index} className={pointClass('circle', true)} />
+            } return <button type="button" key={index} className={pointClass('circle', false)} />
           })
         }
       </div>
@@ -117,26 +196,56 @@ export default function ConvertToPdf(props: { data: any }) {
         {
           points.map((item, index) => {
             if (data.skills[name].value >= index + 1) {
-              return <button type="button" key={index} className="h-5 w-5 rounded-full bg-black border-black !border-solid border" />
-            } return <button type="button" key={index} className="h-5 w-5 rounded-full bg-white border border-black !border-solid" />
+              return <button type="button" key={index} className={pointClass('circle', true)} />
+            } return <button type="button" key={index} className={pointClass('circle', false)} />
           })
         }
       </div>
     );
   };
 
-  const returnAgravated = (name: string, quant: number) => {
+  const returnAgravated = (name: string, quant: number, noWrap = false) => {
     const pointsRest = Array(quant).fill('');
     return ( 
-      <div className="flex flex-wrap gap-2 pt-1">
+      <div className={`flex ${noWrap ? 'flex-nowrap min-w-max' : 'flex-wrap'} gap-2 pt-1`}>
         {
           pointsRest.map((item, index) => (
             <button
               type="button"
               key={index}
-              className="h-6 w-6 bg-white border-black !border-solid border cursor-pointer"
+              className={pointClass('square', false, true)}
             />
           ))
+        }
+      </div>
+    );
+  };
+
+  const returnTracker = (name: 'health' | 'willpower', quant: number, noWrap = false) => {
+    const tracker = isSheetStandalone ? [] : Array.isArray(data[name]) ? data[name] : [];
+
+    return (
+      <div className={`flex ${noWrap ? 'flex-nowrap min-w-max' : 'flex-wrap'} gap-2 pt-1`}>
+        {
+          Array(quant).fill('').map((_, index) => {
+            const point = tracker.find((item: any) => Number(item.value) === index + 1);
+            const fillClass = point
+              ? point.agravated ? 'bg-black' : 'bg-gray-500'
+              : 'bg-white';
+            const sizeClass = isExportMode
+              ? 'h-6 w-6'
+              : usePreviewPdfLayout
+                ? 'h-5 w-5'
+                : 'h-6 w-6';
+
+            return (
+              <button
+                type="button"
+                key={index}
+                className={`${sizeClass} border border-black !border-solid ${fillClass}`}
+              />
+            );
+          })
         }
       </div>
     );
@@ -156,7 +265,7 @@ export default function ConvertToPdf(props: { data: any }) {
               <div className="flex flex-wrap gap-1 pt-1">
                 {
                   number.map((item2, index2) => (
-                    <button key={index2} type="button"  className="h-5 w-5 rounded-full bg-white border-black !border-solid border" />
+                    <button key={index2} type="button" className={pointClass('circle', false)} />
                   ))
                 }
               </div>
@@ -168,7 +277,7 @@ export default function ConvertToPdf(props: { data: any }) {
   };
 
   const returnEmptyGifts = () => {
-    let length = 18 - (data.gifts.length - data.rituals.length);
+    let length = 13 - (data.gifts.length - data.rituals.length);
     if (length < 0) length = 0;
     const points = Array(length).fill('');
     return (
@@ -188,22 +297,32 @@ export default function ConvertToPdf(props: { data: any }) {
   };
 
   return (
-    <div className="px-4 pb-4 fixed w-full h-screen overflow-y-auto top-0 left-0 z-80 bg-black">
-      <div className="fixed bg-black z-80 h-screen w-full">
+    <div className={`${preview ? 'w-full min-h-full bg-white [&_*]:cursor-default [&_button]:pointer-events-none' : 'px-4 pb-4 fixed w-full h-screen overflow-y-auto top-0 left-0 z-80 bg-black'}`}>
+      { !preview && <div className="fixed bg-black z-80 h-screen w-full">
         <Loading />
-      </div>
-      <div ref={pdfRef} className="bg-white text-black p-8 border border-black !border-solid" id="pdf-content">
+      </div> }
+      <div ref={pdfRef} className={`bg-white text-black ${preview ? 'w-full p-4 xl:p-6 text-[10px] xl:text-[11px] leading-tight' : usePreviewPdfLayout ? 'w-full p-4 xl:p-6 text-[13px] xl:text-[14px] leading-tight' : 'p-8 border border-black !border-solid text-[13px] xl:text-[14px] leading-tight'}`} id="pdf-content">
         <div className="border-2 border-black !border-solid p-4 mt-3">
           {/* Cabeçalho */}
           <div className="flex w-full justify-center items-center">
-            <Image
-              src="/images/logos/text-black.png"
-              alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
-              className="w-72 object-contain pb-3"
-              width={2000}
-              height={800}
-              priority
-            />
+            {
+              isExportMode ? (
+                <img
+                  src="/images/logos/text-black.png"
+                  alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+                  className="w-1/3 h-auto object-contain pb-3"
+                />
+              ) : (
+                <Image
+                  src="/images/logos/text-black.png"
+                  alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+                  className="w-72 object-contain pb-3"
+                  width={2000}
+                  height={800}
+                  priority
+                />
+              )
+            }
           </div>
           <div>
             <div className="grid grid-cols-3 border border-black !border-solid w-full">
@@ -239,7 +358,7 @@ export default function ConvertToPdf(props: { data: any }) {
               <p className="bg-black text-white px-2 pt-1 pb-3 mt-1">Atributos</p>
             </div>
             <div className="grid grid-cols-3 pb-3">
-              <p className="text-center">Físicos</p>
+              <p className="text-center">Fí­sicos</p>
               <p className="text-center">Sociais</p>
               <p className="text-center">Mentais</p>
             </div>
@@ -278,7 +397,7 @@ export default function ConvertToPdf(props: { data: any }) {
                   { returnAttributes('intelligence') }
                 </div>
                 <div className="flex justify-between items-center pb-2">
-                  <p className="">Raciocínio</p>
+                  <p className="">Raciocí­nio</p>
                   { returnAttributes('wits') }
                 </div>
                 <div className="flex justify-between items-center pb-2">
@@ -289,26 +408,60 @@ export default function ConvertToPdf(props: { data: any }) {
             </div>
           </div>
           {/* Vitalidade e Força de Vontade */}
-          <div className="grid grid-cols-3 w-full py-3 mt-5">
-            <div className="flex items-center justify-center">
+          {
+            usePreviewPdfLayout && <div className="flex w-full items-start justify-between gap-6 px-6 py-3 mt-5">
+              <div className="flex min-w-max justify-start">
+                <div className="flex items-start justify-start gap-5">
+                  <div className="flex flex-col items-center justify-start">
+                    <p className="pb-2">Vitalidade</p>
+                    { returnTracker('health', getHealthDisplayTotal(), true) }
+                  </div>
+                  <div className="flex flex-col items-center justify-start">
+                    <p className="pb-2">Crinos</p>
+                    { returnAgravated('health', 4, true) }
+                  </div>
+                </div>
+              </div>
+              <div className="flex min-w-max justify-center">
+                <div className="flex flex-col items-center justify-start">
+                  <p className="pb-2">Força de Vontade</p>
+                  { returnTracker('willpower', getWillpowerDisplayTotal(), true) }
+                </div>
+              </div>
+              <div className="flex min-w-max justify-end">
+                <div className="flex flex-col items-center justify-start">
+                  <p className="pb-2">Fúria</p>
+                  { returnAgravated('rage', 5, true) }
+                </div>
+              </div>
+            </div>
+          }
+          { !usePreviewPdfLayout && <div className="flex w-full items-start justify-between gap-6 px-6 py-3 mt-5">
+            <div className="flex min-w-max justify-start">
+              <div className="flex items-start justify-start gap-5">
+                <div className="flex flex-col items-center justify-start">
+                  <p className="pb-2">Vitalidade</p>
+                  { returnAgravated('health', 8, true) }
+                </div>
+                <div className="flex flex-col items-center justify-start">
+                  <p className="pb-2">Crinos</p>
+                  { returnAgravated('health', 4, true) }
+                </div>
+              </div>
+            </div>
+            <div className="flex min-w-max justify-center">
               <div className="flex flex-col items-center justify-start">
-                <p className="pb-2">Vitalidade</p>
-                { returnAgravated('health', 8) }
-              </div>
-              <div className="flex flex-col items-center justify-start ml-5">
-                <p className="pb-2">Crinos</p>
-                { returnAgravated('health', 4) }
+                <p className="pb-2">Força de Vontade</p>
+                { returnAgravated('willpower', 8, true) }
               </div>
             </div>
-            <div className="flex flex-col items-center justify-start">
-              <p className="pb-2">Força de Vontade</p>
-              { returnAgravated('willpower', 8) }
+            <div className="flex min-w-max justify-end">
+              <div className="flex flex-col items-center justify-start">
+                <p className="px-1 pb-2">Fúria</p>
+                { returnAgravated('rage', 5, true) }
+              </div>
             </div>
-            <div className="flex flex-col items-center justify-start">
-              <p className="px-1 pb-2">Fúria</p>
-              { returnAgravated('rage', 5) }
-            </div>
-          </div>
+          </div> }
           {/* Habilidades */}
           <div className="flex flex-col">
             <div className="flex items-center justify-center my-1">
@@ -325,7 +478,7 @@ export default function ConvertToPdf(props: { data: any }) {
                   { returnSkills('brawl') }
                 </div>
                 <div className="flex justify-between items-center pb-2">
-                  <p>Ofícios { data.skills.craft.specialty !== '' && `(${ data.skills.craft.specialty})` }</p>
+                  <p>Ofí­cios { data.skills.craft.specialty !== '' && `(${ data.skills.craft.specialty})` }</p>
                   { returnSkills('craft') }
                 </div>
                 <div className="flex justify-between items-center pb-2">
@@ -417,7 +570,7 @@ export default function ConvertToPdf(props: { data: any }) {
                   { returnSkills('occult') }
                 </div>
                 <div className="flex justify-between items-center pb-2">
-                  <p>Política { data.skills.politics.specialty !== '' && `(${ data.skills.politics.specialty})` }</p>
+                  <p>Polí­tica { data.skills.politics.specialty !== '' && `(${ data.skills.politics.specialty})` }</p>
                   { returnSkills('politics') }
                 </div>
                 <div className="flex justify-between items-center pb-2">
@@ -492,12 +645,12 @@ export default function ConvertToPdf(props: { data: any }) {
               <div className="pt-4 w-full pr-4">
                 <div className="grid grid-cols-2 w-full">
                   <div className="w-full p-1 py-2 flex items-center justify-between pr-3">
-                    <p className="px-1 pb-2 font-bold">Hauglosk</p>
-                    { returnPoints('hauglosk') }
+                    <p className="px-1 font-bold self-center">Hauglosk</p>
+                    { returnPoints('hauglosk', true) }
                   </div>
                   <div className="w-full p-1 pl-3 flex items-center justify-between">
-                    <p className="px-1 pb-2 font-bold">Harano</p>
-                    { returnPoints('harano') }
+                    <p className="px-1 font-bold self-center">Harano</p>
+                    { returnPoints('harano', true) }
                   </div>
                 </div>
               </div>
@@ -506,78 +659,118 @@ export default function ConvertToPdf(props: { data: any }) {
               <p className="mb-3">Formas dos Garou</p>
               <div className="border border-black !border-solid w-full">
                 <div className="grid grid-cols-5 w-full px-3 pb-1 pt-3">
-                  <p className="col-span-1 font-bold">Hominídeo</p>
+                  <p className="col-span-1 font-bold">Hominí­deo</p>
                   <ul className="col-span-3">
                     <li>Custo: Nenhum</li>
                     <li>Incapaz de se regenerar, mas pode tocar prata sem sofrer danos</li>
                   </ul>
                   <div className="col-span-1">
-                    <Image
-                      src="/images/forms/Hominídeo-white.png"
-                      alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
-                      className="object-contain pb-3"
-                      width={2000}
-                      height={800}
-                      priority
-                    />
+                    {
+                      isExportMode ? (
+                        <img
+                          src="/images/forms/Hominídeo-white.png"
+                          alt="Forma Hominídeo"
+                          className="block w-[100px] h-auto object-contain pb-3"
+                        />
+                      ) : (
+                        <Image
+                          src="/images/forms/Hominídeo-white.png"
+                          alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+                          className="object-contain pb-3"
+                          width={2000}
+                          height={800}
+                          priority
+                        />
+                      )
+                    }
                   </div>
                 </div>
                 <div className="grid grid-cols-5 w-full px-3 pt-1">
                   <p className="col-span-1 font-bold">Glabro</p>
                   <ul className="col-span-3">
                     <li>Custo: Um Teste de Fúria</li>
-                    <li>Testes Físicos: Bônus de Dois Dados</li>
+                    <li>Testes Fí­sicos: Bônus de Dois Dados</li>
                     <li>Testes Sociais: Penalidade de Dois dados</li>
                     <li>Regeneração: 1 por Teste de Fúria</li>
                   </ul>
-                  <Image
-                    src="/images/forms/Glabro-white.png"
-                    alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
-                    className="object-contain pb-3"
-                    width={2000}
-                    height={800}
-                    priority
-                  />
+                  {
+                    isExportMode ? (
+                      <img
+                        src="/images/forms/Glabro-white.png"
+                        alt="Forma Glabro"
+                        className="block w-[100px] h-auto object-contain pb-3"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/forms/Glabro-white.png"
+                        alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+                        className="object-contain pb-3"
+                        width={2000}
+                        height={800}
+                        priority
+                      />
+                    )
+                  }
                 </div>
                 <div className="grid grid-cols-5 w-full px-3 pt-1">
                   <p className="col-span-1 font-bold">Crinos</p>
                   <ul className="col-span-3">
                     <li>Custo: Dois Testes de Fúria</li>
                     <li>Gaste 1 ponto de Força de Vontade por turno ou está sujeito ao Frenesi</li>
-                    <li>Testes Físicos: Bônus de Quatro Dados</li>
-                    <li>Nível de Vitalidade: +4</li>
+                    <li>Testes Fí­sicos: Bônus de Quatro Dados</li>
+                    <li>Ní­vel de Vitalidade: +4</li>
                     <li>Testes Sociais e Furtivos: Falha</li>
                     <li>Regeneração: 2 por Teste de Fúria</li>
                     <li>Garras: +3</li>
                     <li>Mordida: +1 Agravado</li>
                     <li>Causa Delírio</li>
                   </ul>
-                  <Image
-                    src="/images/forms/Crinos-white.png"
-                    alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
-                    className="object-contain pb-3"
-                    width={2000}
-                    height={800}
-                    priority
-                  />
+                  {
+                    isExportMode ? (
+                      <img
+                        src="/images/forms/Crinos-white.png"
+                        alt="Forma Crinos"
+                        className="block w-[100px] h-auto object-contain pb-3"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/forms/Crinos-white.png"
+                        alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+                        className="object-contain pb-3"
+                        width={2000}
+                        height={800}
+                        priority
+                      />
+                    )
+                  }
                 </div>
                 <div className="grid grid-cols-5 w-full px-3 pt-1">
                   <p className="col-span-1 font-bold">Hispo</p>
                   <ul className="col-span-3">
                     <li>Custo: um Teste de Fúria</li>
-                    <li>Testes Físicos: Bônus de Dois Dados</li>
+                    <li>Testes Fí­sicos: Bônus de Dois Dados</li>
                     <li>Testes Furtivos: Penalidade de Dois Dados</li>
                     <li>Regeneração: 1 por Teste de Fúria</li>
                     <li>Mordida: +1 Agravado</li>
                   </ul>
-                  <Image
-                    src="/images/forms/Hispo-white.png"
-                    alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
-                    className="object-contain pb-3"
-                    width={2000}
-                    height={800}
-                    priority
-                  />
+                  {
+                    isExportMode ? (
+                      <img
+                        src="/images/forms/Hispo-white.png"
+                        alt="Forma Hispo"
+                        className="block w-[100px] h-auto object-contain pb-3"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/forms/Hispo-white.png"
+                        alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+                        className="object-contain pb-3"
+                        width={2000}
+                        height={800}
+                        priority
+                      />
+                    )
+                  }
                 </div>
                 <div className="grid grid-cols-5 w-full px-3 pt-1">
                   <p className="col-span-1 font-bold">Lupino</p>
@@ -585,21 +778,31 @@ export default function ConvertToPdf(props: { data: any }) {
                     <li>Custo: Nenhum</li>
                     <li>Incapaz de se regenerar, mas pode tocar prata sem sofrer danos</li>
                   </ul>
-                  <Image
-                    src="/images/forms/Lupino-white.png"
-                    alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
-                    className="object-contain pb-3"
-                    width={2000}
-                    height={800}
-                    priority
-                  />
+                  {
+                    isExportMode ? (
+                      <img
+                        src="/images/forms/Lupino-white.png"
+                        alt="Forma Lupino"
+                        className="block w-[100px] h-auto object-contain pb-3"
+                      />
+                    ) : (
+                      <Image
+                        src="/images/forms/Lupino-white.png"
+                        alt="Nome 'Werewolf the Apocalypse' em formato de imagem"
+                        className="object-contain pb-3"
+                        width={2000}
+                        height={800}
+                        priority
+                      />
+                    )
+                  }
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div ref={pdfRef2} className="bg-white text-black p-8" id="pdf-content">
+      <div ref={pdfRef2} className={`bg-white text-black ${preview ? 'mt-6 w-full p-4 xl:p-6 text-[10px] xl:text-[11px] leading-tight' : usePreviewPdfLayout ? 'w-full p-4 xl:p-6 text-[13px] xl:text-[14px] leading-tight' : 'p-8 text-[13px] xl:text-[14px] leading-tight'}`} id="pdf-content">
         <div className="border-2 border-black !border-solid p-4 mt-3">
           <div className="flex flex-col">
             {/* Dons e Rituais */}
@@ -637,7 +840,7 @@ export default function ConvertToPdf(props: { data: any }) {
             </div>
             <div className="grid grid-cols-3 pt-2 gap-2">
               <div className="w-full">
-                <p className="text-center w-full pb-3">Princípios da Crônica</p>
+                <p className="text-center w-full pb-3">Princí­pios da Crônica</p>
                 <div className="px-4 py-2 h-96 border border-black !border-solid"></div>
               </div>
               <div>
@@ -667,12 +870,8 @@ export default function ConvertToPdf(props: { data: any }) {
                 <div className="px-4 py-2 h-96 border border-black !border-solid text-justify">{ truncateText(data.background, 1420) }</div>
               </div>
             </div>
-            <div className="">
-              <p className="col-span-1 pt-5">Experiência Total</p>
-              <hr className="mt-2" />
-            </div>
             <div>
-              <p className="col-span-1 pt-5">Experiência Gasta</p>
+              <p className="col-span-1 pt-5">Experiência</p>
               <hr className="mt-2" />
             </div>
           </div>
@@ -681,3 +880,5 @@ export default function ConvertToPdf(props: { data: any }) {
     </div>
   );
 };
+
+

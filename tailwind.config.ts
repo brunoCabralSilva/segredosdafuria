@@ -33,6 +33,7 @@ const config: Config = {
         '06': "url('/images/wallpapers/193.jpg')",
         '07': "url('/images/wallpapers/175.jpg')",
         '08': "url('/images/wallpapers/122.jpg')",
+        '100': "url('/images/wallpapers/100.jpg')",
         '09': "url('/images/wallpapers/24.jpg')",
         '10': "url('/images/wallpapers/45.jpg')",
         '11': "url('/images/wallpapers/78.jpg')",

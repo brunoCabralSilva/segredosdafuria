@@ -18,6 +18,7 @@ export const createHistory = async (sessionId: string, setShowMessage: any) => {
 }
 
 export const registerHistory = async (sessionId: string, data: any, email: string | null, setShowMessage: any) => {
+  if (!sessionId) return;
 	try {
 	  const authData: any = await authenticate(setShowMessage);
 	  if (authData && authData.email && authData.displayName) {

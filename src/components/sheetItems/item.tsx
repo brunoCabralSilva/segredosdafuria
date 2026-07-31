@@ -4,11 +4,14 @@ import { registerHistory } from "@/firebase/history";
 import { rageCheck } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { usePathname } from "next/navigation";
 import { useContext } from "react";
 
 export default function Item(props: any) {
-	const { name, quant, namePtBr } = props;
-	const {
+  const { name, quant, namePtBr } = props;
+  const pathname = usePathname();
+  const isSheetStandalone = pathname?.startsWith('/sheets/');
+  const {
     email,
     dataSheet,
     sessionId,
@@ -20,42 +23,44 @@ export default function Item(props: any) {
     setShowMenuSession,
   } = useContext(contexto);
 
-  const updateValueAfterRageCheck = async (name: string, value: number) => {
-    const dataPersist = dataSheet.data[name];
-    dataSheet.data[name] = value;
-		await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${dataPersist} para ${value}.`, type: 'notification' }, null, setShowMessage);
-  };
-  
-  const updateValue = async (name: string, value: number) => {
-    const dataPersist = dataSheet.data[name];
-    if (dataSheet.data[name] === 1 && value === 1) dataSheet.data[name] = 0;
-    else dataSheet.data[name] = value;
-		await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${dataPersist} para ${value}.`, type: 'notification' }, null, setShowMessage);
+  const updateValueAfterRageCheck = async (fieldName: string, value: number) => {
+    const dataPersist = dataSheet.data[fieldName];
+    dataSheet.data[fieldName] = value;
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`, type: 'notification' }, null, setShowMessage);
   };
 
-  return(
-    <div className={ `w-full ${ name === 'rage' ? 'mt-8' : 'mt-4' }` }>
-      <span className="capitalize">{ namePtBr } { session.typeSession === 'Regras Alternativas' && namePtBr === 'Fúria' && dataSheet.data.rage >= 5 ? '(em Frenesi)' : ''} </span>
+  const updateValue = async (fieldName: string, value: number) => {
+    const dataPersist = dataSheet.data[fieldName];
+    if (dataSheet.data[fieldName] === 1 && value === 1) dataSheet.data[fieldName] = 0;
+    else dataSheet.data[fieldName] = value;
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`, type: 'notification' }, null, setShowMessage);
+  };
+
+  return (
+    <div className={`w-full ${name === 'rage' ? 'mt-8' : 'mt-4'}`}>
+      <span className="capitalize">{namePtBr} {session.typeSession === 'Regras Alternativas' && namePtBr === 'Fúria' && dataSheet.data.rage >= 5 ? '(em Frenesi)' : ''} </span>
       <div className="flex flex-col items-center lg:flex-row">
         <div className="w-full">
           <div className="flex flex-wrap gap-2 pt-1">
             {
-              Array(quant).fill('').map((item, index) => {
+              Array(quant).fill('').map((_, index) => {
                 if (dataSheet.data[name] >= index + 1) {
                   return (
                     <button
                       type="button"
-                      onClick={ () => updateValue(name, index + 1) }
+                      onClick={() => updateValue(name, index + 1)}
                       key={index}
                       className={`h-6 w-6 rounded-full bg-black ${session.typeSession === 'Regras Alternativas' && namePtBr === 'Fúria' && dataSheet.data.rage >= 5 ? 'border-red-500' : 'border-white'} border-2 cursor-pointer`}
                     />
                   );
-                } return (
+                }
+
+                return (
                   <button
                     type="button"
-                    onClick={ () => updateValue(name, index + 1) }
+                    onClick={() => updateValue(name, index + 1)}
                     key={index}
                     className="h-6 w-6 rounded-full bg-white border-white border-2 cursor-pointer"
                   />
@@ -65,48 +70,57 @@ export default function Item(props: any) {
           </div>
         </div>
         {
-          session.typeSession === 'Regras Alternativas' && namePtBr === 'Fúria' && dataSheet.data.rage > 0 && dataSheet.data.rage < 5 &&
-          <button
-              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => {
-                const rage: number = await rageCheck(session.typeSession, sessionId, email, sheetId, setShowMessage, dataSheet);
-                await updateValueAfterRageCheck('rage', rage);
-                setShowMenuSession('');
-              }}
-					>
-						Teste de Fúria
-					</button>
+          !isSheetStandalone
+          && session.typeSession === 'Regras Alternativas'
+          && namePtBr === 'Fúria'
+          && dataSheet.data.rage > 0
+          && dataSheet.data.rage < 5
+          && <button
+            className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
+            onClick={async () => {
+              const rage: number = await rageCheck(session.typeSession, sessionId, email, sheetId, setShowMessage, dataSheet);
+              await updateValueAfterRageCheck('rage', rage);
+              setShowMenuSession('');
+            }}
+          >
+            Teste de Fúria
+          </button>
         }
         {
-          namePtBr === 'Fúria' && dataSheet.data.rage > 0 && session.typeSession !== 'Regras Alternativas' &&
-          <button
-              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => {
-                const rage: number = await rageCheck(session.typeSession, sessionId, email, sheetId, setShowMessage, dataSheet);
-                await updateValueAfterRageCheck('rage', rage);
-                setShowMenuSession('');
-              }}
-					>
-						Teste de Fúria
-					</button>
+          !isSheetStandalone
+          && namePtBr === 'Fúria'
+          && dataSheet.data.rage > 0
+          && session.typeSession !== 'Regras Alternativas'
+          && <button
+            className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
+            onClick={async () => {
+              const rage: number = await rageCheck(session.typeSession, sessionId, email, sheetId, setShowMessage, dataSheet);
+              await updateValueAfterRageCheck('rage', rage);
+              setShowMenuSession('');
+            }}
+          >
+            Teste de Fúria
+          </button>
         }
-				{
-          namePtBr === 'Harano' &&
-          <button
-              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => setShowHarano(true) }
-					>
-						Teste de Harano
-					</button>
+        {
+          !isSheetStandalone
+          && namePtBr === 'Harano'
+          && <button
+            className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
+            onClick={async () => setShowHarano(true)}
+          >
+            Teste de Harano
+          </button>
         }
-				{
-          namePtBr === 'Hauglosk' &&
-          <button
-              className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
-              onClick={ async () => setShowHauglosk(true) }
-					>
-						Teste de Hauglosk
-					</button>
+        {
+          !isSheetStandalone
+          && namePtBr === 'Hauglosk'
+          && <button
+            className="mt-3 lg:mt-0 bg-white p-1 w-full cursor-pointer capitalize text-center text-black hover:font-bold hover:bg-black hover:text-white rounded border-2 border-black hover:border-white transition-colors duration-600"
+            onClick={async () => setShowHauglosk(true)}
+          >
+            Teste de Hauglosk
+          </button>
         }
       </div>
     </div>

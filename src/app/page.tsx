@@ -82,11 +82,11 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Rituais</p>
           </div>
         </Link>
-        <Link href="/about" className="col-span-1 sm:row-span-2 sm:col-span-2">
+        <Link href="/sheets" className="col-span-1 sm:row-span-2 sm:col-span-2">
           <div
-            className={`${simplify ? 'bg-black border-2 border-white' : 'bg-05'} bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
+            className={`${simplify ? 'bg-black border-2 border-white' : 'bg-100'} bg-cover bg-bottom h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-full bg-black/40`} />
-            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Quem Somos</p>
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Fichas</p>
           </div>
         </Link>
         <Link href="/gifts" className="col-span-2 sm:row-span-2 sm:col-span-3">
@@ -117,11 +117,18 @@ export default function Home() {
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Vantagens e Defeitos</p>
           </div>
         </Link>
-        <Link href="/profile" className="col-span-1 row-span-1 sm:col-span-4 sm:row-span-4">
+        <Link href="/profile" className="col-span-1 row-span-1 sm:col-span-2 sm:row-span-4">
           <div
             className={`${simplify ? 'bg-black border-2 border-white' : 'bg-11'} bg-top bg-cover h-full sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
             <div className={`absolute w-full h-full bg-black/40`} />
             <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Perfil</p>
+          </div>
+        </Link>
+        <Link href="/about" className="col-span-2 row-span-1 sm:row-span-4">
+          <div
+            className={`${simplify ? 'bg-black border-2 border-white' : 'bg-05'} bg-cover h-20vh sm:h-40vh text-white flex relative cursor-pointer border-transparent items-end`}>
+            <div className={`absolute w-full h-full bg-black/40`} />
+            <p className="z-10 font-bold text-base sm:text-xl px-3 p-2">Quem Somos</p>
           </div>
         </Link>
       </div>

@@ -34,7 +34,7 @@ export default function DeleteSheet(props: { isGameMaster : any }) {
       // await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
       await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} excluiu a Ficha do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' }.`, type: 'notification' }, null, setShowMessage);
       if (isGameMaster) setOptionSelect('players');
-      else location.reload();
+      router.push('/sheets');
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
       setShowDeleteSheet(false);

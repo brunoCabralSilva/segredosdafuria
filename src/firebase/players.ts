@@ -14,6 +14,20 @@ export const createPlayersData = async (sessionId: string, setShowMessage: any) 
   }
 };
 
+export const getSheetsByEmail = async (email: string) => {
+  const db = getFirestore(firebaseConfig);
+
+  const sheetsRef = collection(db, "players");
+  const q = query(sheetsRef, where("email", "==", email));
+
+  const querySnapshot = await getDocs(q);
+
+  return querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+};
+
 export const getOldestUserBySession = async (sessionId: string, gameMaster: string, setShowMessage: any) => {
   try {
     const db = getFirestore(firebaseConfig);
