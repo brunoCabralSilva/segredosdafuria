@@ -31,12 +31,22 @@ export default function RequestSessionLink(props: { onClose: () => void }) {
     const loadSessions = async () => {
       try {
         const sessionsList = await getSessions();
-        const activeSessions = sessionsList
+        const activeSessions: SessionListItem[] = sessionsList
           .filter(
             (session: any) =>
               session.statusSession !== 'Finalizada' &&
               session.id !== dataSheet?.sessionId
-          )
+          ).map((session: any) => ({
+            id: String(session.id || ''),
+            name: String(session.name || ''),
+            gameMaster: String(session.gameMaster || ''),
+            nameMaster: String(session.nameMaster || ''),
+            imageName: String(session.imageName || ''),
+            creationDate: String(session.creationDate || ''),
+            description: String(session.description || ''),
+            players: Array.isArray(session.players) ? session.players : [],
+            statusSession: session.statusSession ? String(session.statusSession) : undefined,
+          }))
           .sort((a: any, b: any) => a.name.localeCompare(b.name));
 
         setSessions(activeSessions);
