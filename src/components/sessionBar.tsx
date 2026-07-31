@@ -14,6 +14,7 @@ export default function SessionBar() {
     sessionId,
     session,
     email,
+    sheetId,
     setShowDeleteHistoric,
     setOptionSelect,
     scrollToBottom,
@@ -21,6 +22,11 @@ export default function SessionBar() {
     setShowMessage,
     showMenuSession, setShowMenuSession,
   } = useContext(contexto);
+
+  const getDefaultPlayerMenuOption = () => {
+    if (session.gameMaster === email || sheetId === '') return 'players';
+    return 'general';
+  };
 
   return(
     <div className={`${showMenuSession !== '' ? 'absolute' : 'fixed'} bottom-0 w-full bg-black p-2 flex flex-col gap-2 justify-center items-center min-h-10vh`}>
@@ -44,7 +50,7 @@ export default function SessionBar() {
               className="p-2"
               title="Acessar o Menu da Sessão"
               onClick={() => {
-                setOptionSelect('players');
+                setOptionSelect(getDefaultPlayerMenuOption());
                 setShowMenuSession('sheet');
                 scrollToBottom();
               }}
