@@ -41,9 +41,9 @@ export default function General() {
   useEffect(() => {
     setShowGiftRoll({ show: false, gift: {} });
     setShowRitualRoll({ show: false, ritual: {} });
-    setNewName(dataSheet.data.name);
-    setNewEmail(dataSheet.email);
-    setXp(dataSheet.data.xp ? dataSheet.data.xp : 0);
+    setNewName(dataSheet?.data?.name ?? '');
+    setNewEmail(dataSheet?.email ?? '');
+    setXp(dataSheet?.data?.xp ? dataSheet.data.xp : '0');
   }, [dataSheet, setShowGiftRoll, setShowRitualRoll]);
 
   const typeName = (e: any) => {
@@ -53,42 +53,71 @@ export default function General() {
 
   const updateValue = async (key: string, value: string, namePtBr: string) => {
     const findPlayer = players.find((player: any) => player.id === sheetId) || dataSheet;
-    if (findPlayer) {
-      const dataPersist = findPlayer.data[key];
-      findPlayer.data[key] = value;
-      if (key === 'name') {
-        if (value === '' || value === ' ') {
-          setShowMessage({ show: true, text: 'Necessário preencher um Nome válido' });
-        } else {
-          await updateDataPlayer(sheetId, findPlayer, setShowMessage);
-          setNewName(findPlayer.data.name);
-          await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(findPlayer.user)} alterou o nome do personagem ${dataPersist}${findPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(findPlayer.user)}` : ''} para ${capitalizeFirstLetter(value)}.`, type: 'notification' }, null, setShowMessage);
-          await updateDataPlayer(sheetId, findPlayer, setShowMessage);
-        }
-      } else {
-        await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(findPlayer.user)} alterou ${namePtBr === 'Tribo' ? 'a' : 'o'} ${namePtBr} do personagem ${findPlayer.data.name}${findPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(findPlayer.user)}` : ''} ${dataPersist !== '' ? `de ${capitalizeFirstLetter(dataPersist)} ` : ' '}para ${capitalizeFirstLetter(value)}.`, type: 'notification' }, null, setShowMessage);
-        await updateDataPlayer(sheetId, findPlayer, setShowMessage);
+    if (!findPlayer) return false;
+
+    const dataPersist = findPlayer.data[key];
+
+    if (key === 'name') {
+      const normalizedName = value.replace(/\s+/g, ' ').trim();
+      if (normalizedName === '') {
+        setShowMessage({ show: true, text: 'Necessário preencher um Nome válido' });
+        return false;
       }
+
+      const updatedPlayer = {
+        ...findPlayer,
+        data: {
+          ...findPlayer.data,
+          [key]: normalizedName,
+        },
+      };
+
+      await updateDataPlayer(sheetId, updatedPlayer, setShowMessage);
+      setNewName(normalizedName);
+      await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(findPlayer.user)} alterou o nome do personagem ${dataPersist}${findPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(findPlayer.user)}` : ''} para ${capitalizeFirstLetter(normalizedName)}.`, type: 'notification' }, null, setShowMessage);
+      return true;
     }
+
+    const updatedPlayer = {
+      ...findPlayer,
+      data: {
+        ...findPlayer.data,
+        [key]: value,
+      },
+    };
+
+    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(findPlayer.user)} alterou ${namePtBr === 'Tribo' ? 'a' : 'o'} ${namePtBr} do personagem ${findPlayer.data.name}${findPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(findPlayer.user)}` : ''} ${dataPersist !== '' ? `de ${capitalizeFirstLetter(dataPersist)} ` : ' '}para ${capitalizeFirstLetter(value)}.`, type: 'notification' }, null, setShowMessage);
+    await updateDataPlayer(sheetId, updatedPlayer, setShowMessage);
+    return true;
   };
 
   const updateEmail = async (value: string) => {
     const findPlayer = players.find((player: any) => player.id === sheetId) || dataSheet;
-    if (findPlayer) {
-      const playerData = await getUserByEmail(value, setShowMessage);
-      findPlayer.email = value;
-      findPlayer.user = capitalizeFirstLetter(playerData.firstName) + ' ' + capitalizeFirstLetter(playerData.lastName);
-      const validate = /\S+@\S+\.\S+/;
-      const vEmail = !validate.test(value) || value === '';
-      if (vEmail) {
-        setShowMessage({ show: true, text: 'Necessário preencher um Email válido' });
-      } else {
-        await updateDataPlayer(sheetId, findPlayer, setShowMessage);
-        setNewEmail(findPlayer.email);
-        await registerHistory(session.id, { message: `O Narrador alterou o email do personagem ${capitalizeFirstLetter(findPlayer.user)} para ${value}.`, type: 'notification' }, null, setShowMessage);
-      }
+    if (!findPlayer) return false;
+
+    const normalizedEmail = value.trim();
+    const validate = /\S+@\S+\.\S+/;
+    const invalidEmail = !validate.test(normalizedEmail) || normalizedEmail === '';
+
+    if (invalidEmail) {
+      setShowMessage({ show: true, text: 'Necessário preencher um Email válido' });
+      return false;
     }
+
+    const playerData = await getUserByEmail(normalizedEmail, setShowMessage);
+    const updatedPlayer = {
+      ...findPlayer,
+      email: normalizedEmail,
+      user: capitalizeFirstLetter(playerData.firstName) + ' ' + capitalizeFirstLetter(playerData.lastName),
+    };
+
+    await updateDataPlayer(sheetId, updatedPlayer, setShowMessage);
+    setNewEmail(normalizedEmail);
+    await registerHistory(session.id, { message: `O Narrador alterou o email do personagem ${capitalizeFirstLetter(updatedPlayer.user)} para ${normalizedEmail}.`, type: 'notification' }, null, setShowMessage);
+    return true;
   };
+
+  const displayName = (dataSheet?.data?.name ?? '').trim();
 
   return (
     <div className="flex flex-col w-full pr-2 h-75vh overflow-y-auto mb-3 p-1 text-white items-start justify-start font-bold px-4">
@@ -99,9 +128,9 @@ export default function General() {
       >
         {
           input !== 'nameCharacter' && <span className="break-words w-full text-center">{
-            dataSheet && dataSheet.data && dataSheet.data.name && (dataSheet.data.name.length === 0 || dataSheet.data.name[0] === '' || dataSheet.data.name[0] === ' ')
+            displayName === ''
               ? <span className="w-full">Insira um nome</span>
-              : <span className="w-full">{dataSheet && dataSheet.data && dataSheet.data.name}</span>
+              : <span className="w-full">{displayName}</span>
           }</span>
         }
         {
@@ -117,10 +146,10 @@ export default function General() {
         {
           input === 'nameCharacter'
             ? <BsCheckSquare
-                onClick={(e: any) => {
-                  updateValue('name', newName, 'nome do personagem');
-                  setInput('');
+                onClick={async (e: any) => {
                   e.stopPropagation();
+                  const updated = await updateValue('name', newName, 'nome do personagem');
+                  if (updated) setInput('');
                 }}
                 className="text-3xl"
               />
@@ -159,12 +188,12 @@ export default function General() {
               />
             }
             {
-              input2
+              input2 === 'emailCharacter'
                 ? <BsCheckSquare
-                    onClick={(e: any) => {
-                      updateEmail(newEmail);
-                      setInput2('');
+                    onClick={async (e: any) => {
                       e.stopPropagation();
+                      const updated = await updateEmail(newEmail);
+                      if (updated) setInput2('');
                     }}
                     className="text-3xl"
                   />
@@ -259,10 +288,10 @@ export default function General() {
                 {
                   input === 'xp'
                     ? <BsCheckSquare
-                        onClick={(e: any) => {
-                          updateValue('xp', xp, 'XP');
-                          setInput('');
+                        onClick={async (e: any) => {
                           e.stopPropagation();
+                          const updated = await updateValue('xp', xp, 'XP');
+                          if (updated) setInput('');
                         }}
                         className="text-3xl text-black"
                       />
