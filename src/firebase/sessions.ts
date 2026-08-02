@@ -282,7 +282,6 @@ export const transferSheetToGameMaster = async (
   }
 };
 
-
 export const getAllSessionsByFunction = async (email: string) => {
   const db = getFirestore(firebaseConfig);
 

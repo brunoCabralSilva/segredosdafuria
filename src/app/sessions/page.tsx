@@ -16,6 +16,7 @@ import MessageToUser from "@/components/dicesAndMessages/messageToUser";
 import SessionItem from "./sessionItem";
 
 export default function Sessions() {
+  const authorizedFinanceEmail = 'lycan.byell@gmail.com';
   const router = useRouter();
   const {
     showInfoSessions, setShowInfoSessions,
@@ -113,14 +114,24 @@ export default function Sessions() {
                 </h1>
                 <hr className="w-10/12 mt-6" />
               </div>
-              <div className="flex w-full justify-end mb-3 sm:mb-5 px-4 sm:px-0">
+              <div className="flex w-full justify-end gap-3 mb-3 sm:mb-5 px-4 sm:px-0">
+                {
+                  dataUser.email === authorizedFinanceEmail &&
+                  <button
+                    type="button"
+                    onClick={ () => router.push('/finance') }
+                    className="px-4 py-2 border-2 rounded-xl border-black text-black font-bold flex items-center justify-center cursor-pointer bg-white w-full sm:w-40 hover:border-white transition-colors duration-400 hover:underline"
+                  >
+                    Financeiro
+                  </button>
+                }
                 <button
                   type="button"
                   onClick={ () => {
                     setShowCreateSession(true);
                     setShowInfoSessions(false);
                   }}
-                  className="px-4 py-2 border-2 rounded-xl border-black text-black font-bold flex items-center justify-center cursor-pointer bg-white sm:mr-5 w-full sm:w-40 hover:border-white transition-colors duration-400 hover:underline"
+                  className="px-4 py-2 border-2 rounded-xl border-black text-black font-bold flex items-center justify-center cursor-pointer bg-white w-full sm:w-40 hover:border-white transition-colors duration-400 hover:underline"
                 >
                   Nova Sessão
                 </button>
