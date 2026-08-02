@@ -1,6 +1,10 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { getFinancePeriodOrder } from "@/utils/financePeriod";
+
+const getFinanceCalendarDocumentId = (year: number, month: number) => (
+  `${year}-${String(month).padStart(2, '0')}`
+);
 
 export const getFinances = async () => {
   const db = getFirestore(firebaseConfig);
@@ -100,6 +104,52 @@ export const deleteFinance = async (financeId: string, setShowMessage: any) => {
     return true;
   } catch (error: any) {
     setShowMessage({ show: true, text: 'Ocorreu um erro ao excluir a planilha: ' + error.message });
+    return false;
+  }
+};
+
+export const getFinanceCalendar = async (year: number, month: number) => {
+  const db = getFirestore(firebaseConfig);
+  const calendarDocRef = doc(db, 'financeCalendar', getFinanceCalendarDocumentId(year, month));
+  const calendarDoc = await getDoc(calendarDocRef);
+
+  if (!calendarDoc.exists()) {
+    return {
+      year,
+      month,
+      events: {},
+    };
+  }
+
+  const calendarData = calendarDoc.data();
+
+  return {
+    id: calendarDoc.id,
+    year: calendarData.year || year,
+    month: calendarData.month || month,
+    events: calendarData.events || {},
+  };
+};
+
+export const saveFinanceCalendar = async (
+  year: number,
+  month: number,
+  events: Record<string, any[]>,
+  setShowMessage: any
+) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const calendarDocRef = doc(db, 'financeCalendar', getFinanceCalendarDocumentId(year, month));
+
+    await setDoc(calendarDocRef, {
+      year,
+      month,
+      events,
+    });
+
+    return true;
+  } catch (error: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao salvar o calendário: ' + error.message });
     return false;
   }
 };

@@ -5,7 +5,7 @@ import Loading from "@/components/loading";
 import Nav from "@/components/nav";
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
-import { createFinance, deleteFinance, duplicateFinance, getFinances, updateFinance } from "@/firebase/finance";
+import { createFinance, deleteFinance, duplicateFinance, getFinanceCalendar, getFinances, saveFinanceCalendar, updateFinance } from "@/firebase/finance";
 import { getFinancePeriodOrder, getMonthLabelByOrder, sortFinancesByPeriod } from "@/utils/financePeriod";
 import { useRouter } from "next/navigation";
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -13,7 +13,6 @@ import { useContext, useEffect, useState } from "react";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { MdOutlineDoubleArrow } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
@@ -74,16 +73,143 @@ const playerLineColors = [
   "#ef4444",
 ];
 
+const calendarMonthLabels = [
+  "Janeiro",
+  "Fevereiro",
+  "Marco",
+  "Abril",
+  "Maio",
+  "Junho",
+  "Julho",
+  "Agosto",
+  "Setembro",
+  "Outubro",
+  "Novembro",
+  "Dezembro",
+];
+
+const calendarWeekLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
+const calendarWeekLabelsLong = [
+  "Domingo",
+  "Segunda",
+  "Terca",
+  "Quarta",
+  "Quinta",
+  "Sexta",
+  "Sabado",
+];
+
+const getCalendarDateKey = (year: number, month: number, day: number) => (
+  `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+);
+
+type CalendarSessionEntry = {
+  time: string,
+  name: string,
+  color: string,
+};
+
+const calendarSessionColorOptions = [
+  {
+    value: 'yellow',
+    buttonClassName: 'bg-yellow-400',
+    cardClassName: 'bg-yellow-400/18',
+    dayClassName: 'border-yellow-400 bg-yellow-400/20 hover:bg-yellow-400/28',
+  },
+  {
+    value: 'blue',
+    buttonClassName: 'bg-sky-400',
+    cardClassName: 'bg-sky-400/18',
+    dayClassName: 'border-sky-400 bg-sky-400/20 hover:bg-sky-400/28',
+  },
+  {
+    value: 'green',
+    buttonClassName: 'bg-emerald-400',
+    cardClassName: 'bg-emerald-400/18',
+    dayClassName: 'border-emerald-400 bg-emerald-400/20 hover:bg-emerald-400/28',
+  },
+  {
+    value: 'red',
+    buttonClassName: 'bg-rose-400',
+    cardClassName: 'bg-rose-400/18',
+    dayClassName: 'border-rose-400 bg-rose-400/20 hover:bg-rose-400/28',
+  },
+  {
+    value: 'purple',
+    buttonClassName: 'bg-fuchsia-400',
+    cardClassName: 'bg-fuchsia-400/18',
+    dayClassName: 'border-fuchsia-400 bg-fuchsia-400/20 hover:bg-fuchsia-400/28',
+  },
+  {
+    value: 'orange',
+    buttonClassName: 'bg-orange-400',
+    cardClassName: 'bg-orange-400/18',
+    dayClassName: 'border-orange-400 bg-orange-400/20 hover:bg-orange-400/28',
+  },
+  {
+    value: 'cyan',
+    buttonClassName: 'bg-cyan-400',
+    cardClassName: 'bg-cyan-400/18',
+    dayClassName: 'border-cyan-400 bg-cyan-400/20 hover:bg-cyan-400/28',
+  },
+];
+
+const getDefaultCalendarSessionColor = (index: number) => (
+  calendarSessionColorOptions[index % calendarSessionColorOptions.length].value
+);
+
+const getCalendarSessionColorOption = (colorValue: string) => (
+  calendarSessionColorOptions.find((colorOption) => colorOption.value === colorValue)
+  || calendarSessionColorOptions[0]
+);
+
+const getCalendarDayClassName = (sessions: CalendarSessionEntry[] = []) => {
+  if (sessions.length === 0) {
+    return 'border-white/20 bg-black/10 hover:border-white/30 hover:bg-white/5';
+  }
+
+  return getCalendarSessionColorOption(sessions[0].color).dayClassName;
+};
+
+const emptyCalendarSession = (): CalendarSessionEntry => ({
+  time: '',
+  name: '',
+  color: calendarSessionColorOptions[0].value,
+});
+
+const normalizeCalendarSessions = (sessions: any[] = []): CalendarSessionEntry[] => (
+  sessions.map((sessionItem: any, index: number) => {
+    if (typeof sessionItem === 'string') {
+      return {
+        time: '',
+        name: sessionItem,
+        color: getDefaultCalendarSessionColor(index),
+      };
+    }
+
+    return {
+      time: sessionItem?.time || '',
+      name: sessionItem?.name || '',
+      color: sessionItem?.color || getDefaultCalendarSessionColor(index),
+    };
+  })
+);
+
 export default function Finance() {
   const router = useRouter();
   const [financeList, setFinanceList] = useState<any>([]);
   const [showFinancePage, setShowFinancePage] = useState(false);
-  const [activeFinanceTab, setActiveFinanceTab] = useState<'overview' | 'player'>('overview');
+  const [activeFinanceTab, setActiveFinanceTab] = useState<'overview' | 'player' | 'calendar'>('overview');
   const [isCreatingFinance, setIsCreatingFinance] = useState(false);
   const [editingFinanceHeaderId, setEditingFinanceHeaderId] = useState<string | null>(null);
   const [editingPlayerKey, setEditingPlayerKey] = useState<string | null>(null);
   const [collapsedFinanceIds, setCollapsedFinanceIds] = useState<string[]>([]);
   const [hiddenPlayerLines, setHiddenPlayerLines] = useState<string[]>([]);
+  const [financeCalendarEvents, setFinanceCalendarEvents] = useState<Record<string, CalendarSessionEntry[]>>({});
+  const [isCalendarLoading, setIsCalendarLoading] = useState(true);
+  const [selectedCalendarDay, setSelectedCalendarDay] = useState<number | null>(null);
+  const [editingCalendarSessions, setEditingCalendarSessions] = useState<CalendarSessionEntry[]>([emptyCalendarSession()]);
+  const [isSavingCalendarDay, setIsSavingCalendarDay] = useState(false);
   const [selectedPlayerName, setSelectedPlayerName] = useState("");
   const [sortConfigByFinance, setSortConfigByFinance] = useState<Record<string, {
     field: 'name' | 'payDate' | 'value' | 'situation',
@@ -108,6 +234,7 @@ export default function Finance() {
   const { dataUser, setDataUser, showMessage, setShowMessage } = useContext(contexto);
   const currentYear = new Date().getFullYear();
   const currentMonthNumber = new Date().getMonth() + 1;
+  const currentDayNumber = new Date().getDate();
   const currentPeriodOrder = (currentYear * 100) + currentMonthNumber;
   const authorizedFinanceEmail = "lycan.byell@gmail.com";
 
@@ -162,6 +289,31 @@ export default function Finance() {
 
     loadFinances();
   }, [currentPeriodOrder, setShowMessage, showFinancePage]);
+
+  useEffect(() => {
+    if (!showFinancePage) return;
+
+    const loadFinanceCalendar = async () => {
+      setIsCalendarLoading(true);
+
+      try {
+        const calendarData = await getFinanceCalendar(currentYear, currentMonthNumber);
+        const normalizedCalendarEvents = Object.fromEntries(
+          Object.entries(calendarData.events || {}).map(([dateKey, sessions]: [string, any]) => ([
+            dateKey,
+            normalizeCalendarSessions(Array.isArray(sessions) ? sessions : []),
+          ]))
+        );
+        setFinanceCalendarEvents(normalizedCalendarEvents);
+      } catch (error) {
+        setShowMessage({ show: true, text: 'Ocorreu um erro ao carregar o Calendário: ' + error });
+      } finally {
+        setIsCalendarLoading(false);
+      }
+    };
+
+    loadFinanceCalendar();
+  }, [currentMonthNumber, currentYear, setShowMessage, showFinancePage]);
 
   const getSumValues = (players: any[] = []) => {
     let value = 0;
@@ -309,6 +461,44 @@ export default function Finance() {
     };
   });
 
+  const currentCalendarMonthLabel = calendarMonthLabels[currentMonthNumber - 1];
+  const currentMonthDaysCount = new Date(currentYear, currentMonthNumber, 0).getDate();
+  const currentMonthFirstWeekDay = new Date(currentYear, currentMonthNumber - 1, 1).getDay();
+  const scheduledCalendarDaysCount = Object.keys(financeCalendarEvents).length;
+  const scheduledCalendarSessionsCount = Object.values(financeCalendarEvents).reduce((total, sessions) => (
+    total + sessions.length
+  ), 0);
+
+  const calendarGridCells = [
+    ...Array.from({ length: currentMonthFirstWeekDay }, (_, index) => ({
+      type: 'empty',
+      key: `calendar-empty-start-${index}`,
+    })),
+    ...Array.from({ length: currentMonthDaysCount }, (_, index) => {
+      const dayNumber = index + 1;
+      const dateKey = getCalendarDateKey(currentYear, currentMonthNumber, dayNumber);
+
+      return {
+        type: 'day',
+        key: dateKey,
+        dateKey,
+        dayNumber,
+        isToday: dayNumber === currentDayNumber,
+        sessions: financeCalendarEvents[dateKey] || [],
+      };
+    }),
+  ];
+
+  while (calendarGridCells.length % 7 !== 0) {
+    calendarGridCells.push({
+      type: 'empty',
+      key: `calendar-empty-end-${calendarGridCells.length}`,
+    });
+  }
+
+  const calendarWeekRowCount = calendarGridCells.length / 7;
+  const mobileCalendarDays = calendarGridCells.filter((calendarCell: any) => calendarCell.type === 'day');
+
   const playerPerformanceMap = financeList.reduce((accumulator: Record<string, number[]>, finance: any) => {
     const financePeriodOrder = getFinancePeriodOrder(finance.month || '', finance.year || '');
     if (Math.floor(financePeriodOrder / 100) !== currentYear) return accumulator;
@@ -400,6 +590,81 @@ export default function Finance() {
         ? prevState.filter((item) => item !== playerName)
         : [...prevState, playerName]
     ));
+  };
+
+  const handleOpenCalendarDay = (dayNumber: number) => {
+    const dateKey = getCalendarDateKey(currentYear, currentMonthNumber, dayNumber);
+    const daySessions = financeCalendarEvents[dateKey] || [];
+
+    setSelectedCalendarDay(dayNumber);
+    setEditingCalendarSessions(daySessions.length > 0 ? normalizeCalendarSessions(daySessions) : [emptyCalendarSession()]);
+  };
+
+  const handleCloseCalendarDay = () => {
+    setSelectedCalendarDay(null);
+    setEditingCalendarSessions([emptyCalendarSession()]);
+    setIsSavingCalendarDay(false);
+  };
+
+  const handleCalendarSessionChange = (
+    sessionIndex: number,
+    field: 'time' | 'name' | 'color',
+    value: string
+  ) => {
+    setEditingCalendarSessions((prevState) => prevState.map((sessionItem, index) => (
+      index === sessionIndex ? { ...sessionItem, [field]: value } : sessionItem
+    )));
+  };
+
+  const handleAddCalendarSessionField = () => {
+    setEditingCalendarSessions((prevState) => [...prevState, emptyCalendarSession()]);
+  };
+
+  const handleRemoveCalendarSessionField = (sessionIndex: number) => {
+    setEditingCalendarSessions((prevState) => {
+      if (prevState.length === 1) {
+        return [emptyCalendarSession()];
+      }
+
+      return prevState.filter((_, index) => index !== sessionIndex);
+    });
+  };
+
+  const handleSaveCalendarDay = async () => {
+    if (selectedCalendarDay === null) return;
+
+    const dateKey = getCalendarDateKey(currentYear, currentMonthNumber, selectedCalendarDay);
+    const cleanedSessions = editingCalendarSessions
+      .map((sessionItem) => ({
+        time: sessionItem.time.trim(),
+        name: sessionItem.name.trim(),
+        color: sessionItem.color || calendarSessionColorOptions[0].value,
+      }))
+      .filter((sessionItem) => sessionItem.name);
+    const nextCalendarEvents = { ...financeCalendarEvents };
+
+    if (cleanedSessions.length > 0) {
+      nextCalendarEvents[dateKey] = cleanedSessions;
+    } else {
+      delete nextCalendarEvents[dateKey];
+    }
+
+    setIsSavingCalendarDay(true);
+
+    const success = await saveFinanceCalendar(
+      currentYear,
+      currentMonthNumber,
+      nextCalendarEvents,
+      setShowMessage
+    );
+
+    if (success) {
+      setFinanceCalendarEvents(nextCalendarEvents);
+      handleCloseCalendarDay();
+      setShowMessage({ show: true, text: 'Calendário atualizado com sucesso!' });
+    } else {
+      setIsSavingCalendarDay(false);
+    }
   };
 
   const handleCreateFinance = async () => {
@@ -673,6 +938,17 @@ export default function Finance() {
             >
               Por jogador
             </button>
+            <button
+              type="button"
+              onClick={ () => setActiveFinanceTab('calendar') }
+              className={ `border px-4 py-2 text-sm font-bold transition-colors duration-300 ${
+                activeFinanceTab === 'calendar'
+                  ? 'border-white bg-white text-black'
+                  : 'border-white/30 bg-black/40 text-white hover:border-white'
+              }` }
+            >
+              Calendário
+            </button>
           </div>
           <hr className="w-10/12" />
         </div>
@@ -945,6 +1221,191 @@ export default function Finance() {
               }
             </div>
           </>
+        }
+        {
+          activeFinanceTab === 'calendar' &&
+          <div className="mb-4 flex flex-col rounded-sm border border-white/30 bg-black/70 p-2 text-white md:min-h-[calc(100vh-16rem)]">
+            <div className="flex shrink-0 flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <div className="text-xs uppercase tracking-[0.18em] text-yellow-300/80">
+                  Agenda financeira
+                </div>
+                <h2 className="mt-1 text-xl font-black md:text-2xl">
+                  { currentCalendarMonthLabel } de { currentYear }
+                </h2>
+                <p className="mt-1 hidden max-w-2xl text-[11px] text-white/65 md:block md:text-xs">
+                  Clique em qualquer dia para marcar as sessoes que voce tera neste mes e definir quais serao.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
+                <div className="rounded-sm border border-white/20 bg-black/50 p-1.5">
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-white/50 md:text-xs">
+                    Dias com sessao
+                  </div>
+                  <div className="mt-1 text-lg font-black text-yellow-300 md:text-xl">
+                    { scheduledCalendarDaysCount }
+                  </div>
+                </div>
+                <div className="rounded-sm border border-white/20 bg-black/50 p-1.5">
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-white/50 md:text-xs">
+                    Sessoes planejadas
+                  </div>
+                  <div className="mt-1 text-lg font-black text-green-300 md:text-xl">
+                    { scheduledCalendarSessionsCount }
+                  </div>
+                </div>
+              </div>
+            </div>
+            {
+              isCalendarLoading ? (
+                <div className="flex flex-1 items-center justify-center text-center text-sm text-white/70">
+                  Carregando Calendário do mes atual...
+                </div>
+              ) : (
+                <div className="mt-2 flex min-h-0 flex-1 flex-col">
+                  <div className="grid grid-cols-1 gap-2 md:hidden">
+                    {
+                      mobileCalendarDays.map((calendarDay: any) => (
+                        <button
+                          key={ `${calendarDay.key}-mobile` }
+                          type="button"
+                          onClick={ () => handleOpenCalendarDay(calendarDay.dayNumber) }
+                          className={ `flex flex-col rounded-sm border px-3 py-3 text-left transition-colors duration-300 ${
+                            getCalendarDayClassName(calendarDay.sessions)
+                          } ${calendarDay.isToday ? 'ring-1 ring-green-400' : ''}` }
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <div className={ `text-[11px] font-bold uppercase tracking-[0.14em] ${
+                                calendarDay.isToday
+                                  ? 'text-green-300'
+                                  : (calendarDay.sessions.length > 0 ? 'text-white/55' : 'text-white/40')
+                              }` }>
+                                { calendarDay.isToday ? 'Hoje' : calendarWeekLabelsLong[new Date(currentYear, currentMonthNumber - 1, calendarDay.dayNumber).getDay()] }
+                              </div>
+                              <div className="mt-1 text-lg font-black text-white">
+                                { calendarDay.dayNumber } de { currentCalendarMonthLabel }
+                              </div>
+                            </div>
+                          </div>
+                          {
+                            calendarDay.sessions.length > 0 &&
+                            <div className="mt-3 flex flex-col gap-2">
+                              {
+                                calendarDay.sessions.map((sessionItem: CalendarSessionEntry, sessionIndex: number) => (
+                                  <div
+                                    key={ `${calendarDay.key}-mobile-session-${sessionIndex}` }
+                                    className={ `rounded-sm px-2 py-2 text-left text-xs text-white/90 ${
+                                      getCalendarSessionColorOption(sessionItem.color).cardClassName
+                                    }` }
+                                  >
+                                    <div className="font-semibold text-white">
+                                      { sessionItem.name }
+                                    </div>
+                                    {
+                                      sessionItem.time.trim() &&
+                                      <div className="mt-1 text-[11px] text-white/65">
+                                        { sessionItem.time }
+                                      </div>
+                                    }
+                                  </div>
+                                ))
+                              }
+                            </div>
+                          }
+                        </button>
+                      ))
+                    }
+                  </div>
+                  <div className="sticky top-0 z-20 hidden w-full shrink-0 grid-cols-7 gap-1 bg-black pb-1 md:grid">
+                    {
+                      calendarWeekLabels.map((weekLabel) => (
+                        <div
+                          key={ weekLabel }
+                          className="flex h-4 items-center justify-center rounded-sm border border-white/15 bg-black px-1 text-center text-[9px] font-bold uppercase tracking-[0.08em] text-white/60 md:text-[10px]"
+                        >
+                          { weekLabel }
+                        </div>
+                      ))
+                    }
+                  </div>
+                  <div
+                    className="hidden min-h-0 w-full flex-1 grid-cols-7 gap-1 md:grid"
+                    style={{ gridTemplateRows: `repeat(${calendarWeekRowCount}, minmax(0, 1fr))` }}
+                  >
+                    {
+                      calendarGridCells.map((calendarCell: any) => (
+                        calendarCell.type === 'empty' ? (
+                          <div
+                            key={ calendarCell.key }
+                            className="h-full rounded-sm border border-transparent bg-transparent"
+                          />
+                        ) : (
+                          <button
+                            key={ calendarCell.key }
+                            type="button"
+                            onClick={ () => handleOpenCalendarDay(calendarCell.dayNumber) }
+                            className={ `flex h-full min-h-0 flex-col overflow-hidden rounded-sm border p-1 text-left transition-colors duration-300 ${
+                              getCalendarDayClassName(calendarCell.sessions)
+                            } ${calendarCell.isToday ? 'ring-1 ring-green-400' : ''}` }
+                          >
+                            <div className="flex items-start justify-between gap-2">
+                              <span className={ `text-[8px] uppercase tracking-[0.08em] ${
+                                calendarCell.isToday
+                                  ? 'text-green-300'
+                                  : (calendarCell.sessions.length > 0 ? 'text-white/45' : 'text-white/35')
+                              }` }>
+                                { calendarCell.isToday ? 'Hoje' : 'Dia' }
+                              </span>
+                              <span className={ `text-sm font-black md:text-base ${
+                                calendarCell.sessions.length > 0 ? 'text-white' : 'text-white/70'
+                              }` }>
+                                { calendarCell.dayNumber }
+                              </span>
+                            </div>
+                            <div className="mt-1 flex min-h-0 flex-1 flex-col gap-0.5 overflow-hidden">
+                              {
+                                calendarCell.sessions.length > 0 ? (
+                                  <>
+                                    {
+                                      calendarCell.sessions.slice(0, 2).map((sessionItem: CalendarSessionEntry, sessionIndex: number) => (
+                                        <div
+                                          key={ `${calendarCell.key}-${sessionIndex}` }
+                                          className={ `overflow-hidden rounded-sm px-1 py-0.5 text-[8px] leading-tight text-white/85 md:text-[9px] ${
+                                            getCalendarSessionColorOption(sessionItem.color).cardClassName
+                                          }` }
+                                        >
+                                          <div className="truncate font-semibold text-white">
+                                            { sessionItem.name }
+                                          </div>
+                                          {
+                                            sessionItem.time.trim() &&
+                                            <div className="truncate text-[7px] text-white/65 md:text-[8px]">
+                                              { sessionItem.time }
+                                            </div>
+                                          }
+                                        </div>
+                                      ))
+                                    }
+                                    {
+                                      calendarCell.sessions.length > 2 &&
+                                      <div className="text-[8px] font-bold text-yellow-200 md:text-[9px]">
+                                        + { calendarCell.sessions.length - 2 } sessao(oes)
+                                      </div>
+                                    }
+                                  </>
+                                ) : null
+                              }
+                            </div>
+                          </button>
+                        )
+                      ))
+                    }
+                  </div>
+                </div>
+              )
+            }
+          </div>
         }
         <div className="mb-6 flex w-full justify-end px-4 sm:px-0">
           <button
@@ -1279,6 +1740,117 @@ export default function Finance() {
             )
           }
         </div>
+        {
+          selectedCalendarDay !== null &&
+          <div className="z-60 fixed top-0 left-0 flex h-screen w-full items-center justify-center bg-black/80 px-3 sm:px-0">
+            <div className="relative flex max-h-[90vh] w-full flex-col items-center overflow-y-auto border-2 border-white bg-black pb-5 sm:w-2/3 lg:w-1/2">
+              <div className="top-0 right-0 flex w-full justify-end px-2 pt-4 sm:pt-2">
+                <IoIosCloseCircleOutline
+                  className="text-4xl text-white cursor-pointer"
+                  onClick={ handleCloseCalendarDay }
+                />
+              </div>
+              <div className="w-full px-5 pb-5 text-white">
+                <div className="mb-5 text-center">
+                  <div className="text-xs uppercase tracking-[0.18em] text-yellow-300/80">
+                    Sesssao planejada
+                  </div>
+                  <h3 className="mt-2 text-2xl font-black">
+                    { selectedCalendarDay } de { currentCalendarMonthLabel } de { currentYear }
+                  </h3>
+                  <p className="mt-2 text-sm text-white/70">
+                    Defina aqui quais sessoes vao acontecer nesse dia.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {
+                    editingCalendarSessions.map((sessionItem, sessionIndex) => (
+                      <div
+                        key={ `calendar-session-${sessionIndex}` }
+                        className={ `rounded-sm p-3 ${getCalendarSessionColorOption(sessionItem.color).cardClassName}` }
+                      >
+                        <div className="flex items-start gap-2">
+                          <div className="grid w-full grid-cols-1 gap-2 sm:grid-cols-[140px_minmax(0,1fr)]">
+                            <input
+                              type="text"
+                              value={ sessionItem.time }
+                              placeholder="Horario"
+                              onChange={ (event) => handleCalendarSessionChange(sessionIndex, 'time', event.target.value) }
+                              className="w-full border border-white/30 bg-black/40 px-3 py-2 text-white outline-none"
+                            />
+                            <input
+                              type="text"
+                              value={ sessionItem.name }
+                              placeholder="Nome da sessao"
+                              onChange={ (event) => handleCalendarSessionChange(sessionIndex, 'name', event.target.value) }
+                              className="w-full border border-white/30 bg-black/40 px-3 py-2 text-white outline-none"
+                            />
+                          </div>
+                          <button
+                            type="button"
+                            onClick={ () => handleRemoveCalendarSessionField(sessionIndex) }
+                            className="flex h-11 w-11 items-center justify-center border border-red-900 bg-red-800 text-xl text-white transition-colors duration-300 hover:border-white"
+                            aria-label="Remover sessao"
+                          >
+                            <MdDelete />
+                          </button>
+                        </div>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <input
+                            readOnly
+                            value="Cor da sessao"
+                            className="sr-only"
+                          />
+                          {
+                            calendarSessionColorOptions.map((colorOption) => (
+                              <button
+                                key={ `${sessionIndex}-${colorOption.value}` }
+                                type="button"
+                                onClick={ () => handleCalendarSessionChange(sessionIndex, 'color', colorOption.value) }
+                                className={ `h-7 w-7 rounded-full border-2 transition-transform duration-200 ${
+                                  sessionItem.color === colorOption.value
+                                    ? 'scale-110 border-white'
+                                    : 'border-white/25 hover:border-white/60'
+                                } ${colorOption.buttonClassName}` }
+                                aria-label={ `Selecionar cor ${colorOption.value}` }
+                              />
+                            ))
+                          }
+                        </div>
+                      </div>
+                    ))
+                  }
+                </div>
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    onClick={ handleAddCalendarSessionField }
+                    className="border border-white/30 bg-white/5 px-4 py-2 text-sm font-bold text-white transition-colors duration-300 hover:border-white"
+                  >
+                    Adicionar sessao
+                  </button>
+                </div>
+                <div className="mt-6 flex w-full gap-2">
+                  <button
+                    type="button"
+                    onClick={ handleCloseCalendarDay }
+                    className="mt-2 w-full cursor-pointer border-2 border-white bg-red-800 p-2 font-bold text-white transition-colors hover:border-red-900"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={ handleSaveCalendarDay }
+                    disabled={ isSavingCalendarDay }
+                    className="mt-2 w-full cursor-pointer border-2 border-white bg-green-whats p-2 font-bold text-white transition-colors hover:border-green-900 disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    { isSavingCalendarDay ? 'Salvando...' : 'Salvar' }
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
         { showMessage.show && <MessageToUser /> }
         {
           deletePlayerPopup.show &&
