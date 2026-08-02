@@ -142,9 +142,9 @@ export default function Sessions() {
               </div>
               <div className="px-4 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 gap-3 pb-4 bg-transparent">
                 {
-                  sheetList.map((sheet: any, index: number) =>
-                    <SheetItem key={index} sheet={ sheet } />
-                  )
+                  sheetList.map((sheet: any) => (
+                    <SheetItem key={ sheet.id } sheet={ sheet } />
+                  ))
                 }
               </div>              
               { showInfoSessions && <Info /> }

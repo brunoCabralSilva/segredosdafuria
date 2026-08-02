@@ -9,6 +9,8 @@ export default function SheetItem(props: { sheet: any }) {
   const { sheet } = props;
   const [session, setSession] = useState<any>(null);
   const router = useRouter();
+  const formattedAuspice = capitalizeFirstLetter(String(sheet.data.auspice || '').trim());
+  const formattedTrybe = capitalizeFirstLetter(String(sheet.data.trybe || '').trim());
 
   const resumeBackground = (text: string) => {
     const totalLength = 220;
@@ -22,7 +24,7 @@ export default function SheetItem(props: { sheet: any }) {
       if (session) setSession(session);
     }
     getSession();
-  }, []);
+  }, [sheet.sessionId]);
 
   return(
     <button
@@ -35,7 +37,7 @@ export default function SheetItem(props: { sheet: any }) {
           {
             sheet.data.auspice !== '' &&
             <Image
-              src={`/images/gifts/${sheet.data.auspice}.png` }
+              src={`/images/auspices/${formattedAuspice}.png` }
               alt="Glifo de um lobo"
               className="w-20 h-12 relative object-contain object-center mb-2 rounded-t-xl"
               width={500}
@@ -45,7 +47,7 @@ export default function SheetItem(props: { sheet: any }) {
           {
             sheet.data.trybe !== '' &&
             <Image
-              src={`/images/gifts/${capitalizeFirstLetter(sheet.data.trybe)}.png` }
+              src={`/images/gifts/${formattedTrybe}.png` }
               alt="Glifo de um lobo"
               className="w-12 h-12 relative object-contain object-center mb-2 rounded-t-xl"
               width={500}
@@ -59,7 +61,7 @@ export default function SheetItem(props: { sheet: any }) {
             <hr />
           </div>
           <p className="text-sm font-normal text-justify capitalize pb-2">
-            {`${sheet.data.auspice ? sheet.data.auspice : ''} ${sheet.data.auspice ? 'dos' : '' } ${sheet.data.trybe ? capitalizeFirstLetter(sheet.data.trybe) : ''}`}
+            {`${sheet.data.auspice ? formattedAuspice : ''} ${sheet.data.auspice ? 'dos' : '' } ${sheet.data.trybe ? formattedTrybe : ''}`}
           </p>
           <p className="text-sm font-normal text-justify capitalize">
             {
