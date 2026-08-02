@@ -1,4 +1,5 @@
 'use client'
+import Footer from "@/components/footer";
 import MessageToUser from "@/components/dicesAndMessages/messageToUser";
 import Loading from "@/components/loading";
 import Nav from "@/components/nav";
@@ -1354,6 +1355,9 @@ export default function Finance() {
           </div>
         }
       </section>
+      <div className="relative">
+        <Footer />
+      </div>
     </div>
   );
 }
