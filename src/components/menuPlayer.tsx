@@ -3,7 +3,6 @@ import { useContext, useEffect } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Skills from "./menuSession/skills";
 import AdvantagesAndFlaws from "./advantagesAndFlaws/advantagesAndFlaws";
-import General from "./menuSession/general";
 import Rituals from "./rituals/rituals";
 import Anotations from "./menuSession/notes";
 import Gifts from "./menuSession/gifts";
@@ -97,7 +96,7 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
       case 'gifts': return (<Gifts />);
       case 'rituals': return (<Rituals />);
       case 'session-link': return (<SessionLink />);
-      default: return (<General />);
+      // default: return (<General />);
     }
   };
 
