@@ -339,9 +339,9 @@ export default function Home() {
         <div className="mt-8 w-full">
           <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="font-kingthings text-lg sm:text-xl">Sessoes</h2>
+              <h2 className="font-kingthings text-lg sm:text-xl">Sessões</h2>
               <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                Entre em Sessões, acompanhe o chat, gerencie fichas e viva toda a crônica em um so lugar.
+                Entre em Sessões, acompanhe o chat, gerencie fichas e viva toda a crônica em um só lugar.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
