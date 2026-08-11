@@ -80,9 +80,9 @@ export default function Sheets() {
     })
   );
 
-  const getSheetLabelValue = (value?: string, fallback = '') => {
+  const getSheetLabelValue = (value?: string, fallback = ''): string => {
     const sanitizedValue = String(value || '').trim();
-    return sanitizedValue === '' ? fallback : capitalizeFirstLetter(sanitizedValue);
+    return sanitizedValue === '' ? fallback : String(capitalizeFirstLetter(sanitizedValue));
   };
 
   const refreshSheets = async (userEmail: string) => {
