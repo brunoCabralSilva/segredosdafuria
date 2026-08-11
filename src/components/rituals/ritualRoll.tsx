@@ -1,40 +1,39 @@
-'use client'
+﻿'use client'
 import { useContext } from "react";
 import contexto from "@/context/context";
 import RitualsMechanic from "./ritualsMechanic";
+import { SpecialRollFrame } from "../popup/specialRollShared";
 
 export default function RitualRoll() {
-  const { showRitualRoll } =  useContext(contexto);
-  return(
-    <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueofRage" className="w-full flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl mb-3 font-bold">{ showRitualRoll.ritual.titlePtBr }</p>
-      </label>
-      {
-        showRitualRoll.ritual.cost &&
-        <label className="w-full flex flex-col items-center">
-          <p className="text-white w-full pb-1 text-justify">
-            <span className="pr-2 font-bold">Custo:</span>
-            { showRitualRoll.ritual.cost }
-          </p>
-        </label>
-      }
-      {
-        showRitualRoll.ritual.pool &&
-        <label className="w-full flex flex-col items-center">
-          <p className="text-white w-full pb-1 mb-2 text-justify">
-            <span className="pr-2 font-bold">Teste:</span>
-            { showRitualRoll.ritual.pool }
-          </p>
-        </label>
-      }
-      <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-justify">
-          <span className="pr-2 font-bold">Sistema:</span>
-          { showRitualRoll.ritual.systemPtBr === "" ? showRitualRoll.ritual.descriptionPtBr : showRitualRoll.ritual.systemPtBr }
-        </p>
-      </label>
-      <RitualsMechanic title={showRitualRoll.ritual.title} />
-    </div>
+  const { showRitualRoll, setShowRitualRoll } = useContext(contexto);
+
+  return (
+    <SpecialRollFrame
+      title={showRitualRoll.ritual.titlePtBr}
+      description=""
+      onClose={() => setShowRitualRoll({ show: false, ritual: {} })}
+    >
+      <div className="flex flex-col gap-3">
+        {showRitualRoll.ritual.cost && (
+          <div className="border-b border-white/5 pb-2 font-geist-mono text-[10px] leading-5 text-white/78">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Custo:</span>
+            <span>{showRitualRoll.ritual.cost}</span>
+          </div>
+        )}
+        {showRitualRoll.ritual.pool && (
+          <div className="border-b border-white/5 pb-2 font-geist-mono text-[10px] leading-5 text-white/78">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Teste:</span>
+            <span>{showRitualRoll.ritual.pool}</span>
+          </div>
+        )}
+        <div className="font-geist-mono text-[10px] leading-5 text-white/78">
+          <span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span>
+          <span>{showRitualRoll.ritual.systemPtBr === '' ? showRitualRoll.ritual.descriptionPtBr : showRitualRoll.ritual.systemPtBr}</span>
+        </div>
+        <div className="border-t border-white/10 pt-3">
+          <RitualsMechanic title={showRitualRoll.ritual.title} />
+        </div>
+      </div>
+    </SpecialRollFrame>
   );
 }

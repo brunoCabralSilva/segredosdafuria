@@ -45,13 +45,13 @@ export default function AutomatedRoll() {
 
   if (sheetId !== '')
   return(
-    <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Atributo</p>
+    <div className="flex h-full min-h-0 w-full flex-col items-center overflow-y-auto bg-transparent">
+      <label htmlFor="valueOf" className="mb-3 flex w-full flex-col items-center">
+        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Atributo</p>
           <select
             value={atrSelected}
             onChange={(e: any) => setAtrSelected(e.target.value)}
-            className="w-full py-3 text-black capitalize cursor-pointer"
+            className="h-8 w-full cursor-pointer border border-white/10 bg-white px-2 text-xs text-black capitalize font-geist-mono"
           >
             <option
               className="capitalize text-center text-black"
@@ -80,12 +80,12 @@ export default function AutomatedRoll() {
             }
           </select>
       </label>
-      <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Habilidade</p>
+      <label htmlFor="valueOf" className="mb-3 flex w-full flex-col items-center">
+        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Habilidade</p>
           <select
             value={sklSelected}
             onChange={(e: any) => setSklSelected(e.target.value)}
-            className="w-full py-3 capitalize cursor-pointer text-black"
+            className="h-8 w-full cursor-pointer border border-white/10 bg-white px-2 text-xs text-black capitalize font-geist-mono"
           > 
             <option
               className="capitalize text-center text-black"
@@ -116,12 +116,12 @@ export default function AutomatedRoll() {
             }
           </select>
       </label>
-      <label htmlFor="valueOf" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Renome</p>
+      <label htmlFor="valueOf" className="mb-3 flex w-full flex-col items-center">
+        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Renome</p>
           <select
             value={renSelected}
             onChange={(e: any) => setRenSelected(e.target.value)}
-            className="w-full py-3 capitalize cursor-pointer text-black"
+            className="h-8 w-full cursor-pointer border border-white/10 bg-white px-2 text-xs text-black capitalize font-geist-mono"
           >
             <option
               value="0"
@@ -150,12 +150,12 @@ export default function AutomatedRoll() {
             }
           </select>
       </label>
-      <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Bônus (+) ou Penalidade (-)</p>
+      <label htmlFor="penaltyOrBonus" className="mb-3 flex w-full flex-col items-center">
+        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Bônus (+) ou Penalidade (-)</p>
         <div className="flex w-full">
           <button
             type="button"
-            className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-500 text-black' : 'bg-black/70 text-white'}`}
             onClick={ () => {
               if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
             }}
@@ -163,13 +163,13 @@ export default function AutomatedRoll() {
             <FaMinus />
           </button>
           <div
-            className="p-2 text-center text-black w-full bg-white"
+            className="flex h-8 w-full items-center justify-center bg-white px-2 text-center text-[11px] font-semibold text-black"
           >
             <span className="w-full">{ penaltyOrBonus }</span>
           </div>
           <button
             type="button"
-            className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-500 text-black' : 'bg-black/70 text-white'}`}
             onClick={ () => {
               if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
             }}
@@ -178,12 +178,12 @@ export default function AutomatedRoll() {
           </button>
         </div>
       </label>
-      <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Dificuldade</p>
+      <label htmlFor="dificulty" className="mb-3 flex w-full flex-col items-center">
+        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade</p>
         <div className="flex w-full">
           <button
             type="button"
-            className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ dificulty === 0 ? 'bg-gray-500 text-black' : 'bg-black/70 text-white'}`}
             onClick={ () => {
               if (dificulty > 0) setDificulty(dificulty - 1);
             }}
@@ -191,13 +191,13 @@ export default function AutomatedRoll() {
             <FaMinus />
           </button>
           <div
-            className="p-2 text-center text-black w-full bg-white"
+            className="flex h-8 w-full items-center justify-center bg-white px-2 text-center text-[11px] font-semibold text-black"
           >
             <span className="w-full">{ dificulty }</span>
           </div>
           <button
             type="button"
-            className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+            className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ dificulty === 15 ? 'bg-gray-500 text-black' : 'bg-black/70 text-white'}`}
             onClick={ () => {
               if (dificulty < 15) setDificulty(dificulty + 1)
             }}
@@ -207,7 +207,7 @@ export default function AutomatedRoll() {
         </div>
       </label>
       <button
-        className={`${disabledButton() ? 'text-black bg-gray-400 hover:bg-gray-600 hover:text-white transition-colors': 'text-white bg-black hover:border-red-800 transition-colors cursor-pointer' } border-2 border-white w-full p-2 mt-6 font-bold`}
+        className={`${disabledButton() ? 'bg-gray-500 text-black': 'bg-black text-white hover:border-red-800' } mt-3 w-full border border-white/20 px-2.5 py-2 font-geist-mono text-[9px] font-bold uppercase tracking-[0.08em] transition-colors`}
         disabled={disabledButton()}
         onClick={ rollDices }
       >
@@ -216,15 +216,15 @@ export default function AutomatedRoll() {
     </div>
   );
   return(
-    <div className="w-full bg-black flex flex-col items-center h-screen z-50 top-0 right-0 overflow-y-auto">
-      <div className="text-center">
+    <div className="flex h-full min-h-0 w-full flex-col items-center overflow-y-auto bg-transparent">
+      <div className="text-center font-geist-mono text-[11px] leading-5 text-white/78">
         <span className="pr-1">Você ainda não selecionou uma Ficha de Personagem para utilizar os Testes Automatizados.</span>
         <span
           onClick={ () => {
             setShowMenuSession('sheet');
             setOptionSelect('players');
           }}
-          className="underline font-bold text-white hover:text-red-500 cursor-pointer"
+          className="cursor-pointer font-bold text-white underline underline-offset-2 hover:text-red-500"
         >
           Clique aqui
         </span>

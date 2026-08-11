@@ -2,6 +2,8 @@
   {
     "namePtBr": "Peregrinos Silenciosos",
     "nameEn": "silent striders",
+    "renown": "Sabedoria",
+    "verbs": ["percorrer", "explorar", "entregar", "sabotar"],
     "phrase": "Eu já passei em tudo que é lugar, cara. Vai por mim: cê vai querer escutar o que eu tenho a dizer.",
     "description": [
       "Entre lobos , os garous vão aonde a presa leva a alcateia. Entre humanos, a história demonstra que se encontram garous nas culturas migratórias ou diaspóricas. Em sua própria história antiga, os Peregrinos Silenciosos foram... amaldiçoados - será? - por um espírito poderoso, maligno e mal compreendido e, por causa disso, eles costumam encontrar simpatizantes e práticas parecidas entre as culturas nômades ou dispersas.",
@@ -14,6 +16,7 @@
       "E, por isso, os Peregrinos Silenciosos muitas vezes são versados em várias culturas e costumes, desde os ritos e apetrechos fúnebres dos indígenas sul-americanos ao aniversário do Mestre do Uivo da Fratria dos Vitrais em Nova York, passando pelas saudações típicas dos espíritos de Adis Abeba. E, em suas extensas viagens, eles vão colecionando relacionamentos, mas também arcam com o fardo da reputação de trazer más novas.",
       "O território percorrido pelos Peregrinos Silenciosos não precisa ser vasto: esses lobisomens assumem vários papéis para cumprir da melhor maneira possível sua promessa de servir a Gaia. Podem atuar como intermediários e mediadores da paz entre alcateias envolvidas em rixas de longa data e separadas uma da outra por um trechinho de estrada, ou podem ser diplomatas que levam sensatez e ponderação a meia dúzia de caerns ilustres espalhados por mais de um continente. Podem ou não permanecer durante um bom tempo com uma determinada alcateia, mas, quando o fazem, é quase sempre com a intenção de aprender ou encontrar algo de que alguém longe dali vai precisar. É uma carreira solitária, mesmo entre iguais."
     ],
+    "patronName": "Coruja",
     "patron": "Coruja é o Espírito Padroeiro dos Peregrinos Silenciosos. Ele encoraja seus seguidores a procurar uma vantagem antes de abordar cada questão. Do alto de sua posição estratégica, Coruja observa as coisas com atenção e só age depois de ter visto tudo que há para ver. E só então se abate rápida e decisivamente sobre a presa. Coruja e os Peregrinos Silenciosos estão associados à Sabedoria.",
     "favor": "A sensatez de Coruja exalta a virtude de sair correndo quando necessário. Peregrinos Silenciosos podem somar um dado às paradas de Atletismo ou Furtividade relacionadas a travessias, fugas ou infiltrações.",
     "ban": "Coruja vive atento ao possível retorno da assombração-espírito rival que atormentou sua tribo no passado e se garante nesse sentido, respeitando a existência desse 'outro' tipo de espírito. Se provocar, tomar parte em ou até mesmo testemunhar uma morte sem celebrar um ritual comemorativo que a reconheça, o Peregrino Silencioso poderá recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -84,6 +87,8 @@
   {
     "namePtBr": "Fúrias Negras",
     "nameEn": "black furies",
+    "renown": "Glória",
+    "verbs": ["liberar", "superar", "desmantelar", "demolir"],
     "phrase": "Você não precisa pegar no pé de alguém do seu tamanho. Experimente pegar no pé de alguém do meu tamanho.",
     "description": [
       "A tribo das Fúrias Negras dá extrema importância à justiça, principalmente quando se trata de fazer justiça aos que se veem em desvantagem graças aos atos de outras pessoas. É famosa por contornar ou arrebentar obstáculos, sejam estes um empecilho físico, uma formação inimiga ou uma barreira invisível que impede as minorias de ascender de maneira justa.",
@@ -96,6 +101,7 @@
       "Trata-se de uma função que exige vigilância e autocrítica. É com grande facilidade que a empatia se transforma em pena, e a pena em desdém, e as Fúrias Negras que tempos atrás abraçavam causas nobres podem se cansar de atender às necessidades constantes dos marginalizados. Ao mesmo tempo, a virtude pode se transformar em ódio, e um integrante das Fúrias Negras pode ter inimigos apenas pelo prazer de tê-los, mesmo que não existam inimigos de verdade. Um risco e tanto quando se acrescenta à mistura a política garou e as reuniões do caern.",
       "Nos casos mais extremos, as Fúrias Negras podem até mesmo virar aceleracionistas, consumidas por campanhas infinitas de vingança sanguinária. Por que esperar até a criptofazenda gastar com energia o equivalente ao PIB de um pequeno país se a gente tem como arregaçar com toda a operação de mineração antes que um bando de cuzão metido a techbro consiga comprar novos carros da Tesla? E foda-se a Tesla também, já que boa parte da energia de seus automóveis elétricos e 'ecológicos' vem de combustíveis fósseis. E foda-se você que tá aí duvidando."
     ],
+    "patronName": "Górgona",
     "patron": "O espírito padroeiro da tribo das Fúrias Negras é Górgona, e ela mesma foi tratada de maneira injusta por um espírito ainda mais poderoso. Górgona e as Fúrias Negras estão associadas à Glória, particularmente à glória que se obtém estraçalhando tudo e todos que se encontrem em posições de poder sistêmico, um ato que se justifica por si só na visão de Górgona, o espírito da vingança. Na verdade, muitos integrantes da tribo consideram negligência deixar de agir contra o que se percebe como um abuso de poder, e aqueles que buscam o favor da padroeira podem ser tão patrulhadores que chegam às raias da beligerância.",
     "favor": "Górgona solicita a seus seguidores que eliminem barreiras e castiguem os responsáveis por criá-las ou mantê-las. Quem joga como Fúria Negra pode somar um dado a uma parada usada para se opor a alguém em posição de poder (relativa ao personagem ou a uma pessoa sob seus cuidados) ou para contornar esse obstáculo.",
     "ban": "Górgona exige que seus seguidores sempre tentem corrigir as injustiças. Se permitirem a continuidade de uma injustiça que poderiam ter impedido ou enfrentado, eles poderão recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -133,6 +139,8 @@
   {
     "namePtBr": "Presas de Prata",
     "nameEn": "silver fangs",
+    "renown": "Honra",
+    "verbs": ["motivar", "liderar", "mobilizar", "inspirar"],
     "phrase": "O poder é um meio para se chegar a um fim, a obra de uma vida erigida a serviço de Gaia. É uma responsabilidade tanto quanto - se não mais que - um privilégio",
     "description": [
       "A sociedade garou é inerentemente tribal e, onde existem tribos, surgem líderes. Entre os lobisomens, o manto da liderança foi reivindicado tempos atrás pela tribo das Presas de Prata, a coisa mais próxima de uma linhagem nobre que a cultura garou já produziu. Seu legado é o da aristocracia, do poder de decisão e, por mais que outras tribos detestem admitir, da união em circunstâncias terríveis.",
@@ -145,6 +153,7 @@
       "A relação das Presas de Prata com o mundo espiritual também é complexa. Muitos espíritos - mais que os próprios garous, provavelmente - ainda honram os pactos antigos firmados pelas lendas da tribo. Seres hierárquicos como são os espíritos, esse respeito pelas Presas de Prata tem raízes profundas, mas isso pode se revelar uma faca de dois gumes. Espíritos simples e intratáveis não enxergam nuances nas decisões eticamente ponderadas de uma Presa de Prata.",
       "Lobisomens de outras tribos, particularmente os integrantes jovens, repudiam a 'aristocracia hereditária', que é como as Presas de Prata tentam se vender. Entre os anciões da tribo, ainda imperam práticas anacrônicas, desde concepções gaianas de direito divino à manutenção de haréns, passando por modos de vestir afetados e obsoletos. Sim, nas assembleias, os participantes toleram as declamações das inúmeras façanhas que enaltecem os integrantes da tribo das Presas de Prata, mas como isso se traduz em nobreza hereditária na Idade do Apocalipse tem sido muito debatido - entre os garous jovens da própria tribo, por mais surpreendente que possa parecer."
     ],
+    "patronName": "Falcão",
     "patron": "Falcão é o Espírito Padroeiro das Presas de Prata e, com sua visão aguçada e porte aristocrático, ele inspira os integrantes tanto a buscar seus objetivos quanto a inspirar outras pessoas a segui-los nessa empreitada. Falcão e as Presas de Prata estão associados à Honra.",
     "favor": "Falcão pede aos membros da tribo das Presas de Prata que liderem pelo exemplo e pela conduta. Presas de Prata podem somar um dado às paradas de Persuasão ou Liderança relacionadas a fazer as pessoas acatarem seus conselhos, sugestões ou ordens explícitas.",
     "ban": "Falcão é um espírito orgulhoso e, para ele, a desonra é uma grande vergonha. Se tomar alguma atitude que possa lhe causar vexame ou provocar a perda de Renome, a Presa de Prata poderá recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -182,6 +191,8 @@
   {
     "namePtBr": "Conselho dos Fantasmas",
     "nameEn": "ghost council",
+    "renown": "Sabedoria",
+    "verbs": ["viajar", "resolver", "subverter", "desenterrar"],
     "phrase": "A maior vantagem está em determinar quais são as armas que os inimigos se recusam a usar.",
     "description": [
       "Os lobisomens do Conselho dos Fantasmas são grandes investigadores dos mistérios, mas são considerados um tanto dissimulados pelos garous mais francos e diretos que, às vezes, interpretam erroneamente o respeito que a tribo tem pelas questões de ordem superior. Entre os membros do Conselho dos Fantasmas, é possível encontrar guias, acadêmicos e até mesmo todo um leque de religiosos.",
@@ -195,6 +206,7 @@
       "Como seria de esperar, outros garous costumam achar que os lobisomens do Conselho dos Fantasmas têm motivos suspeitos. Uma crítica honesta é a de que os Fantasmas se preocupam em decifrar o 'como' dos mistérios em nome do poder, sem consideração alguma pelas razões que levam esse poder a se manifestar nos meios que eles empregaram para descobrir o que descobriram. A alcateia agora tem a klaive do rival, e é isso que importa. Resultados já; custos, lá pra frente.",
       "Do ponto de vista holístico, descobrir verdades secretas exige que se chegue a elas. Toda sociedade humana tem tradições nesse sentido, e o Conselho dos Fantasmas já teve e ainda tem integrantes originários de muitas dessas tradições e sociedades. Os integrantes da tribo costumam se empolgar com a oportunidade de viajar, seja para um local estranho, remoto e misterioso da Umbra; acompanhando uma caravana por uma estradinha rústica; ou em desabalada e eletrizante carreira pela taiga desfigurada por conflitos para procurar a bifurcação específica e importantíssima de um rio."
     ],
+    "patronName": "Serpente de Chifres",
     "patron": "O Espírito Padroeiro do Conselho dos Fantasmas é Serpente de Chifres, acostumada a lugares escuros e verdades secretas. Serpente de Chifres e o Conselho dos Fantasmas estão associados à Sabedoria. Dentre todas as tribos, o Conselho dos Fantasmas tem o que provavelmente é a relação mais transacional com sua padroeira, uma aceitação formal - e quase digna de um conto de fadas - do toma lá, dá cá... Algo que, às vezes, assume um matiz sinistro aos olhos de quem não faz parte da tribo.",
     "favor": "Serpente de Chifres estimula seus afilhados a observar as coisas de todos os ângulos possíveis e escolher o mais vantajoso deles. Garous do Conselho dos Fantasmas podem somar um dado às suas paradas de Investigação, Ocultismo ou Subterfúgio relacionadas a revelar um segredo bem guardado.",
     "ban": "Todo mundo sabe que Serpente de Chifres está ligada à Sabedoria, mas tanto os garous quanto os espíritos olham de lado para os métodos que ela emprega para obter conhecimento. Se, durante uma cena, um Fantasma deixar passar a oportunidade de saciar sua curiosidade, ele vai recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume",
@@ -248,6 +260,8 @@
   {
     "namePtBr": "Guardadores do Galhado",
     "nameEn": "hart wardens",
+    "renown": "Glória",
+    "verbs": ["reclamar", "cultivar", "nutrir", "proteger"],
     "phrase": "Bem-vi ndo ao nosso caern. É nossa casa e nosso lar. Aqueça-se junto ao nosso fogo e sirva-se da nossa mesa. Só um aviso, colega: se abusar da nossa hospitalidade , vamos pendurar suas entranhas naquelas árvores deslumbrantes que você viu lá fora.",
     "description": [
       "Entre os Guardadores do Galhado estão os zeladores e intendentes da natureza, quer reverenciem os lugares imaculados e 'ainda por descobrir' do mundo ou cultivem um local particularmente importante para eles, dando-lhe um propósito mais estruturado, como uma fazenda ou um pomar. Pode ser uma vasta propriedade rural, o vale de um rio poluído que precisa ser revitalizado ou até mesmo um trechinho escondido de verde no centro financeiro de Nova Orleans, mas os Guardadores do Galhado estarão lá, arrancando delicadamente do cantinho criado por sua alcateia a promessa que for possível.",
@@ -261,6 +275,7 @@
       "Desde então, os Guardadores do Galhado têm levado a sério o juramento, dedicando-se a uma região, propósito ou pessoa e fazendo o possível para cuidar bem dessa coisa. Para eles, o mundo é um galardão generoso a ser cultivado e compartilhado, mas também protegido daqueles que estão dispostos a maltratá-lo ou explorá-lo para se sentirem superiores às outras pessoas. Respeitam uma mistura intrigante de tradições antigas e modernas, enaltecendo uma hierarquia que se baseia em obrigações devidas, não na riqueza acumulada. Para os merecedores, a fortuna se sucede ao dever.",
       "E, assim, hoje em dia, os Guardadores do Galhado erigem tanto propriedades particulares minúsculas quanto caerns de grandes dimensões e cuidam de uns e outros. A tribo procura os lugares que Gaia prezava e que sucumbiram aos saqueadores, aí os toma de volta. Entoam cantigas e romanceiam histórias para recordar os grandes feitos, demonstrando enorme orgulho por serem guardadores entre lobisomens. E ai de quem desalojar um Guardador do Galhado ou um integrante de sua alcateia, pois esses garous são leais a Gaia, a Cervo, a seus deveres e companheiros... encarniçadamente leais."
     ],
+    "patronName": "Cervo",
     "patron": "O Espírito Padroeiro da tribo é Cervo, que apresentou a todos os garous os modos da natureza, mas tem predileção especial pelos Guardadores do Galhado. Cervo e os Guardadores do Galhado estão associados à Glória e veneram especialmente seus galliards, capazes de atiçar as chamas da Glória ao cantar a lenda ou recitar os feitos de seus irmãos.",
     "favor": "Muitos consideram Cervo o pai da floresta, um espírito com enorme ascendência sobre a fauna e a flora. Guardadores do Galhado podem somar um dado a qualquer parada que envolva Sobrevivência, Empatia com Animais ou Ofícios relacionada à natureza.",
     "ban": "Cervo respeita as tradições de longa data da hospitalidade. Se algum mal ocorrer a uma pessoa acolhida por um Guardador do Galhado, o garou em questão poderá recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -298,6 +313,8 @@
   {
     "namePtBr": "Espreitadores do Vento",
     "nameEn": "galestalkers",
+    "renown": "Honra",
+    "verbs": ["rastrear", "emboscar", "perseguir", "assolar"],
     "phrase": "Quer saber, vou deixar cê sair na frente. Pode se esconder onde quiser. Isso mesmo, onde quiser. Não faz diferença. Até daqui a pouco.",
     "description": [
         "Assim como o vento que atravessa a tundra, os Espreitadores do Vento são incansáveis. Rastreadores inigualáveis, eles sempre sabem onde se encontra a presa, venha das Imensidóes Espirituais ou do mundo físico. Empenham-se em trazer de volta aquilo que se comprometeram a caçar, e seus colegas de alcateia sabem que podem contar com eles.",
@@ -309,6 +326,7 @@
         "Alguns desses rematados caçadores consideram todas as pistas da caçada. Outros podem se concentrar em um elemento apenas da faceta de caçador de sua identidade garou, recorrendo, talvez, a armas que tragam vantagens ou a artefatos potentes que os tornem inescapáveis do outro lado da Película. Pelo que dizem os Espreitadores do Vento, existem tantas maneiras de caçar quantas são as entidades dignas de serem caçadas.",
         "Na Idade do Apocalipse, porém, os Espreitadores do Vento muitas vezes acham difícil decidir o que exatamente merece a atenção deles e da alcateia. Com tantas ameaças e crises que precisam ser resolvidas, eles não são muito diferentes do lobo à solta no viveiro dos coelhos: onde cravar os dentes primeiro? Costumam ser provedores, não líderes, exceto no caso das lendas que começam a se formar em seu meio. Dessa maneira, eles dependem bastante de outros garous e de laços fortes no seio da alcateia, para que, como o vento, não se vejam sem rumo."
     ],
+    "patronName": "Vento Norte",
     "patron": "O próprio Vento Norte é o Espírito Padroeiro dos Espreitadores do Vento, com seu poder sem limites, grande resistência, paciência e a capacidade de sublevar os elementos. Vento Norte e a tribo dos Espreitadores do Vento estão associados à Honra: quando eles se comprometem a fazer alguma coisa, outros garous podem contar com isso.",
     "favor": "Vento Norte é incansável e até mesmo inexorável. Tendo firmado um pacto com os Espreitadores do Vento para que fossem seus caçadores, Vento Norte concede aos garous da tribo um pouco dessa devoção intransigente. Espreitadores do Vento podem somar um dado às paradas diretamente relacionadas à perseguição de suas presas.",
     "ban": "Vento Norte é de uma avidez insaciável, e pode-se dizer o mesmo daqueles que juraram servi-lo. Se passar um dia que seja sem consumir caça recém-abatida (tenha sido ele ou não o caçador), o Espreitador do Vento vai recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -346,6 +364,8 @@
   {
     "namePtBr": "Andarilhos do Asfalto",
     "nameEn": "glass walkers",
+    "renown": "Sabedoria",
+    "verbs": ["pesquisar", "construir", "hackear", "reaproveitar"],
     "phrase": "Se tu quer ver uma coisa em pedaços, tá: eu devo dar conta do recado. Mas, se tu quer construir alguma coisa, é nisso que eu sou bom mesmo. Eu dou um jeito.",
     "description": [
       "Os Andarilhos do Asfalto estão entre os lobisomens mais qualificados a empregar a ciência aplicada, pois levam jeito para resolver problemas usando tecnologia ou, mais precisamente, os espíritos da tecnologia, muitos dos quais são desconhecidos pelos garous mais tradicionais. Entre as fileiras dos Andarilhos do Asfalto, encontram-se engenheiros, técnicos e inventores cujo talento para fazer as máquinas funcionarem geralmente é uma questão de convencer os espíritos que as habitam a atuar de maneira excepcional.",
@@ -357,6 +377,7 @@
       "Naturalmente, essa predileção por utensílios e tecnologia mantém os Andarilhos do Asfalto em convivência frequente com os seres humanos. São raríssimos os membros da tribo de origem lupina, e seus números diminuem dia a dia. Mesmo na vida privada e entre iguais, muitos Andarilhos do Asfalto se preocupam com o risco de 'perderem o lobo', de abandonar parte de sua ligação sagrada com Gaia e trocá-la por algo externo e artificial, algo mais parecido com o propósito da Weaver. Por ora, no entanto, os laços dos Andarilhos do Asfalto com sua herança garou ainda resistem e os espíritos ainda respeitam os pactos de longa data selados com eles.",
       "De fato, os Andarilhos do Asfalto cultivam relações com espíritos que os outros garous evitam ou nem sabem que existem. Espíritos do dinheiro e do lixo, espíritos centelhas que percorrem as linhas de energia das cidades, manifestações insólitas do Espírito Padroeiro e até mesmo espíritos potentes, mas restritos a uma localidade, capazes de alimentar um caem urbano se devidamente propiciados por um theurge competente: todas essas entidades e outras tantas têm as cidades umbráticas como lar. A paisagem espiritual urbana não precisa ser um deserto e muito menos desprovida de espíritos, principalmente quando um Andarilho do Asfalto esclarecido sabe onde procurar e o que oferecer."
     ],
+    "patronName": "Aranha",
     "patron": "O Espírito Padroeiro dos Andarilhos do Asfalto é Aranha, cujas teias meticulosamente tecidas encontram ressonância no impulso da tribo de construir coisas duradouras e eficientes. Esse desejo não torna a tribo popular entre outros garous, que enxergam no apadrinhamento de Aranha uma subserviência à Weaver, não uma obrigação com Gaia. Desse modo, os Andarilhos do Asfalto muitas vezes precisam se distinguir muito mais para ganhar a confiança de outras tribos. Aranha e os Andarilhos do Asfalto estão associados à Sabedoria.",
     "favor": "Por meio de fios e teias, Aranha revela a interligação de todas as coisas, sugerindo uma abordagem estruturada. Andarilhos do Asfalto podem somar um dado às paradas de Tecnologia ou Ciência que têm relação com construir ou consertar coisas.",
     "ban": "Aranha tem uma vasta ninhada de espíritos aparentados e proíbe os Andarilhos do Asfalto de fazer mal a qualquer um deles. Se destruírem máquinas complexas, como veículos, computadores ou linhas de montagem, eles poderão recuperar apenas 1 de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -423,6 +444,8 @@
   {
     "namePtBr": "Roedores de Ossos",
     "nameEn": "bone gnawers",
+    "renown": "Honra",
+    "verbs": ["infiltrar", "furtar", "testemunhar", "escutar", "sobreviver"],
     "phrase": "Um cara ai, o Noré do Bozaque, dizia que por trás de toda grande fortuna tinha um puto que tinha cometido um grande crime e, assim que eu tiver como fazer esse puto pagar, pode crer que é isso mesmo que eu vou fazer.",
     "description": [
       "Os Roedores de Ossos dedicam-se a descobrir tudo que está oculto: segredos, senhas, atalhos, qualquer coisa que possa dar a eles uma vantagem sobre o óbvio. Saem-se particularmente bem escondendo-se à vista de todos, e muitas vezes vivem entre grupos de condição socioeconômica mais baixa, aqueles que parecem invisíveis para as pessoas que se consideram superiores e são indiferentes ao que os 'inferiores' pensam ou presenciam.",
@@ -435,6 +458,7 @@
       "É a clássica história do ovo e da galinha. Os Roedores de Ossos sempre viveram na sarjeta ou se adaptaram às artes e artimanhas dela? Seriam tão bons para fazer tramoias e descobrir podres que foram expulsos da 'sociedade elegante' por conspiradores de cachimbo na boca ou 'nobres' com chapéus de peles e metidos a falar por rimas? Quem se importa? Porque, no fim das contas, quem tem as provas? O lobo longilíneo que se esgueira pelas sombras e sabe se rebaixar quando essa é a atitude que conseguirá mais informações ou o sujeitinho de óculos e rabo de cavalo, com o paletó de tweed reforçado nos cotovelos?",
       "E essa é uma das ironias (ou tragédias, talvez) dos Roedores de Ossos: eles são realmente bons no que fazem, e o que fazem é decisivo para a causa garou, mas raras vezes ganham o respeito dos colegas em volta das fogueiras. Por outro lado, os líderes sensatos reconhecem e elogiam os Roedores de Ossos, pois as lideranças insensatas que os esnobam têm dados pessoais ou suas intimidades expostas nas redes sociais por uma 'fonte' anônima."
     ],
+    "patronName": "Rato",
     "patron": "O espírito padroeiro da tribo dos Roedores de Ossos é Rato, que costuma estar presente sem ser visto e às vezes não é bem-vindo quando sua presença se revela. Rato e os Roedores de Ossos estão associados à Honra, algo que alguns garous arrogantes acham incongruente... até uma Roedora de Ossos aparecer com provas conclusivas de que um rival estava planejando atraiçoá-los. Na verdade, ao que parece, parte da astúcia de Rato está em buscar e estimular aqueles que prefeririam não chamar atenção para si. Esperto, esse Rato. Muito esperto.",
     "favor": "Rato implora a seus seguidores que desvelem as coisas que outros não conseguem enxergar e, depois de tudo exposto à luz, que eles usem o que descobriram de maneiras criativas. O conhecimento não tem valor por si só: todo achado tem um propósito. Roedores de Ossos podem somar um dado a uma parada usada para achar algo que foi perdido ou passou despercebido.",
     "ban": "Rato parece ser uma figura ignóbil, mas, na verdade, faz tudo pelo bem-estar de seu ninho e sua prole. Se deixar passar uma oportunidade relevante de ajudar os desfavorecidos, o Roedor de Ossos vai recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -472,6 +496,8 @@
   {
     "namePtBr": "Senhores das Sombras",
     "nameEn": "shadow lords",
+    "renown": "Glória",
+    "verbs": ["envisionar", "planejar", "conceber", "intimidar"],
     "phrase": "Todo mundo tem um plano até olhar para baixo e ver o próprio sangue encharcando a terra. Imaginar o próximo passo é a verdadeira prova de valor de um garou.",
     "description": [
       "Dominância e submissão formam o credo dos Senhores das Sombras. Aqueles que se mostram fortes merecem dominar; o papel dos fracos é se submeter, expor a barriga e a garganta. As grandes lendas entre os Senhores das Sombras são lobisomens possantes, mas a verdadeira força está em descobrir como se tira proveito das fraquezas do inimigo.",
@@ -483,6 +509,7 @@
       "Apesar da merecidíssima reputação de maquinadores, os Senhores das Sombras também deveriam ser reconhecidos pela precisão com que cuidam dos detalhes de um plano. O caern não vai se administrar sozinho: cedo ou tarde, seu espírito guardião voltará para a Umbra na atual Idade do Apocalipse. E atacar o acampamento dos mercenários parece louvável... até ficar evidente que o plano da alcateia é ceder à Fúria e estraçalhar tudo que encontrar pelo caminho até cruzar a primeira barricada. Nesse momento, o Senhor das Sombras interfere e ressalta que esse 'plano' infantil só faria matar todos eles.",
       "Embora os Senhores das Sombras sejam conhecidos por sua força e astúcia, um contraste semelhante personifica sua identidade. Em certo sentido, os Senhores das Sombras são despóticos e até mesmo dominadores. Em outro sentido, eles são inspiradores e, talvez, a tribo mais meritocrática de todas, baseando-se exclusivamente nas realizações individuais. Os Senhores das Sombras que ainda não têm tantas realizações na carreira devem levar uma vida infeliz, mas esses garous encontram lugar em suas alcateias, apoiando os lobisomens no seu entorno... e, quem sabe, aguardando o momento em que conseguirão alcançar o status que eles realmente merecem."
     ],
+    "patronName": "Trovão",
     "patron": "Trovão, o Espírito Padroeiro dos Senhores das Sombras, faz com que os fracos se recolham às tocas e anuncia a chegada de tempestades vingativas. Trovão costuma se mostrar distante, mas é sempre assustador. Em outras ocasiões, Trovão é o arauto furioso do combate e da mudança. E, assim, afirmam os Senhores das Sombras, que uma finta calculada é a preparação para um pancada forte. Trovão e os Senhores das Sombras estão associados à Glória (em geral, a deles próprios).",
     "favor": "Trovão é capaz de amedrontar aqueles a quem sua presença se anuncia e, ao que parece, os Senhores das Sombras podem se portar da mesma maneira, à imagem e semelhança de seu padroeiro. Os Senhores das Sombras podem somar um dado às suas paradas de Empatia com Animais, Intimidação ou Subterfúgio para fazer ameaças ou se aproveitar de pontos fracos.",
     "ban": "Trovão demonstra apenas o respeito e a deferência que o outro merece, e os Senhores das Sombras seguem seu exemplo. Se sair derrotado de um conflito com um garou de Renome Total inferior ao seu, o Senhor das Sombras poderá recuperar apenas 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",
@@ -520,6 +547,8 @@
   {
     "namePtBr": "Filhos de Gaia",
     "nameEn": "children of gaia",
+    "renown": "Sabedoria",
+    "verbs": ["descobrir", "discernir", "curar", "solucionar"],
     "phrase": "Que Gaia uive nesta era de decadência espiritual, mas, na condição de seus escolhidos, somos a voz desse uivo ou os cúmplices daqueles que a fazem sofrer?",
     "description": [
       "Os Filhos de Gaia se interessam pelos mistérios superiores da entidade que lhes dá o nome e se empenham em entender os enigmas que subsistem na presença dela. Para um Filho de Gaia, nada é mais desafiador que uma charada a investigar ou uma ferida (literal ou figurativa) a fechar, e esses lobisomens se veem particularmente atraídos pela Umbra esotérica.",
@@ -531,6 +560,7 @@
       "Essas indagações existenciais definem os Filhos de Gaia, que tentam sobretudo entender o caráter dos serviços que os lobisomens devem prestar à mãe que os deu à luz. São eles os garous que perguntam 'por quê?' e 'para quê?' quando outros lobisomens invocam o espírito-mãe para justificar um ataque violento e impetuoso às entranhas da Wyrm ou quando insistem que uma carnificina atroz atenderia a seu propósito ulterior. Tal qual a pedra que resiste à correnteza e obriga as águas a contorná-la, os lúcidos Filhos de Gaia dão direção e sentido à força de sua alcateia.",
       "Acima de tudo, os Filhos de Gaia se esforçam para entender. Investigam minuciosamente o passado de um candidato impopular que sobe de repente nas pesquisas com a mesma mente aberta de quem se empenha em descobrir as preferências e razões de um espírito para poder negociar a travessia de seu território por meio de um sacrifício justo. Nem o mundo físico nem o espiritual se resumem a uma lista de fatos para um dos Filhos de Gaia. Cada um deles é uma infinidade de perguntas a serem respondidas. Os lobisomens falastrões fazem pouco caso dos Filhos de Gaia, considerando-os inofensivos ou contrários ao modo de vida garou. Para os Filhos de Gaia, porém, a finalidade de sua busca sem fim por respostas é resolver problemas imediatos. Abelhas picam e projéteis perfuram. Saber o que abriu a ferida ajuda a determinar a maneira de tratá-la e fechá-la."
     ],
+    "patronName": "Unicórnio",
     "patron": "O espírito padroeiro dos Filhos de Gaia é Unicórnio, um mistério e um prodígio para o mundo moderno. Os humanos imaginam Unicórnio como um espírito das florestas, e pode ser que assim seja, mas também é um espírito de lugares misteriosos e tão intangíveis quanto o próprio espírito. Unicórnio e os Filhos de Gaia estão associados à Sabedoria.",
     "favor": "Unicórnio estimula seus seguidores a aprender como as pessoas e os espíritos se relacionam, a entender o que faz da Umbra e do mundo físico o que são e a devolver às coisas sua devida serventia. Filhos de Gaia podem somar um dado a uma parada de Percepção ou Sagacidade relacionada a descobrir alguma coisa a respeito de uma pessoa, animal ou espírito.",
     "ban": "Unicórnio é incisivo e despreza a desonestidade. O Filho de Gaia que se ver obrigado a mentir, ludibriar ou ocultar a verdade especificamente para fins pessoais, só poderá recuperar 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume. (Se você precisar discutir se seria ou não 'para fins pessoais', a intenção talvez já esteja indicada aí...).",
@@ -568,6 +598,8 @@
   {
     "namePtBr": "Garras Vermelhas",
     "nameEn": "red talons",
+    "renown": "Honra",
+    "verbs": ["arruinar", "guardar", "reduzir", "abater", "purificar"],
     "phrase": "Largue isso ai. Vá embora. Se ficar, vai morrer.",
     "description": [
       "A tribo das Garras Vermelhas é a única entre as atuais a apresentar em seus quadros uma quantidade substancial de garous que eram lobos antes da Primeira Transformação. Como todos os garous, as Garras Vermelhas sentem raiva diante do Apocalipse e ao ver Gaia assassinada em nome de uma ganância insaciável. Sentem a mesma raiva ao ver as populações de animais do mundo todo (especialmente os lobos) destruídas porque a humanidade invade hábitats e acha ter direitos de posse, um aliciamento desastroso da ordem natural para fomentar essa mesma ganância.",
@@ -581,6 +613,7 @@
       "Todos os garous conhecem as crônicas do Impergium, a época em que os lobisomens travaram uma guerra franca com o mundo humano. Os detratores tentam pintar a tribo das Garras Vermelhas como revanchista, a viúva do Impergium que morre de saudade dos 'bons e velhos tempos'. Mas essa caracterização é reducionista e atribui maldade a uma motivação que, na verdade, é a necessidade de sobreviver. Para as Garras Vermelhas, pode ser que o Impergium seja a única alternativa.",
       "A luta dos garous é a luta das Garras Vermelhas. O resto dos garous só não sabe disso ainda."
     ],
+    "patronName": "Grifo",
     "patron": "Grifo é o Espírito Padroeiro da tribo das Garras Vermelhas. É Grifo quem vigia as tentativas de usurpação da Weaver e nunca coloca os interesses dos seres humanos acima dos interesses dos animais. Grifo e as Garras Vermelhas estão associados à Honra, mesmo que seja um conceito de honra que costuma confundir os garous que têm como contexto a sociedade humana.",
     "favor": "Grifo é implacável, é um combatente feroz que enfrenta adversidades absurdas. Garras Vermelhas poderão somar um dado às paradas dos testes de Briga sempre que seu valor de Vitalidade estiver abaixo da metade.",
     "ban": "Grifo abomina a complexidade e tenta simplificar as relações de seus seguidores com o mundo. Se, durante uma sessão, uma Garra Vermelha recorrer a uma parada de Erudição, Condução, Finanças, Armas de Fogo, Ciência ou Tecnologia para consertar ou utilizar (em vez de subverter ou destruir) alguma coisa, o personagem em questão só poderá recuperar 1 ponto de Força de Vontade no começo da sessão seguinte, e não o equivalente a seu valor de Autocontrole ou Determinação como de costume.",

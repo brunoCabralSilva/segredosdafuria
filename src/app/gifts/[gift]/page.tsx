@@ -1,133 +1,181 @@
-'use client';
-import { useContext, useEffect, useState } from "react";
+﻿'use client';
+
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
-import Nav from "@/components/nav";
-import Footer from "@/components/footer";
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import Nav from '@/components/nav';
+import Footer from '@/components/footer';
+import Feedback from '@/components/feedback';
+import Simplify from '@/components/simplify';
+import contexto from '@/context/context';
 import listGifts from '../../../data/gifts.json';
-import { IGift, ITypeGift } from "../../../interface";
-import Feedback from "@/components/feedback";
-import contexto from "@/context/context";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
-import { useParams } from "next/navigation";
+import { IGift, ITypeGift } from '../../../interface';
+import { capitalizeFirstLetter } from '@/firebase/utilities';
+
+function getBelongingLabel(item: ITypeGift) {
+  return `${capitalizeFirstLetter(item.type)} (${item.totalRenown})`;
+}
 
 export default function Gift() {
   const params = useParams();
   const gift = params?.gift as string;
   const [dataGift, setDataGift] = useState<IGift>();
-  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
-    const findGift: IGift | undefined = listGifts
-      .find((gft: IGift) => gift === gft.id);
+
+    const findGift = listGifts.find((gft: IGift) => gift === gft.id);
     setDataGift(findGift);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [gift]);
 
-  if (dataGift) {
-    return(
-      <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className="absolute w-full h-full bg-black/90" />
-        <Nav />
-        <section className="relative min-h-screen">
-          <div className="pt-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
-            <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 bg-black/70 text-white">
-              <div className="flex flex-col justify-center dataGifts-center sm:dataGifts-start">
-                <div className="relative text-white flex sm:hidden w-full justify-center pb-5">
-                  { 
-                    dataGift.belonging.map((trybe: ITypeGift, index: number) => (
-                      <Image
-                        key={ index }
-                        src={ `/images/gifts/${capitalizeFirstLetter(trybe.type)}.png` }
-                        alt={`Glifo ${capitalizeFirstLetter(trybe.type)}`}
-                        className={`${trybe.type !== 'global' ? 'h-8' : ''} w-10 object-cover object-center`}
-                        width={ 1200 }
-                        height={ 800 }
-                      />
-                    ))
-                  }
-                </div>
-                <h1 className="font-bold text-lg text-center sm:text-left w-full">
-                  {`${ dataGift.giftPtBr } (${ dataGift.gift }) - ${ dataGift.renown }`}
-                </h1>
-                <hr className="w-10/12 my-4 sm:my-2" />
-              </div>
-              <p>
-                <span className="font-bold pr-1">Pertencente a:</span>
-                { 
-                  dataGift.belonging.map((trybe: ITypeGift, index: number) => (
-                    <span key={ index }>
-                      { capitalizeFirstLetter(trybe.type) } ({ trybe.totalRenown })
-                      { index === dataGift.belonging.length -1 ? '.' : ', ' }
-                    </span>
-                  ))
-                }
+  const belongingLabels = useMemo(() => {
+    if (!dataGift) return '';
+    return dataGift.belonging.map((item) => getBelongingLabel(item)).join(', ');
+  }, [dataGift]);
+
+  if (!dataGift) {
+    return (
+      <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+        <div className="w-full h-full bg-black/80">
+          <Simplify />
+          <div className="absolute inset-0 bg-black/85" />
+          <Nav />
+          <main className="relative z-10 mx-auto flex min-h-[60vh] w-full max-w-[1200px] items-center justify-center px-4 py-10 text-white sm:px-8">
+            <div className="border border-zinc-500/30 bg-black/80 px-6 py-8 text-center">
+              <p className="font-geist-mono text-xs uppercase tracking-[0.12em] text-white/65">Dom</p>
+              <h1 className="mt-3 font-kingthings text-3xl text-white">Não encontrado</h1>
+              <p className="mt-4 font-geist-mono text-sm leading-6 text-white/75">
+                Não foi possível localizar este dom no momento.
               </p>
-              <p className="pt-1">
-                <span className="font-bold pr-1">Fonte:</span>
-                { dataGift.book }, pg. { dataGift.page }.
-              </p>
-              <p className="pt-1">
-                <span className="font-bold pr-1">Custo:</span>
-                { dataGift.cost }.
-              </p>
-              <p className="pt-1">
-                <span className="font-bold pr-1">Ação:</span>
-                { dataGift.action }.
-              </p>
-              { dataGift.pool !== "" &&
-                <p className="pt-1">
-                  <span className="font-bold pr-1">Parada de Dados:</span>
-                  { dataGift.pool }.
-                </p>
-              }
-              { dataGift.duration !== "" &&
-                <p className="pt-1">
-                  <span className="font-bold pr-1">Duração:</span>
-                  { dataGift.duration }.
-                </p>
-              }
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">Descrição:</span>
-                { dataGift.descriptionPtBr }
-              </p>
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">Sistema:</span>
-                { dataGift.systemPtBr }
-              </p>
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">Description (original):</span>
-                { dataGift.description }
-              </p>
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">System (original):</span>
-                { dataGift.system }
-              </p>
-              <div className="flex flex-col sm:flex-row sm:justify-between">
-              </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between">
-              <button
-                type="button"
-                className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-                onClick={() => setShowFeedback(true) }
+              <Link
+                href="/gifts"
+                className="mt-6 inline-flex border border-zinc-500/30 bg-[#7a0000] px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#930000]"
               >
-                Enviar Feedback
-              </button>
-              {
-                showFeedback && <Feedback title={ dataGift.gift } /> 
-              }
+                Ver todos os dons
+              </Link>
+            </div>
+          </main>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+      <div className="w-full h-full bg-black/80">
+        <Simplify />
+        <div className="absolute inset-0 bg-black/85" />
+        <Nav />
+
+        <main className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col px-4 pb-10 pt-4 sm:px-8 sm:pb-14">
+          <section className="group relative overflow-hidden border border-zinc-500/30 bg-black text-white">
+            <div className="absolute bottom-4 right-4 flex pointer-events-none flex-col items-end gap-1 opacity-10">
+              {dataGift.belonging.slice(0, 2).map((giftType: ITypeGift, index: number) => (
+                <div
+                  key={`${dataGift.id}-background-${index}`}
+                  className="flex h-24 w-24 items-center justify-center sm:h-28 sm:w-28"
+                >
+                  <Image
+                    src={`/images/gifts/${capitalizeFirstLetter(giftType.type)}.png`}
+                    alt=""
+                    width={160}
+                    height={160}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="relative z-10 px-5 py-8 sm:px-8 sm:py-10">
+              <Link
+                href="/gifts"
+                className="inline-flex border border-zinc-500/30 bg-black/70 px-4 py-2 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/80 transition-colors hover:border-red-700 hover:text-white"
+              >
+                Voltar para dons
+              </Link>
+
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                {dataGift.belonging.map((giftType: ITypeGift, index: number) => (
+                  <Image
+                    key={`${dataGift.id}-type-${index}`}
+                    src={`/images/gifts/${capitalizeFirstLetter(giftType.type)}.png`}
+                    alt={`Glifo ${capitalizeFirstLetter(giftType.type)}`}
+                    width={80}
+                    height={80}
+                    className="h-12 w-12 object-contain sm:h-14 sm:w-14"
+                  />
+                ))}
               </div>
-            </article>
-          </div>
-        </section>
+
+              <div className="mt-6">
+                <h1 className="font-kingthings text-2xl leading-none text-white sm:text-3xl lg:text-4xl">
+                  {dataGift.giftPtBr}
+                </h1>
+                <p className="mt-3 font-geist-mono text-[11px] uppercase leading-6 text-white/70">
+                  {dataGift.gift}
+                </p>
+              </div>
+
+              <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
+                <p className="font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                  <span className="text-white">PERTENCE A:</span> {belongingLabels}
+                </p>
+                <p className="font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                  <span className="text-white">RENOME:</span> {dataGift.renown}
+                </p>
+                <p className="font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                  <span className="text-white">CUSTO:</span> {dataGift.cost || 'Nenhum'}
+                </p>
+                <p className="font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                  <span className="text-white">AÇÃO:</span> {dataGift.action || 'Nenhuma'}
+                </p>
+                {dataGift.pool !== '' && (
+                  <p className="font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                    <span className="text-white">PARADA:</span> {dataGift.pool}
+                  </p>
+                )}
+                {dataGift.duration !== '' && (
+                  <p className="font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                    <span className="text-white">DURAÇÃO:</span> {dataGift.duration}
+                  </p>
+                )}
+                <p className="font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                  <span className="text-white">FONTE:</span> {dataGift.book}, pg. {dataGift.page}
+                </p>
+              </div>
+
+              <div className="mt-6 border-t border-white/10 pt-6 space-y-6">
+                <div>
+                  <h2 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Descrição</h2>
+                  <p className="mt-4 font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                    {dataGift.descriptionPtBr}
+                  </p>
+                </div>
+
+                <div>
+                  <h2 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Sistema</h2>
+                  <p className="mt-4 font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                    {dataGift.systemPtBr}
+                  </p>
+                </div>
+              </div>
+
+
+            </div>
+          </section>
+
+          {showFeedback && <Feedback title={dataGift.gift} />}
+        </main>
+      </div>
       <Footer />
     </div>
   );
-} return (
-    <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className="absolute w-full h-full bg-black/80" />
-      <Nav />
-      <span className="loader z-50" />
-    </div>
-  );
 }
+
+
+
+

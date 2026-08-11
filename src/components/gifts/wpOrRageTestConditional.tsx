@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 export function WpOrRageTestConditional(props: { type: string, condition: string }) {
   const { condition } = props;
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const discountWillpower = async() => {
     if (marked) {
@@ -32,7 +32,7 @@ export function WpOrRageTestConditional(props: { type: string, condition: string
             const smallestNumber = Math.min(...missingInAgravated);
             dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
           } else {
-            setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
+            setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados posí­veis).' });
           }
         }
       }
@@ -56,11 +56,14 @@ export function WpOrRageTestConditional(props: { type: string, condition: string
         <span>{ condition }</span>
       </label>
       <button
-        className="text-white bg-black hover:border-red-800 border-2 border-white  transition-colors cursor-pointer w-full p-2 font-bold"
+        className="mt-3 w-full border border-white/20 bg-black px-2.5 py-2 font-geist-mono text-[9px] font-bold uppercase tracking-[0.08em] text-white transition-colors cursor-pointer hover:border-red-800"
         onClick={ () => {
           discountWillpower();
-          setShowMenuSession('');
           setShowGiftRoll({ show: false, gift: {} });
+          setOptionSelect('chat');
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('session:open-chat'));
+          }
         }}
       >
         Ativar Dom

@@ -1,5 +1,5 @@
 import contexto from "@/context/context";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import ChangeGameMaster from "../popup/changeGameMaster";
 import LeaveGMFromSession from "../popup/leaveGMFromSession";
 import { BsCheckSquare } from "react-icons/bs";
@@ -16,8 +16,6 @@ export default function Details() {
     email,
     session,
     players,
-    setShowMaps,
-    setShowBattle,
     showEndSession,
     setShowEndSession,
     showDeletePlayer,
@@ -26,354 +24,396 @@ export default function Details() {
     setShowMessage,
     setShowDeletePlayer,
     setShowMenuSession,
-    setShowRelationshipMap,
     setShowDelGMFromSession,
-    showChangeGameMaster, setShowChangeGameMaster,
+    showChangeGameMaster,
+    setShowChangeGameMaster,
   } = useContext(contexto);
 
-    const [nameSession, setNameSession] = useState('');
-    const [description, setDescription] = useState('');
-    const [gameMaster, setGameMaster] = useState('');
-    const [newGameMaster, setNewGameMaster] = useState('');
-    const [creationDate, setCreationDate] = useState('olá');
-    const [nameMaster, setNameMaster] = useState('');
-    const [image, setImage] = useState('');
-    const [input, setInput] = useState('');
-    const [textArea, setTextArea] = useState(false);
-    const isGameMasterUser = email === session.gameMaster;
-    const isBattleVisibleToPlayers = session?.battle?.isVisibleToPlayers === true;
+  const [nameSession, setNameSession] = useState("");
+  const [description, setDescription] = useState("");
+  const [gameMaster, setGameMaster] = useState("");
+  const [newGameMaster, setNewGameMaster] = useState("");
+  const [creationDate, setCreationDate] = useState("");
+  const [nameMaster, setNameMaster] = useState("");
+  const [image, setImage] = useState("");
+  const [input, setInput] = useState("");
+  const [textArea, setTextArea] = useState(false);
 
-    useEffect(() => {
-      setGameMaster(session.gameMaster);
-      setNewGameMaster(session.gameMaster);
-      setNameSession(session.name);
-      setCreationDate(session.creationDate);
-      setDescription(session.description);
-      setNameMaster(session.nameMaster);
-      setImage(session.imageName);
-    }, []);
+  useEffect(() => {
+    setGameMaster(session.gameMaster || "");
+    setNewGameMaster(session.gameMaster || "");
+    setNameSession(session.name || "");
+    setCreationDate(session.creationDate || "");
+    setDescription(session.description || "");
+    setNameMaster(session.nameMaster || "");
+    setImage(session.imageName || "01");
+  }, [session]);
 
-    const typeText = (e: any, type: string) => {
-      const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-      if (type === 'description') setDescription(sanitizedValue);
-      else setNameSession(sanitizedValue);
+  const normalizedPlayers = useMemo(() => {
+    return Array.isArray(players) ? players.filter((player: any) => player.email !== gameMaster) : [];
+  }, [players, gameMaster]);
+
+  const playersSummary = useMemo(() => {
+    return normalizedPlayers.map((player: any) => player.user).join(", ");
+  }, [normalizedPlayers]);
+
+  const buttonClassName =
+    "inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900";
+
+  const ghostButtonClassName =
+    "inline-flex items-center justify-center border border-white/10 bg-black/40 px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30";
+
+  const sanitizeInlineText = (value: string) => value.replace(/\s+/g, " ");
+
+  const sanitizeMultilineText = (value: string) => value
+    .replaceAll("\r\n", "\n")
+    .split("\n")
+    .map((line) => line.replace(/[ \t]+/g, " ").trimEnd())
+    .join("\n");
+
+  const typeText = (event: any, type: string) => {
+    if (type === "description") {
+      setDescription(sanitizeMultilineText(event.target.value));
+      return;
     }
 
-    const updateNameSession = async () => {
-      const sessionData = session;
-      if (nameSession !== sessionData.name) {
-        session.name = nameSession;
-        await updateSession(sessionData, setShowMessage);
-      }
+    setNameSession(sanitizeInlineText(event.target.value));
+  };
+
+  const updateNameSession = async () => {
+    if (nameSession === session.name) return;
+
+    const sessionData = {
+      ...session,
+      name: nameSession,
+    };
+
+    await updateSession(sessionData, setShowMessage);
+  };
+
+  const updateDescription = async () => {
+    if (description === session.description) return;
+
+    const sessionData = {
+      ...session,
+      description,
+    };
+
+    await updateSession(sessionData, setShowMessage);
+  };
+
+  const updateGameMaster = async () => {
+    if (newGameMaster === gameMaster) return;
+
+    const user = await getUserByEmail(newGameMaster, setShowMessage);
+    if (user.email) {
+      setShowChangeGameMaster({
+        show: true,
+        data: {
+          email: newGameMaster,
+          sessionId: session.id,
+          displayName: user.firstName + " " + user.lastName,
+        },
+      });
+      return;
     }
 
-    const updateDescription = async () => {
-      const sessionData = session;
-      if (description !== sessionData.description) {
-        session.description = description;
-        await updateSession(sessionData, setShowMessage);
-      }
-    }
-
-    const updateGameMaster = async () => {
-      if (newGameMaster !== gameMaster) {
-        const user = await getUserByEmail(gameMaster, setShowMessage);
-        if (user.email) {
-          setShowChangeGameMaster({ show: true, data: { email: newGameMaster, sessionId: session.id, displayName: user.firstName + ' ' + user.lastName }});
-        } else {
-          setShowMessage({ show: true, text: 'Necessário inserir o email de um usuário que já esteja cadastrado na plataforma.' });
-          setGameMaster(newGameMaster);
-        }
-      }
-    }
+    setShowMessage({
+      show: true,
+      text: "Necessario inserir o email de um usuario que ja esteja cadastrado na plataforma.",
+    });
+    setNewGameMaster(gameMaster);
+  };
 
   const editNameSession = () => {
-    return (
-      input === 'nameSession'
-      ? <BsCheckSquare
-          onClick={(e:any) => {
-            updateNameSession();
-            setInput('');
-            e.stopPropagation();
-          }}
-          className="text-3xl text-white"
-        />
-      : <FaRegEdit
-          onClick={
-            (e:any) => {
-              setInput('nameSession');
-              e.stopPropagation();
-            }}
-          className="text-3xl text-white"
-        />
-    )
-  }
+    return input === "nameSession" ? (
+      <BsCheckSquare
+        onClick={async (event: any) => {
+          event.stopPropagation();
+          await updateNameSession();
+          setInput("");
+        }}
+        className="cursor-pointer text-3xl text-white"
+      />
+    ) : (
+      <FaRegEdit
+        onClick={(event: any) => {
+          setInput("nameSession");
+          event.stopPropagation();
+        }}
+        className="cursor-pointer text-3xl text-white"
+      />
+    );
+  };
 
   const editDescriptionSession = () => {
-    return(
-      textArea ? 
-        <BsCheckSquare
-          onClick={(e: any) => {
-            updateDescription();
-            setTextArea(false);
-            e.stopPropagation();
-          }}
-          className="text-3xl text-white cursor-pointer mb-1"
-        />
-      : <FaRegEdit
-          onClick={(e: any) => {
-            setTextArea(true);
-            e.stopPropagation();
-          }}
-          className="text-3xl text-white cursor-pointer" />
-    )
-  }
+    return textArea ? (
+      <BsCheckSquare
+        onClick={async (event: any) => {
+          event.stopPropagation();
+          await updateDescription();
+          setTextArea(false);
+        }}
+        className="mb-1 cursor-pointer text-3xl text-white"
+      />
+    ) : (
+      <FaRegEdit
+        onClick={(event: any) => {
+          setTextArea(true);
+          event.stopPropagation();
+        }}
+        className="cursor-pointer text-3xl text-white"
+      />
+    );
+  };
 
   const editGameMasterSession = () => {
-    return(
-      input === 'gameMaster' 
-        ? <BsCheckSquare
-            onClick={(e:any) => {
-              updateGameMaster();
-              setInput('');
-              e.stopPropagation();
-            }}
-            className="text-3xl text-white mr-1"
-          />
-        : <FaRegEdit
-            onClick={
-              (e:any) => {
-                setInput('gameMaster');
-                e.stopPropagation();
-              }}
-            className="text-3xl text-white"
-          />
-    )
-  }
+    return input === "gameMaster" ? (
+      <BsCheckSquare
+        onClick={async (event: any) => {
+          event.stopPropagation();
+          await updateGameMaster();
+          setInput("");
+        }}
+        className="mr-1 cursor-pointer text-3xl text-white"
+      />
+    ) : (
+      <FaRegEdit
+        onClick={(event: any) => {
+          setInput("gameMaster");
+          event.stopPropagation();
+        }}
+        className="cursor-pointer text-3xl text-white"
+      />
+    );
+  };
 
-  return(
-    <div className="w-full overflow-y-auto h-75vh">
-      { showChangeGameMaster.show && <ChangeGameMaster setGameMaster={setGameMaster} /> }
-      { showEndSession && <EndSession /> }
-      { showDelGMFromSession && <LeaveGMFromSession /> }
-      { showDeletePlayer.show && <DeleteUserFromSession /> }
-      {
-        creationDate !== ''
-        ? <div className="h-full w-full pr-1">
-            <div className="flex flex-col items-center justify-start w-full">
-              <div
-                className="w-full mt-2 capitalize flex justify-between items-center cursor-pointer pr-2 border-2 border-white mb-2"
-                onClick={() => setInput('nameSession')}
-              >
-                { 
-                  (input !== 'nameSession' || gameMaster !== email) &&
-                  <span className="text-white font-bold text-2xl my-3 capitalize break-words w-full px-4">
-                    { nameSession }
-                  </span>
-                }
-                { 
-                  input === 'nameSession' && gameMaster === email &&
-                  <input
-                    type="text"
-                    className="border-2 border-white text-white text-left w-full mr-1 bg-black p-2 text-2xl break-words"
-                    placeholder="Nome"
-                    value={ nameSession }
-                    onChange={(e) => typeText(e, 'name')}
-                  />
-                }
-                { gameMaster === email && editNameSession() }
-              </div>
-              <div className="w-full mb-2 flex-col font-bold border-2 border-white">
-                <div className="pl-4 pr-2 pt-2 flex justify-between items-center w-full">
-                  <div
-                    className="text-white w-full cursor-pointer flex-col items-center justify-center"
-                    onClick={
-                      () => {
-                        setTextArea(true);
-                      }
-                    }
-                  >
-                    Descrição:
-                  </div>
-                  <div>
-                    { gameMaster === email && editDescriptionSession() }
+  return (
+    <div className="relative flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden bg-gradient-to-br from-black via-zinc-950 to-red-950/40 text-white">
+      {showChangeGameMaster.show && <ChangeGameMaster setGameMaster={setGameMaster} />}
+      {showEndSession && <EndSession />}
+      {showDelGMFromSession && <LeaveGMFromSession />}
+      {showDeletePlayer.show && <DeleteUserFromSession />}
+
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(153,27,27,0.22),transparent_42%)]" />
+
+      <div className="relative border-b border-white/10 px-4 py-4 sm:px-6">
+        <div className="flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-kingthings text-lg sm:text-xl">Detalhes da Sessão</h2>
+            <p className="mt-1 font-geist-mono text-[11px] sm:text-xs text-white/75">Edite as informações principais, acompanhe os jogadores e acione os modos da crônica a partir deste painel.</p>
+          </div>
+        </div>
+      </div>
+
+      {creationDate !== "" ? (
+        <div className="principles-scrollbar relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-4 sm:px-6">
+          <div className="grid min-h-full grid-cols-1 gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.8fr)]">
+            <div className="space-y-4">
+              <div className="border border-white/10 bg-black/55">
+                <div className="border-b border-white/10 px-4 py-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Nome Da Sessão</p>
+                    {gameMaster === email && editNameSession()}
                   </div>
                 </div>
-                <div className="w-full h-full">
-                  { 
-                    textArea && gameMaster === email ?
-                    <textarea
-                      className="text-white bg-black font-normal p-4 w-full h-72 cursor-pointer break-words text-justify border-t-white border"
-                      value={ description }
-                      onChange={(e) => typeText(e, 'description')}
+
+                <div
+                  className="px-4 py-4"
+                  onClick={() => {
+                    if (gameMaster === email) setInput("nameSession");
+                  }}
+                >
+                  {input === "nameSession" && gameMaster === email ? (
+                    <input
+                      type="text"
+                      className="w-full border border-white/10 bg-black/40 px-3 py-2 text-left text-xl text-white outline-none"
+                      placeholder="Nome"
+                      value={nameSession}
+                      onChange={(event) => typeText(event, "name")}
                     />
-                    : <div
-                        className="text-white font-normal p-4 text-justify w-full h-full cursor-pointer break-words"
-                        onClick={() => setTextArea(true)} 
-                      >
-                      { description }
+                  ) : (
+                    <p className="break-words font-kingthings text-2xl capitalize text-white">
+                      {nameSession}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="border border-white/10 bg-black/55">
+                <div className="border-b border-white/10 px-4 py-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Sinopse</p>
+                    {gameMaster === email && editDescriptionSession()}
+                  </div>
+                </div>
+
+                <div className="px-4 py-4">
+                  {textArea && gameMaster === email ? (
+                    <textarea
+                      className="h-72 w-full border border-white/10 bg-black/40 p-3 text-justify font-geist-mono text-[12px] text-white outline-none"
+                      value={description}
+                      onChange={(event) => typeText(event, "description")}
+                    />
+                  ) : (
+                    <div
+                      className="cursor-pointer whitespace-pre-wrap font-geist-mono text-[12px] text-justify leading-relaxed text-white/85"
+                      onClick={() => {
+                        if (gameMaster === email) setTextArea(true);
+                      }}
+                    >
+                      {description}
                     </div>
-                  }
+                  )}
                 </div>
               </div>
-              <div
-                className={`w-full mb-2 mt-1 flex flex-col justify-between items-center p-2 border-2 border-white`}
-                onClick={() => {
-                  if (gameMaster === email) setInput('gameMaster')
-                }}
-              >
-                <div className="flex w-full">
-                  <span className="text-white break-words w-full p-2">
-                    <span className="font-bold pr-1">{ gameMaster === email ? 'Você é o Narrador desta Sessão' : 'Narrador'}</span>
-                  </span>
-                  { gameMaster === email && editGameMasterSession() }
+
+              <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div className="border border-white/10 bg-black/55">
+                  <div className="border-b border-white/10 px-4 py-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Narrador</p>
+                      {gameMaster === email && editGameMasterSession()}
+                    </div>
+                  </div>
+
+                  <div
+                    className="px-4 py-4"
+                    onClick={() => {
+                      if (gameMaster === email) setInput("gameMaster");
+                    }}
+                  >
+                    <p className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/60">
+                      {gameMaster === email ? "Voce e o narrador desta sessao" : "Narrador da cronica"}
+                    </p>
+                    {input === "gameMaster" ? (
+                      <input
+                        type="text"
+                        className="mt-3 w-full border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none"
+                        placeholder="Email"
+                        value={newGameMaster}
+                        onChange={(event) => setNewGameMaster(event.target.value)}
+                      />
+                    ) : (
+                      <p className="mt-3 break-words font-geist-mono text-[12px] text-white/85">
+                        {gameMaster === email ? newGameMaster : nameMaster}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                { 
-                  input === 'gameMaster'?
-                  <input
-                    type="text"
-                    className="text-sm border border-white text-white text-left w-full bg-black p-2 cursor-pointer"
-                    placeholder="Email"
-                    value={ newGameMaster }
-                    onChange={(e) => setNewGameMaster(e.target.value)}
-                  />
-                  : <span className={`border border-transparent text-sm text-white w-full capitalize p-2 break-words ${gameMaster === email ? 'cursor-pointer' : ''}`}>
-                    { gameMaster === email ? newGameMaster : nameMaster }
-                  </span>
-                }
+
+                <div className="border border-white/10 bg-black/55">
+                  <div className="border-b border-white/10 px-4 py-3">
+                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Data De Criação</p>
+                  </div>
+                  <div className="px-4 py-4">
+                    <p className="font-geist-mono text-[12px] text-white/85">{creationDate}</p>
+                  </div>
+                </div>
               </div>
-              <p className="mt-1 text-white sm:text-left w-full text-center border-2 border-white p-4">
-                <span className="font-bold pr-1">Data de Criação:</span>
-                <span>{ creationDate }</span>
-              </p>
-              <div className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3">
-                <span className="pr-1 font-bold">Jogadores:</span>
-                {
-                  players
-                  .filter((player: any) => player.email !== gameMaster)
-                  .map((item: any, index: number, arr: any[]) => {
-                    if (email !== gameMaster) {
-                      if (index === arr.length - 1) {
-                        return (
-                        <span key={index} className="">
-                          <span className=""> e </span>
-                          <span className="capitalize" key={index}>{item.user}</span>
-                        </span>
-                        );
-                      } else if (index === arr.length - 2) {
-                        return <span className="capitalize" key={index}>{item.user}</span>;
-                      } else {
-                        return <span className="capitalize" key={index}>{item.user}, </span>;
-                      }
-                    } else {
-                      return (
-                        <div key={index} className="text-white pb-3 sm:text-left w-full text-center mt-3 border-2 border-white p-4 mb-3 flex justify-between items-center">
-                          <div className="flex flex-col">
-                            <span className="capitalize">{item.user}</span>
-                            <span className="text-xs">{item.email}</span>
+
+              <div className="border border-white/10 bg-black/55">
+                <div className="border-b border-white/10 px-4 py-3">
+                  <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Jogadores</p>
+                </div>
+                <div className="px-4 py-4">
+                  {email !== gameMaster ? (
+                    <p className="font-geist-mono text-[12px] leading-relaxed text-white/85">
+                      {playersSummary !== "" ? playersSummary : "Nenhum jogador adicional cadastrado."}
+                    </p>
+                  ) : normalizedPlayers.length > 0 ? (
+                    <div className="space-y-3">
+                      {normalizedPlayers.map((item: any, index: number) => (
+                        <div key={index} className="flex items-center justify-between gap-3 border border-white/10 bg-black/35 px-4 py-3">
+                          <div>
+                            <p className="capitalize font-geist-mono text-[12px] text-white/90">{item.user}</p>
+                            <p className="mt-1 text-[11px] text-white/55">{item.email}</p>
                           </div>
                           <button
                             type="button"
-                            className="cursor-pointer"
-                            onClick={ () => setShowDeletePlayer({ show: true, userEmail: item.email }) }
+                            className="inline-flex h-9 w-9 items-center justify-center border border-red-950 bg-red-950 text-white transition-colors hover:bg-red-900"
+                            onClick={() => setShowDeletePlayer({ show: true, userEmail: item.email })}
                           >
                             <MdDelete className="text-lg" />
                           </button>
                         </div>
-                      );
-                    }
-                    })
-                }
-              </div>
-              <button
-                type="button"
-                className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
-                onClick={async () => {
-                  setShowRelationshipMap({ show: true, data: session.id });
-                  setShowMenuSession('');
-                }}
-              >
-                Mapa de Relacionamentos
-              </button>
-              {
-                gameMaster == 'lycan.byell@gmail.com' &&
-                <button
-                  type="button"
-                  className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
-                  onClick={async () => {
-                    setShowMaps({ show: true, data: session.id });
-                    setShowMenuSession('');
-                  }}
-                >
-                  Mapa da Crônica
-                </button>
-              }
-              {
-                (isGameMasterUser || isBattleVisibleToPlayers) &&
-                <button
-                  type="button"
-                  className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold transition-colors hover:border-red-500 hover:text-red-500"
-                  onClick={async () => {
-                    setShowBattle({ show: true, data: session.id });
-                  }}
-                >
-                  Modo Combate
-                </button>
-              }
-              <div className="text-white pb-3 sm:text-left w-full text-center border-2 border-white p-4 mb-3">
-                <div className="flex w-full justify-bewteen items-center">
-                  <span className="pr-1 font-bold w-full">Banner da Sessão:</span>
-                  {
-                    email === gameMaster &&
-                    <FaRegEdit
-                      onClick={ () => {
-                        setShowBannerSession({ show: true, sessionId: session.id });
-                        setShowMenuSession('');
-                      }}
-                      className="text-3xl cursor-pointer"
-                    />
-                  }
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="font-geist-mono text-[12px] text-white/85">Nenhum jogador adicional cadastrado.</p>
+                  )}
                 </div>
-                <div className="flex items-center justify-center w-full mt-2">
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="border border-white/10 bg-black/55">
+                <div className="border-b border-white/10 px-4 py-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Banner da Sessão</p>
+                    {email === gameMaster && (
+                      <FaRegEdit
+                        onClick={() => {
+                          setShowBannerSession({ show: true, sessionId: session.id });
+                          setShowMenuSession("");
+                        }}
+                        className="cursor-pointer text-3xl text-white"
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="p-4">
                   <Image
-                    src={`/images/sessions/${ image }.png` }
-                    alt="Glifo de um lobo"
-                    className="w-full h-32 relative object-cover object-center"
+                    src={`/images/sessions/${image}.png`}
+                    alt="Banner da sessao"
+                    className="h-40 w-full object-cover object-center"
                     width={1000}
                     height={1000}
                   />
                 </div>
               </div>
-              {
-                email === gameMaster &&
-                <button
-                  type="button"
-                  className="p-2 mb-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
-                  onClick={async () => {
-                    if (session.statusSession === 'Finalizada') {
-                      await updateStatusSession(session.id, 'Ativa', setShowMessage);
-                    } else setShowEndSession(true);
-                  }}
-                >
-                  {  session.statusSession === 'Finalizada' ? 'Reativar Sessão' : 'Finalizar Sessão' }
-                </button>
-              }
-              <button
-                type="button"
-                className="p-2 w-full text-center border-2 border-white text-white bg-red-800 cursor-pointer font-bold hover:bg-red-900 transition-colors"
-                onClick={() => {
-                  setShowDelGMFromSession(true);
-                }}
-              >
-                Sair da Sessão
-              </button>
+
+              <div className="border border-white/10 bg-black/55">
+                <div className="border-b border-white/10 px-4 py-3">
+                  <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Ações Da Sessão</p>
+                </div>
+                <div className="flex flex-col gap-3 p-4">
+
+                  {email === gameMaster && (
+                    <button
+                      type="button"
+                      className={buttonClassName}
+                      onClick={async () => {
+                        if (session.statusSession === "Finalizada") {
+                          await updateStatusSession(session.id, "Ativa", setShowMessage);
+                        } else {
+                          setShowEndSession(true);
+                        }
+                      }}
+                    >
+                      {session.statusSession === "Finalizada" ? "Reativar Sessão" : "Finalizar Sessão"}
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    className={ghostButtonClassName}
+                    onClick={() => {
+                      setShowDelGMFromSession(true);
+                    }}
+                  >
+                    Sair Da Sessão
+                  </button>
+                </div>
+              </div>
             </div>
-             
           </div>
-        : <div className="h-full flex items-center justify-center">
-            <span className="loader z-50" />
-          </div>
-      }
+        </div>
+      ) : (
+        <div className="relative flex h-full items-center justify-center">
+          <span className="loader z-50" />
+        </div>
+      )}
     </div>
   );
 }

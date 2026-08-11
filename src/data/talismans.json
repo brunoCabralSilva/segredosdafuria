@@ -19,7 +19,7 @@
         "value": 4
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 189
   },
   {
@@ -38,7 +38,7 @@
         "value": 0
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 189
   },
   {
@@ -57,7 +57,7 @@
         "value": 3
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 189
   },
   {
@@ -80,7 +80,7 @@
         "value": 3
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 189
   },
   {
@@ -93,7 +93,7 @@
     "systemPtBr": "A asa da perdiz, enquanto afetar um indivíduo, não o deixará experimentar o Delírio. Cada exemplar da asa da perdiz “protege” do Delírio apenas um indivíduo por vez e, tendo ou não ciência disso, a pessoa precisa portar a asa junto ao corpo. Se perder a asa, será afetada normalmente pelo Delírio e perderá aos poucos toda lembrança que possa ter de incidentes causadores de Delírio que tenha presenciado, além de duvidar das memórias que ressurgirem posteriormente.",
     "backgroundCost": "The partridge wing is a two-dot Talisman.",
     "backgroundCostPtBr": "O talismã Asa da Perdiz é um Antecedente de 2 pontos.",
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "cost": [
       {
         "type": "Talismã",
@@ -122,7 +122,7 @@
         "value": 3
       } 
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 189
   },
   {
@@ -149,7 +149,7 @@
         "value": 5
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 188
   },
   {
@@ -172,7 +172,7 @@
         "value": 3
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 188
   },
   {

@@ -1,326 +1,298 @@
-'use client';
+﻿'use client';
+
 import Image from 'next/image';
-import { useContext, useEffect, useState } from "react";
-import Nav from '@/components/nav';
-import Footer from "@/components/footer";
-import listTrybes from '../../../data/trybes.json';
-import { IArchetypes, ITrybe } from "../../../interface";
-import Feedback from "@/components/feedback";
-import contexto from '@/context/context';
+import Link from 'next/link';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+import Nav from '@/components/nav';
+import Footer from '@/components/footer';
+import Feedback from '@/components/feedback';
 import Simplify from '@/components/simplify';
+import contexto from '@/context/context';
+import listTrybes from '../../../data/trybes.json';
+import { IArchetypes, ITrybe } from '../../../interface';
+
+type TrybeData = ITrybe & {
+  patronName?: string;
+  renown?: string;
+  verbs?: string[];
+};
+
+const alternativeAuspiceSections = [
+  { key: 'ragabash', title: 'Ragabash' },
+  { key: 'theurge', title: 'Theurge' },
+  { key: 'phillodox', title: 'Philodox' },
+  { key: 'galliard', title: 'Galliard' },
+  { key: 'ahroun', title: 'Ahroun' },
+] as const;
+
+function toTitleCase(text: string) {
+  return text
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function SectionCard(props: { title: string; children: React.ReactNode }) {
+  const { title, children } = props;
+
+  return (
+    <section className="border border-zinc-500/30 text-justify bg-black/80 p-5 sm:p-6">
+      <h2 className="font-kingthings text-2xl uppercase leading-none text-white sm:text-3xl">{title}</h2>
+      <div className="mt-4 space-y-4 font-geist-mono text-sm leading-7 text-white/80 sm:text-[15px]">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+function ParagraphBlock(props: { items: Array<string | String> }) {
+  return (
+    <>
+      {props.items.map((paragraph, index) => (
+        <p key={index}>{String(paragraph)}</p>
+      ))}
+    </>
+  );
+}
 
 export default function Trybe() {
   const params = useParams();
   const trybe = params?.trybe as string;
   const [isLoading, setIsLoading] = useState(true);
-  const [dataTrybe, setDataTrybe] = useState<ITrybe>();
-  const [alternative, setAlternative] = useState<boolean>(true);
+  const [dataTrybe, setDataTrybe] = useState<TrybeData>();
+  const [alternative, setAlternative] = useState(true);
   const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
-    const findTrybe: ITrybe | undefined = listTrybes
-      .find((trb: ITrybe) => trybe
-      .replace(/-/g, ' ') === trb.nameEn
-    );
-    setDataTrybe(findTrybe);
+    setIsLoading(true);
+
+    if (!trybe) {
+      setDataTrybe(undefined);
+      return;
+    }
+
+    const foundTrybe = listTrybes.find(
+      (trb) => trybe.replace(/-/g, ' ') === String(trb.nameEn).toLowerCase()
+    ) as TrybeData | undefined;
+
+    setDataTrybe(foundTrybe);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [trybe]);
 
-  function firstLetter(frase: String) {
-    const palavras = frase.split(' ');
-  
-    const FirstUperCase = palavras.map((palavra) => {
-      if (palavra.length > 0) {
-        return palavra.charAt(0).toUpperCase() + palavra.slice(1);
-      } else {
-        return palavra;
-      }
-    });
-    const phrase = FirstUperCase.join(' ');
-    return phrase;
-  };
-
-  if (dataTrybe) {
-    return(
-      <div className={`w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top relative flex flex-col items-center`}>
-        <Simplify />
-        <div className="absolute w-full h-full bg-black/90" />
-        <Nav />
-        <section className="block-item mb-2 relative px-2 py-10 flex flex-col items-center sm:items-start w-full z-20 text-white text-justify overflow-y-auto">
-          <div className="flex items-center justify-center w-full relative h-full">
-            <div className="absolute h-full w-full sm:w-5/12 flex items-center justify-center">
-              { isLoading && <span className="loader z-50" /> }
+  if (!dataTrybe) {
+    return (
+      <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+        <div className="w-full h-full bg-black/80">
+          <Simplify />
+          <div className="absolute inset-0 bg-black/85" />
+          <Nav />
+          <main className="relative z-10 mx-auto flex min-h-[60vh] w-full max-w-[1200px] items-center justify-center px-4 py-10 text-white sm:px-8">
+            <div className="border border-zinc-500/30 bg-black/80 px-6 py-8 text-center">
+              <p className="font-geist-mono text-xs uppercase tracking-[0.12em] text-white/65">Tribo</p>
+              <h1 className="mt-3 font-kingthings text-3xl uppercase text-white">Não encontrada</h1>
+              <p className="mt-4 font-geist-mono text-sm leading-6 text-white/75">
+                Não foi possível localizar esta tribo no momento.
+              </p>
+              <Link
+                href="/trybes"
+                className="mt-6 inline-flex border border-zinc-500/30 bg-[#7a0000] px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#930000]"
+              >
+                Ver todas as tribos
+              </Link>
             </div>
-            <Image
-              src={`/images/trybes/${dataTrybe.namePtBr} - representation.png`}
-              alt={`Representação dos ${dataTrybe.namePtBr}`}
-              className="w-full mobile:w-8/12 sm:w-5/12 relative px-6"
-              width={800}
-              height={400}
-              onLoad={() => setIsLoading(false)}
-            />
-          </div>
-          { !alternative
-            ? <div className="mt-5 mobile:mt-10 px-6 text-sm sm:text-base w-full mb-10">
-              <h2 className="font-bold text-xl sm:text-2xl w-full text-center">
-                <span>
-                  {`${dataTrybe.namePtBr} (${firstLetter(dataTrybe.nameEn)})`}
-                </span>
-              </h2>
-              <div className="flex items-center justify-center w-full text-sm">
-                <p className="mt-1 sm:mt-3 mb-10 text-center sm:w-1/2">
-                  &quot;{ dataTrybe.phrase }&quot;
-                </p>
-              </div>
-              <div>
-                <span>
-                  {
-                    !alternative
-                    ? 'O texto abaixo está no livro "Lobisomem: O Apocalipse 5th". Clique'
-                    : 'O Texto abaixo é a nossa visão aprofundada sobre a tribo, criado por Bruno Gabryell e Davi Nóbrega e revisado por Viviane Silva, Maycon Serra e Gustavo Curi. Clique'
-                  }
-                </span>
-                <span
-                  onClick={ () => setAlternative(!alternative) }
-                  className="px-1 underline font-bold hover:text-red-500 cursor-pointer">
-                  aqui
-                </span>
-                <span>
-                  {
-                    alternative
-                    ? 'para ver o texto oficial que está no livro "Lobisomem: O Apocalipse 5th"'
-                    : 'para conhecer nossa visão aprofundada sobre a tribo. O texto foi criado por Bruno Gabryell e Davi Nóbrega e revisado por Viviane Silva, Maycon Serra e Gustavo Curi.'
-                  }
-                </span>
-              </div>
-              <div className="mt-5 w-full">
-                <div className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  Definição
-                </div>
-                <div className="text-justify w-full p-2">
-                  {
-                    dataTrybe.description.map((paragraph: String, index: number) => (
-                      <p key={ index } className="pt-3">
-                        { paragraph }
-                      </p>
-                    ))
-                  }
-                </div>
-              </div>
-              <div className="mt-5">
-                <div
-                  className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  Quem são os { dataTrybe.namePtBr }?
-                </div>
-                <div className="text-justify w-full p-2">
-                  {
-                    dataTrybe.whoAre.map((paragraph: String, index: number) => (
-                      <p className="pt-3" key={ index }>
-                        { paragraph }
-                      </p>
-                    ))
-                  }
-                </div>
-              </div>
-              <div className="mt-3">
-                <div
-                  className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  <span>Espírito Padroeiro</span>
-                </div>
-                <div className="text-justify w-full p-2">
-                  { dataTrybe.patron }
-                  <div className="pt-3">
-                    <span className="underline">Favor</span>
-                    <span className="px-1">-</span>
-                    <span>{dataTrybe.favor}</span>
-                  </div>
-                  <div className="pt-3">
-                    <span className="underline">Interdição</span>
-                    <span className="px-1">-</span>
-                    <span>{dataTrybe.ban}</span>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-3 w-full">
-                <div
-                  className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  <span>Arquétipos de { dataTrybe.namePtBr }</span>
-                </div>
-                <div className="text-justify w-full p-2">
-                  {
-                    dataTrybe.archetypes.map((archetype: IArchetypes, index: number) => (
-                      <div key={ index } className="w-full">
-                        <h2 className="underline">{ archetype.title } </h2>
-                        <p className="pb-5">{ archetype.description }</p>
-                      </div>
-                    ))
-                  }
-                </div>
-              </div>
-            </div>
-            : <div className="mt-5 mobile:mt-10 px-6 text-sm sm:text-base w-full mb-10">
-              <h2 className="font-bold text-xl sm:text-2xl w-full text-center">
-                <span>
-                  {`${dataTrybe.namePtBr} - ${dataTrybe.alternativeTitle}`}
-                </span>
-              </h2>
-              <div className="flex flex-col items-center justify-center w-full text-sm">
-                {
-                  dataTrybe.alternativePhrases.map((phrase: string, index: number) => 
-                  <p key={ index } className="mt-1 sm:mt-2 text-center sm:w-1/2">
-                    &quot;{ phrase }&quot;
-                  </p>
-                  )
-                }
-              </div>
-              <div className="mt-10">
-                <span>
-                  {
-                    !alternative
-                    ? 'O texto abaixo está no livro "Lobisomem: O Apocalipse 5th". Clique'
-                    : 'O Texto abaixo é a nossa visão aprofundada sobre a tribo, criado por Bruno Gabryell e Davi Nóbrega e revisado por Viviane Silva, Maycon Serra e Gustavo Curi. Clique'
-                  }
-                </span>
-                <span
-                  onClick={ () => setAlternative(!alternative) }
-                  className="px-1 underline font-bold hover:text-red-500 cursor-pointer">
-                  aqui
-                </span>
-                <span>
-                  {
-                    alternative
-                    ? 'para ver o texto oficial que está no livro "Lobisomem: O Apocalipse 5th"'
-                    : 'para conhecer nossa visão aprofundada sobre a tribo. O texto foi criado por Bruno Gabryell e Davi Nóbrega e revisado por Viviane Silva, Maycon Serra e Gustavo Curi.'
-                  }
-                </span>
-              </div>
-              <div className="mt-5 w-full">
-                <div className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  Definição
-                </div>
-                <div className="text-justify w-full p-2">
-                  {
-                    dataTrybe.alternativeDescription.map((paragraph: String, index: number) => (
-                      <p key={ index } className="pt-3">
-                        { paragraph }
-                      </p>
-                    ))
-                  }
-                </div>
-              </div>
-              <div className="mt-5">
-                <div
-                  className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  Ideologia
-                </div>
-                <div className="text-justify w-full p-2">
-                  {
-                    dataTrybe.alternativeIdeology.map((paragraph: String, index: number) => (
-                      <p className="pt-3" key={ index }>
-                        { paragraph }
-                      </p>
-                    ))
-                  }
-                </div>
-              </div>
-              <div className="mt-5">
-                <div
-                  className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  Costumes
-                </div>
-                <div className="text-justify w-full p-2">
-                  {
-                    dataTrybe.alternativeCustoms.map((paragraph: String, index: number) => (
-                      <p className="pt-3" key={ index }>
-                        { paragraph }
-                      </p>
-                    ))
-                  }
-                </div>
-              </div>
-              <div className="mt-5">
-                <div
-                  className="text-justify w-full text-xl border border-white p-2 flex justify-between items-center cursor-pointer"
-                >
-                  Augúrios
-                </div>
-                <div className="text-justify w-full p-2">
-                  <h2 className="py-3 text-lg font-bold">Ragabash</h2>
-                  <hr />
-                  {
-                    dataTrybe.alternativeAuspices.ragabash.map((paragraph: String, index: number) => (
-                      <p key={ index } className="pt-3">{ paragraph }</p>
-                    ))
-                  }
-                  <h2 className="py-3 text-lg font-bold">Theurge</h2>
-                  <hr />
-                  {
-                    dataTrybe.alternativeAuspices.theurge.map((paragraph: String, index: number) => (
-                      <p key={ index } className="pt-3">{ paragraph }</p>
-                    ))
-                  }
-                  <h2 className="py-3 text-lg font-bold">Philodox</h2>
-                  <hr />
-                  {
-                    dataTrybe.alternativeAuspices.phillodox.map((paragraph: String, index: number) => (
-                      <p key={ index } className="pt-3">{ paragraph }</p>
-                    ))
-                  }
-                  <h2 className="py-3 text-lg font-bold">Galliard</h2>
-                  <hr />
-                  {
-                    dataTrybe.alternativeAuspices.galliard.map((paragraph: String, index: number) => (
-                      <p key={ index } className="pt-3">{ paragraph }</p>
-                    ))
-                  }
-                  <h2 className="py-3 text-lg font-bold">Ahroun</h2>
-                  <hr />
-                  {
-                    dataTrybe.alternativeAuspices.ahroun.map((paragraph: String, index: number) => (
-                      <p key={ index } className="pt-3">{ paragraph }</p>
-                    ))
-                  }
-                </div>
-              </div>
-            </div>
-          }
-          <div className="flex items-center justify-center w-full">
-            <Image
-              src={`/images/trybes/${dataTrybe.namePtBr}.png`}
-              alt={`Glifo dos ${dataTrybe.namePtBr}`}
-              className="w-20 sm:w-38 my-2"
-              width={800}
-              height={400}
-            />
-          </div>
-          <div className="flex items-center justify-center w-full">
-            <button
-              type="button"
-              className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-              onClick={() => setShowFeedback(true) }
-            >
-              Enviar Feedback
-            </button>
-          </div>
-          { showFeedback && <Feedback title={ dataTrybe.nameEn } /> }
-        </section>
+          </main>
+        </div>
         <Footer />
       </div>
     );
-  } return (
-    <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className="absolute w-full h-full bg-black/80" />
-      <Nav />
-      <span className="loader z-50" />
+  }
+
+  const trybeNamePtBr = String(dataTrybe.namePtBr);
+  const trybeNameEn = toTitleCase(String(dataTrybe.nameEn));
+  const representationAlt = `Representação da tribo ${trybeNamePtBr}`;
+  const glyphAlt = `Glifo da tribo ${trybeNamePtBr}`;
+  const verbs = Array.isArray(dataTrybe.verbs) ? dataTrybe.verbs.join(' - ') : '';
+  const officialPhrase = String(dataTrybe.phrase || '');
+  const alternativePhrases = Array.isArray(dataTrybe.alternativePhrases) ? dataTrybe.alternativePhrases : [];
+
+  return (
+    <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+      <div className="w-full h-full bg-black/80">
+        <Simplify />
+        <div className="absolute inset-0 bg-black/85" />
+        <Nav />
+
+        <main className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col px-4 pb-10 pt-4 sm:px-8 sm:pb-14">
+          <section className="relative overflow-hidden border border-zinc-500/30 bg-black text-white">
+            <div className="absolute inset-0 pointer-events-none">
+              <Image
+                src={`/images/trybes/${trybeNamePtBr} - wallpaper.jpg`}
+                alt=""
+                fill
+                sizes="100vw"
+                className="object-cover object-top opacity-20"
+              />
+              <div className="absolute inset-0 bg-black/82" />
+            </div>
+
+            <div className="relative z-10 grid gap-8 px-5 py-8 sm:px-8 sm:py-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
+              <div>
+                <Link
+                  href="/trybes"
+                  className="inline-flex border border-zinc-500/30 bg-black/70 px-4 py-2 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/80 transition-colors hover:border-red-700 hover:text-white"
+                >
+                  Voltar para tribos
+                </Link>
+
+                <div className="mt-6">
+                  <p className="font-geist-mono text-[10px] uppercase tracking-[0.18em] text-white/65">
+                    {dataTrybe.renown || 'Renown não informado'}
+                  </p>
+                  <h1 className="mt-3 font-kingthings text-2xl uppercase leading-none text-white sm:text-3xl lg:text-4xl">
+                    {trybeNamePtBr}
+                  </h1>
+                  <p className="mt-3 font-geist-mono text-[11px] uppercase leading-6 text-white/72">
+                    {verbs}
+                  </p>
+                </div>
+
+                <hr className="mt-6 border-white/12" />
+
+                <div className="mt-5 space-y-3">
+                  <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
+                    {alternative ? 'Visão aprofundada' : 'Texto oficial'}
+                  </p>
+                  <p className="font-geist-mono text-sm leading-7 text-white/75 sm:text-[15px]">
+                    {alternative
+                      ? `${trybeNamePtBr} - ${dataTrybe.alternativeTitle}`
+                      : `${trybeNamePtBr} (${trybeNameEn})`}
+                  </p>
+                  <div className="space-y-2 font-geist-mono text-sm italic leading-7 text-white/88 sm:text-[15px]">
+                    {alternative
+                      ? alternativePhrases.map((phrase, index) => <p key={index}>&quot;{phrase}&quot;</p>)
+                      : officialPhrase && <p>&quot;{officialPhrase}&quot;</p>}
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setAlternative(true)}
+                    className={`${alternative ? 'border-red-700 bg-[#7a0000] text-white' : 'border-zinc-500/30 bg-black/70 text-white/75 hover:border-red-700 hover:text-white'} px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors`}
+                  >
+                    Visão aprofundada
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setAlternative(false)}
+                    className={`${!alternative ? 'border-red-700 bg-[#7a0000] text-white' : 'border-zinc-500/30 bg-black/70 text-white/75 hover:border-red-700 hover:text-white'} px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors`}
+                  >
+                    Texto oficial
+                  </button>
+                </div>
+
+                <p className="mt-5 max-w-3xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+                  {alternative
+                    ? 'Leia a interpretação aprofundada da tribo, com foco em ideologia, costumes e a leitura da comunidade sobre o papel dela no Apocalipse.'
+                    : 'Consulte a descrição oficial da tribo, com seu conceito, identidade, espírito patrono e os arquétipos que a representam.'}
+                </p>
+              </div>
+
+              <div className="relative flex min-h-[280px] items-center justify-center border border-zinc-500/30 bg-black/55 px-4 py-6">
+                {isLoading && <span className="loader absolute z-10" />}
+                <Image
+                  src={`/images/trybes/${trybeNamePtBr} - wallpaper.jpg`}
+                  alt={representationAlt}
+                  className="relative z-0 h-auto max-h-[520px] w-full object-contain"
+                  width={900}
+                  height={900}
+                  onLoad={() => setIsLoading(false)}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-6">
+            <div className="space-y-4">
+              {alternative ? (
+                <>
+                  <SectionCard title="Definição">
+                    <ParagraphBlock items={dataTrybe.alternativeDescription} />
+                  </SectionCard>
+
+                  <SectionCard title="Ideologia">
+                    <ParagraphBlock items={dataTrybe.alternativeIdeology} />
+                  </SectionCard>
+
+                  <SectionCard title="Costumes">
+                    <ParagraphBlock items={dataTrybe.alternativeCustoms} />
+                  </SectionCard>
+
+                  <SectionCard title="Augúrios">
+                    <div className="space-y-6">
+                      {alternativeAuspiceSections.map(({ key, title }) => {
+                        const paragraphs = dataTrybe.alternativeAuspices[key];
+
+                        return (
+                          <div key={key} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0">
+                            <h3 className="font-kingthings text-xl uppercase leading-none text-white sm:text-2xl">{title}</h3>
+                            <div className="mt-3 space-y-4">
+                              <ParagraphBlock items={paragraphs} />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </SectionCard>
+                </>
+              ) : (
+                <>
+                  <SectionCard title="Definição">
+                    <ParagraphBlock items={dataTrybe.description} />
+                  </SectionCard>
+
+                  <SectionCard title={`Quem são os ${trybeNamePtBr}?`}>
+                    <ParagraphBlock items={dataTrybe.whoAre} />
+                  </SectionCard>
+
+                  <SectionCard title="Espírito padroeiro">
+                    <p>{String(dataTrybe.patron)}</p>
+                    <p>
+                      <span className="text-white">Favor:</span> {String(dataTrybe.favor)}
+                    </p>
+                    <p>
+                      <span className="text-white">Interdição:</span> {String(dataTrybe.ban)}
+                    </p>
+                  </SectionCard>
+
+                  <SectionCard title={`Arquétipos de ${trybeNamePtBr}`}>
+                    <div className="space-y-5">
+                      {dataTrybe.archetypes.map((archetype: IArchetypes, index: number) => (
+                        <div key={index} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0">
+                          <h3 className="font-kingthings text-xl uppercase leading-none text-white sm:text-2xl">
+                            {String(archetype.title)}
+                          </h3>
+                          <p className="mt-3">{String(archetype.description)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </SectionCard>
+                </>
+              )}
+            </div>
+          </section>
+
+          {showFeedback && <Feedback title={dataTrybe.nameEn} />}
+        </main>
+      </div>
+      <Footer />
     </div>
   );
 }
+
+
+
+

@@ -1,98 +1,123 @@
-'use client';
-import { useContext, useEffect, useState } from "react";
-import Nav from '@/components/nav';
-import Footer from "@/components/footer";
-import listRituals from '../../../data/rituals.json';
-import { IRitual } from "../../../interface";
-import Feedback from "@/components/feedback";
-import contexto from "@/context/context";
-import { useParams } from "next/navigation";
+﻿'use client';
 
+import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
+import Nav from '@/components/nav';
+import Footer from '@/components/footer';
+import Simplify from '@/components/simplify';
+import contexto from '@/context/context';
+import listRituals from '../../../data/rituals.json';
+import { IRitual } from '../../../interface';
 
 export default function Ritual() {
   const params = useParams();
   const ritual = params?.ritual as string;
   const [dataRitual, setDataRitual] = useState<IRitual>();
-  const { showFeedback, setShowFeedback, setListOfRituais, resetPopups } = useContext(contexto);
+  const { resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
-    const findRitual: any | undefined = listRituals
-      .find((rtl: any) => ritual === rtl.id);
-    setDataRitual(findRitual);
-    setListOfRituais(listRituals);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  if (dataRitual) {
-    return(
-      <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className="absolute w-full h-full bg-black/90" />
-        <Nav />
-        <section className="mb-2 relative px-2 min-h-screen">
-          <div className="py-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
-            <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 bg-black/70 text-white overflow-y-auto">
-              <div className="flex flex-col justify-center items-center sm:items-start">
-                <h1 className="font-bold text-lg text-center sm:text-left w-full">
-                  {`${ dataRitual.titlePtBr } (${ dataRitual.title }) - ${ dataRitual.type}`}
-                </h1>
-                <hr className="w-10/12 my-4 sm:my-2" />
-              </div>
-              <p className="pt-1">
-                <span className="font-bold pr-1">Fonte:</span>
-                { dataRitual.book }, pg. { dataRitual.page }.
+    const findRitual = listRituals.find((item: IRitual) => ritual === item.id);
+    setDataRitual(findRitual);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ritual]);
+
+  if (!dataRitual) {
+    return (
+      <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+        <div className="h-full w-full bg-black/80">
+          <Simplify />
+          <div className="absolute inset-0 bg-black/85" />
+          <Nav />
+          <main className="relative z-10 mx-auto flex min-h-[60vh] w-full max-w-[1200px] items-center justify-center px-4 py-10 text-white sm:px-8">
+            <div className="border border-zinc-500/30 bg-black/80 px-6 py-8 text-center">
+              <p className="font-geist-mono text-xs uppercase tracking-[0.12em] text-white/65">Ritual</p>
+              <h1 className="mt-3 font-kingthings text-3xl text-white">Não encontrado</h1>
+              <p className="mt-4 font-geist-mono text-sm leading-6 text-white/75">
+                Não foi possível localizar este ritual no momento.
               </p>
-              { dataRitual.pool !== "" &&
-                <p className="pt-1">
-                  <span className="font-bold pr-1">Parada de Dados:</span>
-                  { dataRitual.pool }.
-                </p>
-              }
-              <p className="pt-3 text-justify">
-                <span className="font-bold pr-1">Descrição:</span>
-                { dataRitual.descriptionPtBr }
-              </p>
-              {
-                dataRitual.systemPtBr !== '' &&
-                <p className="pt-1 text-justify">
-                  <span className="font-bold pr-1">Sistema:</span>
-                  { dataRitual.systemPtBr }
-                </p>
-              }
-              <p className="pt-3 text-justify">
-                <span className="font-bold pr-1">Description (original):</span>
-                { dataRitual.description }
-              </p>
-              {
-                dataRitual.system !== '' &&
-                <p className="pt-1 text-justify">
-                  <span className="font-bold pr-1">System (original):</span>
-                  { dataRitual.system }
-                </p>
-              }
-              <div className="flex flex-col sm:flex-row sm:justify-between">
-              </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between">
-              <button
-                type="button"
-                className="text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-                onClick={() => setShowFeedback(true) }
+              <Link
+                href="/rituals"
+                className="mt-6 inline-flex border border-zinc-500/30 bg-[#7a0000] px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#930000]"
               >
-                Enviar Feedback
-              </button>
+                Ver todos os rituais
+              </Link>
+            </div>
+          </main>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+      <div className="h-full w-full bg-black/80">
+        <Simplify />
+        <div className="absolute inset-0 bg-black/85" />
+        <Nav />
+
+        <main className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col px-4 pb-10 pt-4 sm:px-8 sm:pb-14">
+          <section className="group relative overflow-hidden border border-zinc-500/30 bg-black text-white">
+            <div className="relative z-10 px-5 py-8 sm:px-8 sm:py-10">
+              <Link
+                href="/rituals"
+                className="inline-flex border border-zinc-500/30 bg-black/70 px-4 py-2 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/80 transition-colors hover:border-red-700 hover:text-white"
+              >
+                Voltar para rituais
+              </Link>
+
+              <div className="mt-6">
+                <p className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/72">
+                  {dataRitual.type}
+                </p>
+                <h1 className="mt-3 font-kingthings text-2xl leading-none text-white sm:text-3xl lg:text-4xl">
+                  {dataRitual.titlePtBr}
+                </h1>
+                <p className="mt-3 font-geist-mono text-[11px] uppercase leading-6 text-white/70">
+                  {dataRitual.title}
+                </p>
               </div>
-              { showFeedback && <Feedback title={ dataRitual.title } /> }
-            </article>
-          </div>
-        </section>
+
+              <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
+                <p className="text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                  <span className="text-white">TIPO:</span> {dataRitual.type}
+                </p>
+                {String(dataRitual.pool).trim() !== '' && (
+                  <p className="text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                    <span className="text-white">PARADA:</span> {dataRitual.pool}
+                  </p>
+                )}
+                <p className="text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                  <span className="text-white">FONTE:</span> {dataRitual.book}, pg. {dataRitual.page}
+                </p>
+              </div>
+
+              <div className="mt-6 space-y-6 border-t border-white/10 pt-6">
+                <div>
+                  <h2 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Descrição</h2>
+                  <p className="mt-4 text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                    {dataRitual.descriptionPtBr}
+                  </p>
+                </div>
+
+                {String(dataRitual.systemPtBr).trim() !== '' && (
+                  <div>
+                    <h2 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Sistema</h2>
+                    <p className="mt-4 text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                      {dataRitual.systemPtBr}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
       <Footer />
     </div>
   );
-} return (
-    <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className="absolute w-full h-full bg-black/80" />
-      <Nav />
-      <span className="loader z-50" />
-    </div>
-  );
 }
+

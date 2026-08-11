@@ -1,195 +1,139 @@
 'use client'
 import { useContext, useState } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
 import contexto from "@/context/context";
 import dataAdvAndFlaws from '../../data/advantagesAndFlaws.json';
-import AdvOrFlawAdded from "../advantagesAndFlaws/advOrFlawAdded";
 import dataTalens from '../../data/talismans.json';
 import dataLoresheets from '../../data/loresheets.json';
 import ItemLoresheet from "../sheetItems/itemLoresheets";
 import ItemTalisman from "../sheetItems/itemTalisman";
 import ItemAdvantage from "../sheetItems/itemAdvantage";
 import { ILoresheet } from "@/interface";
+import AdvOrFlawAdded from "../advantagesAndFlaws/advOrFlawAdded";
+import ManageCollectionFrame from "./manageCollectionFrame";
 
 export default function AddAdvOrFlaw(props: { type: string }) {
-  const [ selectOption, setSelectOption ] = useState('merits');
+  const [selectOption, setSelectOption] = useState('merits');
   const { type } = props;
-  const { dataSheet, setShowAllAdvantages, setShowAllFlaws } =  useContext(contexto);
+  const { dataSheet, setShowAllAdvantages, setShowAllFlaws } = useContext(contexto);
 
-  const returnSumOfAdvantages = (list: { cost?: number, value?: number }[]) => {
-    return list.reduce((total, item) => {
-      return total + (item.cost ?? item.value ?? 0);
-    }, 0);
+  const closePopup = () => {
+    setShowAllAdvantages(false);
+    setShowAllFlaws(false);
   };
 
-  return(
-    <div className="fixed top-0 left-0 w-full h-screen flex flex-col bg-black/70  p-2 pb-3">
-      <div className="bg-black border-2 border-white w-full h-full p-2 sm:p-5">
-        <div className="flex justify-between">
-          <p className="text-white font-bold text-2xl py-3 pt-2">
-            Vantagens e Defeitos
-          </p>
-          <button
-            type="button"
-            className="p-1 right-3 h-10"
-            onClick={ () => {
-              setShowAllAdvantages(false);
-              setShowAllFlaws(false);
-            }}
-          >
-            <IoIosCloseCircleOutline
-              className="text-4xl text-white cursor-pointer"
-              onClick={ () => {
-                setShowAllAdvantages(false);
-                setShowAllFlaws(false);
-              }}
-            />
-          </button>
+  const returnSumOfAdvantages = (list: { cost?: number; value?: number }[]) => {
+    return list.reduce((total, item) => total + (item.cost ?? item.value ?? 0), 0);
+  };
+
+  const tabButtonClassName = (value: string) => {
+    const active = selectOption === value;
+    return active
+      ? 'inline-flex items-center gap-3 border border-red-950 bg-red-950 px-3 py-2 font-geist-mono text-[10px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors'
+      : 'inline-flex items-center gap-3 border border-white/10 bg-black/40 px-3 py-2 font-geist-mono text-[10px] font-extrabold uppercase tracking-[0.12em] text-white/75 transition-colors hover:border-red-900 hover:bg-red-950/30 hover:text-white';
+  };
+
+  const badgeClassName = 'inline-flex min-w-[1.7rem] items-center justify-center border border-white/10 bg-black/45 px-1.5 py-1 text-[10px] font-bold text-white';
+
+  const renderCollection = () => {
+    if (type === 'flaw' || selectOption === 'flaws') {
+      return dataAdvAndFlaws
+        .filter((adv: any) => adv.flaws?.length > 0)
+        .map((item: any, index: number) => (
+          <div key={`${item.name}-${index}`} className="pb-2">
+            <ItemAdvantage type="flaw" item={item} />
+          </div>
+        ));
+    }
+
+    if (selectOption === 'talens') {
+      return dataTalens.map((item: any, index: number) => (
+        <div key={`${item.titlePtBr}-${index}`} className="pb-2">
+          <ItemTalisman item={item} />
         </div>
-        {
-          type === 'advantage' &&
-          <div className="flex flex-col sm:flex-row gap-1 mb-2">
-            <button
-              type="button"
-              className={`${selectOption === 'merits' ? 'border-red-500 bg-black' : 'border-white bg-gray-whats-dark'} flex items-center gap-1 px-3 py-1 border-2 rounded-full text-white`}
-              onClick={ (e) => setSelectOption('merits') }
-            >
-              <span>Méritos e Backgrounds</span>
-              {
-                dataSheet.data.advantagesAndFlaws.advantages.length > 0 &&
-                <div className="bg-black rounded-full text-white border-2 border-red-500 w-5 h-5 text-xs flex items-center justify-center">
-                  { returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.advantages) }
-                </div>
-              }
-            </button>
-            <button
-              type="button"
-              className={`${selectOption === 'talens' ? 'border-red-500 bg-black' : 'border-white bg-gray-whats-dark'} flex items-center gap-1 px-3 py-1 border-2 rounded-full text-white`}
-              onClick={ (e) => setSelectOption('talens') }
-            >
-              <span>Talismãs</span>
-              {
-                dataSheet.data.advantagesAndFlaws.talens.length > 0 &&
-                <div className="bg-black rounded-full text-white border-2 border-red-500 w-5 h-5 text-xs flex items-center justify-center">
-                  { returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.talens) }
-                </div>
-              }
-            </button>
-            <button
-              type="button"
-              className={`${selectOption === 'loresheets' ? 'border-red-500 bg-black' : 'border-white bg-gray-whats-dark'} flex items-center gap-1 border-2 px-3 py-1 rounded-full text-white`}
-              onClick={ (e) => setSelectOption('loresheets') }
-            >
-              <span>Fichas de Conhecimento</span>
-              {
-                dataSheet.data.advantagesAndFlaws.loresheets.length > 0 &&
-                <div className="bg-black rounded-full text-white border-2 border-red-500 w-5 h-5 text-xs flex items-center justify-center">
-                  { returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.loresheets) }
-                </div>
-              }
-            </button>
-            <button
-              type="button"
-              className={`${selectOption === 'flaws' ? 'border-red-500 bg-black' : 'border-white bg-gray-whats-dark'} flex items-center gap-1 border-2 px-3 py-1 rounded-full text-white`}
-              onClick={ (e) => setSelectOption('flaws') }
-            >
-              <span>Defeitos</span>
-              {
-                dataSheet.data.advantagesAndFlaws.flaws.length > 0 &&
-                <div className="bg-black rounded-full text-white border-2 border-red-500 w-5 h-5 text-xs flex items-center justify-center">
-                  { returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.flaws) }
-                </div>
-              }
-            </button>
+      ));
+    }
+
+    if (selectOption === 'loresheets') {
+      return (
+        <div>
+          {dataLoresheets
+            .filter((loresheet: ILoresheet) => !loresheet.custom)
+            .map((item: any, index: number) => (
+              <div key={`${item.titlePtBr}-${index}`} className="pb-2">
+                <ItemLoresheet item={item} />
+              </div>
+            ))}
+          <div className="mb-3 mt-4 border-b border-white/10 pb-2 font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/55">
+            Loresheets não oficiais
           </div>
-        }
-        
-        <div className="custom-grid">
-          {
-            type === 'advantage'
-            ? <div className={`flex-1 pt-3 pb-2 text-justify overflow-y-auto ${ type === 'advantage' ? 'col1': 'col1-73' }`}>
-              { 
-                selectOption === 'merits' &&
-                <div>{
-                  dataAdvAndFlaws
-                  .filter((adv: any) => adv.advantages?.length > 0)
-                  .map((item: any, index: number) => (
-                    <div key={index} className="pb-2">
-                      <ItemAdvantage type="advantage" item={item} />
-                    </div>
-                  ))
-                }</div>
-              }
-              { 
-                selectOption === 'talens' &&
-                <div>{
-                  dataTalens
-                  .map((item: any, index: number) => (
-                    <div key={index} className="pb-2">
-                      <ItemTalisman item={item} />
-                    </div>
-                  ))
-                }</div>
-              }
-              {
-                selectOption === 'loresheets' &&
-                <div>
-                  {
-                    dataLoresheets
-                    .filter((loresheet: ILoresheet) => !loresheet.custom)
-                    .map((item: any, index: number) => (
-                      <div key={index} className="pb-2">
-                        <ItemLoresheet item={item} />
-                      </div>
-                    ))
-                  }
-                  <div className="pt-3 pb-5 text-center sm:text-left text-lg">Loresheets não oficiais (Criadas pela comunidade)</div>
-                  {
-                    dataLoresheets
-                      .filter((loresheet: ILoresheet) => loresheet.custom)
-                      .map((item: any, index: number) => (
-                      <div key={index} className="pb-2">
-                        <ItemLoresheet item={item} />
-                      </div>
-                    ))
-                  }
-                </div>
-              }
-              { 
-                selectOption === 'flaws' &&
-                <div>{
-                  dataAdvAndFlaws
-                  .filter((adv: any) => adv.flaws?.length > 0)
-                  .map((item: any, index: number) => (
-                    <div key={index} className="pb-2">
-                      <ItemAdvantage type="flaw" item={item} />
-                    </div>
-                  ))
-                }</div>
-              }
-              
-            </div>
-            : <div className={`flex-1 pt-3 pb-2 text-justify overflow-y-auto ${ type === 'advantage' ? 'col1': 'col1-73' }`}>
-              { 
-                type === 'flaw' &&
-                <div>{
-                  dataAdvAndFlaws
-                  .filter((adv: any) => adv.flaws?.length > 0)
-                  .map((item: any, index: number) => (
-                    <div key={index} className="pb-2">
-                      <ItemAdvantage type="flaw" item={item} />
-                    </div>
-                  ))
-                }</div>
-              }
-            </div>
-          }
-          <div className={`${ type === 'advantage' ? 'col2': 'col2-73'} hidden sm:flex sm:flex-col w-full pl-2 pt-3`}>
-            <AdvOrFlawAdded type={'advantage'} />
-            <AdvOrFlawAdded type={'flaw'} />
+          {dataLoresheets
+            .filter((loresheet: ILoresheet) => loresheet.custom)
+            .map((item: any, index: number) => (
+              <div key={`${item.titlePtBr}-custom-${index}`} className="pb-2">
+                <ItemLoresheet item={item} />
+              </div>
+            ))}
+        </div>
+      );
+    }
+
+    return dataAdvAndFlaws
+      .filter((adv: any) => adv.advantages?.length > 0)
+      .map((item: any, index: number) => (
+        <div key={`${item.name}-${index}`} className="pb-2">
+          <ItemAdvantage type="advantage" item={item} />
+        </div>
+      ));
+  };
+
+  return (
+    <ManageCollectionFrame
+      title="Vantagens e Defeitos"
+      description={type === 'advantage'
+        ? 'Gerencie méritos, backgrounds, talismãs, loresheets e defeitos da ficha ativa.'
+        : 'Gerencie os defeitos da ficha ativa.'}
+      onClose={closePopup}
+      sidebar={(
+        <div className="principles-scrollbar h-full min-h-0 overflow-y-auto overflow-x-hidden border border-white/10 bg-black/55 p-4 pb-10">
+          <div className="space-y-4 pb-10">
+            <AdvOrFlawAdded type="advantage" />
+            <AdvOrFlawAdded type="flaw" />
           </div>
+        </div>
+      )}
+    >
+      <div className="grid h-full min-h-0 grid-rows-[auto,minmax(0,1fr)] gap-4 overflow-hidden">
+        <div className="border border-white/10 bg-black/45 px-4 py-3">
+          {type === 'advantage' ? (
+            <div className="flex flex-wrap gap-2">
+              <button type="button" className={tabButtonClassName('merits')} onClick={() => setSelectOption('merits')}>
+                <span>Méritos e Backgrounds</span>
+                {dataSheet.data.advantagesAndFlaws.advantages.length > 0 && <span className={badgeClassName}>{returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.advantages)}</span>}
+              </button>
+              <button type="button" className={tabButtonClassName('talens')} onClick={() => setSelectOption('talens')}>
+                <span>Talismãs</span>
+                {dataSheet.data.advantagesAndFlaws.talens.length > 0 && <span className={badgeClassName}>{returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.talens)}</span>}
+              </button>
+              <button type="button" className={tabButtonClassName('loresheets')} onClick={() => setSelectOption('loresheets')}>
+                <span>Loresheets</span>
+                {dataSheet.data.advantagesAndFlaws.loresheets.length > 0 && <span className={badgeClassName}>{returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.loresheets)}</span>}
+              </button>
+              <button type="button" className={tabButtonClassName('flaws')} onClick={() => setSelectOption('flaws')}>
+                <span>Defeitos</span>
+                {dataSheet.data.advantagesAndFlaws.flaws.length > 0 && <span className={badgeClassName}>{returnSumOfAdvantages(dataSheet.data.advantagesAndFlaws.flaws)}</span>}
+              </button>
+            </div>
+          ) : (
+            <div>
+              <p className="font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/55">Seleção atual</p>
+              <p className="mt-1 font-kingthings text-[0.88rem] uppercase tracking-[0.18em] text-white">Defeitos</p>
+            </div>
+          )}
+        </div>
+        <div className="principles-scrollbar h-full min-h-0 overflow-y-auto overflow-x-hidden border border-white/10 bg-black/55 p-3 pb-10 sm:p-4 sm:pb-10">
+          {renderCollection()}
         </div>
       </div>
-    </div>
+    </ManageCollectionFrame>
   );
 }

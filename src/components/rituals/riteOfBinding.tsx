@@ -1,7 +1,15 @@
 import contexto from "@/context/context";
 import { registerMessage, rollTest } from "@/firebase/messagesAndRolls";
 import { useContext, useState } from "react";
-import { FaMinus, FaPlus } from "react-icons/fa";
+import {
+  RitualCounterField,
+  ritualActionButtonClass,
+  ritualCheckboxInputClass,
+  ritualCheckboxLabelClass,
+  ritualKnownParticipantsLabel,
+  ritualParticipantsLabel,
+  ritualPenaltyLabel,
+} from "./ritualFieldShared";
 
 export function RiteOfBinding() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
@@ -22,184 +30,97 @@ export function RiteOfBinding() {
     const totalRage = rage + numberOfPjs;
     const roll = rollTest(totalRage, totalPool, penaltyOrBonus, dificulty);
     return roll;
-  }
+  };
 
   const rollDice = async () => {
     if (marked) {
-      await registerMessage(sessionId, { type: 'ritual', ...showRitualRoll.ritual }, email, setShowMessage);
+      await registerMessage(sessionId, { type: "ritual", ...showRitualRoll.ritual }, email, setShowMessage);
     } else {
       const roll = await rollTestOfUser();
-      await registerMessage(sessionId, { ...showRitualRoll.ritual, type: 'ritual', results: roll }, email, setShowMessage);
+      await registerMessage(sessionId, { ...showRitualRoll.ritual, type: "ritual", results: roll }, email, setShowMessage);
     }
-  }
+  };
 
-  return(
+  return (
     <div className="w-full">
-      <label
-        htmlFor="checkboxReflexive"
-        className="pb-5 w-full text-white flex items-start cursor-pointer">
+      <label htmlFor="checkboxReflexive" className={ritualCheckboxLabelClass}>
         <input
           type="checkbox"
           id="checkboxReflexive"
-          className="mr-2 mt-1"
+          className={ritualCheckboxInputClass}
           checked={marked}
-          onChange={ (e: any) => setMarked(!marked) }
+          onChange={(e: any) => setMarked(e.target.checked)}
         />
-        <span>Marque se o espírito favorece os Garous</span>
+        <span>Marque se o espírito favorece os Garou.</span>
       </label>
-      <label htmlFor="numberOfPjs" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">
-          Quantidade de participantes (que tem pelo menos um ponto de Fúria) além do Mestre do Ritual que estão participando (cada um dos outros participantes soma um dado de Fúria à parada):
-        </p>
-        <div className="flex w-full">
-          <button
-            type="button"
-            className={`border border-white p-3 cursor-pointer ${ numberOfPjs === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-            onClick={ () => {
-              if (numberOfPjs > 0) setNumberOfPjs(numberOfPjs - 1);
-              if (numberOfPjs < numberOfKnowPjs) setNumberOfKnowPjs(numberOfPjs - 1);
-            }}
-          >
-            <FaMinus />
-          </button>
-          <div
-            id="numberOfPjs"
-            className="p-2 bg-white text-center text-black w-full"
-            onChange={ (e: any) => {
-              if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setNumberOfPjs(15);
-              else if (e.target.value >= 0) setNumberOfPjs(Number(e.target.value));
-            }}
-          >
-            {numberOfPjs}
-          </div>
-         <button
-            type="button"
-            className={`border border-white p-3 cursor-pointer ${ numberOfPjs === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-            onClick={ () => {
-              if (numberOfPjs < 15) setNumberOfPjs(numberOfPjs + 1)
-            }}
-          >
-            <FaPlus />
-          </button>
-        </div>
-      </label>
-      <label htmlFor="numberOfKnowPjs" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">
-          Dentre os informados acima, cite a quantidade de participantes além do Mestre do Ritual que conhecem o Ritual (cada um dos outros participantes que conhecerem o Ritual somarão um dado de Fúria e um dado comum à parada):
-        </p>
-        <div className="flex w-full">
-          <button
-            type="button"
-            className={`border border-white p-3 cursor-pointer ${ numberOfKnowPjs === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-            onClick={ () => {
-              if (numberOfKnowPjs > 0) setNumberOfKnowPjs(numberOfKnowPjs - 1);
-            }}
-          >
-            <FaMinus />
-          </button>
-          <div
-            id="numberOfKnowPjs"
-            className="p-2 bg-white text-center text-black w-full"
-            onChange={ (e: any) => {
-              if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setNumberOfKnowPjs(15);
-              else if (e.target.value >= 0) setNumberOfKnowPjs(Number(e.target.value));
-            }}
-          >
-            {numberOfKnowPjs}
-          </div>
-          <button
-            type="button"
-            className={`border border-white p-3 cursor-pointer ${ numberOfKnowPjs === numberOfPjs ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-            onClick={ () => {
-              if (numberOfKnowPjs < numberOfPjs) setNumberOfKnowPjs(numberOfKnowPjs + 1)
-            }}
-          >
-            <FaPlus />
-          </button>
-        </div>
-      </label>
-      {
-        !marked &&
-        <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo espírito alvo em um teste de Poder, ou um valor imposto pelo Narrador)</p>
-          <div className="flex w-full">
-            <button
-              type="button"
-              className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-              onClick={ () => {
-                if (dificulty > 0) setDificulty(dificulty - 1);
-              }}
-            >
-              <FaMinus />
-            </button>
-            <div
-              id="dificulty"
-              className="p-2 bg-white text-center text-black w-full"
-              onChange={ (e: any) => {
-                if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setDificulty(15);
-                else if (e.target.value >= 0) setDificulty(Number(e.target.value));
-              }}
-            >
-              {dificulty}
-            </div>
-            <button
-              type="button"
-              className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-              onClick={ () => {
-                if (dificulty < 15) setDificulty(dificulty + 1)
-              }}
-            >
-              <FaPlus />
-            </button>
-          </div>
-        </label>
-      }
-      {
-        !marked &&
-        <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
-          <div className="flex w-full">
-            <button
-              type="button"
-              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-              onClick={ () => {
-                if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
-              }}
-            >
-              <FaMinus />
-            </button>
-            <div
-              id="penaltyOrBonus"
-              className="p-2 text-center text-black bg-white w-full appearance-none"
-              onChange={(e: any) => {
-                if (Number(e.target.value) < 0 && Number(e.target.value) < -50) setPenaltyOrBonus(-50);
-                else setPenaltyOrBonus(Number(e.target.value))
-              }}
-            >
-              {penaltyOrBonus}
-            </div>
-            <button
-              type="button"
-              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-              onClick={ () => {
-                if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
-              }}
-            >
-              <FaPlus />
-            </button>
-          </div>
-        </label>
-      }
+      <RitualCounterField
+        label={ritualParticipantsLabel}
+        value={numberOfPjs}
+        decreaseDisabled={numberOfPjs === 0}
+        increaseDisabled={numberOfPjs === 15}
+        onDecrease={() => {
+          if (numberOfPjs > 0) {
+            const nextValue = numberOfPjs - 1;
+            setNumberOfPjs(nextValue);
+            if (numberOfKnowPjs > nextValue) {
+              setNumberOfKnowPjs(nextValue);
+            }
+          }
+        }}
+        onIncrease={() => {
+          if (numberOfPjs < 15) setNumberOfPjs(numberOfPjs + 1);
+        }}
+      />
+      <RitualCounterField
+        label={ritualKnownParticipantsLabel}
+        value={numberOfKnowPjs}
+        decreaseDisabled={numberOfKnowPjs === 0}
+        increaseDisabled={numberOfKnowPjs === numberOfPjs}
+        onDecrease={() => {
+          if (numberOfKnowPjs > 0) setNumberOfKnowPjs(numberOfKnowPjs - 1);
+        }}
+        onIncrease={() => {
+          if (numberOfKnowPjs < numberOfPjs) setNumberOfKnowPjs(numberOfKnowPjs + 1);
+        }}
+      />
+      {!marked && (
+        <RitualCounterField
+          label="Dificuldade. Ela deve ser igual ao número de sucessos obtidos pelo espírito alvo em um teste de Poder, ou a um valor imposto pelo Narrador."
+          value={dificulty}
+          decreaseDisabled={dificulty === 0}
+          increaseDisabled={dificulty === 15}
+          onDecrease={() => {
+            if (dificulty > 0) setDificulty(dificulty - 1);
+          }}
+          onIncrease={() => {
+            if (dificulty < 15) setDificulty(dificulty + 1);
+          }}
+        />
+      )}
+      {!marked && (
+        <RitualCounterField
+          label={ritualPenaltyLabel}
+          value={penaltyOrBonus}
+          decreaseDisabled={penaltyOrBonus === -50}
+          increaseDisabled={penaltyOrBonus === 50}
+          onDecrease={() => {
+            if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1);
+          }}
+          onIncrease={() => {
+            if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1);
+          }}
+        />
+      )}
       <button
-        className="text-white bg-black hover:border-red-800 border-2 border-white  transition-colors cursor-pointer w-full p-2 font-bold"
-        onClick={ () => {
+        className={ritualActionButtonClass}
+        onClick={() => {
           rollDice();
-          setShowMenuSession('');
+          setShowMenuSession("");
           setShowRitualRoll({ show: false, ritual: {} });
         }}
       >
-        Ativar Dom
+        Evocar Ritual
       </button>
     </div>
-  )
+  );
 }

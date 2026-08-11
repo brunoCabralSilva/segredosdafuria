@@ -1,98 +1,97 @@
 'use client'
 import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
-import Image from "next/image";
 import { useContext, useState } from "react";
+import { usePathname } from "next/navigation";
 import { GiD10 } from "react-icons/gi";
+import { IoMdArrowDropright } from "react-icons/io";
 
 export default function GiftsAdded(props: { gift: any }) {
   const { gift } = props;
+  const pathname = usePathname();
+  const isSheetStandalone = pathname?.startsWith('/sheets/');
   const [showData, setShowData] = useState(false);
   const { setShowGiftRoll } = useContext(contexto);
-  return(
-    <div className="flex flex-col gap-3 border border-white pl-2 p-2 mb-2 items-center text-justify font-normal">
+
+  return (
+    <div className="mx-4 flex flex-col gap-2 border-b border-white/[0.07] px-2 pb-3 pt-2 text-justify font-normal last:border-b-0 last:pb-1">
       <div
-        className={`w-full flex flex-col items-center cursor-pointer justify-between relative ${showData && 'pl-4 transition-all'}`}
+        className="relative flex w-full cursor-pointer flex-col items-center justify-between"
         onClick={() => setShowData(!showData)}
       >
-        <div className="flex justify-center items-center mb-2">
-          {
-            gift.belonging.map((belong: any, index: number) => (
-              <Image
-                key={index}
-                src={`/images/gifts/${capitalizeFirstLetter(belong.type)}.png`}
-                alt={`Glifo dos ${capitalizeFirstLetter(belong.type)}`}
-                className="h-8 relative object-contain"
-                width={35}
-                height={400}
-              />
-            ))
-          }
-        </div>
-        <div className="font-bold">{ gift.giftPtBr }</div>
-        <div className={`flex items-center gap-2 ${showData && 'absolute top-2 right-2'}`}>
-          {
-            showData &&
-            <button
-              type="button"
-              className={`cursor-pointer`}
-              onClick={ () => setShowGiftRoll({ show: true, gift }) }
-            >
-              <GiD10 className="text-3xl text-white" />
-            </button>
-          }
+        <div className="flex w-full items-start justify-between gap-3 px-2 text-left">
+          <div className="flex min-w-0 gap-1.5">
+            <div className="flex pt-[2px] text-white/65">
+              <IoMdArrowDropright className={`${showData ? 'rotate-90' : ''} text-base transition-all`} />
+            </div>
+            <div className="min-w-0">
+              <div className="font-kingthings text-sm uppercase tracking-[0.08em] text-white">
+                {gift.giftPtBr}
+              </div>
+              <div className="mt-1 font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/55">
+                {gift.belonging.map((belong: any, index: number) => (
+                  <span key={index}>
+                    {capitalizeFirstLetter(belong.type)}
+                    {index !== gift.belonging.length - 1 && <span className="px-1">-</span>}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+          {!isSheetStandalone && <button
+            type="button"
+            className="flex h-9 w-9 items-center justify-center text-white/80  hover:text-red-700/80 hover:text-white text-2xl transition-colors duration-500"
+            onClick={(event) => { event.stopPropagation(); setShowGiftRoll({ show: true, gift }); }}
+          >
+            <GiD10 />
+          </button>}
         </div>
       </div>
-        {
-          showData &&
-          <div className="px-4 pb-4">
-            <div>
-              <span className="pr-1 font-bold">Pertence à:</span>
-              { 
-                gift.belonging.map((belong: { type: string, totalRenown: number }, index: number) => (
-                  <span key={ index } className="capitalize">
-                    { capitalizeFirstLetter(belong.type) } ({ belong.totalRenown })
-                    { index === gift.belonging.length - 1 ? '' : ', ' }
-                  </span>
-                ))
-              }
-            </div>
-            <div>
-              <span className="pr-1 font-bold">Ação:</span>
-              <span className="font-normal">{ gift.action }.</span>
-            </div>
-            <div>
-              <span className="pr-1 font-bold">Renome:</span>
-              <span className="font-normal">{ gift.renown }.</span>
-            </div>
-            <div>
-              <span className="pr-1 font-bold">Custo:</span>
-              <span className="font-normal">{ gift.cost }.</span>
-            </div>
-            {
-              gift.pool !== '' &&
-              <div>
-                <span className="pr-1 font-bold">Teste:</span>
-                <span className="font-normal">{ gift.pool }.</span>
-              </div>
-            }
-            <div className="pt-2">
-              <span className="pr-1 font-bold">Descrição:</span>
-              <span className="font-normal">{ gift.descriptionPtBr }</span>
-            </div>
-            <div className="pt-2">
-              <span className="pr-1 font-bold">Sistema:</span>
-              <span className="font-normal">{ gift.systemPtBr }</span>
-            </div>
-            {
-              gift.duration !== '' &&
-              <div className="pt-2">
-                <span className="pr-1 font-bold">Duração:</span>
-                <span className="font-normal">{ gift.duration }.</span>
-              </div>
-            }
+      {showData && (
+        <div className="space-y-1.5 px-7 pb-2 pt-1 font-geist-mono text-[10px] leading-5 text-white/78">
+          <div>
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Pertence à :</span>
+            {gift.belonging.map((belong: { type: string, totalRenown: number }, index: number) => (
+              <span key={index} className="capitalize">
+                {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
+                {index === gift.belonging.length - 1 ? '' : ', '}
+              </span>
+            ))}
           </div>
-        }
+          <div>
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Ação:</span>
+            <span>{gift.action}.</span>
+          </div>
+          <div>
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Renome:</span>
+            <span>{gift.renown}.</span>
+          </div>
+          <div>
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Custo:</span>
+            <span>{gift.cost}.</span>
+          </div>
+          {gift.pool !== '' && (
+            <div>
+              <span className="pr-1 uppercase tracking-[0.08em] text-white">Teste:</span>
+              <span>{gift.pool}.</span>
+            </div>
+          )}
+          <div className="pt-1">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Descrição:</span>
+            <span>{gift.descriptionPtBr}</span>
+          </div>
+          <div className="pt-1">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span>
+            <span>{gift.systemPtBr}</span>
+          </div>
+          {gift.duration !== '' && (
+            <div className="pt-1">
+              <span className="pr-1 uppercase tracking-[0.08em] text-white">Duração:</span>
+              <span>{gift.duration}.</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

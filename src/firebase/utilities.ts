@@ -1,4 +1,4 @@
-export const getOfficialTimeBrazil = async () => {
+﻿export const getOfficialTimeBrazil = async () => {
   const date = new Date();
   const options: Intl.DateTimeFormatOptions = {
     timeZone: 'America/Sao_Paulo',
@@ -35,6 +35,7 @@ export const playerSheet = {
   trybe: '',
   auspice: '',
   name: '',
+  portraitUrl: '',
   glory: 0,
   honor: 0,
   wisdom: 0,
@@ -43,7 +44,7 @@ export const playerSheet = {
   willpower: [],
   gifts: [],
   rituals: [],
-  form: 'Hominídeo',
+  form: 'Hominí­deo',
   background: '',
   notes: '',
   attributes: {
@@ -109,6 +110,7 @@ export const sheetStructure = (email: string, user: string, message: any) => {
       trybe: '',
       auspice: '',
       name: '',
+      portraitUrl: '',
       glory: 0,
       honor: 0,
       wisdom: 0,
@@ -117,7 +119,7 @@ export const sheetStructure = (email: string, user: string, message: any) => {
       willpower: [],
       gifts: [],
       rituals: [],
-      form: 'Hominídeo',
+      form: 'Hominí­deo',
       background: '',
       notes: '',
       attributes: {

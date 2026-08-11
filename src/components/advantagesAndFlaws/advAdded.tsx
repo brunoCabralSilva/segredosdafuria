@@ -1,39 +1,31 @@
 'use client'
 import { useState } from "react";
-import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
+import { IoMdArrowDropright } from "react-icons/io";
 
 export default function AdvAdded(props: { item: any }) {
   const { item } = props;
   const [showData, setShowData] = useState(false);
-  return(
-    <div className="flex flex-col gap-3 border border-white pl-2 p-2 mb-2 items-center">
-      <div
-        className="w-full flex items-center justify-between"
-        onClick={() => {}}
-      >
-        <span className="font-bold pl-3" id={`advantages-${item.name}`}>
-          {item.name} - { item.cost }
-        </span>
-        <button
-          type="button"
-          className="cursor-pointer"
-          onClick={() => setShowData(!showData) }
-        >
-          {
-          !showData
-            ? <CiCircleChevDown className="text-4xl" />
-            : <CiCircleChevUp className="text-4xl" />
-          }
-        </button>
+
+  return (
+    <div className="w-full border-b border-white/[0.07] pb-2 text-left last:border-b-0">
+      <div className="flex items-start gap-1.5">
+        <div className="flex pt-[2px] text-white/65">
+          <IoMdArrowDropright
+            onClick={() => setShowData(!showData)}
+            className={`${showData ? 'rotate-90' : ''} cursor-pointer text-base transition-all`}
+          />
+        </div>
+        <div className="font-geist-mono text-[11px] uppercase tracking-[0.08em] text-white">
+          {item.name} - {item.cost}
+        </div>
       </div>
-        {
-          showData &&
-          <div>
-            <p className="text-base text-justify font-normal px-3 mb-3">
-              { item.description }
-            </p>
-          </div>
-        }
+      {showData && (
+        <div>
+          <p className="px-5 pb-1 pt-2 text-justify font-geist-mono text-[10px] font-normal leading-5 text-white/78">
+            {item.description}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

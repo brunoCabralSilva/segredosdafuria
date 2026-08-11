@@ -1,98 +1,124 @@
-'use client';
-import { useContext, useEffect, useState } from "react";
+﻿'use client';
+
+import { useContext, useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import Nav from '@/components/nav';
-import Footer from "@/components/footer";
+import Footer from '@/components/footer';
+import Simplify from '@/components/simplify';
+import contexto from '@/context/context';
 import listTalismans from '../../../data/talismans.json';
-import { ITalisman } from "../../../interface";
-import Feedback from "@/components/feedback";
-import contexto from "@/context/context";
-import { useParams } from "next/navigation";
+import { ITalisman } from '../../../interface';
 
 export default function Talisman() {
   const params = useParams();
   const talisman = params?.talisman as string;
   const [dataTalisman, setDataTalisman] = useState<ITalisman>();
-  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  const { resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
-    const findTalisman: ITalisman | undefined = listTalismans
-      .find((tlsmn: ITalisman) => talisman === tlsmn.id);
+
+    const findTalisman = listTalismans.find((item: ITalisman) => talisman === item.id);
     setDataTalisman(findTalisman);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [talisman]);
 
-  if (dataTalisman) {
-    return(
-      <div className="w-full bg-ritual bg-cover bg-top relative">
-        <div className="absolute w-full h-full bg-black/90" />
-        <Nav />
-        <section className="mb-2 relative px-2 min-h-screen">
-          <div className="py-10 flex flex-col dataGifts-center sm:dataGifts-start w-full z-20 text-white text-justify overflow-y-auto">
-            <article className="w-full h-full px-4 pb-4 pt-10 sm:p-10 bg-black/70 text-white overflow-y-auto">
-              <div className="flex flex-col justify-center items-center sm:items-start">
-                <h1 className="font-bold text-lg text-center sm:text-left w-full">
-                  {`${ dataTalisman.titlePtBr } (${ dataTalisman.title })`}
-                </h1>
-                <hr className="w-10/12 my-4 sm:my-2" />
-              </div>
-              <p className="pt-1">
-                <span className="font-bold pr-1">Fonte:</span>
-                { dataTalisman.book }, pg. { dataTalisman.page }.
+  if (!dataTalisman) {
+    return (
+      <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+        <div className="h-full w-full bg-black/80">
+          <Simplify />
+          <div className="absolute inset-0 bg-black/85" />
+          <Nav />
+          <main className="relative z-10 mx-auto flex min-h-[60vh] w-full max-w-[1200px] items-center justify-center px-4 py-10 text-white sm:px-8">
+            <div className="border border-zinc-500/30 bg-black/80 px-6 py-8 text-center">
+              <p className="font-geist-mono text-xs uppercase tracking-[0.12em] text-white/65">Talismã</p>
+              <h1 className="mt-3 font-kingthings text-3xl text-white">Não encontrado</h1>
+              <p className="mt-4 font-geist-mono text-sm leading-6 text-white/75">
+                Não foi possível localizar este talismã no momento.
               </p>
-              {
-                <p className="pt-1">
-                  <span className="font-bold pr-1">Custo:</span>
-                  { dataTalisman.backgroundCostPtBr }.
-                </p>
-              }
-              {
-                <p className="pt-1">
-                  <span className="font-bold pr-1">Cost:</span>
-                  { dataTalisman.backgroundCost }.
-                </p>
-              }
-              <p className="pt-3 text-justify">
-                <span className="font-bold pr-1">Descrição:</span>
-                { dataTalisman.descriptionPtBr }
-              </p>
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">Sistema:</span>
-                { dataTalisman.systemPtBr }
-              </p>
-              <p className="pt-3 text-justify">
-                <span className="font-bold pr-1">Description (original):</span>
-                { dataTalisman.description }
-              </p>
-              <p className="pt-1 text-justify">
-                <span className="font-bold pr-1">System (original):</span>
-                { dataTalisman.system }
-              </p>
-              <div className="flex flex-col sm:flex-row sm:justify-between">
-              </div>
-              <div className="flex flex-col sm:flex-row sm:justify-between">
-              <button
-                type="button"
-                className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-                onClick={() => setShowFeedback(true) }
+              <Link
+                href="/talismans"
+                className="mt-6 inline-flex border border-zinc-500/30 bg-[#7a0000] px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-[#930000]"
               >
-                Enviar Feedback
-              </button>
-              {
-                showFeedback && <Feedback title={ dataTalisman.title } /> 
-              }
+                Ver todos os talismãs
+              </Link>
+            </div>
+          </main>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
+      <div className="h-full w-full bg-black/80">
+        <Simplify />
+        <div className="absolute inset-0 bg-black/85" />
+        <Nav />
+
+        <main className="relative z-10 mx-auto flex w-full max-w-[1200px] flex-col px-4 pb-10 pt-4 sm:px-8 sm:pb-14">
+          <section className="group relative overflow-hidden border border-zinc-500/30 bg-black text-white">
+            <div className="absolute bottom-4 right-4 pointer-events-none opacity-[0.08]">
+              <p className="font-kingthings text-[120px] leading-none text-white sm:text-[160px]">
+                T
+              </p>
+            </div>
+
+            <div className="relative z-10 px-5 py-8 sm:px-8 sm:py-10">
+              <Link
+                href="/talismans"
+                className="inline-flex border border-zinc-500/30 bg-black/70 px-4 py-2 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/80 transition-colors hover:border-red-700 hover:text-white"
+              >
+                Voltar para talismãs
+              </Link>
+
+              <div className="mt-6">
+                <p className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/72">
+                  Talismã
+                </p>
+                <h1 className="mt-3 font-kingthings text-2xl leading-none text-white sm:text-3xl lg:text-4xl">
+                  {dataTalisman.titlePtBr}
+                </h1>
+                <p className="mt-3 font-geist-mono text-[11px] uppercase leading-6 text-white/70">
+                  {dataTalisman.title}
+                </p>
               </div>
-            </article>
-          </div>
-        </section>
+
+              <div className="mt-6 space-y-3 border-t border-white/10 pt-6">
+                <p className="text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                  <span className="text-white">CUSTO:</span> {dataTalisman.backgroundCostPtBr}
+                </p>
+                <p className="text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                  <span className="text-white">FONTE:</span> {dataTalisman.book}, pg. {dataTalisman.page}
+                </p>
+              </div>
+
+              <div className="mt-6 space-y-6 border-t border-white/10 pt-6">
+                <div>
+                  <h2 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Descrição</h2>
+                  <p className="mt-4 text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                    {dataTalisman.descriptionPtBr}
+                  </p>
+                </div>
+
+                {String(dataTalisman.systemPtBr).trim() !== '' && (
+                  <div>
+                    <h2 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Sistema</h2>
+                    <p className="mt-4 text-justify font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs">
+                      {dataTalisman.systemPtBr}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
       <Footer />
     </div>
   );
-} return (
-    <div className="w-full bg-ritual bg-cover bg-top relative h-screen">
-      <div className="absolute w-full h-full bg-black/80" />
-      <Nav />
-      <span className="loader z-50" />
-    </div>
-  );
 }
+

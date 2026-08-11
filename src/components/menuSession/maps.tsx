@@ -870,14 +870,7 @@ export default function Maps() {
 
   if (!hasMap) {
     return (
-      <div className="z-80 sm:z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
-        <div className="w-full flex items-center justify-end pt-1 pb-2 px-2 bg-black">
-          <IoIosCloseCircleOutline
-            className="text-4xl text-white cursor-pointer mr-1 min-w-9"
-            onClick={() => setShowMaps({ show: false, data: "" })}
-          />
-        </div>
-
+      <div className="z-[60] sm:z-50 inset-0 relative md:inset-auto w-full h-full min-h-0 flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
         <div className="w-full h-full flex items-center justify-center bg-black text-white">
           <div className="rounded-lg border border-zinc-700 bg-zinc-950 px-6 py-5 text-center shadow-2xl">
             <h2 className="text-lg font-bold mb-2">
@@ -894,8 +887,8 @@ export default function Maps() {
   }
 
   return (
-    <div className="z-80 sm:z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
-      <div className="w-full flex items-center justify-between gap-3 pt-1 pb-2 px-2 bg-black">
+    <div className="z-[70] sm:z-50 inset-0 relative md:inset-auto w-full h-full min-h-0 flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0">
+      <div className="w-full border-b border-white/10 bg-black/55 px-4 py-3">
         <div className="flex items-center gap-2 flex-wrap">
           <button
             type="button"
@@ -903,10 +896,10 @@ export default function Maps() {
               clearMeasurementLine();
               toggleMarking();
             }}
-            className={`w-9 h-9 rounded border flex items-center justify-center text-lg ${
+            className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
               isMarkingEnabled
-                ? "bg-green-600 text-white border-green-400"
-                : "bg-zinc-700 text-zinc-300 border-zinc-500"
+                ? "border-red-950 bg-red-950 text-white"
+                : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
             }`}
             title={isMarkingEnabled ? "Marcação ativa" : "Marcação inativa"}
           >
@@ -916,10 +909,10 @@ export default function Maps() {
           <button
             type="button"
             onClick={toggleMeasuring}
-            className={`w-9 h-9 rounded border flex items-center justify-center text-lg ${
+            className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
               isMeasuringEnabled
-                ? "bg-green-600 text-white border-green-400"
-                : "bg-zinc-700 text-zinc-300 border-zinc-500"
+                ? "border-red-950 bg-red-950 text-white"
+                : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
             }`}
             title={isMeasuringEnabled ? "Medição ativa" : "Medição inativa"}
           >
@@ -932,7 +925,7 @@ export default function Maps() {
               clearMeasurementLine();
               zoomOut();
             }}
-            className="px-3 py-1 rounded text-sm font-semibold bg-zinc-800 text-white border border-zinc-500"
+            className="inline-flex h-9 min-w-9 items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
           >
             -
           </button>
@@ -943,7 +936,7 @@ export default function Maps() {
               clearMeasurementLine();
               resetZoom();
             }}
-            className="px-3 py-1 rounded text-sm font-semibold bg-zinc-900 text-white border border-zinc-500"
+            className="inline-flex h-9 min-w-[4.5rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
           >
             {Math.round(zoom * 100)}%
           </button>
@@ -965,14 +958,6 @@ export default function Maps() {
             </span>
           )}
         </div>
-
-        <IoIosCloseCircleOutline
-          className="text-4xl text-white cursor-pointer mr-1 min-w-9"
-          onClick={() => {
-            clearMeasurementLine();
-            setShowMaps({ show: false, data: "" });
-          }}
-        />
       </div>
 
       <div

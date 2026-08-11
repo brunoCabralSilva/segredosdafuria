@@ -1,34 +1,33 @@
 'use client'
 import contexto from '@/context/context';
-import Image from 'next/image';
 import { useContext } from 'react';
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 export default function MessageToUser() {
   const { showMessage, setShowMessage } = useContext(contexto);
-  return(
-    <div className="z-80 fixed top-0 left-0 w-full h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0">
-      <div className="w-full sm:w-2/3 md:w-1/2 h-1/2 overflow-y-auto flex flex-col justify-center items-center bg-ritual bg-cover relative border-white border-2 ">
-        <div className="bg-black/90 h-full w-full pb-5 flex flex-col items-center justify-center relative">
-          <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end absolute top-0 right-0">
-            <IoIosCloseCircleOutline
-              className="text-4xl text-white cursor-pointer"
+  const messageText = typeof showMessage.text === 'string' ? showMessage.text : '';
+
+  return (
+    <div className="fixed inset-0 z-[180] flex items-center justify-center bg-black/80 px-3 sm:px-0">
+      <div className="relative w-full max-w-lg overflow-hidden border border-zinc-500 bg-ritual bg-cover text-white shadow-[0_0_24px_rgba(0,0,0,0.45)]">
+        <div className="bg-black/80 h-full w-full relative flex min-h-0 flex-col">
+          <div className="border-b border-white/10 flex items-center gap-2 w-full justify-end p-1">
+            <button
+              type="button"
               onClick={() => setShowMessage({ show: false, text: '' })}
-            />
+              className="flex h-8 w-8 shrink-0 items-center justify-center text-white/75 transition-colors hover:border-red-700 bg-[#7a0000] hover:text-white"
+              aria-label="Fechar mensagem"
+            >
+              <IoIosCloseCircleOutline className="text-2xl" />
+            </button>
           </div>
-          <div className="px-5 w-full flex flex-col items-center justify-center">
-              <Image
-                src="/images/gifts/Dons Nativos.png"
-                alt="Glifo de um lobo"
-                className="w-12 relative object-contain mb-5"
-                width={35}
-                height={400}
-              />
-            <label htmlFor="palavra-passe" className="flex flex-col items-center w-full">
-              <p className="text-white w-full text-center font-bold">
-                { showMessage.text }
+
+          <div className="principles-scrollbar max-h-[70vh] overflow-y-auto px-3 py-3 sm:px-4">
+            <div className="bg-black/45 p-3 sm:p-4 h-[25vh] flex items-center justify-center">
+              <p className="whitespace-pre-line font-geist-mono leading-relaxed tracking-[0.08em] text-white/82 text-sm text-center">
+                {messageText}
               </p>
-            </label>
+            </div>
           </div>
         </div>
       </div>

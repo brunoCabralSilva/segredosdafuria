@@ -2,40 +2,38 @@
 import { useContext } from "react";
 import contexto from "@/context/context";
 import GiftsMechanic from "./giftsMechanic";
+import { SpecialRollFrame } from "../popup/specialRollShared";
 
 export default function GiftRoll() {
-  const { showGiftRoll } =  useContext(contexto);
+  const { showGiftRoll, setShowGiftRoll } = useContext(contexto);
 
-  return(
-    <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl font-bold">Dom:  { showGiftRoll.gift.giftPtBr }</p>
-      </label>
-      {
-        showGiftRoll.gift.cost &&
-        <label className="w-full flex flex-col items-center">
-          <p className="text-white w-full pb-1 text-justify">
-            <span className="pr-2 font-bold">Custo:</span>
-            { showGiftRoll.gift.cost }
-          </p>
-        </label>
-      }
-      {
-        showGiftRoll.gift.pool &&
-        <label className="w-full flex flex-col items-center">
-          <p className="text-white w-full pb-1 text-justify">
-            <span className="pr-2 font-bold">Teste:</span>
-            { showGiftRoll.gift.pool }
-          </p>
-        </label>
-      }
-      <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-justify">
-          <span className="pr-2 font-bold">Sistema:</span>
-          { showGiftRoll.gift.systemPtBr }
-        </p>
-      </label>
-      <GiftsMechanic name={showGiftRoll.gift.gift} />
-    </div>
+  return (
+    <SpecialRollFrame
+      title={`Dom: ${showGiftRoll.gift.giftPtBr || ''}`}
+      description=""
+      onClose={() => setShowGiftRoll({ show: false, gift: {} })}
+    >
+      <div className="flex flex-col gap-3">
+        {showGiftRoll.gift.cost && (
+          <div className="border-b border-white/5 pb-2 font-geist-mono text-[10px] leading-5 text-white/78">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Custo:</span>
+            <span>{showGiftRoll.gift.cost}</span>
+          </div>
+        )}
+        {showGiftRoll.gift.pool && (
+          <div className="border-b border-white/5 pb-2 font-geist-mono text-[10px] leading-5 text-white/78">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Teste:</span>
+            <span>{showGiftRoll.gift.pool}</span>
+          </div>
+        )}
+        <div className="font-geist-mono text-[10px] leading-5 text-white/78">
+          <span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span>
+          <span>{showGiftRoll.gift.systemPtBr}</span>
+        </div>
+        <div className="border-t border-white/10 pt-3">
+          <GiftsMechanic name={showGiftRoll.gift.gift} />
+        </div>
+      </div>
+    </SpecialRollFrame>
   );
 }

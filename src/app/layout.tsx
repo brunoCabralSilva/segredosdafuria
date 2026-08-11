@@ -1,14 +1,22 @@
 import './globals.css';
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cinzel, Geist_Mono, Inter } from "next/font/google";
 import Provider from "@/context/provider";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  variable: '--font-cinzel',
+});
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  variable: '--font-geist-mono',
+});
 
 export const metadata: Metadata = {
   title: 'Segredos da Fúria',
   description: 'Descubra o universo de "Werewolf: The Apocalypse 5th" em minha aplicação React desenvolvida com Next.js e estilizada com Tailwind CSS. Explore tribos, augúrios e raças, pesquise rituais e encontre dons específicos por meio de uma busca avançada.',
-}
+};
 
 export default function RootLayout({
   children,
@@ -17,11 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        <body className={inter.className}>
-          <Provider>
-            {children}
-          </Provider>
-        </body>
+      <body className={`${inter.className} ${cinzel.variable} ${geistMono.variable}`}>
+        <Provider>
+          {children}
+        </Provider>
+      </body>
     </html>
-  )
+  );
 }

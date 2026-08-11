@@ -39,7 +39,7 @@ export default function Info() {
                   <h1 className="text-lg font-bold pt-3 pb-1">O Jogador</h1>
                   <hr className="mb-3" />
                   <p>
-                    Ao ingressar como jogador na plataforma Segredos da Fúria, você se depara com uma série de funcionalidades projetadas para aprimorar sua experiência no universo d Werewolf: The Apocalypse 5th. Aqui está um pouco da jornada do jogador:
+                    Entre em uma Sessão viva, com chat, ficha, automações e tudo o que sua mesa precisa para ganhar ritmo de verdade. Ou crie a sua e conduza a história com praticidade, imersão e controle desde o primeiro clique.
                   </p>
                   <p className="py-3">
                     <span className="font-bold pr-1"> - Ficha de Personagem Dinâmica:</span>

@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 
 export function TheHowlCarries() {
   const [marked, setMarked] = useState(false);
-  const { sessionId, session, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, session, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
     const rageTest = await calculateRageCheck(session.typeSession, sheetId, setShowMessage);
@@ -108,14 +108,17 @@ export function TheHowlCarries() {
           checked={marked}
           onChange={ (e: any) => setMarked(e.target.checked) }
         />
-        <span>Marque se deseja que o efeito pode seja limitado à zona de proteção ao redor do caern onde possa estar (Será realidado um Teste de Fúria)</span>
+        <span>Marque se deseja que o efeito pode seja limitado à zona de proteção ao redor do caern onde possa estar (Será realizado um Teste de Fúria)</span>
       </label>
       <button
-        className="text-white bg-black hover:border-red-800 border-2 border-white  transition-colors cursor-pointer w-full p-2 font-bold"
+        className="mt-3 w-full border border-white/20 bg-black px-2.5 py-2 font-geist-mono text-[9px] font-bold uppercase tracking-[0.08em] text-white transition-colors cursor-pointer hover:border-red-800"
         onClick={ () => {
           discountWillpower();
-          setShowMenuSession('');
           setShowGiftRoll({ show: false, gift: {} });
+          setOptionSelect('chat');
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('session:open-chat'));
+          }
         }}
       >
         Ativar Dom

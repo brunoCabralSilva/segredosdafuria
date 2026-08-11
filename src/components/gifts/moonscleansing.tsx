@@ -13,6 +13,7 @@ export function Moonscleansing() {
     setShowMessage,
     showGiftRoll, setShowGiftRoll,
     setShowMenuSession,
+    setOptionSelect,
   } = useContext(contexto);
 
   type WillpowerDamage = {
@@ -158,22 +159,25 @@ export function Moonscleansing() {
     } else if (dataSheet.data.rage >= 4 && !hasEnoughWillpower) {
       setShowMessage({
         show: true,
-        text: 'Você não possui 4 pontos de Força de Vontade disponíveis para realizar este teste.'
+        text: 'Você não possui 4 pontos de Força de Vontade disponí­veis para realizar este teste.'
       });
     } else if (dataSheet.data.rage < 4 && hasEnoughWillpower) {
-      setShowMessage({ show: true, text: 'Você não possui 4 pontos de Fúria suficientes para ativar este Dom.' });
+      setShowMessage({ show: true, text: 'Você não possui 4 pontos de Força de Vontade disponí­veis para ativar este Dom.' });
     } else {
-      setShowMessage({ show: true, text: 'Você não possui 4 pontos Fúria e nem 4 pontos Força de Vontade para ativar este Dom.' });
+      setShowMessage({ show: true, text: 'Você não possui 4 pontos Fúria e nem 4 pontos Forçaa de Vontade para ativar este Dom.' });
     }
   }
 
   return(
     <button
-        className="text-white bg-black hover:border-red-800 border-2 border-white  transition-colors cursor-pointer w-full p-2 font-bold"
+        className="mt-3 w-full border border-white/20 bg-black px-2.5 py-2 font-geist-mono text-[9px] font-bold uppercase tracking-[0.08em] text-white transition-colors cursor-pointer hover:border-red-800"
         onClick={ () => {
           roll();
-          setShowMenuSession('');
           setShowGiftRoll({ show: false, gift: {} });
+          setOptionSelect('chat');
+          if (typeof window !== 'undefined') {
+            window.dispatchEvent(new Event('session:open-chat'));
+          }
         }}
       >
         Ativar Dom

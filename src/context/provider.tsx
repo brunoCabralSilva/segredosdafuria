@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { ReactNode, useState } from 'react';
 import contexto from './context';
 import { sheetStructure } from '@/firebase/utilities';
@@ -57,7 +57,7 @@ export default function Provider({children }: IProvider) {
   const [addTouchstone, setAddTouchstone] = useState({show: false, data: {}});
   const [showDeleteTouchstone, setShowDeleteTouchstone] = useState({ show: false, name: '' });
   const [addPrinciple, setAddPrinciple] = useState({show: false, data: {}});
-  const [showDeletePrinciple, setShowDeletePrinciple] = useState({ show: false, name: '' });
+  const [showDeletePrinciple, setShowDeletePrinciple] = useState({ show: false, description: '', order: null as number | null });
   const [addFavorAndBan, setAddFavorAndBan] = useState({show: false, data: {}, type: ''});
   const [showDeleteFavorAndBan, setShowDeleteFavorAndBan] = useState({ show: false, name: '', type: '' });
   const [showEvaluateSheet, setShowEvaluateSheet] = useState({ show: false, data: '' });
@@ -78,6 +78,7 @@ export default function Provider({children }: IProvider) {
   const [showCreateSheet, setShowCreateSheet] = useState(false);
   const [showResetPlayer, setShowResetPlayer] = useState({ show: false, email: '' });
   const [showRemovePlayer, setShowRemovePlayer] = useState({ show: false, email: '' });
+  const [showRageTest, setShowRageTest] = useState(false);
   const [showWillpowerTest, setShowWillpowerTest] = useState(false);
   const [showBannerSession, setShowBannerSession] = useState({ show: false, sessionId: '' });
   const [rerollWithWillPower, setRerollWithWillPower] = useState({ show: false, dataMessage: {} });
@@ -136,12 +137,13 @@ export default function Provider({children }: IProvider) {
     setShowCreateSheet(false);
     setShowResetPlayer({ show: false, email: '' });
     setShowRemovePlayer({ show: false, email: '' });
+    setShowRageTest(false);
     setAddTouchstone({ show: false, data: {} });
     setShowDeleteTouchstone({ show: false, name: '' });
     setShowEvaluateSheet({show: false, data: '' });
     setShowDownloadPdf({ show: false, email: '' });
     setAddPrinciple({show: false, data: {}});
-    setShowDeletePrinciple({ show: false, name: '' });
+    setShowDeletePrinciple({ show: false, description: '', order: null });
     setAddFavorAndBan({show: false, data: {}, type: ''});
     setShowDeleteFavorAndBan({ show: false, name: '', type: '' });
     setShowBannerSession({ show: false, sessionId: '' });
@@ -231,6 +233,7 @@ export default function Provider({children }: IProvider) {
         showCreateSheet, setShowCreateSheet,
         showResetPlayer, setShowResetPlayer,
         showRemovePlayer, setShowRemovePlayer,
+        showRageTest, setShowRageTest,
         showWillpowerTest, setShowWillpowerTest,
         showBannerSession, setShowBannerSession,
         rerollWithWillPower, setRerollWithWillPower,
@@ -241,4 +244,5 @@ export default function Provider({children }: IProvider) {
     </contexto.Provider>
   );
 }
+
 

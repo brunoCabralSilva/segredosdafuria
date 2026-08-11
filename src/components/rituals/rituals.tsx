@@ -1,36 +1,31 @@
 import contexto from "@/context/context";
 import { useContext } from "react";
-import { IoAdd } from "react-icons/io5";
-import RitualsAdded from "./ritualsAdded";
 import AddRitual from "../popup/addRitual";
+import RitualsAdded from "./ritualsAdded";
 
 export default function Rituals() {
   const { dataSheet, showRitualsToAdd, setShowRitualsToAdd } = useContext(contexto);
-	return(
-    <div className="flex flex-col w-full h-75vh overflow-y-auto">
-      <div className="w-full h-full mb-2 p-1 text-white flex-col items-start justify-center font-bold">
-        <div className="w-full mb-2 flex items-center justify-between font-bold">
-          <p className="w-full mt-5 mb-3">Rituals</p>
-          <button
-            type="button"
-            className="p-1 border-2 border-white bg-white right-3"
-            onClick={ () => setShowRitualsToAdd(true) }
-          >
-            <IoAdd className="text-black text-xl" />
-          </button>
-        </div>
-        <div className="pb-5">
-          {
-            dataSheet.data.rituals.map((item: any, index: number) => (
-              <RitualsAdded key={ index } ritual={ item } />
-            ))
-          }
-        </div>
-      { showRitualsToAdd && <AddRitual />}
+
+  return (
+    <section className="visage-card relative mt-2 sm:mt-5 w-full overflow-hidden border border-[#708578]/40 bg-[#090d0e]/95 text-slate-300 shadow-[inset_0_0_80px_rgba(0,0,0,0.7)]">
+      <div className="flex items-center justify-between px-6 pb-3 pt-5">
+        <p className="font-kingthings text-[0.82rem] uppercase tracking-[0.26em] text-red-500/85">Rituais</p>
+        <button
+          type="button"
+          onClick={() => setShowRitualsToAdd(true)}
+          className="sheet-readonly-action inline-flex items-center justify-center border border-red-950 bg-red-950 p-2 font-geist-mono text-[9px] uppercase transition-colors hover:bg-red-900 text-white"
+          aria-label="Gerenciar Rituais"
+        >
+          Gerenciar
+        </button>
       </div>
-    </div>
-	)
+      <div className="mx-6 border-b border-white/10" />
+      <div className="pb-4 pt-2">
+        {dataSheet.data.rituals.map((item: any, index: number) => (
+          <RitualsAdded key={index} ritual={item} />
+        ))}
+      </div>
+      {showRitualsToAdd && <AddRitual />}
+    </section>
+  );
 }
-
-
-      

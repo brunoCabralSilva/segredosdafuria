@@ -37,7 +37,7 @@ export default function Chat(props: { sidebar?: boolean }) {
         session && session.gameMaster == email &&
         <HpAndWillPower />
       }
-      <div id="messages-container" className={`relative ${sidebar ? 'h-[79vh] pb-[11vh]' : 'h-90vh'} overflow-y-auto pt-2 px-2`}>
+      <div id="messages-container" className={`relative h-screen overflow-hidden pt-2 px-2`}>
         {
           messages
           ? messages.map((msg: any, index: number) => {
@@ -47,12 +47,12 @@ export default function Chat(props: { sidebar?: boolean }) {
 
               return (<Message key={index} dataMessage={msg} color="gray" />);
             })
-          : <div className={`bg-black/60 text-white ${sidebar ? 'h-80vh' : 'h-90vh'} flex items-center justify-center flex-col`}>
+          : <div className={`bg-black/60 text-white flex items-center justify-center flex-col`}>
               <Loading />
             </div>
         }
       </div>
-      <SessionBar />
+        <SessionBar />
     </div>
   )
 }

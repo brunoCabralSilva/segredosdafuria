@@ -19,7 +19,7 @@
     "system": "The Garou automatically succeeds in any attempt to keep their balance on any surface, so long as that surface can support their weight. They become immune to falling damage from heights of up to ten times their Honor in meters. If surprised, the Garou can activate this Gift reflexively with a Wits + Survival test at Difficulty 3. This Gift can be used in any form.",
     "systemPtBr":"O garou é automaticameme bem-sucedido em toda tentativa de manter o equilíbrio em qualquer superfície desde que esta consiga arcar com o peso dele. Passa a ser imune ao dano por queda de alturas equivalentes a até dez vezes seu valor de Honra em metros. Se apanhado de surpresa, o garou podera ativar este Dom por reflexo com um teste bem-sucedido de Raciocínio + Sobrevivência com Dificuldade 3. É possível usar este Dom em qualquer uma das formas.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 147
   },
   {
@@ -41,7 +41,7 @@
     "system": "",
     "systemPtBr":"O usuário enxerga em todo tipo de escuridão natural, sem penalidade. Se a escuridão for de origem sobrenatural, o usuário receberá sua Sabedoria como dados bônus em qualquer tentativa de resistir às trevas (se isso for possível).",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 146
   },
   {
@@ -63,7 +63,7 @@
     "system": "The player tests Strength + Glory and leaps three meters horizontally or two meters vertically for every success on the test.",
     "systemPtBr":"O jogador faz um teste de Força + Glória e salta três metros na horizontal ou dois metros na vertical para cada sucesso obtido.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 147
   },
   {
@@ -85,7 +85,7 @@
     "system": "The player tests Intelligence + Wisdom against the Difficulty of the local Gauntlet (usually 2-5). If successful, the Garou can perceive and interact with denizens of both aspects of existence without penalty, at the Storyteller's discretion. Although this ability doesn't make them visible to physical entities if used from the Umbra, it does alert some spirits to their presence if used in the physical world.",
     "systemPtBr":"A jogadora faz um teste de Inteligência + Sabedoria com Dificuldade que dependerá da Película da área (geralmente 2-5). Se for bem-sucedida, a garou perceberá e conseguirá interagir com habitantes dos dois aspectos da existência, sem penalidade e a critério do Narrador. O Dom não torna a garou visível para as entidades físicas quando utilizado na Umbra, mas alertará certos espíritos para a presença dela se for usado no mundo físico.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 147
   },
   {
@@ -107,7 +107,7 @@
     "system": "The player makes a Rage Check to gain bonus dice equal to their Glory on a single Brawl attack.",
     "systemPtBr":"0 jogador faz uma checagem de Fúria para somar seu valor de Glória - como dados bônus - a uma parada de ataque envolvendo Briga.",
     "duration": "Um Ataque",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 147
   },
   {
@@ -129,7 +129,7 @@
     "system": "This Gift can be used on any single human or animal, within two meters, with whom the Garou can establish eye contact. The Gift succeeds automatically on mundane humans and animals and causes the target to get out of the werewolf's way while averting their eyes, if not outright groveling. Supernatural creatures and humans aware of the Garou and their powers are unaffected unless the player wins a Charisma + Honor vs Composure + Resolve test. A subject can be targeted by this Gift only once per scene, and the Gift cannot be used during a physical conflict. This Gift can be used in any form.",
     "systemPtBr":"Pode-se usar este Dom com qualquer ser humano ou animal a até dois metros de distância que o garou possa olhar nos olhos. O Dom será automaticamente bem-sucedido se usado em seres humanos e animais comuns. Fará o alvo sair do caminho do lobisomem e desviar o olhar, quando não se prostrar no chão. Criaturas sobrenaturais e humanos que sabem dos garous e seus poderes não serão afetados, a não ser que o jogador vença um teste de Carisma + Honra vs. Autocontrole + Determinação. Um determinado alvo só pode ser visado por este Dom uma vez por cena. Não se pode usar o Dom durante um conflito físico. É possível usar este Dom em qualquer uma das formas.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 146
   },
   {
@@ -151,7 +151,7 @@
     "system": "Upon activating this Gift, the Difficulty of all Awareness tests made by the player are lowered by the character's Wisdom, to a minimum of 2. This Gift can be used in any form.",
     "systemPtBr":"Com a ativação do Dom, a Dificuldade de todos os testes de Percepção feitos pelo jogador sofrerá redução igual à Sabedoria do personagem, sendo 2 a Dificuldade mínima. É possível usar este Dom em qualquer uma das formas.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 148
   },
   {
@@ -173,7 +173,7 @@
     "system": "The Gift allows the Garou to attack additional opponents, within reach, up to the character's Glory, without penalty. Make a single attack roll and apply it to every opponent engaged and covered by the Rage expenditure (see cost). Any additional bonus to the attack applies to all opponents.",
     "systemPtBr":"O Dom permite a garou atacar sem nenhuma penalidade uma quantidade de oponentes adicionais ao alcance de suas mãos igual, no máximo, à sua Glória. Role a parada de ataque uma vez e aplique o resultado a todo oponente engajado que o gasto de Fúria incluir (consulte o custo do Dom). Se o ataque tiver outros bônus, aplique-os a todos os oponentes válidos.",
     "duration": "Um Ataque",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 147
   },
   {
@@ -195,7 +195,7 @@
     "system": "The Garou gains their Honor as bonus dice to all tests to avoid projectile weapons. This Gift can be used only in crinos form.",
     "systemPtBr":"A garou ganhará seu valor de Honra como dados bônus em todos os testes que fizer para tentar evitar projéteis. Só é possível usar este Dom na forma crinos.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 148
   },
   {
@@ -217,7 +217,7 @@
     "system": "The player tests Stamina + Glory at a Difficulty of 2. Each success in the margin allows them to redistribute a single dot from one Physical  Attribute to another. No Attribute can drop below 0 or exceed 5 dots through use of this Gift. At the Storyteller's discretion, this Gift can also allow the user to contort their body to fit into spaces too tight for a normal body to traverse, such as common air ducts or water pipes. In this case, the Difficulty is based on the dimensions of the target space.",
     "systemPtBr":"O jogador faz um teste de Vigor + Glória com Dificuldade 2. Cada sucesso da margem permitirá a ele passar um ponto de um Atributo Físico para outro. Nenhum Atributo poderá ficar com menos de 0 ou mais de 5 pontos após o uso deste Dom. A critério do Narrador, este Dom também pode permitir ao usuário se contorcer até caber em espaços apertados demais para um corpo normal, como tubulações de ar ou água comuns. Nesse caso, a Dificuldade dependerá das dimensões do espaço visado.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 148
   },
   {
@@ -239,7 +239,7 @@
     "system": "The Garou beseeches the spirit for a turn and their player tests Resolve + Honor against the table below: Computers (including mobile phones) with Difficulty 2, Electronics (including cameras) with Difficulty 3, Electrical or combustion engines (cars, trains, etc.) with Difficulty 4, Firearms and other chemical reactions (explosives, fire, etc.) with Difficulty 5, Strictly mechanical devices (winch, bicycle, mechanical lock) with Difficulty 6+. All equipment within 20 meters with a Difficulty match ing or falling below (see table) the number of successes rolled stops functioning for the duration of the Gift. Note that it is entirely possible to overshoot the target, taking out a far wider range of devices than what was intended, but such are the vagaries of the Wyld.",
     "systemPtBr":"O garou passa um turno implorando a cooperação do espírito, aí o jogador faz um teste de Determinação + Honra com Dificuldade indicada a seguir: computadores (celulares inclusive) com dificuldade 2, eletrônicos (câmeras inclusive) com dificuldade 3, motores elétricos ou a combustão (carros, trens, etc.)  com dificuldade 4, armas de fogo e outras reações químicas (explosivos, chamas, etc.) com dificuldade 5 e dispositivos exclusivamente mecânicos (cabrestante, bicicleta, fechadura mecânica) com dificuldade 6+. Todos os equipamentos a até 20 metros de distância com uma Dificuldade (consulte a tabela) igual ou inferior a quantidade de sucessos obtidos deixará de funcionar e continuará inoperante enquanto o Dom durar. Observe que é totalmente possível ''errar a mao'' e enguiçar mais dispositivos que o desejado, pois a Wyld é mesmo imprevisível.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 148
   },
   {
@@ -261,7 +261,7 @@
     "system": "The werewolf can speak freely with any animal, understanding them as if they would a person, limited by the animal's perspective and mind. The animals might not generally be inclined to help the Garou but can be convinced to yield information with a Manipulation + Wisdom test or convinced to perform a task or service with Charisma + Wisdom. Difficulties range from 2 (asking a racoon where the factory dumps its trash) to 5 (having a pet stick insect sacrifice itself by shorting out an old circuit box). In general, the further from mammals the animal is and the more dire the information or service, the higher the Difficulty.",
     "systemPtBr":"A lobisomem consegue falar livremente com qualquer animal e emendê-lo - resguardadas as limitações impostas por sua mente e visão de mundo - como se ele fosse uma pessoa. Os animais talvez não se sintam inclinados a ajudar a garou, mas podem ser convencidos a ceder informações ou a fazer uma tarefa ou um serviço com um teste de Manipulação + Sabedoria ou Carisma + Sabedoria, respectivamente. As Dificuldades variam de 2 (perguntar a um guaxinim onde a fábrica despeja o lixo) a 5 (fazer um bicho-pau de estimação se sacrificar, causando um curto-circuito em um quadro de distribuição antigo). Em geral, quanto mais distante o animal estiver dos mamíferos e mais drástica for a informação ou tarefa, maior será a Dificuldade.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 148
   },
   {
@@ -287,7 +287,7 @@
     "system": "The Garou becomes practically invisible, so long as they remain still and silent. Any attempt to spot them is done at a Difficulty of 2 + the Gift user's Wisdom. Any movement breaks the effect, and attempts to use the Gift for ambush are subject to the normal ambush rules, as the target has a chance to spot the attacker before the attack lands. (Test Wits +  Awareness against the attacker's Composure + Stealth.)",
     "systemPtBr":"O garou ficará praticamente invisível enquanto permanecer imóvel e em silêncio. Toda tentativa de avistá-lo terá Dificuldade igual a 2 + sua Sabedoria. O efeito cessará ao menor movimento. Tentativas de usar o Dom para emboscar alguém ficam sujeitas as regras normais de emboscada, pois o alvo terá a oportunidade de avistar o atacante antes de ser atingido. (Faça uma disputa de Raciocínio + Percepção vs. Autocontrole + Furtividade do alvo.)",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 149
   },
   {
@@ -313,7 +313,7 @@
     "system": "The Gift must target a subject within sight and hearing of the user. The ragabash attacks the  target in a Gift vs Composure + Insight conflict to  cause superficial Willpower damage. A target successfully subjected to this Gift must then direct their attention and attacks at the user, unless they  spend a point of Willpower to resist this urge. This Gift can also be used in homid form.",
     "systemPtBr": "O Dom precisa ter como alvo um indivíduo ao alcance da visão e da audição do usuário. O ragabash ataca o alvo em um conflito de Manipulação + Honra vs. Autocontrole + Sagacidade, causando dano Superficial à Força de Vontade se bem-sucedido. O alvo submetido ao uso bem-sucedido deste Dom será obrigado a dirigir sua atençã e ataques contra o usuario, a não ser que gaste 1 ponto de Força de Vontade para resistir a esse impulso. Também é possível usar este Dom na forma hominídeo.",
     "duration": "Uma Cena ou até o alvo resistir",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 150
   },
   {
@@ -335,7 +335,7 @@
     "system": "Anyone who drinks the equivalent of a glass of a liquid affected by this Gift receives the following benefit: For the next test to resist any kind fear or hostile supernatural mental ability, add a number of dice equal to the Glory of the Gift user. The Gift user can infuse the equivalent of a single bottle of liquid, enough for an entire pack, and the brew and its effect remain active until used or the session ends. This Gift can be used only once per session and can be used in any form.",
     "systemPtBr": "Qualquer um que beba o equivalente a um copo de líquido afetado por este Dom recebe o seguinte benefício: Para o próximo teste de resistência a qualquer tipo de medo ou habilidade mental sobrenatural hostil, adicione um número de dados igual à Glória do usuário do Dom. O usuário do Dom pode infundir o equivalente a uma única garrafa de líquido, suficiente para toda uma matilha, e a infusão e seu efeito permanecem ativos até serem usados ou até o final da sessão. Este Dom só pode ser usado uma vez por sessão e pode ser usado em qualquer forma.",
     "duration": "Por até uma sessão",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 173
   },
   {
@@ -357,7 +357,7 @@
     "system": "The user targets a device in sight and  within five meters and tests Charisma + Glory against the Difficulty of the device (below). A win means that the device is rendered unusable for the rest of the scene; a critical win renders the device completely inoperable and beyond repair. This Gift can also be used in lupus form. Complexity level: Computers (including mobile phones) with Difficulty 2, Electronics (including cameras) with Difficulty 3, Electrical or combustion engines (cars, trains, etc.) with Difficulty 4, Firearms and other chemical reactions (explosives, fire, etc.) with Difficulty 5, Strictly mechanical devices (winch, bicycle, mechanical lock) with Difficulty 6+",
     "systemPtBr":"A usuária toma como alvo um dispositivo ao alcance da visão a até 5 metros de distância, aí faz um teste de Carisma + Glória com Dificuldade que dependerá do dispositivo (a seguir). Em caso de vitória, o dispositivo ficará inoperante até o fim da cena; em caso de vitória crítica, ficará inutilizável e não terá mais conserto. Também e possível usar este Dom na forma lupino. Nível de complexidade: computadores (celulares inclusive) com dificuldade 2, eletrônicos (câmeras inclusive) com dificuldade 3, motores elétricos ou a combustão (carros, trens, etc.)  com dificuldade 4, armas de fogo e outras reações químicas (explosivos, chamas, etc.) com dificuldade 5 e dispositivos exclusivamente mecânicos (cabrestante, bicicleta, fechadura mecânica) com dificuldade 6+.",
     "duration": "Uma Cena ou permanente",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 149
   },
   {
@@ -383,7 +383,7 @@
     "system": "The Garou's player makes a Resolve + Wisdom test, with the number of successes indicating how much of the conversation they manage to catch. A single success yields only a few scattered words, whereas five or more (or a critical win) allows the user to hear every word, and possibly even identify who's on the other end of the exchange. For conversations via landlines, the werewolf must place their ear against a telephone wire or cord; to listen in on cell phone discussions, they need only see one of the devices being used. Any encryption increases the Difficulty by 1 or more. This Gift can also be used in homid form.",
     "systemPtBr":"O jogador faz um teste de Determinação + Sabedoria. O numero de sucessos obtidos indicará quanto da conversa foi interceptada pelo garou. Com um sucesso apenas, ele escutará palavras avulsas, mas, com cinco ou mais sucessos (ou uma vitória crítica), o usuário do Dom ouvirá cada palavra e pode ser que até mesmo identifique quem são os interlocutores. No caso de conversas por telefonia fixa, o lobisomem terá de colar o ouvido a um fio ou cabo telefônico; para bisbilhotar discussões por celular, ele so precisará ver um dos aparelhos utilizados. Se houver criptografia, a Dificuldade aumentará em 1 ou mais. Também é possível usar este Dom na forma hominídeo.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 149
   },
   {
@@ -409,7 +409,7 @@
     "system": "The ragabash gains their Wisdom bonus to all Stealth tests, as well as to defensive tests against physical attacks for the rest of the scene. The Gift lapses as soon as the user interacts directly with a subject, such as attacking them or engaging them in conversation.",
     "systemPtBr":"O ragabash ganhará seu valor de Sabedoria como dados bônus em todos os testes de Furtividade e também nos testes defensivos contra ataques físicos até o fim da cena. O Dom vai expirar assim que o usuário interagir diretamente com alguem, atacando a pessoa ou travando diálogo com ela.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 150
   },
   {
@@ -435,7 +435,7 @@
     "system": "Purely mechanical locks or bars open automatically when this Gift is employed. Electronic or supernatural devices require a Manipulation + Honor test versus a Difficulty set by the Storyteller (2 for a regular electronic lock, 5 for a sorcerously augmented fingerprint scanner). Some extremely advanced locks might even be beyond this Gift's ability to open, at the Storyteller's discretion. This Gift can also be used in homid form.",
     "systemPtBr":"Travas e fechaduras exclusivamente mecânicas se abrem de maneira automática assim que o Dom é usado. Dispositivos eletrônicos ou sobrenaturais exigem um teste de Manipulação + Honra com Dificuldade estabelecida pelo Narrador (2 para uma fechadura eletrônica comum, 5 para um leitor de impressões digitais incrementado por magia). A critério do Narrador, pode ser que algumas fechaduras avançadíssimas não se deixem abrir por este Dom. Também é possível usar este Dom na forma hominídeo.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 151
   },
   {
@@ -461,7 +461,7 @@
     "system": "No roll is required to track a human who isn't in hiding. Tracking a supernatural creature, or a human who is actively hiding, requires an Intelligence + Wisdom test against Intelligence + Streetwise (for urban hiding places) or Intelligence + Survival (in rural areas). The Difficulty rises if a target has supernatural ways to conceal themselves. The time required depends both on the distance to the target and  the result of the roll. The higher the margin, the quicker the target can be located. This Gift can also be used in lupus form.",
     "systemPtBr":"Rastrear um ser humano que não está se escondendo dispensa o uso de dados. Rastrear uma criatura sobrenatural ou um ser humano que está deliberadamente escondido exige um teste de Inteligência + Sabedoria vs. Inteligência + Manha (esconderijos urbanos) ou Inteligência + Sobrevivência (na zona rural). A Dificuldade aumentará se o alvo tiver métodos sobrenaturais de ocultação. O prazo depende tanto da distância até o alvo quanto do resultado obtido nos dados. Quanto maior for a margem, mais rápido o alvo será localizado. Tambem é possível usar este Dom na forma lupino.",
     "duration": "Uma Sessão",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 150
   },
   {
@@ -487,7 +487,7 @@
     "system": "Subsequent to the Gift's activation, the Garou leaves no physical evidence of their passing  (footprints, disturbed vegetation, DNA traces, etc.). The Garou also gains their Wisdom as a bonus to any test to avoid supernatural tracking. Activating this Gift is free for its user, but by spending a Willpower the player can extend the Gift's effects to their character's pack for one scene. This Gift can also be used in lupus form.",
     "systemPtBr": "Ativado o Dom, o garou não deixará indícios físicos de sua passagem (pegadas, vegetação danificada, vestígios de DNA etc.). O garou também ganhará seu valor de Sabedoria como dados bônus em todo teste que fizer com a intenção de escapar do rastreamento sobrenatural. Ativar este Dom não terá custo para o usuário, mas, gastando 1 ponto de Força de Vontade, ele poderá estender os efeitos à sua alcateia durante uma cena. Também é possível usar este Dom na forma lupino.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 150
   },
   {
@@ -513,7 +513,7 @@
     "system": "To activate this Gift, the moon must be visible to the Garou. Once activated, by a beseeching howl directed at Luna, treat silver damage up to the  Wisdom of the user (per damage source) as Superficial.",
     "systemPtBr": "Para ativar este Dom, o garou precisa enxergar a lua. Ativado o Dom com um uivo súplice para Luna, passe a tratar como Superficial todo ponto de dano por prata até o limite imposto pela Sabedoria do usuário (para cada fonte de dano).",
     "duration": "Uma Noite",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 151
   },
   {
@@ -539,7 +539,7 @@
     "system": "This Gift can target a supernatural power or ability of anyone in sight of the user, who needs only to have witnessed the power in use by the subject. The ability must be one learned by, not inherent to, the target. (A Garou's Gift can be stolen, but their ability to shapeshift cannot, for example.) The player tests Intelligence + Honor against the rating of the  power: the Rank of a Gift or appropriate value for another supernatural target. (If no rating exists, the Storyteller should assign an appropriate Difficulty.) On a success, the target loses the power, and any effects derived from it expire immediately. Starting  with the next turn, the werewolf is able to use the power as if it was a Gift possessed by them, substituting Honor for any non-Garou Trait required. At the start of each turn thereafter, a Willpower point  must be spent or the power returns to the original owner.",
     "systemPtBr": "Este Dom pode visar um poder ou capacidade sobrenatural de um alvo qualquer à vista da usuária, que só precisa ter presenciado o uso desse poder pelo sujeito em questão. A capacidade precisa ser algo que o alvo tenha aprendido, não um talento inerente. (É possível roubar o Dom de um garou, por exemplo, mas não sua capacidade de mudar de forma.) O jogador faz um teste de Inteligência + Honra contra o valor do poder: o Renome Total de um Dom ou o valor apropriado no caso de outro alvo sobrenatural. (Se o poder nao estiver quantificado, o Narrador deverá designar a Dificuldade adequada.) Se o teste for bem-sucedido, o alvo perderá o poder, com todos os efeitos gerados por ele cessando imediatamente. A partir do turno seguinte, o lobisomem será capaz de usar o poder como se fosse um dos seus próprios Dons, trocando por Honra as Características não garous porventura necessárias. No começo de todo turno daí em diante, será preciso gastar 1 ponto de Força de Vontade para o poder não voltar ao proprietário original.",
     "duration": "1 Turno para cada ponto de Força de Vontade gasto",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 152
   },
   {
@@ -565,7 +565,7 @@
     "system": "The player tests Dexterity + Glory. If the shape desired is particularly large, small, or exotic, the Difficulty may increase by 1 or more at the Storyteller's discretion. Upon a failure, the user can repeat the attempt by making another Rage check and adding successes to the previous test. The Gift user keeps their Mental Attributes, but their other pools depend on the shape assumed. (For examples, see animals on p. 291.) This Gift can be used in any form.",
     "systemPtBr": "A jogadora faz um teste de Destreza + Glória. Se a forma desejada for particularmente grande, pequena ou exótica, pode ser que a Dificuldade aumente em 1 ou mais, a critério do Narrador. Se falhar no teste, a usuária do Dom poderá repetir a tentativa fazendo mais uma checagem de Fúria e acrescentando sucessos ao resultado anterior. A usuária conserva seus Atributos Mentais, mas outras paradas de dados dependerão da forma assumida. (Exemplos na seção ''Animais'', p. 291.) é possível usar este Dom em qualquer uma das formas.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 151
   },
   {
@@ -591,7 +591,7 @@
     "system": "This Gift can target anyone within five meters and in sight of the user, whose player must test Resolve + Honor against Stamina + Occult of the target. For each success in the margin, the target loses a single dot from one of their Physical Attributes (to a minimum of zero) as their bodies are ravaged by a  withering spiritual affliction. The effects persist for the rest of the story, though they can sometimes become permanent, at the Storyteller's discretion.",
     "systemPtBr": "Este Dom pode visar qualquer um a até 5 metros de distância e avista do usuário. O jogador precisa fazer um teste de Determinação + Honra vs. Vigor + Ocultismo do alvo. Para cada sucesso da margem, o alvo perderá um ponto de um de seus Atributos Físicos (até o mínimo de zero), pois terá o corpo devastado por uma aflição espiritual debilitante. Os efeitos persistirão até o fim da história, mas podem se tornar permanentes a critério do Narrador.",
     "duration": "Uma História",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 152
   },
   {
@@ -617,7 +617,7 @@
     "system": "The spirit must be present and in the same realm (physical or spiritual) as the user. The target spirit is subject to a two-dice penalty in any attempt it might make to resist or that the user might make to  bargain with it or command it (including the use of Command Spirit). The spirit is also forced to stay where it is, unless it breaks free on a Power test (subject to the two-dice penalty) against the Wits + Honor of the user. This Gift cannot be used on an already hostile spirit, and any attempt to harm the spirit causes the Gift to lapse.",
     "systemPtBr": "O espírito deve estar presente e no mesmo reino (físico ou espiritual) que o usuário. O espírito-alvo está sujeito a uma penalidade de dois dados em qualquer tentativa que possa fazer para resistir ou que o usuário possa fazer para negociar com ele ou comandá-lo (incluindo o uso do Espírito de Comando). O espírito também é forçado a ficar onde está, a menos que se liberte em um teste de Poder (sujeito à penalidade de dois dados) contra o Raciocínio + Honra do usuário do dom. Este Dom não pode ser usado em um espírito já hostil e qualquer tentativa de ferir o espírito faz com que o Dom cesse.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 152
   },
   {
@@ -643,7 +643,7 @@
     "system": "Make a Gift test. The subject heals Superficial physical damage equal to the number of successes. If the number of successes exceeds the subject's current Rage, a single level of Aggravated damage can be healed in place of a Superficial one. This Gift can be used in any form.",
     "systemPtBr": "Faça um teste de Inteligência + Glória. O alvo cura um total de pontos de dano físico superficial igual ao número de sucessos obtidos. Se o número de sucessos exceder a Fúria atual do alvo, um único nível de dano Agravado pode ser curado no lugar de um Superficial. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 153
   },
   {
@@ -669,7 +669,7 @@
     "system": "On a successful Wits + Wisdom test, this Gift alerts the Garou if supernatural elements or creatures are nearby, though it does not specify their exact location or identity. The Difficulty for the test is 2, but it can be modified by powers that allow supernatural creatures to conceal their presence, such as the vampiric ability to elude observation.",
     "systemPtBr": "Em um teste bem-sucedido de Raciocínio + Sabedoria, este Dom alerta o Garou se elementos ou criaturas sobrenaturais estiverem próximos, embora não especifique sua localização ou identidade exata. A Dificuldade do teste é 2, mas pode ser modificado por poderes que permitem que criaturas sobrenaturais escondam sua presença, como a habilidade vampírica de iludir a observação.",
     "duration": "Um Turno",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 153
   },
   {
@@ -695,7 +695,7 @@
     "system": "The prophetic visions can come unbidden, in which case the Storyteller decides when and how they manifest. If desired, the Storyteller can have the player test Intelligence + Wisdom to reveal clues about the story or warn about danger in some degree and clarity determined by the number of successes. Once per scene, a player may also try to provoke these visions intentionally by spending a point of Willpower. A similar test is then made, with the Storyteller revealing clues to clarity and extent based on the number of successes.",
     "systemPtBr": "As visões proféticas podem vir espontaneamente, onde o Narrador poderá decidir quando e como elas se manifestam. Se desejar, o Narrador pode fazer com que o jogador teste Inteligência + Sabedoria para revelar pistas sobre a história ou alertar sobre o perigo em algum grau e clareza determinada pelo número de sucessos obtidos. Uma vez por cena, um jogador também pode tentar provocar essas visões intencionalmente gastando um ponto de Força de Vontade.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 153
   },
   {
@@ -717,7 +717,7 @@
     "system": "",
     "systemPtBr": "O espírito deve estar presente e no mesmo reino (físico ou espiritual) que o usuário. Em um teste bem-sucedido de Determinação + Glória contra Poder, o espírito é forçado a abandonar o objeto ou pessoa possuída e se retirar totalmente para a Umbra. Ao sair, um espírito malévolo pode causar seu Poder menos o sucesso obtivo pelo alvo como dano agravado ao seu alvo possuído. Uma vez banidos, a maioria dos espíritos não pode habitar outro alvo durante toda a cena, embora alguns possam, a critério do Narrador. Se usado na Umbra, este Dom forçará o espírito a recuar ou fugir.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 153
   },
   {
@@ -743,7 +743,7 @@
     "system": "As part of crossing the Gauntlet (see p. 230) or while peering into the physical world from the Umbra, the user grips the physical object firmly and pulls it into the Spirit Wilds — or out, making a Resolve + Wisdom test against the local Gauntlet. Failing the test means the object remains where it is, though the user is unaffected. Willpower cost depends on the size of the object, with a small item (a book or laptop) requiring a single point, and a large one (a car or tent) requiring three.",
     "systemPtBr": "Como parte da travesia pela Película (veja p. 230) ou ao observar o mundo físico a partir da Umbra, o usuário agarra o objeto físico firmemente e o puxa para os Planos Espirituais — ou para fora, realizando um teste de Resolução + Sabedoria contra a Dificuldade da Película local. Falhar no teste significa que o objeto permanece onde está, embora o usuário não seja afetado. O custo de Força de Vontade depende do tamanho do objeto, com um item pequeno (um livro ou laptop) requerendo um único ponto, e um grande (um carro ou tenda) requerendo três.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 154
   },
   {
@@ -769,7 +769,7 @@
     "system": "The user concentrates and sends a mental message to the chosen subject. If the user hasn't met the subject in person, the target must be in line of sight. If the subject is known to the user but not present, a Resolve + Wisdom test is required to establish contact. (Difficulty depends on the distance and whether the user is familiar with the subject's location. A subject relaxing at home is a 2, whereas a subject hidden on another continent is 5.) Once contact is established, thoughts can travel in both directions, so long as both participants are willing. This Gift cannot be used to read the mind of a subject; only thoughts intended for the other party can be sensed. Any major distraction, such as either party being harmed, breaks the connection. This Gift can be used in any form.",
     "systemPtBr": "O usuário se concentra e envia uma mensagem mental para opalavra do comando em seu benefício - ou para alvo escolhido. Se o usuário não conheceu o alvo pessoalmente, o alvo deve estar na linha de visão. Se o alvo for conhecido do usuário, mas não estiver presente, um teste de Resolução + Sabedoria é necessário para estabelecer contato (a dificuldade depende da distância e se o usuário está familiarizado com a localização do assunto: um sujeito relaxando em casa é 2, enquanto um sujeito escondido em outro continente é 5). Uma vez estabelecido o contato, os pensamentos podem viajar em ambas as direções, desde que ambos os participantes estejam dispostos. Este Dom não pode ser usado para ler a mente de um alvo; apenas os pensamentos destinados à outra parte podem ser sentidos. Qualquer distração importante, como qualquer uma das partes sendo prejudicada, interrompe a conexão. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena ou até o contato ser encerrado",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 154
   },
   {
@@ -795,7 +795,7 @@
     "system": "The user must activate this Gift as they enter the Umbra. From then until they exit the Umbra, they can always find their way back by following the silver cord, which can be seen only by the user. They also gain their Wisdom as bonus dice to any attempt to navigate the Spirit Wilds, as the tether helps them avoid going in circles or retracing their steps. This Gift can be used in any form.",
     "systemPtBr": "O usuário deve ativar este Dom ao entrar na Umbra. A partir de então, até sair da Umbra, ele sempre pode encontrar o caminho de volta seguindo o fio prateado, que pode ser visto apenas pelo usuário. Ele também ganha sua Sabedoria como dado de bônus para qualquer tentativa de navegar pelos Planos Espirituais, pois o fio os ajuda a evitar andar em círculos ou refazer seus passos. Este Dom pode ser usado em qualquer forma.",
     "duration": "Até sair da Umbra",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 154
   },
   {
@@ -821,7 +821,7 @@
     "system": "The spirit must be present and in the same realm (physical or spiritual) as the user. For each command, the player must defeat the spirit in a Charisma + Honor vs Power test. Spirits cannot be ordered to inflict harm on themselves or anything that they are bound to or possessing, and neither can they be ordered to depart from a bound or possessed object or creature.",
     "systemPtBr": "O espírito deve estar presente e no mesmo reino (físico ou espiritual) que o usuário. Para cada comando, o jogador deve derrotar o espírito em um teste de Carisma + Honra vs. Poder. Os espíritos não podem ser ordenados a infligir danos a eles mesmos ou qualquer coisa a que estejam vinculados ou possuam, e nem podem ser ordenados a se afastarem de um objeto ou criatura vinculada ou possuída.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 154
   },
   {
@@ -847,7 +847,7 @@
     "system": "The spirit must be present and in the same realm (physical or spiritual) as the user. By the player's engaging in a Resolve + Glory vs Power test, the werewolf can restore a point of Superficial Willpower damage for each success in the margin, damaging the spirit by an equal amount. Failing the contest causes a point of Aggravated Willpower damage to the user. A spirit can be affected by this Gift only once per scene.",
     "systemPtBr": "O espírito deve estar presente e no mesmo reino (físico ou espiritual) que o usuário. O Garou realiza um teste de Determinação + Glória vs. Poder e, caso obtenha sucesso, pode restaurar um ponto de dano de Força de Vontade Superficial para cada sucesso obtivo na margem, prejudicando o espírito em igual quantidade. A falha no teste causa um ponto de dano de Força de Vontade Agravada ao usuário. Um espírito pode ser afetado por este Dom apenas uma vez por cena.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 155
   },
   {
@@ -873,7 +873,7 @@
     "system": "The Gift can target anyone within sight of the user, whose player must test Intelligence + Glory against Resolve + Occult of the target. For each success in the margin, the target loses a single dot from one of their Mental Attributes, though no Attribute can go below 0. The effects persist for the rest of the story, though they can sometimes become permanent, at the Storyteller's discretion.",
     "systemPtBr": "O Dom pode ter como alvo qualquer um dentro da visão do usuário, cujo jogador deve testar Inteligência + Glória contra Determinação + Ocultismo do alvo. Para cada sucesso obtido na margem, o alvo perde um único ponto de um de seus Atributos Mentais, embora nenhum Atributo possa ficar abaixo de 0. Os efeitos persistem pelo resto da história, embora às vezes possa se tornar permanente, a critério do Narrador.",
     "duration": "Uma História",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 155
   },
   {
@@ -899,7 +899,7 @@
     "system": "As long as the user concentrates, no spirit can come within three meters of the living ward without defeating the werewolf's player in a Power vs Resolve + Honor test. If the Garou using this Gift fails in this contest, they must immediately lower their ward or spend Willpower equal to the amount by which they failed the contest.",
     "systemPtBr": "Enquanto o usuário se concentrar, nenhum espírito pode chegar a três metros da ala viva sem derrotar o jogador do lobisomem em um teste de Poder vs Resolução + Honra. Se o Garou usando este Dom falhar neste competição, eles devem imediatamente diminuir sua proteção ou gastar Força de Vontade igual à quantidade pela qual falharam no teste. concurso.",
     "duration": "Uma Cena, a menos que seja encerrado antes",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 155
   },
   {
@@ -921,7 +921,7 @@
     "system": "The Garou gains their Honor as bonus dice on Persuasion Skill tests versus other Garou. This Gift can be used in any form.",
     "systemPtBr": "O Garou ganha sua Honra como dados de bônus em Testes de Perícia de Persuasão contra outros Garou. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 155
   },
   {
@@ -947,7 +947,7 @@
     "system": "No test is required for a human unaware of the Garou or their powers. Another supernatural creature or a human with previous experience of the Garou can attempt to resist the effect, in which case the user's player must win a Charisma + Glory test against Composure + Subterfuge.",
     "systemPtBr": "Nenhum teste é necessário para um humano que não conhece os Garou ou seus poderes. Outra criatura sobrenatural ou um humano com experiência anterior com o Garou pode tentar resistir ao efeito, caso em que o jogador do usuário deve vencer um teste de Carisma + Glória contra Autocontrole + Subterfúgio.",
     "duration": "Uma Pergunta",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 156
   },
   {
@@ -973,7 +973,7 @@
     "system": "Upon receiving damage from a brawl or melee attack, the user can make a Rage Check to immediately deal Superficial damage equal to their Glory on the attacker. The damage cannot exceed the amount sustained in the original attack.",
     "systemPtBr": "Ao receber dano de um ataque de briga ou Arma Branca, o usuário pode fazer um Teste de Fúria para imediatamente causar um dano Superficial igual à sua Glória no atacante. O dano não pode exceder a quantidade recebida no ataque original.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 156
   },
   {
@@ -999,7 +999,7 @@
     "system": "The player makes a Wits + Wisdom test against a Difficulty depending on the creature faced: Detecting a fellow Garou is Difficulty 2, Kin before their First Change is 3, whereas something almost indistinguishable from a mundane human, such as a sorcerer, might be Difficulty 5. Vampires lie somewhere between Difficulty 2 and 4, depending on whether they  are actively masquerading as mortal and their general level of monstrosity. This Gift can be used in any form.",
     "systemPtBr": "O jogador realiza um teste de Raciocínio + Sabedoria contra uma Dificuldade dependendo da criatura enfrentada: Detectar um companheiro Garou com dificuldade 2, parentes antes de sua Primeira Mudança com dificuldade 3, enquanto algo quase indistinguível de um humano mundano, como um feiticeiro, pode ter dificuldade 5. Vampiros estão em algum lugar entre a dificuldade 2 e 4, dependendo se eles estão se disfarçando ativamente como mortais e seu nível geral de monstruosidade. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 156
   },
   {
@@ -1025,7 +1025,7 @@
     "system": "The Garou targets one animal within line of sight, and the player rolls Charisma + Honor against Difficulty 3. If successful, the user is able to communicate with and issue commands to the animal, and the animal obeys unto death. The power lasts until the Garou releases the animal from its obligation to them or until the animal dies. This Gift can hold sway over only one animal at a time.",
     "systemPtBr": "O Garou tem como alvo um animal dentro da linha de visão e testa Carisma + Honra contra uma dificuldade 3. Se for bem sucedido, o usuário é capaz de se comunicar e emitir comandos para o animal, onde o mesmo obedecerá até a morte. O poder dura até que o Garou libere o animal de sua obrigação para com ele ou até que o animal morra. Este Dom pode controlar apenas um animal por vez.",
     "duration": "Até expirar",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 156
   },
   {
@@ -1051,7 +1051,7 @@
     "system": "Once active, the Gift makes the user the focus of attention for everyone within hearing or line of sight, and the player can add the character's Glory as dice bonus to any public speech or presentation  involving Persuasion or Performance. Mundane humans and animals are drawn toward the user, and it's impossible to use this Gift and retain any semblance of discretion. Physical altercation in the presence of the user breaks the effect, and the Gift can't be used while the werewolf is engaged in a physical conflict or outright combat.",
     "systemPtBr": "Uma vez ativo, o Dom torna o usuário o foco de atenção para todos dentro da linha de visão ou audição, e o jogador pode adicionar seus pontos de Renome em Glória como bônus de dados para qualquer discurso público ou apresentação envolvendo Persuasão ou Performance. Humanos e animais mundanos são atraídos pelo usuário e é impossível usar este Dom e manter qualquer aparência de discrição. A altercação física na presença do usuário quebra o efeito, e o Dom não pode ser usado enquanto o lobisomem estiver envolvido em um conflito físico ou combate direto.",
     "duration": "Uma cena ou até que o efeito seja interrompido ou encerrado",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 156
   },
   {
@@ -1077,7 +1077,7 @@
     "system": "The Gift's user selects a visible subject who has previously caused harm to a member of their pack, and the player makes a Resolve + Honor test at Difficulty 3. If successful, the pack's natural weapons gain +1 damage against the designated target. Only one enemy can be marked by a single Garou, and the effects aren't cumulative if targeted by other Garou with the same Gift. The Gift lasts until that enemy is dead or the sentence is revoked, but the latter can be done only in the presence of the subject.",
     "systemPtBr": "O usuário do Dom seleciona um alvo visível que já causou dano a um membro de sua matilha e o realiza um teste de Determinação + Honra com uma dificuldade 3. Se for bem-sucedido, as armas naturais da matilha ganham +1 de dano contra o alvo designado. Apenas um inimigo pode ser marcado por um único Garou e os efeitos não são cumulativos se o alvo for outro Garou com o mesmo Dom. O Dom dura até que o inimigo esteja morto ou a sentença seja revogada, mas esta última só pode ser feita na presença do usuário do dom.",
     "duration": "Até a morte do inimigo selecionado ou a  sentença ser revogada",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 157
   },
   {
@@ -1103,7 +1103,7 @@
     "system": "Make an Intelligence + Wisdom test against a Difficulty depending on the information sought. Sensing the circumstances of a duel fought last week with a specific weapon is Difficulty 2, but gaining information on the members of a covert meeting in a park years ago approaches Difficulty 6 or higher. Each point of margin on the roll allows the user to gain progressively more detailed information. This Gift can  also be used in lupus form.",
     "systemPtBr": "Faça um teste de Inteligência +  Sabedoria contra uma Dificuldade dependendo da informação procurada. de detecção as circunstâncias de  um duelo travado na semana passada com uma arma específica é de Dificuldade 2, mas obter informações sobre os membros de uma reunião secreta em um parque  anos atrás se aproxima da Dificuldade 6 ou superior. Cada ponto de margem na rolagem permite ao usuário  obter informações progressivamente mais detalhadas. Este Dom também pode ser usado na forma de lupino.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 157
   },
   {
@@ -1129,7 +1129,7 @@
     "system": "The Garou must issue the order vocally and in the presence of the subject. Other supernatural creatures and humans familiar with the Garou can resist (see pool above), as can anyone if the command goes against their nature or would cause harm to those the subject loves. An order that would directly harm the victim, such as shooting themselves or stepping into a fire, automatically fails, as do commands that demand the impossible. Until the target completes the act or the Garou releases them from the geas, the target attempts to accomplish the act for the rest of the scene.",
     "systemPtBr": "O Garou deve emitir a ordem verbalmente e na presença do alvo. Outras criaturas sobrenaturais e humanos familiarizados com o Garou podem resistir, assim como qualquer um se o comando for contra sua natureza ou causar danos àqueles que o alvo ama. Uma ordem que prejudique diretamente a vítima irá falhar, por exemplo atirar em si mesma, assim como os comandos que exigem o impossível. Até que o alvo complete o ato ou o Garou o libere do feitiço, o alvo tenta realizar o ato pelo resto da cena.",
     "duration": "Até a conclusão do ato, até a cena terminar ou o dom ser suspenso",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 157
   },
   {
@@ -1155,7 +1155,7 @@
     "system": "The subject must make the oath in person to the user. The oath must be something that the taker both understands and accepts. It can be as succinct or detailed as the Gift's user wants, but the promise remains in effect while both the oath forger and the oath taker remember it. Thus, it isn't uncommon for the forger to seek out the taker to remind them of their promise. The Garou immediately senses the oath being broken, no matter the distance or time passed. Thereafter, any attempt by the user to track the oath breaker gives the player bonus dice equal to the Garou's Honor.",
     "systemPtBr": "O sujeito deve fazer o juramento pessoalmente para o usuário. O juramento deve ser algo que o receptor compreenda e aceite. Pode ser tão sucinto ou detalhado quanto o usuário do Dom desejar, mas a promessa permanece em vigor enquanto tanto o forjador do juramento quanto o receptor do juramento se lembrarem dele. Assim, não é incomum que o forjador busque o receptor para lembrá-lo de sua promessa. O Garou imediatamente percebe quando o juramento é quebrado, não importa a distância ou o tempo decorrido. A partir de então, qualquer tentativa do usuário de rastrear quem quebrou o juramento concede ao jogador dados bônus iguais à Honra do Garou.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 158
   },
   {
@@ -1181,7 +1181,7 @@
     "system": "The Garou's player rolls one die for each point of Honor the character possesses, healing one point of Superficial Willpower damage for each success, or one of Aggravated Willpower damage for two successes. This Gift can be used only once per session and can be used in any form.",
     "systemPtBr": "O Garou realiza um teste com um dado para cada ponto de Honra que possui, curando um ponto de Dano Superficial de Força de Vontade para cada sucesso, ou um dos Dano de Força de Vontade agravado a cada dois sucessos. Este Dom pode ser usado apenas uma vez por sessão e pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 158
   },
   {
@@ -1207,7 +1207,7 @@
     "system": "The Garou commands the subject to return to their natural form, and the player tests Manipulation + Honor against the target's Stamina + Resolve. On a win, the subject returns to their normal form, following  their usual rules, and are then unable to change shape for a number of turns equal to the margin. This Gift can be used in homid or lupus form, and the Gift ceases to be active if the user changes form during its effect.",
     "systemPtBr": "O Garou comanda o alvo para retornar à  sua forma natural, testando Manipulação + Honra contra o Vigor + Determinação do alvo. Caso obtenha sucesso, o alvo retorna à sua forma normal, seguindo suas regras usuais e então não consegue mudar de forma por um número de turnos igual a diferença de sucesso obtida. Este Dom pode ser usado na forma hominídea ou lupina e o Dom deixa de ser ativo se o usuário mudar de forma durante seu efeito.",
     "duration": "Até um número de turnos igual a diferença de sucessos(caso o usuário do dom tenha obtido mais sucessos que o alvo) ou quando o usuário do dom mudar de forma",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 158
   },
   {
@@ -1233,7 +1233,7 @@
     "system": "The Garou's player gains their Glory as bonus dice on Social Skill tests versus human subjects. This Gift can also be used in homid form.",
     "systemPtBr": "O jogador do Garou ganha sua Glória como dados de bônus em testes de Habilidade Social contra humanos. Este Dom também pode ser usado na forma hominídea.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 158
   },
   {
@@ -1259,7 +1259,7 @@
     "system": "The Garou's player tests Charisma + Honor against a Difficulty of 2. If successful, other Garou who hear the howl and join the presence of the Gift's user heal a point of Willpower. For each success in the margin, the sound reaches an additional 100 meters. A character can be affected by this Gift only once per session. This Gift can also be used in Lupus form.",
     "systemPtBr": "O jogador do Garou testa Carisma + Honra contra uma Dificuldade de 2. Se for bem sucedido, outro Garou que ouça o uivo e junte-se à presença do usuário do Dom cura um ponto de Força de Vontade. Para cada sucesso na margem, o som atinge mais 100 metros. Um personagem pode ser afetado por este Dom apenas uma vez por sessão. Este dom também pode ser usado na forma de lupina.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 159
   },
   {
@@ -1285,7 +1285,7 @@
     "system": "Make a Gift test at Difficulty 3. If successful, all other members of the user's pack within earshot gain a point of Rage, or two points on a critical win. A character can be affected by this Gift only once per session.",
     "systemPtBr": "Faça um teste de Carisma + Glória com Dificuldade 3. Se for bem-sucedido, todos os demais membros da matilha ao alcance da voz ganham um ponto de Fúria, ou dois pontos em uma vitória crítica. Um personagem pode ser afetado por este Dom apenas uma vez por sessão.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 159
   },
   {
@@ -1311,7 +1311,7 @@
     "system": "Make a Gift test at Difficulty 3. If successful, all members of the user's pack within earshot lose a point of Rage, or two points on a critical win, to a minimum of 1. Pack members in frenzy can make a Composure + Resolve test at Difficulty 3 to snap out of the frenzy and leave Crinos form as normal (see p. 139). A character can be affected by this Gift only once per scene.",
     "systemPtBr": "Faça um teste de Autocontrole + Honra com Dificuldade 3. Se for bem-sucedido, todos os membros da matilha do usuário ao alcance da voz perdem um ponto de Fúria, ou dois pontos em uma vitória crítica, para um mínimo de 1. Os membros da matilha em frenesi podem fazer um teste de Autocontrole + Determinação com Dificuldade 3 para sair do frenesi e deixar a forma de Crinos normalmente (veja p. 139). Um personagem pode ser afetado por este Dom apenas uma vez por cena.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 159
   },
   {
@@ -1337,7 +1337,7 @@
     "system": "The Garou's player makes a Gift test against the Resolve + Insight of any possessed creatures within earshot of the call. The possessed that fail to resist make every effort to reach the source of the call, as long as doing so presents no obvious hazard to their physical wellbeing (such as walking through toxic runoff or jumping unaided into a deep chasm).",
     "systemPtBr": "O Garou faz um teste de Carisma + Honra contra a Determinação + Sagacidade de quaisquer criaturas possuídas ao alcance da voz do chamado. Os endemoninhados que não resistem fazem todos os esforços para chegar à fonte do chamado, desde que fazer isso não apresente nenhum perigo óbvio para seu bem-estar físico (como caminhar em um escoamento tóxico ou pular sem ajuda em um abismo profundo).",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 159
   },
   {
@@ -1363,7 +1363,7 @@
     "system": "As long as the user keeps eye contact with a victim, the victim moves toward the Garou, as if in a  trance, performing no other action until they are  within arm's reach, at which point the effect ends. Other supernatural creatures and humans aware of the Garou and their powers can attempt to resist the user's Charisma + Glory with Composure + Resolve, but once under the effect of the Gift they are unable to look away. Catching the eye of someone actively attempting to avoid the Gift user's gaze requires a contest of the user's Resolve + Intimidation vs the target's Wits +  Awareness. Any attempt at violence against the victim breaks the effect, as do other life-threatening situations, and the victim can attempt to avoid attacks as normal.",
     "systemPtBr": "Enquanto o usuário mantiver contato visual com a vítima, a mesma se move em direção ao Garou, como se estivesse em transe, não realizando nenhuma outra ação até que esteja ao alcance do braço, ponto em que o efeito termina. Outras criaturas sobrenaturais e humanos cientes dos Garou e seus poderes podem tentar resistir ao Carisma + Glória do usuário do dom com Autocontrole + Determinação. Todavia, uma vez sob o efeito do Dom, o alvo é incapaz de desviar o olhar. Tentar ativamente evitar o olhar do usuário do Dom requer uma disputa de Determinação + Intimidação do usuário contra Raciocínio + Consciência do alvo. Qualquer tentativa de violência contra a vítima quebra o efeito, assim como outras situações de risco de vida, e a vítima pode tentar evitar os ataques normalmente.",
     "duration": "Uma Cena ou até o efeito ser encerrado pela proximidade, violência ou outras situações de risco de vida",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 159
   },
   {
@@ -1385,7 +1385,7 @@
     "system": "Make a Gift test at Difficulty 3. If successful, all members of the user's pack within earshot are inspired to greater deeds. When their players spend Willpower to reroll dice, they may reroll any number in a pool, rather than just three (Brutal results still cannot be rerolled, see p. 133). This Gift can be used only once per session.",
     "systemPtBr": "Faça um teste de Carisma + Honra com Dificuldade 3. Se for bem-sucedido, todos os membros da matilha do usuário ao alcance da voz são inspirados a feitos maiores. Quando os jogadores gastarem Força de Vontade para rolar novamente os dados, eles podem rolar novamente qualquer número em uma parada, ao invés de  apenas três (resultados brutais ainda não podem ser  jogados novamente, veja p. 133). Este Dom pode ser  usado apenas uma vez por sessão.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 160
   },
   {
@@ -1411,7 +1411,7 @@
     "system": "The Garou's player chooses a Social or Mental Skill and makes a Gift test at a Difficulty 3,  or 2 if the user themselves possesses the Skill at 2 or more dots. On a win, other members of the pack gain a bonus die for tests of that Skill. A critical win on the Gift test yields a twodice bonus instead.",
     "systemPtBr": "O Garou escolhe uma Habilidade Social ou Mental e realiza um teste de Dom com uma Dificuldade 3, ou 2 se o próprio usuário possuir a Habilidade com 2 ou mais pontos. Em caso de sucesso, outros membros do grupo ganham um dado bônus para testes dessa Habilidade. Uma vitória crítica no teste de Dom concede um bônus de dois dados em vez disso.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 160
   },
   {
@@ -1437,7 +1437,7 @@
     "system": "The player rolls a pool equal to the Garou's Glory. Each success enables each member of the pack (including the Gift user) to restore one level of Superficial Willpower damage. This Gift can be used only once per story.",
     "systemPtBr": "O jogador realiza um teste com um conjunto de dados igual à Glória do Garou. Cada sucesso permite que cada membro da matilha (incluindo o usuário do Dom) recupere um nível de dano superficial de Força de Vontade. Este Dom pode ser utilizado apenas uma vez por história.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 160
   },
   {
@@ -1463,7 +1463,7 @@
     "system": "The Gift's user looks into the eyes of the subject and lets out a short, sharp roar, and the player makes a Gift test. The Difficulty depends on the type of effect controlling the subject and the  power of the creature behind it, but the default is 3. The Storyteller can allow the subject to add their Resolve to the Gift test pool if they are actively trying to resist the effect themselves.",
     "systemPtBr": "O usuário do Dom olha nos olhos do alvo e solta um rugido curto e agudo, realizando um teste de Determinação + Glória. A Dificuldade depende do tipo de efeito que está controlando o sujeito e do poder da criatura por trás disso, mas o padrão é 3. O Narrador pode permitir que o sujeito adicione sua Determinação ao conjunto de dados do teste do Dom se estiver ativamente tentando resistir ao efeito por conta própria.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 160
   },
   {
@@ -1489,7 +1489,7 @@
     "system": "If their Health is fully depleted by Aggravated damage, the Garou's player immediately rolls a pool equal to the character's Honor. Each  success enables them to heal one level of Health damage. This Gift can be used only once per session. This Gift can be used in any form.",
     "systemPtBr": "Se a Vitalidade do usuário do Dom for totalmente esgotada por dano Agravado, o Garou realiza imediatamente um teste com um conjunto de dados igual à Honra do personagem. Cada sucesso permite que ele cure um nível de dano à Vitalidade. Este Dom só pode ser usado uma vez por sessão. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 160
   },
   {
@@ -1515,7 +1515,7 @@
     "system": "The Gift user's player makes a Gift test against a Difficulty set by the Storyteller, depending on what they're trying to accomplish: 2 to simply observe, 3 to leave a message, and up to 4 or more to completely alter the dreamscape to affect the dreamer in some way. If used to unnerve or otherwise frighten the dreamer, the dreamer regains no Willpower through natural means for the rest of the session and loses an additional Willpower point for each success in the  margin. The Gift can be used as long as the user knows the subject's location, though extreme distances (such as cross-continent) add 1 to the Difficulty. This Gift can be used in any form.",
     "systemPtBr": "O Garou faz um teste de Dom com uma Dificuldade estabelecida pelo Narrador, dependendo do que estão tentando realizar: 2 para simplesmente observar, 3 para deixar uma mensagem e até 4 ou mais para alterar completamente a paisagem dos sonhos para afetar o sonhador de alguma forma. Se usado para perturbar ou assustar o sonhador, o sonhador não recupera Força de Vontade de maneira natural pelo restante da sessão e perde um ponto adicional de Força de Vontade para cada sucesso na margem. O Dom pode ser usado desde que o usuário conheça a localização do sujeito, embora distâncias extremas (como entre continentes) acrescentem 1 à Dificuldade. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 160
   },
   {
@@ -1541,7 +1541,7 @@
     "system": "The Garou emits a fearsome howl directed at a visible target fleeing from them or a member of their pack and still within 50 meters. A victim of this Gift has their movement speed reduced to walking pace as long as they try to escape the user. Airborne targets are pulled toward the ground. The Gift succeeds automatically on mundane people, vehicles, and animals. Supernatural victims, such as a vampire or another werewolf, must be bested in a Resolve + Honor vs Composure + Survival test. (At the Storyteller's discretion, extremely motivated or otherwise prepared humans can resist in a similar manner.)",
     "systemPtBr": "O Garou emite um uivo terrível direcionado a um alvo visível que está fugindo deles ou de um membro de sua matilha que está dentro de 50 metros de distância. Um alvo desse Dom tem sua velocidade de movimento reduzida ao passo de caminhada enquanto tentar escapar do usuário. Alvos no ar são puxados em direção ao solo. O Dom é bem-sucedido automaticamente em pessoas comuns, veículos e animais. Alvos sobrenaturais, como um vampiro ou outro Garou, devem ser superadas em um teste de Raciocínio + Honra vs. Autocontrole + Sobrevivência (A critério do Narrador, humanos extremamente motivados ou de outra forma preparados podem resistir de maneira semelhante).",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 161
   },
   {
@@ -1568,7 +1568,7 @@
     "system": "The user shapeshifts, and the player makes a Gift test against the Difficulty of the form: 1 for homid and lupus, 2 for glabro and hispo, and 3 for crinos. On a win, the minor action penalty for the shift is disregarded. If the test fails, the user takes Superficial damage equal to the margin of  failure, though the shift dice penalty is still voided. This Gift can be used in any form.",
     "systemPtBr": "O usuário muda de forma, e o jogador faz um teste de Destreza + Glória contra a Dificuldade da forma: 1 para hominídeo e lupino, 2 para glabro e hispo e 3 para crinos. Em caso de sucesso, a penalidade de ação mínima pela mudança é ignorada. Se o teste falhar, o usuário sofre dano superficial igual à margem da falha, embora a penalidade nos dados da mudança ainda seja anulada. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 161
   },
   {
@@ -1594,7 +1594,7 @@
     "system": "This Gift is free and instantaneous while in crinos form. Add half the Garou's Glory (round up) to the damage of their claw attacks. If their current form doesn't have claws, it gains a claw attack with  half Glory damage as the fingernails elongate and harden.",
     "systemPtBr": "Este Dom não possui custo e é instantâneo enquanto estiver na forma Crinos. Adicione metade da Glória do Garou (arredondada para cima) ao dano de seus ataques de garras. Se a forma atual do Garou não tiver garras, ele ganha um ataque de garras com metade do dano da Glória à medida que as unhas se alongam e endurecem.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 162
   },
   {
@@ -1620,7 +1620,7 @@
     "system": "The Garou's player adds the user's Wisdom to any attempt to detect traps, ambushes, or surprise attacks. Add these dice only when failing would result in immediate danger to the Gift user, not when actively searching an area. This Gift can be used in any form.",
     "systemPtBr": "O Garou adiciona a sua Sabedoria a qualquer tentativa de detectar armadilhas, emboscadas ou ataques surpresa. Adicione esses dados apenas quando falhar resultaria em perigo imediato para o usuário do Dom e não ao buscar ativamente uma área. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 162
   },
   {
@@ -1642,7 +1642,7 @@
     "system": "Activating this Gift inflicts a single level of Aggravated damage, which feels to the victim like an existential burning. In exchange, the Garou gains Rage equal to the number of successes on a straight Glory test. This Gift can be used only once per session.",
     "systemPtBr": "Ativar esse Dom inflige um único nível de dano Agravado, que para a vítima se assemelha a uma queima existencial. Em troca, o Garou ganha Fúria igual ao número de sucessos em um teste de Glória direto. Esse Dom só pode ser usado uma vez por sessão.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 162
   },
   {
@@ -1668,7 +1668,7 @@
     "system": "The Garou's player makes a Gift test against all enemies within earshot and line of sight. Make only one roll for the Garou, whereas each enemy resists with their Composure + Insight. Subjects who  fail to resist suffer a two-dice penalty to attack anyone other than a user of this Gift. The user gains additional Health levels equal to their Honor if at least one enemy succumbs to the effects. These Health levels absorb one point of Superficial damage each but do not protect against Aggravated damage.",
     "systemPtBr": "O Garou realiza um teste de Carisma + Honra contra todos os inimigos ao alcance da audição e da linha de visão. Faça apenas uma rolagem para o Garou, enquanto cada inimigo resiste com sua Autocontrole + Sagacidade. Indivíduos que não conseguirem resistir sofrem uma penalidade de dois dados ao atacar qualquer pessoa que não seja um usuário deste Dom. O usuário ganha níveis adicionais de Vitalidade iguais à sua Honra se pelo menos um inimigo sucumbir aos efeitos. Esses níveis de Vitalidade absorvem um ponto de dano Superficial cada, mas não protegem contra danos Agravados.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 162
   },
   {
@@ -1694,7 +1694,7 @@
     "system": "This Gift can be used on a single target within five meters and succeeds automatically against mundane people and animals, whereas supernatural creatures and humans aware of the Garou and their powers must be bested in a Charisma + Glory vs Composure + Resolve test. A subject affected by this Gift is either frozen with fear or struck with such terror that they do anything to escape the presence of the werewolf. Supernatural creatures can shake off the effect after one turn by spending a point of Willpower.",
     "systemPtBr": "Esse Dom pode ser usado em um único alvo a até cinco metros e tem sucesso automático contra pessoas e animais comuns, enquanto criaturas sobrenaturais e humanos cientes do Garou e seus poderes devem ser superados em um teste de Carisma + Glória contra Autocontrole + Determinação. Um sujeito afetado por esse Dom fica paralisado pelo medo ou atingido por um terror tão intenso que fará qualquer coisa para escapar da presença do lobisomem. Criaturas sobrenaturais podem se livrar do efeito após um turno ao gastar um ponto de Força de Vontade.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 162
   },
   {
@@ -1720,7 +1720,7 @@
     "system": "This Gift is free and instantaneous while in crinos form. Attacks from the Garou's claws ignore mundane armor or damage reduction by an amount equal to the user's Wisdom. Supernatural armor is ignored at the Storyteller's discretion and might require a Wits + Wisdom test at suitable Difficulty to ignore. This test should be performed only once, and the result applies for the rest of the scene.",
     "systemPtBr": "Este Dom não tem custo e é instantâneo enquanto estiver na forma de crinos. Ataques de garras do Garou ignoram a armadura mundana ou a redução de dano em uma quantidade igual à Sabedoria do usuário. A armadura sobrenatural é ignorada a critério do Narrador e pode exigir um teste de Raciocínio + Sabedoria com uma Dificuldade adequada para ser ignorada. Este teste deve ser realizado apenas uma vez e o resultado se aplica pelo resto da cena.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 163
   },
   {
@@ -1746,7 +1746,7 @@
     "system": "The Garou instantly moves to within melee range of an enemy within line of sight, crossing an intervening distance of up to three meters per point of Glory while being able to perform an attack during the same turn. (Note that it must still be possible for the user to physically traverse the distance — no moving through cliff faces or imprisoning bars.) The user counts as being already engaged at the beginning of the turn for the purpose of combat priority.",
     "systemPtBr": "O Garou se move instantaneamente para a distância de combate corpo a corpo de um inimigo dentro da linha de visão, atravessando uma distância intermediária de até três metros por ponto de Glória, enquanto pode realizar um ataque durante o mesmo turno (Observe que ainda deve ser possível para o usuário atravessar fisicamente a distância - não é possível atravessar paredes de rocha ou barras que prendem). O usuário é considerado como já estando envolvido no início do turno para fins de prioridade de combate.",
     "duration": "Um Turno",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 163
   },
   {
@@ -1772,7 +1772,7 @@
     "system": "The werewolf takes no damage from fire and other similar heat sources for the duration of this Gift, and reduces damage from stronger sources by an amount of their Glory per turn. In addition, anyone striking the user with their bare flesh sustains Superficial damage equal to the user's Glory, as the attacker is seared by the smoldering skin of the werewolf.",
     "systemPtBr": "O lobisomem não sofre dano de fogo e outras fontes de calor semelhantes durante a duração desse Dom e reduz o dano de fontes mais intensas em uma quantidade igual à sua Glória por turno. Além disso, qualquer pessoa que atingir o usuário com a pele nua sofre dano Superficial igual à Glória do usuário, já que o atacante é queimado pela pele ardente do lobisomem.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 163
   },
   {
@@ -1798,7 +1798,7 @@
     "system": "Whenever the werewolf sustains (normally Aggravated) damage from fire or silver, an amount equal to their Honor is turned to Superficial damage instead (though it is not subsequently halved).",
     "systemPtBr": "Sempre que o lobisomem sofre dano (normalmente Agravado) causado pelo fogo ou prata, uma quantidade igual à sua Honra é convertida em dano Superficial em vez disso (embora não seja subsequentemente reduzida pela metade).",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 163
   },
   {
@@ -1824,7 +1824,7 @@
     "system": "This Gift is free and instantaneous while in crinos form. The Garou's claw attacks deal Aggravated damage to other Garou. If their current form doesn't have claws, it also gains a +0 damage claw attack as the fingernails elongate, harden, and  gain a silver coating. The silver claws cause a point of Aggravated damage per turn, per the normal silver  rules, and the user must make a Resolve + Honor test at Difficulty 3 each turn to maintain this Gift, as  the silver-induced agony can become unbearable.",
     "systemPtBr": "Este Dom não tem custo e é instantâneo enquanto estiver na forma de crinos. Os ataques de garra do Garou causam dano Agravado a outros Garou. Se sua forma atual não tiver garras, o usuário também ganha um ataque de garra com dano +0, à medida que as unhas alongam, endurecem e ganham um revestimento de prata. As garras de prata causam um ponto de dano Agravado por turno, de acordo com as regras normais de prata  e o usuário deve fazer um teste de Determinação + Honra com Dificuldade 3 a cada turno para manter esse Dom, já que a agonia induzida pela prata pode se tornar insuportável.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 164
   },
   {
@@ -1846,7 +1846,7 @@
     "system": "The user's player makes a Resolve + Glory test against Difficulty 2. Each success in the margin allows the user to cover an area roughly the size of a house with fog. Everyone in the fog suffers a two-dice penalty to Awareness and Firearms tests. This Gift can  be used in any form.",
     "systemPtBr": "O jogador do usuário faz um teste de Determinação + Glória contra uma Dificuldade 2. Cada sucesso na margem permite ao usuário cobrir uma área aproximadamente do tamanho de uma casa com névoa. Todos na névoa sofrem uma penalidade de dois dados nos testes de Percepção e Armas de Fogo. Esse Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 164
   },
   {
@@ -1868,7 +1868,7 @@
     "system": "The Garou focuses their attention on an enemy, spending a full turn while summoning their strength. The user's next brawl or melee attack adds their Glory to the damage rating, but only if doing so would reduce the target's physical Health to zero. In either case, the effect lapses after the attack.",
     "systemPtBr": "O Garou concentra sua atenção em um inimigo, gastando um turno inteiro enquanto convoca sua força. O próximo ataque com briga ou Arma Branca do usuário adiciona sua Glória ao dano, mas apenas se isso reduzir a Vitalidade física do alvo a zero. Em qualquer caso, o efeito desaparece após o ataque.",
     "duration": "Até o próximo ataque com briga ou Arma Branca, ou até o fim da Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 164
   },
   {
@@ -1890,7 +1890,7 @@
     "system": "For the duration of the Gift, any damage inflicted by the claws or fangs of the user cannot be healed or mended by any means, including Gifts or other supernatural abilities. In addition, the user's player receives bonus dice equal to the character's Glory on any attempt to track or find the victim while the Gift is in effect. (In rare cases a Storyteller can allow extremely powerful foes to resist the user's Stamina + Glory with an appropriate pool, such as Power, and negate the effect after a turn.)",
     "systemPtBr": "Durante a duração do Dom, qualquer dano infligido pelas garras ou presas do usuário não pode ser curado ou reparado de nenhuma forma, incluindo Dons ou outras habilidades sobrenaturais. Além disso, o Garou recebe dados bônus iguais à Glória do personagem em qualquer tentativa de rastrear ou encontrar a vítima enquanto o Dom estiver em efeito (em casos raros, o Narrador pode permitir que inimigos extremamente poderosos resistam ao teste do usuário de Vigor + Glória com um conjunto apropriado, como Poder, e neguem o efeito após um turno).",
     "duration": "Uma noite e um dia",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 164
   },
   {
@@ -1912,7 +1912,7 @@
     "system": "The user makes a ranged attack with Dexterity + Glory and receives any damage modifiers to their claws. (If their current form doesn't have claws, it also gains a +0 damage claw attack during the use of this Gift only.) They also sustain a level of Superficial damage from their claws being rent from their paws and are unable to use claw attacks until that damage has been healed or regenerated.",
     "systemPtBr": "O usuário realiza um ataque à distância com Destreza + Glória e recebe quaisquer modificadores de dano para suas garras (Se sua forma atual não tiver garras, ele também ganha um ataque de garra com dano +0 apenas durante o uso deste Dom). Ele também sofrem um nível de dano Superficial devido às garras serem arrancadas de suas patas e não podem usar ataques de garra até que esse dano seja curado ou regenerado.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 164
   },
   {
@@ -1934,7 +1934,7 @@
     "system": "The user makes a Charisma + Glory test against Wits + Occult of anyone not averting their eyes. Victims who fail to resist become completely paralyzed for the rest of the scene, though supernatural creatures may break free after a turn of paralysis by spending a dot of Willpower. A victim that breaks free cannot be paralyzed again for the reminder of the scene. Note that the effect is slow enough to give onlookers a chance to look away, though foolish subjects or those attempting to harm the user might brave it anyway.",
     "systemPtBr": "O usuário realiza um teste de Carisma + Glória contra Raciocínio + Ocultismo de qualquer pessoa que não desviar o olhar. As vítimas que não conseguem resistir ficam completamente paralisadas pelo resto da cena, embora criaturas sobrenaturais possam se libertar após um turno de paralisia ao gastar um ponto de Força de Vontade. Uma vítima que se liberta não pode ser paralisada novamente pelo restante da cena. Note que o efeito é lento o suficiente para dar aos espectadores a chance de desviar o olhar, embora indivíduos imprudentes ou aqueles que tentam prejudicar o usuário possam enfrentá-lo de qualquer maneira.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 165
   },
   {
@@ -1956,7 +1956,7 @@
     "system": "Anyone and anything with a sense of smell, except other Bone Gnawers, must spend a Willpower and succeed on a Composure + Survival test against the  user's Stamina + Honor or be forced to stop short of reaching the user. This Gift applies outside combat only, though many physical conflicts have been avoided thanks to it. This Gift can be used in any form.",
     "systemPtBr": "Qualquer pessoa ou coisa com um sentido de olfato, exceto outros Roedores de Ossos, deve gastar um ponto de Força de Vontade e ter sucesso em um teste de Autocontrole + Sobrevivência contra a soma de Vigor + Honra do usuário, ou será forçada a parar antes de alcançar o mesmo. Esse Dom se aplica apenas fora do combate, embora muitos conflitos físicos tenham sido evitados graças a ele. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 166
   },
   {
@@ -1978,7 +1978,7 @@
     "system": "Once per scene, when ducking into a crowd, the Garou can activate this Gift to attempt to lose any pursuers. Doing so adds their Honor to the Difficulty of any attempt to spot them or follow them for as long as they're in the crowd. This Gift can be used only in homid form or (amid dogs or wolves) lupus form.",
     "systemPtBr": "Uma vez por cena, ao se misturar em uma multidão, o Garou pode ativar esse Dom para tentar despistar qualquer perseguidor. Fazendo isso, adiciona sua Honra à Dificuldade de qualquer tentativa de avistá-lo ou segui-lo enquanto estiver na multidão. Esse Dom só pode ser usado na forma hominídea ou (em meio a cães ou lobos) na forma lupina.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 166
   },
   {
@@ -2000,7 +2000,7 @@
     "system": "The Garou puts their ear to the street, and the player makes a Gift test at a Difficulty set by the Storyteller, depending on the number of people on (or adjacent to) the street and the distance to the conversation sought. (Listening in on a conversation  occurring on the sidewalk two blocks away on an  otherwise empty street would be 2, whereas picking up a conversation on the 50th floor during rush hour would approach 5.) If successful, the Garou can hear  everything said as if they were standing next to the  speaker, but only actual speech from a  living person  can be heard, so ambient sounds or the other side of a  phone conversation, for example, cannot be heard. This Gift can be used in any form.",
     "systemPtBr": "O Garou encosta a orelha no chão e realiza um teste de Determinação + Honra com uma Dificuldade estabelecida pelo Narrador, dependendo do número de pessoas na rua (ou adjacente a ela) e da distância até a conversa buscada (ouvir uma conversa ocorrendo na calçada a duas quadras de distância em uma rua vazia teria uma Dificuldade de 2, enquanto captar uma conversa no 50º andar durante o horário de pico teria uma Dificuldade de 5). Se bem-sucedido, o Garou pode ouvir tudo dito como se estivesse ao lado do interlocutor, mas apenas a fala real de uma pessoa viva pode ser ouvida, portanto, sons ambiente ou o outro lado de uma conversa telefônica, por exemplo, não podem ser ouvidos. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 166
   },
   {
@@ -2022,7 +2022,7 @@
     "system": "The Garou closes their eyes, and the player makes a Gift test at a Difficulty set by the  Storyteller, depending on the number of animals in the vicinity and what the Gift user is searching for. (Scouting the layout of a farm would be 2, whereas finding a specific scientist in an urban medical center would approach 5.) Some supernatural creatures are able to detect the supernatural intrusion and the animal acting as eyes, and if that animal is killed while the Gift is in use (intentionally or through happenstance) the user suffers a level of Aggravated Willpower damage from the mental shock.",
     "systemPtBr": "O Garou fecha os olhos e realiza um teste de Raciocínio + Honra com uma Dificuldade estabelecida pelo Narrador, dependendo do número de animais nas proximidades e do que o usuário do Dom está procurando (investigar o layout de uma fazenda teria uma dificuldade de 2, enquanto encontrar um cientista específico em um centro médico urbano teria uma dificuldade de 5). Algumas criaturas sobrenaturais são capazes de detectar a intrusão sobrenatural e o animal agindo como os olhos e se esse animal for morto enquanto o Dom estiver em uso (intencionalmente ou por acaso), o usuário sofre um nível de dano de Força de Vontade Agravado devido ao choque mental.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 167
   },
   {
@@ -2044,7 +2044,7 @@
     "system": "The Garou can escape into a crack (a fissure resulting from wear or damage, not just any gap) in the landscape or a building and reappear from another crack a turn later, as long as they can reach the crack, both cracks are at least a hand's breadth long, and the cracks are both visible to the user and within ten meters per Honor of the user. The Storyteller ultimately decides on the availability of suitable entries and exits, and the Garou is unable to use this Gift if no exit is to be found within range.",
     "systemPtBr": "O Garou pode escapar para uma fenda (uma fissura resultante do desgaste ou dano, não apenas qualquer espaço vazio) na paisagem ou em um prédio, e reaparecer de outra fenda um turno depois, desde que possa alcançar a fenda, ambas as fendas tenham pelo menos a largura de uma mão e as fendas sejam visíveis para o usuário e estejam a uma distância de até dez metros por ponto de Honra do usuário. O Narrador decide em última instância sobre a disponibilidade de entradas e saídas adequadas e o Garou é incapaz de usar esse Dom se nenhuma saída for encontrada dentro do alcance.",
     "duration": "Um Turno",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 167
   },
   {
@@ -2066,7 +2066,7 @@
     "system": "As long as the user is in a form suitable for the target gathering, the Garou's presence amid a group of strangers (such as a high-society club, a tight-knit criminal gang, or an unfamiliar caern) goes unnoticed, unless the subjects are actively looking for a trespasser. In that case the Gift's user gains their Wisdom as a bonus to Subterfuge or Performance attempts to remain undercover. This Gift doesn't prevent them being noticed thanks to unfitting behavior, such as stripping naked in the aforementioned club, but as long as the pretense is maintained, the Garou is treated as belonging to the group. Note that anyone who knows the user by sight will recognize them, for better or worse. This Gift can be used only in homid form unless the gathering is a Garou one.",
     "systemPtBr": "Contanto que o usuário esteja em uma forma adequada para o grupo alvo, a presença do Garou em meio a um grupo de estranhos (como um clube da alta sociedade, uma gangue criminosa unida ou um caern desconhecido) passa despercebida, a menos que os sujeitos estejam procurando ativamente por intrusos. Nesse caso, o usuário do Dom ganha sua Sabedoria como bônus em tentativas de Subterfúgio ou Performance para se manter disfarçado. Este Dom não impede que eles sejam notados devido a comportamentos inadequados, como ficar nu no clube mencionado, mas desde que o disfarce seja mantido, o Garou é tratado como pertencente ao grupo. Note que qualquer pessoa que conheça o usuário por aparência irá reconhecê-lo, para o melhor ou pior. Este Dom só pode ser usado na forma hominídea, a menos que o encontro seja um entre Garous.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 167
   },
   {
@@ -2088,7 +2088,7 @@
     "system": "The player spends a Willpower point and make a Composure + Wisdom test against the current Rage of a  target in frenzy, or a Difficulty of 3 in the case of other supernatural creatures. If the user is successful, the target is brought out of frenzy, reverting to their natural form (if Garou), per the  normal rules for leaving Crinos form. This Gift can be used in any form.",
     "systemPtBr": "O jogador gasta um ponto de Força de Vontade e realiza um teste de Autocontrole + Sabedoria contra a Fúria atual de um alvo em frenesi, ou uma dificuldade de 3 no caso de outras criaturas sobrenaturais. Se o usuário tiver sucesso, o alvo é retirado do frenesi, revertendo à sua forma natural (se for um Garou), de acordo com as regras normais para deixar a forma Crinos. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 167
   },
   {
@@ -2110,7 +2110,7 @@
     "system": "The player makes a Gift test against a Difficulty depending on the subject: 2 for a living creature, 3 for a spirit, and 4 for a machine or device. (An unwilling subject can attempt to resist, rather than applying a set Difficulty, by using their Composure + Subterfuge.) On a win, the user gains some awareness of the greatest current injury or trauma suffered by the target. It can be physical, supernatural, or even mental. Any attempt by the user to heal or repair the harm gains a two-dice bonus. This Gift can be used in any form.",
     "systemPtBr": "O jogador realiza um teste de Dom contra uma Dificuldade que depende do objeto: 2 para uma criatura viva, 3 para um espírito e 4 para uma máquina ou dispositivo. (Um objeto que não queira ser examinado pode tentar resistir, em vez de aplicar uma Dificuldade fixa, usando Autocontrole + Subterfúgio.) Em caso de sucesso, o usuário obtém alguma percepção da maior lesão ou trauma atual sofrido pelo alvo. Isso pode ser físico, sobrenatural ou até mesmo mental. Qualquer tentativa do usuário de curar ou reparar o dano recebe um bônus de dois dados. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 168
   },
   {
@@ -2132,7 +2132,7 @@
     "system": "The user automatically becomes aware of all mundane life — plant, animal, and human — as well as any (living) supernatural entities in an area roughly equal to a two-story home. Supernatural entities that use powers to conceal themselves can be found only on a Composure + Wisdom test at a Difficulty depending on the creature and ability used, and spirits are not  sensed at all unless they are possessing a living body. Vampires and other undead are not detected unless they feign life, in which case a Gift test at Difficulty 3  can pierce the ruse.",
     "systemPtBr": "O usuário automaticamente se torna consciente de toda vida mundana — plantas, animais e humanos —, assim como de qualquer entidade sobrenatural (viva) em uma área aproximadamente igual a uma casa de dois andares. Entidades sobrenaturais que usam poderes para se ocultar podem ser encontradas somente em um teste de Autocontrole + Sabedoria com uma Dificuldade dependendo da criatura e da habilidade usada, e os espíritos não são percebidos a menos que estejam possuindo um corpo vivo. Vampiros e outros mortos-vivos não são detectados, a menos que finjam estar vivos, caso em que um teste de Dom com Dificuldade 3 pode desmascarar a artimanha.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 168
   },
   {
@@ -2154,7 +2154,7 @@
     "system": "The Garou chooses a number of pack members equal to their Wisdom. Any time one of these members suffers physical damage of any kind, the damage is  halved and the Gift's user suffers the other half as either Health or Willpower damage. Any defensive Gifts active on the user apply as normal.",
     "systemPtBr": "O Garou escolhe um número de membros da matilha igual à sua Sabedoria. Sempre que um desses membros sofre dano físico de qualquer tipo, o dano é reduzido à metade e o usuário do Dom sofre a outra metade como dano de Saúde ou Força de Vontade. Quaisquer Dons defensivos ativos no usuário se aplicam normalmente.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 168
   },
   {
@@ -2176,7 +2176,7 @@
     "system": "Any attempt to spot the werewolf with sight alone has the Difficulty increased by the Gift user's Honor. By spending a Willpower and a full turn, the Gift user can extend its effect to members of their pack within reach. The Gift lapses should the user make any movement or sound. This Gift can be used in any form.",
     "systemPtBr": "Qualquer tentativa de avistar o lobisomem apenas com a visão tem a Dificuldade aumentada pela Honra do usuário do Dom. Ao gastar um ponto de Força de Vontade e um turno completo, o usuário do Dom pode estender seu efeito para os membros de sua matilha ao alcance. O Dom se dissipa caso o usuário faça qualquer movimento ou som. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 168
   },
   {
@@ -2198,7 +2198,7 @@
     "system": "The Garou can target a group of foes within a few meters of one another, at a range of 20 meters. Anyone failing to resist the Gift test suffers a  two-dice penalty to physical attack pools. The wind can also be used to unbalance a target, but only against someone unprepared for the gust and against a single target only. In this case, the opponent is thrown to the ground (or off whatever they were standing on) if they fail to resist with Dexterity +  Athletics, rather than suffer the dice penalty from chilling.",
     "systemPtBr": "O Garou pode mirar um grupo de inimigos a poucos metros uns dos outros, a uma distância de 20 metros. Quem não conseguir resistir ao teste do Dom sofre uma penalidade de dois dados nas jogadas de ataque físico. O vento também pode ser usado para desequilibrar um alvo, mas apenas contra alguém despreparado para a rajada e apenas contra um único alvo. Nesse caso, o oponente é jogado ao chão (ou para fora de onde estavam) se não resistir com Destreza + Atletismo, em vez de sofrer a penalidade de dados pelo resfriamento.",
     "duration": "Margem",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 169
   },
   {
@@ -2220,7 +2220,7 @@
     "system": "Add the Gift user's Honor to any Stealth, survival or Larceny attempt to avoid detection by electronic surveillance,including infrared câmeras, movement detectors and light-based sensors. Ordinary câmeras can still spot them, assuming a living person in watching the feed, and outright mechanical devices (such as tripwires) are unaffected. By spending a Willpower and a full turn, the Gift can extend its effect to members of their pach within reach.",
     "systemPtBr": "Adicione a Honra do usuário do Dom a qualquer teste de Furtividade, Sobrevivência ou Furto para evitar a detecção por vigilância eletrônica, incluindo câmeras infravermelhas, detectores de movimento e sensores baseados em luz. Câmeras comuns ainda podem detectá-los, assumindo que uma pessoa viva esteja monitorando a transmissão, e dispositivos totalmente mecânicos (como fios de disparo) não são afetados. Ao gastar um ponto de Força de Vontade e um turno completo, o Dom pode estender seu efeito aos membros de sua matilha que estejam ao alcance.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 169
   },
   {
@@ -2242,7 +2242,7 @@
     "system": "The user is immune to anything but the most extreme environmental conditions and able to survive for long stretches of time or travel without shelter. The user's player is able to add their Honor to any Survival test to find food or water. The user is resistant to environmental penalties, reducing them by the user's Honor rating. This Gift can be used in any form.",
     "systemPtBr": "O usuário é imune a quaisquer situações que não sejam as condições ambientais mais extremas e é capaz de sobreviver por longos períodos de tempo ou viajar sem abrigo. O jogador do usuário pode adicionar sua Honra a qualquer teste de Sobrevivência para encontrar comida ou água. O usuário é resistente a penalidades ambientais, reduzindo-as de acordo com sua classificação de Honra. Esse Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 169
   },
   {
@@ -2264,7 +2264,7 @@
     "system": "This Gift is free and instantaneous while the user is in crinos form. The first time a target sustains damage from the Garou's claws while this Gift is active, the player makes a Wits + Honor test against the Stamina + Survival of the target. On a win, the target becomes chilled, receiving a two-dice penalty to defend or dodge future physical attacks.",
     "systemPtBr": "Este Dom não tem custo e é instantâneo enquanto o usuário estiver na forma de crinos. Na primeira vez que um alvo sofre dano das garras do Garou enquanto este Dom está ativo, o jogador realiza um teste de Raciocínio + Honra contra Vigor + Sobrevivência do alvo. Em caso de sucesso, o alvo fica congelado, recebendo uma penalidade de dois dados para se defender ou esquivar de futuros ataques físicos.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 169
   },
   {
@@ -2286,7 +2286,7 @@
     "system": "The Garou's player makes an Intelligence + Wisdom test at a Difficulty set by the Storyteller, depending on the distance and nature of the desired location. (A nearby bus stop blessed with both a mirror and an adjacent puddle might be 2, whereas a cave on the other side of the earth might require 6 to find the single water drop from which to spy.) The Garou can only see, not hear or smell, what goes on at the observed location, and if those who are spied upon have supernatural means to detect intruders, they might well become aware of the surveillance. This Gift can be used in any form.",
     "systemPtBr": "O jogador do Garou realiza um teste de Inteligência + Sabedoria com uma Dificuldade estabelecida pelo Narrador, dependendo da distância e natureza do local desejado. (Um ponto de ônibus próximo abençoado com um espelho e uma poça adjacente pode ter uma Dificuldade 2, enquanto uma caverna do outro lado da Terra pode exigir uma Dificuldade 6 para encontrar a única gota de água da qual espionar.) O Garou só pode ver (não ouvir ou sentir cheiros) o que acontece no local observado e se aqueles que são espionados têm meios sobrenaturais para detectar intrusos, eles podem se tornar conscientes da vigilância. Esse Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 170
   },
   {
@@ -2308,7 +2308,7 @@
     "system": "By summoning an environmental fog, the user can perform grappling attacks against distant targets up to 10 meters away. Additional “coils” can be created by the player's splitting of the dice pool, thus enabling the user to engage multiple opponents (see p. 125). The mist uses the Garou's Wits + Wisdom to grapple. The serpents share three health levels and use their owner's Wits + Wisdom to avoid and endure attacks, though they can be harmed only by fire or supernatural attacks able to damage incorporeal targets.",
     "systemPtBr": "Ao convocar uma névoa ambiental, o usuário pode realizar ataques de agarramento contra alvos distantes de até 10 metros de distância. 'Espirais' adicionais podem ser criadas pela divisão da parada de dados do jogador, permitindo assim que o usuário enfrente vários oponentes (ver p. 125). A névoa usa Raciocínio + Sabedoria do Garou para agarrar. As serpentes compartilham três níveis de Vitalidade e usam Raciocínio + Sabedoria de seu dono para evitar e resistir a ataques, embora possam ser feridas apenas por fogo ou ataques sobrenaturais capazes de danificar alvos incorpóreos.",
     "duration": "Uma Cena ou até que seja encerrado ou destruído",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 170
   },
   {
@@ -2330,7 +2330,7 @@
     "system": "The Garou must concentrate for a full turn to use this Gift and can do nothing else while using it. The object chosen can be moved freely, but heavy  objects require a Resolve + Wisdom test instead of Strength (see “Feats of Strength,” p. 130). Lighter objects can be thrown, using Wits + Wisdom as a ranged attack pool. The Gift can be used on any object the Garou can see, but for every 10 meters past the initial 10 any Difficulties increase by 1.",
     "systemPtBr": "O Garou deve se concentrar por um turno completo para usar este Dom e não pode fazer mais nada enquanto o usa. O objeto escolhido pode ser movido livremente, mas objetos pesados requerem um teste de Determinação + Sabedoria em vez de Força (veja 'Feitos de Força', p. 130). Objetos mais leves podem ser lançados, usando Raciocínio + Sabedoria como um teste de ataque à distância. O Dom pode ser usado em qualquer objeto que o Garou possa ver, mas para cada 10 metros além dos primeiros 10, a dificuldade aumenta em 1.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 170
   },
   {
@@ -2352,7 +2352,7 @@
     "system": "The Garou cannot be detected by sight or conventional camera. The Garou can move no faster than walking pace while this Gift is active, as any sudden movement causes the effect to lapse. Attempts to ambush a target while using this Gift are foiled if the target can win a Wits + Awareness test against the Gift user's Wits + Wisdom.",
     "systemPtBr": "O Garou não pode ser detectado por visão ou câmera convencional. O Garou não pode se mover mais rápido do que o ritmo de caminhada enquanto esse Dom estiver ativo, pois qualquer movimento brusco faz o efeito se dissipar. Tentativas de emboscar um alvo enquanto usa esse Dom são frustradas se o alvo puder vencer um teste de Raciocínio + Percepção contra Raciocínio + Sabedoria do usuário do Dom.",
     "duration": "Um número de turnos (ou aproximadamente dez segundos em uma cena mais longa) igual à Sabedoria do usuário.",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 171
   },
   {
@@ -2374,7 +2374,7 @@
     "system": "The Garou can transform any mundane item into a tattoo-like image of itself, etched on their own skin. The item cannot be larger than what the user  could carry in their own hands, as the Garou still feels its weight mystically while the item is tattooed upon them. Storing an item takes a full turn  (at which point the Willpower is spent), but retrieving it counts as a minor action. The Garou can store a number of objects up to their Wisdom rating. Non-mundane items can be stored in this way at the Storyteller's discretion, and carrying them in one's skin may produce unpredictable side effects. This Gift can be used in any form.",
     "systemPtBr": "O Garou pode transformar qualquer item mundano em uma imagem semelhante a uma tatuagem de si mesmo, gravada em sua própria pele. O item não pode ser maior do que o que o usuário poderia carregar em suas próprias mãos, já que o Garou ainda sente seu peso de forma mística enquanto o item é tatuado nele. Armazenar um item leva um turno completo (momento em que um ponto de Força de Vontade é gasto), mas recuperá-lo conta como uma ação mínima. O Garou pode armazenar um número de objetos igual à seus pontos de Renome de Sabedoria. Itens não-mundanos podem ser armazenados dessa maneira a critério do Narrador, e carregá-los na própria pele pode produzir efeitos colaterais imprevisíveis. Esse Dom pode ser usado em qualquer forma.",
     "duration": "Indefinidamente",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 171
   },
   {
@@ -2396,7 +2396,7 @@
     "system": "Powering functional equipment, such as a laptop or a car, requires a Rage check, and more checks can be called for depending on the size of the machine at the Storyteller's discretion. If the machine is damaged a Resolve + Wisdom test at a  Difficulty depending on the level of damage must be made, and the machine will operate for a number of turns equal to the successes in the margin. Note that this Gift does not provide any expertise on how to operate the target device, though.",
     "systemPtBr": "Energizar equipamentos funcionais, como um laptop ou um carro, requer um teste de Fúria, e mais testes podem ser solicitados, dependendo do tamanho da máquina a critério do Narrador. Se a máquina estiver danificada, um teste de Determinação + Sabedoria com uma dificuldade dependendo do nível de dano deve ser feito, e a máquina funcionará por um número de turnos igual aos sucessos na margem. Note que este Dom não fornece nenhum conhecimento sobre como operar o dispositivo-alvo.",
     "duration": "Uma Cena / Quantidade de turnos igual a margem obtida",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 171
   },
   {
@@ -2418,7 +2418,7 @@
     "system": "The Garou's player makes a Manipulation + Wisdom test and targets any device, electronic or mechanical, within the user's line of sight and 10 meters. (A mechanical device should contain some form of mechanism to qualify: A bicycle would be an allowed target, whereas a wheelbarrow would not.) The Gift cannot be used to issue commands that would harm the device. The Difficulty depends on the complexity of the command and the size of the target, and that Difficulty increases if the device is asked to do  something contrary to its main purpose, such as asking a lock (designed to bar entry) to open. The Difficulty is never below 3, in any case, as this Gift is notoriously complicated, and many Garou would rather  just smash the device than converse with it.",
     "systemPtBr": "O jogador do Garou realiza um teste de Manipulação + Sabedoria e escolhe qualquer dispositivo, eletrônico ou mecânico, dentro do campo de visão do usuário e a 10 metros de distância (um dispositivo mecânico deve conter algum tipo de mecanismo para se qualificar: uma bicicleta seria um alvo permitido, enquanto uma carrinho de mão não seria). O Dom não pode ser usado para emitir comandos que prejudiquem o dispositivo. A Dificuldade depende da complexidade do comando e do tamanho do alvo, e essa Dificuldade aumenta se o dispositivo for solicitado a fazer algo contrário ao seu propósito principal, como pedir a uma fechadura (projetada para barrar a entrada) que se abra. A Dificuldade nunca é inferior a 3, em qualquer caso, já que esse Dom é notoriamente complicado e muitos Garou prefeririam simplesmente destruir o dispositivo do que conversar com ele.",
     "duration": "Por até uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 171
   },
   {
@@ -2440,7 +2440,7 @@
     "system": "The Gift user must know the subject being copied by face. The user's player makes a Manipulation + Wisdom test at Difficulty 3. Each success in the margin provides an additional dice bonus to subsequent attempts to pass as the copied subject (usually involving Performance or Subterfuge), as the user's own appearance changes to match that of the impersonated individual. At the Storyteller's discretion, this bonus is halved if the subject copied is a wolf or wolf-born and other wolfborn are present. This Gift can be used in any form.",
     "systemPtBr": "O usuário do Dom deve conhecer o sujeito que está sendo copiado pelo rosto. O jogador do usuário faz um teste de Manipulação + Sabedoria com Dificuldade 3. Cada sucesso na margem fornece um bônus adicional de dados para tentativas subsequentes de passar como o sujeito copiado (geralmente envolvendo Performance ou Subterfúgio), à medida que a aparência do usuário muda para combinar com a do indivíduo imitado. A critério do Narrador, esse bônus é reduzido pela metade se o sujeito copiado for um lobo ou nascido-lobo e outros nascidos-lobo estiverem presentes. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 172
   },
   {
@@ -2462,7 +2462,7 @@
     "system": "The Garou using this Gift must be able to see, touch, and smell the target object. The object can be in any state — anything from a partially de-magnetized floppy disk to the remains of a burnt  book is fair game — though the worse the state of the  object and the greater the amount of time it has spent in that condition, the greater the Difficulty to the Intelligence + Wisdom test. Sensing old images from a sloppily reformatted memory stick might be Difficulty 2, whereas the contents of a 17th-century diary burned to tatters is 5 or more. Also, note that the Gift  doesn't automatically bestow the ability to understand the information gleaned, and additional tests (such as Intelligence + Technology to understand the purpose of a piece of computer code) might be required. This Gift can be used in any form.",
     "systemPtBr": "O Garou que usa esse Dom deve ser capaz de ver, tocar e sentir o cheiro do objeto alvo. O objeto pode estar em qualquer estado - desde um disco flexível parcialmente desmagnetizado até os restos de um livro queimado - embora quanto pior o estado do objeto e quanto mais tempo ele passou nesse estado, maior será a Dificuldade do teste de Inteligência + Sabedoria. Detectar antigas imagens de um pendrive reformatado de forma desleixada pode ser uma Dificuldade 2, enquanto o conteúdo de um diário do século XVII queimado em farrapos é uma Dificuldade 5 ou mais. Além disso, observe que o Dom não concede automaticamente a capacidade de entender as informações obtidas, e testes adicionais (como Inteligência + Tecnologia para entender o propósito de um trecho de código de computador) podem ser necessários. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 172
   },
   {
@@ -2484,7 +2484,7 @@
     "system": "Applying a suitable material, the user marks a boundary either between two objects or in a circle. The length of this boundary is limited to 10 meters per dot of Glory Renown of the user. All movement over this boundary becomes known to the user  as if glimpsed, no matter the user's location, so long as the boundary is active. Any supernatural concealment requires a Wits + Glory test to notice,  with a Difficulty depending on the power and nature of the trespasser. The boundary remains active for a day  and a night or until the objects anchoring it are moved or destroyed. A Gift user can have only one boundary active at any given time. This Gift can be used in any form.",
     "systemPtBr": "Aplicando um material adequado, o usuário marca uma delimitação entre dois objetos ou em um círculo. O comprimento dessa área a 10 metros por ponto de Renome de Glória do usuário. Todo movimento sobre essa área se torna conhecido para o usuário, como se fosse vislumbrado, não importa a localização do usuário, desde que a delimitação esteja ativa. Qualquer ocultação sobrenatural requer um teste de Raciocínio + Glória para notar, com uma Dificuldade dependendo do poder e da natureza do intruso. O limite permanece ativo por um dia e uma noite ou até que os objetos que o ancoram sejam movidos ou destruídos. Um usuário do Dom pode ter apenas um limite ativo a qualquer momento. Este Dom pode ser usado em qualquer forma.",
     "duration": "Um dia ou noite ou até ser encerrado",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 172
   },
   {
@@ -2506,7 +2506,7 @@
     "system": "The user marks spots on the border of a territory (by using water from a caern, blood, or their own urine), tying their spirit to the land. They can mark a territory only while the full moon is shining, and the territory's size is unlimited so long as the Garou is able to mark at least five spots along its circumference in a single night. While in this territory, the Garou's player gains a bonus die on all physical tests. However, any damage to the territory imparts Willpower damage on the user, the extent of which is determined by the Storyteller. (The Storyteller ultimately decides what constitutes damage and its effects. A tree cut down might yield only a single Superficial Willpower damage, whereas a catastrophic oil spill would cause multiple levels of Aggravated damage.) If the territory is already damaged, the Garou can sustain Willpower damage just by using the Gift in the first place, so most werewolves avoid using it except in unspoiled areas that they know well.",
     "systemPtBr": "O usuário marca pontos na fronteira de um território (usando água de um caern, sangue ou sua própria urina), vinculando seu espírito à terra. Eles podem marcar um território apenas quando a lua cheia está brilhando, e o tamanho do território é ilimitado, desde que o Garou seja capaz de marcar pelo menos cinco pontos ao longo de sua circunferência em uma única noite. Enquanto estiver neste território, Garou ganha um dado de bônus em todos os testes físicos. No entanto, qualquer dano ao território causa dano à Força de Vontade no usuário, cuja extensão é determinada pelo Narrador (O Narrador decide em última instância o que constitui dano e seus efeitos. Um arbusto cortado pode resultar apenas em um dano de Superficial na Força de Vontade, enquanto um derramamento de óleo catastrófico causaria múltiplos níveis de dano Agravados). Se o território já estiver danificado, o Garou pode de fato sustentar dano à Força de Vontade apenas usando o Dom em primeiro lugar, portanto, a maioria dos lobisomens evita usá-lo, exceto em áreas incontaminadas que eles conhecem bem.",
     "duration": "Um número de noites igual à Glória do usuário",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 173
   },
   {
@@ -2528,7 +2528,7 @@
     "system": "A single subject falling under the gaze of the Gift's user must resist the user's Charisma + Glory vs the target's Composure + Occult or have their body wracked with horrible pains and gain a 2-dice penalty to all tests for the rest of the scene. Only one subject can be affected by the Gift user at any given time.",
     "systemPtBr": "O usuário do Dom deve ter sucesso em um teste de Carisma + Glória contra a Autocontrole + Ocultismo do alvo, para que este tenha seu corpo atormentado por dores horríveis e receber uma penalidade de 2 dados em todos os testes pelo resto da cena. Apenas um alvo por vez pode ser afetado pelo usuário do Dom.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 173
   },
   {
@@ -2550,7 +2550,7 @@
     "system": "Anyone trying to harm the Gift's user is subject to a grapple attack from nearby trees and plants (at a maximum of one retaliation per turn). If trees are nearby, their pool is the user's Manipulation + Glory. If only bushes or other, smaller plants are present, their pool is reduced to the user's Glory only. If no plants of suitable size are present, the Gift does nothing. At the Storyteller's discretion, other effects such as dice pool penalties are also possible, depending on the flora and foliage, and the Gift is sometimes used as part of Rites involving the growing of plants or trees.",
     "systemPtBr": "Qualquer pessoa que tente prejudicar o usuário do Dom está sujeita a um ataque de agarrão das árvores e das plantas próximas (com um máximo de uma retaliação por turno). Se as árvores estiverem por perto, a parada de dados delas é a Manipulação + Glória do Garou. Se apenas arbustos ou outras plantas menores estiverem presentes, a parada de dados delas é reduzida apenas à Glória do usuário. Se não houver plantas de tamanho adequado presentes, o Dom não faz nada. A critério do Narrador, outros efeitos, como penalidades na parada de dados, também são possíveis, dependendo da flora e da folhagem, e o Dom às vezes é usado como parte de Ritos envolvendo o crescimento de plantas ou árvores.",
     "duration": "Uma cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 173
   },
   {
@@ -2572,7 +2572,7 @@
     "system": "The werewolf spends a scene licking the wounds of the slain, as well as any areas where traces of their presence lingers. The injuries of the victim supernaturally close, and they appear to have died from no discernible cause. (Modern medicine would likely chalk up the deaths to heart failure, though large losses of blood can make them appear mysteriously exsanguinated, an irony not lost on urban Garou looking to throw shade on the local leeches.) Mundane attempts to secure crime scene evidence such as DNA also automatically fail, but investigators familiar with Garou can make attempts normally, albeit with a dice penalty equal to the Gift user's Honor.",
     "systemPtBr": "O lobisomem passa uma cena lambendo as feridas do morto, bem como quaisquer áreas onde traços de sua presença persistem. As lesões da vítima fecham de maneira sobrenatural, e ela parece ter morrido sem uma causa discernível (a medicina moderna provavelmente atribuiria as mortes a insuficiência cardíaca, embora grandes perdas de sangue possam fazê-las parecer misteriosamente exsanguinadas, uma ironia que não escapa aos Garou urbanos que querem prejudicar os sanguessugas locais). Tentativas mundanas de obter evidências de cena de crime, como DNA, também falham automaticamente, mas investigadores familiarizados com os Garou podem fazer tentativas normalmente, embora com uma penalidade de dados igual à Honra do usuário do Dom.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 174
   },
   {
@@ -2594,7 +2594,7 @@
     "system": "The werewolf must touch the intended object. The user's player makes a Resolve + Honor test at a Difficulty depending on the object's size and material. Natural substances, such as wood or stone, are more resistant, whereas artificial substances (especially plastics) are easier to destroy. Alloys are likewise more susceptible to this power than pure metals. Difficulties thus range from 2, for something like a handgun, up to 5 for a carved stone pillar. The size limit for the power is roughly one ton, or an average car, and the effect applies to an entire object. (It cannot be used to corrode a hole in a door, but an attempt can be made to affect the entire door.) The process takes a few minutes, during which the user must stay in contact with the object, making it hard to use in physical combat unless grappling the subject.",
     "systemPtBr": "O lobisomem deve tocar no objeto pretendido. O Garou faz um teste de Determinação + Honra com uma Dificuldade dependendo do tamanho e material do objeto. Substâncias naturais, como madeira ou pedra, são mais resistentes, enquanto substâncias artificiais (especialmente plásticos) são mais fáceis de destruir. Ligas também são mais suscetíveis a esse poder do que metais puros. As Dificuldades variam de 2, para algo como uma arma de fogo, até 5 para uma coluna de pedra esculpida. O limite de tamanho para o poder é aproximadamente uma tonelada, ou um carro médio, e o efeito se aplica a um objeto inteiro (não pode ser usado para corroer um buraco em uma porta, mas uma tentativa pode ser feita para afetar a porta inteira). O processo leva alguns minutos, durante os quais o usuário deve permanecer em contato com o objeto, tornando difícil usar o poder em combate físico, a menos que esteja segurando o objeto.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 174
   },
   {
@@ -2616,7 +2616,7 @@
     "system": "Anything that flies at an altitude of less than 50 meters and within a 100-meter radius of the werewolf must immediately land or risk crash landing. (Difficulty to stay aloft is 1 + the Gift user's Honor) This effect also applies to helicopters, drones, or other craft passing through the area. Projectiles and thrown objects are also affected by the pull, suffering an attack dice penalty equal to the user's Honor if their trajectory enters or leaves the zone. Anything standing on the ground is unaffected, though leaps and other acrobatics also suffer a similar penalty. Upholding this effect requires the Gift user's full attention, and the effect lapses as soon as they perform another action or use another Gift.",
     "systemPtBr": "Qualquer coisa que voa a uma altitude de menos de 50 metros e dentro de um raio de 100 metros do lobisomem deve pousar imediatamente ou correr o risco de pousar de forma forçada. (A Dificuldade para se manter no ar é 1 + a Honra do usuário do Dom) Esse efeito também se aplica a helicópteros, drones ou outras aeronaves que passem pela área. Projéteis e objetos arremessados também são afetados pela atração, sofrendo uma penalidade de dados de ataque igual à Honra do usuário se sua trajetória entrar ou sair da zona. Qualquer coisa em pé no chão não é afetada, embora saltos e outras acrobacias também sofram uma penalidade similar. Manter esse efeito requer a atenção total do usuário do Dom, e o efeito cessa assim que eles realizam outra ação ou usam outro Dom.",
     "duration": "Por até uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 175
   },
   {
@@ -2638,7 +2638,7 @@
     "system": "The Gift user targets an area on the ground, roughly five meters in diameter, within line of sight and ten meters. The user's player makes a Gift test at a Difficulty of 2. (Increase Difficulty by 1 for each additional ten meters of distance.) All within the area suffer a 2-dice penalty to their physical defense pools and cannot move faster than slow walking pace while within the Gift's range, as the ground turns into a sucking bog. Note that the Gift can be used only while on natural ground and has no effect indoors or on paved surfaces.",
     "systemPtBr": "O usuário do Dom escolhe uma área no chão, com cerca de cinco metros de diâmetro, dentro de sua linha de visão e a dez metros. O Garou então faz um teste de Dom com uma Dificuldade de 2 (aumente a Dificuldade em 1 para cada dez metros adicionais de distância). Todos dentro da área sofrem uma penalidade de 2 dados em suas paradas de defesa física e não podem se mover mais rápido do que em passo lento enquanto estiverem dentro do alcance do Dom, pois o chão se transforma em um pântano pegajoso. Note que o Dom só pode ser usado em terreno natural e não tem efeito em ambientes internos ou em superfícies pavimentadas.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 175
   },
   {
@@ -2660,7 +2660,7 @@
     "system": "While active, this Gift allows the user to ignore a number of physical damage levels equal to their Honor each turn, as long as that damage is caused by mundane weapons. Natural weapons, such as claws and fangs, remain unaffected, as does silver and attacks of a spiritual or otherwise supernatural nature, such as with most talismans. While this Gift is active, the user is unable to use any kind of tool or technological device.",
     "systemPtBr": "Enquanto estiver ativo, este Dom permite ao usuário ignorar um número de níveis de dano físico igual à sua Honra a cada turno, desde que esse dano seja causado por armas mundanas. Armas naturais, como garras e presas, permanecem inalteradas, assim como a prata e ataques de natureza espiritual ou sobrenatural, como na maioria dos talismãs. Enquanto este Dom estiver ativo, o usuário não pode usar nenhum tipo de ferramenta ou dispositivo tecnológico.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 175
   },
   {
@@ -2682,7 +2682,7 @@
     "system": "The Garou using this Gift must spend a full turn (or equivalent) studying their target, during which they can do nothing else. Upon the player's successful Intelligence + Glory test against the target's Composure + Subterfuge, the user learns of one way to deal Aggravated physical damage to the subject that they did not already know. (Do not count unique sources of damage, such as named weapons and the like.) If they already know of all the target's anathema, they gain a one-die bonus to attacks as they discern a minor weakness, such as “a tendency to lead with the left.” This Gift can be used in any form.",
     "systemPtBr": "O Garou que usa este Dom deve gastar um turno completo (ou equivalente) estudando seu alvo, durante o qual não pode fazer mais nada. Após um teste bem-sucedido de Inteligência + Glória do jogador contra Raciocínio + Subterfúgio do alvo, o usuário aprende uma maneira de causar dano físico Agravado ao sujeito que ele ainda não conhecia (não conte fontes de dano únicas, como armas nomeadas e similares). Se já conhecer todos os anátemas do alvo, ele ganha um bônus de um dado para ataques, já que discernem uma fraqueza menor, como 'uma tendência a liderar com a esquerda'. Este Dom pode ser usado em qualquer forma.",
     "duration": "",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 175
   },
   {
@@ -2704,7 +2704,7 @@
     "system": "While this Gift is active, the Garou gains their Glory as bonus for all Intimidation tests, and everyone apart from their packmates within 10 meters is unable to use Willpower to reroll dice or to regain Willpower except through mystical means.",
     "systemPtBr": "Enquanto este Dom estiver ativo, o Garou ganha sua Glória como bônus para todos os testes de Intimidação, e todos dentro de 10 metros (exceto seus membros de matilha) são incapazes de usar Força de Vontade para rolar dados novamente ou para recuperar Força de Vontade, exceto por meios místicos.",
     "duration": "Uma cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 175
   },
   {
@@ -2726,7 +2726,7 @@
     "system": "The target loses a number of dice from their pool equal to the Gift user's Glory on their next action, as long as that action takes a turn or less. Use of this Gift is almost invisible, and because the distraction is spiritual in nature, the Gift user isn't implicated unless their player fails a test of the character's Composure + Glory against the Wits + Occult (or Wisdom, if the target is Garou) of the subject. Make this test only if it's relevant who performed the distraction, though. A subject can be affected by this Gift only once per scene. This Gift can be used in any form.",
     "systemPtBr": "O alvo perde um número de dados de sua parada de dados igual à Glória do usuário do Dom em sua próxima ação, desde que essa ação leve um turno ou menos. O uso deste Dom é quase imperceptível e como a distração é de natureza espiritual, o usuário do Dom não é implicado a menos que seu jogador falhe em um teste da Autocontrole + Glória do personagem contra o Raciocínio + Ocultismo (ou Sabedoria, se o alvo for um Garou) do alvo. Faça esse teste apenas se for relevante quem realizou a distração. Um sujeito só pode ser afetado por este Dom uma vez por cena. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Ação",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 176
   },
   {
@@ -2748,7 +2748,7 @@
     "system": "The user's player makes a test of the character's Strength + Glory against the Stamina + Wits of everyone within 20 meters, knocking to the ground anyone who fails to resist. Those who succeed in resisting still suffer a two-dice penalty to any action other than defend for the next turn, unless their test was a critical win.",
     "systemPtBr": "O Garou faz um teste de Força + Glória contra o Vigor + Raciocínio de todos dentro de 20 metros, derrubando no chão quem não conseguir resistir. Aqueles que conseguirem resistir ainda sofrem uma penalidade de dois dados em qualquer ação que não seja defender-se durante o próximo turno, a menos que o resultado do teste tenha sido um sucesso crítico.",
     "duration": "Um Turno ou Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 176
   },
   {
@@ -2770,7 +2770,7 @@
     "system": "The Garou using this Gift needs only to touch the target to activate it. (If used in combat, the user must first succeed with a brawl attack.) While the Gift is in effect, the victim gains no benefit from any Gifts that would protect them from projectile weapons, and any ranged attack against them gains a two-dice bonus. The curse lasts for one day per dot of Glory of the user but can be removed before that by performing a Rite of Abjuration (p. 180). This Gift can be used in any form.",
     "systemPtBr": "O Garou que usa este Dom precisa apenas tocar o alvo para ativá-lo (Se usado em combate, o usuário deve primeiro ter sucesso em um ataque corpo a corpo). Enquanto o Dom estiver em efeito, a vítima não recebe benefícios de quaisquer Dons que a protegeriam de armas de projétil, e qualquer ataque à distância contra eles recebe um bônus de dois dados. A maldição dura um dia por ponto de Glória do usuário, mas pode ser removida antes disso ao realizar um Rito de Abjuração (p. 180). Este Dom pode ser usado em qualquer forma.",
     "duration": "Um dia por ponto de Glória do usuário",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 177
   },
   {
@@ -2792,7 +2792,7 @@
     "system": "The werewolf decides on an item, and the player makes a Wits + Wisdom test at a Difficulty depending on the rarity of the item with regard to the area and how specific they want to be. Finding “a car” might be Difficulty 2, whereas locating “a '75 Chevrolet Corvette” approaches 4 or 5 and might require hours of travel. Of course, if the object isn't available in the area, the Gift automatically fails, as do attempts to locate too specific an object, such as a car of a certain color. (In general, no adjectives can be used in the search, nor can things such as license plates or serial numbers.) What constitutes an “area” is intentionally loose, as it depends more on the amount of clutter than on a set geographical area. It might be a single neighborhood in New York but several square kilometers of forest. This Gift can be used in any form.",
     "systemPtBr": "O Garou escolhe item e e faz um teste de Raciocínio + Sabedoria com uma Dificuldade dependendo da raridade do item em relação à área e o quão específicos eles desejam ser. Encontrar 'um carro' pode ter Dificuldade 2, enquanto localizar 'um Chevrolet Corvette 75' se aproxima de 4 ou 5 e pode exigir horas de viagem. Claro, se o objeto não estiver disponível na área, o Dom falhará automaticamente, assim como as tentativas de localizar um objeto muito específico, como um carro de uma determinada cor (em geral, não podem ser usados adjetivos na busca, nem coisas como placas de licença ou números de série). O que constitui uma 'área' é intencionalmente amplo, pois depende mais da quantidade de bagunça do que de uma área geográfica definida. Pode ser um único bairro em Nova York ou vários quilômetros quadrados de floresta. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 177
   },
   {
@@ -2814,7 +2814,7 @@
     "system": "Upon the werewolf's encountering a language they do not normally speak, the player can make an Intelligence + Wisdom test against a Difficulty based on how common the language is. (Chinese or any variant of Arabic, for example, would be Difficulty 2, a tablet written in an obscure dialect of Sumerian 4, and runes etched by unknown hand before the dawn of humankind 5 and beyond.) This Gift can be used in any form (though intelligible speech is possible only in homid or glabro).",
     "systemPtBr": "Ao encontrar uma língua que o lobisomem normalmente não fala, o jogador pode fazer um teste de Inteligência + Sabedoria contra uma Dificuldade baseada em quão comum é a língua (chinês ou qualquer variante de árabe, por exemplo, teriam Dificuldade 2, uma tabuleta escrita em um dialeto obscuro do sumério teria Dificuldade 4, e runas entalhadas por uma mão desconhecida antes do alvorecer da humanidade teriam Dificuldade 5 ou mais). Este Dom pode ser usado em qualquer forma (embora a fala inteligível seja possível apenas em hominídeo ou glabro).",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 177
   },
   {
@@ -2836,7 +2836,7 @@
     "system": "Everything seems to fall silent around the werewolf using this Gift, as their movements become completely silent and other noises around them are muffled to almost nothing. Any natural noise made by the werewolf becomes undetectable, and sounds in a 10-meter radius are muted. Detecting the Gift's user by sound alone becomes impossible, and any attempt to notice sounds made by anyone within the area of effect suffers a penalty equal to the Wisdom of the user. This Gift can be used in any form.",
     "systemPtBr": "Qualquer ruído natural feito pelo lobisomem se torna indetectável, e os sons em um raio de 10 metros são abafados. Tornar-se impossível detectar o usuário do Dom apenas pelo som, e qualquer tentativa de notar os sons produzidos por qualquer pessoa dentro da área de efeito sofre uma penalidade igual à Sabedoria do usuário. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 178
   },
   {
@@ -2858,7 +2858,7 @@
     "system": "To burrow into earth, the Gift's user must make a Strength + Wisdom test at a Difficulty depending on the relative hardness of the ground. (Soft soil is 2, whereas hard-packed rocky earth is 4.) Each use of the Gift digs a tunnel two meters long, plus two meters for each success in the margin, and takes a turn for each two meters. The maximum distance is 20 meters, but additional uses of this Gift can dig progressively longer tunnels. No matter their length, the tunnels are inherently unstable and last for only one scene.",
     "systemPtBr": "Para escavar na terra, o usuário do Dom deve fazer um teste de Força + Sabedoria com uma Dificuldade dependendo da dureza relativa do solo. (Solo macio é Dificuldade 2, enquanto solo rochoso compacto é Dificuldade 4.) Cada uso do Dom escava um túnel com dois metros de comprimento, mais dois metros para cada sucesso na margem, e leva um turno para cada dois metros. A distância máxima é de 20 metros, mas usos adicionais deste Dom podem cavar túneis progressivamente mais longos. Independentemente do comprimento, os túneis são instáveis por natureza e duram apenas uma cena.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 178
   },
   {
@@ -2880,7 +2880,7 @@
     "system": "Upon activating this test, the Garou's player can add the character's Wisdom to any test involved in navigating an area containing static danger or obstacles. It can help them avoid mines, tripwires, cameras, or unstable terrain, or to navigate a maze, though it does not provide this bonus when attempting to avoid guards or other conscious entities. If the Gift's user can communicate with their packmates, it can provide this bonus to them as well. This Gift can be used in any form.",
     "systemPtBr": "Ao ativar este teste, o jogador do Garou pode adicionar a Sabedoria do personagem a qualquer teste envolvido na navegação de uma área contendo perigo estático ou obstáculos. Isso pode ajudá-los a evitar minas, fios de armadilha, câmeras ou terrenos instáveis, ou a navegar por um labirinto, embora não forneça esse bônus ao tentar evitar guardas ou outras entidades conscientes. Se o usuário do Dom puder se comunicar com os membros de sua matilha, ele pode fornecer esse bônus a eles também. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 178
   },
   {
@@ -2902,7 +2902,7 @@
     "system": "The Gift user always has a general sense of the physical and mental wellbeing of their pack members. If they spend a Willpower and make a Composure + Honor test at Difficulty 2, they are able to get precise information about a single member, such as their current Health value and where the subject is, as long as they are within a 10-kilometer radius of the user. This Gift can be used in any form.",
     "systemPtBr": "O usuário do Dom sempre tem uma noção geral do bem-estar físico e mental dos membros de sua matilha. Se gastar um ponto de Força de Vontade e fizer um teste de Autocontrole + Honra com Dificuldade 2, ele é capaz de obter informações precisas sobre um único membro, como o valor atual de Vitalidade dele e onde ele está, desde que esteja dentro de um raio de 10 quilômetros do usuário. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 178
   },
   {
@@ -2924,7 +2924,7 @@
     "system": "While this Gift is active, spirits and possessed entities avoid attacking the Gift user if they are able to attack other foes. This Gift also allows the user to ignore their Honor's worth of Health or Willpower damage caused by spirits and possessed creatures each turn. This Gift can be used in any form.",
     "systemPtBr": "Enquanto este Dom estiver ativo, os espíritos e entidades possuídas evitam atacar o usuário do Dom se puderem atacar outros inimigos. Este Dom também permite que o usuário ignore o valor igual aos seus pontos de Renome de Honra em dano de Vitalidade ou Força de Vontade causado por espíritos e criaturas possuídas a cada turno. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 179
   },
   {
@@ -2946,7 +2946,7 @@
     "system": "While this Gift is active, members of the pack can make Rage checks for one another. The total number of Rage checks that can be made in this way is equal to the Gift user's Honor. Blood of the Pack cannot be used if Unity of the Pack (see below) has been used in the same scene. This Gift can be used in any form.",
     "systemPtBr": "Enquanto este Dom estiver ativo, os membros da matilha podem fazer Testes de Fúria uns pelos outros. O número total de Testes de Fúria que podem ser feitos desta forma é igual à Honra do usuário do Dom. Sangue da Matilha não pode ser usado se Unidade da Matilha tiver sido usado na mesma cena. Este Dom pode ser usado em qualquer forma.",
     "duration": "Um Turno",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 179
   },
   {
@@ -2968,7 +2968,7 @@
     "system": "While this Gift is active, members of the pack can spend Willpower for one another. The total number of Willpower that can be spent in this way is equal to the Gift user's Honor. Unity of the Pack cannot be used if Blood of the Pack has been used in the same scene. This Gift can be used in any form.",
     "systemPtBr": "Enquanto este Dom estiver ativo, os membros da matilha podem gastar pontos de Força de Vontade uns pelos outros. O número total de pontos de Força de Vontade que podem ser gastos dessa maneira é igual à Honra do usuário do Dom. Unidade da Matilha não pode ser usada se Sangue da Matilha tiver sido usado na mesma cena. Este Dom pode ser usado em qualquer forma.",
     "duration": "Um Turno",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 179
   },
   {
@@ -2990,7 +2990,7 @@
     "system": "While this Gift is active, the Garou's player gains a bonus on all physical combat attack and defense tests of one die for each member of the pack who is Impaired, and two bonus dice for each member on the verge of death (their Health tracker filled with Aggravated damage). This dice bonus cannot exceed the Gift user's Honor.",
     "systemPtBr": "Enquanto este Dom estiver ativo, o Garou ganha um bônus em todos os testes de ataque e defesa de combate físico de um dado para cada membro da matilha que estiver Impedido, e dois dados de bônus para cada membro à beira da morte (sua vitalidade cheia de dano Agravado). Este bônus de dados não pode exceder a Honra do usuário do Dom.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 179
   },
   {
@@ -3012,7 +3012,7 @@
     "system": "The Gift user can extinguish one light source in line of sight per dot of Wisdom. Anyone lacking night vision or additional light sources is subject to a one- to three-dice penalty (depending on ambient light) to all sight-reliant tests. This Gift can be used in any form.",
     "systemPtBr": "O usuário do Dom pode extinguir uma fonte de luz à vista para cada ponto de Sabedoria. Qualquer pessoa que não possua visão noturna ou fontes adicionais de luz está sujeita a uma penalidade de um a três dados (dependendo da luz ambiente) em todos os testes dependentes da visão. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma Cena",
-    "book": "Livro Básico (Lobisomem: O Apocalipse)",
+    "book": "Livro Básico",
     "page": 170
   },
   {

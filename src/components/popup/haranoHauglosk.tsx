@@ -1,9 +1,18 @@
-'use client'
+﻿'use client'
 import { useContext, useEffect, useState } from "react";
 import contexto from "@/context/context";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { haranoHaugloskCheck } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
+import {
+  openChatAfterSpecialRoll,
+  SpecialRollFrame,
+  specialRollActionButtonClass,
+  specialRollCounterButtonClass,
+  specialRollDisabledCounterButtonClass,
+  specialRollLabelClass,
+  specialRollValueClass,
+} from "./specialRollShared";
 
 export default function HaranoHauglosk(props: { type: string }) {
   const { type } = props;
@@ -13,96 +22,82 @@ export default function HaranoHauglosk(props: { type: string }) {
     sessionId,
     dataSheet,
     sheetId,
+    setOptionSelect,
     setShowHauglosk,
     setShowHarano,
     setShowMenuSession,
     setShowMessage,
-  } =  useContext(contexto);
+  } = useContext(contexto);
 
   useEffect(() => {
-    if (Number(dataSheet.data.harano) + Number(dataSheet.data.hauglosk) === 0)
+    if (Number(dataSheet.data.harano) + Number(dataSheet.data.hauglosk) === 0) {
       setHaranoHauglosk(1);
-    else
+    } else {
       setHaranoHauglosk(Number(dataSheet.data.harano) + Number(dataSheet.data.hauglosk));
-  });
+    }
+  }, [dataSheet.data.harano, dataSheet.data.hauglosk]);
+
+  const closePopup = () => {
+    setShowHauglosk(false);
+    setShowHarano(false);
+  };
 
   const rollDices = async () => {
     const typeEdited = type.toLocaleLowerCase();
     dataSheet.data[typeEdited] = await haranoHaugloskCheck(sessionId, typeEdited, dataSheet, dificulty, '', setShowMessage);
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    setShowHauglosk(false);
-    setShowHarano(false);
-    setShowMenuSession('');
+    closePopup();
+    openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
   };
 
-  return(
-    <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
-      <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Teste de { type }</p>
-      </label>
-      <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Parada de Dados</p>
-        <div className="flex w-full">
-          <button
-            type="button"
-            className="border border-white p-3 cursor-pointer bg-gray-400 text-black"
-          >
-            <FaMinus />
-          </button>
-          <div
-            id="dices"
-            className="p-2 bg-white text-center text-black w-full"
-          >
+  return (
+    <SpecialRollFrame
+      title={`Teste de ${type}`}
+      description=""
+      onClose={closePopup}
+    >
+      <div className="flex flex-col items-center">
+        <label htmlFor="shadow-pool" className="mb-3 flex w-full flex-col items-center">
+          <p className={specialRollLabelClass}>Parada de Dados</p>
+          <div id="shadow-pool" className={specialRollValueClass}>
             {haranoHauglosk}
           </div>
-          <button
-            type="button"
-            className="border border-white p-3 cursor-pointer bg-gray-400 text-black"
-          >
-            <FaPlus />
-          </button>
-        </div>
-      </label>
-      <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Dificuldade do Teste</p>
-        <div className="flex w-full">
-          <button
-            type="button"
-            className={`border border-white p-3 cursor-pointer ${ dificulty === 1 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-            onClick={ () => {
-              if (dificulty > 1) setDificulty(dificulty - 1);
-            }}
-          >
-            <FaMinus />
-          </button>
-          <div
-            id="dificulty"
-            className="p-2 bg-white text-center text-black w-full"
-            onChange={ (e: any) => {
-              if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setDificulty(15);
-              else setDificulty(Number(e.target.value));
-            }}
-          >
-            {dificulty}
+        </label>
+        <label htmlFor="shadow-dificulty" className="mb-3 flex w-full flex-col items-center">
+          <p className={specialRollLabelClass}>Dificuldade do Teste</p>
+          <div className="flex w-full">
+            <button
+              type="button"
+              className={`${specialRollCounterButtonClass} ${dificulty === 1 ? specialRollDisabledCounterButtonClass : ''}`}
+              onClick={() => {
+                if (dificulty > 1) setDificulty(dificulty - 1);
+              }}
+            >
+              <FaMinus />
+            </button>
+            <div id="shadow-dificulty" className={specialRollValueClass}>
+              {dificulty}
+            </div>
+            <button
+              type="button"
+              className={`${specialRollCounterButtonClass} ${dificulty === 15 ? specialRollDisabledCounterButtonClass : ''}`}
+              onClick={() => {
+                if (dificulty < 15) setDificulty(dificulty + 1);
+              }}
+            >
+              <FaPlus />
+            </button>
           </div>
-          <button
-            type="button"
-            className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
-            onClick={ () => {
-              if (dificulty < 15) setDificulty(dificulty + 1)
-            }}
-          >
-            <FaPlus />
-          </button>
-        </div>
-      </label>
-      <button
-        className={`${dificulty <= 0 ? 'text-black bg-gray-400' : 'text-white bg-black hover:border-red-800' } border-2 border-white  transition-colors cursor-pointer w-full p-2 mt-6 font-bold`}
-        onClick={ rollDices }
-        disabled={ dificulty <= 0 }
-      >
-        Rolar dados
-      </button>
-    </div>
+        </label>
+        <button
+          type="button"
+          className={`${specialRollActionButtonClass} ${dificulty <= 0 ? 'bg-gray-500 text-black' : 'bg-black text-white hover:border-red-800'}`}
+          onClick={rollDices}
+          disabled={dificulty <= 0}
+        >
+          Realizar o teste
+        </button>
+      </div>
+    </SpecialRollFrame>
   );
 }

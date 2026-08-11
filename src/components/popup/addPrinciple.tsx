@@ -33,8 +33,9 @@ export default function AddPrinciple() {
     const newDataSession = session;
     if (auth) {
       if (addPrinciple.data.description) {
+        const principleOwnerEmail = addPrinciple.data.email || auth.email;
         newDataSession.principles = listPrinciples;
-        newDataSession.principles = [...newDataSession.principles, { email: auth.email, description, order: newDataSession.principles.length + 1 }];
+        newDataSession.principles = [...newDataSession.principles, { email: principleOwnerEmail, description, order: newDataSession.principles.length + 1 }];
         await updateSession(newDataSession, setShowMessage);
       } else {
         newDataSession.principles = [...newDataSession.principles, { email: auth.email, description, order: newDataSession.principles.length + 1 }];

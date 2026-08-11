@@ -8,7 +8,11 @@ import { createConsentForm } from '@/firebase/consentForm';
 import Image from 'next/image';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
-export default function CreateSection() {
+type CreateSectionProps = {
+  closeHref?: string;
+};
+
+export default function CreateSection({ closeHref = '/sessions' }: CreateSectionProps) {
   const router = useRouter();
   const [nameSession, setNameSession] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -88,7 +92,7 @@ export default function CreateSection() {
                 className="text-4xl text-white cursor-pointer"
                 onClick={() => {
                   setShowCreateSession(false);
-                  router.push('/sessions');
+                  router.push(closeHref);
               }}
               />
             </div>

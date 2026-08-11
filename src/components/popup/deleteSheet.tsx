@@ -5,11 +5,12 @@ import { deleteDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter, playerSheet, sheetStructure } from "@/firebase/utilities";
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function DeleteSheet(props: { isGameMaster : any }) {
   const { isGameMaster } = props;
   const router = useRouter();
+  const pathname = usePathname();
 	const {
     sheetId,
     session,
@@ -34,7 +35,11 @@ export default function DeleteSheet(props: { isGameMaster : any }) {
       // await deletePlayerImage (session.id, sheetId, dataSheet.data.profileImage, setShowMessage);
       await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} excluiu a Ficha do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' }.`, type: 'notification' }, null, setShowMessage);
       if (isGameMaster) setOptionSelect('players');
-      router.push('/sheets');
+      if (pathname?.startsWith('/sheets/')) {
+        router.back();
+      } else {
+        router.push('/sheets');
+      }
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });
       setShowDeleteSheet(false);

@@ -32,7 +32,7 @@
         "skill": "The Red Phone: A well-placed somebody in the organization owes you a favor. Once per chronicle, your go-between agrees to take action on your “anonymous tip,” or however you choose to make your wishes known. In effect, you gain five dice to distribute as you like on any roll(s) involving the operation of werewolf-hunting organizations. If the attempt (or any of the attempts, if you distribute the dice across multiple actions) fails, you earn the attention of an active, systemic (see p. 211) enemy."
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 296
   },
   {
@@ -68,7 +68,7 @@
         "skill": "Paper Trail: If documentation exists that can tie a Pentex front to a specific transgression, you can come up with it, whether by finding it yourself or by some other Monkeywrencher pointing you toward it, or, optimally, discovering it during some activity within the story itself, such as by opening the right drawer in a desk. You may use this effect once per chronicle — and either Pentex operations become aware of you (even if their front is compromised), or you can give up a fellow Monkeywrencher (who'll know you burned them)."
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 295
   },
   {
@@ -104,7 +104,7 @@
         "skill": "Chthonic Secret: You're the current keeper of a monumental Umbral secret, such as the location of a powerful spirit's demesne or the hunting grounds of a legendary"
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 297
   },
   {
@@ -140,7 +140,7 @@
         "skill": "Last Howl: You have witnessed firsthand the effects of hauglosk, having watched the glint of fanatical zeal fall kindle in your compatriots' eyes — but not so in yours. Once per chronicle, if you mark your last hauglosk box, you may make a Rage check; if that Rage check fails, untick that last hauglosk box. Congratulations: You've fought your way back from the brink."
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 298
   },
   {
@@ -176,7 +176,7 @@
         "skill": "Solving the Labyrinth: Once per story, you can attempt to persuade a Black Spiral Dancer to emancipate themselves from the horrors of Bat's patronage. To do so, you must completely isolate the subject and make a test (of Intelligence or Charisma + Insight, far away from the influence of cruel spirits who would rather keep that Garou as they are. Roll once per three nights of breaking Bat's hold; you win after achieving a number of successes equal to twice the subject's Willpower. How they react to such deprogramming, or how functional they are in any subsequent society, is a huge question mark. Do they even want a new patron spirit?"
       }
     ],
-    "book": "Werewolf: The Apocalypse 5th",
+    "book": "Livro Básico",
     "page": 299
   },
   {
@@ -212,7 +212,7 @@
         "skillPtBr": "Mau Romance: Você namorou uma das Emissárias, mas ela terminou com você porque teve uma visão sobre como você morreu e não queriam este lamento para si. Uma vez por crônica, quando seu marcador de Vitalidade estiver cheio de dano, você pode optar por entrar em Frenesi em vez de ficar Impedido ou Incapacitado. Defina sua Fúria como 5 e recupere imediatamente níveis de Vitalidade (superficial ou agravado) igual à seu Vigor. Na próxima vez na mesma história em que você ficar Impedido ou Incapacitado devido a dano à Vitalidade, seu personagem morre imediatamente."
       }
     ],
-    "book": "Werewolf The Apocalypse The Emissaries of Athena",
+    "book": "The Emissaries of Athena",
     "page": 1
   },
   {
@@ -762,7 +762,7 @@
     "title": "Espíritos Ancestrais",
     "titlePtBr": "Espíritos Ancestrais",
     "custom": true,
-    "description": "Muitos Garou sentem um frio na espinha ao atravessar a Película, mas para você, o Uivo de Gaia é uma realidade tátil e ensurdecedora, do qual tratar simplesmente como um ruído de fundo enquanto estamos na Umbra é impossível e inaceitável. Nas últimas décadas, a Umbra tornou-se um lugar hostil, onde a agonia da Mãe Terra se manifesta como uma distorção multissensorial que pode assumir diversas facetas aos ouvidos de quem a ouve. Enquanto muitos Garous sucumbem ao Harano ao ouvir esse lamento, vendo-o apenas como o estertor de morte do planeta, você se recusa a ser silenciado. Você faz parte daqueles que buscam nas Tempestades Uivantes (fenômenos Umbráticos capazes de dilacerar a substância dos espíritos e a Força de Vontade dos viajantes) instruções codificadas que podem ajudar na batalha final e até mesmo na salvação de Gaia. Ao escolher esta Ficha de Conhecimento, você deixa de ser mais do que um simples sobrevivente das Tormentas Espirituais e se torna seu maestro, capaz de navegar por desolações umbrais e canalizar a própria fúria da Terra contra os servos da destruição.",
+    "description": "(Houve a contribuição do Chokos do Nação Garou para a característica 3) Muitos Garou sentem um frio na espinha ao atravessar a Película, mas para você, o Uivo de Gaia é uma realidade tátil e ensurdecedora, do qual tratar simplesmente como um ruído de fundo enquanto estamos na Umbra é impossível e inaceitável. Nas últimas décadas, a Umbra tornou-se um lugar hostil, onde a agonia da Mãe Terra se manifesta como uma distorção multissensorial que pode assumir diversas facetas aos ouvidos de quem a ouve. Enquanto muitos Garous sucumbem ao Harano ao ouvir esse lamento, vendo-o apenas como o estertor de morte do planeta, você se recusa a ser silenciado. Você faz parte daqueles que buscam nas Tempestades Uivantes (fenômenos Umbráticos capazes de dilacerar a substância dos espíritos e a Força de Vontade dos viajantes) instruções codificadas que podem ajudar na batalha final e até mesmo na salvação de Gaia. Ao escolher esta Ficha de Conhecimento, você deixa de ser mais do que um simples sobrevivente das Tormentas Espirituais e se torna seu maestro, capaz de navegar por desolações umbrais e canalizar a própria fúria da Terra contra os servos da destruição.",
     "descriptionPtBr": "Muitos Garou sentem um frio na espinha ao atravessar a Película, mas para você, o Uivo de Gaia é uma realidade tátil e ensurdecedora, do qual tratar simplesmente como um ruído de fundo enquanto estamos na Umbra é impossível e inaceitável. Nas últimas décadas, a Umbra tornou-se um lugar hostil, onde a agonia da Mãe Terra se manifesta como uma distorção multissensorial que pode assumir diversas facetas aos ouvidos de quem a ouve. Enquanto muitos Garous sucumbem ao Harano ao ouvir esse lamento, vendo-o apenas como o estertor de morte do planeta, você se recusa a ser silenciado. Você faz parte daqueles que buscam nas Tempestades Uivantes (fenômenos Umbráticos capazes de dilacerar a substância dos espíritos e a Força de Vontade dos viajantes) instruções codificadas que podem ajudar na batalha final e até mesmo na salvação de Gaia. Ao escolher esta Ficha de Conhecimento, você deixa de ser mais do que um simples sobrevivente das Tormentas Espirituais e se torna seu maestro, capaz de navegar por desolações umbrais e canalizar a própria fúria da Terra contra os servos da destruição.",
     "habilities": [
       {
@@ -791,7 +791,7 @@
         "skillPtBr": "Transe Ancestral: Uma vez por história, você pode permitir que o espírito ancestral tome seu corpo, iniciando um Transe Ancestral que dura uma única cena. Ao começar o transe, você recupera imediatamente 3 pontos Superficiais de Força de Vontade. Durante essa cena, você recebe +2 pontos temporários em todas as suas habilidades, representando o peso do conhecimento, da experiência e dos instintos do seu Ancestral fluindo pelo seu corpo. Quando a cena termina, seu corpo sente o peso do espírito que o atravessou: você deve realizar um teste de Frenesi."
       }
     ],
-    "book": "Criado por Bruno Cabral, com contribuição do Chokos (Nação Garou) para a característica 3",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   },
   {
@@ -939,7 +939,7 @@
         "skillPtBr": "Inquisidor: Você foi um membro verdadeiro da Sociedade de São Leopoldo ou de uma de suas organizações filiadas. Conhece seus métodos, suas estruturas internas, seus pecados antigos e seus protocolos modernos. Uma vez por história, pode pedir ao Narrador uma informação verdadeira, precisa e atual sobre a Sociedade e suas atividades. Seja considerado um traidor ou visto como uma arma recuperável, sua antiga posição ainda pode render frutos — para a manipulação, para o controle ou para a vingança."
       }
     ],
-    "book": "Adaptado por Bruno Cabral",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   },
   {
@@ -976,7 +976,7 @@
         "skillPtBr": "Fugitivo de Laboratório: Você escapou de uma instalação de contenção da FIRSTLIGHT, embora sua memória ainda seja fragmentada pelo trauma, por drogas ou por protocolos de apagamento. Uma vez por sessão, pode solicitar ao Narrador um fragmento nítido de memória do seu cativeiro. Além disso, você se torna imune a qualquer forma de Frenesi induzido pela FIRSTLIGHT, seja por estímulos químicos, luminosos ou paratecnológicos."
       }
     ],
-    "book": "Adaptado por Bruno Cabral",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   },
   {
@@ -1095,7 +1095,7 @@
     "title": "Inimigo dos Fenris",
     "titlePtBr": "Inimigo dos Fenris",
     "custom": true,
-    "description": "A Seita de Fenris representa uma das maiores tragédias e falhas dos Garous na era do Apocalipse. Após sucumbirem coletivamente ao Hauglosk — um estado de retidão fanática onde os fins justificam qualquer atrocidade — os Fenrir abandonaram seus antigos aliados, jurando inimizade a todos que não seguem sua visão de guerra total e sem misericórdia. Para eles, o mundo é um campo de extermínio onde a Wyrm está em tudo, e a única resposta é a violência absoluta; não existem espectadores ou vítimas inocentes, apenas os fortes e os que devem ser purgados. Você é alguém que presenciou o que acontece quando a honra de um lobo é substituída por uma sede de sangue dogmática e aprendeu que, para sobreviver aos Fenrir, é preciso entender a sua loucura e revidar. Ao escolher esta Ficha de Conhecimento, você se torna um especialista em enfrentar a Seita de Fenris e seus métodos. Seja por ter sobrevivido a um massacre ou por ter aprendido a mimetizá-los para se infiltrar em seus territórios, você possui um instinto quase sobrenatural para detectar o rastro de ferro e sangue que esses fanáticos deixam para trás. Sua convivência amarga com a Seita lhe concedeu uma proteção psicológica única contra o Hauglosk, permitindo que você identifique o fanatismo antes que ele o consuma, transformando sua dor em táticas de combate eficientes contra aqueles que outrora foram os maiores defensores de Gaia. No entanto, sua reputação como um ''Matador de Fanáticos'' pode torná-lo um alvo prioritário: para A Seita, pessoas como você não são apenas inimigos, mas uma heresia viva que deve ser silenciada para que a causa deles prevaleça.",
+    "description": "(Arte feita por @thamy_1109 - para mais artes, consulte seu Instagram) A Seita de Fenris representa uma das maiores tragédias e falhas dos Garous na era do Apocalipse. Após sucumbirem coletivamente ao Hauglosk — um estado de retidão fanática onde os fins justificam qualquer atrocidade — os Fenrir abandonaram seus antigos aliados, jurando inimizade a todos que não seguem sua visão de guerra total e sem misericórdia. Para eles, o mundo é um campo de extermínio onde a Wyrm está em tudo, e a única resposta é a violência absoluta; não existem espectadores ou vítimas inocentes, apenas os fortes e os que devem ser purgados. Você é alguém que presenciou o que acontece quando a honra de um lobo é substituída por uma sede de sangue dogmática e aprendeu que, para sobreviver aos Fenrir, é preciso entender a sua loucura e revidar. Ao escolher esta Ficha de Conhecimento, você se torna um especialista em enfrentar a Seita de Fenris e seus métodos. Seja por ter sobrevivido a um massacre ou por ter aprendido a mimetizá-los para se infiltrar em seus territórios, você possui um instinto quase sobrenatural para detectar o rastro de ferro e sangue que esses fanáticos deixam para trás. Sua convivência amarga com a Seita lhe concedeu uma proteção psicológica única contra o Hauglosk, permitindo que você identifique o fanatismo antes que ele o consuma, transformando sua dor em táticas de combate eficientes contra aqueles que outrora foram os maiores defensores de Gaia. No entanto, sua reputação como um ''Matador de Fanáticos'' pode torná-lo um alvo prioritário: para A Seita, pessoas como você não são apenas inimigos, mas uma heresia viva que deve ser silenciada para que a causa deles prevaleça.",
     "descriptionPtBr": "A Seita de Fenris representa uma das maiores tragédias e falhas dos Garous na era do Apocalipse. Após sucumbirem coletivamente ao Hauglosk — um estado de retidão fanática onde os fins justificam qualquer atrocidade — os Fenrir abandonaram seus antigos aliados, jurando inimizade a todos que não seguem sua visão de guerra total e sem misericórdia. Para eles, o mundo é um campo de extermínio onde a Wyrm está em tudo, e a única resposta é a violência absoluta; não existem espectadores ou vítimas inocentes, apenas os fortes e os que devem ser purgados. Você é alguém que presenciou o que acontece quando a honra de um lobo é substituída por uma sede de sangue dogmática e aprendeu que, para sobreviver aos Fenrir, é preciso entender a sua loucura e revidar. Ao escolher esta Ficha de Conhecimento, você se torna um especialista em enfrentar a Seita de Fenris e seus métodos. Seja por ter sobrevivido a um massacre ou por ter aprendido a mimetizá-los para se infiltrar em seus territórios, você possui um instinto quase sobrenatural para detectar o rastro de ferro e sangue que esses fanáticos deixam para trás. Sua convivência amarga com a Seita lhe concedeu uma proteção psicológica única contra o Hauglosk, permitindo que você identifique o fanatismo antes que ele o consuma, transformando sua dor em táticas de combate eficientes contra aqueles que outrora foram os maiores defensores de Gaia. No entanto, sua reputação como um ''Matador de Fanáticos'' pode torná-lo um alvo prioritário: para A Seita, pessoas como você não são apenas inimigos, mas uma heresia viva que deve ser silenciada para que a causa deles prevaleça.",
     "habilities": [
       {
@@ -1124,7 +1124,7 @@
         "skillPtBr": "Tática Quebra Lobo: Você estudou - ou testemunhou - como as alcateias da Seita lutam: ataques suicidas, investidas sem hesitação e redundância brutal. Uma vez por história, você pode invocar essa experiência para ganhar +3 dados durante uma cena para testes em que o alvo direto ou indireto seja a Seita de Fenris."
       }
     ],
-    "book": "Criado por Bruno Cabral, arte feita por @thamy_1109 (Instagram)",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   },
   {
@@ -1272,7 +1272,7 @@
         "skillPtBr": "Caçada da Irmandade: Uma vez por história, você pode nomear alguém como alvo da fúria coletiva do Motoclube. A partir desse momento, os membros da Irmandade passam a atormentar e perseguir o escolhido até que o Clube considere a dívida quitada — ou o alvo destruído."
       }
     ],
-    "book": "Adaptado por Bruno Cabral",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   },
   {
@@ -1309,7 +1309,7 @@
         "skillPtBr": "Passagem Fantasma: A confiança da rede em você é absoluta. Uma vez por história, você e sua alcateia podem requisitar transporte completamente seguro para qualquer destino onde o Correio Clandestino atue, seja outro estado, outro país ou qualquer região obscura que exija máxima discrição. A viagem é protegida por protocolos especiais: ninguém rastreia, ninguém investiga e, oficialmente, vocês nunca passaram por ali."
       }
     ],
-    "book": "Adaptado por Bruno Cabral",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   },
   {
@@ -1852,7 +1852,7 @@
         "skillPtBr": "Dividir e Condenar - Você conhece tanto como a sociedade em volta da Wyrm funciona que, uma vez por história, pode transformar uma divergência existente entre Dançarinos da Espiral Negra em uma ruptura aberta. Uma alcateia, culto ou facção abandona temporariamente sua liderança e passa a perseguir seus próprios objetivos. O conflito fratura os inimigos durante uma história e você não controla qual lado vencerá, mas o lado ganhador, no fim, descobrirá que foi você e tornará prioridade se vingar."
       }
     ],
-    "book": "Conteúdo personalizado",
+    "book": "Criado por Bruno Cabral",
     "page": 1
   }
 ]

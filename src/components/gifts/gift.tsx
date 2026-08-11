@@ -5,97 +5,77 @@ import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-export default function Gift(props: { gift: any, index: number, length: number }) {
+export default function Gift(props: { gift: any; index: number; length: number }) {
   const [showGift, setShowGift] = useState(false);
-  const { gift, index, length } = props;
+  const { gift } = props;
   const { dataSheet, email, session, sheetId, setShowMessage } = useContext(contexto);
 
-  const registerGift = async (gift: any) => {
-    const findGift = dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr);
-    if (findGift)
-      dataSheet.data.gifts = dataSheet.data.gifts.filter((item: any) => item.giftPtBr !== gift.giftPtBr) 
-    else dataSheet.data.gifts.push(gift);
-    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${findGift ? ' removeu' : ' adicionou'} o dom ${gift.giftPtBr} ${findGift ? 'do' : 'ao'} personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
-  }
+  const registerGift = async (currentGift: any) => {
+    const findGift = dataSheet.data.gifts.find((item: any) => item.giftPtBr === currentGift.giftPtBr);
 
-  return(
-    <div className={`${dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr) ? 'bg-black border-red-500': 'bg-gray-whats-dark border-white'} border-2 ${ index === length - 1 ? '' : 'mb-3'}`}>
+    if (findGift) {
+      dataSheet.data.gifts = dataSheet.data.gifts.filter((item: any) => item.giftPtBr !== currentGift.giftPtBr);
+    } else {
+      dataSheet.data.gifts.push(currentGift);
+    }
+
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(
+      session.id,
+      {
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${findGift ? ' removeu' : ' adicionou'} o dom ${currentGift.giftPtBr} ${findGift ? 'do' : 'ao'} personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`,
+        type: 'notification',
+      },
+      null,
+      setShowMessage,
+    );
+  };
+
+  const isSelected = Boolean(dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr));
+
+  return (
+    <div className={`${isSelected ? 'border-red-600 bg-black/85 shadow-[0_0_0_1px_rgba(248,113,113,0.42),0_0_22px_rgba(127,29,29,0.24)]' : 'border-white/10 bg-black/40'} overflow-hidden border transition-colors`}>
       <button
         type="button"
-        onClick={ () => setShowGift(!showGift) }
-        className={`w-full flex items-start justify-between px-4 pt-4 ${!showGift && 'pb-4'}`}
+        onClick={() => setShowGift(!showGift)}
+        className="flex w-full items-start justify-between gap-4 px-4 py-3 text-left transition-colors hover:bg-white/5"
       >
-        <div className="capitalize text-base sm:text-lg font-bold flex flex-col w-full text-left">
-          <div>
-            { gift.giftPtBr } - { 
-            gift.belonging.map((belong: { type: string, totalRenown: number }, index: number) => (
-              <span key={ index } className="capitalize">
-                { capitalizeFirstLetter(belong.type) } ({ belong.totalRenown })
-                { index === gift.belonging.length - 1 ? '' : ', ' }
+        <div className="min-w-0 flex-1">
+          <p className="font-kingthings text-[0.86rem] uppercase tracking-[0.18em] text-white">{gift.giftPtBr}</p>
+          <p className="mt-1 font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/55">{gift.gift}</p>
+          <p className="mt-2 font-geist-mono text-[10px] leading-5 text-white/72">
+            {gift.belonging.map((belong: { type: string; totalRenown: number }, index: number) => (
+              <span key={`${gift.gift}-${belong.type}-${index}`}>
+                {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
+                {index === gift.belonging.length - 1 ? '' : ', '}
               </span>
             ))}
-          </div>
-        </div>
-        <div>
-          { 
-            showGift
-            ? <IoIosArrowUp className="text-xl"  />
-            : <IoIosArrowDown className="text-xl" />
-          }
-        </div>
-      </button>
-      {
-        showGift &&
-        <div className="px-4 pb-4">
-          <span className="text-lg">({ gift.gift }) </span>
-          <p className="pt-4">
-          <span className="pr-1 font-bold">Ação:</span>
-            { gift.action }.
           </p>
-          <div>
-            <span className="pr-1 font-bold">Renome:</span>
-            { gift.renown }.
+        </div>
+        <span className="mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center border border-white/10 bg-black/50 text-white/75">
+          {showGift ? <IoIosArrowUp className="text-lg" /> : <IoIosArrowDown className="text-lg" />}
+        </span>
+      </button>
+      {showGift && (
+        <div className="border-t border-white/10 px-4 py-4">
+          <div className="space-y-2.5 font-geist-mono text-[11px] leading-5 text-white/75">
+            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Ação:</span><span>{gift.action}.</span></div>
+            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Renome:</span><span>{gift.renown}.</span></div>
+            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Custo:</span><span>{gift.cost}.</span></div>
+            {gift.pool !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Teste:</span><span>{gift.pool}.</span></div>}
+            <div className="border-t border-white/10 pt-2"><span className="pr-1 uppercase tracking-[0.08em] text-white">Descrição:</span><span className="whitespace-pre-wrap">{gift.descriptionPtBr}</span></div>
+            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span><span className="whitespace-pre-wrap">{gift.systemPtBr}</span></div>
+            {gift.duration !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Duração:</span><span>{gift.duration}.</span></div>}
           </div>
-          <div>
-            <span className="pr-1 font-bold">Custo:</span>
-            { gift.cost }.
-          </div>
-          {
-            gift.pool !== '' &&
-            <div>
-              <span className="pr-1 font-bold">Teste:</span>
-              { gift.pool }.
-            </div>
-          }
-          <div className="pt-2">
-            <span className="pr-1 font-bold">Descrição:</span>
-            { gift.descriptionPtBr }
-          </div>
-          <div className="pt-2">
-            <span className="pr-1 font-bold">Sistema:</span>
-            { gift.systemPtBr }
-          </div>
-          {
-            gift.duration !== '' &&
-            <div className="pt-2">
-              <span className="pr-1 font-bold">Duração:</span>
-              { gift.duration }.
-            </div>
-          }
           <button
             type="button"
-            className="mt-4 px-2 p-1 border-2 border-white bg-white hover:bg-black hover:border-red-500 hover:text-white transition-colors duration-500 right-3 text-black font-bold"
-            onClick={ () => { registerGift(gift)}}
-            >
-            {
-              dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr)
-              ? 'Remover'
-              : 'Adicionar'
-            }
+            className="mt-4 inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-2 font-geist-mono text-[10px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
+            onClick={() => { registerGift(gift); }}
+          >
+            {isSelected ? 'Remover' : 'Adicionar'}
           </button>
         </div>
-      }
+      )}
     </div>
   );
 }

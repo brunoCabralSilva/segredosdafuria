@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import dataTalens from '../../data/talismans.json';
-import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
+import { IoMdArrowDropright } from "react-icons/io";
 
 export default function TalensAdded(props: { item: any }) {
   const { item } = props;
@@ -11,40 +11,32 @@ export default function TalensAdded(props: { item: any }) {
   useEffect(() => {
     setTalen(dataTalens.find((item2: any) => item2.titlePtBr === item.name));
   }, []);
-  return(
-    <div className="flex flex-col gap-3 border border-white pl-2 p-2 mb-2 items-center">
-      <div
-        className="w-full flex items-center justify-between"
-        onClick={() => {}}
-      >
-        <span className="font-bold pl-3" id={`advantages-${item.name}`}>
-          {item.name} - { item.value } - { item.type }
-        </span>
-        <button
-          type="button"
-          className="cursor-pointer"
-          onClick={() => setShowData(!showData) }
-        >
-          {
-          !showData
-            ? <CiCircleChevDown className="text-4xl" />
-            : <CiCircleChevUp className="text-4xl" />
-          }
-        </button>
+
+  return (
+    <div className="w-full border-b border-white/[0.07] pb-2 text-left last:border-b-0">
+      <div className="flex items-start gap-1.5">
+        <div className="flex pt-[2px] text-white/65">
+          <IoMdArrowDropright
+            onClick={() => setShowData(!showData)}
+            className={`${showData ? 'rotate-90' : ''} cursor-pointer text-base transition-all`}
+          />
+        </div>
+        <div className="font-geist-mono text-[11px] uppercase tracking-[0.08em] text-white">
+          {item.name} - {item.value} - {item.type}
+        </div>
       </div>
-        {
-          showData &&
-          <div>
-            <p className="text-base text-justify font-normal px-3 mb-3">
-              <span className="pr-1 font-bold">Descrição:</span>
-              { talen.descriptionPtBr && talen.descriptionPtBr }
-            </p>
-            <p className="text-base text-justify font-normal px-3 mb-3">
-              <span className="pr-1 font-bold">Sistema:</span>
-              { talen.systemPtBr && talen.systemPtBr }
-            </p>
-          </div>
-        }
+      {showData && (
+        <div className="space-y-1.5 px-5 pb-1 pt-2 font-geist-mono text-[10px] font-normal leading-5 text-white/78">
+          <p className="text-justify">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Descrição:</span>
+            {talen.descriptionPtBr && talen.descriptionPtBr}
+          </p>
+          <p className="text-justify">
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span>
+            {talen.systemPtBr && talen.systemPtBr}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

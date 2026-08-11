@@ -1,105 +1,133 @@
-import { useContext } from 'react';
-import contexto from '@/context/context';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { useContext, useMemo } from "react";
+import contexto from "@/context/context";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 import {
   approveSheetLinkRequest,
   approveUser,
   denySheetLinkRequest,
   removeNotification,
-} from '@/firebase/notifications';
+} from "@/firebase/notifications";
 
 export default function Notifications() {
   const { session, sessionId, listNotification, setListNotification, setShowMessage } = useContext(contexto);
-  
-  const remNotFromCache = async(list: any[]) => {
-    const listNotif = listNotification.filter(listNot => JSON.stringify(listNot) !== JSON.stringify(list));
-    setListNotification(listNotif);
-  }
 
-  return(
-    <div className="text-white w-full overflow-y-auto h-75vh">
-      <div className="w-full">
-        {
-          listNotification.map((listNot: any, index: number) => (
-            listNot.type === 'approval'
-            ? <div key={index} className="border-2 pt-1 px-1 border-white mb-2">
-                <div className="w-full flex justify-end pb-3">
-                  <IoIosCloseCircleOutline
-                    className="text-3xl text-white cursor-pointer"
-                    onClick={() => remNotFromCache(listNot)}
-                  />
-                </div>
-                <p className="text-center w-full px-3">{listNot.message}</p>
-                <div className="flex w-full gap-2 px-3 mb-3">
-                  <button
-                    type="button"
-                    onClick={ () => removeNotification(sessionId, listNot.message, setShowMessage) }
-                    className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
+  const notifications = useMemo(() => [...listNotification], [listNotification]);
 
-                  >
-                    Negar
-                  </button>
-                  <button
-                    type="button"
-                    onClick={ () => approveUser(listNot, session, setShowMessage) }
-                    className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-                  >
-                    Aceitar
-                  </button>
-                </div>
-              </div>
-            : listNot.type === 'sheet-link-request'
-            ? <div key={index} className="border-2 pt-1 px-1 border-white mb-2">
-                <div className="w-full flex justify-end pb-3">
-                  <IoIosCloseCircleOutline
-                    className="text-3xl text-white cursor-pointer"
-                    onClick={() => remNotFromCache(listNot)}
-                  />
-                </div>
-                <p className="text-center w-full px-3">{listNot.message}</p>
-                <div className="flex w-full gap-2 px-3 mb-3">
-                  <button
-                    type="button"
-                    onClick={ () => denySheetLinkRequest(listNot, sessionId, setShowMessage) }
-                    className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-                  >
-                    Recusar
-                  </button>
-                  <button
-                    type="button"
-                    onClick={ () => approveSheetLinkRequest(listNot, session, setShowMessage) }
-                    className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-                  >
-                    Vincular ficha
-                  </button>
-                </div>
-              </div>
-            : <div key={index} className="border-2 pt-1 px-1 border-white mb-2">
-                <div className="w-full flex justify-end pb-3">
-                  <IoIosCloseCircleOutline
-                    className="text-3xl text-white cursor-pointer"
-                    onClick={() => remNotFromCache(listNot)}
-                  />
-                </div>
-                <p className="text-center w-full px-3">{listNot.message}</p>
-                <div className="flex w-full gap-2 px-3 mb-3">
-                  <button
-                    type="button"
-                    onClick={ () => removeNotification(sessionId, listNot.message, setShowMessage) }
-                    className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-                  >
-                    Ok
-                  </button>
-                </div>
-              </div>
-          ))
-        }
-        {
-          listNotification.length === 0 &&
-          <div className="w-full text-white text-sm text-center mt-4">
-            Você não possui notificações.
+  const removeFromCache = (notification: any) => {
+    const nextList = listNotification.filter(
+      (currentNotification: any) => JSON.stringify(currentNotification) !== JSON.stringify(notification)
+    );
+    setListNotification(nextList);
+  };
+
+  const buttonClassName =
+    "inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900";
+
+  const renderActions = (notification: any) => {
+    if (notification.type === "approval") {
+      return (
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => removeNotification(sessionId, notification.message, setShowMessage)}
+            className={buttonClassName}
+          >
+            Negar
+          </button>
+          <button
+            type="button"
+            onClick={() => approveUser(notification, session, setShowMessage)}
+            className={buttonClassName}
+          >
+            Aceitar
+          </button>
+        </div>
+      );
+    }
+
+    if (notification.type === "sheet-link-request") {
+      return (
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => denySheetLinkRequest(notification, sessionId, setShowMessage)}
+            className={buttonClassName}
+          >
+            Recusar
+          </button>
+          <button
+            type="button"
+            onClick={() => approveSheetLinkRequest(notification, session, setShowMessage)}
+            className={buttonClassName}
+          >
+            Vincular Ficha
+          </button>
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex flex-wrap gap-2">
+        <button
+          type="button"
+          onClick={() => removeNotification(sessionId, notification.message, setShowMessage)}
+          className={buttonClassName}
+        >
+          Ok
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div className="relative grid h-full min-h-0 w-full min-w-0 grid-rows-[auto,minmax(0,1fr)] overflow-hidden bg-gradient-to-br from-black via-zinc-950 to-red-950/40 text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(153,27,27,0.22),transparent_42%)]" />
+
+      <div className="relative border-b border-white/10 px-4 py-4 sm:px-6">
+        <div className="flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-kingthings text-lg sm:text-xl">Notificações</h2>
+            <p className="mt-1 font-geist-mono text-[11px] sm:text-xs text-white/75">Acompanhe solicitações, avisos e ações pendentes da sessão em um único painel.</p>
           </div>
-        }
+        </div>
+      </div>
+
+      <div className="principles-scrollbar relative min-h-0 overflow-y-auto overflow-x-hidden px-4 py-4 sm:px-6">
+        {notifications.length === 0 ? (
+          <div className="border border-white/15 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
+            Voce não possui notificações.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 content-start gap-3 pb-5">
+            {notifications.map((notification: any, index: number) => (
+              <div key={index} className="overflow-hidden border border-zinc-500/30 bg-black/70">
+                <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+                  <p className="font-geist-mono text-[10px] font-extrabold uppercase tracking-[0.12em] text-red-200/80">
+                    {notification.type === "approval"
+                      ? "Aprovacao"
+                      : notification.type === "sheet-link-request"
+                        ? "Vinculo De Ficha"
+                        : "Notificacao"}
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => removeFromCache(notification)}
+                    className="inline-flex h-9 w-9 items-center justify-center border border-white/10 bg-black/40 text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
+                    aria-label="Remover da visualizacao"
+                  >
+                    <IoIosCloseCircleOutline className="text-2xl" />
+                  </button>
+                </div>
+                <div className="space-y-4 px-4 py-4">
+                  <p className="whitespace-pre-wrap font-geist-mono text-[11px] leading-relaxed text-white/85">
+                    {notification.message}
+                  </p>
+                  {renderActions(notification)}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

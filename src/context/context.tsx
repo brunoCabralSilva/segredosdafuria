@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { playerSheet } from '@/firebase/utilities';
 import { createContext } from 'react';
 
@@ -106,8 +106,8 @@ interface RecipesContext {
   setShowDownloadPdf: (state: { show: boolean, email: string }) => void,
   addPrinciple: { show: boolean, data: any },
   setAddPrinciple: (state: {show: boolean, data: {}}) => void,
-  showDeletePrinciple: { show: boolean, name: string },
-  setShowDeletePrinciple: (state: { show: boolean, name: string }) => void,
+  showDeletePrinciple: { show: boolean, description: string, order: number | null },
+  setShowDeletePrinciple: (state: { show: boolean, description: string, order: number | null }) => void,
   addFavorAndBan: { show: boolean, data: any, type: string },
   setAddFavorAndBan: (state: {show: boolean, data: {}, type: string}) => void,
   showDeleteFavorAndBan: { show: boolean, name: string, type: string },
@@ -141,6 +141,8 @@ interface RecipesContext {
   setShowResetPlayer: (state: { show: boolean, email: string }) => void,
   showRemovePlayer: { show: boolean, email: string },
   setShowRemovePlayer: (state: { show: boolean, email: string }) => void,
+  showRageTest: boolean,
+  setShowRageTest: (state: boolean) => void,
   showWillpowerTest: boolean,
   setShowWillpowerTest: (state: boolean) => void,
   showBannerSession: { show: boolean, sessionId: string },
@@ -259,7 +261,7 @@ const initialValue: RecipesContext = {
   setShowDownloadPdf: () => {},
   addPrinciple: { show: false, data: {} },
   setAddPrinciple: () => {},
-  showDeletePrinciple: { show: false, name: '' },
+  showDeletePrinciple: { show: false, description: '', order: null },
   setShowDeletePrinciple: () => {},
   addFavorAndBan: { show: false, data: {}, type: '' },
   setAddFavorAndBan: () => {},
@@ -294,6 +296,8 @@ const initialValue: RecipesContext = {
   setShowResetPlayer: () => {},
   showRemovePlayer: { show: false, email: '' },
   setShowRemovePlayer: () => {},
+  showRageTest: false,
+  setShowRageTest: () => {},
   showWillpowerTest: false,
   setShowWillpowerTest: () => {},
   showBannerSession: { show: false, sessionId: '' },
@@ -310,3 +314,4 @@ const initialValue: RecipesContext = {
 
 const contexto = createContext(initialValue);
 export default contexto;
+

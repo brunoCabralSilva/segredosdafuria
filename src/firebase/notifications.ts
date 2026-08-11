@@ -34,10 +34,10 @@ const buildSheetLinkRequestMessage = (sheet: any) => {
   const userName = capitalizeFirstLetter(sheet?.user || "usuário");
 
   if (sheetName) {
-    return `A ficha "${capitalizeFirstLetter(sheetName)}" de ${userName} solicitou vínculo com esta sessão.`;
+    return `A ficha "${capitalizeFirstLetter(sheetName)}" de ${userName} solicitou ví­nculo com esta sessão.`;
   }
 
-  return `Uma ficha de ${userName} solicitou vínculo com esta sessão.`;
+  return `Uma ficha de ${userName} solicitou ví­nculo com esta sessão.`;
 };
 
 const ensureConsentForm = async (
@@ -115,7 +115,7 @@ export const requestApproval = async (sessionId: string, setShowMessage: any) =>
       if (querySnapshot.empty) {
         setShowMessage({
           show: true,
-          text: "Não foi possível localizar a notificação da Sessão fornecida.",
+          text: "Não foi possí­vel localizar a notificação da Sessão fornecida.",
         });
         return;
       }
@@ -177,7 +177,7 @@ export const requestSheetLink = async (
     if (sheet?.sessionId === targetSession.id) {
       setShowMessage({
         show: true,
-        text: "Esta ficha já está vinculada à sessão selecionada.",
+        text: "Esta ficha já está vinculada à  sessão selecionada.",
       });
       return null;
     }
@@ -187,7 +187,7 @@ export const requestSheetLink = async (
     const notificationDocRef = await getNotificationDocumentRef(db, targetSession.id);
 
     if (!notificationDocRef) {
-      throw new Error("Não foi possível localizar a área de notificações da sessão selecionada.");
+      throw new Error("Não foi possí­vel localizar a área de notificações da sessão selecionada.");
     }
 
     const requestedAt = await getOfficialTimeBrazil();
@@ -245,7 +245,7 @@ export const requestSheetLink = async (
   } catch (error: any) {
     setShowMessage({
       show: true,
-      text: "Ocorreu um erro ao solicitar vínculo da ficha: " + error.message,
+      text: "Ocorreu um erro ao solicitar ví­nculo da ficha: " + error.message,
     });
     return null;
   }
@@ -263,7 +263,7 @@ export const removeNotification = async (
     await runTransaction(db, async (transaction) => {
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty) {
-        setShowMessage({ show: true, text: "Não foi possível encontrar a notificação." });
+        setShowMessage({ show: true, text: "Não foi possí­vel encontrar a notificação." });
         return;
       }
       const notificationDoc = querySnapshot.docs[0];
@@ -324,13 +324,15 @@ export const cancelSheetLinkRequest = async (
 
     setShowMessage({
       show: true,
-      text: "Solicitação de vínculo cancelada com sucesso.",
+      text: "Solicitação de ví­nculo cancelada com sucesso.",
     });
+    return true;
   } catch (error: any) {
     setShowMessage({
       show: true,
       text: "Ocorreu um erro ao cancelar a solicitação: " + error.message,
     });
+    return false;
   }
 };
 
@@ -372,7 +374,7 @@ export const denySheetLinkRequest = async (
 
     setShowMessage({
       show: true,
-      text: "Solicitação de vínculo recusada.",
+      text: "Solicitação de ví­nculo recusada.",
     });
   } catch (error: any) {
     setShowMessage({

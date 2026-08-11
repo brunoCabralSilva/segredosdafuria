@@ -1,4 +1,4 @@
-import contexto from "@/context/context";
+﻿import contexto from "@/context/context";
 import { useContext, useEffect } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import Skills from "./menuSession/skills";
@@ -24,6 +24,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
 import Consent from "./menuSession/consent";
 import History from "./menuSession/history";
 import Forms from "./menuSession/forms";
+import RageTest from "./popup/rageTest";
 import WillpowerTest from "./popup/willpowerTest";
 import { sheetStructure } from "@/firebase/utilities";
 import Chat from "./menuSession/chat";
@@ -38,6 +39,7 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
     session,
     email,
     players,
+    showRageTest, setShowRageTest,
     showWillpowerTest, setShowWillpowerTest,
     showHarano, setShowHarano,
     showHauglosk, setShowHauglosk,
@@ -73,6 +75,8 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
     }
   }, [sheetId, dataSheet, optionSelect, players, setDataSheet]);
 
+  const hasSpecialRollOpen = showRageTest || showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest;
+
   const returnDataSheet = () => {
     switch (optionSelect) {
       case 'players': return (<Players />);
@@ -98,7 +102,7 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
   };
 
   return (
-    <div className={`${standalone ? 'w-full h-full relative' : 'w-full md:w-3/5 absolute sm:relative top-0 right-0 h-screen'} z-50 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center text-white overflow-y-auto`}>
+    <div className={`${standalone ? 'w-full h-full relative' : 'w-full md:w-3/5 absolute sm:relative top-0 right-0 h-screen'} z-50 px-5 sm:px-8 pb-8 pt-3 sm-p-10 ${hasSpecialRollOpen ? 'bg-black' : 'bg-gray-whats-dark'} flex flex-col items-center text-white overflow-y-auto`}>
       <div className="w-full flex justify-end my-1">
         <IoIosCloseCircleOutline
           className="text-4xl text-white cursor-pointer mb-2"
@@ -108,7 +112,8 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
               return;
             }
 
-            if (showHarano || showHauglosk || showGiftRoll.show || showRitualRoll.show || showWillpowerTest) {
+            if (hasSpecialRollOpen) {
+              setShowRageTest(false);
               setShowHarano(false);
               setShowHauglosk(false);
               setShowGiftRoll({ show: false, gift: {} });
@@ -124,7 +129,8 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
       </div>
       <div className="w-full h-full">
         {
-          !showHarano
+          !showRageTest
+          && !showHarano
           && !showHauglosk
           && !showGiftRoll.show
           && !showRitualRoll.show
@@ -141,9 +147,9 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
               {
                 !standalone
                 && email === session.gameMaster
-                && <option value={'notifications'}>Notificações {listNotification.length > 0 ? `(${listNotification.length})` : ''}</option>
+                && <option value={'notifications'}>Notificacoes {listNotification.length > 0 ? `(${listNotification.length})` : ''}</option>
               }
-              {!standalone && <option value={'history'}>Histórico</option>}
+              {!standalone && <option value={'history'}>Historico</option>}
               {sheetId !== '' && <option value={'general'}>Geral</option>}
               {sheetId !== '' && <option value={'attributes'}>Atributos</option>}
               {sheetId !== '' && <option value={'skills'}>Habilidades</option>}
@@ -151,14 +157,14 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
               {sheetId !== '' && <option value={'rituals'}>Rituais</option>}
               {sheetId !== '' && <option value={'touchstones'}>Pilares</option>}
               {sheetId !== '' && <option value={'advantages-flaws'}>Vantagens e Defeitos</option>}
-              {standalone && <option value={'session-link'}>Vincular com Sessão</option>}
+              {standalone && <option value={'session-link'}>Vincular com Sessao</option>}
               {!standalone && sheetId !== '' && <option value={'forms'}>Formas {dataSheet && dataSheet.data && dataSheet.data.form ? `( Atual: ${dataSheet.data.form} )` : ''} </option>}
-              {!standalone && <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>}
-              {!standalone && <option value={'favor-ban'}>Favores e Proibições</option>}
+              {!standalone && <option value={'principles-of-the-chronicle'}>Principios da Cronica</option>}
+              {!standalone && <option value={'favor-ban'}>Favores e Proibicoes</option>}
               {!standalone && <option value={'consent'}>Ficha de Consentimento</option>}
               {sheetId !== '' && <option value={'background'}>Background</option>}
-              {!standalone && <option value={'anotations'}>Anotações</option>}
-              {!standalone && <option value={'session'}>Sessão</option>}
+              {!standalone && <option value={'anotations'}>Anotacoes</option>}
+              {!standalone && <option value={'session'}>Sessao</option>}
               {!standalone && showBattle.show && <option value={'chat'}>Chat</option>}
             </select>
             {returnDataSheet()}
@@ -166,6 +172,7 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
         }
         {showGiftRoll.show && <GiftRoll />}
         {showRitualRoll.show && <RitualRoll />}
+        {showRageTest && <RageTest />}
         {showHarano && <HaranoHauglosk type="Harano" />}
         {showHauglosk && <HaranoHauglosk type="Hauglosk" />}
         {showWillpowerTest && <WillpowerTest />}

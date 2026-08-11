@@ -9,7 +9,7 @@
     "pool": "Honra + Ocultismo",
     "systemPtBr": "A Dificuldade de purificar um objeto depende de certos fatores, como o tamanho do objeto, há quanto tempo foi imbuído e o poder da entidade que o impregna. Uma árvore habitada há pouco tempo por um Maldito hostil teria Dificuldade 3; a montanha onde um espírito antigo repousa há milênios, 6 ou mais. Uma falha Brutal na celebração deste rito deixa o espírito possessor zangado, e este animará o objeto para atacar ou possuirá algo mais perigoso nas redondezas para se vingar de maneira mais efetiva.",
     "system": "The Difficulty to cleanse an object depends on a number of factors, such as the size of the object, how long it has been imbued, and the power of the imbuing entity. A tree recently inhabited by a hostile Bane might be Difficulty 3, whereas a mountain serving as the resting place of an ancient spirit for millennia is a 6 or more. A Brutal failure on this Rite angers the possessing spirit, which either animates the object and attacks or possesses something more dangerous in the vicinity to better enact its vengeance.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 181
   },
   {
@@ -22,7 +22,7 @@
     "pool": "Gloria + Intimidação",
     "systemPtBr": "A Dificuldade básica do Ritual é a quantidade de participantes, mas nunca inferior a 3. Em caso de vitória, todo participante aumentará sua Fúria em 1 ponto. (O mestre do Ritual tem a opção de fazer cada integrante ganhar 2 pontos em vez de 1, o que aumenta a Dificuldade em 2.) Uma consequência Brutal não leva a um Ritual malsucedido, mas fará todo participante sofrer um nível de dano Superficial à Vitalidade para cada consequência Brutal com a explosão de agressividade: a dança do fogo escapa ao controle e o incêndio se espalha, o duelo ritualístico acaba em carnificina e a partida de futebol vira uma briga generalizada quando os celebrantes se tornam o foco de um tumulto.",
     "system": "The base Difficulty of the Rite is equal to the number of participants, though never less than 3. Upon a win, every participant increases their Rage by one point. (The Rite master can opt for each member to gain 2 points instead, which increases the Difficulty by 2.) A Brutal outcome does not cause the Rite to fail, but each Brutal outcome causes all participants to suffer one level of Superficial damage as the aggression explodes outward — the fire dance burns out of control and spreads, the ritualized duel ends in real bloodshed, and the football game turns into a melee as the performers become the center of a riot.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 184
   },
   {
@@ -35,7 +35,7 @@
     "pool": "Sabedoria + Performance",
     "systemPtBr": "A Dificuldade básica do Ritual é a quantidade de participantes, mas nunca inferior a 3. Em caso de vitória, todo participante reduzirá sua Fúria para apenas 1 ponto. Com uma consequência Brutal, o ritual é malsucedido e cada participante sofrerá um nível de dano Superficial à Força de Vontade por se deixar levar pelas próprias frustrações.",
     "system": "The base Difficulty of the Rite is equal to the number of participants, though never less than 3. Upon a win, every participant lowers their Rage to 1. Upon a Brutal outcome, the rite fails and everyone participating suffers a level of Superficial Willpower damage, as their frustrations get the better of them.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 186
   },
   {
@@ -48,7 +48,7 @@
     "pool": "Honra + Etiqueta",
     "systemPtBr": "A Dificuldade do Ritual é igual a 2 + a penalidade em Renome sofrida graças ao vexame ou, no caso de um espírito, metade de seu Poder (arredondado para cima). Os celebrantes que falharem na execução do Ritual poderão tentar de novo no dia seguinte, e as partes que buscam o perdão muitas vezes precisam repeti-lo em várias ocasiões até completá-lo com êxito. Uma consequência Brutal leva a uma falha e implica nova ofensa: será preciso pagar mais uma penitência antes de tentar o Ritual outra vez. (O teor da penitência depende da queixa e dos ofendidos e fica a critério do Narrador.)",
     "system": "The Difficulty of this Rite is equal to 2 + the Renown penalty suffered through chagrin or, in the case of a spirit, half its Power (round up). Performers who fail the Rite are free to try again the next day, and parties seeking forgiveness must often repeat the Rite on several occasions before completing it successfully. A Brutal outcome causes a failure and means that additional offense was caused, and further penance must be made before the Rite can be tried again. (The nature of this penance depends on the grievance and the offended parties, and is up to the Storyteller.)",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 183
   },
   {
@@ -61,7 +61,7 @@
     "pool": "Sabedoria + Investigação",
     "systemPtBr": "A Dificuldade para celebrar este Ritual é a quantidade de participantes. Em caso de vitória, a Dificuldade para localizar ou identificar os participantes por meio de qualquer tipo de banco de dados ou folha corrida existente aumenta em 3, mas memórias de indivíduos não são afetadas. O efeito persistirá enquanto os participantes não se meterem em encrenca: o Ritual terá de ser celebrado mais uma vez se novo delito grave for cometido ou se os garous forem fichados de alguma outra maneira. Uma consequência Brutal indica que os espíritos roçaram a mente de uma pessoa que já enfrentou os personagens (como uma agente do FBI) e agora retomará ou recomeçará a investigação porque não consegue tirar os personagens da cabeça.",
     "system": "The Difficulty to perform this Rite is equal to the number of participants. On a success the Difficulty to locate or identify the participants through any form of existing database or record is increased by 3, though the memories of individuals are unaffected. This lasts for as long as the participants stay out of trouble — any future felony or other form of registering requires the Rite to be performed again, or the effect is lost. A Brutal outcome means that the spirits have strayed too close to the mind of someone who has encountered the characters before (such as an FBI investigator) who will resume or restart an investigation, unable to get the faces of the characters out of their head.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 184
   },
   {
@@ -74,7 +74,7 @@
     "pool": "Sabedoria + Ofícios",
     "systemPtBr": "A Dificuldade de celebrar este Ritual é igual a 2 + a Graduação do Caern. Uma vitória no teste do Ritual significa que o caern conservará sua graduação ao menos até a repetição da cerimônia no mês seguinte. Uma falha exige nova tentativa na próxima noite e, se o Ritual falhar (ou deixar de ser celebrado pelos garous) durante toda uma fase cheia da lua, a Graduação do Caern será reduzida em 1 (p. 191). Cada consequência Brutal causa uma complicação (por exemplo, um espírito menor e malévolo atravessa a Película ou um representante da lei visita o caern por ter recebido queixas de perturbação da ordem), mas não provoca uma falha automática.",
     "system": "The Difficulty to perform this Rite is equal to 2 + the Caern Value. A win on the Rite test means that the caern keeps its rating, at least until the next monthly iteration. A failure requires a new attempt the following night, and if the Rite fails (or the Garou neglect it) during the entire full moon period, the Caern Value drops by 1 (see p. 191). Each Brutal outcome causes a complication (such as a minor malevolent spirit crossing the Gauntlet or a visit from some local agent of law enforcement who received complaints of a ruckus) but does not cause an automatic failure.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 182
   },
   {
@@ -87,7 +87,7 @@
     "pool": "Renome (qualquer um) + Ocultismo",
     "systemPtBr": "A Dificuldade do Ritual é o valor da Película na área: um caern ativo poderia ter Dificuldade 2; uma ruazinha urbana, 3 ou 4; um laboratório esterilizado poderia chegar a 6. A Dificuldade de atravessar da Umbra para o mundo físico com este Ritual é reduzida em 2. A vitória no teste permite a todos os participantes cruzarem a Película, mas nada além de suas roupas Dedicadas conseguirá acompanhá-los, a não ser que os objetos não Dedicados recebam um empurrãozinho de certos Dons ou outros efeitos sobrenaturais. Cada consequência Brutal fará com que os participantes sofram um nível de dano Agravado ao fazer a travessia, mas não causará a falha automática do Ritual.",
     "system": "The Rite's Difficulty is equal to the local Gauntlet rating: An active caern might be 2, an urban alley 3 or 4, whereas a sterile lab environment might go as high as 6. The Difficulty to return to the physical world from the Umbra using this Rite is reduced by 2. A win on the test allows all participants to pass through the Gauntlet, though nothing but their Dedicated clothes (see below) can accompany them, unless the non-Dedicated object or objects are aided by Gifts or other supernatural effects. Each Brutal outcome causes participants to suffer a level of Aggravated damage as they cross over but does not cause an automatic failure of the Rite.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 186
   },
   {
@@ -100,7 +100,7 @@
     "pool": "",
     "systemPtBr": "O mestre do Ritual pode celebrá-lo para si mesmo ou para um outro garou. Depois de dedicadas, as roupas permanecerão no corpo do garou - quer ele mude de forma ou não, entre na Umbra ou não - e passarão a impressão de desaparecer e reaparecer dependendo da possibilidade de se ajustarem ou não à forma atual do lobisomem. Só é possível dedicar roupas ou adornos (joias, por exemplo) com este Ritual, nada de bolsas, mochilas nem outras peças de equipamento capazes de armazenar coisas, mas objetos miúdos guardados em bolsos ou similares recebem o mesmo benefício, porém os objetos em questão só estarão disponíveis se as roupas estiverem fisicamente presentes. A muda de roupas conservará essas características até que o portador dedique outro figurino ou que as vestes sejam lavadas - a mão - em qualquer fonte de água que não seja um rio ou riacho. (Os theurges especulam que a energia da Wyld necessária para manter o traje em estado de impermanência espiritual é sensível à mácula da Weaver; outros acham que a culpa é das impurezas químicas presentes na água potável.)",
     "system": "The Rite master can perform this Rite on themselves or another Garou. Once dedicated, the garments remain worn by the Garou — regardless of whether the werewolf changes form or enters the Umbra — and seemingly disappear and reappear, depending on whether they fit the werewolf's present form or not. Only clothes or trinkets such as jewelry can be dedicated in this manner, not bags or other storage equipment, but small items kept in pockets or in similar fashion gain the same benefit, though the clothes need to be physically present for such items to be available. A set of clothes keeps this trait until either the bearer dedicates another outfit or the clothes are washed — by hand — in anything other than running creek or river water. (Theurges speculate that the Wyld energies required to keep the garments in a state of spiritual flux are sensitive to Weaver-taint; others blame chemical impurities in tap water.)",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 184
   },
   {
@@ -113,7 +113,7 @@
     "pool": "Sabedoria + Investigação",
     "systemPtBr": "O raio de ação do Ritual corresponde a uma cidade pequena ou a um distrito de uma cidade grande, aproximadamente. A Dificuldade é determinada pela distância física entre o celebrante e o Parente mais próximo. (Dificuldade 2 se for a casa ao lado; 4 se for o outro lado da cidade.) A presença de outros lobisomens atrapalha um pouco as coisas, aumentando a Dificuldade em 1 se houver na área outros garous além da alcateia do celebrante. Uma vitória no teste somará dois dados a qualquer teste de Habilidade relevante que se faça no futuro para localizar o tal Parente durante um mês inteiro após a celebração do Ritual.",
     "system": "The range of the Rite is roughly the size of a small town, or a large city district, with the Difficulty determined by the physical distance to closest Kin. (Difficulty 2 for next door, 4 for across town.) The presence of other werewolves also muddies the water, increasing the Difficulty by 1 if any Garou other than the Rite performers' pack is in the area. A win on the test adds two dice to any future relevant Skill tests to find that specific Kin for one full month after the Rite master performs the Rite.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 182
   },
   {
@@ -126,7 +126,7 @@
     "pool": "Honra + Persuasão vs Poder",
     "systemPtBr": "É necessário celebrar este Ritual em um lugar aonde o espírito tenha como chegar. Se o espírito estiver confinado a um local ou objeto, o Ritual terá de ser celebrado lá ou perto da coisa, respectivamente. Se o espírito não tiver laços com um determinado elemento físico, a celebrante terá de saber o nome da entidade. A parada que o espírito usará para resistir é formada pelo Poder dele e modificada pela Película da área (-2 dados se for em um caern; +2 dados se a Película tiver um valor extraordinariamente elevado). A relação do mestre do Ritual com o espírito também pode interferir e modificar as paradas envolvidas. Se for de fato invocado, o espírito terá de permanecer ali durante uma cena; depois disso, estará livre para ir embora. No caso de uma consequência Brutal, o espírito ficará ofendidíssmo e dirigirá aos celebrantes as ações hostis que ele for capaz de executar.",
     "system": "The Rite must be held in a location that the spirit can reach. If the spirit is bound to an object or a place, the Rite must be held in or near it. If the spirit isn't tied to a particular physical feature, its name must instead be known by the performer. The resist pool is the spirit's Power, modified by the local Gauntlet (-2 dice if at a caern; +2 dice if the Gauntlet is unusually high). The Rite master's relationship to the spirit can also come into play and modify the pools involved. The spirit, if successfully summoned, is bound to stay for one scene, after which it's free to leave. Upon a Brutal outcome, the spirit is gravely offended and engages in whatever hostile action it is capable of against the performers of the Rite.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 185
   },
   {
@@ -139,7 +139,7 @@
     "pool": "Glória + Ocultismo",
     "systemPtBr": "A menos que o espírito mantenha relações excepcionalmente boas com o mestre do Ritual - o que levaria a uma vitória automática no Ritual - , o espírito resistirá com sua parada de Poder. Uma vitória na disputa confinará o espírito durante uma semana, mais uma semana adicional para cada sucesso da margem. Uma consequência Brutal no teste do Ritual deixará o espírito zangado (se já não o estivesse) e permitirá que ele possua um dos participantes durante uma cena (caso o espírito decida fazê-lo, pois muitos simplesmente preferem fugir). A natureza exata da possessão depende do espírito e da vontade do Narrador, mas não foram poucas as alcateias que se perderam por tentar avassalar uma entidade hierarquicamente superior.",
     "system": "Unless the spirit is on exceptionally good terms with the Rite master — which makes the Rite succeed automatically — the Rite is resisted by the Power of the spirit. A win on the test binds the spirit for one week, with one additional week added for each success in the margin. A Brutal outcome on the Rite test angers the spirit (if it wasn't angry already) and allows it to possess one of the participants for a scene (should the spirit choose to do so — many simply want to flee the vicinity). The exact nature of the possession depends on the spirit and the whims of the Storyteller, but more than one pack has been lost while attempting to make a servant of their better.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 183
   },
   {
@@ -152,7 +152,7 @@
     "pool": "",
     "systemPtBr": "A penalidade por vexame da garou ou alcateia-alvo passa a ser 2. (Consulte a p. 142.) As condições para o Ritual expirar estão ligadas à remoção do vexame e são determinadas no momento da celebração do rito. Remover a marca antes disso fará a infratora exalar um fedor abominável até ela reaplicar o sinal. O fedor impõe uma penalidade de três dados a todos os testes Sociais.",
     "system": "The subject Garou or pack has their chagrin penalty increased to 2. The conditions for lapsing of the Rite are tied to removing chagrin and are decided on at the enactment of the Rite. Removing the mark before that stage results in a vile stink following the offending Garou until such time they reapply the mark. The stench yields a three-dice penalty to all Social tests.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 186
   },
   {
@@ -165,7 +165,7 @@
     "pool": "Renome (o tipo associado ao novo Espírito Padroeiro da alcateia) + Etiqueta",
     "systemPtBr": "Todos os membros da alcateia devem participar do Ritual, mas a mestre do Ritual não precisa estar associada ao Espírito Padroeiro almejado. A Dificuldade básica é igual a 4 menos quantas sessões se passaram desde a escolha do último Espírito Padroeiro, sendo 1 a Dificuldade mínima. A vitória permitirá a todos os integrantes desfrutar não só do favor de suas respectivas tribos, mas também do favor do Espírito Padroeiro enquanto o apadrinhamento durar. O garou que já pertence à tribo favorecida pelo novo Padroeiro da alcateia multiplicará por dois o bônus associado ao favor. Mais informações sobre Espíritos Padroeiras e seus favores podem ser encontradas no capítulo das tribos. Uma consequência Brutal não leva a um Ritual malsucedido, mas zanga o Espírito Padroeiro anterior, que terá de ser aplacado com uma demanda ou penitência - e um Ritual de Contrição - antes que se possa invocá-lo outra vez.",
     "system": "All members of the pack must participate in this Rite, though the Rite master does not need to be associated with the Patron Spirit sought. The Base Difficulty is 4, minus the number of sessions since the last Patron Spirit was chosen, to a minimum of 1. Success allows all members of the pack to enjoy that Patron Spirit's favor for the duration of the patronage in addition to their tribe favor, and any pack member already part of the new pack Patron's tribe has their favor bonus doubled. See the tribes chapter for information on Patron Spirits and the favors they bestow. A Brutal outcome doesn't cause the Rite to fail but angers the previous Patron Spirit, who must be appeased by the performance of a quest or labor of penance, as well as a Rite of Contrition, before they can be called upon again.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 182
   },
   {
@@ -178,7 +178,7 @@
     "pool": "Honra + Performance",
     "systemPtBr": "Este Ritual só pode ser celebrado após uma vitória da alcateia. Pode-se tentá-lo apenas uma vez por história para permitir à alcateia restaurar Força de Vontade acima e além do normal. A mestre do Ritual decide quantos níveis de dano à Força de Vontade os colegas de alcateia pretendem reparar. Esse número corresponderá à Dificuldade. Se o rito for bem-sucedido, cada integrante da alcateia vai restaurar a quantidade designada de níveis de dano Superficial à Força de Vontade. Também se pode optar por reparar dano Agravado à Força de Vontade à razão de 1 para 2. Em caso de falha, inclusive via consequência Brutal, nenhuma Força de Vontade será restaurada, mas o Ritual não terá outros efeitos, a não ser que o Narrador decida algo diferente.",
     "system": "This Rite can be performed only after the pack has achieved a victory. It can be attempted, only once per story, to allow the pack to restore Willpower above and beyond the norm. The Rite master decides how many levels of Willpower damage the packmates want to restore. The Difficulty is equal to this number. If successful, each member of the pack restores this designated number of levels of Superficial Willpower damage. They can also choose to restore Aggravated Willpower on a 1-for-2 basis. Failure, including by Brutal outcome, yields no Willpower restoration, but has no further effects unless the Storyteller deems otherwise.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 183
   },
   {
@@ -192,7 +192,7 @@
     "systemPtBr": "A Dificuldade de criar um caern novo é 5. Se o objetivo for aumentar a Graduação do Caern, a Dificuldade será 4 + o valor atual. Faz-se o teste ao término do ciclo lunar, depois de completados todos os preparativos. O Ritual, quando bemsucedido, produz um novo caern de Graduação 1 ou aumenta em 1 a Graduação do caern que se deseja fortalecer. Se o Ritual falhar, o mestre do Ritual (ou outra pessoa) terá de recomeçar os preparativos que duram um mês. Cada consequência Brutal (par de resultados Brutais) invocará um espírito hostil ou ofenderá outro já presente. O Ritual só será completado quando os lobisomens tiverem dado um jeito em todos esses espíritos. Observe que os personagens dos jogadores que usarem este Ritual no caern da própria alcateia terão de gastar pontos de experiência para validar o novo caern ou a nova Graduação de Caern (consulte 'Caerns', mais adiante).",
     "system": "The Difficulty to create a new caern is 5. If attempting to increase a Caern Value, the Difficulty is 4 + the current rating. The test is made at the culmination of the lunar cycle, after all preparations have been completed. A successful Rite yields a new caern with a Caern Value of 1; a successful strengthening increases the Caern Value by 1. Failure requires the Rite master (or someone else) to start the monthly preparation anew. Each Brutal outcome (pair of Brutal results) summons a hostile spirit or offends one already present, and all of these spirits need to be dealt with before the Rite can be considered complete. Note that player characters using this Rite on their pack's own caern need to spend experience points to make the new caern or Caern Value valid (see “Caerns,” below)."
     ,
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 184
   },
   {
@@ -205,7 +205,7 @@
     "pool": "Renome (o mais alto do alvo) + Liderança",
     "systemPtBr": "Este Ritual precisa ter como alvo o integrante da alcateia que Perdeu o Lobo. Somente os colegas de alcateia do alvo podem participar e a Dificuldade é 3. Os participantes precisam sacrificar um total de 3 pontos de Fúria. Se o Ritual for bem-sucedido, o alvo ganhará um - e apenas um - ponto de Fúria, recuperando o Lobo. No caso de uma falha comum, a Fúria voltará aos participantes, mas, com uma falha Brutal, os pontos serão sacrificados mesmo com o fracasso do Ritual.",
     "system": "This Rite must target a member of a pack who has Lost the Wolf. Only members of the target's pack can participate, and the Difficulty is 3. The participants must sacrifice a total of 3 Rage among them; if the Rite is successful, the target gains a single point of Rage, returning their Wolf to them. On a regular failure, the Rage returns to the participants, but a Brutal failure sacrifices it, even though the Rite fails.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 185
   },
   {
@@ -218,7 +218,7 @@
     "pool": "Sabedoria + Sobrevivência",
     "systemPtBr": "A Dificuldade do Ritual é igual a 2 mais 1 para cada participante fora o mestre do Ritual. Se o Ritual for bem-sucedido, todos os participantes terão 2 dados comuns predefinidos como sucessos em qualquer teste de Percepção que vierem a fazer para detectar invasores no adro - a área ao redor do território do caern (desconhecendo-se a região exata, então cerca de um quilômetro em todas as direções) - e também um bônus semelhante em outros testes para rastrear ou investigar intrusos. O benefício dura um mês lunar. Uma consequência Brutal espantará os espíritos e animais do território que circunda o caem e ninguém poderá tentar o Ritual de novo antes de se passar um mês lunar.",
     "system": "The Difficulty of the Rite is 2 plus 1 for each participant, apart from the Rite master. Upon a successful Rite, all participants have 2 regular dice pinned to success for any Awareness test to detect intruders upon the bawn, the area surrounding the caern territory (if the exact region is unknown, roughly a kilometer in all directions), as well as a similar bonus to other tests to track or investigate trespassers. The benefit lasts for a lunar month. On a Brutal failure, the spirits and animals of the territory surrounding the caern are spooked, and nobody can attempt the Ritual again until a lunar month has passed.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 182
   },
   {
@@ -231,7 +231,7 @@
     "pool": "Sabedoria + Artesanato",
     "systemPtBr": "A Dificuldade de celebrar este Ritual é igual a 2 + a Graduação do Caern. Se for bem-sucedido, somará dois dados a qualquer tentativa de disfarçar ou esconder o caern, além de impor uma penalidade de dois dados a todo teste que se fizer para descobrir o caern, desde que não intencionalmente. O efeito dura um mês lunar. No caso de uma consequência Brutal, a rede inteira (ou outra forma que o Ritual tenha assumido) terá de ser arrancada e refeita, e ninguém poderá tentar o Ritual de novo antes de se passar um mês lunar.",
     "system": "The Difficulty to perform this Rite is 2 + the caern's Caern Value. If successful, it adds two dice to any attempt to mask or conceal the caern, as well as yielding a two-dice penalty on any test to unwittingly discover the caern. The effect lasts for a lunar month. On a Brutal failure, the entire web construction (or whatever form the Rite takes) must be torn down and redone, and no one can attempt the Ritual again until a lunar month has passed.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 186
   },
   {
@@ -257,7 +257,7 @@
     "system": "",
     "descriptionPtBr": "O Ritual Satírico é uma canção, dança ou peça criada com o único propósito de ridicularizar um transgressor. Este Ritual costuma ser celebrado durante uma assembleia enquanto o alvo da zombaria, sentadinho em um canto, encara a fratria inteira. Já que os garous registram sua longa história em narrativas orais (muitas vezes pitorescas...), a Sátira será lembrada e passada adiante por anos a fio. O lobisomem submetido a este Ritual não costuma perder Renome, mas a Sátira muitas vezes é um aviso para o garou ou a alcateia que está por um triz de se sujeitar ao bem mais rigoroso Ritual da Vergonha. Os garous jovens às vezes brincam que o Ritual Satírico deveria se chamar 'Esculacho' ou coisa que o valha.",
     "description": "A Satire Rite is a special song, dance, or drama crafted for the sole purpose of ridiculing an offender. This Rite is usually performed at a moot while the Garou to be mocked sits in full view of the sept. Because the Garou keep extensive (often colorful…) oral histories, the Satire will be remembered and passed down through the years. A werewolf subjected to this Rite doesn't usually lose Renown, but it is often delivered as a warning to a Garou or pack on the verge of being subjected to the far more severe Rite of Shame. Young Garou sometimes irreverently call the Satire Rite 'Breaking Balls' or the like.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 187
   },
   {
@@ -270,7 +270,7 @@
     "system": "",
     "descriptionPtBr": "Usa-se este Ritual para homenagear uma lobisomem e reconhecer as provações que ela suportou até alcançar a posição que tem hoje. Um dos anciões pode fazer as honras ou a própria garou pode aproveitar a oportunidade e relatar suas façanhas. Quem tomar a palavra contará tudo que a garou fez para merecer a aclamação. Aos ouvidos humanos, pode parecer presunção esmiuçar as próprias conquistas, mas é perfeitamente aceitável se exibir dessa maneira nos encontros dos lobisomens, desde que a garou em questão o faça como parte do Ritual. Também é a ocasião ideal para alguém discordar das alegações se o fizer como parte do Ritual, o indivíduo não precisará temer uma retaliação imediata.",
     "description": "This Rite is used to honor a werewolf and recognize the trials they have endured to attain their current standing. An elder might do the honors, or the Garou themselves might take an opportunity to tell of their past exploits. Whoever makes the address recounts all of the things the Garou did to gain acclaim. Although a Garou detailing their own accomplishments might seem boastful to human ears, it is a perfectly acceptable way to present oneself at gatherings of werewolves, so long as the Garou observes it as a function of the Rite. This time would also be when anyone taking issue with the claims to speak up, and they can do so, within the Rite, without fear of immediate retaliation.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 187
   },
   {
@@ -283,7 +283,7 @@
     "system": "",
     "descriptionPtBr": "Este Ritual homenageia aqueles que morreram mais recentemente. Um galliard ou companheiro de alcateia do lobisomem falecido costuma ser o celebrante. As particularidades do Ritual variam drasticamente de acordo com a região ou até mesmo a alcateia. Por exemplo, um mestre do Ritual dos Guardadores do Galhado pede à fratria que conte histórias sobre atos heroicos e travessuras do falecido, ao passo que a garou mais Renomada de uma fratria da floresta Hoia na Romênia conduz um rito solene no qual os celebrantes e todos os companheiros de alcateia do morto se posicionam nas encostas e, com as caudas ao vento, externam por meio de uivos o orgulho e o pesar que sentem ao encaminhar o amigo para o além, de preferência para uma outra vida como espírito lendário.",
     "description": "This Rite honors the newly dead. A galliard or a pack-mate of the departed werewolf usually performs the Rite. The specifics of the Rite vary dramatically by region or even pack. For example, a Hart Warden Rite master leads the sept in the telling of tales, both raucous and heroic, about the fallen Garou, whereas the most Renowned Garou of a sept in the Hoia Forest leads a solemn rite in which the performers and all the fallen one's packmates stand on the slopes, tails to the wind, and howl out their pride and grief to speed their companion onward, ideally to an existence as a legendary spirit.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 187
   },
   {
@@ -296,7 +296,7 @@
     "system": "",
     "descriptionPtBr": "Quando se veem feridos ou velhos demais para lutar ao lado dos companheiros de alcateia, alguns lobisomens celebram este rito lúgubre e solene. O garou se senta no centro de uma roda formada por seus colegas de alcateia e fratria. Os galliards cantam a vida e os feitos do celebrante, e este solicita aos espíritos que o acolham no além. Aí o celebrante percorre com vagar e altivez as fileiras cerradas dos garous ali reunidos. Ao passar por sua gente, ele uiva e entoa uma nênia parecida com aquela que se canta na Cerimônia pelos Falecidos. Em seguida, o celebrante se recolhe a um lugar afastado e ali põe fim à sua vida, geralmente com uma klaive. Em raras ocasiões, dois companheiros de alcateia celebram juntos o rito, matando um ao outro simultaneamente em combate ritualístico. Logo após a morte do celebrante, os garous reunidos costumam fazer a Cerimônia pelos Falecidos.",
     "description": "Once some werewolves become too wounded or aged to fight alongside their packmates, they perform this bleak and solemn rite. The Garou sits at the center of a gathering of their pack- and sept-mates. The galliards sing of the celebrant's life and deeds, and they invoke the spirits for welcome in the next world. The celebrant then slowly and proudly walks through the closed ranks of the assembled Garou. As they pass their people, they howl a dirge similar to that sung during the Gathering for the Departed. The celebrant then leaves for a secluded site. There they end their life, usually with a klaive. Rarely, two packmates perform this Rite together, killing each other simultaneously in ritual combat. Immediately after the celebrant's death, the assembled Garou often perform the Gathering for the Departed.",
-    "book": "Lobisomem: O Apocalipse 5ed",
+    "book": "Lívro Básico",
     "page": 187
   },
   {
@@ -498,7 +498,7 @@
     "id": "39",
     "titlePtBr": "Ritual do Lobo Quebrado",
     "title": "Rite of the Broken Wolf",
-    "type": "Punishment",
+    "type": "Místico",
     "pool": "Honra + Liderança",
     "systemPtBr": "A Dificuldade deste Rito é igual a 2 + o maior valor de Renome do alvo. Se bem-sucedido, o lobisomem perde seu lobo interior: não pode mudar de forma nem acessar sua Fúria. Esse estado persiste até que sua lua de augúrio brilhe novamente ou até que o Rito do Lobo Renascido (Corebook, p. 186) seja realizado sobre ele por um dos Garou que o castigaram.",
     "system": "The Difficulty of this Rite is equal to 2 + the targeted Garou's highest Renown score. If successful, the werewolf loses the wolf within: they cannot shapeshift or access their Rage. This condition endures until their auspice moon rises again or until the Rite of the Wolf Reborn (Werewolf, p. 186) is performed upon them by one of the Garou who punished them.",
@@ -589,7 +589,7 @@
     "id": "46",
     "titlePtBr": "Ritual da Desfiguração",
     "title": "Rite of Disfigurement",
-    "type": "Punishment",
+    "type": "Místico",
     "pool": "Glória + Intimidação",
     "systemPtBr": "A Dificuldade do Rito é igual a 2 mais o maior Renome do Garou alvo. O alvo frequentemente é amarrado ou incapacitado, pois poucos se submetem voluntariamente a este Rito humilhante. Aqueles afetados pelo Rito exibem uma característica animal clara do animal de presa usado no Rito, como seus cascos, chifres, dentes, orelhas ou cauda, em todas as formas sobrenaturais, mais uma característica adicional para cada ponto de margem de sucesso. A aparência dessas características é horrífica, em vez de fofa ou fantasiosa, e elas são um sinal óbvio do sobrenatural para caçadores e outros humanos cautelosos. Garou reconhecem instantaneamente essas características como erradas e como uma marca de humilhação. Essas características duram até que o alvo uive para a lua de seu augúrio. Um Mestre do Rito que falhe no Rito pode tentar novamente no dia seguinte, embora muitos interpretem isso como um sinal de que o Rito não deveria ter sido invocado. Em um resultado Brutal, o Mestre do Rito sofre os efeitos até a próxima vez que uivar para a lua.",
     "system": "The Difficulty of the Rite is equal to 2 plus the target Garou's highest Renown. The target is often bound or incapacitated as few willingly submit to this humiliating Rite. Those affected by the Rite show a clear animal feature of the prey animal used in the Rite, such as its hooves, antlers, teeth, ears, or tail in all supernatural forms, plus an additional one for every point of margin of success. The appearance of these features is horrific rather than cute or whimsical, and they're an obvious sign of the unnatural to hunters and other wary humans. Garou instantly recognize these features as wrong and a mark of humiliation. These features last until they howl at their auspice's moon. A Rite master who fails the Rite may attempt it again the next day, though many take it as a sign that the Rite was not meant to be invoked. On a Brutal outcome, the Rite master instead suffers the effects until they next howl at the moon.",

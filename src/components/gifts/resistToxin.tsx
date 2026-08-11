@@ -8,7 +8,7 @@ export function ResistToxin() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [type, setType] = useState<number>(0);
-  const { sessionId, session,sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, session,sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -49,14 +49,14 @@ export function ResistToxin() {
   return(
     <div className="w-full">
       <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Selecione a Condição</p>
+        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Selecione a Condição</p>
         <select
-          className="flex w-full text-black p-3"
+          className="h-8 w-full cursor-pointer border border-white/10 bg-black/70 px-2 text-center font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white outline-none transition-colors hover:border-red-700/70"
           value={type}
           onChange={ (e: React.ChangeEvent<HTMLSelectElement>) => setType(Number(e.target.value)) }
         >
           <option
-            className="capitalize text-center text-black"
+            className="text-center text-black"
             value={ 0 }
             disabled
           >
@@ -64,13 +64,13 @@ export function ResistToxin() {
           </option>
           <option
             value={ 1 }
-            className="p-3 bg-black text-center text-white w-full"
+            className="bg-black text-center text-white"
           >
             Garou resistindo quando um teste normalmente não é permitido
           </option>
           <option
             value={ 2 }
-            className="p-3 bg-black text-center text-white w-full"
+            className="bg-black text-center text-white"
           >
             Garou resistindo a entorpecentes simples usando o Dom ativamente
           </option>
@@ -79,10 +79,10 @@ export function ResistToxin() {
       {
         type !== 0 && type !== 3 &&
         <label htmlFor="penaltyOrBonus" className="mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Penalidade (-) ou Bônus (+) para o teste</p>
+          <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Penalidade (-) ou Bônus (+) para o teste</p>
           <div className="flex w-full">
             <div
-              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+              className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ penaltyOrBonus === -50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (penaltyOrBonus > -50) setPenaltyOrBonus(penaltyOrBonus - 1)
               }}
@@ -91,7 +91,7 @@ export function ResistToxin() {
             </div>
             <div
               id="penaltyOrBonus"
-              className="p-2 text-center text-black bg-white w-full appearance-none"
+              className="flex h-8 w-full items-center justify-center appearance-none bg-white px-2 text-center text-[11px] font-semibold text-black"
               onChange={(e: any) => {
                 if (Number(e.target.value) < 0 && Number(e.target.value) < -50) setPenaltyOrBonus(-50);
                 else setPenaltyOrBonus(Number(e.target.value))
@@ -100,7 +100,7 @@ export function ResistToxin() {
               {penaltyOrBonus}
             </div>
             <div
-              className={`border border-white p-3 cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+              className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ penaltyOrBonus === 50 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (penaltyOrBonus < 50) setPenaltyOrBonus(penaltyOrBonus + 1)
               }}
@@ -113,10 +113,10 @@ export function ResistToxin() {
       {
         type !== 0 && type !== 3 &&
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-          <p className="text-white w-full pb-3">Dificuldade do Teste</p>
+          <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade do Teste</p>
           <div className="flex w-full">
             <div
-              className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+              className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (dificulty > 0) setDificulty(dificulty - 1);
               }}
@@ -125,7 +125,7 @@ export function ResistToxin() {
             </div>
             <div
               id="dificulty"
-              className="p-2 bg-white text-center text-black w-full"
+              className="flex h-8 w-full items-center justify-center bg-white px-2 text-center text-[11px] font-semibold text-black"
               onChange={ (e: any) => {
                 if (Number(e.target.value > 0 && Number(e.target.value) > 15)) setDificulty(15);
                 else if (e.target.value >= 0) setDificulty(Number(e.target.value));
@@ -134,7 +134,7 @@ export function ResistToxin() {
               {dificulty}
             </div>
             <div
-              className={`border border-white p-3 cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
+              className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ dificulty === 15 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}
               onClick={ () => {
                 if (dificulty < 15) setDificulty(dificulty + 1)
               }}
@@ -147,11 +147,14 @@ export function ResistToxin() {
       {
         type !== 0 &&
         <button
-          className="text-white bg-black hover:border-red-800 border-2 border-white  transition-colors cursor-pointer w-full p-2 font-bold"
+          className="mt-3 w-full border border-white/20 bg-black px-2.5 py-2 font-geist-mono text-[9px] font-bold uppercase tracking-[0.08em] text-white transition-colors cursor-pointer hover:border-red-800"
           onClick={ () => {
             rollRage();
-            setShowMenuSession('');
             setShowGiftRoll({ show: false, gift: {} });
+            setOptionSelect('chat');
+            if (typeof window !== 'undefined') {
+              window.dispatchEvent(new Event('session:open-chat'));
+            }
           }}
         >
           Ativar Dom

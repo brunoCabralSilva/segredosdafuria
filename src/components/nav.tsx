@@ -1,179 +1,191 @@
-'use client'
+﻿'use client';
+
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useContext, useEffect, useState } from 'react';
-import Link from "next/link";
 import { authenticate } from '@/firebase/authenticate';
-import { useRouter } from 'next/navigation';
 import contexto from '@/context/context';
 import Logout from './popup/logout';
 
-export default function Nav() {
+const menuSections = [
+  {
+    title: 'Ferramentas',
+    items: [
+      { href: '/sessions', label: 'Sessões' },
+      { href: '/sheets', label: 'Fichas' },
+    ],
+  },
+  {
+    title: 'Consultas',
+    items: [
+      { href: '/', label: 'Início' },
+      { href: '/trybes', label: 'Tribos' },
+      { href: '/auspices', label: 'Augúrios' },
+      { href: '/forms', label: 'Formas' },
+      { href: '/gifts', label: 'Dons' },
+      { href: '/rituals', label: 'Rituais' },
+      { href: '/loresheets', label: 'Loresheets' },
+      { href: '/talismans', label: 'Talismãs' },
+      { href: '/advantagesAndFlaws', label: 'Vantagens e Defeitos' },
+    ],
+  },
+  {
+    title: 'Projeto',
+    items: [
+      { href: '/profile', label: 'Perfil' },
+      { href: '/about', label: 'Quem Somos' },
+    ],
+  },
+] as const;
+
+export default function Nav(props: { compact?: boolean }) {
+  const { compact = false } = props;
   const [showMenu, setShowMenu] = useState(false);
-  const [loginLogout, setLoginLogout] = useState('');
+  const [loginLogout, setLoginLogout] = useState<'login' | 'logout'>('login');
   const router = useRouter();
-  const { logoutUser, setLogoutUser, setShowMessage } = useContext(contexto);
+  const pathname = usePathname();
+  const { logoutUser, setLogoutUser, setShowMessage, dataUser } = useContext(contexto);
 
   useEffect(() => {
+    let active = true;
+
     const fetchData = async () => {
+      if (dataUser.email && dataUser.displayName) {
+        if (active) setLoginLogout('logout');
+        return;
+      }
+
       const authData = await authenticate(setShowMessage);
+      if (!active) return;
+
       if (authData && authData.email && authData.displayName) {
         setLoginLogout('logout');
-      } else setLoginLogout('login');
+      } else {
+        setLoginLogout('login');
+      }
     };
+
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const barra1 = () => {
-    if(!showMenu) {
-      return 'rotate-0 transition duration-500 z-0';
-    } return 'rotate-45 transition duration-500 translate-y-2 z-40';
-  }
+    return () => {
+      active = false;
+    };
+  }, [dataUser.displayName, dataUser.email, setShowMessage]);
 
-  const barra2 = () => {
-    if(!showMenu) {
-      return 'rotate-0 transition duration-500 z-0';
-    } return '-rotate-45 transition duration-500 z-40';
-  }
+  useEffect(() => {
+    setShowMenu(false);
+  }, [pathname]);
 
-  const barra3 = () => {
-    if(!showMenu) {
-      return 'opacity-1 transition duration-500 z-0';
-    } return 'opacity-0 transition duration-500 z-40';
-  }
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = showMenu ? 'hidden' : previousOverflow || '';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [showMenu]);
+
+  const isActivePath = (href: string) => {
+    if (!pathname) return false;
+    if (href === '/') return pathname === '/';
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const isSessionDetailsRoute = pathname?.startsWith('/sessions/');
+  const linkBaseClass = 'font-geist-mono text-[11px] uppercase tracking-[0.12em] transition-colors';
+
+  const renderMenuLink = (href: string, label: string) => (
+    <Link
+      key={href}
+      href={href}
+      className={`border-b border-white/10 pb-3 pt-1 ${linkBaseClass} ${isActivePath(href) ? 'text-red-500' : 'text-white/76 hover:text-red-400'}`}
+    >
+      {label}
+    </Link>
+  );
 
   return (
-    <nav className="w-full text-base relative 2xl:text-xl leading-6 z-40">
-      { logoutUser && <Logout /> }
-      <div
-        onClick={ () => setShowMenu(!showMenu) }
-        className="bg-black px-2 pt-2 pb-1 rounded cursor-pointer fixed right-0 top-0 sm:mt-1 sm:mr-2 flex flex-col z-40"
-      >
-        <div className={`h-1 w-9 bg-white mb-1 ${barra1()}`} />
-        <div className={`h-1 w-9 bg-white mb-1 ${barra2()}`} />
-        <div className={`h-1 w-9 bg-white mb-1 ${barra3()}`} />
-      </div>
-      { showMenu &&
-        <ul
-          className={`overflow-y-auto fixed top-0 right-0 opacity-1 z-30 w-full sm:w-1/2 md:w-1/4 h-screen items-center pt-2 transition duration-500 flex flex-col text-white justify-center bg-black font-extrabold`}
-        >
-          <li>
-            <Link
-              href="/"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Início
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/trybes"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Tribos
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/auspices"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Augúrios
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/forms"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Formas
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/gifts"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Dons
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/rituals"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Rituais
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/advantagesAndFlaws"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Vantagens e Defeitos
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/talismans"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Talismãs
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/loresheets"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Fichas de Conhecimento
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/sessions"
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Sessões
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/sheets"
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Fichas
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/profile"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Perfil
-            </Link>
-          </li>
-          <li className="pt-4">
-            <Link href="/about"
-              onClick={ () => setShowMenu(!showMenu) }
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
-            >
-              Quem Somos
-            </Link>
-          </li>
-          <li className="pt-10">
+    <>
+      {logoutUser && <Logout />}
+
+      <nav className={`sticky top-0 z-[100] w-full flex justify-center ${compact ? "bg-transparent px-0 pt-0 sm:px-0" : "bg-black px-4 pt-2 sm:px-8"}`}> 
+        <div className={compact ? "flex w-full justify-center" : `flex w-full ${!showMenu && !isSessionDetailsRoute ? 'max-w-[1200px]' : ''} justify-end`}> 
           <button
+            type="button"
+            aria-label={showMenu ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={showMenu}
+            onClick={() => setShowMenu((current) => !current)}
+            className={`group flex h-11 w-11 items-center justify-center border transition-colors ${showMenu ? 'fixed right-2 top-4 z-[110] border-red-700 bg-[#7a0000] sm:right-2' : 'border-zinc-500/30 bg-black/80 hover:border-red-700'}`}
+          >
+            <span className="relative block h-4 w-5">
+              <span
+                className={`absolute left-0 top-0 h-[2px] w-5 bg-white transition-transform duration-300 ${showMenu ? 'translate-y-[7px] rotate-45' : ''}`}
+              />
+              <span
+                className={`absolute left-0 top-[7px] h-[2px] w-5 bg-white transition-opacity duration-300 ${showMenu ? 'opacity-0' : 'opacity-100'}`}
+              />
+              <span
+                className={`absolute left-0 top-[14px] h-[2px] w-5 bg-white transition-transform duration-300 ${showMenu ? '-translate-y-[7px] -rotate-45' : ''}`}
+              />
+            </span>
+          </button>
+        </div>
+      </nav>
+
+      <div
+        className={`fixed inset-0 z-[80] transition-opacity duration-300 ${showMenu ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'}`}
+      >
+        <button
+          type="button"
+          aria-label="Fechar menu"
+          onClick={() => setShowMenu(false)}
+          className="absolute inset-0 bg-black/80"
+        />
+
+        <aside
+          className={`absolute right-0 top-0 flex h-full w-full max-w-[420px] flex-col border-l border-zinc-500/30 bg-black pb-8 pt-20 text-white transition-transform duration-300 pr-2 pl-8 ${showMenu ? 'translate-x-0' : 'translate-x-full'}`}
+        >
+          <div className="flex-1 space-y-8 overflow-y-auto pr-1">
+            {menuSections.map((section) => (
+              <section key={section.title}>
+                <p className="font-kingthings text-2xl uppercase leading-none text-white">
+                  {section.title}
+                </p>
+                <div className="mt-4 flex flex-col gap-3">
+                  {section.items.map((item) => renderMenuLink(item.href, item.label))}
+                </div>
+              </section>
+            ))}
+          </div>
+
+          <div className="mt-8 border-t border-white/10 pt-5">
+            <button
               type="button"
-              onClick={ async () => {
-                if (loginLogout === 'login') router.push('/login');
-                else setLogoutUser(true)
+              onClick={async () => {
+                setShowMenu(false);
+                if (loginLogout === 'login') {
+                  router.push('/login');
+                } else {
+                  setLogoutUser(true);
+                }
               }}
-              className="text-white transition duration-1000 px-2 hover:underline hover:underline-offset-4"
+              className={`inline-flex border px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] text-white transition-colors ${loginLogout === 'logout' ? 'border-red-700 bg-[#7a0000] hover:bg-[#930000]' : 'border-zinc-500/30 bg-black hover:border-red-700 hover:text-red-500'}`}
             >
-              { loginLogout === 'logout' && 'Logout' }
-              { loginLogout === 'login' && 'Login' }
+              {loginLogout === 'logout' ? 'Logout' : 'Login'}
             </button>
-          </li>
-        </ul>
-      }
-    </nav>
+          </div>
+        </aside>
+      </div>
+    </>
   );
 }
+
+
+
+
+
+
+
+
+
+

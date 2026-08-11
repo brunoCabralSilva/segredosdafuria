@@ -1,143 +1,195 @@
-'use client'
+﻿'use client'
 import dotenv from 'dotenv';
 import emailjs from '@emailjs/browser';
-import { useContext, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { BiError } from 'react-icons/bi';
-import { VscRepoPush } from "react-icons/vsc";
+import { VscRepoPush } from 'react-icons/vsc';
 import contexto from '@/context/context';
 
 dotenv.config();
 
-export default function Feedback(props: { title: string }) {
+type MessagePopup = {
+  error: boolean;
+  message: string;
+  show: boolean;
+};
+
+export default function Feedback(props: { title?: string }) {
   const [message, setMessage] = useState('');
   const [nameUser, setNameUser] = useState('');
   const [emailUser, setEmailUser] = useState('');
-  const [messagePopup, setMessagePopup] = useState(
-    { error: true, message: '', show: false }
-  );
+  const [messagePopup, setMessagePopup] = useState<MessagePopup>({
+    error: true,
+    message: '',
+    show: false,
+  });
   const { setShowFeedback } = useContext(contexto);
-  const sendEmail = (e: any) => {
-    const regex = /\S+@\S+\.\S+/
+
+  const sendEmail = async (e: FormEvent<HTMLFormElement>) => {
+    const regex = /\S+@\S+\.\S+/;
     e.preventDefault();
-    if (!nameUser || nameUser === '' || nameUser.length < 2) {
-      setMessagePopup(
-        {
-          message: 'O nome do usuário deve possuir pelo menos 2 caracteres',
-          error: true,
-          show: true,
-        }
-      );
-    } else if (!emailUser || !regex.test(emailUser) || emailUser === '') {
-      setMessagePopup(
-        {
-          message: 'Por favor, informe um e-mail válido',
-          error: true,
-          show: true,
-        }
-      );
-    } else if (!message || message === '' || message.length <= 5) {
-      setMessagePopup(
-        {
-          message: 'A mensagem deve possuir pelo menos mais de 5 caracteres',
-          error: true,
-          show: true,
-        }
-      );
+
+    if (!nameUser || nameUser.length < 2) {
+      setMessagePopup({
+        message: 'O nome do usuario deve possuir pelo menos 2 caracteres.',
+        error: true,
+        show: true,
+      });
+    } else if (!emailUser || !regex.test(emailUser)) {
+      setMessagePopup({
+        message: 'Por favor, informe um e-mail valido.',
+        error: true,
+        show: true,
+      });
+    } else if (!message || message.length <= 5) {
+      setMessagePopup({
+        message: 'A mensagem deve possuir mais de 5 caracteres.',
+        error: true,
+        show: true,
+      });
     } else {
-      const userID: any = process.env.NEXT_PUBLIC_USERID;
-      const templateID: any = process.env.NEXT_PUBLIC_TEMPLATEID;
-      const serviceID: any = process.env.NEXT_PUBLIC_SERVICEID;
+      const userID: string | undefined = process.env.NEXT_PUBLIC_USERID;
+      const templateID: string | undefined = process.env.NEXT_PUBLIC_TEMPLATEID;
+      const serviceID: string | undefined = process.env.NEXT_PUBLIC_SERVICEID;
+
       try {
-        emailjs.sendForm(
-          serviceID,
-          templateID,
-          e.target,
+        await emailjs.sendForm(
+          serviceID || '',
+          templateID || '',
+          e.currentTarget,
           userID,
         );
-        e.target.reset();
+        e.currentTarget.reset();
         setMessage('');
         setNameUser('');
         setEmailUser('');
-        setMessagePopup(
-          {
-            message: 'Feedback enviado com sucesso! Muito obrigado por sua colaboração!',
-            error: false,
-            show: true,
-          }
-        );
+        setMessagePopup({
+          message: 'Feedback enviado com sucesso. Muito obrigado pela colaboracao!',
+          error: false,
+          show: true,
+        });
         setTimeout(() => setShowFeedback(false), 3000);
       } catch (error: any) {
         global.alert(error);
       }
     }
+
     setTimeout(() => {
-      setMessagePopup( { message: '', error: true, show: false });
+      setMessagePopup({ message: '', error: true, show: false });
     }, 4000);
-  }
-  return(
-    <div className="fixed w-full h-screen top-0 left-0 bg-black/50 flex items-center justify-center flex-col text-white z-50">
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
       <form
-        onSubmit={ sendEmail }
-        className="bg-black border-2 border-white w-10/12 sm:w-1/2 md:w-1/3 px-5 py-7 relative flex flex-col"
+        onSubmit={sendEmail}
+        className="relative flex w-full max-w-2xl flex-col overflow-hidden border border-zinc-500/40 bg-zinc-950/85"
       >
-        <div className="absolute top-0 right-0 p-2 text-xl">
-          <AiFillCloseCircle
-            className="cursor-pointer"
-            onClick={() => setShowFeedback(false) }
-          />
-        </div>
-        <p className="py-2 text-center px-4 font-bold">
-          Deixe aqui seu Feedback e em breve responderemos:
-        </p>
-        <input type="text"
-          id="gift"
-          name="gift"
-          value={ props.title }
-          className="py-3 px-2 mt-2 text-white text-center bg-transparent font-bold border-transparent"
+        <div
+          className="absolute inset-0 bg-cover bg-center "
+          style={{ backgroundImage: "url('/images/wallpapers/128.jpg')" }}
         />
-        <input
-          type="text"
-          id="nameUser"
-          name="nameUser"
-          value={ nameUser }
-          className="py-3 px-2 mt-2 bg-black/70 border border-white"
-          placeholder="Insira seu Nome"
-          onChange={ (e) => setNameUser(e.target.value) }
-        />
-        <input
-          type="email"
-          id="emailUser"
-          name="emailUser"
-          value={ emailUser }
-          className="py-3 px-2 mt-2 bg-black/70 border border-white"
-          placeholder="Insira seu Email"
-          onChange={ (e) => setEmailUser(e.target.value) }
-        />
-        <textarea
-          className="mt-2 w-full h-28 bg-black/70 border border-white p-2"
-          value={ message }
-          id="message"
-          name="message"
-          placeholder="Digite aqui seu feedback"
-          onChange={ (e) => setMessage(e.target.value) }
-        >
-        </textarea>
-        {
-          messagePopup.show &&
-          <div className="w-full text-center flex flex-col items-center justify-center py-4 px-4 font-bold">
-            <p className="text-2xl w-full flex justify-center">{ messagePopup.error ? <BiError className="text-red-500" /> : <VscRepoPush className="text-green-500" />}</p>
-            { messagePopup.message }
-          </div>
-        }
+        <div className="absolute inset-0 bg-black/90" />
+
         <button
-          type="submit"
-          value="Submit"
-          className="hover:underline w-full my-2 py-3 border-2 border-black font-bold bg-white text-black transition-colors duration-200 "
+          type="button"
+          onClick={() => setShowFeedback(false)}
+          className="absolute right-4 top-4 z-20 text-2xl text-white/70 transition-colors hover:text-red-400"
+          aria-label="Fechar feedback"
         >
-          Enviar
+          <AiFillCloseCircle />
         </button>
+
+        <div className="relative z-10 px-5 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-8">
+          <h2 className="mt-2 font-kingthings text-2xl sm:text-3xl">Enviar Feedback</h2>
+          <p className="mt-2 max-w-xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+            Compartilhe sugestões, erros encontrados ou ideias para melhorar as sessões, fichas e outras ferramentas do site.
+          </p>
+        </div>
+
+        <div className="relative z-10 flex flex-col gap-4 px-5 sm:px-8">
+          {props.title && (
+            <input
+              type="hidden"
+              id="gift"
+              name="gift"
+              value={props.title}
+            />
+          )}
+
+          <label className="flex flex-col gap-2">
+            <span className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/70">
+              Nome
+            </span>
+            <input
+              type="text"
+              id="nameUser"
+              name="nameUser"
+              value={nameUser}
+              className="border border-zinc-500/40 bg-black/70 px-4 py-3 font-geist-mono text-xs text-white outline-none transition-colors placeholder:text-white/30 focus:border-red-700/80"
+              placeholder="Insira seu nome"
+              onChange={(e) => setNameUser(e.target.value)}
+            />
+          </label>
+
+          <label className="flex flex-col gap-2">
+            <span className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/70">
+              E-mail
+            </span>
+            <input
+              type="email"
+              id="emailUser"
+              name="emailUser"
+              value={emailUser}
+              className="border border-zinc-500/40 bg-black/70 px-4 py-3 font-geist-mono text-xs text-white outline-none transition-colors placeholder:text-white/30 focus:border-red-700/80"
+              placeholder="Insira seu e-mail"
+              onChange={(e) => setEmailUser(e.target.value)}
+            />
+          </label>
+
+          <label className="flex flex-col gap-2">
+            <span className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/70">
+              Mensagem
+            </span>
+            <textarea
+              className="h-36 border border-zinc-500/40 bg-black/70 px-4 py-3 font-geist-mono text-xs text-white outline-none transition-colors placeholder:text-white/30 focus:border-red-700/80"
+              value={message}
+              id="message"
+              name="message"
+              placeholder="Digite aqui seu feedback"
+              onChange={(e) => setMessage(e.target.value)}
+            />
+          </label>
+
+          {messagePopup.show && (
+            <div
+              className={`flex w-full items-center gap-3 border px-4 py-3 font-geist-mono text-xs leading-5 ${
+                messagePopup.error
+                  ? 'border-red-900/70 bg-red-950/20 text-red-200'
+                  : 'border-emerald-900/70 bg-emerald-950/20 text-emerald-200'
+              }`}
+            >
+              <span className="text-lg">
+                {messagePopup.error ? <BiError /> : <VscRepoPush />}
+              </span>
+              <p>{messagePopup.message}</p>
+            </div>
+          )}
+
+          <button
+            type="submit"
+            value="Submit"
+            className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 mb-5"
+          >
+            Enviar Feedback
+          </button>
+        </div>
       </form>
     </div>
   );
 }
+
+
+
+
