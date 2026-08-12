@@ -659,7 +659,7 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
               <p className="mb-3">Formas dos Garou</p>
               <div className="border border-black !border-solid w-full">
                 <div className="grid grid-cols-5 w-full px-3 pb-1 pt-3">
-                  <p className="col-span-1 font-bold">Hominí­deo</p>
+                  <p className="col-span-1 font-bold">Hominídeo</p>
                   <ul className="col-span-3">
                     <li>Custo: Nenhum</li>
                     <li>Incapaz de se regenerar, mas pode tocar prata sem sofrer danos</li>

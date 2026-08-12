@@ -19,7 +19,7 @@ const introParagraphs = [
   'Mudar de forma não é só uma decisão mecânica. Entre os Garou, cada corpo comunica intenção, poder, ameaça, deferência ou urgência. Saber quando assumir cada forma é tão importante quanto dominar seus efeitos em cena.',
 ];
 
-const formOrder = ['Hominí­deo', 'Glabro', 'Crinos', 'Hispo', 'Lupino'];
+const formOrder = ['Hominídeo', 'Glabro', 'Crinos', 'Hispo', 'Lupino'];
 
 const sortedForms = [...(listForms as FormListItem[])].sort(
   (a, b) => formOrder.indexOf(String(a.name)) - formOrder.indexOf(String(b.name))

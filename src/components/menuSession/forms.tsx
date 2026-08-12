@@ -38,10 +38,10 @@ export default function Forms() {
       if (dataSheet.data.rage >= 5) {
         setShowMessage({
           show: true,
-          text: `O personagem ${dataSheet.data.name} possui Fúria 5, se encontra em Frenesi e não pode realizar nenhuma ação que não seja atacar ou sair do mesmo (caso seja possí­vel no momento).`,
+          text: `O personagem ${dataSheet.data.name} possui Fúria 5, se encontra em Frenesi e não pode realizar nenhuma ação que não seja atacar ou sair do mesmo (caso seja possível no momento).`,
         });
       } else if (newForm !== actualForm) {
-        if (newForm === 'Hominí­deo' || newForm === 'Lupino') {
+        if (newForm === 'Hominídeo' || newForm === 'Lupino') {
           if (actualForm === 'Crinos') {
             dataSheet.data.attributes.strength -= 4;
             dataSheet.data.attributes.stamina -= 4;
@@ -120,7 +120,7 @@ export default function Forms() {
       );
 
       if (newForm !== actualForm) {
-        if (newForm === 'Hominí­deo' || newForm === 'Lupino') {
+        if (newForm === 'Hominídeo' || newForm === 'Lupino') {
           if (actualForm === 'Crinos') {
             dataSheet.data.attributes.strength -= 4;
             dataSheet.data.attributes.stamina -= 4;
@@ -171,13 +171,14 @@ export default function Forms() {
             openSessionChat();
           }
         } else {
+          
           if (dataSheet.data.rage < 1) {
             setShowMessage({
               show: true,
               text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`,
             });
           } else {
-            if (actualForm === 'Hominí­deo' || actualForm === 'Lupino') {
+            if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
               dataSheet.data.attributes.strength += 2;
               dataSheet.data.attributes.dexterity += 2;
               if (findResilienciaDeLuna) dataSheet.data.attributes.stamina += 4;
