@@ -9,7 +9,7 @@ import { GiD10 } from "react-icons/gi";
 
 const renownMeta = {
   glory: {
-    label: 'GLÃƒÆ’Ã¢â‚¬Å“RIA',
+    label: 'GLÓRIA',
     textClass: 'text-white/90',
     filledClass: 'border-red-300/70 bg-red-700/30 shadow-[0_0_10px_rgba(185,28,28,0.18)]',
   },
@@ -41,12 +41,13 @@ export default function ItemRenownHaranoHauglosk() {
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${fieldName === 'harano' || fieldName === 'hauglosk' ? 'o' : 'a'} ${fieldName === 'glory' ? 'GlÃ³ria' : fieldName === 'honor' ? 'Honra' : fieldName === 'wisdom' ? 'Sabedoria' : fieldName === 'harano' ? 'Harano' : 'Hauglosk'} do personagem ${sheetData.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`,
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${fieldName === 'harano' || fieldName === 'hauglosk' ? 'o' : 'a'} ${fieldName === 'glory' ? 'Glória' : fieldName === 'honor' ? 'Honra' : fieldName === 'wisdom' ? 'Sabedoria' : fieldName === 'harano' ? 'Harano' : 'Hauglosk'} do personagem ${sheetData.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`,
         type: 'notification',
       },
       null,
       setShowMessage,
     );
+    
   };
   const renderRenownTrack = (type: keyof typeof renownMeta) => {
     const meta = renownMeta[type];
