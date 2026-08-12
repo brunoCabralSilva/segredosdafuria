@@ -204,7 +204,7 @@ export default function Forms() {
   const currentForm = dataForms.find((form: any) => form.name === currentFormName);
   const getCostLabel = (cost?: string) => cost?.includes('Nenhum') ? 'Nenhum teste de Fúria' : (cost || '');
   const formColumns = [
-    ['Hominí­deo', 'Lupino'],
+    ['Hominídeo', 'Lupino'],
     ['Hispo', 'Glabro'],
     ['Crinos'],
   ];
