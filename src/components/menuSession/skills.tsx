@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { updateDataPlayer } from '@/firebase/players';
 import ItemSkill from '../sheetItems/itemSkill';
 import { useContext } from 'react';
@@ -8,16 +8,20 @@ import { capitalizeFirstLetter } from '@/firebase/utilities';
 
 export default function Skills() {
   const { dataSheet, session, email, sheetId, setShowMessage } = useContext(contexto);
+  const sheetData = dataSheet?.data;
+  const sheetSkills = sheetData?.skills;
 
   const updateValue = async (value: string) => {
+    if (!dataSheet || !sheetData || !sheetSkills) return;
+
     const newDataSheet = dataSheet;
-    const dataPersist = newDataSheet.data.skills.type;
+    const dataPersist = sheetSkills.type || '';
     newDataSheet.data.skills.type = value;
     await updateDataPlayer(sheetId, newDataSheet, setShowMessage);
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o modelo de distribuição de habilidades do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`,
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou o modelo de distribuição de habilidades do personagem ${sheetData.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`,
         type: 'notification',
       },
       null,
@@ -33,7 +37,7 @@ export default function Skills() {
   return (
     <div className="mt-2 sm:mt-5 w-full text-white">
       <div className="mb-2 sm:mb-4 flex justify-end w-full">
-        <select className={selectClass} value={dataSheet.data.skills.type} onChange={(e) => updateValue(e.target.value)}>
+        <select className={selectClass} value={sheetSkills?.type || ''} onChange={(e) => updateValue(e.target.value)}>
           <option disabled value="">Escolha um modelo de distribuição de Habilidades</option>
           <option value="Pau pra toda Obra">Pau pra toda obra (Modelo de Distribuição de Habilidades)</option>
           <option value="Equilibrado">Equilibrado (Modelo de Distribuição de Habilidades)</option>
@@ -96,4 +100,3 @@ export default function Skills() {
     </div>
   );
 }
-

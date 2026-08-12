@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
@@ -21,16 +21,19 @@ export default function Item(props: any) {
     setShowHarano,
     setShowHauglosk,
   } = useContext(contexto);
+  const sheetData = dataSheet?.data;
 
   const updateValue = async (fieldName: string, value: number) => {
-    const dataPersist = dataSheet.data[fieldName];
-    if (dataSheet.data[fieldName] === 1 && value === 1) dataSheet.data[fieldName] = 0;
-    else dataSheet.data[fieldName] = value;
+    if (!dataSheet || !sheetData) return;
+
+    const dataPersist = sheetData[fieldName] ?? 0;
+    if (sheetData[fieldName] === 1 && value === 1) sheetData[fieldName] = 0;
+    else sheetData[fieldName] = value;
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`,
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${namePtBr === 'Harano' || namePtBr === 'Hauglosk' ? 'o' : 'a'} ${namePtBr} do personagem ${sheetData.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`,
         type: 'notification',
       },
       null,
@@ -38,10 +41,9 @@ export default function Item(props: any) {
     );
   };
 
-  const showRageButton = !isSheetStandalone && name === 'rage' && dataSheet.data.rage > 0;
+  const showRageButton = !isSheetStandalone && name === 'rage' && Number(sheetData?.rage || 0) > 0;
   const showHaranoButton = !isSheetStandalone && name === 'harano';
   const showHaugloskButton = !isSheetStandalone && name === 'hauglosk';
-
   const renderRollButton = () => {
     if (showRageButton) {
       return (
@@ -76,7 +78,7 @@ export default function Item(props: any) {
         {Array(quant)
           .fill('')
           .map((_, index) => {
-            const isFilled = dataSheet.data[name] >= index + 1;
+            const isFilled = Number(sheetData?.[name] || 0) >= index + 1;
             const className = isFilled
               ? name === 'rage'
                 ? 'h-5 w-5 border border-red-300/70 bg-red-700/30 shadow-[0_0_10px_rgba(185,28,28,0.18)] cursor-pointer transition-colors'
@@ -110,8 +112,8 @@ export default function Item(props: any) {
       <div className="flex flex-col items-center px-6 pb-3 pt-5 text-center">
         {renderTrack()}
         <div className="mt-4 min-h-[20px] font-geist-mono text-[0.58rem] uppercase tracking-[0.22em] text-zinc-500">
-          {session.typeSession === 'Regras Alternativas' && name === 'rage' && dataSheet.data.rage >= 5 ? 'FRENESI' : ''}
-          {name === 'rage' && dataSheet.data.rage === 0 ? 'PERDEU O LOBO' : ''}
+          {session.typeSession === 'Regras Alternativas' && name === 'rage' && Number(sheetData?.rage || 0) >= 5 ? 'FRENESI' : ''}
+          {name === 'rage' && Number(sheetData?.rage || 0) === 0 ? 'PERDEU O LOBO' : ''}
         </div>
       </div>
     </section>

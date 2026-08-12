@@ -3,30 +3,38 @@ import contexto from '@/context/context';
 import { registerHistory } from '@/firebase/history';
 import { updateDataPlayer } from '@/firebase/players';
 import { capitalizeFirstLetter, translate } from '@/firebase/utilities';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { BsCheckSquare } from 'react-icons/bs';
 import { FaRegEdit } from 'react-icons/fa';
 
 export default function ItemSkill(props: any) {
   const { name, quant } = props;
   const { dataSheet, session, email, sheetId, setShowMessage } = useContext(contexto);
-  const [skill, setSkill] = useState<string>(dataSheet.data.skills[name].specialty || '');
+  const sheetData = dataSheet?.data;
+  const skillsData = sheetData?.skills;
+  const currentSkill = useMemo(
+    () => skillsData?.[name] ?? { value: 0, specialty: '' },
+    [name, skillsData]
+  );
+  const [skill, setSkill] = useState<string>('');
   const [input, setInput] = useState(false);
 
   useEffect(() => {
-    setSkill(dataSheet.data.skills[name].specialty || '');
+    setSkill(currentSkill.specialty || '');
     setInput(false);
-  }, [dataSheet, name]);
+  }, [currentSkill.specialty, name]);
 
   const updateValue = async (value: number) => {
-    const dataPersist = dataSheet.data.skills[name].value;
-    if (dataSheet.data.skills[name].value === 1 && value === 1) dataSheet.data.skills[name] = { value: 0, specialty: skill };
-    else dataSheet.data.skills[name] = { value, specialty: skill };
+    if (!dataSheet || !sheetData || !skillsData) return;
+
+    const dataPersist = currentSkill.value ?? 0;
+    if (currentSkill.value === 1 && value === 1) skillsData[name] = { value: 0, specialty: skill };
+    else skillsData[name] = { value, specialty: skill };
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a habilidade ${translate(name)} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`,
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a habilidade ${translate(name)} do personagem ${sheetData.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} ${dataPersist !== '' ? `de ${dataPersist} ` : ' '}para ${value}.`,
         type: 'notification',
       },
       null,
@@ -35,13 +43,15 @@ export default function ItemSkill(props: any) {
   };
 
   const updateSpecialty = async () => {
-    const dataPersist = dataSheet.data.skills[name].specialty;
-    dataSheet.data.skills[name] = { value: dataSheet.data.skills[name].value, specialty: skill };
+    if (!dataSheet || !sheetData || !skillsData) return;
+
+    const dataPersist = currentSkill.specialty || '';
+    skillsData[name] = { value: currentSkill.value ?? 0, specialty: skill };
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a especialização da habilidade ${translate(name)} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de '${dataPersist}' para '${skill}'.`,
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a especialização da habilidade ${translate(name)} do personagem ${sheetData.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de '${dataPersist}' para '${skill}'.`,
         type: 'notification',
       },
       null,
@@ -54,25 +64,23 @@ export default function ItemSkill(props: any) {
 
     return (
       <div className="flex flex-wrap justify-start gap-2 md:justify-end">
-        {dataSheet &&
-          dataSheet.data &&
-          points.map((_, index) => {
-            const isFilled = dataSheet.data.skills[name].value >= index + 1;
+        {points.map((_, index) => {
+          const isFilled = Number(currentSkill.value || 0) >= index + 1;
 
-            return (
-              <button
-                type="button"
-                onClick={() => updateValue(index + 1)}
-                key={index}
-                className={[
-                  'h-4 w-4 shrink-0 rotate-45 border transition-colors',
-                  isFilled
-                    ? 'border-red-300/70 bg-red-700/30 shadow-[0_0_10px_rgba(185,28,28,0.18)]'
-                    : 'border-zinc-700 bg-transparent',
-                ].join(' ')}
-              />
-            );
-          })}
+          return (
+            <button
+              type="button"
+              onClick={() => updateValue(index + 1)}
+              key={index}
+              className={[
+                'h-4 w-4 shrink-0 rotate-45 border transition-colors',
+                isFilled
+                  ? 'border-red-300/70 bg-red-700/30 shadow-[0_0_10px_rgba(185,28,28,0.18)]'
+                  : 'border-zinc-700 bg-transparent',
+              ].join(' ')}
+            />
+          );
+        })}
       </div>
     );
   };
@@ -122,4 +130,3 @@ export default function ItemSkill(props: any) {
     </div>
   );
 }
-

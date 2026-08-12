@@ -11,6 +11,7 @@ export default function Background(props: { type: string }) {
   const { type } = props;
   const [textArea, setTextArea] = useState<boolean>(false);
   const { sheetId, session, email, dataSheet, setShowMessage } = useContext(contexto);
+  const sheetData = dataSheet?.data;
   const [text, setText] = useState<string>("");
 
   const isBackground = type === 'background';
@@ -25,19 +26,19 @@ export default function Background(props: { type: string }) {
   };
 
   useEffect(() => {
-    setText(dataSheet.data[type]);
+    setText(String(sheetData?.[type] || ''));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataSheet]);
+  }, [dataSheet, type]);
 
   const updateValue = async () => {
-    if (dataSheet) {
+    if (dataSheet && sheetData) {
       const dataItem = dataSheet;
       dataItem.data[type] = text;
       await updateDataPlayer(sheetId, dataItem, setShowMessage);
       await registerHistory(
         session.id,
         {
-          message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} atualizou o Background do personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.'}`,
+          message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} atualizou o Background do personagem${sheetData.name !== '' ? ` ${sheetData.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.'}`,
           type: 'notification',
         },
         null,

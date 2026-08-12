@@ -1,10 +1,10 @@
-﻿'use client'
+'use client'
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { usePathname } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { GiD10 } from "react-icons/gi";
 
 export default function ItemAgravated(props: any) {
@@ -13,37 +13,44 @@ export default function ItemAgravated(props: any) {
   const pathname = usePathname();
   const isSheetStandalone = pathname?.startsWith('/sheets/');
   const { dataSheet, setShowMessage, sheetId, session, email, setShowWillpowerTest } = useContext(contexto);
+  const sheetData = dataSheet?.data;
+  const advantages = useMemo(() => sheetData?.advantagesAndFlaws?.advantages ?? [], [sheetData]);
+  const flaws = useMemo(() => sheetData?.advantagesAndFlaws?.flaws ?? [], [sheetData]);
+  const itemValues = useMemo(() => (Array.isArray(sheetData?.[name]) ? sheetData[name] : []), [name, sheetData]);
 
   useEffect(() => {
     const returnValues = async (): Promise<void> => {
+      if (!sheetData) {
+        setTotalItem(0);
+        return;
+      }
+
       if (name === 'willpower') {
-        setTotalItem(Number(dataSheet.data.attributes.composure) + Number(dataSheet.data.attributes.resolve));
+        setTotalItem(Number(sheetData.attributes?.composure || 0) + Number(sheetData.attributes?.resolve || 0));
       }
 
       if (name === 'health') {
         const hasAdvantage = (title: string) =>
-          dataSheet.data.advantagesAndFlaws?.advantages?.some(
-            (advantage: { title: string }) => advantage.title === title
-          );
+          advantages.some((advantage: { title: string }) => advantage.title === title);
 
         const getStandaloneStaminaValue = () => {
-          const currentValue = Number(dataSheet.data.attributes?.stamina || 0);
+          const currentValue = Number(sheetData.attributes?.stamina || 0);
 
           if (!isSheetStandalone) return currentValue;
 
-          if (dataSheet.data.form === 'Crinos') return Math.max(0, currentValue - 4);
+          if (sheetData.form === 'Crinos') return Math.max(0, currentValue - 4);
 
-          if (dataSheet.data.form === 'Hispo' || dataSheet.data.form === 'Glabro') {
-            return Math.max(0, currentValue - (hasAdvantage('Resiliência de Luna') ? 4 : 2));
+          if (sheetData.form === 'Hispo' || sheetData.form === 'Glabro') {
+            return Math.max(0, currentValue - (hasAdvantage('Resiliêia de Luna') ? 4 : 2));
           }
 
           return currentValue;
         };
 
-        const findMaldicaoDaAncia = dataSheet.data.advantagesAndFlaws.flaws.find(
+        const findMaldicaoDaAncia = flaws.find(
           (advantage: { title: string }) => advantage.title === 'Maldição da Anciã'
         );
-        const findPeleEspessa = dataSheet.data.advantagesAndFlaws.advantages.find(
+        const findPeleEspessa = advantages.find(
           (advantage: { title: string }) => advantage.title === 'Pele Espessa'
         );
         const staminaValue = getStandaloneStaminaValue();
@@ -56,7 +63,7 @@ export default function ItemAgravated(props: any) {
     };
 
     returnValues();
-  }, [dataSheet, isSheetStandalone, name]);
+  }, [advantages, flaws, isSheetStandalone, name, sheetData]);
 
   const updateValue = async (value: number) => {
     if (dataSheet) {
@@ -101,10 +108,10 @@ export default function ItemAgravated(props: any) {
   };
 
   const getHealthSummary = () => {
-    const findMaldicaoDaAncia = dataSheet.data.advantagesAndFlaws.flaws.find(
+    const findMaldicaoDaAncia = flaws.find(
       (advantage: { title: string }) => advantage.title === 'Maldição da Anciã'
     );
-    const findPeleEspessa = dataSheet.data.advantagesAndFlaws.advantages.find(
+    const findPeleEspessa = advantages.find(
       (advantage: { title: string }) => advantage.title === 'Pele Espessa'
     );
 
@@ -119,7 +126,7 @@ export default function ItemAgravated(props: any) {
 
   const renderMarker = (index: number) => {
     const markerBaseClassName = 'h-5 w-5 border flex items-center justify-center';
-    const marker = dataSheet.data[name].find((element: any) => element.value === index + 1);
+    const marker = itemValues.find((element: any) => element.value === index + 1);
 
     if (isSheetStandalone) {
       return <button type="button" key={index} className="h-5 w-5 cursor-default border border-red-300/45 bg-red-950/30" />;

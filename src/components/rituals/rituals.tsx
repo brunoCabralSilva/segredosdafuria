@@ -5,6 +5,8 @@ import RitualsAdded from "./ritualsAdded";
 
 export default function Rituals() {
   const { dataSheet, showRitualsToAdd, setShowRitualsToAdd } = useContext(contexto);
+  const sheetData = dataSheet?.data;
+  const rituals = Array.isArray(sheetData?.rituals) ? sheetData.rituals : [];
 
   return (
     <section className="visage-card relative mt-2 sm:mt-5 w-full overflow-hidden border border-[#708578]/40 bg-[#090d0e]/95 text-slate-300 shadow-[inset_0_0_80px_rgba(0,0,0,0.7)]">
@@ -21,7 +23,7 @@ export default function Rituals() {
       </div>
       <div className="mx-6 border-b border-white/10" />
       <div className="pb-4 pt-2">
-        {dataSheet.data.rituals.map((item: any, index: number) => (
+        {rituals.map((item: any, index: number) => (
           <RitualsAdded key={index} ritual={item} />
         ))}
       </div>

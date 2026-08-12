@@ -9,7 +9,7 @@ import { GiD10 } from "react-icons/gi";
 
 const renownMeta = {
   glory: {
-    label: 'GLÓRIA',
+    label: 'GLÃƒÆ’Ã¢â‚¬Å“RIA',
     textClass: 'text-white/90',
     filledClass: 'border-red-300/70 bg-red-700/30 shadow-[0_0_10px_rgba(185,28,28,0.18)]',
   },
@@ -29,23 +29,25 @@ export default function ItemRenownHaranoHauglosk() {
   const pathname = usePathname();
   const isSheetStandalone = pathname?.startsWith('/sheets/');
   const { email, dataSheet, sheetId, session, setShowMessage, setShowHarano, setShowHauglosk } = useContext(contexto);
+  const sheetData = dataSheet?.data;
 
   const updateValue = async (fieldName: string, value: number) => {
-    const dataPersist = dataSheet.data[fieldName];
-    if (dataSheet.data[fieldName] === 1 && value === 1) dataSheet.data[fieldName] = 0;
-    else dataSheet.data[fieldName] = value;
+    if (!dataSheet || !sheetData) return;
+
+    const dataPersist = sheetData[fieldName] ?? 0;
+    if (sheetData[fieldName] === 1 && value === 1) sheetData[fieldName] = 0;
+    else sheetData[fieldName] = value;
     await updateDataPlayer(sheetId, dataSheet, setShowMessage);
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${fieldName === 'harano' || fieldName === 'hauglosk' ? 'o' : 'a'} ${fieldName === 'glory' ? 'Glória' : fieldName === 'honor' ? 'Honra' : fieldName === 'wisdom' ? 'Sabedoria' : fieldName === 'harano' ? 'Harano' : 'Hauglosk'} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`,
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou ${fieldName === 'harano' || fieldName === 'hauglosk' ? 'o' : 'a'} ${fieldName === 'glory' ? 'GlÃ³ria' : fieldName === 'honor' ? 'Honra' : fieldName === 'wisdom' ? 'Sabedoria' : fieldName === 'harano' ? 'Harano' : 'Hauglosk'} do personagem ${sheetData.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${dataPersist} para ${value}.`,
         type: 'notification',
       },
       null,
       setShowMessage,
     );
   };
-
   const renderRenownTrack = (type: keyof typeof renownMeta) => {
     const meta = renownMeta[type];
 
@@ -54,7 +56,7 @@ export default function ItemRenownHaranoHauglosk() {
         {Array(5)
           .fill('')
           .map((_, index) => {
-            const isFilled = dataSheet.data[type] >= index + 1;
+            const isFilled = Number(sheetData?.[type] || 0) >= index + 1;
 
             return (
               <button
@@ -78,7 +80,7 @@ export default function ItemRenownHaranoHauglosk() {
         {Array(5)
           .fill('')
           .map((_, index) => {
-            const isFilled = dataSheet.data[type] >= index + 1;
+            const isFilled = Number(sheetData?.[type] || 0) >= index + 1;
 
             return (
               <button
@@ -104,7 +106,7 @@ export default function ItemRenownHaranoHauglosk() {
       <span className="absolute bottom-0 left-0 h-px w-4 bg-red-700/85" />
       <span className="absolute bottom-0 left-0 h-4 w-px bg-red-700/85" />
       <div className="px-6 pb-3 pt-5">
-        <p className="font-geist-mono text-[0.82rem] uppercase tracking-[0.28em] text-red-500/85">Renome ({dataSheet.data.glory + dataSheet.data.honor + dataSheet.data.wisdom})</p>
+        <p className="font-geist-mono text-[0.82rem] uppercase tracking-[0.28em] text-red-500/85">Renome ({Number(sheetData?.glory || 0) + Number(sheetData?.honor || 0) + Number(sheetData?.wisdom || 0)})</p>
       </div>
       <div className="mx-6 border-b border-zinc-500/20" />
       <div className="px-6 pb-5 pt-4">

@@ -7,7 +7,10 @@ import { IoAdd } from "react-icons/io5";
 
 export default function Touchstones() {
   const { dataSheet, setAddTouchstone, setShowDeleteTouchstone } = useContext(contexto);
-  const touchstones = [...dataSheet.data.touchstones].sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name));
+  const sheetData = dataSheet?.data;
+  const touchstones = Array.isArray(sheetData?.touchstones)
+    ? [...sheetData.touchstones].sort((a: { name: string }, b: { name: string }) => a.name.localeCompare(b.name))
+    : [];
   const actionButtonClass = "sheet-readonly-action inline-flex items-center justify-center border border-red-950 bg-red-950 p-2 font-geist-mono text-[9px] uppercase text-white transition-colors hover:bg-red-900";
 
   return (
@@ -16,7 +19,7 @@ export default function Touchstones() {
         <div>
           <p className="font-kingthings text-[0.82rem] uppercase tracking-[0.26em] text-red-500/85">Pilares</p>
         </div>
-        {dataSheet.data.touchstones.length < 3 && (
+        {touchstones.length < 3 && (
           <button
             type="button"
             onClick={() => setAddTouchstone({ show: true, data: {} })}

@@ -1,11 +1,12 @@
 import contexto from "@/context/context";
 import { useContext } from "react";
-import { IoAdd } from "react-icons/io5";
 import AddGift from "../popup/addGift";
 import GiftsAdded from "../gifts/giftsAdded";
 
 export default function Gifts() {
   const { dataSheet, showGiftsToAdd, setShowGiftsToAdd, setShowMessage } = useContext(contexto);
+  const sheetData = dataSheet?.data;
+  const gifts = Array.isArray(sheetData?.gifts) ? sheetData.gifts : [];
 
   return (
     <section className="visage-card relative mt-2 sm:mt-5 w-full overflow-hidden border border-[#708578]/40 bg-[#090d0e]/95 text-slate-300 shadow-[inset_0_0_80px_rgba(0,0,0,0.7)]">
@@ -14,8 +15,10 @@ export default function Gifts() {
         <button
           type="button"
           onClick={() => {
-            const totalRenown = Number(dataSheet.data.glory) + Number(dataSheet.data.wisdom) + Number(dataSheet.data.honor);
-            if (dataSheet.data.trybe !== '' && dataSheet.data.auspice !== '' && totalRenown >= 3) {
+            if (!sheetData) return;
+
+            const totalRenown = Number(sheetData.glory || 0) + Number(sheetData.wisdom || 0) + Number(sheetData.honor || 0);
+            if (sheetData.trybe !== '' && sheetData.auspice !== '' && totalRenown >= 3) {
               setShowGiftsToAdd(true);
             } else {
               setShowMessage({ show: true, text: 'Antes de adicionar um dom, é necessário preencher uma Tribo, um Augúrio e pelo menos três pontos em Renomes' });
@@ -29,7 +32,7 @@ export default function Gifts() {
       </div>
       <div className="mx-6 border-b border-white/10" />
       <div className="pb-4 pt-2">
-        {dataSheet.data.gifts.map((item: any, index: number) => (
+        {gifts.map((item: any, index: number) => (
           <GiftsAdded key={index} gift={item} />
         ))}
       </div>

@@ -1,7 +1,6 @@
 'use client'
 import { useContext } from 'react';
 import contexto from '@/context/context';
-import { IoAdd } from 'react-icons/io5';
 import AddAdvOrFlaw from '../popup/addAdvOrFlaw';
 import AdvAdded from './advAdded';
 import AdvTalensAdded from './advTalensAdded';
@@ -13,14 +12,20 @@ export default function AdvantagesAndFlaws() {
     showAllFlaws,
     showAllAdvantages, setShowAllAdvantages,
   } = useContext(contexto);
+  const sheetData = dataSheet?.data;
+  const advantagesAndFlaws = sheetData?.advantagesAndFlaws;
+  const advantages = Array.isArray(advantagesAndFlaws?.advantages) ? advantagesAndFlaws.advantages : [];
+  const talens = Array.isArray(advantagesAndFlaws?.talens) ? advantagesAndFlaws.talens : [];
+  const loresheets = Array.isArray(advantagesAndFlaws?.loresheets) ? advantagesAndFlaws.loresheets : [];
+  const flaws = Array.isArray(advantagesAndFlaws?.flaws) ? advantagesAndFlaws.flaws : [];
 
   const sumAllAdvantagesAndFlaws = () => {
     let advantageSum = 0;
     let flawSum = 0;
-    dataSheet.data.advantagesAndFlaws.advantages.forEach((item: any) => advantageSum += item.cost);
-    dataSheet.data.advantagesAndFlaws.talens.forEach((item: any) => advantageSum += item.value);
-    dataSheet.data.advantagesAndFlaws.loresheets.forEach((item: any) => advantageSum += item.cost);
-    dataSheet.data.advantagesAndFlaws.flaws.forEach((item: any) => flawSum += item.cost);
+    advantages.forEach((item: any) => advantageSum += item.cost);
+    talens.forEach((item: any) => advantageSum += item.value);
+    loresheets.forEach((item: any) => advantageSum += item.cost);
+    flaws.forEach((item: any) => flawSum += item.cost);
     const textAdvantage = advantageSum + ' / 7';
     const textFlaw = flawSum + ' / 2';
 
@@ -55,41 +60,41 @@ export default function AdvantagesAndFlaws() {
       <div className="pb-4">
         {sumAllAdvantagesAndFlaws()}
         <div className="mb-2 mt-3 flex h-full w-full flex-col items-start justify-center px-5 font-bold">
-          {dataSheet?.data?.advantagesAndFlaws?.advantages?.length > 0 && (
+          {advantages.length > 0 && (
             <div className="w-full">
               <div className="mb-2 mt-4 border-b border-white/10 pb-1 font-geist-mono text-[9px] uppercase tracking-[0.14em] text-white/55">MÉRITOS E BACKGROUNDS</div>
               <div className="space-y-2.5">
-                {dataSheet.data.advantagesAndFlaws.advantages.map((item: any, index: number) => (
+                {advantages.map((item: any, index: number) => (
                   <AdvAdded key={index} item={item} />
                 ))}
               </div>
             </div>
           )}
-          {dataSheet?.data?.advantagesAndFlaws?.talens?.length > 0 && (
+          {talens.length > 0 && (
             <div className="w-full">
               <div className="mb-2 mt-4 border-b border-white/10 pb-1 font-geist-mono text-[9px] uppercase tracking-[0.14em] text-white/55">TALISMÃS</div>
               <div className="space-y-2.5">
-                {dataSheet.data.advantagesAndFlaws.talens.map((item: any, index: number) => (
+                {talens.map((item: any, index: number) => (
                   <AdvTalensAdded key={index} item={item} />
                 ))}
               </div>
             </div>
           )}
-          {dataSheet?.data?.advantagesAndFlaws?.loresheets?.length > 0 && (
+          {loresheets.length > 0 && (
             <div className="w-full">
               <div className="mb-2 mt-4 border-b border-white/10 pb-1 font-geist-mono text-[9px] uppercase tracking-[0.14em] text-white/55">LORESHEETS</div>
               <div className="space-y-2.5">
-                {dataSheet.data.advantagesAndFlaws.loresheets.map((item: any, index: number) => (
+                {loresheets.map((item: any, index: number) => (
                   <AdvLoresheetsAdded key={index} item={item} />
                 ))}
               </div>
             </div>
           )}
-          {dataSheet?.data?.advantagesAndFlaws?.flaws?.length > 0 && (
+          {flaws.length > 0 && (
             <div className="w-full">
               <div className="mb-2 mt-4 border-b border-white/10 pb-1 font-geist-mono text-[9px] uppercase tracking-[0.14em] text-white/55">DEFEITOS</div>
               <div className="space-y-2.5">
-                {dataSheet.data.advantagesAndFlaws.flaws.map((item: any, index: number) => (
+                {flaws.map((item: any, index: number) => (
                   <AdvAdded key={index} item={item} />
                 ))}
               </div>

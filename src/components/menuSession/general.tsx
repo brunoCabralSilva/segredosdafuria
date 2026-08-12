@@ -80,7 +80,13 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const canCopySheet = isStandaloneSheetView && dataSheet?.email === email;
   const canDeleteSheet = (isStandaloneSheetView && dataSheet?.email === email) || (!isStandaloneSheetView && isNarrator && sheetId !== '');
   const sessionCharacterOptions = isNarrator ? players : players.filter((player: any) => player.email === email);
-  const shouldBlockUntilCharacterSelection = !isStandaloneSheetView && isNarrator && sheetId === '';
+  const hasActiveSessionCharacter = sessionCharacterOptions.some((player: any) => player?.id === sheetId);
+  const activeSessionCharacterValue = isStandaloneSheetView
+    ? sheetId
+    : isNarrator
+      ? (hasActiveSessionCharacter ? sheetId : '__none__')
+      : (hasActiveSessionCharacter ? sheetId : '');
+  const shouldBlockUntilCharacterSelection = !isStandaloneSheetView && isNarrator && activeSessionCharacterValue === '__none__';
 
   const getCurrentBrazilDateTimeString = () => {
     const formatter = new Intl.DateTimeFormat('pt-BR', {
@@ -145,7 +151,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     setDataSheet(selectedPlayer);
     setShowMessage({
       show: true,
-      text: `VocÃª selecionou o personagem ${selectedPlayer.data.name !== '' ? selectedPlayer.data.name : ''} (${capitalizeFirstLetter(selectedPlayer.user)})`,
+      text: `Você selecionou o personagem ${selectedPlayer.data.name !== '' ? selectedPlayer.data.name : ''} (${capitalizeFirstLetter(selectedPlayer.user)})`,
     });
 
     await registerHistory(
@@ -249,7 +255,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     if (key === 'name') {
       const normalizedName = value.replace(/\s+/g, ' ').trim();
       if (normalizedName === '') {
-        setShowMessage({ show: true, text: 'NecessÃ¡rio preencher um nome vÃ¡lido.' });
+        setShowMessage({ show: true, text: 'Necessário preencher um nome válido.' });
         return false;
       }
 
@@ -279,7 +285,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
       const normalizedPortraitUrl = value.trim();
 
       if (!validatePortraitUrl(normalizedPortraitUrl)) {
-        setShowMessage({ show: true, text: 'NecessÃ¡rio informar um link de imagem vÃ¡lido com http ou https.' });
+        setShowMessage({ show: true, text: 'Necessário informar um link de imagem válido com http ou https.' });
         return false;
       }
 
@@ -359,7 +365,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const sheetDataValues = dataSheet?.data ?? {};
   const displayName = (dataSheet?.data?.name ?? '').trim();
   const portraitUrlPersisted = (dataSheet?.data?.portraitUrl ?? '').trim();
-  const sessionName = dataSession?.name || session?.name || 'Sem crÃ´nica';
+  const sessionName = dataSession?.name || session?.name || 'Sem crônica';
   const selectedTrybeData = dataTrybes.find((trybe: any) => trybe.nameEn === sheetDataValues.trybe || trybe.namePtBr === sheetDataValues.trybe);
   const patronName = selectedTrybeData?.patronName || 'Sem padroeiro';
   const patronDescription = selectedTrybeData?.patron || 'Selecione uma tribo para visualizar o espirito padroeiro.';
@@ -396,12 +402,6 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     <div className="principles-scrollbar mb-3 flex h-full w-full flex-col items-start justify-start overflow-y-auto overflow-x-hidden sm:px-4 pr-2 text-white font-bold [direction:rtl]">
       <div className="h-full w-full [direction:ltr]">
         <div className="relative min-h-full w-full">
-          {shouldBlockUntilCharacterSelection && (
-            <div className="absolute inset-0 z-10 bg-black/80">
-              <div className="flex h-full w-full items-center justify-center px-4">
-              </div>
-            </div>
-          )}
         {isReadOnlyCommunitySheet ? (
           <div className={`${headerCardClass} mt-5 px-4 py-4`}>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -443,7 +443,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                   <p className={headerMetaLabelClass}>Personagem Ativo</p>
                   <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
                     <select
-                      value={isNarrator && sheetId === '' ? '__none__' : sheetId}
+                      value={activeSessionCharacterValue}
                       disabled={isReadOnlyCommunitySheet}
                       onChange={(event) => {
                         if (event.target.value === '__none__') {
@@ -472,8 +472,11 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                 </>
               )}
             </div>
-            <div className={`${headerCardClass} px-4 py-3 ${hasPendingSessionTransfer ? 'pointer-events-none select-none opacity-45' : ''}`}> 
-              <div className={isStandaloneSheetView ? 'flex justify-end' : 'grid grid-cols-[minmax(0,1fr)_auto] gap-3'}>
+            <div className={`relative ${headerCardClass} px-4 py-3 ${hasPendingSessionTransfer ? 'pointer-events-none select-none opacity-45' : ''}`}> 
+              {shouldBlockUntilCharacterSelection && (
+                <div className="absolute inset-0 z-20 bg-black/80" />
+              )}
+              <div className={`${isStandaloneSheetView ? 'flex justify-end' : 'grid grid-cols-[minmax(0,1fr)_auto] gap-3'} ${shouldBlockUntilCharacterSelection ? 'pointer-events-none select-none' : ''}`}>
                 {!isStandaloneSheetView && (
                   <div>
                     <p className={headerMetaLabelClass}>Experiencia</p>
@@ -542,8 +545,11 @@ export default function General(props: { dataSession: any; id: string; gameMaste
             </div>
           </div>
         )}
-        <div className={isReadOnlyCommunitySheet ? 'pointer-events-none select-none opacity-80 [&_.sheet-readonly-action]:hidden' : ''}>
-          <section className="relative w-full overflow-visible text-slate-300">
+        <div className={`relative ${isReadOnlyCommunitySheet ? 'pointer-events-none select-none opacity-80 [&_.sheet-readonly-action]:hidden' : ''}`}>
+          {shouldBlockUntilCharacterSelection && (
+            <div className="absolute inset-0 z-20 bg-black/80" />
+          )}
+          <section className={`relative w-full overflow-visible text-slate-300 ${shouldBlockUntilCharacterSelection ? 'pointer-events-none select-none' : ''}`}>
             <span className="absolute right-0 top-0 h-px w-4 bg-red-700/85" />
             <span className="absolute right-0 top-0 h-4 w-px bg-red-700/85" />
             <span className="absolute bottom-0 left-0 h-px w-4 bg-red-700/85" />
@@ -604,7 +610,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                         </div>
                         {portraitImageError && portraitUrlPersisted !== '' && (
                           <div className="mt-2 font-geist-mono text-[0.54rem] uppercase tracking-[0.16em] text-red-400/80">
-                            NÃ£o foi possÃ­Â­vel carregar esta imagem.
+                            Não foi possível carregar esta imagem.
                           </div>
                         )}
                       </div>
@@ -641,9 +647,9 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       </select>
                     </div>
                     <div>
-                      <p className={fieldLabelClass}>AugÃºrio</p>
-                      <select className={selectClass} value={sheetDataValues.auspice || ''} onChange={(e) => updateValue('auspice', e.target.value, 'AugÃºrio')}>
-                        <option key="auspice-placeholder" disabled value="">Escolha um AugÃºrio</option>
+                      <p className={fieldLabelClass}>Augúrio</p>
+                      <select className={selectClass} value={sheetDataValues.auspice || ''} onChange={(e) => updateValue('auspice', e.target.value, 'Augúrio')}>
+                        <option key="auspice-placeholder" disabled value="">Escolha um Augúrio</option>
                         <option key="auspice-ragabash" value="ragabash">Ragabash</option>
                         <option key="auspice-theurge" value="theurge">Theurge</option>
                         <option key="auspice-philodox" value="philodox">Philodox</option>
@@ -702,14 +708,14 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       {hasPendingSessionTransfer ? (
                         <div className="mt-2 border-b border-zinc-500/20 pb-3">
                           <p className="font-geist-mono text-[0.64rem] uppercase tracking-[0.12em] text-zinc-200">
-                            Voce solicitou transferÃªncia para a sessÃ£o {pendingSessionTransfer.sessionName}
+                            Voce solicitou transferência para a sessão {pendingSessionTransfer.sessionName}
                           </p>
                           <button
                             type="button"
                             onClick={cancelPendingChronicleLink}
                             className="mt-3 inline-flex border border-red-700/60 bg-black px-3 py-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.14em] text-white transition-colors hover:bg-red-950"
                           >
-                            Cancelar solicitaÃ§Ã£o
+                            Cancelar solicitação
                           </button>
                         </div>
                       ) : (
@@ -729,7 +735,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                             ))
                           ) : (
                             <option key="empty-sessions" value="__empty__" disabled>
-                              Nenhuma mesa ativa disponÃ­Â­vel
+                              Nenhuma mesa ativa disponí­vel
                             </option>
                           )}
                         </select>
@@ -759,7 +765,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       </div>
                     </div>
                     <div className="sm:col-span-2">
-                      <p className={fieldLabelClass}>ProibiÃ§Ã£o</p>
+                      <p className={fieldLabelClass}>Proibição</p>
                       <div className="mt-2 border-b border-zinc-500/20 pb-2 font-geist-mono uppercase text-[#dfe5da] whitespace-normal break-words pr-2 text-[8px] leading-relaxed tracking-[0.08em]">
                         {patronBan}
                       </div>
@@ -775,10 +781,10 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                 <ItemAgravated name="health" namePtBr="Vitalidade" />
               </div>
               <div className="col-span-2 h-full sm:pb-5">
-                <ItemAgravated name="willpower" namePtBr="ForÃ§a de Vontade" />
+                <ItemAgravated name="willpower" namePtBr="Força de Vontade" />
               </div>
               <div className="col-span-2 h-full sm:pb-5">
-                <Item quant={5} name="rage" namePtBr="FÃºria" />
+                <Item quant={5} name="rage" namePtBr="Fúria" />
               </div>
             </div>
             <div className="col-span-1 sm:col-span-3 w-full">
