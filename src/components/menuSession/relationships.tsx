@@ -36,8 +36,8 @@ type EdgeDragState = {
     pointerId: number;
 };
 
-const MIN_CANVAS_WIDTH = 780;
-const MIN_CANVAS_HEIGHT = 560;
+const MIN_CANVAS_WIDTH = 1200;
+const MIN_CANVAS_HEIGHT = 1000;
 const NODE_WIDTH = 112;
 const NODE_HEIGHT = 40;
 const NODE_TEXT_MAX_CHARS = 11;
@@ -47,26 +47,13 @@ const LABEL_HEIGHT = 20;
 const LABEL_TEXT_MAX_CHARS = 14;
 const LABEL_TEXT_LINE_HEIGHT = 10;
 
-function getCanvasDimensions(
-    nodes: RelationshipNode[],
-    containerWidth: number,
-    containerHeight: number
-) {
-    const contentWidth = nodes.reduce((largestWidth, node) => {
-        return Math.max(largestWidth, node.x + NODE_WIDTH / 2 + 72);
-    }, MIN_CANVAS_WIDTH);
-    const contentHeight = nodes.reduce((largestHeight, node) => {
-        return Math.max(
-            largestHeight,
-            node.y + getNodeBoxHeight(node.name || "Sem nome") / 2 + 72
-        );
-    }, MIN_CANVAS_HEIGHT);
-
+function getCanvasDimensions() {
     return {
-        width: Math.max(MIN_CANVAS_WIDTH, Math.round(containerWidth), Math.ceil(contentWidth)),
-        height: Math.max(MIN_CANVAS_HEIGHT, Math.round(containerHeight), Math.ceil(contentHeight)),
+        width: MIN_CANVAS_WIDTH,
+        height: MIN_CANVAS_HEIGHT,
     };
 }
+
 
 function getNextNodePosition(
     totalNodes: number,
@@ -405,41 +392,6 @@ export default function Relationships() {
             }, {}),
         [edges]
     );
-    const selectedNode =
-        selectedNodeId === null
-            ? null
-            : nodes.find((node) => node.id === selectedNodeId) ?? null;
-    const isSelectedNodeOwner = selectedNode?.email === email;
-    const isGameMaster = session?.gameMaster === email;
-    const canEditSelectedNode = Boolean(selectedNode) && (isSelectedNodeOwner || isGameMaster);
-
-    useEffect(() => {
-        const container = canvasContainerRef.current;
-
-        if (!container) {
-            return;
-        }
-
-        const updateCanvasSize = () => {
-            setCanvasSize(
-                getCanvasDimensions(
-                    nodes,
-                    container.clientWidth,
-                    container.clientHeight
-                )
-            );
-        };
-
-        updateCanvasSize();
-
-        const resizeObserver = new ResizeObserver(updateCanvasSize);
-        resizeObserver.observe(container);
-
-        return () => {
-            resizeObserver.disconnect();
-        };
-    }, [nodes]);
-
     const connections = useMemo(
         () =>
             edges
@@ -452,6 +404,18 @@ export default function Relationships() {
                 ),
         [edges, nodeMap]
     );
+    const selectedNode =
+        selectedNodeId === null
+            ? null
+            : nodes.find((node) => node.id === selectedNodeId) ?? null;
+    const isSelectedNodeOwner = selectedNode?.email === email;
+    const isGameMaster = session?.gameMaster === email;
+    const canEditSelectedNode = Boolean(selectedNode) && (isSelectedNodeOwner || isGameMaster);
+
+
+    useEffect(() => {
+        setCanvasSize(getCanvasDimensions());
+    }, []);
 
     async function persistRelationshipMap(
         nextNodes: RelationshipNode[],
@@ -932,7 +896,7 @@ export default function Relationships() {
                     </div>
                 </div>
 
-                <div className="flex h-full min-h-0 w-full min-w-0 flex-col gap-3 md:flex-row">
+                <div className="relative flex flex-1 min-h-0 w-full min-w-0 flex-col gap-3">
                     <div
                         ref={canvasContainerRef}
                         className="relative flex h-full min-h-0 min-w-0 flex-1 overflow-hidden border border-white/10 bg-black/35 shadow-[0_22px_80px_rgba(0,0,0,0.35)]"
@@ -1154,12 +1118,17 @@ export default function Relationships() {
                     </div>
 
                     {selectedNode && (
-                        <div className="w-full overflow-y-auto border border-white/10 bg-black/45 p-4 shadow-[0_18px_50px_rgba(0,0,0,0.28)] md:h-full md:max-h-none md:w-[300px]">
-                            <div className=" border border-white/10 bg-black/60 p-4 backdrop-blur-sm">
-                                <div className="mb-3 flex items-center justify-between gap-3 h-full overflow-y-auto">
-                                    <p className="text-sm font-semibold text-white">
-                                        Relacionamentos
-                                    </p>
+                        <div className="absolute inset-x-3 h-[85vh] bottom-3 top-3 z-20 border border-white/10 bg-black/45 p-4 shadow-[0_18px_50px_rgba(0,0,0,0.28)] md:left-auto md:right-3 md:w-[320px]">
+                            <div className="flex h-full min-h-0 flex-col border border-white/10 bg-black/60 p-4 backdrop-blur-sm">
+                                <div className="flex shrink-0 items-start justify-between gap-3 border-b border-white/10 pb-3">
+                                    <div className="min-w-0">
+                                        <p className="text-sm font-semibold text-white">
+                                            Relacionamentos
+                                        </p>
+                                        <p className="mt-1 break-words text-xs text-zinc-400">
+                                            Item selecionado: {selectedNode.name || "Sem nome"}
+                                        </p>
+                                    </div>
                                     <button
                                         type="button"
                                         onClick={closeSelectedNodePanel}
@@ -1169,29 +1138,25 @@ export default function Relationships() {
                                     </button>
                                 </div>
 
-                                <>
-                                    <p className="mb-3 text-xs text-zinc-400">
-                                        Item selecionado: {selectedNode.name || "Sem nome"}
-                                    </p>
-
+                                <div className="principles-scrollbar flex-1 min-h-0 overflow-y-auto pr-1 pt-4">
                                     {isGameMaster && (
-                                        <label className="mb-4 block text-sm">
+                                        <label className="mb-4 block text-[10px]">
                                             <span className="mb-2 block text-zinc-300">Nome do item</span>
                                             <input
                                                 type="text"
                                                 value={nameDraft}
                                                 onChange={(event) => setNameDraft(event.target.value)}
                                                 placeholder="Defina o nome do item"
-                                                className="w-full border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none transition focus:border-red-400/60"
+                                                className="w-full border border-white/10 bg-black/40 px-3 py-2 text-[10px] text-white outline-none transition focus:border-red-400/60"
                                             />
                                         </label>
                                     )}
 
                                     {selectedNodeRelationships.length > 0 ? (
-                                        <div className="flex flex-col gap-3">
+                                        <div className="flex flex-col gap-3 pb-2">
                                             {selectedNodeRelationships.map((node) => (
-                                                <label key={node.id} className="block text-sm">
-                                                    <span className="mb-2 block text-zinc-300">
+                                                <label key={node.id} className="block text-[10px]">
+                                                    <span className="mb-2 block break-words text-zinc-300">
                                                         {selectedNode.name} para {node.name}
                                                     </span>
                                                     {canEditSelectedNode ? (
@@ -1205,10 +1170,10 @@ export default function Relationships() {
                                                                 }))
                                                             }
                                                             placeholder="Descreva esta relacao"
-                                                            className="w-full border border-white/10 bg-black/40 px-3 py-2 text-sm text-white outline-none transition focus:border-red-400/60"
+                                                            className="w-full border border-white/10 bg-black/40 px-3 py-2 text-[10px] text-white outline-none transition focus:border-red-400/60"
                                                         />
                                                     ) : (
-                                                        <div className=" border border-white/10 bg-black/40 px-3 py-2 text-sm text-white">
+                                                        <div className="border border-white/10 bg-black/40 px-3 py-2 text-[10px] text-white break-words">
                                                             {edgeMap[`${selectedNode.id}-${node.id}`]?.label?.trim() ||
                                                                 "Sem texto"}
                                                         </div>
@@ -1217,33 +1182,33 @@ export default function Relationships() {
                                             ))}
                                         </div>
                                     ) : (
-                                        <p className="text-sm text-zinc-400">
+                                        <p className="text-[10px] text-zinc-400">
                                             Ainda nao existem outros elementos para se relacionar.
                                         </p>
                                     )}
+                                </div>
 
-                                    {canEditSelectedNode && (
-                                        <div className="mt-4 flex flex-wrap gap-2">
-                                            <button
-                                                type="button"
-                                                onClick={saveSelectedNodeRelationships}
-                                                disabled={isSaving}
-                                                className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-3 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
-                                            >
-                                                {isSaving ? "Salvando..." : "Salvar"}
-                                            </button>
+                                {canEditSelectedNode && (
+                                    <div className="mt-4 flex shrink-0 flex-wrap gap-2 border-t border-white/10 pt-4">
+                                        <button
+                                            type="button"
+                                            onClick={saveSelectedNodeRelationships}
+                                            disabled={isSaving}
+                                            className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-3 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
+                                        >
+                                            {isSaving ? "Salvando..." : "Salvar"}
+                                        </button>
 
-                                            <button
-                                                type="button"
-                                                onClick={deleteMyNode}
-                                                disabled={isSaving}
-                                                className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-3 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
-                                            >
-                                                Apagar meu item
-                                            </button>
-                                        </div>
-                                    )}
-                                </>
+                                        <button
+                                            type="button"
+                                            onClick={deleteMyNode}
+                                            disabled={isSaving}
+                                            className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-3 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
+                                        >
+                                            Apagar meu item
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}
