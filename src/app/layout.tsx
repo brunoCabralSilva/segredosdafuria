@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${cinzel.variable} ${geistMono.variable}`}>
+      <body suppressHydrationWarning className={`${inter.className} ${cinzel.variable} ${geistMono.variable}`}>
         <Provider>
           {children}
         </Provider>

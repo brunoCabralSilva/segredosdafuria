@@ -149,7 +149,7 @@ export function VisionsOfMomentsLost() {
           setShowGiftRoll({ show: false, gift: {} });
           setOptionSelect('chat');
           if (typeof window !== 'undefined') {
-            window.dispatchEvent(new Event('session:open-chat'));
+            window.dispatchEvent(new Event('session:open-action-result'));
           }
         }}
       >

@@ -344,8 +344,31 @@ function normalizeTokenStat(value: number) {
   return Math.floor(value);
 }
 
+const DEFAULT_BATTLE_IMAGE_SRC = "/images/battle/default.png";
+type BattleImageOption = {
+  value: string;
+  label: string;
+};
 function getBattleImageSrc(imageName: string) {
-  return `/images/battle/${imageName}.png`;
+  const trimmedImageName = imageName.trim();
+
+  if (!trimmedImageName) return DEFAULT_BATTLE_IMAGE_SRC;
+
+  return `/images/battle/${trimmedImageName}.png`;
+}
+
+function getBattleImageLabel(imageSrc: string) {
+  if (imageSrc === DEFAULT_BATTLE_IMAGE_SRC) return "Padrao";
+
+  const fileName = imageSrc.split("/").pop() ?? "padrao";
+  return fileName.replace(/\.[^.]+$/i, "");
+}
+
+function createBattleImageOption(imageSrc: string): BattleImageOption {
+  return {
+    value: imageSrc,
+    label: getBattleImageLabel(imageSrc),
+  };
 }
 
 export default function Battle() {
@@ -367,6 +390,8 @@ export default function Battle() {
   const isBattleVisibleToPlayers =
     session?.battle?.isVisibleToPlayers === true;
 
+  const selectedBattleImageSrcFromSession =
+    session?.battle?.selectedImageSrc ?? DEFAULT_BATTLE_IMAGE_SRC;
   const imageWrapperRef = useRef<HTMLDivElement | null>(null);
   const markerDragStateRef = useRef<MarkerDragState | null>(null);
   const tokenDragStateRef = useRef<TokenDragState | null>(null);
@@ -413,6 +438,15 @@ export default function Battle() {
   const [fullscreenImageName, setFullscreenImageName] = useState<
     string | null
   >(null);
+  const [battleImageSrc, setBattleImageSrc] = useState(
+    selectedBattleImageSrcFromSession
+  );
+  const [selectedBattleImageOption, setSelectedBattleImageOption] = useState(
+    selectedBattleImageSrcFromSession
+  );
+  const [battleImageOptions, setBattleImageOptions] = useState<BattleImageOption[]>([
+    createBattleImageOption(selectedBattleImageSrcFromSession),
+  ]);
 
   const [zoom, setZoom] = useState(1);
   const [isSavingMap, setIsSavingMap] = useState(false);
@@ -437,6 +471,58 @@ export default function Battle() {
     setShowMessage,
     showBattle.show,
   ]);
+
+  useEffect(() => {
+    setBattleImageSrc(selectedBattleImageSrcFromSession);
+    setSelectedBattleImageOption(selectedBattleImageSrcFromSession);
+  }, [selectedBattleImageSrcFromSession]);
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    const loadBattleImageOptions = async () => {
+      try {
+        const response = await fetch('/api/battle-default-images', {
+          cache: 'no-store',
+        });
+
+        if (!response.ok) {
+          throw new Error('Nao foi possivel carregar as imagens do mapa.');
+        }
+
+        const payload = (await response.json()) as { images?: string[] };
+        const nextOptions = (payload.images ?? []).map((fileName) =>
+          createBattleImageOption(`/images/battle/default/${fileName}`)
+        );
+
+        const hasSelectedOption = nextOptions.some(
+          (imageOption) => imageOption.value === selectedBattleImageSrcFromSession
+        );
+
+        const mergedOptions = hasSelectedOption
+          ? nextOptions
+          : [createBattleImageOption(selectedBattleImageSrcFromSession), ...nextOptions];
+
+        if (!isCancelled) {
+          setBattleImageOptions(
+            mergedOptions.length > 0
+              ? mergedOptions
+              : [createBattleImageOption(selectedBattleImageSrcFromSession)]
+          );
+        }
+      } catch {
+        if (!isCancelled) {
+          setBattleImageOptions([createBattleImageOption(selectedBattleImageSrcFromSession)]);
+        }
+      }
+    };
+
+    void loadBattleImageOptions();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [selectedBattleImageSrcFromSession]);
 
   // const hasMap = Boolean(session?.battle);
   const hasMap = true;
@@ -689,6 +775,32 @@ export default function Battle() {
     }
   }
 
+
+  async function updateBattleImage(nextImageSrc: string) {
+    if (!session?.id) {
+      setShowMessage({
+        show: true,
+        text: "Sessao invalida. Nao foi possivel atualizar a imagem do mapa.",
+      });
+      return;
+    }
+
+    const nextSession = {
+      ...session,
+      battle: {
+        ...(session.battle ?? {}),
+        selectedImageSrc: nextImageSrc,
+      },
+    };
+
+    try {
+      setIsSavingMap(true);
+      setSession(nextSession);
+      await updateSession(nextSession, setShowMessage);
+    } finally {
+      setIsSavingMap(false);
+    }
+  }
   function clearMeasurementLine() {
     setMeasurements([]);
     setMeasurementStart(null);
@@ -1155,6 +1267,12 @@ export default function Battle() {
     setIsTokenPopupOpen(true);
   }
 
+  const closeBattleView = () => {
+    setShowBattle({ show: false, data: "" });
+    forceHideSessionMenu();
+    window.dispatchEvent(new Event('session:open-chat'));
+  };
+
   function closePopup() {
     setIsPopupOpen(false);
     setPendingPoint(null);
@@ -1365,10 +1483,7 @@ export default function Battle() {
         <div className="w-full flex items-center justify-end pt-1 pb-2 px-2 bg-black">
           <IoIosCloseCircleOutline
             className="text-4xl text-white cursor-pointer mr-1 min-w-9"
-            onClick={() => {
-              setShowBattle({ show: false, data: "" });
-              forceHideSessionMenu();
-            }}
+            onClick={closeBattleView}
           />
         </div>
         <div className="w-full h-full flex items-center justify-center bg-black text-white">
@@ -1386,8 +1501,9 @@ export default function Battle() {
   }
 
   return (
-    <div className="w-full">
-      <div className="inset-0 md:relative md:inset-auto w-full h-full min-h-0 flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0">
+    <div className="flex h-full min-h-0 w-full flex-col xl:flex-row">
+      <div className="min-h-0 flex-1">
+        <div className="inset-0 md:relative md:inset-auto w-full h-full min-h-0 flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0">
         <div className="w-full border-b border-white/10 bg-black/55 px-4 py-3">
           <div className="flex items-center gap-2 flex-wrap">
             <button
@@ -1492,6 +1608,24 @@ export default function Battle() {
               +
             </button>
 
+            <select
+              value={selectedBattleImageOption}
+              onChange={(event) => {
+                const nextValue = event.target.value;
+                setSelectedBattleImageOption(nextValue);
+                setBattleImageSrc(nextValue);
+                void updateBattleImage(nextValue);
+              }}
+              className="h-9 min-w-[13rem] border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white outline-none transition-colors hover:border-red-900 focus:border-red-900"
+              title="Selecionar imagem do mapa"
+            >
+              {battleImageOptions.map((imageOption) => (
+                <option key={imageOption.value} value={imageOption.value} className="bg-black text-white">
+                  {imageOption.label.toUpperCase()}
+                </option>
+              ))}
+            </select>
+
             {isSavingMap && (
               <span className="text-xs text-zinc-300">
                 Salvando mapa...
@@ -1521,12 +1655,19 @@ export default function Battle() {
               }}
             >
               <Image
-                src={getBattleImageSrc(showBattle.data)}
+                src={battleImageSrc}
                 alt={`Mapa da Sessão ${session.name}`}
                 fill
                 className="object-contain select-none"
                 priority
                 draggable={false}
+                onError={() => {
+                  if (battleImageSrc !== DEFAULT_BATTLE_IMAGE_SRC) {
+                    setBattleImageSrc(DEFAULT_BATTLE_IMAGE_SRC);
+                    setSelectedBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
+                    void updateBattleImage(DEFAULT_BATTLE_IMAGE_SRC);
+                  }
+                }}
               />
 
               <svg className="absolute inset-0 z-10 w-full h-full pointer-events-none">
@@ -2251,7 +2392,10 @@ export default function Battle() {
           )}
         </div>
       </div>
-      <Chat />
+    </div>
+      <aside className="min-h-0 w-full border-t border-white/10 bg-black/85 xl:h-full xl:w-[24rem] xl:min-w-[22rem] xl:max-w-[26rem] xl:border-l xl:border-t-0">
+        <Chat sidebar />
+      </aside>
     </div>
   );
 }

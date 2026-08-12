@@ -49,6 +49,8 @@ import WillpowerTest from "@/components/popup/willpowerTest";
 import HaranoHauglosk from "@/components/popup/haranoHauglosk";
 import GiftRoll from "@/components/gifts/giftRoll";
 import RitualRoll from "@/components/rituals/ritualRoll";
+import SessionSheetPicker from "@/components/popup/sessionSheetPicker";
+import EvaluateSheet from "@/components/popup/evaluateSheet";
 
 export default function SessionId() {
   const params = useParams();
@@ -69,14 +71,17 @@ export default function SessionId() {
   const [showSessionNotifications, setShowSessionNotifications] = useState<boolean>(false);
   const [showSessionPrinciples, setShowSessionPrinciples] = useState<boolean>(false);
   const [showSessionSidebar, setShowSessionSidebar] = useState<boolean>(true);
+  const [showNarratorSheetPicker, setShowNarratorSheetPicker] = useState(false);
   const {
     setName,
     sheetId,
+    setSheetId,
     setEmail,
     setSessionId,
     resetPopups,
     setPlayers,
     setSession,
+    players,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
     showSelectSheet, setShowSelectSheet,
@@ -102,6 +107,8 @@ export default function SessionId() {
     showHauglosk,
     showWillpowerTest,
     setShowMenuSession,
+    setOptionSelect,
+    showEvaluateSheet,
     showDownloadPdf,
     showBannerSession,
     showGiftRoll,
@@ -195,6 +202,127 @@ export default function SessionId() {
     setShowSessionPrinciples(false);
   };
 
+  const currentSessionSidebarView = showRelationshipMap.show
+    ? 'relationships'
+    : showMaps.show
+      ? 'maps'
+      : showBattle.show
+        ? 'battle'
+        : showSessionGeneral
+          ? 'general'
+          : showSessionDetails
+            ? 'details'
+            : showSessionConsent
+              ? 'consent'
+              : showSessionPrinciples
+                ? 'principles'
+                : showSessionNotifications
+                  ? 'notifications'
+                  : showSessionHistory
+                    ? 'history'
+                    : showHelp
+                      ? 'help'
+                      : 'chat';
+
+  const getSidebarIconButtonClass = (view: string) => {
+    return `p-2 text-2xl transition-colors ${currentSessionSidebarView === view ? 'text-red-500' : 'text-white hover:text-red-400'}`;
+  };
+
+  const resetSessionContentViews = () => {
+    setShowRelationshipMap({ show: false, data: "" });
+    setShowMaps({ show: false, data: "" });
+    setShowBattle({ show: false, data: "" });
+    setShowSessionChat(false);
+    setShowSessionGeneral(false);
+    setShowSessionDetails(false);
+    setShowSessionConsent(false);
+    setShowHelp(false);
+    clearSessionMainArea();
+    clearSessionMenuView();
+  };
+
+  const openSessionChatView = () => {
+    resetSessionContentViews();
+    setShowSessionChat(true);
+  };
+
+  const openSessionGeneralView = () => {
+    resetSessionContentViews();
+    setShowSessionGeneral(true);
+  };
+
+const toggleSessionSidebarView = (view: string) => {
+    if (view !== 'chat' && currentSessionSidebarView === view) {
+      openSessionChatView();
+      return;
+    }
+
+    if (view === 'general') {
+      if (gameMaster && sheetId === '') {
+        setShowNarratorSheetPicker(true);
+        return;
+      }
+
+      openSessionGeneralView();
+      return;
+    }
+
+    if (view === 'chat') {
+      openSessionChatView();
+      return;
+    }
+
+    resetSessionContentViews();
+
+    switch (view) {
+      case 'history':
+        setShowSessionHistory(true);
+        break;
+      case 'notifications':
+        setShowSessionNotifications(true);
+        break;
+      case 'help':
+        setShowSessionNotifications(false);
+        setShowHelp(true);
+        break;
+      case 'details':
+        setShowSessionDetails(true);
+        break;
+      case 'consent':
+        setShowSessionConsent(true);
+        break;
+      case 'principles':
+        setShowSessionPrinciples(true);
+        break;
+      case 'relationships':
+        setShowRelationshipMap({ show: true, data: id });
+        break;
+      case 'maps':
+        setShowMaps({ show: true, data: id });
+        break;
+      case 'battle':
+        setShowBattle({ show: true, data: id });
+        break;
+      default:
+        setShowSessionChat(true);
+        break;
+    }
+  };
+
+  const handleOpenGeneralFromSidebar = () => {
+    toggleSessionSidebarView('general');
+  };
+
+  const handleSelectNarratorPlayer = (player: any) => {
+    if (!player?.id) return;
+
+    setSheetId(player.id);
+    setDataSheet(player);
+    setOptionSelect('general');
+    setShowNarratorSheetPicker(false);
+    openSessionGeneralView();
+  };
+
   const sidebarIconsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -209,30 +337,82 @@ export default function SessionId() {
 
     return () => window.removeEventListener("resize", syncSidebarIconsScroll);
   }, []);
-
   useEffect(() => {
     const handleOpenSessionChat = () => {
       setShowRelationshipMap({ show: false, data: "" });
       setShowMaps({ show: false, data: "" });
       setShowBattle({ show: false, data: "" });
+      setShowSessionChat(true);
       setShowSessionGeneral(false);
       setShowSessionDetails(false);
       setShowSessionConsent(false);
       setShowHelp(false);
-      clearSessionMainArea();
-      clearSessionMenuView();
+      setShowSessionHistory(false);
+      setShowSessionNotifications(false);
+      setShowSessionPrinciples(false);
+      setShowMenuSession('');
+    };
+
+    const handleOpenSessionGeneral = () => {
+      setShowRelationshipMap({ show: false, data: "" });
+      setShowMaps({ show: false, data: "" });
+      setShowBattle({ show: false, data: "" });
+      setShowSessionChat(false);
+      setShowSessionGeneral(true);
+      setShowSessionDetails(false);
+      setShowSessionConsent(false);
+      setShowHelp(false);
+      setShowSessionHistory(false);
+      setShowSessionNotifications(false);
+      setShowSessionPrinciples(false);
+      setShowMenuSession('');
+    };
+
+    const handleOpenSessionActionResult = () => {
+      setShowRelationshipMap({ show: false, data: "" });
+      setShowMaps({ show: false, data: "" });
+      setShowBattle({ show: false, data: "" });
+      setShowSessionChat(false);
+      setShowSessionGeneral(false);
+      setShowSessionDetails(false);
+      setShowSessionConsent(false);
+      setShowHelp(false);
+      setShowSessionHistory(false);
+      setShowSessionNotifications(false);
+      setShowSessionPrinciples(false);
+      setShowMenuSession('');
+
+      if (dataSession?.battle?.isVisibleToPlayers) {
+        setShowBattle({ show: true, data: id });
+        return;
+      }
+
       setShowSessionChat(true);
     };
 
     window.addEventListener('session:open-chat', handleOpenSessionChat);
+    window.addEventListener('session:open-general', handleOpenSessionGeneral);
+    window.addEventListener('session:open-action-result', handleOpenSessionActionResult);
 
-    return () => window.removeEventListener('session:open-chat', handleOpenSessionChat);
-  }, []);
+    return () => {
+      window.removeEventListener('session:open-chat', handleOpenSessionChat);
+      window.removeEventListener('session:open-general', handleOpenSessionGeneral);
+      window.removeEventListener('session:open-action-result', handleOpenSessionActionResult);
+    };
+  }, [id, dataSession?.battle?.isVisibleToPlayers, setShowBattle, setShowHelp, setShowMaps, setShowMenuSession, setShowRelationshipMap, setShowSessionChat, setShowSessionConsent, setShowSessionDetails, setShowSessionGeneral, setShowSessionHistory, setShowSessionNotifications, setShowSessionPrinciples]);
 
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-ritual bg-cover bg-top">
       {showSelectSheet && <SheetSelector />}
+      {showNarratorSheetPicker && (
+        <SessionSheetPicker
+          players={players}
+          onClose={() => setShowNarratorSheetPicker(false)}
+          onSelectPlayer={handleSelectNarratorPlayer}
+        />
+      )}
       {showMessage.show && <MessageToUser />}
+      {showEvaluateSheet.show && <EvaluateSheet />}
       {showDeleteHistoric && <DeleteHistoric />}
       {showResetPlayer.show && <ResetPlayer />}
       {showRemovePlayer.show && <RemovePlayer />}
@@ -267,210 +447,88 @@ export default function SessionId() {
                   <div ref={sidebarIconsRef} className="principles-scrollbar mt-3 h-full min-h-0 w-full overflow-y-auto overflow-x-hidden">
                     <div className="flex w-full h-full flex-col items-center justify-between gap-1">
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('history')}
                         title="Histórico"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowSessionHistory(true);
-                        }}
+                        onClick={() => toggleSessionSidebarView('history')}
                       >
                         <FaHistory />
                       </button>
+                      {dataSession?.gameMaster === email && (
+                        <button
+                          className={getSidebarIconButtonClass('notifications')}
+                          title="Notificações"
+                          onClick={() => toggleSessionSidebarView('notifications')}
+                        >
+                          <IoNotifications />
+                        </button>
+                      )}
                       <button
-                        className="p-2 text-2xl"
-                        title="Notificações"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowSessionNotifications(true);
-                        }}
-                      >
-                        <IoNotifications />
-                      </button>
-                      <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('help')}
                         title="Sistema e Mecânica"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowSessionNotifications(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowHelp(true);
-                        }}
+                        onClick={() => toggleSessionSidebarView('help')}
                       >
                         <IoIosHelpCircle />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('details')}
                         title="Detalhes da Sessão"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowSessionDetails(true);
-                        }}
+                        onClick={() => toggleSessionSidebarView('details')}
                       >
                         <IoMdSettings />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('consent')}
                         title="Ficha de Consentimento"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowSessionConsent(true);
-                        }}
+                        onClick={() => toggleSessionSidebarView('consent')}
                       >
                         <MdOutlineSecurity />
                       </button>
                       <button
-                        className="p-2 text-2xl"
-                        title="Princí­pios da Crônica"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowSessionPrinciples(true);
-                        }}
+                        className={getSidebarIconButtonClass('principles')}
+                        title="Princípios da Crônica"
+                        onClick={() => toggleSessionSidebarView('principles')}
                       >
                         <GoLaw />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('relationships')}
                         title="Mapa de Relacionamentos"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: true, data: id });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                        }}
+                        onClick={() => toggleSessionSidebarView('relationships')}
                       >
                         <GiThreeFriends />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('maps')}
                         title="Mapa da Crônica"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: true, data: id });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                        }}
+                        onClick={() => toggleSessionSidebarView('maps')}
                       >
                         <FaRegMap />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('battle')}
                         title="Modo Combate"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: true, data: id });
-                          setShowSessionChat(false);
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                        }}
+                        onClick={() => toggleSessionSidebarView('battle')}
                       >
                         <LuSwords />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className="p-2 text-2xl text-white transition-colors hover:text-red-400"
                         title="Realizar um teste com dados"
                         onClick={() => setShowMenuSession('dices')}
                       >
                         <GiD10 />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('general')}
                         title="Ficha de Personagem"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionChat(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          setShowHelp(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowSessionGeneral(true);
-                        }}
+                        onClick={handleOpenGeneralFromSidebar}
                       >
                         <FaFileAlt />
                       </button>
                       <button
-                        className="p-2 text-2xl"
+                        className={getSidebarIconButtonClass('chat')}
                         title="Chat da Sessão"
-                        onClick={() => {
-                          setShowRelationshipMap({ show: false, data: "" });
-                          setShowMaps({ show: false, data: "" });
-                          setShowBattle({ show: false, data: "" });
-                          setShowSessionGeneral(false);
-                          setShowSessionDetails(false);
-                          setShowSessionConsent(false);
-                          clearSessionMainArea();
-                          clearSessionMenuView();
-                          setShowSessionChat(true);
-                        }}
+                        onClick={() => toggleSessionSidebarView('chat')}
                       >
                         <IoChatbubbles />
                       </button>

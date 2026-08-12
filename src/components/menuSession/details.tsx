@@ -5,7 +5,11 @@ import LeaveGMFromSession from "../popup/leaveGMFromSession";
 import { BsCheckSquare } from "react-icons/bs";
 import { FaRegEdit } from "react-icons/fa";
 import { updateSession, updateStatusSession } from "@/firebase/sessions";
+import { authenticate } from "@/firebase/authenticate";
 import { getUserByEmail } from "@/firebase/user";
+import { registerHistory } from "@/firebase/history";
+import { addNewSheetMandatory } from "@/firebase/players";
+import { capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
 import { MdDelete } from "react-icons/md";
 import DeleteUserFromSession from "../popup/deleteUserFromSession";
 import Image from "next/image";
@@ -27,6 +31,9 @@ export default function Details() {
     setShowDelGMFromSession,
     showChangeGameMaster,
     setShowChangeGameMaster,
+    setSheetId,
+    setDataSheet,
+    setOptionSelect,
   } = useContext(contexto);
 
   const [nameSession, setNameSession] = useState("");
@@ -38,6 +45,7 @@ export default function Details() {
   const [image, setImage] = useState("");
   const [input, setInput] = useState("");
   const [textArea, setTextArea] = useState(false);
+  const [creatingSheet, setCreatingSheet] = useState(false);
 
   useEffect(() => {
     setGameMaster(session.gameMaster || "");
@@ -188,6 +196,49 @@ export default function Details() {
     );
   };
 
+
+  const createSessionSheet = async () => {
+    if (creatingSheet) return;
+
+    setCreatingSheet(true);
+    try {
+      const dateMessage = await getOfficialTimeBrazil();
+      const auth = await authenticate(setShowMessage);
+
+      if (!auth || !auth.email || !auth.displayName) {
+        setShowMessage({ show: true, text: 'Nao foi possivel identificar o usuario para criar a ficha.' });
+        return;
+      }
+
+      const sheet = sheetStructure(auth.email, auth.displayName, dateMessage);
+      const register: string = await addNewSheetMandatory(session.id, sheet, setShowMessage);
+      if (!register) return;
+
+      await registerHistory(
+        session.id,
+        {
+          message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(sheet.user)} criou um novo personagem.`,
+          type: 'notification',
+        },
+        null,
+        setShowMessage,
+      );
+
+      const createdSheet = { ...sheet, id: register, sessionId: session.id };
+      setSheetId(register);
+      setDataSheet(createdSheet);
+      setOptionSelect('general');
+      setShowMenuSession('');
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('session:open-general'));
+      }
+      setShowMessage({ show: true, text: 'Ficha criada com sucesso!' });
+    } catch (error) {
+      setShowMessage({ show: true, text: 'Ocorreu um erro inesperado: ' + error });
+    } finally {
+      setCreatingSheet(false);
+    }
+  };
   return (
     <div className="relative flex h-full min-h-0 w-full min-w-0 flex-col overflow-hidden bg-gradient-to-br from-black via-zinc-950 to-red-950/40 text-white">
       {showChangeGameMaster.show && <ChangeGameMaster setGameMaster={setGameMaster} />}
@@ -393,7 +444,16 @@ export default function Details() {
                     >
                       {session.statusSession === "Finalizada" ? "Reativar Sessão" : "Finalizar Sessão"}
                     </button>
-                  )}
+                  )}                  <button
+                    type="button"
+                    className={buttonClassName}
+                    onClick={() => {
+                      void createSessionSheet();
+                    }}
+                    disabled={creatingSheet}
+                  >
+                    {creatingSheet ? 'Criando ficha...' : 'Criar Ficha'}
+                  </button>
 
                   <button
                     type="button"

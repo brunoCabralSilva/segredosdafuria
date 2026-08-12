@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useContext, useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { registerManualRoll } from "@/firebase/messagesAndRolls";
+import { openChatAfterSpecialRoll } from "../popup/specialRollShared";
 
 export default function ManualRoll() {
 	const [valueOfRage, setValueOfRage] = useState<number>(0);
@@ -10,7 +11,7 @@ export default function ManualRoll() {
   const [totalDices, setTotalDices] = useState<number>(1);
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(0);
-	const { setShowMenuSession, sessionId, setShowMessage } = useContext(contexto);
+	const { setShowMenuSession, sessionId, setShowMessage, setOptionSelect } = useContext(contexto);
 
 	const disableRoll = () => {
     return dificulty <= 0 &&  valueOf <= 0 && penaltyOrBonus === 0;
@@ -18,7 +19,7 @@ export default function ManualRoll() {
 
 	const rollDices = async () => {
     await registerManualRoll(sessionId, valueOfRage, (totalDices - valueOfRage), penaltyOrBonus, dificulty, setShowMessage);
-    setShowMenuSession('');
+    openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
   };
 
   return(

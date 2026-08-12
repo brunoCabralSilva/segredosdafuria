@@ -134,7 +134,7 @@ export default function SheetId() {
     <div className="h-screen overflow-hidden bg-ritual bg-cover bg-top">
       {showMessage.show && <MessageToUser />}
       {showDownloadPdf.show && verifyConvert()}
-      {showEvaluateSheet.show && sheetData?.email === dataUser.email && <EvaluateSheet />}
+      {showEvaluateSheet.show && <EvaluateSheet />}
       {showGiftRoll.show && (
         <div className="absolute inset-0 z-[60] flex items-center justify-center bg-black/80 px-3 py-4 backdrop-blur-[2px] sm:px-4">
           <div className="w-full max-w-sm">

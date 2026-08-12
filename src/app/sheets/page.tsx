@@ -122,7 +122,6 @@ export default function Sheets() {
       const sheet = sheetStructure(authUser.email, authUser.displayName, creationDate);
       const sheetId = await addNewSheetMandatory('', sheet, setShowMessage);
       if (!sheetId) return;
-      await refreshSheets(authUser.email);
       setShowMessage({ show: true, text: 'Ficha criada com sucesso!' });
       router.push(`/sheets/${sheetId}`);
     } catch (error) {

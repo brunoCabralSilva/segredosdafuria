@@ -676,52 +676,52 @@ export default function Help() {
                     <div className="mb-3 mt-2 h-px w-full bg-white/10" />
                     <div className="w-full">
                       <div className="pb-5 md:grid-cols-3 hidden md:grid">
-                        <div className="font-kingthings">Glória</div>
-                        <div className="font-kingthings">Honra</div>
-                        <div className="font-kingthings">Sabedoria</div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-kingthings px-4">Glória</div>
+                        <div className="font-kingthings px-4">Honra</div>
+                        <div className="font-kingthings px-4">Sabedoria</div>
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser valoroso
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser respeitoso
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de aprender
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser confiável
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser leal
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ponderar
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser generoso
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser justo
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser prudente
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de proteger os fracos
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de manter a palavra
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de ser misericordioso
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de exterminar a Wyrm
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de aceitar todos os desafios justos
                         </div>
-                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80">
+                        <div className="font-geist-mono text-[11px] tracking-[0.12em] text-white/80 px-4">
                           Hei de pensar antes de agir e ouvir antes de pensar
                         </div>
                       </div>

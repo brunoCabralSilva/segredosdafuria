@@ -13,8 +13,13 @@ export function openChatAfterSpecialRoll(setOptionSelect: (state: string) => voi
   setOptionSelect('chat');
 
   if (typeof window !== 'undefined') {
-    window.dispatchEvent(new Event('session:open-chat'));
+    window.dispatchEvent(new Event('session:open-action-result'));
   }
+}
+
+export function openSheetAfterSessionAction(setOptionSelect: (state: string) => void, setShowMenuSession: (state: string) => void) {
+  setOptionSelect('general');
+  setShowMenuSession('sheet');
 }
 
 export function SpecialRollFrame(props: {

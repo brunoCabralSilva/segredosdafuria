@@ -1,10 +1,10 @@
 'use client'
 import contexto from "@/context/context";
 import { capitalizeFirstLetter, playerSheet, translate } from "@/firebase/utilities";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircle } from "react-icons/fa6";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import DraggablePopup from "./draggablePopup";
 
 export default function EvaluateSheet() {
   const {
@@ -50,20 +50,29 @@ export default function EvaluateSheet() {
   const [giftsTrybe, setGiftsTrybe] = useState({ correct: false, errorMessage: '' });
   const [giftsAuspice, setGiftsAuspice] = useState({ correct: false, errorMessage: '' });
 
+  const closePopup = useCallback(() => {
+    setShowEvaluateSheet({ show: false, data: '' });
+  }, [setShowEvaluateSheet]);
+
   useEffect(() => {
+    if (!showEvaluateSheet.show) return;
+
     let data: any = {};
     if (showEvaluateSheet.data !== 'player') {
-      const findPlayer = players.find((player: any) => player.email === showEvaluateSheet.data);
+      const findPlayer = players.find((player: any) => player.id === showEvaluateSheet.data || player.email === showEvaluateSheet.data);
       if (findPlayer) {
         data = findPlayer.data;
         setData(findPlayer.data);
       } else {
         setShowMessage({ show: true, text: 'Não foi possível localizar o Jogador.' });
-        setShowEvaluateSheet({ show: false, data: {} });
+        closePopup();
+        return;
       }
-    } else {
+    } else if (dataSheet?.data) {
       data = dataSheet.data;
       setData(dataSheet.data);
+    } else {
+      return;
     }
     //Verificação de Nome de Personagem
     if (data.name.length === 0) {
@@ -113,7 +122,7 @@ export default function EvaluateSheet() {
     verifyAdvantagesAndFlaws(data);
     verifyGifts(data);
     verifySkills(data);
-  }, [players, dataSheet]);
+  }, [closePopup, dataSheet, players, setShowMessage, showEvaluateSheet.data, showEvaluateSheet.show]);
 
   const verifyGifts = (data: any) => {
     if (data.gifts.length !== 3) {
@@ -577,177 +586,186 @@ export default function EvaluateSheet() {
     } else setFlaws({ correct: true, errorMessage: '' });
   }
 
+  const rowClass = 'flex items-start gap-2.5';
+  const nestedRowClass = 'flex items-start gap-2.5 pl-4 sm:pl-5';
+  const labelClass = 'w-full break-words font-geist-mono text-[0.66rem] leading-snug tracking-[0.04em] text-zinc-100 sm:text-[0.7rem]';
+  const errorWrapClass = 'pl-6 sm:pl-8 [&>div]:border-l [&>div]:border-red-700/45 [&>div]:pl-3 [&>div]:font-geist-mono [&>div]:text-[0.58rem] [&>div]:leading-relaxed [&>div]:tracking-[0.03em] [&>div]:text-zinc-400 sm:[&>div]:text-[0.62rem]';
+  const deepErrorWrapClass = 'pl-8 sm:pl-11 [&>div]:border-l [&>div]:border-red-700/45 [&>div]:pl-3 [&>div]:font-geist-mono [&>div]:text-[0.58rem] [&>div]:leading-relaxed [&>div]:tracking-[0.03em] [&>div]:text-zinc-400 sm:[&>div]:text-[0.62rem]';
+  const successIconClass = 'mt-0.5 shrink-0 text-[0.92rem] text-emerald-400';
+  const errorIconClass = 'mt-0.5 shrink-0 text-[0.92rem] text-red-500';
+
   return (
-    <div className="z-80 sm:z-50 fixed md:relative w-full h-screen flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
-      <div className="w-full flex justify-center pt-3 bg-black">
-        <div className="px-6 sm:px-10 text-white font-bold text-2xl w-full">Verificação de Ficha:</div>
-        <IoIosCloseCircleOutline
-          className="text-4xl text-white cursor-pointer mr-5"
-          onClick={ () => setShowEvaluateSheet({ show: false, data: {} }) }
-        />
-      </div>
-      <div className="w-full overflow-y-auto h-full flex flex-col justify-start items-center bg-black relative pb-5">
-        <div className="px-6 sm:px-10 w-full text-white">
+    <DraggablePopup
+      title="Verificacao de ficha"
+      description="Arraste pela barra superior e redimensione pelo canto inferior direito."
+      onClose={closePopup}
+      sizeClassName="w-[calc(100vw-1.5rem)] sm:w-[50vw] h-[50vh]"
+      bodyClassName="p-0"
+      resizable
+      allowBackgroundInteraction
+    >
+      <div className="w-full bg-[radial-gradient(circle_at_top,rgba(122,0,0,0.12),transparent_28%),linear-gradient(180deg,rgba(0,0,0,0.96),rgba(0,0,0,0.92))] pb-5">
+        <div className="w-full px-4 pb-2 pt-4 sm:px-6 text-white [&>div]:border-b [&>div]:border-white/8 [&>div]:py-3 last:[&>div]:border-b-0">
           {/* Nome */}
-          <div className="pt-3">
-            <div className="flex gap-2 items-center">
+          <div className="pt-1">
+            <div className={rowClass}>
               {
                 name.correct
-                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                ? <FaRegCheckCircle className={successIconClass} />
+                : <FaRegCircle className={errorIconClass} />
               }
-              <div className="w-full">Inserir o nome do Personagem</div>
+              <div className={labelClass}>Inserir o nome do Personagem</div>
             </div>
-              <div className="pl-5">
+              <div className={errorWrapClass}>
                 { !name.correct && <div> - { name.errorMessage }</div> }
               </div>
           </div>
           {/* Augúrio */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
               {
                 auspice.correct
-                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                ? <FaRegCheckCircle className={successIconClass} />
+                : <FaRegCircle className={errorIconClass} />
               }
-              <div className="w-full">Escolher um Augúrio</div>
+              <div className={labelClass}>Escolher um Augúrio</div>
             </div>
-            <div className="pl-5">
+            <div className={errorWrapClass}>
               { !auspice.correct && <div> - { auspice.errorMessage }</div> }
             </div>
           </div>
           {/* Tribo */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
               {
                 trybe.correct
-                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                ? <FaRegCheckCircle className={successIconClass} />
+                : <FaRegCircle className={errorIconClass} />
               }
-              <div className="w-full">Escolher uma Tribo</div>
+              <div className={labelClass}>Escolher uma Tribo</div>
             </div>
-              <div className="pl-5">
+              <div className={errorWrapClass}>
                 { !trybe.correct && <div> - { trybe.errorMessage }</div> }
               </div>
           </div>
           {/* Renome */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
               {
                 renownSum.correct && renownTrybe.correct
-                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                ? <FaRegCheckCircle className={successIconClass} />
+                : <FaRegCircle className={errorIconClass} />
               }
-              <div className="w-full">Preencher Renome</div>
+              <div className={labelClass}>Preencher Renome</div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   renownSum.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">A Soma dos Renomes precisa ser igual a 3</div>
+                <div className={labelClass}>A Soma dos Renomes precisa ser igual a 3</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !renownSum.correct && <div> - { renownSum.errorMessage }</div> }
               </div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   renownTrybe.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">O renome relacionado ao patrono precisa ser igual a 2</div>
+                <div className={labelClass}>O renome relacionado ao patrono precisa ser igual a 2</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !renownTrybe.correct && <div> - { renownTrybe.errorMessage }</div> }
               </div>
             </div>
           </div>
           {/* Atributos */} 
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
                 {
                   attributes3.correct && attributes2.correct && attributes1.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-              <div className="w-full">Atributos:</div>
+              <div className={labelClass}>Atributos:</div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   attributes4.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Preencher Um atributo com 4 pontos</div>
+                <div className={labelClass}>Preencher Um atributo com 4 pontos</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !attributes4.correct && <div> - { attributes4.errorMessage }</div> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   attributes3.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Preencher Três atributos com 3 pontos</div>
+                <div className={labelClass}>Preencher Três atributos com 3 pontos</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !attributes3.correct && <div> - { attributes3.errorMessage }</div> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   attributes2.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Preencher Quatro atributos com 2 pontos</div>
+                <div className={labelClass}>Preencher Quatro atributos com 2 pontos</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !attributes2.correct && <div> - { attributes2.errorMessage }</div> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   attributes1.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Preencher Um atributo com 1 ponto</div>
+                <div className={labelClass}>Preencher Um atributo com 1 ponto</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !attributes1.correct && <div> - { attributes1.errorMessage }</div> }
               </div>
             </div>
           </div>
           {/* Habilidades */} 
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
                 {
                   verifyCorrectlySkills()
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-              <div className="w-full">Habilidades:</div>
+              <div className={labelClass}>Habilidades:</div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   skillsType.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Escolher um Modelo de Distribuição { data.skills.type !== '' && '(' + data.skills.type + ')'}</div>
+                <div className={labelClass}>Escolher um Modelo de Distribuição { data.skills.type !== '' && '(' + data.skills.type + ')'}</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !skillsType.correct && <div> - { skillsType.errorMessage }</div> }
               </div>
             </div>
@@ -758,108 +776,108 @@ export default function EvaluateSheet() {
                   { 
                     data.skills.type === 'Especialista'
                     ? <div>
-                        <div className="flex gap-2 pl-5">
+                        <div className={nestedRowClass}>
                           {
                             skillsCountPlus.correct
-                            ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                            : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                            ? <FaRegCheckCircle className={successIconClass} />
+                            : <FaRegCircle className={errorIconClass} />
                           }
-                          <div className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</div>
+                          <div className={labelClass}>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 4 pontos</div>
                         </div>
-                        <div className="pl-10">
+                        <div className={deepErrorWrapClass}>
                           { !skillsCountPlus.correct && <div> - { skillsCountPlus.errorMessage }</div> }
                         </div>
-                        <div className="flex gap-2 pl-5">
+                        <div className={nestedRowClass}>
                           {
                             skillsCount4.correct
-                            ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                            : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                            ? <FaRegCheckCircle className={successIconClass} />
+                            : <FaRegCircle className={errorIconClass} />
                           }
-                          <div className="w-full">{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</div>
+                          <div className={labelClass}>{number4 === 0 ? 'Nenhuma Habilidade': number4 > 1 ? number4 + ' Habilidades' : number4 + ' Habilidade' } com 4 pontos</div>
                         </div>
-                        <div className="pl-10">
+                        <div className={deepErrorWrapClass}>
                           { !skillsCount4.correct && <div> - { skillsCount4.errorMessage }</div> }
                         </div>
                       </div>
                     : <div>
-                        <div className="flex gap-2 pl-5">
+                        <div className={nestedRowClass}>
                           {
                             skillsCountPlus4.correct
-                            ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                            : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                            ? <FaRegCheckCircle className={successIconClass} />
+                            : <FaRegCircle className={errorIconClass} />
                           }
-                          <div className="w-full">{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</div>
+                          <div className={labelClass}>{numberPlus === 0 ? 'Nenhuma Habilidade': numberPlus > 1 ? numberPlus + ' Habilidades' : numberPlus + ' Habilidade' } com mais de 3 pontos</div>
                         </div>
-                        <div className="pl-10">
+                        <div className={deepErrorWrapClass}>
                           { !skillsCountPlus4.correct && <div> - { skillsCountPlus4.errorMessage }</div> }
                         </div>
                       </div>
                     }
                 </div>
                 <div>
-                  <div className="flex gap-2 pl-5">
+                  <div className={nestedRowClass}>
                     {
                       skillsCount3.correct
-                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                      ? <FaRegCheckCircle className={successIconClass} />
+                      : <FaRegCircle className={errorIconClass} />
                     }
-                    <div className="w-full">{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</div>
+                    <div className={labelClass}>{number3 > 1 || number3 === 0 ? number3 + ' Habilidades' : number3 + ' Habilidade' } com 3 pontos</div>
                   </div>
-                  <div className="pl-10">
+                  <div className={deepErrorWrapClass}>
                     { !skillsCount3.correct && <div> - { skillsCount3.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 pl-5">
+                  <div className={nestedRowClass}>
                     {
                       skillsCount2.correct
-                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                      ? <FaRegCheckCircle className={successIconClass} />
+                      : <FaRegCircle className={errorIconClass} />
                     }
-                    <div className="w-full">{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</div>
+                    <div className={labelClass}>{number2 > 1 || number2 === 0 ? number2 + ' Habilidades' : number2 + ' Habilidade' } com 2 pontos</div>
                   </div>
-                  <div className="pl-10">
+                  <div className={deepErrorWrapClass}>
                     { !skillsCount2.correct && <div> - { skillsCount2.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 pl-5">
+                  <div className={nestedRowClass}>
                     {
                       skillsCount1.correct
-                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                      ? <FaRegCheckCircle className={successIconClass} />
+                      : <FaRegCircle className={errorIconClass} />
                     }
-                    <div className="w-full">{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</div>
+                    <div className={labelClass}>{number1 > 1 || number1 === 0 ? number1 + ' Habilidades' : number1 + ' Habilidade' } com 1 pontos</div>
                   </div>
-                  <div className="pl-10">
+                  <div className={deepErrorWrapClass}>
                     { !skillsCount1.correct && <div> - { skillsCount1.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 pl-5">
+                  <div className={nestedRowClass}>
                     {
                       skillsCount0.correct
-                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                      ? <FaRegCheckCircle className={successIconClass} />
+                      : <FaRegCircle className={errorIconClass} />
                     }
-                    <div className="w-full">{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</div>
+                    <div className={labelClass}>{number0 > 1 || number0 === 0 ? number0 + ' Habilidades' : number0 + ' Habilidade' } com 0 pontos</div>
                   </div>
-                  <div className="pl-10">
+                  <div className={deepErrorWrapClass}>
                     { !skillsCount0.correct && <div> - { skillsCount0.errorMessage }</div> }
                   </div>
                 </div>
                 {
                   data.skills.academics.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 pl-5">
+                    <div className={nestedRowClass}>
                       {
                         skillAcademics.correct
-                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                        ? <FaRegCheckCircle className={successIconClass} />
+                        : <FaRegCircle className={errorIconClass} />
                       }
-                      <div className="w-full">Preencher uma Especialização em Acadêmicos</div>
+                      <div className={labelClass}>Preencher uma Especialização em Acadêmicos</div>
                     </div>
-                    <div className="pl-10">
+                    <div className={deepErrorWrapClass}>
                       { !skillAcademics.correct && <div> - { skillAcademics.errorMessage }</div> }
                     </div>
                   </div>
@@ -867,15 +885,15 @@ export default function EvaluateSheet() {
                 {
                   data.skills.craft.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 pl-5">
+                    <div className={nestedRowClass}>
                       {
                         skillCraft.correct
-                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                        ? <FaRegCheckCircle className={successIconClass} />
+                        : <FaRegCircle className={errorIconClass} />
                       }
-                      <div className="w-full">Preencher uma Especialização em Ofícios</div>
+                      <div className={labelClass}>Preencher uma Especialização em Ofícios</div>
                     </div>
-                    <div className="pl-10">
+                    <div className={deepErrorWrapClass}>
                       { !skillCraft.correct && <div> - { skillCraft.errorMessage }</div> }
                     </div>
                   </div>
@@ -883,15 +901,15 @@ export default function EvaluateSheet() {
                 {
                   data.skills.performance.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 pl-5">
+                    <div className={nestedRowClass}>
                       {
                         skillPerformance.correct
-                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                        ? <FaRegCheckCircle className={successIconClass} />
+                        : <FaRegCircle className={errorIconClass} />
                       }
-                      <div className="w-full">Preencher uma Especialização em Performance</div>
+                      <div className={labelClass}>Preencher uma Especialização em Performance</div>
                     </div>
-                    <div className="pl-10">
+                    <div className={deepErrorWrapClass}>
                       { !skillPerformance.correct && <div> - { skillPerformance.errorMessage }</div> }
                     </div>
                   </div>
@@ -899,42 +917,42 @@ export default function EvaluateSheet() {
                 {
                   data.skills.science.value !== 0 &&
                   <div>
-                    <div className="flex gap-2 pl-5">
+                    <div className={nestedRowClass}>
                       {
                         skillScience.correct
-                        ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                        : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                        ? <FaRegCheckCircle className={successIconClass} />
+                        : <FaRegCircle className={errorIconClass} />
                       }
-                      <div className="w-full">Preencher uma Especialização em Science</div>
+                      <div className={labelClass}>Preencher uma Especialização em Science</div>
                     </div>
-                    <div className="pl-10">
+                    <div className={deepErrorWrapClass}>
                       { !skillScience.correct && <div> - { skillScience.errorMessage }</div> }
                     </div>
                   </div>
                 }
                 <div>
-                  <div className="flex gap-2 pl-5">
+                  <div className={nestedRowClass}>
                     {
                       skillNewSpecialty.correct
-                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                      ? <FaRegCheckCircle className={successIconClass} />
+                      : <FaRegCircle className={errorIconClass} />
                     }
-                    <div className="w-full">Adicionar uma nova Especialização em uma Habilidade à sua escolha</div>
+                    <div className={labelClass}>Adicionar uma nova Especialização em uma Habilidade à sua escolha</div>
                   </div>
-                  <div className="pl-10">
+                  <div className={deepErrorWrapClass}>
                     { !skillNewSpecialty.correct && <div> - { skillNewSpecialty.errorMessage }</div> }
                   </div>
                 </div>
                 <div>
-                  <div className="flex gap-2 pl-5">
+                  <div className={nestedRowClass}>
                     {
                       skillSpecialtyZero.correct
-                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                      ? <FaRegCheckCircle className={successIconClass} />
+                      : <FaRegCircle className={errorIconClass} />
                     }
-                    <div className="w-full">Nenhuma Habilidade com 0 pontos pode ter uma Especialização</div>
+                    <div className={labelClass}>Nenhuma Habilidade com 0 pontos pode ter uma Especialização</div>
                   </div>
-                  <div className="pl-10">
+                  <div className={deepErrorWrapClass}>
                     { !skillSpecialtyZero.correct && <div> - { skillSpecialtyZero.errorMessage }</div> }
                   </div>
                 </div>
@@ -943,62 +961,62 @@ export default function EvaluateSheet() {
           </div>
           {/* Dons */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
                 {
                   gifts.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-              <div className="w-full">Dons:</div>
+              <div className={labelClass}>Dons:</div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   gifts.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Adicionar 3 Dons</div>
+                <div className={labelClass}>Adicionar 3 Dons</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !gifts.correct && <div> - { gifts.errorMessage }</div> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   giftsGlobal.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Adicionar um Dom Nativo</div>
+                <div className={labelClass}>Adicionar um Dom Nativo</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !giftsGlobal.correct && <div> - { giftsGlobal.errorMessage }</div> }
               </div>
               <div>
                 <div>
-                  <div className="flex gap-2 pl-5">
+                  <div className={nestedRowClass}>
                     {
                       giftsTrybe.correct
-                      ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                      : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                      ? <FaRegCheckCircle className={successIconClass} />
+                      : <FaRegCircle className={errorIconClass} />
                     }
-                    <div className="w-full">Adicionar um Dom da Tribo ({ capitalizeFirstLetter(data.trybe) })</div>
+                    <div className={labelClass}>Adicionar um Dom da Tribo ({ capitalizeFirstLetter(data.trybe) })</div>
                   </div>
-                  <div className="pl-10">
+                  <div className={deepErrorWrapClass}>
                     { !giftsTrybe.correct && <div> - { giftsTrybe.errorMessage }</div> }
                   </div>
                 </div>
-                <div className="flex gap-2 pl-5">
+                <div className={nestedRowClass}>
                   {
                     giftsAuspice.correct
-                    ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                    : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                    ? <FaRegCheckCircle className={successIconClass} />
+                    : <FaRegCircle className={errorIconClass} />
                   }
-                  <div className="w-full">Adicionar um Dom do Augúrio <span className="capitalize">({ data.auspice })</span></div>
+                  <div className={labelClass}>Adicionar um Dom do Augúrio <span className="capitalize">({ data.auspice })</span></div>
                 </div>
-                <div className="pl-10">
+                <div className={deepErrorWrapClass}>
                   { !giftsAuspice.correct && <div> - { giftsAuspice.errorMessage }</div> }
                 </div>
               </div>
@@ -1006,85 +1024,85 @@ export default function EvaluateSheet() {
           </div>
           {/* Rituais */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
               {
                 rituals.correct
-                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                ? <FaRegCheckCircle className={successIconClass} />
+                : <FaRegCircle className={errorIconClass} />
               }
-              <div className="w-full">Adicionar um Ritual</div>
+              <div className={labelClass}>Adicionar um Ritual</div>
             </div>
-            <div className="pl-5">
+            <div className={errorWrapClass}>
               { !rituals.correct && <div> - { rituals.errorMessage }</div> }
             </div>
           </div>
           {/* Pilares */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
               {
                 touchstone.correct
-                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                ? <FaRegCheckCircle className={successIconClass} />
+                : <FaRegCircle className={errorIconClass} />
               }
-              <div className="w-full">Adicionar Pilares para o Personagem</div>
+              <div className={labelClass}>Adicionar Pilares para o Personagem</div>
             </div>
-            <div className="pl-5">
+            <div className={errorWrapClass}>
               { !touchstone.correct && <div> - { touchstone.errorMessage }</div> }
             </div>
           </div>
           {/* Vantagens e Defeitos */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
                 {
                   advantages.correct && flaws.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-              <div className="w-full">Vantagens e Defeitos:</div>
+              <div className={labelClass}>Vantagens e Defeitos:</div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   advantages.correct
-                    ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                    : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                    ? <FaRegCheckCircle className={successIconClass} />
+                    : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Preencher 7 pontos em Vantagens (Méritos e Background, Loresheets e/ou Talismãs)</div>
+                <div className={labelClass}>Preencher 7 pontos em Vantagens (Méritos e Background, Loresheets e/ou Talismãs)</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !advantages.correct && <div> - { advantages.errorMessage }</div> }
               </div>
             </div>
             <div>
-              <div className="flex gap-2 pl-5">
+              <div className={nestedRowClass}>
                 {
                   flaws.correct
-                  ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                  : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                  ? <FaRegCheckCircle className={successIconClass} />
+                  : <FaRegCircle className={errorIconClass} />
                 }
-                <div className="w-full">Preencher 2 pontos em Defeitos</div>
+                <div className={labelClass}>Preencher 2 pontos em Defeitos</div>
               </div>
-              <div className="pl-10">
+              <div className={deepErrorWrapClass}>
                 { !flaws.correct && <div> - { flaws.errorMessage }</div> }
               </div>
             </div>
           </div>
           {/* Background */}
           <div>
-            <div className="flex gap-2 items-center">
+            <div className={rowClass}>
               {
                 background.correct
-                ? <FaRegCheckCircle className="text-green-500 text-lg mt-1" />
-                : <FaRegCircle className="text-red-500 text-lg mt-1" />
+                ? <FaRegCheckCircle className={successIconClass} />
+                : <FaRegCircle className={errorIconClass} />
               }
-              <div className="w-full">Inserir a história do personagem</div>
+              <div className={labelClass}>Inserir a história do personagem</div>
             </div>
-            <div className="pl-5">
+            <div className={errorWrapClass}>
               { !background.correct && <div> - { background.errorMessage }</div> }
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </DraggablePopup>
   );
 }

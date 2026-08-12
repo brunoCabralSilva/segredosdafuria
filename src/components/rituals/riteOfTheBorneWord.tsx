@@ -1,6 +1,7 @@
 import contexto from "@/context/context";
 import { registerMessage, rollTest } from "@/firebase/messagesAndRolls";
 import { useContext, useState } from "react";
+import { openChatAfterSpecialRoll } from "../popup/specialRollShared";
 import {
   RitualCounterField,
   ritualActionButtonClass,
@@ -17,7 +18,7 @@ export function RiteOfTheBorneWord() {
   const [marked, setMarked] = useState(false);
   const [numberOfPjs, setNumberOfPjs] = useState<number>(0);
   const [numberOfKnowPjs, setNumberOfKnowPjs] = useState<number>(0);
-  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage, setOptionSelect } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = Number(dataSheet.data.skills.occult.etiquette) + Number(dataSheet.data.honor);
@@ -115,7 +116,7 @@ export function RiteOfTheBorneWord() {
         className={ritualActionButtonClass}
         onClick={() => {
           rollDice();
-          setShowMenuSession("");
+          openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
           setShowRitualRoll({ show: false, ritual: {} });
         }}
       >

@@ -1,6 +1,7 @@
 import contexto from "@/context/context";
 import { registerMessage, rollTest } from "@/firebase/messagesAndRolls";
 import { useContext, useState } from "react";
+import { openChatAfterSpecialRoll } from "../popup/specialRollShared";
 import {
   RitualCounterField,
   ritualActionButtonClass,
@@ -21,7 +22,7 @@ export function RiteWithRoll(
   const [dificulty, setDificulty] = useState<number>(1);
   const [numberOfPjs, setNumberOfPjs] = useState<number>(0);
   const [numberOfKnowPjs, setNumberOfKnowPjs] = useState<number>(0);
-  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage, setOptionSelect } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;
@@ -104,7 +105,7 @@ export function RiteWithRoll(
         className={ritualActionButtonClass}
         onClick={() => {
           rollDices();
-          setShowMenuSession("");
+          openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
           setShowRitualRoll({ show: false, ritual: {} });
         }}
       >

@@ -101,14 +101,14 @@ export default function Consent() {
             onClick={() => setActiveTab("editor")}
             className={tabButtonClassName("editor")}
           >
-            Editor De Consentimento
+            Minha Ficha De Consentimento
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("summary")}
             className={tabButtonClassName("summary")}
           >
-            Ficha geral
+            Ficha do grupo
           </button>
         </div>
       </div>

@@ -1,10 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import sheetData from '../../data/sheet.json';
 import { FaMinus, FaPlus } from "react-icons/fa";
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
 import { useRouter } from "next/navigation";
 import { registerAutomatedRoll } from "@/firebase/messagesAndRolls";
+import { openChatAfterSpecialRoll } from "../popup/specialRollShared";
 
 export default function AutomatedRoll() {
   const [atrSelected, setAtrSelected] = useState<string>('0');
@@ -16,13 +17,15 @@ export default function AutomatedRoll() {
   const { setShowMenuSession, sheetId, sessionId, setShowMessage, dataSheet, setOptionSelect } = useContext(contexto);
   const router = useRouter();
 
-  useEffect(() => { verifyUser() }, []);
-  
-  const verifyUser = async() => {
+  const verifyUser = useCallback(async () => {
     const auth: any = await authenticate(setShowMessage);
     if (auth && auth.email) setPlayerSelected(auth.email);
     else router.push('/login');
-  }
+  }, [router, setShowMessage]);
+
+  useEffect(() => {
+    void verifyUser();
+  }, [verifyUser]);
 
   const disabledButton = () => {
     return ((atrSelected === '0' || atrSelected === '1') && (sklSelected === '0' || sklSelected === '1') && (renSelected === '0' || renSelected === '1')) || dificulty <= 0;
@@ -40,7 +43,7 @@ export default function AutomatedRoll() {
       dificulty,
       setShowMessage,
     );
-    setShowMenuSession('');
+    openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
   };
 
   if (sheetId !== '')

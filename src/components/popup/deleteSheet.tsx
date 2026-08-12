@@ -37,8 +37,6 @@ export default function DeleteSheet(props: { isGameMaster : any }) {
       if (isGameMaster) setOptionSelect('players');
       if (pathname?.startsWith('/sheets/')) {
         router.back();
-      } else {
-        router.push('/sheets');
       }
     } catch(error) {
       setShowMessage({ show: true, text: "Ocorreu um erro: " + error });

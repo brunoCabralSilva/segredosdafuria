@@ -1,10 +1,11 @@
 import contexto from "@/context/context";
 import { registerMessage } from "@/firebase/messagesAndRolls";
 import { useContext } from "react";
+import { openChatAfterSpecialRoll } from "../popup/specialRollShared";
 import { ritualActionButtonClass } from "./ritualFieldShared";
 
 export function SimpleTest() {
-  const { sessionId, email, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage } = useContext(contexto);
+  const { sessionId, email, showRitualRoll, setShowRitualRoll, setShowMenuSession, setShowMessage, setOptionSelect } = useContext(contexto);
 
   const roll = async () => {
     await registerMessage(sessionId, { ...showRitualRoll.ritual, type: "ritual" }, email, setShowMessage);
@@ -16,7 +17,7 @@ export function SimpleTest() {
         className={ritualActionButtonClass}
         onClick={() => {
           roll();
-          setShowMenuSession("");
+          openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
           setShowRitualRoll({ show: false, ritual: {} });
         }}
       >

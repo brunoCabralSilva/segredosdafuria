@@ -10,7 +10,7 @@ export const createPlayersData = async (sessionId: string, setShowMessage: any) 
     const collectionRef = collection(db, 'players');
     await addDoc(collectionRef, { sessionId, list: [] });
   } catch (err: any) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar jogadores para a SessÃ£o: ' + err.message });
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar jogadores para a Sessão: ' + err.message });
   }
 };
 
@@ -61,7 +61,7 @@ export const getOldestUserBySession = async (sessionId: string, gameMaster: stri
     });
     return oldestUser;
   } catch (err: any) {
-    setShowMessage({show: true, text: "Erro ao buscar usuÃ¡rio mais antigo:" + err.message});
+    setShowMessage({show: true, text: "Erro ao buscar usuário mais antigo:" + err.message});
     return null;
   }
 };
@@ -75,7 +75,7 @@ export const getPlayersBySession = async (sessionId: string, setShowMessage: any
     if (sessionSnap.exists()) return sessionSnap.data().players;
     return null;
   } catch (err) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar a SessÃ£o: ' + err });
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar a Sessão: ' + err });
     return null;
   }
 };
@@ -88,7 +88,7 @@ export const getPlayerById = async (id: string, setShowMessage: any) => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) return docSnap.data();
     else {
-      setShowMessage({ show: true, text: 'Jogador nÃ£o encontrado.' });
+      setShowMessage({ show: true, text: 'Jogador não encontrado.' });
       return null;
     }
   } catch (err) {
@@ -110,7 +110,7 @@ export const getPlayerByEmail = async (sessionId: string, email: string, setShow
       return data.list.find((item: any) => item.email === email);
     } return [];
   } catch (err) {
-    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar o Jogador na SessÃ£o: ' + err });
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao buscar o Jogador na Sessão: ' + err });
   }
 };
 
@@ -128,7 +128,7 @@ export const getAllPlayersBySessionId = async (sessionId: string, setShowMessage
   } catch (err) {
     setShowMessage({
       show: true,
-      text: 'Ocorreu um erro ao buscar os Jogadores da SessÃ£o: ' + err
+      text: 'Ocorreu um erro ao buscar os Jogadores da Sessão: ' + err
     });
   }
 };
@@ -144,7 +144,7 @@ export const updateDataPlayer = async (
     await runTransaction(db, async (transaction) => {
       const docSnap = await transaction.get(docRef);
       if (!docSnap.exists()) {
-        setShowMessage({ show: true, text: 'Jogador nÃ£o encontrado.' });
+        setShowMessage({ show: true, text: 'Jogador não encontrado.' });
         return;
       }
       transaction.update(docRef, newData);
@@ -170,14 +170,14 @@ export const deleteDataPlayer = async (
     await runTransaction(db, async (transaction) => {
       const docSnap = await transaction.get(docRef);
       if (!docSnap.exists()) {
-        setShowMessage({ show: true, text: 'Personagem nÃ£o encontrado.' });
+        setShowMessage({ show: true, text: 'Personagem não encontrado.' });
         return;
       }
       // await deletePlayerImage(sessionId, id, imageUrl, setShowMessage);
       transaction.delete(docRef);
     });
 
-    setShowMessage({ show: true, text: 'Personagem excluÃ­do com sucesso.' });
+    setShowMessage({ show: true, text: 'Personagem excluído com sucesso.' });
   } catch (err: any) {
     setShowMessage({
       show: true,
@@ -242,14 +242,14 @@ export const updateDataWithRage = async (typeSession: string, sessionId: string,
       if (newData.data.rage  > 5) newData.data.rage = 5;
       if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
       if (numberOfChecks === 2) {
-        textNumberofChecks = 'Foram realizadas duas Checagens de FÃºria';
-        if (success === 2) textActualRage = 'Obteve sucesso nas duas Checagens e a FÃºria foi mantida.';
-        else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha na Checagem. A FÃºria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
-        else textActualRage = 'Falhou nas duas Checagens. A FÃºria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
+        textNumberofChecks = 'Foram realizadas duas Checagens de Fúria';
+        if (success === 2) textActualRage = 'Obteve sucesso nas duas Checagens e a Fúria foi mantida.';
+        else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha na Checagem. A Fúria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
+        else textActualRage = 'Falhou nas duas Checagens. A Fúria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
       } else {
-        textNumberofChecks = 'Foi realizada uma Checagem de FÃºria';
-        if (success === 0) textActualRage = 'NÃ£o obteve sucesso na Checagem. A FÃºria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
-        else textActualRage = 'Obteve sucesso na Checagem. A FÃºria foi mantida.';
+        textNumberofChecks = 'Foi realizada uma Checagem de Fúria';
+        if (success === 0) textActualRage = 'Não obteve sucesso na Checagem. A Fúria foi aumentada para ' + newData.data.rage + (newData.data.rage >= 5 ? ' (o Personagem entrou em Frenesi).' : '.');
+        else textActualRage = 'Obteve sucesso na Checagem. A Fúria foi mantida.';
       }
     } else {
         const newRage = newData.data.rage - (resultOfRage.length - success);
@@ -257,14 +257,14 @@ export const updateDataWithRage = async (typeSession: string, sessionId: string,
         newData.data.rage = newRage;
         if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
         if (numberOfChecks === 2) {
-          textNumberofChecks = 'Foram realizados dois Testes de FÃºria';
-          if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a FÃºria foi mantida.';
-          else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A FÃºria foi reduzida para ' + newData.data.rage + '.'
-          else textActualRage = 'Falhou nos dois Testes. A fÃºria foi reduzida para ' + newData.data.rage + '.';
+          textNumberofChecks = 'Foram realizados dois Testes de Fúria';
+          if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a Fúria foi mantida.';
+          else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.'
+          else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + newData.data.rage + '.';
         } else {
-          textNumberofChecks = 'Foi realizado um Teste de FÃºria';
-          if (success === 0) textActualRage = 'NÃ£o obteve sucesso no Teste. A FÃºria foi reduzida para ' + newData.data.rage + '.';
-          else textActualRage = 'Obteve sucesso no Teste. A fÃºria foi mantida.';
+          textNumberofChecks = 'Foi realizado um Teste de Fúria';
+          if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.';
+          else textActualRage = 'Obteve sucesso no Teste. A fúria foi mantida.';
         }
     }
     await registerMessage(
@@ -285,7 +285,7 @@ export const updateDataWithRage = async (typeSession: string, sessionId: string,
     await runTransaction(db, async (transaction) => {
       const docSnap = await transaction.get(docRef);
       if (!docSnap.exists()) {
-        setShowMessage({ show: true, text: 'Jogador nÃ£o encontrado.' });
+        setShowMessage({ show: true, text: 'Jogador não encontrado.' });
         return;
       }
       transaction.update(docRef, { ...newData });
@@ -349,7 +349,7 @@ export const removePlayerFromSession = async (sessionId: string, email: string, 
       const docSnapshot = await transaction.get(docRef);
       const data = docSnapshot.data();
       if (!data?.list || data.list.length === 0) {
-        setShowMessage({ show: true, text: 'Nenhum jogador encontrado na sessÃ£o.' });
+        setShowMessage({ show: true, text: 'Nenhum jogador encontrado na sessão.' });
         return;
       }
       const updatedList = data.list.filter((player: any) => player.email !== email);
@@ -357,7 +357,7 @@ export const removePlayerFromSession = async (sessionId: string, email: string, 
         transaction.update(docRef, { list: updatedList });
         setShowMessage({ show: true, text: 'Jogador removido com sucesso.' });
       } else {
-        setShowMessage({ show: true, text: 'Jogador nÃ£o encontrado na sessÃ£o.' });
+        setShowMessage({ show: true, text: 'Jogador não encontrado na sessão.' });
       }
     });
   } catch (error: any) {

@@ -26,6 +26,7 @@ import Touchstones from './touchstones';
 import Background from './background';
 import Rituals from '../rituals/rituals';
 import Nav from '../nav';
+import DraggablePopup from '../popup/draggablePopup';
 
 type SessionListItem = {
   id: string;
@@ -77,8 +78,9 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const canManageSheetIdentity = dataSheet?.email === email;
   const canViewSheetEmail = dataSheet?.email === email;
   const canCopySheet = isStandaloneSheetView && dataSheet?.email === email;
-  const canDeleteSheet = isStandaloneSheetView && dataSheet?.email === email;
+  const canDeleteSheet = (isStandaloneSheetView && dataSheet?.email === email) || (!isStandaloneSheetView && isNarrator && sheetId !== '');
   const sessionCharacterOptions = isNarrator ? players : players.filter((player: any) => player.email === email);
+  const shouldBlockUntilCharacterSelection = !isStandaloneSheetView && isNarrator && sheetId === '';
 
   const getCurrentBrazilDateTimeString = () => {
     const formatter = new Intl.DateTimeFormat('pt-BR', {
@@ -367,6 +369,13 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   return (
     <div className="principles-scrollbar mb-3 flex h-full w-full flex-col items-start justify-start overflow-y-auto overflow-x-hidden sm:px-4 pr-2 text-white font-bold [direction:rtl]">
       <div className="h-full w-full [direction:ltr]">
+        <div className="relative min-h-full w-full">
+          {shouldBlockUntilCharacterSelection && (
+            <div className="absolute inset-0 z-10 bg-black/80">
+              <div className="flex h-full w-full items-center justify-center px-4">
+              </div>
+            </div>
+          )}
         {isReadOnlyCommunitySheet ? (
           <div className={`${headerCardClass} mt-5 px-4 py-4`}>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -388,32 +397,54 @@ export default function General(props: { dataSession: any; id: string; gameMaste
             </div>
           </div>
         ) : (
-          <div className="mt-5 grid w-full grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className={`${headerCardClass} px-4 py-3`}>
-              <p className={headerMetaLabelClass}>Personagem Ativo</p>
-              <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
-                <select
-                  value={isNarrator && sheetId === '' ? '__none__' : sheetId}
-                  disabled={isReadOnlyCommunitySheet}
-                  onChange={(event) => {
-                    if (event.target.value === '__none__') {
-                      clearSessionCharacter();
-                      return;
-                    }
+          <div className="relative mt-5 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className={`${headerCardClass} px-4 py-3 ${shouldBlockUntilCharacterSelection ? 'relative z-20' : ''}`}>
+              {isStandaloneSheetView ? (
+                <>
+                  <p className={headerMetaLabelClass}>Navegacao</p>
+                  <div className="mt-2">
+                    <button
+                      type="button"
+                      onClick={() => router.push('/sheets')}
+                      className="inline-flex min-h-[42px] w-full items-center justify-center border border-red-950 bg-red-950 px-4 py-2.5 font-geist-mono text-[0.66rem] uppercase tracking-[0.18em] text-white transition-colors hover:bg-red-900"
+                    >
+                      Retornar para Fichas
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <p className={headerMetaLabelClass}>Personagem Ativo</p>
+                  <div className="mt-2 flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-between">
+                    <select
+                      value={isNarrator && sheetId === '' ? '__none__' : sheetId}
+                      disabled={isReadOnlyCommunitySheet}
+                      onChange={(event) => {
+                        if (event.target.value === '__none__') {
+                          clearSessionCharacter();
+                          return;
+                        }
 
-                    selectSessionCharacter(event.target.value);
-                  }}
-                  className={`min-w-0 flex-1 border border-zinc-500/30 bg-black/60 px-4 py-2.5 text-left font-geist-mono text-[0.66rem] uppercase tracking-[0.18em] text-white/75 outline-none transition-colors hover:border-red-700/80 hover:text-white ${isReadOnlyCommunitySheet ? 'cursor-default opacity-70' : 'cursor-pointer'}`}
-                >
-                  {isNarrator && <option key="no-character" value="__none__">Nenhum personagem</option>}
-                  {!isNarrator && sheetId === '' && <option key="select-character" value="">Selecione um personagem</option>}
-                  {sessionCharacterOptions.map((player: any) => (
-                    <option key={player.id} value={player.id}>
-                      {getSessionCharacterLabel(player)}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                        selectSessionCharacter(event.target.value);
+                      }}
+                      className={`min-w-0 flex-1 border border-zinc-500/30 bg-black/60 px-4 py-2.5 text-left font-geist-mono text-[0.66rem] uppercase tracking-[0.18em] text-white/75 outline-none transition-colors hover:border-red-700/80 hover:text-white ${isReadOnlyCommunitySheet ? 'cursor-default opacity-70' : 'cursor-pointer'}`}
+                    >
+                      {isNarrator && <option key="no-character" value="__none__">Nenhum personagem</option>}
+                      {!isNarrator && sheetId === '' && <option key="select-character" value="">Selecione um personagem</option>}
+                      {sessionCharacterOptions.map((player: any, index: number) => {
+                        const optionValue = player?.id || `session-character-${player?.email || player?.user || 'player'}-${index}`;
+                        const optionKey = `${optionValue}-${index}`;
+
+                        return (
+                          <option key={optionKey} value={optionValue}>
+                            {getSessionCharacterLabel(player)}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </>
+              )}
             </div>
             <div className={`${headerCardClass} px-4 py-3 ${hasPendingSessionTransfer ? 'pointer-events-none select-none opacity-45' : ''}`}> 
               <div className={isStandaloneSheetView ? 'flex justify-end' : 'grid grid-cols-[minmax(0,1fr)_auto] gap-3'}>
@@ -738,16 +769,19 @@ export default function General(props: { dataSession: any; id: string; gameMaste
           <Rituals />
           <Touchstones />
       {chronicleTransferPrompt && (
-        <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/75 px-4">
-          <div className="w-full max-w-md border border-red-700/40 bg-[#070a0b] p-5 text-white shadow-[0_24px_60px_rgba(0,0,0,0.55)]">
-            <p className="font-geist-mono text-[0.62rem] uppercase tracking-[0.22em] text-zinc-500">Transferência de ficha</p>
-            <h3 className="mt-3 font-kingthings text-[1rem] uppercase tracking-[0.16em] text-[#e1e7dd]">
-              Confirmar solicitação
-            </h3>
-            <p className="mt-4 font-geist-mono text-[0.68rem] leading-relaxed tracking-[0.08em] text-zinc-200">
-              Deseja solicitar a transferência desta ficha para a sessão {capitalizeFirstLetter(chronicleTransferPrompt.name)}?
-            </p>
-            <div className="mt-5 flex items-center justify-end gap-3">
+        <DraggablePopup
+          title="Transferencia de ficha"
+          description="Arraste este popup pela barra superior"
+          onClose={() => setChronicleTransferPrompt(null)}
+          sizeClassName="w-[calc(100vw-1.5rem)] sm:w-[50vw] h-[50vh]"
+        >
+          <div className="flex h-full min-h-0 flex-col justify-between gap-4">
+            <div className="border border-white/10 bg-black/82 p-4">
+              <p className="font-geist-mono text-[0.68rem] leading-relaxed tracking-[0.08em] text-zinc-200">
+                Deseja solicitar a transferencia desta ficha para a sessao {capitalizeFirstLetter(chronicleTransferPrompt.name)}?
+              </p>
+            </div>
+            <div className="mt-auto flex items-center justify-end gap-3 border-t border-white/10 pt-4">
               <button
                 type="button"
                 onClick={() => setChronicleTransferPrompt(null)}
@@ -764,11 +798,12 @@ export default function General(props: { dataSession: any; id: string; gameMaste
               </button>
             </div>
           </div>
-        </div>
+        </DraggablePopup>
       )}
           <Background type="background" />
           <Background type="notes" />
         </div>
+      </div>
       </div>
       {showResetSheet && <ResetSheet />}
       {showDeleteSheet && <DeleteSheet isGameMaster={session.gameMaster === email} />}

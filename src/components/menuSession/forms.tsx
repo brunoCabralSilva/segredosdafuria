@@ -20,7 +20,7 @@ export default function Forms() {
 
   const openSessionChat = () => {
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new Event('session:open-chat'));
+      window.dispatchEvent(new Event('session:open-action-result'));
     }
   };
 
