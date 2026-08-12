@@ -444,6 +444,10 @@ export default function Battle() {
   const [selectedBattleImageOption, setSelectedBattleImageOption] = useState(
     selectedBattleImageSrcFromSession
   );
+  const [pendingBattleImageOption, setPendingBattleImageOption] = useState(
+    selectedBattleImageSrcFromSession
+  );
+  const [showBattleImagePicker, setShowBattleImagePicker] = useState(false);
   const [battleImageOptions, setBattleImageOptions] = useState<BattleImageOption[]>([
     createBattleImageOption(selectedBattleImageSrcFromSession),
   ]);
@@ -475,6 +479,7 @@ export default function Battle() {
   useEffect(() => {
     setBattleImageSrc(selectedBattleImageSrcFromSession);
     setSelectedBattleImageOption(selectedBattleImageSrcFromSession);
+    setPendingBattleImageOption(selectedBattleImageSrcFromSession);
   }, [selectedBattleImageSrcFromSession]);
 
   useEffect(() => {
@@ -549,7 +554,8 @@ export default function Battle() {
   const editingTokenHasSessionCharacter = editingToken
     ? tokenHasSessionCharacter(editingToken)
     : false;
-  const isAnyBattlePopupOpen = isPopupOpen || isTokenPopupOpen;
+  const isAnyBattlePopupOpen =
+    isPopupOpen || isTokenPopupOpen || showBattleImagePicker;
   const isBlueMarkerSelected =
     editingPoint !== null &&
     normalizeMarkerColor(editingPoint.color) === "azul";
@@ -800,6 +806,13 @@ export default function Battle() {
     } finally {
       setIsSavingMap(false);
     }
+  }
+
+  async function applyBattleImageSelection() {
+    setBattleImageSrc(pendingBattleImageOption);
+    setSelectedBattleImageOption(pendingBattleImageOption);
+    await updateBattleImage(pendingBattleImageOption);
+    setShowBattleImagePicker(false);
   }
   function clearMeasurementLine() {
     setMeasurements([]);
@@ -1608,23 +1621,20 @@ export default function Battle() {
               +
             </button>
 
-            <select
-              value={selectedBattleImageOption}
-              onChange={(event) => {
-                const nextValue = event.target.value;
-                setSelectedBattleImageOption(nextValue);
-                setBattleImageSrc(nextValue);
-                void updateBattleImage(nextValue);
-              }}
-              className="h-9 min-w-[13rem] border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white outline-none transition-colors hover:border-red-900 focus:border-red-900"
-              title="Selecionar imagem do mapa"
-            >
-              {battleImageOptions.map((imageOption) => (
-                <option key={imageOption.value} value={imageOption.value} className="bg-black text-white">
-                  {imageOption.label.toUpperCase()}
-                </option>
-              ))}
-            </select>
+            {isGameMaster && (
+              <button
+                type="button"
+                disabled={isSavingMap}
+                onClick={() => {
+                  setPendingBattleImageOption(selectedBattleImageOption);
+                  setShowBattleImagePicker(true);
+                }}
+                className="inline-flex h-9 min-w-[13rem] items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30 disabled:cursor-not-allowed disabled:opacity-60"
+                title="Selecionar imagem do mapa"
+              >
+                Selecionar mapa
+              </button>
+            )}
 
             {isSavingMap && (
               <span className="text-xs text-zinc-300">
@@ -1665,6 +1675,7 @@ export default function Battle() {
                   if (battleImageSrc !== DEFAULT_BATTLE_IMAGE_SRC) {
                     setBattleImageSrc(DEFAULT_BATTLE_IMAGE_SRC);
                     setSelectedBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
+                    setPendingBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
                     void updateBattleImage(DEFAULT_BATTLE_IMAGE_SRC);
                   }
                 }}
@@ -2357,6 +2368,81 @@ export default function Battle() {
                     {isSavingMap ? "Salvando..." : "Salvar"}
                   </button>
                   </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {showBattleImagePicker && isGameMaster && (
+            <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/80 px-4 py-4">
+              <div
+                className="flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden border border-zinc-700/40 bg-gradient-to-br from-black via-zinc-950 to-[#140000] text-white shadow-[0_0_28px_rgba(0,0,0,0.72)]"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+                  <div>
+                    <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white">
+                      Selecionar mapa
+                    </p>
+                    <p className="mt-1 font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/55">
+                      Escolha uma imagem e clique em aplicar para definir o mapa da batalha.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowBattleImagePicker(false)}
+                    className="flex h-9 w-9 items-center justify-center border border-white/10 bg-black/70 text-white/75 transition-colors hover:border-red-700 hover:bg-[#5f0000] hover:text-white"
+                  >
+                    <IoIosCloseCircleOutline className="text-2xl" />
+                  </button>
+                </div>
+                <div className="principles-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-4">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {battleImageOptions.map((imageOption) => {
+                      const isSelected = pendingBattleImageOption === imageOption.value;
+
+                      return (
+                        <button
+                          key={imageOption.value}
+                          type="button"
+                          onClick={() => setPendingBattleImageOption(imageOption.value)}
+                          className={`flex flex-col gap-2 border p-2 text-left transition-colors ${isSelected ? 'border-red-950 bg-red-950/30' : 'border-white/10 bg-black/50 hover:border-red-900 hover:bg-red-950/20'}`}
+                        >
+                          <div className="relative aspect-video w-full overflow-hidden border border-white/10 bg-black">
+                            <Image
+                              src={imageOption.value}
+                              alt={imageOption.label}
+                              fill
+                              className="object-contain"
+                            />
+                          </div>
+                          <span className="block font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/85">
+                            {imageOption.label}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="flex items-center justify-end gap-2 border-t border-white/10 px-4 py-3">
+                  <button
+                    type="button"
+                    disabled={isSavingMap}
+                    onClick={() => setShowBattleImagePicker(false)}
+                    className="inline-flex h-9 min-w-[8rem] items-center justify-center border border-white/10 bg-black/60 px-3 font-geist-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/20 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="button"
+                    disabled={isSavingMap || pendingBattleImageOption === selectedBattleImageOption}
+                    onClick={() => {
+                      void applyBattleImageSelection();
+                    }}
+                    className="inline-flex h-9 min-w-[8rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    Aplicar
+                  </button>
                 </div>
               </div>
             </div>

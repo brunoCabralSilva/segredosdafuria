@@ -145,7 +145,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     setDataSheet(selectedPlayer);
     setShowMessage({
       show: true,
-      text: `Você selecionou o personagem ${selectedPlayer.data.name !== '' ? selectedPlayer.data.name : ''} (${capitalizeFirstLetter(selectedPlayer.user)})`,
+      text: `VocÃª selecionou o personagem ${selectedPlayer.data.name !== '' ? selectedPlayer.data.name : ''} (${capitalizeFirstLetter(selectedPlayer.user)})`,
     });
 
     await registerHistory(
@@ -223,6 +223,23 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     }
   };
 
+  const filterAllowedGifts = (gifts: any[], trybe: string, auspice: string) => {
+    const normalizedAllowedTypes = new Set(
+      ['global', trybe, auspice]
+        .map((item) => String(item || '').trim().toLowerCase())
+        .filter((item) => item !== '')
+    );
+
+    return gifts.filter((gift: any) => {
+      const giftBelongings = Array.isArray(gift?.belonging) ? gift.belonging : [];
+
+      return giftBelongings.some((belongingItem: any) => {
+        const belongingType = String(belongingItem?.type || '').trim().toLowerCase();
+        return normalizedAllowedTypes.has(belongingType);
+      });
+    });
+  };
+
   const updateValue = async (key: string, value: string, namePtBr: string) => {
     const findPlayer = players.find((player: any) => player.id === sheetId) || dataSheet;
     if (!findPlayer) return false;
@@ -232,7 +249,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     if (key === 'name') {
       const normalizedName = value.replace(/\s+/g, ' ').trim();
       if (normalizedName === '') {
-        setShowMessage({ show: true, text: 'Necessário preencher um nome válido.' });
+        setShowMessage({ show: true, text: 'NecessÃ¡rio preencher um nome vÃ¡lido.' });
         return false;
       }
 
@@ -262,7 +279,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
       const normalizedPortraitUrl = value.trim();
 
       if (!validatePortraitUrl(normalizedPortraitUrl)) {
-        setShowMessage({ show: true, text: 'Necessário informar um link de imagem válido com http ou https.' });
+        setShowMessage({ show: true, text: 'NecessÃ¡rio informar um link de imagem vÃ¡lido com http ou https.' });
         return false;
       }
 
@@ -289,11 +306,20 @@ export default function General(props: { dataSession: any; id: string; gameMaste
       return true;
     }
 
+    const nextTrybe = key === 'trybe' ? value : findPlayer?.data?.trybe || '';
+    const nextAuspice = key === 'auspice' ? value : findPlayer?.data?.auspice || '';
+    const shouldFilterGifts = key === 'trybe' || key === 'auspice';
+    const currentGifts = Array.isArray(findPlayer?.data?.gifts) ? findPlayer.data.gifts : [];
+    const filteredGifts = shouldFilterGifts
+      ? filterAllowedGifts(currentGifts, nextTrybe, nextAuspice)
+      : currentGifts;
+
     const updatedPlayer = {
       ...findPlayer,
       data: {
         ...findPlayer.data,
         [key]: value,
+        ...(shouldFilterGifts ? { gifts: filteredGifts } : {}),
       },
     };
 
@@ -333,7 +359,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const sheetDataValues = dataSheet?.data ?? {};
   const displayName = (dataSheet?.data?.name ?? '').trim();
   const portraitUrlPersisted = (dataSheet?.data?.portraitUrl ?? '').trim();
-  const sessionName = dataSession?.name || session?.name || 'Sem crônica';
+  const sessionName = dataSession?.name || session?.name || 'Sem crÃ´nica';
   const selectedTrybeData = dataTrybes.find((trybe: any) => trybe.nameEn === sheetDataValues.trybe || trybe.namePtBr === sheetDataValues.trybe);
   const patronName = selectedTrybeData?.patronName || 'Sem padroeiro';
   const patronDescription = selectedTrybeData?.patron || 'Selecione uma tribo para visualizar o espirito padroeiro.';
@@ -578,7 +604,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                         </div>
                         {portraitImageError && portraitUrlPersisted !== '' && (
                           <div className="mt-2 font-geist-mono text-[0.54rem] uppercase tracking-[0.16em] text-red-400/80">
-                            Não foi possí­vel carregar esta imagem.
+                            NÃ£o foi possÃ­Â­vel carregar esta imagem.
                           </div>
                         )}
                       </div>
@@ -615,9 +641,9 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       </select>
                     </div>
                     <div>
-                      <p className={fieldLabelClass}>Augúrio</p>
-                      <select className={selectClass} value={sheetDataValues.auspice || ''} onChange={(e) => updateValue('auspice', e.target.value, 'Augúrio')}>
-                        <option key="auspice-placeholder" disabled value="">Escolha um Augúrio</option>
+                      <p className={fieldLabelClass}>AugÃºrio</p>
+                      <select className={selectClass} value={sheetDataValues.auspice || ''} onChange={(e) => updateValue('auspice', e.target.value, 'AugÃºrio')}>
+                        <option key="auspice-placeholder" disabled value="">Escolha um AugÃºrio</option>
                         <option key="auspice-ragabash" value="ragabash">Ragabash</option>
                         <option key="auspice-theurge" value="theurge">Theurge</option>
                         <option key="auspice-philodox" value="philodox">Philodox</option>
@@ -676,14 +702,14 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       {hasPendingSessionTransfer ? (
                         <div className="mt-2 border-b border-zinc-500/20 pb-3">
                           <p className="font-geist-mono text-[0.64rem] uppercase tracking-[0.12em] text-zinc-200">
-                            Voce solicitou transferência para a sessão {pendingSessionTransfer.sessionName}
+                            Voce solicitou transferÃªncia para a sessÃ£o {pendingSessionTransfer.sessionName}
                           </p>
                           <button
                             type="button"
                             onClick={cancelPendingChronicleLink}
                             className="mt-3 inline-flex border border-red-700/60 bg-black px-3 py-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.14em] text-white transition-colors hover:bg-red-950"
                           >
-                            Cancelar solicitação
+                            Cancelar solicitaÃ§Ã£o
                           </button>
                         </div>
                       ) : (
@@ -703,7 +729,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                             ))
                           ) : (
                             <option key="empty-sessions" value="__empty__" disabled>
-                              Nenhuma mesa ativa disponí­vel
+                              Nenhuma mesa ativa disponÃ­Â­vel
                             </option>
                           )}
                         </select>
@@ -733,7 +759,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       </div>
                     </div>
                     <div className="sm:col-span-2">
-                      <p className={fieldLabelClass}>Proibição</p>
+                      <p className={fieldLabelClass}>ProibiÃ§Ã£o</p>
                       <div className="mt-2 border-b border-zinc-500/20 pb-2 font-geist-mono uppercase text-[#dfe5da] whitespace-normal break-words pr-2 text-[8px] leading-relaxed tracking-[0.08em]">
                         {patronBan}
                       </div>
@@ -749,10 +775,10 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                 <ItemAgravated name="health" namePtBr="Vitalidade" />
               </div>
               <div className="col-span-2 h-full sm:pb-5">
-                <ItemAgravated name="willpower" namePtBr="Força de Vontade" />
+                <ItemAgravated name="willpower" namePtBr="ForÃ§a de Vontade" />
               </div>
               <div className="col-span-2 h-full sm:pb-5">
-                <Item quant={5} name="rage" namePtBr="Fúria" />
+                <Item quant={5} name="rage" namePtBr="FÃºria" />
               </div>
             </div>
             <div className="col-span-1 sm:col-span-3 w-full">
