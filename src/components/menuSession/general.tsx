@@ -735,7 +735,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                             ))
                           ) : (
                             <option key="empty-sessions" value="__empty__" disabled>
-                              Nenhuma mesa ativa disponí­vel
+                              Nenhuma mesa ativa disponível
                             </option>
                           )}
                         </select>
