@@ -32,16 +32,16 @@ export default function Forms() {
 
     if (session.typeSession === 'Regras Alternativas') {
       const findResilienciaDeLuna = dataSheet.data.advantagesAndFlaws.advantages.find(
-        (advantage: { title: string }) => advantage.title === 'ResiliÃªncia de Luna'
+        (advantage: { title: string }) => advantage.title === 'Resiliência de Luna'
       );
 
       if (dataSheet.data.rage >= 5) {
         setShowMessage({
           show: true,
-          text: `O personagem ${dataSheet.data.name} possui FÃºria 5, se encontra em Frenesi e nÃ£o pode realizar nenhuma aÃ§Ã£o que nÃ£o seja atacar ou sair do mesmo (caso seja possÃ­vel no momento).`,
+          text: `O personagem ${dataSheet.data.name} possui Fúria 5, se encontra em Frenesi e não pode realizar nenhuma ação que não seja atacar ou sair do mesmo (caso seja possí­vel no momento).`,
         });
       } else if (newForm !== actualForm) {
-        if (newForm === 'HominÃ­deo' || newForm === 'Lupino') {
+        if (newForm === 'Hominí­deo' || newForm === 'Lupino') {
           if (actualForm === 'Crinos') {
             dataSheet.data.attributes.strength -= 4;
             dataSheet.data.attributes.stamina -= 4;
@@ -69,10 +69,10 @@ export default function Forms() {
           if (dataSheet.data.rage === 0) {
             setShowMessage({
               show: true,
-              text: `O personagem ${dataSheet.data.name} nÃ£o possui FÃºria para realizar esta aÃ§Ã£o (Mudar para a forma Crinos).`,
+              text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma Crinos).`,
             });
           } else {
-            if (actualForm === 'HominÃ­deo' || actualForm === 'Lupino') {
+            if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
               dataSheet.data.attributes.strength += 4;
               dataSheet.data.attributes.stamina += 4;
               dataSheet.data.attributes.dexterity += 4;
@@ -85,17 +85,17 @@ export default function Forms() {
             const oldRage = dataSheet.data.rage;
             dataSheet.data.form = newForm;
             await updateDataWithRage(session.typeSession, sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
-            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'NÃ£o houve aumento de FÃºria' : `FÃºria atualizada de ${oldRage} para ${dataSheet.data.rage}${dataSheet.data.rage >= 5 ? ' e o personagem entrou em Frenesi)' : ''}`}).`, type: 'notification' }, null, setShowMessage);
+            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'Não houve aumento de Fúria' : `Fúria atualizada de ${oldRage} para ${dataSheet.data.rage}${dataSheet.data.rage >= 5 ? ' e o personagem entrou em Frenesi)' : ''}`}).`, type: 'notification' }, null, setShowMessage);
             openSessionChat();
           }
         } else {
           if (dataSheet.data.rage === 0) {
             setShowMessage({
               show: true,
-              text: `O personagem ${dataSheet.data.name} nÃ£o possui FÃºria para realizar esta aÃ§Ã£o (Mudar para a forma ${newForm}).`,
+              text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`,
             });
           } else {
-            if (actualForm === 'HominÃ­deo' || actualForm === 'Lupino') {
+            if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
               dataSheet.data.attributes.strength += 2;
               dataSheet.data.attributes.dexterity += 2;
               if (findResilienciaDeLuna) dataSheet.data.attributes.stamina += 4;
@@ -109,26 +109,26 @@ export default function Forms() {
             dataSheet.data.form = newForm;
             const oldRage = dataSheet.data.rage;
             await updateDataWithRage(session.typeSession, sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
-            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'NÃ£o houve aumento de FÃºria' : `FÃºria atualizada de ${oldRage} para ${dataSheet.data.rage}${dataSheet.data.rage >= 5 ? ' e o personagem entrou em Frenesi)' : ''}`}).`, type: 'notification' }, null, setShowMessage);
+            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'Não houve aumento de Fúria' : `Fúria atualizada de ${oldRage} para ${dataSheet.data.rage}${dataSheet.data.rage >= 5 ? ' e o personagem entrou em Frenesi)' : ''}`}).`, type: 'notification' }, null, setShowMessage);
             openSessionChat();
           }
         }
       }
     } else {
       const findResilienciaDeLuna = dataSheet.data.advantagesAndFlaws.advantages.find(
-        (advantage: { title: string }) => advantage.title === 'ResiliÃªncia de Luna'
+        (advantage: { title: string }) => advantage.title === 'Resiliência de Luna'
       );
 
       if (newForm !== actualForm) {
-        if (newForm === 'HominÃ­deo' || newForm === 'Lupino') {
+        if (newForm === 'Hominí­deo' || newForm === 'Lupino') {
           if (actualForm === 'Crinos') {
             dataSheet.data.attributes.strength -= 4;
             dataSheet.data.attributes.stamina -= 4;
             dataSheet.data.attributes.dexterity -= 4;
             if (dataSheet.data.rage > 0) {
               dataSheet.data.rage = 1;
-              await registerMessage(sessionId, { message: `O personagem ${dataSheet.data.name} Mudou para a forma ${newForm}. FÃºria reduzida para 1 por ter saÃ­do da forma Crinos.`, type: 'transform' }, email, setShowMessage);
-              await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${newForm} (FÃºria reduzida para 1 por ter saÃ­do da forma Crinos.).`, type: 'notification' }, null, setShowMessage);
+              await registerMessage(sessionId, { message: `O personagem ${dataSheet.data.name} Mudou para a forma ${newForm}. Fúria reduzida para 1 por ter saí­do da forma Crinos.`, type: 'transform' }, email, setShowMessage);
+              await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${newForm} (Fúria reduzida para 1 por ter saído da forma Crinos.).`, type: 'notification' }, null, setShowMessage);
             }
           } else if (actualForm === 'Hispo' || actualForm === 'Glabro') {
             dataSheet.data.attributes.strength -= 2;
@@ -151,10 +151,10 @@ export default function Forms() {
           if (dataSheet.data.rage < 2) {
             setShowMessage({
               show: true,
-              text: `O personagem ${dataSheet.data.name} nÃ£o possui FÃºria para realizar esta aÃ§Ã£o (Mudar para a forma Crinos).`,
+              text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma Crinos).`,
             });
           } else {
-            if (actualForm === 'HominÃ­deo' || actualForm === 'Lupino') {
+            if (actualForm === 'Hominídeo' || actualForm === 'Lupino') {
               dataSheet.data.attributes.strength += 4;
               dataSheet.data.attributes.stamina += 4;
               dataSheet.data.attributes.dexterity += 4;
@@ -167,17 +167,17 @@ export default function Forms() {
             const oldRage = dataSheet.data.rage;
             dataSheet.data.form = newForm;
             await updateDataWithRage(session.typeSession, sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
-            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'NÃ£o houve perda de FÃºria' : `FÃºria atualizada de ${oldRage} para ${dataSheet.data.rage}`}).`, type: 'notification' }, null, setShowMessage);
+            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'Não houve perda de Fúria' : `Fúria atualizada de ${oldRage} para ${dataSheet.data.rage}`}).`, type: 'notification' }, null, setShowMessage);
             openSessionChat();
           }
         } else {
           if (dataSheet.data.rage < 1) {
             setShowMessage({
               show: true,
-              text: `O personagem ${dataSheet.data.name} nÃ£o possui FÃºria para realizar esta aÃ§Ã£o (Mudar para a forma ${newForm}).`,
+              text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`,
             });
           } else {
-            if (actualForm === 'HominÃ­deo' || actualForm === 'Lupino') {
+            if (actualForm === 'Hominí­deo' || actualForm === 'Lupino') {
               dataSheet.data.attributes.strength += 2;
               dataSheet.data.attributes.dexterity += 2;
               if (findResilienciaDeLuna) dataSheet.data.attributes.stamina += 4;
@@ -191,7 +191,7 @@ export default function Forms() {
             dataSheet.data.form = newForm;
             const oldRage = dataSheet.data.rage;
             await updateDataWithRage(session.typeSession, sessionId, email, sheetId, dataSheet, newForm, setShowMessage);
-            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'NÃ£o houve perda de FÃºria' : `FÃºria atualizada de ${oldRage} para ${dataSheet.data.rage}`}).`, type: 'notification' }, null, setShowMessage);
+            await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${dataSheet.data.form} (${oldRage === dataSheet.data.rage ? 'Não houve perda de Fúria' : `Fúria atualizada de ${oldRage} para ${dataSheet.data.rage}`}).`, type: 'notification' }, null, setShowMessage);
             openSessionChat();
           }
         }
@@ -201,9 +201,9 @@ export default function Forms() {
 
   const currentFormName = sheetData?.form || '';
   const currentForm = dataForms.find((form: any) => form.name === currentFormName);
-  const getCostLabel = (cost?: string) => cost?.includes('Nenhum') ? 'Nenhum teste de FÃºria' : (cost || '');
+  const getCostLabel = (cost?: string) => cost?.includes('Nenhum') ? 'Nenhum teste de Fúria' : (cost || '');
   const formColumns = [
-    ['HominÃ­deo', 'Lupino'],
+    ['Hominí­deo', 'Lupino'],
     ['Hispo', 'Glabro'],
     ['Crinos'],
   ];
@@ -283,7 +283,7 @@ export default function Forms() {
             <div>
               <p className="font-kingthings text-[0.92rem] uppercase tracking-[0.28em] text-red-500/85">FORMAS</p>
               <p className="mt-2 max-w-3xl font-geist-mono text-[10px] uppercase tracking-[0.14em] text-white/55">
-                MudanÃ§as de atributos e efeitos sÃ£o aplicados imediatamente ao confirmar a nova forma.
+                Mudanças de atributos e efeitos são aplicados imediatamente ao confirmar a nova forma.
               </p>
             </div>
             <div className="border border-red-900/60 bg-black/40 px-3 py-2 font-geist-mono text-[10px] uppercase tracking-[0.14em] text-red-200/85">
