@@ -108,17 +108,17 @@ export default function ItemSkill(props: any) {
               {input ? <BsCheckSquare className="text-base" /> : <FaRegEdit className="text-sm" />}
             </button>
             <div className="min-w-0 flex-1">
-              <div className="font-kingthings text-[0.74rem] tracking-[0.16em] text-white/70">{translate(name)}</div>
+              <div className="font-kingthings uppercase text-[0.74rem] tracking-[0.16em] text-white/70">{translate(name)}</div>
               {input ? (
                 <input
                   type="text"
-                  className="mt-2 w-full border-b border-red-700/55 bg-transparent pb-1 font-kingthings text-[0.63rem] tracking-[0.16em] text-zinc-200 outline-none placeholder:text-zinc-500"
+                  className="mt-2 w-full border-b border-red-700/55 bg-transparent pb-1 font- text-[0.63rem] tracking-[0.16em] text-zinc-200 outline-none placeholder:text-zinc-500"
                   placeholder=""
                   value={skill}
                   onChange={(e) => setSkill(e.target.value.replace(/\s+/g, ' '))}
                 />
               ) : (
-                <div className={`mt-2 ${specialtyText !== '' ? 'border-b' : ''} border-zinc-500/20 pb-1 font-kingthings text-[0.56rem] tracking-[0.22em] text-zinc-500`}>
+                <div className={`mt-2 ${specialtyText !== '' ? 'border-b' : ''} border-zinc-500/20 pb-1 font-kingthings uppercase text-[0.56rem] tracking-[0.22em] text-zinc-500`}>
                   {specialtyText}
                 </div>
               )}
