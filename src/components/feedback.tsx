@@ -32,7 +32,7 @@ export default function Feedback(props: { title?: string }) {
 
     if (!nameUser || nameUser.length < 2) {
       setMessagePopup({
-        message: 'O nome do usuario deve possuir pelo menos 2 caracteres.',
+        message: 'O nome do usuário deve possuir pelo menos 2 caracteres.',
         error: true,
         show: true,
       });

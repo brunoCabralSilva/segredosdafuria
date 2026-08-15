@@ -1,17 +1,18 @@
-'use client';
+﻿'use client';
 
 import { useContext, useEffect, useState } from 'react';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
+import Loading from '@/components/loading';
 import Simplify from '@/components/simplify';
 import MessageToUser from '@/components/dicesAndMessages/messageToUser';
 import VerifySession from '@/components/popup/verifySession';
 import CreateSection from '@/components/popup/createSection';
 import contexto from '@/context/context';
-import { authenticate } from '@/firebase/authenticate';
 import { addNewSheetMandatory, getSheetsByEmail } from '@/firebase/players';
 import { getAllSessionsByFunction, getSessions } from '@/firebase/sessions';
 import { capitalizeFirstLetter, parseDate, sheetStructure } from '@/firebase/utilities';
+import useRequiredAuth from '@/hooks/useRequiredAuth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -59,6 +60,7 @@ export default function Profile() {
   const [playerSessions, setPlayerSessions] = useState<ProfileSession[]>([]);
   const [mySheets, setMySheets] = useState<ProfileSheet[]>([]);
   const router = useRouter();
+  const { authChecked, authUser } = useRequiredAuth();
   const {
     simplify,
     dataSession,
@@ -72,22 +74,11 @@ export default function Profile() {
   } = useContext(contexto);
 
   const getProfileUser = async () => {
-    if (email !== '' && nameUser !== '') {
-      return { email, displayName: nameUser };
+    if (authUser) {
+      return { email: authUser.email, displayName: authUser.displayName };
     }
 
-    const authData: any = await authenticate(setShowMessage);
-    if (!authData || !authData.email || !authData.displayName) return null;
-
-    const authUser = {
-      email: String(authData.email),
-      displayName: String(authData.displayName),
-    };
-
-    setEmail(authUser.email);
-    setNameUser(authUser.displayName);
-    setDataUser(authUser);
-    return authUser;
+    return null;
   };
 
   const getCurrentBrazilDateTimeString = () => {
@@ -157,6 +148,8 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    if (!authChecked || !authUser) return;
+
     let active = true;
 
     const loadProfile = async () => {
@@ -164,22 +157,12 @@ export default function Profile() {
         resetPopups();
         if (active) setDataSession({ show: false, id: '' });
 
-        const authData: any = await authenticate(setShowMessage);
-
-        if (!authData || !authData.email || !authData.displayName) {
-          router.push('/login');
-          return;
-        }
-
-        const authUser = {
-          email: String(authData.email),
-          displayName: String(authData.displayName),
-        };
+        if (!authChecked || !authUser) return;
 
         if (active) {
           setEmail(authUser.email);
           setNameUser(authUser.displayName);
-          setDataUser(authUser);
+          setDataUser({ email: authUser.email, displayName: authUser.displayName });
         }
 
         const [sessions, sessionMemberships, sheets] = await Promise.all([
@@ -237,8 +220,15 @@ export default function Profile() {
     return () => {
       active = false;
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authChecked, authUser, resetPopups, setDataSession, setDataUser, setShowMessage]);
+
+  if (!authChecked) {
+    return (
+      <main className='flex min-h-screen items-center justify-center bg-black'>
+        <Loading />
+      </main>
+    );
+  }
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center bg-black">
@@ -271,9 +261,9 @@ export default function Profile() {
                 <div className="w-full">
                   <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                      <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é narrador</h2>
+                      <h2 className="font-kingthings text-lg sm:text-xl">SessÃµes em que vocÃª Ã© narrador</h2>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                        Acompanhe as mesas que estão sob sua condução e retome cada crônica com um clique.
+                        Acompanhe as mesas que estÃ£o sob sua conduÃ§Ã£o e retome cada crÃ´nica com um clique.
                       </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
@@ -282,7 +272,7 @@ export default function Profile() {
                         onClick={() => void handleCreateSession()}
                         className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
                       >
-                        Criar Sessão
+                        Criar SessÃ£o
                       </button>
                       <Link
                         href="/sessions"
@@ -295,7 +285,7 @@ export default function Profile() {
 
                   {narratorSessions.length === 0 ? (
                     <div className="border border-zinc-500/30 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
-                      Você ainda não possui sessões ativas em que seja narrador.
+                      VocÃª ainda nÃ£o possui sessÃµes ativas em que seja narrador.
                     </div>
                   ) : (
                     <Swiper
@@ -334,7 +324,7 @@ export default function Profile() {
                             <div className="relative h-36 w-full">
                               <Image
                                 src={`/images/sessions/${session.imageName || '01'}.png`}
-                                alt={`Banner da sessão ${session.name || ''}`}
+                                alt={`Banner da sessÃ£o ${session.name || ''}`}
                                 className="object-cover"
                                 fill
                                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -343,17 +333,17 @@ export default function Profile() {
                               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
                               <div className="absolute inset-x-0 bottom-0 px-3 pb-1 pt-3">
                                 <p className="font-kingthings text-base capitalize text-white transition-colors group-hover:text-red-500">
-                                  {session.name || 'Sessão sem nome'}
+                                  {session.name || 'SessÃ£o sem nome'}
                                 </p>
                               </div>
                             </div>
 
                             <div className="space-y-2 px-4 py-4 text-white uppercase">
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Narrador: <span className="uppercase">{session.nameMaster || 'Não informado'}</span>
+                                Narrador: <span className="uppercase">{session.nameMaster || 'NÃ£o informado'}</span>
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Criada em: {session.creationDate || 'Não informada'}
+                                Criada em: {session.creationDate || 'NÃ£o informada'}
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
                                 Status: {session.statusSession || 'Ativa'}
@@ -372,9 +362,9 @@ export default function Profile() {
                 <div className="mt-10 w-full">
                   <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                      <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é jogador</h2>
+                      <h2 className="font-kingthings text-lg sm:text-xl">SessÃµes em que vocÃª Ã© jogador</h2>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                        Encontre rapidamente as mesas em que seu personagem participa e siga a história de onde parou.
+                        Encontre rapidamente as mesas em que seu personagem participa e siga a histÃ³ria de onde parou.
                       </p>
                     </div>
                     <Link
@@ -387,7 +377,7 @@ export default function Profile() {
 
                   {playerSessions.length === 0 ? (
                     <div className="border border-zinc-500/30 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
-                      Você ainda não possui sessões ativas em que seja jogador.
+                      VocÃª ainda nÃ£o possui sessÃµes ativas em que seja jogador.
                     </div>
                   ) : (
                     <Swiper
@@ -427,7 +417,7 @@ export default function Profile() {
                             <div className="relative h-36 w-full">
                               <Image
                                 src={`/images/sessions/${session.imageName || '01'}.png`}
-                                alt={`Banner da sessão ${session.name || ''}`}
+                                alt={`Banner da sessÃ£o ${session.name || ''}`}
                                 className="object-cover"
                                 fill
                                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -436,17 +426,17 @@ export default function Profile() {
                               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
                               <div className="absolute inset-x-0 bottom-0 px-3 pb-1 pt-3">
                                 <p className="font-kingthings text-base capitalize text-white transition-colors group-hover:text-red-500">
-                                  {session.name || 'Sessão sem nome'}
+                                  {session.name || 'SessÃ£o sem nome'}
                                 </p>
                               </div>
                             </div>
 
                             <div className="space-y-2 px-4 py-4 text-white uppercase">
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Narrador: <span className="uppercase">{session.nameMaster || 'Não informado'}</span>
+                                Narrador: <span className="uppercase">{session.nameMaster || 'NÃ£o informado'}</span>
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Criada em: {session.creationDate || 'Não informada'}
+                                Criada em: {session.creationDate || 'NÃ£o informada'}
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
                                 Status: {session.statusSession || 'Ativa'}
@@ -467,7 +457,7 @@ export default function Profile() {
                     <div>
                       <h2 className="font-kingthings text-lg sm:text-xl">Suas fichas</h2>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                        Reencontre seus personagens, acompanhe seus augúrios e tribos, e retome cada ficha sem esforço.
+                        Reencontre seus personagens, acompanhe seus augÃºrios e tribos, e retome cada ficha sem esforÃ§o.
                       </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
@@ -489,7 +479,7 @@ export default function Profile() {
 
                   {mySheets.length === 0 ? (
                     <div className="border border-zinc-500/30 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
-                      Você ainda não possui fichas cadastradas.
+                      VocÃª ainda nÃ£o possui fichas cadastradas.
                     </div>
                   ) : (
                     <Swiper
@@ -521,7 +511,7 @@ export default function Profile() {
                       {mySheets.map((sheet) => {
                         const formattedAuspice = capitalizeFirstLetter(String(sheet.data?.auspice || '').trim());
                         const formattedTrybe = capitalizeFirstLetter(String(sheet.data?.trybe || '').trim());
-                        const creatorName = sheet.user || nameUser || 'Usuário não informado';
+                        const creatorName = sheet.user || nameUser || 'UsuÃ¡rio nÃ£o informado';
                         const creatorInitial = creatorName.trim().charAt(0).toUpperCase() || '?';
 
                         return (
@@ -555,17 +545,17 @@ export default function Profile() {
 
                                 <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-3 font-geist-mono text-[10px] uppercase text-white/85 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                                   <div className="min-w-0">
-                                    <p className="text-white/60">Augúrio</p>
-                                    <p className="mt-1 text-[11px] text-white">{formattedAuspice || 'Não definido'}</p>
+                                    <p className="text-white/60">AugÃºrio</p>
+                                    <p className="mt-1 text-[11px] text-white">{formattedAuspice || 'NÃ£o definido'}</p>
                                   </div>
                                   <div />
                                   <div className="min-w-0">
                                     <p className="text-white/60">Tribo</p>
-                                    <p className="mt-1 text-[11px] text-white">{formattedTrybe || 'Não definida'}</p>
+                                    <p className="mt-1 text-[11px] text-white">{formattedTrybe || 'NÃ£o definida'}</p>
                                   </div>
                                   <div className="min-w-0 text-right">
                                     <p className="text-white/60">Criada em</p>
-                                    <p className="mt-1 text-[11px] text-white">{sheet.creationDate || 'Não informada'}</p>
+                                    <p className="mt-1 text-[11px] text-white">{sheet.creationDate || 'NÃ£o informada'}</p>
                                   </div>
                                 </div>
 
@@ -592,3 +582,5 @@ export default function Profile() {
     </main>
   );
 }
+
+

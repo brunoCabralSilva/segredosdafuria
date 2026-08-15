@@ -53,6 +53,7 @@ export default function Sessions() {
     setDataSession,
   } = useContext(contexto);
   const [loadingSessions, setLoadingSessions] = useState(true);
+  const [showData, setShowData] = useState(false);
   const [sessionsAsGM, setSessionsAsGM] = useState<SessionCard[]>([]);
   const [sessionsEnded, setSessionsEnded] = useState<SessionCard[]>([]);
   const [sessionsAsPlayer, setSessionsAsPlayer] = useState<SessionCard[]>([]);
@@ -106,6 +107,7 @@ export default function Sessions() {
         resetPopups();
         if (active) {
           setLoadingSessions(true);
+          setShowData(false);
           setDataSession({ show: false, id: '' });
         }
 
@@ -126,6 +128,8 @@ export default function Sessions() {
 
           if (active) setDataUser(authUser);
         }
+
+        if (active) setShowData(true);
 
         const sessionsList = await getSessions();
         if (active) organizeSessions(sessionsList as SessionCard[], authUser.email);
@@ -226,7 +230,7 @@ export default function Sessions() {
 
       <section className="h-full w-full bg-black/90">
         <div className="relative z-10 mx-auto w-full max-w-[1200px] px-4 pb-10 pt-4 sm:px-8 sm:pb-14">
-          {loadingSessions ? (
+          {!showData || loadingSessions ? (
             <div className="flex min-h-[60vh] items-center justify-center border border-zinc-500/30 bg-black/80 px-6 py-10 text-white">
               <span className="loader z-50" />
             </div>
@@ -275,28 +279,28 @@ export default function Sessions() {
                 <hr className="mt-5 border-white/10" />
               </div>
 
-              {renderSessionSection(
+              {sessionsAsGM.length > 0 && renderSessionSection(
                 'Sessões em que você é narrador',
                 'As mesas sob sua condução ficam reunidas aqui para acesso rápido.',
                 sessionsAsGM,
                 'Você ainda não possui sessões ativas em que seja narrador.',
               )}
 
-              {renderSessionSection(
+              {sessionsAsPlayer.length > 0 && renderSessionSection(
                 'Sessões em que você é jogador',
                 'Aqui ficam as sessões em que seu personagem participa ativamente.',
                 sessionsAsPlayer,
                 'Você ainda não possui sessões ativas em que seja jogador.',
               )}
 
-              {renderSessionSection(
+              {sessionsOthers.length > 0 && renderSessionSection(
                 'Outras sessões',
                 'Explore outras mesas ativas disponíveis no projeto.',
                 sessionsOthers,
                 'Não há outras sessões ativas disponíveis no momento.',
               )}
 
-              {renderSessionSection(
+              {sessionsEnded.length > 0 && renderSessionSection(
                 'Sessões finalizadas',
                 'As crônicas encerradas continuam registradas aqui para consulta.',
                 sessionsEnded,
@@ -312,3 +316,4 @@ export default function Sessions() {
     </main>
   );
 }
+

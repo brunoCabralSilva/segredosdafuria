@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { getAllPlayersBySessionId, updateDataPlayer } from "@/firebase/players";
@@ -44,12 +44,16 @@ export default function HpAndWillPower() {
     setSheetId,
     setShowGiftRoll,
     setShowRitualRoll,
+    showSelectSheet,
   } = useContext(contexto);
 
   const isGameMaster = session?.gameMaster === email;
   const ownedPlayers = sessionSheets.filter((player: any) => player.email === email);
   const selectedOwnedPlayer =
-    ownedPlayers.find((player: any) => player.id === selectedPlayerId) ?? ownedPlayers[0] ?? null;
+    ownedPlayers.find((player: any) => player.id === sheetId) ??
+    ownedPlayers.find((player: any) => player.id === dataSheet?.id) ??
+    ownedPlayers.find((player: any) => player.id === selectedPlayerId) ??
+    ownedPlayers[0] ?? null;
   const selectedPlayerGifts = Array.isArray(selectedOwnedPlayer?.data?.gifts)
     ? selectedOwnedPlayer.data.gifts
     : [];
@@ -72,7 +76,7 @@ export default function HpAndWillPower() {
   }, [dataSession, session?.id, sessionPlayers, setShowMessage]);
 
   useEffect(() => {
-    if (isGameMaster) return;
+    if (isGameMaster || showSelectSheet) return;
 
     if (ownedPlayers.length === 0) {
       if (selectedPlayerId !== "") setSelectedPlayerId("");
@@ -80,8 +84,9 @@ export default function HpAndWillPower() {
     }
 
     const activeOwnedPlayer =
-      ownedPlayers.find((player: any) => player.id === selectedPlayerId) ??
+      ownedPlayers.find((player: any) => player.id === sheetId) ??
       ownedPlayers.find((player: any) => player.id === dataSheet?.id) ??
+      ownedPlayers.find((player: any) => player.id === selectedPlayerId) ??
       ownedPlayers[0];
 
     if (selectedPlayerId !== activeOwnedPlayer.id) {
@@ -95,7 +100,7 @@ export default function HpAndWillPower() {
     if (dataSheet?.id !== activeOwnedPlayer.id) {
       setDataSheet(activeOwnedPlayer);
     }
-  }, [dataSheet?.id, isGameMaster, ownedPlayers, selectedPlayerId, setDataSheet, setSheetId, sheetId]);
+  }, [dataSheet?.id, isGameMaster, ownedPlayers, selectedPlayerId, setDataSheet, setSheetId, sheetId, showSelectSheet]);
 
   function syncPlayerState(nextPlayer: any) {
     setSessionSheets((currentState) =>
@@ -183,7 +188,7 @@ export default function HpAndWillPower() {
 
   function returnTotalHealth(player: any) {
     const findMaldicaoDaAncia = player.data.advantagesAndFlaws.flaws.find(
-      (advantage: { title: string }) => advantage.title == "Maldição da Anciã"
+      (advantage: { title: string }) => advantage.title == "MaldiÃ§Ã£o da AnciÃ£"
     );
     const findPeleEspessa = player.data.advantagesAndFlaws.advantages.find(
       (advantage: { title: string }) => advantage.title == "Pele Espessa"
@@ -213,7 +218,7 @@ export default function HpAndWillPower() {
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? "O Narrador" : capitalizeFirstLetter(nextPlayer.user)} alterou a Fúria do personagem ${nextPlayer.data.name}${nextPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(nextPlayer.user)}` : ""} de ${currentRage} para ${nextRage}.`,
+        message: `${session.gameMaster === email ? "O Narrador" : capitalizeFirstLetter(nextPlayer.user)} alterou a FÃºria do personagem ${nextPlayer.data.name}${nextPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(nextPlayer.user)}` : ""} de ${currentRage} para ${nextRage}.`,
         type: "notification",
       },
       null,
@@ -454,6 +459,9 @@ export default function HpAndWillPower() {
     </div>
   );
 }
+
+
+
 
 
 

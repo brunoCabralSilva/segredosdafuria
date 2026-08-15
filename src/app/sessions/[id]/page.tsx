@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
@@ -131,14 +131,16 @@ export default function SessionId() {
   }, [notifications, setListNotification]);
 
   useEffect(() => {
-    if (snapshot) {
-      const dataWithId = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      setPlayers(dataWithId);
-      if (sheetId !== '') {
-        setDataSheet(dataWithId.find((dataId: any) => dataId.id === sheetId));
-      }
+    if (!snapshot) return;
+
+    const dataWithId = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setPlayers(dataWithId);
+
+    if (sheetId !== '') {
+      const selectedPlayer = dataWithId.find((dataId: any) => dataId.id === sheetId);
+      if (selectedPlayer) setDataSheet(selectedPlayer);
     }
-  }, [snapshot]);
+  }, [setDataSheet, setPlayers, sheetId, snapshot]);
 
   const dataRefSession = doc(db, "sessions", id);
   const [dataSession, loadingSession] = useDocumentData(dataRefSession, { idField: "id" } as any);
@@ -163,11 +165,11 @@ export default function SessionId() {
       setName(authData.displayName);
       const dataDocSnapshot = await getDocs(queryData);
       if (dataDocSnapshot.empty) {
-        setShowMessage({ show: true, text: 'A Sessão foi encontrada' });
+        setShowMessage({ show: true, text: 'A SessÃ£o foi encontrada' });
         router.push('/sessions');
       } else {
         setShowData(true);
-        if (authData.email === 'yslasouzagnr@gmail.com') setShowMessage({ show: true, text: 'Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3' });
+        if (authData.email === 'yslasouzagnr@gmail.com') setShowMessage({ show: true, text: 'Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que vocÃª retorne\nPra que eu possa te abraÃ§ar\nTe beijar de novo\n<3' });
         const sessionData: any = await getSessionById(id);
         if (sessionData) {
           const players = await getPlayersBySession(id, setShowMessage);
@@ -176,12 +178,12 @@ export default function SessionId() {
             setGameMaster(false);
             setShowSelectSheet(true);
           } else {
-            setShowMessage({ show: true, text: 'Você não é o narrador da sessão' });
+            setShowMessage({ show: true, text: 'VocÃª nÃ£o Ã© o narrador da sessÃ£o' });
             router.push('/sessions');
           }
           setShowData(true);
         } else {
-          setShowMessage({ show: true, text: 'Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente' });
+          setShowMessage({ show: true, text: 'Houve um erro ao encontrar a sessÃ£o. Por favor, atualize e tente novamente' });
           router.push('/sessions');
         }
       }
@@ -448,7 +450,7 @@ const toggleSessionSidebarView = (view: string) => {
                     <div className="flex w-full h-full flex-col items-center justify-between gap-1">
                       <button
                         className={getSidebarIconButtonClass('history')}
-                        title="Histórico"
+                        title="HistÃ³rico"
                         onClick={() => toggleSessionSidebarView('history')}
                       >
                         <FaHistory />
@@ -456,7 +458,7 @@ const toggleSessionSidebarView = (view: string) => {
                       {dataSession?.gameMaster === email && (
                         <button
                           className={getSidebarIconButtonClass('notifications')}
-                          title="Notificações"
+                          title="NotificaÃ§Ãµes"
                           onClick={() => toggleSessionSidebarView('notifications')}
                         >
                           <IoNotifications />
@@ -464,14 +466,14 @@ const toggleSessionSidebarView = (view: string) => {
                       )}
                       <button
                         className={getSidebarIconButtonClass('help')}
-                        title="Sistema e Mecânica"
+                        title="Sistema e MecÃ¢nica"
                         onClick={() => toggleSessionSidebarView('help')}
                       >
                         <IoIosHelpCircle />
                       </button>
                       <button
                         className={getSidebarIconButtonClass('details')}
-                        title="Detalhes da Sessão"
+                        title="Detalhes da SessÃ£o"
                         onClick={() => toggleSessionSidebarView('details')}
                       >
                         <IoMdSettings />
@@ -485,7 +487,7 @@ const toggleSessionSidebarView = (view: string) => {
                       </button>
                       <button
                         className={getSidebarIconButtonClass('principles')}
-                        title="Princípios da Crônica"
+                        title="PrincÃ­pios da CrÃ´nica"
                         onClick={() => toggleSessionSidebarView('principles')}
                       >
                         <GoLaw />
@@ -499,7 +501,7 @@ const toggleSessionSidebarView = (view: string) => {
                       </button>
                       <button
                         className={getSidebarIconButtonClass('maps')}
-                        title="Mapa da Crônica"
+                        title="Mapa da CrÃ´nica"
                         onClick={() => toggleSessionSidebarView('maps')}
                       >
                         <FaRegMap />
@@ -527,7 +529,7 @@ const toggleSessionSidebarView = (view: string) => {
                       </button>
                       <button
                         className={getSidebarIconButtonClass('chat')}
-                        title="Chat da Sessão"
+                        title="Chat da SessÃ£o"
                         onClick={() => toggleSessionSidebarView('chat')}
                       >
                         <IoChatbubbles />

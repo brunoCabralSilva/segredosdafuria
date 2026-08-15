@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -53,6 +53,7 @@ export default function Sheets() {
   const [mySheets, setMySheets] = useState<SheetCard[]>([]);
   const [communitySheets, setCommunitySheets] = useState<SheetCard[]>([]);
   const [loadingSheets, setLoadingSheets] = useState(true);
+  const [showData, setShowData] = useState(false);
   const [creatingSheet, setCreatingSheet] = useState(false);
   const [mySectionFilters, setMySectionFilters] = useState<SectionFilters>(DEFAULT_SECTION_FILTERS);
   const [communitySectionFilters, setCommunitySectionFilters] = useState<SectionFilters>(DEFAULT_SECTION_FILTERS);
@@ -353,12 +354,14 @@ export default function Sheets() {
 
         if (dataUser.email !== '' && dataUser.displayName !== '') {
           await refreshSheets(dataUser.email);
+          setShowData(true);
         } else {
           const authData: any = await authenticate(setShowMessage);
           if (authData && authData.email && authData.displayName) {
             const authUser = { email: authData.email, displayName: authData.displayName };
             if (active) setDataUser(authUser);
             await refreshSheets(authData.email);
+            setShowData(true);
           } else {
             router.push('/login');
             return;
@@ -389,7 +392,7 @@ export default function Sheets() {
 
       <section className="h-full w-full bg-black/90">
         <div className="relative z-10 mx-auto w-full max-w-[1200px] px-4 pb-10 pt-4 sm:px-8 sm:pb-14">
-          {loadingSheets ? (
+          {!showData || loadingSheets ? (
             <div className="flex min-h-[60vh] items-center justify-center border border-zinc-500/30 bg-black/80 px-6 py-10 text-white">
               <span className="loader z-50" />
             </div>

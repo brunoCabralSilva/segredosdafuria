@@ -37,7 +37,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
           }
         }
       } catch (error) {
-        setShowMessage({ show: true, text: 'Ocorreu um erro com a validacao de dados: ' + error });
+        setShowMessage({ show: true, text: 'Ocorreu um erro com a validação de dados: ' + error });
         router.push('/login');
       }
     };
@@ -52,22 +52,22 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
 
   const registerSession = async () => {
     if (nameSession.length < 3) {
-      setShowMessage({ show: true, text: 'Necessario preencher um titulo com pelo menos 3 caracteres.' });
+      setShowMessage({ show: true, text: 'Necessário preencher um título com pelo menos 3 caracteres.' });
       return;
     }
 
     if (nameSession.length > 40) {
-      setShowMessage({ show: true, text: 'Necessario preencher um titulo com menos de 40 caracteres.' });
+      setShowMessage({ show: true, text: 'Necessário preencher um título com menos de 40 caracteres.' });
       return;
     }
 
     if (description.length < 10) {
-      setShowMessage({ show: true, text: 'Necessario preencher uma descricao com pelo menos 10 caracteres.' });
+      setShowMessage({ show: true, text: 'Necessário preencher uma descrição com pelo menos 10 caracteres.' });
       return;
     }
 
     if (image === '') {
-      setShowMessage({ show: true, text: 'Necessario selecionar uma imagem para a sessao.' });
+      setShowMessage({ show: true, text: 'Necessário selecionar uma imagem para a sessão.' });
       return;
     }
 
@@ -77,7 +77,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
       const sessionList: any = await getSessionByName(nameSession.toLowerCase(), setShowMessage);
 
       if (sessionList) {
-        setShowMessage({ show: true, text: 'Ja existe uma sessao criada com esse nome.' });
+        setShowMessage({ show: true, text: 'Ja existe uma sessão criada com esse nome.' });
         setLoading(false);
         return;
       }
@@ -98,7 +98,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
         return;
       }
 
-      setShowMessage({ show: true, text: 'Ocorreu um erro ao tentar criar uma nova sessao. Atualize a pagina e tente novamente.' });
+      setShowMessage({ show: true, text: 'Ocorreu um erro ao tentar criar uma nova sessão. Atualize a página e tente novamente.' });
     } catch (error: any) {
       setShowMessage({ show: true, text: String(error) });
     } finally {
@@ -107,8 +107,8 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
   };
 
   const typeSessionDescription = typeSession === 'Regras Oficiais'
-    ? 'Voce esta criando uma sessao que utiliza as regras oficiais da Quinta Edicao de Lobisomem: O Apocalipse.'
-    : 'Voce esta criando uma sessao que utiliza regras alternativas para a Quinta Edicao de Lobisomem: O Apocalipse. Falhas em checagens de furia aumentam a furia ao inves de diminuir.';
+    ? 'Voce está criando uma sessão que utiliza as regras oficiais da Quinta Edição de Lobisomem: O Apocalipse.'
+    : 'Voce esta criando uma sessão que utiliza regras alternativas para a Quinta Edicao de Lobisomem: O Apocalipse. Falhas em checagens de Fúria aumentam ela ao invés de diminuir.';
 
   const fieldLabelClass = 'mb-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.2em] text-zinc-300';
   const fieldClass = 'w-full border border-white/10 bg-black/75 px-3 py-3 font-geist-mono text-[0.72rem] uppercase tracking-[0.08em] text-white outline-none transition-colors hover:border-red-700/70 focus:border-red-700';
@@ -122,13 +122,13 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
                 <p className="font-geist-mono text-[0.62rem] uppercase tracking-[0.24em] text-zinc-500">
-                  Nova sessao
+                  Nova sessão
                 </p>
                 <h2 className="mt-2 font-kingthings text-[1.15rem] uppercase tracking-[0.16em] text-[#e1e7dd] sm:text-[1.35rem]">
-                  Criar sessao
+                  Criar sessão
                 </h2>
                 <p className="mt-2 max-w-2xl font-geist-mono text-[0.62rem] uppercase tracking-[0.12em] text-zinc-300/80">
-                  Defina o titulo, o tipo, a descricao e escolha a imagem da cronica.
+                  Defina o título, o tipo, a descrição e escolha a imagem da crônica.
                 </p>
               </div>
               <button
@@ -147,7 +147,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
               <div className="space-y-4">
                 <div className="border border-white/10 bg-black/82 p-4">
                   <label htmlFor="nameSession" className="block">
-                    <p className={fieldLabelClass}>Titulo</p>
+                    <p className={fieldLabelClass}>Título</p>
                     <input
                       type="text"
                       id="nameSession"
@@ -180,7 +180,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
                   </div>
 
                   <label htmlFor="description" className="mt-4 block">
-                    <p className={fieldLabelClass}>Descricao</p>
+                    <p className={fieldLabelClass}>Descrição</p>
                     <textarea
                       id="description"
                       rows={8}
@@ -196,7 +196,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
               </div>
 
               <div className="border border-white/10 bg-black/82 p-4">
-                <p className={fieldLabelClass}>Imagem da sessao</p>
+                <p className={fieldLabelClass}>Imagem da sessão</p>
                 <div className="principles-scrollbar grid max-h-[52vh] grid-cols-1 gap-2 overflow-y-auto pr-1 sm:grid-cols-2 xl:grid-cols-3">
                   {Array.from({ length: 33 }, (_, i) => {
                     const imageId = String(i + 1).padStart(2, '0');
@@ -211,13 +211,13 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
                       >
                         <Image
                           src={`/images/sessions/${imageId}.png`}
-                          alt={`Imagem da sessao ${imageId}`}
+                          alt={`Imagem da sessão ${imageId}`}
                           className={`h-32 w-full object-cover object-center transition duration-200 ${selected ? 'opacity-100' : 'opacity-65 group-hover:opacity-90'}`}
                           width={1000}
                           height={1000}
                         />
                         <div className={`absolute inset-x-0 bottom-0 border-t px-2 py-2 font-geist-mono text-[0.55rem] uppercase tracking-[0.18em] ${selected ? 'border-red-600 bg-[#190404] text-white' : 'border-white/10 bg-black/80 text-zinc-300'}`}>
-                          {selected ? 'Selecionada' : `Opcao ${imageId}`}
+                          {selected ? 'Selecionada' : `Opção ${imageId}`}
                         </div>
                       </button>
                     );
@@ -242,7 +242,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
                 onClick={registerSession}
                 disabled={loading}
               >
-                {loading ? 'Criando sessao...' : 'Criar sessao'}
+                {loading ? 'Criando sessão...' : 'Criar sessão'}
               </button>
             </div>
           </div>

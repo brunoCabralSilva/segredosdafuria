@@ -64,8 +64,8 @@ export default function SessionSheetPicker(props: SessionSheetPickerProps) {
 
   return (
     <DraggablePopup
-      title="Selecionar usuario"
-      description="Escolha um usuario para abrir a ficha na area principal da sessao."
+      title="Selecionar usuário"
+      description="Escolha um usuário para abrir a ficha na área principal da sessão."
       onClose={onClose}
       sizeClassName="w-[calc(100vw-1.5rem)] sm:w-[34rem] h-auto max-h-[80vh]"
       bodyClassName="space-y-4"
@@ -75,7 +75,7 @@ export default function SessionSheetPicker(props: SessionSheetPickerProps) {
           ? (
             <div className="border border-white/10 bg-black/60 px-4 py-5 text-center">
               <p className="font-geist-mono text-[0.7rem] uppercase tracking-[0.14em] text-white/82">
-                Nenhuma ficha foi encontrada nesta sessao.
+                Nenhuma ficha foi encontrada nesta sessão.
               </p>
             </div>
           )
@@ -120,7 +120,7 @@ export default function SessionSheetPicker(props: SessionSheetPickerProps) {
                         onClick={() => setSelectedEmail('')}
                         className="border border-white/10 bg-black/60 px-3 py-2 font-geist-mono text-[0.58rem] uppercase tracking-[0.14em] text-white/72 transition-colors hover:border-[#7a0000] hover:text-white"
                       >
-                        Trocar usuario
+                        Trocar usuário
                       </button>
                     </div>
                     <div className="grid gap-2">

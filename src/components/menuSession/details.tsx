@@ -128,7 +128,7 @@ export default function Details() {
 
     setShowMessage({
       show: true,
-      text: "Necessario inserir o email de um usuario que ja esteja cadastrado na plataforma.",
+      text: "Necessario inserir o email de um usuário que ja esteja cadastrado na plataforma.",
     });
     setNewGameMaster(gameMaster);
   };
@@ -206,7 +206,7 @@ export default function Details() {
       const auth = await authenticate(setShowMessage);
 
       if (!auth || !auth.email || !auth.displayName) {
-        setShowMessage({ show: true, text: 'Nao foi possivel identificar o usuario para criar a ficha.' });
+        setShowMessage({ show: true, text: 'Nao foi possivel identificar o usuário para criar a ficha.' });
         return;
       }
 
@@ -430,6 +430,17 @@ export default function Details() {
                 </div>
                 <div className="flex flex-col gap-3 p-4">
 
+                  <button
+                    type="button"
+                    className={buttonClassName}
+                    onClick={() => {
+                      void createSessionSheet();
+                    }}
+                    disabled={creatingSheet}
+                  >
+                    {creatingSheet ? 'Criando ficha...' : 'Criar Ficha'}
+                  </button>
+
                   {email === gameMaster && (
                     <button
                       type="button"
@@ -444,16 +455,7 @@ export default function Details() {
                     >
                       {session.statusSession === "Finalizada" ? "Reativar Sessão" : "Finalizar Sessão"}
                     </button>
-                  )}                  <button
-                    type="button"
-                    className={buttonClassName}
-                    onClick={() => {
-                      void createSessionSheet();
-                    }}
-                    disabled={creatingSheet}
-                  >
-                    {creatingSheet ? 'Criando ficha...' : 'Criar Ficha'}
-                  </button>
+                  )}
 
                   <button
                     type="button"
