@@ -7,6 +7,17 @@ import { FaFire, FaHeart } from "react-icons/fa6";
 import { GiFangs } from "react-icons/gi";
 import { IoIosClose } from "react-icons/io";
 
+const aggravatedMarkerClassName =
+  "h-6 w-6 sm:h-3 sm:w-3 border border-red-300/70 bg-red-950/30 flex items-center justify-center cursor-pointer mr-1 mt-1 sm:mt-0";
+const superficialMarkerClassName =
+  "h-6 w-6 sm:h-3 sm:w-3 border border-red-300/70 bg-black/20 flex items-center justify-center cursor-pointer mr-1 mt-1 sm:mt-0";
+const emptyMarkerClassName =
+  "h-6 w-6 sm:h-3 sm:w-3 border border-zinc-600/70 bg-transparent cursor-pointer mr-1 mt-1 sm:mt-0";
+const filledRageMarkerClassName =
+  "h-6 w-6 sm:h-3 sm:w-3 border border-red-300/70 bg-red-700/30 shadow-[0_0_10px_rgba(185,28,28,0.18)] cursor-pointer mr-1 mt-1 sm:mt-0";
+const emptyRageMarkerClassName =
+  "h-6 w-6 sm:h-3 sm:w-3 border border-zinc-700 bg-transparent cursor-pointer mr-1 mt-1 sm:mt-0";
+
 export default function PlayersPopup(props: { player: any }) {
   const [closePopup, setClosePopup] = useState(false);
   const { player } = props;
@@ -60,7 +71,7 @@ export default function PlayersPopup(props: { player: any }) {
     const dataPersist = player.data.rage;
     if (player.data.rage === 1 && value === 1) player.data.rage = 0;
     else player.data.rage = value;
-		await updateDataPlayer(player.id, player, setShowMessage);
+    await updateDataPlayer(player.id, player, setShowMessage);
     await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(player.user)} alterou a Fúria do personagem ${player.data.name}${player.email !== email ? ` do jogador ${capitalizeFirstLetter(player.user)}` : '' } de ${dataPersist} para ${value}.`, type: 'notification' }, null, setShowMessage);
   };
 
@@ -77,7 +88,7 @@ export default function PlayersPopup(props: { player: any }) {
   if (!closePopup)
     return(
       <div
-        className={`${closePopup ? 'hidden' : 'flex'} justify-end items-center border border-white p-2 mb-1 bg-black rounded-xl`}
+        className={`${closePopup ? 'hidden' : 'flex'} justify-end items-center p-2 mb-1 bg-black`}
       >
         <div className="w-full text-xs flex flex-col items-center justify-center gap-1">
         <div className="w-full flex items-center justify-between">
@@ -85,7 +96,7 @@ export default function PlayersPopup(props: { player: any }) {
               onClick={ () => setClosePopup(true) }
               className="text-xl cursor-pointer"
             />
-            <p className="w-full text-right">{ limitTextSmart(player.data.name) }</p>
+            <p className="w-full font-kingthings text-right">{ limitTextSmart(player.data.name) }</p>
         </div>
         <div className="flex items-center justify-end w-full">
             {
@@ -99,24 +110,31 @@ export default function PlayersPopup(props: { player: any }) {
                         type="button"
                         onClick={ () => updateValue(player, 'willpower', index + 1) }
                         key={index}
-                        className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-black border-white border cursor-pointer"
-                    />
+                        className={aggravatedMarkerClassName}
+                    >
+                      <span className="relative block h-3.5 w-3.5 sm:h-2 sm:w-2">
+                        <span className="absolute left-1/2 top-0 h-full w-[2px] sm:w-[1px] -translate-x-1/2 rotate-45 bg-red-300/70" />
+                        <span className="absolute left-1/2 top-0 h-full w-[2px] sm:w-[1px] -translate-x-1/2 -rotate-45 bg-red-300/70" />
+                      </span>
+                    </button>
                     );
                 } return (
                     <button
                     type="button"
                     onClick={ () => updateValue(player, 'willpower', index + 1) }
                     key={index}
-                    className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-gray-500 border-white border cursor-pointer"
-                    />
+                    className={superficialMarkerClassName}
+                  >
+                    <span className="block h-4 w-[2px] sm:h-2 sm:w-[1px] rotate-45 bg-red-300/70" />
+                  </button>
                 );
                 } return (
                     <button
                     type="button"
                     onClick={ () => updateValue(player, 'willpower', index + 1) }
                     key={index}
-                    className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-white border-white border cursor-pointer"
-                    />
+                    className={emptyMarkerClassName}
+                />
                 );
             })
             }
@@ -138,23 +156,30 @@ export default function PlayersPopup(props: { player: any }) {
                         type="button"
                         onClick={ () => updateValue(player, 'health', index + 1) }
                         key={index}
-                        className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-black border-white border cursor-pointer"
-                        />
+                        className={aggravatedMarkerClassName}
+                      >
+                        <span className="relative block h-3.5 w-3.5 sm:h-2 sm:w-2">
+                          <span className="absolute left-1/2 top-0 h-full w-[2px] sm:w-[1px] -translate-x-1/2 rotate-45 bg-red-300/70" />
+                          <span className="absolute left-1/2 top-0 h-full w-[2px] sm:w-[1px] -translate-x-1/2 -rotate-45 bg-red-300/70" />
+                        </span>
+                      </button>
                     );
                     } return (
                     <button
                         type="button"
                         onClick={ () => updateValue(player, 'health', index + 1) }
                         key={index}
-                        className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-gray-500 border-white border cursor-pointer"
-                    />
+                        className={superficialMarkerClassName}
+                    >
+                      <span className="block h-4 w-[2px] sm:h-2 sm:w-[1px] rotate-45 bg-red-300/70" />
+                    </button>
                     );
                 } return (
                     <button
                         type="button"
                         onClick={ () => updateValue(player, 'health', index + 1) }
                         key={index}
-                        className="sm:h-3 sm:w-3 h-6 w-6 rounded-full mr-1 mt-1 sm:mt-0 bg-white border-white border cursor-pointer"
+                        className={emptyMarkerClassName}
                     />
                     );
                 })
@@ -174,7 +199,7 @@ export default function PlayersPopup(props: { player: any }) {
                     type="button"
                     onClick={ () => updateRageValue(player, index + 1) }
                     key={index}
-                    className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-black border-white border cursor-pointer mr-1 mt-1 sm:mt-0"
+                    className={filledRageMarkerClassName}
                     />
                 );
                 } return (
@@ -182,7 +207,7 @@ export default function PlayersPopup(props: { player: any }) {
                     type="button"
                     onClick={ () => updateRageValue(player, index + 1) }
                     key={index}
-                    className="sm:h-3 sm:w-3 h-6 w-6 rounded-full bg-white border-white border cursor-pointer mr-1 mt-1 sm:mt-0"
+                    className={emptyRageMarkerClassName}
                 />
                 );
             })
@@ -193,19 +218,6 @@ export default function PlayersPopup(props: { player: any }) {
             />
         </div>
         </div>
-        {/* <div className="ml-1 flex flex-col"> */}
-        {/* {
-            player.data.profileImage
-            ?
-            <Image
-                src={ player.data.profileImage }
-                alt=""
-                className="w-12 sm:w-10 h-20 sm:h-14 object-cover rounded-lg border-2 border-white mb-1 ml-2 sm:ml-0"
-                width={ 100 }
-                height={ 200 }
-            />
-            :  */}
-        {/* </div> */}
       </div>
     )
     return <div />

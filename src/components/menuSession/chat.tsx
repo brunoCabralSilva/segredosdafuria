@@ -42,7 +42,7 @@ export default function Chat(props: { sidebar?: boolean }) {
         </div>
       )}
       {
-        session && session.gameMaster == email && !sidebar &&
+        session &&
         <HpAndWillPower />
       }
       <div id={messagesContainerId} className={`principles-scrollbar relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden [direction:rtl] ${sidebar ? 'px-2 pb-2 pt-2' : 'px-2 pb-0 pt-2 pr-2'}`}>
@@ -68,3 +68,4 @@ export default function Chat(props: { sidebar?: boolean }) {
     </div>
   )
 }
+
