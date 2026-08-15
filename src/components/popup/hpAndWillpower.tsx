@@ -188,7 +188,7 @@ export default function HpAndWillPower() {
 
   function returnTotalHealth(player: any) {
     const findMaldicaoDaAncia = player.data.advantagesAndFlaws.flaws.find(
-      (advantage: { title: string }) => advantage.title == "MaldiÃ§Ã£o da AnciÃ£"
+      (advantage: { title: string }) => advantage.title == "Maldição da Anciã"
     );
     const findPeleEspessa = player.data.advantagesAndFlaws.advantages.find(
       (advantage: { title: string }) => advantage.title == "Pele Espessa"
@@ -218,7 +218,7 @@ export default function HpAndWillPower() {
     await registerHistory(
       session.id,
       {
-        message: `${session.gameMaster === email ? "O Narrador" : capitalizeFirstLetter(nextPlayer.user)} alterou a FÃºria do personagem ${nextPlayer.data.name}${nextPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(nextPlayer.user)}` : ""} de ${currentRage} para ${nextRage}.`,
+        message: `${session.gameMaster === email ? "O Narrador" : capitalizeFirstLetter(nextPlayer.user)} alterou a Fúria do personagem ${nextPlayer.data.name}${nextPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(nextPlayer.user)}` : ""} de ${currentRage} para ${nextRage}.`,
         type: "notification",
       },
       null,

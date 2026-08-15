@@ -31,9 +31,9 @@ const Register = () => {
     } else if(vEmail) {
       setShowMessage({ show: true, text: 'Necessário preencher um Email válido' });
     } else if (!password || password.length < 6) {
-      setShowMessage({ show: true, text: 'Necessário inserir uma Senha com pelo menos 6 dí­gitos' });
+      setShowMessage({ show: true, text: 'Necessário inserir uma Senha com pelo menos 6 dígitos' });
     } else if (password !== password2) {
-      setShowMessage({ show: true, text: 'As senhas inseridas nÃ£o conferem' });
+      setShowMessage({ show: true, text: 'As senhas inseridas não conferem' });
     } else {
       setLoading(true);
       const reg = await registerUser(

@@ -261,9 +261,9 @@ export default function Profile() {
                 <div className="w-full">
                   <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                      <h2 className="font-kingthings text-lg sm:text-xl">SessÃµes em que vocÃª Ã© narrador</h2>
+                      <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é narrador</h2>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                        Acompanhe as mesas que estÃ£o sob sua conduÃ§Ã£o e retome cada crÃ´nica com um clique.
+                        Acompanhe as mesas que estão sob sua condução e retome cada crônica com um clique.
                       </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
@@ -272,7 +272,7 @@ export default function Profile() {
                         onClick={() => void handleCreateSession()}
                         className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
                       >
-                        Criar SessÃ£o
+                        Criar Sessão
                       </button>
                       <Link
                         href="/sessions"
@@ -285,7 +285,7 @@ export default function Profile() {
 
                   {narratorSessions.length === 0 ? (
                     <div className="border border-zinc-500/30 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
-                      VocÃª ainda nÃ£o possui sessÃµes ativas em que seja narrador.
+                      Você ainda não possui sessões ativas em que seja narrador.
                     </div>
                   ) : (
                     <Swiper
@@ -324,7 +324,7 @@ export default function Profile() {
                             <div className="relative h-36 w-full">
                               <Image
                                 src={`/images/sessions/${session.imageName || '01'}.png`}
-                                alt={`Banner da sessÃ£o ${session.name || ''}`}
+                                alt={`Banner da sessão ${session.name || ''}`}
                                 className="object-cover"
                                 fill
                                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -333,17 +333,17 @@ export default function Profile() {
                               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
                               <div className="absolute inset-x-0 bottom-0 px-3 pb-1 pt-3">
                                 <p className="font-kingthings text-base capitalize text-white transition-colors group-hover:text-red-500">
-                                  {session.name || 'SessÃ£o sem nome'}
+                                  {session.name || 'Sessão sem nome'}
                                 </p>
                               </div>
                             </div>
 
                             <div className="space-y-2 px-4 py-4 text-white uppercase">
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Narrador: <span className="uppercase">{session.nameMaster || 'NÃ£o informado'}</span>
+                                Narrador: <span className="uppercase">{session.nameMaster || 'Não informado'}</span>
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Criada em: {session.creationDate || 'NÃ£o informada'}
+                                Criada em: {session.creationDate || 'Não informada'}
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
                                 Status: {session.statusSession || 'Ativa'}
@@ -362,9 +362,9 @@ export default function Profile() {
                 <div className="mt-10 w-full">
                   <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                      <h2 className="font-kingthings text-lg sm:text-xl">SessÃµes em que vocÃª Ã© jogador</h2>
+                      <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é jogador</h2>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                        Encontre rapidamente as mesas em que seu personagem participa e siga a histÃ³ria de onde parou.
+                        Encontre rapidamente as mesas em que seu personagem participa e siga a história de onde parou.
                       </p>
                     </div>
                     <Link
@@ -377,7 +377,7 @@ export default function Profile() {
 
                   {playerSessions.length === 0 ? (
                     <div className="border border-zinc-500/30 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
-                      VocÃª ainda nÃ£o possui sessÃµes ativas em que seja jogador.
+                      Você ainda não possui sessões ativas em que seja jogador.
                     </div>
                   ) : (
                     <Swiper
@@ -417,7 +417,7 @@ export default function Profile() {
                             <div className="relative h-36 w-full">
                               <Image
                                 src={`/images/sessions/${session.imageName || '01'}.png`}
-                                alt={`Banner da sessÃ£o ${session.name || ''}`}
+                                alt={`Banner da sessão ${session.name || ''}`}
                                 className="object-cover"
                                 fill
                                 sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
@@ -426,17 +426,17 @@ export default function Profile() {
                               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/45 to-transparent" />
                               <div className="absolute inset-x-0 bottom-0 px-3 pb-1 pt-3">
                                 <p className="font-kingthings text-base capitalize text-white transition-colors group-hover:text-red-500">
-                                  {session.name || 'SessÃ£o sem nome'}
+                                  {session.name || 'Sessão sem nome'}
                                 </p>
                               </div>
                             </div>
 
                             <div className="space-y-2 px-4 py-4 text-white uppercase">
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Narrador: <span className="uppercase">{session.nameMaster || 'NÃ£o informado'}</span>
+                                Narrador: <span className="uppercase">{session.nameMaster || 'Não informado'}</span>
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
-                                Criada em: {session.creationDate || 'NÃ£o informada'}
+                                Criada em: {session.creationDate || 'Não informada'}
                               </p>
                               <p className="font-geist-mono text-[11px] text-white/75">
                                 Status: {session.statusSession || 'Ativa'}
@@ -457,7 +457,7 @@ export default function Profile() {
                     <div>
                       <h2 className="font-kingthings text-lg sm:text-xl">Suas fichas</h2>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                        Reencontre seus personagens, acompanhe seus augÃºrios e tribos, e retome cada ficha sem esforÃ§o.
+                        Reencontre seus personagens, acompanhe seus augúrios e tribos, e retome cada ficha sem esforço.
                       </p>
                     </div>
                     <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
@@ -479,7 +479,7 @@ export default function Profile() {
 
                   {mySheets.length === 0 ? (
                     <div className="border border-zinc-500/30 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
-                      VocÃª ainda nÃ£o possui fichas cadastradas.
+                      Você ainda não possui fichas cadastradas.
                     </div>
                   ) : (
                     <Swiper
@@ -511,7 +511,7 @@ export default function Profile() {
                       {mySheets.map((sheet) => {
                         const formattedAuspice = capitalizeFirstLetter(String(sheet.data?.auspice || '').trim());
                         const formattedTrybe = capitalizeFirstLetter(String(sheet.data?.trybe || '').trim());
-                        const creatorName = sheet.user || nameUser || 'UsuÃ¡rio nÃ£o informado';
+                        const creatorName = sheet.user || nameUser || 'Usuário não informado';
                         const creatorInitial = creatorName.trim().charAt(0).toUpperCase() || '?';
 
                         return (
@@ -545,17 +545,17 @@ export default function Profile() {
 
                                 <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-3 font-geist-mono text-[10px] uppercase text-white/85 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
                                   <div className="min-w-0">
-                                    <p className="text-white/60">AugÃºrio</p>
-                                    <p className="mt-1 text-[11px] text-white">{formattedAuspice || 'NÃ£o definido'}</p>
+                                    <p className="text-white/60">Augúrio</p>
+                                    <p className="mt-1 text-[11px] text-white">{formattedAuspice || 'Não definido'}</p>
                                   </div>
                                   <div />
                                   <div className="min-w-0">
                                     <p className="text-white/60">Tribo</p>
-                                    <p className="mt-1 text-[11px] text-white">{formattedTrybe || 'NÃ£o definida'}</p>
+                                    <p className="mt-1 text-[11px] text-white">{formattedTrybe || 'Não definida'}</p>
                                   </div>
                                   <div className="min-w-0 text-right">
                                     <p className="text-white/60">Criada em</p>
-                                    <p className="mt-1 text-[11px] text-white">{sheet.creationDate || 'NÃ£o informada'}</p>
+                                    <p className="mt-1 text-[11px] text-white">{sheet.creationDate || 'Não informada'}</p>
                                   </div>
                                 </div>
 

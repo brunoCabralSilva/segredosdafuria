@@ -165,11 +165,11 @@ export default function SessionId() {
       setName(authData.displayName);
       const dataDocSnapshot = await getDocs(queryData);
       if (dataDocSnapshot.empty) {
-        setShowMessage({ show: true, text: 'A SessÃ£o foi encontrada' });
+        setShowMessage({ show: true, text: 'A Sessão foi encontrada' });
         router.push('/sessions');
       } else {
         setShowData(true);
-        if (authData.email === 'yslasouzagnr@gmail.com') setShowMessage({ show: true, text: 'Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que vocÃª retorne\nPra que eu possa te abraÃ§ar\nTe beijar de novo\n<3' });
+        if (authData.email === 'yslasouzagnr@gmail.com') setShowMessage({ show: true, text: 'Espero que o tempo passe\nEspero que a semana acabe\nPra que eu possa te ver de novo\nEspero que o tempo voe\nPara que você retorne\nPra que eu possa te abraçar\nTe beijar de novo\n<3' });
         const sessionData: any = await getSessionById(id);
         if (sessionData) {
           const players = await getPlayersBySession(id, setShowMessage);
@@ -178,12 +178,12 @@ export default function SessionId() {
             setGameMaster(false);
             setShowSelectSheet(true);
           } else {
-            setShowMessage({ show: true, text: 'VocÃª nÃ£o Ã© o narrador da sessÃ£o' });
+            setShowMessage({ show: true, text: 'Você não é o narrador da sessão' });
             router.push('/sessions');
           }
           setShowData(true);
         } else {
-          setShowMessage({ show: true, text: 'Houve um erro ao encontrar a sessÃ£o. Por favor, atualize e tente novamente' });
+          setShowMessage({ show: true, text: 'Houve um erro ao encontrar a sessão. Por favor, atualize e tente novamente' });
           router.push('/sessions');
         }
       }
@@ -450,7 +450,7 @@ const toggleSessionSidebarView = (view: string) => {
                     <div className="flex w-full h-full flex-col items-center justify-between gap-1">
                       <button
                         className={getSidebarIconButtonClass('history')}
-                        title="HistÃ³rico"
+                        title="Histórico"
                         onClick={() => toggleSessionSidebarView('history')}
                       >
                         <FaHistory />
@@ -458,7 +458,7 @@ const toggleSessionSidebarView = (view: string) => {
                       {dataSession?.gameMaster === email && (
                         <button
                           className={getSidebarIconButtonClass('notifications')}
-                          title="NotificaÃ§Ãµes"
+                          title="Notificações"
                           onClick={() => toggleSessionSidebarView('notifications')}
                         >
                           <IoNotifications />
@@ -466,14 +466,14 @@ const toggleSessionSidebarView = (view: string) => {
                       )}
                       <button
                         className={getSidebarIconButtonClass('help')}
-                        title="Sistema e MecÃ¢nica"
+                        title="Sistema e Mecânica"
                         onClick={() => toggleSessionSidebarView('help')}
                       >
                         <IoIosHelpCircle />
                       </button>
                       <button
                         className={getSidebarIconButtonClass('details')}
-                        title="Detalhes da SessÃ£o"
+                        title="Detalhes da Sessão"
                         onClick={() => toggleSessionSidebarView('details')}
                       >
                         <IoMdSettings />
@@ -487,7 +487,7 @@ const toggleSessionSidebarView = (view: string) => {
                       </button>
                       <button
                         className={getSidebarIconButtonClass('principles')}
-                        title="PrincÃ­pios da CrÃ´nica"
+                        title="Princípios da Crônica"
                         onClick={() => toggleSessionSidebarView('principles')}
                       >
                         <GoLaw />
@@ -501,7 +501,7 @@ const toggleSessionSidebarView = (view: string) => {
                       </button>
                       <button
                         className={getSidebarIconButtonClass('maps')}
-                        title="Mapa da CrÃ´nica"
+                        title="Mapa da Crônica"
                         onClick={() => toggleSessionSidebarView('maps')}
                       >
                         <FaRegMap />
@@ -529,7 +529,7 @@ const toggleSessionSidebarView = (view: string) => {
                       </button>
                       <button
                         className={getSidebarIconButtonClass('chat')}
-                        title="Chat da SessÃ£o"
+                        title="Chat da Sessão"
                         onClick={() => toggleSessionSidebarView('chat')}
                       >
                         <IoChatbubbles />
