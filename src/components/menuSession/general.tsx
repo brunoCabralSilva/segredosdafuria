@@ -520,7 +520,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                   </div>
                 )}
                 <div>
-                  <p className={headerMetaLabelClass}>Acoes</p>
+                  <p className={headerMetaLabelClass}>Ações</p>
                   <div className="mt-2 flex items-center gap-2">
                     <button type="button" onClick={() => setShowEvaluateSheet({ show: true, data: 'player' })} className="items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Verificar ficha">
                       <FaFileCircleCheck className="text-base" />
@@ -554,113 +554,115 @@ export default function General(props: { dataSession: any; id: string; gameMaste
             <span className="absolute right-0 top-0 h-4 w-px bg-red-700/85" />
             <span className="absolute bottom-0 left-0 h-px w-4 bg-red-700/85" />
             <span className="absolute bottom-0 left-0 h-4 w-px bg-red-700/85" />
-            <div className="grid grid-cols-1 gap-2 sm:gap-5 sm:grid-cols-9 pb-2 sm:pb-5 w-full">
-              <div className={`relative col-span-1 mt-2 sm:mt-5 h-full w-full overflow-visible border border-zinc-500/30 bg-[#080c0d]/95 text-white shadow-[inset_0_0_80px_rgba(0,0,0,0.72)] sm:col-span-3 ${hasPendingSessionTransfer ? 'pointer-events-none select-none opacity-45' : ''}`}> 
-                <span className="absolute right-0 top-0 h-px w-4 bg-red-700/85" />
-                <span className="absolute right-0 top-0 h-4 w-px bg-red-700/85" />
-                <span className="absolute bottom-0 left-0 h-px w-4 bg-red-700/85" />
-                <span className="absolute bottom-0 left-0 h-4 w-px bg-red-700/85" />
-                <div className="relative px-6 pb-6 pt-5">
-                  <div className="relative min-h-[190px]">
-                    <div className="flex w-full flex-col items-start gap-5 pr-[42%]">
-                      {sheetDataValues.trybe && (
-                        <Image
-                          src={`/images/trybes/${capitalizeFirstLetter(sheetDataValues.trybe)}.png`}
-                          alt={`Glifo da tribo ${capitalizeFirstLetter(sheetDataValues.trybe)}`}
-                          className="h-auto w-24 object-contain opacity-85"
-                          width={2000}
-                          height={800}
-                          priority
-                        />
-                      )}
-
-                      <div className="w-full">
-                        <div className="mt-2 flex min-w-0 items-center gap-3 border-b border-zinc-500/25 pb-2" onClick={() => { if (canEditPortraitUrl) setInput('portraitUrl'); }}>
-                          {input === 'portraitUrl' && canEditPortraitUrl ? (
-                            <input
-                              type="text"
-                              className="w-full bg-transparent font-geist-mono text-[0.68rem] tracking-[0.06em] text-[#e1e7dd] outline-none placeholder:text-zinc-500"
-                              placeholder="https://exemplo.com/imagem.png"
-                              value={portraitUrl}
-                              onChange={(e) => setPortraitUrl(e.target.value)}
-                            />
-                          ) : (
-                            <span className="block w-full truncate whitespace-nowrap font-geist-mono text-[0.62rem] uppercase tracking-[0.12em] text-zinc-400">
-                              {portraitUrlPersisted !== '' ? portraitUrlPersisted : 'Cole um link de imagem'}
-                            </span>
-                          )}
-                          {canEditPortraitUrl && (input === 'portraitUrl' ? (
-                            <BsCheckSquare
-                              onClick={async (e: any) => {
-                                e.stopPropagation();
-                                const updated = await updateValue('portraitUrl', portraitUrl, 'link da imagem');
-                                if (updated) setInput('');
-                              }}
-                              className="cursor-pointer text-xl text-red-500/85"
-                            />
-                          ) : (
-                            <FaRegEdit
-                              onClick={(e: any) => {
-                                setInput('portraitUrl');
-                                e.stopPropagation();
-                              }}
-                              className="cursor-pointer text-lg text-red-500/85"
-                            />
-                          ))}
-                        </div>
-                        {portraitImageError && portraitUrlPersisted !== '' && (
-                          <div className="mt-2 font-geist-mono text-[0.54rem] uppercase tracking-[0.16em] text-red-400/80">
-                            Não foi possível carregar esta imagem.
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {portraitUrlPersisted !== '' && !portraitImageError && (
-                      <>
-                        <div className="absolute -right-6 -top-7 z-20 w-[45%] max-w-[158px] -rotate-[7deg] border border-zinc-400/20 bg-zinc-950/85 p-1 shadow-[0_26px_46px_rgba(0,0,0,0.52)]">
-                          <img
-                            src={portraitUrlPersisted}
-                            alt={`Imagem de ${displayName || 'personagem'}`}
-                            className="h-[190px] w-full object-cover"
-                            loading="lazy"
-                            referrerPolicy="no-referrer"
-                            onError={() => setPortraitImageError(true)}
+            <div className="grid grid-cols-1 sm:gap-5 sm:grid-cols-9 sm:pb-5 w-full">
+              <div className={`pb-4 sm:pb-0 relative col-span-1 mt-2 sm:mt-5 h-full w-full overflow-visible sm:col-span-3 text-white shadow-[inset_0_0_80px_rgba(0,0,0,0.72)] ${hasPendingSessionTransfer ? 'pointer-events-none select-none opacity-45' : ''}`}>
+                <div className={`border border-zinc-500/30 bg-[#080c0d]/95 w-full h-full`}> 
+                  <span className="absolute right-0 top-0 h-px w-4 bg-red-700/85" />
+                  <span className="absolute right-0 top-0 h-4 w-px bg-red-700/85" />
+                  <span className="absolute bottom-0 left-0 h-px w-4 bg-red-700/85" />
+                  <span className="absolute bottom-0 left-0 h-4 w-px bg-red-700/85" />
+                  <div className="relative px-6 pb-6 pt-5 h-full">
+                    <div className="relative min-h-[190px]">
+                      <div className="flex w-full flex-col items-start gap-5 pr-[42%]">
+                        {sheetDataValues.trybe && (
+                          <Image
+                            src={`/images/trybes/${capitalizeFirstLetter(sheetDataValues.trybe)}.png`}
+                            alt={`Glifo da tribo ${capitalizeFirstLetter(sheetDataValues.trybe)}`}
+                            className="h-auto w-24 object-contain opacity-85"
+                            width={2000}
+                            height={800}
+                            priority
                           />
-                        </div>
-                      </>
-                    )}
-                  </div>
+                        )}
 
-                  <div className="mt-5 grid w-full grid-cols-1 gap-5">
-                    <div>
-                      <p className={fieldLabelClass}>Tribo</p>
-                      <select className={selectClass} value={sheetDataValues.trybe || ''} onChange={(e) => updateValue('trybe', e.target.value, 'Tribo')}>
-                        <option key="trybe-placeholder" disabled value="">Escolha uma tribo</option>
-                        {dataTrybes
-                          .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr))
-                          .map((trybe, index) => (
-                            <option key={index} value={trybe.nameEn}>
-                              {trybe.namePtBr}
-                            </option>
-                          ))}
-                      </select>
+                        <div className="w-full">
+                          <div className="mt-2 flex min-w-0 items-center gap-3 border-b border-zinc-500/25 pb-2" onClick={() => { if (canEditPortraitUrl) setInput('portraitUrl'); }}>
+                            {input === 'portraitUrl' && canEditPortraitUrl ? (
+                              <input
+                                type="text"
+                                className="w-full bg-transparent font-geist-mono text-[0.68rem] tracking-[0.06em] text-[#e1e7dd] outline-none placeholder:text-zinc-500"
+                                placeholder="https://exemplo.com/imagem.png"
+                                value={portraitUrl}
+                                onChange={(e) => setPortraitUrl(e.target.value)}
+                              />
+                            ) : (
+                              <span className="block w-full truncate whitespace-nowrap font-geist-mono text-[0.62rem] uppercase tracking-[0.12em] text-zinc-400">
+                                {portraitUrlPersisted !== '' ? portraitUrlPersisted : 'Cole um link de imagem'}
+                              </span>
+                            )}
+                            {canEditPortraitUrl && (input === 'portraitUrl' ? (
+                              <BsCheckSquare
+                                onClick={async (e: any) => {
+                                  e.stopPropagation();
+                                  const updated = await updateValue('portraitUrl', portraitUrl, 'link da imagem');
+                                  if (updated) setInput('');
+                                }}
+                                className="cursor-pointer text-xl text-red-500/85"
+                              />
+                            ) : (
+                              <FaRegEdit
+                                onClick={(e: any) => {
+                                  setInput('portraitUrl');
+                                  e.stopPropagation();
+                                }}
+                                className="cursor-pointer text-lg text-red-500/85"
+                              />
+                            ))}
+                          </div>
+                          {portraitImageError && portraitUrlPersisted !== '' && (
+                            <div className="mt-2 font-geist-mono text-[0.54rem] uppercase tracking-[0.16em] text-red-400/80">
+                              Não foi possível carregar esta imagem.
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      {portraitUrlPersisted !== '' && !portraitImageError && (
+                        <>
+                          <div className="absolute -right-6 -top-7 z-20 w-[45%] max-w-[158px] -rotate-[7deg] border border-zinc-400/20 bg-black p-1 shadow-[0_26px_46px_rgba(0,0,0,0.52)]">
+                            <img
+                              src={portraitUrlPersisted}
+                              alt={`Imagem de ${displayName || 'personagem'}`}
+                              className="h-[190px] w-full object-cover"
+                              loading="lazy"
+                              referrerPolicy="no-referrer"
+                              onError={() => setPortraitImageError(true)}
+                            />
+                          </div>
+                        </>
+                      )}
                     </div>
-                    <div>
-                      <p className={fieldLabelClass}>Augúrio</p>
-                      <select className={selectClass} value={sheetDataValues.auspice || ''} onChange={(e) => updateValue('auspice', e.target.value, 'Augúrio')}>
-                        <option key="auspice-placeholder" disabled value="">Escolha um Augúrio</option>
-                        <option key="auspice-ragabash" value="ragabash">Ragabash</option>
-                        <option key="auspice-theurge" value="theurge">Theurge</option>
-                        <option key="auspice-philodox" value="philodox">Philodox</option>
-                        <option key="auspice-galliard" value="galliard">Galliard</option>
-                        <option key="auspice-ahroun" value="ahroun">Ahroun</option>
-                      </select>
+
+                    <div className="mt-5 grid w-full grid-cols-1 gap-5">
+                      <div>
+                        <p className={fieldLabelClass}>Tribo</p>
+                        <select className={selectClass} value={sheetDataValues.trybe || ''} onChange={(e) => updateValue('trybe', e.target.value, 'Tribo')}>
+                          <option key="trybe-placeholder" disabled value="">Escolha uma tribo</option>
+                          {dataTrybes
+                            .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr))
+                            .map((trybe, index) => (
+                              <option key={index} value={trybe.nameEn}>
+                                {trybe.namePtBr}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                      <div>
+                        <p className={fieldLabelClass}>Augúrio</p>
+                        <select className={selectClass} value={sheetDataValues.auspice || ''} onChange={(e) => updateValue('auspice', e.target.value, 'Augúrio')}>
+                          <option key="auspice-placeholder" disabled value="">Escolha um Augúrio</option>
+                          <option key="auspice-ragabash" value="ragabash">Ragabash</option>
+                          <option key="auspice-theurge" value="theurge">Theurge</option>
+                          <option key="auspice-philodox" value="philodox">Philodox</option>
+                          <option key="auspice-galliard" value="galliard">Galliard</option>
+                          <option key="auspice-ahroun" value="ahroun">Ahroun</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="relative col-span-6 mt-2 sm:mt-5 h-full w-full overflow-visible border border-zinc-500/30 bg-[#080c0d]/95 text-white shadow-[inset_0_0_80px_rgba(0,0,0,0.72)]">
+              <div className="relative col-span-6 sm:mt-5 h-full w-full overflow-visible border border-zinc-500/30 bg-[#080c0d]/95 text-white shadow-[inset_0_0_80px_rgba(0,0,0,0.72)]">
                 <span className="absolute right-0 top-0 h-px w-4 bg-red-700/85" />
                 <span className="absolute right-0 top-0 h-4 w-px bg-red-700/85" />
                 <span className="absolute bottom-0 left-0 h-px w-4 bg-red-700/85" />
@@ -775,7 +777,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
               </div>
             </div>
           </section>
-          <div className="grid grid-cols-1 sm:grid-cols-9 gap-2 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-9 sm:gap-4">
             <div className="col-span-6 grid h-full grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4">
               <div className="col-span-2 h-full sm:pb-5">
                 <ItemAgravated name="health" namePtBr="Vitalidade" />
@@ -787,7 +789,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                 <Item quant={5} name="rage" namePtBr="Fúria" />
               </div>
             </div>
-            <div className="col-span-1 sm:col-span-3 w-full">
+            <div className="col-span-1 sm:col-span-3 w-full mt-2 sm:mt-0">
               <ItemRenownHaranoHauglosk />
             </div>
           </div>

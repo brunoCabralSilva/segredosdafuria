@@ -545,7 +545,7 @@ const toggleSessionSidebarView = (view: string) => {
       {
         showMenuSession === 'dices' &&
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 px-3 py-4 backdrop-blur-[2px] sm:px-4">
-          <div className="h-full w-full max-w-sm">
+          <div className="h-full w-full max-w-sm flex items-center justify-center">
             <MenuRoll dataSession={ dataSession } id={ id } gameMaster={ gameMaster } />
           </div>
         </div>

@@ -65,7 +65,7 @@ export default function ItemRenownHaranoHauglosk() {
                 onClick={() => updateValue(type, index + 1)}
                 key={index}
                 className={[
-                  'h-3.5 w-3.5 rounded-full border transition-colors',
+                  'h-5 sm:h-3.5 w-5 sm:w-3.5 rounded-full border transition-colors',
                   isFilled ? meta.filledClass : 'border-zinc-700 bg-transparent',
                 ].join(' ')}
               />
@@ -114,7 +114,7 @@ export default function ItemRenownHaranoHauglosk() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-center">
           {(Object.keys(renownMeta) as Array<keyof typeof renownMeta>).map((type) => (
             <div key={type}>
-              <p className={`font-geist-mono text-[0.62rem] uppercase tracking-[0.2em] ${renownMeta[type].textClass}`}>
+              <p className={`font-geist-mono sm:text-[0.62rem] uppercase tracking-[0.2em] ${renownMeta[type].textClass}`}>
                 {renownMeta[type].label}
               </p>
               {renderRenownTrack(type)}
@@ -124,7 +124,7 @@ export default function ItemRenownHaranoHauglosk() {
         <div className="mx-auto mt-4 w-full border-b border-zinc-500/20" />
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
           <div>
-            <p className="font-geist-mono text-[0.62rem] uppercase tracking-[0.2em] text-white">Harano</p>
+            <p className="font-geist-mono sm:text-[0.62rem] uppercase tracking-[0.2em] text-white">Harano</p>
             {renderShadowTrack('harano')}
             {!isSheetStandalone && <div className="mt-3 flex justify-center">
               <button
@@ -136,7 +136,7 @@ export default function ItemRenownHaranoHauglosk() {
             </div>}
           </div>
           <div>
-            <p className="font-geist-mono text-[0.62rem] uppercase tracking-[0.2em] text-white">Hauglosk</p>
+            <p className="font-geist-mono sm:text-[0.62rem] uppercase tracking-[0.2em] text-white">Hauglosk</p>
             {renderShadowTrack('hauglosk')}
             {!isSheetStandalone && <div className="mt-3 flex justify-center">
               <button

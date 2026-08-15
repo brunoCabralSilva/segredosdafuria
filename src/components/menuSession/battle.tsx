@@ -567,8 +567,8 @@ export default function Battle() {
   const hasGalleryImages = galleryImageNames.length > 0;
   const currentGalleryImageName = hasGalleryImages
     ? galleryImageNames[
-        Math.min(galleryImageIndex, galleryImageNames.length - 1)
-      ]
+    Math.min(galleryImageIndex, galleryImageNames.length - 1)
+    ]
     : null;
   const selectedCharacterName = dataSheet?.data?.name?.trim?.() ?? "";
 
@@ -702,7 +702,7 @@ export default function Battle() {
       </div>
     );
   }
-  
+
   async function updateBattlePoints(nextPoints: Point[]) {
     if (!session?.id) {
       setShowMessage({
@@ -990,10 +990,10 @@ export default function Battle() {
     const updatedPoints = points.map((point) =>
       point.id === dragState.pointId
         ? {
-            ...point,
-            x: nextPosition.x,
-            y: nextPosition.y,
-          }
+          ...point,
+          x: nextPosition.x,
+          y: nextPosition.y,
+        }
         : point
     );
 
@@ -1082,16 +1082,16 @@ export default function Battle() {
     const updatedTokens = tokens.map((token) =>
       token.id === dragState.tokenId
         ? {
-            ...token,
-            x: nextPosition.x,
-            y: nextPosition.y,
-            ...(tokenMatchesSelectedCharacter(token)
-              ? {
-                  ownerEmail: token.ownerEmail ?? email,
-                  sheetId: token.sheetId ?? sheetId,
-                }
-              : {}),
-          }
+          ...token,
+          x: nextPosition.x,
+          y: nextPosition.y,
+          ...(tokenMatchesSelectedCharacter(token)
+            ? {
+              ownerEmail: token.ownerEmail ?? email,
+              sheetId: token.sheetId ?? sheetId,
+            }
+            : {}),
+        }
         : token
     );
 
@@ -1140,10 +1140,10 @@ export default function Battle() {
       color: "green",
       ...(isGameMaster
         ? {
-            superficialDamage: 0,
-            aggravatedDamage: 0,
-            otherMarkers: 0,
-          }
+          superficialDamage: 0,
+          aggravatedDamage: 0,
+          otherMarkers: 0,
+        }
         : { ownerEmail: email, sheetId }),
     };
 
@@ -1329,9 +1329,9 @@ export default function Battle() {
         color: isGameMaster ? tokenColor : token.color ?? "green",
         ...(tokenMatchesSelectedCharacter(token)
           ? {
-              ownerEmail: token.ownerEmail ?? email,
-              sheetId: token.sheetId ?? sheetId,
-            }
+            ownerEmail: token.ownerEmail ?? email,
+            sheetId: token.sheetId ?? sheetId,
+          }
           : {}),
       };
 
@@ -1380,9 +1380,9 @@ export default function Battle() {
     const updatedTokens = tokens.map((token) =>
       token.id === editingToken.id
         ? {
-            ...token,
-            isDead: !token.isDead,
-          }
+          ...token,
+          isDead: !token.isDead,
+        }
         : token
     );
 
@@ -1438,12 +1438,12 @@ export default function Battle() {
       const updatedPoints = points.map((point) =>
         point.id === editingPointId
           ? {
-              ...point,
-              name,
-              icon: selectedIcon,
-              color: selectedColor,
-              imageNames,
-            }
+            ...point,
+            name,
+            icon: selectedIcon,
+            color: selectedColor,
+            imageNames,
+          }
           : point
       );
 
@@ -1515,594 +1515,825 @@ export default function Battle() {
 
   return (
     <div className="flex h-full min-h-0 w-full flex-col xl:flex-row">
-      <div className="min-h-0 flex-1">
+      <div className="h-[50vh] sm:h-full min-h-0 flex-1">
         <div className="inset-0 md:relative md:inset-auto w-full h-full min-h-0 flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0">
-        <div className="w-full border-b border-white/10 bg-black/55 px-4 py-3">
-          <div className="flex items-center gap-2 flex-wrap">
-            <button
-              type="button"
-              onClick={() => {
-                clearMeasurementLine();
-                toggleMarking();
-              }}
-              className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
-                isMarkingEnabled
-                  ? "border-red-950 bg-red-950 text-white"
-                  : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
-              }`}
-              title={isMarkingEnabled ? "Marcação ativa" : "Marcação inativa"}
-            >
-              <FaMapMarkerAlt />
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleMeasuring}
-              className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
-                isMeasuringEnabled
-                  ? "border-red-950 bg-red-950 text-white"
-                  : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
-              }`}
-              title={isMeasuringEnabled ? "Medição ativa" : "Medição inativa"}
-            >
-              <FaRulerCombined />
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleTokenPlacement}
-              className={`inline-flex h-9 w-9 items-center justify-center border font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors ${
-                isTokenPlacementEnabled
-                  ? "border-red-950 bg-red-950 text-white"
-                  : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
-              }`}
-              title={
-                isTokenPlacementEnabled
-                  ? "Criacao de token ativa"
-                  : "Criar token"
-              }
-            >
-              T
-            </button>
-
-            {isGameMaster && (
+          <div className="w-full border-b border-white/10 bg-black/55 px-4 py-3">
+            <div className="flex items-center gap-2 flex-wrap">
               <button
                 type="button"
-                disabled={isSavingMap}
                 onClick={() => {
                   clearMeasurementLine();
-                  updateBattleVisibility(!isBattleVisibleToPlayers);
+                  toggleMarking();
                 }}
-                className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${
-                  isBattleVisibleToPlayers
+                className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${isMarkingEnabled
                     ? "border-red-950 bg-red-950 text-white"
                     : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
-                }`}
-                title={
-                  isBattleVisibleToPlayers
-                    ? "Jogadores podem ver o modo de combate"
-                    : "Somente o narrador pode ver o modo de combate"
-                }
+                  }`}
+                title={isMarkingEnabled ? "Marcação ativa" : "Marcação inativa"}
               >
-                {isBattleVisibleToPlayers ? <FaEye /> : <FaEyeSlash />}
+                <FaMapMarkerAlt />
               </button>
-            )}
 
-            <button
-              type="button"
-              onClick={() => {
-                clearMeasurementLine();
-                zoomOut();
-              }}
-              className="inline-flex h-9 min-w-9 items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
-            >
-              -
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                clearMeasurementLine();
-                resetZoom();
-              }}
-              className="inline-flex h-9 min-w-[4.5rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
-            >
-              {Math.round(zoom * 100)}%
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                clearMeasurementLine();
-                zoomIn();
-              }}
-              className="inline-flex h-9 min-w-9 items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
-            >
-              +
-            </button>
-
-            {isGameMaster && (
               <button
                 type="button"
-                disabled={isSavingMap}
-                onClick={() => {
-                  setPendingBattleImageOption(selectedBattleImageOption);
-                  setShowBattleImagePicker(true);
-                }}
-                className="inline-flex h-9 min-w-[13rem] items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30 disabled:cursor-not-allowed disabled:opacity-60"
-                title="Selecionar imagem do mapa"
+                onClick={toggleMeasuring}
+                className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${isMeasuringEnabled
+                    ? "border-red-950 bg-red-950 text-white"
+                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                  }`}
+                title={isMeasuringEnabled ? "Medição ativa" : "Medição inativa"}
               >
-                Selecionar mapa
+                <FaRulerCombined />
               </button>
-            )}
 
-            {isSavingMap && (
-              <span className="text-xs text-zinc-300">
-                Salvando mapa...
-              </span>
-            )}
-          </div>
-        </div>
+              <button
+                type="button"
+                onClick={toggleTokenPlacement}
+                className={`inline-flex h-9 w-9 items-center justify-center border font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors ${isTokenPlacementEnabled
+                    ? "border-red-950 bg-red-950 text-white"
+                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                  }`}
+                title={
+                  isTokenPlacementEnabled
+                    ? "Criacao de token ativa"
+                    : "Criar token"
+                }
+              >
+                T
+              </button>
 
-        <div
-          onWheel={handleWheel}
-          className="w-full h-full bg-black overflow-auto relative"
-        >
-          <div className="flex h-full min-h-full w-full min-w-full items-center justify-center">
-            <div
-              ref={imageWrapperRef}
-              onClick={handleMapClick}
-              className={`relative shrink-0 ${
-                isMarkingEnabled || isMeasuringEnabled || isTokenPlacementEnabled
-                  ? "cursor-crosshair"
-                  : "cursor-default"
-              }`}
-              style={{
-                width: "100%",
-                height: "100%",
-                minWidth: `${zoom * 100}%`,
-                minHeight: `${zoom * 100}%`,
-              }}
-            >
-              <Image
-                src={battleImageSrc}
-                alt={`Mapa da Sessão ${session.name}`}
-                fill
-                className="object-contain select-none"
-                priority
-                draggable={false}
-                onError={() => {
-                  if (battleImageSrc !== DEFAULT_BATTLE_IMAGE_SRC) {
-                    setBattleImageSrc(DEFAULT_BATTLE_IMAGE_SRC);
-                    setSelectedBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
-                    setPendingBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
-                    void updateBattleImage(DEFAULT_BATTLE_IMAGE_SRC);
+              {isGameMaster && (
+                <button
+                  type="button"
+                  disabled={isSavingMap}
+                  onClick={() => {
+                    clearMeasurementLine();
+                    updateBattleVisibility(!isBattleVisibleToPlayers);
+                  }}
+                  className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${isBattleVisibleToPlayers
+                      ? "border-red-950 bg-red-950 text-white"
+                      : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                    }`}
+                  title={
+                    isBattleVisibleToPlayers
+                      ? "Jogadores podem ver o modo de combate"
+                      : "Somente o narrador pode ver o modo de combate"
                   }
+                >
+                  {isBattleVisibleToPlayers ? <FaEye /> : <FaEyeSlash />}
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => {
+                  clearMeasurementLine();
+                  zoomOut();
                 }}
-              />
+                className="inline-flex h-9 min-w-9 items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
+              >
+                -
+              </button>
 
-              <svg className="absolute inset-0 z-10 w-full h-full pointer-events-none">
-                {measurements.map((measurement) => (
-                  <line
-                    key={measurement.id}
-                    x1={`${measurement.start.x * 100}%`}
-                    y1={`${measurement.start.y * 100}%`}
-                    x2={`${measurement.end.x * 100}%`}
-                    y2={`${measurement.end.y * 100}%`}
-                    stroke="white"
-                    strokeWidth="2"
-                    strokeDasharray="8 6"
-                  />
-                ))}
+              <button
+                type="button"
+                onClick={() => {
+                  clearMeasurementLine();
+                  resetZoom();
+                }}
+                className="inline-flex h-9 min-w-[4.5rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
+              >
+                {Math.round(zoom * 100)}%
+              </button>
 
-                {measurementStart && (
-                  <circle
-                    cx={`${measurementStart.x * 100}%`}
-                    cy={`${measurementStart.y * 100}%`}
-                    r="6"
-                    fill="white"
-                    stroke="black"
-                    strokeWidth="2"
-                  />
-                )}
-              </svg>
+              <button
+                type="button"
+                onClick={() => {
+                  clearMeasurementLine();
+                  zoomIn();
+                }}
+                className="inline-flex h-9 min-w-9 items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
+              >
+                +
+              </button>
 
-              {measurements.map((measurement) => {
-                const middleX =
-                  (measurement.start.x + measurement.end.x) / 2;
-                const middleY =
-                  (measurement.start.y + measurement.end.y) / 2;
+              {isGameMaster && (
+                <button
+                  type="button"
+                  disabled={isSavingMap}
+                  onClick={() => {
+                    setPendingBattleImageOption(selectedBattleImageOption);
+                    setShowBattleImagePicker(true);
+                  }}
+                  className="inline-flex h-9 min-w-[13rem] items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30 disabled:cursor-not-allowed disabled:opacity-60"
+                  title="Selecionar imagem do mapa"
+                >
+                  Selecionar mapa
+                </button>
+              )}
 
-                return (
-                  <div
-                    key={`label-${measurement.id}`}
-                    className="absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded bg-black/80 px-2 py-1 text-xs font-bold text-white border border-white pointer-events-none"
-                    style={{
-                      left: `${middleX * 100}%`,
-                      top: `${middleY * 100}%`,
-                    }}
-                  >
-                    {measurement.distanceMeters.toFixed(2)} m
-                  </div>
-                );
-              })}
-
-              {tokens.map((token) => {
-                const tokenPosition =
-                  draggedToken?.id === token.id ? draggedToken : token;
-                const resolvedTokenImageName = (token.imageName ?? token.name ?? "").trim();
-                const shouldShowTokenImage =
-                  resolvedTokenImageName.length > 0 &&
-                  !failedTokenImageIds[token.id];
-                const tokenFallbackLabel = getTokenFallbackLabel(
-                  resolvedTokenImageName || token.name || "Token"
-                );
-                const tokenColorClassName =
-                  (token.color ?? "green") === "red"
-                    ? "border-red-500 bg-red-950/70"
-                    : "border-green-500 bg-black/80";
-
-                return (
-                  <button
-                    key={token.id}
-                    type="button"
-                    onPointerDown={(event) =>
-                      handleTokenPointerDown(event, token)
-                    }
-                    onPointerMove={handleTokenPointerMove}
-                    onPointerUp={handleTokenPointerUp}
-                    onPointerCancel={handleTokenPointerCancel}
-                    onDragStart={(event) => event.preventDefault()}
-                    onClick={(event) => {
-                      if (isMeasuringEnabled) return;
-
-                      event.stopPropagation();
-
-                      if (suppressTokenClickRef.current === token.id) {
-                        suppressTokenClickRef.current = null;
-                        return;
-                      }
-
-                      openTokenPopup(token);
-                    }}
-                    className={`absolute z-30 flex h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 text-center text-[8px] font-bold leading-none text-white shadow-lg ${tokenColorClassName} ${
-                      isMeasuringEnabled
-                        ? "pointer-events-none cursor-default"
-                        : canMoveToken(token)
-                        ? "cursor-grab touch-none active:cursor-grabbing"
-                        : "cursor-pointer"
-                    }`}
-                    style={{
-                      left: `${tokenPosition.x * 100}%`,
-                      top: `${tokenPosition.y * 100}%`,
-                    }}
-                    title={token.name}
-                  >
-                    {shouldShowTokenImage ? (
-                      <Image
-                        src={getBattleImageSrc(resolvedTokenImageName)}
-                        alt={token.name}
-                        fill
-                        draggable={false}
-                        className="pointer-events-none h-full w-full select-none object-cover"
-                        onError={() =>
-                          setFailedTokenImageIds((prevState) => ({
-                            ...prevState,
-                            [token.id]: true,
-                          }))
-                        }
-                      />
-                    ) : (
-                      <span className="pointer-events-none select-none text-[10px] font-black uppercase leading-none">
-                        {tokenFallbackLabel}
-                      </span>
-                    )}
-
-                    {token.isDead && (
-                      <span className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-2xl font-black leading-none text-red-600 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
-                        X
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-
-              {points.map((point) => {
-                const marker = markerIcons[point.icon];
-                const markerColor = markerColors[normalizeMarkerColor(point.color)];
-                const MarkerIcon = marker.Icon;
-                const markerPosition =
-                  draggedMarker?.id === point.id ? draggedMarker : point;
-
-                return (
-                  <button
-                    key={point.id}
-                    type="button"
-                    onPointerDown={(event) =>
-                      handleMarkerPointerDown(event, point)
-                    }
-                    onPointerMove={handleMarkerPointerMove}
-                    onPointerUp={handleMarkerPointerUp}
-                    onPointerCancel={handleMarkerPointerCancel}
-                    onClick={(event) => {
-                      if (isMeasuringEnabled) return;
-
-                      event.stopPropagation();
-
-                      if (suppressMarkerClickRef.current === point.id) {
-                        suppressMarkerClickRef.current = null;
-                        return;
-                      }
-
-                      openEditPopup(point);
-                    }}
-                    className={`absolute h-7 w-7 rounded-full border-2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-sm z-30 shadow-lg ${markerColor.className} ${
-                      isMeasuringEnabled
-                        ? "pointer-events-none cursor-default"
-                        : canMoveMarker(point)
-                        ? "pointer-events-auto cursor-grab active:cursor-grabbing touch-none"
-                        : "pointer-events-auto cursor-pointer"
-                    }`}
-                    style={{
-                      left: `${markerPosition.x * 100}%`,
-                      top: `${markerPosition.y * 100}%`,
-                    }}
-                    title={
-                      isMeasuringEnabled
-                        ? point.name
-                        : normalizeMarkerColor(point.color) === "azul" &&
-                          !isGameMaster
-                        ? `${point.name} - clique para visualizar`
-                        : `${point.name} - clique para editar`
-                    }
-                  >
-                    <MarkerIcon />
-                  </button>
-                );
-              })}
+              {isSavingMap && (
+                <span className="text-xs text-zinc-300">
+                  Salvando mapa...
+                </span>
+              )}
             </div>
           </div>
 
-          {isPopupOpen && (
-            <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
+          <div
+            onWheel={handleWheel}
+            className="w-full h-full bg-black overflow-auto relative"
+          >
+            <div className="flex h-full min-h-full w-full min-w-full items-center justify-center">
               <div
-                className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
-                onClick={(event) => event.stopPropagation()}
+                ref={imageWrapperRef}
+                onClick={handleMapClick}
+                className={`relative shrink-0 ${isMarkingEnabled || isMeasuringEnabled || isTokenPlacementEnabled
+                    ? "cursor-crosshair"
+                    : "cursor-default"
+                  }`}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  minWidth: `${zoom * 100}%`,
+                  minHeight: `${zoom * 100}%`,
+                }}
               >
-                <div className="mb-4 flex items-center justify-between gap-3">
-                  <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      onClick={() => setPopupPage("details")}
-                      className={`rounded border px-3 py-2 text-sm font-semibold transition ${
-                        popupPage === "details"
-                          ? "border-white bg-zinc-100 text-black"
-                          : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
-                      }`}
-                    >
-                      {isReadOnlyPopup ? "Informacoes" : "Edicao"}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setPopupPage("gallery")}
-                      className={`rounded border px-3 py-2 text-sm font-semibold transition ${
-                        popupPage === "gallery"
-                          ? "border-white bg-zinc-100 text-black"
-                          : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
-                      }`}
-                    >
-                      Imagens
-                    </button>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      clearMeasurementLine();
-                      closePopup();
-                    }}
-                    className="text-zinc-300 hover:text-white text-xl"
-                  >
-                    x
-                  </button>
-                </div>
-
-                {isReadOnlyPopup ? (
-                  <div className="space-y-4">
-                    {popupPage === "details" ? (
-                      <>
-                    <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
-                      <p className="text-sm text-zinc-400 mb-1">
-                        Nome do marcador
-                      </p>
-                      <p className="text-sm font-semibold text-white">
-                        {markerName}
-                      </p>
-                    </div>
-
-                    <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
-                      <p className="text-sm text-zinc-400 mb-1">
-                        Icone selecionado
-                      </p>
-                      <div className="flex items-center gap-3">
-                        <span
-                          className={`flex h-9 w-9 items-center justify-center rounded-full border-2 ${selectedPreviewColor.className}`}
-                        >
-                          <SelectedPreviewIcon />
-                        </span>
-                        <span className="text-sm font-semibold text-white">
-                          {markerIcons[selectedIcon].label}
-                        </span>
-                      </div>
-                    </div>
-                      </>
-                    ) : (
-
-                    <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
-                      <p className="text-sm text-zinc-400 mb-3">
-                        Galeria de imagens
-                      </p>
-                      {renderGalleryContent()}
-                    </div>
-
-                    )}
-
-                    {popupPage === "details" && (
-                      <p className="text-sm text-zinc-400">
-                        Voce nao tem permissao para editar marcadores azuis.
-                      </p>
-                    )}
-
-                    <p className="hidden">
-                      Voce nao tem permissao para editar este marcador porque a cor azul é exclusiva do Narrador.
-                    </p>
-                  </div>
-                ) : (
-                  <>
-                {popupPage === "details" ? (
-                  <>
-                <input
-                  type="text"
-                  value={markerName}
-                  onChange={(event) => setMarkerName(event.target.value)}
-                  placeholder="Ex: Terminal Central, Cidade Industrial..."
-                  className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none mb-4"
+                <Image
+                  src={battleImageSrc}
+                  alt={`Mapa da Sessão ${session.name}`}
+                  fill
+                  className="object-contain select-none"
+                  priority
+                  draggable={false}
+                  onError={() => {
+                    if (battleImageSrc !== DEFAULT_BATTLE_IMAGE_SRC) {
+                      setBattleImageSrc(DEFAULT_BATTLE_IMAGE_SRC);
+                      setSelectedBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
+                      setPendingBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
+                      void updateBattleImage(DEFAULT_BATTLE_IMAGE_SRC);
+                    }
+                  }}
                 />
 
-                <label className="block text-sm mb-2">
-                  Escolha o ícone
-                </label>
+                <svg className="absolute inset-0 z-10 w-full h-full pointer-events-none">
+                  {measurements.map((measurement) => (
+                    <line
+                      key={measurement.id}
+                      x1={`${measurement.start.x * 100}%`}
+                      y1={`${measurement.start.y * 100}%`}
+                      x2={`${measurement.end.x * 100}%`}
+                      y2={`${measurement.end.y * 100}%`}
+                      stroke="white"
+                      strokeWidth="2"
+                      strokeDasharray="8 6"
+                    />
+                  ))}
 
-                <div className="grid grid-cols-5 sm:grid-cols-6 gap-2 max-h-36 overflow-y-auto pr-1 mb-4">
-                  {Object.entries(markerIcons).map(([key, marker]) => {
-                    const Icon = marker.Icon;
-                    const isSelected = selectedIcon === key;
-
-                    return (
-                      <div
-                        key={key}
-                        className="w-full h-full flex items-center justify-center"
-                      >
-                        <button
-                          type="button"
-                          onClick={() => {
-                            clearMeasurementLine();
-                            setSelectedIcon(key as MarkerIconType);
-                          }}
-                          aria-label={marker.label}
-                          title={marker.label}
-                          className={`h-9 w-9 rounded-full border-2 flex items-center justify-center text-sm transition ${
-                            isSelected
-                              ? `${selectedPreviewColor.className} ring-2 ring-white ring-offset-2 ring-offset-zinc-950`
-                              : `${selectedPreviewColor.className} hover:scale-105`
-                          }`}
-                        >
-                          <Icon />
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <label className="block text-sm mb-2">
-                  Escolha a cor
-                </label>
-
-                <div className="grid grid-cols-5 sm:grid-cols-6 gap-2">
-                  {availableMarkerColors.map(([key, color]) => {
-                    const isSelected = selectedColor === key;
-
-                    return (
-                      <div
-                        key={key}
-                        className="flex items-center justify-center"
-                      >
-                        <button 
-                          type="button"
-                          onClick={() => {
-                            clearMeasurementLine();
-                            setSelectedColor(key as MarkerColorType);
-                          }}
-                          aria-label={color.label}
-                          title={color.label}
-                          className={`h-6 w-6 rounded-full border transition ${
-                            isSelected
-                              ? "ring-2 ring-white ring-offset-2 ring-offset-zinc-950"
-                              : "hover:scale-105"
-                          }`}
-                        >
-                          <span
-                            className={`block h-full w-full rounded-full border ${color.previewBorderClassName} ${color.previewClassName}`}
-                          />
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                <div className="flex justify-between gap-2 mt-5">
-                  {editingPointId && (
-                    <button
-                      type="button"
-                      disabled={isSavingMap}
-                      onClick={() => {
-                        clearMeasurementLine();
-                        deleteMarker();
-                      }}
-                      className="px-3 py-2 rounded bg-red-700 hover:bg-red-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      Excluir
-                    </button>
+                  {measurementStart && (
+                    <circle
+                      cx={`${measurementStart.x * 100}%`}
+                      cy={`${measurementStart.y * 100}%`}
+                      r="6"
+                      fill="white"
+                      stroke="black"
+                      strokeWidth="2"
+                    />
                   )}
+                </svg>
 
-                  <div className="ml-auto flex gap-2">
+                {measurements.map((measurement) => {
+                  const middleX =
+                    (measurement.start.x + measurement.end.x) / 2;
+                  const middleY =
+                    (measurement.start.y + measurement.end.y) / 2;
+
+                  return (
+                    <div
+                      key={`label-${measurement.id}`}
+                      className="absolute z-20 -translate-x-1/2 -translate-y-1/2 rounded bg-black/80 px-2 py-1 text-xs font-bold text-white border border-white pointer-events-none"
+                      style={{
+                        left: `${middleX * 100}%`,
+                        top: `${middleY * 100}%`,
+                      }}
+                    >
+                      {measurement.distanceMeters.toFixed(2)} m
+                    </div>
+                  );
+                })}
+
+                {tokens.map((token) => {
+                  const tokenPosition =
+                    draggedToken?.id === token.id ? draggedToken : token;
+                  const resolvedTokenImageName = (token.imageName ?? token.name ?? "").trim();
+                  const shouldShowTokenImage =
+                    resolvedTokenImageName.length > 0 &&
+                    !failedTokenImageIds[token.id];
+                  const tokenFallbackLabel = getTokenFallbackLabel(
+                    resolvedTokenImageName || token.name || "Token"
+                  );
+                  const tokenColorClassName =
+                    (token.color ?? "green") === "red"
+                      ? "border-red-500 bg-red-950/70"
+                      : "border-green-500 bg-black/80";
+
+                  return (
+                    <button
+                      key={token.id}
+                      type="button"
+                      onPointerDown={(event) =>
+                        handleTokenPointerDown(event, token)
+                      }
+                      onPointerMove={handleTokenPointerMove}
+                      onPointerUp={handleTokenPointerUp}
+                      onPointerCancel={handleTokenPointerCancel}
+                      onDragStart={(event) => event.preventDefault()}
+                      onClick={(event) => {
+                        if (isMeasuringEnabled) return;
+
+                        event.stopPropagation();
+
+                        if (suppressTokenClickRef.current === token.id) {
+                          suppressTokenClickRef.current = null;
+                          return;
+                        }
+
+                        openTokenPopup(token);
+                      }}
+                      className={`absolute z-30 flex h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 text-center text-[8px] font-bold leading-none text-white shadow-lg ${tokenColorClassName} ${isMeasuringEnabled
+                          ? "pointer-events-none cursor-default"
+                          : canMoveToken(token)
+                            ? "cursor-grab touch-none active:cursor-grabbing"
+                            : "cursor-pointer"
+                        }`}
+                      style={{
+                        left: `${tokenPosition.x * 100}%`,
+                        top: `${tokenPosition.y * 100}%`,
+                      }}
+                      title={token.name}
+                    >
+                      {shouldShowTokenImage ? (
+                        <Image
+                          src={getBattleImageSrc(resolvedTokenImageName)}
+                          alt={token.name}
+                          fill
+                          draggable={false}
+                          className="pointer-events-none h-full w-full select-none object-cover"
+                          onError={() =>
+                            setFailedTokenImageIds((prevState) => ({
+                              ...prevState,
+                              [token.id]: true,
+                            }))
+                          }
+                        />
+                      ) : (
+                        <span className="pointer-events-none select-none text-[10px] font-black uppercase leading-none">
+                          {tokenFallbackLabel}
+                        </span>
+                      )}
+
+                      {token.isDead && (
+                        <span className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-2xl font-black leading-none text-red-600 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+                          X
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+
+                {points.map((point) => {
+                  const marker = markerIcons[point.icon];
+                  const markerColor = markerColors[normalizeMarkerColor(point.color)];
+                  const MarkerIcon = marker.Icon;
+                  const markerPosition =
+                    draggedMarker?.id === point.id ? draggedMarker : point;
+
+                  return (
+                    <button
+                      key={point.id}
+                      type="button"
+                      onPointerDown={(event) =>
+                        handleMarkerPointerDown(event, point)
+                      }
+                      onPointerMove={handleMarkerPointerMove}
+                      onPointerUp={handleMarkerPointerUp}
+                      onPointerCancel={handleMarkerPointerCancel}
+                      onClick={(event) => {
+                        if (isMeasuringEnabled) return;
+
+                        event.stopPropagation();
+
+                        if (suppressMarkerClickRef.current === point.id) {
+                          suppressMarkerClickRef.current = null;
+                          return;
+                        }
+
+                        openEditPopup(point);
+                      }}
+                      className={`absolute h-7 w-7 rounded-full border-2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-sm z-30 shadow-lg ${markerColor.className} ${isMeasuringEnabled
+                          ? "pointer-events-none cursor-default"
+                          : canMoveMarker(point)
+                            ? "pointer-events-auto cursor-grab active:cursor-grabbing touch-none"
+                            : "pointer-events-auto cursor-pointer"
+                        }`}
+                      style={{
+                        left: `${markerPosition.x * 100}%`,
+                        top: `${markerPosition.y * 100}%`,
+                      }}
+                      title={
+                        isMeasuringEnabled
+                          ? point.name
+                          : normalizeMarkerColor(point.color) === "azul" &&
+                            !isGameMaster
+                            ? `${point.name} - clique para visualizar`
+                            : `${point.name} - clique para editar`
+                      }
+                    >
+                      <MarkerIcon />
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {isPopupOpen && (
+              <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
+                <div
+                  className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => setPopupPage("details")}
+                        className={`rounded border px-3 py-2 text-sm font-semibold transition ${popupPage === "details"
+                            ? "border-white bg-zinc-100 text-black"
+                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                          }`}
+                      >
+                        {isReadOnlyPopup ? "Informacoes" : "Edicao"}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setPopupPage("gallery")}
+                        className={`rounded border px-3 py-2 text-sm font-semibold transition ${popupPage === "gallery"
+                            ? "border-white bg-zinc-100 text-black"
+                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                          }`}
+                      >
+                        Imagens
+                      </button>
+                    </div>
+
                     <button
                       type="button"
-                      disabled={isSavingMap}
                       onClick={() => {
                         clearMeasurementLine();
                         closePopup();
                       }}
-                      className="px-3 py-2 rounded bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="text-zinc-300 hover:text-white text-xl"
                     >
-                      Cancelar
+                      x
                     </button>
+                  </div>
+
+                  {isReadOnlyPopup ? (
+                    <div className="space-y-4">
+                      {popupPage === "details" ? (
+                        <>
+                          <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                            <p className="text-sm text-zinc-400 mb-1">
+                              Nome do marcador
+                            </p>
+                            <p className="text-sm font-semibold text-white">
+                              {markerName}
+                            </p>
+                          </div>
+
+                          <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                            <p className="text-sm text-zinc-400 mb-1">
+                              Icone selecionado
+                            </p>
+                            <div className="flex items-center gap-3">
+                              <span
+                                className={`flex h-9 w-9 items-center justify-center rounded-full border-2 ${selectedPreviewColor.className}`}
+                              >
+                                <SelectedPreviewIcon />
+                              </span>
+                              <span className="text-sm font-semibold text-white">
+                                {markerIcons[selectedIcon].label}
+                              </span>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+
+                        <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                          <p className="text-sm text-zinc-400 mb-3">
+                            Galeria de imagens
+                          </p>
+                          {renderGalleryContent()}
+                        </div>
+
+                      )}
+
+                      {popupPage === "details" && (
+                        <p className="text-sm text-zinc-400">
+                          Voce nao tem permissao para editar marcadores azuis.
+                        </p>
+                      )}
+
+                      <p className="hidden">
+                        Voce nao tem permissao para editar este marcador porque a cor azul é exclusiva do Narrador.
+                      </p>
+                    </div>
+                  ) : (
+                    <>
+                      {popupPage === "details" ? (
+                        <>
+                          <input
+                            type="text"
+                            value={markerName}
+                            onChange={(event) => setMarkerName(event.target.value)}
+                            placeholder="Ex: Terminal Central, Cidade Industrial..."
+                            className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none mb-4"
+                          />
+
+                          <label className="block text-sm mb-2">
+                            Escolha o ícone
+                          </label>
+
+                          <div className="grid grid-cols-5 sm:grid-cols-6 gap-2 max-h-36 overflow-y-auto pr-1 mb-4">
+                            {Object.entries(markerIcons).map(([key, marker]) => {
+                              const Icon = marker.Icon;
+                              const isSelected = selectedIcon === key;
+
+                              return (
+                                <div
+                                  key={key}
+                                  className="w-full h-full flex items-center justify-center"
+                                >
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      clearMeasurementLine();
+                                      setSelectedIcon(key as MarkerIconType);
+                                    }}
+                                    aria-label={marker.label}
+                                    title={marker.label}
+                                    className={`h-9 w-9 rounded-full border-2 flex items-center justify-center text-sm transition ${isSelected
+                                        ? `${selectedPreviewColor.className} ring-2 ring-white ring-offset-2 ring-offset-zinc-950`
+                                        : `${selectedPreviewColor.className} hover:scale-105`
+                                      }`}
+                                  >
+                                    <Icon />
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          <label className="block text-sm mb-2">
+                            Escolha a cor
+                          </label>
+
+                          <div className="grid grid-cols-5 sm:grid-cols-6 gap-2">
+                            {availableMarkerColors.map(([key, color]) => {
+                              const isSelected = selectedColor === key;
+
+                              return (
+                                <div
+                                  key={key}
+                                  className="flex items-center justify-center"
+                                >
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      clearMeasurementLine();
+                                      setSelectedColor(key as MarkerColorType);
+                                    }}
+                                    aria-label={color.label}
+                                    title={color.label}
+                                    className={`h-6 w-6 rounded-full border transition ${isSelected
+                                        ? "ring-2 ring-white ring-offset-2 ring-offset-zinc-950"
+                                        : "hover:scale-105"
+                                      }`}
+                                  >
+                                    <span
+                                      className={`block h-full w-full rounded-full border ${color.previewBorderClassName} ${color.previewClassName}`}
+                                    />
+                                  </button>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          <div className="flex justify-between gap-2 mt-5">
+                            {editingPointId && (
+                              <button
+                                type="button"
+                                disabled={isSavingMap}
+                                onClick={() => {
+                                  clearMeasurementLine();
+                                  deleteMarker();
+                                }}
+                                className="px-3 py-2 rounded bg-red-700 hover:bg-red-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                              >
+                                Excluir
+                              </button>
+                            )}
+
+                            <div className="ml-auto flex gap-2">
+                              <button
+                                type="button"
+                                disabled={isSavingMap}
+                                onClick={() => {
+                                  clearMeasurementLine();
+                                  closePopup();
+                                }}
+                                className="px-3 py-2 rounded bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                              >
+                                Cancelar
+                              </button>
+
+                              <button
+                                type="button"
+                                disabled={isSavingMap}
+                                onClick={() => {
+                                  clearMeasurementLine();
+                                  saveMarker();
+                                }}
+                                className="px-3 py-2 rounded bg-green-700 hover:bg-green-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                              >
+                                {isSavingMap ? "Salvando..." : "Salvar"}
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
+                            <p className="text-sm text-zinc-400 mb-3">
+                              Galeria de imagens
+                            </p>
+                            {renderGalleryContent()}
+                          </div>
+
+                          {renderMarkerImageNameEditor()}
+
+                          <div className="flex justify-end gap-2 mt-5">
+                            <button
+                              type="button"
+                              disabled={isSavingMap}
+                              onClick={() => {
+                                clearMeasurementLine();
+                                closePopup();
+                              }}
+                              className="px-3 py-2 rounded bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                            >
+                              Cancelar
+                            </button>
+
+                            <button
+                              type="button"
+                              disabled={isSavingMap}
+                              onClick={() => {
+                                clearMeasurementLine();
+                                saveMarker();
+                              }}
+                              className="px-3 py-2 rounded bg-green-700 hover:bg-green-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                            >
+                              {isSavingMap ? "Salvando..." : "Salvar"}
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {isTokenPopupOpen && editingToken && (
+              <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
+                <div
+                  className="max-h-[calc(100dvh-2rem)] w-full max-w-sm overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    {editingTokenHasSessionCharacter ? (
+                      <h2 className="text-sm font-bold">
+                        Editar token
+                      </h2>
+                    ) : (
+                      <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setTokenPopupPage("details")}
+                          className={`rounded border px-3 py-2 text-sm font-semibold transition ${tokenPopupPage === "details"
+                              ? "border-white bg-zinc-100 text-black"
+                              : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                            }`}
+                        >
+                          Edicao
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => setTokenPopupPage("markers")}
+                          className={`rounded border px-3 py-2 text-sm font-semibold transition ${tokenPopupPage === "markers"
+                              ? "border-white bg-zinc-100 text-black"
+                              : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                            }`}
+                        >
+                          Marcadores
+                        </button>
+                      </div>
+                    )}
 
                     <button
                       type="button"
-                      disabled={isSavingMap}
                       onClick={() => {
                         clearMeasurementLine();
-                        saveMarker();
+                        closeTokenPopup();
                       }}
-                      className="px-3 py-2 rounded bg-green-700 hover:bg-green-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="text-xl text-zinc-300 hover:text-white"
                     >
-                      {isSavingMap ? "Salvando..." : "Salvar"}
+                      x
                     </button>
                   </div>
-                </div>
-                  </>
-                ) : (
-                  <>
-                    <div className="rounded border border-zinc-700 bg-zinc-900 p-3">
-                      <p className="text-sm text-zinc-400 mb-3">
-                        Galeria de imagens
-                      </p>
-                      {renderGalleryContent()}
-                    </div>
 
-                    {renderMarkerImageNameEditor()}
+                  {tokenPopupPage === "details" ? (
+                    <>
+                      <label className="mb-2 block text-sm">
+                        Nome do token / imagem
+                      </label>
+                      <input
+                        type="text"
+                        value={tokenName}
+                        onChange={(event) => {
+                          setTokenName(event.target.value);
+                          setIsPreviewImageFailed(false);
+                        }}
+                        placeholder="Ex: Luna Crinos"
+                        className={`w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none ${!isGameMaster
+                            ? "cursor-not-allowed opacity-70"
+                            : ""
+                          }`}
+                        disabled={!isGameMaster}
+                      />
 
-                    <div className="flex justify-end gap-2 mt-5">
+                      {isGameMaster && (
+                        <div className="mt-4">
+                          <label className="mb-2 block text-sm">
+                            Cor do token
+                          </label>
+                          <div className="flex gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setTokenColor("green")}
+                              className={`rounded border px-3 py-2 text-sm font-semibold ${tokenColor === "green"
+                                  ? "border-white bg-green-700 text-white"
+                                  : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                                }`}
+                            >
+                              Verde
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => setTokenColor("red")}
+                              className={`rounded border px-3 py-2 text-sm font-semibold ${tokenColor === "red"
+                                  ? "border-white bg-red-700 text-white"
+                                  : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                                }`}
+                            >
+                              Vermelho
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {tokenName.trim() && (
+                        <div className="mt-4 rounded border border-zinc-700 bg-zinc-900 p-3">
+                          <p className="mb-3 text-sm text-zinc-400">
+                            Preview
+                          </p>
+                          <div
+                            className={`relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 ${tokenColor === "red"
+                                ? "border-red-500 bg-red-950/70"
+                                : "border-green-500 bg-black"
+                              }`}
+                          >
+                            {!isPreviewImageFailed ? (
+                              <Image
+                                src={getBattleImageSrc(tokenName.trim())}
+                                alt={tokenName}
+                                fill
+                                className="h-full w-full object-cover"
+                                onError={() => setIsPreviewImageFailed(true)}
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center text-lg font-black uppercase text-white">
+                                {getTokenFallbackLabel(tokenName)}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {!editingTokenHasSessionCharacter ? (
+                        <div className="flex flex-col gap-3">
+                          <label className="block text-sm">
+                            <span className="mb-2 block">Dano Superficial</span>
+                            <input
+                              type="number"
+                              min={0}
+                              value={tokenSuperficialDamage}
+                              onChange={(event) =>
+                                setTokenSuperficialDamage(Number(event.target.value))
+                              }
+                              className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
+                            />
+                          </label>
+
+                          <label className="block text-sm">
+                            <span className="mb-2 block">Dano Agravado</span>
+                            <input
+                              type="number"
+                              min={0}
+                              value={tokenAggravatedDamage}
+                              onChange={(event) =>
+                                setTokenAggravatedDamage(Number(event.target.value))
+                              }
+                              className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
+                            />
+                          </label>
+
+                          <label className="block text-sm">
+                            <span className="mb-2 block">Outros marcadores</span>
+                            <input
+                              type="number"
+                              min={0}
+                              value={tokenOtherMarkers}
+                              onChange={(event) =>
+                                setTokenOtherMarkers(Number(event.target.value))
+                              }
+                              className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
+                            />
+                          </label>
+                        </div>
+                      ) : (
+                        <div className="rounded border border-zinc-700 bg-zinc-900 p-3 text-sm text-zinc-400">
+                          Tokens vinculados a personagens da sessao nao usam esses marcadores extras.
+                        </div>
+                      )}
+                    </>
+                  )}
+
+                  <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex gap-2">
                       <button
                         type="button"
                         disabled={isSavingMap}
                         onClick={() => {
                           clearMeasurementLine();
-                          closePopup();
+                          deleteToken();
                         }}
-                        className="px-3 py-2 rounded bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="rounded bg-red-700 px-3 py-2 text-sm font-semibold text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+                      >
+                        Excluir
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={isSavingMap}
+                        onClick={() => {
+                          clearMeasurementLine();
+                          toggleTokenDead();
+                        }}
+                        className={`rounded px-3 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60 ${editingToken.isDead
+                            ? "bg-red-900 hover:bg-red-800"
+                            : "bg-zinc-700 hover:bg-zinc-600"
+                          }`}
+                      >
+                        Morto
+                      </button>
+                    </div>
+
+                    <div className="ml-auto flex gap-2">
+                      <button
+                        type="button"
+                        disabled={isSavingMap}
+                        onClick={() => {
+                          clearMeasurementLine();
+                          closeTokenPopup();
+                        }}
+                        className="rounded bg-zinc-700 px-3 py-2 text-sm font-semibold text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         Cancelar
                       </button>
@@ -2112,374 +2343,125 @@ export default function Battle() {
                         disabled={isSavingMap}
                         onClick={() => {
                           clearMeasurementLine();
-                          saveMarker();
+                          saveToken();
                         }}
-                        className="px-3 py-2 rounded bg-green-700 hover:bg-green-600 text-white text-sm font-semibold disabled:opacity-60 disabled:cursor-not-allowed"
+                        className="rounded bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-60"
                       >
                         {isSavingMap ? "Salvando..." : "Salvar"}
                       </button>
                     </div>
-                  </>
-                )}
-                  </>
-                )}
-              </div>
-            </div>
-          )}
-
-          {isTokenPopupOpen && editingToken && (
-            <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
-              <div
-                className="max-h-[calc(100dvh-2rem)] w-full max-w-sm overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
-                onClick={(event) => event.stopPropagation()}
-              >
-                <div className="mb-4 flex items-center justify-between gap-3">
-                  {editingTokenHasSessionCharacter ? (
-                    <h2 className="text-sm font-bold">
-                      Editar token
-                    </h2>
-                  ) : (
-                    <div className="grid min-w-0 flex-1 grid-cols-2 gap-2">
-                      <button
-                        type="button"
-                        onClick={() => setTokenPopupPage("details")}
-                        className={`rounded border px-3 py-2 text-sm font-semibold transition ${
-                          tokenPopupPage === "details"
-                            ? "border-white bg-zinc-100 text-black"
-                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
-                        }`}
-                      >
-                        Edicao
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => setTokenPopupPage("markers")}
-                        className={`rounded border px-3 py-2 text-sm font-semibold transition ${
-                          tokenPopupPage === "markers"
-                            ? "border-white bg-zinc-100 text-black"
-                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
-                        }`}
-                      >
-                        Marcadores
-                      </button>
-                    </div>
-                  )}
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      clearMeasurementLine();
-                      closeTokenPopup();
-                    }}
-                    className="text-xl text-zinc-300 hover:text-white"
-                  >
-                    x
-                  </button>
-                </div>
-
-                {tokenPopupPage === "details" ? (
-                  <>
-                    <label className="mb-2 block text-sm">
-                      Nome do token / imagem
-                    </label>
-                    <input
-                      type="text"
-                      value={tokenName}
-                      onChange={(event) => {
-                        setTokenName(event.target.value);
-                        setIsPreviewImageFailed(false);
-                      }}
-                      placeholder="Ex: Luna Crinos"
-                      className={`w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none ${
-                        !isGameMaster
-                          ? "cursor-not-allowed opacity-70"
-                          : ""
-                      }`}
-                      disabled={!isGameMaster}
-                    />
-
-                    {isGameMaster && (
-                      <div className="mt-4">
-                        <label className="mb-2 block text-sm">
-                          Cor do token
-                        </label>
-                        <div className="flex gap-2">
-                          <button
-                            type="button"
-                            onClick={() => setTokenColor("green")}
-                            className={`rounded border px-3 py-2 text-sm font-semibold ${
-                              tokenColor === "green"
-                                ? "border-white bg-green-700 text-white"
-                                : "border-zinc-600 bg-zinc-900 text-zinc-300"
-                            }`}
-                          >
-                            Verde
-                          </button>
-
-                          <button
-                            type="button"
-                            onClick={() => setTokenColor("red")}
-                            className={`rounded border px-3 py-2 text-sm font-semibold ${
-                              tokenColor === "red"
-                                ? "border-white bg-red-700 text-white"
-                                : "border-zinc-600 bg-zinc-900 text-zinc-300"
-                            }`}
-                          >
-                            Vermelho
-                          </button>
-                        </div>
-                      </div>
-                    )}
-
-                    {tokenName.trim() && (
-                      <div className="mt-4 rounded border border-zinc-700 bg-zinc-900 p-3">
-                        <p className="mb-3 text-sm text-zinc-400">
-                          Preview
-                        </p>
-                        <div
-                          className={`relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 ${
-                            tokenColor === "red"
-                              ? "border-red-500 bg-red-950/70"
-                              : "border-green-500 bg-black"
-                          }`}
-                        >
-                          {!isPreviewImageFailed ? (
-                            <Image
-                              src={getBattleImageSrc(tokenName.trim())}
-                              alt={tokenName}
-                              fill
-                              className="h-full w-full object-cover"
-                              onError={() => setIsPreviewImageFailed(true)}
-                            />
-                          ) : (
-                            <div className="flex h-full w-full items-center justify-center text-lg font-black uppercase text-white">
-                              {getTokenFallbackLabel(tokenName)}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <>
-                    {!editingTokenHasSessionCharacter ? (
-                      <div className="flex flex-col gap-3">
-                        <label className="block text-sm">
-                          <span className="mb-2 block">Dano Superficial</span>
-                          <input
-                            type="number"
-                            min={0}
-                            value={tokenSuperficialDamage}
-                            onChange={(event) =>
-                              setTokenSuperficialDamage(Number(event.target.value))
-                            }
-                            className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
-                          />
-                        </label>
-
-                        <label className="block text-sm">
-                          <span className="mb-2 block">Dano Agravado</span>
-                          <input
-                            type="number"
-                            min={0}
-                            value={tokenAggravatedDamage}
-                            onChange={(event) =>
-                              setTokenAggravatedDamage(Number(event.target.value))
-                            }
-                            className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
-                          />
-                        </label>
-
-                        <label className="block text-sm">
-                          <span className="mb-2 block">Outros marcadores</span>
-                          <input
-                            type="number"
-                            min={0}
-                            value={tokenOtherMarkers}
-                            onChange={(event) =>
-                              setTokenOtherMarkers(Number(event.target.value))
-                            }
-                            className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
-                          />
-                        </label>
-                      </div>
-                    ) : (
-                      <div className="rounded border border-zinc-700 bg-zinc-900 p-3 text-sm text-zinc-400">
-                        Tokens vinculados a personagens da sessao nao usam esses marcadores extras.
-                      </div>
-                    )}
-                  </>
-                )}
-
-                <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      disabled={isSavingMap}
-                      onClick={() => {
-                        clearMeasurementLine();
-                        deleteToken();
-                      }}
-                      className="rounded bg-red-700 px-3 py-2 text-sm font-semibold text-white hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      Excluir
-                    </button>
-
-                    <button
-                      type="button"
-                      disabled={isSavingMap}
-                      onClick={() => {
-                        clearMeasurementLine();
-                        toggleTokenDead();
-                      }}
-                      className={`rounded px-3 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60 ${
-                        editingToken.isDead
-                          ? "bg-red-900 hover:bg-red-800"
-                          : "bg-zinc-700 hover:bg-zinc-600"
-                      }`}
-                    >
-                      Morto
-                    </button>
-                  </div>
-
-                  <div className="ml-auto flex gap-2">
-                  <button
-                    type="button"
-                    disabled={isSavingMap}
-                    onClick={() => {
-                      clearMeasurementLine();
-                      closeTokenPopup();
-                    }}
-                    className="rounded bg-zinc-700 px-3 py-2 text-sm font-semibold text-white hover:bg-zinc-600 disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    Cancelar
-                  </button>
-
-                  <button
-                    type="button"
-                    disabled={isSavingMap}
-                    onClick={() => {
-                      clearMeasurementLine();
-                      saveToken();
-                    }}
-                    className="rounded bg-green-700 px-3 py-2 text-sm font-semibold text-white hover:bg-green-600 disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    {isSavingMap ? "Salvando..." : "Salvar"}
-                  </button>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          {showBattleImagePicker && isGameMaster && (
-            <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/80 px-4 py-4">
-              <div
-                className="flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden border border-zinc-700/40 bg-gradient-to-br from-black via-zinc-950 to-[#140000] text-white shadow-[0_0_28px_rgba(0,0,0,0.72)]"
-                onClick={(event) => event.stopPropagation()}
-              >
-                <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
-                  <div>
-                    <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white">
-                      Selecionar mapa
-                    </p>
-                    <p className="mt-1 font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/55">
-                      Escolha uma imagem e clique em aplicar para definir o mapa da batalha.
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setShowBattleImagePicker(false)}
-                    className="flex h-9 w-9 items-center justify-center border border-white/10 bg-black/70 text-white/75 transition-colors hover:border-red-700 hover:bg-[#5f0000] hover:text-white"
-                  >
-                    <IoIosCloseCircleOutline className="text-2xl" />
-                  </button>
-                </div>
-                <div className="principles-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-4">
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {battleImageOptions.map((imageOption) => {
-                      const isSelected = pendingBattleImageOption === imageOption.value;
-
-                      return (
-                        <button
-                          key={imageOption.value}
-                          type="button"
-                          onClick={() => setPendingBattleImageOption(imageOption.value)}
-                          className={`flex flex-col gap-2 border p-2 text-left transition-colors ${isSelected ? 'border-red-950 bg-red-950/30' : 'border-white/10 bg-black/50 hover:border-red-900 hover:bg-red-950/20'}`}
-                        >
-                          <div className="relative aspect-video w-full overflow-hidden border border-white/10 bg-black">
-                            <Image
-                              src={imageOption.value}
-                              alt={imageOption.label}
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
-                          <span className="block font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/85">
-                            {imageOption.label}
-                          </span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="flex items-center justify-end gap-2 border-t border-white/10 px-4 py-3">
-                  <button
-                    type="button"
-                    disabled={isSavingMap}
-                    onClick={() => setShowBattleImagePicker(false)}
-                    className="inline-flex h-9 min-w-[8rem] items-center justify-center border border-white/10 bg-black/60 px-3 font-geist-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/20 disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    type="button"
-                    disabled={isSavingMap || pendingBattleImageOption === selectedBattleImageOption}
-                    onClick={() => {
-                      void applyBattleImageSelection();
-                    }}
-                    className="inline-flex h-9 min-w-[8rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
-                  >
-                    Aplicar
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {fullscreenImageName && (
-            <div
-              className="absolute inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
-              onClick={() => setFullscreenImageName(null)}
-            >
-              <div
-                className="relative h-full w-full max-w-7xl"
-                onClick={(event) => event.stopPropagation()}
-              >
-                <button
-                  type="button"
-                  onClick={() => setFullscreenImageName(null)}
-                  className="absolute right-2 top-2 z-10 rounded border border-zinc-600 bg-black/70 px-3 py-2 text-sm font-semibold text-white hover:bg-black"
+            {showBattleImagePicker && isGameMaster && (
+              <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/80 px-4 py-4">
+                <div
+                  className="flex max-h-[85vh] w-full max-w-5xl flex-col overflow-hidden border border-zinc-700/40 bg-gradient-to-br from-black via-zinc-950 to-[#140000] text-white shadow-[0_0_28px_rgba(0,0,0,0.72)]"
+                  onClick={(event) => event.stopPropagation()}
                 >
-                  Fechar
-                </button>
+                  <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+                    <div>
+                      <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white">
+                        Selecionar mapa
+                      </p>
+                      <p className="mt-1 font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/55">
+                        Escolha uma imagem e clique em aplicar para definir o mapa da batalha.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowBattleImagePicker(false)}
+                      className="flex h-9 w-9 items-center justify-center border border-white/10 bg-black/70 text-white/75 transition-colors hover:border-red-700 hover:bg-[#5f0000] hover:text-white"
+                    >
+                      <IoIosCloseCircleOutline className="text-2xl" />
+                    </button>
+                  </div>
+                  <div className="principles-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-4">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                      {battleImageOptions.map((imageOption) => {
+                        const isSelected = pendingBattleImageOption === imageOption.value;
 
-                <div className="relative h-full w-full">
-                  <Image
-                    src={getBattleImageSrc(fullscreenImageName)}
-                    alt={fullscreenImageName}
-                    fill
-                    className="object-contain"
-                  />
+                        return (
+                          <button
+                            key={imageOption.value}
+                            type="button"
+                            onClick={() => setPendingBattleImageOption(imageOption.value)}
+                            className={`flex flex-col gap-2 border p-2 text-left transition-colors ${isSelected ? 'border-red-950 bg-red-950/30' : 'border-white/10 bg-black/50 hover:border-red-900 hover:bg-red-950/20'}`}
+                          >
+                            <div className="relative aspect-video w-full overflow-hidden border border-white/10 bg-black">
+                              <Image
+                                src={imageOption.value}
+                                alt={imageOption.label}
+                                fill
+                                className="object-contain"
+                              />
+                            </div>
+                            <span className="block font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/85">
+                              {imageOption.label}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-end gap-2 border-t border-white/10 px-4 py-3">
+                    <button
+                      type="button"
+                      disabled={isSavingMap}
+                      onClick={() => setShowBattleImagePicker(false)}
+                      className="inline-flex h-9 min-w-[8rem] items-center justify-center border border-white/10 bg-black/60 px-3 font-geist-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/20 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="button"
+                      disabled={isSavingMap || pendingBattleImageOption === selectedBattleImageOption}
+                      onClick={() => {
+                        void applyBattleImageSelection();
+                      }}
+                      className="inline-flex h-9 min-w-[8rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                      Aplicar
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {fullscreenImageName && (
+              <div
+                className="absolute inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
+                onClick={() => setFullscreenImageName(null)}
+              >
+                <div
+                  className="relative h-full w-full max-w-7xl"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setFullscreenImageName(null)}
+                    className="absolute right-2 top-2 z-10 rounded border border-zinc-600 bg-black/70 px-3 py-2 text-sm font-semibold text-white hover:bg-black"
+                  >
+                    Fechar
+                  </button>
+
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={getBattleImageSrc(fullscreenImageName)}
+                      alt={fullscreenImageName}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-      <aside className="min-h-0 w-full border-t border-white/10 bg-black/85 xl:h-full xl:w-[24rem] xl:min-w-[22rem] xl:max-w-[26rem] xl:border-l xl:border-t-0">
+      <aside className="h-[50vh] sm:h-full min-h-0 w-full border-t border-white/10 bg-black/85 xl:h-full xl:w-[24rem] xl:min-w-[22rem] xl:max-w-[26rem] xl:border-l xl:border-t-0">
         <Chat sidebar />
       </aside>
     </div>

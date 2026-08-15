@@ -50,7 +50,7 @@ export default function Background(props: { type: string }) {
   };
 
   return (
-    <section className="visage-card relative mt-5 w-full overflow-hidden border border-[#708578]/40 bg-[#090d0e]/95 text-slate-300 shadow-[inset_0_0_80px_rgba(0,0,0,0.7)]">
+    <section className="visage-card relative mt-2 sm:mt-5 w-full overflow-hidden border border-[#708578]/40 bg-[#090d0e]/95 text-slate-300 shadow-[inset_0_0_80px_rgba(0,0,0,0.7)]">
       <div className="flex items-center justify-between px-6 pb-3 pt-5">
         <div>
           <p onClick={() => setTextArea(true)} className="cursor-pointer font-kingthings text-[0.82rem] uppercase tracking-[0.26em] text-red-500/85">

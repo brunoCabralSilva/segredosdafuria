@@ -74,7 +74,7 @@ export default function Consent() {
   }, [list]);
 
   const tabButtonClassName = (tab: ConsentTab) => {
-    const baseClassName = "inline-flex items-center justify-center border px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors";
+    const baseClassName = "w-full border px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors";
 
     return activeTab === tab
       ? `${baseClassName} border-red-950 bg-red-950 text-white`
@@ -95,7 +95,7 @@ export default function Consent() {
       </div>
 
       <div className="relative border-b border-white/10 px-4 py-3 sm:px-6">
-        <div className="flex flex-wrap gap-2">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2">
           <button
             type="button"
             onClick={() => setActiveTab("editor")}
