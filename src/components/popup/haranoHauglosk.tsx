@@ -52,7 +52,7 @@ export default function HaranoHauglosk(props: { type: string }) {
 
   return (
     <SpecialRollFrame
-      title={`Teste de ${type}`}
+      title={`Checagem de ${type}`}
       description=""
       onClose={closePopup}
     >
@@ -64,7 +64,7 @@ export default function HaranoHauglosk(props: { type: string }) {
           </div>
         </label>
         <label htmlFor="shadow-dificulty" className="mb-3 flex w-full flex-col items-center">
-          <p className={specialRollLabelClass}>Dificuldade do Teste</p>
+          <p className={specialRollLabelClass}>Dificuldade da Checagem</p>
           <div className="flex w-full">
             <button
               type="button"

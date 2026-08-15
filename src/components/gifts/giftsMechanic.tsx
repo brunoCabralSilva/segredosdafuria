@@ -30,7 +30,7 @@ export default function GiftsMechanic(props: { name: string }) {
   const { name } = props;
   switch(name) {
 
-    //Dons que custam 1 Teste de Fúria
+    //Dons que custam 1 Checagem de Fúria
     case 'Animal Magnetism': return <RageTestOrWp type="rage" />;
     case 'Between the Cracks': return <RageTestOrWp type="rage" />;
     case 'Blackout': return <RageTestOrWp type="rage" />;
@@ -89,7 +89,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Implacable Grip": return <RageTestOrWp type="willpower" />;
     case "Footsteps of the Past": return <RageTestOrWp type="willpower" />;
 
-    //Dons que custam 1 Teste de Fúria + 1 teste
+    //Dons que custam 1 Checagem de Fúria + 1 teste
     case "Hare's Leap":
       return <RageOrWpWithRoll skill="" type="rage" attribute="strength" renown="glory" dificulty={1} textDificulty="" />; 
     case 'Jam Technology':
@@ -289,7 +289,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Exposed Desire":
       return <RgOrWpWithConditionInRoll type="willpower" attribute="wits" renown="glory" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Raciocínio, ou um valor imposto pelo Narrador)" condition="Marque se o alvo é uma criatura não humana" />    
 
-    //Testes que requerem ou não apenas 1 ponto de força de vontade ou 1 teste de Fúria
+    //Checagens que requerem ou não apenas 1 ponto de força de vontade ou 1 teste de Fúria
     case "Scent of Running Water":
       return <WpOrRageTestConditional type="willpower" condition="Marque se deseja estender os efeitos do Dom à parada de dados do seu personagem por uma cena" />
     case "Camouflage":
@@ -320,7 +320,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Strength to Endure":
       return <NormalTest attribute="resolve" renown="honor" />
 
-    //Testes Individuais
+    //Checagens Individuais
     case 'Pack Instinct': return <PackInstinct />
     case 'Sight from Beyond': return <SightFromBeyond />
     case "Razor Claws": return <RazorClaws />

@@ -1128,7 +1128,7 @@
         "cost": 3,
         "type": "checkbox",
         "title": "Rito Vinculado",
-        "description": "Rito Vinculado - Seus Ritos Sociais possuem poder místico por trás deles. Quando adquire esta Vantagem, você aprende um Rito Social. Para cada Rito Social que conhece, na primeira vez em cada história que você realizar esse Rito, pode testar Liderança + seu Renome mais alto como se o Rito fosse místico, com Dificuldade 2, mais 1 por participante, até o máximo de 7. Para cada ponto na margem de sucesso, você pode escolher um participante para receber um benefício. Esse participante pode restaurar um ponto de dano Superficial à Força de Vontade ou à Vitalidade, ou mover um ponto de Harano para Hauglosk. Cada participante só pode se beneficiar disso uma vez por Rito por história. Resultados Brutais nesses Ritos Sociais deixam você esgotado, causando um ponto de dano Superficial à sua Força de Vontade.",
+        "description": "Rito Vinculado - Seus Ritos Sociais possuem poder místico por trás deles. Quando adquire esta Vantagem, você aprende um Rito Social. Para cada Rito Social que conhece, na primeira vez em cada história que você realizar esse Rito, pode realizar uma Checagem de Liderança + seu Renome mais alto como se o Rito fosse místico, com Dificuldade 2, mais 1 por participante, até o máximo de 7. Para cada ponto na margem de sucesso, você pode escolher um participante para receber um benefício. Esse participante pode restaurar um ponto de dano Superficial à Força de Vontade ou à Vitalidade, ou mover um ponto de Harano para Hauglosk. Cada participante só pode se beneficiar disso uma vez por Rito por história. Resultados Brutais nesses Ritos Sociais deixam você esgotado, causando um ponto de dano Superficial à sua Força de Vontade.",
         "font": "Tribos de Gaia",
         "page": "202"
       }
@@ -1153,7 +1153,7 @@
         "cost": 3,
         "type": "checkbox",
         "title": "Temperamento Equilibrado",
-        "description": "Temperamento Equilibrado - Você tem uma mentalidade comparativamente saudável para um Garou. Testes de Harano e Hauglosk são feitos com um dado adicional, até o máximo de 10. Isto não pode ser adquirido em conjunto com os Defeitos Amargurado ou Melancólico (The Moonlit Path, p. 68).",
+        "description": "Temperamento Equilibrado - Você tem uma mentalidade comparativamente saudável para um Garou. Checagens de Harano e Hauglosk são feitos com um dado adicional, até o máximo de 10. Isto não pode ser adquirido em conjunto com os Defeitos Amargurado ou Melancólico (The Moonlit Path, p. 68).",
         "font": "Tribos de Gaia",
         "page": "202"
       }

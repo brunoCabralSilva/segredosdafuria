@@ -21,7 +21,7 @@
     ],
     "resume": [
       "Não é uma forma obviamente sobrenatural, mas deixa os humanos comuns desconfortáveis;",
-      "Testes Sociais sofrem uma penalidade de dois dados (não se aplica a intimidação e nem a não humanos);",
+      "Checagens Sociais sofrem uma penalidade de dois dados (não se aplica a intimidação e nem a não humanos);",
       "Dois dados de bônus para todos os testes Físicos, exceto Furtividade;",
       "Regenera um nível de Vitalidade com uma checagem de Fúria."
     ],
@@ -50,7 +50,7 @@
     ],
     "resume": [
       "A comunicação comum é quase impossível: apenas palavras únicas conseguem ser pronunciadas ('matar', 'inimigo', 'Wyrm');",
-      "Testes de Furtividade e Sociais que não envolvam Intimidação falham automaticamente;",
+      "Checagens de Furtividade e Sociais que não envolvam Intimidação falham automaticamente;",
       "Um bônus de quatro dados a todos os testes Físicos;",
       "4 níveis extras de Vitalidade (aplique à trilha normal o dano marcado nesses níveis se não ocorrer regeneração;",
       "+3 de dano Agravado pelas garras naturais (ou Superficial contra lobisomens, vampiros e outras criaturas sobrenaturais resistentes);",
@@ -86,7 +86,7 @@
     ],
     "resume": [
       "Não pode falar como um humano, mas pode se comunicar bem o suficiente com lobos e outros Garou que entendem nuances baseadas na forma;",
-      "Testes para evitar a detecção são realizados com uma penalidade de dois dados;", 
+      "Checagens para evitar a detecção são realizados com uma penalidade de dois dados;", 
       "Bônus de dois dados para todos os testes Físicos não relacionados a Furtividade;",
       "Mordida com +1 de dano Agravado",
       "Pode regenerar um nível de Vitalidade com uma checagem de Fúria"

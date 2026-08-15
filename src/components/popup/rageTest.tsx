@@ -54,7 +54,7 @@ export default function RageTest() {
 
   return (
     <SpecialRollFrame
-      title="Teste de Fúria"
+      title="Checagem de Fúria"
       description=""
       onClose={closePopup}
     >

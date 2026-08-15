@@ -111,7 +111,7 @@ export function VisionsOfMomentsLost() {
       {
         marked &&
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-          <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade do Teste (A dificuldade é 3 para outros alvos ou 1 para si mesmo. Alvos relutantes podem resistir com Autocontrole + Determinação)</p>
+          <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade da Checagem (A dificuldade é 3 para outros alvos ou 1 para si mesmo. Alvos relutantes podem resistir com Autocontrole + Determinação)</p>
           <div className="flex w-full">
             <div
               className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}

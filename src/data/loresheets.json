@@ -189,7 +189,7 @@
       {
         "cost": 1,
         "skill": "Hunting Things: You spent many nights with Hel tracking down others of your kind. Add +2 dice to any Survival or Investigation pool when seeking out or hunting another Garou.",
-        "skillPtBr": "Caçando Coisas: Você passou muitas noites com Hel rastreando outros de sua espécie. Adicione +2 dados a qualquer Teste de Sobrevivência ou Investigação ao procurar ou caçar outro Garou."
+        "skillPtBr": "Caçando Coisas: Você passou muitas noites com Hel rastreando outros de sua espécie. Adicione +2 dados a qualquer Checagem de Sobrevivência ou Investigação ao procurar ou caçar outro Garou."
       },
       {
         "cost": 2,
@@ -657,7 +657,7 @@
       {
         "cost": 1,
         "skill": "Spiritual Eye Contact: You can test Wits + Insight (Difficulty 3) to discern whether a person is possessed.",
-        "skillPtBr": "Contato Espiritual: Você pode testar Astúcia + Percepção (Dificuldade 3) para discernir se uma pessoa está possuída."
+        "skillPtBr": "Contato Espiritual: Você pode realizar uma Checagem de Sagacidade + Percepção (Dificuldade 3) para discernir se uma pessoa está possuída."
       },
       {
         "cost": 2,
@@ -1437,7 +1437,7 @@
       {
         "cost": 2,
         "skill": "Graven Blood: Through communion with the spirits of death, you taught yourself how to resist a vampire's bite, making your blood taste like that of the grave and filled with Rage. Vampires must test for fury frenzy, Difficulty 3, if they bite you or otherwise taste your blood.",
-        "skillPtBr": "Sangue Sepulcral: Por meio da comunhão com os espíritos da morte, você ensinou a si mesmo como resistir à mordida de um vampiro, fazendo seu sangue ter gosto de túmulo e estar cheio de Fúria. Vampiros devem testar frenesi de fúria, Dificuldade 3, caso mordam você ou provem seu sangue de qualquer outra forma."
+        "skillPtBr": "Sangue Sepulcral: Por meio da comunhão com os espíritos da morte, você ensinou a si mesmo como resistir à mordida de um vampiro, fazendo seu sangue ter gosto de túmulo e estar cheio de Fúria. Vampiros devem realizar uma Checagem de frenesi de fúria, Dificuldade 3, caso mordam você ou provem seu sangue de qualquer outra forma."
       },
       {
         "cost": 3,
@@ -1622,7 +1622,7 @@
       {
         "cost": 3,
         "skill": "Eyes of the City: For many Garou, the pillars of glass and steel that so define cities resemble nothing more than a spiritual blight. Not so for you, and these same reflective surfaces allow you to glimpse the Umbra. Test Resolve + Awareness (Difficulty 2 in cities, 3 in suburbs, and 4 in caerns or the wilderness). Success allows the Garou to perceive the local Umbra through these reflective surfaces, while Brutal outcomes see the mirror shatter of its own accord. No other senses or communication are conferred from this advantage.",
-        "skillPtBr": "Olhos da Cidade: Para muitos Garou, os pilares de vidro e aço que tanto definem as cidades não parecem nada além de uma praga espiritual. Não para você; essas mesmas superfícies reflexivas permitem que você vislumbre a Umbra. Teste Determinação + Percepção, com Dificuldade 2 em cidades, 3 em subúrbios e 4 em caerns ou áreas selvagens. Um sucesso permite que o Garou perceba a Umbra local por meio dessas superfícies reflexivas, enquanto resultados Brutais fazem o espelho se estilhaçar por conta própria. Nenhum outro sentido ou comunicação é concedido por esta vantagem."
+        "skillPtBr": "Olhos da Cidade: Para muitos Garou, os pilares de vidro e aço que tanto definem as cidades não parecem nada além de uma praga espiritual. Não para você; essas mesmas superfícies reflexivas permitem que você vislumbre a Umbra. Realize uma Checagem de Determinação + Percepção, com Dificuldade 2 em cidades, 3 em subúrbios e 4 em caerns ou áreas selvagens. Um sucesso permite que o Garou perceba a Umbra local por meio dessas superfícies reflexivas, enquanto resultados Brutais fazem o espelho se estilhaçar por conta própria. Nenhum outro sentido ou comunicação é concedido por esta vantagem."
       },
       {
         "cost": 4,
@@ -1704,7 +1704,7 @@
       {
         "cost": 5,
         "skill": "Dire Curse: The groups infiltrated by Garou have many ways to lay low their enemies, and you've picked up some of the worst they have to offer. The curse takes a few minutes to perform and requires either a personal object from the target or that they remain in line of sight during the ritual. Test Composure + Occult, Difficulty 1; for every two points of margin, the target loses one success from a single type of test of the character's choice. These can be spread across multiple tests, but the curse only persists for 24 hours. Storytellers should offer a more narrative resolution if the target is unlikely to make tests.",
-        "skillPtBr": "Maldição Terrível: Os grupos infiltrados por Garou possuem muitas formas de derrubar seus inimigos, e você aprendeu algumas das piores que eles têm a oferecer. A maldição leva alguns minutos para ser realizada e exige um objeto pessoal do alvo ou que ele permaneça na linha de visão durante o ritual. Teste Autocontrole + Ocultismo, Dificuldade 1; para cada dois sucessos de margem, o alvo perde um sucesso em um único tipo de teste à escolha do personagem. Esses sucessos perdidos podem ser distribuídos por múltiplos testes, mas a maldição persiste apenas por 24 horas. Narradores devem oferecer uma resolução mais narrativa caso seja improvável que o alvo faça testes."
+        "skillPtBr": "Maldição Terrível: Os grupos infiltrados por Garou possuem muitas formas de derrubar seus inimigos, e você aprendeu algumas das piores que eles têm a oferecer. A maldição leva alguns minutos para ser realizada e exige um objeto pessoal do alvo ou que ele permaneça na linha de visão durante o ritual. Realize uma Checagem de Autocontrole + Ocultismo, Dificuldade 1; para cada dois sucessos de margem, o alvo perde um sucesso em um único tipo de teste à escolha do personagem. Esses sucessos perdidos podem ser distribuídos por múltiplos testes, mas a maldição persiste apenas por 24 horas. Narradores devem oferecer uma resolução mais narrativa caso seja improvável que o alvo faça testes."
       }
     ],
     "book": "Tribos de Gaia",

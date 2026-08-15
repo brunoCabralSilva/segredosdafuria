@@ -72,7 +72,7 @@ export default function GiftsAdded(props: { gift: any }) {
           </div>
           {gift.pool !== '' && (
             <div>
-              <span className="pr-1 uppercase tracking-[0.08em] text-white">Teste:</span>
+              <span className="pr-1 uppercase tracking-[0.08em] text-white">Checagem:</span>
               <span>{gift.pool}.</span>
             </div>
           )}

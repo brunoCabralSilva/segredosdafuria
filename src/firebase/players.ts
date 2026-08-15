@@ -257,14 +257,14 @@ export const updateDataWithRage = async (typeSession: string, sessionId: string,
         newData.data.rage = newRage;
         if (nameForm) textForm = ' por mudar para a forma ' + nameForm + '.';
         if (numberOfChecks === 2) {
-          textNumberofChecks = 'Foram realizados dois Testes de Fúria';
+          textNumberofChecks = 'Foram realizados duas Checagens de Fúria';
           if (success === 2) textActualRage = 'Obteve sucesso nos dois testes e a Fúria foi mantida.';
-          else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.'
-          else textActualRage = 'Falhou nos dois Testes. A fúria foi reduzida para ' + newData.data.rage + '.';
+          else if (success === 1) textActualRage = 'Obteve um sucesso e uma falha na Checagem. A Fúria foi reduzida para ' + newData.data.rage + '.'
+          else textActualRage = 'Falhou nas duas Checagens. A fúria foi reduzida para ' + newData.data.rage + '.';
         } else {
-          textNumberofChecks = 'Foi realizado um Teste de Fúria';
-          if (success === 0) textActualRage = 'Não obteve sucesso no Teste. A Fúria foi reduzida para ' + newData.data.rage + '.';
-          else textActualRage = 'Obteve sucesso no Teste. A fúria foi mantida.';
+          textNumberofChecks = 'Foi realizado uma Checagem de Fúria';
+          if (success === 0) textActualRage = 'Não obteve sucesso na Checagem. A Fúria foi reduzida para ' + newData.data.rage + '.';
+          else textActualRage = 'Obteve sucesso na Checagem. A fúria foi mantida.';
         }
     }
     await registerMessage(

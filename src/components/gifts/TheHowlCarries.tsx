@@ -108,7 +108,7 @@ export function TheHowlCarries() {
           checked={marked}
           onChange={ (e: any) => setMarked(e.target.checked) }
         />
-        <span>Marque se deseja que o efeito pode seja limitado à zona de proteção ao redor do caern onde possa estar (Será realizado um Teste de Fúria)</span>
+        <span>Marque se deseja que o efeito pode seja limitado à zona de proteção ao redor do caern onde possa estar (Será realizada uma Checagem de Fúria)</span>
       </label>
       <button
         className="mt-3 w-full border border-white/20 bg-black px-2.5 py-2 font-geist-mono text-[9px] font-bold uppercase tracking-[0.08em] text-white transition-colors cursor-pointer hover:border-red-800"

@@ -36,6 +36,14 @@ export default function Message(props: { dataMessage: any, color: string }) {
     const findMargin = dicesMargin.find((rageDice: number) => rageDice < 6);
     return findRage || findMargin;
   }
+
+  const resultToRituals = (result: any) => {
+    if (result.criticalPairs == 0 && result.success > result.dificulty)
+      return'Obteve sucesso na Checagem';
+    else if ((result.criticalPairs + result.success) > result.dificulty)
+      return'Pode ter obtido sucesso na Checagem, mas haverão Complicações (Veja Sistema)';
+    else 'Falhou na Checagem e pode haver Complicações (Veja Sistema)';
+  }
   
 	switch(dataMessage.type) {
     case 'notification':
@@ -129,7 +137,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                   dataMessage.cost !== '' &&
                   <p className="">
                     <span className="pr-1 font-bold">Custo:</span>
-                    { dataMessage.cost } (Possíveis Testes de Fúria e gastos de Força de Vontade são feitos automaticamente).
+                    { dataMessage.cost } (Possíveis Checagens de Fúria e gastos de Força de Vontade são feitos automaticamente).
                   </p>
                 }
                 {
@@ -169,7 +177,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                         ))
                       }
                     </div>
-                    <div className="font-bold pt-2 text-left">Teste de Fúria necessário:</div>
+                    <div className="font-bold pt-2 text-left">Checagem de Fúria necessária:</div>
                     <div className="">{ dataMessage.rageResults.result }</div>
                     <div className="font-bold pb-3">
                       Fúria Atual: {dataMessage.rageResults.rage}
@@ -202,7 +210,7 @@ export default function Message(props: { dataMessage: any, color: string }) {
                         Rerrolar com Força de Vontade
                       </button>
                     }
-                    <div className="font-bold pt-2 text-left">Teste de ativação do Dom:</div>
+                    <div className="font-bold pt-2 text-left">Checagem de ativação do Dom:</div>
                     <div className="font-bold pt-1 text-left">
                       { dataMessage.results.message }
                     </div>
@@ -295,9 +303,13 @@ export default function Message(props: { dataMessage: any, color: string }) {
                         Rerrolar com Força de Vontade
                       </button>
                     }
-                    <div className="font-bold pt-4 text-left">Teste de ativação do Ritual:</div>
+                    <div className="font-bold pt-4 text-left">Checagem de ativação do Ritual:</div>
                     <div className="font-bold pt-1 text-left">
-                      { ritualList.includes(dataMessage.titlePtBr) ? dataMessage.results.criticalPairs + dataMessage.results.success > dataMessage.results.dificulty ? 'Obteve Sucesso no Teste, mas haverão Complicações (Veja Sistema)' : 'Falhou no Teste e haverão Complicações (Veja Sistema)' : dataMessage.results.message }
+                      {
+                        ritualList.includes(dataMessage.titlePtBr)
+                        ? resultToRituals(dataMessage.results)
+                        : dataMessage.results.message
+                      }
                     </div>
                     <div className="flex justify-start items-center">
                         <span className="">{`Sucessos: `}</span>

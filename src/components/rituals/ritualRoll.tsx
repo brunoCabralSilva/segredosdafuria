@@ -22,7 +22,7 @@ export default function RitualRoll() {
         )}
         {showRitualRoll.ritual.pool && (
           <div className="border-b border-white/5 pb-2 font-geist-mono text-[10px] leading-5 text-white/78">
-            <span className="pr-1 uppercase tracking-[0.08em] text-white">Teste:</span>
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Checagem:</span>
             <span>{showRitualRoll.ritual.pool}</span>
           </div>
         )}

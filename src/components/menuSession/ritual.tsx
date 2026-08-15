@@ -53,7 +53,7 @@ export default function Ritual(props: { ritual: any; index: number; length: numb
         <div className="border-t border-white/10 px-4 py-4">
           <div className="space-y-2.5 font-geist-mono text-[11px] leading-5 text-white/75">
             <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Tipo:</span><span>{ritual.type}.</span></div>
-            {ritual.pool !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Teste:</span><span>{ritual.pool}.</span></div>}
+            {ritual.pool !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Checagem:</span><span>{ritual.pool}.</span></div>}
             <div className="border-t border-white/10 pt-2"><span className="pr-1 uppercase tracking-[0.08em] text-white">Descrição:</span><span className="whitespace-pre-wrap">{ritual.descriptionPtBr}</span></div>
             {ritual.systemPtBr !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span><span className="whitespace-pre-wrap">{ritual.systemPtBr}</span></div>}
           </div>

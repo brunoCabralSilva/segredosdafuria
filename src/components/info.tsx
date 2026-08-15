@@ -66,7 +66,7 @@ export default function Info() {
                     </span>
                   </p>
                   <p className="py-3">
-                    <span className="font-bold pr-1"> - Testes Automáticos e Manuais:</span>
+                    <span className="font-bold pr-1"> - Checagens Automáticas e Manuais:</span>
                     <span>
                       Execute testes com base nos dados preenchidos em sua ficha, sejam em testes automáticos relacionados aos atributos e habilidades do personagem ou em testes manuais, onde é necessário informar dados como dificuldade, bônus ou penalidades e quantidade de dados normais e de fúria.
                     </span>
@@ -97,7 +97,7 @@ export default function Info() {
                     </span>
                   </p>
                   <p className="py-3">
-                    <span className="font-bold pr-1"> - Testes:</span>
+                    <span className="font-bold pr-1"> - Checagens:</span>
                     <span>
                       O Narrador pode realizar testes clicando no ícone que representa um dado. Alí, ele pode escolher informações como quantidade de dados normais e de fúria, dificuldade e bônus ou penalidades.
                     </span>

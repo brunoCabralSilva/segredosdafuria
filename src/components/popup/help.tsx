@@ -340,7 +340,7 @@ export default function Help() {
                               <li className="list-disc">
                                 {
                                   form.cost === 'Nenhum.'
-                                    ? 'Nenhum Teste de Fúria'
+                                    ? 'Nenhuma Checagem de Fúria'
                                     : form.cost
                                 }
                               </li>
@@ -386,7 +386,7 @@ export default function Help() {
                                   <li className="list-disc">
                                     {
                                       form.cost === 'Nenhum.'
-                                        ? 'Nenhum Teste de Fúria'
+                                        ? 'Nenhuma Checagem de Fúria'
                                         : form.cost
                                     }
                                   </li>
@@ -454,7 +454,7 @@ export default function Help() {
                         </ul>
                       </div>
                     </div>
-                    <p className="w-full text-center font-kingthings text-lg md:text-left sm:text-xl">Dados de Fúria em Testes (p. 133)</p>
+                    <p className="w-full text-center font-kingthings text-lg md:text-left sm:text-xl">Dados de Fúria em Checagens (p. 133)</p>
                     <div className="mb-3 mt-2 h-px w-full bg-white/10" />
                     <div className="w-full">
                       <div className="pb-5 text-justify font-geist-mono text-[11px] leading-6 text-white/80">

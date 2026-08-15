@@ -38,7 +38,7 @@ export default function HaranoHauglosk(props: { type: string }) {
   return(
     <div className="w-full bg-black flex flex-col items-center h-80vh z-50 top-0 right-0 overflow-y-auto">
       <label htmlFor="valueofRage" className="w-full mb-4 flex flex-col items-center">
-        <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Teste de { type }</p>
+        <p className="text-white w-full pb-1 text-xl mb-5 font-bold">Checagem de { type }</p>
       </label>
       <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
         <p className="text-white w-full pb-3">Parada de Dados</p>
@@ -62,7 +62,7 @@ export default function HaranoHauglosk(props: { type: string }) {
         </div>
       </label>
       <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-        <p className="text-white w-full pb-3">Dificuldade do Teste</p>
+        <p className="text-white w-full pb-3">Dificuldade da Checagem</p>
         <div className="flex w-full">
           <div
             className={`border border-white p-3 cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}

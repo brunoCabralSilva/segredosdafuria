@@ -688,10 +688,10 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
                 <div className="grid grid-cols-5 w-full px-3 pt-1">
                   <p className="col-span-1 font-bold">Glabro</p>
                   <ul className="col-span-3">
-                    <li>Custo: Um Teste de Fúria</li>
-                    <li>Testes Fí­sicos: Bônus de Dois Dados</li>
-                    <li>Testes Sociais: Penalidade de Dois dados</li>
-                    <li>Regeneração: 1 por Teste de Fúria</li>
+                    <li>Custo: Uma Checagem de Fúria</li>
+                    <li>Checagens Físicas: Bônus de Dois Dados</li>
+                    <li>Checagens Sociais: Penalidade de Dois dados</li>
+                    <li>Regeneração: 1 por Checagem de Fúria</li>
                   </ul>
                   {
                     isExportMode ? (
@@ -715,12 +715,12 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
                 <div className="grid grid-cols-5 w-full px-3 pt-1">
                   <p className="col-span-1 font-bold">Crinos</p>
                   <ul className="col-span-3">
-                    <li>Custo: Dois Testes de Fúria</li>
+                    <li>Custo: Duas Checagens de Fúria</li>
                     <li>Gaste 1 ponto de Força de Vontade por turno ou está sujeito ao Frenesi</li>
-                    <li>Testes Fí­sicos: Bônus de Quatro Dados</li>
-                    <li>Ní­vel de Vitalidade: +4</li>
-                    <li>Testes Sociais e Furtivos: Falha</li>
-                    <li>Regeneração: 2 por Teste de Fúria</li>
+                    <li>Checagens Físicas: Bônus de Quatro Dados</li>
+                    <li>Nível de Vitalidade: +4</li>
+                    <li>Checagens Sociais e Furtivas: Falha</li>
+                    <li>Regeneração: 2 por Checagem de Fúria</li>
                     <li>Garras: +3</li>
                     <li>Mordida: +1 Agravado</li>
                     <li>Causa Delírio</li>
@@ -747,10 +747,10 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
                 <div className="grid grid-cols-5 w-full px-3 pt-1">
                   <p className="col-span-1 font-bold">Hispo</p>
                   <ul className="col-span-3">
-                    <li>Custo: um Teste de Fúria</li>
-                    <li>Testes Fí­sicos: Bônus de Dois Dados</li>
-                    <li>Testes Furtivos: Penalidade de Dois Dados</li>
-                    <li>Regeneração: 1 por Teste de Fúria</li>
+                    <li>Custo: uma Checagem de Fúria</li>
+                    <li>Checagens Físicas: Bônus de Dois Dados</li>
+                    <li>Checagens Furtivas: Penalidade de Dois Dados</li>
+                    <li>Regeneração: 1 por Checagem de Fúria</li>
                     <li>Mordida: +1 Agravado</li>
                   </ul>
                   {
@@ -812,7 +812,7 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
                 <div className="grid grid-cols-10 w-full font-bold">
                   <div className="col-span-3 border border-black !border-solid px-2 pb-3">Nome</div>
                   <div className="col-span-2 border border-black !border-solid px-2">Custo</div>
-                  <div className="col-span-4 border border-black !border-solid px-2">Teste</div>
+                  <div className="col-span-4 border border-black !border-solid px-2">Checagem</div>
                   <div className="col-span-1 border border-black !border-solid px-2">Página</div>
                 </div>
                 {

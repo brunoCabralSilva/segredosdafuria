@@ -132,7 +132,7 @@ export function HandsOfEarth() {
       {
         type !== 0 && type !== 1 &&
         <label htmlFor="dificulty" className="mb-4 flex flex-col items-center w-full">
-          <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade do Teste (para cada 10 metros além dos primeiros 10, a dificuldade aumenta em 1)</p>
+          <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade da Checagem (para cada 10 metros além dos primeiros 10, a dificuldade aumenta em 1)</p>
           <div className="flex w-full">
             <div
               className={`flex h-8 w-8 items-center justify-center border border-white/15 text-[10px] cursor-pointer ${ dificulty === 0 ? 'bg-gray-400 text-black' : 'bg-black text-white'}`}

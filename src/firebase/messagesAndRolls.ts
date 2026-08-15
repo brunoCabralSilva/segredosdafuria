@@ -422,14 +422,14 @@ export const haranoHaugloskCheck = async(
   let text = '';
   if (success < dificulty) {
     dataSheet.data[type] += 1;
-    text = `Não obteve sucesso no Teste. O ${type} foi aumentado para ` + dataSheet.data[type] + '.';
-  } else text = 'Obteve sucesso no Teste. Não houve aumento em ' + type + '.';
+    text = `Não obteve sucesso na Checagem. O ${type} foi aumentado para ` + dataSheet.data[type] + '.';
+  } else text = 'Obteve sucesso na Checagem. Não houve aumento em ' + type + '.';
   let emailRoll = null;
   if (email !== '') emailRoll = email;
   await registerMessage(
     sessionId,
     {
-      message: `Foi realizado um Teste de ${capitalizeFirstLetter(type)} para o personagem "${dataSheet.data.name}"`,
+      message: `Foi realizada uma Checagem de ${capitalizeFirstLetter(type)} para o personagem "${dataSheet.data.name}"`,
       rollOf: rollTest,
       result: text,
       value: dataSheet.data[type],

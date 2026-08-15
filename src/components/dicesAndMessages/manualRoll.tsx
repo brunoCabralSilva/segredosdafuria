@@ -134,7 +134,7 @@ export default function ManualRoll() {
         </div>
       </label>
       <label htmlFor="dificulty" className="mb-3 flex w-full flex-col items-center">
-        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade do Teste</p>
+        <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Dificuldade da Checagem</p>
         <div className="flex w-full">
           <button
             type="button"

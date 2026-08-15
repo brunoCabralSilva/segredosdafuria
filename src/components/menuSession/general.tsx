@@ -408,7 +408,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
               <div>
                 <p className={headerMetaLabelClass}>Ficha da Comunidade</p>
                 <div className="mt-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.14em] text-zinc-200">
-                  Esta ficha pertence a comunidade. Use o botao de copiar para criar uma versao sua e liberar a edicao.
+                  Esta ficha pertence a comunidade. Use o botão de copiar para criar uma versão sua e liberar a edição.
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -427,7 +427,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
             <div className={`${headerCardClass} px-4 py-3 ${shouldBlockUntilCharacterSelection ? 'relative z-20' : ''}`}>
               {isStandaloneSheetView ? (
                 <>
-                  <p className={headerMetaLabelClass}>Navegacao</p>
+                  <p className={headerMetaLabelClass}>Navegação</p>
                   <div className="mt-2">
                     <button
                       type="button"
@@ -479,7 +479,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
               <div className={`${isStandaloneSheetView ? 'flex justify-end' : 'grid grid-cols-[minmax(0,1fr)_auto] gap-3'} ${shouldBlockUntilCharacterSelection ? 'pointer-events-none select-none' : ''}`}>
                 {!isStandaloneSheetView && (
                   <div>
-                    <p className={headerMetaLabelClass}>Experiencia</p>
+                    <p className={headerMetaLabelClass}>Experiência</p>
                     <div className={`mt-2 flex min-h-[42px] items-center justify-between border border-zinc-500/30 px-3 ${input === 'xp' ? 'bg-[#dfe5da]' : 'bg-[#b8beb5]'}`}>
                       {input === 'xp' ? (
                         <input

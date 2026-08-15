@@ -123,14 +123,14 @@ export default function MenuRoll(props: { dataSession: any, id: string, gameMast
               onClick={() => setOptionRadio('automated')}
               className={`border px-2 py-2 text-center font-geist-mono text-[9px] uppercase tracking-[0.08em] transition-colors sm:text-[10px] ${optionRadio === 'automated' ? 'border-red-700 bg-[#7a0000] text-white' : 'border-white/10 bg-black/40 text-white/70 hover:border-red-700/70 hover:text-white'}`}
             >
-              Teste automatizado
+              Checagem automatizada
             </button>
             <button
               type="button"
               onClick={() => setOptionRadio('manual')}
               className={`border px-2 py-2 text-center font-geist-mono text-[9px] uppercase tracking-[0.08em] transition-colors sm:text-[10px] ${optionRadio === 'manual' ? 'border-red-700 bg-[#7a0000] text-white' : 'border-white/10 bg-black/40 text-white/70 hover:border-red-700/70 hover:text-white'}`}
             >
-              Teste manual
+              Checagem manual
             </button>
           </div>
         </div>

@@ -221,7 +221,7 @@ export default function AutomatedRoll() {
   return(
     <div className="flex h-full min-h-0 w-full flex-col items-center overflow-y-auto bg-transparent">
       <div className="text-center font-geist-mono text-[11px] leading-5 text-white/78">
-        <span className="pr-1">Você ainda não selecionou uma Ficha de Personagem para utilizar os Testes Automatizados.</span>
+        <span className="pr-1">Você ainda não selecionou uma Ficha de Personagem para utilizar as Checagens Automatizadas.</span>
         <span
           onClick={ () => {
             setShowMenuSession('sheet');

@@ -48,7 +48,7 @@ export default function WillpowerTest() {
 
   return (
     <SpecialRollFrame
-      title="Teste de Força de Vontade"
+      title="Checagem de Força de Vontade"
       description=""
       onClose={closePopup}
     >
@@ -99,7 +99,7 @@ export default function WillpowerTest() {
           </div>
         </label>
         <label htmlFor="willpower-dificulty" className="mb-3 flex w-full flex-col items-center">
-          <p className={specialRollLabelClass}>Dificuldade do Teste</p>
+          <p className={specialRollLabelClass}>Dificuldade da Checagem</p>
           <div className="flex w-full">
             <button
               type="button"
