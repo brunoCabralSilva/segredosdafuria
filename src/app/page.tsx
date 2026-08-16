@@ -397,7 +397,7 @@ export default function Home() {
                     <div className="relative h-36 w-full">
                       <Image
                         src={`/images/sessions/${session.imageName || '01'}.png`}
-                        alt={`Banner da sessao ${session.name || ''}`}
+                        alt={`Banner da sessão ${session.name || ''}`}
                         className="object-cover"
                         fill
                       />
@@ -485,7 +485,7 @@ export default function Home() {
               {latestSheets.map((sheet) => {
                 const formattedAuspice = capitalizeFirstLetter(String(sheet.data?.auspice || '').trim());
                 const formattedTrybe = capitalizeFirstLetter(String(sheet.data?.trybe || '').trim());
-                const creatorName = sheet.user || 'Usuario nao informado';
+                const creatorName = sheet.user || 'Usuário não informado';
                 const creatorInitial = creatorName.trim().charAt(0).toUpperCase() || '?';
 
                 return (

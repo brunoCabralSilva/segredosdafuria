@@ -162,6 +162,10 @@
       {
         "type": "global",
         "totalRenown": 4
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 6
       }
     ],
     "description": "Moving like a blur of fur, claws, and muscle, the Garou is  able to attack multiple opponents within reach. A wolverine- or badger-spirit grants this Gift.",
@@ -323,6 +327,10 @@
     "belonging": [
       {
         "type": "hart wardens",
+        "totalRenown": 3
+      },
+      {
+        "type": "fenris",
         "totalRenown": 3
       }
     ],
@@ -537,7 +545,7 @@
     "action": "Completa",
     "pool": "Inteligência + Honra",
     "system": "This Gift can target a supernatural power or ability of anyone in sight of the user, who needs only to have witnessed the power in use by the subject. The ability must be one learned by, not inherent to, the target. (A Garou's Gift can be stolen, but their ability to shapeshift cannot, for example.) The player tests Intelligence + Honor against the rating of the  power: the Rank of a Gift or appropriate value for another supernatural target. (If no rating exists, the Storyteller should assign an appropriate Difficulty.) On a success, the target loses the power, and any effects derived from it expire immediately. Starting  with the next turn, the werewolf is able to use the power as if it was a Gift possessed by them, substituting Honor for any non-Garou Trait required. At the start of each turn thereafter, a Willpower point  must be spent or the power returns to the original owner.",
-    "systemPtBr": "Este Dom pode visar um poder ou capacidade sobrenatural de um alvo qualquer à vista do usuário, que só precisa ter presenciado o uso desse poder pelo sujeito em questão. A capacidade precisa ser algo que o alvo tenha aprendido, não um talento inerente. (É possível roubar o Dom de um garou, por exemplo, mas não sua capacidade de mudar de forma.) O jogador faz um teste de Inteligência + Honra contra o valor do poder: o Renome Total de um Dom ou o valor apropriado no caso de outro alvo sobrenatural. (Se o poder nao estiver quantificado, o Narrador deverá designar a Dificuldade adequada.) Se o teste for bem-sucedido, o alvo perderá o poder, com todos os efeitos gerados por ele cessando imediatamente. A partir do turno seguinte, o lobisomem será capaz de usar o poder como se fosse um dos seus próprios Dons, trocando por Honra as Características não garous porventura necessárias. No começo de todo turno daí em diante, será preciso gastar 1 ponto de Força de Vontade para o poder não voltar ao proprietário original.",
+    "systemPtBr": "Este Dom pode visar um poder ou capacidade sobrenatural de um alvo qualquer à vista do usuário, que só precisa ter presenciado o uso desse poder pelo sujeito em questão. A capacidade precisa ser algo que o alvo tenha aprendido, não um talento inerente. (É possível roubar o Dom de um garou, por exemplo, mas não sua capacidade de mudar de forma.) O jogador faz um teste de Inteligência + Honra contra o valor do poder: o Renome Total de um Dom ou o valor apropriado no caso de outro alvo sobrenatural. (Se o poder não estiver quantificado, o Narrador deverá designar a Dificuldade adequada.) Se o teste for bem-sucedido, o alvo perderá o poder, com todos os efeitos gerados por ele cessando imediatamente. A partir do turno seguinte, o lobisomem será capaz de usar o poder como se fosse um dos seus próprios Dons, trocando por Honra as Características não garous porventura necessárias. No começo de todo turno daí em diante, será preciso gastar 1 ponto de Força de Vontade para o poder não voltar ao proprietário original.",
     "duration": "1 Turno para cada ponto de Força de Vontade gasto",
     "book": "Livro Básico",
     "page": 152
@@ -1066,6 +1074,10 @@
       {
         "type": "red talons",
         "totalRenown": 6
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 6
       }
     ],
     "description": "The Gift's user passes sentence on an enemy, declaring their life forfeit. Members of the user's pack find their claws and fangs sharpened against the designated enemy, the better to send them to an early grave. Any number of predator-spirits grant this Gift.",
@@ -1247,6 +1259,10 @@
       },
       {
         "type": "silver fangs",
+        "totalRenown": 3
+      },
+      {
+        "type": "fenris",
         "totalRenown": 3
       }
     ],
@@ -1478,6 +1494,10 @@
       {
         "type": "bone gnawers",
         "totalRenown": 9
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 9
       }
     ],
     "description": "Like Garou of legend, the Gift's user is able to cheat death, their body rapidly healing as they dance at the brink of defeat. A wolf- or bear-spirit grants this Gift.",
@@ -1530,6 +1550,10 @@
       {
         "type": "black furies",
         "totalRenown": 3
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 3
       }
     ],
     "description": "The Garou is able to slow a fleeing target by making their legs buckle, footing soften, and tires slip. A bog-spirit grants this Gift.",
@@ -1556,7 +1580,12 @@
       {
         "type": "bone gnawers",
         "totalRenown": 3
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 3
       }
+
     ],
     "description": "The werewolf is able to shapeshift in the blink of an eye. Doing so comes at a risk, though, as Garou can sustain serious bodily damage if this attempt fails. Any Gaian spirit grants this Gift.",
     "descriptionPtBr": "O lobisomem é capaz de mudar de forma em um piscar de olhos. Mas a manobra é arriscada, pois o corpo do garou poderá sofrer danos graves se a tentativa for malsucedida. Qualquer espírito-gaiano concede este Dom.",
@@ -1582,6 +1611,10 @@
       },
       {
         "type": "red talons",
+        "totalRenown": 3
+      },
+      {
+        "type": "fenris",
         "totalRenown": 3
       }
     ],
@@ -1656,6 +1689,10 @@
       },
       {
         "type": "glass walkers",
+        "totalRenown": 6
+      },
+      {
+        "type": "fenris",
         "totalRenown": 6
       }
     ],
@@ -1734,6 +1771,10 @@
       },
       {
         "type": "silent striders",
+        "totalRenown": 9
+      },
+      {
+        "type": "fenris",
         "totalRenown": 9
       }
     ],
@@ -2495,6 +2536,10 @@
       {
         "type": "hart wardens",
         "totalRenown": 6
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 6
       }
     ],
     "description": "While on their own marked territory, the Garou is strengthened, drawing power from the land. They are required to defend this territory, however, as any scars on it are reflected into the user's spirit.",
@@ -2978,6 +3023,10 @@
     "belonging": [
       {
         "type": "silver fangs",
+        "totalRenown": 9
+      },
+      {
+        "type": "fenris",
         "totalRenown": 9
       }
     ],
@@ -3777,6 +3826,10 @@
       {
         "type": "ahroun",
         "totalRenown": 8
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 6
       }
     ],
     "description": "The Garou takes the Rage from a rival they've just overpowered. This Gift is taught by dominant lion- or bull-spirits.",
@@ -3828,6 +3881,10 @@
       },
       {
         "type": "black furies",
+        "totalRenown": 3
+      },
+      {
+        "type": "fenris",
         "totalRenown": 3
       }
     ],
@@ -4003,6 +4060,10 @@
       {
         "type": "children of gaia",
         "totalRenown": 9
+      },
+      {
+        "type": "fenris",
+        "totalRenown": 9
       }
     ],
     "description": "Wolves are fiercely protective of their young. This Gift allows a Garou to dig deep into that ancient power and stand strong for those in their care, even when their bodies should have long fallen under the onslaught. A bear- or wolf-spirit teaches this Gift.",
@@ -4054,6 +4115,10 @@
       },
       {
         "type": "red talons",
+        "totalRenown": 3
+      },
+      {
+        "type": "fenris",
         "totalRenown": 3
       }
     ],

@@ -38,7 +38,7 @@ function SectionCard(props: { title: string; children: React.ReactNode }) {
   const { title, children } = props;
 
   return (
-    <section className="border border-zinc-500/30 text-justify bg-black/80 p-5 sm:p-6">
+    <section className="border border-zinc-500/30 bg-black/80 p-5 text-justify sm:p-6">
       <h2 className="font-kingthings text-2xl uppercase leading-none text-white sm:text-3xl">{title}</h2>
       <div className="mt-4 space-y-4 font-geist-mono text-sm leading-7 text-white/80 sm:text-[15px]">
         {children}
@@ -54,6 +54,33 @@ function ParagraphBlock(props: { items: Array<string | String> }) {
         <p key={index}>{String(paragraph)}</p>
       ))}
     </>
+  );
+}
+
+function getNonEmptyItems(items?: Array<string | String>) {
+  return Array.isArray(items)
+    ? items.filter((item) => String(item).trim().length > 0)
+    : [];
+}
+
+function AuguriesBlock(props: { dataTrybe: TrybeData }) {
+  return (
+    <div className="space-y-6">
+      {alternativeAuspiceSections.map(({ key, title }) => {
+        const paragraphs = getNonEmptyItems(props.dataTrybe.alternativeAuspices[key]);
+
+        if (paragraphs.length === 0) return null;
+
+        return (
+          <div key={key} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0">
+            <h3 className="font-kingthings text-xl uppercase leading-none text-white sm:text-2xl">{title}</h3>
+            <div className="mt-3 space-y-4">
+              <ParagraphBlock items={paragraphs} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
@@ -113,10 +140,28 @@ export default function Trybe() {
   const trybeNamePtBr = String(dataTrybe.namePtBr);
   const trybeNameEn = toTitleCase(String(dataTrybe.nameEn));
   const representationAlt = `Representação da tribo ${trybeNamePtBr}`;
-  const glyphAlt = `Glifo da tribo ${trybeNamePtBr}`;
   const verbs = Array.isArray(dataTrybe.verbs) ? dataTrybe.verbs.join(' - ') : '';
+  const isFenrisUnified = trybeNamePtBr === 'Fenris';
+  const officialDescription = getNonEmptyItems(dataTrybe.description);
+  const officialWhoAre = getNonEmptyItems(dataTrybe.whoAre);
+  const alternativeDescription = getNonEmptyItems(dataTrybe.alternativeDescription);
+  const alternativePhrases = getNonEmptyItems(dataTrybe.alternativePhrases);
+  const alternativeIdeology = getNonEmptyItems(dataTrybe.alternativeIdeology);
+  const alternativeCustoms = getNonEmptyItems(dataTrybe.alternativeCustoms);
   const officialPhrase = String(dataTrybe.phrase || '');
-  const alternativePhrases = Array.isArray(dataTrybe.alternativePhrases) ? dataTrybe.alternativePhrases : [];
+  const showAlternativeView = alternative && !isFenrisUnified;
+  const heroSubtitle = isFenrisUnified
+    ? `${trybeNamePtBr} - ${dataTrybe.alternativeTitle || trybeNameEn}`
+    : showAlternativeView
+      ? `${trybeNamePtBr} - ${dataTrybe.alternativeTitle}`
+      : `${trybeNamePtBr} (${trybeNameEn})`;
+  const heroPhrases = isFenrisUnified
+    ? alternativePhrases
+    : showAlternativeView
+      ? alternativePhrases
+      : officialPhrase
+        ? [officialPhrase]
+        : [];
 
   return (
     <div className={`relative min-h-screen w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
@@ -162,43 +207,45 @@ export default function Trybe() {
                 <hr className="mt-6 border-white/12" />
 
                 <div className="mt-5 space-y-3">
-                  <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
-                    {alternative ? 'Visão aprofundada' : 'Texto oficial'}
-                  </p>
+                  {!isFenrisUnified && (
+                    <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
+                      {showAlternativeView ? 'Visão aprofundada' : 'Texto oficial'}
+                    </p>
+                  )}
                   <p className="font-geist-mono text-sm leading-7 text-white/75 sm:text-[15px]">
-                    {alternative
-                      ? `${trybeNamePtBr} - ${dataTrybe.alternativeTitle}`
-                      : `${trybeNamePtBr} (${trybeNameEn})`}
+                    {heroSubtitle}
                   </p>
                   <div className="space-y-2 font-geist-mono text-sm italic leading-7 text-white/88 sm:text-[15px]">
-                    {alternative
-                      ? alternativePhrases.map((phrase, index) => <p key={index}>&quot;{phrase}&quot;</p>)
-                      : officialPhrase && <p>&quot;{officialPhrase}&quot;</p>}
+                    {heroPhrases.map((phrase, index) => <p key={index}>&quot;{phrase}&quot;</p>)}
                   </div>
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setAlternative(true)}
-                    className={`${alternative ? 'border-red-700 bg-[#7a0000] text-white' : 'border-zinc-500/30 bg-black/70 text-white/75 hover:border-red-700 hover:text-white'} px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors`}
-                  >
-                    Visão aprofundada
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAlternative(false)}
-                    className={`${!alternative ? 'border-red-700 bg-[#7a0000] text-white' : 'border-zinc-500/30 bg-black/70 text-white/75 hover:border-red-700 hover:text-white'} px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors`}
-                  >
-                    Texto oficial
-                  </button>
-                </div>
+                {!isFenrisUnified && (
+                  <>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setAlternative(true)}
+                        className={`${alternative ? 'border-red-700 bg-[#7a0000] text-white' : 'border-zinc-500/30 bg-black/70 text-white/75 hover:border-red-700 hover:text-white'} px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors`}
+                      >
+                        Visão aprofundada
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setAlternative(false)}
+                        className={`${!alternative ? 'border-red-700 bg-[#7a0000] text-white' : 'border-zinc-500/30 bg-black/70 text-white/75 hover:border-red-700 hover:text-white'} px-4 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors`}
+                      >
+                        Texto oficial
+                      </button>
+                    </div>
 
-                <p className="mt-5 max-w-3xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
-                  {alternative
-                    ? 'Leia a interpretação aprofundada da tribo, com foco em ideologia, costumes e a leitura da comunidade sobre o papel dela no Apocalipse.'
-                    : 'Consulte a descrição oficial da tribo, com seu conceito, identidade, espírito patrono e os arquétipos que a representam.'}
-                </p>
+                    <p className="mt-5 max-w-3xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+                      {showAlternativeView
+                        ? 'Leia a interpretação aprofundada da tribo, com foco em ideologia, costumes e a leitura da comunidade sobre o papel dela no Apocalipse.'
+                        : 'Consulte a descrição oficial da tribo, com seu conceito, identidade, espírito patrono e os arquétipos que a representam.'}
+                    </p>
+                  </>
+                )}
               </div>
 
               <div className="relative flex min-h-[280px] items-center justify-center border border-zinc-500/30 bg-black/55 px-4 py-6">
@@ -217,45 +264,91 @@ export default function Trybe() {
 
           <section className="mt-6">
             <div className="space-y-4">
-              {alternative ? (
+              {isFenrisUnified ? (
+                <>
+                  {officialDescription.length > 0 && (
+                    <SectionCard title="Definição">
+                      <ParagraphBlock items={officialDescription} />
+                    </SectionCard>
+                  )}
+
+                  {officialWhoAre.length > 0 && (
+                    <SectionCard title={`Quem são os ${trybeNamePtBr}?`}>
+                      <ParagraphBlock items={officialWhoAre} />
+                    </SectionCard>
+                  )}
+
+                  <SectionCard title="Espírito padroeiro">
+                    <p>{String(dataTrybe.patron)}</p>
+                    <p>
+                      <span className="text-white">Favor:</span> {String(dataTrybe.favor)}
+                    </p>
+                    <p>
+                      <span className="text-white">Interdição:</span> {String(dataTrybe.ban)}
+                    </p>
+                  </SectionCard>
+
+                  {alternativeDescription.length > 0 && (
+                    <SectionCard title={String(dataTrybe.alternativeTitle || 'Visão aprofundada')}>
+                      <ParagraphBlock items={alternativeDescription} />
+                    </SectionCard>
+                  )}
+
+                  {alternativeIdeology.length > 0 && (
+                    <SectionCard title="Ideologia">
+                      <ParagraphBlock items={alternativeIdeology} />
+                    </SectionCard>
+                  )}
+
+                  {alternativeCustoms.length > 0 && (
+                    <SectionCard title="Costumes">
+                      <ParagraphBlock items={alternativeCustoms} />
+                    </SectionCard>
+                  )}
+
+                  <SectionCard title="Augúrios">
+                    <AuguriesBlock dataTrybe={dataTrybe} />
+                  </SectionCard>
+
+                  <SectionCard title={`Arquétipos de ${trybeNamePtBr}`}>
+                    <div className="space-y-5">
+                      {dataTrybe.archetypes.map((archetype: IArchetypes, index: number) => (
+                        <div key={index} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0">
+                          <h3 className="font-kingthings text-xl uppercase leading-none text-white sm:text-2xl">
+                            {String(archetype.title)}
+                          </h3>
+                          <p className="mt-3">{String(archetype.description)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </SectionCard>
+                </>
+              ) : showAlternativeView ? (
                 <>
                   <SectionCard title="Definição">
-                    <ParagraphBlock items={dataTrybe.alternativeDescription} />
+                    <ParagraphBlock items={alternativeDescription} />
                   </SectionCard>
 
                   <SectionCard title="Ideologia">
-                    <ParagraphBlock items={dataTrybe.alternativeIdeology} />
+                    <ParagraphBlock items={alternativeIdeology} />
                   </SectionCard>
 
                   <SectionCard title="Costumes">
-                    <ParagraphBlock items={dataTrybe.alternativeCustoms} />
+                    <ParagraphBlock items={alternativeCustoms} />
                   </SectionCard>
 
                   <SectionCard title="Augúrios">
-                    <div className="space-y-6">
-                      {alternativeAuspiceSections.map(({ key, title }) => {
-                        const paragraphs = dataTrybe.alternativeAuspices[key];
-
-                        return (
-                          <div key={key} className="border-t border-white/10 pt-4 first:border-t-0 first:pt-0">
-                            <h3 className="font-kingthings text-xl uppercase leading-none text-white sm:text-2xl">{title}</h3>
-                            <div className="mt-3 space-y-4">
-                              <ParagraphBlock items={paragraphs} />
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
+                    <AuguriesBlock dataTrybe={dataTrybe} />
                   </SectionCard>
                 </>
               ) : (
                 <>
                   <SectionCard title="Definição">
-                    <ParagraphBlock items={dataTrybe.description} />
+                    <ParagraphBlock items={officialDescription} />
                   </SectionCard>
 
                   <SectionCard title={`Quem são os ${trybeNamePtBr}?`}>
-                    <ParagraphBlock items={dataTrybe.whoAre} />
+                    <ParagraphBlock items={officialWhoAre} />
                   </SectionCard>
 
                   <SectionCard title="Espírito padroeiro">
@@ -284,18 +377,12 @@ export default function Trybe() {
               )}
             </div>
           </section>
-
-
         </main>
       </div>
       <Footer />
     </div>
   );
 }
-
-
-
-
 
 
 

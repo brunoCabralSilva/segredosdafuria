@@ -1413,7 +1413,7 @@ export default function Battle() {
     if (!isGameMaster && selectedColor === "azul") {
       setShowMessage({
         show: true,
-        text: "A cor azul é reservada ao Narrador da sessao.",
+        text: "A cor azul é reservada ao Narrador da sessão.",
       });
       return;
     }
@@ -1474,7 +1474,7 @@ export default function Battle() {
     if (isReadOnlyPopup) {
       setShowMessage({
         show: true,
-        text: "Voce nao tem permissao para excluir marcadores azuis.",
+        text: "Você não tem permissão para excluir marcadores azuis.",
       });
       return;
     }
@@ -1941,12 +1941,12 @@ export default function Battle() {
 
                       {popupPage === "details" && (
                         <p className="text-sm text-zinc-400">
-                          Voce nao tem permissao para editar marcadores azuis.
+                          Você não tem permissão para editar marcadores azuis.
                         </p>
                       )}
 
                       <p className="hidden">
-                        Voce nao tem permissao para editar este marcador porque a cor azul é exclusiva do Narrador.
+                        Você não tem permissão para editar este marcador porque a cor azul é exclusiva do Narrador.
                       </p>
                     </div>
                   ) : (
@@ -2289,7 +2289,7 @@ export default function Battle() {
                         </div>
                       ) : (
                         <div className="rounded border border-zinc-700 bg-zinc-900 p-3 text-sm text-zinc-400">
-                          Tokens vinculados a personagens da sessao nao usam esses marcadores extras.
+                          Tokens vinculados a personagens da sessão não usam esses marcadores extras.
                         </div>
                       )}
                     </>

@@ -1233,7 +1233,7 @@ export default function Relationships() {
                     </div>
                   ) : (
                     <p className="text-[10px] text-zinc-400">
-                      Ainda nao existem outros elementos para se relacionar.
+                      Ainda não existem outros elementos para se relacionar.
                     </p>
                   )}
                 </div>

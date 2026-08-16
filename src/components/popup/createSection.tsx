@@ -86,6 +86,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
         nameSession.toLowerCase(),
         description,
         typeSession,
+        false,
         email,
         image,
         dataUser.displayName,
@@ -251,3 +252,4 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
     </div>
   );
 }
+

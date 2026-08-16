@@ -148,7 +148,7 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
                 && email === session.gameMaster
                 && <option value={'notifications'}>Notificacoes {listNotification.length > 0 ? `(${listNotification.length})` : ''}</option>
               }
-              {!standalone && <option value={'history'}>Historico</option>}
+              {!standalone && <option value={'history'}>Histórico</option>}
               {sheetId !== '' && <option value={'general'}>Geral</option>}
               {sheetId !== '' && <option value={'attributes'}>Atributos</option>}
               {sheetId !== '' && <option value={'skills'}>Habilidades</option>}
@@ -156,14 +156,14 @@ export default function MenuPlayer(props: { standalone?: boolean }) {
               {sheetId !== '' && <option value={'rituals'}>Rituais</option>}
               {sheetId !== '' && <option value={'touchstones'}>Pilares</option>}
               {sheetId !== '' && <option value={'advantages-flaws'}>Vantagens e Defeitos</option>}
-              {standalone && <option value={'session-link'}>Vincular com Sessao</option>}
+              {standalone && <option value={'session-link'}>Vincular com Sessão</option>}
               {!standalone && sheetId !== '' && <option value={'forms'}>Formas {dataSheet && dataSheet.data && dataSheet.data.form ? `( Atual: ${dataSheet.data.form} )` : ''} </option>}
-              {!standalone && <option value={'principles-of-the-chronicle'}>Principios da Cronica</option>}
+              {!standalone && <option value={'principles-of-the-chronicle'}>Princípios da Crônica</option>}
               {!standalone && <option value={'favor-ban'}>Favores e Proibicoes</option>}
               {!standalone && <option value={'consent'}>Ficha de Consentimento</option>}
               {sheetId !== '' && <option value={'background'}>Background</option>}
-              {!standalone && <option value={'anotations'}>Anotacoes</option>}
-              {!standalone && <option value={'session'}>Sessao</option>}
+              {!standalone && <option value={'anotations'}>Anotações</option>}
+              {!standalone && <option value={'session'}>Sessão</option>}
               {!standalone && showBattle.show && <option value={'chat'}>Chat</option>}
             </select>
             {returnDataSheet()}

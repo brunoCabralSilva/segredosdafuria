@@ -1237,13 +1237,13 @@ export default function Finance() {
                       { currentCalendarMonthLabel } de { currentYear }
                     </h2>
                     <p className="mt-1 hidden max-w-2xl text-[11px] text-white/65 md:block md:text-xs">
-                      Clique em qualquer dia para marcar as sessoes que voce tera neste mes e definir quais serao.
+                      Clique em qualquer dia para marcar as sessões que você terá neste mês e definir quais serão.
                     </p>
                   </div>
                   <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                     <div className="rounded-sm border border-white/20 bg-black/50 p-1.5">
                       <div className="text-[10px] uppercase tracking-[0.16em] text-white/50 md:text-xs">
-                        Dias com sessao
+                        Dias com sessão
                       </div>
                       <div className="mt-1 text-lg font-black text-yellow-300 md:text-xl">
                         { scheduledCalendarDaysCount }
@@ -1251,7 +1251,7 @@ export default function Finance() {
                     </div>
                     <div className="rounded-sm border border-white/20 bg-black/50 p-1.5">
                       <div className="text-[10px] uppercase tracking-[0.16em] text-white/50 md:text-xs">
-                        Sessoes planejadas
+                        Sessões planejadas
                       </div>
                       <div className="mt-1 text-lg font-black text-green-300 md:text-xl">
                         { scheduledCalendarSessionsCount }
@@ -1393,7 +1393,7 @@ export default function Finance() {
                                         {
                                           calendarCell.sessions.length > 2 &&
                                           <div className="text-[8px] font-bold text-yellow-200 md:text-[9px]">
-                                            + { calendarCell.sessions.length - 2 } sessao(oes)
+                                            + { calendarCell.sessions.length - 2 } sessão(ões)
                                           </div>
                                         }
                                       </>
@@ -1777,14 +1777,14 @@ export default function Finance() {
                                 <input
                                   type="text"
                                   value={ sessionItem.time }
-                                  placeholder="Horario"
+                                  placeholder="Horário"
                                   onChange={ (event) => handleCalendarSessionChange(sessionIndex, 'time', event.target.value) }
                                   className="w-full border border-white/30 bg-black/40 px-3 py-2 text-white outline-none"
                                 />
                                 <input
                                   type="text"
                                   value={ sessionItem.name }
-                                  placeholder="Nome da sessao"
+                                  placeholder="Nome da sessão"
                                   onChange={ (event) => handleCalendarSessionChange(sessionIndex, 'name', event.target.value) }
                                   className="w-full border border-white/30 bg-black/40 px-3 py-2 text-white outline-none"
                                 />
@@ -1793,7 +1793,7 @@ export default function Finance() {
                                 type="button"
                                 onClick={ () => handleRemoveCalendarSessionField(sessionIndex) }
                                 className="flex h-11 w-11 items-center justify-center border border-red-900 bg-red-800 text-xl text-white transition-colors duration-300 hover:border-white"
-                                aria-label="Remover sessao"
+                                aria-label="Remover sessão"
                               >
                                 <MdDelete />
                               </button>
@@ -1801,7 +1801,7 @@ export default function Finance() {
                             <div className="mt-3 flex flex-wrap gap-2">
                               <input
                                 readOnly
-                                value="Cor da sessao"
+                                value="Cor da sessão"
                                 className="sr-only"
                               />
                               {
@@ -1830,7 +1830,7 @@ export default function Finance() {
                         onClick={ handleAddCalendarSessionField }
                         className="border border-white/30 bg-white/5 px-4 py-2 text-sm font-bold text-white transition-colors duration-300 hover:border-white"
                       >
-                        Adicionar sessao
+                        Adicionar sessão
                       </button>
                     </div>
                     <div className="mt-6 flex w-full gap-2">

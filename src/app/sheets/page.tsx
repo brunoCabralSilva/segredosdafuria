@@ -137,9 +137,9 @@ export default function Sheets() {
   };
 
   const renderSheetCard = (sheet: SheetCard) => {
-    const formattedAuspice = getSheetLabelValue(sheet.data?.auspice, 'Nao definido');
-    const formattedTrybe = getSheetLabelValue(sheet.data?.trybe, 'Nao definida');
-    const creatorName = sheet.user || 'Usuario nao informado';
+    const formattedAuspice = getSheetLabelValue(sheet.data?.auspice, 'Não definido');
+    const formattedTrybe = getSheetLabelValue(sheet.data?.trybe, 'Não definida');
+    const creatorName = sheet.user || 'Usuário não informado';
     const creatorInitial = creatorName.trim().charAt(0).toUpperCase() || '?';
 
     return (
@@ -421,18 +421,18 @@ export default function Sheets() {
 
               {renderSection(
                 'Minhas Fichas',
-                'Personagens que pertencem a sua conta e continuam totalmente editaveis.',
+                'Personagens que pertencem a sua conta e continuam totalmente editáveis.',
                 mySheets,
-                'Voce ainda nao possui fichas cadastradas.',
+                'Voce ainda não possui fichas cadastradas.',
                 mySectionFilters,
                 setMySectionFilters,
               )}
 
               {renderSection(
                 'Fichas Criadas Pela Comunidade',
-                'Fichas publicas de outros jogadores. Voce pode abrir, consultar e copiar para a sua conta.',
+                'Fichas públicas de outros jogadores. Você pode abrir, consultar e copiar para a sua conta.',
                 communitySheets,
-                'Nenhuma ficha da comunidade foi encontrada ate o momento.',
+                'Nenhuma ficha da comunidade foi encontrada até o momento.',
                 communitySectionFilters,
                 setCommunitySectionFilters,
               )}

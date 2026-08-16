@@ -126,6 +126,8 @@ export default function EvaluateSheet() {
 
   const verifyGifts = (data: any) => {
     const resolvedGifts = resolveGiftEntries(Array.isArray(data.gifts) ? data.gifts : []);
+    const normalizedTrybe = String(data.trybe || '').trim().toLowerCase();
+    const normalizedAuspice = String(data.auspice || '').trim().toLowerCase();
 
     if (resolvedGifts.length !== 3) {
       let text = '';
@@ -140,12 +142,12 @@ export default function EvaluateSheet() {
       setGiftsGlobal({ correct: false, errorMessage: 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que pertenca a Dons Nativos.' });
     } else setGiftsGlobal({ correct: true, errorMessage: '' });
 
-    const findTrybe = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === data.trybe));
+    const findTrybe = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => String(belongingItem.type || '').trim().toLowerCase() === normalizedTrybe));
     if (findTrybe.length === 0) {
       setGiftsTrybe({ correct: false, errorMessage: 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença à Tribo ' + capitalizeFirstLetter(data.trybe) + '.' });
     } else setGiftsTrybe({ correct: true, errorMessage: '' });
 
-    const findAuspice = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === data.auspice));
+    const findAuspice = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => String(belongingItem.type || '').trim().toLowerCase() === normalizedAuspice));
     if (findAuspice.length === 0) {
       setGiftsAuspice({ correct: false, errorMessage: 'Necessário navegar até Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença ao Augúrio ' + capitalizeFirstLetter(data.auspice) + '.' });
     } else setGiftsAuspice({ correct: true, errorMessage: '' });
@@ -521,8 +523,9 @@ export default function EvaluateSheet() {
     if (data.trybe === '') {
       setRenownTrybe({ correct: false, errorMessage: 'Necessário navegar até Renome e preencher uma Tribo para que este item seja avaliado.' });
     } else {
+      const normalizedTrybe = String(data.trybe || '').trim().toLowerCase();
       let renownValue = { en: '', pb: '' };
-      switch(data.trybe) {
+      switch(normalizedTrybe) {
         case 'glass walkers':
           renownValue.en = 'wisdom';
           renownValue.pb = 'Sabedoria';
@@ -566,6 +569,10 @@ export default function EvaluateSheet() {
         case 'red talons':
           renownValue.en = 'honor';
           renownValue.pb = 'Honra';
+          break;
+        case 'fenris':
+          renownValue.en = 'glory';
+          renownValue.pb = 'Glória';
           break;
       }
       if (Number(data[renownValue.en]) !==  2) {
@@ -1108,5 +1115,6 @@ export default function EvaluateSheet() {
     </DraggablePopup>
   );
 }
+
 
 

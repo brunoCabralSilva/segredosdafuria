@@ -38,6 +38,7 @@ type SessionListItem = {
   description: string;
   players?: string[];
   statusSession?: string;
+  allowCustomTrybes?: boolean;
 };
 
 export default function General(props: { dataSession: any; id: string; gameMaster: boolean }) {
@@ -202,6 +203,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
             description: String(sessionItem.description || ''),
             players: Array.isArray(sessionItem.players) ? sessionItem.players : [],
             statusSession: sessionItem.statusSession ? String(sessionItem.statusSession) : undefined,
+            allowCustomTrybes: Boolean(sessionItem.allowCustomTrybes),
           }))
           .sort((first, second) => first.name.localeCompare(second.name));
 
@@ -376,6 +378,10 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const patronBan = selectedTrybeData?.ban || 'Selecione uma tribo para visualizar a proibicao do espirito padroeiro.';
   const pendingSessionTransfer = dataSheet?.pendingSessionLink;
   const hasPendingSessionTransfer = !!pendingSessionTransfer?.requestId;
+  const allowCustomTrybes = !dataSheet?.sessionId || Boolean(session?.allowCustomTrybes ?? dataSession?.allowCustomTrybes);
+  const availableTrybes = [...dataTrybes]
+    .filter((trybe: any) => allowCustomTrybes || !trybe.custom || trybe.nameEn === sheetDataValues.trybe || trybe.namePtBr === sheetDataValues.trybe)
+    .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr));
   const fieldLabelClass = 'font-geist-mono text-[0.58rem] uppercase tracking-[0.24em] text-[#7f8883]';
   const fieldValueClass = 'mt-2 border-b border-zinc-500/20 pb-2 font-kingthings text-[0.82rem] uppercase tracking-[0.14em] text-[#dfe5da]';
   const selectClass = 'w-full border-b border-zinc-500/25 bg-transparent pb-2 font-kingthings text-[0.82rem] uppercase tracking-[0.14em] text-[#dfe5da] outline-none transition-colors hover:border-red-700/80 focus:border-red-700 [&_option]:bg-[#0a0e0f]';
@@ -645,13 +651,11 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                         <p className={fieldLabelClass}>Tribo</p>
                         <select className={selectClass} value={sheetDataValues.trybe || ''} onChange={(e) => updateValue('trybe', e.target.value, 'Tribo')}>
                           <option key="trybe-placeholder" disabled value="">Escolha uma tribo</option>
-                          {dataTrybes
-                            .sort((a, b) => a.namePtBr.localeCompare(b.namePtBr))
-                            .map((trybe, index) => (
-                              <option key={index} value={trybe.nameEn}>
-                                {trybe.namePtBr}
-                              </option>
-                            ))}
+                          {availableTrybes.map((trybe, index) => (
+                            <option key={index} value={trybe.nameEn}>
+                              {trybe.namePtBr}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div>
@@ -713,7 +717,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       </div>
                     </div>
                     <div>
-                      <p className={fieldLabelClass}>Cronica</p>
+                      <p className={fieldLabelClass}>Crônica</p>
                       {hasPendingSessionTransfer ? (
                         <div className="mt-2 border-b border-zinc-500/20 pb-3">
                           <p className="font-geist-mono text-[0.64rem] uppercase tracking-[0.12em] text-zinc-200">
@@ -865,6 +869,8 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     </div>
   );
 }
+
+
 
 
 

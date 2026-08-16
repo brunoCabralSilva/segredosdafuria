@@ -22,7 +22,7 @@ export default function EditBannerSession() {
 
   const updtSession = async () => {
     if (image === '') {
-      setShowMessage({ show: true, text: 'Necessario selecionar uma imagem para a sua sessao' });
+      setShowMessage({ show: true, text: 'Necessário selecionar uma imagem para a sua sessão' });
       return;
     }
 
@@ -85,7 +85,7 @@ export default function EditBannerSession() {
                   >
                     <Image
                       src={`/images/sessions/${banner}.png`}
-                      alt={`Banner da sessao ${banner}`}
+                      alt={`Banner da sessão ${banner}`}
                       className={`h-36 w-full object-cover object-center transition-all duration-200 sm:h-40 ${
                         isSelected
                           ? 'scale-[1.02] opacity-100'

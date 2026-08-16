@@ -41,13 +41,13 @@ export default function DeletePrinciple() {
 
   const deletePrinciple = async () => {
     if (!Array.isArray(session?.principles) || !selectedPrinciple) {
-      setShowMessage({ show: true, text: "Nao foi possivel localizar o principio selecionado." });
+      setShowMessage({ show: true, text: "Nao foi possivel localizar o princípio selecionado." });
       closePopup();
       return;
     }
 
     if (!canDeleteSelectedPrinciple) {
-      setShowMessage({ show: true, text: "Voce nao tem permissao para apagar este principio." });
+      setShowMessage({ show: true, text: "Você não tem permissão para apagar este princípio." });
       closePopup();
       return;
     }
@@ -59,7 +59,7 @@ export default function DeletePrinciple() {
     });
 
     if (principleIndex === -1) {
-      setShowMessage({ show: true, text: "Nao foi possivel localizar o principio selecionado." });
+      setShowMessage({ show: true, text: "Não foi possível localizar o princípio selecionado." });
       closePopup();
       return;
     }

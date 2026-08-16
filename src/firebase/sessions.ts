@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
+﻿import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
 import { capitalizeFirstLetter, getOfficialTimeBrazil } from "./utilities";
 import firebaseConfig from "./connection";
 import { createNotificationData, registerNotification } from "./notifications";
@@ -363,3 +363,4 @@ export const deleteSessionById = async (sessionId: string, setShowMessage: any) 
     return false;
   }
 };
+

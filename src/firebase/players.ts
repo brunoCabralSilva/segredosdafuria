@@ -325,7 +325,7 @@ export const addNewSheetMandatory = async (sessionId: string, sheet: any, setSho
       if (sessionlessSheetsCount >= 5) {
         setShowMessage({
           show: true,
-          text: 'Voce ja possui 5 fichas sem vinculo com sessoes. Apague uma ficha sem vinculo ou vincule uma delas a uma sessao para criar outra.',
+          text: 'Voce já possui 5 fichas sem vínculo com sessões. Apague uma ficha sem vínculo ou vincule uma delas a uma sessão para criar outra.',
         });
         return '';
       }

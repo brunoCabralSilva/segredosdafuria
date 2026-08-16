@@ -415,7 +415,7 @@ export default function HpAndWillPower() {
           </>
         ) : (
           <p className="mt-3 border-t border-white/10 pt-3 font-geist-mono text-[0.62rem] uppercase tracking-[0.08em] text-white/45">
-            Voce nao possui personagens nesta sessao.
+            Voce não possui personagens nesta sessão.
           </p>
         )}
       </div>

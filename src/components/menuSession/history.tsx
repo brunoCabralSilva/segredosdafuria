@@ -35,7 +35,7 @@ export default function History() {
       <div className="principles-scrollbar relative min-h-0 overflow-y-auto overflow-x-hidden px-4 py-4 sm:px-6">
         {historyList.length === 0 ? (
           <div className="border border-white/15 bg-black/60 px-4 py-6 text-center font-geist-mono text-xs text-white/70">
-            Nenhum registro foi encontrado no histórico desta sessao.
+            Nenhum registro foi encontrado no histórico desta sessão.
           </div>
         ) : (
           <div className="grid grid-cols-1 content-start pb-5 bg-black/70">

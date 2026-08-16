@@ -68,7 +68,7 @@ export default function RerollWithWillpower() {
               const smallestNumber = Math.min(...missingInAgravated);
               dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
             } else {
-              setShowMessage({ show: true, text: 'Voce nao possui mais pontos de Forca de Vontade para realizar este teste (Ja sofreu todos os danos Agravados possiveis).' });
+              setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Ja sofreu todos os danos Agravados possíveis).' });
               canRoll = false;
             }
           }
@@ -180,7 +180,7 @@ export default function RerollWithWillpower() {
             type="button"
             onClick={closePopup}
             className="absolute right-4 top-4 z-20 text-2xl text-white/70 transition-colors hover:text-red-400"
-            aria-label="Fechar rerrolagem com forca de vontade"
+            aria-label="Fechar rerrolagem com força de vontade"
           >
             <AiFillCloseCircle />
           </button>

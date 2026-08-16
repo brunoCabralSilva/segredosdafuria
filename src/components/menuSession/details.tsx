@@ -1,4 +1,4 @@
-import contexto from "@/context/context";
+﻿import contexto from "@/context/context";
 import { useContext, useEffect, useMemo, useState } from "react";
 import ChangeGameMaster from "../popup/changeGameMaster";
 import LeaveGMFromSession from "../popup/leaveGMFromSession";
@@ -9,6 +9,7 @@ import { authenticate } from "@/firebase/authenticate";
 import { getUserByEmail } from "@/firebase/user";
 import { registerHistory } from "@/firebase/history";
 import { addNewSheetMandatory } from "@/firebase/players";
+import dataTrybes from "@/data/trybes.json";
 import { capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
 import { MdDelete } from "react-icons/md";
 import DeleteUserFromSession from "../popup/deleteUserFromSession";
@@ -44,6 +45,7 @@ export default function Details() {
   const [nameMaster, setNameMaster] = useState("");
   const [image, setImage] = useState("");
   const [typeSession, setTypeSession] = useState("Regras Oficiais");
+  const [allowCustomTrybes, setAllowCustomTrybes] = useState(false);
   const [input, setInput] = useState("");
   const [textArea, setTextArea] = useState(false);
   const [creatingSheet, setCreatingSheet] = useState(false);
@@ -57,6 +59,7 @@ export default function Details() {
     setNameMaster(session.nameMaster || "");
     setImage(session.imageName || "01");
     setTypeSession(session.typeSession || "Regras Oficiais");
+    setAllowCustomTrybes(Boolean(session.allowCustomTrybes));
   }, [session]);
 
   const normalizedPlayers = useMemo(() => {
@@ -70,6 +73,30 @@ export default function Details() {
 
     return Array.from(uniquePlayers.values());
   }, [players, gameMaster]);
+
+  const customTrybeNames = useMemo(() => {
+    const names = new Set<string>();
+
+    dataTrybes.forEach((trybe: any) => {
+      if (!trybe?.custom) return;
+
+      [String(trybe?.nameEn || ""), String(trybe?.namePtBr || "")]
+        .map((value) => value.trim().toLowerCase())
+        .filter((value) => value !== "")
+        .forEach((value) => names.add(value));
+    });
+
+    return names;
+  }, []);
+
+  const linkedSheetsWithCustomTrybe = useMemo(() => {
+    if (!Array.isArray(players)) return [];
+
+    return players.filter((player: any) => {
+      const selectedTrybe = String(player?.data?.trybe || "").trim().toLowerCase();
+      return selectedTrybe !== "" && customTrybeNames.has(selectedTrybe);
+    });
+  }, [customTrybeNames, players]);
 
   const playersSummary = useMemo(() => {
     return normalizedPlayers.map((player: any) => player.user).join(", ");
@@ -138,7 +165,7 @@ export default function Details() {
 
     setShowMessage({
       show: true,
-      text: "Necessario inserir o email de um usuário que ja esteja cadastrado na plataforma.",
+      text: "Necessário inserir o email de um usuário que já esteja cadastrado na plataforma.",
     });
     setNewGameMaster(gameMaster);
   };
@@ -152,6 +179,27 @@ export default function Details() {
     };
 
     setTypeSession(nextTypeSession);
+    await updateSession(sessionData, setShowMessage);
+  };
+
+  const updateAllowCustomTrybes = async (nextAllowCustomTrybes: boolean) => {
+    if (nextAllowCustomTrybes === Boolean(session.allowCustomTrybes)) return;
+
+    if (!nextAllowCustomTrybes && linkedSheetsWithCustomTrybe.length > 0) {
+      setAllowCustomTrybes(true);
+      setShowMessage({
+        show: true,
+        text: "Não é possível desmarcar a permissão de tribos alternativas enquanto houver ficha vinculada com tribo alternativa. Remova a ficha da sessão ou altere a tribo da ficha primeiro.",
+      });
+      return;
+    }
+
+    const sessionData = {
+      ...session,
+      allowCustomTrybes: nextAllowCustomTrybes,
+    };
+
+    setAllowCustomTrybes(nextAllowCustomTrybes);
     await updateSession(sessionData, setShowMessage);
   };
 
@@ -358,7 +406,7 @@ export default function Details() {
                     }}
                   >
                     <p className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/60">
-                      {gameMaster === email ? "Você é o narrador desta sessão" : "Narrador da cronica"}
+                      {gameMaster === email ? "Você é o narrador desta sessão" : "Narrador da crônica"}
                     </p>
                     {input === "gameMaster" ? (
                       <input
@@ -440,7 +488,7 @@ export default function Details() {
                 <div className="p-4">
                   <Image
                     src={`/images/sessions/${image}.png`}
-                    alt="Banner da sessao"
+                    alt="Banner da sessão"
                     className="h-40 w-full object-cover object-center"
                     width={1000}
                     height={1000}
@@ -514,6 +562,25 @@ export default function Details() {
                       ? "Usa as regras oficiais do livro Lobisomem: O Apocalipse 5ed"
                       : "Usa um modelo alternativo de regras (Fúria aumenta se falhar em Checagem de Fúria, sair da Forma Crinos não diminui a Fúria para 1, Ao chegar a 5 pontos de Fúria entra em Frenesi)"}
                   </p>
+                  <label className="mt-4 flex items-start gap-3 border border-white/10 bg-black/30 px-3 py-3">
+                    <input
+                      type="checkbox"
+                      checked={allowCustomTrybes}
+                      disabled={gameMaster !== email}
+                      onChange={(event) => {
+                        void updateAllowCustomTrybes(event.target.checked);
+                      }}
+                      className="mt-0.5 h-4 w-4 accent-red-800 disabled:cursor-not-allowed"
+                    />
+                    <div>
+                      <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Permitir Tribos Alternativas</p>
+                      <p className="mt-2 font-geist-mono text-[11px] leading-relaxed text-white/60">
+                        {allowCustomTrybes
+                          ? "Tribos Alternativas também aparecem na seleção de tribo das fichas desta sessão."
+                          : "A seleção de tribo mostra apenas as tribos padrão da plataforma."}
+                      </p>
+                    </div>
+                  </label>
                 </div>
               </div>
             </div>
@@ -527,6 +594,8 @@ export default function Details() {
     </div>
   );
 }
+
+
 
 
 

@@ -135,14 +135,14 @@ export default function VerifySession() {
           type="button"
           onClick={closePopup}
           className="absolute right-4 top-4 z-20 text-2xl text-white/70 transition-colors hover:text-red-400"
-          aria-label="Fechar verificacao da sessao"
+          aria-label="Fechar verificação da sessão"
         >
           <AiFillCloseCircle />
         </button>
 
         <div className="relative z-10 px-5 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-8">
           <h2 className="mt-2 font-kingthings text-2xl sm:text-xl uppercase">
-            {name !== '' ? name : 'Sessao'}
+            {name !== '' ? name : 'Sessão'}
           </h2>
         </div>
 

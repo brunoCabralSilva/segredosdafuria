@@ -58,7 +58,7 @@ export default function SheetSelector() {
           <p className="mt-2 max-w-xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
             {hasPlayers
               ? ''
-              : 'Voce ainda nao possui personagens criados para esta sessao. Crie sua primeira ficha para comecar o jogo.'}
+              : 'Voce ainda não possui personagens criados para esta sessão. Crie sua primeira ficha para começar o jogo.'}
           </p>
         </div>
 

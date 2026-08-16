@@ -178,12 +178,12 @@ export default function WillpowerTest() {
         <label htmlFor="willpower-pool" className="mb-1 flex w-full flex-col items-center">
           <p className={specialRollLabelClass}>Parada de Dados</p>
           <div id="willpower-pool" className={specialRollValueClass}>
-            {parsedWillpowerValue === 'Aguardando Selecao' ? '-' : parsedWillpowerValue}
+            {parsedWillpowerValue === 'Aguardando Seleção' ? '-' : parsedWillpowerValue}
           </div>
         </label>
         {parsedWillpowerValue === '0' && (
           <div className="mt-2 text-center font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/65">
-            Voce nao possui Força de Vontade disponível para realizar este teste.
+            Você não possui Força de Vontade disponível para realizar este teste.
           </div>
         )}
         <button

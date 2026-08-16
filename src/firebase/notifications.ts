@@ -1,4 +1,4 @@
-import {
+﻿import {
   addDoc,
   arrayUnion,
   collection,
@@ -18,6 +18,7 @@ import { registerMessage } from "./messagesAndRolls";
 import { createConsentForm } from "./consentForm";
 import { addNewSheetMandatory } from "./players";
 import { registerHistory } from "./history";
+import dataTrybes from "../data/trybes.json";
 
 const getNotificationDocumentRef = async (db: any, sessionId: string) => {
   const notificationRef = collection(db, "notifications");
@@ -34,10 +35,26 @@ const buildSheetLinkRequestMessage = (sheet: any) => {
   const userName = capitalizeFirstLetter(sheet?.user || "usuário");
 
   if (sheetName) {
-    return `A ficha "${capitalizeFirstLetter(sheetName)}" de ${userName} solicitou ví­nculo com esta sessão.`;
+    return `A ficha "${capitalizeFirstLetter(sheetName)}" de ${userName} solicitou vínculo com esta sessão.`;
   }
 
-  return `Uma ficha de ${userName} solicitou ví­nculo com esta sessão.`;
+  return `Uma ficha de ${userName} solicitou vínculo com esta sessão.`;
+};
+
+const sheetUsesCustomTrybe = (sheet: any) => {
+  const selectedTrybe = String(sheet?.data?.trybe || "").trim().toLowerCase();
+
+  if (selectedTrybe === "") return false;
+
+  return dataTrybes.some((trybe: any) => {
+    if (!trybe?.custom) return false;
+
+    const trybeNames = [String(trybe?.nameEn || ""), String(trybe?.namePtBr || "")]
+      .map((value) => value.trim().toLowerCase())
+      .filter((value) => value !== "");
+
+    return trybeNames.includes(selectedTrybe);
+  });
 };
 
 const ensureConsentForm = async (
@@ -115,7 +132,7 @@ export const requestApproval = async (sessionId: string, setShowMessage: any) =>
       if (querySnapshot.empty) {
         setShowMessage({
           show: true,
-          text: "Não foi possí­vel localizar a notificação da Sessão fornecida.",
+          text: "Não foi possível localizar a notificação da Sessão fornecida.",
         });
         return;
       }
@@ -177,7 +194,15 @@ export const requestSheetLink = async (
     if (sheet?.sessionId === targetSession.id) {
       setShowMessage({
         show: true,
-        text: "Esta ficha já está vinculada à  sessão selecionada.",
+        text: "Esta ficha já está vinculada à sessão selecionada.",
+      });
+      return null;
+    }
+
+    if (sheetUsesCustomTrybe(sheet) && !Boolean(targetSession?.allowCustomTrybes)) {
+      setShowMessage({
+        show: true,
+        text: "Esta ficha usa uma tribo alternativa, e a sessão selecionada não permite tribos alternativas.",
       });
       return null;
     }
@@ -187,7 +212,7 @@ export const requestSheetLink = async (
     const notificationDocRef = await getNotificationDocumentRef(db, targetSession.id);
 
     if (!notificationDocRef) {
-      throw new Error("Não foi possí­vel localizar a área de notificações da sessão selecionada.");
+      throw new Error("Não foi possível localizar a área de notificações da sessão selecionada.");
     }
 
     const requestedAt = await getOfficialTimeBrazil();
@@ -245,7 +270,7 @@ export const requestSheetLink = async (
   } catch (error: any) {
     setShowMessage({
       show: true,
-      text: "Ocorreu um erro ao solicitar ví­nculo da ficha: " + error.message,
+      text: "Ocorreu um erro ao solicitar vínculo da ficha: " + error.message,
     });
     return null;
   }
@@ -263,7 +288,7 @@ export const removeNotification = async (
     await runTransaction(db, async (transaction) => {
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty) {
-        setShowMessage({ show: true, text: "Não foi possí­vel encontrar a notificação." });
+        setShowMessage({ show: true, text: "Não foi possível encontrar a notificação." });
         return;
       }
       const notificationDoc = querySnapshot.docs[0];
@@ -324,7 +349,7 @@ export const cancelSheetLinkRequest = async (
 
     setShowMessage({
       show: true,
-      text: "Solicitação de ví­nculo cancelada com sucesso.",
+      text: "Solicitação de vínculo cancelada com sucesso.",
     });
     return true;
   } catch (error: any) {
@@ -374,7 +399,7 @@ export const denySheetLinkRequest = async (
 
     setShowMessage({
       show: true,
-      text: "Solicitação de ví­nculo recusada.",
+      text: "Solicitação de vínculo recusada.",
     });
   } catch (error: any) {
     setShowMessage({
@@ -422,6 +447,13 @@ export const approveSheetLinkRequest = async (
         return {
           accepted: false,
           reason: "A solicitação desta ficha não está mais pendente.",
+        };
+      }
+
+      if (sheetUsesCustomTrybe(playerData) && !Boolean(session?.allowCustomTrybes)) {
+        return {
+          accepted: false,
+          reason: "Esta ficha usa uma tribo alternativa, e esta sessão não permite tribos alternativas.",
         };
       }
 
@@ -518,3 +550,7 @@ export const approveUser = async (notification: any, session: any, setShowMessag
     });
   }
 };
+
+
+
+

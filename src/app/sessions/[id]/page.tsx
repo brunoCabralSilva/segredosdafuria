@@ -114,6 +114,7 @@ export default function SessionId() {
     showGiftRoll,
     showRitualRoll,
     rerollWithWillPower,
+    listNotification,
     setListNotification,
   } = useContext(contexto);
 
@@ -457,10 +458,13 @@ const toggleSessionSidebarView = (view: string) => {
                       </button>
                       {dataSession?.gameMaster === email && (
                         <button
-                          className={getSidebarIconButtonClass('notifications')}
+                          className={`${getSidebarIconButtonClass('notifications')} relative`}
                           title="Notificações"
                           onClick={() => toggleSessionSidebarView('notifications')}
                         >
+                          {listNotification.length > 0 && (
+                            <span className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full bg-red-500" />
+                          )}
                           <IoNotifications />
                         </button>
                       )}
@@ -579,6 +583,7 @@ const toggleSessionSidebarView = (view: string) => {
     </div>
   );
 }
+
 
 
 

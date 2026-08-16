@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import contexto from '@/context/context';
 import { requestSheetLink } from '@/firebase/notifications';
@@ -18,6 +18,7 @@ type SessionListItem = {
   description: string;
   players?: string[];
   statusSession?: string;
+  allowCustomTrybes?: boolean;
 };
 
 export default function RequestSessionLink(props: { onClose: () => void }) {
@@ -46,6 +47,7 @@ export default function RequestSessionLink(props: { onClose: () => void }) {
             description: String(session.description || ''),
             players: Array.isArray(session.players) ? session.players : [],
             statusSession: session.statusSession ? String(session.statusSession) : undefined,
+            allowCustomTrybes: Boolean(session.allowCustomTrybes),
           }))
           .sort((a: any, b: any) => a.name.localeCompare(b.name));
 
@@ -199,3 +201,4 @@ export default function RequestSessionLink(props: { onClose: () => void }) {
     </div>
   );
 }
+

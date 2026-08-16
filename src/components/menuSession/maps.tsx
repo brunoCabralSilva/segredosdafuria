@@ -791,7 +791,7 @@ export default function Maps() {
     if (!isGameMaster && selectedColor === "azul") {
       setShowMessage({
         show: true,
-        text: "A cor azul é reservada ao Narrador da sessao.",
+        text: "A cor azul é reservada ao Narrador da sessão.",
       });
       return;
     }
@@ -852,7 +852,7 @@ export default function Maps() {
     if (isReadOnlyPopup) {
       setShowMessage({
         show: true,
-        text: "Voce nao tem permissao para excluir marcadores azuis.",
+        text: "Você não tem permissão para excluir marcadores azuis.",
       });
       return;
     }
@@ -1176,12 +1176,12 @@ export default function Maps() {
 
                   {popupPage === "details" && (
                     <p className="text-sm text-zinc-400">
-                      Voce nao tem permissao para editar marcadores azuis.
+                      Você não tem permissão para editar marcadores azuis.
                     </p>
                   )}
 
                   <p className="hidden">
-                    Voce nao tem permissao para editar este marcador porque a cor azul é exclusiva do Narrador.
+                    Você não tem permissão para editar este marcador porque a cor azul é exclusiva do Narrador.
                   </p>
                 </div>
               ) : (
