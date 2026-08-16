@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import contexto from '@/context/context';
 import listTrybes from '@/data/trybes.json';
@@ -141,7 +141,7 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
-      <div className="relative flex max-h-[94vh] w-full max-w-5xl flex-col overflow-y-auto border border-zinc-500/40 bg-black/90">
+      <div className="principles-scrollbar relative flex max-h-[94vh] w-full max-w-5xl flex-col overflow-y-auto overflow-x-hidden border border-zinc-500/40 bg-black/90">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: "url('/images/wallpapers/95.jpg')" }}
@@ -199,7 +199,7 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
                 </div>
               </div>
 
-              <div className="principles-scrollbar relative min-h-0 flex-1 border border-zinc-500/30 bg-black/90 [direction:rtl] px-2 pb-0 pt-2 pr-2 sm:px-2 sm:pb-0 sm:pt-2 sm:pr-2">
+              <div className="principles-scrollbar relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden border border-zinc-500/30 bg-black/90 [direction:rtl] px-2 pb-0 pt-2 pr-2 sm:px-2 sm:pb-0 sm:pt-2 sm:pr-2">
                 <div className="w-full [direction:ltr]">
                   <div className="border border-white/10 bg-black/60 p-4 sm:p-5">
                     <h3 className="font-kingthings text-lg leading-7 text-white sm:text-lg">
@@ -265,7 +265,7 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
             </>
           ) : topTrybe ? (
             <>
-              <div className="principles-scrollbar relative min-h-0 flex-1 border border-zinc-500/30 bg-black/45 [direction:rtl] px-2 pb-0 pt-2 pr-2 sm:px-2 sm:pb-0 sm:pt-2 sm:pr-2">
+              <div className="principles-scrollbar relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden border border-zinc-500/30 bg-black/45 [direction:rtl] px-2 pb-0 pt-2 pr-2 sm:px-2 sm:pb-0 sm:pt-2 sm:pr-2">
                 <div className="w-full [direction:ltr]">
                   <div className="grid gap-5 pb-2 lg:grid-cols-[280px_minmax(0,1fr)]">
                     <div className="border border-white/10 bg-black/65 p-4">
