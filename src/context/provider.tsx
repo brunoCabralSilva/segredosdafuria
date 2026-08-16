@@ -1,5 +1,5 @@
 ﻿'use client'
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useState } from 'react';
 import contexto from './context';
 import { sheetStructure } from '@/firebase/utilities';
 
@@ -86,18 +86,18 @@ export default function Provider({children }: IProvider) {
   const [showBattle, setShowBattle] = useState({ show: false, data: '' });
   const [showRelationshipMap, setShowRelationshipMap] = useState({ show: false, data: '' });
 
-  const scrollToBottom = () => {
+  const scrollToBottom = useCallback(() => {
     const messagesContainer = document.getElementById('messages-container');
     if (messagesContainer) {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
-  };
+  }, []);
 
-  const forceHideSessionMenu = () => {
+  const forceHideSessionMenu = useCallback(() => {
     setShowMenuSessionState('');
-  };
+  }, []);
 
-  const setShowMenuSession = (state: string) => {
+  const setShowMenuSession = useCallback((state: string) => {
     if (state === '' && showBattle.show) {
       setOptionSelect('chat');
       setShowMenuSessionState('sheet');
@@ -105,9 +105,9 @@ export default function Provider({children }: IProvider) {
     }
 
     setShowMenuSessionState(state);
-  };
+  }, [showBattle.show]);
 
-  const resetPopups = () => {
+  const resetPopups = useCallback(() => {
     setShowHelp(false);
     setShowConsentForm(false);
     setShowSelectSheet(false);
@@ -150,7 +150,7 @@ export default function Provider({children }: IProvider) {
     setShowMaps({ show: false, data: '' });
     setShowBattle({ show: false, data: '' });
     setShowRelationshipMap({ show: false, data: '' });
-  }
+  }, []);
 
   return (
     <contexto.Provider
@@ -244,5 +244,6 @@ export default function Provider({children }: IProvider) {
     </contexto.Provider>
   );
 }
+
 
 

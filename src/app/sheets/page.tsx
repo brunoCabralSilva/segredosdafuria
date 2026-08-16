@@ -393,7 +393,7 @@ export default function Sheets() {
       <section className="h-full w-full bg-black/90">
         <div className="relative z-10 mx-auto w-full max-w-[1200px] px-4 pb-10 pt-4 sm:px-8 sm:pb-14">
           {!showData || loadingSheets ? (
-            <div className="flex min-h-[60vh] items-center justify-center border border-zinc-500/30 bg-black/80 px-6 py-10 text-white">
+            <div className="flex min-h-[60vh] items-center justify-center bg-black/80 px-6 py-10 text-white">
               <span className="loader z-50" />
             </div>
           ) : (
