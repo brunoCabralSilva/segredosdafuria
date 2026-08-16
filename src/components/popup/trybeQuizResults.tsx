@@ -79,7 +79,7 @@ export default function TrybeQuizResultsPopup(props: { onClose: () => void }) {
                 Placar das tribos
               </p>
               <p className="font-geist-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
-                {loading ? 'Carregando resultados...' : `${totalResults} votos registrados`}
+                {loading ? 'Carregando resultados...' : `${totalResults} resultados registrados`}
               </p>
             </div>
           </div>
