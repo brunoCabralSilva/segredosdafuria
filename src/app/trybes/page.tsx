@@ -59,10 +59,10 @@ export default function Trybes() {
                   <div className="mt-8 flex flex-col gap-3 border border-zinc-500/30 bg-black/45 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
                     <div>
                       <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/55">
-                        Teste narrativo
+                        NÃO SABE QUAL SUA TRIBO?
                       </p>
                       <p className="mt-2 max-w-2xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
-                        Responda 10 situações inspiradas no material das tribos e descubra qual delas mais ecoa com seu jeito de agir.
+                        Responda 11 situações inspiradas no material das tribos e descubra qual delas mais ecoa com seu jeito de agir.
                       </p>
                     </div>
                     <button
