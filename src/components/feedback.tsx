@@ -53,20 +53,18 @@ export default function Feedback(props: { title?: string }) {
       });
     } else {
       const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-      const templateID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-      const serviceID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateID = process.env.NEXT_PUBLIC_TEMPLATEID;
+      const serviceID = process.env.NEXT_PUBLIC_SERVICEID;
 
       try {
+        const form = e.currentTarget;
+
         await emailjs.sendForm(
           serviceID || '',
           templateID || '',
-          form, // USA A REFERÊNCIA SALVA
-          {
-            publicKey: publicKey || '',
-          },
+          form,
+          publicKey || '',
         );
-
-        form.reset(); // AGORA FUNCIONA
 
         setMessage('');
         setNameUser('');
@@ -80,7 +78,7 @@ export default function Feedback(props: { title?: string }) {
 
         setTimeout(() => setShowFeedback(false), 3000);
       } catch (error: any) {
-        console.error('Erro completo EmailJS:', error);
+        console.error('Erro EmailJS:', error);
         console.error('Status:', error?.status);
         console.error('Mensagem:', error?.text);
 
