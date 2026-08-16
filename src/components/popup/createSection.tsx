@@ -113,8 +113,8 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
     : 'Você esta criando uma sessão que utiliza regras alternativas para a Quinta Edicao de Lobisomem: O Apocalipse. Falhas em checagens de Fúria aumentam ela ao invés de diminuir.';
 
   const customTrybesDescription = allowCustomTrybes
-    ? 'Tribos alternativas tambem vao aparecer na selecao de tribos das fichas desta sessao.'
-    : 'A selecao de tribos vai mostrar apenas as tribos padrao da plataforma.';
+    ? 'Tribos alternativas tambem vão aparecer na seleção de tribos das fichas desta sessão.'
+    : 'A seleção de tribos vai mostrar apenas as tribos oficiais de Lobisomem: O Apocalipse 5ed.';
 
   const fieldLabelClass = 'mb-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.2em] text-zinc-300';
   const fieldClass = 'w-full border border-white/10 bg-black/75 px-3 py-3 font-geist-mono text-[0.72rem] uppercase tracking-[0.08em] text-white outline-none transition-colors hover:border-red-700/70 focus:border-red-700';
