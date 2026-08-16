@@ -3,7 +3,7 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import contexto from "@/context/context";
 import Image from "next/image";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { capitalizeFirstLetter, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
 import Loading from "./loading";
 import { usePathname } from "next/navigation";
 
@@ -20,6 +20,8 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
 
   const hasAdvantage = (title: string) => data.advantagesAndFlaws?.advantages?.some((advantage: { title: string }) => advantage.title === title);
   const hasFlaw = (title: string) => data.advantagesAndFlaws?.flaws?.some((flaw: { title: string }) => flaw.title === title);
+  const resolvedGifts = resolveGiftEntries(Array.isArray(data.gifts) ? data.gifts : []);
+  const resolvedRituals = resolveRitualEntries(Array.isArray(data.rituals) ? data.rituals : []);
   const getSheetStandalonePhysicalValue = (name: 'strength' | 'dexterity' | 'stamina') => {
     const currentValue = Number(data.attributes?.[name] || 0);
 
@@ -277,7 +279,7 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
   };
 
   const returnEmptyGifts = () => {
-    let length = 13 - (data.gifts.length - data.rituals.length);
+    let length = 13 - (resolvedGifts.length - resolvedRituals.length);
     if (length < 0) length = 0;
     const points = Array(length).fill('');
     return (
@@ -816,22 +818,22 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
                   <div className="col-span-1 border border-black !border-solid px-2">Página</div>
                 </div>
                 {
-                  data.rituals.map((item: any, index: number) => (
+                  resolvedRituals.map((item: any, index: number) => (
                     <div key={ index } className="grid grid-cols-10 w-full">
-                      <div className={`col-span-3 border pb-3 border-black !border-solid px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.titlePtBr }</div>
-                      <div className={`col-span-2 border  pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}></div>
-                      <div className={`col-span-4 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
-                      <div className={`col-span-1 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
+                      <div className={`col-span-3 border pb-3 border-black !border-solid px-2 py-1 ${index === resolvedRituals.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.titlePtBr }</div>
+                      <div className={`col-span-2 border  pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === resolvedRituals.length - 1 && 'border-b-black'}`}></div>
+                      <div className={`col-span-4 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === resolvedRituals.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
+                      <div className={`col-span-1 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === resolvedRituals.length - 1 && 'border-b-black'}`}>{ item.page }</div>
                     </div>
                   ))
                 }
                 {
-                  data.gifts.map((item: any, index: number) => (
+                  resolvedGifts.map((item: any, index: number) => (
                     <div key={ index } className="grid grid-cols-10 w-full">
-                      <div className={`col-span-3 border pb-3 border-black !border-solid px-2 py-1 ${index === data.gifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.giftPtBr }</div>
-                      <div className={`col-span-2 border  pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.cost }</div>
-                      <div className={`col-span-4 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
-                      <div className={`col-span-1 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === data.gifts.length - 1 && 'border-b-black'}`}>{ item.page }</div>
+                      <div className={`col-span-3 border pb-3 border-black !border-solid px-2 py-1 ${index === resolvedGifts.length - 1 ? 'border-b-black' : 'border-b-transparent'}`}>{ item.giftPtBr }</div>
+                      <div className={`col-span-2 border  pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === resolvedGifts.length - 1 && 'border-b-black'}`}>{ item.cost }</div>
+                      <div className={`col-span-4 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === resolvedRituals.length - 1 && 'border-b-black'}`}>{ item.pool }</div>
+                      <div className={`col-span-1 border pb-3 border-black !border-solid border-transparent border-t-black border-r-black px-2 py-1 ${index === resolvedRituals.length - 1 && 'border-b-black'}`}>{ item.page }</div>
                     </div>
                   ))
                 }
@@ -880,5 +882,8 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
     </div>
   );
 };
+
+
+
 
 

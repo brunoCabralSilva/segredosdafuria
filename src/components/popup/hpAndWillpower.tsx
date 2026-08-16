@@ -2,7 +2,7 @@
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { getAllPlayersBySessionId, updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { capitalizeFirstLetter, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { FaFire, FaHeart } from "react-icons/fa6";
 import { GiD10, GiFangs } from "react-icons/gi";
@@ -55,10 +55,10 @@ export default function HpAndWillPower() {
     ownedPlayers.find((player: any) => player.id === selectedPlayerId) ??
     ownedPlayers[0] ?? null;
   const selectedPlayerGifts = Array.isArray(selectedOwnedPlayer?.data?.gifts)
-    ? selectedOwnedPlayer.data.gifts
+    ? resolveGiftEntries(selectedOwnedPlayer.data.gifts)
     : [];
   const selectedPlayerRituals = Array.isArray(selectedOwnedPlayer?.data?.rituals)
-    ? selectedOwnedPlayer.data.rituals
+    ? resolveRitualEntries(selectedOwnedPlayer.data.rituals)
     : [];
 
   useEffect(() => {
@@ -459,6 +459,8 @@ export default function HpAndWillPower() {
     </div>
   );
 }
+
+
 
 
 

@@ -1,25 +1,35 @@
-import contexto from "@/context/context";
+﻿import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { capitalizeFirstLetter, normalizeGiftId, serializeGiftEntries } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export default function Gift(props: { gift: any; index: number; length: number }) {
   const [showGift, setShowGift] = useState(false);
   const { gift } = props;
-  const { dataSheet, email, session, sheetId, setShowMessage } = useContext(contexto);
+  const { dataSheet, email, session, sheetId, setDataSheet, setShowMessage } = useContext(contexto);
 
   const registerGift = async (currentGift: any) => {
-    const findGift = dataSheet.data.gifts.find((item: any) => item.giftPtBr === currentGift.giftPtBr);
+    const currentGiftIds = Array.isArray(dataSheet?.data?.gifts)
+      ? serializeGiftEntries(dataSheet.data.gifts)
+      : [];
+    const currentGiftId = normalizeGiftId(currentGift);
+    const findGift = currentGiftIds.includes(currentGiftId);
+    const updatedGiftIds = findGift
+      ? currentGiftIds.filter((giftId) => giftId !== currentGiftId)
+      : [...currentGiftIds, currentGiftId];
 
-    if (findGift) {
-      dataSheet.data.gifts = dataSheet.data.gifts.filter((item: any) => item.giftPtBr !== currentGift.giftPtBr);
-    } else {
-      dataSheet.data.gifts.push(currentGift);
-    }
+    const updatedSheet = {
+      ...dataSheet,
+      data: {
+        ...dataSheet.data,
+        gifts: updatedGiftIds,
+      },
+    };
 
-    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    setDataSheet(updatedSheet);
+    await updateDataPlayer(sheetId, updatedSheet, setShowMessage);
     await registerHistory(
       session.id,
       {
@@ -31,7 +41,10 @@ export default function Gift(props: { gift: any; index: number; length: number }
     );
   };
 
-  const isSelected = Boolean(dataSheet.data.gifts.find((item: any) => item.giftPtBr === gift.giftPtBr));
+  const currentGiftIds = Array.isArray(dataSheet?.data?.gifts)
+    ? serializeGiftEntries(dataSheet.data.gifts)
+    : [];
+  const isSelected = currentGiftIds.includes(normalizeGiftId(gift));
 
   return (
     <div className={`${isSelected ? 'border-red-600 bg-black/85 shadow-[0_0_0_1px_rgba(248,113,113,0.42),0_0_22px_rgba(127,29,29,0.24)]' : 'border-white/10 bg-black/40'} overflow-hidden border transition-colors`}>
@@ -59,13 +72,13 @@ export default function Gift(props: { gift: any; index: number; length: number }
       {showGift && (
         <div className="border-t border-white/10 px-4 py-4">
           <div className="space-y-2.5 font-geist-mono text-[11px] leading-5 text-white/75">
-            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Ação:</span><span>{gift.action}.</span></div>
+            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">AÃ§Ã£o:</span><span>{gift.action}.</span></div>
             <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Renome:</span><span>{gift.renown}.</span></div>
             <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Custo:</span><span>{gift.cost}.</span></div>
             {gift.pool !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Checagem:</span><span>{gift.pool}.</span></div>}
-            <div className="border-t border-white/10 pt-2"><span className="pr-1 uppercase tracking-[0.08em] text-white">Descrição:</span><span className="whitespace-pre-wrap">{gift.descriptionPtBr}</span></div>
+            <div className="border-t border-white/10 pt-2"><span className="pr-1 uppercase tracking-[0.08em] text-white">DescriÃ§Ã£o:</span><span className="whitespace-pre-wrap">{gift.descriptionPtBr}</span></div>
             <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span><span className="whitespace-pre-wrap">{gift.systemPtBr}</span></div>
-            {gift.duration !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Duração:</span><span>{gift.duration}.</span></div>}
+            {gift.duration !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">DuraÃ§Ã£o:</span><span>{gift.duration}.</span></div>}
           </div>
           <button
             type="button"

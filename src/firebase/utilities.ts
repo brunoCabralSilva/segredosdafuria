@@ -1,4 +1,7 @@
-﻿export const getOfficialTimeBrazil = async () => {
+﻿import dataGifts from '../data/gifts.json';
+import dataRituals from '../data/rituals.json';
+
+export const getOfficialTimeBrazil = async () => {
   const date = new Date();
   const options: Intl.DateTimeFormatOptions = {
     timeZone: 'America/Sao_Paulo',
@@ -14,10 +17,101 @@
 };
 
 export const parseDate = (dateStr: string): Date => {
-  const [datePart, timePart] = dateStr.split(", ");
-  const [day, month, year] = datePart.split("/").map(Number);
-  const [hours, minutes, seconds] = timePart.split(":").map(Number);
+  const [datePart, timePart] = dateStr.split(', ');
+  const [day, month, year] = datePart.split('/').map(Number);
+  const [hours, minutes, seconds] = timePart.split(':').map(Number);
   return new Date(year, month - 1, day, hours, minutes, seconds);
+};
+
+const giftCatalog = Array.isArray(dataGifts) ? dataGifts : [];
+const giftCatalogById = new Map(giftCatalog.map((gift: any) => [String(gift.id), gift]));
+const ritualCatalog = Array.isArray(dataRituals) ? dataRituals : [];
+const ritualCatalogById = new Map(ritualCatalog.map((ritual: any) => [String(ritual.id), ritual]));
+
+export const normalizeGiftId = (gift: any): string => {
+  if (typeof gift === 'string' || typeof gift === 'number') return String(gift);
+  if (gift && typeof gift === 'object' && gift.id !== undefined && gift.id !== null) {
+    return String(gift.id);
+  }
+  return '';
+};
+
+export const serializeGiftEntries = (gifts: any[] = []) => {
+  const seen = new Set<string>();
+
+  return gifts
+    .map((gift) => normalizeGiftId(gift))
+    .filter((giftId) => giftId !== '')
+    .filter((giftId) => {
+      if (seen.has(giftId)) return false;
+      seen.add(giftId);
+      return true;
+    });
+};
+
+export const resolveGiftEntries = (gifts: any[] = []) => {
+  return serializeGiftEntries(gifts)
+    .map((giftId) => giftCatalogById.get(giftId))
+    .filter(Boolean);
+};
+
+export const normalizeRitualId = (ritual: any): string => {
+  if (typeof ritual === 'string' || typeof ritual === 'number') return String(ritual);
+  if (ritual && typeof ritual === 'object' && ritual.id !== undefined && ritual.id !== null) {
+    return String(ritual.id);
+  }
+  return '';
+};
+
+export const serializeRitualEntries = (rituals: any[] = []) => {
+  const seen = new Set<string>();
+
+  return rituals
+    .map((ritual) => normalizeRitualId(ritual))
+    .filter((ritualId) => ritualId !== '')
+    .filter((ritualId) => {
+      if (seen.has(ritualId)) return false;
+      seen.add(ritualId);
+      return true;
+    });
+};
+
+export const resolveRitualEntries = (rituals: any[] = []) => {
+  return serializeRitualEntries(rituals)
+    .map((ritualId) => ritualCatalogById.get(ritualId))
+    .filter(Boolean);
+};
+
+export const normalizePlayerSheetForStorage = <T>(playerData: T): T => {
+  if (!playerData || typeof playerData !== 'object') return playerData;
+
+  const normalizedData = JSON.parse(JSON.stringify(playerData));
+
+  if (Array.isArray(normalizedData?.data?.gifts)) {
+    normalizedData.data.gifts = serializeGiftEntries(normalizedData.data.gifts);
+  }
+
+  if (Array.isArray(normalizedData?.data?.rituals)) {
+    normalizedData.data.rituals = serializeRitualEntries(normalizedData.data.rituals);
+  }
+
+  if (Array.isArray(normalizedData?.list)) {
+    normalizedData.list = normalizedData.list.map((item: any) => {
+      if (!item || typeof item !== 'object') return item;
+
+      const nextItem = { ...item };
+      if (Array.isArray(nextItem?.data?.gifts) || Array.isArray(nextItem?.data?.rituals)) {
+        nextItem.data = {
+          ...nextItem.data,
+          ...(Array.isArray(nextItem?.data?.gifts) ? { gifts: serializeGiftEntries(nextItem.data.gifts) } : {}),
+          ...(Array.isArray(nextItem?.data?.rituals) ? { rituals: serializeRitualEntries(nextItem.data.rituals) } : {}),
+        };
+      }
+      return nextItem;
+    });
+  }
+
+  return normalizedData;
 };
 
 export const playerSheet = {
@@ -231,3 +325,4 @@ export const translate = (str: string): string => {
     default: return str;
   }
 }
+

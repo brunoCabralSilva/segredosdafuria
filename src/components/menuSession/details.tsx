@@ -1,4 +1,4 @@
-import contexto from "@/context/context";
+﻿import contexto from "@/context/context";
 import { useContext, useEffect, useMemo, useState } from "react";
 import ChangeGameMaster from "../popup/changeGameMaster";
 import LeaveGMFromSession from "../popup/leaveGMFromSession";
@@ -8,7 +8,7 @@ import { updateSession, updateStatusSession } from "@/firebase/sessions";
 import { authenticate } from "@/firebase/authenticate";
 import { getUserByEmail } from "@/firebase/user";
 import { registerHistory } from "@/firebase/history";
-import { addNewSheetMandatory } from "@/firebase/players";
+import { addNewSheetMandatory, migrateAllPlayersRitualsToIds } from "@/firebase/players";
 import { capitalizeFirstLetter, getOfficialTimeBrazil, sheetStructure } from "@/firebase/utilities";
 import { MdDelete } from "react-icons/md";
 import DeleteUserFromSession from "../popup/deleteUserFromSession";
@@ -46,6 +46,7 @@ export default function Details() {
   const [input, setInput] = useState("");
   const [textArea, setTextArea] = useState(false);
   const [creatingSheet, setCreatingSheet] = useState(false);
+  const [migratingRitualIds, setMigratingRitualIds] = useState(false);
 
   useEffect(() => {
     setGameMaster(session.gameMaster || "");
@@ -128,7 +129,7 @@ export default function Details() {
 
     setShowMessage({
       show: true,
-      text: "Necessario inserir o email de um usuário que ja esteja cadastrado na plataforma.",
+      text: "Necessario inserir o email de um usuÃ¡rio que ja esteja cadastrado na plataforma.",
     });
     setNewGameMaster(gameMaster);
   };
@@ -197,6 +198,17 @@ export default function Details() {
   };
 
 
+  const migrateRitualEntriesToIds = async () => {
+    if (migratingRitualIds) return;
+
+    setMigratingRitualIds(true);
+    try {
+      await migrateAllPlayersRitualsToIds(setShowMessage);
+    } finally {
+      setMigratingRitualIds(false);
+    }
+  };
+
   const createSessionSheet = async () => {
     if (creatingSheet) return;
 
@@ -206,7 +218,7 @@ export default function Details() {
       const auth = await authenticate(setShowMessage);
 
       if (!auth || !auth.email || !auth.displayName) {
-        setShowMessage({ show: true, text: 'Nao foi possivel identificar o usuário para criar a ficha.' });
+        setShowMessage({ show: true, text: 'Nao foi possivel identificar o usuÃ¡rio para criar a ficha.' });
         return;
       }
 
@@ -251,8 +263,8 @@ export default function Details() {
       <div className="relative border-b border-white/10 px-4 py-4 sm:px-6">
         <div className="flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="font-kingthings text-lg sm:text-xl">Detalhes da Sessão</h2>
-            <p className="mt-1 font-geist-mono text-[11px] sm:text-xs text-white/75">Edite as informações principais, acompanhe os jogadores e acione os modos da crônica a partir deste painel.</p>
+            <h2 className="font-kingthings text-lg sm:text-xl">Detalhes da SessÃ£o</h2>
+            <p className="mt-1 font-geist-mono text-[11px] sm:text-xs text-white/75">Edite as informaÃ§Ãµes principais, acompanhe os jogadores e acione os modos da crÃ´nica a partir deste painel.</p>
           </div>
         </div>
       </div>
@@ -264,7 +276,7 @@ export default function Details() {
               <div className="border border-white/10 bg-black/55">
                 <div className="border-b border-white/10 px-4 py-3">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Nome Da Sessão</p>
+                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Nome Da SessÃ£o</p>
                     {gameMaster === email && editNameSession()}
                   </div>
                 </div>
@@ -355,7 +367,7 @@ export default function Details() {
 
                 <div className="border border-white/10 bg-black/55">
                   <div className="border-b border-white/10 px-4 py-3">
-                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Data De Criação</p>
+                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Data De CriaÃ§Ã£o</p>
                   </div>
                   <div className="px-4 py-4">
                     <p className="font-geist-mono text-[12px] text-white/85">{creationDate}</p>
@@ -401,7 +413,7 @@ export default function Details() {
               <div className="border border-white/10 bg-black/55">
                 <div className="border-b border-white/10 px-4 py-3">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Banner da Sessão</p>
+                    <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Banner da SessÃ£o</p>
                     {email === gameMaster && (
                       <FaRegEdit
                         onClick={() => {
@@ -426,7 +438,7 @@ export default function Details() {
 
               <div className="border border-white/10 bg-black/55">
                 <div className="border-b border-white/10 px-4 py-3">
-                  <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Ações Da Sessão</p>
+                  <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">AÃ§Ãµes Da SessÃ£o</p>
                 </div>
                 <div className="flex flex-col gap-3 p-4">
 
@@ -453,7 +465,20 @@ export default function Details() {
                         }
                       }}
                     >
-                      {session.statusSession === "Finalizada" ? "Reativar Sessão" : "Finalizar Sessão"}
+                      {session.statusSession === "Finalizada" ? "Reativar SessÃ£o" : "Finalizar SessÃ£o"}
+                    </button>
+                  )}
+
+                  {email === gameMaster && (
+                    <button
+                      type="button"
+                      className={ghostButtonClassName}
+                      onClick={() => {
+                        void migrateRitualEntriesToIds();
+                      }}
+                      disabled={migratingRitualIds}
+                    >
+                      {migratingRitualIds ? 'Migrando rituais...' : 'Migrar Rituais Para IDs'}
                     </button>
                   )}
 
@@ -464,7 +489,7 @@ export default function Details() {
                       setShowDelGMFromSession(true);
                     }}
                   >
-                    Sair Da Sessão
+                    Sair Da SessÃ£o
                   </button>
                 </div>
               </div>
@@ -479,3 +504,8 @@ export default function Details() {
     </div>
   );
 }
+
+
+
+
+

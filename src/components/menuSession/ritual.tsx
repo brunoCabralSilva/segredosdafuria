@@ -1,25 +1,35 @@
 ﻿import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { capitalizeFirstLetter, normalizeRitualId, serializeRitualEntries } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 export default function Ritual(props: { ritual: any; index: number; length: number }) {
   const [showRitual, setShowRitual] = useState(false);
   const { ritual } = props;
-  const { dataSheet, session, email, sheetId, setShowMessage } = useContext(contexto);
+  const { dataSheet, session, email, sheetId, setDataSheet, setShowMessage } = useContext(contexto);
 
   const registerRitual = async () => {
-    const findRitual = dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr);
+    const currentRitualIds = Array.isArray(dataSheet?.data?.rituals)
+      ? serializeRitualEntries(dataSheet.data.rituals)
+      : [];
+    const currentRitualId = normalizeRitualId(ritual);
+    const findRitual = currentRitualIds.includes(currentRitualId);
+    const updatedRitualIds = findRitual
+      ? currentRitualIds.filter((ritualId) => ritualId !== currentRitualId)
+      : [...currentRitualIds, currentRitualId];
 
-    if (findRitual) {
-      dataSheet.data.rituals = dataSheet.data.rituals.filter((item: any) => item.titlePtBr !== ritual.titlePtBr);
-    } else {
-      dataSheet.data.rituals.push(ritual);
-    }
+    const updatedSheet = {
+      ...dataSheet,
+      data: {
+        ...dataSheet.data,
+        rituals: updatedRitualIds,
+      },
+    };
 
-    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    setDataSheet(updatedSheet);
+    await updateDataPlayer(sheetId, updatedSheet, setShowMessage);
     await registerHistory(
       session.id,
       {
@@ -31,7 +41,10 @@ export default function Ritual(props: { ritual: any; index: number; length: numb
     );
   };
 
-  const isSelected = Boolean(dataSheet.data.rituals.find((item: any) => item.titlePtBr === ritual.titlePtBr));
+  const currentRitualIds = Array.isArray(dataSheet?.data?.rituals)
+    ? serializeRitualEntries(dataSheet.data.rituals)
+    : [];
+  const isSelected = currentRitualIds.includes(normalizeRitualId(ritual));
 
   return (
     <div className={`${isSelected ? 'border-red-600 bg-black/85 shadow-[0_0_0_1px_rgba(248,113,113,0.42),0_0_22px_rgba(127,29,29,0.24)]' : 'border-white/10 bg-black/40'} overflow-hidden border transition-colors`}>

@@ -1,4 +1,5 @@
-import contexto from "@/context/context";
+﻿import contexto from "@/context/context";
+import { resolveRitualEntries } from "@/firebase/utilities";
 import { useContext } from "react";
 import AddRitual from "../popup/addRitual";
 import RitualsAdded from "./ritualsAdded";
@@ -6,7 +7,7 @@ import RitualsAdded from "./ritualsAdded";
 export default function Rituals() {
   const { dataSheet, showRitualsToAdd, setShowRitualsToAdd } = useContext(contexto);
   const sheetData = dataSheet?.data;
-  const rituals = Array.isArray(sheetData?.rituals) ? sheetData.rituals : [];
+  const rituals = Array.isArray(sheetData?.rituals) ? resolveRitualEntries(sheetData.rituals) : [];
 
   return (
     <section className="visage-card relative mt-2 sm:mt-5 w-full overflow-hidden border border-[#708578]/40 bg-[#090d0e]/95 text-slate-300 shadow-[inset_0_0_80px_rgba(0,0,0,0.7)]">
@@ -24,7 +25,7 @@ export default function Rituals() {
       <div className="mx-6 border-b border-white/10" />
       <div className="pb-4 pt-2">
         {rituals.map((item: any, index: number) => (
-          <RitualsAdded key={index} ritual={item} />
+          <RitualsAdded key={`${item.id}-${index}`} ritual={item} />
         ))}
       </div>
       {showRitualsToAdd && <AddRitual />}
