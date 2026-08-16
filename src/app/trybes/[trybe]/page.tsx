@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import Feedback from '@/components/feedback';
+
 import Simplify from '@/components/simplify';
 import contexto from '@/context/context';
 import listTrybes from '../../../data/trybes.json';
@@ -63,7 +63,7 @@ export default function Trybe() {
   const [isLoading, setIsLoading] = useState(true);
   const [dataTrybe, setDataTrybe] = useState<TrybeData>();
   const [alternative, setAlternative] = useState(true);
-  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
+  const { resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
@@ -285,13 +285,16 @@ export default function Trybe() {
             </div>
           </section>
 
-          {showFeedback && <Feedback title={dataTrybe.nameEn} />}
+
         </main>
       </div>
       <Footer />
     </div>
   );
 }
+
+
+
 
 
 

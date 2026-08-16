@@ -1,11 +1,11 @@
-'use client';
+﻿'use client';
 import { useContext, useEffect, useState } from "react";
 import Image from 'next/image';
 import Nav from '@/components/nav';
 import Footer from "@/components/footer";
 import listForms from '../../../data/forms.json';
 import { IForm } from "../../../interface";
-import Feedback from "@/components/feedback";
+
 import contexto from "@/context/context";
 import { useParams } from "next/navigation";
 import Simplify from "@/components/simplify";
@@ -15,7 +15,7 @@ export default function Form() {
   const form = params?.form as string;
   const [isLoading, setIsLoading] = useState(true);
   const [dataForm, setDataForm] = useState<IForm>();
-  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
+  const { resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
@@ -72,16 +72,7 @@ export default function Form() {
               ))
             }
           </div>
-          <button
-            type="button"
-            className="px-6 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-            onClick={() => setShowFeedback(true) }
-          >
-            Enviar Feedback
-          </button>
-          {
-            showFeedback && <Feedback title={ dataForm.name } /> 
-          }
+          
         </div>
       </section>
       <Footer />
@@ -95,3 +86,5 @@ export default function Form() {
     </div>
   );
 }
+
+

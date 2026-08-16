@@ -197,9 +197,7 @@ export default function Gifts() {
                       </li>
                     </ol>
 
-                    <p className="mt-4 font-geist-mono text-[11px] leading-7 text-white/72 sm:text-xs">
-                      OBS - Você notará que, ao fim de cada Dom, haverá uma opção de &quot;Enviar Feedback&quot;. Você poderá usá-lo, caso encontre algum ponto de melhoria no dom em questão (seja uma tradução que pode melhorar, ou um erro de digitação, ou ausência de informações ou informações em locais errados). Desta forma, será possível encaminhar para o administrador da página a melhoria para que ela seja avaliada. Assim, melhoramos a qualidade dos dados que estamos cedendo por meio desta aplicação!
-                    </p>
+                    
                   </div>
                 </div>
               </div>
@@ -241,3 +239,4 @@ export default function Gifts() {
     </div>
   );
 }
+

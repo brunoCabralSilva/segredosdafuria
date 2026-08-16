@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import Nav from '@/components/nav';
 import Footer from '@/components/footer';
-import Feedback from '@/components/feedback';
+
 import Simplify from '@/components/simplify';
 import contexto from '@/context/context';
 import listGifts from '../../../data/gifts.json';
@@ -21,7 +21,7 @@ export default function Gift() {
   const params = useParams();
   const gift = params?.gift as string;
   const [dataGift, setDataGift] = useState<IGift>();
-  const { showFeedback, setShowFeedback, resetPopups, simplify } = useContext(contexto);
+  const { resetPopups, simplify } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
@@ -168,13 +168,16 @@ export default function Gift() {
             </div>
           </section>
 
-          {showFeedback && <Feedback title={dataGift.gift} />}
+
         </main>
       </div>
       <Footer />
     </div>
   );
 }
+
+
+
 
 
 

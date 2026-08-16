@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import contexto from "@/context/context";
 import { useRouter } from "next/navigation";
@@ -99,7 +99,7 @@ export default function Info() {
                   <p className="py-3">
                     <span className="font-bold pr-1"> - Checagens:</span>
                     <span>
-                      O Narrador pode realizar testes clicando no ícone que representa um dado. Alí, ele pode escolher informações como quantidade de dados normais e de fúria, dificuldade e bônus ou penalidades.
+                      O Narrador pode realizar testes clicando no ícone que representa um dado. Ali, ele pode escolher informações como quantidade de dados normais e de fúria, dificuldade e bônus ou penalidades.
                     </span>
                   </p>
                   <p className="py-3">
@@ -147,17 +147,11 @@ export default function Info() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col justify-center items-center">
-            <button
-              type="button"
-              className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-            >
-              Enviar Feedback
-            </button>
-            </div>
+            
           </article>
         </div>
       </section>
     </div>
   );
 }
+

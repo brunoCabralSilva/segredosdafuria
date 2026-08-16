@@ -1,10 +1,10 @@
-'use client';
+﻿'use client';
 import { useContext, useEffect, useState } from "react";
 import Nav from '@/components/nav';
 import Footer from "@/components/footer";
 import listLoresheets from '../../../data/loresheets.json';
 import { IHabilities, ILoresheet } from "../../../interface";
-import Feedback from "@/components/feedback";
+
 import contexto from "@/context/context";
 import { useParams } from "next/navigation";
 import Image from "next/image";
@@ -13,7 +13,7 @@ export default function Loresheet() {
   const params = useParams();
   const loresheet = params?.loresheet as string;
   const [dataLoresheet, setDataLoresheet] = useState<ILoresheet>();
-  const { showFeedback, setShowFeedback, resetPopups } = useContext(contexto);
+  const { resetPopups } = useContext(contexto);
 
   useEffect(() => {
     resetPopups();
@@ -24,7 +24,7 @@ export default function Loresheet() {
   }, []);
 
   const returnDot = (index: number) => {
-    const dots = ['● ', '●● ', '●●● ', '●●●● ', '●●●●● '];
+    const dots = ['â— ', 'â—â— ', 'â—â—â— ', 'â—â—â—â— ', 'â—â—â—â—â— '];
     return dots[index];
   };
 
@@ -83,18 +83,7 @@ export default function Loresheet() {
                 ))
               }
             </ul> */}
-            <div className="flex flex-col sm:flex-row sm:justify-between">
-            <button
-                type="button"
-                className="pb-3 text-orange-300 hover:text-orange-600 transition-colors duration-300 mt-5 cursor-pointer underline"
-                onClick={() => setShowFeedback(true) }
-              >
-                Enviar Feedback
-              </button>
-              {
-                showFeedback && <Feedback title={ dataLoresheet.title } /> 
-              }
-              </div>
+            
           </article>
           </div>
         </section>
@@ -109,3 +98,5 @@ export default function Loresheet() {
     </div>
   );
 }
+
+
