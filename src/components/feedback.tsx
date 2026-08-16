@@ -29,6 +29,7 @@ export default function Feedback(props: { title?: string }) {
   const sendEmail = async (e: FormEvent<HTMLFormElement>) => {
     const regex = /\S+@\S+\.\S+/;
     e.preventDefault();
+    const form = e.currentTarget;
 
     if (!nameUser || nameUser.length < 2) {
       setMessagePopup({
@@ -57,10 +58,10 @@ export default function Feedback(props: { title?: string }) {
         await emailjs.sendForm(
           serviceID || '',
           templateID || '',
-          e.currentTarget,
+          form,
           userID,
         );
-        e.currentTarget.reset();
+        form.reset();
         setMessage('');
         setNameUser('');
         setEmailUser('');
@@ -189,6 +190,9 @@ export default function Feedback(props: { title?: string }) {
     </div>
   );
 }
+
+
+
 
 
 
