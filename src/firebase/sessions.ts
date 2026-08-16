@@ -53,6 +53,7 @@ export const createSession = async (
   nameSession: string,
   description: string,
   typeSession: string,
+  allowCustomTrybes: boolean,
   email: string,
   image: string,
   displayName: string,
@@ -70,6 +71,7 @@ export const createSession = async (
       anotations: '',
       statusSession: 'Ativa',
       typeSession,
+      allowCustomTrybes,
       imageName: image,
       description,
       principles: [],
@@ -363,4 +365,5 @@ export const deleteSessionById = async (sessionId: string, setShowMessage: any) 
     return false;
   }
 };
+
 

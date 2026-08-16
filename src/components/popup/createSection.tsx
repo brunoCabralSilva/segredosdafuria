@@ -21,6 +21,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const [typeSession, setTypeSession] = useState('Regras Oficiais');
+  const [allowCustomTrybes, setAllowCustomTrybes] = useState(false);
   const { dataUser, setShowCreateSession, setShowMessage } = useContext(contexto);
 
   useEffect(() => {
@@ -86,7 +87,7 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
         nameSession.toLowerCase(),
         description,
         typeSession,
-        false,
+        allowCustomTrybes,
         email,
         image,
         dataUser.displayName,
@@ -109,7 +110,11 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
 
   const typeSessionDescription = typeSession === 'Regras Oficiais'
     ? 'Voce está criando uma sessão que utiliza as regras oficiais da Quinta Edição de Lobisomem: O Apocalipse.'
-    : 'Voce esta criando uma sessão que utiliza regras alternativas para a Quinta Edicao de Lobisomem: O Apocalipse. Falhas em checagens de Fúria aumentam ela ao invés de diminuir.';
+    : 'Você esta criando uma sessão que utiliza regras alternativas para a Quinta Edicao de Lobisomem: O Apocalipse. Falhas em checagens de Fúria aumentam ela ao invés de diminuir.';
+
+  const customTrybesDescription = allowCustomTrybes
+    ? 'Tribos alternativas tambem vao aparecer na selecao de tribos das fichas desta sessao.'
+    : 'A selecao de tribos vai mostrar apenas as tribos padrao da plataforma.';
 
   const fieldLabelClass = 'mb-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.2em] text-zinc-300';
   const fieldClass = 'w-full border border-white/10 bg-black/75 px-3 py-3 font-geist-mono text-[0.72rem] uppercase tracking-[0.08em] text-white outline-none transition-colors hover:border-red-700/70 focus:border-red-700';
@@ -179,6 +184,25 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
                   <div className="mt-4 border border-red-900/45 bg-[#120606] px-3 py-3 font-geist-mono text-[0.62rem] uppercase leading-relaxed tracking-[0.12em] text-zinc-200">
                     {typeSessionDescription}
                   </div>
+
+                  <label className="mt-4 block border border-white/10 bg-black/70 px-3 py-3">
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        checked={allowCustomTrybes}
+                        onChange={(e) => {
+                          setAllowCustomTrybes(e.target.checked);
+                        }}
+                        className="mt-0.5 h-4 w-4 accent-red-800"
+                      />
+                      <div>
+                        <p className={fieldLabelClass}>Permitir tribos alternativas</p>
+                        <p className="font-geist-mono text-[0.62rem] leading-relaxed tracking-[0.08em] text-zinc-300">
+                          {customTrybesDescription}
+                        </p>
+                      </div>
+                    </div>
+                  </label>
 
                   <label htmlFor="description" className="mt-4 block">
                     <p className={fieldLabelClass}>Descrição</p>
@@ -252,4 +276,6 @@ export default function CreateSection({ closeHref = '/sessions' }: CreateSection
     </div>
   );
 }
+
+
 
