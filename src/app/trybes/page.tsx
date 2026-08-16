@@ -5,9 +5,10 @@ import Nav from '@/components/nav';
 import Footer from '@/components/footer';
 import listTrybes from '../../data/trybes.json';
 import Link from 'next/link';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import contexto from '@/context/context';
 import Simplify from '@/components/simplify';
+import DiscoverTrybePopup from '@/components/popup/discoverTrybe';
 
 const introParagraphs = [
   'As tribos são grupos de lobisomens unidos por um propósito espiritual comum e afinidades compartilhadas. Cada tribo é associada a um Espírito Patrono, e os Garou que fazem parte dela prometem seguir os valores desse espírito, criando uma relação profunda de compromisso espiritual.',
@@ -25,6 +26,7 @@ const getTrybePreview = (text: string, totalLength = 65) => {
 
 export default function Trybes() {
   const { resetPopups, simplify } = useContext(contexto);
+  const [showDiscoverTrybe, setShowDiscoverTrybe] = useState(false);
 
   useEffect(() => {
     resetPopups();
@@ -52,6 +54,24 @@ export default function Trybes() {
                     {introParagraphs.map((paragraph) => (
                       <p key={paragraph}>{paragraph}</p>
                     ))}
+                  </div>
+
+                  <div className="mt-8 flex flex-col gap-3 border border-zinc-500/30 bg-black/45 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
+                    <div>
+                      <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/55">
+                        Teste narrativo
+                      </p>
+                      <p className="mt-2 max-w-2xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+                        Responda 10 situações inspiradas no material das tribos e descubra qual delas mais ecoa com seu jeito de agir.
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowDiscoverTrybe(true)}
+                      className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-5 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
+                    >
+                      Descubra sua tribo
+                    </button>
                   </div>
                 </div>
               </div>
@@ -118,20 +138,7 @@ export default function Trybes() {
         </main>
       </div>
       <Footer />
+      {showDiscoverTrybe && <DiscoverTrybePopup onClose={() => setShowDiscoverTrybe(false)} />}
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,11 +1,16 @@
 'use client'
-import contexto from "@/context/context";
-import { clearHistory } from "@/firebase/sessions";
-import { useContext } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import contexto from '@/context/context';
+import { clearHistory } from '@/firebase/sessions';
+import { useContext } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 export default function DeleteHistoric() {
   const { setShowDeleteHistoric, session, setShowMessage } = useContext(contexto);
+
+  const closePopup = () => {
+    setShowDeleteHistoric(false);
+  };
+
   const clearMessages = async () => {
     try {
       await clearHistory(session.id, setShowMessage);
@@ -15,37 +20,46 @@ export default function DeleteHistoric() {
     }
   };
 
-  return(
-    <div className="z-50 fixed top-0 left-0 w-full h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0">
-      <div className="w-full sm:w-2/3 md:w-1/2 overflow-y-auto flex flex-col justify-center items-center bg-black relative border-white border-2 pb-5">
-        <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
-          <IoIosCloseCircleOutline
-            className="text-4xl text-white cursor-pointer"
-            onClick={() => setShowDeleteHistoric(false) }
-          />
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
+      <div className="relative flex w-full max-w-2xl flex-col overflow-hidden border border-zinc-500/40 bg-zinc-950/85">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/wallpapers/128.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-black/90" />
+
+        <button
+          type="button"
+          onClick={closePopup}
+          className="absolute right-4 top-4 z-20 text-2xl text-white/70 transition-colors hover:text-red-400"
+          aria-label="Fechar limpeza de histórico"
+        >
+          <AiFillCloseCircle />
+        </button>
+
+        <div className="relative z-10 px-5 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-8">
+          <h2 className="mt-2 font-kingthings text-2xl sm:text-3xl">Limpar Histórico</h2>
+          <p className="mt-2 max-w-xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+            Tem certeza de que quer apagar todo o histórico deste chat? Tudo o que foi enviado pelos participantes será removido com esta ação.
+          </p>
         </div>
-        <div className="pb-5 px-5 w-full">
-          <label htmlFor="palavra-passe" className="flex flex-col items-center w-full">
-            <p className="text-white w-full text-center pb-3">
-              Tem certeza de que quer apagar TODO o histórico deste chat? Tudo o que foi enviado pelos participantes será apagado com esta ação!
-            </p>
-          </label>
-          <div className="flex w-full gap-2">
-            <button
-              type="button"
-              onClick={() => setShowDeleteHistoric(false) }
-              className={`text-white bg-red-800 hover:border-red-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-            >
-              Não
-            </button>
-            <button
-              type="button"
-              onClick={ clearMessages }
-              className={`text-white bg-green-whats hover:border-green-900 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold`}
-            >
-              Sim
-            </button>
-          </div>
+
+        <div className="relative z-10 flex gap-3 px-5 pb-5 sm:px-8 sm:pb-8">
+          <button
+            type="button"
+            onClick={closePopup}
+            className="inline-flex flex-1 items-center justify-center border border-zinc-600/50 bg-black/70 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-zinc-400/70"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            onClick={clearMessages}
+            className="inline-flex flex-1 items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
+          >
+            Limpar Histórico
+          </button>
         </div>
       </div>
     </div>

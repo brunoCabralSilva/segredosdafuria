@@ -1,7 +1,7 @@
 ﻿'use client'
 import { useContext, useEffect, useState } from 'react';
 import { BsCheckSquare } from 'react-icons/bs';
-import { FaCopy, FaFileDownload, FaRegEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaCopy, FaEraser, FaFileDownload, FaRegEdit, FaTrashAlt } from 'react-icons/fa';
 import dataTrybes from '../../data/trybes.json';
 import { addNewSheetMandatory, updateDataPlayer } from '@/firebase/players';
 import { cancelSheetLinkRequest, requestSheetLink } from '@/firebase/notifications';
@@ -26,7 +26,7 @@ import Touchstones from './touchstones';
 import Background from './background';
 import Rituals from '../rituals/rituals';
 import Nav from '../nav';
-import DraggablePopup from '../popup/draggablePopup';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 type SessionListItem = {
   id: string;
@@ -59,6 +59,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     dataSheet,
     setDataSheet,
     showResetSheet,
+    setShowResetSheet,
     showDeleteSheet,
     setShowDeleteSheet,
     setShowGiftRoll,
@@ -535,9 +536,14 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       <FaFileDownload className="text-base" />
                     </button>
                     {canDeleteSheet && (
-                      <button type="button" onClick={() => setShowDeleteSheet(true)} className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Excluir ficha">
-                        <FaTrashAlt className="text-base" />
-                      </button>
+                      <>
+                        <button type="button" onClick={() => setShowResetSheet(true)} className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Limpar ficha">
+                          <FaEraser className="text-base" />
+                        </button>
+                        <button type="button" onClick={() => setShowDeleteSheet(true)} className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Excluir ficha">
+                          <FaTrashAlt className="text-base" />
+                        </button>
+                      </>
                     )}
                     {isStandaloneSheetView && <Nav compact />}
                   </div>
@@ -804,36 +810,50 @@ export default function General(props: { dataSession: any; id: string; gameMaste
           <AdvantagesAndFlaws />
           <Touchstones />
       {chronicleTransferPrompt && (
-        <DraggablePopup
-          title="Transferencia de ficha"
-          description="Arraste este popup pela barra superior"
-          onClose={() => setChronicleTransferPrompt(null)}
-          sizeClassName="w-[calc(100vw-1.5rem)] sm:w-[50vw] h-[50vh]"
-        >
-          <div className="flex h-full min-h-0 flex-col justify-between gap-4">
-            <div className="border border-white/10 bg-black/82 p-4">
-              <p className="font-geist-mono text-[0.68rem] leading-relaxed tracking-[0.08em] text-zinc-200">
-                Deseja solicitar a transferencia desta ficha para a sessao {capitalizeFirstLetter(chronicleTransferPrompt.name)}?
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
+          <div className="relative flex w-full max-w-2xl flex-col overflow-hidden border border-zinc-500/40 bg-zinc-950/85">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/images/wallpapers/128.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/90" />
+
+            <button
+              type="button"
+              onClick={() => setChronicleTransferPrompt(null)}
+              className="absolute right-4 top-4 z-20 text-2xl text-white/70 transition-colors hover:text-red-400"
+              aria-label="Fechar transferência de ficha"
+            >
+              <AiFillCloseCircle />
+            </button>
+
+            <div className="relative z-10 flex w-full flex-col items-end px-5 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-8">
+              <h2 className="mt-2 w-full text-left font-kingthings text-xl">Transferência De Ficha</h2>
+              <p className="mt-2 w-full text-left font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+                Deseja solicitar a transferência desta ficha para a sessão {capitalizeFirstLetter(chronicleTransferPrompt.name)}?
               </p>
             </div>
-            <div className="mt-auto flex items-center justify-end gap-3 border-t border-white/10 pt-4">
-              <button
-                type="button"
-                onClick={() => setChronicleTransferPrompt(null)}
-                className="border border-zinc-700 bg-black px-3 py-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.14em] text-zinc-200 transition-colors hover:border-zinc-500"
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                onClick={confirmChronicleLink}
-                className="border border-red-700/60 bg-red-950 px-3 py-2 font-geist-mono text-[0.62rem] uppercase tracking-[0.14em] text-white transition-colors hover:bg-red-900"
-              >
-                Confirmar
-              </button>
+
+            <div className="relative z-10 flex flex-col gap-4 px-5 pb-6 sm:px-8 sm:pb-8">
+              <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-start">
+                <button
+                  type="button"
+                  onClick={() => setChronicleTransferPrompt(null)}
+                  className="inline-flex items-center justify-center border border-zinc-500/40 bg-black/60 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-white/40 hover:bg-black/80"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={confirmChronicleLink}
+                  className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
+                >
+                  Confirmar
+                </button>
+              </div>
             </div>
           </div>
-        </DraggablePopup>
+        </div>
       )}
           <Background type="background" />
           <Background type="notes" />
@@ -845,6 +865,11 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     </div>
   );
 }
+
+
+
+
+
 
 
 

@@ -1,16 +1,15 @@
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
 import { registerHistory } from "@/firebase/history";
-import { updateDataPlayer } from "@/firebase/players";
 import { updateSession } from "@/firebase/sessions";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { SpecialRollFrame, specialRollActionButtonClass, specialRollLabelClass } from "./specialRollShared";
 
 export default function AddPrinciple() {
   const [description, setDescription] = useState('');
-  const [listPrinciples, setListPrinciples] = useState({});
+  const [listPrinciples, setListPrinciples] = useState<any[]>([]);
   const {
     email,
     dataSheet,
@@ -25,8 +24,12 @@ export default function AddPrinciple() {
     if (addPrinciple.data.description) {
       setDescription(addPrinciple.data.description);
       setListPrinciples(session.principles.filter((principle: any) => principle.order !== addPrinciple.data.order));
+      return;
     }
-  }, []);
+
+    setDescription('');
+    setListPrinciples(session.principles || []);
+  }, [addPrinciple.data.description, addPrinciple.data.order, session.principles]);
 
   const createPrinciple = async () => {
     const auth = await authenticate(setShowMessage);
@@ -44,37 +47,40 @@ export default function AddPrinciple() {
       await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} ${addPrinciple.data.description ? ' atualizou' : ' adicionou'} um Princípio ${addPrinciple.data.description ? 'do' : 'ao' } personagem${dataSheet.data.name !== '' ? ` ${dataSheet.data.name}` : ''}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}.` : '.' }`, type: 'notification' }, null, setShowMessage);
     } else router.push('/login');
     setAddPrinciple({ show: false, data: {} });
-  }
+  };
 
-  return(
-    <div className="z-60 fixed top-0 left-0 w-full h-screen flex items-center justify-center bg-black/80 px-3 sm:px-0 text-white">
-      <div className="w-full sm:w-2/3 md:w-1/2 overflow-y-auto flex flex-col justify-center items-center bg-ritual bg-cover bg-center relative border-white border-2">
-        <div className="bg-black/90 h-full w-full">
-          <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
-            <IoIosCloseCircleOutline
-              className="text-4xl text-white cursor-pointer"
-              onClick={() => setAddPrinciple({ show: false, data: {} }) }
-            />
-          </div>
-          <div className="pb-5 px-5 w-full">
-            <p className="font-bold pb-1 pt-4">Descreva o Princípio</p>
-            <textarea
-              className="focus:outline-none text-white bg-black font-normal p-3 border-2 border-white w-full mr-1 mt-1"
-              value={ description }
-              onChange={(e) => {
-                const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
-                setDescription(sanitizedValue);
-              }}
-            />
+  const textareaClass = 'principles-scrollbar min-h-[180px] w-full resize-none border border-white/10 bg-black/75 px-3 py-2 font-geist-mono text-[10px] leading-5 tracking-[0.05em] text-white outline-none transition-colors placeholder:text-white/28 hover:border-red-700/70 focus:border-red-700/70';
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 px-3">
+      <div className="w-full max-w-md">
+        <SpecialRollFrame
+          title={addPrinciple.data.description ? 'Editar Princípio' : 'Adicionar Princípio'}
+          description="Princípios da crônica"
+          onClose={() => setAddPrinciple({ show: false, data: {} })}
+        >
+          <div className="flex flex-col gap-3">
+            <label className="flex flex-col gap-1.5">
+              <span className={specialRollLabelClass}>Descrição do Princípio</span>
+              <textarea
+                className={textareaClass}
+                value={description}
+                placeholder="Descreva o princípio que deve orientar esta crônica."
+                onChange={(e) => {
+                  const sanitizedValue = e.target.value.replace(/\s+/g, ' ');
+                  setDescription(sanitizedValue);
+                }}
+              />
+            </label>
             <button
               type="button"
-              onClick={ createPrinciple }
-              className="mt-2 mb-5 p-2 w-full text-center border-2 border-white text-white bg-black cursor-pointer font-bold hover:border-red-500 transition-colors"
+              onClick={createPrinciple}
+              className={`${specialRollActionButtonClass} bg-black text-white hover:border-red-800 hover:bg-[#190505]`}
             >
-              { addPrinciple.data.description ? 'Atualizar': 'Adicionar' } Princípio
+              {addPrinciple.data.description ? 'Atualizar Princípio' : 'Adicionar Princípio'}
             </button>
           </div>
-        </div>
+        </SpecialRollFrame>
       </div>
     </div>
   );

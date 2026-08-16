@@ -2,7 +2,7 @@
 import contexto from "@/context/context";
 import { updateSession } from "@/firebase/sessions";
 import { useContext, useMemo } from "react";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { SpecialRollFrame, specialRollActionButtonClass, specialRollLabelClass } from "./specialRollShared";
 
 const EMPTY_DELETE_STATE = { show: false, description: "", order: null as number | null };
 
@@ -81,46 +81,39 @@ export default function DeletePrinciple() {
     closePopup();
   };
 
-  return(
-    <div className="z-60 fixed top-0 left-0 flex h-screen w-full items-center justify-center bg-black/80 px-3 sm:px-0">
-      <div className="relative flex w-full flex-col items-center justify-center overflow-y-auto border-2 border-white bg-black pb-5 sm:w-2/3 md:w-1/2">
-        <div className="flex w-full justify-end px-2 pt-4 sm:pt-2">
-          <IoIosCloseCircleOutline
-            className="cursor-pointer text-4xl text-white"
-            onClick={closePopup}
-          />
-        </div>
-        <div className="w-full px-5 pb-5">
-          <label htmlFor="palavra-passe" className="flex w-full flex-col items-center">
-            <p className="w-full pb-3 text-center text-white">
-              Tem certeza de que quer apagar este principio?
-            </p>
-          </label>
-
-          {selectedPrinciple && (
-            <div className="border border-white/15 bg-black/70 px-4 py-3 font-geist-mono text-xs text-white/80">
-              {selectedPrinciple.description}
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 px-3">
+      <div className="w-full max-w-sm">
+        <SpecialRollFrame
+          title="Excluir Princípio"
+          description={selectedPrinciple?.description || 'Confirmação'}
+          onClose={closePopup}
+        >
+          <div className="flex flex-col gap-4">
+            <div className="px-3 py-1">
+              <p className="mt-2 font-geist-mono text-[10px] uppercase tracking-[0.06em] text-white/74">
+                Tem certeza de que quer apagar este princípio?
+              </p>
             </div>
-          )}
-
-          <div className="flex w-full gap-2">
-            <button
-              type="button"
-              onClick={closePopup}
-              className="mt-6 w-full cursor-pointer border-2 border-white bg-red-800 p-2 font-bold text-white transition-colors hover:border-red-900"
-            >
-              Nao
-            </button>
-            <button
-              type="button"
-              onClick={deletePrinciple}
-              className="mt-6 w-full cursor-pointer border-2 border-white bg-green-whats p-2 font-bold text-white transition-colors hover:border-green-900 disabled:cursor-not-allowed disabled:opacity-60"
-              disabled={!selectedPrinciple || !canDeleteSelectedPrinciple}
-            >
-              Sim
-            </button>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={closePopup}
+                className={`${specialRollActionButtonClass} mt-0 bg-black text-white hover:border-red-800 hover:bg-[#190505]`}
+              >
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={deletePrinciple}
+                className={`${specialRollActionButtonClass} mt-0 border-red-900/70 bg-[#2a0606] text-white hover:border-red-700 hover:bg-[#450808] disabled:cursor-not-allowed disabled:opacity-60`}
+                disabled={!selectedPrinciple || !canDeleteSelectedPrinciple}
+              >
+                Excluir Princípio
+              </button>
+            </div>
           </div>
-        </div>
+        </SpecialRollFrame>
       </div>
     </div>
   );

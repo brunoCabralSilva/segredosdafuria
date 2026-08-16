@@ -1,70 +1,131 @@
-'use client'
-import { useContext, useState } from "react";
+﻿'use client'
+
+import { updateBannerSession } from "@/firebase/sessions";
 import contexto from '@/context/context';
 import Image from 'next/image';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
-import { updateBannerSession } from "@/firebase/sessions";
+import { useContext, useMemo, useState } from "react";
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 export default function EditBannerSession() {
   const [image, setImage] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const { showBannerSession, setShowBannerSession, setShowMessage } = useContext(contexto);
 
+  const banners = useMemo(
+    () => Array.from({ length: 33 }, (_, index) => String(index + 1).padStart(2, '0')),
+    [],
+  );
+
+  const closePopup = () => {
+    setShowBannerSession({ show: false, sessionId: '' });
+  };
+
   const updtSession = async () => {
     if (image === '') {
-      setShowMessage({ show: true, text: 'Necessário selecionar uma imagem para a sua sessão'});
-    } else {
-      setLoading(true);
-      await updateBannerSession(
-        showBannerSession.sessionId,
-        image,
-        setShowMessage,
-      );
-      setLoading(false);
-      setShowBannerSession({ show: false, sessionId: '' });
+      setShowMessage({ show: true, text: 'Necessario selecionar uma imagem para a sua sessao' });
+      return;
     }
+
+    setLoading(true);
+    await updateBannerSession(
+      showBannerSession.sessionId,
+      image,
+      setShowMessage,
+    );
+    setLoading(false);
+    closePopup();
   };
-  
+
   return (
-    <div className="fixed top-0 left-0 h-screen bg-black bg-cover bg-top mb-2 w-full flex items-center justify-center z-50">
-      <div className="flex items-center justify-center flex-col w-full h-85vh bg-black">
-        <div className="w-full overflow-y-auto flex flex-col justify-start items-center mt-2 px-5 pb-10">
-          <div className="w-full text-white text-2xl pb-3 font-bold text-center mt-2 relative flex flex-col items-center justify-center">
-            <div className="pt-4 sm:pt-2 px-2 w-full flex justify-end top-0 right-0">
-              <IoIosCloseCircleOutline
-                className="text-4xl text-white cursor-pointer"
-                onClick={() => {
-                  setShowBannerSession({ show: false, sessionId: '' });
-              }}
-              />
-            </div>
-            <p className="text-white w-full pb-3">Selecione uma imagem para sua Sessão:</p>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
+      <div className="relative flex max-h-[92vh] w-full max-w-6xl flex-col overflow-hidden border border-zinc-500/40 bg-zinc-950/85">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/images/wallpapers/128.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-black/90" />
+
+        <button
+          type="button"
+          onClick={closePopup}
+          className="absolute right-4 top-4 z-20 text-2xl text-white/70 transition-colors hover:text-red-400"
+          aria-label="Fechar edição de banner"
+        >
+          <AiFillCloseCircle />
+        </button>
+
+        <div className="relative z-10 px-5 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-8">
+          <h2 className="mt-2 font-kingthings text-2xl sm:text-3xl">Editar Banner Da Sessão</h2>
+          <p className="mt-2 max-w-3xl font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+            Escolha uma arte para representar a sessão. A imagem selecionada será usada como banner principal nos detalhes da mesa.
+          </p>
+        </div>
+
+        <div className="relative z-10 flex flex-col gap-5 px-5 pb-6 sm:px-8 sm:pb-8">
+          <div className="flex items-center justify-between gap-3 border border-zinc-500/30 bg-black/45 px-4 py-3 font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/70">
+            <span>Banners disponíveis: {banners.length}</span>
+            <span>{image === '' ? 'Nenhum banner selecionado' : `Banner ${image} selecionado`}</span>
           </div>
-          <label className="flex flex-col items-center w-full mt-4">           
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full">
-              {
-                Array.from({ length: 33 }, (_, i) => (
-                  <Image
-                    key={i}
-                    src={`/images/sessions/${String(i + 1).padStart(2, '0')}.png`}
-                    onClick={ () => setImage(String(i + 1).padStart(2, '0')) }
-                    alt="Glifo de um lobo"
-                    className={`w-full h-32 relative object-cover object-center cursor-pointer border ${ String(i + 1).padStart(2, '0') === image ? 'border-white' : 'border-black'} ${image !== '' && image !== String(i + 1).padStart(2, '0') ? 'opacity-50' : 'opacity-1'} `}
-                    width={1000}
-                    height={1000}
-                  />
-                ))
-              }
+
+          <div className="principles-scrollbar max-h-[52vh] overflow-y-auto overflow-x-hidden border border-zinc-500/30 bg-black/45 p-3 sm:p-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {banners.map((banner) => {
+                const isSelected = banner === image;
+
+                return (
+                  <button
+                    key={banner}
+                    type="button"
+                    onClick={() => setImage(banner)}
+                    className={`group relative overflow-hidden border text-left transition-all duration-200 ${
+                      isSelected
+                        ? 'border-red-700 bg-black/60 shadow-[0_0_0_1px_rgba(185,28,28,0.45)]'
+                        : 'border-zinc-700/50 bg-black/35 hover:border-zinc-500/70'
+                    }`}
+                  >
+                    <Image
+                      src={`/images/sessions/${banner}.png`}
+                      alt={`Banner da sessao ${banner}`}
+                      className={`h-36 w-full object-cover object-center transition-all duration-200 sm:h-40 ${
+                        isSelected
+                          ? 'scale-[1.02] opacity-100'
+                          : 'opacity-75 group-hover:opacity-95'
+                      }`}
+                      width={1000}
+                      height={1000}
+                    />
+                    <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black via-black/80 to-transparent px-3 py-2 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white">
+                      <span>Banner {banner}</span>
+                      <span className={isSelected ? 'text-red-300' : 'text-white/60'}>
+                        {isSelected ? 'Selecionado' : 'Selecionar'}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-          </label>
-          <button
-            className="text-white bg-black hover:border-red-800 transition-colors cursor-pointer border-2 border-white w-full p-2 mt-6 font-bold"
-            onClick={ updtSession }
-          >
-            { loading ? 'Atualizando Imagem...' : 'Atualizar Imagem'}
-          </button>
+          </div>
+
+          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+            <button
+              type="button"
+              onClick={closePopup}
+              className="inline-flex items-center justify-center border border-zinc-500/40 bg-black/60 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-white/40 hover:bg-black/80"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              disabled={loading}
+              onClick={updtSession}
+              className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {loading ? 'Atualizando Imagem...' : 'Atualizar Imagem'}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
