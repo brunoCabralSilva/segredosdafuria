@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Footer from '@/components/footer';
 import { authenticate } from '@/firebase/authenticate';
@@ -6,6 +6,7 @@ import Simplify from '@/components/simplify';
 import MessageToUser from '@/components/dicesAndMessages/messageToUser';
 import VerifySession from '@/components/popup/verifySession';
 import CreateSection from '@/components/popup/createSection';
+import Info from '@/components/info';
 import contexto from '@/context/context';
 import { addNewSheetMandatory, getAllSheets } from '@/firebase/players';
 import { getSessions } from '@/firebase/sessions';
@@ -19,6 +20,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { IoIosInformationCircle } from 'react-icons/io';
 
 const menuItems = [
   { href: '/advantagesAndFlaws', label: 'VANTAGENS E DEFEITOS', image: '/images/wallpapers/45.jpg', position: 'top' },
@@ -83,6 +85,8 @@ export default function Home() {
     setDataSession,
     showCreateSession,
     setShowCreateSession,
+    showInfoSessions,
+    setShowInfoSessions,
     dataUser,
     setDataUser,
   } = useContext(contexto);
@@ -254,6 +258,7 @@ export default function Home() {
       {showMessage.show && <MessageToUser />}
       {dataSession.show && <VerifySession />}
       {showCreateSession && <CreateSection closeHref="/" />}
+      {showInfoSessions && <Info />}
 
       <header className={`relative flex h-screen w-full flex-col items-center justify-center bg-cover bg-top ${simplify ? 'bg-black' : 'bg-ritual'}`}>
         <div className="absolute h-full w-full bg-black/50" />
@@ -282,7 +287,7 @@ export default function Home() {
         <div className={`relative mt-4 flex w-full overflow-hidden bg-cover text-center text-white sm:mt-8 ${simplify ? 'border border-white/20 bg-black' : 'bg-06'}`}>
           <div className="absolute h-full w-full bg-black/70" />
           <p className="relative z-10 px-5 py-5 font-kingthings text-sm sm:text-base">
-            Convidamos você a uma jornada repleta de conhecimento ancestral, onde poderá desvendar as características únicas das tribos, augúrios, dons, rituais... enfim! Tudo existente na 5º Edição de Lobisomem: O Apocalipse.
+            Convidamos você a uma jornada repleta de conhecimento ancestral, onde poderá desvendar as características únicas das tribos, augúrios, dons, rituais... enfim! Tudo existente na 5ª Edição de Lobisomem: O Apocalipse.
           </p>
         </div>
 
@@ -339,7 +344,20 @@ export default function Home() {
         <div className="mt-8 w-full">
           <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <h2 className="font-kingthings text-lg sm:text-xl">Sessões</h2>
+              <div className="flex items-center gap-3">
+                <h2 className="font-kingthings text-lg sm:text-xl">Sessões</h2>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowInfoSessions(!showInfoSessions);
+                    setShowCreateSession(false);
+                  }}
+                  className="text-white/70 transition-colors hover:text-red-400"
+                  aria-label="Informações sobre sessões"
+                >
+                  <IoIosInformationCircle className="text-2xl sm:text-3xl" />
+                </button>
+              </div>
               <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
                 Entre em Sessões, acompanhe o chat, gerencie fichas e viva toda a crônica em um só lugar.
               </p>
@@ -582,3 +600,4 @@ export default function Home() {
     </main>
   );
 }
+

@@ -8,6 +8,7 @@ import Simplify from '@/components/simplify';
 import MessageToUser from '@/components/dicesAndMessages/messageToUser';
 import VerifySession from '@/components/popup/verifySession';
 import CreateSection from '@/components/popup/createSection';
+import Info from '@/components/info';
 import contexto from '@/context/context';
 import { addNewSheetMandatory, getSheetsByEmail } from '@/firebase/players';
 import { getAllSessionsByFunction, getSessions } from '@/firebase/sessions';
@@ -20,6 +21,7 @@ import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { IoIosInformationCircle } from 'react-icons/io';
 
 type ProfileSession = {
   id: string;
@@ -71,6 +73,8 @@ export default function Profile() {
     setDataUser,
     showCreateSession,
     setShowCreateSession,
+    showInfoSessions,
+    setShowInfoSessions,
   } = useContext(contexto);
 
   const getProfileUser = async () => {
@@ -236,6 +240,7 @@ export default function Profile() {
       {showMessage.show && <MessageToUser />}
       {dataSession.show && <VerifySession />}
       {showCreateSession && <CreateSection closeHref="/profile" />}
+      {showInfoSessions && <Info />}
       <Nav />
 
       <section className={`w-full ${simplify ? 'bg-black' : 'bg-ritual'} bg-cover bg-top`}>
@@ -261,7 +266,20 @@ export default function Profile() {
                 <div className="w-full">
                   <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                      <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é narrador</h2>
+                      <div className="flex items-center gap-3">
+                        <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é narrador</h2>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowInfoSessions(!showInfoSessions);
+                            setShowCreateSession(false);
+                          }}
+                          className="text-white/70 transition-colors hover:text-red-400"
+                          aria-label="Informações sobre sessões"
+                        >
+                          <IoIosInformationCircle className="text-2xl sm:text-3xl" />
+                        </button>
+                      </div>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
                         Acompanhe as mesas que estão sob sua condução e retome cada crônica com um clique.
                       </p>
@@ -362,7 +380,20 @@ export default function Profile() {
                 <div className="mt-10 w-full">
                   <div className="mb-4 flex flex-col gap-3 text-white sm:flex-row sm:items-end sm:justify-between">
                     <div>
-                      <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é jogador</h2>
+                      <div className="flex items-center gap-3">
+                        <h2 className="font-kingthings text-lg sm:text-xl">Sessões em que você é jogador</h2>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setShowInfoSessions(!showInfoSessions);
+                            setShowCreateSession(false);
+                          }}
+                          className="text-white/70 transition-colors hover:text-red-400"
+                          aria-label="Informações sobre sessões"
+                        >
+                          <IoIosInformationCircle className="text-2xl sm:text-3xl" />
+                        </button>
+                      </div>
                       <p className="mt-1 font-geist-mono text-[11px] text-white/75 sm:text-xs">
                         Encontre rapidamente as mesas em que seu personagem participa e siga a história de onde parou.
                       </p>
@@ -582,5 +613,6 @@ export default function Profile() {
     </main>
   );
 }
+
 
 

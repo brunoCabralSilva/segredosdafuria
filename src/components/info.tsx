@@ -1,7 +1,7 @@
 ﻿'use client'
 
 import contexto from "@/context/context";
-import { useRouter } from "next/navigation";
+
 import { useContext } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -191,7 +191,7 @@ function renderSection(section: GuideSection) {
 
 export default function Info() {
   const { setShowInfoSessions } = useContext(contexto);
-  const router = useRouter();
+
 
   return(
     <div className="fixed inset-0 z-[300] flex items-center justify-center px-3 py-4 text-white backdrop-blur-[3px] sm:px-5 sm:py-6">
@@ -214,7 +214,6 @@ export default function Info() {
             className="shrink-0 cursor-pointer"
             onClick={ () => {
               setShowInfoSessions(false);
-              router.push('/sessions');
             }}
             aria-label="Fechar guia"
           >
@@ -229,5 +228,7 @@ export default function Info() {
     </div>
   );
 }
+
+
 
 
