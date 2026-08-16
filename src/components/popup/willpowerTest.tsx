@@ -81,10 +81,7 @@ export default function WillpowerTest() {
     );
 
     const rollMessage = String(roll?.message || '').toLowerCase();
-    console.log('Roll Message' + rollMessage);
     const totalSuccesses = Number(roll?.brutalPairs || 0) + Number(roll?.criticalPairs || 0) + Number(roll?.success || 0);
-    console.log(totalSuccesses);
-    console.log(roll.dificulty);
     const failedWillpowerCheck = totalSuccesses < Number(roll?.dificulty || dificulty) || rollMessage.includes('falhou');
 
     console.log(failedWillpowerCheck);
@@ -119,15 +116,15 @@ export default function WillpowerTest() {
               Selecione a parada de dados
             </option>
             <option value={'restante - ' + (dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length)}>
-              Usar Forca de Vontade restante ({dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length})
+              Usar Força de Vontade restante ({dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length})
             </option>
             <option value={'total - ' + (dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve)}>
-              Usar Forca de Vontade total ({dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve})
+              Usar Força de Vontade total ({dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve})
             </option>
           </select>
         </label>
         <label htmlFor="willpower-penalty" className="mb-3 flex w-full flex-col items-center">
-          <p className={specialRollLabelClass}>Penalidade (-) ou Bonus (+)</p>
+          <p className={specialRollLabelClass}>Penalidade (-) ou Bônus (+)</p>
           <div className="flex w-full">
             <button
               type="button"
@@ -186,7 +183,7 @@ export default function WillpowerTest() {
         </label>
         {parsedWillpowerValue === '0' && (
           <div className="mt-2 text-center font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/65">
-            Voce nao possui Forca de Vontade disponivel para realizar este teste.
+            Voce nao possui Força de Vontade disponível para realizar este teste.
           </div>
         )}
         <button

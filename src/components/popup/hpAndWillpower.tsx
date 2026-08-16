@@ -146,7 +146,7 @@ export default function HpAndWillPower() {
     await updateDataPlayer(nextPlayer.id, nextPlayer, setShowMessage);
 
     const persistValue = formatTrackDamageSummary(nextTrack, name);
-    let namePtBr = "Forca de Vontade";
+    let namePtBr = "Força de Vontade";
     if (name === "health") namePtBr = "Vitalidade";
 
     await registerHistory(
@@ -374,7 +374,7 @@ export default function HpAndWillPower() {
             {selectedOwnedPlayer && (
               <div className="mt-3 ">
                 {renderTrackRow(
-                  "Forca de Vontade",
+                  "Força de Vontade",
                   <FaFire className="text-blue-400" />,
                   Array(Number(selectedOwnedPlayer.data.attributes.composure) + Number(selectedOwnedPlayer.data.attributes.resolve))
                     .fill("")
