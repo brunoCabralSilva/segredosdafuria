@@ -226,6 +226,7 @@ export default function Sessions() {
       {showMessage.show && <MessageToUser />}
       {dataSession.show && <VerifySession />}
       {showCreateSession && <CreateSection closeHref="/sessions" />}
+      {showInfoSessions && <Info />}
       <Nav />
 
       <section className="h-full w-full bg-black/90">
@@ -307,7 +308,7 @@ export default function Sessions() {
                 'Nenhuma sessão finalizada encontrada até o momento.',
               )}
 
-              {showInfoSessions && <Info />}
+
             </section>
           )}
         </div>
@@ -316,4 +317,5 @@ export default function Sessions() {
     </main>
   );
 }
+
 
