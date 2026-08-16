@@ -1,21 +1,31 @@
 ﻿'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
+import contexto from '@/context/context';
 import listTrybes from '@/data/trybes.json';
 import {
   calculateTrybeQuizResult,
   tribeQuizQuestionCount,
   tribeQuizQuestions,
   type TribeQuizAnswers,
+  type TribeQuizResultId,
 } from '@/data/trybeQuiz';
-import { useMemo, useState } from 'react';
+import {
+  registerTrybeQuizWinner,
+  type TrybeQuizScoreboardItem,
+} from '@/firebase/trybeQuiz';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 export default function DiscoverTrybePopup(props: { onClose: () => void }) {
   const { onClose } = props;
+  const { setShowMessage } = useContext(contexto);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<TribeQuizAnswers>({});
+  const [scoreboard, setScoreboard] = useState<TrybeQuizScoreboardItem[]>([]);
+  const [savingScoreboard, setSavingScoreboard] = useState(false);
+  const [hasRegisteredWinner, setHasRegisteredWinner] = useState(false);
 
   const isResultStep = currentQuestionIndex >= tribeQuizQuestionCount;
   const currentQuestion = tribeQuizQuestions[Math.min(currentQuestionIndex, tribeQuizQuestionCount - 1)];
@@ -26,10 +36,12 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
     return calculateTrybeQuizResult(answers);
   }, [answers, isResultStep]);
 
+  const topTrybeId = ranking[0]?.trybeId as TribeQuizResultId | undefined;
+
   const topTrybe = useMemo(() => {
-    if (!ranking[0]) return null;
-    return listTrybes.find((trybe) => trybe.nameEn === ranking[0].trybeId) || null;
-  }, [ranking]);
+    if (!topTrybeId) return null;
+    return listTrybes.find((trybe) => trybe.nameEn === topTrybeId) || null;
+  }, [topTrybeId]);
 
   const secondaryTrybes = useMemo(() => {
     return ranking
@@ -37,6 +49,25 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
       .map((item) => listTrybes.find((trybe) => trybe.nameEn === item.trybeId))
       .filter(Boolean);
   }, [ranking]);
+
+  const rankedScoreboard = useMemo(() => {
+    return [...scoreboard]
+      .map((item) => ({
+        ...item,
+        trybe: listTrybes.find((trybe) => trybe.nameEn === item.trybeId) || null,
+      }))
+      .sort((first, second) => {
+        if (second.total !== first.total) return second.total - first.total;
+        return String(first.trybe?.namePtBr || first.trybeId).localeCompare(
+          String(second.trybe?.namePtBr || second.trybeId),
+          'pt-BR',
+        );
+      });
+  }, [scoreboard]);
+
+  const totalQuizResults = useMemo(() => {
+    return scoreboard.reduce((total, item) => total + Number(item.total || 0), 0);
+  }, [scoreboard]);
 
   const progressPercentage = Math.round((Object.keys(answers).length / tribeQuizQuestionCount) * 100);
 
@@ -73,7 +104,40 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
   const resetQuiz = () => {
     setAnswers({});
     setCurrentQuestionIndex(0);
+    setScoreboard([]);
+    setSavingScoreboard(false);
+    setHasRegisteredWinner(false);
   };
+
+  useEffect(() => {
+    let ignore = false;
+
+    if (!isResultStep || !topTrybeId || hasRegisteredWinner) return;
+
+    const saveScoreboard = async () => {
+      try {
+        setSavingScoreboard(true);
+        const nextScoreboard = await registerTrybeQuizWinner(topTrybeId);
+        if (ignore) return;
+        setScoreboard(nextScoreboard);
+        setHasRegisteredWinner(true);
+      } catch (error: any) {
+        if (ignore) return;
+        setShowMessage({
+          show: true,
+          text: 'Ocorreu um erro ao salvar o resultado do teste de tribo: ' + (error?.message || error),
+        });
+      } finally {
+        if (!ignore) setSavingScoreboard(false);
+      }
+    };
+
+    void saveScoreboard();
+
+    return () => {
+      ignore = true;
+    };
+  }, [hasRegisteredWinner, isResultStep, setShowMessage, topTrybeId]);
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
@@ -102,7 +166,7 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
           </p>
         </div>
 
-        <div className="relative z-10  flex min-h-0 flex-1 flex-col gap-4 px-5 pb-6 sm:px-8 sm:pb-8">
+        <div className="relative z-10 flex min-h-0 flex-1 flex-col gap-4 px-5 pb-6 sm:px-8 sm:pb-8">
           {!isResultStep ? (
             <>
               <div className="border border-zinc-500/30 bg-black/45 px-4 py-4">
@@ -124,11 +188,10 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
                         <span
                           key={question.id}
                           className={`h-2 w-full ${isCurrent
-                              ? 'bg-red-600'
-                              : answered
-                                ? 'bg-white/70'
-                                : 'bg-white/15'
-                            }`}
+                            ? 'bg-red-600'
+                            : answered
+                              ? 'bg-white/70'
+                              : 'bg-white/15'}`}
                         />
                       );
                     })}
@@ -154,13 +217,13 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
                           type="button"
                           onClick={() => handleSelectOption(option.id)}
                           className={`border px-4 py-4 text-left transition-colors sm:px-5 ${isSelected
-                              ? 'border-red-700 bg-red-950/30'
-                              : 'border-zinc-500/30 bg-black/55 hover:border-zinc-300/40 hover:bg-black/70'
-                            }`}
+                            ? 'border-red-700 bg-red-950/30'
+                            : 'border-zinc-500/30 bg-black/55 hover:border-zinc-300/40 hover:bg-black/70'}`}
                         >
                           <div className="flex items-center gap-4">
-                            <span className={`flex h-8 w-8 shrink-0 items-center justify-center border font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] ${isSelected ? 'border-red-700 bg-red-950/60 text-white' : 'border-white/15 bg-black/70 text-white/70'
-                              }`}>
+                            <span className={`flex h-8 w-8 shrink-0 items-center justify-center border font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] ${isSelected
+                              ? 'border-red-700 bg-red-950/60 text-white'
+                              : 'border-white/15 bg-black/70 text-white/70'}`}>
                               {String.fromCharCode(65 + index)}
                             </span>
                             <div>
@@ -278,6 +341,42 @@ export default function DiscoverTrybePopup(props: { onClose: () => void }) {
                       <blockquote className="border-l border-red-700/70 pl-4 font-geist-mono text-sm leading-6 text-white/78">
                         {topTrybe.phrase}
                       </blockquote>
+
+                      <div className="border border-white/10 bg-black/60 px-4 py-4">
+                        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                          <p className="font-geist-mono text-[10px] uppercase tracking-[0.14em] text-white/55">
+                            Placar das tribos
+                          </p>
+                          <p className="font-geist-mono text-[10px] uppercase tracking-[0.14em] text-white/40">
+                            {savingScoreboard ? 'Atualizando placar...' : `${totalQuizResults} resultados registrados`}
+                          </p>
+                        </div>
+
+                        <div className="mt-3 grid gap-2">
+                          {rankedScoreboard.map((item, index) => (
+                            <div
+                              key={item.trybeId}
+                              className={`flex items-center justify-between border px-3 py-2 ${
+                                item.trybeId === topTrybeId
+                                  ? 'border-red-700/70 bg-red-950/30'
+                                  : 'border-white/10 bg-black/45'
+                              }`}
+                            >
+                              <div className="flex items-center gap-3">
+                                <span className="font-geist-mono text-[10px] uppercase tracking-[0.14em] text-white/45">
+                                  #{index + 1}
+                                </span>
+                                <span className="font-geist-mono text-xs text-white/82 sm:text-[13px]">
+                                  {item.trybe?.namePtBr || item.trybeId}
+                                </span>
+                              </div>
+                              <span className="font-geist-mono text-xs font-bold text-white sm:text-[13px]">
+                                {item.total}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
