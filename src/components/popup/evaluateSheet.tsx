@@ -78,26 +78,26 @@ export default function EvaluateSheet() {
     if (data.name.length === 0) {
       setName({
         correct: false,
-        errorMessage: 'Na aba "Geral" da Ficha de personagem, deve ser preenchido um Nome.',
+        errorMessage: 'Na Ficha de personagem, deve ser preenchido um Nome.',
       });
     } else setName({ correct: true, errorMessage: '' });
     //Verificação de Tribo
     if (data.trybe === '') {
       setTrybe({
         correct: false,
-        errorMessage: 'Na aba "Geral" da Ficha de personagem, deve ser selecionada uma Tribo.',
+        errorMessage: 'Na Ficha de personagem, deve ser selecionada uma Tribo.',
       });
     } else setTrybe({ correct: true, errorMessage: '' });
     //Verificação de Augúrio
     if (data.auspice === '') {
       setAuspice({
         correct: false,
-        errorMessage: 'Na aba "Geral" da Ficha de personagem, deve ser selecionado um Augúrio.',
+        errorMessage: 'Na Ficha de personagem, deve ser selecionado um Augúrio.',
       });
     } else setAuspice({ correct: true, errorMessage: '' });
     //Verificação de Rituais
     if (data.rituals.length !== 1) {
-      setRituals({ correct: false, errorMessage: 'Necessário navegar até a aba "Rituais" e adicionar 1 Ritual. Atualmente, você tem ' + data.rituals.length + '.'  });
+      setRituals({ correct: false, errorMessage: 'Necessário navegar até "Rituais" e adicionar 1 Ritual. Atualmente, você tem ' + data.rituals.length + '.'  });
     } else setRituals({ correct: true, errorMessage: '' });
     //Verificação de Touchstones
     if (data.touchstones.length < 1 || data.touchstones.length > 3) {
@@ -105,7 +105,7 @@ export default function EvaluateSheet() {
       if (data.touchstones.length === 0) {
         text = 'Não existem Pilares preenchidos. é necessário preencher de um a três deles.'
       } else {
-        text = 'Existem ' + data.touchstones.length + ' Pilares preenchidos. É necessário ir até a aba "Pilares" e preencher de um a três deles.'
+        text = 'Existem ' + data.touchstones.length + ' Pilares preenchidos. É necessário ir até "Pilares" e preencher de um a três deles.'
       }
       setTouchstone({ correct: false, errorMessage: text });
     } else setTouchstone({ correct: true, errorMessage: '' });
@@ -113,7 +113,7 @@ export default function EvaluateSheet() {
     if (data.background === '' || data.background === ' ') {
       setBackground({
         correct: false,
-        errorMessage: 'Na aba "Background", é necessário inserir uma história do personagem.',
+        errorMessage: 'Em "Background", é necessário inserir uma história do personagem.',
       });
     } else setBackground({ correct: true, errorMessage: '' });
 
@@ -129,25 +129,25 @@ export default function EvaluateSheet() {
 
     if (resolvedGifts.length !== 3) {
       let text = '';
-      if (resolvedGifts.length === 0) text = 'não existem DSons adicionados.'
+      if (resolvedGifts.length === 0) text = 'não existem Dons adicionados.'
       else if (resolvedGifts.length === 1) text = 'existe apenas 1 Dom adicionado.';
       else text = 'existem ' + resolvedGifts.length + ' Dons adicionados.'
-      setGifts({ correct: false, errorMessage: 'Necessário ir até a aba "Dons", clicar no botão "+" e adicionar 3: 1 Dom Nativo, 1 Dom do Augúrio e 1 Dom da Tribo. Atualmente, ' + text });
+      setGifts({ correct: false, errorMessage: 'Necessário ir até "Dons", clicar no botão "Gerenciar" e adicionar 3: 1 Dom Nativo, 1 Dom do Augúrio e 1 Dom da Tribo. Atualmente, ' + text });
     } else setGifts({ correct: true, errorMessage: '' });
 
     const findGlobals = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === 'global'));
     if (findGlobals.length === 0) {
-      setGiftsGlobal({ correct: false, errorMessage: 'Necessário navegar até a aba "Dons", clicar no botão "Gerenciar" e adicionar um Dom que pertenca a Dons Nativos.' });
+      setGiftsGlobal({ correct: false, errorMessage: 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que pertenca a Dons Nativos.' });
     } else setGiftsGlobal({ correct: true, errorMessage: '' });
 
     const findTrybe = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === data.trybe));
     if (findTrybe.length === 0) {
-      setGiftsTrybe({ correct: false, errorMessage: 'Necessário navegar até a aba "Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença à Tribo ' + capitalizeFirstLetter(data.trybe) + '.' });
+      setGiftsTrybe({ correct: false, errorMessage: 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença à Tribo ' + capitalizeFirstLetter(data.trybe) + '.' });
     } else setGiftsTrybe({ correct: true, errorMessage: '' });
 
     const findAuspice = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === data.auspice));
     if (findAuspice.length === 0) {
-      setGiftsAuspice({ correct: false, errorMessage: 'Necessário navegar até a aba "Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença ao Augúrio ' + capitalizeFirstLetter(data.auspice) + '.' });
+      setGiftsAuspice({ correct: false, errorMessage: 'Necessário navegar até Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença ao Augúrio ' + capitalizeFirstLetter(data.auspice) + '.' });
     } else setGiftsAuspice({ correct: true, errorMessage: '' });
   }
 
@@ -174,7 +174,7 @@ export default function EvaluateSheet() {
 
   const verifySkills = async (data: any) => {
     if (data.skills.type === '') {
-      setSkillsType({ correct: false, errorMessage: 'Necessário navegar até a aba "Habilidades" e selecionar o modelo de distribuição.' });
+      setSkillsType({ correct: false, errorMessage: 'Necessário navegar até "Habilidades" e selecionar o modelo de distribuição.' });
     } else {
       setSkillsType({ correct: true, errorMessage: '' });
       var countPlus = 0;
@@ -401,25 +401,25 @@ export default function EvaluateSheet() {
       //academics, craft, performance, science + more one
       if (data.skills.academics.value !== 0) {
         if (data.skills.academics.specialty === '') {
-          setSkillAcademics({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Acadêmicos". No campo de preenchimento, deve ser inserida uma Especialização.' });
+          setSkillAcademics({ correct: false, errorMessage: 'Necessário navegar até Habilidades e clicar no botão de edição da Habilidade "Acadêmicos". No campo de preenchimento, deve ser inserida uma Especialização.' });
         } else setSkillAcademics({ correct: true, errorMessage: '' });
       }
 
       if (data.skills.craft.value !== 0) {
         if (data.skills.craft.specialty === '') {
-          setSkillCraft({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Ofícios". No campo de preenchimento, deve ser inserida uma Especialização.' });
+          setSkillCraft({ correct: false, errorMessage: 'Necessário navegar até Habilidades e clicar no botão de edição da Habilidade "Ofícios". No campo de preenchimento, deve ser inserida uma Especialização.' });
         } else setSkillCraft({ correct: true, errorMessage: '' });
       }
 
       if (data.skills.performance.value !== 0) {
         if (data.skills.performance.specialty === '') {
-          setSkillPerformance({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Performance". No campo de preenchimento, deve ser inserida uma Especialização.' });
+          setSkillPerformance({ correct: false, errorMessage: 'Necessário navegar até Habilidades e clicar no botão de edição da Habilidade "Performance". No campo de preenchimento, deve ser inserida uma Especialização.' });
         } else setSkillPerformance({ correct: true, errorMessage: '' });
       }
 
       if (data.skills.science.value !== 0) {
         if (data.skills.science.specialty === '') {
-          setSkillScience({ correct: false, errorMessage: 'Necessário navegar até a aba Habilidades e clicar no botão de edição da Habilidade "Ciências". No campo de preenchimento, deve ser inserida uma Especialização.' });
+          setSkillScience({ correct: false, errorMessage: 'Necessário navegar até Habilidades e clicar no botão de edição da Habilidade "Ciências". No campo de preenchimento, deve ser inserida uma Especialização.' });
         } else setSkillScience({ correct: true, errorMessage: '' });
       }
       
@@ -436,7 +436,7 @@ export default function EvaluateSheet() {
           text = valueNonEmptySpecialty.join(', ') + ' e ' + lastItem;
           text += '" e apagar as Especializações das Habilidades citadas.';
         }
-        setSkillSpecialtyZero({ correct: false, errorMessage: 'Não é possível adicionar especializações em Habilidades com 0 pontos. Necessário navegar até a aba "Habilidades", clicar no botão de edição de "' + text });
+        setSkillSpecialtyZero({ correct: false, errorMessage: 'Não é possível adicionar especializações em Habilidades com 0 pontos. Necessário navegar "Habilidades", clicar no botão de edição de "' + text });
       } else setSkillSpecialtyZero({ correct: true, errorMessage: '' });
 
       const valueWithSpecialty: string[] = [];
@@ -485,27 +485,27 @@ export default function EvaluateSheet() {
     } else {
       if (count4 !== 1) {
         let text = '';
-        if (count4 === 1) text = 'Existe apenas Um atributo com 3 pontos. Na aba "Atributos", é necessário preencher Um atributo com este valor.';
-        else  text = 'Existem ' + count4 + ' atributos com 4 pontos. Na aba "Atributos", é necessário preencher Um atributo com este valor.';
+        if (count4 === 1) text = 'Existe apenas Um atributo com 3 pontos. Em "Atributos", é necessário preencher Um atributo com este valor.';
+        else  text = 'Existem ' + count4 + ' atributos com 4 pontos. Em "Atributos", é necessário preencher Um atributo com este valor.';
         setAttributes4({ correct: false, errorMessage: text });
       } else setAttributes4({ correct: true, errorMessage: '' });
       
       if (count3 !== 3) {
         let text = '';
-        if (count3 === 1) text = 'Existe apenas Um atributo com 3 pontos. Na aba "Atributos", é necessário preencher Três atributos com este valor.';
-        else  text = 'Existem ' + count3 + ' atributos com 3 pontos. Na aba "Atributos", é necessário preencher Três atributos com este valor.';
+        if (count3 === 1) text = 'Existe apenas Um atributo com 3 pontos. Em "Atributos", é necessário preencher Três atributos com este valor.';
+        else  text = 'Existem ' + count3 + ' atributos com 3 pontos. Em "Atributos", é necessário preencher Três atributos com este valor.';
         setAttributes3({ correct: false, errorMessage: text });
       } else setAttributes3({ correct: true, errorMessage: '' });
 
       if (count2 !== 4) {
         let text = '';
-        if (count2 === 1) text = 'Existe apenas Um atributo com 2 pontos. Na aba "Atributos", é necessário preencher Quatro atributos com este valor.';
-        else  text = 'Existem ' + count2 + ' atributos com 2 pontos. Na aba "Atributos", é necessário preencher Quatro atributos com este valor.';
+        if (count2 === 1) text = 'Existe apenas Um atributo com 2 pontos. Em "Atributos", é necessário preencher Quatro atributos com este valor.';
+        else  text = 'Existem ' + count2 + ' atributos com 2 pontos. Em "Atributos", é necessário preencher Quatro atributos com este valor.';
         setAttributes2({ correct: false, errorMessage: text });
       } else setAttributes2({ correct: true, errorMessage: '' });
 
       if (count1 !== 1) {
-        setAttributes1({ correct: false, errorMessage: 'Existem ' + count1 + ' atributos com 1 ponto. Na aba "Atributos", é necessário preencher apenas Um atributo com este valor.' });
+        setAttributes1({ correct: false, errorMessage: 'Existem ' + count1 + ' atributos com 1 ponto. Em "Atributos", é necessário preencher apenas Um atributo com este valor.' });
       } else setAttributes1({ correct: true, errorMessage: '' });
     }
   }
@@ -515,11 +515,11 @@ export default function EvaluateSheet() {
     if (sumRenown === 3) {
       setRenownSum({ correct: true, errorMessage: '' });
     } else {
-      setRenownSum({ correct: false, errorMessage: 'Necessário navegar até a aba "Geral" e preencher três pontos entre Honra, Glória e/ou Sabedoria. Atualmente, a soma dos pontos de Renome é ' + sumRenown + '.' });
+      setRenownSum({ correct: false, errorMessage: 'Necessário navegar até Renome e preencher três pontos entre Honra, Glória e/ou Sabedoria. Atualmente, a soma dos pontos de Renome é ' + sumRenown + '.' });
     }
 
     if (data.trybe === '') {
-      setRenownTrybe({ correct: false, errorMessage: 'Necessário navegar até a aba "Geral" e preencher uma Tribo para que este item seja avaliado.' });
+      setRenownTrybe({ correct: false, errorMessage: 'Necessário navegar até Renome e preencher uma Tribo para que este item seja avaliado.' });
     } else {
       let renownValue = { en: '', pb: '' };
       switch(data.trybe) {
@@ -569,7 +569,7 @@ export default function EvaluateSheet() {
           break;
       }
       if (Number(data[renownValue.en]) !==  2) {
-        setRenownTrybe({ correct: false, errorMessage: 'Necessário navegar até a aba "Geral" e preencher o renome relacionado ao patrono da sua tribo (' + renownValue.pb + ') com dois pontos.' });
+        setRenownTrybe({ correct: false, errorMessage: 'Necessário navegar até Renome e preenchê-lo de acordo com o padroeiro da sua tribo (' + renownValue.pb + ') com dois pontos.' });
       } else setRenownTrybe({ correct: true, errorMessage: ''});
     }
   }
@@ -581,10 +581,10 @@ export default function EvaluateSheet() {
     const sumAdvantages = loresheetsSum + advantagesSum + talensSum;
     const sumFlaws = data.advantagesAndFlaws.flaws.reduce((sum: any, item: any) => sum + item.cost, 0);
     if (sumAdvantages !== 7) {
-      setAdvantages({ correct: false, errorMessage: 'Na aba "Vantagens e Defeitos", é necessário preencher 7 pontos entre as Vantagens disponíveis (Méritos e Backgrounds, Loresheets e/ou Talismãs). Atualmente, ' + sumAdvantages + ' pontos foram preenchidos.' });
+      setAdvantages({ correct: false, errorMessage: 'Em "Vantagens e Defeitos", é necessário preencher 7 pontos entre as Vantagens disponíveis (Méritos e Backgrounds, Loresheets e/ou Talismãs). Atualmente, ' + sumAdvantages + ' pontos foram preenchidos.' });
     } else setAdvantages({ correct: true, errorMessage: '' });
     if (sumFlaws !== 2) {
-      setFlaws({ correct: false, errorMessage: 'Na aba "Vantagens e Defeitos", é necessário preencher 7 pontos entre as Vantagens disponíveis (Méritos e Backgrounds, Loresheets e/ou Talismãs). Atualmente, ' + sumFlaws + ' pontos foram preenchidos.' });
+      setFlaws({ correct: false, errorMessage: 'Em "Vantagens e Defeitos", é necessário preencher 7 pontos entre as Vantagens disponíveis (Méritos e Backgrounds, Loresheets e/ou Talismãs). Atualmente, ' + sumFlaws + ' pontos foram preenchidos.' });
     } else setFlaws({ correct: true, errorMessage: '' });
   }
 
