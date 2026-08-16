@@ -1,12 +1,14 @@
-import contexto from "@/context/context";
+﻿import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { FaFire, FaHeart } from "react-icons/fa6";
 import { GiFangs } from "react-icons/gi";
 import { IoIosClose } from "react-icons/io";
 
+const silverMarkerClassName =
+  "h-6 w-6 sm:h-3 sm:w-3 border border-red-300/70 bg-red-950/40 flex items-center justify-center cursor-pointer mr-1 mt-1 sm:mt-0";
 const aggravatedMarkerClassName =
   "h-6 w-6 sm:h-3 sm:w-3 border border-red-300/70 bg-red-950/30 flex items-center justify-center cursor-pointer mr-1 mt-1 sm:mt-0";
 const superficialMarkerClassName =
@@ -23,33 +25,13 @@ export default function PlayersPopup(props: { player: any }) {
   const { player } = props;
   const { session, setShowMessage, email } = useContext(contexto);
 
-  const updateValue = async (player: any, name: string, value: number) => {
-    const dataPersist = player.data[name].reduce((acc: any, item: any) => {
-      item.agravated ? acc.agravated += 1 : acc.letal += 1;
-      return acc;
-    }, { agravated: 0, letal: 0 });
-    const persistMessage = `Dano Agravado(${dataPersist.agravated}) e Dano Letal (${dataPersist.letal})`;
+  const updateValue = async (player: any, name: 'health' | 'willpower', value: number) => {
+    const currentTrack = Array.isArray(player.data?.[name]) ? player.data[name] : [];
+    const persistMessage = formatTrackDamageSummary(currentTrack, name);
+    player.data[name] = cycleTrackMarker(currentTrack, name, value);
 
-    if (player.data[name].length === 0) {
-      player.data[name] = [ { value, agravated: false }];
-    } else {
-      const itemAgravated = player.data[name].filter((item: any) => item.value === value && item.agravated === true);
-      const restOfList = player.data[name].filter((item: any) => item.value !== value);
-      if (itemAgravated.length > 0) {
-        player.data[name] = restOfList;
-      } else {
-        const itemLetal = player.data[name].filter((item: any) => item.value === value);
-        if (itemLetal.length === 0) {
-          player.data[name] = [ ...restOfList, { value, agravated: false }];
-        } else player.data[name] = [ ...restOfList, { value, agravated: true }];
-      }
-    }
     await updateDataPlayer(player.id, player, setShowMessage);
-    const newPersist = player.data[name].reduce((acc: any, item: any) => {
-      item.agravated ? acc.agravated += 1 : acc.letal += 1;
-      return acc;
-    }, { agravated: 0, letal: 0 });
-    const persistValue = `Dano Agravado(${newPersist.agravated}) e Dano Letal(${newPersist.letal})`;
+    const persistValue = formatTrackDamageSummary(player.data[name], name);
     let namePtBr = 'Força de Vontade';
     if (name === 'health') namePtBr = 'Vitalidade';
     await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(player.user)} alterou a ${namePtBr} do personagem ${player.data.name}${player.email !== email ? ` do jogador ${capitalizeFirstLetter(player.user)}` : '' } de ${persistMessage} para ${persistValue}.`, type: 'notification' }, null, setShowMessage);
@@ -101,9 +83,9 @@ export default function PlayersPopup(props: { player: any }) {
         <div className="flex items-center justify-end w-full">
             {
             Array(Number(player.data.attributes.composure) + Number(player.data.attributes.resolve)).fill('').map((item, index) => {
-                const willpowerMap: number[] = player.data.willpower.map((element: any) => element.value);
-                if (willpowerMap.includes(index + 1)) {
                 const filterPoint = player.data.willpower.find((ht: any) => ht.value === index + 1 && ht.agravated === true);
+                const hasPoint = player.data.willpower.some((element: any) => element.value === index + 1);
+                if (hasPoint) {
                 if (filterPoint) {
                     return (
                     <button
@@ -147,10 +129,25 @@ export default function PlayersPopup(props: { player: any }) {
             <div className="flex flex-wrap justify-end w-full">
             {
                 Array(returnTotalHealth(player)).fill('').map((item, index) => {
-                const healthMap: number[] = player.data.health.map((element: any) => element.value);
-                if (healthMap.includes(index + 1)) {
-                    const filterPoint = player.data.health.find((ht: any) => ht.value === index + 1 && ht.agravated === true);
-                    if (filterPoint) {
+                const marker = player.data.health.find((ht: any) => ht.value === index + 1);
+                if (marker?.silver) {
+                    return (
+                        <button
+                        type="button"
+                        onClick={ () => updateValue(player, 'health', index + 1) }
+                        key={index}
+                        className={silverMarkerClassName}
+                      >
+                        <span className="relative block h-3.5 w-3.5 sm:h-2 sm:w-2">
+                          <span className="absolute left-1/2 top-0 h-full w-[2px] sm:w-[1px] -translate-x-1/2 bg-red-300/80" />
+                          <span className="absolute left-0 top-1/2 h-[2px] w-full -translate-y-1/2 bg-red-300/80 sm:h-[1px]" />
+                          <span className="absolute left-1/2 top-0 h-full w-[2px] sm:w-[1px] -translate-x-1/2 rotate-45 bg-red-300/80" />
+                          <span className="absolute left-1/2 top-0 h-full w-[2px] sm:w-[1px] -translate-x-1/2 -rotate-45 bg-red-300/80" />
+                        </span>
+                      </button>
+                    );
+                }
+                if (marker?.agravated) {
                     return (
                         <button
                         type="button"
@@ -164,7 +161,8 @@ export default function PlayersPopup(props: { player: any }) {
                         </span>
                       </button>
                     );
-                    } return (
+                }
+                if (marker) return (
                     <button
                         type="button"
                         onClick={ () => updateValue(player, 'health', index + 1) }
@@ -174,7 +172,7 @@ export default function PlayersPopup(props: { player: any }) {
                       <span className="block h-4 w-[2px] sm:h-2 sm:w-[1px] rotate-45 bg-red-300/70" />
                     </button>
                     );
-                } return (
+                return (
                     <button
                         type="button"
                         onClick={ () => updateValue(player, 'health', index + 1) }
@@ -222,3 +220,4 @@ export default function PlayersPopup(props: { player: any }) {
     )
     return <div />
 }
+

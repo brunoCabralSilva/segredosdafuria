@@ -1,14 +1,17 @@
 ﻿'use client'
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
-import { rageCheck } from "@/firebase/messagesAndRolls";
+import { calculateRageChecks, registerMessage } from "@/firebase/messagesAndRolls";
 import { updateDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
-import { useContext } from "react";
+import { useContext, useMemo, useState } from "react";
+import { FaMinus, FaPlus } from "react-icons/fa6";
 import {
   openChatAfterSpecialRoll,
   SpecialRollFrame,
   specialRollActionButtonClass,
+  specialRollCounterButtonClass,
+  specialRollDisabledCounterButtonClass,
   specialRollLabelClass,
   specialRollValueClass,
 } from "./specialRollShared";
@@ -25,6 +28,9 @@ export default function RageTest() {
     setShowMenuSession,
     setOptionSelect,
   } = useContext(contexto);
+  const currentRage = Number(dataSheet?.data?.rage ?? 0);
+  const [numberOfRageTests, setNumberOfRageTests] = useState(currentRage > 0 ? 1 : 0);
+  const maxSelectableRage = useMemo(() => Math.max(0, currentRage), [currentRage]);
 
   const closePopup = () => {
     setShowRageTest(false);
@@ -46,8 +52,30 @@ export default function RageTest() {
   };
 
   const rollDices = async () => {
-    const rage = await rageCheck(session.typeSession, sessionId, email, sheetId, setShowMessage, dataSheet);
-    await updateValueAfterRageCheck(rage);
+    if (numberOfRageTests <= 0) {
+      setShowMessage({ show: true, text: 'Selecione ao menos um dado de Fúria para realizar a checagem.' });
+      return;
+    }
+
+    const rageResults = await calculateRageChecks(session.typeSession, sheetId, numberOfRageTests, setShowMessage);
+    if (!rageResults) return;
+
+    await registerMessage(
+      sessionId,
+      {
+        message: `Foi ${numberOfRageTests === 1 ? 'realizada uma Checagem' : 'realizado um conjunto de Checagens'} de Fúria para o personagem "${dataSheet.data.name}".`,
+        rollOfRage: rageResults.rollOfRage,
+        result: rageResults.result,
+        rage: rageResults.rage,
+        success: rageResults.success,
+        user: dataSheet.user,
+        type: 'rage-check',
+      },
+      email,
+      setShowMessage,
+    );
+
+    await updateValueAfterRageCheck(rageResults.rage);
     closePopup();
     openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
   };
@@ -59,16 +87,38 @@ export default function RageTest() {
       onClose={closePopup}
     >
       <div className="flex flex-col items-center">
-        <label htmlFor="rage-dice-pool" className="mb-3 flex w-full flex-col items-center">
-          <p className={specialRollLabelClass}>Parada de Dados</p>
-          <div id="rage-dice-pool" className={specialRollValueClass}>
-            1
+        <label htmlFor="rage-tests" className="mb-3 flex w-full flex-col items-center">
+          <p className={specialRollLabelClass}>Dados de Fúria</p>
+          <div className="flex w-full">
+            <button
+              type="button"
+              className={`${specialRollCounterButtonClass} ${numberOfRageTests <= 1 ? specialRollDisabledCounterButtonClass : ''}`}
+              onClick={() => {
+                if (numberOfRageTests > 1) setNumberOfRageTests(numberOfRageTests - 1);
+              }}
+              disabled={numberOfRageTests <= 1}
+            >
+              <FaMinus />
+            </button>
+            <div id="rage-tests" className={specialRollValueClass}>
+              {numberOfRageTests}
+            </div>
+            <button
+              type="button"
+              className={`${specialRollCounterButtonClass} ${numberOfRageTests >= maxSelectableRage ? specialRollDisabledCounterButtonClass : ''}`}
+              onClick={() => {
+                if (numberOfRageTests < maxSelectableRage) setNumberOfRageTests(numberOfRageTests + 1);
+              }}
+              disabled={numberOfRageTests >= maxSelectableRage}
+            >
+              <FaPlus />
+            </button>
           </div>
         </label>
         <label htmlFor="rage-current-value" className="mb-3 flex w-full flex-col items-center">
           <p className={specialRollLabelClass}>Furia Atual</p>
           <div id="rage-current-value" className={specialRollValueClass}>
-            {dataSheet?.data?.rage ?? 0}
+            {currentRage}
           </div>
         </label>
         <button

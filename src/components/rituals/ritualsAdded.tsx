@@ -59,7 +59,7 @@ export default function RitualsAdded(props: { ritual: any }) {
             </div>
           )}
           <div className="pt-1">
-            <span className="pr-1 uppercase tracking-[0.08em] text-white">DescriÃ§Ã£o:</span>
+            <span className="pr-1 uppercase tracking-[0.08em] text-white">Descrição:</span>
             <span className="whitespace-pre-wrap">{ritual.descriptionPtBr}</span>
           </div>
           {ritual.systemPtBr !== '' && (

@@ -24,7 +24,7 @@ export default function AddGift() {
   return (
     <ManageCollectionFrame
       title="Dons"
-      description="Gerencie os dons disponÃ­veis para a tribo, o augÃºrio e o total de renome do personagem ativo."
+      description="Gerencie os dons disponíveis para a tribo, o augúrio e o total de renome do personagem ativo."
       onClose={() => setShowGiftsToAdd(false)}
       sidebar={(
         <div className="principles-scrollbar h-full min-h-0 overflow-y-auto overflow-x-hidden border border-white/10 bg-black/55 p-4 pb-10">
@@ -32,7 +32,7 @@ export default function AddGift() {
             <div>
               <p className="font-kingthings text-base uppercase tracking-[0.18em] text-white">Dons Adicionados</p>
               <p className="mt-1 font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/65">
-                Itens atualmente vinculados Ã  ficha
+                Itens atualmente vinculados à ficha
               </p>
             </div>
             <span className="border border-red-950 bg-red-950 px-2 py-1 font-geist-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white">
@@ -70,13 +70,13 @@ export default function AddGift() {
             <div>
               <p className="font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/55">Tribo</p>
               <p className="mt-1 font-kingthings text-[0.82rem] uppercase tracking-[0.16em] text-white">
-                {dataSheet.data.trybe ? capitalizeFirstLetter(dataSheet.data.trybe) : 'NÃ£o definida'}
+                {dataSheet.data.trybe ? capitalizeFirstLetter(dataSheet.data.trybe) : 'Não definida'}
               </p>
             </div>
             <div>
-              <p className="font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/55">AugÃºrio</p>
+              <p className="font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/55">Augúrio</p>
               <p className="mt-1 font-kingthings text-[0.82rem] uppercase tracking-[0.16em] text-white">
-                {dataSheet.data.auspice ? capitalizeFirstLetter(dataSheet.data.auspice) : 'NÃ£o definido'}
+                {dataSheet.data.auspice ? capitalizeFirstLetter(dataSheet.data.auspice) : 'Não definido'}
               </p>
             </div>
             <div>
@@ -88,7 +88,7 @@ export default function AddGift() {
         <div className="principles-scrollbar h-full min-h-0 overflow-y-auto overflow-x-hidden border border-white/10 bg-black/55 p-3 pb-10 sm:p-4 sm:pb-10">
           {availableGifts.length === 0 ? (
             <div className="border border-white/10 bg-black/45 px-4 py-6 text-center font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/60">
-              Nenhum dom disponÃ­vel para os critÃ©rios atuais.
+              Nenhum dom disponível para os critérios atuais.
             </div>
           ) : (
             <div className="space-y-3 pb-10">

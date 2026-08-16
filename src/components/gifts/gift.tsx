@@ -72,13 +72,13 @@ export default function Gift(props: { gift: any; index: number; length: number }
       {showGift && (
         <div className="border-t border-white/10 px-4 py-4">
           <div className="space-y-2.5 font-geist-mono text-[11px] leading-5 text-white/75">
-            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">AÃ§Ã£o:</span><span>{gift.action}.</span></div>
+            <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Ação:</span><span>{gift.action}.</span></div>
             <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Renome:</span><span>{gift.renown}.</span></div>
             <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Custo:</span><span>{gift.cost}.</span></div>
             {gift.pool !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Checagem:</span><span>{gift.pool}.</span></div>}
-            <div className="border-t border-white/10 pt-2"><span className="pr-1 uppercase tracking-[0.08em] text-white">DescriÃ§Ã£o:</span><span className="whitespace-pre-wrap">{gift.descriptionPtBr}</span></div>
+            <div className="border-t border-white/10 pt-2"><span className="pr-1 uppercase tracking-[0.08em] text-white">Descrição:</span><span className="whitespace-pre-wrap">{gift.descriptionPtBr}</span></div>
             <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Sistema:</span><span className="whitespace-pre-wrap">{gift.systemPtBr}</span></div>
-            {gift.duration !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">DuraÃ§Ã£o:</span><span>{gift.duration}.</span></div>}
+            {gift.duration !== '' && <div><span className="pr-1 uppercase tracking-[0.08em] text-white">Duração:</span><span>{gift.duration}.</span></div>}
           </div>
           <button
             type="button"

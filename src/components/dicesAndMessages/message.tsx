@@ -38,12 +38,19 @@ export default function Message(props: { dataMessage: any, color: string }) {
   }
 
   const resultToRituals = (result: any) => {
-    if (result.criticalPairs == 0 && result.success > result.dificulty)
-      return'Obteve sucesso na Checagem';
-    else if ((result.criticalPairs + result.success) > result.dificulty)
-      return'Pode ter obtido sucesso na Checagem, mas haverão Complicações (Veja Sistema)';
-    else 'Falhou na Checagem e pode haver Complicações (Veja Sistema)';
-  }
+    console.log(result);
+    if (result.brutalPairs > 0) {
+      const totalSuccess = result.success + result.brutalPairs;
+
+      if (totalSuccess > result.dificulty) {
+        return 'Pode ter obtido sucesso na Checagem, mas haverão Complicações em consequência do Resultado Brutal (Veja Sistema)';
+      }
+      return 'Falhou no teste mediante a existência de um Resultado Brutal';
+    }
+
+    if (result.success > result.dificulty) return 'Obteve sucesso na Checagem';
+    return 'Falhou na Checagem';
+  };
   
 	switch(dataMessage.type) {
     case 'notification':

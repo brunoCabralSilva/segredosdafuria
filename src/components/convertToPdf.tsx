@@ -239,13 +239,32 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
               : usePreviewPdfLayout
                 ? 'h-5 w-5'
                 : 'h-6 w-6';
+            const lineClass = isExportMode
+              ? 'w-[2px]'
+              : usePreviewPdfLayout
+                ? 'w-[1px]'
+                : 'w-[2px]';
+            const innerSizeClass = isExportMode
+              ? 'h-4 w-4'
+              : usePreviewPdfLayout
+                ? 'h-3.5 w-3.5'
+                : 'h-4 w-4';
 
             return (
               <button
                 type="button"
                 key={index}
-                className={`${sizeClass} border border-black !border-solid ${fillClass}`}
-              />
+                className={`${sizeClass} border border-black !border-solid ${fillClass} flex items-center justify-center`}
+              >
+                {name === 'health' && point?.silver && (
+                  <span className={`relative block ${innerSizeClass}`}>
+                    <span className={`absolute left-1/2 top-0 h-full ${lineClass} -translate-x-1/2 bg-white`} />
+                    <span className={`absolute left-0 top-1/2 w-full ${isExportMode ? 'h-[2px]' : usePreviewPdfLayout ? 'h-[1px]' : 'h-[2px]'} -translate-y-1/2 bg-white`} />
+                    <span className={`absolute left-1/2 top-0 h-full ${lineClass} -translate-x-1/2 rotate-45 bg-white`} />
+                    <span className={`absolute left-1/2 top-0 h-full ${lineClass} -translate-x-1/2 -rotate-45 bg-white`} />
+                  </span>
+                )}
+              </button>
             );
           })
         }
@@ -882,6 +901,8 @@ export default function ConvertToPdf(props: { data: any, preview?: boolean }) {
     </div>
   );
 };
+
+
 
 
 

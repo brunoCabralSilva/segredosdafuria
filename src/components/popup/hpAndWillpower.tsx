@@ -2,7 +2,7 @@
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { getAllPlayersBySessionId, updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
+import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { FaFire, FaHeart } from "react-icons/fa6";
 import { GiD10, GiFangs } from "react-icons/gi";
@@ -17,6 +17,8 @@ const playerRowClassName =
   "flex items-center justify-between gap-3 text-left last:border-b-0";
 const playerDieButtonClassName =
   "flex h-8 w-8 shrink-0 items-center justify-center text-xl text-white/80 transition-colors duration-500 hover:text-red-700/80 hover:text-white";
+const silverMarkerClassName =
+  "h-4 w-4 border border-red-300/70 bg-red-950/40 flex items-center justify-center cursor-pointer";
 const aggravatedMarkerClassName =
   "h-4 w-4 border border-red-300/70 bg-red-950/30 flex items-center justify-center cursor-pointer";
 const superficialMarkerClassName =
@@ -129,32 +131,8 @@ export default function HpAndWillPower() {
     const currentTrack = Array.isArray(selectedOwnedPlayer.data?.[name])
       ? selectedOwnedPlayer.data[name]
       : [];
-    const dataPersist = currentTrack.reduce((acc: any, item: any) => {
-      item.agravated ? (acc.agravated += 1) : (acc.letal += 1);
-      return acc;
-    }, { agravated: 0, letal: 0 });
-    const persistMessage = `Dano Agravado(${dataPersist.agravated}) e Dano Letal (${dataPersist.letal})`;
-
-    let nextTrack = [...currentTrack];
-
-    if (nextTrack.length === 0) {
-      nextTrack = [{ value, agravated: false }];
-    } else {
-      const itemAgravated = nextTrack.filter(
-        (item: any) => item.value === value && item.agravated === true
-      );
-      const restOfList = nextTrack.filter((item: any) => item.value !== value);
-
-      if (itemAgravated.length > 0) {
-        nextTrack = restOfList;
-      } else {
-        const itemLetal = nextTrack.filter((item: any) => item.value === value);
-        nextTrack =
-          itemLetal.length === 0
-            ? [...restOfList, { value, agravated: false }]
-            : [...restOfList, { value, agravated: true }];
-      }
-    }
+    const persistMessage = formatTrackDamageSummary(currentTrack, name);
+    const nextTrack = cycleTrackMarker(currentTrack, name, value);
 
     const nextPlayer = {
       ...selectedOwnedPlayer,
@@ -167,11 +145,7 @@ export default function HpAndWillPower() {
     syncPlayerState(nextPlayer);
     await updateDataPlayer(nextPlayer.id, nextPlayer, setShowMessage);
 
-    const newPersist = nextTrack.reduce((acc: any, item: any) => {
-      item.agravated ? (acc.agravated += 1) : (acc.letal += 1);
-      return acc;
-    }, { agravated: 0, letal: 0 });
-    const persistValue = `Dano Agravado(${newPersist.agravated}) e Dano Letal(${newPersist.letal})`;
+    const persistValue = formatTrackDamageSummary(nextTrack, name);
     let namePtBr = "Forca de Vontade";
     if (name === "health") namePtBr = "Vitalidade";
 
@@ -246,6 +220,24 @@ export default function HpAndWillPower() {
     if (!selectedOwnedPlayer) return null;
 
     const marker = selectedOwnedPlayer.data[name].find((element: any) => element.value === index + 1);
+
+    if (name === "health" && marker?.silver) {
+      return (
+        <button
+          type="button"
+          onClick={() => updateTrackValue(name, index + 1)}
+          key={`${name}-${index}`}
+          className={silverMarkerClassName}
+        >
+          <span className="relative block h-2.5 w-2.5">
+            <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 bg-red-300/80" />
+            <span className="absolute left-0 top-1/2 h-[1px] w-full -translate-y-1/2 bg-red-300/80" />
+            <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 rotate-45 bg-red-300/80" />
+            <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 -rotate-45 bg-red-300/80" />
+          </span>
+        </button>
+      );
+    }
 
     if (marker?.agravated) {
       return (
@@ -459,6 +451,8 @@ export default function HpAndWillPower() {
     </div>
   );
 }
+
+
 
 
 

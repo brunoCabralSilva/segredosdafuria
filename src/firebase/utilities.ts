@@ -23,6 +23,66 @@ export const parseDate = (dateStr: string): Date => {
   return new Date(year, month - 1, day, hours, minutes, seconds);
 };
 
+const sortTrackByValue = (track: any[] = []) => {
+  return [...track].sort((first, second) => Number(first?.value || 0) - Number(second?.value || 0));
+};
+
+export const cycleTrackMarker = (
+  track: any[] = [],
+  name: 'health' | 'willpower',
+  value: number,
+) => {
+  const currentTrack = Array.isArray(track) ? track : [];
+  const currentMarker = currentTrack.find((item: any) => Number(item?.value) === value);
+  const restOfList = currentTrack.filter((item: any) => Number(item?.value) !== value);
+
+  if (!currentMarker) {
+    return sortTrackByValue([...restOfList, { value, agravated: false }]);
+  }
+
+  if (name === 'health') {
+    if (currentMarker?.silver) return sortTrackByValue(restOfList);
+    if (currentMarker?.agravated) {
+      return sortTrackByValue([...restOfList, { value, agravated: true, silver: true }]);
+    }
+    return sortTrackByValue([...restOfList, { value, agravated: true }]);
+  }
+
+  if (currentMarker?.agravated) return sortTrackByValue(restOfList);
+  return sortTrackByValue([...restOfList, { value, agravated: true }]);
+};
+
+export const getTrackDamageSummary = (
+  track: any[] = [],
+  name: 'health' | 'willpower',
+) => {
+  const currentTrack = Array.isArray(track) ? track : [];
+
+  return currentTrack.reduce((acc: any, item: any) => {
+    if (name === 'health' && item?.silver) {
+      acc.silver += 1;
+      return acc;
+    }
+
+    if (item?.agravated) acc.agravated += 1;
+    else acc.superficial += 1;
+    return acc;
+  }, { agravated: 0, silver: 0, superficial: 0 });
+};
+
+export const formatTrackDamageSummary = (
+  track: any[] = [],
+  name: 'health' | 'willpower',
+) => {
+  const summary = getTrackDamageSummary(track, name);
+
+  if (name === 'health') {
+    return `Dano de Prata(${summary.silver}), Dano Agravado(${summary.agravated}) e Dano Superficial(${summary.superficial})`;
+  }
+
+  return `Dano Agravado(${summary.agravated}) e Dano Superficial(${summary.superficial})`;
+};
+
 const giftCatalog = Array.isArray(dataGifts) ? dataGifts : [];
 const giftCatalogById = new Map(giftCatalog.map((gift: any) => [String(gift.id), gift]));
 const ritualCatalog = Array.isArray(dataRituals) ? dataRituals : [];
@@ -325,4 +385,5 @@ export const translate = (str: string): string => {
     default: return str;
   }
 }
+
 

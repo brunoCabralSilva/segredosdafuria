@@ -1,8 +1,8 @@
-'use client'
+﻿'use client'
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary } from "@/firebase/utilities";
 import { usePathname } from "next/navigation";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { GiD10 } from "react-icons/gi";
@@ -41,7 +41,7 @@ export default function ItemAgravated(props: any) {
           if (sheetData.form === 'Crinos') return Math.max(0, currentValue - 4);
 
           if (sheetData.form === 'Hispo' || sheetData.form === 'Glabro') {
-            return Math.max(0, currentValue - (hasAdvantage('Resiliêia de Luna') ? 4 : 2));
+            return Math.max(0, currentValue - (hasAdvantage('Resiliência de Luna') ? 4 : 2));
           }
 
           return currentValue;
@@ -67,32 +67,12 @@ export default function ItemAgravated(props: any) {
 
   const updateValue = async (value: number) => {
     if (dataSheet) {
-      const dataPersist = dataSheet.data[name].reduce((acc: any, item: any) => {
-        item.agravated ? (acc.agravated += 1) : (acc.letal += 1);
-        return acc;
-      }, { agravated: 0, letal: 0 });
-      const persistMessage = `Dano Agravado(${dataPersist.agravated}) e Dano Letal (${dataPersist.letal})`;
-
-      if (dataSheet.data[name].length === 0) {
-        dataSheet.data[name] = [{ value, agravated: false }];
-      } else {
-        const itemAgravated = dataSheet.data[name].filter((item: any) => item.value === value && item.agravated === true);
-        const restOfList = dataSheet.data[name].filter((item: any) => item.value !== value);
-        if (itemAgravated.length > 0) {
-          dataSheet.data[name] = restOfList;
-        } else {
-          const itemLetal = dataSheet.data[name].filter((item: any) => item.value === value);
-          if (itemLetal.length === 0) dataSheet.data[name] = [...restOfList, { value, agravated: false }];
-          else dataSheet.data[name] = [...restOfList, { value, agravated: true }];
-        }
-      }
+      const currentTrack = Array.isArray(dataSheet.data?.[name]) ? dataSheet.data[name] : [];
+      const persistMessage = formatTrackDamageSummary(currentTrack, name);
+      dataSheet.data[name] = cycleTrackMarker(currentTrack, name, value);
 
       await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-      const newPersist = dataSheet.data[name].reduce((acc: any, item: any) => {
-        item.agravated ? (acc.agravated += 1) : (acc.letal += 1);
-        return acc;
-      }, { agravated: 0, letal: 0 });
-      const persistValue = `Dano Agravado(${newPersist.agravated}) e Dano Letal(${newPersist.letal})`;
+      const persistValue = formatTrackDamageSummary(dataSheet.data[name], name);
       await registerHistory(
         session.id,
         {
@@ -130,6 +110,24 @@ export default function ItemAgravated(props: any) {
 
     if (isSheetStandalone) {
       return <button type="button" key={index} className="h-5 w-5 cursor-default border border-red-300/45 bg-red-950/30" />;
+    }
+
+    if (name === 'health' && marker?.silver) {
+      return (
+        <button
+          type="button"
+          onClick={() => updateValue(index + 1)}
+          key={index}
+          className={`${markerBaseClassName} cursor-pointer border-red-300/70 bg-red-950/40`}
+        >
+          <span className="relative block h-3.5 w-3.5">
+            <span className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 bg-red-300/80" />
+            <span className="absolute left-0 top-1/2 h-[2px] w-full -translate-y-1/2 bg-red-300/80" />
+            <span className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 rotate-45 bg-red-300/80" />
+            <span className="absolute left-1/2 top-0 h-full w-[2px] -translate-x-1/2 -rotate-45 bg-red-300/80" />
+          </span>
+        </button>
+      );
     }
 
     if (marker?.agravated) {
@@ -203,12 +201,41 @@ export default function ItemAgravated(props: any) {
         {name === 'health' && (
           <>
             <div className="mt-4 font-geist-mono text-[0.58rem] uppercase tracking-[0.24em] text-zinc-500">{getHealthSummary()}</div>
+            {!isSheetStandalone && (
+              <div className="px-6 gap-1 w-full mt-4 flex flex-col items-start justify-center font-geist-mono text-[0.5rem] uppercase tracking-[0.18em] text-zinc-500">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-4 w-4 items-center justify-center border border-red-300/70 bg-black/20">
+                    <span className="block h-3 w-[1px] rotate-45 bg-red-300/70" />
+                  </span>
+                  <span>Superficial</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="flex h-4 w-4 items-center justify-center border border-red-300/70 bg-red-950/30">
+                    <span className="relative block h-2.5 w-2.5">
+                      <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 rotate-45 bg-red-300/70" />
+                      <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 -rotate-45 bg-red-300/70" />
+                    </span>
+                  </span>
+                  <span>Agravado</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="flex h-4 w-4 items-center justify-center border border-red-300/70 bg-red-950/40">
+                    <span className="relative block h-2.5 w-2.5">
+                      <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 bg-red-300/80" />
+                      <span className="absolute left-0 top-1/2 h-[1px] w-full -translate-y-1/2 bg-red-300/80" />
+                      <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 rotate-45 bg-red-300/80" />
+                      <span className="absolute left-1/2 top-0 h-full w-[1px] -translate-x-1/2 -rotate-45 bg-red-300/80" />
+                    </span>
+                  </span>
+                  <span>Prata</span>
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>
     </section>
   );
 }
-
 
 

@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter, getOfficialTimeBrazil, translate } from "./utilities";
+﻿import { capitalizeFirstLetter, getOfficialTimeBrazil, translate } from "./utilities";
 import firebaseConfig from "./connection";
 import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
@@ -349,18 +349,23 @@ export const calculateRageChecks = async(typeSession: string, sheetId: string, n
         let resultOfRage = [];
         let success = 0;
         for (let i = 0; i < number; i += 1) {
-        const value = Math.floor(Math.random() * 10) + 1;
+          const value = Math.floor(Math.random() * 10) + 1;
           if (value >= 6) success += 1;
           resultOfRage.push(value);
         }
+        const failedChecks = number - success;
+        player.data.rage += failedChecks;
+        if (player.data.rage > 5) player.data.rage = 5;
+
         let text = '';
-        if (success === number)
-          text = 'Obteve sucesso em todas as Checagens de Fúria. A fúria foi mantida.';
-        else {
-          if (success === 0) text = `Não obteve sucesso em nenhuma Checagem de Fúria. A Fúria foi aumentada para ${(player.data.rage)}${player.data.rage >= 5 ? ' (o Personagem entrou em Frenesi)' : ''}.`;
-          else text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nas Checagens de Fúria e ${(number - success)} ${number - success === 1 ? 'falha': 'falhas.'}`;
+        if (success === number) {
+          text = 'Obteve sucesso em todas as Checagens de Fúria. A Fúria foi mantida.';
+        } else if (success === 0) {
+          text = `Não obteve sucesso em nenhuma Checagem de Fúria. A Fúria foi aumentada para ${player.data.rage}${player.data.rage >= 5 ? ' (o Personagem entrou em Frenesi)' : ''}.`;
+        } else {
+          text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nas Checagens de Fúria e ${failedChecks} ${failedChecks === 1 ? 'falha' : 'falhas'}. A Fúria agora está em ${player.data.rage}${player.data.rage >= 5 ? ' (o Personagem entrou em Frenesi)' : ''}.`;
         }
-        player.data.rage += (number - success);
+
         return({
           message: number === 1 ? 'Foi realizada uma Checagem de Fúria.' : 'Foi realizado um conjunto de Checagens de Fúria.',
           rollOfRage: resultOfRage,
@@ -376,18 +381,22 @@ export const calculateRageChecks = async(typeSession: string, sheetId: string, n
         let resultOfRage = [];
         let success = 0;
         for (let i = 0; i < number; i += 1) {
-        const value = Math.floor(Math.random() * 10) + 1;
+          const value = Math.floor(Math.random() * 10) + 1;
           if (value >= 6) success += 1;
           resultOfRage.push(value);
         }
+        const failedChecks = number - success;
+        player.data.rage -= failedChecks;
+
         let text = '';
-        if (success === number)
+        if (success === number) {
           text = 'Obteve sucesso em todas as Checagens de Fúria. A Fúria foi mantida.';
-        else {
-          if (success === 0) text = `Não obteve sucesso em nenhuma Checagem de Fúria. A Fúria foi reduzida para ' + ${(player.data.rage)}.`;
-          else text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nas Checagens de Fúria e ${(number - success)} ${number - success === 1 ? 'falha': 'falhas.'}`;
+        } else if (success === 0) {
+          text = `Não obteve sucesso em nenhuma Checagem de Fúria. A Fúria foi reduzida para ${player.data.rage}.`;
+        } else {
+          text = `Obteve ${success} ${success === 1 ? 'sucesso' : 'sucessos'} nas Checagens de Fúria e ${failedChecks} ${failedChecks === 1 ? 'falha' : 'falhas'}. A Fúria agora está em ${player.data.rage}.`;
         }
-        player.data.rage -= (number - success);
+
         return({
           message: number === 1 ? 'Foi realizada uma Checagem de Fúria.' : 'Foi realizado um conjunto de Checagens de Fúria.',
           rollOfRage: resultOfRage,
@@ -399,7 +408,6 @@ export const calculateRageChecks = async(typeSession: string, sheetId: string, n
     }
   }
 }
-
 export const haranoHaugloskCheck = async(
 	sessionId: string,
 	type: string,

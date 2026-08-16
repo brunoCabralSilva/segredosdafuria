@@ -22,7 +22,7 @@ export default function Gifts() {
             if (sheetData.trybe !== '' && sheetData.auspice !== '' && totalRenown >= 3) {
               setShowGiftsToAdd(true);
             } else {
-              setShowMessage({ show: true, text: 'Antes de adicionar um dom, Ã© necessÃ¡rio preencher uma Tribo, um AugÃºrio e pelo menos trÃªs pontos em Renomes' });
+              setShowMessage({ show: true, text: 'Antes de adicionar um dom, é necessário preencher uma Tribo, um Augúrio e pelo menos trás pontos em Renomes' });
             }
           }}
           className="sheet-readonly-action inline-flex p-2 font-geist-mono text-[9px] items-center justify-center border border-red-950 bg-red-950 text-white transition-colors hover:bg-red-900 uppercase"
