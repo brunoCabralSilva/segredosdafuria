@@ -1,4 +1,4 @@
-﻿import dataGifts from '../data/gifts.json';
+import dataGifts from '../data/gifts.json';
 import dataRituals from '../data/rituals.json';
 
 export const getOfficialTimeBrazil = async () => {
@@ -81,6 +81,75 @@ export const formatTrackDamageSummary = (
   }
 
   return `Dano Agravado(${summary.agravated}) e Dano Superficial(${summary.superficial})`;
+};
+
+export const addWillpowerDamage = (
+  track: any[] = [],
+  composure: number,
+  resolve: number,
+) => {
+  const totalWillpower = Number(composure || 0) + Number(resolve || 0);
+  const currentTrack = Array.isArray(track) ? [...track] : [];
+
+  if (totalWillpower <= 0) {
+    return {
+      updatedTrack: sortTrackByValue(currentTrack),
+      applied: false,
+      agravated: false,
+    };
+  }
+
+  const shouldApplyAgravated = totalWillpower - currentTrack.length < 0;
+
+  if (currentTrack.length === 0) {
+    return {
+      updatedTrack: sortTrackByValue([{ value: 1, agravated: shouldApplyAgravated }]),
+      applied: true,
+      agravated: shouldApplyAgravated,
+    };
+  }
+
+  const agravatedValues = currentTrack
+    .filter((item: any) => item?.agravated === true)
+    .map((item: any) => Number(item?.value));
+  const superficialValues = currentTrack
+    .filter((item: any) => item?.agravated === false)
+    .map((item: any) => Number(item?.value));
+  const allValues = Array.from({ length: totalWillpower }, (_, index) => index + 1);
+  const missingInBoth = allValues.filter(
+    (value) => !agravatedValues.includes(value) && !superficialValues.includes(value),
+  );
+
+  if (missingInBoth.length > 0) {
+    const smallestNumber = Math.min(...missingInBoth);
+    return {
+      updatedTrack: sortTrackByValue([
+        ...currentTrack,
+        { value: smallestNumber, agravated: shouldApplyAgravated },
+      ]),
+      applied: true,
+      agravated: shouldApplyAgravated,
+    };
+  }
+
+  const missingInAgravated = allValues.filter((value) => !agravatedValues.includes(value));
+  if (missingInAgravated.length > 0) {
+    const smallestNumber = Math.min(...missingInAgravated);
+    return {
+      updatedTrack: sortTrackByValue([
+        ...currentTrack,
+        { value: smallestNumber, agravated: true },
+      ]),
+      applied: true,
+      agravated: true,
+    };
+  }
+
+  return {
+    updatedTrack: sortTrackByValue(currentTrack),
+    applied: false,
+    agravated: false,
+  };
 };
 
 const giftCatalog = Array.isArray(dataGifts) ? dataGifts : [];

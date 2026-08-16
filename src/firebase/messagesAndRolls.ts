@@ -1,4 +1,4 @@
-﻿import { capitalizeFirstLetter, getOfficialTimeBrazil, translate } from "./utilities";
+import { capitalizeFirstLetter, getOfficialTimeBrazil, translate } from "./utilities";
 import firebaseConfig from "./connection";
 import { collection, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
 import { authenticate } from "./authenticate";
@@ -159,6 +159,7 @@ export const registerWillpowerRoll = async(
 	if (penaltyOrBonus < 0) roll.test += ` (${(penaltyOrBonus * -1)} ${(penaltyOrBonus * -1) > 1 ? 'dados foram subtraídos': 'dado foi subtraído'} por conta da penalidade preenchida)`;
 	roll.test += '.'
 	await registerMessage(sessionId, roll, null, setShowMessage);
+	return roll;
 }
   
 export const registerManualRoll = async(

@@ -1,8 +1,9 @@
-﻿'use client'
+'use client'
 import { useContext, useState } from "react";
 import contexto from "@/context/context";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { registerWillpowerRoll } from "@/firebase/messagesAndRolls";
+import { updateDataPlayer } from "@/firebase/players";
 import {
   openChatAfterSpecialRoll,
   SpecialRollFrame,
@@ -21,6 +22,8 @@ export default function WillpowerTest() {
   const {
     sessionId,
     dataSheet,
+    sheetId,
+    setDataSheet,
     setOptionSelect,
     setShowWillpowerTest,
     setShowMenuSession,
@@ -31,14 +34,65 @@ export default function WillpowerTest() {
     setShowWillpowerTest(false);
   };
 
+  const discountWillpower = async () => {
+    let agravatedValue = false;
+    const actualWillpower = dataSheet.data.attributes.composure + dataSheet.data.attributes.resolve - dataSheet.data.willpower.length;
+    if (actualWillpower < 0) agravatedValue = true;
+    if (dataSheet.data.willpower.length === 0) {
+      if (agravatedValue) dataSheet.data.willpower.push({ value: 1, agravated: true });
+      else dataSheet.data.willpower.push({ value: 1, agravated: false });
+    } else {
+      const resolveComposure = dataSheet.data.attributes.resolve + dataSheet.data.attributes.composure;
+      const agravated = dataSheet.data.willpower.filter((fdv: any) => fdv.agravated === true).map((fd: any) => fd.value);
+      const superficial = dataSheet.data.willpower.filter((fdv: any) => fdv.agravated === false).map((fd: any) => fd.value);
+      const allValues = Array.from({ length: resolveComposure }, (_, i) => i + 1);
+      const missingInBoth = allValues.filter(value => !agravated.includes(value) && !superficial.includes(value));
+      if (missingInBoth.length > 0) {
+        const smallestNumber = Math.min(...missingInBoth);
+        if (agravatedValue) dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
+        else dataSheet.data.willpower.push({ value: smallestNumber, agravated: false });
+      } else {
+        const missingInAgravated = allValues.filter(value => !agravated.includes(value));
+        if (missingInAgravated.length > 0) {
+          const smallestNumber = Math.min(...missingInAgravated);
+          dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
+        } else {
+          setShowMessage({ show: true, text: 'VocÃª nÃ£o possui mais pontos de ForÃ§a de Vontade para realizar este teste (JÃ¡ sofreu todos os danos Agravados possÃ­veis).' });
+        }
+      }
+    }
+
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    setDataSheet({ ...dataSheet });
+  };
+
   const rollDices = async () => {
     const actualWillpower = Number(willpowerType.replace('total -', '').replace('restante -', ''));
-    let type = '';
+    const type = willpowerType.includes('total') ? 'total' : 'restante';
 
-    if (willpowerType.includes('total')) type = 'total';
-    else type = 'restante';
+    const roll = await registerWillpowerRoll(
+      sessionId,
+      type,
+      dataSheet.data.name,
+      actualWillpower,
+      penaltyOrBonus,
+      dificulty,
+      setShowMessage,
+    );
 
-    await registerWillpowerRoll(sessionId, type, dataSheet.data.name, actualWillpower, penaltyOrBonus, dificulty, setShowMessage);
+    const rollMessage = String(roll?.message || '').toLowerCase();
+    console.log('Roll Message' + rollMessage);
+    const totalSuccesses = Number(roll?.brutalPairs || 0) + Number(roll?.criticalPairs || 0) + Number(roll?.success || 0);
+    console.log(totalSuccesses);
+    console.log(roll.dificulty);
+    const failedWillpowerCheck = totalSuccesses < Number(roll?.dificulty || dificulty) || rollMessage.includes('falhou');
+
+    console.log(failedWillpowerCheck);
+
+    if (failedWillpowerCheck && sheetId) {
+      await discountWillpower();
+    }
+
     closePopup();
     openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
   };

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
@@ -106,17 +106,25 @@ export default function ItemAgravated(props: any) {
 
   const renderMarker = (index: number) => {
     const markerBaseClassName = 'h-5 w-5 border flex items-center justify-center';
-    const marker = itemValues.find((element: any) => element.value === index + 1);
+    const markerValue = index + 1;
+    const marker = itemValues.find((element: any) => element.value === markerValue);
+    const hasAgravatedMarker = itemValues.some(
+      (element: any) => element.value === markerValue && element.agravated === true,
+    );
+    const hasSilverMarker = itemValues.some(
+      (element: any) => element.value === markerValue && element.silver === true,
+    );
+    const hasMarker = itemValues.some((element: any) => element.value === markerValue);
 
     if (isSheetStandalone) {
       return <button type="button" key={index} className="h-5 w-5 cursor-default border border-red-300/45 bg-red-950/30" />;
     }
 
-    if (name === 'health' && marker?.silver) {
+    if (name === 'health' && hasSilverMarker) {
       return (
         <button
           type="button"
-          onClick={() => updateValue(index + 1)}
+          onClick={() => updateValue(markerValue)}
           key={index}
           className={`${markerBaseClassName} cursor-pointer border-red-300/70 bg-red-950/40`}
         >
@@ -130,11 +138,11 @@ export default function ItemAgravated(props: any) {
       );
     }
 
-    if (marker?.agravated) {
+    if (hasAgravatedMarker) {
       return (
         <button
           type="button"
-          onClick={() => updateValue(index + 1)}
+          onClick={() => updateValue(markerValue)}
           key={index}
           className={`${markerBaseClassName} cursor-pointer border-red-300/70 bg-red-950/30`}
         >
@@ -146,11 +154,11 @@ export default function ItemAgravated(props: any) {
       );
     }
 
-    if (marker) {
+    if (hasMarker && marker) {
       return (
         <button
           type="button"
-          onClick={() => updateValue(index + 1)}
+          onClick={() => updateValue(markerValue)}
           key={index}
           className={`${markerBaseClassName} cursor-pointer border-red-300/70 bg-black/20`}
         >
@@ -162,7 +170,7 @@ export default function ItemAgravated(props: any) {
     return (
       <button
         type="button"
-        onClick={() => updateValue(index + 1)}
+        onClick={() => updateValue(markerValue)}
         key={index}
         className={`${markerBaseClassName} cursor-pointer border-zinc-600/70 bg-transparent`}
       />
