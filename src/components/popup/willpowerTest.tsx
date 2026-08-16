@@ -57,7 +57,7 @@ export default function WillpowerTest() {
           const smallestNumber = Math.min(...missingInAgravated);
           dataSheet.data.willpower.push({ value: smallestNumber, agravated: true });
         } else {
-          setShowMessage({ show: true, text: 'VocÃª nÃ£o possui mais pontos de ForÃ§a de Vontade para realizar este teste (JÃ¡ sofreu todos os danos Agravados possÃ­veis).' });
+          setShowMessage({ show: true, text: 'Você não possui mais pontos de Força de Vontade para realizar este teste (Já sofreu todos os danos Agravados possíveis).' });
         }
       }
     }

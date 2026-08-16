@@ -1,4 +1,4 @@
-﻿import contexto from "@/context/context";
+import contexto from "@/context/context";
 import { useContext, useEffect, useMemo, useState } from "react";
 import ChangeGameMaster from "../popup/changeGameMaster";
 import LeaveGMFromSession from "../popup/leaveGMFromSession";
@@ -43,6 +43,7 @@ export default function Details() {
   const [creationDate, setCreationDate] = useState("");
   const [nameMaster, setNameMaster] = useState("");
   const [image, setImage] = useState("");
+  const [typeSession, setTypeSession] = useState("Regras Oficiais");
   const [input, setInput] = useState("");
   const [textArea, setTextArea] = useState(false);
   const [creatingSheet, setCreatingSheet] = useState(false);
@@ -55,10 +56,19 @@ export default function Details() {
     setDescription(session.description || "");
     setNameMaster(session.nameMaster || "");
     setImage(session.imageName || "01");
+    setTypeSession(session.typeSession || "Regras Oficiais");
   }, [session]);
 
   const normalizedPlayers = useMemo(() => {
-    return Array.isArray(players) ? players.filter((player: any) => player.email !== gameMaster) : [];
+    if (!Array.isArray(players)) return [];
+
+    const uniquePlayers = new Map<string, any>();
+    players.forEach((player: any) => {
+      if (!player?.email || player.email === gameMaster || uniquePlayers.has(player.email)) return;
+      uniquePlayers.set(player.email, player);
+    });
+
+    return Array.from(uniquePlayers.values());
   }, [players, gameMaster]);
 
   const playersSummary = useMemo(() => {
@@ -131,6 +141,18 @@ export default function Details() {
       text: "Necessario inserir o email de um usuário que ja esteja cadastrado na plataforma.",
     });
     setNewGameMaster(gameMaster);
+  };
+
+  const updateTypeSession = async (nextTypeSession: string) => {
+    if (nextTypeSession === session.typeSession) return;
+
+    const sessionData = {
+      ...session,
+      typeSession: nextTypeSession,
+    };
+
+    setTypeSession(nextTypeSession);
+    await updateSession(sessionData, setShowMessage);
   };
 
   const editNameSession = () => {
@@ -336,7 +358,7 @@ export default function Details() {
                     }}
                   >
                     <p className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white/60">
-                      {gameMaster === email ? "Voce e o narrador desta sessao" : "Narrador da cronica"}
+                      {gameMaster === email ? "Você é o narrador desta sessão" : "Narrador da cronica"}
                     </p>
                     {input === "gameMaster" ? (
                       <input
@@ -362,6 +384,7 @@ export default function Details() {
                     <p className="font-geist-mono text-[12px] text-white/85">{creationDate}</p>
                   </div>
                 </div>
+
               </div>
 
               <div className="border border-white/10 bg-black/55">
@@ -468,6 +491,29 @@ export default function Details() {
                   >
                     Sair Da Sessão
                   </button>
+                </div>
+              </div>
+              <div className="border border-white/10 bg-black/55">
+                <div className="border-b border-white/10 px-4 py-3">
+                  <p className="font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white/80">Regras Da Sessão</p>
+                </div>
+                <div className="px-4 py-4">
+                  <select
+                    value={typeSession}
+                    disabled={gameMaster !== email}
+                    onChange={(event) => {
+                      void updateTypeSession(event.target.value);
+                    }}
+                    className="w-full border border-white/10 bg-black/40 px-3 py-2 font-geist-mono text-[11px] uppercase tracking-[0.08em] text-white outline-none transition-colors hover:border-red-700/60 focus:border-red-700/60 disabled:cursor-not-allowed disabled:opacity-70"
+                  >
+                    <option value="Regras Oficiais">Regras Oficiais</option>
+                    <option value="Regras Alternativas">Regras Alternativas</option>
+                  </select>
+                  <p className="mt-3 font-geist-mono text-[11px] leading-relaxed text-white/60">
+                    {typeSession === "Regras Oficiais"
+                      ? "Usa as regras oficiais do livro Lobisomem: O Apocalipse 5ed"
+                      : "Usa um modelo alternativo de regras (Fúria aumenta se falhar em Checagem de Fúria, sair da Forma Crinos não diminui a Fúria para 1, Ao chegar a 5 pontos de Fúria entra em Frenesi)"}
+                  </p>
                 </div>
               </div>
             </div>
