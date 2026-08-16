@@ -27,11 +27,8 @@ export default function Feedback(props: { title?: string }) {
   const { setShowFeedback } = useContext(contexto);
 
   const sendEmail = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const form = e.currentTarget; // GUARDA O FORMULÁRIO AQUI
-
     const regex = /\S+@\S+\.\S+/;
+    e.preventDefault();
 
     if (!nameUser || nameUser.length < 2) {
       setMessagePopup({
@@ -41,7 +38,7 @@ export default function Feedback(props: { title?: string }) {
       });
     } else if (!emailUser || !regex.test(emailUser)) {
       setMessagePopup({
-        message: 'Por favor, informe um e-mail válido.',
+        message: 'Por favor, informe um e-mail valido.',
         error: true,
         show: true,
       });
@@ -52,50 +49,34 @@ export default function Feedback(props: { title?: string }) {
         show: true,
       });
     } else {
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-      const templateID = process.env.NEXT_PUBLIC_TEMPLATEID;
-      const serviceID = process.env.NEXT_PUBLIC_SERVICEID;
+      const userID: string | undefined = process.env.NEXT_PUBLIC_USERID;
+      const templateID: string | undefined = process.env.NEXT_PUBLIC_TEMPLATEID;
+      const serviceID: string | undefined = process.env.NEXT_PUBLIC_SERVICEID;
 
       try {
-        const form = e.currentTarget;
-
         await emailjs.sendForm(
           serviceID || '',
           templateID || '',
-          form,
-          publicKey || '',
+          e.currentTarget,
+          userID,
         );
-
+        e.currentTarget.reset();
         setMessage('');
         setNameUser('');
         setEmailUser('');
-
         setMessagePopup({
-          message: 'Feedback enviado com sucesso. Muito obrigado pela colaboração!',
+          message: 'Feedback enviado com sucesso. Muito obrigado pela colaboracao!',
           error: false,
           show: true,
         });
-
         setTimeout(() => setShowFeedback(false), 3000);
       } catch (error: any) {
-        console.error('Erro EmailJS:', error);
-        console.error('Status:', error?.status);
-        console.error('Mensagem:', error?.text);
-
-        setMessagePopup({
-          message: `Erro ao enviar feedback: ${error?.text || 'Erro desconhecido'}`,
-          error: true,
-          show: true,
-        });
+        global.alert(error);
       }
     }
 
     setTimeout(() => {
-      setMessagePopup({
-        message: '',
-        error: true,
-        show: false,
-      });
+      setMessagePopup({ message: '', error: true, show: false });
     }, 4000);
   };
 
