@@ -2,68 +2,30 @@
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary } from "@/firebase/utilities";
+import {
+  capitalizeFirstLetter,
+  cycleTrackMarker,
+  formatTrackDamageSummary,
+  getBaseHealthTotal,
+  getFormHealthBonus,
+  getTotalHealthBoxes,
+} from "@/firebase/utilities";
 import { usePathname } from "next/navigation";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import { GiD10 } from "react-icons/gi";
 
 export default function ItemAgravated(props: any) {
-  const [totalItem, setTotalItem] = useState(0);
   const { name, namePtBr } = props;
   const pathname = usePathname();
   const isSheetStandalone = pathname?.startsWith('/sheets/');
   const { dataSheet, setShowMessage, sheetId, session, email, setShowWillpowerTest } = useContext(contexto);
   const sheetData = dataSheet?.data;
-  const advantages = useMemo(() => sheetData?.advantagesAndFlaws?.advantages ?? [], [sheetData]);
-  const flaws = useMemo(() => sheetData?.advantagesAndFlaws?.flaws ?? [], [sheetData]);
   const itemValues = useMemo(() => (Array.isArray(sheetData?.[name]) ? sheetData[name] : []), [name, sheetData]);
-
-  useEffect(() => {
-    const returnValues = async (): Promise<void> => {
-      if (!sheetData) {
-        setTotalItem(0);
-        return;
-      }
-
-      if (name === 'willpower') {
-        setTotalItem(Number(sheetData.attributes?.composure || 0) + Number(sheetData.attributes?.resolve || 0));
-      }
-
-      if (name === 'health') {
-        const hasAdvantage = (title: string) =>
-          advantages.some((advantage: { title: string }) => advantage.title === title);
-
-        const getStandaloneStaminaValue = () => {
-          const currentValue = Number(sheetData.attributes?.stamina || 0);
-
-          if (!isSheetStandalone) return currentValue;
-
-          if (sheetData.form === 'Crinos') return Math.max(0, currentValue - 4);
-
-          if (sheetData.form === 'Hispo' || sheetData.form === 'Glabro') {
-            return Math.max(0, currentValue - (hasAdvantage('Resiliência de Luna') ? 4 : 2));
-          }
-
-          return currentValue;
-        };
-
-        const findMaldicaoDaAncia = flaws.find(
-          (advantage: { title: string }) => advantage.title === 'Maldição da Anciã'
-        );
-        const findPeleEspessa = advantages.find(
-          (advantage: { title: string }) => advantage.title === 'Pele Espessa'
-        );
-        const staminaValue = getStandaloneStaminaValue();
-
-        if (findMaldicaoDaAncia && findPeleEspessa) setTotalItem(staminaValue + 3);
-        else if (findMaldicaoDaAncia) setTotalItem(staminaValue + 2);
-        else if (findPeleEspessa) setTotalItem(staminaValue + 4);
-        else setTotalItem(staminaValue + 3);
-      }
-    };
-
-    returnValues();
-  }, [advantages, flaws, isSheetStandalone, name, sheetData]);
+  const totalItem = name === 'willpower'
+    ? Number(sheetData?.attributes?.composure || 0) + Number(sheetData?.attributes?.resolve || 0)
+    : name === 'health'
+      ? (isSheetStandalone ? getBaseHealthTotal(sheetData) : getTotalHealthBoxes(sheetData))
+      : 0;
 
   const updateValue = async (value: number) => {
     if (dataSheet) {
@@ -88,20 +50,25 @@ export default function ItemAgravated(props: any) {
   };
 
   const getHealthSummary = () => {
-    const findMaldicaoDaAncia = flaws.find(
-      (advantage: { title: string }) => advantage.title === 'Maldição da Anciã'
-    );
-    const findPeleEspessa = advantages.find(
-      (advantage: { title: string }) => advantage.title === 'Pele Espessa'
-    );
-
+    const staminaValue = Number(sheetData?.attributes?.stamina || 0);
+    const staticBonus = getBaseHealthTotal(sheetData) - staminaValue;
+    const formBonus = isSheetStandalone ? 0 : getFormHealthBonus(sheetData);
     const parts = ['VIGOR'];
-    let staminaBonus = 3;
-    if (findPeleEspessa) staminaBonus += 1;
-    if (findMaldicaoDaAncia) staminaBonus -= 1;
-    parts.push(' + ' + staminaBonus);
 
-    return parts.join(' ');
+    if (staticBonus !== 0) {
+      parts.push(staticBonus > 0 ? `+ ${staticBonus}` : `- ${Math.abs(staticBonus)}`);
+    }
+
+    if (formBonus > 0) {
+      parts.push(`+ ${formBonus}`);
+    }
+
+    let summary = parts.join(' ');
+    if (formBonus > 0 && sheetData?.form) {
+      summary += ` (${sheetData.form})`;
+    }
+
+    return summary;
   };
 
   const renderMarker = (index: number) => {
@@ -196,7 +163,7 @@ export default function ItemAgravated(props: any) {
       </div>
       <div className="mx-6 border-b border-zinc-500/20" />
       <div className="flex flex-col items-center pb-5 pt-4 text-center">
-        <div className={`flex px-6 flex-wrap justify-center gap-2 w-full`}>
+        <div className="flex w-full flex-wrap justify-center gap-2 px-6">
           {Array(totalItem)
             .fill('')
             .map((_, index) => renderMarker(index))}
@@ -210,7 +177,12 @@ export default function ItemAgravated(props: any) {
           <>
             <div className="mt-4 font-geist-mono text-[0.58rem] uppercase tracking-[0.24em] text-zinc-500">{getHealthSummary()}</div>
             {!isSheetStandalone && (
-              <div className="px-6 gap-1 w-full mt-4 flex flex-col items-start justify-center font-geist-mono text-[0.5rem] uppercase tracking-[0.18em] text-zinc-500">
+              <div className="mt-4 flex w-full flex-col items-start justify-center gap-1 px-6 font-geist-mono text-[0.5rem] uppercase tracking-[0.18em] text-zinc-500">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-4 w-4 items-center justify-center border border-red-300/70 bg-black/20">
+                  </span>
+                  <span>Sem Dano</span>
+                </div>
                 <div className="flex items-center gap-2">
                   <span className="flex h-4 w-4 items-center justify-center border border-red-300/70 bg-black/20">
                     <span className="block h-3 w-[1px] rotate-45 bg-red-300/70" />
@@ -245,5 +217,3 @@ export default function ItemAgravated(props: any) {
     </section>
   );
 }
-
-

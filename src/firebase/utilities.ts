@@ -27,6 +27,72 @@ const sortTrackByValue = (track: any[] = []) => {
   return [...track].sort((first, second) => Number(first?.value || 0) - Number(second?.value || 0));
 };
 
+const hasTrackModifier = (list: any[] = [], title: string) => {
+  return Array.isArray(list) && list.some((item: any) => item?.title === title);
+};
+
+export const getBaseHealthTotal = (sheetData: any) => {
+  const staminaValue = Number(sheetData?.attributes?.stamina || 0);
+  const advantages = Array.isArray(sheetData?.advantagesAndFlaws?.advantages)
+    ? sheetData.advantagesAndFlaws.advantages
+    : [];
+  const flaws = Array.isArray(sheetData?.advantagesAndFlaws?.flaws)
+    ? sheetData.advantagesAndFlaws.flaws
+    : [];
+
+  let totalHealth = staminaValue + 3;
+
+  if (hasTrackModifier(advantages, 'Pele Espessa')) totalHealth += 1;
+  if (hasTrackModifier(flaws, 'Maldição da Anciã')) totalHealth -= 1;
+
+  return Math.max(0, totalHealth);
+};
+
+export const getFormHealthBonus = (sheetData: any, formOverride?: string) => {
+  const currentForm = formOverride ?? sheetData?.form;
+  const advantages = Array.isArray(sheetData?.advantagesAndFlaws?.advantages)
+    ? sheetData.advantagesAndFlaws.advantages
+    : [];
+
+  if (currentForm === 'Crinos') return 4;
+
+  if (
+    (currentForm === 'Hispo' || currentForm === 'Glabro')
+    && hasTrackModifier(advantages, 'Resiliência de Luna')
+  ) {
+    return 2;
+  }
+
+  return 0;
+};
+
+export const getTotalHealthBoxes = (sheetData: any, formOverride?: string) => {
+  return getBaseHealthTotal(sheetData) + getFormHealthBonus(sheetData, formOverride);
+};
+
+export const trimTrackToMaxValue = (track: any[] = [], maxValue: number) => {
+  const currentTrack = Array.isArray(track) ? track : [];
+  return sortTrackByValue(
+    currentTrack.filter((item: any) => Number(item?.value || 0) <= maxValue),
+  );
+};
+
+export const normalizeHealthTrackForFormChange = (
+  sheetData: any,
+  previousForm: string,
+  nextForm: string,
+) => {
+  const currentTrack = Array.isArray(sheetData?.health) ? sheetData.health : [];
+  const previousBonus = getFormHealthBonus(sheetData, previousForm);
+  const nextBonus = getFormHealthBonus(sheetData, nextForm);
+
+  if (previousBonus === nextBonus) {
+    return sortTrackByValue(currentTrack);
+  }
+
+  return trimTrackToMaxValue(currentTrack, getBaseHealthTotal(sheetData));
+};
+
 export const cycleTrackMarker = (
   track: any[] = [],
   name: 'health' | 'willpower',
@@ -267,7 +333,7 @@ export const playerSheet = {
   willpower: [],
   gifts: [],
   rituals: [],
-  form: 'Hominí­deo',
+  form: 'Hominídeo',
   background: '',
   notes: '',
   attributes: {
@@ -342,7 +408,7 @@ export const sheetStructure = (email: string, user: string, message: any) => {
       willpower: [],
       gifts: [],
       rituals: [],
-      form: 'Hominí­deo',
+      form: 'Hominídeo',
       background: '',
       notes: '',
       attributes: {
@@ -454,5 +520,6 @@ export const translate = (str: string): string => {
     default: return str;
   }
 }
+
 
 

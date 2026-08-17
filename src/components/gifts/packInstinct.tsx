@@ -8,7 +8,7 @@ export function PackInstinct() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(2);
   const [marked, setMarked] = useState(false);
-  const { sessionId, sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sessionId, sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = Number(dataSheet.data.attributes.composure) + Number(dataSheet.data.honor);

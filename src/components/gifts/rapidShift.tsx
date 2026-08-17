@@ -6,10 +6,15 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 export function RapidShift() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
-    let pool = Number(dataSheet.data.glory) + Number(dataSheet.data.attributes.dexterity);
+    const form = dataSheet.data.form;
+    let atribSelected = Number(dataSheet.data.glory) + Number(dataSheet.data.attributes.dexterity);
+    if (form == 'Crinos') atribSelected += 4;
+    else if ((form == 'Hispo' || form == 'Glabro')) atribSelected += 2;
+
+    let pool = atribSelected;
     let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;

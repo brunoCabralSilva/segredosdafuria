@@ -291,7 +291,6 @@ export default function Sheets() {
               ? 'Nenhum resultado encontrado.'
               : `Mostrando ${pageStartIndex + 1}-${Math.min(pageStartIndex + ITEMS_PER_PAGE, filteredSheets.length)} de ${filteredSheets.length} fichas`}
           </span>
-          <span>9 fichas por pagina</span>
         </div>
 
         {filteredSheets.length === 0 ? (

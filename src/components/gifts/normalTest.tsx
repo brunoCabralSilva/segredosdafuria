@@ -7,12 +7,18 @@ export function NormalTest(props: { attribute: string, renown: string }) {
   const { attribute, renown } = props;
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
-  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
+    const form = dataSheet.data.form;
+    let atribSelected = Number(dataSheet.data.attributes[attribute]);
+    const isPhysical = attribute == 'stamina' || attribute == 'strength' || attribute == 'dexterity';
+    if (form == 'Crinos' && isPhysical) atribSelected += 4;
+    else if ((form == 'Hispo' || form == 'Glabro') && isPhysical) atribSelected += 2;
+
     let pool = 0;
     if (renown !== '') pool += Number(dataSheet.data[renown]);
-    if (attribute !== '') pool += Number(dataSheet.data.attributes[attribute]);
+    if (attribute !== '') pool += atribSelected;
     let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;

@@ -4,7 +4,7 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function RazorClaws() {
-  const { sheetId, session, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sheetId, session, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollRage = async () => {
     if (dataSheet.data.form !== "Crinos") {

@@ -19,13 +19,19 @@ export function RgOrWpWithConditionInRoll(
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(dif);
   const [marked, setMarked] = useState(false);
-  const { sessionId, session, email, dataSheet, showGiftRoll, sheetId, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sessionId, session, email, dataSheet, showGiftRoll, sheetId, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
+    const form = dataSheet.data.form;
+    let atribSelected = Number(dataSheet.data.attributes[attribute]);
+    const isPhysical = attribute == 'stamina' || attribute == 'strength' || attribute == 'dexterity';
+    if (form == 'Crinos' && isPhysical) atribSelected += 4;
+    else if ((form == 'Hispo' || form == 'Glabro') && isPhysical) atribSelected += 2;
+
     let pool = 0;
     if (skill !== '' && skill !== undefined) pool += Number(dataSheet.data.skills[skill].value);
     if (renown !== '') pool += Number(dataSheet.data[renown]);
-    if (attribute !== '') pool += Number(dataSheet.data.attributes[attribute]);
+    if (attribute !== '') pool += atribSelected;
     let rage = Number(dataSheet.data.rage);
     if (rage > pool) {
       rage = pool;

@@ -1,8 +1,8 @@
-﻿'use client'
+'use client'
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { getAllPlayersBySessionId, updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
+import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary, getTotalHealthBoxes, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { FaFire, FaHeart } from "react-icons/fa6";
 import { GiD10, GiFangs } from "react-icons/gi";
@@ -161,17 +161,7 @@ export default function HpAndWillPower() {
   }
 
   function returnTotalHealth(player: any) {
-    const findMaldicaoDaAncia = player.data.advantagesAndFlaws.flaws.find(
-      (advantage: { title: string }) => advantage.title == "Maldição da Anciã"
-    );
-    const findPeleEspessa = player.data.advantagesAndFlaws.advantages.find(
-      (advantage: { title: string }) => advantage.title == "Pele Espessa"
-    );
-
-    if (findMaldicaoDaAncia && findPeleEspessa) return Number(player.data.attributes.stamina) + 3;
-    if (findMaldicaoDaAncia) return Number(player.data.attributes.stamina) + 2;
-    if (findPeleEspessa) return Number(player.data.attributes.stamina) + 4;
-    return Number(player.data.attributes.stamina) + 3;
+    return getTotalHealthBoxes(player?.data);
   }
 
   async function updateRageValue(value: number) {

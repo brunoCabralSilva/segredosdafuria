@@ -4,7 +4,7 @@ import { updateDataPlayer } from "@/firebase/players";
 import { useContext } from "react";
 
 export function WindClaws() {
-  const { sheetId, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sheetId, sessionId, email, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const discountWillpower = async() => {
     if (dataSheet.data.form !== 'Crinos') {

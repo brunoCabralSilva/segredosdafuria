@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useContext, useEffect, useState } from 'react';
 import { BsCheckSquare } from 'react-icons/bs';
 import { FaCopy, FaEraser, FaFileDownload, FaRegEdit, FaTrashAlt } from 'react-icons/fa';
@@ -10,7 +10,7 @@ import contexto from '@/context/context';
 import Item from '../sheetItems/item';
 import ItemAgravated from '../sheetItems/itemAgravated';
 import ResetSheet from '../popup/resetSheet';
-import { capitalizeFirstLetter, resolveGiftEntries, serializeGiftEntries, sheetStructure } from '@/firebase/utilities';
+import { capitalizeFirstLetter, normalizeHealthTrackForFormChange, resolveGiftEntries, serializeGiftEntries, sheetStructure } from '@/firebase/utilities';
 import DeleteSheet from '../popup/deleteSheet';
 import { registerHistory } from '@/firebase/history';
 import { FaFileCircleCheck } from 'react-icons/fa6';
@@ -47,11 +47,13 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const router = useRouter();
   const [input, setInput] = useState('');
   const [newName, setNewName] = useState('');
+  const [newEmail, setNewEmail] = useState('');
   const [xp, setXp] = useState('0');
   const [portraitUrl, setPortraitUrl] = useState('');
   const [portraitImageError, setPortraitImageError] = useState(false);
   const [activeSessions, setActiveSessions] = useState<SessionListItem[]>([]);
   const [chronicleTransferPrompt, setChronicleTransferPrompt] = useState<SessionListItem | null>(null);
+  const [showCopySheetPrompt, setShowCopySheetPrompt] = useState(false);
   const {
     players,
     email,
@@ -77,8 +79,8 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const isStandaloneSheetView = pathname?.startsWith('/sheets/');
   const isReadOnlyCommunitySheet = isStandaloneSheetView && !!dataSheet?.email && dataSheet.email !== email;
   const canEditPortraitUrl = isStandaloneSheetView ? dataSheet?.email === email : dataSheet?.email === email || isNarrator;
-  const canManageSheetIdentity = dataSheet?.email === email;
-  const canViewSheetEmail = dataSheet?.email === email;
+  const canManageSheetIdentity = isStandaloneSheetView ? dataSheet?.email === email : dataSheet?.email === email || isNarrator;
+  const canViewSheetEmail = isStandaloneSheetView ? dataSheet?.email === email : dataSheet?.email === email || isNarrator;
   const canCopySheet = isStandaloneSheetView && dataSheet?.email === email;
   const canDeleteSheet = (isStandaloneSheetView && dataSheet?.email === email) || (!isStandaloneSheetView && isNarrator && sheetId !== '');
   const sessionCharacterOptions = isNarrator ? players : players.filter((player: any) => player.email === email);
@@ -109,6 +111,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     if (!dataSheet || email === '' || name === '') return;
 
     const clonedSheet = JSON.parse(JSON.stringify(dataSheet));
+    const currentForm = clonedSheet?.data?.form || 'Homin\u00eddeo';
     delete clonedSheet.id;
     delete clonedSheet.pendingSessionLink;
     clonedSheet.email = email;
@@ -116,9 +119,15 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     clonedSheet.creationDate = getCurrentBrazilDateTimeString();
     clonedSheet.sessionId = '';
 
+    if (clonedSheet?.data) {
+      clonedSheet.data.health = normalizeHealthTrackForFormChange(clonedSheet.data, currentForm, 'Homin\u00eddeo');
+      clonedSheet.data.form = 'Homin\u00eddeo';
+    }
+
     const newSheetId = await addNewSheetMandatory('', clonedSheet, setShowMessage);
 
     if (newSheetId) {
+      setShowCopySheetPrompt(false);
       setShowMessage({ show: true, text: 'Ficha copiada com sucesso!' });
       router.push(`/sheets/${newSheetId}`);
     }
@@ -182,6 +191,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     setShowGiftRoll({ show: false, gift: {} });
     setShowRitualRoll({ show: false, ritual: {} });
     setNewName(dataSheet?.data?.name ?? '');
+    setNewEmail(dataSheet?.email ?? '');
     setXp(dataSheet?.data?.xp ? dataSheet.data.xp : '0');
     setPortraitUrl(dataSheet?.data?.portraitUrl ?? '');
     setPortraitImageError(false);
@@ -231,6 +241,8 @@ export default function General(props: { dataSession: any; id: string; gameMaste
       return false;
     }
   };
+
+  const validateEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
   const filterAllowedGifts = (gifts: any[], trybe: string, auspice: string) => {
     const normalizedAllowedTypes = new Set(
@@ -345,6 +357,41 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     await updateDataPlayer(sheetId, updatedPlayer, setShowMessage);
     return true;
   };
+  const updateSheetEmail = async (value: string) => {
+    const findPlayer = players.find((player: any) => player.id === sheetId) || dataSheet;
+    if (!findPlayer) return false;
+
+    const normalizedEmail = value.trim().toLowerCase();
+    if (!validateEmail(normalizedEmail)) {
+      setShowMessage({ show: true, text: 'Necessário informar um email válido.' });
+      return false;
+    }
+
+    const previousEmail = findPlayer.email || 'sem email';
+    const updatedPlayer = {
+      ...findPlayer,
+      email: normalizedEmail,
+    };
+
+    await updateDataPlayer(sheetId, updatedPlayer, setShowMessage);
+    setDataSheet((current: any) => (current ? { ...current, email: normalizedEmail } : current));
+    setNewEmail(normalizedEmail);
+    await registerHistory(
+      session.id,
+      {
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(findPlayer.user)} alterou o email do personagem ${findPlayer.data.name}${findPlayer.email !== email ? ` do jogador ${capitalizeFirstLetter(findPlayer.user)}` : ''} de ${previousEmail} para ${normalizedEmail}.`,
+        type: 'notification',
+      },
+      null,
+      setShowMessage,
+    );
+    return true;
+  };
+
+  const requestCopySheet = () => {
+    setShowCopySheetPrompt(true);
+  };
+
   const requestChronicleLink = (targetSessionId: string) => {
     if (targetSessionId === '__none__') return;
 
@@ -420,7 +467,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button type="button" onClick={() => void copyCommunitySheet()} className="items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Copiar ficha">
+                <button type="button" onClick={requestCopySheet} className="items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Copiar ficha">
                   <FaCopy className="text-base" />
                 </button>
                 <button type="button" onClick={() => setShowDownloadPdf({ show: true, email: '' })} className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Download de ficha">
@@ -534,7 +581,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       <FaFileCircleCheck className="text-base" />
                     </button>
                     {canCopySheet && (
-                      <button type="button" onClick={() => void copyCommunitySheet()} className="items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Copiar ficha">
+                      <button type="button" onClick={requestCopySheet} className="items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900" title="Copiar ficha">
                         <FaCopy className="text-base" />
                       </button>
                     )}
@@ -558,7 +605,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
             </div>
           </div>
         )}
-        <div className={`relative ${isReadOnlyCommunitySheet ? 'pointer-events-none select-none opacity-80 [&_.sheet-readonly-action]:hidden' : ''}`}>
+        <div className={`relative ${isReadOnlyCommunitySheet && !showCopySheetPrompt ? 'pointer-events-none select-none opacity-80 [&_.sheet-readonly-action]:hidden' : ''}`}>
           {shouldBlockUntilCharacterSelection && (
             <div className="absolute inset-0 z-20 bg-black/80" />
           )}
@@ -718,7 +765,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                     </div>
                     <div>
                       <p className={fieldLabelClass}>Crônica</p>
-                      {hasPendingSessionTransfer ? (
+                      {hasPendingSessionTransfer && (!isStandaloneSheetView || dataSheet?.email === email) ? (
                         <div className="mt-2 border-b border-zinc-500/20 pb-3">
                           <p className="font-geist-mono text-[0.64rem] uppercase tracking-[0.12em] text-zinc-200">
                             Voce solicitou transferência para a sessão {pendingSessionTransfer.sessionName}
@@ -768,7 +815,44 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                     {canViewSheetEmail && (
                       <div>
                         <p className={fieldLabelClass}>Email</p>
-                        <div className={fieldValueClass}>{dataSheet?.email || 'Sem email'}</div>
+                        <div
+                          className="mt-2 flex items-center gap-3 border-b border-zinc-500/25 pb-2"
+                          onClick={() => {
+                            if (!hasPendingSessionTransfer && canManageSheetIdentity) setInput('sheetEmail');
+                          }}
+                        >
+                          {input === 'sheetEmail' && canManageSheetIdentity ? (
+                            <input
+                              type="email"
+                              className="w-full bg-transparent font-geist-mono text-[0.72rem] tracking-[0.08em] text-[#dfe5da] outline-none placeholder:text-zinc-500"
+                              placeholder="email@exemplo.com"
+                              value={newEmail}
+                              onChange={(e) => setNewEmail(e.target.value)}
+                            />
+                          ) : (
+                            <span className="w-full break-words font-geist-mono text-[0.72rem] tracking-[0.08em] text-[#dfe5da]">
+                              {dataSheet?.email || 'Sem email'}
+                            </span>
+                          )}
+                          {canManageSheetIdentity && (input === 'sheetEmail' ? (
+                            <BsCheckSquare
+                              onClick={async (e: any) => {
+                                e.stopPropagation();
+                                const updated = await updateSheetEmail(newEmail);
+                                if (updated) setInput('');
+                              }}
+                              className="cursor-pointer text-xl text-red-500/85"
+                            />
+                          ) : (
+                            <FaRegEdit
+                              onClick={(e: any) => {
+                                setInput('sheetEmail');
+                                e.stopPropagation();
+                              }}
+                              className="cursor-pointer text-lg text-red-500/85"
+                            />
+                          ))}
+                        </div>
                       </div>
                     )}
                     <div className="sm:col-span-2">
@@ -813,6 +897,52 @@ export default function General(props: { dataSession: any; id: string; gameMaste
           {!isStandaloneSheetView && <Forms />}
           <AdvantagesAndFlaws />
           <Touchstones />
+      {showCopySheetPrompt && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
+          <div className="relative flex w-full max-w-2xl flex-col overflow-hidden border border-zinc-500/40 bg-zinc-950/85">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/images/wallpapers/128.jpg')" }}
+            />
+            <div className="absolute inset-0 bg-black/90" />
+
+            <button
+              type="button"
+              onClick={() => setShowCopySheetPrompt(false)}
+              className="absolute right-4 top-4 z-20 text-2xl text-white/70 transition-colors hover:text-red-400"
+              aria-label="Fechar confirmação de cópia"
+            >
+              <AiFillCloseCircle />
+            </button>
+
+            <div className="relative z-10 flex w-full flex-col items-end px-5 pb-5 pt-6 sm:px-8 sm:pb-6 sm:pt-8">
+              <h2 className="mt-2 w-full text-left font-kingthings text-xl">Copiar Ficha</h2>
+              <p className="mt-2 w-full text-left font-geist-mono text-xs leading-6 text-white/75 sm:text-[13px]">
+                Deseja copiar esta ficha? Uma nova versão será criada para o seu usuário.
+              </p>
+            </div>
+
+            <div className="relative z-10 flex flex-col gap-4 px-5 pb-6 sm:px-8 sm:pb-8">
+              <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-start">
+                <button
+                  type="button"
+                  onClick={() => setShowCopySheetPrompt(false)}
+                  className="inline-flex items-center justify-center border border-zinc-500/40 bg-black/60 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-white/40 hover:bg-black/80"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void copyCommunitySheet()}
+                  className="inline-flex items-center justify-center border border-red-950 bg-red-950 px-4 py-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
+                >
+                  Confirmar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {chronicleTransferPrompt && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-6 text-white backdrop-blur-[3px] sm:px-6">
           <div className="relative flex w-full max-w-2xl flex-col overflow-hidden border border-zinc-500/40 bg-zinc-950/85">

@@ -42,6 +42,7 @@ export default function AutomatedRoll() {
       penaltyOrBonus,
       dificulty,
       setShowMessage,
+      dataSheet.data.form,
     );
     openChatAfterSpecialRoll(setOptionSelect, setShowMenuSession);
   };
@@ -77,7 +78,7 @@ export default function AutomatedRoll() {
                   key={index}
                   value={item.value}
                 >
-                  { item.namePtBr } ({ dataSheet.data.attributes[item.value] })
+                  { item.namePtBr } ({ (item.namePtBr == 'vigor' || item.namePtBr == 'força' || item.namePtBr == 'destreza') && dataSheet.data.form == 'Crinos' ? dataSheet.data.attributes[item.value] + 4 : dataSheet.data.form == 'Hispo' || dataSheet.data.form == 'Glabro' ? dataSheet.data.attributes[item.value] + 2 : dataSheet.data.attributes[item.value] })
                 </option>
               ))
             }

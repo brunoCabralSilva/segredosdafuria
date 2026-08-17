@@ -18,7 +18,6 @@ export function Energize() {
     dataSheet,
     setShowMessage,
     showGiftRoll, setShowGiftRoll,
-    setShowMenuSession,
     setOptionSelect,
   } = useContext(contexto);
 

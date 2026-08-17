@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 export function WpOrRageTestConditional(props: { type: string, condition: string }) {
   const { condition } = props;
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const discountWillpower = async() => {
     if (marked) {

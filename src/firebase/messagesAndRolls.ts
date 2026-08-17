@@ -130,7 +130,7 @@ export const registerMessage = async (sessionId: string, data: any, email: strin
           { date, email: emailToRecord, user: authData.displayName, ...data, order: sessionData.list.length + 1 },
           ];
           updatedChat.sort((a: any, b: any) => a.order - b.order)
-          if (updatedChat.length > 15) updatedChat.shift();
+          if (updatedChat.length > 30) updatedChat.shift();
           transaction.update(sessionDocRef, { list: updatedChat });
         } else {
           setShowMessage({ show: true, text: "Não foi possível localizar a Sessão. Por favor, atualize a página e tente novamente." });
@@ -193,17 +193,23 @@ export const registerAutomatedRoll = async(
 	penaltyOrBonus: number,
 	dificulty: number,
   setShowMessage: any,
+  form: string,
 ) => {
 	let valueOf = 0;
 	let rage = 0;
 	try {
-		const player = await getPlayerById(sheetId, setShowMessage);
+    const player = await getPlayerById(sheetId, setShowMessage);
 		let text = 'Foi realizado um teste de ';
 		if (player) {
+      let atribSelected = Number(player.data.attributes[atrSelected]);
+      const isPhysical = atrSelected == 'stamina' || atrSelected == 'strength' || atrSelected == 'dexterity';
+      if (form == 'Crinos' && isPhysical) atribSelected += 4;
+      else if ((form == 'Hispo' || form == 'Glabro') && isPhysical)
+        atribSelected += 2;
 			rage = Number(player.data.rage);
 			if (atrSelected !== '0' && atrSelected !== '1') {
-				valueOf += Number(player.data.attributes[atrSelected]);
-				text += translate(atrSelected) + ' (' + player.data.attributes[atrSelected] + ')';
+				valueOf += atribSelected;
+				text += translate(atrSelected) + ' (' + atribSelected + ')';
 			}
 			if (sklSelected !== '0' && sklSelected !== '1') {
 				valueOf += Number(player.data.skills[sklSelected].value);

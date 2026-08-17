@@ -8,7 +8,7 @@ export function TheLivingWood() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(1);
   const [type, setType] = useState<number>(0);
-  const { sessionId, session, sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sessionId, session, sheetId, email, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = 0;

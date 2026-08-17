@@ -1,7 +1,7 @@
-﻿import contexto from "@/context/context";
+import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary } from "@/firebase/utilities";
+import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary, getTotalHealthBoxes } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { FaFire, FaHeart } from "react-icons/fa6";
 import { GiFangs } from "react-icons/gi";
@@ -38,15 +38,7 @@ export default function PlayersPopup(props: { player: any }) {
   };
 
   const returnTotalHealth = (player: any) => {
-    var findMaldicaoDaAncia = player.data.advantagesAndFlaws.flaws.find((advantage: { title: string }) => advantage.title == 'Maldição da Anciã');
-    var findPeleEspessa = player.data.advantagesAndFlaws.advantages.find((advantage: { title: string }) => advantage.title == 'Pele Espessa');
-    if (findMaldicaoDaAncia && findPeleEspessa) {
-      return (Number(player.data.attributes.stamina) + 3);
-    } else if (findMaldicaoDaAncia) {
-      return (Number(player.data.attributes.stamina) + 2);
-    } else if (findPeleEspessa) {
-      return (Number(player.data.attributes.stamina) + 4);
-    } else return (Number(player.data.attributes.stamina) + 3);
+    return getTotalHealthBoxes(player?.data);
   }
 
   const updateRageValue = async (player: any, value: number) => {

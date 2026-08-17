@@ -13,7 +13,6 @@ export function RageTestOrWp(props: { type: string }) {
     dataSheet,
     setShowMessage,
     showGiftRoll, setShowGiftRoll,
-    setShowMenuSession,
     setOptionSelect,
   } = useContext(contexto);
 

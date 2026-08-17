@@ -8,7 +8,7 @@ export function SightFromBeyond() {
   const [penaltyOrBonus, setPenaltyOrBonus] = useState<number>(0);
   const [dificulty, setDificulty] = useState<number>(2);
   const [marked, setMarked] = useState(false);
-  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setShowMenuSession, setOptionSelect, setShowMessage } = useContext(contexto);
+  const { sessionId, email, sheetId, dataSheet, showGiftRoll, setShowGiftRoll, setOptionSelect, setShowMessage } = useContext(contexto);
 
   const rollTestOfUser = async () => {
     let pool = Number(dataSheet.data.attributes.intelligence) + Number(dataSheet.data.wisdom);
