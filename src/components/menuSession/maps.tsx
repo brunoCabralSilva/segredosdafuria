@@ -2,7 +2,7 @@
 
 import contexto from "@/context/context";
 import Image from "next/image";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import type { ElementType, MouseEvent, PointerEvent, WheelEvent } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
@@ -134,10 +134,18 @@ type PopupPage = "details" | "gallery";
 const IMAGE_WIDTH = 2000;
 const IMAGE_HEIGHT = 800;
 
-const SCALE_BAR_KM = 10;
+const DEFAULT_SCALE_BAR_KM = 10;
 const SCALE_BAR_LENGTH_IN_IMAGE_PIXELS = 500;
-const KM_PER_IMAGE_PIXEL = SCALE_BAR_KM / SCALE_BAR_LENGTH_IN_IMAGE_PIXELS;
 const MARKER_DRAG_THRESHOLD_IN_PIXELS = 5;
+
+function parseScaleBarKm(value: string | number | undefined | null) {
+  const normalizedValue = String(value ?? "").replace(",", ".").trim();
+  const parsedValue = Number(normalizedValue);
+
+  if (!Number.isFinite(parsedValue) || parsedValue <= 0) return null;
+
+  return parsedValue;
+}
 
 const markerIcons = {
   metro: { label: "Metrô", Icon: FaSubway },
@@ -319,6 +327,11 @@ export default function Maps() {
 
   const [zoom, setZoom] = useState(1);
   const [isSavingMap, setIsSavingMap] = useState(false);
+  const persistedScaleBarKm =
+    parseScaleBarKm(session?.map?.scaleBarKm) ?? DEFAULT_SCALE_BAR_KM;
+  const [scaleBarKmInput, setScaleBarKmInput] = useState(
+    String(persistedScaleBarKm)
+  );
   const [draggedMarker, setDraggedMarker] =
     useState<DraggedMarker | null>(null);
 
@@ -342,6 +355,12 @@ export default function Maps() {
         Math.min(galleryImageIndex, galleryImageNames.length - 1)
       ]
     : null;
+  const kmPerImagePixel =
+    persistedScaleBarKm / SCALE_BAR_LENGTH_IN_IMAGE_PIXELS;
+
+  useEffect(() => {
+    setScaleBarKmInput(String(persistedScaleBarKm));
+  }, [persistedScaleBarKm]);
 
   function renderGalleryContent() {
     if (!hasGalleryImages || !currentGalleryImageName) {
@@ -494,6 +513,53 @@ export default function Maps() {
     setMeasurementStart(null);
   }
 
+  async function updateMapScaleBarKm(nextScaleBarKm: number) {
+    if (!session?.id) {
+      setShowMessage({
+        show: true,
+        text: "Sessao invalida. Nao foi possivel salvar a escala do mapa.",
+      });
+      return;
+    }
+
+    const normalizedScaleBarKm = Number(nextScaleBarKm.toFixed(2));
+    const nextSession = {
+      ...session,
+      map: {
+        ...(session.map ?? {}),
+        scaleBarKm: normalizedScaleBarKm,
+      },
+    };
+
+    try {
+      setIsSavingMap(true);
+      setSession(nextSession);
+      await updateSession(nextSession, setShowMessage);
+      clearMeasurementLine();
+    } finally {
+      setIsSavingMap(false);
+    }
+  }
+
+  async function applyScaleBarKm() {
+    if (!isGameMaster) return;
+
+    const parsedScaleBarKm = parseScaleBarKm(scaleBarKmInput);
+
+    if (parsedScaleBarKm === null) {
+      setShowMessage({
+        show: true,
+        text: "Informe uma escala valida em km para a regua do mapa.",
+      });
+      setScaleBarKmInput(String(persistedScaleBarKm));
+      return;
+    }
+
+    if (parsedScaleBarKm === persistedScaleBarKm) return;
+
+    await updateMapScaleBarKm(parsedScaleBarKm);
+  }
+
   function calculateDistanceKm(
     start: MeasurementPoint,
     end: MeasurementPoint
@@ -505,7 +571,7 @@ export default function Maps() {
       dxInImagePixels ** 2 + dyInImagePixels ** 2
     );
 
-    return distanceInImagePixels * KM_PER_IMAGE_PIXEL;
+    return distanceInImagePixels * kmPerImagePixel;
   }
 
   function handleWheel(event: WheelEvent<HTMLDivElement>) {
@@ -957,6 +1023,40 @@ export default function Maps() {
               Salvando mapa...
             </span>
           )}
+
+          <div className="inline-flex items-center gap-2 rounded border border-white/10 bg-black/40 px-3 py-2 text-xs text-zinc-300">
+            <span className="font-geist-mono uppercase tracking-[0.12em] text-zinc-400">
+              Regua
+            </span>
+            {isGameMaster ? (
+              <>
+                <input
+                  type="text"
+                  value={scaleBarKmInput}
+                  onChange={(event) =>
+                    setScaleBarKmInput(event.target.value)
+                  }
+                  onBlur={() => {
+                    void applyScaleBarKm();
+                  }}
+                  className="w-20 rounded border border-zinc-600 bg-black px-2 py-1 text-right text-white outline-none"
+                  placeholder="10"
+                />
+                <span>km / 500 px</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    void applyScaleBarKm();
+                  }}
+                  className="rounded border border-zinc-500 bg-zinc-800 px-2 py-1 font-semibold text-white transition-colors hover:bg-zinc-700"
+                >
+                  Aplicar
+                </button>
+              </>
+            ) : (
+              <span>{persistedScaleBarKm.toFixed(2)} km / 500 px</span>
+            )}
+          </div>
         </div>
       </div>
 
