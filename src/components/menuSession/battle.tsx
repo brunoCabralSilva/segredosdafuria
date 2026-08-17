@@ -101,6 +101,12 @@ type Point = {
   imageNames?: string[];
 };
 
+type TokenSizeType =
+  | "normal"
+  | "grande"
+  | "imenso"
+  | "colossal";
+
 type Token = {
   id: number;
   x: number;
@@ -109,6 +115,7 @@ type Token = {
   imageName?: string;
   isDead?: boolean;
   color?: "green" | "red";
+  size?: TokenSizeType;
   ownerEmail?: string;
   sheetId?: string;
   superficialDamage?: number;
@@ -163,6 +170,40 @@ type TokenDragState = {
 
 type PopupPage = "details" | "gallery";
 type TokenPopupPage = "details" | "markers";
+
+const tokenSizes = {
+  normal: {
+    label: "Normal",
+    className: "h-[30px] w-[30px]",
+    textClassName: "text-[10px]",
+  },
+  grande: {
+    label: "Grande",
+    className: "h-[48px] w-[48px]",
+    textClassName: "text-xs",
+  },
+  imenso: {
+    label: "Imenso",
+    className: "h-[72px] w-[72px]",
+    textClassName: "text-sm",
+  },
+  colossal: {
+    label: "Colossal",
+    className: "h-[100px] w-[100px]",
+    textClassName: "text-base",
+  },
+} satisfies Record<
+  TokenSizeType,
+  {
+    label: string;
+    className: string;
+    textClassName: string;
+  }
+>;
+
+function normalizeTokenSize(size?: TokenSizeType): TokenSizeType {
+  return size ?? "normal";
+}
 
 const IMAGE_WIDTH = 2000;
 const IMAGE_HEIGHT = 800;
@@ -419,6 +460,7 @@ export default function Battle() {
   const [markerName, setMarkerName] = useState("");
   const [tokenName, setTokenName] = useState("");
   const [tokenColor, setTokenColor] = useState<"green" | "red">("green");
+  const [tokenSize, setTokenSize] = useState<TokenSizeType>("normal");
   const [tokenSuperficialDamage, setTokenSuperficialDamage] = useState(0);
   const [tokenAggravatedDamage, setTokenAggravatedDamage] = useState(0);
   const [tokenOtherMarkers, setTokenOtherMarkers] = useState(0);
@@ -1138,6 +1180,7 @@ export default function Battle() {
       name: nextTokenName,
       imageName: nextTokenName,
       color: "green",
+      size: "normal",
       ...(isGameMaster
         ? {
           superficialDamage: 0,
@@ -1272,6 +1315,7 @@ export default function Battle() {
     setEditingTokenId(token.id);
     setTokenName(token.imageName ?? token.name);
     setTokenColor(token.color ?? "green");
+    setTokenSize(normalizeTokenSize(token.size));
     setTokenSuperficialDamage(token.superficialDamage ?? 0);
     setTokenAggravatedDamage(token.aggravatedDamage ?? 0);
     setTokenOtherMarkers(token.otherMarkers ?? 0);
@@ -1310,6 +1354,7 @@ export default function Battle() {
     setTokenOtherMarkers(0);
     setTokenPopupPage("details");
     setIsPreviewImageFailed(false);
+    setTokenSize("normal");
   }
 
   async function saveToken() {
@@ -1326,7 +1371,13 @@ export default function Battle() {
         ...token,
         name: nextName,
         imageName: nextName,
-        color: isGameMaster ? tokenColor : token.color ?? "green",
+        color: isGameMaster
+          ? tokenColor
+          : token.color ?? "green",
+        size: isGameMaster
+          ? tokenSize
+          : normalizeTokenSize(token.size),
+
         ...(tokenMatchesSelectedCharacter(token)
           ? {
             ownerEmail: token.ownerEmail ?? email,
@@ -1526,8 +1577,8 @@ export default function Battle() {
                   toggleMarking();
                 }}
                 className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${isMarkingEnabled
-                    ? "border-red-950 bg-red-950 text-white"
-                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                  ? "border-red-950 bg-red-950 text-white"
+                  : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
                   }`}
                 title={isMarkingEnabled ? "Marcação ativa" : "Marcação inativa"}
               >
@@ -1538,8 +1589,8 @@ export default function Battle() {
                 type="button"
                 onClick={toggleMeasuring}
                 className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${isMeasuringEnabled
-                    ? "border-red-950 bg-red-950 text-white"
-                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                  ? "border-red-950 bg-red-950 text-white"
+                  : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
                   }`}
                 title={isMeasuringEnabled ? "Medição ativa" : "Medição inativa"}
               >
@@ -1550,8 +1601,8 @@ export default function Battle() {
                 type="button"
                 onClick={toggleTokenPlacement}
                 className={`inline-flex h-9 w-9 items-center justify-center border font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors ${isTokenPlacementEnabled
-                    ? "border-red-950 bg-red-950 text-white"
-                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                  ? "border-red-950 bg-red-950 text-white"
+                  : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
                   }`}
                 title={
                   isTokenPlacementEnabled
@@ -1571,8 +1622,8 @@ export default function Battle() {
                     updateBattleVisibility(!isBattleVisibleToPlayers);
                   }}
                   className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors disabled:cursor-not-allowed disabled:opacity-60 ${isBattleVisibleToPlayers
-                      ? "border-red-950 bg-red-950 text-white"
-                      : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                    ? "border-red-950 bg-red-950 text-white"
+                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
                     }`}
                   title={
                     isBattleVisibleToPlayers
@@ -1649,8 +1700,8 @@ export default function Battle() {
                 ref={imageWrapperRef}
                 onClick={handleMapClick}
                 className={`relative shrink-0 ${isMarkingEnabled || isMeasuringEnabled || isTokenPlacementEnabled
-                    ? "cursor-crosshair"
-                    : "cursor-default"
+                  ? "cursor-crosshair"
+                  : "cursor-default"
                   }`}
                 style={{
                   width: "100%",
@@ -1736,7 +1787,7 @@ export default function Battle() {
                     (token.color ?? "green") === "red"
                       ? "border-red-500 bg-red-950/70"
                       : "border-green-500 bg-black/80";
-
+                  const resolvedTokenSize = tokenSizes[normalizeTokenSize(token.size)];
                   return (
                     <button
                       key={token.id}
@@ -1760,11 +1811,11 @@ export default function Battle() {
 
                         openTokenPopup(token);
                       }}
-                      className={`absolute z-30 flex h-[30px] w-[30px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 text-center text-[8px] font-bold leading-none text-white shadow-lg ${tokenColorClassName} ${isMeasuringEnabled
-                          ? "pointer-events-none cursor-default"
-                          : canMoveToken(token)
-                            ? "cursor-grab touch-none active:cursor-grabbing"
-                            : "cursor-pointer"
+                      className={`absolute z-30 flex ${resolvedTokenSize.className} -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full border-2 text-center text-[8px] font-bold leading-none text-white shadow-lg ${tokenColorClassName} ${isMeasuringEnabled
+                        ? "pointer-events-none cursor-default"
+                        : canMoveToken(token)
+                          ? "cursor-grab touch-none active:cursor-grabbing"
+                          : "cursor-pointer"
                         }`}
                       style={{
                         left: `${tokenPosition.x * 100}%`,
@@ -1787,7 +1838,7 @@ export default function Battle() {
                           }
                         />
                       ) : (
-                        <span className="pointer-events-none select-none text-[10px] font-black uppercase leading-none">
+                        <span className={`pointer-events-none select-none font-black uppercase leading-none ${resolvedTokenSize.textClassName}`}>
                           {tokenFallbackLabel}
                         </span>
                       )}
@@ -1831,10 +1882,10 @@ export default function Battle() {
                         openEditPopup(point);
                       }}
                       className={`absolute h-7 w-7 rounded-full border-2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center text-sm z-30 shadow-lg ${markerColor.className} ${isMeasuringEnabled
-                          ? "pointer-events-none cursor-default"
-                          : canMoveMarker(point)
-                            ? "pointer-events-auto cursor-grab active:cursor-grabbing touch-none"
-                            : "pointer-events-auto cursor-pointer"
+                        ? "pointer-events-none cursor-default"
+                        : canMoveMarker(point)
+                          ? "pointer-events-auto cursor-grab active:cursor-grabbing touch-none"
+                          : "pointer-events-auto cursor-pointer"
                         }`}
                       style={{
                         left: `${markerPosition.x * 100}%`,
@@ -1868,8 +1919,8 @@ export default function Battle() {
                         type="button"
                         onClick={() => setPopupPage("details")}
                         className={`rounded border px-3 py-2 text-sm font-semibold transition ${popupPage === "details"
-                            ? "border-white bg-zinc-100 text-black"
-                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                          ? "border-white bg-zinc-100 text-black"
+                          : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
                           }`}
                       >
                         {isReadOnlyPopup ? "Informacoes" : "Edicao"}
@@ -1879,8 +1930,8 @@ export default function Battle() {
                         type="button"
                         onClick={() => setPopupPage("gallery")}
                         className={`rounded border px-3 py-2 text-sm font-semibold transition ${popupPage === "gallery"
-                            ? "border-white bg-zinc-100 text-black"
-                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                          ? "border-white bg-zinc-100 text-black"
+                          : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
                           }`}
                       >
                         Imagens
@@ -1984,8 +2035,8 @@ export default function Battle() {
                                     aria-label={marker.label}
                                     title={marker.label}
                                     className={`h-9 w-9 rounded-full border-2 flex items-center justify-center text-sm transition ${isSelected
-                                        ? `${selectedPreviewColor.className} ring-2 ring-white ring-offset-2 ring-offset-zinc-950`
-                                        : `${selectedPreviewColor.className} hover:scale-105`
+                                      ? `${selectedPreviewColor.className} ring-2 ring-white ring-offset-2 ring-offset-zinc-950`
+                                      : `${selectedPreviewColor.className} hover:scale-105`
                                       }`}
                                   >
                                     <Icon />
@@ -2017,8 +2068,8 @@ export default function Battle() {
                                     aria-label={color.label}
                                     title={color.label}
                                     className={`h-6 w-6 rounded-full border transition ${isSelected
-                                        ? "ring-2 ring-white ring-offset-2 ring-offset-zinc-950"
-                                        : "hover:scale-105"
+                                      ? "ring-2 ring-white ring-offset-2 ring-offset-zinc-950"
+                                      : "hover:scale-105"
                                       }`}
                                   >
                                     <span
@@ -2133,8 +2184,8 @@ export default function Battle() {
                           type="button"
                           onClick={() => setTokenPopupPage("details")}
                           className={`rounded border px-3 py-2 text-sm font-semibold transition ${tokenPopupPage === "details"
-                              ? "border-white bg-zinc-100 text-black"
-                              : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                            ? "border-white bg-zinc-100 text-black"
+                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
                             }`}
                         >
                           Edicao
@@ -2144,8 +2195,8 @@ export default function Battle() {
                           type="button"
                           onClick={() => setTokenPopupPage("markers")}
                           className={`rounded border px-3 py-2 text-sm font-semibold transition ${tokenPopupPage === "markers"
-                              ? "border-white bg-zinc-100 text-black"
-                              : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                            ? "border-white bg-zinc-100 text-black"
+                            : "border-zinc-700 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
                             }`}
                         >
                           Marcadores
@@ -2179,8 +2230,8 @@ export default function Battle() {
                         }}
                         placeholder="Ex: Luna Crinos"
                         className={`w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none ${!isGameMaster
-                            ? "cursor-not-allowed opacity-70"
-                            : ""
+                          ? "cursor-not-allowed opacity-70"
+                          : ""
                           }`}
                         disabled={!isGameMaster}
                       />
@@ -2195,8 +2246,8 @@ export default function Battle() {
                               type="button"
                               onClick={() => setTokenColor("green")}
                               className={`rounded border px-3 py-2 text-sm font-semibold ${tokenColor === "green"
-                                  ? "border-white bg-green-700 text-white"
-                                  : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                                ? "border-white bg-green-700 text-white"
+                                : "border-zinc-600 bg-zinc-900 text-zinc-300"
                                 }`}
                             >
                               Verde
@@ -2206,8 +2257,8 @@ export default function Battle() {
                               type="button"
                               onClick={() => setTokenColor("red")}
                               className={`rounded border px-3 py-2 text-sm font-semibold ${tokenColor === "red"
-                                  ? "border-white bg-red-700 text-white"
-                                  : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                                ? "border-white bg-red-700 text-white"
+                                : "border-zinc-600 bg-zinc-900 text-zinc-300"
                                 }`}
                             >
                               Vermelho
@@ -2216,6 +2267,34 @@ export default function Battle() {
                         </div>
                       )}
 
+                      <div className="mt-4">
+                        <label className="mb-2 block text-sm">
+                          Tamanho do token
+                        </label>
+
+                        <div className="grid grid-cols-3 gap-2">
+                          {Object.entries(tokenSizes).map(([key, size]) => {
+                            const isSelected = tokenSize === key;
+
+                            return (
+                              <button
+                                key={key}
+                                type="button"
+                                onClick={() =>
+                                  setTokenSize(key as TokenSizeType)
+                                }
+                                className={`rounded border px-3 py-2 text-sm font-semibold transition ${isSelected
+                                    ? "border-white bg-zinc-700 text-white"
+                                    : "border-zinc-600 bg-zinc-900 text-zinc-300 hover:bg-zinc-800"
+                                  }`}
+                              >
+                                {size.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+
                       {tokenName.trim() && (
                         <div className="mt-4 rounded border border-zinc-700 bg-zinc-900 p-3">
                           <p className="mb-3 text-sm text-zinc-400">
@@ -2223,8 +2302,8 @@ export default function Battle() {
                           </p>
                           <div
                             className={`relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 ${tokenColor === "red"
-                                ? "border-red-500 bg-red-950/70"
-                                : "border-green-500 bg-black"
+                              ? "border-red-500 bg-red-950/70"
+                              : "border-green-500 bg-black"
                               }`}
                           >
                             {!isPreviewImageFailed ? (
@@ -2317,8 +2396,8 @@ export default function Battle() {
                           toggleTokenDead();
                         }}
                         className={`rounded px-3 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-60 ${editingToken.isDead
-                            ? "bg-red-900 hover:bg-red-800"
-                            : "bg-zinc-700 hover:bg-zinc-600"
+                          ? "bg-red-900 hover:bg-red-800"
+                          : "bg-zinc-700 hover:bg-zinc-600"
                           }`}
                       >
                         Morto
