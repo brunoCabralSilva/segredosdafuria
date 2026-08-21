@@ -1487,7 +1487,7 @@ export default function Help() {
                             Encostar na prata nessas formas sobrenaturais causa 1 de dano Agravado por turno.
                           </li>
                           <li className="list-disc">
-                            Se tiver a oportunidade de descansar durante uma noite, o garou também vai regenerar automaticamente um nível de Vitalidade perdido por dano Agravado, mas morrerá se por acaso sofrer dano Agravado por fogo ou prata antes de descansar
+                            Estando incapacitado, se tiver a oportunidade de descansar durante uma noite, o garou também vai regenerar automaticamente um nível de Vitalidade perdido por dano Agravado, mas morrerá se por acaso sofrer dano Agravado por fogo ou prata antes de descansar
                           </li>
                           <li className="list-disc">
                             É possível remover dano Superficial da sua trilha de Vitalidade no início de uma Sessão se houver passado tempo suficiente desde o ferimento para que o personagem tenha se recuperado.
