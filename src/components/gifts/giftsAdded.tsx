@@ -1,6 +1,7 @@
 'use client'
 import contexto from "@/context/context";
 import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { filterVisibleGiftBelongings } from "./filterVisibleGiftBelongings";
 import { useContext, useState } from "react";
 import { usePathname } from "next/navigation";
 import { GiD10 } from "react-icons/gi";
@@ -11,7 +12,9 @@ export default function GiftsAdded(props: { gift: any }) {
   const pathname = usePathname();
   const isSheetStandalone = pathname?.startsWith('/sheets/');
   const [showData, setShowData] = useState(false);
-  const { setShowGiftRoll } = useContext(contexto);
+  const { session, setShowGiftRoll } = useContext(contexto);
+  const allowCustomTrybes = !session?.id || Boolean(session?.allowCustomTrybes);
+  const visibleBelongings = filterVisibleGiftBelongings(gift.belonging, allowCustomTrybes);
 
   return (
     <div className="mx-4 flex flex-col gap-2 border-b border-white/[0.07] px-2 pb-3 pt-2 text-justify font-normal last:border-b-0 last:pb-1">
@@ -28,14 +31,16 @@ export default function GiftsAdded(props: { gift: any }) {
               <div className="font-kingthings text-sm uppercase tracking-[0.08em] text-white">
                 {gift.giftPtBr}
               </div>
-              <div className="mt-1 font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/55">
-                {gift.belonging.map((belong: any, index: number) => (
-                  <span key={index}>
-                    {capitalizeFirstLetter(belong.type)}
-                    {index !== gift.belonging.length - 1 && <span className="px-1">-</span>}
-                  </span>
-                ))}
-              </div>
+              {visibleBelongings.length > 0 && (
+                <div className="mt-1 font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/55">
+                  {visibleBelongings.map((belong: any, index: number) => (
+                    <span key={index}>
+                      {capitalizeFirstLetter(belong.type)}
+                      {index !== visibleBelongings.length - 1 && <span className="px-1">-</span>}
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
           {!isSheetStandalone && <button
@@ -49,15 +54,17 @@ export default function GiftsAdded(props: { gift: any }) {
       </div>
       {showData && (
         <div className="space-y-1.5 px-7 pb-2 pt-1 font-geist-mono text-[10px] leading-5 text-white/78">
-          <div>
-            <span className="pr-1 uppercase tracking-[0.08em] text-white">Pertence à :</span>
-            {gift.belonging.map((belong: { type: string, totalRenown: number }, index: number) => (
-              <span key={index} className="capitalize">
-                {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
-                {index === gift.belonging.length - 1 ? '' : ', '}
-              </span>
-            ))}
-          </div>
+          {visibleBelongings.length > 0 && (
+            <div>
+              <span className="pr-1 uppercase tracking-[0.08em] text-white">Pertence à :</span>
+              {visibleBelongings.map((belong: { type: string, totalRenown: number }, index: number) => (
+                <span key={index} className="capitalize">
+                  {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
+                  {index === visibleBelongings.length - 1 ? '' : ', '}
+                </span>
+              ))}
+            </div>
+          )}
           <div>
             <span className="pr-1 uppercase tracking-[0.08em] text-white">Ação:</span>
             <span>{gift.action}.</span>

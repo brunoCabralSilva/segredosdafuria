@@ -3,11 +3,12 @@ import { useContext, useMemo } from "react";
 import dataGifts from '../../data/gifts.json';
 import contexto from "@/context/context";
 import { capitalizeFirstLetter, filterGiftsBySheetRules, resolveGiftEntries } from "@/firebase/utilities";
+import { filterVisibleGiftBelongings } from "../gifts/filterVisibleGiftBelongings";
 import Gift from "../gifts/gift";
 import ManageCollectionFrame from "./manageCollectionFrame";
 
 export default function AddGift() {
-  const { dataSheet, setShowGiftsToAdd } = useContext(contexto);
+  const { dataSheet, session, setShowGiftsToAdd } = useContext(contexto);
 
   const availableGifts = useMemo(() => {
     const sumRenown = Number(dataSheet.data.glory) + Number(dataSheet.data.wisdom) + Number(dataSheet.data.honor);
@@ -19,6 +20,7 @@ export default function AddGift() {
 
   const selectedGifts = Array.isArray(dataSheet?.data?.gifts) ? resolveGiftEntries(dataSheet.data.gifts) : [];
   const totalRenown = Number(dataSheet.data.glory) + Number(dataSheet.data.wisdom) + Number(dataSheet.data.honor);
+  const allowCustomTrybes = !session?.id || Boolean(session?.allowCustomTrybes);
 
   return (
     <ManageCollectionFrame
@@ -44,20 +46,26 @@ export default function AddGift() {
                 Nenhum dom adicionado.
               </div>
             ) : (
-              selectedGifts.map((item: any, index: number) => (
-                <div key={`${item.id}-${index}`} className="border border-red-700/60 bg-black/55 px-4 py-3 shadow-[0_0_20px_rgba(127,29,29,0.16)]">
-                  <p className="font-kingthings text-[0.82rem] uppercase tracking-[0.16em] text-white">{item.giftPtBr}</p>
-                  <p className="mt-1 font-geist-mono text-[10px] uppercase tracking-[0.1em] text-white/55">{item.gift}</p>
-                  <p className="mt-2 font-geist-mono text-[10px] leading-5 text-white/72">
-                    {item.belonging.map((belong: { type: string; totalRenown: number }, belongIndex: number) => (
-                      <span key={`${item.gift}-${belong.type}-${belongIndex}`}>
-                        {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
-                        {belongIndex === item.belonging.length - 1 ? '' : ', '}
-                      </span>
-                    ))}
-                  </p>
-                </div>
-              ))
+              selectedGifts.map((item: any, index: number) => {
+                const visibleBelongings = filterVisibleGiftBelongings(item.belonging, allowCustomTrybes);
+
+                return (
+                  <div key={`${item.id}-${index}`} className="border border-red-700/60 bg-black/55 px-4 py-3 shadow-[0_0_20px_rgba(127,29,29,0.16)]">
+                    <p className="font-kingthings text-[0.82rem] uppercase tracking-[0.16em] text-white">{item.giftPtBr}</p>
+                    <p className="mt-1 font-geist-mono text-[10px] uppercase tracking-[0.1em] text-white/55">{item.gift}</p>
+                    {visibleBelongings.length > 0 && (
+                      <p className="mt-2 font-geist-mono text-[10px] leading-5 text-white/72">
+                        {visibleBelongings.map((belong: { type: string; totalRenown: number }, belongIndex: number) => (
+                          <span key={`${item.gift}-${belong.type}-${belongIndex}`}>
+                            {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
+                            {belongIndex === visibleBelongings.length - 1 ? "" : ", "}
+                          </span>
+                        ))}
+                      </p>
+                    )}
+                  </div>
+                );
+              })
             )}
           </div>
         </div>

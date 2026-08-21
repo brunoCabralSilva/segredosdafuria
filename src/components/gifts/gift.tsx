@@ -1,4 +1,5 @@
-﻿import contexto from "@/context/context";
+import contexto from "@/context/context";
+import { filterVisibleGiftBelongings } from "@/components/gifts/filterVisibleGiftBelongings";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
 import { capitalizeFirstLetter, normalizeGiftId, serializeGiftEntries } from "@/firebase/utilities";
@@ -45,6 +46,8 @@ export default function Gift(props: { gift: any; index: number; length: number }
     ? serializeGiftEntries(dataSheet.data.gifts)
     : [];
   const isSelected = currentGiftIds.includes(normalizeGiftId(gift));
+  const allowCustomTrybes = !session?.id || Boolean(session?.allowCustomTrybes);
+  const visibleBelongings = filterVisibleGiftBelongings(gift.belonging, allowCustomTrybes);
 
   return (
     <div className={`${isSelected ? 'border-red-600 bg-black/85 shadow-[0_0_0_1px_rgba(248,113,113,0.42),0_0_22px_rgba(127,29,29,0.24)]' : 'border-white/10 bg-black/40'} overflow-hidden border transition-colors`}>
@@ -56,14 +59,16 @@ export default function Gift(props: { gift: any; index: number; length: number }
         <div className="min-w-0 flex-1">
           <p className="font-kingthings text-[0.86rem] uppercase tracking-[0.18em] text-white">{gift.giftPtBr}</p>
           <p className="mt-1 font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/55">{gift.gift}</p>
-          <p className="mt-2 font-geist-mono text-[10px] leading-5 text-white/72">
-            {gift.belonging.map((belong: { type: string; totalRenown: number }, index: number) => (
-              <span key={`${gift.gift}-${belong.type}-${index}`}>
-                {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
-                {index === gift.belonging.length - 1 ? '' : ', '}
-              </span>
-            ))}
-          </p>
+          {visibleBelongings.length > 0 && (
+            <p className="mt-2 font-geist-mono text-[10px] leading-5 text-white/72">
+              {visibleBelongings.map((belong: { type: string; totalRenown: number }, index: number) => (
+                <span key={`${gift.gift}-${belong.type}-${index}`}>
+                  {capitalizeFirstLetter(belong.type)} ({belong.totalRenown})
+                  {index === visibleBelongings.length - 1 ? '' : ', '}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
         <span className="mt-1 inline-flex h-8 w-8 shrink-0 items-center justify-center border border-white/10 bg-black/50 text-white/75">
           {showGift ? <IoIosArrowUp className="text-lg" /> : <IoIosArrowDown className="text-lg" />}

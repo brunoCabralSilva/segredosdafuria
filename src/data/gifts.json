@@ -510,6 +510,10 @@
       {
         "type": "silver fangs",
         "totalRenown": 9
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 9
       }
     ],
     "description": "By howling a prayer to Luna while she's visible in the sky, Garou can convince her to  temporarily rescind her silver curse. Until the next sunrise, as long as the user can  see the moon in the sky, the Garou is no longer vulnerable to silver, and the lunar metal is treated  like any other. A Lune grants this Gift.",
@@ -692,6 +696,10 @@
       {
         "type": "bone gnawers",
         "totalRenown": 3
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 3
       }
     ],
     "description": "The wielder of this Gift receives prophetic visions — glimpses of the Umbral landscape, the future, or the past, sometimes as dreams and other times in waking moments. The visions are rarely clear and appear dreamlike or symbolic, but they can warn of immediate danger or act as beacons in the face of difficult choices. A dream-spirit grants this Gift.",
@@ -791,6 +799,10 @@
       },
       {
         "type": "silent striders",
+        "totalRenown": 6
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 6
       }
     ],
@@ -943,6 +955,10 @@
       },
       {
         "type": "glass walkers",
+        "totalRenown": 3
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 3
       }
     ],
@@ -1104,6 +1120,10 @@
       {
         "type": "bone gnawers",
         "totalRenown": 6
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 6
       }
     ],
     "description": "By inhaling the scent of an object or place, the Garou can catch glimpses of events that occurred in the target's vicinity. More dramatic events leave stronger scents, and picking out details and minor occurrences calls for great skill. A crow-spirit or another animal-spirit that thrives in multiple environments, witnessing many events, can grant this Gift.",
@@ -1181,6 +1201,10 @@
       },
       {
         "type": "silent striders",
+        "totalRenown": 9
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 9
       }
     ],
@@ -1290,6 +1314,10 @@
       {
         "type": "red talons",
         "totalRenown": 3
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 3
       }
     ],
     "description": "The Garou sings a song of past grievances, current peril, and future pain, giving voice to the anguish of Gaia and stoking the Rage in their packmates.",
@@ -1315,6 +1343,10 @@
       },
       {
         "type": "children of gaia",
+        "totalRenown": 3
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 3
       }
     ],
@@ -1415,6 +1447,10 @@
       },
       {
         "type": "hart wardens",
+        "totalRenown": 6
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 6
       }
     ],
@@ -2051,6 +2087,10 @@
     "belonging": [
       {
         "type": "bone gnawers",
+        "totalRenown": 9
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 9
       }
     ],
@@ -2716,6 +2756,10 @@
       {
         "type": "shadow lords",
         "totalRenown": 3
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 3
       }
     ],
     "description": "The Garou observes their target intently, and with the spying spirit discerns a weakness in their prey. This can be either a supernatural flaw, such as the werewolves' own vulnerability to silver or, lacking that, a weak spot compromising the foe's defense. A termite-spirit grants this Gift.",
@@ -2848,6 +2892,10 @@
       {
         "type": "silent striders",
         "totalRenown": 3
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 3
       }
     ],
     "description": "The Garou may speak and read any living language they encounter, though they probably speak it with an obvious accent. Given time, they are also able to understand some parts of dead languages, though the user is unable to pierce any intentional code or other form of obfuscation. A parrot-spirit grants this Gift.",
@@ -2914,6 +2962,10 @@
       {
         "type": "silent striders",
         "totalRenown": 9
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 9
       }
     ],
     "description": "The werewolf is able to sense the safest path over or through a hazardous area, such as a minefield or winding unfamiliar streets, by following the guidance of local spirits. This Gift does not provide a way if none exists but can tip the scales in the favor of the Garou and their pack. An ant-spirit grants this Gift.",
@@ -2935,6 +2987,10 @@
     "belonging": [
       {
         "type": "silver fangs",
+        "totalRenown": 3
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 3
       }
     ],
@@ -4416,6 +4472,10 @@
       {
         "type": "shadow lords",
         "totalRenown": 6
+      },
+      {
+        "type": "stargazers",
+        "totalRenown": 6
       }
     ],
     "description": "This Gift allows the user to discern what someone or something wants, even if no word has been spoken. A desire-spirit teaches this Gift.",
@@ -4529,6 +4589,10 @@
     "belonging": [
       {
         "type": "silver fangs",
+        "totalRenown": 6
+      },
+      {
+        "type": "stargazers",
         "totalRenown": 6
       }
     ],
