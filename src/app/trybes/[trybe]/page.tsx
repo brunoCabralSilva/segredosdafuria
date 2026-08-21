@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ import listTrybes from '../../../data/trybes.json';
 import { IArchetypes, ITrybe } from '../../../interface';
 
 type TrybeData = ITrybe & {
+  custom?: boolean;
   patronName?: string;
   renown?: string;
   verbs?: string[];
@@ -141,7 +142,7 @@ export default function Trybe() {
   const trybeNameEn = toTitleCase(String(dataTrybe.nameEn));
   const representationAlt = `Representação da tribo ${trybeNamePtBr}`;
   const verbs = Array.isArray(dataTrybe.verbs) ? dataTrybe.verbs.join(' - ') : '';
-  const isFenrisUnified = trybeNamePtBr === 'Fenris';
+  const isCustomUnified = dataTrybe.custom === true;
   const officialDescription = getNonEmptyItems(dataTrybe.description);
   const officialWhoAre = getNonEmptyItems(dataTrybe.whoAre);
   const alternativeDescription = getNonEmptyItems(dataTrybe.alternativeDescription);
@@ -149,13 +150,13 @@ export default function Trybe() {
   const alternativeIdeology = getNonEmptyItems(dataTrybe.alternativeIdeology);
   const alternativeCustoms = getNonEmptyItems(dataTrybe.alternativeCustoms);
   const officialPhrase = String(dataTrybe.phrase || '');
-  const showAlternativeView = alternative && !isFenrisUnified;
-  const heroSubtitle = isFenrisUnified
+  const showAlternativeView = alternative && !isCustomUnified;
+  const heroSubtitle = isCustomUnified
     ? `${trybeNamePtBr} - ${dataTrybe.alternativeTitle || trybeNameEn}`
     : showAlternativeView
       ? `${trybeNamePtBr} - ${dataTrybe.alternativeTitle}`
       : `${trybeNamePtBr} (${trybeNameEn})`;
-  const heroPhrases = isFenrisUnified
+  const heroPhrases = isCustomUnified
     ? alternativePhrases
     : showAlternativeView
       ? alternativePhrases
@@ -207,7 +208,7 @@ export default function Trybe() {
                 <hr className="mt-6 border-white/12" />
 
                 <div className="mt-5 space-y-3">
-                  {!isFenrisUnified && (
+                  {!isCustomUnified && (
                     <p className="font-geist-mono text-[11px] uppercase tracking-[0.14em] text-white/60">
                       {showAlternativeView ? 'Visão aprofundada' : 'Texto oficial'}
                     </p>
@@ -220,7 +221,7 @@ export default function Trybe() {
                   </div>
                 </div>
 
-                {!isFenrisUnified && (
+                {!isCustomUnified && (
                   <>
                     <div className="mt-6 flex flex-wrap gap-3">
                       <button
@@ -264,7 +265,7 @@ export default function Trybe() {
 
           <section className="mt-6">
             <div className="space-y-4">
-              {isFenrisUnified ? (
+              {isCustomUnified ? (
                 <>
                   {officialDescription.length > 0 && (
                     <SectionCard title="Definição">

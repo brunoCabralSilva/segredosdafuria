@@ -172,7 +172,7 @@ export default function Sheets() {
 
           <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-3 font-geist-mono text-[10px] uppercase text-white/85 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
             <div className="min-w-0">
-              <p className="text-white/60">Augurio</p>
+              <p className="text-white/60">Augúrio</p>
               <p className="mt-1 text-[11px] text-white">{formattedAuspice}</p>
             </div>
             <div />
@@ -243,7 +243,7 @@ export default function Sheets() {
 
         <div className="mb-4 grid gap-3 border border-zinc-500/30 bg-black/60 p-4 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
           <label className="flex flex-col gap-2">
-            <span className="font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/60">Filtrar por augurio</span>
+            <span className="font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/60">Filtrar por augúrio</span>
             <select
               value={sectionFilters.auspice}
               onChange={(event) => {
@@ -252,7 +252,7 @@ export default function Sheets() {
               }}
               className="border border-zinc-500/30 bg-black px-3 py-2 font-geist-mono text-[11px] uppercase tracking-[0.08em] text-white outline-none transition-colors hover:border-red-700/80 focus:border-red-700"
             >
-              <option value="all">Todos os augurios</option>
+              <option value="all">Todos os augúrios</option>
               {auspiceOptions.map((option) => (
                 <option key={option} value={option}>{option}</option>
               ))}
