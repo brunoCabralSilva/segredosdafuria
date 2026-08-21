@@ -29,7 +29,7 @@ const menuItems = [
   { href: '/gifts', label: 'DONS', image: '/images/wallpapers/56.jpg', position: 'center' },
   { href: '/forms', label: 'FORMAS', image: '/images/wallpapers/33.jpg', position: 'center' },
   { href: '/sheets', label: 'FICHAS', image: '/images/wallpapers/100.jpg', position: 'bottom' },
-  { href: '/loresheets', label: 'LORESHEETS', image: '/images/wallpapers/1001.png', position: 'center' },
+  { href: '/loresheets', label: 'LORESHEETS', image: '/images/loresheets/Cavaleiros do Vento Oeste.png', position: 'center' },
   { href: '/profile', label: 'PERFIL', image: '/images/wallpapers/78.jpg', position: 'top' },
   { href: '/rituals', label: 'RITUAIS', image: '/images/wallpapers/0001.png', position: 'center' },
   { href: '/sessions', label: 'SESSÕES', image: '/images/wallpaper.png', position: 'center' },
