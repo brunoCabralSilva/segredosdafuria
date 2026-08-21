@@ -1,6 +1,6 @@
 ﻿'use client'
 import contexto from "@/context/context";
-import { capitalizeFirstLetter, playerSheet, resolveGiftEntries, translate } from "@/firebase/utilities";
+import { capitalizeFirstLetter, hasReturningMaidenAihanLoresheet, playerSheet, resolveGiftEntries, translate } from "@/firebase/utilities";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaRegCircle } from "react-icons/fa6";
@@ -124,30 +124,60 @@ export default function EvaluateSheet() {
     verifySkills(data);
   }, [closePopup, dataSheet, players, setShowMessage, showEvaluateSheet.data, showEvaluateSheet.show]);
 
+  const auspiceGiftTypes = ['ragabash', 'theurge', 'philodox', 'galliard', 'ahroun'];
+
   const verifyGifts = (data: any) => {
     const resolvedGifts = resolveGiftEntries(Array.isArray(data.gifts) ? data.gifts : []);
     const normalizedTrybe = String(data.trybe || '').trim().toLowerCase();
     const normalizedAuspice = String(data.auspice || '').trim().toLowerCase();
+    const hasReturningMaidenAihan = hasReturningMaidenAihanLoresheet(data);
+    const otherAuspiceTypes = auspiceGiftTypes.filter((type) => type !== normalizedAuspice);
 
-    if (resolvedGifts.length !== 3) {
+    const findGlobals = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === 'global'));
+    const findTrybe = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => String(belongingItem.type || '').trim().toLowerCase() === normalizedTrybe));
+    const findAuspice = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => String(belongingItem.type || '').trim().toLowerCase() === normalizedAuspice));
+    const findAlternateAuspice = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => otherAuspiceTypes.includes(String(belongingItem.type || '').trim().toLowerCase())));
+    const hasAlternateAuspiceReplacement = hasReturningMaidenAihan && findAlternateAuspice.length > 0;
+
+    if (hasReturningMaidenAihan) {
+      if (resolvedGifts.length < 3) {
+        let text = '';
+        if (resolvedGifts.length === 0) text = 'não existem Dons adicionados.';
+        else if (resolvedGifts.length === 1) text = 'existe apenas 1 Dom adicionado.';
+        else text = 'existem ' + resolvedGifts.length + ' Dons adicionados.';
+        setGifts({
+          correct: false,
+          errorMessage: 'Necessário ir até "Dons", clicar no botão "Gerenciar" e adicionar pelo menos 3 dons. Com a loresheet Liu "Returning Maiden" Aihan (custo 1), você pode substituir o Dom Nativo inicial por 1 Dom de outro Augúrio. Atualmente, ' + text,
+        });
+      } else if (findAlternateAuspice.length > 1) {
+        setGifts({
+          correct: false,
+          errorMessage: 'A loresheet Liu "Returning Maiden" Aihan (custo 1) permite aprender apenas 1 Dom de outro Augúrio.',
+        });
+      } else {
+        setGifts({ correct: true, errorMessage: '' });
+      }
+    } else if (resolvedGifts.length !== 3) {
       let text = '';
-      if (resolvedGifts.length === 0) text = 'não existem Dons adicionados.'
+      if (resolvedGifts.length === 0) text = 'não existem Dons adicionados.';
       else if (resolvedGifts.length === 1) text = 'existe apenas 1 Dom adicionado.';
-      else text = 'existem ' + resolvedGifts.length + ' Dons adicionados.'
+      else text = 'existem ' + resolvedGifts.length + ' Dons adicionados.';
       setGifts({ correct: false, errorMessage: 'Necessário ir até "Dons", clicar no botão "Gerenciar" e adicionar 3: 1 Dom Nativo, 1 Dom do Augúrio e 1 Dom da Tribo. Atualmente, ' + text });
     } else setGifts({ correct: true, errorMessage: '' });
 
-    const findGlobals = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => belongingItem.type === 'global'));
-    if (findGlobals.length === 0) {
-      setGiftsGlobal({ correct: false, errorMessage: 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que pertenca a Dons Nativos.' });
+    if (findGlobals.length === 0 && !hasAlternateAuspiceReplacement) {
+      setGiftsGlobal({
+        correct: false,
+        errorMessage: hasReturningMaidenAihan
+          ? 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que pertença a Dons Nativos ou 1 Dom de outro Augúrio por causa da loresheet Liu "Returning Maiden" Aihan (custo 1).'
+          : 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que pertenca a Dons Nativos.',
+      });
     } else setGiftsGlobal({ correct: true, errorMessage: '' });
 
-    const findTrybe = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => String(belongingItem.type || '').trim().toLowerCase() === normalizedTrybe));
     if (findTrybe.length === 0) {
       setGiftsTrybe({ correct: false, errorMessage: 'Necessário navegar até "Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença à Tribo ' + capitalizeFirstLetter(data.trybe) + '.' });
     } else setGiftsTrybe({ correct: true, errorMessage: '' });
 
-    const findAuspice = resolvedGifts.filter((gift: any) => gift.belonging.some((belongingItem: any) => String(belongingItem.type || '').trim().toLowerCase() === normalizedAuspice));
     if (findAuspice.length === 0) {
       setGiftsAuspice({ correct: false, errorMessage: 'Necessário navegar até Dons", clicar no botão "Gerenciar" e adicionar um Dom que Pertença ao Augúrio ' + capitalizeFirstLetter(data.auspice) + '.' });
     } else setGiftsAuspice({ correct: true, errorMessage: '' });
@@ -985,7 +1015,7 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className={successIconClass} />
                   : <FaRegCircle className={errorIconClass} />
                 }
-                <div className={labelClass}>Adicionar 3 Dons</div>
+                <div className={labelClass}>{hasReturningMaidenAihanLoresheet(data) ? 'Adicionar ao menos 3 Dons' : 'Adicionar 3 Dons'}</div>
               </div>
               <div className={deepErrorWrapClass}>
                 { !gifts.correct && <div> - { gifts.errorMessage }</div> }
@@ -998,7 +1028,7 @@ export default function EvaluateSheet() {
                   ? <FaRegCheckCircle className={successIconClass} />
                   : <FaRegCircle className={errorIconClass} />
                 }
-                <div className={labelClass}>Adicionar um Dom Nativo</div>
+                <div className={labelClass}>{hasReturningMaidenAihanLoresheet(data) ? 'Adicionar um Dom Nativo ou 1 Dom de outro Augúrio' : 'Adicionar um Dom Nativo'}</div>
               </div>
               <div className={deepErrorWrapClass}>
                 { !giftsGlobal.correct && <div> - { giftsGlobal.errorMessage }</div> }

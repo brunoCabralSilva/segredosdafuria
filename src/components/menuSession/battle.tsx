@@ -113,6 +113,7 @@ type Token = {
   y: number;
   name: string;
   imageName?: string;
+  imageUrl?: string;
   isDead?: boolean;
   color?: "green" | "red";
   size?: TokenSizeType;
@@ -398,6 +399,40 @@ function getBattleImageSrc(imageName: string) {
   return `/images/battle/${trimmedImageName}.png`;
 }
 
+function isValidTokenImageUrl(imageUrl: string) {
+  const trimmedImageUrl = imageUrl.trim();
+
+  if (!trimmedImageUrl) return false;
+
+  try {
+    const parsedUrl = new URL(trimmedImageUrl);
+    return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
+function getTokenImageSrc(token: Pick<Token, "name" | "imageName" | "imageUrl">) {
+  const trimmedImageUrl = String(token.imageUrl ?? "").trim();
+
+  if (trimmedImageUrl) return trimmedImageUrl;
+
+  return getBattleImageSrc(String(token.imageName ?? token.name ?? ""));
+}
+
+function tokenHasImageSource(token: Pick<Token, "name" | "imageName" | "imageUrl">) {
+  return String(token.imageUrl ?? "").trim().length > 0 ||
+    String(token.imageName ?? token.name ?? "").trim().length > 0;
+}
+
+function isValidBattleImageUrl(imageUrl: string) {
+  return isValidTokenImageUrl(imageUrl);
+}
+
+function isExternalBattleImageSrc(imageSrc: string) {
+  return isValidBattleImageUrl(imageSrc);
+}
+
 function getBattleImageLabel(imageSrc: string) {
   if (imageSrc === DEFAULT_BATTLE_IMAGE_SRC) return "Padrao";
 
@@ -459,6 +494,7 @@ export default function Battle() {
 
   const [markerName, setMarkerName] = useState("");
   const [tokenName, setTokenName] = useState("");
+  const [tokenImageUrl, setTokenImageUrl] = useState("");
   const [tokenColor, setTokenColor] = useState<"green" | "red">("green");
   const [tokenSize, setTokenSize] = useState<TokenSizeType>("normal");
   const [tokenSuperficialDamage, setTokenSuperficialDamage] = useState(0);
@@ -488,6 +524,11 @@ export default function Battle() {
   );
   const [pendingBattleImageOption, setPendingBattleImageOption] = useState(
     selectedBattleImageSrcFromSession
+  );
+  const [pendingBattleImageLink, setPendingBattleImageLink] = useState(
+    isExternalBattleImageSrc(selectedBattleImageSrcFromSession)
+      ? selectedBattleImageSrcFromSession
+      : ""
   );
   const [showBattleImagePicker, setShowBattleImagePicker] = useState(false);
   const [battleImageOptions, setBattleImageOptions] = useState<BattleImageOption[]>([
@@ -522,6 +563,11 @@ export default function Battle() {
     setBattleImageSrc(selectedBattleImageSrcFromSession);
     setSelectedBattleImageOption(selectedBattleImageSrcFromSession);
     setPendingBattleImageOption(selectedBattleImageSrcFromSession);
+    setPendingBattleImageLink(
+      isExternalBattleImageSrc(selectedBattleImageSrcFromSession)
+        ? selectedBattleImageSrcFromSession
+        : ""
+    );
   }, [selectedBattleImageSrcFromSession]);
 
   useEffect(() => {
@@ -570,6 +616,12 @@ export default function Battle() {
       isCancelled = true;
     };
   }, [selectedBattleImageSrcFromSession]);
+
+  const normalizedPendingBattleImageLink = pendingBattleImageLink.trim();
+  const pendingBattleImageSrc =
+    normalizedPendingBattleImageLink || pendingBattleImageOption;
+  const hasPendingBattleImageChanges =
+    pendingBattleImageSrc !== selectedBattleImageOption;
 
   // const hasMap = Boolean(session?.battle);
   const hasMap = true;
@@ -851,9 +903,26 @@ export default function Battle() {
   }
 
   async function applyBattleImageSelection() {
-    setBattleImageSrc(pendingBattleImageOption);
-    setSelectedBattleImageOption(pendingBattleImageOption);
-    await updateBattleImage(pendingBattleImageOption);
+    if (
+      normalizedPendingBattleImageLink &&
+      !isValidBattleImageUrl(normalizedPendingBattleImageLink)
+    ) {
+      setShowMessage({
+        show: true,
+        text: "Informe uma URL válida para a imagem do mapa.",
+      });
+      return;
+    }
+
+    setBattleImageSrc(pendingBattleImageSrc);
+    setSelectedBattleImageOption(pendingBattleImageSrc);
+    setPendingBattleImageOption(pendingBattleImageSrc);
+    setPendingBattleImageLink(
+      isExternalBattleImageSrc(pendingBattleImageSrc)
+        ? pendingBattleImageSrc
+        : ""
+    );
+    await updateBattleImage(pendingBattleImageSrc);
     setShowBattleImagePicker(false);
   }
   function clearMeasurementLine() {
@@ -1314,6 +1383,7 @@ export default function Battle() {
 
     setEditingTokenId(token.id);
     setTokenName(token.imageName ?? token.name);
+    setTokenImageUrl(String(token.imageUrl ?? ""));
     setTokenColor(token.color ?? "green");
     setTokenSize(normalizeTokenSize(token.size));
     setTokenSuperficialDamage(token.superficialDamage ?? 0);
@@ -1348,6 +1418,7 @@ export default function Battle() {
     setIsTokenPopupOpen(false);
     setEditingTokenId(null);
     setTokenName("");
+    setTokenImageUrl("");
     setTokenColor("green");
     setTokenSuperficialDamage(0);
     setTokenAggravatedDamage(0);
@@ -1364,13 +1435,25 @@ export default function Battle() {
       ? tokenName.trim() || editingToken.name
       : editingToken.name;
 
+    const nextImageUrl = tokenImageUrl.trim();
+
+    if (nextImageUrl && !isValidTokenImageUrl(nextImageUrl)) {
+      setShowMessage({
+        show: true,
+        text: "Necessário informar um link de imagem válido com http ou https.",
+      });
+      return;
+    }
+
     const updatedTokens = tokens.map((token) => {
       if (token.id !== editingToken.id) return token;
 
+      const { imageUrl: _imageUrl, ...tokenWithoutImageUrl } = token;
       const nextToken = {
-        ...token,
+        ...tokenWithoutImageUrl,
         name: nextName,
         imageName: nextName,
+        ...(nextImageUrl ? { imageUrl: nextImageUrl } : {}),
         color: isGameMaster
           ? tokenColor
           : token.color ?? "green",
@@ -1671,9 +1754,13 @@ export default function Battle() {
               {isGameMaster && (
                 <button
                   type="button"
-                  disabled={isSavingMap}
                   onClick={() => {
                     setPendingBattleImageOption(selectedBattleImageOption);
+                    setPendingBattleImageLink(
+                      isExternalBattleImageSrc(selectedBattleImageOption)
+                        ? selectedBattleImageOption
+                        : ""
+                    );
                     setShowBattleImagePicker(true);
                   }}
                   className="inline-flex h-9 min-w-[13rem] items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30 disabled:cursor-not-allowed disabled:opacity-60"
@@ -1693,7 +1780,7 @@ export default function Battle() {
 
           <div
             onWheel={handleWheel}
-            className="w-full h-full bg-black overflow-auto relative"
+            className="principles-scrollbar w-full h-full overflow-x-auto overflow-y-auto bg-black relative"
           >
             <div className="flex h-full min-h-full w-full min-w-full items-center justify-center">
               <div
@@ -1710,18 +1797,17 @@ export default function Battle() {
                   minHeight: `${zoom * 100}%`,
                 }}
               >
-                <Image
+                <img
                   src={battleImageSrc}
                   alt={`Mapa da Sessão ${session.name}`}
-                  fill
-                  className="object-contain select-none"
-                  priority
+                  className="h-full w-full object-contain select-none"
                   draggable={false}
                   onError={() => {
                     if (battleImageSrc !== DEFAULT_BATTLE_IMAGE_SRC) {
                       setBattleImageSrc(DEFAULT_BATTLE_IMAGE_SRC);
                       setSelectedBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
                       setPendingBattleImageOption(DEFAULT_BATTLE_IMAGE_SRC);
+                      setPendingBattleImageLink("");
                       void updateBattleImage(DEFAULT_BATTLE_IMAGE_SRC);
                     }
                   }}
@@ -1777,8 +1863,9 @@ export default function Battle() {
                   const tokenPosition =
                     draggedToken?.id === token.id ? draggedToken : token;
                   const resolvedTokenImageName = (token.imageName ?? token.name ?? "").trim();
+                  const resolvedTokenImageSrc = getTokenImageSrc(token);
                   const shouldShowTokenImage =
-                    resolvedTokenImageName.length > 0 &&
+                    tokenHasImageSource(token) &&
                     !failedTokenImageIds[token.id];
                   const tokenFallbackLabel = getTokenFallbackLabel(
                     resolvedTokenImageName || token.name || "Token"
@@ -1824,10 +1911,9 @@ export default function Battle() {
                       title={token.name}
                     >
                       {shouldShowTokenImage ? (
-                        <Image
-                          src={getBattleImageSrc(resolvedTokenImageName)}
+                        <img
+                          src={resolvedTokenImageSrc}
                           alt={token.name}
-                          fill
                           draggable={false}
                           className="pointer-events-none h-full w-full select-none object-cover"
                           onError={() =>
@@ -1910,7 +1996,7 @@ export default function Battle() {
             {isPopupOpen && (
               <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
                 <div
-                  className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
+                  className="principles-scrollbar max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto overflow-x-hidden rounded-lg border border-zinc-600 bg-zinc-950 p-4 pr-3 text-white shadow-2xl"
                   onClick={(event) => event.stopPropagation()}
                 >
                   <div className="mb-4 flex items-center justify-between gap-3">
@@ -2170,7 +2256,7 @@ export default function Battle() {
             {isTokenPopupOpen && editingToken && (
               <div className="absolute inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
                 <div
-                  className="max-h-[calc(100dvh-2rem)] w-full max-w-sm overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
+                  className="flex h-[70vh] w-full max-w-sm flex-col rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
                   onClick={(event) => event.stopPropagation()}
                 >
                   <div className="mb-4 flex items-center justify-between gap-3">
@@ -2216,6 +2302,7 @@ export default function Battle() {
                     </button>
                   </div>
 
+                  <div className="principles-scrollbar relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1">
                   {tokenPopupPage === "details" ? (
                     <>
                       <label className="mb-2 block text-sm">
@@ -2235,6 +2322,20 @@ export default function Battle() {
                           }`}
                         disabled={!isGameMaster}
                       />
+                      <label className="mb-2 mt-4 block text-sm">
+                        Link da imagem do token
+                      </label>
+                      <input
+                        type="text"
+                        value={tokenImageUrl}
+                        onChange={(event) => {
+                          setTokenImageUrl(event.target.value);
+                          setIsPreviewImageFailed(false);
+                        }}
+                        placeholder="https://exemplo.com/token.png"
+                        className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white outline-none"
+                      />
+
 
                       {isGameMaster && (
                         <div className="mt-4">
@@ -2295,7 +2396,7 @@ export default function Battle() {
                         </div>
                       </div>
 
-                      {tokenName.trim() && (
+                      {(tokenName.trim() || tokenImageUrl.trim()) && (
                         <div className="mt-4 rounded border border-zinc-700 bg-zinc-900 p-3">
                           <p className="mb-3 text-sm text-zinc-400">
                             Preview
@@ -2307,16 +2408,19 @@ export default function Battle() {
                               }`}
                           >
                             {!isPreviewImageFailed ? (
-                              <Image
-                                src={getBattleImageSrc(tokenName.trim())}
-                                alt={tokenName}
-                                fill
+                              <img
+                                src={getTokenImageSrc({
+                                  name: tokenName || editingToken?.name || "Token",
+                                  imageName: tokenName || editingToken?.name || "Token",
+                                  imageUrl: tokenImageUrl,
+                                })}
+                                alt={tokenName || editingToken?.name || "Token"}
                                 className="h-full w-full object-cover"
                                 onError={() => setIsPreviewImageFailed(true)}
                               />
                             ) : (
                               <div className="flex h-full w-full items-center justify-center text-lg font-black uppercase text-white">
-                                {getTokenFallbackLabel(tokenName)}
+                                {getTokenFallbackLabel(tokenName || editingToken?.name || "Token")}
                               </div>
                             )}
                           </div>
@@ -2374,7 +2478,9 @@ export default function Battle() {
                     </>
                   )}
 
-                  <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-4">
                     <div className="flex gap-2">
                       <button
                         type="button"
@@ -2458,26 +2564,54 @@ export default function Battle() {
                     </button>
                   </div>
                   <div className="principles-scrollbar min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-4 py-4">
+                    <div className={`mb-4 border p-3 transition-colors ${normalizedPendingBattleImageLink ? 'border-red-950 bg-red-950/20' : 'border-white/10 bg-black/50'}`}>
+                      <label className="mb-2 block font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/85">
+                        Link do mapa
+                      </label>
+                      <input
+                        type="text"
+                        value={pendingBattleImageLink}
+                        onChange={(event) => setPendingBattleImageLink(event.target.value)}
+                        placeholder="https://exemplo.com/mapa.png"
+                        className="w-full border border-white/10 bg-black/70 px-3 py-2 text-sm text-white outline-none placeholder:text-white/35"
+                      />
+                      <p className="mt-2 font-geist-mono text-[9px] uppercase tracking-[0.08em] text-white/55">
+                        Ao preencher o link, ele fica em evidência e tem prioridade sobre as imagens da lista.
+                      </p>
+                      {normalizedPendingBattleImageLink && (
+                        <div className="mt-3 aspect-video w-full overflow-hidden border border-white/10 bg-black">
+                          <img
+                            src={normalizedPendingBattleImageLink}
+                            alt="Preview do mapa por link"
+                            className="h-full w-full object-contain"
+                          />
+                        </div>
+                      )}
+                    </div>
                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                       {battleImageOptions.map((imageOption) => {
-                        const isSelected = pendingBattleImageOption === imageOption.value;
+                        const isSelected =
+                          normalizedPendingBattleImageLink === "" &&
+                          pendingBattleImageOption === imageOption.value;
 
                         return (
                           <button
                             key={imageOption.value}
                             type="button"
-                            onClick={() => setPendingBattleImageOption(imageOption.value)}
-                            className={`flex flex-col gap-2 border p-2 text-left transition-colors ${isSelected ? 'border-red-950 bg-red-950/30' : 'border-white/10 bg-black/50 hover:border-red-900 hover:bg-red-950/20'}`}
+                            onClick={() => {
+                              setPendingBattleImageOption(imageOption.value);
+                              setPendingBattleImageLink("");
+                            }}
+                            className={`flex min-w-0 flex-col gap-2 border p-2 text-left transition-colors ${isSelected ? 'border-red-950 bg-red-950/30' : 'border-white/10 bg-black/50 hover:border-red-900 hover:bg-red-950/20'}`}
                           >
-                            <div className="relative aspect-video w-full overflow-hidden border border-white/10 bg-black">
-                              <Image
+                            <div className="aspect-video w-full overflow-hidden border border-white/10 bg-black">
+                              <img
                                 src={imageOption.value}
                                 alt={imageOption.label}
-                                fill
-                                className="object-contain"
+                                className="h-full w-full object-contain"
                               />
                             </div>
-                            <span className="block font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/85">
+                            <span className="block truncate font-geist-mono text-[10px] uppercase tracking-[0.12em] text-white/85" title={imageOption.label}>
                               {imageOption.label}
                             </span>
                           </button>
@@ -2496,7 +2630,7 @@ export default function Battle() {
                     </button>
                     <button
                       type="button"
-                      disabled={isSavingMap || pendingBattleImageOption === selectedBattleImageOption}
+                      disabled={isSavingMap || !hasPendingBattleImageChanges}
                       onClick={() => {
                         void applyBattleImageSelection();
                       }}

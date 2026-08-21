@@ -32,10 +32,64 @@ export default function Forms() {
     dataSheet.data.form = newForm;
   };
 
+  const handleCrinosToHybridTransition = async (actualForm: string, newForm: string) => {
+    if (!dataSheet?.data) return;
+
+    const previousRage = Number(dataSheet.data.rage || 0);
+    if (previousRage <= 0) {
+      setShowMessage({
+        show: true,
+        text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`,
+      });
+      return;
+    }
+
+    dataSheet.data.rage = 1;
+    const rollOfRage = [Math.floor(Math.random() * 10) + 1];
+    const success = rollOfRage[0] >= 6 ? 1 : 0;
+    let resultingForm = newForm;
+    let result = `Obteve sucesso na Checagem. A Fúria foi reduzida para 1 e o personagem assumiu a forma ${newForm}.`;
+
+    if (success === 0) {
+      dataSheet.data.rage = 0;
+      resultingForm = 'Hominídeo';
+      result = 'Não obteve sucesso na Checagem. A Fúria caiu para 0, o personagem perdeu o lobo e voltou para a forma Hominídeo.';
+    }
+
+    applyFormChange(actualForm, resultingForm);
+
+    await registerMessage(
+      sessionId,
+      {
+        message: `Foi realizada uma Checagem de Fúria para o personagem "${dataSheet.data.name}" ao sair da forma Crinos e tentar assumir a forma ${newForm}.`,
+        rollOfRage,
+        result,
+        rage: dataSheet.data.rage,
+        success,
+        user: dataSheet.user,
+        type: 'rage-check',
+      },
+      email,
+      setShowMessage,
+    );
+
+    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
+    await registerHistory(
+      session.id,
+      {
+        message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Forma do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : ''} de ${actualForm} para ${resultingForm} (Fúria ajustada de ${previousRage} para ${dataSheet.data.rage} ao sair da forma Crinos${success === 0 ? ' e o personagem perdeu o lobo' : ''}).`,
+        type: 'notification',
+      },
+      null,
+      setShowMessage,
+    );
+    openSessionChat();
+  };
   const updateValue = async (newForm: string) => {
     if (!dataSheet || !sheetData) return;
 
     const actualForm = sheetData.form;
+    const isCrinosToHybridTransition = actualForm === 'Crinos' && (newForm === 'Hispo' || newForm === 'Glabro');
 
     if (session.typeSession === 'Regras Alternativas') {
       if (dataSheet.data.rage >= 5) {
@@ -122,6 +176,8 @@ export default function Forms() {
               show: true,
               text: `O personagem ${dataSheet.data.name} não possui Fúria para realizar esta ação (Mudar para a forma ${newForm}).`,
             });
+          } else if (isCrinosToHybridTransition) {
+            await handleCrinosToHybridTransition(actualForm, newForm);
           } else {
             applyFormChange(actualForm, newForm);
             const oldRage = dataSheet.data.rage;
@@ -267,4 +323,3 @@ export default function Forms() {
     </section>
   );
 }
-

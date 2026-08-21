@@ -22,9 +22,23 @@ export default function ItemAdvantage(props: { item: any; type: string }) {
     const obj = { name, cost, description, type: optionType, title };
     const aliadosEfetividade = dataSheet.data.advantagesAndFlaws.advantages.find((adv: { cost: number; description: string; name: string; title: string; type: string }) => adv.name == 'Aliados - Efetividade');
     const pactoEspiritual = dataSheet.data.advantagesAndFlaws.advantages.find((adv: { cost: number; description: string; name: string; title: string; type: string }) => adv.name == 'Pacto Espiritual');
+    const temperamentoEquilibrado = dataSheet.data.advantagesAndFlaws.advantages.find((adv: { cost: number; description: string; name: string; title: string; type: string }) => adv.title === 'Temperamento Equilibrado');
+    const amargurado = dataSheet.data.advantagesAndFlaws.flaws.find((flaw: { cost: number; description: string; name: string; title: string; type: string }) => flaw.title === 'Amargurado');
+    const melancolico = dataSheet.data.advantagesAndFlaws.flaws.find((flaw: { cost: number; description: string; name: string; title: string; type: string }) => flaw.title === 'Melancólico');
+    const homemLobo = dataSheet.data.advantagesAndFlaws.flaws.find((flaw: { cost: number; description: string; name: string; title: string; type: string }) => flaw.title === 'Homem-Lobo');
+    const caoDoInferno = dataSheet.data.advantagesAndFlaws.flaws.find((flaw: { cost: number; description: string; name: string; title: string; type: string }) => flaw.title === 'Cão do Inferno');
+    const menosMonstruoso = dataSheet.data.advantagesAndFlaws.flaws.find((flaw: { cost: number; description: string; name: string; title: string; type: string }) => flaw.title === 'Menos Monstruoso');
 
     if (name === 'Aliados - Confiabilidade' && !aliadosEfetividade) {
       setShowMessage({ show: true, text: 'A Vantagem "Aliados - Confiabilidade" só pode ser adquirida caso o personagem possua pelo menos 1 ponto em "Aliados - Efetividade".' });
+    } else if (title === 'Temperamento Equilibrado' && (amargurado || melancolico)) {
+      setShowMessage({ show: true, text: 'A Vantagem "Temperamento Equilibrado" não pode ser adquirida caso o personagem possua o Defeito "Amargurado" ou "Melancólico".' });
+    } else if (advOfFlaw === 'flaw' && (title === 'Amargurado' || title === 'Melancólico') && temperamentoEquilibrado) {
+      setShowMessage({ show: true, text: 'O Defeito "' + title + '" não pode ser adquirido caso o personagem possua a Vantagem "Temperamento Equilibrado".' });
+    } else if (title === 'Menos Monstruoso' && (homemLobo || caoDoInferno)) {
+      setShowMessage({ show: true, text: 'O Defeito "Menos Monstruoso" não pode ser adquirido caso o personagem possua "Homem-Lobo" ou "Cão do Inferno".' });
+    } else if (advOfFlaw === 'flaw' && (title === 'Homem-Lobo' || title === 'Cão do Inferno') && menosMonstruoso) {
+      setShowMessage({ show: true, text: 'O Defeito "' + title + '" não pode ser adquirido caso o personagem possua o Defeito "Menos Monstruoso".' });
     } else if ((title === 'Acompanhante' || title === 'Hospedeiro') && !pactoEspiritual) {
       setShowMessage({ show: true, text: 'A Vantagem "' + title + '" só pode ser adquirida caso o personagem possua pelo menos 1 ponto em "Pacto Espiritual - Espírito de Poder 1 / gafarete menor".' });
     } else if (title === 'Pacto Condicional' && !pactoEspiritual) {
@@ -114,6 +128,11 @@ export default function ItemAdvantage(props: { item: any; type: string }) {
                   const optionSelected = type === 'flaw'
                     ? dataSheet.data.advantagesAndFlaws.flaws.find((item2: any) => item2.description === adv.description)
                     : dataSheet.data.advantagesAndFlaws.advantages.find((item2: any) => item2.description === adv.description);
+                  const suggestions = Array.isArray(adv.sugestions)
+                    ? adv.sugestions
+                    : Array.isArray(adv['sugestions:'])
+                      ? adv['sugestions:']
+                      : [];
 
                   return (
                     <button
@@ -124,6 +143,18 @@ export default function ItemAdvantage(props: { item: any; type: string }) {
                     >
                       <p className="font-geist-mono text-[10px] uppercase tracking-[0.12em] text-red-300/85">Custo {adv.cost}</p>
                       <p className="mt-2 whitespace-pre-wrap font-geist-mono text-[11px] leading-6">{adv.description}</p>
+                      {suggestions.length > 0 && (
+                        <div className="mt-3 border-l border-red-900/60 pl-3">
+                          <p className="font-geist-mono text-[10px] uppercase tracking-[0.1em] text-red-300/75">Sugestões</p>
+                          <div className="mt-2 space-y-2">
+                            {suggestions.map((suggestion: string, suggestionIndex: number) => (
+                              <p key={`${item.name}-${index2}-suggestion-${suggestionIndex}`} className="whitespace-pre-wrap font-geist-mono text-[10px] leading-5 text-white/70">
+                                - {suggestion}
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                       {adv.title && <p className="mt-2 font-geist-mono text-[10px] uppercase tracking-[0.1em] text-white/55">{adv.title}</p>}
                     </button>
                   );

@@ -1,8 +1,8 @@
-﻿'use client'
+'use client'
 import { useContext, useMemo } from "react";
 import dataGifts from '../../data/gifts.json';
 import contexto from "@/context/context";
-import { capitalizeFirstLetter, resolveGiftEntries } from "@/firebase/utilities";
+import { capitalizeFirstLetter, filterGiftsBySheetRules, resolveGiftEntries } from "@/firebase/utilities";
 import Gift from "../gifts/gift";
 import ManageCollectionFrame from "./manageCollectionFrame";
 
@@ -12,10 +12,9 @@ export default function AddGift() {
   const availableGifts = useMemo(() => {
     const sumRenown = Number(dataSheet.data.glory) + Number(dataSheet.data.wisdom) + Number(dataSheet.data.honor);
 
-    return dataGifts.filter((gift: any) => gift.belonging.some((belong: any) => {
-      return (belong.type === 'global' || belong.type === dataSheet.data.trybe || belong.type === dataSheet.data.auspice)
-        && belong.totalRenown <= sumRenown;
-    }));
+    return filterGiftsBySheetRules(dataGifts, dataSheet.data).filter((gift: any) =>
+      gift.belonging.some((belong: any) => belong.totalRenown <= sumRenown)
+    );
   }, [dataSheet.data.auspice, dataSheet.data.glory, dataSheet.data.honor, dataSheet.data.trybe, dataSheet.data.wisdom]);
 
   const selectedGifts = Array.isArray(dataSheet?.data?.gifts) ? resolveGiftEntries(dataSheet.data.gifts) : [];

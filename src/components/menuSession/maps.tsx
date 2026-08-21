@@ -3,8 +3,9 @@
 import contexto from "@/context/context";
 import Image from "next/image";
 import { useContext, useEffect, useRef, useState } from "react";
-import type { ElementType, MouseEvent, PointerEvent, WheelEvent } from "react";
+import type { ElementType, MouseEvent, PointerEvent, SyntheticEvent, WheelEvent } from "react";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { MdOutlineDoubleArrow } from "react-icons/md";
 
 import {
   FaSubway,
@@ -35,6 +36,9 @@ import {
   FaShieldAlt,
   FaStore,
   FaLandmark,
+  FaLink,
+  FaFolderOpen,
+  FaSave,
 } from "react-icons/fa";
 import { updateSession } from "@/firebase/sessions";
 
@@ -130,6 +134,8 @@ type MarkerDragState = {
 };
 
 type PopupPage = "details" | "gallery";
+
+type MapImageSource = "directory" | "link";
 
 const IMAGE_WIDTH = 2000;
 const IMAGE_HEIGHT = 800;
@@ -327,6 +333,7 @@ export default function Maps() {
 
   const [zoom, setZoom] = useState(1);
   const [isSavingMap, setIsSavingMap] = useState(false);
+  const [isMenuCollapsed, setIsMenuCollapsed] = useState(false);
   const persistedScaleBarKm =
     parseScaleBarKm(session?.map?.scaleBarKm) ?? DEFAULT_SCALE_BAR_KM;
   const [scaleBarKmInput, setScaleBarKmInput] = useState(
@@ -334,9 +341,47 @@ export default function Maps() {
   );
   const [draggedMarker, setDraggedMarker] =
     useState<DraggedMarker | null>(null);
+  const [mapImageLinkInput, setMapImageLinkInput] = useState(
+    String(session?.map?.imageUrl ?? "")
+  );
+  const [mapImageSourceInput, setMapImageSourceInput] =
+    useState<MapImageSource>(
+      session?.map?.imageSource === "link" ? "link" : "directory"
+    );
+  const [hasDirectoryMapImage, setHasDirectoryMapImage] = useState<
+    boolean | null
+  >(null);
+  const [activeMapLoadFailed, setActiveMapLoadFailed] = useState(false);
+  const [mapImageDimensions, setMapImageDimensions] = useState({
+    width: IMAGE_WIDTH,
+    height: IMAGE_HEIGHT,
+  });
 
-  // const hasMap = Boolean(session?.map);
-  const hasMap = true;
+  const directoryMapImageSrc = showMaps?.data
+    ? "/images/maps/" + showMaps.data + "/" + showMaps.data + ".png"
+    : "";
+  const persistedMapImageUrl = String(session?.map?.imageUrl ?? "").trim();
+  const persistedMapImageSource: MapImageSource =
+    session?.map?.imageSource === "link" ? "link" : "directory";
+  const effectiveMapImageSource: MapImageSource | null =
+    persistedMapImageSource === "link"
+      ? persistedMapImageUrl
+        ? "link"
+        : hasDirectoryMapImage
+          ? "directory"
+          : null
+      : hasDirectoryMapImage
+        ? "directory"
+        : persistedMapImageUrl
+          ? "link"
+          : null;
+  const activeMapImageSrc =
+    effectiveMapImageSource === "directory"
+      ? directoryMapImageSrc
+      : effectiveMapImageSource === "link"
+        ? persistedMapImageUrl
+        : "";
+  const hasMap = Boolean(activeMapImageSrc) && !activeMapLoadFailed;
   const editingPoint =
     editingPointId === null
       ? null
@@ -361,6 +406,58 @@ export default function Maps() {
   useEffect(() => {
     setScaleBarKmInput(String(persistedScaleBarKm));
   }, [persistedScaleBarKm]);
+
+  useEffect(() => {
+    setMapImageLinkInput(String(session?.map?.imageUrl ?? ""));
+    setMapImageSourceInput(
+      session?.map?.imageSource === "link" ? "link" : "directory"
+    );
+  }, [session?.map?.imageSource, session?.map?.imageUrl]);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !showMaps?.data) {
+      setHasDirectoryMapImage(false);
+      return;
+    }
+
+    let isCancelled = false;
+    const directoryImageProbe = new window.Image();
+
+    directoryImageProbe.onload = () => {
+      if (!isCancelled) setHasDirectoryMapImage(true);
+    };
+
+    directoryImageProbe.onerror = () => {
+      if (!isCancelled) setHasDirectoryMapImage(false);
+    };
+
+    directoryImageProbe.src = directoryMapImageSrc;
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [directoryMapImageSrc, showMaps?.data]);
+
+  useEffect(() => {
+    setActiveMapLoadFailed(false);
+  }, [activeMapImageSrc]);
+
+  function handleActiveMapImageLoad(event: SyntheticEvent<HTMLImageElement>) {
+    const { naturalWidth, naturalHeight } = event.currentTarget;
+
+    if (naturalWidth > 0 && naturalHeight > 0) {
+      setMapImageDimensions({
+        width: naturalWidth,
+        height: naturalHeight,
+      });
+    }
+
+    setActiveMapLoadFailed(false);
+  }
+
+  function handleActiveMapImageError() {
+    setActiveMapLoadFailed(true);
+  }
 
   function renderGalleryContent() {
     if (!hasGalleryImages || !currentGalleryImageName) {
@@ -481,21 +578,87 @@ export default function Maps() {
       </div>
     );
   }
-  
-  async function updateMapPoints(nextPoints: Point[]) {
+
+  function renderMapImageControls() {
+    if (!isGameMaster) return null;
+
+    return (
+      <div className="w-full min-w-0 flex-1 rounded border border-white/10 bg-black/40 px-3 py-2 text-xs text-zinc-300">
+        <div className="flex min-w-0 items-center gap-2">
+          {hasDirectoryMapImage ? (
+            <div className="inline-flex shrink-0 overflow-hidden rounded border border-zinc-600">
+              <button
+                type="button"
+                onClick={() => setMapImageSourceInput("directory")}
+                aria-label="Usar imagem do diretório"
+                title="Usar imagem do diretório"
+                className={
+                  "inline-flex items-center justify-center px-3 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors " +
+                  (mapImageSourceInput === "directory"
+                    ? "bg-red-950 text-white"
+                    : "bg-black text-zinc-300 hover:bg-zinc-900")
+                }
+              >
+                <FaFolderOpen />
+              </button>
+              <button
+                type="button"
+                onClick={() => setMapImageSourceInput("link")}
+                aria-label="Usar imagem por link"
+                title="Usar imagem por link"
+                className={
+                  "inline-flex items-center justify-center px-3 py-2 font-geist-mono text-[11px] font-bold uppercase tracking-[0.12em] transition-colors " +
+                  (mapImageSourceInput === "link"
+                    ? "bg-red-950 text-white"
+                    : "bg-black text-zinc-300 hover:bg-zinc-900")
+                }
+              >
+                <FaLink />
+              </button>
+            </div>
+          ) : null}
+
+          <input
+            type="text"
+            value={mapImageLinkInput}
+            onChange={(event) => setMapImageLinkInput(event.target.value)}
+            placeholder="https://exemplo.com/mapa.png"
+            className="min-w-0 w-0 flex-1 rounded border border-zinc-600 bg-black px-3 py-2 text-sm text-white outline-none"
+          />
+
+          <button
+            type="button"
+            disabled={isSavingMap}
+            onClick={() => {
+              void saveMapImageConfiguration();
+            }}
+            aria-label={isSavingMap ? "Salvando imagem do mapa" : "Salvar imagem do mapa"}
+            title={isSavingMap ? "Salvando imagem do mapa" : "Salvar imagem do mapa"}
+            className="sheet-readonly-action inline-flex h-10 w-10 shrink-0 items-center justify-center border border-red-950 bg-red-950 text-sm text-white transition-colors hover:bg-red-900 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            <FaSave />
+          </button>
+        </div>
+      </div>
+    );
+  }
+  async function updateSessionMap(
+    nextMapPatch: Record<string, any>,
+    errorText: string
+  ) {
     if (!session?.id) {
       setShowMessage({
         show: true,
-        text: "Sessão inválida. Não foi possível salvar os pontos do mapa.",
+        text: errorText,
       });
-      return;
+      return false;
     }
 
     const nextSession = {
       ...session,
       map: {
         ...(session.map ?? {}),
-        points: nextPoints,
+        ...nextMapPatch,
       },
     };
 
@@ -503,9 +666,68 @@ export default function Maps() {
       setIsSavingMap(true);
       setSession(nextSession);
       await updateSession(nextSession, setShowMessage);
+      return true;
     } finally {
       setIsSavingMap(false);
     }
+  }
+
+  async function saveMapImageConfiguration() {
+    if (!isGameMaster) return;
+
+    const normalizedMapImageUrl = mapImageLinkInput.trim();
+    const nextImageSource: MapImageSource = hasDirectoryMapImage
+      ? mapImageSourceInput
+      : "link";
+
+    if (nextImageSource === "directory" && !hasDirectoryMapImage) {
+      setShowMessage({
+        show: true,
+        text: "Nenhuma imagem local foi encontrada para esta sessão. Use um link para o mapa.",
+      });
+      return;
+    }
+
+    if (nextImageSource === "link" && normalizedMapImageUrl) {
+      try {
+        new URL(normalizedMapImageUrl);
+      } catch (error) {
+        setShowMessage({
+          show: true,
+          text: "Informe uma URL válida para a imagem do mapa.",
+        });
+        return;
+      }
+    }
+
+    const updated = await updateSessionMap(
+      {
+        imageSource: nextImageSource,
+        imageUrl: normalizedMapImageUrl,
+      },
+      "Sessão inválida. Não foi possível salvar a imagem do mapa."
+    );
+
+    if (!updated) return;
+
+    setActiveMapLoadFailed(false);
+    clearMeasurementLine();
+    setShowMessage({
+      show: true,
+      text:
+        nextImageSource === "directory"
+          ? "Mapa configurado para usar a imagem do diretório."
+          : normalizedMapImageUrl
+            ? "Mapa configurado para usar a imagem do link."
+            : "Link da imagem do mapa removido com sucesso.",
+    });
+  }
+  
+  async function updateMapPoints(nextPoints: Point[]) {
+    await updateSessionMap(
+      { points: nextPoints },
+      "Sessão inválida. Não foi possível salvar os pontos do mapa."
+    );
   }
 
   function clearMeasurementLine() {
@@ -514,31 +736,13 @@ export default function Maps() {
   }
 
   async function updateMapScaleBarKm(nextScaleBarKm: number) {
-    if (!session?.id) {
-      setShowMessage({
-        show: true,
-        text: "Sessao invalida. Nao foi possivel salvar a escala do mapa.",
-      });
-      return;
-    }
-
     const normalizedScaleBarKm = Number(nextScaleBarKm.toFixed(2));
-    const nextSession = {
-      ...session,
-      map: {
-        ...(session.map ?? {}),
-        scaleBarKm: normalizedScaleBarKm,
-      },
-    };
+    const updated = await updateSessionMap(
+      { scaleBarKm: normalizedScaleBarKm },
+      "Sessão inválida. Não foi possível salvar a escala do mapa."
+    );
 
-    try {
-      setIsSavingMap(true);
-      setSession(nextSession);
-      await updateSession(nextSession, setShowMessage);
-      clearMeasurementLine();
-    } finally {
-      setIsSavingMap(false);
-    }
+    if (updated) clearMeasurementLine();
   }
 
   async function applyScaleBarKm() {
@@ -935,17 +1139,39 @@ export default function Maps() {
   const selectedPreviewColor = markerColors[selectedColor];
 
   if (!hasMap) {
+    const emptyMapTitle = activeMapLoadFailed
+      ? "Não foi possível carregar o mapa selecionado"
+      : hasDirectoryMapImage === null
+        ? "Verificando mapa da crônica"
+        : "Nenhum mapa disponível para esta sessão";
+
+    const emptyMapDescription = activeMapLoadFailed
+      ? effectiveMapImageSource === "link"
+        ? "O link informado não carregou. Revise a URL ou volte para a imagem do diretório."
+        : "A imagem configurada para este mapa não pôde ser carregada."
+      : hasDirectoryMapImage === null
+        ? "A plataforma está verificando se existe uma imagem local para esta sessão."
+        : isGameMaster
+          ? "Adicione um link de imagem para exibir o mapa desta sessão."
+          : "Nenhum mapa foi configurado para esta sessão até o momento.";
+
     return (
       <div className="z-[60] sm:z-50 inset-0 relative md:inset-auto w-full h-full min-h-0 flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0 border-white border-2">
         <div className="w-full h-full flex items-center justify-center bg-black text-white">
-          <div className="rounded-lg border border-zinc-700 bg-zinc-950 px-6 py-5 text-center shadow-2xl">
+          <div className="w-full max-w-3xl rounded-lg border border-zinc-700 bg-zinc-950 px-6 py-5 text-center shadow-2xl">
             <h2 className="text-lg font-bold mb-2">
-              Nenhum mapa foi criado para essa sessão
+              {emptyMapTitle}
             </h2>
 
             <p className="text-sm text-zinc-400">
-              Crie um mapa para esta sessão antes de adicionar marcadores.
+              {emptyMapDescription}
             </p>
+
+            {isGameMaster && (
+              <div className="mt-5 text-left">
+                {renderMapImageControls()}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -954,115 +1180,133 @@ export default function Maps() {
 
   return (
     <div className="z-[70] sm:z-50 inset-0 relative md:inset-auto w-full h-full min-h-0 flex flex-col items-center justify-center bg-black/80 px-3 sm:px-0">
-      <div className="w-full border-b border-white/10 bg-black/55 px-4 py-3">
+      <div className="relative w-full">
+        <div className="border-b border-white/10 bg-black/55 px-4 py-3">
         <div className="flex items-center gap-2 flex-wrap">
-          <button
-            type="button"
-            onClick={() => {
-              clearMeasurementLine();
-              toggleMarking();
-            }}
-            className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
-              isMarkingEnabled
-                ? "border-red-950 bg-red-950 text-white"
-                : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
-            }`}
-            title={isMarkingEnabled ? "Marcação ativa" : "Marcação inativa"}
-          >
-            <FaMapMarkerAlt />
-          </button>
+          {!isMenuCollapsed && (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  clearMeasurementLine();
+                  toggleMarking();
+                }}
+                className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
+                  isMarkingEnabled
+                    ? "border-red-950 bg-red-950 text-white"
+                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                }`}
+                title={isMarkingEnabled ? "Marcação ativa" : "Marcação inativa"}
+              >
+                <FaMapMarkerAlt />
+              </button>
 
-          <button
-            type="button"
-            onClick={toggleMeasuring}
-            className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
-              isMeasuringEnabled
-                ? "border-red-950 bg-red-950 text-white"
-                : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
-            }`}
-            title={isMeasuringEnabled ? "Medição ativa" : "Medição inativa"}
-          >
-            <FaRulerCombined />
-          </button>
+              <button
+                type="button"
+                onClick={toggleMeasuring}
+                className={`inline-flex h-9 w-9 items-center justify-center border text-lg transition-colors ${
+                  isMeasuringEnabled
+                    ? "border-red-950 bg-red-950 text-white"
+                    : "border-white/10 bg-black/40 text-white/75 hover:border-red-900 hover:bg-red-950/30 hover:text-white"
+                }`}
+                title={isMeasuringEnabled ? "Medição ativa" : "Medição inativa"}
+              >
+                <FaRulerCombined />
+              </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              clearMeasurementLine();
-              zoomOut();
-            }}
-            className="inline-flex h-9 min-w-9 items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
-          >
-            -
-          </button>
+              <button
+                type="button"
+                onClick={() => {
+                  clearMeasurementLine();
+                  zoomOut();
+                }}
+                className="inline-flex h-9 min-w-9 items-center justify-center border border-white/10 bg-black/40 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:border-red-900 hover:bg-red-950/30"
+              >
+                -
+              </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              clearMeasurementLine();
-              resetZoom();
-            }}
-            className="inline-flex h-9 min-w-[4.5rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
-          >
-            {Math.round(zoom * 100)}%
-          </button>
+              <button
+                type="button"
+                onClick={() => {
+                  clearMeasurementLine();
+                  resetZoom();
+                }}
+                className="inline-flex h-9 min-w-[4.5rem] items-center justify-center border border-red-950 bg-red-950 px-3 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] text-white transition-colors hover:bg-red-900"
+              >
+                {Math.round(zoom * 100)}%
+              </button>
 
-          <button
-            type="button"
-            onClick={() => {
-              clearMeasurementLine();
-              zoomIn();
-            }}
-            className="px-3 py-1 rounded text-sm font-semibold bg-zinc-800 text-white border border-zinc-500"
-          >
-            +
-          </button>
+              <button
+                type="button"
+                onClick={() => {
+                  clearMeasurementLine();
+                  zoomIn();
+                }}
+                className="px-3 py-1 rounded text-sm font-semibold bg-zinc-800 text-white border border-zinc-500"
+              >
+                +
+              </button>
 
-          {isSavingMap && (
-            <span className="text-xs text-zinc-300">
-              Salvando mapa...
-            </span>
+              {isSavingMap && (
+                <span className="text-xs text-zinc-300">
+                  Salvando mapa...
+                </span>
+              )}
+
+              <div className="inline-flex items-center gap-2 rounded border border-white/10 bg-black/40 px-3 py-2 text-xs text-zinc-300">
+                <span className="font-geist-mono uppercase tracking-[0.12em] text-zinc-400">
+                  Escala
+                </span>
+                {isGameMaster ? (
+                  <>
+                    <input
+                      type="text"
+                      value={scaleBarKmInput}
+                      onChange={(event) =>
+                        setScaleBarKmInput(event.target.value)
+                      }
+                      onBlur={() => {
+                        void applyScaleBarKm();
+                      }}
+                      className="w-20 rounded border border-zinc-600 bg-black px-2 py-1 text-right text-white outline-none"
+                      placeholder="10"
+                    />
+                    <span>km / 500 px</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        void applyScaleBarKm();
+                      }}
+                      aria-label="Salvar escala do mapa"
+                      title="Salvar escala do mapa"
+                      className="sheet-readonly-action inline-flex h-9 w-9 items-center justify-center border border-red-950 bg-red-950 text-sm text-white transition-colors hover:bg-red-900"
+                    >
+                      <FaSave />
+                    </button>
+                  </>
+                ) : (
+                  <span>{persistedScaleBarKm.toFixed(2)} km / 500 px</span>
+                )}
+              </div>
+
+              {isGameMaster && renderMapImageControls()}
+            </>
           )}
-
-          <div className="inline-flex items-center gap-2 rounded border border-white/10 bg-black/40 px-3 py-2 text-xs text-zinc-300">
-            <span className="font-geist-mono uppercase tracking-[0.12em] text-zinc-400">
-              Regua
-            </span>
-            {isGameMaster ? (
-              <>
-                <input
-                  type="text"
-                  value={scaleBarKmInput}
-                  onChange={(event) =>
-                    setScaleBarKmInput(event.target.value)
-                  }
-                  onBlur={() => {
-                    void applyScaleBarKm();
-                  }}
-                  className="w-20 rounded border border-zinc-600 bg-black px-2 py-1 text-right text-white outline-none"
-                  placeholder="10"
-                />
-                <span>km / 500 px</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    void applyScaleBarKm();
-                  }}
-                  className="rounded border border-zinc-500 bg-zinc-800 px-2 py-1 font-semibold text-white transition-colors hover:bg-zinc-700"
-                >
-                  Aplicar
-                </button>
-              </>
-            ) : (
-              <span>{persistedScaleBarKm.toFixed(2)} km / 500 px</span>
-            )}
-          </div>
         </div>
-      </div>
+        </div>
 
+        <button
+          type="button"
+          className="absolute left-1 top-full z-[80] flex h-8 w-10 -translate-y-px items-center justify-center rounded-b-full pb-2 bg-gray-whats-dark text-2xl text-white transition hover:bg-gray-700"
+          title={isMenuCollapsed ? "Exibir menu do mapa" : "Ocultar menu do mapa"}
+          onClick={() => setIsMenuCollapsed((current) => !current)}
+        >
+          <MdOutlineDoubleArrow className={isMenuCollapsed ? "rotate-90" : "-rotate-90"} />
+        </button>
+      </div>
       <div
         onWheel={handleWheel}
-        className="w-full h-full bg-black overflow-auto relative"
+        className="principles-scrollbar w-full h-full overflow-x-auto overflow-y-auto bg-black relative"
       >
         <div className="min-w-full min-h-full flex justify-center items-center">
           <div
@@ -1075,17 +1319,19 @@ export default function Maps() {
             }`}
             style={{
               width: `${zoom * 100}%`,
-              aspectRatio: `${IMAGE_WIDTH} / ${IMAGE_HEIGHT}`,
+              aspectRatio: mapImageDimensions.width + " / " + mapImageDimensions.height,
             }}
           >
-            <Image
-              src={`/images/maps/${showMaps.data}/${showMaps.data}.png`}
-              alt="Mapa de Nova Horizonte"
-              fill
-              className="object-contain select-none"
-              priority
-              draggable={false}
-            />
+            {activeMapImageSrc && (
+              <img
+                src={activeMapImageSrc}
+                alt="Mapa da crônica"
+                onLoad={handleActiveMapImageLoad}
+                onError={handleActiveMapImageError}
+                className="h-full w-full object-contain select-none"
+                draggable={false}
+              />
+            )}
 
             <svg className="absolute inset-0 z-10 w-full h-full pointer-events-none">
               {measurements.map((measurement) => (
@@ -1192,7 +1438,7 @@ export default function Maps() {
         {isPopupOpen && (
           <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 px-4 py-4">
             <div
-              className="max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-lg border border-zinc-600 bg-zinc-950 p-4 text-white shadow-2xl"
+              className="principles-scrollbar max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto overflow-x-hidden rounded-lg border border-zinc-600 bg-zinc-950 p-4 pr-3 text-white shadow-2xl"
               onClick={(event) => event.stopPropagation()}
             >
               <div className="mb-4 flex items-center justify-between gap-3">

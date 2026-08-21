@@ -88,7 +88,7 @@ export default function RageTest() {
     >
       <div className="flex flex-col items-center">
         <label htmlFor="rage-tests" className="mb-3 flex w-full flex-col items-center">
-          <p className={specialRollLabelClass}>Dados de Fúria</p>
+          <p className={specialRollLabelClass}>Número de Checagens de Fúria</p>
           <div className="flex w-full">
             <button
               type="button"

@@ -1,7 +1,7 @@
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter } from "@/firebase/utilities";
+import { capitalizeFirstLetter, hasReturningMaidenAihanLoresheet, removeAuspiceGiftsExceptGlobalOrTrybe, resolveGiftEntries, serializeGiftEntries } from "@/firebase/utilities";
 import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
@@ -10,25 +10,54 @@ export default function ItemLoresheet(props: { item: any }) {
   const [showLoresheet, setShowLoresheet] = useState(false);
   const { dataSheet, sheetId, session, email, setShowMessage } = useContext(contexto);
 
-  const updateLoresheet = async (name: string, description: string, cost: number, skill: string) => {
+    const updateLoresheet = async (name: string, description: string, cost: number, skill: string) => {
     const obj = { name, cost, description, skill };
-    let newList = dataSheet.data.advantagesAndFlaws.loresheets;
-    const findLoresheet = dataSheet.data.advantagesAndFlaws.loresheets.filter((flaw: any) => flaw.name === name);
+    const currentLoresheets = Array.isArray(dataSheet.data.advantagesAndFlaws.loresheets)
+      ? [...dataSheet.data.advantagesAndFlaws.loresheets]
+      : [];
+    let newList = currentLoresheets;
+    const hadReturningMaidenAihan = hasReturningMaidenAihanLoresheet(dataSheet.data);
+    const findLoresheet = currentLoresheets.filter((flaw: any) => flaw.name === name);
     const dataPersist = findLoresheet.map((flaw: any) => `"${flaw.skill.split(':')[0].trim()} (${flaw.cost})"`).join(', ').replace(/, ([^,]+)$/, ' e $1');
     const equal = newList.find((listItem: any) => listItem.skill === skill);
     const different = newList.find((listItem: any) => listItem.name !== name);
+
     if (equal) newList = newList.filter((listItem: any) => listItem.skill !== skill);
     else if (different) {
       newList = newList.filter((listItem: any) => listItem.name === name);
       newList.push(obj);
     } else newList.push(obj);
+
+    const nextSheetData = {
+      ...dataSheet.data,
+      advantagesAndFlaws: {
+        ...dataSheet.data.advantagesAndFlaws,
+        loresheets: newList,
+      },
+    };
+
+    const hasReturningMaidenAihan = hasReturningMaidenAihanLoresheet(nextSheetData);
+    const shouldRemoveAuspiceGifts = hadReturningMaidenAihan && !hasReturningMaidenAihan;
+    const resolvedCurrentGifts = resolveGiftEntries(Array.isArray(dataSheet.data.gifts) ? dataSheet.data.gifts : []);
+    const nextGifts = shouldRemoveAuspiceGifts
+      ? serializeGiftEntries(removeAuspiceGiftsExceptGlobalOrTrybe(resolvedCurrentGifts, nextSheetData))
+      : serializeGiftEntries(Array.isArray(dataSheet.data.gifts) ? dataSheet.data.gifts : []);
+
+    const nextSheet = {
+      ...dataSheet,
+      data: {
+        ...nextSheetData,
+        gifts: nextGifts,
+      },
+    };
+
     dataSheet.data.advantagesAndFlaws.loresheets = newList;
-    await updateDataPlayer(sheetId, dataSheet, setShowMessage);
-    const findLrsheet = dataSheet.data.advantagesAndFlaws.loresheets.filter((flaw: any) => flaw.name === name);
+    dataSheet.data.gifts = nextGifts;
+    await updateDataPlayer(sheetId, nextSheet, setShowMessage);
+    const findLrsheet = newList.filter((flaw: any) => flaw.name === name);
     const newPersist = findLrsheet.map((flaw: any) => `"${flaw.skill.split(':')[0].trim()} (${flaw.cost})"`).join(', ').replace(/, ([^,]+)$/, ' e $1');
     await registerHistory(session.id, { message: `${session.gameMaster === email ? 'O Narrador' : capitalizeFirstLetter(dataSheet.user)} alterou a Loresheet ${name} do personagem ${dataSheet.data.name}${dataSheet.email !== email ? ` do jogador ${capitalizeFirstLetter(dataSheet.user)}` : '' } de ${findLoresheet.length === 0 ? "''" : dataPersist} para ${findLrsheet.length === 0 ? "''" : newPersist}.`, type: 'notification' }, null, setShowMessage);
   };
-
   const verifySelected = () => item.habilities.find((adv: any) => dataSheet.data.advantagesAndFlaws.loresheets.find((item2: any) => item2.skill === adv.skillPtBr));
   const isSelected = Boolean(verifySelected());
 

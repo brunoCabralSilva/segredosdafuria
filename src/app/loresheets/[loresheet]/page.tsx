@@ -24,7 +24,7 @@ export default function Loresheet() {
   }, []);
 
   const returnDot = (index: number) => {
-    const dots = ['â— ', 'â—â— ', 'â—â—â— ', 'â—â—â—â— ', 'â—â—â—â—â— '];
+    const dots = ['•', '••', '•••', '••••', '•••••'];
     return dots[index];
   };
 
@@ -65,25 +65,11 @@ export default function Loresheet() {
               {
                 dataLoresheet.habilities.map((hability: IHabilities, index: number) => (
                   <div className="pt-2 text-justify flex" key={ index }>
-                    {returnDot(index) }{hability.skillPtBr}
+                    {returnDot(index) } {hability.skillPtBr}
                   </div>
                 ))
               }
-            </ul>
-            {/* <p className="pt-3 text-justify">
-              <span className="font-bold pr-1">Description (original):</span>
-              { dataLoresheet.description }
-            </p>
-            <ul className="list-disc lex flex-col sm:justify-between">
-            {
-                dataLoresheet.habilities.map((hability: IHabilities, index: number) => (
-                  <div className="pt-2 text-justify flex" key={ index }>
-                    {returnDot(index) }{hability.skill}
-                  </div>
-                ))
-              }
-            </ul> */}
-            
+            </ul>            
           </article>
           </div>
         </section>

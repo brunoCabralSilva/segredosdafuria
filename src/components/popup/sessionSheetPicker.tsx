@@ -67,8 +67,8 @@ export default function SessionSheetPicker(props: SessionSheetPickerProps) {
       title="Selecionar usuário"
       description="Escolha um usuário para abrir a ficha na área principal da sessão."
       onClose={onClose}
-      sizeClassName="w-[calc(100vw-1.5rem)] sm:w-[34rem] h-auto max-h-[80vh]"
-      bodyClassName="space-y-4"
+      sizeClassName="w-[calc(100vw-1.5rem)] sm:w-[34rem] h-[70vh]"
+      bodyClassName="space-y-4 pr-1"
     >
       {
         userOptions.length === 0

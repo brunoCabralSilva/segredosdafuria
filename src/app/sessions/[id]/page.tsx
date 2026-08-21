@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { useRouter } from "next/navigation";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
@@ -13,6 +13,7 @@ import { getPlayersBySession } from "@/firebase/players";
 import { getSessionById } from "@/firebase/sessions";
 import firestoreConfig from "@/firebase/connection";
 import MessageToUser from "@/components/dicesAndMessages/messageToUser";
+import RageStateAlert from "@/components/popup/rageStateAlert";
 import DeleteHistoric from "@/components/popup/deleteHistoric";
 import RemovePlayer from "@/components/popup/removePlayer";
 import ResetPlayer from "@/components/popup/resetPlayer";
@@ -84,6 +85,7 @@ export default function SessionId() {
     players,
     dataSheet, setDataSheet,
     showMessage, setShowMessage,
+    showRageAlert,
     showSelectSheet, setShowSelectSheet,
     addFavorAndBan,
     showDeleteFavorAndBan,
@@ -548,6 +550,8 @@ const toggleSessionSidebarView = (view: string) => {
             <Loading />
           </div>
       }
+      {showMessage.show && <MessageToUser />}
+      {showRageAlert.show && <RageStateAlert />}
       {
         showMenuSession === 'dices' &&
         <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 px-3 py-4 backdrop-blur-[2px] sm:px-4">
@@ -583,7 +587,6 @@ const toggleSessionSidebarView = (view: string) => {
     </div>
   );
 }
-
 
 
 

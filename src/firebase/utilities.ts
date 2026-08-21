@@ -250,6 +250,87 @@ export const resolveGiftEntries = (gifts: any[] = []) => {
     .filter(Boolean);
 };
 
+const alternateAuspiceGiftTypes = ['ragabash', 'theurge', 'philodox', 'galliard', 'ahroun'];
+
+const normalizeLooseComparisonText = (value: any): string => {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[\u201C\u201D"]/g, '"')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+};
+
+export const hasReturningMaidenAihanLoresheet = (sheetData: any): boolean => {
+  const loresheets = Array.isArray(sheetData?.advantagesAndFlaws?.loresheets)
+    ? sheetData.advantagesAndFlaws.loresheets
+    : [];
+
+  return loresheets.some((item: any) => {
+    const normalizedName = normalizeLooseComparisonText(item?.name);
+
+    return Number(item?.cost) === 1 && (
+      normalizedName === 'liu "donzela retornante" aihan'
+      || normalizedName === 'liu "returning maiden" aihan'
+    );
+  });
+};
+
+export const getAllowedGiftTypesForSheet = (
+  sheetData: any,
+  trybeOverride?: string,
+  auspiceOverride?: string,
+) => {
+  const normalizedAllowedTypes = new Set(
+    ['global', trybeOverride ?? sheetData?.trybe, auspiceOverride ?? sheetData?.auspice]
+      .map((item) => String(item || '').trim().toLowerCase())
+      .filter((item) => item !== ''),
+  );
+
+  if (hasReturningMaidenAihanLoresheet(sheetData)) {
+    alternateAuspiceGiftTypes.forEach((type) => normalizedAllowedTypes.add(type));
+  }
+
+  return normalizedAllowedTypes;
+};
+
+export const filterGiftsBySheetRules = (
+  gifts: any[] = [],
+  sheetData: any,
+  trybeOverride?: string,
+  auspiceOverride?: string,
+) => {
+  const normalizedAllowedTypes = getAllowedGiftTypesForSheet(sheetData, trybeOverride, auspiceOverride);
+
+  return gifts.filter((gift: any) => {
+    const giftBelongings = Array.isArray(gift?.belonging) ? gift.belonging : [];
+
+    return giftBelongings.some((belongingItem: any) => {
+      const belongingType = String(belongingItem?.type || '').trim().toLowerCase();
+      return normalizedAllowedTypes.has(belongingType);
+    });
+  });
+};
+
+export const removeAuspiceGiftsExceptGlobalOrTrybe = (
+  gifts: any[] = [],
+  sheetData: any,
+  trybeOverride?: string,
+) => {
+  const normalizedTrybe = String((trybeOverride ?? sheetData?.trybe) || '').trim().toLowerCase();
+
+  return gifts.filter((gift: any) => {
+    const giftBelongings = Array.isArray(gift?.belonging) ? gift.belonging : [];
+    const belongingTypes = giftBelongings.map((belongingItem: any) => String(belongingItem?.type || '').trim().toLowerCase());
+    const hasAuspiceBelonging = belongingTypes.some((type: string) => alternateAuspiceGiftTypes.includes(type));
+
+    if (!hasAuspiceBelonging) return true;
+
+    return belongingTypes.includes('global') || (normalizedTrybe !== '' && belongingTypes.includes(normalizedTrybe));
+  });
+};
+
 export const normalizeRitualId = (ritual: any): string => {
   if (typeof ritual === 'string' || typeof ritual === 'number') return String(ritual);
   if (ritual && typeof ritual === 'object' && ritual.id !== undefined && ritual.id !== null) {

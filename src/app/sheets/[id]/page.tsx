@@ -1,6 +1,7 @@
-﻿'use client'
+'use client'
 import ConvertToPdf from "@/components/convertToPdf";
 import MessageToUser from "@/components/dicesAndMessages/messageToUser";
+import RageStateAlert from "@/components/popup/rageStateAlert";
 import Loading from "@/components/loading";
 import General from "@/components/menuSession/general";
 import EvaluateSheet from "@/components/popup/evaluateSheet";
@@ -46,6 +47,7 @@ export default function SheetId() {
     resetPopups,
     showMessage,
     setShowMessage,
+    showRageAlert,
   } = useContext(contexto);
   const [authChecked, setAuthChecked] = useState(false);
 
@@ -133,6 +135,7 @@ export default function SheetId() {
   return (
     <div className="h-screen overflow-hidden bg-ritual bg-cover bg-top">
       {showMessage.show && <MessageToUser />}
+      {showRageAlert.show && <RageStateAlert />}
       {showDownloadPdf.show && verifyConvert()}
       {showEvaluateSheet.show && <EvaluateSheet />}
       {showGiftRoll.show && (
@@ -180,4 +183,3 @@ export default function SheetId() {
     </div>
   );
 }
-

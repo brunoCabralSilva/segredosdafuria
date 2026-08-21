@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 import { playerSheet } from '@/firebase/utilities';
 import { createContext } from 'react';
 
@@ -41,6 +41,8 @@ interface RecipesContext {
   setShowFeedback: (state: boolean) => void,
   showMessage: { show: boolean, text: string },
   setShowMessage: (state: { show: boolean, text: string }) => void,
+  showRageAlert: { show: boolean, title: string, text: string },
+  setShowRageAlert: (state: { show: boolean, title: string, text: string }) => void,
   //sessions
   sessionId: string,
   setSessionId: (state: string) => void,
@@ -194,6 +196,8 @@ const initialValue: RecipesContext = {
   setShowFeedback: () => {},
   showMessage: { show: false, text: '' },
   setShowMessage: () => {},
+  showRageAlert: { show: false, title: '', text: '' },
+  setShowRageAlert: () => {},
   showDeletePlayer: { show: false, userEmail: '' },
   setShowDeletePlayer: () => {},
   //sessions

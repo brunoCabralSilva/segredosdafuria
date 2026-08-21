@@ -1,5 +1,5 @@
-﻿'use client'
-import { ReactNode, useCallback, useState } from 'react';
+'use client'
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 import contexto from './context';
 import { sheetStructure } from '@/firebase/utilities';
 
@@ -24,6 +24,7 @@ export default function Provider({children }: IProvider) {
   //pages
   const [showFeedback, setShowFeedback] = useState(false);
   const [showMessage, setShowMessage] = useState({ show: false, text: '' });
+  const [showRageAlert, setShowRageAlert] = useState({ show: false, title: '', text: '' });
   //navigation
   const [logoutUser, setLogoutUser] = useState(false);
   //sessions
@@ -85,6 +86,8 @@ export default function Provider({children }: IProvider) {
   const [showMaps, setShowMaps] = useState({ show: false, data: '' });
   const [showBattle, setShowBattle] = useState({ show: false, data: '' });
   const [showRelationshipMap, setShowRelationshipMap] = useState({ show: false, data: '' });
+  const previousObservedSheetIdRef = useRef('');
+  const previousRageRef = useRef<number | null>(null);
 
   const scrollToBottom = useCallback(() => {
     const messagesContainer = document.getElementById('messages-container');
@@ -106,6 +109,42 @@ export default function Provider({children }: IProvider) {
 
     setShowMenuSessionState(state);
   }, [showBattle.show]);
+  useEffect(() => {
+    const currentSheetId = String((dataSheet as any)?.id || sheetId || '').trim();
+    const currentRage = Number((dataSheet as any)?.data?.rage);
+
+    if (currentSheetId === '' || !Number.isFinite(currentRage)) {
+      previousObservedSheetIdRef.current = currentSheetId;
+      previousRageRef.current = null;
+      return;
+    }
+
+    if (previousObservedSheetIdRef.current !== currentSheetId) {
+      previousObservedSheetIdRef.current = currentSheetId;
+      previousRageRef.current = currentRage;
+      return;
+    }
+
+    const previousRage = previousRageRef.current;
+    if (previousRage !== null && previousRage !== currentRage) {
+      if (previousRage > 0 && currentRage <= 0) {
+        setShowRageAlert({
+          show: true,
+          title: 'Perdeu o Lobo',
+          text: 'Sua Fúria caiu para 0. Você perdeu o lobo.',
+        });
+      } else if (String((session as any)?.typeSession || '') === 'Regras Alternativas' && previousRage < 5 && currentRage >= 5) {
+        setShowRageAlert({
+          show: true,
+          title: 'Entrou em Frenesi',
+          text: 'Sua Fúria chegou a 5. Nas Regras Alternativas, você entrou em frenesi.',
+        });
+      }
+    }
+
+    previousObservedSheetIdRef.current = currentSheetId;
+    previousRageRef.current = currentRage;
+  }, [dataSheet, session, sheetId]);
 
   const resetPopups = useCallback(() => {
     setShowHelp(false);
@@ -150,6 +189,7 @@ export default function Provider({children }: IProvider) {
     setShowMaps({ show: false, data: '' });
     setShowBattle({ show: false, data: '' });
     setShowRelationshipMap({ show: false, data: '' });
+    setShowRageAlert({ show: false, title: '', text: '' });
   }, []);
 
   return (
@@ -165,6 +205,7 @@ export default function Provider({children }: IProvider) {
         //pages
         showFeedback, setShowFeedback,
         showMessage, setShowMessage,
+        showRageAlert, setShowRageAlert,
         //Gifts
         globalGifts, setGlobalGifts,
         totalRenown, setTotalRenown,

@@ -10,7 +10,7 @@ import contexto from '@/context/context';
 import Item from '../sheetItems/item';
 import ItemAgravated from '../sheetItems/itemAgravated';
 import ResetSheet from '../popup/resetSheet';
-import { capitalizeFirstLetter, normalizeHealthTrackForFormChange, resolveGiftEntries, serializeGiftEntries, sheetStructure } from '@/firebase/utilities';
+import { capitalizeFirstLetter, filterGiftsBySheetRules, normalizeHealthTrackForFormChange, removeAuspiceGiftsExceptGlobalOrTrybe, resolveGiftEntries, serializeGiftEntries, sheetStructure } from '@/firebase/utilities';
 import DeleteSheet from '../popup/deleteSheet';
 import { registerHistory } from '@/firebase/history';
 import { FaFileCircleCheck } from 'react-icons/fa6';
@@ -244,22 +244,6 @@ export default function General(props: { dataSession: any; id: string; gameMaste
 
   const validateEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
-  const filterAllowedGifts = (gifts: any[], trybe: string, auspice: string) => {
-    const normalizedAllowedTypes = new Set(
-      ['global', trybe, auspice]
-        .map((item) => String(item || '').trim().toLowerCase())
-        .filter((item) => item !== '')
-    );
-
-    return gifts.filter((gift: any) => {
-      const giftBelongings = Array.isArray(gift?.belonging) ? gift.belonging : [];
-
-      return giftBelongings.some((belongingItem: any) => {
-        const belongingType = String(belongingItem?.type || '').trim().toLowerCase();
-        return normalizedAllowedTypes.has(belongingType);
-      });
-    });
-  };
 
   const updateValue = async (key: string, value: string, namePtBr: string) => {
     const findPlayer = players.find((player: any) => player.id === sheetId) || dataSheet;
@@ -333,7 +317,11 @@ export default function General(props: { dataSession: any; id: string; gameMaste
     const currentGifts = Array.isArray(findPlayer?.data?.gifts) ? findPlayer.data.gifts : [];
     const resolvedCurrentGifts = resolveGiftEntries(currentGifts);
     const filteredGifts = shouldFilterGifts
-      ? serializeGiftEntries(filterAllowedGifts(resolvedCurrentGifts, nextTrybe, nextAuspice))
+      ? serializeGiftEntries(
+          key === 'auspice'
+            ? removeAuspiceGiftsExceptGlobalOrTrybe(resolvedCurrentGifts, findPlayer.data, nextTrybe)
+            : filterGiftsBySheetRules(resolvedCurrentGifts, findPlayer.data, nextTrybe, nextAuspice)
+        )
       : serializeGiftEntries(currentGifts);
 
     const updatedPlayer = {
