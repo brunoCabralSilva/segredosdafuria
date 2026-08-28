@@ -31,6 +31,16 @@ export default function AutomatedRoll() {
     return ((atrSelected === '0' || atrSelected === '1') && (sklSelected === '0' || sklSelected === '1') && (renSelected === '0' || renSelected === '1')) || dificulty <= 0;
   }
 
+  const selectedSpecialty = sklSelected !== '0' && sklSelected !== '1'
+    ? dataSheet?.data?.skills?.[sklSelected]?.specialty?.trim() || ''
+    : '';
+
+  const formatSkillOptionLabel = (skillName: string, skillValue: number, specialty: string) => {
+    const normalizedSpecialty = specialty.trim();
+    if (normalizedSpecialty === '') return `${skillName} (${skillValue})`;
+    return `${skillName} (${skillValue}) - ${normalizedSpecialty}`;
+  };
+
   const rollDices = async () => {
     await registerAutomatedRoll(
       sheetId,
@@ -113,8 +123,11 @@ export default function AutomatedRoll() {
                     key={index}
                     value={item.value}
                   >
-                    { item.namePtBr }
-                    ({ dataSheet.data.skills[item.value].value })
+                    {formatSkillOptionLabel(
+                      item.namePtBr,
+                      dataSheet.data.skills[item.value].value,
+                      dataSheet.data.skills[item.value].specialty || '',
+                    )}
                   </option>
                 ))
             }
@@ -156,6 +169,11 @@ export default function AutomatedRoll() {
       </label>
       <label htmlFor="penaltyOrBonus" className="mb-3 flex w-full flex-col items-center">
         <p className="w-full pb-1.5 font-geist-mono text-[10px] uppercase tracking-[0.08em] text-white/78">Bônus (+) ou Penalidade (-)</p>
+        {selectedSpecialty !== '' && (
+          <p className="w-full pb-1.5 font-geist-mono text-[10px] leading-4 text-white/62">
+            {`Você tem especialização em ${selectedSpecialty}. Adicione +1 caso se aplique.`}
+          </p>
+        )}
         <div className="flex w-full">
           <button
             type="button"
