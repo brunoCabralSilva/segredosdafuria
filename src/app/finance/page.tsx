@@ -1,11 +1,11 @@
-﻿'use client'
+'use client'
 import Footer from "@/components/footer";
 import MessageToUser from "@/components/dicesAndMessages/messageToUser";
 import Loading from "@/components/loading";
 import Nav from "@/components/nav";
 import contexto from "@/context/context";
 import { authenticate } from "@/firebase/authenticate";
-import { createFinance, deleteFinance, duplicateFinance, getFinanceCalendar, getFinances, saveFinanceCalendar, updateFinance } from "@/firebase/finance";
+import { createFinance, createFinanceCalendar, deleteFinance, duplicateFinance, getFinanceCalendars, getFinances, saveFinanceCalendar, updateFinance } from "@/firebase/finance";
 import { getFinancePeriodOrder, getMonthLabelByOrder, sortFinancesByPeriod } from "@/utils/financePeriod";
 import { useRouter } from "next/navigation";
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -76,7 +76,7 @@ const playerLineColors = [
 const calendarMonthLabels = [
   "Janeiro",
   "Fevereiro",
-  "Marco",
+  "Março",
   "Abril",
   "Maio",
   "Junho",
@@ -92,11 +92,11 @@ const calendarWeekLabels = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
 const calendarWeekLabelsLong = [
   "Domingo",
   "Segunda",
-  "Terca",
+  "Terça",
   "Quarta",
   "Quinta",
   "Sexta",
-  "Sabado",
+  "Sábado",
 ];
 
 const getCalendarDateKey = (year: number, month: number, day: number) => (
@@ -195,6 +195,64 @@ const normalizeCalendarSessions = (sessions: any[] = []): CalendarSessionEntry[]
   })
 );
 
+type FinanceCalendar = {
+  id: string,
+  year: number,
+  month: number,
+  events: Record<string, CalendarSessionEntry[]>,
+  periodOrder: number,
+};
+
+const sortFinanceCalendars = (calendars: FinanceCalendar[]) => (
+  [...calendars].sort((calendarA, calendarB) => calendarA.periodOrder - calendarB.periodOrder)
+);
+
+const getFinanceCalendarLabel = (year: number, month: number) => (
+  `${calendarMonthLabels[month - 1] || 'Mês'} de ${year}`
+);
+
+const getNextFinanceCalendarPeriod = (
+  calendars: FinanceCalendar[],
+  baseYear: number,
+  baseMonth: number
+) => {
+  const existingPeriods = new Set(calendars.map((calendar) => calendar.periodOrder));
+  let nextYear = baseYear;
+  let nextMonth = baseMonth;
+
+  while (existingPeriods.has((nextYear * 100) + nextMonth)) {
+    nextMonth += 1;
+
+    if (nextMonth > 12) {
+      nextMonth = 1;
+      nextYear += 1;
+    }
+  }
+
+  return {
+    year: nextYear,
+    month: nextMonth,
+  };
+};
+
+const normalizeFinanceCalendar = (calendarData: any): FinanceCalendar => {
+  const year = Number(calendarData.year) || 0;
+  const month = Number(calendarData.month) || 0;
+
+  return {
+    id: calendarData.id,
+    year,
+    month,
+    events: Object.fromEntries(
+      Object.entries(calendarData.events || {}).map(([dateKey, sessions]: [string, any]) => ([
+        dateKey,
+        normalizeCalendarSessions(Array.isArray(sessions) ? sessions : []),
+      ]))
+    ),
+    periodOrder: (year * 100) + month,
+  };
+};
+
 export default function Finance() {
   const router = useRouter();
   const [financeList, setFinanceList] = useState<any>([]);
@@ -205,8 +263,10 @@ export default function Finance() {
   const [editingPlayerKey, setEditingPlayerKey] = useState<string | null>(null);
   const [collapsedFinanceIds, setCollapsedFinanceIds] = useState<string[]>([]);
   const [hiddenPlayerLines, setHiddenPlayerLines] = useState<string[]>([]);
-  const [financeCalendarEvents, setFinanceCalendarEvents] = useState<Record<string, CalendarSessionEntry[]>>({});
+  const [financeCalendars, setFinanceCalendars] = useState<FinanceCalendar[]>([]);
+  const [selectedFinanceCalendarId, setSelectedFinanceCalendarId] = useState('');
   const [isCalendarLoading, setIsCalendarLoading] = useState(true);
+  const [isCreatingCalendar, setIsCreatingCalendar] = useState(false);
   const [selectedCalendarDay, setSelectedCalendarDay] = useState<number | null>(null);
   const [editingCalendarSessions, setEditingCalendarSessions] = useState<CalendarSessionEntry[]>([emptyCalendarSession()]);
   const [isSavingCalendarDay, setIsSavingCalendarDay] = useState(false);
@@ -293,27 +353,38 @@ export default function Finance() {
   useEffect(() => {
     if (!showFinancePage) return;
 
-    const loadFinanceCalendar = async () => {
+    const loadFinanceCalendars = async () => {
       setIsCalendarLoading(true);
 
       try {
-        const calendarData = await getFinanceCalendar(currentYear, currentMonthNumber);
-        const normalizedCalendarEvents = Object.fromEntries(
-          Object.entries(calendarData.events || {}).map(([dateKey, sessions]: [string, any]) => ([
-            dateKey,
-            normalizeCalendarSessions(Array.isArray(sessions) ? sessions : []),
-          ]))
+        const calendars = sortFinanceCalendars(
+          (await getFinanceCalendars()).map((calendar: any) => normalizeFinanceCalendar(calendar))
         );
-        setFinanceCalendarEvents(normalizedCalendarEvents);
+
+        setFinanceCalendars(calendars);
+        setSelectedFinanceCalendarId((prevState) => {
+          if (calendars.some((calendar) => calendar.id === prevState)) {
+            return prevState;
+          }
+
+          const currentCalendar = calendars.find((calendar) => calendar.periodOrder === currentPeriodOrder);
+          return currentCalendar?.id || calendars[calendars.length - 1]?.id || '';
+        });
       } catch (error) {
-        setShowMessage({ show: true, text: 'Ocorreu um erro ao carregar o Calendário: ' + error });
+        setShowMessage({ show: true, text: 'Ocorreu um erro ao carregar os calendários: ' + error });
       } finally {
         setIsCalendarLoading(false);
       }
     };
 
-    loadFinanceCalendar();
-  }, [currentMonthNumber, currentYear, setShowMessage, showFinancePage]);
+    loadFinanceCalendars();
+  }, [currentPeriodOrder, setShowMessage, showFinancePage]);
+
+  useEffect(() => {
+    setSelectedCalendarDay(null);
+    setEditingCalendarSessions([emptyCalendarSession()]);
+    setIsSavingCalendarDay(false);
+  }, [selectedFinanceCalendarId]);
 
   const getSumValues = (players: any[] = []) => {
     let value = 0;
@@ -461,11 +532,19 @@ export default function Finance() {
     };
   });
 
-  const currentCalendarMonthLabel = calendarMonthLabels[currentMonthNumber - 1];
-  const currentMonthDaysCount = new Date(currentYear, currentMonthNumber, 0).getDate();
-  const currentMonthFirstWeekDay = new Date(currentYear, currentMonthNumber - 1, 1).getDay();
-  const scheduledCalendarDaysCount = Object.keys(financeCalendarEvents).length;
-  const scheduledCalendarSessionsCount = Object.values(financeCalendarEvents).reduce((total, sessions) => (
+  const selectedFinanceCalendar = financeCalendars.find((calendar) => calendar.id === selectedFinanceCalendarId) || null;
+  const selectedCalendarYear = selectedFinanceCalendar?.year || currentYear;
+  const selectedCalendarMonthNumber = selectedFinanceCalendar?.month || currentMonthNumber;
+  const selectedCalendarMonthLabel = calendarMonthLabels[selectedCalendarMonthNumber - 1] || '';
+  const selectedCalendarEvents: Record<string, CalendarSessionEntry[]> = selectedFinanceCalendar?.events || {};
+  const isSelectedCalendarCurrentMonth = selectedCalendarYear === currentYear && selectedCalendarMonthNumber === currentMonthNumber;
+  const currentCalendarMonthLabel = selectedFinanceCalendar
+    ? getFinanceCalendarLabel(selectedCalendarYear, selectedCalendarMonthNumber)
+    : 'Nenhum calendário selecionado';
+  const currentMonthDaysCount = selectedFinanceCalendar ? new Date(selectedCalendarYear, selectedCalendarMonthNumber, 0).getDate() : 0;
+  const currentMonthFirstWeekDay = selectedFinanceCalendar ? new Date(selectedCalendarYear, selectedCalendarMonthNumber - 1, 1).getDay() : 0;
+  const scheduledCalendarDaysCount = Object.keys(selectedCalendarEvents).length;
+  const scheduledCalendarSessionsCount = Object.values(selectedCalendarEvents).reduce((total, sessions) => (
     total + sessions.length
   ), 0);
 
@@ -476,15 +555,15 @@ export default function Finance() {
     })),
     ...Array.from({ length: currentMonthDaysCount }, (_, index) => {
       const dayNumber = index + 1;
-      const dateKey = getCalendarDateKey(currentYear, currentMonthNumber, dayNumber);
+      const dateKey = getCalendarDateKey(selectedCalendarYear, selectedCalendarMonthNumber, dayNumber);
 
       return {
         type: 'day',
         key: dateKey,
         dateKey,
         dayNumber,
-        isToday: dayNumber === currentDayNumber,
-        sessions: financeCalendarEvents[dateKey] || [],
+        isToday: isSelectedCalendarCurrentMonth && dayNumber === currentDayNumber,
+        sessions: selectedCalendarEvents[dateKey] || [],
       };
     }),
   ];
@@ -593,8 +672,10 @@ export default function Finance() {
   };
 
   const handleOpenCalendarDay = (dayNumber: number) => {
-    const dateKey = getCalendarDateKey(currentYear, currentMonthNumber, dayNumber);
-    const daySessions = financeCalendarEvents[dateKey] || [];
+    if (!selectedFinanceCalendar) return;
+
+    const dateKey = getCalendarDateKey(selectedCalendarYear, selectedCalendarMonthNumber, dayNumber);
+    const daySessions = selectedCalendarEvents[dateKey] || [];
 
     setSelectedCalendarDay(dayNumber);
     setEditingCalendarSessions(daySessions.length > 0 ? normalizeCalendarSessions(daySessions) : [emptyCalendarSession()]);
@@ -631,9 +712,9 @@ export default function Finance() {
   };
 
   const handleSaveCalendarDay = async () => {
-    if (selectedCalendarDay === null) return;
+    if (selectedCalendarDay === null || !selectedFinanceCalendar) return;
 
-    const dateKey = getCalendarDateKey(currentYear, currentMonthNumber, selectedCalendarDay);
+    const dateKey = getCalendarDateKey(selectedCalendarYear, selectedCalendarMonthNumber, selectedCalendarDay);
     const cleanedSessions = editingCalendarSessions
       .map((sessionItem) => ({
         time: sessionItem.time.trim(),
@@ -641,7 +722,7 @@ export default function Finance() {
         color: sessionItem.color || calendarSessionColorOptions[0].value,
       }))
       .filter((sessionItem) => sessionItem.name);
-    const nextCalendarEvents = { ...financeCalendarEvents };
+    const nextCalendarEvents = { ...selectedCalendarEvents };
 
     if (cleanedSessions.length > 0) {
       nextCalendarEvents[dateKey] = cleanedSessions;
@@ -652,18 +733,51 @@ export default function Finance() {
     setIsSavingCalendarDay(true);
 
     const success = await saveFinanceCalendar(
-      currentYear,
-      currentMonthNumber,
+      selectedCalendarYear,
+      selectedCalendarMonthNumber,
       nextCalendarEvents,
       setShowMessage
     );
 
     if (success) {
-      setFinanceCalendarEvents(nextCalendarEvents);
+      setFinanceCalendars((prevState) => sortFinanceCalendars(prevState.map((calendar) => (
+        calendar.id === selectedFinanceCalendar.id
+          ? { ...calendar, events: nextCalendarEvents }
+          : calendar
+      ))));
       handleCloseCalendarDay();
       setShowMessage({ show: true, text: 'Calendário atualizado com sucesso!' });
     } else {
       setIsSavingCalendarDay(false);
+    }
+  };
+
+  const handleCreateFinanceCalendar = async () => {
+    setIsCreatingCalendar(true);
+
+    try {
+      const nextCalendarPeriod = getNextFinanceCalendarPeriod(financeCalendars, currentYear, currentMonthNumber);
+      const newCalendar = await createFinanceCalendar(
+        nextCalendarPeriod.year,
+        nextCalendarPeriod.month,
+        setShowMessage
+      );
+
+      if (newCalendar) {
+        const normalizedCalendar = normalizeFinanceCalendar(newCalendar);
+
+        setFinanceCalendars((prevState) => sortFinanceCalendars([
+          ...prevState.filter((calendar) => calendar.id !== normalizedCalendar.id),
+          normalizedCalendar,
+        ]));
+        setSelectedFinanceCalendarId(normalizedCalendar.id);
+        setShowMessage({
+          show: true,
+          text: `Calendário de ${getFinanceCalendarLabel(normalizedCalendar.year, normalizedCalendar.month)} criado com sucesso!`,
+        });
+      }
+    } finally {
+      setIsCreatingCalendar(false);
     }
   };
 
@@ -1225,44 +1339,92 @@ export default function Finance() {
                 </div>
               </>
             }
-            {
+                        {
               activeFinanceTab === 'calendar' &&
               <div className="mb-4 flex flex-col rounded-sm border border-white/30 bg-black/70 p-2 text-white md:min-h-[calc(100vh-16rem)]">
-                <div className="flex shrink-0 flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
-                  <div>
+                <div className="flex flex-col sm:flex-row w-full justify-between gap-4">
+                  <div className="w-1/2 text-center sm:text-left">
                     <div className="text-xs uppercase tracking-[0.18em] text-yellow-300/80">
                       Agenda financeira
                     </div>
                     <h2 className="mt-1 text-xl font-black md:text-2xl">
-                      { currentCalendarMonthLabel } de { currentYear }
+                      { selectedFinanceCalendar ? currentCalendarMonthLabel : 'Calendários mensais' }
                     </h2>
                     <p className="mt-1 hidden max-w-2xl text-[11px] text-white/65 md:block md:text-xs">
-                      Clique em qualquer dia para marcar as sessões que você terá neste mês e definir quais serão.
+                      {
+                        selectedFinanceCalendar
+                          ? 'Clique em qualquer dia para marcar as sessões deste calendário.'
+                          : 'Crie um calendário mensal e escolha-o no seletor para começar a organizar as sessões.'
+                      }
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-                    <div className="rounded-sm border border-white/20 bg-black/50 p-1.5">
-                      <div className="text-[10px] uppercase tracking-[0.16em] text-white/50 md:text-xs">
-                        Dias com sessão
+                  <aside className="w-1/2 border border-white/20 bg-white/[0.035] p-3 shadow-[0_10px_32px_rgba(0,0,0,0.24)] xl:w-[500px] xl:self-end">
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <button
+                        type="button"
+                        onClick={ handleCreateFinanceCalendar }
+                        disabled={ isCreatingCalendar }
+                        className="min-h-14 w-full shrink-0 cursor-pointer rounded-xl border-2 border-black bg-white px-5 text-sm font-bold text-black transition-colors duration-400 hover:border-white hover:underline disabled:cursor-not-allowed disabled:opacity-70 sm:w-44"
+                      >
+                        { isCreatingCalendar ? 'Criando...' : 'Novo calendário' }
+                      </button>
+                      <label className="relative block min-w-0 flex-1">
+                        <span className="absolute -top-2 left-2 z-10 bg-[#080808] px-1 text-[9px] font-bold uppercase tracking-[0.14em] text-white/55">
+                          Calendário ativo
+                        </span>
+                        <select
+                          value={ selectedFinanceCalendarId }
+                          onChange={ (event) => setSelectedFinanceCalendarId(event.target.value) }
+                          disabled={ isCalendarLoading || financeCalendars.length === 0 }
+                          className="py-3 w-full appearance-none border border-white/25 bg-black/60 px-4 pr-10 text-sm font-semibold text-white outline-none transition-colors duration-300 hover:border-white/55 focus:border-yellow-300 disabled:cursor-not-allowed disabled:opacity-60"
+                        >
+                          <option value="" className="text-black">Selecione um calendário</option>
+                          {
+                            financeCalendars.map((calendar) => (
+                              <option key={ calendar.id } value={ calendar.id } className="text-black">
+                                { getFinanceCalendarLabel(calendar.year, calendar.month) }
+                              </option>
+                            ))
+                          }
+                        </select>
+                        <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-sm text-white/55">⌄</span>
+                      </label>
+                    </div>
+                    <div className="mt-3 grid grid-cols-1 divide-y divide-white/15 border border-white/15 bg-black/35 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+                      <div className="px-4 py-3">
+                        <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/50">
+                          Dias com sessão
+                        </div>
+                        <div className="mt-1 flex items-baseline gap-1.5">
+                          <span className="text-2xl font-black leading-none text-yellow-300">
+                            { scheduledCalendarDaysCount }
+                          </span>
+                          <span className="text-[10px] text-white/45">dias</span>
+                        </div>
                       </div>
-                      <div className="mt-1 text-lg font-black text-yellow-300 md:text-xl">
-                        { scheduledCalendarDaysCount }
+                      <div className="px-4 py-3">
+                        <div className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/50">
+                          Sessões planejadas
+                        </div>
+                        <div className="mt-1 flex items-baseline gap-1.5">
+                          <span className="text-2xl font-black leading-none text-green-300">
+                            { scheduledCalendarSessionsCount }
+                          </span>
+                          <span className="text-[10px] text-white/45">sessões</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="rounded-sm border border-white/20 bg-black/50 p-1.5">
-                      <div className="text-[10px] uppercase tracking-[0.16em] text-white/50 md:text-xs">
-                        Sessões planejadas
-                      </div>
-                      <div className="mt-1 text-lg font-black text-green-300 md:text-xl">
-                        { scheduledCalendarSessionsCount }
-                      </div>
-                    </div>
-                  </div>
+                  </aside>
+                  
                 </div>
                 {
                   isCalendarLoading ? (
                     <div className="flex flex-1 items-center justify-center text-center text-sm text-white/70">
-                      Carregando Calendário do mes atual...
+                      Carregando calendário...
+                    </div>
+                  ) : !selectedFinanceCalendar ? (
+                    <div className="flex flex-1 items-center justify-center text-center text-sm text-white/70">
+                      Nenhum calendário criado ainda. Clique em Novo calendário para começar.
                     </div>
                   ) : (
                     <div className="mt-2 flex min-h-0 flex-1 flex-col">
@@ -1284,10 +1446,10 @@ export default function Finance() {
                                       ? 'text-green-300'
                                       : (calendarDay.sessions.length > 0 ? 'text-white/55' : 'text-white/40')
                                   }` }>
-                                    { calendarDay.isToday ? 'Hoje' : calendarWeekLabelsLong[new Date(currentYear, currentMonthNumber - 1, calendarDay.dayNumber).getDay()] }
+                                    { calendarDay.isToday ? 'Hoje' : calendarWeekLabelsLong[new Date(selectedCalendarYear, selectedCalendarMonthNumber - 1, calendarDay.dayNumber).getDay()] }
                                   </div>
                                   <div className="mt-1 text-lg font-black text-white">
-                                    { calendarDay.dayNumber } de { currentCalendarMonthLabel }
+                                    { calendarDay.dayNumber } de { selectedCalendarMonthLabel }
                                   </div>
                                 </div>
                               </div>
@@ -1756,13 +1918,13 @@ export default function Finance() {
                   <div className="w-full px-5 pb-5 text-white">
                     <div className="mb-5 text-center">
                       <div className="text-xs uppercase tracking-[0.18em] text-yellow-300/80">
-                        Sesssao planejada
+                        Sessão planejada
                       </div>
                       <h3 className="mt-2 text-2xl font-black">
-                        { selectedCalendarDay } de { currentCalendarMonthLabel } de { currentYear }
+                        { selectedCalendarDay } de { selectedCalendarMonthLabel } de { selectedCalendarYear }
                       </h3>
                       <p className="mt-2 text-sm text-white/70">
-                        Defina aqui quais sessoes vao acontecer nesse dia.
+                        Defina aqui quais sessões vão acontecer nesse dia.
                       </p>
                     </div>
                     <div className="flex flex-col gap-3">

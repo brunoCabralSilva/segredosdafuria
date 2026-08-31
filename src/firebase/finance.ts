@@ -131,6 +131,55 @@ export const getFinanceCalendar = async (year: number, month: number) => {
   };
 };
 
+export const getFinanceCalendars = async () => {
+  const db = getFirestore(firebaseConfig);
+  const collectionRef = collection(db, 'financeCalendar');
+  const querySnapshot = await getDocs(collectionRef);
+
+  return querySnapshot.docs.map((calendarDoc) => {
+    const calendarData = calendarDoc.data();
+    const year = Number(calendarData.year) || 0;
+    const month = Number(calendarData.month) || 0;
+
+    return {
+      id: calendarDoc.id,
+      year,
+      month,
+      events: calendarData.events || {},
+      periodOrder: (year * 100) + month,
+    };
+  });
+};
+
+export const createFinanceCalendar = async (
+  year: number,
+  month: number,
+  setShowMessage: any
+) => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    const documentId = getFinanceCalendarDocumentId(year, month);
+    const calendarDocRef = doc(db, 'financeCalendar', documentId);
+
+    await setDoc(calendarDocRef, {
+      year,
+      month,
+      events: {},
+    });
+
+    return {
+      id: documentId,
+      year,
+      month,
+      events: {},
+      periodOrder: (year * 100) + month,
+    };
+  } catch (error: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao criar o calendário: ' + error.message });
+    return null;
+  }
+};
+
 export const saveFinanceCalendar = async (
   year: number,
   month: number,
