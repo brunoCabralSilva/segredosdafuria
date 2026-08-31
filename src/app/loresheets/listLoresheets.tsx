@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { capitalizeFirstLetter } from '@/firebase/utilities';
 import { ILoresheet } from '../../interface';
 
 type ListLoresheetsProps = {
@@ -62,6 +63,9 @@ function LoresheetSection({ currentPage, emptyMessage, items, setCurrentPage, ti
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {paginatedLoresheets.map((item, index) => {
               const cardPreview = getLoresheetPreview(String(item.descriptionPtBr || item.description || ''));
+              const cardSubtitle = item.division === true && item.trybe
+                ? String(capitalizeFirstLetter(item.trybe))
+                : item.title;
 
               return (
                 <Link
@@ -98,7 +102,7 @@ function LoresheetSection({ currentPage, emptyMessage, items, setCurrentPage, ti
                         {item.titlePtBr}
                       </p>
                       <p className="mt-2 font-geist-mono text-[10px] uppercase leading-5 text-white/70 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">
-                        {item.title}
+                        {cardSubtitle}
                       </p>
                     </div>
 
@@ -172,7 +176,7 @@ function LoresheetSection({ currentPage, emptyMessage, items, setCurrentPage, ti
                 disabled={currentPage === totalPages}
                 className="border border-zinc-500/30 px-4 py-2 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white transition-colors disabled:cursor-default disabled:opacity-40 hover:border-red-700 hover:text-red-400"
               >
-                Próxima
+                PrÃ³xima
               </button>
             </div>
           )}
@@ -240,10 +244,10 @@ export default function ListLoresheets({ loresheets }: ListLoresheetsProps) {
 
       <LoresheetSection
         currentPage={divisionPage}
-        emptyMessage="Nenhuma loresheet de divisões de tribo encontrada com os filtros atuais."
+        emptyMessage="Nenhuma loresheet de divisÃµes de tribo encontrada com os filtros atuais."
         items={divisionLoresheets}
         setCurrentPage={setDivisionPage}
-        title="Loresheets de divisões de tribo"
+        title="Loresheets de divisÃµes de tribo"
       />
     </div>
   );

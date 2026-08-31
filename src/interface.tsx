@@ -136,10 +136,12 @@ export interface ILoresheet {
   id: number,
   custom?: boolean,
   division?: boolean,
+  trybe?: string,
   titlePtBr: String,
   title: string,
   descriptionPtBr: String,
   description: String,
+  loresheetText?: String,
   habilities: IHabilities[];
   book: String,
   page: number

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import { useContext, useEffect, useState } from "react";
 import Nav from '@/components/nav';
 import Footer from "@/components/footer";
@@ -58,7 +58,14 @@ export default function Loresheet() {
                 <p className="pt-3 text-justify">
                   <span className="font-bold pr-1">Descrição:</span>
                   { dataLoresheet.descriptionPtBr }
-                </p>
+                                </p>
+                {
+                  dataLoresheet.loresheetText && (
+                    <p className="pt-3 text-justify">
+                      { dataLoresheet.loresheetText }
+                    </p>
+                  )
+                }
               </div>
             </div>
             <ul className="pt-3 sm:justify-between">
@@ -84,5 +91,4 @@ export default function Loresheet() {
     </div>
   );
 }
-
 
