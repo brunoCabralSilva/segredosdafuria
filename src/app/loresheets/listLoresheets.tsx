@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
@@ -191,6 +191,7 @@ function LoresheetSection({ currentPage, emptyMessage, items, setCurrentPage, ti
 export default function ListLoresheets({ loresheets }: ListLoresheetsProps) {
   const [officialPage, setOfficialPage] = useState(1);
   const [communityPage, setCommunityPage] = useState(1);
+  const [divisionPage, setDivisionPage] = useState(1);
 
   const officialLoresheets = useMemo(
     () => loresheets.filter((item) => !item.custom),
@@ -198,13 +199,19 @@ export default function ListLoresheets({ loresheets }: ListLoresheetsProps) {
   );
 
   const communityLoresheets = useMemo(
-    () => loresheets.filter((item) => item.custom),
+    () => loresheets.filter((item) => item.custom === true && item.division !== true),
+    [loresheets],
+  );
+
+  const divisionLoresheets = useMemo(
+    () => loresheets.filter((item) => item.custom === true && item.division === true),
     [loresheets],
   );
 
   useEffect(() => {
     setOfficialPage(1);
     setCommunityPage(1);
+    setDivisionPage(1);
   }, [loresheets]);
 
   return (
@@ -229,6 +236,14 @@ export default function ListLoresheets({ loresheets }: ListLoresheetsProps) {
         items={communityLoresheets}
         setCurrentPage={setCommunityPage}
         title="Loresheets criadas por Bruno Cabral"
+      />
+
+      <LoresheetSection
+        currentPage={divisionPage}
+        emptyMessage="Nenhuma loresheet de divisões de tribo encontrada com os filtros atuais."
+        items={divisionLoresheets}
+        setCurrentPage={setDivisionPage}
+        title="Loresheets de divisões de tribo"
       />
     </div>
   );

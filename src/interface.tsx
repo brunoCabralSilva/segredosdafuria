@@ -1,4 +1,4 @@
-﻿export interface ITypeGift {
+export interface ITypeGift {
   type: string;
   totalRenown: number;
 }
@@ -135,6 +135,7 @@ export interface IForm {
 export interface ILoresheet {
   id: number,
   custom?: boolean,
+  division?: boolean,
   titlePtBr: String,
   title: string,
   descriptionPtBr: String,
