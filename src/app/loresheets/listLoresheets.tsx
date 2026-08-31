@@ -176,7 +176,7 @@ function LoresheetSection({ currentPage, emptyMessage, items, setCurrentPage, ti
                 disabled={currentPage === totalPages}
                 className="border border-zinc-500/30 px-4 py-2 font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white transition-colors disabled:cursor-default disabled:opacity-40 hover:border-red-700 hover:text-red-400"
               >
-                PrÃ³xima
+                Próxima
               </button>
             </div>
           )}
@@ -244,10 +244,10 @@ export default function ListLoresheets({ loresheets }: ListLoresheetsProps) {
 
       <LoresheetSection
         currentPage={divisionPage}
-        emptyMessage="Nenhuma loresheet de divisÃµes de tribo encontrada com os filtros atuais."
+        emptyMessage="Nenhuma loresheet de divisões de tribo encontrada com os filtros atuais."
         items={divisionLoresheets}
         setCurrentPage={setDivisionPage}
-        title="Loresheets de divisÃµes de tribo"
+        title="Loresheets de divisões de tribo"
       />
     </div>
   );
