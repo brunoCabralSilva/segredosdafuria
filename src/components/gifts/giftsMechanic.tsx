@@ -147,7 +147,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case "Bestial Regression":
       return <RageOrWpWithRoll skill="" type="rage" attribute="wits" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Determinação + Raciocínio, ou um valor imposto pelo Narrador)." />
     case 'Jump Scare':
-      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Astúcia, ou um valor imposto pelo Narrador)." />
+      return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Raciocínio, ou um valor imposto pelo Narrador)." />
     case 'Entreat':
       return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={1} textDificulty={'Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo espírito alvo em um teste de Poder, ou um valor imposto pelo Narrador).'} />
     case 'Calcify':
@@ -155,7 +155,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case 'Howl of Despair':
       return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
     case 'Light of the Moon':
-      return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Astúcia, ou um valor imposto pelo Narrador)." />
+      return <RageOrWpWithRoll skill="" type="rage" attribute="charisma" renown="glory" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Autocontrole + Raciocínio, ou um valor imposto pelo Narrador)." />
     case 'Second Skin':
       return <RageOrWpWithRoll skill="" type="rage" attribute="manipulation" renown="wisdom" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual a 3)" />
     case 'Curse of Isolation':
@@ -249,7 +249,7 @@ export default function GiftsMechanic(props: { name: string }) {
     case 'Ghost Walk':
       return <RageOrWpWithRoll skill="" type="willpower" attribute="stamina" renown="honor" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser igual à Película local - 1)" />
     case 'Lullaby':
-      return <RageOrWpWithRoll skill="" type="willpower" attribute="composure" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Determinação + Astúcia, ou um valor imposto pelo Narrador)." />
+      return <RageOrWpWithRoll skill="" type="willpower" attribute="composure" renown="wisdom" dificulty={1} textDificulty="Dificuldade (A dificuldade deve ser o número de sucessos obtidos pelo alvo em um teste de Determinação + Raciocínio, ou um valor imposto pelo Narrador)." />
     case 'The Line of No Approach':
       return <RageOrWpWithRoll skill="" type="willpower" attribute="composure" renown="wisdom" dificulty={3} textDificulty="Dificuldade (A dificuldade deve ser igual à 3; um ou ambos os alvos sobrenaturais podem resistir com Força + Determinação, se preferirem" />
     case 'Consume Rage':

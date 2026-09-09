@@ -3453,7 +3453,7 @@
     "action": "Menor",
     "pool": "Manipulação + Glória",
     "system": "The Garou selects a target and makes a Manipulation + Glory test against the target's Composure + Wits. If the werewolf wins, the target must spend 1 point of Willpower or lose their next action. If they do so, they cannot spend Willpower to reroll dice. They may still take a minor action. This Gift can be used in any form.",
-    "systemPtBr": "O Garou seleciona um alvo e realiza um teste de Manipulação + Glória contra a Autocontrole + Astúcia do alvo. Se o lobisomem vencer, o alvo deve gastar 1 de Força de Vontade ou perder sua próxima ação. Se o fizer, não poderá gastar Força de Vontade para rerrolar dados. Ele ainda pode realizar uma ação menor. Este Dom pode ser usado em qualquer forma.",
+    "systemPtBr": "O Garou seleciona um alvo e realiza um teste de Manipulação + Glória contra a Autocontrole + Raciocínio do alvo. Se o lobisomem vencer, o alvo deve gastar 1 de Força de Vontade ou perder sua próxima ação. Se o fizer, não poderá gastar Força de Vontade para rerrolar dados. Ele ainda pode realizar uma ação menor. Este Dom pode ser usado em qualquer forma.",
     "duration": "Uma ação",
     "book": "The Moonlit Path",
     "page": 62
@@ -3657,7 +3657,7 @@
     "action": "Completa",
     "pool": "Autocontrole + Sabedoria",
     "system": "The target must be capable of natural sleep and within earshot of the Garou. The player makes a Composure + Wisdom test against the Wits + Resolve of the target, and if successful, the victim drifts into a deep, peaceful slumber. While sleeping, the target is still awoken by noises and disturbances as usual unless the Garou scores a critical win, in which case they only wake if hurt. Supernatural targets can resist the effects by spending a Willpower, and will regardlessly wake if threatened. If left undisturbed, slumbering victims sleep for hours.",
-    "systemPtBr": "O alvo deve ser capaz de dormir naturalmente e estar ao alcance auditivo do Garou. O jogador realiza um teste de Autocontrole + Sabedoria contra Astúcia + Determinação do alvo e, se bem-sucedido, a vítima entra em um sono profundo e pacífico. Enquanto dorme, o alvo ainda pode ser acordado por ruídos e distúrbios como de costume, a menos que o Garou obtenha uma vitória crítica, caso em que só acorda se ferido. Alvos sobrenaturais podem resistir aos efeitos gastando um ponto de Força de Vontade, e acordarão de qualquer forma se ameaçados. Se não forem perturbados, os alvos adormecidos dormem por horas.",
+    "systemPtBr": "O alvo deve ser capaz de dormir naturalmente e estar ao alcance auditivo do Garou. O jogador realiza um teste de Autocontrole + Sabedoria contra Raciocínio + Determinação do alvo e, se bem-sucedido, a vítima entra em um sono profundo e pacífico. Enquanto dorme, o alvo ainda pode ser acordado por ruídos e distúrbios como de costume, a menos que o Garou obtenha uma vitória crítica, caso em que só acorda se ferido. Alvos sobrenaturais podem resistir aos efeitos gastando um ponto de Força de Vontade, e acordarão de qualquer forma se ameaçados. Se não forem perturbados, os alvos adormecidos dormem por horas.",
     "duration": "Até ser acordado ou o final da cena",
     "book": "The Moonlit Path",
     "page": 64
@@ -3709,7 +3709,7 @@
     "action": "Menor",
     "pool": "Carisma + Glória",
     "system": "Anyone looking directly at the werewolf (typically those involved in close combat or targeting them with ranged attacks or powers) must make a Wits + Composure test against the ahroun's Charisma + Glory or be dazzled by the light. Dazzled characters receive a two-dice penalty to all dice pools relying on sight. Vampires and creatures susceptible to sunlight sustain one level of Aggravated Health damage each round they are exposed to the light. The Gift ends prematurely if the Garou is incapacitated by filling either their Health or Willpower tracker or chooses to end it.",
-    "systemPtBr": "Qualquer um que olhe diretamente para o lobisomem (normalmente aqueles envolvidos em combate corpo a corpo ou que o miram com ataques à distância ou poderes) deve realizar um teste de Astúcia + Autocontrole contra Carisma + Glória do ahroun ou ficar ofuscado pela luz. Personagens ofuscados recebem uma penalidade de dois dados em todas as reservas de dados que dependam da visão. Vampiros e criaturas suscetíveis à luz solar sofrem um nível de dano Agravado a cada rodada de exposição à luz. O Dom termina prematuramente se o Garou ficar incapacitado ao preencher seu rastreador de Saúde ou Força de Vontade ou optar por encerrá-lo.",
+    "systemPtBr": "Qualquer um que olhe diretamente para o lobisomem (normalmente aqueles envolvidos em combate corpo a corpo ou que o miram com ataques à distância ou poderes) deve realizar um teste de Raciocínio + Autocontrole contra Carisma + Glória do ahroun ou ficar ofuscado pela luz. Personagens ofuscados recebem uma penalidade de dois dados em todas as reservas de dados que dependam da visão. Vampiros e criaturas suscetíveis à luz solar sofrem um nível de dano Agravado a cada rodada de exposição à luz. O Dom termina prematuramente se o Garou ficar incapacitado ao preencher seu rastreador de Saúde ou Força de Vontade ou optar por encerrá-lo.",
     "duration": "Uma cena ou até ser encerrado",
     "book": "The Moonlit Path",
     "page": 65
