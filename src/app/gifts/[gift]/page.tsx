@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useContext, useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
@@ -163,6 +163,32 @@ export default function Gift() {
                   </p>
                 </div>
               </div>
+
+              {(dataGift.description || dataGift.system) && (
+                <section aria-labelledby="gift-english-heading" className="mt-6 space-y-6 border-t border-white/10 pt-6">
+                  <h2 id="gift-english-heading" className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">
+                    Versão em inglês
+                  </h2>
+                  <div lang="en" className="space-y-6">
+                    {dataGift.description && (
+                      <div>
+                        <h3 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Description</h3>
+                        <p className="mt-4 whitespace-pre-wrap font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                          {dataGift.description}
+                        </p>
+                      </div>
+                    )}
+                    {dataGift.system && (
+                      <div>
+                        <h3 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">System</h3>
+                        <p className="mt-4 whitespace-pre-wrap font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                          {dataGift.system}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              )}
 
 
             </div>

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useContext, useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -112,6 +112,32 @@ export default function Ritual() {
                   </div>
                 )}
               </div>
+
+              {(dataRitual.description?.trim() || dataRitual.system?.trim()) && (
+                <section aria-labelledby="ritual-english-heading" className="mt-6 space-y-6 border-t border-white/10 pt-6">
+                  <h2 id="ritual-english-heading" className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">
+                    Versão em inglês
+                  </h2>
+                  <div lang="en" className="space-y-6">
+                    {dataRitual.description?.trim() && (
+                      <div>
+                        <h3 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">Description</h3>
+                        <p className="mt-4 whitespace-pre-wrap font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                          {dataRitual.description}
+                        </p>
+                      </div>
+                    )}
+                    {dataRitual.system?.trim() && (
+                      <div>
+                        <h3 className="font-geist-mono text-[11px] uppercase tracking-[0.12em] text-white sm:text-xs">System</h3>
+                        <p className="mt-4 whitespace-pre-wrap font-geist-mono text-[11px] leading-7 text-white/75 sm:text-xs text-justify">
+                          {dataRitual.system}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </section>
+              )}
             </div>
           </section>
         </main>

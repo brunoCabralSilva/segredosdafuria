@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body suppressHydrationWarning className={`${inter.className} ${cinzel.variable} ${geistMono.variable}`}>
         <Provider>
           {children}
