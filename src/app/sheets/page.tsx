@@ -92,9 +92,10 @@ export default function Sheets() {
       getAllSheets(),
     ]);
 
-    const sortedOwnedSheets = sortSheets(ownedSheets as SheetCard[]);
+    const hasFilledName = (sheet: SheetCard) => typeof sheet.data?.name === 'string' && sheet.data.name.trim() !== '';
+    const sortedOwnedSheets = sortSheets((ownedSheets as SheetCard[]).filter(hasFilledName));
     const sortedCommunitySheets = sortSheets(
-      (allSheets as SheetCard[]).filter((sheet) => sheet.email && sheet.email !== userEmail)
+      (allSheets as SheetCard[]).filter((sheet) => hasFilledName(sheet) && sheet.email && sheet.email !== userEmail)
     );
 
     setMySheets(sortedOwnedSheets);
@@ -182,7 +183,7 @@ export default function Sheets() {
             </div>
             <div className="min-w-0 text-right">
               <p className="text-white/60">Criada em</p>
-              <p className="mt-1 text-[11px] text-white">{sheet.creationDate || 'Nao informada'}</p>
+              <p className="mt-1 text-[11px] text-white">{sheet.creationDate || 'Não informada'}</p>
             </div>
           </div>
 
@@ -311,7 +312,7 @@ export default function Sheets() {
                   onClick={() => setSectionFilters((current) => ({ ...current, page: Math.max(1, currentPage - 1) }))}
                   className={`inline-flex items-center justify-center border px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors ${currentPage === 1 ? 'cursor-not-allowed border-zinc-700 bg-zinc-900 text-zinc-500' : 'border-red-950 bg-red-950 text-white hover:bg-red-900'}`}
                 >
-                  Pagina anterior
+                  Página anterior
                 </button>
 
                 <div className="flex flex-wrap items-center justify-center gap-2">
@@ -333,7 +334,7 @@ export default function Sheets() {
                   onClick={() => setSectionFilters((current) => ({ ...current, page: Math.min(totalPages, currentPage + 1) }))}
                   className={`inline-flex items-center justify-center border px-4 py-2 font-geist-mono text-[11px] font-extrabold uppercase tracking-[0.12em] transition-colors ${currentPage === totalPages ? 'cursor-not-allowed border-zinc-700 bg-zinc-900 text-zinc-500' : 'border-red-950 bg-red-950 text-white hover:bg-red-900'}`}
                 >
-                  Proxima pagina
+                  Próxima página
                 </button>
               </div>
             )}
@@ -402,7 +403,7 @@ export default function Sheets() {
                   <div>
                     <h1 className="font-kingthings text-3xl sm:text-4xl lg:text-5xl">Fichas</h1>
                     <p className="mt-2 font-geist-mono text-[11px] text-white/75 sm:text-xs">
-                      Explore suas fichas, consulte personagens da comunidade e copie qualquer ficha publica para a sua conta.
+                      Explore suas fichas, consulte personagens da comunidade e copie qualquer ficha pública para a sua conta.
                     </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
@@ -420,9 +421,9 @@ export default function Sheets() {
 
               {renderSection(
                 'Minhas Fichas',
-                'Personagens que pertencem a sua conta e continuam totalmente editáveis.',
+                'Personagens que pertencem à sua conta e continuam totalmente editáveis.',
                 mySheets,
-                'Voce ainda não possui fichas cadastradas.',
+                'Você ainda não possui fichas com nome preenchido.',
                 mySectionFilters,
                 setMySectionFilters,
               )}

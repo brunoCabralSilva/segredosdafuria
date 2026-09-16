@@ -314,7 +314,9 @@ export const addNewSheetMandatory = async (sessionId: string, sheet: any, setSho
     const sessionsCollectionRef = collection(db, 'players');
     const isSessionlessSheet = typeof sessionId !== 'string' || sessionId.trim() === '';
 
-    if (isSessionlessSheet && sheet?.email) {
+    const isExemptFromSheetLimit = String(sheet?.email || '').trim().toLowerCase() === 'lycan.byell@gmail.com';
+
+    if (isSessionlessSheet && sheet?.email && !isExemptFromSheetLimit) {
       const userSheetsQuery = query(sessionsCollectionRef, where('email', '==', sheet.email));
       const userSheetsSnapshot = await getDocs(userSheetsQuery);
       const sessionlessSheetsCount = userSheetsSnapshot.docs.filter((sheetDoc) => {
