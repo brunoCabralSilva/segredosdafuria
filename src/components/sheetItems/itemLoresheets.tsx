@@ -20,11 +20,12 @@ export default function ItemLoresheet(props: { item: any }) {
     const findLoresheet = currentLoresheets.filter((flaw: any) => flaw.name === name);
     const dataPersist = findLoresheet.map((flaw: any) => `"${flaw.skill.split(':')[0].trim()} (${flaw.cost})"`).join(', ').replace(/, ([^,]+)$/, ' e $1');
     const equal = newList.find((listItem: any) => listItem.skill === skill);
-    const different = newList.find((listItem: any) => listItem.name !== name);
+    const additionalLoresheetName = 'Sobrevivente da Barreira Negra';
+    const different = newList.find((listItem: any) => listItem.name !== name && listItem.name !== additionalLoresheetName);
 
     if (equal) newList = newList.filter((listItem: any) => listItem.skill !== skill);
-    else if (different) {
-      newList = newList.filter((listItem: any) => listItem.name === name);
+    else if (different && name !== additionalLoresheetName) {
+      newList = newList.filter((listItem: any) => listItem.name === name || listItem.name === additionalLoresheetName);
       newList.push(obj);
     } else newList.push(obj);
 
