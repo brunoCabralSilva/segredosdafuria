@@ -45,10 +45,10 @@ export default function SessionSheetPicker(props: SessionSheetPickerProps) {
 
   const getPlayerLabel = (player: any) => {
     if (player?.data?.name) {
-      return `${player.data.name} (${capitalizeFirstLetter(player.user || player.email || 'usuario')})`;
+      return `${player.data.name} (${capitalizeFirstLetter(player.user || player.email || 'usuário')})`;
     }
 
-    return capitalizeFirstLetter(player?.user || player?.email || 'usuario');
+    return capitalizeFirstLetter(player?.user || player?.email || 'usuário');
   };
 
   const handleSelectUser = (userEmail: string) => {
@@ -83,7 +83,7 @@ export default function SessionSheetPicker(props: SessionSheetPickerProps) {
             <div className="space-y-4">
               <div className="space-y-2">
                 <p className="font-geist-mono text-[0.68rem] uppercase tracking-[0.18em] text-[#b7bcbc]">
-                  Usuarios
+                  Usuários
                 </p>
                 <div className="grid gap-2">
                   {userOptions.map((option) => (

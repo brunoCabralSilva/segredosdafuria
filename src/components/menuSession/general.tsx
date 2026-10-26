@@ -3,14 +3,14 @@ import { useContext, useEffect, useState } from 'react';
 import { BsCheckSquare } from 'react-icons/bs';
 import { FaCopy, FaEraser, FaFileDownload, FaRegEdit, FaTrashAlt } from 'react-icons/fa';
 import dataTrybes from '../../data/trybes.json';
-import { addNewSheetMandatory, updateDataPlayer } from '@/firebase/players';
+import { addNewSheetMandatory, updateDataPlayer, updatePlayerVisibility } from '@/firebase/players';
 import { cancelSheetLinkRequest, requestSheetLink } from '@/firebase/notifications';
 import { getSessions } from '@/firebase/sessions';
 import contexto from '@/context/context';
 import Item from '../sheetItems/item';
 import ItemAgravated from '../sheetItems/itemAgravated';
 import ResetSheet from '../popup/resetSheet';
-import { capitalizeFirstLetter, filterGiftsBySheetRules, normalizeHealthTrackForFormChange, removeAuspiceGiftsExceptGlobalOrTrybe, resolveGiftEntries, serializeGiftEntries, sheetStructure } from '@/firebase/utilities';
+import { capitalizeFirstLetter, filterGiftsBySheetRules, isPlayerVisibleInSession, normalizeHealthTrackForFormChange, removeAuspiceGiftsExceptGlobalOrTrybe, resolveGiftEntries, serializeGiftEntries, sheetStructure } from '@/firebase/utilities';
 import DeleteSheet from '../popup/deleteSheet';
 import { registerHistory } from '@/firebase/history';
 import { FaFileCircleCheck } from 'react-icons/fa6';
@@ -54,6 +54,7 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const [activeSessions, setActiveSessions] = useState<SessionListItem[]>([]);
   const [chronicleTransferPrompt, setChronicleTransferPrompt] = useState<SessionListItem | null>(null);
   const [showCopySheetPrompt, setShowCopySheetPrompt] = useState(false);
+  const [isSavingVisibility, setIsSavingVisibility] = useState(false);
   const {
     players,
     email,
@@ -83,14 +84,34 @@ export default function General(props: { dataSession: any; id: string; gameMaste
   const canViewSheetEmail = isStandaloneSheetView ? dataSheet?.email === email : dataSheet?.email === email || isNarrator;
   const canCopySheet = isStandaloneSheetView && dataSheet?.email === email;
   const canDeleteSheet = (isStandaloneSheetView && dataSheet?.email === email) || (!isStandaloneSheetView && isNarrator && sheetId !== '');
-  const sessionCharacterOptions = isNarrator ? players : players.filter((player: any) => player.email === email);
-  const hasActiveSessionCharacter = sessionCharacterOptions.some((player: any) => player?.id === sheetId);
+  const sessionCharacters = isNarrator ? players : players.filter((player: any) => player.email === email);
+  const sessionCharacterOptions = sessionCharacters.filter(isPlayerVisibleInSession);
+  const hasActiveSessionCharacter = sessionCharacters.some((player: any) => player?.id === sheetId);
+  const hasVisibleSessionCharacter = sessionCharacterOptions.some((player: any) => player?.id === sheetId);
   const activeSessionCharacterValue = isStandaloneSheetView
     ? sheetId
-    : isNarrator
-      ? (hasActiveSessionCharacter ? sheetId : '__none__')
-      : (hasActiveSessionCharacter ? sheetId : '');
-  const shouldBlockUntilCharacterSelection = !isStandaloneSheetView && isNarrator && activeSessionCharacterValue === '__none__';
+    : hasVisibleSessionCharacter
+      ? sheetId
+      : isNarrator && !hasActiveSessionCharacter ? '__none__' : '';
+  const shouldBlockUntilCharacterSelection = !isStandaloneSheetView && isNarrator && !hasActiveSessionCharacter;
+
+  const changePlayerVisibility = async (ocultar: boolean) => {
+    if (!sheetId || !dataSheet?.data || !canManageSheetIdentity || isSavingVisibility) return;
+
+    const currentSheetId = sheetId;
+    setIsSavingVisibility(true);
+    try {
+      const updated = await updatePlayerVisibility(currentSheetId, ocultar, setShowMessage);
+      if (updated) {
+        setDataSheet((current: any) => {
+          if (!current || current.id !== currentSheetId) return current;
+          return { ...current, data: { ...current.data, ocultar } };
+        });
+      }
+    } finally {
+      setIsSavingVisibility(false);
+    }
+  };
 
   const getCurrentBrazilDateTimeString = () => {
     const formatter = new Intl.DateTimeFormat('pt-BR', {
@@ -499,7 +520,11 @@ export default function General(props: { dataSession: any; id: string; gameMaste
                       className={`min-w-0 flex-1 border border-zinc-500/30 bg-black/60 px-4 py-2.5 text-left font-geist-mono text-[0.66rem] uppercase tracking-[0.18em] text-white/75 outline-none transition-colors hover:border-red-700/80 hover:text-white ${isReadOnlyCommunitySheet ? 'cursor-default opacity-70' : 'cursor-pointer'}`}
                     >
                       {isNarrator && <option key="no-character" value="__none__">Nenhum personagem</option>}
-                      {!isNarrator && sheetId === '' && <option key="select-character" value="">Selecione um personagem</option>}
+                      {activeSessionCharacterValue === '' && (
+                        <option key="select-character" value="" disabled>
+                          {hasActiveSessionCharacter ? 'Personagem atual oculto' : 'Selecione um personagem'}
+                        </option>
+                      )}
                       {sessionCharacterOptions.map((player: any, index: number) => {
                         const optionValue = player?.id || `session-character-${player?.email || player?.user || 'player'}-${index}`;
                         const optionKey = `${optionValue}-${index}`;
@@ -979,6 +1004,25 @@ export default function General(props: { dataSession: any; id: string; gameMaste
       )}
           <Background type="background" />
           <Background type="notes" />
+          {sheetId !== '' && dataSheet?.data && !shouldBlockUntilCharacterSelection && canManageSheetIdentity && (
+            <section className="visage-card relative mt-2 w-full border border-[#708578]/40 bg-[#090d0e]/95 px-6 py-5 text-slate-300 sm:mt-5">
+              <label className="flex cursor-pointer items-start gap-3">
+                <input
+                  type="checkbox"
+                  checked={dataSheet.data.ocultar === true}
+                  disabled={isSavingVisibility}
+                  onChange={(event) => changePlayerVisibility(event.target.checked)}
+                  className="mt-1 h-4 w-4 shrink-0 accent-red-700 disabled:cursor-wait"
+                />
+                <span>
+                  <span className="block font-kingthings text-[0.82rem] uppercase tracking-[0.26em] text-red-500/85">Ocultar</span>
+                  <span className="mt-1 block font-geist-mono text-[10px] leading-5 tracking-[0.05em] text-white/75">
+                    Quando marcada, esta opção oculta o personagem na lista Personagem Ativo e no painel de Fúria, Força de Vontade e Vitalidade. Ele continua disponível na seleção inicial. Desmarque para exibi-lo novamente.
+                  </span>
+                </span>
+              </label>
+            </section>
+          )}
         </div>
       </div>
       </div>

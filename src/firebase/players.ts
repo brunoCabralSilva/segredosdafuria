@@ -1,4 +1,4 @@
-﻿import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, where } from "firebase/firestore";
+﻿import { addDoc, arrayUnion, collection, doc, getDoc, getDocs, getFirestore, query, runTransaction, updateDoc, where } from "firebase/firestore";
 import firebaseConfig from "./connection";
 import { registerMessage } from "./messagesAndRolls";
 // import { deletePlayerImage } from "./storage";
@@ -157,6 +157,17 @@ export const updateDataPlayer = async (
     });
   }
 }
+
+export const updatePlayerVisibility = async (id: string, ocultar: boolean, setShowMessage: any): Promise<boolean> => {
+  try {
+    const db = getFirestore(firebaseConfig);
+    await updateDoc(doc(db, 'players', id), { 'data.ocultar': ocultar });
+    return true;
+  } catch (err: any) {
+    setShowMessage({ show: true, text: 'Ocorreu um erro ao atualizar a visibilidade do personagem: ' + err.message });
+    return false;
+  }
+};
 
 export const deleteDataPlayer = async (
   id: string,

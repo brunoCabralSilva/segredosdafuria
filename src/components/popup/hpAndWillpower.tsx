@@ -2,7 +2,7 @@
 import contexto from "@/context/context";
 import { registerHistory } from "@/firebase/history";
 import { getAllPlayersBySessionId, updateDataPlayer } from "@/firebase/players";
-import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary, getTotalHealthBoxes, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
+import { capitalizeFirstLetter, cycleTrackMarker, formatTrackDamageSummary, getTotalHealthBoxes, isPlayerVisibleInSession, resolveGiftEntries, resolveRitualEntries } from "@/firebase/utilities";
 import { useContext, useEffect, useState } from "react";
 import { FaFire, FaHeart } from "react-icons/fa6";
 import { GiD10, GiFangs } from "react-icons/gi";
@@ -51,11 +51,13 @@ export default function HpAndWillPower() {
 
   const isGameMaster = session?.gameMaster === email;
   const ownedPlayers = sessionSheets.filter((player: any) => player.email === email);
+  const visiblePlayers = sessionSheets.filter(isPlayerVisibleInSession);
+  const visibleOwnedPlayers = visiblePlayers.filter((player: any) => player.email === email);
   const selectedOwnedPlayer =
-    ownedPlayers.find((player: any) => player.id === sheetId) ??
-    ownedPlayers.find((player: any) => player.id === dataSheet?.id) ??
-    ownedPlayers.find((player: any) => player.id === selectedPlayerId) ??
-    ownedPlayers[0] ?? null;
+    visibleOwnedPlayers.find((player: any) => player.id === sheetId) ??
+    visibleOwnedPlayers.find((player: any) => player.id === dataSheet?.id) ??
+    visibleOwnedPlayers.find((player: any) => player.id === selectedPlayerId) ??
+    visibleOwnedPlayers[0] ?? null;
   const selectedPlayerGifts = Array.isArray(selectedOwnedPlayer?.data?.gifts)
     ? resolveGiftEntries(selectedOwnedPlayer.data.gifts)
     : [];
@@ -78,6 +80,7 @@ export default function HpAndWillPower() {
   }, [dataSession, session?.id, sessionPlayers, setShowMessage]);
 
   useEffect(() => {
+    // Preserva a ficha aberta pela seleção inicial, mesmo quando oculta neste painel.
     if (isGameMaster || showSelectSheet) return;
 
     if (ownedPlayers.length === 0) {
@@ -337,7 +340,7 @@ export default function HpAndWillPower() {
   }
 
   function renderGameMasterPanel() {
-    return sessionSheets.map((player: any, index: number) => (
+    return visiblePlayers.map((player: any, index: number) => (
       <PlayersPopup player={player} key={index} />
     ));
   }
@@ -345,7 +348,7 @@ export default function HpAndWillPower() {
   function renderPlayerPanel() {
     return (
       <div className={playerPanelClassName}>
-        {ownedPlayers.length > 0 ? (
+        {visibleOwnedPlayers.length > 0 ? (
           <>
             <div className="">
               <select
@@ -353,7 +356,7 @@ export default function HpAndWillPower() {
                 onChange={(event) => handleSelectPlayer(event.target.value)}
                 className="w-full border border-white/10 bg-black/70 px-3 py-2 font-geist-mono text-[0.68rem] uppercase tracking-[0.08em] text-white outline-none transition-colors hover:border-red-700/60 focus:border-red-700/60"
               >
-                {ownedPlayers.map((player: any) => (
+                {visibleOwnedPlayers.map((player: any) => (
                   <option key={player.id} value={player.id}>
                     {player.data?.name || "Sem nome"}
                   </option>
@@ -378,7 +381,7 @@ export default function HpAndWillPower() {
                     .map((_, index) => renderAgravatedMarker("health", index))
                 )}
                 {renderTrackRow(
-                  "Furia",
+                  "Fúria",
                   <GiFangs />,
                   Array(5)
                     .fill("")
@@ -405,7 +408,7 @@ export default function HpAndWillPower() {
           </>
         ) : (
           <p className="mt-3 border-t border-white/10 pt-3 font-geist-mono text-[0.62rem] uppercase tracking-[0.08em] text-white/45">
-            Voce não possui personagens nesta sessão.
+            Você não possui personagens visíveis nesta sessão.
           </p>
         )}
       </div>

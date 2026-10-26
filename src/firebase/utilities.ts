@@ -390,6 +390,10 @@ export const normalizePlayerSheetForStorage = <T>(playerData: T): T => {
   return normalizedData;
 };
 
+export const isPlayerVisibleInSession = (player: { data?: { ocultar?: boolean | null } } | null | undefined): boolean => {
+  return !!player && (player.data?.ocultar ?? false) === false;
+};
+
 export const playerSheet = {
   xp: '0',
   advantagesAndFlaws: {
@@ -417,6 +421,7 @@ export const playerSheet = {
   form: 'Hominídeo',
   background: '',
   notes: '',
+  ocultar: false,
   attributes: {
     strength: 1,
     dexterity: 1,
@@ -492,6 +497,7 @@ export const sheetStructure = (email: string, user: string, message: any) => {
       form: 'Hominídeo',
       background: '',
       notes: '',
+      ocultar: false,
       attributes: {
         strength: 1,
         dexterity: 1,
