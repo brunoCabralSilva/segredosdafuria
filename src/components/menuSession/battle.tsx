@@ -115,7 +115,7 @@ type Token = {
   imageName?: string;
   imageUrl?: string;
   isDead?: boolean;
-  color?: "green" | "red";
+  color?: "green" | "red" | "yellow";
   size?: TokenSizeType;
   ownerEmail?: string;
   sheetId?: string;
@@ -495,7 +495,7 @@ export default function Battle() {
   const [markerName, setMarkerName] = useState("");
   const [tokenName, setTokenName] = useState("");
   const [tokenImageUrl, setTokenImageUrl] = useState("");
-  const [tokenColor, setTokenColor] = useState<"green" | "red">("green");
+  const [tokenColor, setTokenColor] = useState<"green" | "red" | "yellow">("green");
   const [tokenSize, setTokenSize] = useState<TokenSizeType>("normal");
   const [tokenSuperficialDamage, setTokenSuperficialDamage] = useState(0);
   const [tokenAggravatedDamage, setTokenAggravatedDamage] = useState(0);
@@ -1871,9 +1871,11 @@ export default function Battle() {
                     resolvedTokenImageName || token.name || "Token"
                   );
                   const tokenColorClassName =
-                    (token.color ?? "green") === "red"
+                    token.color === "red"
                       ? "border-red-500 bg-red-950/70"
-                      : "border-green-500 bg-black/80";
+                      : token.color === "yellow"
+                        ? "border-yellow-400 bg-yellow-950/70"
+                        : "border-green-500 bg-black/80";
                   const resolvedTokenSize = tokenSizes[normalizeTokenSize(token.size)];
                   return (
                     <button
@@ -2364,6 +2366,17 @@ export default function Battle() {
                             >
                               Vermelho
                             </button>
+
+                            <button
+                              type="button"
+                              onClick={() => setTokenColor("yellow")}
+                              className={`rounded border px-3 py-2 text-sm font-semibold ${tokenColor === "yellow"
+                                ? "border-white bg-yellow-400 text-black"
+                                : "border-zinc-600 bg-zinc-900 text-zinc-300"
+                                }`}
+                            >
+                              Amarelo
+                            </button>
                           </div>
                         </div>
                       )}
@@ -2404,7 +2417,9 @@ export default function Battle() {
                           <div
                             className={`relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 ${tokenColor === "red"
                               ? "border-red-500 bg-red-950/70"
-                              : "border-green-500 bg-black"
+                              : tokenColor === "yellow"
+                                ? "border-yellow-400 bg-yellow-950/70"
+                                : "border-green-500 bg-black"
                               }`}
                           >
                             {!isPreviewImageFailed ? (
